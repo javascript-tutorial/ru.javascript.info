@@ -1,3 +1,3 @@
-# An introduction
+# Введение
 
-About the JavaScript language and the environment to develop with it.
+О языке программирования JavaScript и среде для работы с ним.
