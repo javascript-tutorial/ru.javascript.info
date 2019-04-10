@@ -1,80 +1,81 @@
-# Cookies, document.cookie
+# Куки, document.cookie
 
-Cookies are small strings of data that are stored directly in the browser. They are a part of HTTP protocol, defined by [RFC 6265](https://tools.ietf.org/html/rfc6265) specification.
+Куки (cookies) - это строки, содержащие данные и хранящиеся в браузере. Они являются частью HTTP-протокола, определенного в спецификации [RFC 6265](https://tools.ietf.org/html/rfc6265).
 
-Most of the time, cookies are set by a web server. Then they are automatically added to every request to the same domain.
+Чаще всего куки устанавливаются веб-сервером. А затем автоматически добавляются в каждый запрос к этому же домену.
 
-One of the most widespread use cases is authentication:
+Один из наиболее применяемых случаев использования куков - это аутентификация:
 
-1. Upon sign in, the server uses `Set-Cookie` HTTP-header in the response to set a cookie with "session identifier".
-2. Next time when the request is set to the same domain, the browser sends the over the net using `Cookie` HTTP-header.
-3. So the server knows who made the request.
+1. Во время регистрации сервер записывает в респонс (ответ) HTTP-заголовок `Set-Cookie` для того, чтобы установить кук с идентификатором сессии ("session identifier").
+2. Во время следующего запроса к этому же домену браузер посылает на сервер HTTP-заголовок `Cookie` с идентификатором сессии.
+3. Таким образом сервер узнает о том, кто сделал запрос.
 
-We can also access cookies from the browser, using `document.cookie` property.
+Мы так же можем получить доступ к кукам непосредственно из браузера, используя свойство `document.cookie`.
 
-There are many tricky things about cookies and their options. In this chapter we'll cover them in detail.
+Куки имеют множество особенностей и тонкостей в их использовании, и в этой главе мы подробнее с ними разберемся.
 
-## Reading from document.cookie
+## Чтение document.cookie
 
 ```online
-Do you have any cookies on this site? Let's see:
+Ваш сайт содержит какие-нибудь куки? Посмотрим:
 ```
 
 ```offline
-Assuming you're on a website, it's possible to see the cookies, like this:
+Предположим, что мы зашли на сайт и у нас есть возможность записать куки таким образом:
 ```
 
-```js run
-// At javascript.info, we use Google Analytics for statistics,
-// so there should be some cookies
+```run js
+// На javascript.info мы используем сервис Google Analytics для сбора статистики,
+// значит у нас должны храниться куки
 alert( document.cookie ); // cookie1=value1; cookie2=value2;...
 ```
 
 
-The value of `document.cookie` consists of `name=value` pairs, delimited by `; `. Each one is a separate cookie.
+Значение свойства `document.cookie` - это набор парных элементов `name=value`, разделенных `; `. Каждая пара представляет собой отдельный кук.
 
-To find a particular cookie, we can split `document.cookie` by `; `, and then find the right name. We can use either a regular expression or array functions to do that.
+Для того, чтобы найти нужный кук, нам нужно будет разбить `document.cookie` (используя разделитель  `; `) на пары ключ-значение и найти нужный нам ключ. Для этого мы можем использовать как регулярные выражения, так и функции для обработки массивов.
 
-We leave it as an excercise for the reader. Also, at the end of the chapter you'll find helper functions to manipulate cookies.
+Оставим эту задачу читателю для самостоятельного выполнения. Кроме того, в конце этой главы вы найдете полезные функции для управления куками. 
 
-## Writing to document.cookie
 
-We can write to `document.cookie`. But it's not a data property, it's an accessor.
+## Запись в document.cookie
 
-**A write operation to `document.cookie` passes through the browser that updates cookies mentioned in it, but doesn't touch other cookies.**
+У нас есть возможность производить запись в `document.cookie`. Однако это не свойство для работы с данными, это - только средство для доступа к ним.
 
-For instance, this call sets a cookie with the name `user` and value `John`:
+**Во время записи в свойство `document.cookie` браузер обновит только куки, упомянутые в этом свойстве, но при этом не затронет все остальные.**
 
-```js run
-document.cookie = "user=John"; // update only cookie named 'user'
-alert(document.cookie); // show all cookies
+Например, этот вызов установит кук с именем `user` и знаечением `John`:
+
+```run js 
+document.cookie = "user=John"; // обновляем только кук с именем 'user'
+alert(document.cookie); // показываем все куки
 ```
 
-If you run it, then probably you'll see multiple cookies. That's because `document.cookie=` operation does not overwrite all cookies. It only sets the mentioned cookie `user`.
+Если вы запустите этот код, то скорее всего увидите множество куков. Это происходит поотому что операция `document.cookie=` не перезаписывает все куки, а лишь кук с вышеупомянутым именем `user`.
 
-Technically, name and value can have any characters, but to keep the formatting valid they should be escaped using a built-in `encodeURIComponent` function:
+Технически  и имя, и занчение кука могут состоять из любых символов, однако для сохранения правильного форматирования следует использовать встренную функцию `encodeURIComponent`:
 
-```js run
-// special values, need encoding
+```run js 
+// специальные символы, требуется кодировка
 let name = "my name";
 let value = "John Smith"
 
-// encodes the cookie as my%20name=John%20Smith
+// перекодирует кук к виду my%20name=John%20Smith
 document.cookie = encodeURIComponent(name) + '=' + encodeURIComponent(value);
 
 alert(document.cookie); // ...; my%20name=John%20Smith
 ```
 
 
-```warn header="Limitations"
-There are few limitations:
-- The `name=value` pair, after `encodeURIComponent`, should not exceed 4kb. So we can't store anything huge in a cookie.
-- The total number of cookies per domain is limited to around 20+, the exact limit depends on a browser.
+```warn header="Ограничения"
+Существует несколько ограничений:
+- После перекодировки `encodeURIComponent` размер элемента  `name=value` не должен превышать 4Кб. Таким образом, мы не сможем сохранить в куках большие данные.
+- Общее количество куков на домен ограничивается примерно 20+. Точное ограничение зависит от конкретного браузера.
 ```
 
-Cookies have several options, many of them are important and should be set.
+У куков есть несколько важных свойств, которые играют большое значение и которые следует обязательно устанавливать.
 
-The options are listed after `key=value`, delimited by `;`, like this:
+Эти свойства перечисляются после пары `ключ=значение` и отделены друг от друга разделителем `;`, как-то так:
 
 ```js run
 document.cookie = "user=John; path=/; expires=Tue, 19 Jan 2038 03:14:07 GMT"
@@ -84,21 +85,21 @@ document.cookie = "user=John; path=/; expires=Tue, 19 Jan 2038 03:14:07 GMT"
 
 - **`path=/mypath`**
 
-The url path prefix, where the cookie is accessible. Must be absolute. By default, it's the current path.
+Префикс, указывающий url, для которого доступен этот кук. Путь должен быть абсолютный. По умолчанию указывается текущий путь.
 
-If a cookie is set with `path=/admin`, it's visible at pages `/admin` and `/admin/something`, but not at `/home` or `/adminpage`.
+Если кук установлен с `path=/admin`, то он будет виден так же и на страницах с url-ами `/admin` и `/admin/something`, но не на страницах `/home` или `/adminpage`.
 
-Usually, we set `path=/` to make the cookie accessible from all website pages.
+Как правило, мы устанавливаем путь `path=/`, для чтобы наш кук был доступен со всех страниц сайта.
 
 ## domain
 
 - **`domain=site.com`**
 
-A domain where the cookie is accessible. In practice though, there are limitations. We can't set any domain.
+Домен, на котором доступен наш кук. На практике, однако есть ограничения - мы не можем установить сюда любой домен.
 
-By default, a cookie is accessible only at the domain that set it. So, if the cookie was set by `site.com`, we won't get it `other.com`.
+По умолчанию кук доступен лишь тому домену, который его установил. Так что кук, который был установлен сайтом `site.com`, не будет доступен на домене `other.com`.
 
-...But what's more tricky, we also won't get the cookie at a subdomain `forum.site.com`!
+...Но! Что гораздо более интересно - мы так же не сможем получить этот кук на под-домене `forum.site.com`!
 
 ```js
 // at site.com
@@ -108,9 +109,9 @@ document.cookie = "user=John"
 alert(document.cookie); // no user
 ```
 
-**There's no way to let a cookie be accessible from another 2nd-level domain, so `other.com` will never receive a cookie set at `site.com`.**
+**Способа получить доступ к кукам из доменов второго уровня нет. Поэтому сайт `other.com` никогда не получит куки, установленные сайтом `site.com`.** 
 
-It's a safety restriction, to allow us to store sensitive data in cookies.
+Это ограничение безопасности, которое позволяет нам сохранять чувствительные (конфиденциальные) данные в куках.
 
 ...But if we'd like to grant access to subdomains like `forum.site.com`, that's possible. We  should explicitly set `domain` option to the root domain: `domain=site.com`:
 
