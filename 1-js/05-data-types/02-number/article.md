@@ -375,21 +375,21 @@ alert( parseInt('2n9c', 36) ); // 123456
 
 ## Другие математические функции
 
-JavaScript has a built-in [Math](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Math) object which contains a small library of mathematical functions and constants.
+В JavaScript встроен объект [Math](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Math), который содержит различные математические функции и константы.
 
-A few examples:
+Несколько примеров:
 
 `Math.random()`
-: Returns a random number from 0 to 1 (not including 1)
+: Возвращает псевдослучайное число в диапазоне от 0 (включительно) до 1 (но не включая 1)
 
     ```js run
     alert( Math.random() ); // 0.1234567894322
     alert( Math.random() ); // 0.5435252343232
-    alert( Math.random() ); // ... (any random numbers)
+    alert( Math.random() ); // ... (любое количество псевдослучайных чисел)
     ```
 
 `Math.max(a, b, c...)` / `Math.min(a, b, c...)`
-: Returns the greatest/smallest from the arbitrary number of arguments.
+: Возвращает наибольшее/наименьшее число из перечисленных аргументов.
 
     ```js run
     alert( Math.max(3, 5, -10, 0, 1) ); // 5
@@ -397,36 +397,36 @@ A few examples:
     ```
 
 `Math.pow(n, power)`
-: Returns `n` raised the given power
+: Возвращает `n` возведенное в степень `power`
 
     ```js run
-    alert( Math.pow(2, 10) ); // 2 in power 10 = 1024
+    alert( Math.pow(2, 10) ); // 2 в степени 10 = 1024
     ```
 
-There are more functions and constants in `Math` object, including trigonometry, which you can find in the [docs for the Math](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Math) object.
+В объекте `Math` есть множество функций и констант, включая тригонометрические функции, подробнее можно ознакомиться в документации по объекту [Math](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Math).
 
-## Summary
+## Резюме
 
-To write big numbers:
+Чтобы писать большие числа:
 
-- Append `"e"` with the zeroes count to the number. Like: `123e6` is `123` with 6 zeroes.
-- A negative number after `"e"` causes the number to be divided by 1 with given zeroes. That's for one-millionth or such.
+- Используйте краткую форму записи больших чисел - `"e"`, с указанным количеством нулей. Например: `123e6` это `123` с 6-ю нулями.
+- Отрицательное число после `"e"` приводит к делению числа на 1 с указанным количеством нулей.
 
-For different numeral systems:
+Для других систем счисления:
 
-- Can write numbers directly in hex (`0x`), octal (`0o`) and binary (`0b`) systems
-- `parseInt(str, base)` parses an integer from any numeral system with base: `2 ≤ base ≤ 36`.
-- `num.toString(base)` converts a number to a string in the numeral system with the given `base`.
+- Можно записывать числа сразу в шестнадцатеричной (`0x`), восьмеричной (`0o`) и бинарной (`0b`) системах счисления
+- `parseInt(str, base)` преобразует целочисленный тип в указанную систему счисления: `2 ≤ base ≤ 36`.
+- `num.toString(base)` представляет число в строковом виде в указанной системе счисления `base`.
 
-For converting values like `12pt` and `100px` to a number:
+Для преобразования значения типа `12pt` и `100px` в число:
 
-- Use `parseInt/parseFloat` for the "soft" conversion, which reads a number from a string and then returns the value they could read before the error.
+- Используйте `parseInt/parseFloat` для "мягкого" преобразования строки в число, данные функции по порядку считывают числа из строки до тех пор пока не возникнет ошибка.
 
-For fractions:
+Для дробей:
 
-- Round using `Math.floor`, `Math.ceil`, `Math.trunc`, `Math.round` or `num.toFixed(precision)`.
-- Make sure to remember there's a loss of precision when working with fractions.
+- Используйте округления `Math.floor`, `Math.ceil`, `Math.trunc`, `Math.round` или `num.toFixed(precision)`.
+- Помните, что при работе с дробями происходит потеря точности.
 
-More mathematical functions:
+Еще больше математических функций:
 
-- See the [Math](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Math) object when you need them. The library is very small, but can cover basic needs.
+- Документация по объекту [Math](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Math). Библиотека маленькая, но содержит всё самое важное.
