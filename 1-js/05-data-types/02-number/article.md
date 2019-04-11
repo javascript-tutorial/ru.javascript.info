@@ -152,7 +152,7 @@ alert( num.toString(2) );   // 11111111
     alert( Math.floor(num * 100) / 100 ); // 1.23456 -> 123.456 -> 123 -> 1.23
     ```
 
-2. Метод [toFixed(n)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed) округляет число до `n` знаков после запятой и возвращает строковое представление результата.
+2. Метод [toFixed(n)](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed) округляет число до `n` знаков после запятой и возвращает строковое представление результата.
 
     ```js run
     let num = 12.34;
