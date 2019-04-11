@@ -1,6 +1,6 @@
 # Числа
 
-Все числа в JavaScript хранятся в 64-битном формате [IEEE-754](http://en.wikipedia.org/wiki/IEEE_754-1985), также известном как "double precision".
+Все числа в JavaScript хранятся в 64-битном формате [IEEE-754](http://en.wikipedia.org/wiki/IEEE_754-1985), известные также как числа с двойной точностью.
 
 Давайте подробнее узнаем о работе с числами в JavaScript.
 
