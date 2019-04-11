@@ -1,38 +1,38 @@
-# Methods of RegExp and String
+# Методы RegExp и String
 
-There are two sets of methods to deal with regular expressions.
+Существует два набора методов для работы с регулярными выражениями.
 
-1. First, regular expressions are objects of the built-in [RegExp](mdn:js/RegExp) class, it provides many methods.
-2. Besides that, there are methods in regular strings can work with regexps.
+1. Во-первых, регулярные выражения являются объектами встроенного класса [RegExp](mdn:js/RegExp), он предоставляет много методов.
+2. Кроме того, в обычных строках есть методы, которые могут работать с регулярными выражениями.
 
 
-## Recipes
+## Советы <!-- TODO: Как пеерводится Recipes -->
 
-Which method to use depends on what we'd like to do.
+Какой метод использовать, зависит от того, что мы хотели бы сделать.
 
-Methods become much easier to understand if we separate them by their use in real-life tasks:
+Методы станет намного легче понять, если мы разделим их по их использованию в реальных задачах:
 
-**To search for all matches:**
+**Для поиска всех совпадений:**
 
-Use regexp `g` flag and:
-- Get a flat array of matches -- `str.match(reg)`
-- Get an array or matches with details -- `str.matchAll(reg)`.
+Используйте флаг `g` и:
+- Получить плоский массив совпадений -- `str.match(reg)`
+- Получить детализированный набор всех совпадений с возможностью перебора -- `str.matchAll(reg)`.
 
-**To search for the first match only:**
-- Get the full first match -- `str.match(reg)` (without `g` flag).
-- Get the string position of the first match -- `str.search(reg)`.
-- Check if there's a match -- `regexp.test(str)`.
-- Find the match from the given position -- `regexp.exec(str)` (set `regexp.lastIndex` to position).
+**Для поиска только первого совпадения:**
+- Получить детализированное первое совпадение -- `str.match(reg)` (без флага `g`).
+- Получить позицию строки первого совпадения -- `str.search(reg)`.
+- Проверить, есть ли совпадение -- `regexp.test(str)`.
+- Найти совпадение с заданной позиции -- `regexp.exec(str)` (`regexp.lastIndex` устанавливает начало поиска в нужную позицию).
 
-**To replace all matches:**
-- Replace with another string or a function result -- `str.replace(reg, str|func)`
+**Чтобы заменить все совпадения:**
+- Заменить на другую строку или результат функции -- `str.replace(reg, str|func)`
 
-**To split the string by a separator:**
+**Чтобы разделить строку разделителем:**
 - `str.split(str|reg)`
 
-Now you get the details about every method in this chapter... But if you're reading for the first time, and want to know more about regexps - go ahead!
+Теперь вы получили подробную информацию о каждом методе в этой главе ... Но если вы читаете данную информацию впервые и хотите узнать больше о регулярных выражениях - продолжайте!
 
-You may want to skip methods for now, move on to the next chapter, and then return here if something about a method is unclear.
+Вы можете пропустить этот раздел о методах на данный момент, перейти к следующей главе, а затем вернуться сюда, если что-то о методе неясно.
 
 ## str.search(reg)
 
