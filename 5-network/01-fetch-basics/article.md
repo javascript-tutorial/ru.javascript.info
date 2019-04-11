@@ -1,36 +1,35 @@
 
-# Fetch: Basics
+# Fetch: Основы
 
-Method `fetch()` is the modern way of sending requests over HTTP.
+Метод `fetch()` это современный метод отправки HTTP запросов.
 
-Is evolved for several years and continues to improve, right now the support is pretty solid among browsers.
+На протяжении нескольких лет метод постоянно развивался и до сих пор продолжает улучшаться. В настоящее время его поддерживают все современный браузеры.
 
-The basic syntax is:
+Базовый синтакс:
 
 ```js
 let promise = fetch(url, [options])
 ```
 
-- **`url`** -- the URL to access.
-- **`options`** -- optional parameters: method, headers etc.
+- **`url`** -- URL для отправки запроса.
+- **`options`** -- дополнительный параметры: метод, заголовки и так далее.
 
-The browser starts the request right away and returns a `promise`.
+Браузер сразу же начинает запрос и возвращает `promise`.
 
-Getting a response is usually a two-stage process.
+Процесс получения ответа обычно происходит в два этапа.
 
-**The `promise` resolves with an object of the built-in [Response](https://fetch.spec.whatwg.org/#response-class) class as soon as the server responds with headers.**
+**`promise` выполняется со встроенный объектом класса [Response](https://fetch.spec.whatwg.org/#response-class) как только сервер отправляет ответ с заголовками.**
 
+Таким образом, мы можем проверить HTTP статус, чтобы увидеть, является ли он успешным или нет, проверить заголовки, но пока без тела ответа.
 
-So we can check HTTP status, to see whether it is successful or not, check headers, but don't have the body yet.
+Промис завершается с ошибкой если `fetch` не смог выполнить HTTP запрос, например при ошибке сети, или при отсутствии запрашиваемого ресурса. HTTP ошибки, такие как 404 или 500 считаются стандартной частью процесса.
 
-The promise rejects if the `fetch` was unable to make HTTP-request, e.g. network problems, or there's no such site. HTTP-errors, even such as 404 or 500, are considered a normal flow.
+Мы можем увидеть их в свойствах ответа:
 
-We can see them in response properties:
+- **`ok`** -- логическая переменная, `true` при HTTP коде состояния 200-299.
+- **`status`** -- HTTP код состояния.
 
-- **`ok`** -- boolean, `true` if the HTTP status code is 200-299.
-- **`status`** -- HTTP status code.
-
-For example:
+Например:
 
 ```js
 let response = await fetch(url);
@@ -43,30 +42,30 @@ if (response.ok) { // if HTTP-status is 200-299
 }
 ```
 
-To get the response body, we need to use an additional method call.
+Для получения тела ответа нам нужно использовать дополнительный вызов метода.
 
-`Response` provides multiple promise-based methods to access the body in various formats:
+`Response` предоставляет несколько методов основанных на промисах для доступа к телу ответа в различных форматах:
 
-- **`response.json()`** -- parse the response as JSON object,
-- **`response.text()`** -- return the response as text,
-- **`response.formData()`** -- return the response as FormData object (form/multipart encoding),
-- **`response.blob()`** -- return the response as [Blob](info:blob) (binary data with type),
-- **`response.arrayBuffer()`** -- return the response as [ArrayBuffer](info:arraybuffer-binary-arrays) (pure binary data),
-- additionally, `response.body` is a [ReadableStream](https://streams.spec.whatwg.org/#rs-class) object, it allows to read the body chunk-by-chunk, we'll see an example later.
+- **`response.json()`** -- приобразовать ответ в JSON объект,
+- **`response.text()`** -- вернуть ответ как обычный текст,
+- **`response.formData()`** -- вернуть ответ как объект FormData (кодировка form/multipart),
+- **`response.blob()`** -- возвращает объект как [Blob](info:blob) (бинарные данные с типом),
+- **`response.arrayBuffer()`** -- возвращает ответ как [ArrayBuffer](info:arraybuffer-binary-arrays) (простейшие бинарные данные),
+- в дополнение, `response.body` это объект [ReadableStream](https://streams.spec.whatwg.org/#rs-class), который дает возможность считываеть тело по частям. Мы рассмотрим пример позже.
 
-For instance, here we get a JSON-object with latest commits from Github:
+Например, у нас есть JSON объект с последними Github коммитами:
 
 ```js run async
 let response = await fetch('https://api.github.com/repos/iliakan/javascript-tutorial-en/commits');
 
 *!*
-let commits = await response.json(); // read response body and parse as JSON
+let commits = await response.json(); // получаем тело ответа и преобразовываем в JSON
 */!*
 
 alert(commits[0].author.login);
 ```
 
-Or, the same using pure promises syntax:
+Или пример с использованием промисов:
 
 ```js run
 fetch('https://api.github.com/repos/iliakan/javascript-tutorial-en/commits')
@@ -74,42 +73,43 @@ fetch('https://api.github.com/repos/iliakan/javascript-tutorial-en/commits')
   .then(commits => alert(commits[0].author.login));
 ```
 
-To get the text:
+Для получения текста:
 ```js
 let text = await response.text();
 ```
-
-And for the binary example, let's fetch and show an image (see chapter [Blob](info:blob) for details about operations on blobs):
+И для примера работы с бинарными данными, давайте запросим и выведем на экран картинку (см. главу [Blob](info:blob) чтобы узнать детали реализации)
 
 ```js async run
 let response = await fetch('/article/fetch/logo-fetch.svg');
 
 *!*
-let blob = await response.blob(); // download as Blob object
+let blob = await response.blob(); // скачать как Blob объект
 */!*
 
-// create <img> for it
+// создадим <img>
 let img = document.createElement('img');
 img.style = 'position:fixed;top:10px;left:10px;width:100px';
 document.body.append(img);
 
-// show it
+// выводим на экран
 img.src = URL.createObjectURL(blob);
 
-setTimeout(() => { // hide after two seconds
+setTimeout(() => { // прячем через две секунды
   img.remove();
   URL.revokeObjectURL(img.src);
 }, 2000);
 ```
 
 ````warn
-We can choose only one body-parsing method.
+Мы можем выбрать только один метод преобразования.
 
 If we got the response with `response.text()`, then `response.json()` won't work, as the body content has already been processed.
 
+Если мы получили ответ с `response.text()`, тогда `response.json()` не сработает, так как данные уже были обработаны.
+
 ```js
-let text = await response.text(); // response body consumed
-let parsed = await response.json(); // fails (already consumed)
+let text = await response.text(); // тело ответа преобразовано
+let parsed = await response.json(); // ошибка (данные уже были преобразованы)
 ````
 
 ## Headers
