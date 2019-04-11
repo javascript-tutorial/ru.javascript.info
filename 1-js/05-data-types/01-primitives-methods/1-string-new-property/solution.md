@@ -1,31 +1,30 @@
-
-Try running it:
+Попробуйте запустить код:
 
 ```js run
-let str = "Hello";
+let str = "Привет";
 
 str.test = 5; // (*)
 
-alert(str.test); 
+alert(str.test);
 ```
 
-There may be two kinds of result:
+Здесь может быть два результата:
+
 1. `undefined`
-2. An error.
+2. Ошибка
 
-Why? Let's replay what's happening at line `(*)`:
+Почему? Давайте посмотрим что происходит на линии `(*)`:
 
-1. When a property of `str` is accessed, a "wrapper object" is created.
-2. The operation with the property is carried out on it. So, the object gets the `test` property.
-3. The operation finishes and the "wrapper object" disappears.
+1. В момент обращения к свойству `str` создается "объект-обертка".
+2. Операция со свойством выполняется на объекте. Таким образом, объект получает свойство `test`.
+3. Операция заканчивается и "объект-обертка" удаляется.
 
-So, on the last line, `str` has no trace of the property. A new wrapper object for every object operation on a string.
+Выходит, на последней линии `str` больше не имеет свойства `test`. При каждой объектной операции со строкой создается новый "объект-обертка".
 
-Some browsers though may decide to further limit the programmer and disallow to assign properties to primitives at all. That's why in practice we can also see errors at line `(*)`. It's a little bit farther from the specification though.
+Некоторые браузеры могут решить еще более ограничить возможности пользователя и запретить присваивание свойств примитивным типам. Поэтому, на практике мы можем встречать ошибки на линии `(*)`. Хотя, это далековато от правил языка.
 
-**This example clearly shows that primitives are not objects.**
+**Данный пример наглядно показывает, что примитивы не являются объектами.**
 
-They just can not store data. 
+Они просто не могут хранить данные.
 
-All property/method operations are performed with the help of temporary objects.
-
+Все операции со свойствами/методами выполняются с помощью временных объектов.
