@@ -61,7 +61,7 @@ alert( new TextDecoder().decode(binaryString) ); // Hello
 let encoder = new TextEncoder();
 ```
 
-Поддерживается только "utf-8" кодировка.
+Поддерживается только кодировка "utf-8".
 
 Кодировщик имеет следующие два метода:
 - **`encode(str)`** -- возвращает строку  закодированную в `Uint8Array` бинарный массив.
