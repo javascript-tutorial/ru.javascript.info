@@ -65,7 +65,7 @@ let encoder = new TextEncoder();
 
 Кодировщик имеет следующие два метода:
 - **`encode(str)`** -- возвращает строку  закодированную в `Uint8Array` бинарный массив.
-- **`encodeInto(str, destination)`** -- кодирует `str` (строку) в `destination` (адресат) который должен быть бинарным массивом  `Uint8Array`.
+- **`encodeInto(str, destination)`** -- кодирует строку (`str`) и помещает её в `destination`, который должен быть экземпляром `Uint8Array`.
 
 ```js run
 let encoder = new TextEncoder();
