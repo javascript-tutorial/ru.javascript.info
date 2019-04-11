@@ -367,7 +367,7 @@ alert( parseInt('a123') ); // NaN, на первом символе происх
 
 ```js run
 alert( parseInt('0xff', 16) ); // 255
-alert( parseInt('ff', 16) ); // 255, без 0x тоде работает
+alert( parseInt('ff', 16) ); // 255, без 0x тоже работает
 
 alert( parseInt('2n9c', 36) ); // 123456
 ```
