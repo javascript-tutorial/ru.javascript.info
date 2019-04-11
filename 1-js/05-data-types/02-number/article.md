@@ -228,7 +228,7 @@ alert( 0.1.toFixed(20) ); // 0.10000000000000000555
 Справедливости ради заметим, что ошибка в точности вычислений для чисел с плавающей точкой сохраняется в любом другом языке, где используется формат IEEE 754, включая PHP, Java, C, Perl, Ruby.
 ```
 
-Можно ли обойти проблему? Конечно, наиболее надежный способ - это округлить результат используя метод [toFixed(n)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed):
+Можно ли обойти проблему? Конечно, наиболее надежный способ — это округлить результат используя метод [toFixed(n)](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed):
 
 ```js run
 let sum = 0.1 + 0.2;
