@@ -70,14 +70,14 @@ let range = {
       current: this.from,
       last: this.to,
 
-      // next() вызывается на каждой итерации с помощь цикла for..of 
+      // next() вызывается на каждой итерации с помощью цикла for..of 
 *!*
       async next() { // (2)
         // должен возвращать значение как объект {done:.., value :...}
         // (автоматически упаковывается в обещание с помощью async)
 */!*
 
-        // можно использовать await внутни для асинхронности:
+        // можно использовать await внутри для асинхронности:
         await new Promise(resolve => setTimeout(resolve, 1000)); // (3)
 
         if (this.current <= this.last) {
@@ -277,7 +277,7 @@ let range = {
 let repo = 'iliakan/javascript-tutorial-en'; // репозиторий на Github, откуда брать коммиты
 
 for await (let commit of fetchCommits(repo)) {
-  // обработка комитов
+  // обработка коммитов
 }
 ```
 
@@ -296,13 +296,13 @@ async function* fetchCommits(repo) {
 
     const body = await response.json(); // (2) парсинг ответа в JSON (массив коммитов)
 
-    // (3) URL со ссылкой на следующую страницу в хедерах, получите ее
+    // (3) Ccылка на следующую страницу находится в хедерах, извлеките ее
     let nextPage = response.headers.get('Link').match(/<(.*?)>; rel="next"/);
     nextPage = nextPage && nextPage[1];
 
     url = nextPage;
 
-    for(let commit of body) { // (4) отдавайте коммиты по одному до окончания страницы
+    for(let commit of body) { // (4) возвращайте коммиты по одному до окончания страницы
       yield commit;
     }
   }
@@ -335,7 +335,7 @@ async function* fetchCommits(repo) {
 
 Это именно то, что мы хотели. Механика внутренней нумерации снаружи невидна. Для нас это просто асинхронный генератор, который возвращает коммиты.
 
-## Резюме
+## Итого
 
 Обычные итераторы и генераторы прекрасно работают с данными, которые не требуют времени для их создания или получения.
 
