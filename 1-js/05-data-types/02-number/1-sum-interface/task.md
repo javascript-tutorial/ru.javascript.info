@@ -1,11 +1,11 @@
-importance: 5
+важность: 5
 
 ---
 
-# Sum numbers from the visitor
+# Сумма чисел
 
-Create a script that prompts the visitor to enter two numbers and then shows their sum.
+Создайте скрипт, который запрашивает ввод 2-х чисел (используйте prompt) и после показывает их сумму.
 
 [demo]
 
-P.S. There is a gotcha with types.
+P.S. Не попадитесь на неточности в типах данных.
