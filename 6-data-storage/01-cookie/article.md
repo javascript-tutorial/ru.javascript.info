@@ -6,7 +6,7 @@
 
 Один из наиболее частых случаев использования куков - это аутентификация:
 
-1. Во время регистрации сервер записывает в респонс (ответ) HTTP-заголовок `Set-Cookie` для того, чтобы установить кук с идентификатором сессии ("session identifier").
+1. Во время регистрации сервер записывает в респонс (ответ) HTTP-заголовок `Set-Cookie` для того, чтобы установить cookie с идентификатором сессии ("session identifier").
 2. Во время следующего запроса к этому же домену браузер посылает на сервер HTTP-заголовок `Cookie` с идентификатором сессии.
 3. Таким образом сервер узнает о том, кто сделал запрос.
 
@@ -53,14 +53,14 @@ alert(document.cookie); // показываем все куки
 
 Если вы запустите этот код, то скорее всего увидите множество куков. Это происходит потому что операция `document.cookie=` не перезапишет не все куки, а лишь кук с вышеупомянутым именем `user`.
 
-Технически  и имя, и значение кука могут состоять из любых символов, однако для сохранения правильного форматирования следует использовать встренную функцию `encodeURIComponent`:
+Технически и имя, и значение кука могут состоять из любых символов, однако для сохранения правильного форматирования следует использовать встренную функцию `encodeURIComponent`:
 
 ```run js 
 // специальные символы, требуется кодировка
 let name = "my name";
 let value = "John Smith"
 
-// перекодирует кук к виду my%20name=John%20Smith
+// перекодирует cookie к виду my%20name=John%20Smith
 document.cookie = encodeURIComponent(name) + '=' + encodeURIComponent(value);
 
 alert(document.cookie); // ...; my%20name=John%20Smith
@@ -85,7 +85,7 @@ document.cookie = "user=John; path=/; expires=Tue, 19 Jan 2038 03:14:07 GMT"
 
 - **`path=/mypath`**
 
-Префикс, указывающий url, для которого доступен этот кук. Путь должен быть абсолютный. По умолчанию указывается текущий путь.
+Префикс, указывающий url, для которого доступен этот cookie. Путь должен быть абсолютный. По умолчанию указывается текущий путь.
 
 Если кук установлен с `path=/admin`, то он будет виден так же и на страницах с url-ами `/admin` и `/admin/something`, но не на страницах `/home` или `/adminpage`.
 
@@ -95,11 +95,11 @@ document.cookie = "user=John; path=/; expires=Tue, 19 Jan 2038 03:14:07 GMT"
 
 - **`domain=site.com`**
 
-Домен, на котором доступен наш кук. На практике, однако есть ограничения - мы не можем указать здесь какой угодно домен.
+Домен, на котором доступен наш cookie. На практике, однако есть ограничения - мы не можем указать здесь какой угодно домен.
 
-По умолчанию кук доступен лишь тому домену, который его установил. Так что кук, который был установлен сайтом `site.com`, не будет доступен на сайте `other.com`.
+По умолчанию cookie доступен лишь тому домену, который его установил. Так что cookie, который был установлен сайтом `site.com`, не будет доступен на сайте `other.com`.
 
-...Но! Что гораздо более интересно - мы так же не сможем получить этот кук и на под-домене `forum.site.com`!
+...Но! Что более интересно - мы так же не сможем получить этот cookie и на под-домене `forum.site.com`!
 
 ```js
 // at site.com
@@ -135,9 +135,9 @@ alert(document.cookie); // with user
 
 - **`expires=Tue, 19 Jan 2038 03:14:07 GMT`**
 
-Время истечения кука (cookie expiration date) устанавливает дату, когда браузер автоматически удалит этот кук.
+Время истечения cookie (cookie expiration date) устанавливает дату, когда браузер автоматически удалит этот cookie.
 
-Дата истечения должна указываться строго в  UTC-формате во временной зоне GMT. Для получения строки даты мы можем использовать функцию  `date.toUTCString`. К примеру, установим кук, который истечет через сутки:
+Дата истечения должна указываться строго в  UTC-формате во временной зоне GMT. Для получения строки даты мы можем использовать функцию  `date.toUTCString`. К примеру, установим cookie, который истечет через сутки:
 
 ```js
 // +1 day from now
@@ -146,13 +146,13 @@ date = date.toUTCString();
 document.cookie = "user=John; expires=" + date;
 ```
 
-If we set `expires` to a date in the past, the cookie is deleted.
+Если мы установим в `expires` прошедшую дату, то cookie удалится.
 
 -  **`max-age=3600`**
 
-An alternative to `expires`, specifies the cookie expiration in seconds from the current moment.
+Так же можно удалить cookie, установив время истечения cookie через несколько секунд.
 
-If zero or negative, then the cookie is deleted:
+При отрицательном либо нулевом значении cookie тоже удалится.
 
 ```js
 // cookie will die +1 hour from now
@@ -166,13 +166,13 @@ document.cookie = "user=John; max-age=0";
 
 - **`secure`**
 
-The cookie should be transferred only over HTTPS.
+Куки должны передаваться только по HTTPS-протоколу.
 
-**By default, if we set a cookie at `http://site.com`, then it also appears at `https://site.com` and vise versa.**
+**По умолчанию, cookie, установленная сайтом `http://site.com`, так же будет доступна на сайте `https://site.com` и наоборот.**
 
-That is, cookies are domain-based, they do not distinguish between the protocols.
+Куки прикреплены к доменам и не передаются между разными протоколами.
 
-With this option, if a cookie is set by `https://site.com`, then it doesn't appear when the same site is accessed by HTTP, as `http://site.com`. So if a cookie has sensitive content that should never be sent over unencrypted HTTP, then the flag is the right thing.
+Таким образом, если cookie установлена сайтом `https://site.com`, она не будет видна на сайте `http://site.com`, загруженном по протоколу HTTP.
 
 ```js
 // assuming we're on https:// now
@@ -182,31 +182,31 @@ document.cookie = "user=John; secure";
 
 ## samesite
 
-That's another security option, to protect from so-called XSRF (cross-site request forgery) attacks.
+Это еще одна настройка безопасности, призванная защищать пользователя от так называемых XSRF-аттак (англ. cross-site request forgery - имитация кроссдоменног запроса).
 
-To understand when it's useful, let's introduce the following attack scenario.
+Чтобы понять, как помогает эта настройка, представим себе следующую ситуацию:
 
-### XSRF attack
+### XSRF-аттака
 
-Imagine, you are logged into the site `bank.com`. That is: you have an authentication cookie from that site. Your browser sends it to `bank.com` with every request, so that it recognizes you and performs all sensitive financial operations.
+Представим, что мы залогинились на сайте `bank.com`. И теперь нам доступен аутентификационный cookie  этого сайта. Ваш сайт пересылает этот кук с каждым запросом, распознает вас и осуществляет необходимые финансовые операции.
 
-Now, while browsing the web in another window, you occasionally come to another site `evil.com`, that automatically submits a form `<form action="https://bank.com/pay">` to `bank.com` with input fields that initiate a transaction to the hacker's account.
+Теперь, представим себе, что в другом окне вы открываете еще один сайт `evil.com`, который автоматически отправляет на сайт `bank.com` форму `<form action="https://bank.com/pay">` с заполненными полями платежа для банковского счета хакера.
 
-The form is submitted from `evil.com` directly to the bank site, and your cookie is also sent, just because it's sent every time you visit `bank.com`. So the bank recognizes you and actually performs the payment.
+Форма с сайта `evil.com` вместе с вашим cookie отправляется на сайт банка. Cookie так же отсылается, потому что это происходит каждый раз, когда вы заходите на сайт `bank.com`. Банк распознает вас и действительно осуществялет платеж.
 
 ![](cookie-xsrf.png)
 
-That's called a cross-site request forgery (or XSRF) attack.
+Вот это и называют XSRF-аттакой.
 
-Real banks are protected from it of course. All forms generated by `bank.com` have a special field, so called "xsrf protection token", that an evil page can't neither generate, nor somehow extract from a remote page (it can submit a form there, but can't get the data back).
+Естественно настоящие банки такого не допускают. Каждая форма, сгенерированная доменом `bank.com` имеет специальный токен, называемое "xsrf protection token" (токен для xsrf-защиты), который зловредные сайты не способны ни сгенерировать, ни какким-либо образом извлечь с помощью удаленной страницы (они могут отправить форму на сайт банка, но не способны получить ответ на запрос).
 
-But that takes time to implement: we need to ensure that every form has the token field, and we must also check all requests.
+Но подобная реализация требует времени: нам нужно удостовериться, что у каждой формы есть такой токен, а так же проверять все запросы.
 
-### Enter cookie samesite option
+### Настройка куки samesite
 
-The cookie `samesite` option provides another way to protect from such attacks, that (in theory) should not require "xsrf protection tokens".
+Настройка куки samesite предоставляет еще один способ защиты от таких аттак, что (в теории) избавляет нас от надобности использования xsrf-токенов.
 
-It has two possible values:
+У него есть два возможных значения:
 
 - **`samesite=strict` (same as `samesite` without value)**
 
