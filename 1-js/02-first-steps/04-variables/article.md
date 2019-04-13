@@ -1,41 +1,41 @@
-# Variables
+# Переменная
 
-Most of the time, a JavaScript application needs to work with information. Here are two examples:
-1. An online shop -- the information might include goods being sold and a shopping cart.
-2. A chat application -- the information might include users, messages, and much more.
+Большую часть времени, приложению написанному на JavaScript необходимо работать с информацией. Вот два примера:
+1. Интернет магазин -- информация может включать продаваемые товары и корзину покупок.
+2. Чат -- информация может включать пользователей, сообщения и многое другое.
 
-Variables are used to store this information.
+Переменные используются для хранения этой информации.
 
-## A variable
+## Переменная
 
-A [variable](https://en.wikipedia.org/wiki/Variable_(computer_science)) is a "named storage" for data. We can use variables to store goodies, visitors, and other data.
+[Переменная](https://en.wikipedia.org/wiki/Variable_(computer_science)) -- это "именованное хранилище" для данных. Мы можем использовать переменные для хранения товаров, посетителей, и других данных.
 
-To create a variable in JavaScript, use the `let` keyword.
+Для создания переменной в JavaScript, используйте ключевое слово `let`.
 
-The statement below creates (in other words: *declares* or *defines*) a variable with the name "message":
+Приведенная ниже инструкция создает (другими словами: *объявляет* или *определяет*) переменную с именем "message":
 
 ```js
 let message;
 ```
 
-Now, we can put some data into it by using the assignment operator `=`:
+Теперь, мы можем поместить в неё некоторые данные, используя оператор присваивания `=`:
 
 ```js
 let message;
 
 *!*
-message = 'Hello'; // store the string
+message = 'Hello'; // хранит строку
 */!*
 ```
 
-The string is now saved into the memory area associated with the variable. We can access it using the variable name:
+Строка сохраняется в области памяти, связанной с переменной. Мы можем получить к ней доступ, используя имя переменной:
 
 ```js run
 let message;
 message = 'Hello!';
 
 *!*
-alert(message); // shows the variable content
+alert(message); // показывает содержимое переменной
 */!*
 ```
 
