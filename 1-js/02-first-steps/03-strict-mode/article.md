@@ -38,7 +38,7 @@ alert("some code");
 // строгий режим не активирован
 ```
 
-Над `"use strict"` могут отображаться только комментарии.
+Над `"use strict"` могут, быть записаны только комментарии.
 ````
 
 ```warn header="Нет никакого способа отменить `use strict`"
@@ -74,6 +74,6 @@ alert("some code");
 На данный момент достаточно иметь общее понимание об этом:
 
 1. Директива `"use strict"` переключает движок в "современный" режим, изменяя поведение некоторых встроенных функций. Подробности мы увидим позже в учебнике.
-2. Strict mode is enabled by placing `"use strict"` at the top of a script or function. Several language features, like "classes" and "modules", enable strict mode automatically.
-3. Strict mode is supported by all modern browsers.
-4. We recommended always starting scripts with `"use strict"`. All examples in this tutorial assume strict mode unless (very rarely) specified otherwise.
+2. Строгий режим включается путем размещения `"use strict"` в верхней части скрипта или функции. Некоторые функции языка, такие как "классы" и "модули", автоматически включают строгий режим.
+3. Строгий режим поддерживается всеми современными браузерами.
+4. Мы рекомендуем всегда начинать скрипты с `"use strict"`. Все примеры в этом руководстве предполагают строгий режим, если (очень редко) не указано иное.
