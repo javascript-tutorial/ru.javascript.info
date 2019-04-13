@@ -8,7 +8,7 @@
 
 1. Во время регистрации сервер записывает в респонс (ответ) HTTP-заголовок `Set-Cookie` для того, чтобы установить cookie с идентификатором сессии ("session identifier").
 2. Во время следующего запроса к этому же домену браузер посылает на сервер HTTP-заголовок `Cookie` с идентификатором сессии.
-3. Таким образом сервер узнает о том, кто сделал запрос.
+3. Таким образом сервер понимает кто сделал запрос.
 
 Мы так же можем получить доступ к кукам непосредственно из браузера, используя свойство `document.cookie`.
 
@@ -73,7 +73,7 @@ alert(document.cookie); // ...; my%20name=John%20Smith
 - Общее количество куков на один домен ограничивается примерно 20+. Точное ограничение зависит от конкретного браузера.
 ```
 
-У куков есть несколько важных свойств, которые играют большое значение и которые обязательно следует устанавливать.
+У куков есть несколько важных настроек, которые играют большое значение и которые обязательно следует устанавливать.
 
 Эти свойства перечисляются после пары `ключ=значение` и отделены друг от друга разделителем `;`, как-то так:
 
@@ -113,7 +113,7 @@ alert(document.cookie); // no user
 
 Это ограничение безопасности, которое позволяет нам сохранять чувствительные (конфиденциальные) данные в куках.
 
-...Однако, если нам все же нужно получить доступ к поддоменам вида `forum.site.com`, это все же возможно. Достаточно в качестве значения опции `domain` указать корневой домен:  `domain=site.com`:
+...Однако, если нам все же нужно получить доступ к поддоменам вида `forum.site.com`, это все же можно сделать. Достаточно в качестве значения опции `domain` указать корневой домен:  `domain=site.com`:
 
 ```js
 // at site.com, make the cookie accessible on any subdomain:
@@ -131,11 +131,11 @@ alert(document.cookie); // with user
 
 По умолчанию, если для кука не указана ни одна из этих опций, она удалится вместе с закрытием браузера. Такие куки называются - куки сессий ("session cookies").
 
-Чтобы помочь кукам "пережить" закрытие бразуера, мы можем установить занчение опций `expires` или `max-age`.
+Чтобы помочь кукам "пережить" закрытие бразуера, мы можем установить значение опций `expires` или `max-age`.
 
 - **`expires=Tue, 19 Jan 2038 03:14:07 GMT`**
 
-Время истечения cookie (cookie expiration date) устанавливает дату, когда браузер автоматически удалит этот cookie.
+Время истечения cookie (cookie expiration date) устанавливает дату, при наступлении которой браузер автоматически удалит этот cookie.
 
 Дата истечения должна указываться строго в  UTC-формате во временной зоне GMT. Для получения строки даты мы можем использовать функцию  `date.toUTCString`. К примеру, установим cookie, который истечет через сутки:
 
@@ -208,81 +208,82 @@ document.cookie = "user=John; secure";
 
 У него есть два возможных значения:
 
-- **`samesite=strict` (same as `samesite` without value)**
+- **`samesite=strict` (то же что и `samesite` без значения)**
 
-A cookie with `samesite=strict` is never sent if the user comes from outside the site.
 
-In other words, whether a user follows a link from their mail or submits a form from `evil.com`, or does any operation that originates from another domain, the cookie is not sent.
+Cookie со значением `samesite=strict` никогда не пересылается, если пользователь зашел с другого сайта.
 
-If authentication cookies have `samesite` option, then XSRF attack has no chances to succeed, because a submission from `evil.com` comes without cookies. So `bank.com` will not recognize the user and will not proceed with the payment.
+Другими словами, если пользователь прошел по ссылке из своей почты или отправил форму через сайт  `evil.com`, либо производит операции, которые инициированы другим доменом, куки не будет пересылаться.
 
-The protection is quite reliable. Only operations that come from `bank.com` will send the `samesite` cookie.
+Если аутентификационная cookie  имеет настройку `samesite`, то никакая xsrf-аттака не пройдет, т.к. форма с сайта  `evil.com` придет без куков. Банк не сможет распознать своего клиента и не осуществит платеж.
 
-Although, there's a small inconvenience.
+Это весьма надежная мера безопасности. Только те оерации, которые были инициированы сайтом `bank.com` смогут отправлять куки, помеченные опцией `samesite`.
 
-When a user follows a legitimate link to `bank.com`, like from their own notes, they'll be surprised that `bank.com` does not recognize them. Indeed, `samesite=strict` cookies are not sent in that case.
+Однако, существует небольшое неудобство.
 
-We could work around that by using two cookies: one for "general recognition", only for the purposes of saying: "Hello, John", and the other one for data-changing operations with `samesite=strict`. Then a person coming from outside of the site will see a welcome, but payments must be initiated from the bank website.
+Когда пользователь зайдет на сайт `bank.com` по валидной ссылке (например, из своих электронных записей), он внезапно обнаружит, что сайт не узнаёт его. Это происходит, потому что в этом случае куки с меткой `samesite=strict` не пересылаются.
+
+Мы можем обойти это ограничение, используя два вида cookie - один для так называемого "общего распознавания" (к примеру для того, чтобы поприветствовать пользователя на сайте: "Привет, Джон!"), а второй - для операций обмена данными (с пометкой `samesite=strict`). Так пользователь, попадая на сайт по внешней ссылке, сможет увидеть приветствие, но все платежи смогут быть инициированы только с сайта банка.
 
 - **`samesite=lax`**
 
-A more relaxed approach that also protects from XSRF and doesn't break user experience.
+Это более "расслабленный" и не портящий впечатление от работы с сайтом подход для защиты от xsrf-аттак. 
 
-Lax mode, just like `strict`, forbids the browser to send cookies when coming from outside the site, but adds an exception.
+Режим lax, так же как и `strict`, запрещает браузеру пересылать куки, если пользователь зашел на сайт по внешней ссылке, и дополнительно добавляет исключение.
 
-A `samesite=lax` cookie is sent if both of these conditions are true:
-1. The HTTP method is "safe" (e.g. GET, but not POST).
+Кук с меткой `samesite=lax` переслыается лишь в случае, когда соблюдаются эти условия:
 
-    The full list safe of HTTP methods is in the [RFC7231 specification](https://tools.ietf.org/html/rfc7231). Basically, these are the methods that should be used for reading, but not writing the data. They must not perform any data-changing operations. Following a link is always GET, the safe method.
+1. Метод HTTP безопасный (к примеру GET, а не POST).
 
-2. The operation performs top-level navigation (changes URL in the browser address bar).
+    Полный перечень безопасных методов представлен в спецификации [RFC7231](https://tools.ietf.org/html/rfc7231). Вообще такие методы предназначены только для чтения данных, но не для записи. Такие методы не должны осуществлять операции по обмену данными. Переход по ссылке всегда осущетсвляется через GET-метод, что вполне безопасно.
 
-    That's usually true, but if the navigation is performed in an `<iframe>`, then it's not top-level. Also, AJAX requests do not perform any navigation, hence they don't fit.
+2. Операция может осуществлять только навигацию верхнего уровня (то есть изменять адрес в адресной строке браузера).
 
-So, what `samesite=lax` does is basically allows a most common "go to URL" operation to have cookies. E.g. opening a website link from notes satisfies these conditions.
+    В большинстве случаев навигация, осуществляемая внутри фрейма `<iframe>` - не верхнеуровневая. Так же AJAX-запросы не смогут осуществлять навигацию по сайту, так что они тоже не помогут.
+   
+В общем-то все что делает пометка  `samesite=lax` - позволяет операциям типа "перейти по URL" иметь куки. К примеру, операция перехода на сатй по ссылке из записей вполне удовлетворяет этим условиям. 
 
-But anything more complicated, like AJAX request from another site or a form submittion loses cookies.
+Однако, любая чуть более сложная операция, к примеру AJAX-запрос с другого сайта или отправка формы потеряют куки.
 
-If that's fine for you, then adding `samesite=lax` will probably not break the user experience and add protection.
+Если вас это устраивает, то добавление метки  `samesite=lax` скорее всего не испортит впечатление от работы с сайтом и добавит защиту.
 
-Overall, `samesite` is a great option, but it has an important drawback:
-- `samesite` is ignored (not supported) by old browsers, year 2017 or so.
+В целом, `samesite` - хорошая опция, но с одним исключением:
+- `samesite` будет игнорироваться (не поддерживается) старыми браузерами от 2017 года и страше.
 
-**So if we solely rely on `samesite` to provide protection, then old browsers will be vulnerable.**
+**Поэтому, если мы полагаемся исключительно на `samesite` в плане защиты сайта, то мы оставляем уязвимости в старых браузерах.**
 
-But we surely can use `samesite` together with other protection measures, like xsrf tokens, to add an additional layer of defence and then, in the future, when old browsers die out, we'll probably be able to drop xsrf tokens.
+Мы конечно можем использовать `samesite` совместно с другими мерами защиты, такими как xsrf-токены, чтобы создать дорполнительный слой защиты, а в будущем, когда старые браузеры окончательно выйдут из употребления, мы, возможно, так же сможем избавиться и от использования xsrf-токенов.
 
 ## httpOnly
 
-This option has nothing to do with Javascript, but we have to mention it for completeness.
+Эта опция не имеет отношения к Javascript, но ее все же стоит упомянуть для целостности.
 
-The web-server uses `Set-Cookie` header to set a cookie. And it may set the `httpOnly` option.
+Веб-серверы используют заголовок `Set-Cookie`, чтобы установить кук. Кук так же может установить опция `httpOnly`.
 
-This option forbids any JavaScript access to the cookie. We can't see such cookie or manipulate it using `document.cookie`.
+Эта метка запрещает любым Javascript-скриптам получать доступ к такому cookie. Мы не можем видеть и управлять таким куком через `document.cookie`.
 
-That's used as a precaution measure, to protect from certain attacks when a hacker injects his own Javascript code into a page and waits for a user to visit that page. That shouldn't be possible at all, a hacker should not be able to inject their code into our site, but there may be bugs that let hackers do it.
+Ее стоит использовать в качестве меры предосторожности для защиты от аттак, когда хакер внедряет свой Javascript-код на страницу и ждет, когда пользователь зайдет на страницу. Нельзя, чтобы такое было возможно, у хакера не должно быть возможности внедрять свой код на чужой сайт, но сайт может содержать баги, которые позволят это сделать. 
 
+Обычно, если такая ситуация происходит и пользователь заходит на страницу, содержащую инъекцию (хакерский код), то она исполнится и получит доступ к переменной `document.cookie` с аутентификационныим куками пользователя. Это проблема.
 
-Normally, if such thing happens, and a user visits a web-page with hacker's code, then that code executes and gains access to `document.cookie` with user cookies containing authentication information. That's bad.
+Однако, ески cookie помечен как `httpOnly`, то `document.cookie` не будет видеть этот кук, так что он будет защищен.
 
-But if a cookie is `httpOnly`, then `document.cookie` doesn't see it, so it is protected.
+## Приложение: функции куков
 
-## Appendix: Cookie functions
+Здесь представлен небольшой набор функций для работы с куками, более удобный, чем ручное управление куками через `document.cookie`.
 
-Here's a small set of functions to work with cookies, more convenient than a manual modification of `document.cookie`.
-
-There exist many cookie libraries for that, so these are for demo purposes. Fully working though.
+Так же существует убольшое множество библиотек для работы с куками, поэтому эти функции представлены только в целях демонстрации. Тем не менее они могут оказаться полезными.
 
 
 ### getCookie(name)
 
-The shortest way to access cookie is to use a [regular expression](info:regular-expressions).
+Простейший способ получить cookie  - использование [регулярного выражения] (info:regular-expressions).
 
-The function `getCookie(name)` returns the cookie with the given `name`:
+Функция `getCookie(name)` находит кук по заданному имени `name`:
 
 ```js
-// returns the cookie with the given name,
-// or undefined if not found
+// возвращает кук с указанным именем
+// либо undefined если ничего не находит
 function getCookie(name) {
   let matches = document.cookie.match(new RegExp(
     "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
