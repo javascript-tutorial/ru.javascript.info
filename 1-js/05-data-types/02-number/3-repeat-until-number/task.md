@@ -1,14 +1,14 @@
-importance: 5
+важность: 5
 
 ---
 
-# Repeat until the input is a number
+# Требуйте ввода правильного числового значения
 
-Create a function `readNumber` which prompts for a number until the visitor enters a valid numeric value.
+Напишите функцию `readNumber`, которая будет запрашивать (prompt) ввод правильного числового значения.
 
-The resulting value must be returned as a number.
+Функция должна вернуть в числовом формате.
 
-The visitor can also stop the process by entering an empty line or pressing "CANCEL". In that case, the function should return `null`.
+Также, надо разрешить пользователю остановить процесс ввода, отправив пустую строку или нажав "Отмена". В этом случае функция должна вернуть `null`. 
 
 [demo]
 
