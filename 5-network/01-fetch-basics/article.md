@@ -83,10 +83,10 @@ let text = await response.text();
 let response = await fetch('/article/fetch/logo-fetch.svg');
 
 *!*
-let blob = await response.blob(); // скачать как Blob объект
+let blob = await response.blob(); // скачиваем как Blob объект
 */!*
 
-// создадим <img>
+// создаем <img>
 let img = document.createElement('img');
 img.style = 'position:fixed;top:10px;left:10px;width:100px';
 document.body.append(img);
