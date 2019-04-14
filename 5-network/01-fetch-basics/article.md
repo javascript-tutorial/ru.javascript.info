@@ -351,7 +351,6 @@ fetch(url, options)
 
 Параметры:
 - `method` -- HTTP метод,
-- `headers` -- an object with request headers (not any header is allowed),
 - `headers` -- объект с запрашиваемыми заголовками (не все заголовка разрешены),
 - `body` -- текст/FormData/BufferSource/Blob/UrlSearchParams данные для отправки.
 
