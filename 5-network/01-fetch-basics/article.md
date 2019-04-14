@@ -77,7 +77,7 @@ fetch('https://api.github.com/repos/iliakan/javascript-tutorial-en/commits')
 ```js
 let text = await response.text();
 ```
-И для примера работы с бинарными данными, давайте запросим и выведем на экран картинку (см. главу [Blob](info:blob) чтобы узнать детали реализации)
+И для примера работы с бинарными данными, давайте запросим и выведем на экран изображение (см. главу [Blob](info:blob) чтобы узнать детали реализации)
 
 ```js async run
 let response = await fetch('/article/fetch/logo-fetch.svg');
