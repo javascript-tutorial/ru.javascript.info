@@ -1,14 +1,14 @@
-# Character classes
+# Классы символов
 
-Consider a practical task -- we have a phone number `"+7(903)-123-45-67"`, and we need to turn it into pure numbers: `79035419441`.
+Рассмотрим практическую задачу - у нас есть номер телефона `"+7 (903) -123-45-67"`, и нам нужно превратить его в строку только из чисел: `79035419441`.
 
-To do so, we can find and remove anything that's not a number. Character classes can help with that.
+Для этого мы можем найти и удалить все, что не является числом. Классы символов могут помочь с этим.
 
-A character class is a special notation that matches any symbol from a certain set.
+Класс символов - это специальное обозначение, которое соответствует любому символу из определенного набора.
 
-For the start, let's explore a "digit" class. It's written as `\d`. We put it in the pattern, that means "any single digit".
+Для начала давайте рассмотрим класс "цифр". Он обозначается как `\d`. Мы помещаем это обозначение в регулярное выражение, что соответствует "любой одной цифре".
 
-For instance, the let's find the first digit in the phone number:
+Например, давайте найдем первую цифру в номере телефона:
 
 ```js run
 let str = "+7(903)-123-45-67";
@@ -18,99 +18,100 @@ let reg = /\d/;
 alert( str.match(reg) ); // 7
 ```
 
-Without the flag `g`, the regular expression only looks for the first match, that is the first digit `\d`.
+Без флага `g` регулярное выражение ищет только первое совпадение, то есть первую цифру `\ d`.
 
-Let's add the `g` flag to find all digits:
+Давайте добавим флаг `g`, чтобы найти все цифры:
 
 ```js run
 let str = "+7(903)-123-45-67";
 
 let reg = /\d/g;
 
-alert( str.match(reg) ); // array of matches: 7,9,0,3,1,2,3,4,5,6,7
+alert( str.match(reg) ); // массив совпадений: 7,9,0,3,1,2,3,4,5,6,7
 
 alert( str.match(reg).join('') ); // 79035419441
 ```
 
-That was a character class for digits. There are other character classes as well.
+Это был класс символов для цифр. Есть и другие подобные классы.
 
-Most used are:
+Наиболее используемые:
 
-`\d` ("d" is from "digit")
-: A digit: a character from `0` to `9`.
+`\d` ("d": от английского "digit" – "цифра")
+: Цифра: символ от `0` до `9`.
 
-`\s` ("s" is from "space")
-: A space symbol: that includes spaces, tabs, newlines.
+`\s` ("s": от английского "space" – "пробел")
+: Символ пробела: включает пробелы, символы табуляции, переводы строк.
 
-`\w` ("w" is from "word")
-: A "wordly" character: either a letter of English alphabet or a digit or an underscore. Non-english letters (like cyrillic or hindi) do not belong to `\w`.
+`\w` ("w": от английского "word" – "слово")
+: Символ «слова», а точнее – буква латинского алфавита или цифра или подчёркивание '_'. Не-английские буквы не являются частью `\w`, то есть русская буква не подходит.
 
-For instance, `pattern:\d\s\w` means a "digit" followed by a "space character" followed by a "wordly character", like `"1 a"`.
+Для примера, `pattern:\d\s\w` обозначает цифру, за которой идёт пробельный символ, а затем символ слова, как в строке `"1 a"`.
 
-**A regexp may contain both regular symbols and character classes.**
+**Регулярное выражение может содержать как обычные символы, так и классы символов.**
 
-For instance, `pattern:CSS\d` matches a string `match:CSS` with a digit after it:
+Например, `pattern:CSS\d` соответствует строке` match:CSS` с цифрой после нее:
 
 ```js run
-let str = "CSS4 is cool";
+let str = "Стандарт CSS4 - это здорово";
 let reg = /CSS\d/
 
 alert( str.match(reg) ); // CSS4
 ```
 
-Also we can use many character classes:
+Также мы можем использовать несколько классов символов одновременно:
 
 ```js run
-alert( "I love HTML5!".match(/\s\w\w\w\w\d/) ); // 'HTML5'
+alert( "Я люблю HTML5!".match(/\s\w\w\w\w\d/) ); // 'HTML5'
 ```
 
-The match (each character class corresponds to one result character):
+Соответствие (каждому классу символов соответствует один символ результата):
 
 ![](love-html5-classes.png)
 
-## Word boundary: \b
+## Граница слова: \b
 
-A word boundary `pattern:\b` -- is a special character class.
+Граница слова `pattern:\b` - это специальный символьный класс.
 
-It does not denote a character, but rather a boundary between characters.
+Он обозначает не какой-то конкретный символ, а границу между символами.
 
-For instance, `pattern:\bJava\b` matches `match:Java` in the string `subject:Hello, Java!`, but not in the script `subject:Hello, JavaScript!`.
+Например, `pattern:\bJava\b` соответствует` match:Java` в строке `subject:Hello,Java!`, но не в сценарии `subject: Hello, JavaScript!`.
 
 ```js run
-alert( "Hello, Java!".match(/\bJava\b/) ); // Java
-alert( "Hello, JavaScript!".match(/\bJava\b/) ); // null
+alert( "Привет, Java!".match(/\bJava\b/) ); // Java
+alert( "Привет, JavaScript!".match(/\bJava\b/) ); // null
 ```
 
-The boundary has "zero width" in a sense that usually a character class means a character in the result (like a wordly character or a digit), but not in this case.
+Граница имеет "нулевую ширину" в том смысле, что обычно класс символов означает символ в результате (например, символ или цифру), но не в этом случае.
 
-The boundary is a test.
+Граница – это проверка.
 
-When regular expression engine is doing the search, it's moving along the string in an attempt to find the match. At each string position it tries to find the pattern.
+Когда механизм регулярных выражений выполняет поиск, он перемещается по строке в попытке найти совпадение. В каждой позиции строки он пытается найти шаблон.
 
-When the pattern contains `pattern:\b`, it tests that the position in string is a word boundary, that is one of three variants:
+Когда шаблон содержит `pattern:\b`, он проверяет, что позиция в строке является границей слова, то есть одним из трех вариантов:
 
-- Immediately before is `\w`, and immediately after -- not `\w`, or vise versa.
-- At string start, and the first string character is `\w`.
-- At string end, and the last string character is `\w`.
+- Внутри текста, если с одной стороны `\w`, а с другой – не `\w`.
+- Начало текста, если первый символ `\w`.
+- Конец текста, если последний символ `\w`.
 
-For instance, in the string `subject:Hello, Java!` the following positions match `\b`:
+Например, в строке `subject:Привет, Java!` Следующие позиции соответствуют `\b`:
 
 ![](hello-java-boundaries.png)
 
-So it matches `pattern:\bHello\b`, because:
+Так что это соответствует `pattern:\bПривет\b`, потому что:
 
-1. At the beginning of the string the first `\b` test matches.
-2. Then the word `Hello` matches.
-3. Then `\b` matches, as we're between `o` and a space.
+1. В начале строки совпадает первый тест `\b`.
+2. Далее слово `Привет` совпадает.
+3. Далее `\b` снова совпадает, так как мы находимся между `т` и пробелом.
 
 Pattern `pattern:\bJava\b` also matches. But not `pattern:\bHell\b` (because there's no word boundary after `l`) and not `Java!\b` (because the exclamation sign is not a wordly character, so there's no word boundary after it).
+Pattern `pattern:\bJava\b` также совпадает. Но не `pattern:\bПривед\b` (потому что после `д` нет границы слова), и не `Java!\b` (потому что восклицательный знак не является словесным символом, поэтому после него нет границы слова).
 
 
 ```js run
-alert( "Hello, Java!".match(/\bHello\b/) ); // Hello
-alert( "Hello, Java!".match(/\bJava\b/) );  // Java
-alert( "Hello, Java!".match(/\bHell\b/) );  // null (no match)
-alert( "Hello, Java!".match(/\bJava!\b/) ); // null (no match)
+alert( "Привет, Java!".match(/\bПривет\b/) ); // Привет
+alert( "Привет, Java!".match(/\bJava\b/) );  // Java
+alert( "Привет, Java!".match(/\bПривед\b/) );  // null (no match)
+alert( "Привет, Java!".match(/\bJava!\b/) ); // null (no match)
 ```
 
 Once again let's note that `pattern:\b` makes the searching engine to test for the boundary, so that `pattern:Java\b` finds `match:Java` only when followed by a word boundary, but it does not add a letter to the result.   §
