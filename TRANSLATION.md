@@ -61,7 +61,7 @@ document.querySelector('.hello').innerHTML = text;
 
 - _Вы_ и его производные пишите с маленькой буквы
 - Используйте букву `ё` ([этот npm-пакет](https://github.com/hcodes/eyo) может проверить текст и вставить её, где нужно)
-- Не знаете, как перевести термин? [Соварь «Веб-стандартов»](https://github.com/web-standards-ru/dictionary/blob/master/dictionary.md) поможет!
+- Не знаете, как перевести термин? [Словарь «Веб-стандартов»](https://github.com/web-standards-ru/dictionary/blob/master/dictionary.md) поможет!
 - Названия компаний (Google), библиотек (Jest) и аббревиатуры (DOM) не переводятся.
 
 
