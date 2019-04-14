@@ -1,13 +1,102 @@
+# Русский перевод The JavaScript Tutorial
 
-# The JavaScript Tutorial
+Репозиторий содержит переведенные файлы на русский язык сайта [Modern JavaScript Tutorial](https://javascript.info).
 
-This repository hosts the translation of the [Modern JavaScript Tutorial](https://javascript.info).
+<!--
+Текущий прогресс: 
+Пожалуйста, используйте этот ишью, если вы хотите что-то перевести и узнать.
+--> 
 
-The full list of translations and leads is at <https://github.com/iliakan/javascript-tutorial-en>.
+По вопросам перевода обращайтесь к @iliakan.
 
-Please contact the translation lead for any questions. 
-Contact @iliakan there's no answer or the translation appears to be stalled. 
+## Общие правила
 
-If there are other translators, notify them (create an issue?) when you're taking a chapter.
+- Перевод не должен быть буквальным, избегайте кальки. Небольшие вольности в переводе допускаются, но только если они помогают передать смысл.
+- Перевод должен быть технически правильным и хорошо написанным.
+- Если вам нужно оригинальный текст, отправьте пулреквест в соответствующий репозиторий.
+- _Вы_ и его производные пишите с маленькой буквы
+- Всегда используйте букву `ё` (это легко соблюдать с помощью [данного npm-пакета](https://github.com/hcodes/eyo))
+- Используйте тире вместо дефиса (оно должно быть намного длиннее, чем дефис). Тире: `—`, дефис: `-`
+- Переводите комментарии в примерах кода, но не содержимое
+- Используйте терминологию [словаря «Веб-стандартов»](https://github.com/web-standards-ru/dictionary), если нет исходного варианта в таблице ниже
+- Не переводите наименования компаний (Facebook, Airbnb), библиотек (Jest, Enzyme) и т.д.
+- Не переводите аббревиатуры (API, DOM, HOC, UI).
 
+### Ресурсы по переводу
 
+Для лучшего перевода, пожалуста, ознакомьтесь со следующими статьями:
+
+* [Берегись канцелярита!](http://www.vavilon.ru/noragal/slovo2.html)
+* [Словесная алгебра](http://www.vavilon.ru/noragal/slovo4.html)
+
+## Универсальное руководство по стилю
+
+Описанные ниже правила содержаться в [оригинальном репозитории](https://github.com/javascript-tutorial/en.javascript.info/blob/master/TRANSLATION.md), который предписывает общий стиль для **всех** языков, на которые переводится учебник.
+
+## Текст в блоках с кодом
+
+- Переводите комментарии в блоках кода.
+- По возможности переводите строки в примерах.
+- Не переводите имя переменных, идентификаторов, классов.
+
+Пример:
+
+```js
+// Example
+const text = "Hello, world";
+document.querySelector('.hello').innerHTML = text;
+```
+
+✅ МОЖНО (переведён комментарий):
+
+```js
+// Ejemplo
+const text = 'Hello, world';
+document.querySelector('.hello').innerHTML = text;
+```
+
+✅ ТОЖЕ МОЖНО (переведён ещё текст):
+
+```js
+// Ejemplo
+const text = 'Hola mundo';
+document.querySelector('.hello').innerHTML = text;
+```
+
+❌ НЕЛЬЗЯ (переведён класс):
+
+```js
+// Ejemplo
+const text = 'Hola mundo';
+// ".hello" is a class
+// DO NOT TRANSLATE
+document.querySelector('.hola').innerHTML = text;
+```
+
+❌ СОВСЕМ НЕЛЬЗЯ (переведены переменные):
+
+```js
+// Ejemplo
+const texto = 'Hola mundo';
+documento.querySelector('.hola').interiorHTML = texto;
+```
+
+### Внешние ссылки
+
+Если внешняя ссылка ведёт к статье на [MDN] или [Wikipedia], и там существует статья на русском языке, исправьте ссылку, чтобы она указывала на русский вариант, даже если он неполный или требует улучшения.
+
+[MDN]: https://developer.mozilla.org/en-US/
+[Wikipedia]: https://en.wikipedia.org/wiki/Main_Page
+
+Для ссылок, у которых нету языковых эквивалентов (Stack Overflow, видео на YouTube, и т. д.), просто оставьте оригинальный вариант как есть.
+
+<!-- скоро
+
+## Соглашение по переводу (глоссарий)
+
+**Пожалуйста, поддерживайте глоссарий в алфавитном порядке.**
+
+| Оригинальный термин | Перевод |
+| ------------------ | ---------- |
+
+-->
