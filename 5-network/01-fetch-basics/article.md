@@ -38,7 +38,7 @@ if (response.ok) { // если HTTP код состояния 200-299
   // получаем тело ответа (см. ниже)
   let json = await response.json();
 } else {
-  alert("HTTP-Error: " + response.status);
+  alert("Ошибка HTTP: " + response.status);
 }
 ```
 
