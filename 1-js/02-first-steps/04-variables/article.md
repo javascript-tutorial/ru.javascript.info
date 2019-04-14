@@ -39,23 +39,23 @@ alert(message); // показывает содержимое переменно�
 */!*
 ```
 
-To be concise, we can combine the variable declaration and assignment into a single line:
+Для краткости можно совместить объявление переменной и запись данных в одну строку:
 
 ```js run
-let message = 'Hello!'; // define the variable and assign the value
+let message = 'Hello!'; // определяем переменную и присваиваем ей значение
 
 alert(message); // Hello!
 ```
 
-We can also declare multiple variables in one line:
+Мы также можем объявить несколько переменных в одной строке:
 
 ```js no-beautify
 let user = 'John', age = 25, message = 'Hello';
 ```
 
-That might seem shorter, but we don't recommend it. For the sake of better readability, please use a single line per variable.
+Это может показаться короче, но мы так делать не рекомендуем. Для лучшей читаемости, пожалуйста, используйте одну строку на переменную.
 
-The multiline variant is a bit longer, but easier to read:
+Многострочный вариант немного длиннее, но легче для чтения:
 
 ```js
 let user = 'John';
@@ -63,14 +63,14 @@ let age = 25;
 let message = 'Hello';
 ```
 
-Some people also define multiple variables in this multiline style:
+Некоторые люди также определяют несколько переменных в многострочном стиле:
 ```js no-beautify
 let user = 'John',
   age = 25,
   message = 'Hello';
 ```
 
-...Or even in the "comma-first" style:
+...Или даже в стиле с запятой в начале строки:
 
 ```js no-beautify
 let user = 'John'
@@ -78,22 +78,22 @@ let user = 'John'
   , message = 'Hello';
 ```
 
-Technically, all these variants do the same thing. So, it's a matter of personal taste and aesthetics.
+Технически, все эти варианты делают одно и тоже. Так что это вопрос личного вкуса и эстетики.
 
 
-````smart header="`var` instead of `let`"
-In older scripts, you may also find another keyword: `var` instead of `let`:
+````smart header="`var` вместо `let`"
+В старых сценариях вы также можете найти другое ключевое слово: `var` вместо `let`:
 
 ```js
 *!*var*/!* message = 'Hello';
 ```
 
-The `var` keyword is *almost* the same as `let`. It also declares a variable, but in a slightly different, "old-school" way.
+Ключевое слово `var` *почти* такое же, как `let`. Оно объявляет переменную, но немного по-другому, "олдскукльным" способом.
 
-There are subtle differences between `let` and `var`, but they do not matter for us yet. We'll cover them in detail in the chapter <info:var>.
+Есть тонкие различия между `let` и `var`, но они пока не имеют для нас значения. Мы подробно рассмотрим их в этой главе <info:var>.
 ````
 
-## A real-life analogy
+## Аналогия из жизни
 
 We can easily grasp the concept of a "variable" if we imagine it as a "box" for data, with a uniquely-named sticker on it.
 
