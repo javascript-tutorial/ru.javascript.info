@@ -95,30 +95,30 @@ let user = 'John'
 
 ## Аналогия из жизни
 
-We can easily grasp the concept of a "variable" if we imagine it as a "box" for data, with a uniquely-named sticker on it.
+Мы легко поймем концепцию "переменной", если представим ее в виде "коробки" для данных, с уникальным названием на ней.
 
-For instance, the variable `message` can be imagined as a box labeled `"message"` with the value `"Hello!"` in it:
+Например, переменную `message` можно представить, как коробку с названием `"message"` и значением `"Hello!"` внутри:
 
 ![](variable.png)
 
-We can put any value in the box.
+Мы можем положить любое значение в коробку.
 
-We can also change it as many times as we want:
+Мы также можем изменить его столько раз, сколько захотим:
 ```js run
 let message;
 
 message = 'Hello!';
 
-message = 'World!'; // value changed
+message = 'World!'; // значение изменено
 
 alert(message);
 ```
 
-When the value is changed, the old data is removed from the variable:
+При изменении значения старые данные удаляются из переменной:
 
 ![](variable-change.png)
 
-We can also declare two variables and copy data from one into the other.
+Мы также можем объявить две переменные и скопировать данные из одной в другую.
 
 ```js run
 let hello = 'Hello world!';
@@ -126,28 +126,28 @@ let hello = 'Hello world!';
 let message;
 
 *!*
-// copy 'Hello world' from hello into message
+// копируем значение 'Hello world' из переменной hello в переменную message
 message = hello;
 */!*
 
-// now two variables hold the same data
+// теперь две переменные содержат одинаковые данные
 alert(hello); // Hello world!
 alert(message); // Hello world!
 ```
 
-```smart header="Functional languages"
-It's interesting to note that [functional](https://en.wikipedia.org/wiki/Functional_programming) programming languages, like [Scala](http://www.scala-lang.org/) or [Erlang](http://www.erlang.org/), forbid changing variable values.
+```smart header="Функциональные языки программирования"
+Интересно отметить, что [функциональные](https://en.wikipedia.org/wiki/Functional_programming) языки программирования, такие как [Scala](http://www.scala-lang.org/) или [Erlang](http://www.erlang.org/), запрещают измененять значения в переменной.
 
-In such languages, once the value is stored "in the box", it's there forever. If we need to store something else, the language forces us to create a new box (declare a new variable). We can't reuse the old one.
+В таких языках, однажды сохраненное "в коробку" значение, остается там навсегда. Если нам нужно сохранить что-то другое, язык засталяет нас создать новую коробку (объявить новую переменную). Мы не можем использовать старую переменную.
 
-Though it may seem a little odd at first sight, these languages are quite capable of serious development. More than that, there are areas like parallel computations where this limitation confers certain benefits. Studying such a language (even if you're not planning to use it soon) is recommended to broaden the mind.
+Хотя на первый взгляд это может показаться немного странным, эти языки вполне подходят для серьезной разработки. Более того, есть такие области, как параллельные вычисления, где это ограничение дает определенные преимущества. Изучение такого языка (даже если вы не планируете использовать его в ближайшее время) рекомендуется для расширения кругозора.
 ```
 
-## Variable naming [#variable-naming]
+## Имена переменных [#variable-naming]
 
-There are two limitations on variable names in JavaScript:
+В JavaScript существует два ограничения на имена переменных :
 
-1. The name must contain only letters, digits, or the symbols `$` and `_`.
+1. Имя переменной должно содержать только буквы, цифры, или символы `$` и `_`.
 2. The first character must not be a digit.
 
 Examples of valid names:
