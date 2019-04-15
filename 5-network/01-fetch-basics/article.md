@@ -339,7 +339,7 @@ fetch(url, options)
 
 Параметры ответа:
 - `response.status` -- HTTP-код ответа,
-- `response.ok` -- `true` статус ответа 200-299.
+- `response.ok` -- `true`, если статус ответа в диапазоне 200-299.
 - `response.headers` -- коллекция HTTP заголовков.
 
 Методы для получения тела ответа: 
