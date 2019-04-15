@@ -350,7 +350,7 @@ fetch(url, options)
 - **`response.arrayBuffer()`** -- возвращает ответ как [ArrayBuffer](info:arraybuffer-binary-arrays) (простейшие бинарные данные),
 
 Параметры:
-- `method` -- HTTP метод,
+- `method` -- HTTP-метод,
 - `headers` -- объект с запрашиваемыми заголовками (не все заголовка разрешены),
 - `body` -- текст/FormData/BufferSource/Blob/UrlSearchParams данные для отправки.
 
