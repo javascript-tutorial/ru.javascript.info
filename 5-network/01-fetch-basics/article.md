@@ -340,7 +340,7 @@ fetch(url, options)
 Параметры ответа:
 - `response.status` -- HTTP-код ответа,
 - `response.ok` -- `true`, если статус ответа в диапазоне 200-299.
-- `response.headers` -- коллекция HTTP заголовков.
+- `response.headers` -- похожий на объект типа Map с HTTP-заголовками.
 
 Методы для получения тела ответа: 
 - **`response.json()`** -- преобразовывает ответ в JSON объект,
