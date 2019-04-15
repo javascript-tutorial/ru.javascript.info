@@ -53,7 +53,7 @@ if (response.ok) { // если HTTP код состояния 200-299
 - **`response.arrayBuffer()`** -- возвращает ответ как [ArrayBuffer](info:arraybuffer-binary-arrays) (простейшие бинарные данные),
 - помимо этого, `response.body` - это объект [ReadableStream](https://streams.spec.whatwg.org/#rs-class), с помощью которого можно считывать тело запроса по частям. Мы рассмотрим пример позже.
 
-Например, у нас есть JSON объект с последними Github коммитами:
+Например, у нас есть JSON-объект с последними коммитами из репозитория на Github:
 
 ```js run async
 let response = await fetch('https://api.github.com/repos/iliakan/javascript-tutorial-en/commits');
