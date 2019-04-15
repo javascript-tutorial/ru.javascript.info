@@ -323,7 +323,7 @@ function submit() {
 
 ## Итого
 
-Типичный `fetch` запрос состоит из двух `awaits`:
+Типичный запрос с помощью `fetch` состоит из двух операторов `await`:
 
 ```js
 let response = await fetch(url, options); // завершается с заголовками ответа
