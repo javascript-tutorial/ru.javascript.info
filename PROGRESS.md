@@ -1,5 +1,3 @@
-[10:37:02] Using gulpfile /js/translate/gulpfile.js
-[10:37:02] Starting 'progress.md'...
 
 ## Maintainer List
 
@@ -120,5 +118,3 @@ When PRs are merged, make sure to mark that page as completed!
   
 * [ ] Mutation observer
     
-
-[10:37:02] Finished 'progress.md' after 358 ms
