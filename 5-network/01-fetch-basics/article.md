@@ -48,7 +48,7 @@ if (response.ok) { // если HTTP код состояния 200-299
 
 - **`response.json()`** -- преобразовывает ответ в JSON-объект,
 - **`response.text()`** -- возвращает ответ как обычный текст,
-- **`response.formData()`** -- возвращает ответ как объект FormData (кодировка form/multipart),
+- **`response.formData()`** -- возвращает ответ как объект FormData (закодированные с помощью типа form/multipart),
 - **`response.blob()`** -- возвращает объект как [Blob](info:blob) (бинарные данные с типом),
 - **`response.arrayBuffer()`** -- возвращает ответ как [ArrayBuffer](info:arraybuffer-binary-arrays) (простейшие бинарные данные),
 - в дополнение, `response.body` это объект [ReadableStream](https://streams.spec.whatwg.org/#rs-class), который дает возможность считываеть тело по частям. Мы рассмотрим пример позже.
