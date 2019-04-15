@@ -352,6 +352,6 @@ fetch(url, options)
 Параметры:
 - `method` -- HTTP-метод,
 - `headers` -- объект с запрашиваемыми заголовками (не все заголовка разрешены),
-- `body` -- текст/FormData/BufferSource/Blob/UrlSearchParams данные для отправки.
+- `body` -- данные для отправки в виде текста/FormData/BufferSource/Blob/UrlSearchParams.
 
 В следующих главах мы рассмотрим больше параметров и вариантов использования.
