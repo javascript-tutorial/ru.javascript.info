@@ -148,55 +148,55 @@ alert(message); // Hello world!
 В JavaScript существует два ограничения на имена переменных :
 
 1. Имя переменной должно содержать только буквы, цифры, или символы `$` и `_`.
-2. The first character must not be a digit.
+2. Первый символ не должен быть цифрой.
 
-Examples of valid names:
+Примеры допустимых имен:
 
 ```js
 let userName;
 let test123;
 ```
 
-When the name contains multiple words, [camelCase](https://en.wikipedia.org/wiki/CamelCase) is commonly used. That is: words go one after another, each word starting with a capital letter: `myVeryLongName`.
+Если имя содержит несколько слов, обычно используется [верблюжья нотация](https://en.wikipedia.org/wiki/CamelCase). То есть слова идут одно за другим, и каждое слово начинается с заглавной буквы: `myVeryLongName`.
 
-What's interesting -- the dollar sign `'$'` and the underscore `'_'` can also be used in names. They are regular symbols, just like letters, without any special meaning.
+Что интересно -- знак доллара `'$'` и подчеркивание `'_'` также можно использовать в названиях. Это обычные символы, как и буквы, без какого-либо особого значения.
 
-These names are valid:
+Эти имена являются допустимыми:
 
 ```js run untrusted
-let $ = 1; // declared a variable with the name "$"
-let _ = 2; // and now a variable with the name "_"
+let $ = 1; // объявили переменную с именем "$"
+let _ = 2; // а теперь переменную с именем "_"
 
 alert($ + _); // 3
 ```
 
-Examples of incorrect variable names:
+Примеры неправильных имен переменных:
 
 ```js no-beautify
-let 1a; // cannot start with a digit
+let 1a; // не может начинаться с цифры
 
-let my-name; // hyphens '-' aren't allowed in the name
+let my-name; // дефис '-' не разрешен в имени
 ```
 
-```smart header="Case matters"
-Variables named `apple` and `AppLE` are two different variables.
+```smart header="Регистр имеет значение"
+Переменные с именами `apple` and `AppLE` -- это две разные переменные.
 ```
 
-````smart header="Non-English letters are allowed, but not recommended"
-It is possible to use any language, including cyrillic letters or even hieroglyphs, like this:
+````smart header="Не английские буквы разрешены, но не рекомендуются"
+Можно использовать любой язык, включая кириллицу или даже иероглифы, например:
 
 ```js
 let имя = '...';
 let 我 = '...';
 ```
 
-Technically, there is no error here, such names are allowed, but there is an international tradition to use English in variable names. Even if we're writing a small script, it may have a long life ahead. People from other countries may need to read it some time.
+Технически здесь нет ошибки, такие имена разрешены, но есть международная традиция использовать английский язык в именах переменных. Даже если мы пишем небольшой сценарий, у него может быть долгая жизнь впереди. Людям из других стран, возможно, придется прочесть его не один раз.
 ````
 
-````warn header="Reserved names"
-There is a [list of reserved words](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Lexical_grammar#Keywords), which cannot be used as variable names because they are used by the language itself.
+````warn header="Зарезервированные имена"
+Существует [список зарезервированных слов](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Lexical_grammar#Keywords), которые нельзя использовать в качестве имен переменных, потому что они используются самим языком.
 
-For example: `let`, `class`, `return`, and `function` are reserved.
+Например: `let`, `class`, `return`, и `function` зарезервированы.
 
 The code below gives a syntax error:
 
