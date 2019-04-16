@@ -12,7 +12,7 @@
 
 Если взяли статью на перевод — имеет смысл создать issue об этом, чтобы другие люди не переводили ее же.
 
-> **Обязательно ознакомmтесь с [рекомендациями по переводу](https://github.com/javascript-tutorial/ru.javascript.info/blob/master/TRANSLATION.md)!**
+> **Обязательно ознакомьтесь с [рекомендациями по переводу](https://github.com/javascript-tutorial/ru.javascript.info/blob/master/TRANSLATION.md)!**
 
 # Структура
 
