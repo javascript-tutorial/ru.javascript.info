@@ -198,27 +198,27 @@ let 我 = '...';
 
 Например: `let`, `class`, `return`, и `function` зарезервированы.
 
-The code below gives a syntax error:
+Приведенный ниже код дает синтаксическую ошибку:
 
 ```js run no-beautify
-let let = 5; // can't name a variable "let", error!
-let return = 5; // also can't name it "return", error!
+let let = 5; // нельзя назвать переменную "let", ошибка!
+let return = 5; // также нельзя назвать переменную "return", ошибка!
 ```
 ````
 
-````warn header="An assignment without `use strict`"
+````warn header="Создание переменной без использования `use strict`"
 
-Normally, we need to define a variable before using it. But in the old times, it was technically possible to create a variable by a mere assignment of the value without using `let`. This still works now if we don't put `use strict` in our scripts to maintain compatibility with old scripts.
+Обычно нам нужно определить переменную перед ее использованием. Но в старые времена было технически возможно создать переменную простым присвоением значения без использования `let`. Это все еще работает, если мы не ставим `use strict` в наших файлах для поддержания совместимости со старыми сценариями.
 
 ```js run no-strict
-// note: no "use strict" in this example
+// заметка: "use strict" в этом примере не используется
 
-num = 5; // the variable "num" is created if it didn't exist
+num = 5; // если переменная "num" не существовала, она создается
 
 alert(num); // 5
 ```
 
-This is a bad practice and would cause an error in strict mode:
+Это плохая практика и приведет к ошибке в строгом режиме:
 
 ```js
 "use strict";
@@ -229,23 +229,23 @@ num = 5; // error: num is not defined
 ```
 ````
 
-## Constants
+## Константы
 
-To declare a constant (unchanging) variable, use `const` instead of `let`:
+Чтобы объявить константу (неиспользуемую) переменную, используйте `const` вместо `let`:
 
 ```js
 const myBirthday = '18.04.1982';
 ```
 
-Variables declared using `const` are called "constants". They cannot be changed. An attempt to do so would cause an error:
+Переменные объявленные с помощью `const` называются "константами". Их нельзя изменить. Попытка сделать это приведет к ошибке:
 
 ```js run
 const myBirthday = '18.04.1982';
 
-myBirthday = '01.01.2001'; // error, can't reassign the constant!
+myBirthday = '01.01.2001'; // ошибка, константу невозможно переназначить!
 ```
 
-When a programmer is sure that a variable will never change, they can declare it with `const` to guarantee and clearly communicate that fact to everyone.
+Когда программист уверен, что переменная никогда не будет меняться, он может объявить ее используя ключевое слово `const`, гарантировать это и наглядно донести это до каждого.
 
 
 ### Uppercase constants
