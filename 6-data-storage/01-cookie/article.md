@@ -277,7 +277,7 @@ Cookie со значением `samesite=strict` никогда не перес�
 
 ### getCookie(name)
 
-Простейший способ получить cookie  - использование [регулярного выражения] (info:regular-expressions).
+Простейший способ получить cookie  - использование [регулярного выражения](info:regular-expressions).
 
 Функция `getCookie(name)` находит кук по заданному имени `name`:
 
@@ -292,20 +292,20 @@ function getCookie(name) {
 }
 ```
 
-Here `new RegExp` is generated dynamically, to match `; name=<value>`.
+Здесь регулярное выражение `new RegExp` формируется так, чтобы находить совпадения по шаблону `; name=<value>`.
 
-Please note that a cookie value is encoded, so `getCookie` uses a built-in `decodeURIComponent` function to decode it.
+Обратите внимание, что значение cookie закодировано, поэтому функция `getCookie` использует встроенный метод `decodeURIComponent` для его декодирования.
 
 ### setCookie(name, value, options)
 
-Sets the cookie `name` to the given `value` with `path=/` by default (can be modified to add other defaults):
+Устанавливает занчение  `value` в cookie с именем `name` для пути `path=/` (настройки можно менять и добавлять другие занчения настроек по умолчанию):
 
 ```js run
 function setCookie(name, value, options = {}) {
 
   options = {
     path: '/',
-    // add other defaults here if necessary
+    // в случае необходимости можно добавить другие настройки по умолчанию
     ...options
   };
 
@@ -326,13 +326,13 @@ function setCookie(name, value, options = {}) {
   document.cookie = updatedCookie;
 }
 
-// Example of use:
+// Пример использования:
 setCookie('user', 'John', {secure: true, 'max-age': 3600});
 ```
 
 ### deleteCookie(name)
 
-To delete a cookie, we can call it with a negative expiration date:
+Чтобы удалить cookie нам достаточно установить ему отрицательную дату окончания действия (expiration date): 
 
 ```js
 function deleteCookie(name) {
@@ -342,16 +342,16 @@ function deleteCookie(name) {
 }
 ```
 
-```warn header="Updating or deleting must use same path and domain"
-Please note: when we update or delete a cookie, we should use exactly the same path and domain options as when we set it.
+```warn header="Обновление и удаление должны производиться с теми же настройками домена и пути"
+Обратите внимание: во время обновления и удаления cookie нужно следить за тем, что мы произвели изменения для тех же самых домена и пути, с которыми этот cookie был создан.
 ```
 
-Together: [cookie.js](cookie.js).
+Все вместе: [cookie.js](cookie.js).
 
 
-## Appendix: Third-party cookies
+## Приложение: Сторонние куки (Third-party cookies)
 
-A cookie is called "third-party" if it's placed by domain other than the user is visiting.
+Cookie называется сторонним (англ. third-party), если он был создан не тем же доменом, на который зашел пользователь.
 
 For instance:
 1. A page at `site.com` loads a banner from another site: `<img src="https://ads.com/banner.png">`.
