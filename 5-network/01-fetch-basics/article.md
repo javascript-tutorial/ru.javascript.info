@@ -48,7 +48,7 @@ if (response.ok) { // если HTTP код состояния 200-299
 
 - **`response.json()`** -- преобразовывает ответ в JSON-объект,
 - **`response.text()`** -- возвращает ответ как обычный текст,
-- **`response.formData()`** -- возвращает ответ как объект FormData (закодированные с помощью типа form/multipart),
+- **`response.formData()`** -- возвращает ответ как объект FormData,
 - **`response.blob()`** -- возвращает объект как [Blob](info:blob) (бинарные данные с типом),
 - **`response.arrayBuffer()`** -- возвращает ответ как [ArrayBuffer](info:arraybuffer-binary-arrays) (простейшие бинарные данные),
 - помимо этого, `response.body` - это объект [ReadableStream](https://streams.spec.whatwg.org/#rs-class), с помощью которого можно считывать тело запроса по частям. Мы рассмотрим пример позже.
@@ -77,7 +77,7 @@ fetch('https://api.github.com/repos/iliakan/javascript-tutorial-en/commits')
 ```js
 let text = await response.text();
 ```
-И для примера работы с бинарными данными, давайте запросим и выведем на экран изображение (см. главу [Blob](info:blob) чтобы узнать детали реализации)
+И для примера работы с бинарными данными, давайте запросим и выведем на экран изображение (см. главу [Blob](info:blob) чтобы узнать про операции с Blob)
 
 ```js async run
 let response = await fetch('/article/fetch/logo-fetch.svg');
