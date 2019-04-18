@@ -277,24 +277,24 @@ alert(color); // #FF7F00
 
 Название "константа" просто означает, что значение переменной никогда не меняется. Но есть константы, которые известны до выполнения (например, шестнадцатеричное значение для красного цвета), а есть константы, которые *вычисляются* во время выполнения сценария, но не изменяются после их первоначального назначения.
 
-For instance:
+Например:
 ```js
-const pageLoadTime = /* time taken by a webpage to load */;
+const pageLoadTime = /* время потраченое на загрузку веб-страницы */;
 ```
 
-The value of `pageLoadTime` is not known prior to the page load, so it's named normally. But it's still a constant because it doesn't change after assignment.
+Значение `pageLoadTime` не известно до загрузки страницы, поэтому ее имя записано как обычно. Но это все еще константа, потому что она не изменяется после назначения.
 
-In other words, capital-named constants are only used as aliases for "hard-coded" values.  
+Другими словами, константы с именами записанными заглавными буквами  используются только как псевдонимы для "жестко закодированных" значений.  
 
-## Name things right
+## Придумывайте правильные имена
 
-Talking about variables, there's one more extremely important thing.
+В разговоре о переменных необходимо упомянуть, что есть еще одна чрезвычайно важная вещь.
 
-Please name your variables sensibly. Take time to think about this.
+Пожалуйста, называйте ваши переменные разумно. Подумайте об этом.
 
-Variable naming is one of the most important and complex skills in programming. A quick glance at variable names can reveal which code was written by a beginner versus an experienced developer.
+Именование переменных -- это один из самых важных и сложных навыков в программировании. Быстрый взгляд на имена переменных может показать, какой код был написан новичком, а какой опытным разработчиком.
 
-In a real project, most of the time is spent modifying and extending an existing code base rather than writing something completely separate from scratch. When we return to some code after doing something else for a while, it's much easier to find information that is well-labeled. Or, in other words, when the variables have good names.
+В реальном проекте большая часть времени тратится на изменение и расширение существующей кодовой базы, а не на написание чего-то совершенно нового с нуля. Когда мы возвращаемся к какому-то коду, после выполнения чего-то другого в течение некоторого времени, гораздо легче найти информацию, которая хорошо размечена. Или, другими словами, когда переменные имеют хорошие имена.
 
 Please spend time thinking about the right name for a variable before declaring it. Doing so will repay you handsomely.
 
