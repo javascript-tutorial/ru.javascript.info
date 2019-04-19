@@ -22,7 +22,7 @@ window.open('https://javascript.info/')
 // попап заблокирован
 window.open('https://javascript.info');
 
-// popup будет показан
+// попап будет показан
 button.onclick = () => {
   window.open('https://javascript.info');
 };
