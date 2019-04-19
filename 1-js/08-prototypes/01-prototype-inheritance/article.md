@@ -1,22 +1,22 @@
-# Prototypal inheritance
+# Прототипное наследование
 
-In programming, we often want to take something and extend it.
+В программировании мы часто хотим взять что-то и расширить.
 
-For instance, we have a `user` object with its properties and methods, and want to make `admin` and `guest` as slightly modified variants of it. We'd like to reuse what we have in `user`, not copy/reimplement its methods, just build a new object on top of it.
+Например, у нас есть объект `user` со своими свойствами и методами, и мы хотим создать обьекты `admin` и `guest` как его слегка измененные варианты. Мы хотели бы повторно использовать то, что есть у обьекта `user`, не копировать/переопределять его методы, но просто создать новый объект поверх него.
 
-*Prototypal inheritance* is a language feature that helps in that.
+*Прототипное наследование* — это особенность языка, которая помогает в этом.
 
 ## [[Prototype]]
 
-In JavaScript, objects have a special hidden property `[[Prototype]]` (as named in the specification), that is either `null` or references another object. That object is called "a prototype":
+В JavaScript объекты имеют специальное скрытое свойство `[[Prototype]]` (как указано в спецификации), которое либо равно `null`, либо ссылается на другой объект. Этот объект называется "прототип":
 
 ![prototype](object-prototype-empty.png)
 
-That `[[Prototype]]` has a "magical" meaning. When we want to read a property from `object`, and it's missing, JavaScript automatically takes it from the prototype. In programming, such thing is called "prototypal inheritance". Many cool language features and programming techniques are based on it.
+Этот `[[Prototype]]` имеет "магическое" значение. Когда мы хотим прочитать свойство из `объекта`, а оно отсутствует, JavaScript автоматически берет его из прототипа. В программировании такой механизм называется "прототипным наследованием". Многие интересные возможности языка и техники программирования основываются на нем.
 
-The property `[[Prototype]]` is internal and hidden, but there are many ways to set it.
+Свойство `[[Prototype]]` является внутренним и скрытым, но есть много способов задать его самостоятельно.
 
-One of them is to use `__proto__`, like this:
+Одним из них является использование `__proto__`, например так:
 
 ```js run
 let animal = {
@@ -31,17 +31,17 @@ rabbit.__proto__ = animal;
 */!*
 ```
 
-```smart header="`__proto__` is a historical getter/setter for `[[Prototype]]`"
-Please note that `__proto__` is *not the same* as `[[Prototype]]`. That's a getter/setter for it.
+```smart header="Свойство `__proto__` — историчеси геттер/сеттер для `[[Prototype]]`"
+Обратите внимание, что `__proto__` — *не то же самое*, что `[[Prototype]]`. Это геттер/сеттер для него.
 
-It exists for historical reasons, in modern language it is replaced with functions `Object.getPrototypeOf/Object.setPrototypeOf` that also get/set the prototype. We'll study the reasons for that and these functions later.
+Он существует по историческим причинам, в современном языке его заменяют функции `Object.getPrototypeOf / Object.setPrototypeOf`, которые также получают/устанавливают прототип. Мы рассмотрим причины этого и эти функции позже.
 
-By the specification, `__proto__` must only be supported by browsers, but in fact all environments including server-side support it. For now, as `__proto__` notation is a little bit more intuitively obvious, we'll use it in the examples.
+По спецификации `__proto__` должен поддерживаться только браузерами, но на самом деле все среды, включая серверную, поддерживают его. На данный момент, поскольку нотация `__proto__` немного более понятна, мы будем использовать ее в примерах.
 ```
 
-If we look for a property in `rabbit`, and it's missing, JavaScript automatically takes it from `animal`.
+Если мы ищем свойство в `rabbit`, и оно отсутствует, JavaScript автоматически берет его из `animal`.
 
-For instance:
+Например:
 
 ```js run
 let animal = {
@@ -55,22 +55,22 @@ let rabbit = {
 rabbit.__proto__ = animal; // (*)
 */!*
 
-// we can find both properties in rabbit now:
+// теперь мы можем найти оба свойства в rabbit:
 *!*
 alert( rabbit.eats ); // true (**)
 */!*
 alert( rabbit.jumps ); // true
 ```
 
-Here the line `(*)` sets `animal` to be a prototype of `rabbit`.
+Здесь линия `(*)` устанавливает `animal` как прототип для `rabbit`.
 
-Then, when `alert` tries to read property `rabbit.eats` `(**)`, it's not in `rabbit`, so JavaScript follows the `[[Prototype]]` reference and finds it in `animal` (look from the bottom up):
+Затем, когда `alert` пытается прочитать свойство `rabbit.eats` `(**)`, его нет в `rabbit`, поэтому JavaScript следует по ссылке `[[Prototype]]` и находит ее в `animal` (смотрите снизу вверх):
 
 ![](proto-animal-rabbit.png)
 
-Here we can say that "`animal` is the prototype of `rabbit`" or "`rabbit` prototypically inherits from `animal`".
+Здесь иы можем сказать, что "`animal` является прототипом `rabbit`" или "`rabbit` прототипно наследуется от `animal`".
 
-So if `animal` has a lot of useful properties and methods, then they become automatically available in `rabbit`. Such properties are called "inherited".
+Так что если у `animal` много полезных свойств и методов, то они автоматически становятся доступными у `rabbit`. Такие свойства называются "унаследованными".
 
 If we have a method in `animal`, it can be called on `rabbit`:
 
