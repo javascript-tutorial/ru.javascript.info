@@ -35,7 +35,7 @@ button.onclick = () => {
 Запустим код:
 
 ```js run
-// откроется черех 3 секунды
+// откроется через 3 секунды
 setTimeout(() => window.open('http://google.com'), 3000);
 ```
 
