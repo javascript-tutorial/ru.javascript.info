@@ -296,35 +296,35 @@ const pageLoadTime = /* время потраченое на загрузку в
 
 В реальном проекте большая часть времени тратится на изменение и расширение существующей кодовой базы, а не на написание чего-то совершенно нового с нуля. Когда мы возвращаемся к какому-то коду, после выполнения чего-то другого в течение некоторого времени, гораздо легче найти информацию, которая хорошо размечена. Или, другими словами, когда переменные имеют хорошие имена.
 
-Please spend time thinking about the right name for a variable before declaring it. Doing so will repay you handsomely.
+Пожалуйста, потратьте время на обдумывание правильного имени переменной перед ее объявлением. Делайте так, и будете вознаграждены.
 
-Some good-to-follow rules are:
+Несколько хороших правил:
 
-- Use human-readable names like `userName` or `shoppingCart`.
-- Stay away from abbreviations or short names like `a`, `b`, `c`, unless you really know what you're doing.
-- Make names maximally descriptive and concise. Examples of bad names are `data` and `value`. Such names say nothing. It's only okay to use them if the context of the code makes it exceptionally obvious which data or value the variable is referencing.
-- Agree on terms within your team and in your own mind. If a site visitor is called a "user" then we should name related variables `currentUser` or `newUser` instead of `currentVisitor` or `newManInTown`.
+- Используйте легко-читаемые имена, такие как `имя пользователя` или `карта товара`.
+- Держитесь подальше от аббревиатур или кортких имен, таких как `a`, `b`, `c`, за исключением тех случаев, когда вы точно знаете, что так нужно.
+- Делайте имена максимально описательными и локаничными. Примеры плохих имен `данные` и `значение`. Такие имена ничего не говорят. Их можно использовать только в том случае, если из контекста кода очевидно, на какие данные или значение ссылается переменная.
+- Соглашайтесь на условия внутри вашей команды и в вашем собственном разуме. Если посетитель сайта называется "пользователь" тогда мы должны назвать связанные с ним переменные `текущий пользователь` или `новый пользователь` вместо того, чтобы называть их `текущий посетитель` или `новый мужчина в городе`.
 
-Sounds simple? Indeed it is, but creating descriptive and concise variable names in practice is not. Go for it.
+Звучит просто? Действительно это так, но на практике создание описательных и локаничных имен переменных редкость. Действуйте.
 
-```smart header="Reuse or create?"
-And the last note. There are some lazy programmers who, instead of declaring new variables, tend to reuse existing ones.
+```smart header="Переиспользовать или создавать?"
+И последняя заметка. Есть ленивые программисты, которые вместо объявления новых переменных, обычно, повторно используют существующие.
 
-As a result, their variables are like boxes into which people throw different things without changing their stickers. What's inside the box now? Who knows? We need to come closer and check.
+В результате их переменные похожи на коробки, в которые люди бросают разные предметы, не меняя на них стикеры. Что сейчас находится внутри коробки? Кто знает? Нам необходимо подойти поближе и проверить.
 
-Such programmers save a little bit on variable declaration but lose ten times more on debugging.
+Такие программисты экономят немного на объявлении переменных, но теряют в десять раз больше при отладке.
 
-An extra variable is good, not evil.
+Дополнительная переменная - это добро, а не зло.
 
-Modern JavaScript minifiers and browsers optimize code well enough, so it won't create performance issues. Using different variables for different values can even help the engine optimize your code.
+Современные JavaScript минификаторы и браузеры оптимизируют код достаточно хорошо, поэтому он не создает проблем с производительностью. Использование разных переменных для разных значений может даже помочь движку оптимизировать ваш код.
 ```
 
-## Summary
+## Итого
 
-We can declare variables to store data by using the `var`, `let`, or `const` keywords.
+Мы можем объявить переменные для хранения данных с помощью ключевых слов `var`, `let`, or `const`.
 
-- `let` -- is a modern variable declaration. The code must be in strict mode to use `let` in Chrome (V8).
-- `var` -- is an old-school variable declaration. Normally we don't use it at all, but we'll cover subtle differences from `let` in the chapter <info:var>, just in case you need them.
-- `const` -- is like `let`, but the value of the variable can't be changed.
+- `let` -- это современный способ объявления. При использовании `let` в Chrome (V8) должен быть включен строгий режим.
+- `var` -- это олдскульный способ объявления. Обычно мы не используем его вообще, но мы рассмотрим тонкие отличия от `let` в главе <info:var>, на случай, если это все таки Вам понадобится.
+- `const` -- похож на `let`, но значение переменной не может изменяться.
 
-Variables should be named in a way that allows us to easily understand what's inside them.
+Переменные должны быть названы таким образом, чтобы мы могли легко понять, что у них внутри.
