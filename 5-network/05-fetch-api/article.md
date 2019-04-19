@@ -41,23 +41,23 @@ let promise = fetch(url, {
 
 Этот заголовок содержит URL-адрес страницы, которая сделала запрос. В большинстве случаев, это играет очень незначительную информационную роль, но иногда, в целях безопасности, имеет смысл изменить или удалить его. 
 
-**The `referrer` option allows to set any `Referer` within the current origin) or disable it.**
+**Параметр `referrer` даёт возможность установить любой `Referer` в пределах текущего ресурса или отлключить его.**
 
-To send no referer, set an empty string:
+Для отправки no referer, используем пустую строку:
 ```js
 fetch('/page', {
 *!*
-  referrer: "" // no Referer header
+  referrer: "" // заголовок no referer
 */!*
 });
 ```
 
-To set another url within the current origin:
+Чтобы установить другой url внутри текущего ресурса:
 
 ```js
 fetch('/page', {
-  // assuming we're on https://javascript.info
-  // we can set any Referer header, but only within the current origin
+  // представим, что мы находимся на https://javascript.info
+  // мы можем установить любой заголовок Referer, но только внутри текущего ресурса
 *!*
   referrer: "https://javascript.info/anotherpage"
 */!*
