@@ -31,7 +31,7 @@ rabbit.__proto__ = animal;
 */!*
 ```
 
-```smart header="Свойство `__proto__` — историчеси геттер/сеттер для `[[Prototype]]`"
+```smart header="Свойство `__proto__` — историчеси обусловленный геттер/сеттер для `[[Prototype]]`"
 Обратите внимание, что `__proto__` — *не то же самое*, что `[[Prototype]]`. Это геттер/сеттер для него.
 
 Он существует по историческим причинам, в современном языке его заменяют функции `Object.getPrototypeOf / Object.setPrototypeOf`, которые также получают/устанавливают прототип. Мы рассмотрим причины этого и эти функции позже.
@@ -72,7 +72,7 @@ alert( rabbit.jumps ); // true
 
 Так что если у `animal` много полезных свойств и методов, то они автоматически становятся доступными у `rabbit`. Такие свойства называются "унаследованными".
 
-If we have a method in `animal`, it can be called on `rabbit`:
+Если у нас есть метод в `animal`, он может быть вызван на `rabbit`:
 
 ```js run
 let animal = {
@@ -89,18 +89,17 @@ let rabbit = {
   __proto__: animal
 };
 
-// walk is taken from the prototype
+// walk взят из прототипа
 *!*
 rabbit.walk(); // Animal walk
 */!*
 ```
 
-The method is automatically taken from the prototype, like this:
+Метод автоматически берется из прототипа:
 
 ![](proto-animal-rabbit-walk.png)
 
-The prototype chain can be longer:
-
+Цепочка прототипов может быть длиннее:
 
 ```js run
 let animal = {
@@ -124,33 +123,33 @@ let longEar = {
 */!*
 };
 
-// walk is taken from the prototype chain
+// walk взят из цепочки прототипов
 longEar.walk(); // Animal walk
-alert(longEar.jumps); // true (from rabbit)
+alert(longEar.jumps); // true (для rabbit)
 ```
 
 ![](proto-animal-rabbit-chain.png)
 
-There are actually only two limitations:
+На самом деле есть только два ограничения:
 
-1. The references can't go in circles. JavaScript will throw an error if we try to assign `__proto__` in a circle.
-2. The value of `__proto__` can be either an object or `null`, other types (like primitives) are ignored.
+1. Ссылки не могут идти по кругу. JavaScript выдаст ошибку, если мы попытаемся назначить `__proto__` по кругу.
+2. Значение `__proto__` может быть как объектом, так и `null`, другие типы (например, примитивы) игнорируются.
 
-Also it may be obvious, but still: there can be only one `[[Prototype]]`. An object may not inherit from two others.
+Также, это может быть очевидно, но все же: может быть только один `[[Prototype]]`. Объект не может наследоваться от двух других.
 
-## Writing doesn't use prototype
+## Запись не использует прототип
 
-The prototype is only used for reading properties.
+Прототип используется только для чтения свойств.
 
-Write/delete operations work directly with the object.
+Операции записи/удаления работают напрямую с объектом.
 
-In the example below, we assign its own `walk` method to `rabbit`:
+В приведенном ниже примере мы присваиваем `rabbit` собственный метод `walk`:
 
 ```js run
 let animal = {
   eats: true,
   walk() {
-    /* this method won't be used by rabbit */  
+    /* этот метод не будет использоваться в rabbit */  
   }
 };
 
@@ -167,13 +166,13 @@ rabbit.walk = function() {
 rabbit.walk(); // Rabbit! Bounce-bounce!
 ```
 
-From now on, `rabbit.walk()` call finds the method immediately in the object and executes it, without using the prototype:
+Теперь вызов rabbit.walk () находит метод непосредственно в объекте и выполняет его, не используя прототип:
 
 ![](proto-animal-rabbit-walk-2.png)
 
-That's for data properties only, not for accessors. If a property is a getter/setter, then it behaves like a function: getters/setters are looked up in the prototype.
+Это справедливо только для свойств данных, а не для методов доступа. Если свойство является геттером/сеттером, то оно ведет себя как функция: геттеры/сеттеры ищутся в прототипе.
 
-For that reason `admin.fullName` works correctly in the code below:
+По этой причине `admin.fullName` работает корректно в приведенном ниже коде:
 
 ```js run
 let user = {
@@ -196,27 +195,27 @@ let admin = {
 
 alert(admin.fullName); // John Smith (*)
 
-// setter triggers!
+// срабатывает сеттер!
 admin.fullName = "Alice Cooper"; // (**)
 ```
 
-Here in the line `(*)` the property `admin.fullName` has a getter in the prototype `user`, so it is called. And in the line `(**)` the property has a setter in the prototype, so it is called.
+Здесь в строке `(*)` свойство `admin.fullName` имеет геттер в прототипе `user`, поэтому вызывается он. В строке `(**)` свойство так же имеет сеттер в прототипе, который и будет вызван.
 
-## The value of "this"
+## Значение "this"
 
-An interesting question may arise in the example above: what's the value of `this` inside `set fullName(value)`? Where the properties `this.name` and `this.surname` are written: into `user` or `admin`?
+В приведенном выше примере может возникнуть интересный вопрос: каково значение `this` внутри `set fullName (value)`? Где записаны свойства `this.name` и `this.surname`: в `user` или `admin`?
 
-The answer is simple: `this` is not affected by prototypes at all.
+Ответ прост: прототипы никак не влияют на `this`.
 
-**No matter where the method is found: in an object or its prototype. In a method call, `this` is always the object before the dot.**
+**Неважно, где находится метод: в объекте или его прототипе. В вызове метода, `this` — всегда объект перед точкой.**
 
-So, the setter call `admin.fullName=` uses `admin` as `this`, not `user`.
+Таким образом, вызов сеттера `admin.fullName=` в качестве `this` использует `admin`, а не `user`.
 
-That is actually a super-important thing, because we may have a big object with many methods and inherit from it. Then inherited objects can run its methods, and they will modify the state of these objects, not the big one.
+Это на самом деле очень важная вещь, потому что мы можем иметь большой объект со многими методами и наследовать его. Затем наследуемые объекты могут запускать его методы, и они будут изменять состояние этих объектов, а не большого.
 
-For instance, here `animal` represents a "method storage", and `rabbit` makes use of it.
+Например, здесь `animal` представляет собой "хранилище метода", и `rabbit` использует его.
 
-The call `rabbit.sleep()` sets `this.isSleeping` on the `rabbit` object:
+Вызов `rabbit.sleep()` устанавливает `this.isSleeping` для объекта `rabbit`:
 
 ```js run
 // animal has methods
@@ -236,25 +235,26 @@ let rabbit = {
   __proto__: animal
 };
 
-// modifies rabbit.isSleeping
+// модифицирует rabbit.isSleeping
 rabbit.sleep();
 
 alert(rabbit.isSleeping); // true
-alert(animal.isSleeping); // undefined (no such property in the prototype)
+alert(animal.isSleeping); // undefined (нет такого свойства в прототипе)
 ```
 
-The resulting picture:
+Картинка с результатом:
 
 ![](proto-animal-rabbit-walk-3.png)
 
 If we had other objects like `bird`, `snake` etc inheriting from `animal`, they would also gain access to methods of `animal`. But `this` in each method would be the corresponding object, evaluated at the call-time (before dot), not `animal`. So when we write data into `this`, it is stored into these objects.
+Если бы у нас были другие объекты, такие как `bird`, `snake` и т.д., унаследованные от `animal`, они также получили бы доступ к методам `animal`. Но `this` в каждом методе будет соответствовать обьекту, на котором происходит вызов (до точки), а не `animal`. Поэтому, когда мы записываем данные в `this`, они сохраняются в этих объектах.
 
-As a result, methods are shared, but the object state is not.
+В результате методы являются общими, а состояние объекта — нет.
 
-## Summary
+## Итого
 
-- In JavaScript, all objects have a hidden `[[Prototype]]` property that's either another object or `null`.
-- We can use `obj.__proto__` to access it (a historical getter/setter, there are other ways, to be covered soon).
-- The object referenced by `[[Prototype]]` is called a "prototype".
-- If we want to read a property of `obj` or call a method, and it doesn't exist, then JavaScript tries to find it in the prototype. Write/delete operations work directly on the object, they don't use the prototype (unless the property is actually a setter).
-- If we call `obj.method()`, and the `method` is taken from the prototype, `this` still references `obj`. So methods always work with the current object even if they are inherited.
+- В JavaScript все объекты имеют скрытое свойство `[[Prototype]]`, которое является либо другим объектом, либо `null`.
+- Мы можем использовать `obj .__ proto__` для доступа к нему (исторически обусловленный геттер/сеттер, есть другие способы, которые скоро будут рассмотрены).
+- Объект, на который ссылается `[[Prototype]]`, называется "прототипом".
+- Если мы хотим прочитать свойство `obj` или вызвать метод, а оно не существует, тогда JavaScript пытается найти его в прототипе. Операции записи/удаления работают непосредственно с объектом, они не используют прототип (если свойство фактически не является сеттером).
+- Если мы вызываем `obj.method()`, а метод взят из прототипа, он все равно ссылается на `obj`. Таким образом, методы всегда работают с текущим объектом, даже если они наследуются.
