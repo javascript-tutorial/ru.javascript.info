@@ -1,46 +1,45 @@
 
 # Fetch API
 
-So far, we know quite a bit about fetch.
+До сих пор мы узнали лишь немного про `fetch`.
 
-Now let's see the rest of API, to cover all its abilities.
+Теперь давайте рассмотрим оставшуюся часть API, чтобы охватить все его возможности.
 
-Here's the full list of all possible fetch options with their default values (alternatives in comments):
+Вот полный перечень всех возможных параметров с их значениями по умолчанию (альтернативные значения в комментариях):
 
 ```js
 let promise = fetch(url, {
-  method: "GET", // POST, PUT, DELETE, etc.
+  method: "GET", // POST, PUT, DELETE, и т.д.
   headers: {
-    "Content-Type": "text/plain;charset=UTF-8" // for a string body, depends on body
+    "Content-Type": "text/plain;charset=UTF-8" // для строкового тела, зависит от тела сообщения
   },
-  body: undefined // string, FormData, Blob, BufferSource, or URLSearchParams
-  referrer: "about:client", // "" for no-referrer, or an url from the current origin
+  body: undefined // строка, FormData, Blob, BufferSource, или URLSearchParams
+  referrer: "about:client", // "" для no-referrer, или URL-адрес текущего источника
   referrerPolicy: "no-referrer-when-downgrade", // no-referrer, origin, same-origin...
   mode: "cors", // same-origin, no-cors
   credentials: "same-origin", // omit, include
-  cache: "default", // no-store, reload, no-cache, force-cache, or only-if-cached
+  cache: "default", // no-store, reload, no-cache, force-cache, или only-if-cached
   redirect: "follow", // manual, error
-  integrity: "", // a hash, like "sha256-abcdef1234567890"
+  integrity: "", // хеш, например "sha256-abcdef1234567890"
   keepalive: false, // true
-  signal: undefined, // AbortController to abort request
+  signal: undefined, // AbortController для отмены запроса
   window: window // null
 });
 ```
 
-An impressive list, right?
+Впечатляющий список, верно?
 
-We fully covered `method`, `headers` and `body` in the chapter <info:fetch-basics>.
+Мы полностью рассмотрели `method`, `headers` и `body` в главе <info:fetch-basics>.
 
-The `signal` option is covered in <info:fetch-abort>.
+Параметр `signal` рассматривается в <info:fetch-abort>.
 
-Now let's explore the rest of options.
+Теперь давайте разберем оставшиеся параметры.
 
 ## referrer, referrerPolicy
 
-These options govern how `fetch` sets HTTP `Referer` header.
+Эти параметры определяют как `fetch` устанавливает HTTP-заголовок `Referer`.
 
-That header contains the url of the page that made the request. In most scenarios, it plays a very minor informational role, but sometimes, for security purposes, it makes sense to remove or modify it.
-.
+Этот заголовок содержит URL-адрес страницы, которая сделала запрос. В большинстве случаев, это играет очень незначительную информационную роль, но иногда, в целях безопасности, имеет смысл изменить или удалить его. 
 
 **The `referrer` option allows to set any `Referer` within the current origin) or disable it.**
 
