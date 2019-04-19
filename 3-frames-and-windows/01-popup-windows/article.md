@@ -19,7 +19,7 @@ window.open('https://javascript.info/')
 
 Например:
 ```js
-// popup заблокирован
+// попап заблокирован
 window.open('https://javascript.info');
 
 // popup будет показан
