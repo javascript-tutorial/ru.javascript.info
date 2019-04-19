@@ -18,7 +18,6 @@ window.open('https://javascript.info/')
 **Всплывающее окно блокируется в том случае, если вызов window.open произошёл не в результате действия посетителя (например, события `onclick`).**
 
 Например:
-
 ```js
 // popup заблокирован
 window.open('https://javascript.info');
