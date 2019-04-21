@@ -298,7 +298,7 @@ function getCookie(name) {
 
 ### setCookie(name, value, options)
 
-Устанавливает занчение  `value` в cookie с именем `name` для пути `path=/` (настройки можно менять и добавлять другие занчения настроек по умолчанию):
+Устанавливает значение `value` в cookie с именем `name` для пути `path=/` (настройки можно менять и добавлять другие значения настроек по умолчанию):
 
 ```js run
 function setCookie(name, value, options = {}) {
@@ -353,76 +353,75 @@ function deleteCookie(name) {
 
 Cookie называется сторонним (англ. third-party), если он был создан не тем же доменом, на который зашел пользователь.
 
-For instance:
-1. A page at `site.com` loads a banner from another site: `<img src="https://ads.com/banner.png">`.
-2. Along with the banner, the remote server at `ads.com` may set `Set-Cookie` header with cookie like `id=1234`. Such cookie originates from `ads.com` domain, and will only be visible at `ads.com`:
+Например:
+1. Страница `site.com` подгружает себе баннер с другого сайта: `<img src="https://ads.com/banner.png">`.
+2. Вместе с подгрузкой баннера удаленный сервер `ads.com` создает заголовок `Set-Cookie` с куком вида `id=1234`. Этот cookie создан доменом `ads.com`и будет виден только на домене `ads.com`:
 
     ![](cookie-third-party.png)
 
-3. Next time when `ads.com` is accessed, the remote server gets the `id` cookie and recognizes the user:
+3. В следующий раз, когда пользователь зайдет на сайт `ads.com`, удаленный сервер получит кук `id` и сможет распознать этого пользователя:
 
     ![](cookie-third-party-2.png)
 
-4. What's even more important, when the users moves from `site.com` to another site `other.com` that also has a banner, then `ads.com` gets the cookie, as it belongs to `ads.com`, thus recognizing the visitor and tracking him as he moves between sites:
+4. Но, что более важно - в процессе перменщения пользователя с одного сайта (`site.com`) на другой (`other.com`) сайт, на котором так же будет размещен этот баннер, домен `ads.com` вновь получит этот кук,  как если бы он относился к домену `ads.com`, распознает пользователя и начнет отслеживать его перемещения по другим сайтам:
 
     ![](cookie-third-party-3.png)
 
 
-Third-party cookies are traditionally used for tracking and ads services, due to their nature. They are bound to the originating domain, so `ads.com` can track the same user between different sites, if they all access it.
+Сторонние куки как правило используются рекламными и отслеживающими сервисами, ибо по сути именно для этого такие куки и создавались. Они привязаны к своему домену, поэтому `ads.com` может отслеживать пермещения одного и того же пользователя между сайтами показывать ему рекламу.
 
-Naturally, some people don't like being tracked, so browsers allow to disable such cookies.
+Как правило, люди не любят, когда за нами следят, поэтому бразуеры позволяют отключать такие куки.
 
-Also, some modern browsers employ special policies for such cookies:
-- Safari does not allow third-party cookies at all.
-- Firefox comes with a "black list" of third-party domains where it blocks third-party cookies.
+Также, многие современные браузеры придерживаются особой политики в отношении этих куков:
+- Safari вообще не разрешает использование таких куков.
+- Firefox поставляется с "черным списком" сторонних доменов, для которых блокируются сторонние куки.
 
 
 ```smart
-If we load a script from a third-party domain, like `<script src="https://google-analytics.com/analytics.js">`, and that script uses `document.cookie` to set a cookie, then such cookie is not third-party.
+Если мы загружает скрипт со стороннего домена, например так: `<script src="https://google-analytics.com/analytics.js">`, и этот скрипт использует `document.cookie` чтобы создать кук, то такой кук не является сторонним.
 
-If a script sets a cookie, then no matter where the script came from -- it belongs to the domain of the current webpage.
+Если кук создается скриптом, то не имеет значения откуда этот скрипт был загружен -- этот кук принадлежит домену текущей страницы.
 ```
 
-## Appendix: GDPR
+## Приложение: GDPR (Общий регламент по защите данных)
 
-This topic is not related to JavaScript at all, just something to keep in mind when setting cookies.
+Эта тема не имеет прямого отношения к JavaScript, однако эту информацию стоим иметь ввиду, кога вы создаете куки.
 
-There's a legislation in Europe called GDPR, that enforces a set of rules for websites to respect users' privacy. And one of such rules is to require an explicit permission for tracking cookies from a user.
+В Европе существует специальное законодательство  для сайтов - GDPR (англ. General Data Protection Regulation - Общий регламент по защите данных) - это свод правил, призванных обеспечить приватность пользователя. Одно из этих правил требует  получения явного согласия от пользователя о том, что он позволяет использование куков, которые будут отслежвать его действия на сайте.
 
-Please note, that's only about tracking/identifying cookies.
+Обратите внимание, что это правило касается исключительно идентифицирующих и отслеживающих куков.
 
-So, if we set a cookie that just saves some information, but neither tracks nor identifies the user, then we are free to do it.
+Поэтому, если мы на своем сайте хотим использовать куки для хранения какой-то информации, но не собираемся опознавать пользователя или следить за ним, то мы можем использовать куки, не требуя ничьего согласия.
 
-But if we are going to set a cookie with an authentication session or a tracking id, then a user must allow that.
-
-Websites generally have two variants of following GDPR. You must have seen them both already in the web:
-
-1. If a website wants to set tracking cookies only for authenticated users.
-
-    To do so, the registration form should have a checkbox like "accept the privacy policy", the user must check it, and then the website is free to set auth cookies.
-
-2. If a website wants to set tracking cookies for everyone.
-
-    To do so legally, a website shows a modal "splash screen" for newcomers, and require them to agree for cookies. Then the website can set them and let people see the content. That can be disturbing for new visitors though. No one likes to see "must-click" modal splash screens instead of the content. But GDPR requires an explicit agreement.
+Однако, если мы собираемся использовать кук с идентификатором пользовательской сессии или идентификатор для отслеживания пользователя, пользователь должен подтвердить свое согласие. 
 
 
-GDPR is not only about cookies, it's about other privacy-related issues too, but that's too much beyond our scope.
+Как правило, сайты для соблюдения GDPR используют два способа. И скорее всего вы уже видели оба этих способа в интернете:
 
+1. Если сайт хочет использовать отслеживащие куки для авторизованных пользователей. 
 
-## Summary
+    В этом случае форма регистрации пользователя должна иметь галочку "Принять соглашение о безопасности". Если пользователь её устанавливает, сайт имеет право использовать авторизующие куки.
 
-`document.cookie` provides access to cookies
-- write operations modify only cookies mentioned in it.
-- name/value must be encoded.
-- one cookie up to 4kb, 20+ cookies per site (depends on a browser).
+2. Если сайт хочет использовать отслеживающие куки для всех без исключения пользователей.
 
-Cookie options:
-- `path=/`, by default current path, makes the cookie visible only under that path.
-- `domain=site.com`, by default a cookie is visible on current domain only, if set explicitly to the domain, makes the cookie visible on subdomains.
-- `expires` or `max-age` sets cookie expiration time, without them the cookie dies when the browser is closed.
-- `secure` makes the cookie HTTPS-only.
-- `samesite` forbids the browser to send the cookie with requests coming from outside the site, helps to prevent XSRF attacks.
+    Чтобы соблюсти законодательство, сайт для всех новых посетителей показывает модальный экран, на котором от пользователя требуется принять согласие об использовании куков. Только после этого сайт имеет право создавать такие куки и позволяет пользователям видеть содержимое сайта. Такие модальные экраны будут видеть только новые посетители сайта, ведь мало кому понравится каждый раз при заходе на сайт видеть обязательную  заставку вместо содержимого сайта. Однако это законодательство всегда требует получения явного согласия от пользователей.
+    
+Законодательство GDPR не только регулирует использование куков на сайтах, оно в целом призвано регулировать приватность пользователей в интернете. Однако рассмотрение этой темы уже выходит за рамки нашего урока.
 
-Additionally:
-- Third-party cookies may be forbidden by the browser, e.g. Safari does that by default.
-- When setting a tracking cookie for EU citizens, GDPR requires to ask for permission.
+## Итого
+
+Свойство `document.cookie` позволяет нам получить доступ к кукам:
+- операция записи изменяет только куки, упомянутые в этой операции.
+- имя/значение кука должно быть закодировано.
+- размер одного кука ограничен 4Кб, один сайт может иметь 20+ куков (точное количество зависит от браузера).
+
+Настройки куков:
+- `path=/`, по умолчанию устанавливается текущий путь, эта настройка ограничивает видимость кука - кук будет доступен лишь по этому пути.
+- `domain=site.com`, по умолчанию кук виден только на текущем домене, если домен указан явно, то кук будет так же доступен и на поддоменах.
+- `expires` или `max-age` устанавливают дату/время истечения кука, если эти настройки не установлены, кук "умрет" во время закрытия бразуера.
+- `secure` заставляет кук передаваться исключительно по HTTPS-протоколу.
+- `samesite` запрещает бразуеру пересылать кук в ответ запросам, пришедшим с других сайтов, позволяет предупредить XSRF-аттаки.
+
+Дополнительно:
+- Браузер может вообще запретить сторонние куки (как Safari).
+- Для граждан Европейского союза законодательство GDPR требует от сайтов в явном виде получить согласие от пользователя использовать отслеживающие куки.
