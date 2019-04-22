@@ -114,42 +114,42 @@ alert( "Привет, Java!".match(/\bПривед\b/) );  // null (no match)
 alert( "Привет, Java!".match(/\bJava!\b/) ); // null (no match)
 ```
 
-Once again let's note that `pattern:\b` makes the searching engine to test for the boundary, so that `pattern:Java\b` finds `match:Java` only when followed by a word boundary, but it does not add a letter to the result.
+Еще раз отметим, что `pattern:\b` заставляет поисковую систему проверять границы, поэтому `pattern:Java\b` находит `match:Java` только тогда, когда за ней следует граница слова, но не добавляет этот символ к результату.
 
-Usually we use `\b` to find standalone English words. So that if we want `"Java"` language then `pattern:\bJava\b` finds exactly a standalone word and ignores it when it's a part of `"JavaScript"`.
+Обычно мы используем `\b`, чтобы найти отдельные английские слова. Таким образом, если нам нужен `"Java"` язык, то `pattern:\bJava\b` находит только отдельное слово и игнорирует его, когда оно является частью `"JavaScript"`.
 
-Another example: a regexp `pattern:\b\d\d\b` looks for standalone two-digit numbers. In other words, it requires that before and after `pattern:\d\d` must be a symbol different from `\w` (or beginning/end of the string).
+Другой пример: регулярное выражение `pattern:\b\d\d\b` ищет отдельностоящие двузначные числа. Другими словами, требуется, чтобы до и после `pattern:\d\d` был символ, отличный от `\w` (или начала/конца строки)
 
 ```js run
 alert( "1 23 456 78".match(/\b\d\d\b/g) ); // 23,78
 ```
 
-```warn header="Word boundary doesn't work for non-English alphabets"
-The word boundary check `\b` tests for a boundary between `\w` and something else. But `\w` means an English letter (or a digit or an underscore), so the test won't work for other characters (like cyrillic or hieroglyphs).
+```warn header="Граница слова не работает для неанглийских алфавитов"
+Проверка границы слова `\b` проверяет границу между `\w` и чем-то еще. Но `\w` означает английскую букву (или цифру или знак подчеркивания), поэтому тест не будет работать для других символов (например, кириллицы или иероглифов).
 ```
 
 
-## Inverse classes
+## Обратные классы
 
-For every character class there exists an "inverse class", denoted with the same letter, but uppercased.
+Для каждого класса символов существует "обратный класс", обозначаемый той же буквой, но в верхнем регистре.
 
-The "reverse" means that it matches all other characters, for instance:
+"Обратный" означает, что он соответствует всем другим символам, например:
 
 `\D`
-: Non-digit: any character except `\d`, for instance a letter.
+: Не цифра: любой символ, кроме `\d`, например буква.
 
 `\S`
-: Non-space: any character except `\s`, for instance a letter.
+: Не пробел: любой символ, кроме `\s`, например буква.
 
 `\W`
-: Non-wordly character: anything but `\w`.
+: Любой символ, кроме `\w`, то есть не латинница, не подчёркивание, не цифра. В частности, русские буквы принадлежат этому классу.
 
 `\B`
-: Non-boundary: a test reverse to `\b`.
+: Проверка, обратная `\b`.
 
-In the beginning of the chapter we saw how to get all digits from the phone `subject:+7(903)-123-45-67`.
+В начале главы мы увидели, как получить все цифры из строки с номером телефона `subject:+7(903)-123-45-67`.
 
-One way was to match all digits and join them:
+Один из способов - это сопоставить все цифры и соединить их:
 
 ```js run
 let str = "+7(903)-123-45-67";
@@ -157,7 +157,7 @@ let str = "+7(903)-123-45-67";
 alert( str.match(/\d/g).join('') ); // 79031234567
 ```
 
-An alternative, shorter way is to find non-digits `\D` and remove them from the string:
+Альтернативный, более короткий путь - найти нецифровые символы `\D` и удалить их из строки:
 
 
 ```js run
