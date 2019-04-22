@@ -103,7 +103,6 @@ alert( "Привет, JavaScript!".match(/\bJava\b/) ); // null
 2. Далее слово `Привет` совпадает.
 3. Далее `\b` снова совпадает, так как мы находимся между `т` и пробелом.
 
-Pattern `pattern:\bJava\b` also matches. But not `pattern:\bHell\b` (because there's no word boundary after `l`) and not `Java!\b` (because the exclamation sign is not a wordly character, so there's no word boundary after it).
 Pattern `pattern:\bJava\b` также совпадает. Но не `pattern:\bПривед\b` (потому что после `д` нет границы слова), и не `Java!\b` (потому что восклицательный знак не является словесным символом, поэтому после него нет границы слова).
 
 
