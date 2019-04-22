@@ -166,101 +166,101 @@ let str = "+7(903)-123-45-67";
 alert( str.replace(/\D/g, "") ); // 79031234567
 ```
 
-## Spaces are regular characters
+## Пробелы – обычные символы
 
-Usually we pay little attention to spaces. For us strings `subject:1-5` and `subject:1 - 5` are nearly identical.
+Обычно мы уделяем мало внимания пробелам. Для нас строки `subject:1-5` и` subject: 1 - 5` практически идентичны.
 
-But if a regexp doesn't take spaces into account, it may fail to work.
+Но если регулярное выражение не учитывает пробелы, оно может не работать.
 
-Let's try to find digits separated by a dash:
-
-```js run
-alert( "1 - 5".match(/\d-\d/) ); // null, no match!
-```
-
-Here we fix it by adding spaces into the regexp `pattern:\d - \d`:
+Давайте попробуем найти цифры, разделенные тире:
 
 ```js run
-alert( "1 - 5".match(/\d - \d/) ); // 1 - 5, now it works
+alert( "1 - 5".match(/\d-\d/) ); // null, нет совпадений!
 ```
 
-**A space is a character. Equal in importance with any other character.**
-
-Of course, spaces in a regexp are needed only if we look for them. Extra spaces (just like any other extra characters) may prevent a match:
+Здесь мы исправляем это, добавляя пробелы в регулярное выражение `pattern:\d - \d`:
 
 ```js run
-alert( "1-5".match(/\d - \d/) ); // null, because the string 1-5 has no spaces
+alert( "1 - 5".match(/\d - \d/) ); // 1 - 5, теперь это работает
 ```
 
-In other words, in a regular expression all characters matter, spaces too.
+**Пробел - это символ. По важности он равен любому другому символу.**
 
-## A dot is any character
-
-The dot `"."` is a special character class that matches "any character except a newline".
-
-For instance:
+Конечно, пробелы в регулярных выражениях нужны только в том случае, если мы их ищем. Лишние пробелы (как и любые другие лишние символы) могут помешать совпадению:
 
 ```js run
-alert( "Z".match(/./) ); // Z
+alert( "1-5".match(/\d - \d/) ); // null, потому что строка '1-5' не содержит пробелов
 ```
 
-Or in the middle of a regexp:
+Другими словами, в регулярном выражении все символы имеют значение, даже пробелы.
+
+## Точка - это любой символ
+
+Точка `"."` - это специальный символьный класс, который соответствует "любому символу, кроме новой строки".
+
+Для примера:
+
+```js run
+alert( "Ю".match(/./) ); // Ю
+```
+
+Или в середине регулярного выражения:
 
 ```js run
 let reg = /CS.4/;
 
 alert( "CSS4".match(reg) ); // CSS4
 alert( "CS-4".match(reg) ); // CS-4
-alert( "CS 4".match(reg) ); // CS 4 (space is also a character)
+alert( "CS 4".match(reg) ); // CS 4 (пробел тоже является символом)
 ```
 
-Please note that the dot means "any character", but not the "absense of a character". There must be a character to match it:
+Обратите внимание, что точка означает "любой символ", но не "отсутствие символа". Там должен быть каой-либо символ, чтобы соответствовать условию поиска:
 
 ```js run
-alert( "CS4".match(/CS.4/) ); // null, no match because there's no character for the dot
+alert( "CS4".match(/CS.4/) ); // null, нет совпадений потому что нет символа соответствующего точке
 ```
 
-### The dotall "s" flag
+### Точка, как буквально любой символ, с флагом "s"
 
-Usually a dot doesn't match a newline character.
+Обычно точка не соответствует символу новой строки.
 
-For instance, this doesn't match:
+Например, ниже в результате нет совпадений:
 
 ```js run
-alert( "A\nB".match(/A.B/) ); // null (no match)
+alert( "A\nB".match(/A.B/) ); // null (нет совпадений)
 
-// a space character would match
-// or a letter, but not \n
+// пробел или буква
+// будут соответствовать, но не \n
 ```
 
-Sometimes it's inconvenient, we really want "any character", newline included.
+Иногда это неудобно, мы действительно хотим "любой символ", включая перевод строки.
 
-That's what `s` flag does. If a regexp has it, then the dot `"."` match literally any character:
+Это то, что делает флаг `s`. Если регулярное выражение имеет его, то точка `"."` Соответствует буквально любому символу:
 
 ```js run
-alert( "A\nB".match(/A.B/s) ); // A\nB (match!)
+alert( "A\nB".match(/A.B/s) ); // A\nB (совпадение!)
 ```
 
 
-## Summary
+## Итого
 
-There exist following character classes:
+Существуют следующие классы симовлов:
 
-- `pattern:\d` -- digits.
-- `pattern:\D` -- non-digits.
-- `pattern:\s` -- space symbols, tabs, newlines.
-- `pattern:\S` -- all but `pattern:\s`.
-- `pattern:\w` -- English letters, digits, underscore `'_'`.
-- `pattern:\W` -- all but `pattern:\w`.
-- `pattern:.` -- any character if with the regexp `'s'` flag, otherwise any except a newline.
+- `pattern:\d` -- цифры.
+- `pattern:\D` -- не-цифры.
+- `pattern:\s` -- пробельные символы, табы, новые строки.
+- `pattern:\S` -- все, кроме `pattern:\s`.
+- `pattern:\w` -- латиница, цифры, подчеркивание `'_'`.
+- `pattern:\W` -- все, кроме `pattern:\w`.
+- `pattern:.` -- любой символ, если с флагом регулярного выражения `'s'`, в противном случае любой, кроме символа новой строки.
 
-...But that's not all!
+...Но это не все!
 
-Modern Javascript also allows to look for characters by their Unicode properties, for instance:
+Современный JavaScript также позволяет искать символы по их свойствам Юникод, например:
 
-- A cyrillic letter is: `pattern:\p{Script=Cyrillic}` or `pattern:\p{sc=Cyrillic}`.
-- A dash (be it a small hyphen `-` or a long dash `—`): `pattern:\p{Dash_Punctuation}` or `pattern:\p{pd}`.
-- A currency symbol: `pattern:\p{Currency_Symbol}` or `pattern:\p{sc}`.
-- ...And much more. Unicode has a lot of character categories that we can select from.
+- Кириллица: `pattern:\p{Script=Cyrillic}` или `pattern:\p{sc=Cyrillic}`.
+- Тире (будь то короткое `-` или длинное тире `—`): `pattern:\p{Dash_Punctuation}` или `pattern:\p{pd}`.
+- Валюта: `pattern:\p{Currency_Symbol}` или `pattern:\p{sc}`.
+- ...И многое другое. Юникод имеет много категорий символов, которые мы можем выбрать.
 
-These patterns require `'u'` regexp flag to work. More about that in the chapter [](info:regexp-unicode).
+Для работы этих шаблонов необходим флаг регулярного выражения `'u'`. Подробнее об этом в главе [](info:regexp-unicode).
