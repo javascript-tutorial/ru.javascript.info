@@ -74,7 +74,7 @@ alert( "Я люблю HTML5!".match(/\s\w\w\w\w\d/) ); // 'HTML5'
 
 Он обозначает не какой-то конкретный символ, а границу между символами.
 
-Например, `pattern:\bJava\b` соответствует` match:Java` в строке `subject:Hello,Java!`, но не в сценарии `subject: Hello, JavaScript!`.
+Например, `pattern:\bJava\b` соответствует` match:Java` в строке `subject:Hello,Java!`, но не в скрипте `subject: Hello, JavaScript!`.
 
 ```js run
 alert( "Привет, Java!".match(/\bJava\b/) ); // Java
