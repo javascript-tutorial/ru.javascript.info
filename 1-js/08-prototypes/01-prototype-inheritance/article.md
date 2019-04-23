@@ -101,6 +101,7 @@ rabbit.walk(); // Animal walk
 
 Цепочка прототипов может быть длиннее:
 
+
 ```js run
 let animal = {
   eats: true,
