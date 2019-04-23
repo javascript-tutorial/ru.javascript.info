@@ -165,7 +165,7 @@ reader.onload = function() {
 Операции с изображениями выполняются через `<canvas>` элемент:
 
 1. Для отрисовки изображения (или его части) на холсте( canvas) используется [canvas.drawImage](https://developer.mozilla.org/ru/docs/Web/API/CanvasRenderingContext2D/drawImage).
-2. Вызов canvas метода [.toBlob(callback, format, quality)](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toBlob) создает blob и вызывает `callback` функцию при завершении.
+2. Вызов canvas метода [.toBlob(callback, format, quality)](https://developer.mozilla.org/ru/docs/Web/API/HTMLCanvasElement/toBlob) создает blob и вызывает функцию `callback` при завершении.
 
 В примере ниже, изображение просто копируется, но мы можем взять его часть, или трансформировать его на canvas перед созданием blob:
 
