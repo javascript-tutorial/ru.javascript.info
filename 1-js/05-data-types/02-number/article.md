@@ -313,7 +313,7 @@ alert( 9999999999999999 ); // покажет 10000000000000000
 ```js run
 let num = +prompt("Enter a number", '');
 
-// вернер true, если аргумент является не числом, Infinity или -Infinity
+// вернет true, если аргумент является не числом, Infinity или -Infinity
 alert( isFinite(num) );
 ```
 
