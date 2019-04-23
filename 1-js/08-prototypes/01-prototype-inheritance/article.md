@@ -247,7 +247,7 @@ alert(animal.isSleeping); // undefined (нет такого свойства в 
 ![](proto-animal-rabbit-walk-3.png)
 
 If we had other objects like `bird`, `snake` etc inheriting from `animal`, they would also gain access to methods of `animal`. But `this` in each method would be the corresponding object, evaluated at the call-time (before dot), not `animal`. So when we write data into `this`, it is stored into these objects.
-Если бы у нас были другие объекты, такие как `bird`, `snake` и т.д., унаследованные от `animal`, они также получили бы доступ к методам `animal`. Но `this` в каждом методе будет соответствовать обьекту, на котором происходит вызов (до точки), а не `animal`. Поэтому, когда мы записываем данные в `this`, они сохраняются в этих объектах.
+Если бы у нас были другие объекты, такие как `bird`, `snake` и т.д., унаследованные от `animal`, они также получили бы доступ к методам `animal`. Но `this` в каждом методе будет соответствовать объекту, на котором происходит вызов (до точки), а не `animal`. Поэтому, когда мы записываем данные в `this`, они сохраняются в этих объектах.
 
 В результате методы являются общими, а состояние объекта — нет.
 
