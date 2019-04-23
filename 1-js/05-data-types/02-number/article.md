@@ -303,7 +303,7 @@ alert( 9999999999999999 ); // покажет 10000000000000000
 
     ```js run
     alert( isFinite("15") ); // true
-    alert( isFinite("str") ); // false, потому что специальтное значение: NaN
+    alert( isFinite("str") ); // false, потому что специальное значение: NaN
     alert( isFinite(Infinity) ); // false, потому что специальное значение: Infinity
     ```
 
