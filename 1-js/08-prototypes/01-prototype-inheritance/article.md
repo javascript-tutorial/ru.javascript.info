@@ -62,7 +62,7 @@ alert( rabbit.eats ); // true (**)
 alert( rabbit.jumps ); // true
 ```
 
-Здесь линия `(*)` устанавливает `animal` как прототип для `rabbit`.
+Здесь строка `(*)` устанавливает `animal` как прототип для `rabbit`.
 
 Затем, когда `alert` пытается прочитать свойство `rabbit.eats` `(**)`, его нет в `rabbit`, поэтому JavaScript следует по ссылке `[[Prototype]]` и находит ее в `animal` (смотрите снизу вверх):
 
