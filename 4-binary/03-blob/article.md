@@ -209,7 +209,7 @@ let blob = await new Promise(resolve => canvasElem.toBlob(resolve, 'image/png'))
 
 Конструктор `Blob` позволяет создать blob практически из чего угодно, включая `BufferSource`.
 
-Но если нам нужена производительная низкоуровневая обработка, мы можем использовать `ArrayBuffer` из `FileReader`:
+Но если нам нужна производительная низкоуровневая обработка, мы можем использовать `ArrayBuffer` из `FileReader`:
 
 ```js
 // получаем arrayBuffer из blob
