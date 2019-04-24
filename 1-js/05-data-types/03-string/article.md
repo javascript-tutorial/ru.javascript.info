@@ -1,8 +1,8 @@
-# Strings
+# Строки
 
-In JavaScript, the textual data is stored as strings. There is no separate type for a single character.
+В JavaScript любые текстовые данные являются строками. Не существует отдельного типа «символ», который есть в ряде других языков.
 
-The internal format for strings is always [UTF-16](https://en.wikipedia.org/wiki/UTF-16), it is not tied to the page encoding.
+Внутренний формат для строк — всегда [UTF-16](https://ru.wikipedia.org/wiki/UTF-16), вне зависимости от кодировки страницы.
 
 ## Quotes
 
