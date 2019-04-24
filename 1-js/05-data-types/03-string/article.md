@@ -4,11 +4,11 @@
 
 Внутренний формат для строк — всегда [UTF-16](https://ru.wikipedia.org/wiki/UTF-16), вне зависимости от кодировки страницы.
 
-## Quotes
+## Кавычки
 
-Let's recall the kinds of quotes.
+В JavaScript есть разные типы кавычек.
 
-Strings can be enclosed within either single quotes, double quotes or backticks:
+Строку можно создать с помощью одинарных и двойных кавычек, а также обратных апострофов:
 
 ```js
 let single = 'single-quoted';
@@ -17,7 +17,7 @@ let double = "double-quoted";
 let backticks = `backticks`;
 ```
 
-Single and double quotes are essentially the same. Backticks, however, allow us to embed any expression into the string, including function calls:
+Одинарные и двойные кавычки при этом используются для обычных строк, а если взять строку в обратные апострофы, то в такой строке может содержаться любое выражение, включая вызовы функций:
 
 ```js run
 function sum(a, b) {
@@ -27,7 +27,7 @@ function sum(a, b) {
 alert(`1 + 2 = ${sum(1, 2)}.`); // 1 + 2 = 3.
 ```
 
-Another advantage of using backticks is that they allow a string to span multiple lines:
+Ещё одна интересная особенность строк, использующих обратные апострофы, в том, что они могут быть многострочными:
 
 ```js run
 let guestList = `Guests:
@@ -36,18 +36,18 @@ let guestList = `Guests:
  * Mary
 `;
 
-alert(guestList); // a list of guests, multiple lines
+alert(guestList); // список гостей, состоящий из нескольких строк
 ```
 
-If we try to use single or double quotes in the same way, there will be an error:
+Если попытаться использовать точно так же одинарные или двойные кавычки, то будет ошибка:
 ```js run
 let guestList = "Guests:  // Error: Unexpected token ILLEGAL
   * John";
 ```
 
-Single and double quotes come from ancient times of language creation when the need for multiline strings was not taken into account. Backticks appeared much later and thus are more versatile.
+Одинарные и двойные кавычки в языке с незапамятных времён: тогда потребность в многострочных строках не учитывалась. Что касается обратных апострофов, они появились существенно позже и поэтому они гибче.
 
-Backticks also allow us to specify a "template function" before the first backtick. The syntax is: <code>func&#96;string&#96;</code>. The function `func` is called automatically, receives the string and embedded expressions and can process them. You can read more about it in the [docs](mdn:/JavaScript/Reference/Template_literals#Tagged_template_literals). This is called "tagged templates". This feature makes it easier to wrap strings into custom templating or other functionality, but it is rarely used.
+Обратные апострофы также позволяют задавать «шаблонную функцию» перед первым обратным апострофом. Используемый синтаксис: <code>func&#96;string&#96;</code>. Автоматически вызываемая функция `func` получает строку и встроенные в неё выражения и может их обработать. Подробнее об этом можно прочитать в [документации](mdn:/JavaScript/Reference/Template_literals#Tagged_template_literals). Если перед строкой есть выражение, то шаблонная строка называется «теговым шаблоном». Это позволяет упростить шаблонизацию и легче манипулировать строками, но сейчас эта возможность используется редко.
 
 
 ## Special characters
