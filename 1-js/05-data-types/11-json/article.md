@@ -27,14 +27,14 @@ alert(user); // {name: "John", age: 30}
 
 ## JSON.stringify
 
-The [JSON](http://en.wikipedia.org/wiki/JSON) (JavaScript Object Notation) is a general format to represent values and objects. It is described as in [RFC 4627](http://tools.ietf.org/html/rfc4627) standard. Initially it was made for JavaScript, but many other languages have libraries to handle it as well.  So it's easy to use JSON for data exchange when the client uses JavaScript and the server is written on Ruby/PHP/Java/Whatever.
+The [JSON](https://ru.wikipedia.org/wiki/JSON) (JavaScript Object Notation) это общий формат для представления значений и объектов. Его описание задокументированно в стандарте [RFC 4627](http://tools.ietf.org/html/rfc4627). Первоначально он был создан для JavaScript, но многие другие языки также имеют библиотеки, которые также могут работать с ним. Таким образом, JSON легко использовать для обмена данными, когда клиент использует JavaScript а сервер написан на Ruby/PHP/Java/любой другой язык.
 
-JavaScript provides methods:
+JavaScript предоставляет методы:
 
-- `JSON.stringify` to convert objects into JSON.
-- `JSON.parse` to convert JSON back into an object.
+- `JSON.stringify` для преобразования объектов в JSON.
+- `JSON.parse` для преобразования JSON обратно в объект.
 
-For instance, here we `JSON.stringify` a student:
+Например, здесь мы преобразуем через `JSON.stringify` карточку студента:
 ```js run
 let student = {
   name: 'John',
@@ -48,11 +48,11 @@ let student = {
 let json = JSON.stringify(student);
 */!*
 
-alert(typeof json); // we've got a string!
+alert(typeof json); // мы получим строку!
 
 alert(json);
 *!*
-/* JSON-encoded object:
+/* выведет записанный в JSON объект:
 {
   "name": "John",
   "age": 30,
@@ -64,35 +64,35 @@ alert(json);
 */!*
 ```
 
-The method `JSON.stringify(student)` takes the object and converts it into a string.
+Метод `JSON.stringify(student)` берет объект и преобразует его в строку.
 
-The resulting `json` string is a called *JSON-encoded* or *serialized* or *stringified* or *marshalled* object. We are ready to send it over the wire or put into a plain data store.
+Полученная `json` строка называется *JSON-кодированным* или *сериализованным*, *строковым* или *структурированным* объектом. Мы готовы отправить его по проводам или поместить в обычное хранилище данных.
 
 
-Please note that a JSON-encoded object has several important differences from the object literal:
+Обратите внимание, что JSON-кодированный объект имеет несколько важных отличий от объектного литерала:
 
-- Strings use double quotes. No single quotes or backticks in JSON. So `'John'` becomes `"John"`.
-- Object property names are double-quoted also. That's obligatory. So `age:30` becomes `"age":30`.
+- Строки используют двойные кавычки. Никаких одинарных кавычек или обратных кавычек в JSON. Так `'John'` становится `"John"`.
+- Имена свойств объекта также заключаются в двойные кавычки. Это обязательно. Так `age:30` становится `"age":30`.
 
-`JSON.stringify` can be applied to primitives as well.
+`JSON.stringify` может быть применен и к примитивам.
 
-Natively supported JSON types are:
+Внутренне поддерживаются типы JSON:
 
-- Objects `{ ... }`
-- Arrays `[ ... ]`
-- Primitives:
-    - strings,
-    - numbers,
-    - boolean values `true/false`,
+- Объекты `{ ... }`
+- Массивы `[ ... ]`
+- Примитивы:
+    - строки,
+    - числа,
+    - логические значения `true/false`,
     - `null`.
 
-For instance:
+Например:
 
 ```js run
-// a number in JSON is just a number
+// число в JSON - всего лишь числовое значение
 alert( JSON.stringify(1) ) // 1
 
-// a string in JSON is still a string, but double-quoted
+// строка в JSON по-прежнему является строкой, но имеет двойные кавычки
 alert( JSON.stringify('test') ) // "test"
 
 alert( JSON.stringify(true) ); // true
@@ -100,31 +100,31 @@ alert( JSON.stringify(true) ); // true
 alert( JSON.stringify([1, 2, 3]) ); // [1,2,3]
 ```
 
-JSON is data-only cross-language specification, so some JavaScript-specific object properties are skipped by `JSON.stringify`.
+JSON является кросс-языковой спецификацией только для данных, поэтому некоторые специфичные для JavaScript свойства объекта в `JSON.stringify` пропускаются.
 
-Namely:
+А именно:
 
-- Function properties (methods).
-- Symbolic properties.
-- Properties that store `undefined`.
+- Свойства функции (методы).
+- Символические свойства.
+- Свойства, которые хранят `undefined`.
 
 ```js run
 let user = {
-  sayHi() { // ignored
+  sayHi() { // будет пропущено
     alert("Hello");
   },
-  [Symbol("id")]: 123, // ignored
-  something: undefined // ignored
+  [Symbol("id")]: 123, // так-же будет пропущено
+  something: undefined // как и это - пропущено
 };
 
-alert( JSON.stringify(user) ); // {} (empty object)
+alert( JSON.stringify(user) ); // {} (пустой объект)
 ```
 
-Usually that's fine. If that's not what we want, then soon we'll see how to customize the process.
+Обычно это нормально. Если это не то, что мы хотим, то скоро мы увидим, как настроить процесс.
 
-The great thing is that nested objects are supported and converted automatically.
+Самое замечательное, что вложенные объекты поддерживаются и конвертируются автоматически.
 
-For instance:
+Например:
 
 ```js run
 let meetup = {
@@ -138,7 +138,7 @@ let meetup = {
 };
 
 alert( JSON.stringify(meetup) );
-/* The whole structure is stringified:
+/* вся структура преобразована:
 {
   "title":"Conference",
   "room":{"number":23,"participants":["john","ann"]},
@@ -146,9 +146,9 @@ alert( JSON.stringify(meetup) );
 */
 ```
 
-The important limitation: there must be no circular references.
+Важное ограничение: не должно быть циклических ссылок.
 
-For instance:
+Например:
 
 ```js run
 let room = {
@@ -160,41 +160,41 @@ let meetup = {
   participants: ["john", "ann"]
 };
 
-meetup.place = room;       // meetup references room
-room.occupiedBy = meetup; // room references meetup
+meetup.place = room;       // meetup ссылается на room
+room.occupiedBy = meetup; // room ссылается на meetup
 
 *!*
-JSON.stringify(meetup); // Error: Converting circular structure to JSON
+JSON.stringify(meetup); // Ошибка: Преобразование цикличной структуры в JSON
 */!*
 ```
 
-Here, the conversion fails, because of circular reference: `room.occupiedBy` references `meetup`, and `meetup.place` references `room`:
+Здесь преобразование завершается неудачно из-за циклической ссылки: `room.occupiedBy` ссылается на `meetup`, и `meetup.place` ссылается на `room`:
 
 ![](json-meetup.png)
 
 
-## Excluding and transforming: replacer
+## Исключение и преобразование: заменитель
 
-The full syntax of `JSON.stringify` is:
+Полный синтаксис `JSON.stringify` таков:
 
 ```js
 let json = JSON.stringify(value[, replacer, space])
 ```
 
 value
-: A value to encode.
+: Значение для кодирования.
 
 replacer
-: Array of properties to encode or a mapping function `function(key, value)`.
+: Массив свойств для кодирования или функции отображения `function(key, value)`.
 
 space
-: Amount of space to use for formatting
+: Дополнительные Объем пространства, используемого для форматирования
 
-Most of the time, `JSON.stringify` is used with the first argument only. But if we need to fine-tune the replacement process, like to filter out circular references, we can use the second argument of `JSON.stringify`.
+В большинстве случаев `JSON.stringify` используется только с первым аргументом. Но если нам нужно отфильтровать процесс замены, например, отфильтровать циклические ссылки, то можно использовать второй аргумент `JSON.stringify`.
 
-If we pass an array of properties to it, only these properties will be encoded.
+Если мы передадим ему массив свойств, будут закодированы только эти свойства.
 
-For instance:
+Например:
 
 ```js run
 let room = {
@@ -204,18 +204,18 @@ let room = {
 let meetup = {
   title: "Conference",
   participants: [{name: "John"}, {name: "Alice"}],
-  place: room // meetup references room
+  place: room // meetup ссылается на room
 };
 
-room.occupiedBy = meetup; // room references meetup
+room.occupiedBy = meetup; // room ссылается на meetup
 
 alert( JSON.stringify(meetup, *!*['title', 'participants']*/!*) );
 // {"title":"Conference","participants":[{},{}]}
 ```
 
-Here we are probably too strict. The property list is applied to the whole object structure. So participants are empty, because `name` is not in the list.
+Здесь мы, наверное, слишком строги. Список свойств применяется ко всей структуре объекта. Так что участники пусты, потому что `name` нет в списке.
 
-Let's include every property except `room.occupiedBy` that would cause the circular reference:
+Давайте включим все свойства, кроме `room.occupiedBy`, что вызовет цикличную ссылку:
 
 ```js run
 let room = {
@@ -225,10 +225,10 @@ let room = {
 let meetup = {
   title: "Conference",
   participants: [{name: "John"}, {name: "Alice"}],
-  place: room // meetup references room
+  place: room // meetup ссылается на room
 };
 
-room.occupiedBy = meetup; // room references meetup
+room.occupiedBy = meetup; // room ссылается на meetup
 
 alert( JSON.stringify(meetup, *!*['title', 'participants', 'place', 'name', 'number']*/!*) );
 /*
@@ -240,13 +240,13 @@ alert( JSON.stringify(meetup, *!*['title', 'participants', 'place', 'name', 'num
 */
 ```
 
-Now everything except `occupiedBy` is serialized. But the list of properties is quite long.
+Теперь все, кроме `occupiedBy`, сериализовано. Но список свойств довольно длинный.
 
-Fortunately, we can use a function instead of an array as the `replacer`.
+К счастью,в качестве `replacer` мы можем использовать функцию, а не массив.
 
-The function will be called for every `(key, value)` pair and should return the "replaced" value, which will be used instead of the original one.
+Функция будет вызываться для каждой пары `(key, value)` и должна возвращать «замененное» значение, которое будет использоваться вместо исходного.
 
-In our case, we can return `value` "as is" for everything except `occupiedBy`. To ignore `occupiedBy`, the code below returns `undefined`:
+В нашем случае мы можем вернуть `value` «как есть» для всего, кроме `occupiedBy`. Чтобы игнорировать  `occupiedBy`, код ниже возвращает `undefined`:
 
 ```js run
 let room = {
@@ -256,17 +256,17 @@ let room = {
 let meetup = {
   title: "Conference",
   participants: [{name: "John"}, {name: "Alice"}],
-  place: room // meetup references room
+  place: room // meetup ссылается на room
 };
 
-room.occupiedBy = meetup; // room references meetup
+room.occupiedBy = meetup; // room ссылается на meetup
 
 alert( JSON.stringify(meetup, function replacer(key, value) {
-  alert(`${key}: ${value}`); // to see what replacer gets
+  alert(`${key}: ${value}`); // чтобы посмотреть, что получит заменитель
   return (key == 'occupiedBy') ? undefined : value;
 }));
 
-/* key:value pairs that come to replacer:
+/* пары ключ:значение, которые приходят на замену:
 :             [object Object]
 title:        Conference
 participants: [object Object],[object Object]
@@ -334,7 +334,7 @@ The `spaces` parameter is used solely for logging and nice-output purposes.
 
 Like `toString` for string conversion, an object may provide method `toJSON` for to-JSON conversion. `JSON.stringify` automatically calls it if available.
 
-For instance:
+Например:
 
 ```js run
 let room = {
@@ -411,10 +411,10 @@ str
 reviver
 : Optional function(key,value) that will be called for each `(key, value)` pair and can transform the value.
 
-For instance:
+Например:
 
 ```js run
-// stringified array
+// строковый массив
 let numbers = "[0, 1, 2, 3]";
 
 numbers = JSON.parse(numbers);
