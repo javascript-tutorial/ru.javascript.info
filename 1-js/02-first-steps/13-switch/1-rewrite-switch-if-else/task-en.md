@@ -1,10 +1,10 @@
-важность: 5
+importance: 5
 
 ---
 
-# Напишите "if", аналогичный "switch"
+# Rewrite the "switch" into an "if"
 
-Напишите `if..else`, соответствующий следующему `switch`:
+Write the code using `if..else` which would correspond to the following `switch`:
 
 ```js
 switch (browser) {
@@ -23,3 +23,4 @@ switch (browser) {
     alert( 'We hope that this page looks ok!' );
 }
 ```
+
