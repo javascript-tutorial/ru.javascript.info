@@ -1,5 +1,13 @@
 
 ```js run demo
+/**
+ * Возводит x в степень n (комментарий JSDoc)
+ *
+ * @param {number} x число, которое возводится в степень
+ * @param {number} n степень, должна быть целым числом больше 1
+ *
+ * @return {number} x в степени n
+ */
 function pow(x, n) {
   let result = x;
 
@@ -20,4 +28,3 @@ if (n < 1) {
   alert( pow(x, n) );
 }
 ```
-
