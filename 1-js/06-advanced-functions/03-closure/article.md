@@ -300,7 +300,7 @@ function makeCounter() {
 }
 
 let counter1 = makeCounter();
-ret counter2 = makeCounter();
+let counter2 = makeCounter();
 
 alert( counter1() ); // 0
 alert( counter1() ); // 1
