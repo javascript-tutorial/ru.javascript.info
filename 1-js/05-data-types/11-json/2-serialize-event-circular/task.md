@@ -22,7 +22,7 @@ let meetup = {
 };
 
 *!*
-// обратные ссылки 
+// цикличные ссылки 
 room.occupiedBy = meetup;
 meetup.self = meetup;
 */!*
