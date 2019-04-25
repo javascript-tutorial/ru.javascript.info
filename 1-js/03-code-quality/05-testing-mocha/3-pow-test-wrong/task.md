@@ -1,13 +1,13 @@
-importance: 5
+важность: 5
 
 ---
 
-# What's wrong in the test?
+# Что не так с этим тестом?
 
-What's wrong in the test of `pow` below?
+Что не так с тестом `pow` ниже?
 
 ```js
-it("Raises x to the power n", function() {
+it("Возводит x в степень n", function() {
   let x = 5;
 
   let result = x;
@@ -21,4 +21,4 @@ it("Raises x to the power n", function() {
 });
 ```
 
-P.S. Syntactically the test is correct and passes.
+P.S. Тест не содержит синтаксических ошибок и не падает при выполнении.
