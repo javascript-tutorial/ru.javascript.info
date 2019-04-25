@@ -1,15 +1,15 @@
-# Operators
+# Операторы
 
-We know many operators from school. They are things like addition `+`, multiplication `*`, subtraction `-`, and so on.
+Мы знаем много операторов из школы. Это такие вещи, как сложение `+`, умножение `*`, вычитание `-`, и так далее.
 
-In this chapter, we'll concentrate on aspects of operators that are not covered by school arithmetic.
+В этой главе мы сконцентрируемся на аспектах операторов, которые не охватываются школьной арифметикой.
 
-## Terms: "unary", "binary", "operand"
+## Термины: «унарный», «бинарный», «операнд»
 
-Before we move on, let's grasp some common terminology.
+Прежде чем двигаться дальше, давайте разберемся с некоторой общей терминологией.
 
-- *An operand* -- is what operators are applied to. For instance, in the multiplication of `5 * 2` there are two operands: the left operand is `5` and the right operand is `2`. Sometimes, people call these "arguments" instead of "operands".
-- An operator is *unary* if it has a single operand. For example, the unary negation `-` reverses the sign of a number:
+- *Операнд* -- это то, к чему применяются операторы. Например, при умножении `5 * 2` есть два операнда: левый операнд `5` и правый операнд `2`. Иногда люди называют это «аргументы» вместо «операндов».
+- Оператор *унарный*, если он имеет один операнд. Например, одинарное отрицание `-` меняет знак числа:
 
     ```js run
     let x = 1;
