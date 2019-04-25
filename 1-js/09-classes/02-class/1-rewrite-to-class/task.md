@@ -1,9 +1,9 @@
-importance: 5
+важность: 5
 
 ---
 
-# Rewrite to class
+# Перепешите класс
 
-Rewrite the `Clock` class from prototypes to the modern "class" syntax.
+Перепешите класс `Clock`, используя вместо прототипов современный синтаксис классов.
 
-P.S. The clock ticks in the console, open it to see.
+P.S. Тиканье часов можно посмотреть в консоли.
