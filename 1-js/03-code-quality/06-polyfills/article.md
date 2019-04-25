@@ -15,7 +15,7 @@ JavaScript - динамично развивающийся язык програ
 
 И тут приходит на помощь Babel.
 
-[Babel](https://babeljs.io) - это [транспилер](https://en.wikipedia.org/wiki/Source-to-source_compiler). Он переписывает современные JavaScript функции в предыдущий стандарт.
+[Babel](https://babeljs.io) - это [транспилер](https://ru.wikipedia.org/wiki/%D0%A2%D1%80%D0%B0%D0%BD%D1%81%D0%BF%D0%B0%D0%B9%D0%BB%D0%B5%D1%80). Он переписывает современные JavaScript-функции в предыдущий стандарт.
 
 На самом деле, есть две части Babel:
 
