@@ -1,46 +1,47 @@
-# Interaction: alert, prompt, confirm
+# Взаимодействие: alert, prompt, confirm
 
-This part of the tutorial aims to cover JavaScript "as is", without environment-specific tweaks.
+В этой части учебника используется JavaScript "из коробки" без специфических настроек окружения.
 
-But we'll still be using the browser as our demo environment, so we should know at least a few of its user-interface functions. In this chapter, we'll get familiar with the browser functions `alert`, `prompt` and `confirm`.
+Но мы продолжим использовать браузер как демо-среду, поэтому мы должны освосить по крайней мере несколько функций его пользовательского интерфейса. В этой части ознакомимся с такими функциями браузера как `alert`, `prompt` и `confirm`.
+
 
 ## alert
 
-Syntax:
+Синтаксис:
 
 ```js
 alert(message);
 ```
 
-This shows a message and pauses script execution until the user presses "OK".
+Этот код отобразит окно в браузере и приостановит дальнейшее выполнение скриптов, до тех пор пока пользователь не нажмет кнопку "OK".
 
-For example:
+Например:
 
 ```js run
 alert("Hello");
 ```
 
-The mini-window with the message is called a *modal window*. The word "modal" means that the visitor can't interact with the rest of the page, press other buttons, etc. until they have dealt with the window. In this case -- until they press "OK".
+Это небольшое окно с сообщением называется *модальным окном*. Понятие *модальный* означает, что пользователь не может взаимодействовать с интерфейсом остальной части страницы, нажимать на другие кнопки и т.д. до тех пор, пока взаимодействует с окном. В данном случае -- пока не будет нажата кнопка "OK".
 
 ## prompt
 
-The function `prompt` accepts two arguments:
+Функция `prompt` принимает два аргумента:
 
 ```js no-beautify
 result = prompt(title, [default]);
 ```
 
-It shows a modal window with a text message, an input field for the visitor, and the buttons OK/CANCEL.
+Этот код отобразит модальное окно с текстом, полем для ввода текста и кнопками OK/CANCEL.
 
 `title`
-: The text to show the visitor.
+: Текст для отображения в окне.
 
 `default`
-: An optional second parameter, the initial value for the input field.
+: Необязательный второй параметр, который устанавливает начальное значение в поле для ввода текста в окне.
 
-The visitor may type something in the prompt input field and press OK. Or they can cancel the input by pressing CANCEL or hitting the `key:Esc` key.
+Пользователь может напечатать что-либо в поле ввода запроса и нажать OK. Или отменить ввод нажатием клавиши CANCEL или нажав клавишу `Esc`.
 
-The call to `prompt` returns the text from the input field or `null` if the input was canceled.
+Вызов `prompt` вернет текст указанный в поле для ввода или `null` если ввод отменен пользователем.
 
 For instance:
 
