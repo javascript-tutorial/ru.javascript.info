@@ -1,46 +1,47 @@
-# Object methods, "this"
+# Методы объекта, "this"
 
-Objects are usually created to represent entities of the real world, like users, orders and so on:
+Объекты обычно создаются чтобы представить сущности реального мира, будь то пользовательи, заказы и так далее:
 
 ```js
 let user = {
-  name: "John",
+  name: "Джон",
   age: 30
 };
 ```
 
-And, in the real world, a user can *act*: select something from the shopping cart, login, logout etc.
+И, также как и в реальном мире, пользователь может *совершать действия*: выбирать что-то из корзины покупок, автозироваться, выйти из системы, оплатить и т.п.
 
-Actions are represented in JavaScript by functions in properties.
+Такие действия в JavaScript представляют функции, являющиеся значениями свойств объекта.
 
-## Method examples
+## Примеры методов
 
-For the start, let's teach the `user` to say hello:
+Для начала, давайте научим нашего пользователя (созданный объект) `user` здороваться:
 
 ```js run
 let user = {
-  name: "John",
+  name: "Джон",
   age: 30
 };
 
 *!*
 user.sayHi = function() {
-  alert("Hello!");
+  alert("Привет!");
 };
 */!*
 
-user.sayHi(); // Hello!
+user.sayHi(); // Привет!
 ```
 
-Here we've just used a Function Expression to create the function and assign it to the property `user.sayHi` of the object.
+Здесь мы просто использовали Function Expression (функциональное выражение), чтобы создать функцию для приветствия и присвоили её свойству `user.sayHi` нашего объекта.
 
-Then we can call it. The user can now speak!
+Теперь мы можем вызвать эту функцию. Теперь пользователь может говорить!
 
-A function that is the property of an object is called its *method*.
+Функция, которая является свойством объекта, называется *методом* этого объекта.
 
-So, here we've got a method `sayHi` of the object `user`.
+Итак, мы получили метод `sayHi` объекта `user`.
 
 Of course, we could use a pre-declared function as a method, like this:
+Конечно, мы могли бы заранее объявить функцию и использовать ее в качестве метода, примерно так:
 
 ```js run
 let user = {
@@ -48,42 +49,40 @@ let user = {
 };
 
 *!*
-// first, declare
+// сначала объявляем
 function sayHi() {
-  alert("Hello!");
+  alert("Привет!");
 };
 
-// then add as a method
+// затем добавляем в качестве метода
 user.sayHi = sayHi;
 */!*
 
-user.sayHi(); // Hello!
+user.sayHi(); // Привет!
 ```
 
-```smart header="Object-oriented programming"
-When we write our code using objects to represent entities, that's called an [object-oriented programming](https://en.wikipedia.org/wiki/Object-oriented_programming), in short: "OOP".
+```smart header="Объектно-ориентированное программирование"
+Когда мы пишем наш код используя объекты для представления сущностей реального мира - это называется [объектно-ориентированное программирование](https://ru.wikipedia.org/wiki/%D0%9E%D0%B1%D1%8A%D0%B5%D0%BA%D1%82%D0%BD%D0%BE-%D0%BE%D1%80%D0%B8%D0%B5%D0%BD%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%BD%D0%BE%D0%B5_%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5) или сокращенно: "ООП".
 
-OOP is a big thing, an interesting science of its own. How to choose the right entities? How to organize the interaction between them? That's architecture, and there are great books on that topic, like "Design Patterns: Elements of Reusable Object-Oriented Software" by E.Gamma, R.Helm, R.Johnson, J.Vissides or "Object-Oriented Analysis and Design with Applications" by G.Booch, and more. 
+ООП является большой предметной областью и интересной наукой сама по себе. Как выбрать правильные сущности? Как организовать взаимодействие между ними? Это создание архитектуру и есть хорошие книги по этой теме, такие как "Design Patterns: Elements of Reusable Object-Oriented Software" авторов E.Gamma, R.Helm, R.Johnson, J.Vissides или "Object-Oriented Analysis and Design with Applications" за авторством G.Booch, а также еще множество книг.
 ```
-### Method shorthand
+### Сокращенная запись метода
 
-There exists a shorter syntax for methods in an object literal:
-
+Существует более короткий синтаксис для методов в литерале объекта:
 ```js
-// these objects do the same
-
+// эти объекты делают тоже самое (одинаковые методы)
 let user = {
   sayHi: function() {
-    alert("Hello");
+    alert("Привет");
   }
 };
 
-// method shorthand looks better, right?
+//сокращенная запись выглядит лучше, не так ли?
 let user = {
 *!*
-  sayHi() { // same as "sayHi: function()"
+  sayHi() { // тоже самое что и "sayHi: function()"
 */!*
-    alert("Hello");
+    alert("Привет");
   }
 };
 ```
