@@ -60,51 +60,51 @@ alert(`Тебе ${age} лет!`); // Тебе 100 лет!
 let test = prompt("Test");
 ```
 
-So, for prompts to look good in IE, we recommend always providing the second argument:
+Для более лаконичного отображения, реккомендуется всегда указывать второй параметр:
 
 ```js run
-let test = prompt("Test", ''); // <-- for IE
+let test = prompt("Test", ''); // <-- для IE
 ```
 ````
 
 ## confirm
 
-The syntax:
+Синтаксис:
 
 ```js
 result = confirm(question);
 ```
 
-The function `confirm` shows a modal window with a `question` and two buttons: OK and CANCEL.
+Функция `confirm` отображает модальное окно с текстом вопроса `question` и двумя кнопками: OK и CANCEL.
 
-The result is `true` if OK is pressed and `false` otherwise.
+Результат `true` если нажата кнопка OK. В других случаях `false`.
 
-For example:
+Например:
 
 ```js run
-let isBoss = confirm("Are you the boss?");
+let isBoss = confirm("Ты тут главный?");
 
-alert( isBoss ); // true if OK is pressed
+alert( isBoss ); // `true` если нажата OK
 ```
 
-## Summary
+## Резюме
 
-We covered 3 browser-specific functions to interact with visitors:
+Рассмотрели 3 функции браузера для взаимодействия с пользователем:
 
 `alert`
-: shows a message.
+: показывает сообщение.
 
 `prompt`
-: shows a message asking the user to input text. It returns the text or, if CANCEL or `key:Esc` is clicked, `null`.
+: показывает сообщение и запрашивает ввод текста от пользователя. Возвращает напечатанный текст в поле ввода или `null` если были нажаты кнопки CANCEL или `Esc` с клавиатуры.
 
 `confirm`
-: shows a message and waits for the user to press "OK" or "CANCEL". It returns `true` for OK and `false` for CANCEL/`key:Esc`.
+: показывает сообщение и ждет пока пользователь нажмет OK или CANCEL. Возращает `true` если нажата OK и `false` если нажаты кнопки CANCEL или `Esc` с клавиатуры.
 
-All these methods are modal: they pause script execution and don't allow the visitor to interact with the rest of the page until the window has been dismissed.
+Все эти методы являются модальными: останавливают выполнение скриптов и не позволяют пользователю взаимодействовать с остальной частью страницы до тех пор, пока окно не будет закрыто.
 
-There are two limitations shared by all the methods above:
+На все указанные методы распространяется два ограничения:
 
-1. The exact location of the modal window is determined by the browser. Usually, it's in the center.
-2. The exact look of the window also depends on the browser. We can't modify it.
+1. Расположение окон определяется браузеров. Обычно окна рассположены в центре.
+2. Визуальное отображение окон зависит от браузера и мы не можем изменит их вид.
 
-That is the price for simplicity. There are other ways to show nicer windows and richer interaction with the visitor, but if "bells and whistles" do not matter much, these methods work just fine.
+Такова цена простоты. Есть другие способы показать более приятные глазу окна с богатым функционалом для взаимодействия с пользователем, но если "навороты" не имеют значеня, то данные методы работают отлично.
