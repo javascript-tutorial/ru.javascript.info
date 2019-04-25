@@ -1,3 +1,3 @@
-The result is **an error**.
+Результатом будет **ошибка**.
 
-The function `sayHi` is declared inside the `if`, so it only lives inside it. There is no `sayHi` outside.
+Функция `sayHi` объявлена внутри `if`, так что она живёт только внутри этого блока. Снаружи нет `sayHi`.
