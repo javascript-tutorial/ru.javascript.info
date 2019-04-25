@@ -316,7 +316,7 @@ alert(JSON.stringify(user, null, 2));
 }
 */
 
-/* для JSON.stringify(user, null, 4) результат был бы более отступчивым:
+/* для JSON.stringify(user, null, 4) результат содержал больше отступов:
 {
     "name": "John",
     "age": 25,
