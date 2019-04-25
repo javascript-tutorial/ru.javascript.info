@@ -46,15 +46,15 @@ result = prompt(title, [default]);
 For instance:
 
 ```js run
-let age = prompt('How old are you?', 100);
+let age = prompt('Сколько тебе лет?', 100);
 
-alert(`You are ${age} years old!`); // You are 100 years old!
+alert(`Тебе ${age} лет!`); // Тебе 100 лет!
 ```
 
-````warn header="In IE: always supply a `default`"
-The second parameter is optional, but if we don't supply it, Internet Explorer will insert the text `"undefined"` into the prompt.
+````warn header="Для IE: всегда устанавливайте значение по-умолчанию"
+Второй параметр не обязательный, но если не указать его, то Internet Explorer установить значение `"undefined"` в поле для ввода.
 
-Run this code in Internet Explorer to see:
+Запустите код в Internet Explorer и посмотрите на результат:
 
 ```js run
 let test = prompt("Test");
