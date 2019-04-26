@@ -1,96 +1,99 @@
-# Arrays 
+# Массивы
 
-Objects allow you to store keyed collections of values. That's fine.
+Массивы - объекты позволяющие хранить именованные коллекции значений. Это замечательно.
 
-But quite often we find that we need an *ordered collection*, where we have a 1st, a 2nd, a 3rd element and so on. For example, we need that to store a list of something: users, goods, HTML elements etc. 
+Но довольно часто мы понимаем, что нам необходима _упорядоченная коллекция_ данных, в которой присутствуют 1-й, 2-й, 3-й элементы и т.д. Например, она понадобится нам для хранения списка чего-либо: пользователей, товаров, элементов HTML и т.д.  
 
-It is not convenient to use an object here, because it provides no methods to manage the order of elements. We can’t insert a new property “between” the existing ones. Objects are just not meant for such use.
+В этом случае использовать объект неудобно, так как он не предоставляет методов управления порядком элементов. Мы не можем вставить новое свойство "между" уже существующими. Объекты просто не предназначены для этих целей.
 
-There exists a special data structure named `Array`, to store ordered collections. 
+Для хранения упорядоченных коллекций существует особая структура данных, которая называется `Массив`.
 
-## Declaration
+## Объявление
 
-There are two syntaxes for creating an empty array:
+Существует два варианта синтаксиса для создания пустого массива:
 
 ```js
 let arr = new Array();
 let arr = [];
 ```
 
-Almost all the time, the second syntax is used. We can supply initial elements in the brackets:
+Практически всегда используется второй вариант синтаксиса. В скобках мы можем указать начальные значения элементов:
 
 ```js
-let fruits = ["Apple", "Orange", "Plum"];
+let fruits = ["Яблоко", "Апельсин", "Слива"];
 ```
 
-Array elements are numbered, starting with zero.
+Элементы массива нумеруются, начиная с нуля. 
 
-We can get an element by its number in square brackets:
+Мы можем получить элемент, указав его номер в квадратных скобках: 
 
 ```js run
-let fruits = ["Apple", "Orange", "Plum"];
+let fruits = ["Яблоко", "Апельсин", "Слива"];
 
-alert( fruits[0] ); // Apple
-alert( fruits[1] ); // Orange
-alert( fruits[2] ); // Plum
+alert( fruits[0] ); // Яблоко
+alert( fruits[1] ); // Апельсин
+alert( fruits[2] ); // Слива
 ```
 
-We can replace an element:
+Мы можем заменить элемент: 
 
 ```js
-fruits[2] = 'Pear'; // now ["Apple", "Orange", "Pear"]
+fruits[2] = 'Груша'; // теперь ["Яблоко", "Апельсин", "Груша"]
 ```
 
-...Or add a new one to the array:
+… Или добавить новый к существующему массиву: 
 
 ```js
-fruits[3] = 'Lemon'; // now ["Apple", "Orange", "Pear", "Lemon"]
+fruits[3] = 'Лимон'; // теперь ["Яблоко", "Апельсин", "Груша", "Лимон"]
 ```
 
-The total count of the elements in the array is its `length`:
+Общее число элементов массива содержится в его свойстве `length`: 
 
 ```js run
-let fruits = ["Apple", "Orange", "Plum"];
+let fruits = ["Яблоко", "Апельсин", "Слива"];
 
 alert( fruits.length ); // 3
 ```
 
-We can also use `alert` to show the whole array.
+Вывести массив целиком можно при помощи `alert`.
 
 ```js run
-let fruits = ["Apple", "Orange", "Plum"];
+let fruits = ["Яблоко", "Апельсин", "Слива"];
 
-alert( fruits ); // Apple,Orange,Plum
+alert( fruits ); // Яблоко, Апельсин, Слива
 ```
 
-An array can store elements of any type.
+В массиве могут храниться элементы любого типа. 
 
-For instance:
+Например:
 
 ```js run no-beautify
-// mix of values
-let arr = [ 'Apple', { name: 'John' }, true, function() { alert('hello'); } ];
+// разные типы значений
+let arr = [ 'Яблоко', { name: 'Джон' }, true, function() { alert('привет'); } ];
 
-// get the object at index 1 and then show its name
-alert( arr[1].name ); // John
+// получить элемент с индексом 1(объект) и затем показать его свойство
+alert( arr[1].name ); // Джон
 
-// get the function at index 3 and run it
-arr[3](); // hello
+// получить элемент с индексом 3(функция) и выполнить её
+arr[3](); // привет
 ```
 
-
 ````smart header="Trailing comma"
-An array, just like an object, may end with a comma:
+Массив, так же, как и объект, может оканчиваться запятой:
 ```js 
 let fruits = [
-  "Apple", 
-  "Orange", 
-  "Plum"*!*,*/!*
+  "Яблоко", 
+  "Апельсин", 
+  "Слива"*!*,*/!*
 ];
 ```
 
-The "trailing comma" style makes it easier to insert/remove items, because all lines become alike.
+«Замыкающая запятая» упрощает процесс добавления/удаления элементов, так как все строки становятся идентичными.
 ````
+
+## Методы pop/push, shift/unshift
+
+
 
 
 ## Methods pop/push, shift/unshift
