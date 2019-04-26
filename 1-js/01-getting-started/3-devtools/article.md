@@ -54,7 +54,11 @@ Safari (браузер для Mac, не поддерживается в сист
 
 Обычно, при нажатии `key:Enter` введенная строка кода сразу выполняется.
 
+<<<<<<< HEAD
 Чтобы перенести строку нажмите `key:Shift+Enter`.
+=======
+To insert multiple lines, press `key:Shift+Enter`.
+>>>>>>> 19223ae762f03cdff4e83f6f963f4f427af93847
 
 ## Итого
 
