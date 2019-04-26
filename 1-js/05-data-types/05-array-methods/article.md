@@ -1,118 +1,120 @@
-# Array methods
+# Методы массивов
 
-Arrays provide a lot of methods. To make things easier, in this chapter they are split into groups.
+Массивы предоставляют множество методов. Чтобы было проще, в этой главе они разбиты на группы.
 
-## Add/remove items
+## Добавление/удаление элементов
 
-We already know methods that add and remove items from the beginning or the end:
+Мы уже знаем методы, которые добавляют и удаляют элементы из начала или конца:
 
-- `arr.push(...items)` -- adds items to the end,
-- `arr.pop()` -- extracts an item from the end,
-- `arr.shift()` -- extracts an item from the beginning,
-- `arr.unshift(...items)` -- adds items to the beginning.
+- `arr.push(...items)` -- добавляет элементы в конец,
+- `arr.pop()` -- извлекает элемент из конца,
+- `arr.shift()` -- извлекает элемент из начала,
+- `arr.unshift(...items)` -- добавляет элементы в начало.
 
-Here are few others.
+Есть и другие.
 
-### splice
+### Метод splice
 
-How to delete an element from the array?
+Как удалить элемент из массива?
 
-The arrays are objects, so we can try to use `delete`:
+Так как массивы являются объектами, то для удаления ключа можно воспользоваться обычным `delete`:
 
 ```js run
 let arr = ["I", "go", "home"];
 
-delete arr[1]; // remove "go"
+delete arr[1]; // удаляем "go"
 
 alert( arr[1] ); // undefined
 
-// now arr = ["I",  , "home"];
+// теперь arr = ["I",  , "home"];
 alert( arr.length ); // 3
 ```
 
-The element was removed, but the array still has 3 elements, we can see that `arr.length == 3`.
+Вроде бы элемент был удалён, но при проверке оказывается что массив всё ещё имеет 3 элемента `arr.length == 3`.
 
-That's natural, because `delete obj.key` removes a value by the `key`. It's all it does. Fine for objects. But for arrays we usually want the rest of elements to shift and occupy the freed place. We expect to have a shorter array now.
+Это нормально, потому что всё что делает `delete obj.key`, это удаляет значение с помощью `key`. 
+Это подходит для объектов, но для массивов мы обычно хотим, чтобы остальные элементы смещались и занимали освободившееся место. 
+Мы ожидаем, что массив станет короче.
 
-So, special methods should be used.
+Для этого нужно использовать специальные методы.
 
-The [arr.splice(str)](mdn:js/Array/splice) method is a swiss army knife for arrays. It can do everything: add, remove and insert elements.
+??? Метод [arr.splice(str)](mdn:js/Array/splice) – это универсальный раскладной нож для работы с массивами. Умеет все: добавлять, удалять и заменять элементы.
 
-The syntax is:
+Его синтаксис:
 
 ```js
 arr.splice(index[, deleteCount, elem1, ..., elemN])
 ```
 
-It starts from the position `index`: removes `deleteCount` elements and then inserts `elem1, ..., elemN` at their place. Returns the array of removed elements.
+Удалить `deleteCount` элементов, начиная с номера `index`, а затем вставить `elem1, ..., elemN` на их место. Возвращает массив из удалённых элементов.
 
-This method is easy to grasp by examples.
+Этот метод проще всего понять, рассмотрев примеры.
 
-Let's start with the deletion:
+Начнём с удаления:
 
 ```js run
-let arr = ["I", "study", "JavaScript"];
+let arr = ["Я", "изучаю", "JavaScript"];
 
 *!*
-arr.splice(1, 1); // from index 1 remove 1 element
+arr.splice(1, 1); // начиная с позиции 1, удалить 1 элемент
 */!*
 
-alert( arr ); // ["I", "JavaScript"]
+alert( arr ); // осталось ["Я", "JavaScript"]
 ```
 
-Easy, right? Starting from the index `1` it removed `1` element.
+Легко, правда? Начиная с позиции `1`, он убрал `1` элемент.
 
-In the next example we remove 3 elements and replace them with the other two:
+В следующем примере мы удалим 3 элемента и заменим их двумя другими.
 
 ```js run
-let arr = [*!*"I", "study", "JavaScript",*/!* "right", "now"];
+let arr = [*!*"Я", "изучаю", "JavaScript",*/!* "прямо", "сейчас"];
 
-// remove 3 first elements and replace them with another
-arr.splice(0, 3, "Let's", "dance");
+// удалить 3 первых елемента и удалить их другими
+arr.splice(0, 3, "Давай", "танцевать");
 
-alert( arr ) // now [*!*"Let's", "dance"*/!*, "right", "now"]
+alert( arr ) // теперь [*!*"Давай", "танцевать"*/!*, "прямо", "сейчас"]
 ```
 
-Here we can see that `splice` returns the array of removed elements:
+Здесь видно, что splice возвращает массив из удаленных элементов:
 
 ```js run
-let arr = [*!*"I", "study",*/!* "JavaScript", "right", "now"];
+let arr = [*!*"Я", "изучаю",*/!* "JavaScript", "прямо", "сейчас"];
 
-// remove 2 first elements
+// удалить 2 первых элемента
 let removed = arr.splice(0, 2);
 
-alert( removed ); // "I", "study" <-- array of removed elements
+alert( removed ); // "Я", "изучаю" <-- массив из удалённых элементов
 ```
 
-The `splice` method is also able to insert the elements without any removals. For that we need to set `deleteCount` to `0`:
+Метод `splice` также может вставлять элементы без удаления, для этого достаточно установить `deleteCount` в `0`:
 
 ```js run
-let arr = ["I", "study", "JavaScript"];
+let arr = ["Я", "изучаю", "JavaScript"];
 
-// from index 2
-// delete 0
-// then insert "complex" and "language"
-arr.splice(2, 0, "complex", "language");
+// с позиции 2
+// удалить 0
+// вставить "сложный", "язык"
+arr.splice(2, 0, "сложный", "язык");
 
-alert( arr ); // "I", "study", "complex", "language", "JavaScript"
+alert( arr ); // "Я", "изучаю", "сложный", "язык", "JavaScript"
 ```
 
 ````smart header="Negative indexes allowed"
-Here and in other array methods, negative indexes are allowed. They specify the position from the end of the array, like here:
+В этом и вдругих методах для массивов допускается использование отрицательного номера позиции, которая в этом случае отсчитывает элементы с конца:
 
 ```js run
 let arr = [1, 2, 5];
 
-// from index -1 (one step from the end)
-// delete 0 elements,
-// then insert 3 and 4
+// начиная с позиции индексом -1 (перед последним элементом)
+// удалить 0 элементов,
+// затем вставить числа 3 и 4
 arr.splice(-1, 0, 3, 4);
 
 alert( arr ); // 1,2,3,4,5
 ```
 ````
 
-### slice
+### Метод slice
 
 The method [arr.slice](mdn:js/Array/slice) is much simpler than similar-looking `arr.splice`.
 
