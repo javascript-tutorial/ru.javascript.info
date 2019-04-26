@@ -116,19 +116,20 @@ alert( arr ); // 1,2,3,4,5
 
 ### Метод slice
 
-The method [arr.slice](mdn:js/Array/slice) is much simpler than similar-looking `arr.splice`.
+Метод [arr.slice](mdn:js/Array/slice) намного проще чем похожий на него `arr.splice`
 
-The syntax is:
+Его синтаксис:
 
 ```js
 arr.slice(start, end)
 ```
 
-It returns a new array containing all items from index `"start"` to `"end"` (not including `"end"`). Both `start` and `end` can be negative, in that case position from array end is assumed.
+Он возвращает новый массив, который содержит в себе все элементы начиная со `"start"` и заканчивая `"end"` (не включая `"end"`).
+Оба индекса `start` и `end` могут быть отрицательными. В этом случае отсчёт будет осуществляться с конца массива.
 
-It works like `str.slice`, but makes subarrays instead of substrings.
+Это работает так же как и `str.slice`, но делает подмассивы вместо подстрок
 
-For instance:
+Например:
 
 ```js run
 let str = "test";
@@ -141,17 +142,18 @@ alert( str.slice(-2) ); // st
 alert( arr.slice(-2) ); // s,t
 ```
 
-### concat
+### Метод concat
 
-The method [arr.concat](mdn:js/Array/concat) joins the array with other arrays and/or items.
+Метод [arr.concat](mdn:js/Array/concat) объединяет массив с другими массивами и/или элементами.
 
-The syntax is:
+Его синтаксис:
 
 ```js
 arr.concat(arg1, arg2...)
 ```
 
 It accepts any number of arguments -- either arrays or values.
+Он принимает любое количество аргументов - которые могут быть массивами и значениями.
 
 The result is a new array containing items from `arr`, then `arg1`, `arg2` etc.
 
