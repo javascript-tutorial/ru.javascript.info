@@ -22,4 +22,4 @@ if (userName == 'Admin') {
 }
 ```
 
-Note the vertical indents inside the `if` blocks. They are technically not required, but make the code more readable.
+Обратите внимание на вертикальные отступы внутри блоков `if`. Они технически не требуются, но делают код более читаемым.

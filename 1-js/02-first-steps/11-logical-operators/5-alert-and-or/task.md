@@ -1,10 +1,10 @@
-importance: 5
+важность: 5
 
 ---
 
-# The result of OR AND OR
+# Что выведет этот код?
 
-What will the result be?
+Что выведет код ниже?
 
 ```js
 alert( null || 2 && 3 || 4 );

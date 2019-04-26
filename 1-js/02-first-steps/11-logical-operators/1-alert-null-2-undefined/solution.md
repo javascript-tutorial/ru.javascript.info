@@ -1,4 +1,4 @@
-The answer is `2`, that's the first truthy value.
+Ответ: `2`, это первое значение, которое в логическом контексте даст `true`.
 
 ```js run
 alert( null || 2 || undefined );

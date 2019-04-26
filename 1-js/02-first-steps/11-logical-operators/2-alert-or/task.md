@@ -1,10 +1,10 @@
-importance: 3
+важность: 3
 
 ---
 
-# What's the result of OR'ed alerts?
+# Что выведет alert (ИЛИ)?
 
-What will the code below output?
+Что выведет код ниже?
 
 ```js
 alert( alert(1) || 2 || alert(3) );

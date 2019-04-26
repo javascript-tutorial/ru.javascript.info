@@ -1,10 +1,10 @@
-importance: 3
+важность: 3
 
 ---
 
-# What is the result of AND'ed alerts?
+# Что выведет alert (И)??
 
-What will this code show?
+Что выведет код ниже?
 
 ```js
 alert( alert(1) && alert(2) );

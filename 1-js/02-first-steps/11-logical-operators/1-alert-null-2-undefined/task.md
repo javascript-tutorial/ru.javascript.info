@@ -1,10 +1,10 @@
-importance: 5
+важность: 5
 
 ---
 
-# What's the result of OR?
+# Что выведет alert (ИЛИ)?
 
-What is the code below going to output?
+Что выведет код ниже?
 
 ```js
 alert( null || 2 || undefined );
