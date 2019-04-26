@@ -1,51 +1,51 @@
 
-# Преобразование объектов в примитивы
+# Object to primitive conversion
 
-Что произойдёт если сложить объекты `obj1 + obj2`, вычесть `obj1 - obj2` или вывести, воспользовавшись `alert(obj)`?
+What happens when objects are added `obj1 + obj2`, subtracted `obj1 - obj2` or printed using `alert(obj)`?
 
-Существуют специальные методы в объектах, которые производят эти преобразования.
+There are special methods in objects that do the conversion.
 
-В главе <info:type-conversions> мы видели правила для численных, строковых и логических преобразований. Но мы обделили вниманием объекты. Теперь, посокольку мы уже знаем о методах объектов и символах, стало возможным исправить это.
+In the chapter <info:type-conversions> we've seen the rules for numeric, string and boolean conversions of primitives. But we left a gap for objects. Now, as we know about methods and symbols it becomes possible to close it.
 
-Для объектов нет логических преобразований, потому что все объекты являются `true` в логическом контексте. Поэтому важны только преобразования к строке и числу.
+For objects, there's no to-boolean conversion, because all objects are `true` in a boolean context. So there are only string and numeric conversions.
 
-Преобразования к числу происходят, когда мы вычитаем объекты или применяем к ним математические функции. Например, Объект `Date` (рассматривался в статье <info:date>) можно вычитать, и результатом вычислений `date1 - date2` будет время между двумя датами.
+The numeric conversion happens when we subtract objects or apply mathematical functions. For instance, `Date` objects (to be covered in the chapter <info:date>) can be subtracted, and the result of `date1 - date2` is the time difference between two dates.
 
-Преобразования к строке же происходят, когда мы хотим вывести объекты с помощью `alert(obj)` или в похожих случаях.
+As for the string conversion -- it usually happens when we output an object like `alert(obj)` and in similar contexts.
 
-## Преобразование к примитивам
+## ToPrimitive
 
-Когда объекты используются в случаях, где нужны примитивы, например, в вызове `alert` или математических операциях, происходит их преобразование к примитивным значениям следуя алгоритму `ToPrimitive` ([спецификация](https://tc39.github.io/ecma262/#sec-toprimitive)).
+When an object is used in the context where a primitive is required, for instance, in an `alert` or mathematical operations, it's converted to a primitive value using the `ToPrimitive` algorithm ([specification](https://tc39.github.io/ecma262/#sec-toprimitive)).
 
-Этот алгоритм позволяет нам настроить преобразование, используя специальные методы объектов.
+That algorithm allows us to customize the conversion using a special object method.
 
-В зависимости от ситуации, преобразование имеет так называемый "hint".
+Depending on the context, the conversion has a so-called "hint".
 
-Существует три варианта:
+There are three variants:
 
 `"string"`
-: Когда в результате операции ожидается строка, для объектно-строковых преобразований, таких как `alert`:
+: When an operation expects a string, for object-to-string conversions, like `alert`:
 
     ```js
-    // вывод
+    // output
     alert(obj);
 
-    // используем объект в качества имени свойства
+    // using object as a property key
     anotherObj[obj] = 123;
     ```
 
 `"number"`
-: Когда в результате операции ожидается число, для объектно-численных преобразований, таких как математические операции:
+: When an operation expects a number, for object-to-number conversions, like maths:
 
     ```js
-    // явное преобразование
+    // explicit conversion
     let num = Number(obj);
 
-    // математическое (исключая бинарный оператор "+")
-    let n = +obj; // унарный плюс
+    // maths (except binary plus)
+    let n = +obj; // unary plus
     let delta = date1 - date2;
 
-    // больше/меньше сравнения
+    // less/greater comparison
     let greater = user1 > user2;
     ```
 
@@ -233,4 +233,4 @@ The conversion algorithm is:
 3. Otherwise if hint is `"number"` or `"default"`
     - try `obj.valueOf()` and `obj.toString()`, whatever exists.
 
-In practice, it's often enough to implement only `obj.toString()` as a "catch-all" method for all conversions that return a "human-readable" representation of an object, for logging or debugging purposes.
+In practice, it's often enough to implement only `obj.toString()` as a "catch-all" method for all conversions that return a "human-readable" representation of an object, for logging or debugging purposes.  
