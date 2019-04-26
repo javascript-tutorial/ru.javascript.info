@@ -17,67 +17,66 @@
     *!*
     x = -x;
     */!*
-    alert( x ); // -1, unary negation was applied
+    alert( x ); // -1, было применено унарное отрицание
     ```
-- An operator is *binary* if it has two operands. The same minus exists in binary form as well:
+- Оператор является *бинарным*, если он имеет два операнда. Тот же минус существует и в бинарной форме:
 
     ```js run no-beautify
     let x = 1, y = 3;
-    alert( y - x ); // 2, binary minus subtracts values
+    alert( y - x ); // 2, бинарный минус вычитает значения
     ```
 
-    Formally, we're talking about two different operators here: the unary negation (single operand: reverses the sign) and the binary subtraction (two operands: subtracts).
+    Формально, мы говорим здесь о двух разных операторах: унарное отрицание (один операнд: меняет знак) и бинарное вычитание (два операнда: вычитание).
 
-## String concatenation, binary +
+## Конкатенация строк, бинарный +
 
-Now, let's see special features of JavaScript operators that are beyond school arithmetics.
+Теперь давайте посмотрим на особенности JavaScript-операторов, которые выходят за рамки школьной арифметики.
 
-Usually, the plus operator `+` sums numbers.
+Обычно оператор плюс `+` суммирует числа.
 
-But, if the binary `+` is applied to strings, it merges (concatenates) them:
+Но если бинарный `+` применяется к строкам, он объединяет (сцепляет) их:
 
 ```js
-let s = "my" + "string";
-alert(s); // mystring
+let s = "моя" + "строка";
+alert(s); // моястрока
 ```
 
-Note that if one of the operands is a string, the other one is converted to a string too.
+Обратите внимание, что если один из операндов является строкой, другой тоже преобразуется в строку.
 
-For example:
+Например:
 
 ```js run
 alert( '1' + 2 ); // "12"
 alert( 2 + '1' ); // "21"
 ```
 
-See, it doesn't matter whether the first operand is a string or the second one. The rule is simple: if either operand is a string, the other one is converted into a string as well.
+Видите, не имеет значения, является ли первый операнд строкой или вторым. Правило простое: если один из операндов является строкой, другой также преобразуется в строку.
 
-However, note that operations run from left to right. If there are two numbers followed by a string, the numbers will be added before being converted to a string:
-
+Однако обратите внимание, что операции выполняются слева направо. Если перед строкой находятся два числа, числа будут добавлены перед преобразованием в строку:
 
 ```js run
-alert(2 + 2 + '1' ); // "41" and not "221"
+alert(2 + 2 + '1' ); // "41" а не "221"
 ```
 
-String concatenation and conversion is a special feature of the binary plus `+`. Other arithmetic operators work only with numbers and always convert their operands to numbers.
+Конкатенация и преобразование строк - это особенность бинарного плюс `+`. Другие арифметические операторы работают только с числами и всегда преобразуют свои операнды в числа.
 
-For instance, subtraction and division:
+Например, вычитание и деление:
 
 ```js run
 alert( 2 - '1' ); // 1
 alert( '6' / '2' ); // 3
 ```
 
-## Numeric conversion, unary +
+## Числовое преобразование, одинарное +
 
-The plus `+` exists in two forms: the binary form that we used above and the unary form.
+Плюс `+` существует в двух формах: бинарная форма, которую мы использовали выше, и унарная форма.
 
-The unary plus or, in other words, the plus operator `+` applied to a single value, doesn't do anything to numbers. But if the operand is not a number, the unary plus converts it into a number.
+Унарный плюс или, другими словами, оператор плюс `+`, примененный к одному значению, ничего не делает с числами. Но если операнд не является числом, унарный плюс преобразует его в число.
 
-For example:
+Например:
 
 ```js run
-// No effect on numbers
+// Не влияет на числа
 let x = 1;
 alert( +x ); // 1
 
@@ -85,78 +84,78 @@ let y = -2;
 alert( +y ); // -2
 
 *!*
-// Converts non-numbers
+// Преобразует не числа
 alert( +true ); // 1
 alert( +"" );   // 0
 */!*
 ```
 
-It actually does the same thing as `Number(...)`, but is shorter.
+На самом деле он делает то же самое, что и `Number(...)`, но короче.
 
-The need to convert strings to numbers arises very often. For example, if we are getting values from HTML form fields, they are usually strings.
+Необходимость преобразования строк в числа возникает очень часто. Например, если мы получаем значения из полей формы HTML, они обычно являются строками.
 
-What if we want to sum them?
+Что если мы хотим их сложить?
 
-The binary plus would add them as strings:
+Бинарный плюс добавил бы их в виде строк:
 
 ```js run
 let apples = "2";
 let oranges = "3";
 
-alert( apples + oranges ); // "23", the binary plus concatenates strings
+alert( apples + oranges ); // "23", бинарный плюс объединяет строки
 ```
 
-If we want to treat them as numbers, we need to convert and then sum them:
+Если мы хотим рассматривать их как числа, нам нужно преобразовать и затем сложить их:
 
 ```js run
 let apples = "2";
 let oranges = "3";
 
 *!*
-// both values converted to numbers before the binary plus
+// оба значения преобразуются в числа перед бинарным плюсом
 alert( +apples + +oranges ); // 5
 */!*
 
-// the longer variant
+// более длинный вариант
 // alert( Number(apples) + Number(oranges) ); // 5
 ```
 
-From a mathematician's standpoint, the abundance of pluses may seem strange. But from a programmer's standpoint, there's nothing special: unary pluses are applied first, they convert strings to numbers, and then the binary plus sums them up.
+С точки зрения математика, обилие плюсов может показаться странным. Но с точки зрения программиста, в этом нет ничего особенного: сначала применяются унарные плюсы, они преобразуют строки в числа, а затем их суммирует бинарный плюс.
 
-Why are unary pluses applied to values before the binary ones? As we're going to see, that's because of their *higher precedence*.
+Почему одинарные плюсы применяются к значениям перед двоичными? Как мы увидим, это из-за их *более высокого приоритета*.
 
-## Operator precedence
+## Приоритет оператора
 
-If an expression has more than one operator, the execution order is defined by their *precedence*, or, in other words, the implicit priority order of operators.
+Если выражение имеет более одного оператора, порядок выполнения определяется их *приоритетом* или, другими словами, неявным порядком приоритета операторов.
 
-From school, we all know that the multiplication in the expression `1 + 2 * 2` should be calculated before the addition. That's exactly the precedence thing. The multiplication is said to have *a higher precedence* than the addition.
+Из школы мы все знаем, что умножение в выражении `1 + 2 * 2` должно быть рассчитано до сложения. Это как раз вопрос приоритета. Умножение имеет *более высокий приоритет*, чем сложение.
 
-Parentheses override any precedence, so if we're not satisfied with the implicit order, we can use them to change it. For example: `(1 + 2) * 2`.
+Скобки переопределяют любой приоритет, поэтому, если мы не удовлетворены неявным порядком, мы можем использовать их для его изменения. Например: `(1 + 2) * 2`.
 
-There are many operators in JavaScript. Every operator has a corresponding precedence number. The one with the larger number executes first. If the precedence is the same, the execution order is from left to right.
+В JavaScript много операторов. Каждый оператор имеет соответствующий приоритет. Тот, у которого больше число, выполняется первым. Если приоритет тот же, порядок выполнения слева направо.
 
-Here's an extract from the [precedence table](https://developer.mozilla.org/en/JavaScript/Reference/operators/operator_precedence) (you don't need to remember this, but note that unary operators are higher than corresponding binary ones):
+Вот выдержка из [таблицы приоритетов](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Operators/Operator_Precedence) (вам не нужно помнить это, но обратите внимание, что унарные операторы выше, чем соответствующие бинарные):
 
-| Precedence | Name | Sign |
+| Приоритет | Тип оператора | Знак |
 |------------|------|------|
 | ... | ... | ... |
-| 16 | unary plus | `+` |
-| 16 | unary negation | `-` |
-| 14 | multiplication | `*` |
-| 14 | division | `/` |
-| 13 | addition | `+` |
-| 13 | subtraction | `-` |
+| 16 | унарный плюс | `+` |
+| 16 | унарный минус | `-` |
+| 14 | умножение | `*` |
+| 14 | деление | `/` |
+| 13 | сложение | `+` |
+| 13 | вычитание | `-` |
 | ... | ... | ... |
-| 3 | assignment | `=` |
+| 3 | присваивание | `=` |
 | ... | ... | ... |
 
-As we can see, the "unary plus" has a priority of `16` which is higher than the `13` of "addition" (binary plus). That's why, in the expression `"+apples + +oranges"`, unary pluses work before the addition.
+Как мы видим, «унарный плюс» имеет приоритет `16`, который выше, чем `13` «сложение» (бинарный плюс). Вот почему в выражении `+apples + +oranges` одинарные плюсы работают до сложения.
 
-## Assignment
+## Присваивание
 
-Let's note that an assignment `=` is also an operator. It is listed in the precedence table with the very low priority of `3`.
+Отметим, что присваивание `=` также является оператором. Он указан в таблице приоритетов с очень низким приоритетом `3`.
 
-That's why, when we assign a variable, like `x = 2 * 2 + 1`, the calculations are done first and then the `=` is evaluated, storing the result in `x`.
+Вот почему, когда мы присваиваем переменную, такую как `x = 2 * 2 + 1`, сначала выполняются вычисления, а затем вычисляется `=`, сохраняя результат в `x`.
 
 ```js
 let x = 2 * 2 + 1;
@@ -164,7 +163,7 @@ let x = 2 * 2 + 1;
 alert( x ); // 5
 ```
 
-It is possible to chain assignments:
+Возможно присваивание по цепочке:
 
 ```js run
 let a, b, c;
@@ -178,14 +177,15 @@ alert( b ); // 4
 alert( c ); // 4
 ```
 
-Chained assignments evaluate from right to left. First, the rightmost expression `2 + 2` is evaluated and then assigned to the variables on the left: `c`, `b` and `a`. At the end, all the variables share a single value.
+Такое присваивание работает справа-налево. Сначала вычисляется самое правое выражение `2 + 2`, а затем присваивается переменным слева: `c`, `b` и `a`. В конце, все переменные имеют одно общее значение.
 
-````smart header="The assignment operator `\"=\"` returns a value"
-An operator always returns a value. That's obvious for most of them like addition `+` or multiplication `*`. But the assignment operator follows this rule too.
+````smart header="Оператор присваивания `\"=\"` возвращает значение"
 
-The call `x = value` writes the `value` into `x` *and then returns it*.
+Оператор всегда возвращает значение. Это очевидно для большинства из них, таких как сложение `+` или умножение `*`. Но оператор присваивания также следует этому правилу.
 
-Here's a demo that uses an assignment as part of a more complex expression:
+Вызов `x = value` записывает `value` в `x` и возвращает его.
+
+Вот демонстрация, которая использует присвоение как часть более сложного выражения:
 
 ```js run
 let a = 1;
@@ -199,9 +199,9 @@ alert( a ); // 3
 alert( c ); // 0
 ```
 
-In the example above, the result of `(a = b + 1)` is the value which is assigned to `a` (that is `3`). It is then used to subtract from `3`.
+В приведенном выше примере результатом `(a = b + 1)` является значение, которое присваивается `a` (то есть `3`). Затем оно используется для вычитания из `3`.
 
-Funny code, isn't it? We should understand how it works, because sometimes we see it in 3rd-party libraries, but shouldn't write anything like that ourselves. Such tricks definitely don't make code clearer or readable.
+Забавный код, не так ли? Мы должны понять, как это работает, потому что иногда мы видим это в сторонних библиотеках, но не должны писать ничего подобного сами. Такие трюки определенно не делают код более понятным или читабельным.
 ````
 
 ## Remainder %
