@@ -8,7 +8,7 @@ importance: 5
 
 Но иногда есть много обратных ссылок. И имена могут использоваться как в циклических ссылках, так и в обычных свойствах.
 
-Напишите функцию `replacer` для строкового преобразования, но удалите свойства, которые ссылаются на` meetup`:
+Напишите функцию `replacer` для JSON-преобразования, которая удалит свойства, ссылающиеся на `meetup`:
 
 ```js run
 let room = {
@@ -16,8 +16,8 @@ let room = {
 };
 
 let meetup = {
-  title: "Conference",
-  occupiedBy: [{name: "John"}, {name: "Alice"}],
+  title: "Совещание",
+  occupiedBy: [{name: "Иванов"}, {name: "Петров"}],
   place: room
 };
 
@@ -33,8 +33,8 @@ alert( JSON.stringify(meetup, function replacer(key, value) {
 
 /* в результате должно быть:
 {
-  "title":"Conference",
-  "occupiedBy":[{"name":"John"},{"name":"Alice"}],
+  "title":"Совещание",
+  "occupiedBy":[{"name":"Иванов"},{"name":"Петров"}],
   "place":{"number":23}
 }
 */
