@@ -2,7 +2,11 @@
 
 Что если бинарные данные фактически являются строкой? Например, мы получили файл с текстовыми данными.
 
+<<<<<<< HEAD
 Встроенный объект [TextDecoder](https://encoding.spec.whatwg.org/#interface-textdecoder) позволяет декодировать данные из бинарного буфера в обычную строку.
+=======
+The build-in [TextDecoder](https://encoding.spec.whatwg.org/#interface-textdecoder) object allows to read the value into an an actual JavaScript string, given the buffer and the encoding.
+>>>>>>> 19223ae762f03cdff4e83f6f963f4f427af93847
 
 Для этого прежде всего нам нужно создать сам декодер:
 ```js
