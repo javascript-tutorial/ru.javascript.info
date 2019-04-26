@@ -87,25 +87,25 @@ let user = {
 };
 ```
 
-As demonstrated, we can omit `"function"` and just write `sayHi()`.
+Как было показано, мы можем опустить ключевое слово `"function"` и просто написать `sayHi()`.
 
-To tell the truth, the notations are not fully identical. There are subtle differences related to object inheritance (to be covered later), but for now they do not matter. In almost all cases the shorter syntax is preferred.
+Нужно отметить, что такая сокращенная нотаяция не является полностью идентичной полной нотации. Есть тонкие различия, связанные с наследованием объектов (что будет рассмортено позже), но на данном этапе изучения это не является важным. В большинстве случаев сокращенный синтаксис более предпочтителен.
 
-## "this" in methods
+## Ключевое слово "this" в методах
 
-It's common that an object method needs to access the information stored in the object to do its job.
+Как правило, методу объекта необходим доступ к информации, которая хранится в этом объекте, чтобы выполнить с ней какие-либо действия (в соответствии с назначением метода).
 
-For instance, the code inside `user.sayHi()` may need the name of the `user`.
+Например, коду внутри `user.sayHi()` может понадобиться имя пользователя, которое храниться в объекте `user`.
 
-**To access the object, a method can use the `this` keyword.**
+**Для доступа к информации внутри объекта метод может использовать ключевое словое `this`.**
 
-The value of `this` is the object "before dot", the one used to call the method.
+Значение `this` - это объект "перед точкой", который использовался для вызова метода.
 
-For instance:
+Например:
 
 ```js run
 let user = {
-  name: "John",
+  name: "Джон",
   age: 30,
 
   sayHi() {
@@ -116,39 +116,39 @@ let user = {
 
 };
 
-user.sayHi(); // John
+user.sayHi(); // Джон
 ```
 
-Here during the execution of `user.sayHi()`, the value of `this` will be `user`.
+Здесь во время выполнения кода `user.sayHi()`, значением `this` будет являться `user` (ссылка на объект `user`).
 
-Technically, it's also possible to access the object without `this`, by referencing it via the outer variable:
+Технически, также возможно получить доступ к объекту без ключевого слова `this`, ссылаясь на него через внешнюю переменную (в которой хранится ссылка на этот объект):
 
 ```js
 let user = {
-  name: "John",
+  name: "Джон",
   age: 30,
 
   sayHi() {
 *!*
-    alert(user.name); // "user" instead of "this"
+    alert(user.name); // используем переменную "user" вместо ключевого слова "this"
 */!*
   }
 
 };
 ```
 
-...But such code is unreliable. If we decide to copy `user` to another variable, e.g. `admin = user` and overwrite `user` with something else, then it will access the wrong object.
+...Но такой код будет ненадежным. Если мы решим скопировать ссылку на объект `user` в другую переменную, например `admin = user` и перезапишем переменную `user` чем-то другим, тогда будет получен доступ к неправильному объекту при вызовер метода из `admin`.
 
-That's demonstrated below:
+Это показано ниже:
 
 ```js run
 let user = {
-  name: "John",
+  name: "Джон",
   age: 30,
 
   sayHi() {
 *!*
-    alert( user.name ); // leads to an error
+    alert( user.name ); // приведет к ошибке
 */!*
   }
 
@@ -156,14 +156,14 @@ let user = {
 
 
 let admin = user;
-user = null; // overwrite to make things obvious
+user = null; // обнулим переменную, для наглядности. Теперь переменная "user" не хранит ссылку на объект.
 
-admin.sayHi(); // Whoops! inside sayHi(), the old name is used! error!
+admin.sayHi(); // Оп! внутри sayHi(), используется старая переменная "user", которая боьше не ссылается на объект! Ошибка!
 ```
 
-If we used `this.name` instead of `user.name` inside the `alert`, then the code would work.
+Если мы используем `this.name` вместо `user.name` внутри `alert`, тогда этот код будет работать.
 
-## "this" is not bound
+## "this" не является связанным
 
 In JavaScript, "this" keyword behaves unlike most other programming languages. First, it can be used in any function.
 
