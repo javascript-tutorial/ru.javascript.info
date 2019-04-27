@@ -43,7 +43,7 @@ result = prompt(title, [default]);
 
 Вызов `prompt` вернет текст указанный в поле для ввода или `null` если ввод отменен пользователем.
 
-For instance:
+Например:
 
 ```js run
 let age = prompt('Сколько тебе лет?', 100);
