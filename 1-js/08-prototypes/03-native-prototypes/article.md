@@ -1,33 +1,33 @@
-# Native prototypes
+# Нативные прототипы
 
-The `"prototype"` property is widely used by the core of JavaScript itself. All built-in constructor functions use it.
+Свойство `"prototype"` широко используется в самом ядре JavaScript. Все встроенные функции-конструкторы используют его.
 
-We'll see how it is for plain objects first, and then for more complex ones.
+Сначала мы посмотрим как это работает для простых объектов, а затем и для более сложных. 
 
 ## Object.prototype
 
-Let's say we output an empty object:
+Давайте выведем пустой объект:
 
 ```js run
 let obj = {};
 alert( obj ); // "[object Object]" ?
 ```
 
-Where's the code that generates the string `"[object Object]"`? That's a built-in `toString` method, but where is it? The `obj` is empty!
+Где код, который генерирует строку `"[object Object]"`? Это встроенный метод `toString`, но где он? `obj` ведь пуст!
 
-...But the short notation `obj = {}` is the same as `obj = new Object()`, where `Object` is a built-in object constructor function, with its own `prototype` referencing a huge object with `toString` and other methods.
+...Но краткая нотация `obj = {}` это тоже самое, что и `obj = new Object()`, где `Object` - встроенная функция-конструктор для объектов с собственным свойством `prototype`, который ссылается на огромный объект с методом `toString` и другими.
 
-Here's what's going on:
+Вот что происходит:
 
 ![](object-prototype.png)
 
-When `new Object()` is called (or a literal object `{...}` is created), the `[[Prototype]]` of it is set to `Object.prototype` according to the rule that we discussed in the previous chapter:
+Когда вызывается `new Object()` (или создается объект с помощью литерала `{...}`), свойство `[[Prototype]]` этого объекта устанавливается как `Object.prototype` по правилам, который мы обсуждали в предыдущей статье:
 
 ![](object-prototype-1.png)
 
-So then when `obj.toString()` is called the method is taken from `Object.prototype`.
+Таким образом, когда вызывается `obj.toString()` метод берется из `Object.prototype`.
 
-We can check it like this:
+Мы можем проверить это так:
 
 ```js run
 let obj = {};
@@ -36,7 +36,7 @@ alert(obj.__proto__ === Object.prototype); // true
 // obj.toString === obj.__proto__.toString == Object.prototype.toString
 ```
 
-Please note that there is no additional `[[Prototype]]` in the chain above `Object.prototype`:
+Стоит обратить внимание, что выше `Object.prototype` по цепочке прототипов нет допольнительного свойства `[[Prototype]]`:
 
 ```js run
 alert(Object.prototype.__proto__); // null
