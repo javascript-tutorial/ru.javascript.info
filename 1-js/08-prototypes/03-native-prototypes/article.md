@@ -2,7 +2,7 @@
 
 Свойство `"prototype"` широко используется в самом ядре JavaScript. Все встроенные функции-конструкторы используют его.
 
-Сначала мы посмотрим как это работает для простых объектов, а затем и для более сложных. 
+Сначала мы посмотрим как это работает для простых объектов, а затем и для более сложных.
 
 ## Object.prototype
 
@@ -15,7 +15,7 @@ alert( obj ); // "[object Object]" ?
 
 Где код, который генерирует строку `"[object Object]"`? Это встроенный метод `toString`, но где он? `obj` ведь пуст!
 
-...Но краткая нотация `obj = {}` это тоже самое, что и `obj = new Object()`, где `Object` - встроенная функция-конструктор для объектов с собственным свойством `prototype`, который ссылается на огромный объект с методом `toString` и другими.
+...Но краткая нотация `obj = {}` это то же самое, что и `obj = new Object()`, где `Object` - встроенная функция-конструктор для объектов с собственным свойством `prototype`, который ссылается на огромный объект с методом `toString` и другими.
 
 Вот что происходит:
 
@@ -36,63 +36,63 @@ alert(obj.__proto__ === Object.prototype); // true
 // obj.toString === obj.__proto__.toString == Object.prototype.toString
 ```
 
-Стоит обратить внимание, что выше `Object.prototype` по цепочке прототипов нет допольнительного свойства `[[Prototype]]`:
+Стоит обратить внимание, что выше `Object.prototype` по цепочке прототипов нет дополнительного свойства `[[Prototype]]`:
 
 ```js run
 alert(Object.prototype.__proto__); // null
 ```
 
-## Other built-in prototypes
+## Другие встроенные прототипы
 
-Other built-in objects such as `Array`, `Date`, `Function` and others also keep methods in prototypes.
+Другие встроенные объекты, такие как `Array`, `Date`, `Function` и другие, также хранят свои методы в прототипах.
 
-For instance, when we create an array `[1, 2, 3]`, the default `new Array()` constructor is  used internally. So the array data is written into the new object, and `Array.prototype` becomes its prototype and provides methods. That's very memory-efficient.
+Например, когда создается массив `[1, 2, 3]`, скрыто используется конструктор по-умолчанию `new Array()`. Так данные массива записываются в новый объект, и прототипом этого объекта становится `Array.prototype`, предоставляя ему свои методы. Это позволяет эффективно использовать память.
 
-By specification, all of the built-in prototypes have `Object.prototype` on the top. Sometimes people say that "everything inherits from objects".
+Согласно спецификации, наверху иерархии встроенных прототипов находится `Object.prototype`. Иногда говорят, что "все наследуется от объектов".
 
-Here's the overall picture (for 3 built-ins to fit):
+Вот более полная картина (для 3 встроенных объектов):
 
 ![](native-prototypes-classes.png)
 
-Let's check the prototypes manually:
+Давайте проверим прототипы:
 
 ```js run
 let arr = [1, 2, 3];
 
-// it inherits from Array.prototype?
+// наследует от Array.prototype?
 alert( arr.__proto__ === Array.prototype ); // true
 
-// then from Object.prototype?
+// затем от Object.prototype?
 alert( arr.__proto__.__proto__ === Object.prototype ); // true
 
-// and null on the top.
+// и null на вершине иерархии
 alert( arr.__proto__.__proto__.__proto__ ); // null
 ```
 
-Some methods in prototypes may overlap, for instance, `Array.prototype` has its own `toString` that lists comma-delimited elements:
+Некоторые методы в прототипах могу пересекаться, например, у `Array.prototype` есть свой метод `toString`, который выводит элементы массива через запятую:
 
 ```js run
 let arr = [1, 2, 3]
-alert(arr); // 1,2,3 <-- the result of Array.prototype.toString
+alert(arr); // 1,2,3 <-- результат Array.prototype.toString
 ```
 
-As we've seen before, `Object.prototype` has `toString` as well, but `Array.prototype` is closer in the chain, so the array variant is used.
+Как мы видели раньше, у `Object.prototype` есть свой `toString`, но так как `Array.prototype` ближе в цепочке прототипов, то берётся именно вариант для массивов:
 
 
 ![](native-prototypes-array-tostring.png)
 
 
-In-browser tools like Chrome developer console also show inheritance (`console.dir` may need to be used for built-in objects):
+В браузерных инструментах, таких как консоль разработчик в Chrome, можно посмотреть цепочку наследования (возможно, потребуется использовать `console.dir` для встроенных объектов):
 
 ![](console_dir_array.png)
 
-Other built-in objects also work the same way. Even functions -- they are objects of a built-in `Function` constructor, and their methods (`call`/`apply` and others) are taken from `Function.prototype`. Functions have their own `toString` too.
+Другие встроенные объекты работают таким же способом. Даже функции -- все они объекты встроенного конструктора `Function`, и все их методы (`call`/`apply` и другие) берутся из `Function.prototype`. Также у функций есть свой метод `toString`.
 
 ```js run
 function f() {}
 
 alert(f.__proto__ == Function.prototype); // true
-alert(f.__proto__.__proto__ == Object.prototype); // true, inherit from objects
+alert(f.__proto__.__proto__ == Object.prototype); // true, наследует от Object
 ```
 
 ## Primitives
