@@ -1,7 +1,7 @@
 
 # Fetch: Abort
 
-Aborting a `fetch` is a little bit tricky. Remember, `fetch` returns a promise. And Javascript generally has no concept of "aborting" a promise. So how can we cancel a fetch?
+Aborting a `fetch` is a little bit tricky. Remember, `fetch` returns a promise. And JavaScript generally has no concept of "aborting" a promise. So how can we cancel a fetch?
 
 There's a special built-in object for such purposes: `AbortController`.
 
@@ -13,9 +13,9 @@ The usage is pretty simple:
     let controller = new AbortController();
     ```
 
-    The controller is an extremely simple object. It has a single method `abort()`, and a single property `signal`, that generates an event when `abort()` is called:
+    A controller is an extremely simple object. It has a single method `abort()`, and a single property `signal`. When `abort()` is called, the `abort` event triggers on `controller.signal`:
 
-    We can even use it without `fetch` for our own purposes, like this:
+    Like this:
 
     ```js run
     let controller = new AbortController();

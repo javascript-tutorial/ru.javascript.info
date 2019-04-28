@@ -10,7 +10,9 @@ There are two sets of methods to deal with regular expressions.
 
 Which method to use depends on what we'd like to do.
 
-Methods become much easier to understand if we separate them by their use in real-life tasks:
+Methods become much easier to understand if we separate them by their use in real-life tasks.
+
+So, here are general recipes, the details to follow:
 
 **To search for all matches:**
 
@@ -30,9 +32,7 @@ Use regexp `g` flag and:
 **To split the string by a separator:**
 - `str.split(str|reg)`
 
-Now you get the details about every method in this chapter... But if you're reading for the first time, and want to know more about regexps - go ahead!
-
-You may want to skip methods for now, move on to the next chapter, and then return here if something about a method is unclear.
+Now you can continue reading this chapter to get the details about every method... But if you're reading for the first time, then you probably want to know more about regexps. So you can move to the next chapter, and then return here if something about a method is unclear.
 
 ## str.search(reg)
 
@@ -41,12 +41,12 @@ We've seen this method already. It returns the position of the first match or `-
 ```js run
 let str = "A drop of ink may make a million think";
 
-alert( str.search( *!*/a/i*/!* ) ); // 0 (the first position)
+alert( str.search( *!*/a/i*/!* ) ); // 0 (first match at zero position)
 ```
 
 **The important limitation: `search` only finds  the first match.**
 
-We can't find next positions using `search`, there's just no syntax for that. But there are other methods that can.
+We can't find next matches using `search`, there's just no syntax for that. But there are other methods that can.
 
 ## str.match(reg), no "g" flag
 
@@ -215,9 +215,9 @@ alert('12-34-56'.split(/-/)) // array of [12, 34, 56]
 
 ## str.replace(str|reg, str|func)
 
-That's actually a great method, one of most useful ones. The swiss army knife for searching and replacing.
+This is a generic method for searching and replacing, one of most useful ones. The swiss army knife for searching and replacing.  
 
-The simplest use -- searching and replacing a substring, like this:
+We can use it without regexps, to search and replace a substring:
 
 ```js run
 // replace a dash by a colon
@@ -263,7 +263,7 @@ Quite often we'd like to reuse parts of the source string, recombine them in the
 
 To do so, we should:
 1. First, mark the parts by parentheses in regexp.
-2. Use `$1`, `$2` (and so on) in the replacement string to get the content matched by parentheses.
+2. Use `$1`, `$2` (and so on) in the replacement string to get the content matched by 1st, 2nd and so on parentheses.
 
 For instance:
 
@@ -433,7 +433,7 @@ alert( regexp.test(str) ); // false (no match)
 
 
 ````warn header="Same global regexp tested repeatedly may fail to match"
-If we apply the same global regexp to different inputs, it may lead to wrong result, because `regexp.test` call advances `regexp.lastIndex` property, so next matches start from non-zero position.
+If we apply the same global regexp to different inputs, it may lead to wrong result, because `regexp.test` call advances `regexp.lastIndex` property, so the search in another string may start from non-zero position.
 
 For instance, here we call `regexp.test` twice on the same text, and the second time fails:
 
