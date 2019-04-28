@@ -95,16 +95,16 @@ alert(f.__proto__ == Function.prototype); // true
 alert(f.__proto__.__proto__ == Object.prototype); // true, наследует от Object
 ```
 
-## Primitives
+## Примитивы
 
-The most intricate thing happens with strings, numbers and booleans.
+Самое сложное происходит со строкам, числами и булевым типом.
 
-As we remember, they are not objects. But if we try to access their properties, then temporary wrapper objects are created using built-in constructors `String`, `Number`, `Boolean`, they provide the methods and disappear.
+Как мы помним, они не объекты. Но если мы попытаемся получить доступ к их свойствам, тогда будет создан временный объект-обертка с использованием встроенных конструкторов `String`, `Number`, `Boolean`, которые предоставят методы и после чего исчезнут.
 
-These objects are created invisibly to us and most engines optimize them out, but the specification describes it exactly this way. Methods of these objects also reside in prototypes, available as `String.prototype`, `Number.prototype` and `Boolean.prototype`.
+Эти объекты создаются невидимо для нас, и большая часть движков оптимизирует этот процесс, но спецификация описывает это именно таким образом. Методы этих объектов также находятся в прототипах, доступных как `String.prototype`, `Number.prototype` и `Boolean.prototype`. 
 
-```warn header="Values `null` and `undefined` have no object wrappers"
-Special values `null` and `undefined` stand apart. They have no object wrappers, so methods and properties are not available for them. And there are no corresponding prototypes too.
+```warn header="Значения `null` и `undefined` имеют объектов-оберток"
+Специальные значения `null` и `undefined` стоят особняком. У них нет, объектов-оберток, так что методы и свойства им недоступны. Также у них нет соответствующих прототипов.
 ```
 
 ## Changing native prototypes [#native-prototype-change]
