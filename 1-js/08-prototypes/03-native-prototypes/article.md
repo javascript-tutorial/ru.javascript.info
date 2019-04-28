@@ -153,17 +153,17 @@ alert( "La".repeat(3) ); // LaLaLa
 ```
 
 
-## Borrowing from prototypes
+## Одалживание у прототипов
 
-In the chapter <info:call-apply-decorators#method-borrowing> we talked about method borrowing.
+В главе <info:call-apply-decorators#method-borrowing> мы говорили об одалживании методов.
 
-That's when we take a method from one object and copy it into another.
+Это когда мы берем метод из одного объекта и копируем его в другой.
 
-Some methods of native prototypes are often borrowed.
+Некоторые методы встроенных прототипов часто можно одолжить.
 
-For instance, if we're making an array-like object, we may want to copy some array methods to it.
+Например, если мы создаем объект похожий на массив, мы возможно захотим скопировать некоторые методы массива в этот объект.
 
-E.g.
+Пример:
 
 ```js run
 let obj = {
@@ -179,13 +179,13 @@ obj.join = Array.prototype.join;
 alert( obj.join(',') ); // Hello,world!
 ```
 
-It works, because the internal algorithm of the built-in `join` method only cares about the correct indexes and the `length` property, it doesn't check that the object is indeed the array. And many built-in methods are like that.
+Это работает, потому что для внутреннего алгоритма встроенного метода `join` важна только корректность индексов и свойства `length`, он не проверяет является ли объект на самом деле массивом. И многие встроенные методы работают так же.
 
-Another possibility is to inherit by setting `obj.__proto__` to `Array.prototype`, so all `Array` methods are automatically available in `obj`.
+!! Другая возможность -- наследование, установив `obj.__proto__` как `Array.prototype`, таким образом все методы `Array` станут автоматически доступны в `obj`.
 
-But that's impossible if `obj` already inherits from another object. Remember, we only can inherit from one object at a time.
+Но это будет невозможно, если `obj` уже наследуется от другого объекта. Помните, мы можем наследоваться только от одного объекта одновременно.
 
-Borrowing methods is flexible, it allows to mix functionality from different objects if needed.
+Одалживание методов гибкий способ, он позволяет смешивать функциональность разных объектов по необходимости.
 
 ## Summary
 
