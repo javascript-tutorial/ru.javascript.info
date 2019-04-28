@@ -59,7 +59,7 @@ roma.sayHi(); // Привет, дружище!
 ```js run
 let str = "Привет";
 
-alert(str.toUpperCase()); // ПРИВЕТ
+alert( str.toUpperCase() ); // ПРИВЕТ
 ```
 
 Легко, правда? Вот, что на самом деле происходит в `str.toUpperCase()`:
@@ -77,7 +77,7 @@ alert(str.toUpperCase()); // ПРИВЕТ
 ```js run
 let n = 1.23456;
 
-alert(n.toFixed(2)); // 1.23
+alert( n.toFixed(2) ); // 1.23
 ```
 
 Более подробно с различными свойствами и методами мы познакомимся в главах <info:number> и <info:string>.
@@ -91,9 +91,9 @@ alert(n.toFixed(2)); // 1.23
 Например:
 
 ```js run
-alert(typeof 1); // "число"
+alert( typeof 1 ); // "число"
 
-alert(typeof new Number(1)); // "объект"!
+alert( typeof new Number(1) ); // "объект"!
 ```
 
 И так как `zero` - это объект, модальное окно выведется на экран.
@@ -103,7 +103,7 @@ let zero = new Number(0);
 
 if (zero) {
   // zero возвращает "true", так как является объектом
-  alert("zero имеет «истинное» значение?!?");
+  alert( "zero имеет «истинное» значение?!?" );
 }
 ```
 
