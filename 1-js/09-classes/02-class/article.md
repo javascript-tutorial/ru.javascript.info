@@ -64,7 +64,7 @@ alert(typeof User); // function
 */!*
 
 *!*
-// доказательство: User это функция-конструктор
+// доказательство: User - это функция-конструктор
 */!*
 alert(User === User.prototype.constructor); // true
 
