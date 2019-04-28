@@ -1,4 +1,4 @@
-# Нативные прототипы
+# Встроенные прототипы
 
 Свойство `"prototype"` широко используется в самом ядре JavaScript. Все встроенные функции-конструкторы используют его.
 
@@ -107,9 +107,9 @@ alert(f.__proto__.__proto__ == Object.prototype); // true, наследует о
 Специальные значения `null` и `undefined` стоят особняком. У них нет, объектов-оберток, так что методы и свойства им недоступны. Также у них нет соответствующих прототипов.
 ```
 
-## Changing native prototypes [#native-prototype-change]
+## Изменение встроенных прототипов [#native-prototype-change]
 
-Native prototypes can be modified. For instance, if we add a method to `String.prototype`,  it becomes available to all strings:
+Встроенные прототипы можно изменять. Например, если добавить метод к `String.prototype`, метод становится доступен для все строк:
 
 ```js run
 String.prototype.show = function() {
@@ -119,32 +119,32 @@ String.prototype.show = function() {
 "BOOM!".show(); // BOOM!
 ```
 
-During the process of development, we may have ideas for new built-in methods we'd like to have, and we may be tempted to add them to native prototypes. But that is generally a bad idea.
+В течение процесса разработки, у нас могут быть идеи о новых встроенных методах, которые нам хотелось бы иметь, и можем испытать искушение добавить их во встроенные прототипы. Но в целом, это плохая идея.
 
 ```warn
-Prototypes are global, so it's easy to get a conflict. If two libraries add a method `String.prototype.show`, then one of them will be overwriting the other.
+Прототипы глобальны, и очень легко получить конфликты. Если две библиотеки добавляют методы `String.prototype.show`, то одна из них перепишет другой.
 
-So, generally, modifying a native prototype is considered a bad idea.
+Так что, в целом, изменение встроенных прототипов считается плохой идей.
 ```
 
-**In modern programming, there is only one case where modifying native prototypes is approved. That's polyfilling.**
+**В современном программировании есть только один случай, в котором одобряется изменение встроенных прототипов. Это создание полифилов.
 
-Polyfilling is a term for making a substitute for a method that exists in JavaScript specification, but not yet supported by current JavaScript engine.
+Полифил - это термин, который означает замену метода, существуего в спецификации JavaScript, но еще не поддерживается текущим движком JavaScript.
 
-Then we may implement it manually and populate the built-in prototype with it.
+Тогда мы можем реализовать его сами и добавить его во встроенный прототип.
 
-For instance:
+Например:
 
 ```js run
-if (!String.prototype.repeat) { // if there's no such method
-  // add it to the prototype
+if (!String.prototype.repeat) { // Если такого метода нет
+  // добавляем его в прототип
 
   String.prototype.repeat = function(n) {
-    // repeat the string n times
+    // повторить строку n раз
 
-    // actually, the code should be a little bit more complex than that
-    // (the full algorithm is in the specification)
-    // but even an imperfect polyfill is often considered good enough
+    // на самом деле код должен быть немного более сложным
+    // (полный алгоритм можно найти в спецификации)
+    // но даже неполный полифил часто считается достаточно хорошим
     return new Array(n + 1).join(this);
   };
 }
