@@ -187,10 +187,10 @@ alert( obj.join(',') ); // Hello,world!
 
 Одалживание методов гибкий способ, он позволяет смешивать функциональность разных объектов по необходимости.
 
-## Summary
+## Итого
 
-- All built-in objects follow the same pattern:
-    - The methods are stored in the prototype (`Array.prototype`, `Object.prototype`, `Date.prototype` etc).
-    - The object itself stores only the data (array items, object properties, the date).
-- Primitives also store methods in prototypes of wrapper objects: `Number.prototype`, `String.prototype`, `Boolean.prototype`. Only `undefined` and `null` do not have wrapper objects.
-- Built-in prototypes can be modified or populated with new methods. But it's not recommended to change them. Probably the only allowable cause is when we add-in a new standard, but not yet supported by the engine JavaScript method.
+- Все встроенные объекты следуют одному шаблону:
+    - Методы хранятся в прототипах (`Array.prototype`, `Object.prototype`, `Date.prototype` и тд.).
+    - Сами объекты хранят только данные (элементы массивов, свойства объектов, даты).
+- Примитивы также хранят свои методы в прототипах объектах-обертках: `Number.prototype`, `String.prototype`, `Boolean.prototype`. Только у значений `undefined` и `null` нет объектов-оберток.
+- Встроенные прототипы могут быть изменены или дополнены новыми методами. Но не рекомендуется менять их. Единственная допустимая причина, это когда добавляется новый метод из стандарта, но он еще не поддерживается движком JavaScript.
