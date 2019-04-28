@@ -59,7 +59,7 @@ class User {
 }
 
 *!*
-// доказательство: User это функция
+// доказательство: User - это функция
 alert(typeof User); // function
 */!*
 
