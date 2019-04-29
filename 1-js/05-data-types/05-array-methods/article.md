@@ -13,7 +13,7 @@
 
 Есть и другие.
 
-### Метод splice
+### splice
 
 Как удалить элемент из массива?
 
@@ -22,7 +22,7 @@
 ```js run
 let arr = ["I", "go", "home"];
 
-delete arr[1]; // удаляем "go"
+delete arr[1]; // удалить "go"
 
 alert( arr[1] ); // undefined
 
@@ -100,12 +100,12 @@ alert( arr ); // "Я", "изучаю", "сложный", "язык", "JavaScript
 ```
 
 ````smart header="Negative indexes allowed"
-В этом и вдругих методах для массивов допускается использование отрицательного номера позиции, которая в этом случае отсчитывает элементы с конца:
+В этом и в других методах для массивов допускается использование отрицательного номера позиции, которая в этом случае отсчитывает элементы с конца:
 
 ```js run
 let arr = [1, 2, 5];
 
-// начиная с позиции индексом -1 (перед последним элементом)
+// начиная с индекса -1 (перед последним элементом)
 // удалить 0 элементов,
 // затем вставить числа 3 и 4
 arr.splice(-1, 0, 3, 4);
@@ -114,7 +114,7 @@ alert( arr ); // 1,2,3,4,5
 ```
 ````
 
-### Метод slice
+### slice
 
 Метод [arr.slice](mdn:js/Array/slice) намного проще чем похожий на него `arr.splice`
 
@@ -142,7 +142,7 @@ alert( str.slice(-2) ); // st
 alert( arr.slice(-2) ); // s,t
 ```
 
-### Метод concat
+### concat
 
 Метод [arr.concat](mdn:js/Array/concat) объединяет массив с другими массивами и/или элементами.
 
@@ -152,35 +152,34 @@ alert( arr.slice(-2) ); // s,t
 arr.concat(arg1, arg2...)
 ```
 
-It accepts any number of arguments -- either arrays or values.
-Он принимает любое количество аргументов - которые могут быть массивами и значениями.
+Он принимает любое количество аргументов -- которые могут быть массивами или значениями.
 
-The result is a new array containing items from `arr`, then `arg1`, `arg2` etc.
+В результате мы получаем новый массив включающий в себя элементы из `arr`, а также `arg1`, `arg2` и так далее...
 
-If an argument is an array or has `Symbol.isConcatSpreadable` property, then all its elements are copied. Otherwise, the argument itself is copied.
+Если аргумент — массив, или имеет свойство `Symbol.isConcatSpreadable`, то все его элементы копируются. В противном случае скопируется сам аргумент.
 
-For instance:
+Например:
 
 ```js run
 let arr = [1, 2];
 
-// merge arr with [3,4]
+// объеденить arr с [3,4]
 alert( arr.concat([3, 4])); // 1,2,3,4
 
-// merge arr with [3,4] and [5,6]
+// объеденить arr с [3,4] и [5,6]
 alert( arr.concat([3, 4], [5, 6])); // 1,2,3,4,5,6
 
-// merge arr with [3,4], then add values 5 and 6
+// объеденить arr с [3,4], потом добавить значение 5 и 6
 alert( arr.concat([3, 4], 5, 6)); // 1,2,3,4,5,6
 ```
 
-Normally, it only copies elements from arrays ("spreads" them). Other objects, even if they look like arrays, added as a whole:
+Как правило, он только копирует элементы из массивов («раскладывает» их). Другие объекты, даже если они выглядят как массивы, добавляются как есть:
 
 ```js run
 let arr = [1, 2];
 
 let arrayLike = {
-  0: "something",
+  0: "что-то",
   length: 1
 };
 
@@ -188,65 +187,65 @@ alert( arr.concat(arrayLike) ); // 1,2,[object Object]
 //[1, 2, arrayLike]
 ```
 
-...But if an array-like object has `Symbol.isConcatSpreadable` property, then its elements are added instead:
+... Но если массивоподобный объект имеет свойство `Symbol.isConcatSpreadable`, вместо него добавляются его элементы:
 
 ```js run
 let arr = [1, 2];
 
 let arrayLike = {
-  0: "something",
-  1: "else",
+  0: "что-то",
+  1: "ещё",
 *!*
   [Symbol.isConcatSpreadable]: true,
 */!*
   length: 2
 };
 
-alert( arr.concat(arrayLike) ); // 1,2,something,else
+alert( arr.concat(arrayLike) ); // 1,2,что-то,ещё
 ```
 
-## Iterate: forEach
+## Перебор: forEach
 
-The [arr.forEach](mdn:js/Array/forEach) method allows to run a function for every element of the array.
+Метод [arr.forEach](mdn:js/Array/forEach) позволяет запускать функцию для каждого элемента массива.
 
-The syntax:
+Его синтаксис:
 ```js
 arr.forEach(function(item, index, array) {
-  // ... do something with item
+  // ... делать что-то с item
 });
 ```
 
-For instance, this shows each element of the array:
+Например этот код покажет каждый элемент массива:
 
 ```js run
-// for each element call alert
+// Вызов alert для каждого элемента
 ["Bilbo", "Gandalf", "Nazgul"].forEach(alert);
 ```
 
-And this code is more elaborate about their positions in the target array:
+А этот более подробно опишет их позиции в заданном массиве:
 
 ```js run
 ["Bilbo", "Gandalf", "Nazgul"].forEach((item, index, array) => {
-  alert(`${item} is at index ${index} in ${array}`);
+  alert(`${item} имеет позицию ${index} в ${array}`);
 });
 ```
 
-The result of the function (if it returns any) is thrown away and ignored.
+Результат функции (если она что-то возвращает) отбрасывается и игнорируется.
 
 
-## Searching in array
+## Поиск в массиве
 
-These are methods to search for something in an array.
+Это методы поиска чего-либо в массиве.
 
-### indexOf/lastIndexOf and includes
+### indexOf/lastIndexOf и includes
 
-The methods [arr.indexOf](mdn:js/Array/indexOf), [arr.lastIndexOf](mdn:js/Array/lastIndexOf) and [arr.includes](mdn:js/Array/includes) have the same syntax and do essentially the same as their string counterparts, but operate on items instead of characters:
+Методы [arr.indexOf](mdn:js/Array/indexOf), [arr.lastIndexOf](mdn:js/Array/lastIndexOf) и [arr.includes](mdn:js/Array/includes) имеют одинаковый синтаксис и делают по сути то же самое что и их строковые аналоги, но работают с элементами вместо символов:
 
-- `arr.indexOf(item, from)` looks for `item` starting from index `from`, and returns the index where it was found, otherwise `-1`.
-- `arr.lastIndexOf(item, from)` -- same, but looks from right to left.
-- `arr.includes(item, from)` -- looks for `item` starting from index `from`, returns `true` if found.
+- `arr.indexOf (item, from)` ищет `item`, начиная с индекса` from`, и возвращает индекс, в котором он был найден, в противном случае `-1`.
+- `arr.lastIndexOf (item, from)` - то же самое, но ищет справа налево.
+- `arr.includes (item, from)` - ищет `item`, начиная с индекса` from`, возвращает `true`, если найдёт.
 
-For instance:
+Например:
 
 ```js run
 let arr = [1, 0, false];
@@ -258,59 +257,59 @@ alert( arr.indexOf(null) ); // -1
 alert( arr.includes(1) ); // true
 ```
 
-Note that the methods use `===` comparison. So, if we look for `false`, it finds exactly `false` and not the zero.
+Обратите внимание, что методы используют сравнение `===`. Таким образом, если мы ищем `false`, он находит именно `false`, а не ноль.
 
-If we want to check for inclusion, and don't want to know the exact index, then `arr.includes` is preferred.
+Если мы хотим проверить наличие включений и не хотим знать точный индекс, тогда предпочтительным является `arr.include`.
 
-Also, a very minor difference of `includes` is that it correctly handles `NaN`, unlike `indexOf/lastIndexOf`:
+Кроме того, очень незначительным отличием `include` является то, что он правильно обрабатывает` NaN`, в отличие от `indexOf / lastIndexOf`:
 
 ```js run
 const arr = [NaN];
-alert( arr.indexOf(NaN) ); // -1 (should be 0, but === equality doesn't work for NaN)
-alert( arr.includes(NaN) );// true (correct)
+alert( arr.indexOf(NaN) ); // -1 (должен быть 0, но === равенство не работает для NaN)
+alert( arr.includes(NaN) );// true (верно)
 ```
 
-### find and findIndex
+### find и findIndex
 
-Imagine we have an array of objects. How do we find an object with the specific condition?
+Представьте, что у нас есть массив объектов. Как нам найти объект с определенным условием?
 
-Here the [arr.find](mdn:js/Array/find) method comes in handy.
+Здесь пригодится метод [arr.find](mdn:js/Array/find).
 
-The syntax is:
+Его синтаксис таков:
 ```js
 let result = arr.find(function(item, index, array) {
-  // if true is returned, item is returned and iteration is stopped
-  // for falsy scenario returns undefined
+  // если возвращается true, метод возвращает элемент и итерация останавливается
+  // для ложного сценария возвращает undefined
 });
 ```
 
-The function is called repetitively for each element of the array:
+Функция вызывается многократно для каждого элемента массива:
 
-- `item` is the element.
-- `index` is its index.
-- `array` is the array itself.
+- `item` это элемент.
+- `index` это его индекс.
+- `array` это сам массив.
 
-If it returns `true`, the search is stopped, the `item` is returned. If nothing found, `undefined` is returned.
+Если функция возвращает `true`, поиск останавливается, возвращается `item`. Если ничего не найдено, возвращается `undefined`.
 
-For example, we have an array of users, each with the fields `id` and `name`. Let's find the one with `id == 1`:
+Например, у нас есть массив пользователей, каждый из которых имеет поля `id` и` name`. Давайте найдем того, кто с `id == 1`:
 
 ```js run
 let users = [
-  {id: 1, name: "John"},
-  {id: 2, name: "Pete"},
-  {id: 3, name: "Mary"}
+  {id: 1, name: "Вася"},
+  {id: 2, name: "Петя"},
+  {id: 3, name: "Маша"}
 ];
 
 let user = users.find(item => item.id == 1);
 
-alert(user.name); // John
+alert(user.name); // Вася
 ```
 
-In real life arrays of objects is a common thing, so the `find` method is very useful.
+В реальной жизни массивы объектов обычное дело, поэтому метод `find` очень полезен.
 
-Note that in the example we provide to `find` the function `item => item.id == 1` with one argument. Other arguments of this function are rarely used.
+Обратите внимание, что в данном примере мы предоставляем `find` функцию` item => item.id == 1` с одним аргументом. Другие аргументы этой функции используются редко.
 
-The [arr.findIndex](mdn:js/Array/findIndex) method is essentially the same, but it returns the index where the element was found instead of the element itself and `-1` is returned when nothing is found.
+Метод [arr.findIndex](mdn:js/Array/findIndex) по сути тот же самое, но он возвращает индекс, в на котором был найден элемент, а не сам элемент, и возвращается `-1`, когда ничего не найдено.
 
 ### filter
 
