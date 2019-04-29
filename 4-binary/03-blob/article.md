@@ -128,7 +128,7 @@ blob:https://javascript.info/1e67e00e-860d-40a5-89ae-6ab0cbee6273
 Браузер декодирует строку и покажет смайлик: <img src="data:image/png;base64,R0lGODlhDAAMAKIFAF5LAP/zxAAAANyuAP/gaP///wAAAAAAACH5BAEAAAUALAAAAAAMAAwAAAMlWLPcGjDKFYi9lxKBOaGcF35DhWHamZUW0K4mAbiwWtuf0uxFAgA7">
 
 
-Для трансформации Blob в base64, мы будем использовать встроенный в браузер `FileReader` объект. Он может читать данные из Blob в множестве форматов. В [следующей главе](info:file) мы рассмотрим это более глубоко.
+Для трансформации Blob в base64, мы будем использовать встроенный в браузер объект типа `FileReader`. Он может читать данные из Blob в множестве форматов. В [следующей главе](info:file) мы рассмотрим это более глубоко.
 
 Вот пример загрузки Blob, при помощи base-64:
 
