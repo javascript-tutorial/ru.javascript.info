@@ -89,7 +89,7 @@ link.click();
 URL.revokeObjectURL(link.href);
 ```
 
-**`URL.createObjectURL` берет Blob и создает уникальный url для него, в форме `blob:<origin>/<uuid>`.**
+**`URL.createObjectURL` берет Blob и создает уникальный URL для него, в форме `blob:<origin>/<uuid>`.**
 
 Вот как выглядит сгенерированный URL:
 
