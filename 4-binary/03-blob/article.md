@@ -225,7 +225,7 @@ fileReader.onload = function(event) {
 ```
 
 
-## Заключение
+## Итого
 
 В то время как `ArrayBuffer`, `Uint8Array` и другие `BufferSource` являются "бинарными данными", [Blob](https://www.w3.org/TR/FileAPI/#dfn-Blob) представляет "бинарные данные с типом".
 
