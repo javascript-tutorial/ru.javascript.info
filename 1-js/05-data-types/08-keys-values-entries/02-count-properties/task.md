@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# Count properties
+# Подсчет количества свойств объекта
 
-Write a function `count(obj)` that returns the number of properties in the object:
+Напишите функцию `count(obj)`, которая возвращает количество свойств объекта:
 
 ```js
 let user = {
@@ -15,7 +15,7 @@ let user = {
 alert( count(user) ); // 2
 ```
 
-Try to make the code as short as possible.
+Постарайтесь сделать код как можно короче.
 
-P.S. Ignore symbolic properties, count only "regular" ones.
+P.S. Символьные свойства игнорируются, подсчитываются только "обычные".
 

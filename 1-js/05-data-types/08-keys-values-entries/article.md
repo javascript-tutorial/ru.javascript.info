@@ -1,42 +1,42 @@
 
 # Object.keys, values, entries
 
-Let's step away from the individual data structures and talk about the iterations over them.
+Давайте отойдем от отдельных структур данных и поговорим об их итерировании.
 
-In the previous chapter we saw methods `map.keys()`, `map.values()`, `map.entries()`.
+В предыдущей главе мы видели методы `map.keys()`, `map.values()`, `map.entries()`.
 
-These methods are generic, there is a common agreement to use them for data structures. If we ever create a data structure of our own, we should implement them too.
+Это универсальные методы и существует общее соглашение использовать их для структур данных. Если бы мы создали собственную структуру данных, мы также должны были бы их реализовать.
 
-They are supported for:
+Методы поддерживаются для структур:
 
 - `Map`
 - `Set`
-- `Array` (except `arr.values()`)
+- `Array` (кроме `arr.values()`)
 
-Plain objects also support similar methods, but the syntax is a bit different.
+Простые объекты также поддерживают подобные методы, но синтаксис немного отличается.
 
 ## Object.keys, values, entries
 
-For plain objects, the following methods are available:
+Для простых объектов доступны следующие методы:
 
-- [Object.keys(obj)](mdn:js/Object/keys) -- returns an array of keys.
-- [Object.values(obj)](mdn:js/Object/values) -- returns an array of values.
-- [Object.entries(obj)](mdn:js/Object/entries) -- returns an array of `[key, value]` pairs.
+- [Object.keys(obj)](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Object/keys) -- возвращает массив ключей.
+- [Object.values(obj)](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Object/values) -- возвращает массив значений.
+- [Object.entries(obj)](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Object/entries) -- возвращает массив пар `[ключ, значение]`.
 
-...But please note the distinctions (compared to map for example):
+... Но, обратите внимание на различия (по сравнению с `map`, например):
 
-|             | Map              | Object       |
-|-------------|------------------|--------------|
-| Call syntax | `map.keys()`  | `Object.keys(obj)`, but not `obj.keys()` |
-| Returns     | iterable    | "real" Array                     |
+|                  | Map                | Object                                 |
+|------------------|--------------------|----------------------------------------|
+| Синтаксис вызова | `map.keys()`       | `Object.keys(obj)`, не `obj.keys()`  |
+| Возвращает       | итерируемый объект | "реальный" массив                      |
 
-The first difference is that we have to call `Object.keys(obj)`, and not `obj.keys()`.
+Первое отличие в том, что мы должны вызвать `Object.keys(obj)`, а не `obj.keys()`.
 
-Why so? The main reason is flexibility. Remember, objects are a base of all complex structures in JavaScript. So we may have an object of our own like `order` that implements its own `order.values()` method. And we still can call `Object.values(order)` on it.
+Почему так? Основная причина - гибкость. Помните, что объекты являются основой всех сложных структур в JavaScript. У нас может быть объект `order`, который реализует свой собственный метод `order.values()`. И мы всё ещё можем применять к нему метод `Object.values(order)`.
 
-The second difference is that `Object.*` methods return "real" array objects, not just an iterable. That's mainly for historical reasons.
+Второе отличие в том, что методы вида `Object.*` возвращают "реальные" массивы, а не просто итерируемые объекты. Это в основном по историческим причинам.
 
-For instance:
+Например:
 
 ```js
 let user = {
@@ -49,7 +49,7 @@ let user = {
 - `Object.values(user) = ["John", 30]`
 - `Object.entries(user) = [ ["name","John"], ["age",30] ]`
 
-Here's an example of using `Object.values` to loop over property values:
+Вот пример использования `Object.values` ​​для перебора значений свойств в цикле:
 
 ```js run
 let user = {
@@ -57,9 +57,9 @@ let user = {
   age: 30
 };
 
-// loop over values
+// перебор значений
 for (let value of Object.values(user)) {
-  alert(value); // John, then 30
+  alert(value); // John, затем 30
 }
 ```
 
