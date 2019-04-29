@@ -313,54 +313,54 @@ alert(user.name); // Вася
 
 ### filter
 
-The `find` method looks for a single (first) element that makes the function return `true`.
+Метод `find` ищет один (первый) элемент, который заставляет функцию возвращать` true`.
 
-If there may be many, we can use [arr.filter(fn)](mdn:js/Array/filter).
+Если их может быть много, мы можем использовать [arr.filter(fn)](mdn:js/Array/filter).
 
-The syntax is similar to `find`, but filter continues to iterate for all array elements even if `true` is already returned:
+Синтаксис похож на `find`, но фильтр продолжает повторяться для всех элементов массива, даже если` true` уже возвращено:
 
 ```js
 let results = arr.filter(function(item, index, array) {
-  // if true item is pushed to results and iteration continues
-  // returns empty array for complete falsy scenario
+  // Если true — элемент добавляется к результату и перебор продолжается
+  // Возвращает пустой массив в случае если все итерации оказались ложными 
 });
 ```
 
-For instance:
+Например:
 
 ```js run
 let users = [
-  {id: 1, name: "John"},
-  {id: 2, name: "Pete"},
-  {id: 3, name: "Mary"}
+  {id: 1, name: "Вася"},
+  {id: 2, name: "Петя"},
+  {id: 3, name: "Маша"}
 ];
 
-// returns array of the first two users
+// возвращает массив первых двух пользователей
 let someUsers = users.filter(item => item.id < 3);
 
 alert(someUsers.length); // 2
 ```
 
-## Transform an array
+## Преобразование массива
 
-This section is about the methods transforming or reordering the array.
+Этот раздел о методах преобразования или переупорядочения массива.
 
 
 ### map
 
-The [arr.map](mdn:js/Array/map) method is one of the most useful and often used.
+Метод [arr.map](mdn:js/Array/map) является одним из наиболее полезных и часто используемых.
 
-The syntax is:
+Синтаксис:
 
 ```js
 let result = arr.map(function(item, index, array) {
-  // returns the new value instead of item
+  // возвращает новое значение вместо элемента
 })
 ```
 
-It calls the function for each element of the array and returns the array of results.
+Он вызывает функцию для каждого элемента массива и возвращает массив результатов.
 
-For instance, here we transform each element into its length:
+Например, здесь мы преобразуем каждый элемент в его длину:
 
 ```js run
 let lengths = ["Bilbo", "Gandalf", "Nazgul"].map(item => item.length);
@@ -369,30 +369,30 @@ alert(lengths); // 5,7,6
 
 ### sort(fn)
 
-The method [arr.sort](mdn:js/Array/sort) sorts the array *in place*.
+Метод [arr.sort](mdn:js/Array/sort) сортирует массив *на месте*.
 
-For instance:
+Например:
 
 ```js run
 let arr = [ 1, 2, 15 ];
 
-// the method reorders the content of arr (and returns it)
+// метод переупорядочивает содержимое arr (и возвращает его)
 arr.sort();
 
 alert( arr );  // *!*1, 15, 2*/!*
 ```
 
-Did you notice anything strange in the outcome?
+Не заметили ничего странного в этом примере?
 
-The order became `1, 15, 2`. Incorrect. But why?
+Порядок стал `1, 15, 2`. Неправильно. Но почему?
 
-**The items are sorted as strings by default.**
+**По умолчанию элементы сортируются как строки.**
 
-Literally, all elements are converted to strings and then compared. So, the lexicographic ordering is applied and indeed `"2" > "15"`.
+Это произошло потому, что все элементы преобразуются в строки, а затем сравниваются. Таким образом, применяется лексикографическое упорядочение и на самом деле `"2" > "15"`.
 
-To use our own sorting order, we need to supply a function of two arguments as the argument of `arr.sort()`.
+Чтобы использовать наш собственный порядок сортировки, нам нужно предоставить функцию с двумя аргументами в качестве аргумента `arr.sort ()`.
 
-The function should work like this:
+Функция должна работать так:
 ```js
 function compare(a, b) {
   if (a > b) return 1;
@@ -401,7 +401,7 @@ function compare(a, b) {
 }
 ```
 
-For instance:
+Например:
 
 ```js run
 function compareNumeric(a, b) {
@@ -419,13 +419,13 @@ arr.sort(compareNumeric);
 alert(arr);  // *!*1, 2, 15*/!*
 ```
 
-Now it works as intended.
+Теперь всё работает как надо.
 
-Let's step aside and think what's happening. The `arr` can be array of anything, right? It may contain numbers or strings or html elements or whatever. We have a set of *something*. To sort it, we need an *ordering function* that knows how to compare its elements. The default is a string order.
+Давайте отойдем в сторону и подумаем, что же происходит. Упомянутый выше массив `arr` может быть массивом чего угодно, верно? Он может содержать числа, строки, элементы HTML или что-то еще. У нас есть набор *чего-то*. Чтобы отсортировать его, нам нужна *упорядочивающая функция*, которая знает, как сравнивать ее элементы. По умолчанию элементы сортируются как строки.
 
-The `arr.sort(fn)` method has a built-in implementation of sorting algorithm. We don't need to care how it exactly works (an optimized [quicksort](https://en.wikipedia.org/wiki/Quicksort) most of the time). It will walk the array, compare its elements using the provided function and reorder them, all we need is to provide the `fn` which does the comparison.
+Метод `arr.sort(fn)` имеет встроенную реализацию алгоритма сортировки. Нам не нужно заботиться о том, как это на самом деле работает (в большинстве случаев это оптимизированная [quicksort](https://en.wikipedia.org/wiki/Quicksort)). Она будет проходить по массиву, сравнивать его элементы с помощью предоставленной функции и переупорядочивать их, все, что нам нужно, это предоставить `fn`, которая выполняет сравнение.
 
-By the way, if we ever want to know which elements are compared -- nothing prevents from alerting them:
+Кстати, если мы когда-нибудь захотим узнать, какие элементы сравниваются -- ничто не мешает нам вывести их на экран:
 
 ```js run
 [1, -2, 15, 2, 0, 8].sort(function(a, b) {
@@ -433,13 +433,13 @@ By the way, if we ever want to know which elements are compared -- nothing preve
 });
 ```
 
-The algorithm may compare an element multiple times in the process, but it tries to make as few comparisons as possible.
+В процессе работы алгоритм может сравнивать элемент по нескольку раз, но он всё равно старается сделать как можно меньше сравнений.
 
 
-````smart header="A comparison function may return any number"
-Actually, a comparison function is only required to return a positive number to say "greater" and a negative number to say "less".
+````smart header="Функция сравнения может вернуть любое число"
+На самом деле, функция сравнения требуется только для возврата положительного числа, чтобы сказать "больше" и отрицательного числа, чтобы сказать "меньше".
 
-That allows to write shorter functions:
+Это позволяет писать более короткие функции:
 
 ```js run
 let arr = [ 1, 2, 15 ];
@@ -450,14 +450,14 @@ alert(arr);  // *!*1, 2, 15*/!*
 ```
 ````
 
-````smart header="Arrow functions for the best"
-Remember [arrow functions](info:function-expressions-arrows#arrow-functions)? We can use them here for neater sorting:
+````smart header="Лучше использовать стрелочные функции"
+Помните [arrow functions](info:function-expressions-arrows#arrow-functions)? Мы можем использовать их здесь для того что бы сортировка выглядела более аккуратной:
 
 ```js
 arr.sort( (a, b) => a - b );
 ```
 
-This works exactly the same as the other, longer, version above.
+Это работает точно так же, как и другая, более длинная версия выше.
 ````
 
 ### reverse
