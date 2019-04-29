@@ -56,7 +56,7 @@ if (response.ok) { // если HTTP код состояния 200-299
 Например, у нас есть JSON-объект с последними коммитами из репозитория на Github:
 
 ```js run async
-let response = await fetch('https://api.github.com/repos/iliakan/javascript-tutorial-en/commits');
+let response = await fetch('https://api.github.com/repos/javascript-tutorial/en.javascript.info/commits');
 
 *!*
 let commits = await response.json(); // получаем тело ответа и преобразовываем в JSON
@@ -68,7 +68,7 @@ alert(commits[0].author.login);
 Или пример с использованием промисов:
 
 ```js run
-fetch('https://api.github.com/repos/iliakan/javascript-tutorial-en/commits')
+fetch('https://api.github.com/repos/javascript-tutorial/en.javascript.info/commits')
   .then(response => response.json())
   .then(commits => alert(commits[0].author.login));
 ```
@@ -116,7 +116,7 @@ let parsed = await response.json(); // ошибка (данные уже был�
 Мы можем получить конкретный заголовок или перебрать их в цикле:
 
 ```js run async
-let response = await fetch('https://api.github.com/repos/iliakan/javascript-tutorial-en/commits');
+let response = await fetch('https://api.github.com/repos/javascript-tutorial/en.javascript.info/commits');
 
 // получить один заголовок
 alert(response.headers.get('Content-Type')); // application/json; charset=utf-8
