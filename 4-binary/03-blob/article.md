@@ -198,7 +198,7 @@ canvas.toBlob(function(blob) {
 }, 'image/png');
 ```
 
-Или если вы предпочитаете `async/await` вместо callback функции:
+Или если вы предпочитаете `async/await` вместо колбэка:
 ```js
 let blob = await new Promise(resolve => canvasElem.toBlob(resolve, 'image/png'));
 ```
