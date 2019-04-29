@@ -187,7 +187,7 @@ class User {
 let user = new User("Иван");
 alert(user.name); // Иван
 
-user = new User(""); // Имя слишко коротко.
+user = new User(""); // Имя слишком короткое.
 ```
 
 Изнутри геттеры и сеттеры создаются в `User.prototype` следующим образом:
