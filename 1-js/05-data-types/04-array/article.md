@@ -93,100 +93,95 @@ let fruits = [
 
 ## Методы pop/push, shift/unshift
 
+[Очередь](https://en.wikipedia.org/wiki/Queue_(abstract_data_type)) – один из самых распространенных вариантов применения массива. В области компьютерных наук так называется упорядоченная коллекция элементов, поддерживающая два вида операций:
 
-
-
-## Methods pop/push, shift/unshift
-
-A [queue](https://en.wikipedia.org/wiki/Queue_(abstract_data_type)) is one of most common uses of an array. In computer science, this means an ordered collection of elements which supports two operations:
-
-- `push` appends an element to the end.
-- `shift` get an element from the beginning, advancing the queue, so that the 2nd element becomes the 1st.
+- `push` добавляет элемент в конец.
+- `shift` удаляет элемент в начале, сдвигая очередь вверх, так что второй элемент становится первым. 
 
 ![](queue.png)
 
-Arrays support both operations.
+Массивы поддерживают обе операции.
 
-In practice we need it very often. For example, a queue of messages that need to be shown on-screen.
+На практике необходимость в этом возникает очень часто. Например, очередь сообщений, которые надо показать на экране.
 
-There's another use case for arrays -- the data structure named [stack](https://en.wikipedia.org/wiki/Stack_(abstract_data_type)). 
+Существует и другой вариант применения для массивов – структура данных, называемая [стек](https://en.wikipedia.org/wiki/Stack_(abstract_data_type)).
 
-It supports two operations:
+Она поддерживает два вида операций: 
 
-- `push` adds an element to the end.
-- `pop` takes an element from the end.
+- `push` добавляет элемент в конец.
+- `pop` удаляет последний элемент.
 
-So new elements are added or taken always from the "end".
+Таким образом, новые элементы всегда добавляются или удаляются из «конца».
 
-A stack is usually illustrated as a pack of cards: new cards are added to the top or taken from the top:
+Примером стека обычно служит колода карт: новые карты кладутся наверх и берутся тоже сверху:
 
 ![](stack.png)
 
-For stacks, the latest pushed item is received first, that's also called LIFO (Last-In-First-Out) principle. For queues, we have FIFO (First-In-First-Out).
+При использовании стека, последний добавленный элемент получают первым, что является действием принципа LIFO (последним пришёл – первым ушёл). Для очереди - FIFO (первым пришёл – первым ушёл).
 
-Arrays in JavaScript can work both as a queue and as a stack. They allow you to add/remove elements both to/from the beginning or the end. 
+Массивы в JavaScript могут работать и как очередь, и как стек. Это позволяет вам добавлять/удалять элементы как в начале, так и в конце массива.
 
-In computer science the data structure that allows it is called [deque](https://en.wikipedia.org/wiki/Double-ended_queue).
+В компьютерных науках структура данных, делающая это возможным, называется двусторонняя [очередь](https://en.wikipedia.org/wiki/Double-ended_queue).
 
-**Methods that work with the end of the array:**
+**Методы, работающие с концом массива:**
 
-`pop`
-: Extracts the last element of the array and returns it:
+`pop` 
+: Удаляет последний элемент из массива и возвращает его:
 
     ```js run
-    let fruits = ["Apple", "Orange", "Pear"];
+    let fruits = ["Яблоко", "Апельсин", "Pear"];
 
-    alert( fruits.pop() ); // remove "Pear" and alert it
+    alert( fruits.pop() ); // удаляем "Груша" и выводим его
 
-    alert( fruits ); // Apple, Orange
+    alert( fruits ); // Яблоко, Апельсин
     ```
-
+    
 `push`
-: Append the element to the end of the array:
+: Добавляет элемент в конец массива: 
 
     ```js run
-    let fruits = ["Apple", "Orange"];
+    let fruits = ["Яблоко", "Апельсин"];
 
-    fruits.push("Pear");
+    fruits.push("Груша");
 
-    alert( fruits ); // Apple, Orange, Pear
+    alert( fruits ); // Яблоко, Апельсин, Груша
     ```
+    
+    Вызов `fruits.push(...)` равнозначен `fruits[fruits.length] = ...`.
 
-    The call `fruits.push(...)` is equal to `fruits[fruits.length] = ...`.
-
-**Methods that work with the beginning of the array:**
+**Методы, работающие с началом массива:**
 
 `shift`
-: Extracts the first element of the array and returns it:
+: Удаляет из массива первый элемент и возвращает его:
 
     ```js
-    let fruits = ["Apple", "Orange", "Pear"];
+    let fruits = ["Яблоко", "Апельсин", "Груша"];
 
-    alert( fruits.shift() ); // remove Apple and alert it
+    alert( fruits.shift() ); // удаляем Яблоко и выводим
 
-    alert( fruits ); // Orange, Pear
+    alert( fruits ); // Апельсин, Груша
     ```
-
+    
 `unshift`
-: Add the element to the beginning of the array:
+: Добавляет элемент в начало массива:
 
     ```js
-    let fruits = ["Orange", "Pear"];
+    let fruits = ["Апельсин", "Груша"];
 
-    fruits.unshift('Apple');
+    fruits.unshift('Яблоко');
 
-    alert( fruits ); // Apple, Orange, Pear
+    alert( fruits ); // Яблоко, Апельсин, Груша
     ```
 
-Methods `push` and `unshift` can add multiple elements at once:
+Методы `push` и `unshift` могут добавлять сразу несколько элементов:  
 
 ```js run
-let fruits = ["Apple"];
+let fruits = ["Яблоко"];
 
-fruits.push("Orange", "Peach");
-fruits.unshift("Pineapple", "Lemon");
+fruits.push("Апельсин", "Груша");
+fruits.unshift("Ананас", "Лимон");
 
-// ["Pineapple", "Lemon", "Apple", "Orange", "Peach"]
+// ["Ананас", "Лимон", "Яблоко", "Апельсин", "Груша"]
 alert( fruits );
 ```
 
