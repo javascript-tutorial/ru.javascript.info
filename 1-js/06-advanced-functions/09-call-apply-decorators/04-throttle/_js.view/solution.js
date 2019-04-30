@@ -22,7 +22,7 @@ function throttle(func, ms) {
     setTimeout(function() {
       isThrottled = false;
       if (savedArgs) {
-        // если были вызовы, последний savedThis/savedArgs
+        // если были вызовы, savedThis/savedArgs хранят последний из них
         // рекурсивный вызов запускает функцию и снова устанавливает время задержки
         wrapper.apply(savedThis, savedArgs);
         savedArgs = savedThis = null;

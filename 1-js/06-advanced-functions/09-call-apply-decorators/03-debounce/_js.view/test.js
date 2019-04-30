@@ -7,7 +7,7 @@ describe("debounce", function() {
     this.clock.restore();
   });
 
-  it("вызывает функцию максимум один раз в мс", function() {
+  it("вызывает функцию один раз в 'ms' мс", function() {
     let log = '';
 
     function f(a) {
