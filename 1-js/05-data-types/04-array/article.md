@@ -128,50 +128,50 @@ let fruits = [
 `pop` 
 : Удаляет последний элемент из массива и возвращает его:
 
-    ```js run
-    let fruits = ["Яблоко", "Апельсин", "Pear"];
+```js run
+let fruits = ["Яблоко", "Апельсин", "Pear"];
 
-    alert( fruits.pop() ); // удаляем "Груша" и выводим его
+alert( fruits.pop() ); // удаляем "Груша" и выводим его
 
-    alert( fruits ); // Яблоко, Апельсин
-    ```
+alert( fruits ); // Яблоко, Апельсин
+```
     
 `push`
 : Добавляет элемент в конец массива: 
 
-    ```js run
-    let fruits = ["Яблоко", "Апельсин"];
+```js run
+let fruits = ["Яблоко", "Апельсин"];
 
-    fruits.push("Груша");
+fruits.push("Груша");
 
-    alert( fruits ); // Яблоко, Апельсин, Груша
-    ```
-    
-    Вызов `fruits.push(...)` равнозначен `fruits[fruits.length] = ...`.
+alert( fruits ); // Яблоко, Апельсин, Груша
+```
+
+Вызов `fruits.push(...)` равнозначен `fruits[fruits.length] = ...`.
 
 **Методы, работающие с началом массива:**
 
 `shift`
 : Удаляет из массива первый элемент и возвращает его:
 
-    ```js
-    let fruits = ["Яблоко", "Апельсин", "Груша"];
+```js
+let fruits = ["Яблоко", "Апельсин", "Груша"];
 
-    alert( fruits.shift() ); // удаляем Яблоко и выводим
+alert( fruits.shift() ); // удаляем Яблоко и выводим
 
-    alert( fruits ); // Апельсин, Груша
-    ```
+alert( fruits ); // Апельсин, Груша
+```
     
 `unshift`
 : Добавляет элемент в начало массива:
 
-    ```js
-    let fruits = ["Апельсин", "Груша"];
+```js
+let fruits = ["Апельсин", "Груша"];
 
-    fruits.unshift('Яблоко');
+fruits.unshift('Яблоко');
 
-    alert( fruits ); // Яблоко, Апельсин, Груша
-    ```
+alert( fruits ); // Яблоко, Апельсин, Груша
+```
 
 Методы `push` и `unshift` могут добавлять сразу несколько элементов:  
 
@@ -185,53 +185,53 @@ fruits.unshift("Ананас", "Лимон");
 alert( fruits );
 ```
 
-## Internals
+## Внутреннее устройство массива
 
-An array is a special kind of object. The square brackets used to access a property `arr[0]` actually come from the object syntax. Numbers are used as keys. 
+Массив – это объект особого вида. Квадратные скобки, используемые для того, чтобы получить доступ к свойству arr[0], фактически обусловлены синтаксисом объекта. В качестве ключей используются цифры.
 
-They extend objects providing special methods to work with ordered collections of data and also the `length` property. But at the core it's still an object.
+Они (массивы) расширяют объекты, так как предусматривают специальные методы для работы с упорядоченными коллекциями данных, а также свойство length. Но в основе все равно лежит объект.
 
-Remember, there are only 7 basic types in JavaScript. Array is an object and thus behaves like an object. 
+Следует помнить, что в JavaScript  существует всего 7 основных типов данных. Массив является объектом и, следовательно, ведет себя как объект.
 
-For instance, it is copied by reference:
+Например, копируется по ссылке: 
 
 ```js run
-let fruits = ["Banana"]
+let fruits = ["Банан"]
 
-let arr = fruits; // copy by reference (two variables reference the same array)
+let arr = fruits; // копируется по ссылке (2 переменных ссылаются на один и тот же массив)
 
 alert( arr === fruits ); // true
  
-arr.push("Pear"); // modify the array by reference
+arr.push("Груша"); // массив меняется по ссылке
 
-alert( fruits ); // Banana, Pear - 2 items now
+alert( fruits ); // Банан, Груша - теперь 2 элемента
 ```
 
-...But what makes arrays really  special is their internal representation. The engine tries to store its elements in the contiguous memory area, one after another, just as depicted on the illustrations in this chapter, and there are other optimizations as well, to make arrays work really fast.
+...Но то, что действительно делает массивы особенными  - это их внутреннее представление. Программа старается хранить элементы массива в виде непрерывной области памяти, один за другим, так, как это показано на иллюстрациях к этой главе. Существуют и другие способы оптимизации, заставляющие массив работать действительно быстро.
 
-But they all break if we quit working with an array as with an "ordered collection" and start working with it as if it were a regular object.
+Но все они утратят эффективность, если мы перестанем работать с массивом, как с «упорядоченной коллекцией данных», и начнем использовать его как обычный объект.
 
-For instance, technically we can do this:
+Например, технически, мы можем сделать следующее:
 
 ```js
-let fruits = []; // make an array
+let fruits = []; // создаём массив
 
-fruits[99999] = 5; // assign a property with the index far greater than its length
+fruits[99999] = 5; // создаём свойство с индексом намного превышающим длину массива
 
-fruits.age = 25; // create a property with an arbitrary name
+fruits.age = 25; // создаём свойство с произвольным именем
 ```
 
-That's possible, because arrays are objects at their base. We can add any properties to them.
+Это возможно, потому что в основе массива лежит объект. Мы можем присвоить ему любые свойства. 
 
-But the engine will see that we're working with the array as with a regular object. Array-specific optimizations are not suited for such cases and will be turned off, their benefits disappear.
+Но программа поймет, что мы работаем с массивом, как с обычным объектом. Способы оптимизации, используемые для массивов, в этом случае не подходят и поэтому они будут отключены и никакой выгоды не принесут.
 
-The ways to misuse an array:
+Варианты неправильного применения массива:
 
-- Add a non-numeric property like `arr.test = 5`. 
-- Make holes, like: add `arr[0]` and then `arr[1000]` (and nothing between them).
-- Fill the array in the reverse order, like `arr[1000]`, `arr[999]` and so on.
+- Добавление нецифрового свойства, например:  `arr.test = 5`.
+- Создание «дыр», например: добавление arr[0], затем arr[1000] (между ними ничего нет).
+- Заполнение массива в обратном порядке, например: arr[1000], arr[999] и т.д.
 
-Please think of arrays as special structures to work with the *ordered data*. They provide special methods for that. Arrays are carefully tuned inside JavaScript engines to work with contiguous ordered data, please use them this way. And if you need arbitrary keys, chances are high that you actually require a regular object `{}`.
+Массив следует считать особой структурой, позволяющей работать с *упорядоченными данными*. Для этого массивы предоставляют специальные методы. Массивы прекрасно встраиваются в программы JavaScript, когда возникает необходимость работы с односвязными упорядоченными данными, поэтому, пожалуйста, используйте их в таких случаях. В случае если вам нужны произвольные ключи, скорее всего вам потребуется обычный объект `{}`.
 
 ## Performance
 
