@@ -137,7 +137,7 @@ let response = fetch(protectedUrl, {
 });
 ```
 
-...Но существует список [запрещенных HTTP заголовков](https://fetch.spec.whatwg.org/#forbidden-header-name), которые мы не можем установить:
+...Но существует список [запрещенных HTTP-заголовков](https://fetch.spec.whatwg.org/#forbidden-header-name), которые мы не можем установить:
 
 - `Accept-Charset`, `Accept-Encoding`
 - `Access-Control-Request-Headers`
