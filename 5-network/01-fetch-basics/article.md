@@ -83,7 +83,7 @@ let text = await response.text();
 let response = await fetch('/article/fetch/logo-fetch.svg');
 
 *!*
-let blob = await response.blob(); // скачиваем как Blob объект
+let blob = await response.blob(); // скачиваем как Blob-объект
 */!*
 
 // создаем <img>
