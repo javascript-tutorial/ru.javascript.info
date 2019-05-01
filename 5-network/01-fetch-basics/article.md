@@ -343,7 +343,7 @@ fetch(url, options)
 - `response.headers` -- похожий на объект типа Map с HTTP-заголовками.
 
 Методы для получения тела ответа: 
-- **`response.json()`** -- преобразовывает ответ в JSON объект,
+- **`response.json()`** -- преобразовывает ответ в JSON-объект,
 - **`response.text()`** -- возвращает ответ как обычный текст,
 - **`response.formData()`** -- возвращает ответ как объект FormData (кодировка form/multipart),
 - **`response.blob()`** -- возвращает объект как [Blob](info:blob) (бинарные данные с типом),
