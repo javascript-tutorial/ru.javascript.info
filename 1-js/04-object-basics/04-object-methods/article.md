@@ -165,9 +165,9 @@ admin.sayHi(); // Оп! внутри sayHi(), используется стар�
 
 ## "this" не является связанным
 
-In JavaScript, "this" keyword behaves unlike most other programming languages. First, it can be used in any function.
+В JavaScript ключевое слово "this" ведет себя иначе чем в большентве других языках программирования. Во-первых, оно может использоваться в любой функции.
 
-There's no syntax error in the code like that:
+В этом коде нет синтаксической ошибки:
 
 ```js
 function sayHi() {
@@ -175,33 +175,33 @@ function sayHi() {
 }
 ```
 
-The value of `this` is evaluated during the run-time. And it can be anything.
+Значение `this` вычисляется во время выполнения кода. И оно может быть любым.
 
-For instance, the same function may have different "this" when called from different objects:
+Например, одна и таже функция может иметь различное значение "this" когда вызывается из разных объектов:
 
 ```js run
-let user = { name: "John" };
-let admin = { name: "Admin" };
+let user = { name: "Джон" };
+let admin = { name: "Админ" };
 
 function sayHi() {
   alert( this.name );
 }
 
 *!*
-// use the same functions in two objects
+// используем одну и ту же функцию в двух объектах
 user.f = sayHi;
 admin.f = sayHi;
 */!*
 
-// these calls have different this
-// "this" inside the function is the object "before the dot"
-user.f(); // John  (this == user)
-admin.f(); // Admin  (this == admin)
+// вызовы функции, приведенные ниже, имеют разное значение this
+// "this" внутри функции является ссылкой на объект, который указан "перед точкой" (т.о. значение "this" внутри функции определяется объектом, который вызывает эту функцию)
+user.f(); // Джон  (this == user)
+admin.f(); // Админ  (this == admin)
 
-admin['f'](); // Admin (dot or square brackets access the method – doesn't matter)
+admin['f'](); // Админ (неважен способ доступ к методу - через точку или квадтратные скобки)
 ```
 
-Actually, we can call the function without an object at all:
+На самом деле, мы можем вызвать функцию вообще без использования объекта:
 
 ```js run
 function sayHi() {
@@ -211,64 +211,65 @@ function sayHi() {
 sayHi(); // undefined
 ```
 
-In this case `this` is `undefined` in strict mode. If we try to access `this.name`, there will be an error.
+В строгом режиме (`"use strict"`) в таком коде значением `this` будет является `undefined`. Если мы попытаемся получить доступ к name, используя `this.name` в строгом режиме - это вызовет ошибку.
 
-In non-strict mode the value of `this` in such case will be the *global object* (`window` in a browser, we'll get to it later in the chapter [](info:global-object)). This is a historical behavior that `"use strict"` fixes.
+В нестрогом режиме значением `this` в таком случае будет *глобальный объект* (`window` для браузера, мы вернемся к этому позже в главе  [Глобальный объект](info:global-object)). Это исторически сложившееся поведение `this`, которое исправляется использованием строгого режима (`"use strict"`).
 
-Please note that usually a call of a function that uses `this` without an object is not normal, but rather a programming mistake. If a function has `this`, then it is usually meant to be called in the context of an object.
+Пожалуста, обратите внимание, что обычно вызов функции, которая использует `this`, без объекта - не является нормальным и больше говорит об ошибке в программировании. Если функция использует `this`, тогда это обычно означает, что она будет вызываться в контектсте какого-либо объекта.
 
-```smart header="The consequences of unbound `this`"
-If you come from another programming language, then you are probably used to the idea of a "bound `this`", where methods defined in an object always have `this` referencing that object.
+```smart header="Последствия несвязонности `this`"
+Если вы до этого изучали другие языки программирования, тогда вы, скорее всего, привыкли к идее "связонности `this`" - когда методы, определенные внутри объекта всегда сохраняют в качестве значения `this` ссылку на свой объект (в котром был определен метод).
 
-In JavaScript `this` is "free", its value is evaluated at call-time and does not depend on where the method was declared, but rather on what's the object "before the dot".
+В JavaScript `this` является "свободным", его значение вычисляется в момент вызова метода и не зависит от того, где этот метод был объявлен, а зависит от того, какой объект вызывает метод (какой объект стоит "перед точкой"). 
 
-The concept of run-time evaluated `this` has both pluses and minuses. On the one hand, a function can be reused for different objects. On the other hand, greater flexibility opens a place for mistakes.
+Эта идея вычисления `this` в момент исполнения имеет как свои плюсы, так и минусы. С одной стороны, функция может быть повторно использована в качестве метода у различных объектов (что повышает гибкость). С другой стороны, бОльшая гибкость открывает место ошибкам.
 
-Here our position is not to judge whether this language design decision is good or bad. We'll understand how to work with it, how to get benefits and evade problems.
+Здесь наша позиция не в том, чтобы судить является ли это решение в языке хорошим или плохим. Мы должны понимать как с этим работать, как получить выгоды и избежать проблем.
 ```
 
-## Internals: Reference Type
+## Внутренности: Тип ссылки
 
-```warn header="In-depth language feature"
-This section covers an advanced topic, to understand certain edge-cases better.
+```warn header="Углубленная особенность языка"
+Этот раздел объясняет сложную тему, чтобы лучше понимать некоторые крайние случаи.
 
-If you want to go on faster, it can be skipped or postponed.
+Если вы хотите продвигаться быстрее, его можно пропустить или отложить.
 ```
 
-An intricate method call can lose `this`, for instance:
+Не очевидный вызов метода может приветс к потери значения `this`, например:
+
 
 ```js run
 let user = {
-  name: "John",
+  name: "Джон",
   hi() { alert(this.name); },
-  bye() { alert("Bye"); }
+  bye() { alert("Пока"); }
 };
 
-user.hi(); // John (the simple call works)
+user.hi(); // Джон (простой вызов метода работает хорошо)
 
 *!*
-// now let's call user.hi or user.bye depending on the name
-(user.name == "John" ? user.hi : user.bye)(); // Error!
+// теперь, давайте попробуем вызывать user.hi или user.bye в зависимости от имени ползователя (user.name)
+(user.name == "Джон" ? user.hi : user.bye)(); // Ошибка, имя "Джон" не будет выведено во 2-й раз!
 */!*
 ```
 
-On the last line there is a ternary operator that chooses either `user.hi` or `user.bye`. In this case the result is `user.hi`.
+В последтней строчке кода используется тернарный оператор, который определяет какой будет вызван метод `user.hi` или `user.bye` в зависимости от выполнения условия. В данном случае будет выбран `user.hi`.
 
-The method is immediately called with parentheses `()`. But it doesn't work right!
+И тогда метод сразу вызывается с помощью круглых скобок `()`. Но это не работает должным образом.
 
-You can see that the call results in an error, because the value of `"this"` inside the call becomes `undefined`.
+Вы можете видеть, что при вызове будет получен ошибочный результат (или ошибка в строгом режиме), потому что значением `"this"` внутри функции становиться `undefined`.
 
-This works (object dot method):
+Так работает (доступ к методу объекта через точку):
 ```js
 user.hi();
 ```
 
-This doesn't (evaluated method):
+Так уже не работает (вызыаемый метод вычисляется):
 ```js
-(user.name == "John" ? user.hi : user.bye)(); // Error!
+(user.name == "Джон" ? user.hi : user.bye)(); // Ошибка!
 ```
 
-Why? If we want to understand why it happens, let's get under the hood of how `obj.method()` call works.
+Почему? Если мы хотим понять почему так происходит, давайте разберемся (заглянем под капот) как работает вызов методов (`obj.method()`).
 
 Looking closely, we may notice two operations in `obj.method()` statement:
 
