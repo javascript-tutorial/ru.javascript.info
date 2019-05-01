@@ -77,7 +77,7 @@ fetch('https://api.github.com/repos/javascript-tutorial/en.javascript.info/commi
 ```js
 let text = await response.text();
 ```
-И для примера работы с бинарными данными, давайте запросим и выведем на экран изображение (см. главу [Blob](info:blob) чтобы узнать про операции с Blob)
+И для примера работы с бинарными данными, давайте запросим и выведем на экран изображение (см. главу [Blob](info:blob), чтобы узнать про операции с Blob):
 
 ```js async run
 let response = await fetch('/article/fetch/logo-fetch.svg');
