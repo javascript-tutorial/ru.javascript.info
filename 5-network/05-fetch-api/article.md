@@ -9,7 +9,7 @@
 
 ```js
 let promise = fetch(url, {
-  method: "GET", // POST, PUT, DELETE, и т.д.
+  method: "GET", // POST, PUT, DELETE и т.д.
   headers: {
     "Content-Type": "text/plain;charset=UTF-8" // для строкового тела, зависит от тела сообщения
   },
