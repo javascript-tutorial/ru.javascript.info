@@ -1,26 +1,26 @@
 # Promise API
 
-There are 4 static methods in the `Promise` class. We'll quickly cover their use cases here.
+В классе `Promise` есть 4 статичных метода. Давайте ознакомимся с ними.
 
 ## Promise.resolve
 
-The syntax:
+Синтаксис:
 
 ```js
 let promise = Promise.resolve(value);
 ```
 
-Returns a resolved promise with the given `value`.
+Возвращает выполненный промис со значением `value`.
 
-Same as:
+Подробная запись:
 
 ```js
 let promise = new Promise(resolve => resolve(value));
 ```
 
-The method is used when we already have a value, but would like to have it "wrapped" into a promise.
+`Promise.resolve` используют, когда хотят построить асинхронную цепочку, и начальный результат уже есть.
 
-For instance, the `loadCached` function below fetches the `url` and remembers the result, so that future calls on the same URL return it immediately:
+Например, функция `loadCached`, описанная ниже, получает данные по `url` и запоминает результат, поэтому в будущем, когда мы захотим повторно получить данные по этой же ссылке, мы сможем сразу вернуть результат:
 
 ```js
 function loadCached(url) {
@@ -41,59 +41,59 @@ function loadCached(url) {
 }
 ```
 
-We can use `loadCached(url).then(…)`, because the function is guaranteed to return a promise. That's the purpose `Promise.resolve` serves in the line `(*)`: it makes sure the interface is unified. We can always use `.then` after `loadCached`.
+Мы можем использовать метод `then` для `loadCached`, вот так: `loadCached(url).then(…)`, потому что функция `loadCached` возвращает промис. Это и есть основная цель использования `Promise.resolve` в строке `(*)`: функция гарантированно возвращает унифицированный результат. Мы всегда можем использовать `.then` после `loadCached`.
 
 ## Promise.reject
 
-The syntax:
+Синтаксис:
 
 ```js
 let promise = Promise.reject(error);
 ```
 
-Create a rejected promise with the `error`.
+Создаёт уже выполнившийся промис, но не с успешным результатом, а с `ошибкой`.
 
-Same as:
+Подробная запись:
 
 ```js
 let promise = new Promise((resolve, reject) => reject(error));
 ```
 
-We cover it here for completeness, rarely used in real code.
+Далее – посмотрим некоторые полезные вспомогательные методы.
 
 ## Promise.all
 
-Let's say we want to run many promises to execute in parallel, and wait till all of them are ready.
+Давайте представим, что нам надо запустить множество промисов параллельно и ожидать готовности их всех.
 
-For instance, download several URLs in parallel and process the content when all are done.
+Например, параллельная загрузка нескольких ссылок и обработка результата, когда все промисы выполнятся.
 
-That's what `Promise.all` is for.
+Для этого нам понадобится `Promise.all`.
 
-The syntax is:
+Синтаксис:
 
 ```js
 let promise = Promise.all([...promises...]);
 ```
 
-It takes an array of promises (technically can be any iterable, but usually an array) and returns a new promise.
+Медот `.all` принимает массив промисов (может принимать любой итерируемый объект, но обычно используется массив) и возвращает новый промис.
 
-The new promise resolves when all listed promises are settled and has an array of their results.
+Новый промис выполнится, когда весь переданный список промисов получит результат.
 
-For instance, the `Promise.all` below settles after 3 seconds, and then its result is an array `[1, 2, 3]`:
+Например, `Promise.all`, представленный ниже, выполнится спустя 3 секунды, результатом работы метода будет массив `[1, 2, 3]`:
 
 ```js run
 Promise.all([
   new Promise(resolve => setTimeout(() => resolve(1), 3000)), // 1
   new Promise(resolve => setTimeout(() => resolve(2), 2000)), // 2
   new Promise(resolve => setTimeout(() => resolve(3), 1000))  // 3
-]).then(alert); // 1,2,3 when promises are ready: each promise contributes an array member
+]).then(alert); // когда все промисы выполнятся, результат будет 1,2,3. Каждый промис добавляет результат в массив
 ```
 
-Please note that the relative order is the same. Even though the first promise takes the longest time to resolve, it is still first in the array of results.
+Обратите внимание, что порядок результатов сохраняется относительно переданных промисов. Даже если первый промис будет выполняться дольше всех, он все равно запишет результат в первый элемент массива.
 
-A common trick is to map an array of job data into an array of promises, and then wrap that into `Promise.all`.
+Часто применяемый трюк - это объединить запущенные промисы в один массив и обернуть его в `Promise.all`.
 
-For instance, if we have an array of URLs, we can fetch them all like this:
+Например, если у нас есть массив ссылок, то мы можем получить результат по ним вот так:
 
 ```js run
 let urls = [
@@ -102,17 +102,17 @@ let urls = [
   'https://api.github.com/users/jeresig'
 ];
 
-// map every url to the promise fetch(github url)
+// Проходим по каждому элементу массива, запускаем промис (fetch(url)) и добавляем его в массив (requests)
 let requests = urls.map(url => fetch(url));
 
-// Promise.all waits until all jobs are resolved
+// Promise.all будет ожидать выполнения всех промисов
 Promise.all(requests)
   .then(responses => responses.forEach(
     response => alert(`${response.url}: ${response.status}`)
   ));
 ```
 
-A more real-life example with fetching user information for an array of github users by their names (or we could fetch an array of goods by their ids, the logic is same):
+Более реальный пример - это получить информацию о github пользователях, представленных в массиве (или мы можем получить массив товаров по их идентификаторам, логика та же):
 
 ```js run
 let names = ['iliakan', 'remy', 'jeresig'];
@@ -121,22 +121,22 @@ let requests = names.map(name => fetch(`https://api.github.com/users/${name}`));
 
 Promise.all(requests)
   .then(responses => {
-    // all responses are ready, we can show HTTP status codes
+    // все промисы выполнены, мы можем показать HTTP статус
     for(let response of responses) {
-      alert(`${response.url}: ${response.status}`); // shows 200 for every url
+      alert(`${response.url}: ${response.status}`); // покажет 200 для каждой ссылки
     }
 
     return responses;
   })
-  // map array of responses into array of response.json() to read their content
+  // формируем массив ответов из .json() (stream)
   .then(responses => Promise.all(responses.map(r => r.json())))
-  // all JSON answers are parsed: "users" is the array of them
+  // после выполнения всех промисов: "users" является массивом результатов
   .then(users => users.forEach(user => alert(user.name)));
 ```
 
-If any of the promises is rejected, `Promise.all` immediately rejects with that error.
+Если любой из промисов будет отклонён, то `Promise.all` немедленно вернет эту ошибку.
 
-For instance:
+Например:
 
 ```js run
 Promise.all([
@@ -148,42 +148,42 @@ Promise.all([
 ]).catch(alert); // Error: Whoops!
 ```
 
-Here the second promise rejects in two seconds. That leads to immediate rejection of `Promise.all`, so `.catch` executes: the rejection error becomes the outcome of the whole `Promise.all`.
+Тут второй промис будет отклонен через 2 секунды. Это приведет к немедленному отклонению всего `Promise.all`, поэтому выполнится `.catch`: ошибка отклоненного промиса становится результатом всего `Promise.all`.
 
-The important detail is that promises provide no way to "cancel" or "abort" their execution. So other promises continue to execute, and then eventually settle, but all their results are ignored.
+Важной деталью является то, что промисы не предоставляют возможности отклонить или прервать их выполнение. Таким образом, промисы продолжат выполняться, но все результаты будут игнорироваться.
 
-There are ways to avoid this: we can either write additional code to `clearTimeout` (or otherwise cancel) the promises in case of an error, or we can make errors show up as members in the resulting array (see the task below this chapter about it).
+Есть способы, которые помогут избежать этого: мы можем написать дополнительный код для `clearTimeout` (или каким-то другим образом отменить промис) промиса в случае ошибки, либо можно сделать так, чтобы ошибки отображались как элементы в результирующем массиве (смотрите задачу ниже).
 
-````smart header="`Promise.all(...)` allows non-promise items in `iterable`"
-Normally, `Promise.all(...)` accepts an iterable (in most cases an array) of promises. But if any of those objects is not a promise, it's wrapped in `Promise.resolve`.
+````smart header="`Promise.all(...)` разрешает передавать НЕ промисы в `iterable` (итерируемом) объекте"
+Обычно, `Promise.all(...)` принимает итерируемый (чаще всего массив) объект промисов. Но, если любой из этих объектов не является промисом, он помещается в `Promise.resolve`.
 
-For instance, here the results are `[1, 2, 3]`:
+Например, `[1, 2, 3]` это результат:
 
 ```js run
 Promise.all([
   new Promise((resolve, reject) => {
     setTimeout(() => resolve(1), 1000)
   }),
-  2, // treated as Promise.resolve(2)
-  3  // treated as Promise.resolve(3)
+  2, // рассматривается как Promise.resolve(2)
+  3  // рассматривается как Promise.resolve(3)
 ]).then(alert); // 1, 2, 3
 ```
 
-So we are able to pass non-promise values to `Promise.all` where convenient.
+Таким образом, мы можем передавать НЕ промисы в `Promise.all`, где нам удобно.
 
 ````
 
 ## Promise.race
 
-Similar to `Promise.all`, it takes an iterable of promises, but instead of waiting for all of them to finish, it waits for the first result (or error), and goes on with it.
+Метод очень похож на `Promise.all`, он принимает итерируемый объект (массив) промисов, но вместо того, чтобы ждать результата от всех промисов, он ожидает первый выполенный промис (или ошибку) и сразу возвращает результат.
 
-The syntax is:
+Синтаксис:
 
 ```js
 let promise = Promise.race(iterable);
 ```
 
-For instance, here the result will be `1`:
+Например, тут результат будет `1`:
 
 ```js run
 Promise.race([
@@ -193,15 +193,15 @@ Promise.race([
 ]).then(alert); // 1
 ```
 
-So, the first result/error becomes the result of the whole `Promise.race`. After the first settled promise "wins the race", all further results/errors are ignored.
+Но, в отличие от `Promise.all`, результатом будет первый успешно выполнившийся промис из списка или первая появившаяся ошибка. Остальные промисы игнорируются.
 
-## Summary
+## Итого
 
-There are 4 static methods of `Promise` class:
+Мы ознакомились с 4 статичными методами класса `Promise`:
 
-1. `Promise.resolve(value)` -- makes a resolved promise with the given value.
-2. `Promise.reject(error)` -- makes a rejected promise with the given error.
-3. `Promise.all(promises)` -- waits for all promises to resolve and returns an array of their results. If any of the given promises rejects, then it becomes the error of `Promise.all`, and all other results are ignored.
-4. `Promise.race(promises)` -- waits for the first promise to settle, and its result/error becomes the outcome.
+1. `Promise.resolve(value)` -- возвращает успешно выполнившийся промис, с указанным значением.
+2. `Promise.reject(error)` -- возвращает промис с указанной ошибкой.
+3. `Promise.all(promises)` -- ожидает выполнения всех промисов и возвращает массив с результатами. Если любой из указанных промисов вернёт ошибку, то результатом работы `Promise.all` будет эта ошибка, результаты остальных промисов будут игнорироваться.
+4. `Promise.race(promises)` -- ожидает первый выполненный промис, результатом будет выполнившийся промис или первая ошибка.
 
-Of these four, `Promise.all` is the most common in practice.
+Из всех перечисленных методов, часто используемый `Promise.all`.
