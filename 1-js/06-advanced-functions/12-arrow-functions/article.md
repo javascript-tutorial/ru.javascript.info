@@ -1,26 +1,26 @@
-# Arrow functions revisited
+# Снова стрелочные функции
 
-Let's revisit arrow functions.
+Давайте вернемся к стрелочным функциям.
 
-Arrow functions are not just a "shorthand" for writing small stuff.
+Стрелочные функции это не просто "сокращение" чтобы меньше писать.
 
-JavaScript is full of situations where we need to write a small function, that's executed somewhere else.
+При написании JavaScript кода часто возникают ситуации когда нам нужно написать небольшую функцию, которая будет выполнена где-то еще. 
 
-For instance:
+Например:
 
-- `arr.forEach(func)` -- `func` is executed by `forEach` for every array item.
-- `setTimeout(func)` -- `func` is executed by the built-in scheduler.
-- ...there are more.
+- `arr.forEach(func)` -- `func` выполнена `forEach` для каждого элемента массива.
+- `setTimeout(func)` -- `func` выполнена встроенным планировщиком.
+- ...и так далее.
 
-It's in the very spirit of JavaScript to create a function and pass it somewhere.
+Это очень в духе JavaScript, создать функцию и передать ее куда-нибудь.
 
-And in such functions we usually don't want to leave the current context.
+И в таких функциях мы обычно не хотим выходить из текущего контекста.
 
-## Arrow functions have no "this"
+## У стрелочных функций нет "this"
 
-As we remember from the chapter <info:object-methods>, arrow functions do not have `this`. If `this` is accessed, it is taken from the outside.
+Как мы помним из главы <info:object-methods>, у стрелочных функций нет `this`. Если к «this» обращаются, он берется снаружи.
 
-For instance, we can use it to iterate inside an object method:
+Например, мы можем использовать это для итерации внутри метода объекта:
 
 ```js run
 let group = {
@@ -39,9 +39,9 @@ let group = {
 group.showList();
 ```
 
-Here in `forEach`, the arrow function is used, so `this.title` in it is exactly the same as in the outer method `showList`. That is: `group.title`.
+Здесь внутри `forEach` использована стрелочная функции, таким образом `this.title` в ней точно такой же как и в методе `showList`. Это: `group.title`.
 
-If we used a "regular" function, there would be an error:
+Если бы мы использовали "обычную" функцию, была бы ошибка:
 
 ```js run
 let group = {
@@ -61,28 +61,29 @@ let group = {
 group.showList();
 ```
 
-The error occurs because `forEach` runs functions with `this=undefined` by default, so the attempt to access `undefined.title` is made.
+Ошибка возникает потому что `forEach` по умолчанию запускает функции с `this` равным undefined, и мы пытаемся обратиться к `undefined.title`.
 
-That doesn't affect arrow functions, because they just don't have `this`.
 
-```warn header="Arrow functions can't run with `new`"
-Not having `this` naturally means another limitation: arrow functions can't be used as constructors. They can't be called with `new`.
+Это не влияет на стрелочные функции, потому что у них просто нет `this`
+
+```warn header="Стрелочные функции нельзя использовать с `new`"
+Отсутствие`this` естественно ведет к другому ограничению: стрелочные функции не могут быть использованы как конструкторы. Они не могут быть вызваны с `new`.
 ```
 
-```smart header="Arrow functions VS bind"
-There's a subtle difference between an arrow function `=>` and a regular function called with `.bind(this)`:
+```smart header="Стрелочные функции VS bind"
+Существует тонкая разница между стрелочной функцией `=>` and обычной функцией вызванной с `.bind(this)`:
 
-- `.bind(this)` creates a "bound version" of the function.
-- The arrow `=>` doesn't create any binding. The function simply doesn't have `this`. The lookup of `this` is made exactly the same way as a regular variable search: in the outer lexical environment.
+- `.bind(this)` создает "связанную версию" функции.
+- Стрелка `=>` ничего не привязывает. У функции просто нет `this`. Определние `this` происходит абсолютно так же как и обычный поиск перменной: во внешнем лексическом окружении.
 ```
 
-## Arrows have no "arguments"
+## Стрелочные функции не имеют "arguments"
 
-Arrow functions also have no `arguments` variable.
+У стрелочных функции так же нет переменной `arguments`.
 
-That's great for decorators, when we need to forward a call with the current `this` and `arguments`.
+Это отлично подходит для декораторов, когда нам нужно пробросить вызов с текущимим `this` и `arguments`.
 
-For instance, `defer(f, ms)` gets a function and returns a wrapper around it that delays the call by `ms` milliseconds:
+Например, `defer(f, ms)` принимает функцию и возвращет обертку вокруг нее, которая откладывает вызов на `ms` миллисекунд:
 
 ```js run
 function defer(f, ms) {
@@ -99,7 +100,7 @@ let sayHiDeferred = defer(sayHi, 2000);
 sayHiDeferred("John"); // Hello, John after 2 seconds
 ```
 
-The same without an arrow function would look like:
+Тоже самое без стрелочной функции выглядело быД
 
 ```js
 function defer(f, ms) {
@@ -112,15 +113,15 @@ function defer(f, ms) {
 }
 ```
 
-Here we had to create additional variables `args` and `ctx` so that the function inside `setTimeout` could take them.
+Здесь мы были вынуждены создать дополнительные переменные `args` и `ctx` чтобы функция внутри `setTimeout` могла взять их.
 
-## Summary
+## Кратко
 
-Arrow functions:
+Стрелочные функции:
 
-- Do not have `this`.
-- Do not have `arguments`.
-- Can't be called with `new`.
-- (They also don't have `super`, but we didn't study it. Will be in the chapter <info:class-inheritance>).
+- Не имеют `this`.
+- Не имеют `arguments`.
+- Не могут быть вызваны `new`.
+- (У них так же нет `super`, но мы про это не говорили. Про это будет в главе <info:class-inheritance>).
 
-That's because they are meant for short pieces of code that do not have their own "context", but rather works in the current one. And they really shine in that use case.
+Все это потому что они предназанчены для небольших участков кода которые не имеют своего "контекста", а работают в текущем. И они отлично справляются со всоей задачей.
