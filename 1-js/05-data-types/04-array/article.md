@@ -233,45 +233,45 @@ fruits.age = 25; // создаём свойство с произвольным 
 
 Массив следует считать особой структурой, позволяющей работать с *упорядоченными данными*. Для этого массивы предоставляют специальные методы. Массивы прекрасно встраиваются в программы JavaScript, когда возникает необходимость работы с односвязными упорядоченными данными, поэтому, пожалуйста, используйте их в таких случаях. В случае если вам нужны произвольные ключи, скорее всего вам потребуется обычный объект `{}`.
 
-## Performance
+## Эффективность
 
-Methods `push/pop` run fast, while `shift/unshift` are slow.
+Методы `push/pop` выполняются быстро, а методы `shift/unshift` – медленно.
 
 ![](array-speed.png)
 
-Why is it faster to work with the end of an array than with its beginning? Let's see what happens during the execution:
+Почему работать с концом массива быстрее, чем с его началом? Давайте посмотрим, что происходит во время выполнения:
 
 ```js
-fruits.shift(); // take 1 element from the start
+fruits.shift(); // удаляем 1-ый элемент  с начала
 ```
 
-It's not enough to take and remove the element with the number `0`. Other elements need to be renumbered as well.
+Просто взять и удалить элемент с номером `0` недостаточно. Нужно также заново пронумеровать остальные элементы. 
 
-The `shift` operation must do 3 things:
+Операция `shift` должна выполнить 3 действия:
 
-1. Remove the element with the index `0`.
-2. Move all elements to the left, renumber them from the index `1` to `0`, from `2` to `1` and so on.
-3. Update the `length` property.
+1. Удалить элемент с индексом `0`.
+2. Сдвинуть все элементы влево, заново пронумеровать их, заменив `1` на `0`, `2` на `1` и т.д. 
+3. Обновить свойство `length` .
 
 ![](array-shift.png)
 
-**The more elements in the array, the more time to move them, more in-memory operations.**
+**Чем больше элементов содержит массив, тем больше времени потребуется для того, чтобы их переместить, больше операций с памятью.**
 
-The similar thing happens with `unshift`: to add an element to the beginning of the array, we need first to move existing elements to the right, increasing their indexes.
+То же самое происходит с `unshift` : чтобы добавить элемент в начало массива, нам нужно сначала сдвинуть существующие элементы вправо, увеличивая их индексы.
 
-And what's with `push/pop`? They do not need to move anything. To extract an element from the end, the `pop` method cleans the index and shortens `length`.
+А что же с `push/pop`? Им не нужно ничего перемещать. Чтобы удалить элемент в конце массива, метод `pop` очищает индекс и уменьшает значение `length`.
 
-The actions for the `pop` operation:
+Действия при операции `pop`:
 
 ```js
-fruits.pop(); // take 1 element from the end
+fruits.pop(); // удаляем 1 элемент с конца
 ```
 
 ![](array-pop.png)
 
-**The `pop` method does not need to move anything, because other elements keep their indexes. That's why it's blazingly fast.**
+**Метод `pop` не требует перемещения, потому что остальные элементы остаются на тех же индексах. Именно поэтому он выполняется очень быстро.**
 
-The similar thing with the `push` method.
+Аналогично работает метод `push`.
 
 ## Loops
 
