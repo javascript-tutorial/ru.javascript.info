@@ -1,20 +1,19 @@
-importance: 5
+важность: 5
 
 ---
 
-# Second bind
+# Повторный bind
 
-Can we change `this` by additional binding?
+Можем ли мы изменить `this` дополнительным связыванием?
 
-What will be the output?
+Что выведет этот код?
 
 ```js no-beautify
 function f() {
   alert(this.name);
 }
 
-f = f.bind( {name: "John"} ).bind( {name: "Ann" } );
+f = f.bind( { name: "Вася" } ).bind( { name: "Петя" } );
 
 f();
 ```
-

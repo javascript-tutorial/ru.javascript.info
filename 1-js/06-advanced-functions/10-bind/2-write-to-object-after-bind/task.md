@@ -1,10 +1,10 @@
-importance: 5
+важность: 5
 
 ---
 
-# Bound function as a method
+# Связанная функция как метод
 
-What will be the output?
+Что выведет функция?
 
 ```js
 function f() {
@@ -17,4 +17,3 @@ let user = {
 
 user.g();
 ```
-
