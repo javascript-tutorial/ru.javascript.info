@@ -100,7 +100,7 @@ let sayHiDeferred = defer(sayHi, 2000);
 sayHiDeferred("John"); // Hello, John after 2 seconds
 ```
 
-Тоже самое без стрелочной функции выглядело бы:
+То же самое без стрелочной функции выглядело бы:
 
 ```js
 function defer(f, ms) {
