@@ -1,41 +1,41 @@
 
-# Prototype methods, objects without __proto__
+# Методы прототипов, объекты без свойства __proto__
 
-In the first chapter of this section, we mentioned that there are modern methods to setup a prototype.
+В первой главе это секции мы упоминали, что существуют современные методы работы с прототипами.
 
-The `__proto__` is considered outdated and somewhat deprecated (in browser-only part of the Javascript standard).
+Свойство `__proto__` считается устаревшим и некотором роде нежелательным (только в браузерной части стандарта Javascript).
 
-The modern methods are:
+Современные методы:
 
-- [Object.create(proto[, descriptors])](mdn:js/Object/create) -- creates an empty object with given `proto` as `[[Prototype]]` and optional property descriptors.
-- [Object.getPrototypeOf(obj)](mdn:js/Object/getPrototypeOf) -- returns the `[[Prototype]]` of `obj`.
-- [Object.setPrototypeOf(obj, proto)](mdn:js/Object/setPrototypeOf) -- sets the `[[Prototype]]` of `obj` to `proto`.
+- [Object.create(proto[, descriptors])](mdn:js/Object/create) -- создает пустой объект со свойством `[[Prototype]]`, указанным как `proto`, и необязательными дескрипторами свойств.
+- [Object.getPrototypeOf(obj)](mdn:js/Object/getPrototypeOf) -- возвращает свойство `[[Prototype]]` объекта `obj`.
+- [Object.setPrototypeOf(obj, proto)](mdn:js/Object/setPrototypeOf) -- устанавливает свойство `[[Prototype]]` объекта `obj` как `proto`.
 
-These should be used instead of `__proto__`.
+Эти методы должны быть использованы вместо `__proto__`.
 
-For instance:
+Например:
 
 ```js run
 let animal = {
   eats: true
 };
 
-// create a new object with animal as a prototype
+// создаем новый объект с прототипом animal
 *!*
 let rabbit = Object.create(animal);
 */!*
 
 alert(rabbit.eats); // true
 *!*
-alert(Object.getPrototypeOf(rabbit) === animal); // get the prototype of rabbit
+alert(Object.getPrototypeOf(rabbit) === animal); // получаем прототип объекта rabbit
 */!*
 
 *!*
-Object.setPrototypeOf(rabbit, {}); // change the prototype of rabbit to {}
+Object.setPrototypeOf(rabbit, {}); // изменяем прототип объект rabbit на {}
 */!*
 ```
 
-`Object.create` has an optional second argument: property descriptors. We can provide additional properties to the new object there, like this:
+У `Object.create` есть необязательный второй аргумент: дескрипторы свойств. Мы можем добавить дополнительное свойство новому объекту таким образом:
 
 ```js run
 let animal = {
@@ -51,16 +51,16 @@ let rabbit = Object.create(animal, {
 alert(rabbit.jumps); // true
 ```
 
-The descriptors are in the same format as described in the chapter <info:property-descriptors>.
+У дескрипторов такой же формат как описано в этой главе <info:property-descriptors>.
 
-We can use `Object.create` to perform an object cloning more powerful than copying properties in `for..in`:
+Мы можем использовать `Object.create` для клонирования объектов как более мощный способ чем копирование свойств с помощью `for..in`:
 
 ```js
-// fully identical shallow clone of obj
+// полностью идентичный поверхностный клон obj
 let clone = Object.create(Object.getPrototypeOf(obj), Object.getOwnPropertyDescriptors(obj));
 ```
 
-This call makes a truly exact copy of `obj`, including all properties: enumerable and non-enumerable, data properties and setters/getters -- everything, and with the right `[[Prototype]]`.
+Подобный вызов создает точную копию объекта `obj`, включая все свойства: перечисляемые и не перечисляемые, свойства, геттеры/сеттеры для свойств -- и все это с правильным свойством `[[Prototype]]`.
 
 ## Brief history
 
