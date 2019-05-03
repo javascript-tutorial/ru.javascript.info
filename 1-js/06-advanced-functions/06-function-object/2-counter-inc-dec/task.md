@@ -2,14 +2,14 @@ importance: 5
 
 ---
 
-# Set and decrease for counter
+# Set и decrease для счётчика
 
-Modify the code of `makeCounter()` so that the counter can also decrease and set the number:
+Изменить код `makeCounter()` так чтобы счетчик мог увеличивать и устанавливать значение:
 
-- `counter()` should return the next number (as before).
-- `counter.set(value)` should set the `count` to `value`.
-- `counter.decrease()` should decrease the `count` by 1.
+- `counter()` должен вернуть следующее значение (как и раньше).
+- `counter.set(value)` должен установить значение `value` в `count`.
+- `counter.decrease()` должен увеличить значение `count` на 1.
 
-See the sandbox code for the complete usage example.
+Посмотрите код песочницы для полного примера использования.
 
-P.S. You can use either a closure or the function property to keep the current count. Or write both variants.
+P.S. Для того чтобы хранить текущее значение счётчика вы можете использовать как замыкание, так и свойство функции. Или написать оба варианта.
