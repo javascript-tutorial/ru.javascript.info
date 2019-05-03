@@ -128,7 +128,7 @@ Promise.all(requests)
 
     return responses;
   })
-  // формируем массив ответов из .json() (stream)
+  // формируем массив ответов из response.json(), чтобы прочитать его содержимое
   .then(responses => Promise.all(responses.map(r => r.json())))
   // после выполнения всех промисов: "users" является массивом результатов
   .then(users => users.forEach(user => alert(user.name)));
