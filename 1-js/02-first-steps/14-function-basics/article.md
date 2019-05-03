@@ -138,7 +138,7 @@ alert( userName ); // *!*John*/!*, не изменилась, у функции 
 В примере ниже функции передаются два параметра: `from` и `text`.
 
 ```js run
-function showMessage(*!*from, text*/!*) { // агрументы: from, text
+function showMessage(*!*from, text*/!*) { // аргументы: from, text
   alert(from + ': ' + text);
 }
 
