@@ -16,7 +16,7 @@ function sayHi() {
 
 ```js
 let sayHi = function() {
-  alert( "Hello" );
+  alert( "Привет" );
 };
 ```
 
