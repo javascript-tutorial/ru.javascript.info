@@ -38,7 +38,7 @@ alert(user.isAdmin); // false
 ```js
 function User(name) {
 *!*
-  // this = {};  (условно)
+  // this = {};  (неявно)
 */!*
 
   // add properties to this
@@ -46,7 +46,7 @@ function User(name) {
   this.isAdmin = false;
 
 *!*
-  // return this;  (условно)
+  // return this;  (неявно)
 */!*
 }
 ```
