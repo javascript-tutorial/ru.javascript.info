@@ -121,7 +121,7 @@ let requests = names.map(name => fetch(`https://api.github.com/users/${name}`));
 
 Promise.all(requests)
   .then(responses => {
-    // все промисы выполнены, мы можем показать HTTP статус
+    // все промисы выполнены, можно показать код HTTP-состояния
     for(let response of responses) {
       alert(`${response.url}: ${response.status}`); // покажет 200 для каждой ссылки
     }
