@@ -1,18 +1,18 @@
 # Scheduling: setTimeout and setInterval
 
-We may decide to execute a function not right now, but at a certain time later. That's called "scheduling a call".
+Вы можете вызвать функцию не в данный момент, а позже в определенное время. Это называется "планирование вызова".
 
-There are two methods for it:
+Для этого существуется два метода:
 
-- `setTimeout` allows to run a function once after the interval of time.
-- `setInterval` allows to run a function regularly with the interval between the runs.
+- `setTimeout` позволяет вызвать функцию **один раз** через определенный интервал времени.
+- `setInterval` позволяет вызывать функцию **постоянно** через определенный интервал времени.
 
-These methods are not a part of JavaScript specification. But most environments have the internal scheduler and provide these methods. In particular, they are supported in all browsers and Node.js.
+Эти методы не являюся частью спецификации JavaScript. Но большинство сред выполнения JS-кода имеют внутренний планировщик и предоставляют доступ к этим методам. В частности, они поддерживаются во всех браузерах и Node.js.
 
 
 ## setTimeout
 
-The syntax:
+Синтаксис:
 
 ```js
 let timerId = setTimeout(func|code, [delay], [arg1], [arg2], ...)
@@ -21,16 +21,16 @@ let timerId = setTimeout(func|code, [delay], [arg1], [arg2], ...)
 Parameters:
 
 `func|code`
-: Function or a string of code to execute.
-Usually, that's a function. For historical reasons, a string of code can be passed, but that's not recommended.
+: функция или строка кода для выполнения.
+В большинстве случаев, это функция. Так уже давно сложилось, что код может быть передан в строке, но это не рекомендуется.
 
 `delay`
-: The delay before run, in milliseconds (1000 ms = 1 second), by default 0.
+: Задержка перед запуском в миллисекундах (1000 мс = 1 с). Значение по-умолчанию 0.
 
 `arg1`, `arg2`...
-: Arguments for the function (not supported in IE9-)
+: аргументы, передаваемые в функцию (не поддерживается в IE9-)
 
-For instance, this code calls `sayHi()` after one second:
+Например, данный код вызывает `sayHi()` спустя одну секунду:
 
 ```js run
 function sayHi() {
@@ -42,7 +42,7 @@ setTimeout(sayHi, 1000);
 */!*
 ```
 
-With arguments:
+С аргументами:
 
 ```js run
 function sayHi(phrase, who) {
@@ -54,56 +54,56 @@ setTimeout(sayHi, 1000, "Hello", "John"); // Hello, John
 */!*
 ```
 
-If the first argument is a string, then JavaScript creates a function from it.
+Если первый аргумент является строкой, то JavaScript создаст из нее функцию.
 
-So, this will also work:
+Это также будет работать:
 
 ```js run no-beautify
 setTimeout("alert('Hello')", 1000);
 ```
 
-But using strings is not recommended, use functions instead of them, like this:
+Но использование строк не реккомендуется. Вместо этого используйте функции. Например, так:
 
 ```js run no-beautify
 setTimeout(() => alert('Hello'), 1000);
 ```
 
-````smart header="Pass a function, but don't run it"
-Novice developers sometimes make a mistake by adding brackets `()` after the function:
+````smart header="Передать функцию, но не выполнять ее"
+Начинающие разработчики иногда ошибаются, добавляя скобки `()` после функции:
 
 ```js
-// wrong!
+// не правильно!
 setTimeout(sayHi(), 1000);
 ```
-That doesn't work, because `setTimeout` expects a reference to function. And here `sayHi()` runs the function, and the *result of its execution* is passed to `setTimeout`. In our case the result of `sayHi()` is `undefined` (the function returns nothing), so nothing is scheduled.
+Это не работает, потому что `setTimeout` ожидает ссылку на функцию. Здесь `sayHi()` запускает выполнение функции и *результат выполнения* отправляется в `setTimeout`. В нашем случае результатом выполнения `sayHi()` является `undefined` (так как функция ничего не возвращает), поэтому и нечего планировать.
 ````
 
-### Canceling with clearTimeout
+### Отмена через clearTimeout
 
-A call to `setTimeout` returns a "timer identifier" `timerId` that we can use to cancel the execution.
+Вызов `setTimeout` вызывает "идентификатор таймера" `timerId`, который можно использовать для отмены выполнения.
 
-The syntax to cancel:
+Синтаксис для отмены:
 
 ```js
 let timerId = setTimeout(...);
 clearTimeout(timerId);
 ```
 
-In the code below, we schedule the function and then cancel it (changed our mind). As a result, nothing happens:
+В коде ниже мы планируем вызов функции и затем отменяем его (просто передумали). В результате ничего не происходит:
 
 ```js run no-beautify
-let timerId = setTimeout(() => alert("never happens"), 1000);
-alert(timerId); // timer identifier
+let timerId = setTimeout(() => alert("ничего не происходит"), 1000);
+alert(timerId); // идентификатор таймера
 
 clearTimeout(timerId);
-alert(timerId); // same identifier (doesn't become null after canceling)
+alert(timerId); // тот же идентификатор (не принимает значение null после отмены)
 ```
 
-As we can see from `alert` output, in a browser the timer identifier is a number. In other environments, this can be something else. For instance, Node.js returns a timer object with additional methods.
+Как мы видим в результате вывода `alert`, в браузере идентификатором таймера является число. В других средах это может быть что-то еще. Например, Node.js возвращает объект таймера с дополнительными методами.
 
-Again, there is no universal specification for these methods, so that's fine.
+Повторюсь, что нет единой спецификации на эти методы, поэтому такое поведение является нормальным.
 
-For browsers, timers are described in the [timers section](https://www.w3.org/TR/html5/webappapis.html#timers) of HTML5 standard.
+Для браузеров таймеры описаны в [разделе таймеров](https://www.w3.org/TR/html5/webappapis.html#timers) стандарта HTML5.
 
 ## setInterval
 
