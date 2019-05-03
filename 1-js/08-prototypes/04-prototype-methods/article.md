@@ -62,26 +62,26 @@ let clone = Object.create(Object.getPrototypeOf(obj), Object.getOwnPropertyDescr
 
 Подобный вызов создает точную копию объекта `obj`, включая все свойства: перечисляемые и не перечисляемые, свойства, геттеры/сеттеры для свойств -- и все это с правильным свойством `[[Prototype]]`.
 
-## Brief history
+## Краткая история
 
-If we count all the ways to manage `[[Prototype]]`, there's a lot! Many ways to do the same!
+Если пересчитать все способы управления свойством `[[Prototype]]`, то их будет много! И многие из них делают одно и тоже!
 
-Why so?
+Почему так?
 
-That's for historical reasons.
+В силу исторических причин.
 
-- The `"prototype"` property of a constructor function works since very ancient times.
-- Later in the year 2012: `Object.create` appeared in the standard. It allowed to create objects with the given prototype, but did not allow to get/set it. So browsers implemented non-standard `__proto__` accessor that allowed to get/set a prototype at any time.
-- Later in the year 2015: `Object.setPrototypeOf` and `Object.getPrototypeOf` were added to the standard. The `__proto__` was de-facto implemented everywhere, so it made its way to the Annex B of the standard, that is optional for non-browser environments.
+- Свойство `"prototype"` функции-конструктора существует еще с очень давних времен.
+- Позднее в 2012 году: `Object.create` появился в стандарте. Это давало возможность создавать объекты с указанным прототипом, но так же не позволяло устанавливать/получать его. Тогда браузеры реализовали нестандартный аксессор `__proto__`, который позволил устанавливать/получать прототип в любой время.
+- Позднее и 2015 году: в стандарт были добавлены `Object.setPrototypeOf` и `Object.getPrototypeOf`. Фактически свойство `__proto__` было реализовано везде, так что оно попало Приложение Б стандарта, которое было опционально для не браузерных окружений.
 
-As of now we have all these ways at our disposal.
+Теперь мы знаем, что у нас есть все эти способы в нашем распоряжении.
 
-Why `__proto__` was replaced by the functions? That's an interesting question, requiring us to understand why `__proto__` is bad. Read on to get the answer.
+Почему же `__proto__` был заменен на функции? Вопрос интересный, требующий от нас понимания, почему `__proto__` плох. Читайте далее, чтобы узнать ответ.
 
-```warn header="Don't reset `[[Prototype]]` unless the speed doesn't matter"
-Technically, we can get/set `[[Prototype]]` at any time. But usually we only set it once at the object creation time, and then do not modify: `rabbit` inherits from `animal`, and that is not going to change.
+```warn header="Не переопределяйте `[[Prototype]]`, кроме случаев, когда скорость не важна"
+Технически, мы можем установить/получить `[[Prototype]]` в любое время. Но обычно мы устанавливаем прототип только раз во время создания объекта, а после не меняем: `rabbit` наследует от `animal`, и это не изменится.
 
-And JavaScript engines are highly optimized to that. Changing a prototype "on-the-fly" with `Object.setPrototypeOf` or `obj.__proto__=` is a very slow operation, it breaks internal optimizations for object property access operations. So evade it unless you know what you're doing, or Javascript speed totally doesn't matter for you.
+И JavaScript движки хорошо оптимизированы для этого. Изменение прототипа "на лету" с помощью `Object.setPrototypeOf` или `obj.__proto__=` очень медленная операция, которая ломает внутренние оптимизации для операций доступа к свойствам объекта. Так что лучше избегать этого, кроме, тех ситуаций, когда вы знаете, что делаете, или скорость Javascript для вас полностью не важна.
 ```
 
 ## "Very plain" objects
