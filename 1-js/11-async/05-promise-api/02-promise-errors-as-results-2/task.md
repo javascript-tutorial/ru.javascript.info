@@ -13,7 +13,7 @@ let urls = [
 
 // выполнить запросы
 Promise.all(urls.map(url => fetch(url)))
-  // обработать каждый response, используя response.json()
+  // обработать каждый ответ, используя response.json()
   .then(responses => Promise.all(
     responses.map(r => r.json())
   ))
