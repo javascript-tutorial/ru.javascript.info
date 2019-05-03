@@ -6,7 +6,7 @@
 
 ```js
 function sayHi() {
-  alert( "Hello" );
+  alert( "Привет" );
 }
 ```
 
