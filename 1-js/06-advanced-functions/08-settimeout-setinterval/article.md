@@ -34,7 +34,7 @@ Parameters:
 
 ```js run
 function sayHi() {
-  alert('Hello');
+  alert('Привет');
 }
 
 *!*
@@ -50,7 +50,7 @@ function sayHi(phrase, who) {
 }
 
 *!*
-setTimeout(sayHi, 1000, "Hello", "John"); // Hello, John
+setTimeout(sayHi, 1000, "Привет", "Джон"); // Привет, Джон
 */!*
 ```
 
@@ -59,13 +59,13 @@ setTimeout(sayHi, 1000, "Hello", "John"); // Hello, John
 Это также будет работать:
 
 ```js run no-beautify
-setTimeout("alert('Hello')", 1000);
+setTimeout("alert('Привет')", 1000);
 ```
 
 Но использование строк не реккомендуется. Вместо этого используйте функции. Например, так:
 
 ```js run no-beautify
-setTimeout(() => alert('Hello'), 1000);
+setTimeout(() => alert('Привет'), 1000);
 ```
 
 ````smart header="Передать функцию, но не выполнять ее"
