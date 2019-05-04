@@ -1,42 +1,42 @@
-# Class checking: "instanceof"
+# Проверка класса: "instanceof"
 
-The `instanceof` operator allows to check whether an object belongs to a certain class. It also takes inheritance into account.
+Оператор `instanceof` позволяет проверить, какому классу принадлежит объект, с учетом наследования.
 
-Such a check may be necessary in many cases, here we'll use it for building a *polymorphic* function, the one that treats arguments differently depending on their type.
+Такая проверка может потребоваться во многих случаях. Здесь мы будем использовать ее для создания *полиморфной* функции, которая использует аргументы по-разному в зависимости от их типа.
 
-## The instanceof operator [#ref-instanceof]
+## Оператор instanceof [#ref-instanceof]
 
-The syntax is:
+Синтаксис:
 ```js
 obj instanceof Class
 ```
 
-It returns `true` if `obj` belongs to the `Class` (or a class inheriting from it).
+Оператор вернет `true`, если `obj` принадлежит классу `Class` (или класс наследует от него).
 
-For instance:
+Например:
 
 ```js run
 class Rabbit {}
 let rabbit = new Rabbit();
 
-// is it an object of Rabbit class?
+// это объект класса Rabbit?
 *!*
 alert( rabbit instanceof Rabbit ); // true
 */!*
 ```
 
-It also works with constructor functions:
+Также это работает с функциями-конструкторами:
 
 ```js run
 *!*
-// instead of class
+// вместо класса
 function Rabbit() {}
 */!*
 
 alert( new Rabbit() instanceof Rabbit ); // true
 ```
 
-...And with built-in classes like `Array`:
+...И для встроенных классов, таких как `Array`:
 
 ```js run
 let arr = [1, 2, 3];
@@ -44,16 +44,16 @@ alert( arr instanceof Array ); // true
 alert( arr instanceof Object ); // true
 ```
 
-Please note that `arr` also belongs to the `Object` class. That's because `Array` prototypally inherits from `Object`.
+Пожалуйста, обратите внимание, что `arr` также принадлежит классу `Object`. Это потому, что `Array` наследуется от `Object`.
 
-The `instanceof` operator examines the prototype chain for the check, and is also fine-tunable using the static method `Symbol.hasInstance`.
+Оператор `instanceof` просматривает цепочку прототипов для проверки, и это также свободно настраивается с помощью статичного метода `Symbol.hasInstance`.
 
-The algorithm of `obj instanceof Class` works roughly as follows:
+Алгоритм работы `obj instanceof Class` работает примерно следующим образом:
 
-1. If there's a static method `Symbol.hasInstance`, then use it. Like this:
+1. Если имеется статичный метод `Symbol.hasInstance`, тогда используется он. Таким образом:
 
     ```js run
-    // assume anything that canEat is an animal
+    // предполагаем, все что может есть, - это животное
     class Animal {
       static [Symbol.hasInstance](obj) {
         if (obj.canEat) return true;
@@ -61,12 +61,12 @@ The algorithm of `obj instanceof Class` works roughly as follows:
     }
 
     let obj = { canEat: true };
-    alert(obj instanceof Animal); // true: Animal[Symbol.hasInstance](obj) is called
+    alert(obj instanceof Animal); // true: вызван Animal[Symbol.hasInstance](obj)
     ```
 
-2. Most classes do not have `Symbol.hasInstance`. In that case, check if `Class.prototype` equals to one of prototypes in the `obj` prototype chain.
+2. Большая часть классов не имеет метода `Symbol.hasInstance`. В этом случае проверяется равен ли `Class.prototype` одному из прототипов в прототипной цепочке `obj`.
 
-    In other words, compare:
+    Другими словами, сравнивается:
     ```js
     obj.__proto__ === Class.prototype
     obj.__proto__.__proto__ === Class.prototype
@@ -74,9 +74,9 @@ The algorithm of `obj instanceof Class` works roughly as follows:
     ...
     ```
 
-    In the example above `Rabbit.prototype === rabbit.__proto__`, so that gives the answer immediately.
+    В примере выше `Rabbit.prototype === rabbit.__proto__`, так что результат будет получен немедленно.
 
-    In the case of an inheritance, `rabbit` is an instance of the parent class as well:
+    В случае с наследованием, `rabbit` также является экземпляром своего родительского класса:
 
     ```js run
     class Animal {}
@@ -87,35 +87,35 @@ The algorithm of `obj instanceof Class` works roughly as follows:
     alert(rabbit instanceof Animal); // true
     */!*
     // rabbit.__proto__ === Rabbit.prototype
-    // rabbit.__proto__.__proto__ === Animal.prototype (match!)
+    // rabbit.__proto__.__proto__ === Animal.prototype (совпадение!)
     ```
 
-Here's the illustration of what `rabbit instanceof Animal` compares with `Animal.prototype`:
+Вот иллюстрация того как `rabbit instanceof Animal` сравнивается с `Animal.prototype`:
 
 ![](instanceof.png)
 
-By the way, there's also a method [objA.isPrototypeOf(objB)](mdn:js/object/isPrototypeOf), that returns `true` if `objA` is somewhere in the chain of prototypes for `objB`. So the test of `obj instanceof Class` can be rephrased as `Class.prototype.isPrototypeOf(obj)`.
+Кстати, есть метод [objA.isPrototypeOf(objB)], которые возвращает `true`, если объект `objA` есть где-то в прототипной цепочки объекта `objB`. Так что `obj instanceof Class` можно перефразировать как `Class.prototype.isPrototypeOf(obj)`.
 
-That's funny, but the `Class` constructor itself does not participate in the check! Only the chain of prototypes and `Class.prototype` matters.
+Забавно, но сам конструктор `Class` не участвует в процессе проверки! Важна только цепочка прототипов `Class.prototype`.
 
-That can lead to interesting consequences when `prototype` is changed.
+Это может приводить к интересным последствиям при изменении `prototype`.
 
-Like here:
+Как, например, тут:
 
 ```js run
 function Rabbit() {}
 let rabbit = new Rabbit();
 
-// changed the prototype
+// заменяем прототип
 Rabbit.prototype = {};
 
-// ...not a rabbit any more!
+// ...больше не rabbit!
 *!*
 alert( rabbit instanceof Rabbit ); // false
 */!*
 ```
 
-That's one of the reasons to avoid changing `prototype`. Just to keep safe.
+Это одна из причин избегать изменения `prototype`. Просто для безопасности.
 
 ## Bonus: Object toString for the type
 
