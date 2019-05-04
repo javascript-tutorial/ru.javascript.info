@@ -1,5 +1,6 @@
 Ответ: `null`.
 
+
 ```js run
 function f() {
   alert( this ); // null

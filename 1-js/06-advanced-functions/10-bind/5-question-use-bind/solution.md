@@ -33,10 +33,11 @@ askPassword(user.loginOk.bind(user), user.loginFail.bind(user));
 Теперь всё работает корректно.
 
 Альтернативное решение - сделать функции-обёртки над `user.loginOk/loginFail`:
-
 ```js
 //...
 askPassword(() => user.loginOk(), () => user.loginFail());
 ```
 
 Обычно это также работает, но может не сработать в более сложных ситуациях, когда `user` может быть перезаписан между моментами запроса и выполнения `() => user.loginOk()`.
+
+
