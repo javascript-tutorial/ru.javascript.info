@@ -217,7 +217,7 @@ let sum = 0;
 
 while (true) {
 
-  let value = +prompt("Enter a number", '');
+  let value = +prompt("Введите число", '');
 
 *!*
   if (!value) break; // (*)
@@ -226,7 +226,7 @@ while (true) {
   sum += value;
 
 }
-alert( 'Sum: ' + sum );
+alert( 'Сумма: ' + sum );
 ```
 
 Директива `break` в строке `(*)`, если посетитель ничего не ввёл, полностью прекращает выполнение цикла и передаёт управление на строку за его телом, то есть на `alert`.
@@ -308,7 +308,7 @@ for (let i = 0; i < 3; i++) {
 
   for (let j = 0; j < 3; j++) {
 
-    let input = prompt(`Value at coords (${i},${j})`, '');
+    let input = prompt(`Значения координат (${i},${j})`, '');
 
     // Что если мы захотим перейти к Done (ниже) прямо отсюда?
 
