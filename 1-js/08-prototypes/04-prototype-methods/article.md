@@ -84,13 +84,13 @@ let clone = Object.create(Object.getPrototypeOf(obj), Object.getOwnPropertyDescr
 И JavaScript движки хорошо оптимизированы для этого. Изменение прототипа "на лету" с помощью `Object.setPrototypeOf` или `obj.__proto__=` очень медленная операция, которая ломает внутренние оптимизации для операций доступа к свойствам объекта. Так что лучше избегать этого, кроме, тех ситуаций, когда вы знаете, что делаете, или скорость Javascript для вас полностью не важна.
 ```
 
-## "Very plain" objects
+## "Очень пустой" объект
 
-As we know, objects can be used as associative arrays to store key/value pairs.
+Как мы знаем, объекты можно использовать как ассоциативные массивы для хранения пар ключ/значение.
 
-...But if we try to store *user-provided* keys in it (for instance, a user-entered dictionary), we can see an interesting glitch: all keys work fine except `"__proto__"`.
+...Но если попробуем хранить *созданные пользователями* ключи (например, словари с пользовательским вводом), мы можем заметить интересный сбой: все ключи работают как ожидается, за исключением `"__proto__"`.
 
-Check out the example:
+Посмотрите на пример:
 
 ```js run
 let obj = {};
@@ -98,36 +98,36 @@ let obj = {};
 let key = prompt("What's the key?", "__proto__");
 obj[key] = "some value";
 
-alert(obj[key]); // [object Object], not "some value"!
+alert(obj[key]); // [object Object], не "some value"!
 ```
 
-Here if the user types in `__proto__`, the assignment is ignored!
+Если пользователь введет `__proto__`, присвоение проигнорируется!
 
-That shouldn't surprise us. The `__proto__` property is special: it must be either an object or `null`, a string can not become a prototype.
+И это не должно удивлять нас. Свойство `__proto__` особенное: оно должно быть либо объектом, либо `null`, а строка не может стать прототипом.
 
-But we didn't *intend* to implement such behavior, right? We want to store key/value pairs, and the key named `"__proto__"` was not properly saved. So that's a bug!
+Но мы не *намеревались* реализовывать такое поведение, не так ли? Мы хотим хранить пары ключ/значение, и ключ с именем `"__proto__"` не был сохранен надлежащим образом. Так что это ошибка!
 
-Here the consequences are not terrible. But in other cases the prototype may indeed be changed, so the execution may go wrong in totally unexpected ways.
+В примере последствия не так ужасны. Но в других случаях прототип может быть изменен, и код может выполниться совершенно неожиданным неправильным способом.
 
-What's worst -- usually developers do not think about such possibility at all. That makes such bugs hard to notice and even turn them into vulnerabilities, especially when JavaScript is used on server-side.
+Что хуже всего -- разработчики не думают о такой возможности совсем. Это делает такие ошибки сложным для отлавливания или даже превращает их в уязвимости, особенно когда JavaScript используется на сервере.
 
-Unexpected things also may happen when accessing `toString` property -- that's a function by default, and other built-in properties.
+Неожиданные вещи могут случаться также при получении доступа к свойству `toString`, которое по умолчанию функция, и к другим встроенным свойствам.
 
-How to evade the problem?
+Как избежать проблемы?
 
-First, we can just switch to using `Map`, then everything's fine.
+Во-первых, мы можем перейти на использование коллекции `Map`, и тогда все будет в порядке.
 
-But `Object` also can serve us well here, because language creators gave a thought to that problem long ago.
+Но и `Object` может также хорошо подойти, потому что создатели языка уже давно продумали решение проблемы.
 
-The `__proto__` is not a property of an object, but an accessor property of `Object.prototype`:
+Свойство `__proto__` это не свойство объекта, а свойство-аксессор для `Object.prototype`:
 
 ![](object-prototype-2.png)
 
-So, if `obj.__proto__` is read or set, the corresponding getter/setter is called from its prototype, and it gets/sets `[[Prototype]]`.
+Так что при чтении или установке `obj.__proto__`, вызывается соответствующий геттер/сеттер из прототипа `obj`, и именно он устанавливает/получает свойство `[[Prototype]]`.
 
-As it was said in the beginning of this tutorial section: `__proto__` is a way to access `[[Prototype]]`, it is not `[[Prototype]]` itself.
+Как было сказано в начале этой обучающей секции: `__proto__` это способ доступа к свойству `[[Prototype]]`, это не само свойство `[[Prototype]]`.
 
-Now, if we want to use an object as an associative array, we can do it with a little trick:
+Теперь, если мы хотим использовать объект как ассоциативный массив, мы можем сделать это с помощью небольшого трюка:
 
 ```js run
 *!*
@@ -140,15 +140,15 @@ obj[key] = "some value";
 alert(obj[key]); // "some value"
 ```
 
-`Object.create(null)` creates an empty object without a prototype (`[[Prototype]]` is `null`):
+`Object.create(null)` создает пустой объект без прототипа (свойство `[[Prototype]]` это `null`):
 
 ![](object-prototype-null.png)
 
-So, there is no inherited getter/setter for `__proto__`. Now it is processed as a regular data property, so the example above works right.
+Таким образом не будет унаследованного геттера/сеттера для `__proto__`. Теперь это свойство обрабатывается как обычное свойство, и пример приведенный выше работает правильно.
 
-We can call such object "very plain" or "pure dictionary objects", because they are even simpler than regular plain object `{...}`.
+Мы можем назвать такой объект "очень пустым" или "чистым словарным объектом", потому что они еще проще чем обычные объекты `{...}`.
 
-A downside is that such objects lack any built-in object methods, e.g. `toString`:
+Недостаток в том, что у таких объектов не будет встроенных методов объекта, таких как `toString`:
 
 ```js run
 *!*
@@ -158,9 +158,9 @@ let obj = Object.create(null);
 alert(obj); // Error (no toString)
 ```
 
-...But that's usually fine for associative arrays.
+...Но обычно этого достаточно для ассоциативных массивов.
 
-Please note that most object-related methods are `Object.something(...)`, like `Object.keys(obj)` -- they are not in the prototype, so they will keep working on such objects:
+Пожалуйста, обратите внимание, что большая часть методов `Object.something(...)` связанных с объектами, таких как `Object.keys(obj)` -- они не находятся в прототипе, так что они продолжать работать для таких объектов:
 
 
 ```js run
