@@ -34,7 +34,7 @@ let promise = fetch(url, [options])
 ```js
 let response = await fetch(url);
 
-if (response.ok) { // если HTTP код состояния 200-299
+if (response.ok) { // если код HTTP-состояния в пределах 200-299
   // получаем тело ответа (см. ниже)
   let json = await response.json();
 } else {
