@@ -39,24 +39,24 @@ let a = 2 + 2;
 
 switch (a) {
   case 3:
-    alert( 'Too small' );
+    alert( 'Маловато' );
     break;
 *!*
   case 4:
-    alert( 'Exactly!' );
+    alert( 'В точку!' );
     break;
 */!*
   case 5:
-    alert( 'Too large' );
+    alert( 'Перебор' );
     break;
   default:
-    alert( "I don't know such values" );
+    alert( "Нет таких значений" );
 }
 ```
 
 Здесь оператор `switch` последовательно сравнит `a` со всеми вариантами из `case`.
 
-Сначала `3`, затем – так как нет совпадения – `4`. Совпадение найдено, будет выполнен этот вариант, со строки `alert( 'Exactly!' )` и далее, до ближайшего `break`, который прервёт выполнение.
+Сначала `3`, затем – так как нет совпадения – `4`. Совпадение найдено, будет выполнен этот вариант, со строки `alert( 'В точку!' )` и далее, до ближайшего `break`, который прервёт выполнение.
 
 **Если `break` нет, то выполнение пойдёт ниже по следующим `case`, при этом остальные проверки игнорируются.**
 
@@ -67,14 +67,14 @@ let a = 2 + 2;
 
 switch (a) {
   case 3:
-    alert( 'Too small' );
+    alert( 'Маловато' );
 *!*
   case 4:
-    alert( 'Exactly!' );
+    alert( 'В точку!' );
   case 5:
-    alert( 'Too big' );
+    alert( 'Перебор' );
   default:
-    alert( "I don't know such values" );
+    alert( "Нет таких значений" );
 */!*
 }
 ```
@@ -82,9 +82,9 @@ switch (a) {
 В примере выше последовательно выполнятся три `alert`:
 
 ```js
-alert( 'Exactly!' );
-alert( 'Too big' );
-alert( "I don't know such values" );
+alert( 'В точку!' );
+alert( 'Перебор' );
+alert( "Нет таких значений" );
 ```
 
 ````smart header="Любое выражение может быть `switch/case` аргументом"
@@ -99,12 +99,12 @@ let b = 0;
 switch (+a) {
 *!*
   case b + 1:
-    alert("this runs, because +a is 1, exactly equals b+1");
+    alert("Выполнится, т.к. значением +a будет 1, что в точности равно b+1");
     break;
 */!*
 
   default:
-    alert("this doesn't run");
+    alert("Код не выполнится");
 }
 ```
 В этом примере выражение `+a` вычисляется в `1`, что совпадает с выражением `b + 1` в `case`, и следовательно, код в этом блоке будет выполнен.
@@ -121,19 +121,19 @@ let a = 2 + 2;
 
 switch (a) {
   case 4:
-    alert('Right!');
+    alert('Правильно!');
     break;
 
 *!*
   case 3:                    // (*) группируем оба case
   case 5:
-    alert('Wrong!');
-    alert("Why don't you take a math class?");
+    alert('Неправильно!');
+    alert("Может Вам посетить урок математики?");
     break;
 */!*
 
   default:
-    alert('The result is strange. Really.');
+    alert('Результат выглядит странновато. Честно.');
 }
 ```
 
@@ -148,22 +148,22 @@ switch (a) {
 Для примера, давайте рассмотрим следующий код:
 
 ```js run
-let arg = prompt("Enter a value?");
+let arg = prompt("Введите число?");
 switch (arg) {
   case '0':
   case '1':
-    alert( 'One or zero' );
+    alert( 'Один или Ноль' );
     break;
 
   case '2':
-    alert( 'Two' );
+    alert( 'Два' );
     break;
 
   case 3:
-    alert( 'Never executes!' );
+    alert( 'Никогда не выполнится!' );
     break;
   default:
-    alert( 'An unknown value' );
+    alert( 'Неизвестное значение' );
 }
 ```
 
