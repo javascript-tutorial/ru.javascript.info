@@ -299,7 +299,7 @@ alert( 9999999999999999 ); // покажет 10000000000000000
     alert( NaN === NaN ); // false
     ```
 
-- `isFinite(value)` конвертирует аргумент в число и возвращает `true`, если это не бесконечность, и не `NaN/Infinity/-Infinity`:
+- `isFinite(value)` преобразует аргумент в число и возвращает `true`, если оно является обычным числом, т.е. не `NaN/Infinity/-Infinity`:
 
     ```js run
     alert( isFinite("15") ); // true
