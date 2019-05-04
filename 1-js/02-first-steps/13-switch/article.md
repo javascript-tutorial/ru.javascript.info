@@ -152,7 +152,7 @@ let arg = prompt("Введите число?");
 switch (arg) {
   case '0':
   case '1':
-    alert( 'Один или Ноль' );
+    alert( 'Один или ноль' );
     break;
 
   case '2':
