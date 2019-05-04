@@ -273,12 +273,12 @@ fruits.pop(); // удаляем 1 элемент с конца
 
 Аналогично работает метод `push`.
 
-## Loops
+## Перебор элементов
 
-One of the oldest ways to cycle array items is the `for` loop over indexes:
+Одним из самых старых способов перебора элементов массива является цикл for по цифровым индексам: 
 
 ```js run
-let arr = ["Apple", "Orange", "Pear"];
+let arr = ["Яблоко", "Апельсин", "Груша"];
 
 *!*
 for (let i = 0; i < arr.length; i++) {
@@ -287,40 +287,41 @@ for (let i = 0; i < arr.length; i++) {
 }
 ```
 
-But for arrays there is another form of loop, `for..of`:
+Но для массивов возможен и другой вариант цикла, `for..of`:
 
 ```js run
-let fruits = ["Apple", "Orange", "Plum"];
+let fruits = ["Яблоко", "Апельсин", "Слива"];
 
-// iterates over array elements
+// проходит по значениям
 for (let fruit of fruits) {
   alert( fruit ); 
 }
 ```
 
-The `for..of` doesn't give access to the number of the current element, just its value, but in most cases that's enough. And it's shorter.
+Цикл `for..of` не предоставляет доступа к номеру текущего элемента, только к его значению, но в большинстве случаев этого достаточно. А также это короче.
 
-Technically, because arrays are objects, it is also possible to use `for..in`:
+Технически, так как массив является объектом, можно использовать и вариант `for..in`:
 
 ```js run
-let arr = ["Apple", "Orange", "Pear"];
+let arr = ["Яблоко", "Апельсин", "Груша"];
 
 *!*
 for (let key in arr) {
 */!*
-  alert( arr[key] ); // Apple, Orange, Pear
+  alert( arr[key] ); // Яблоко, Апельсин, Груша
 }
 ```
 
-But that's actually a bad idea. There are potential problems with it:
+Но на самом деле это плохая идея. Существуют скрытые недостатки этого способа:
 
-1. The loop `for..in` iterates over *all properties*, not only the numeric ones.
+1. Цикл `for..in` выполняет перебор *всех свойств* объекта, а не только цифровых.
 
-    There are so-called "array-like" objects in the browser and in other environments, that *look like arrays*. That is, they have `length` and indexes properties, but they may also have other non-numeric properties and methods, which we usually don't need. The `for..in` loop will list them though. So if we need to work with array-like objects, then these "extra" properties can become a problem.
+    В браузере и других программных средах также существуют так называемые *массивоподобные объекты*, которые выглядят, как массив. Это означает, что они имеют свойство `length` и числовые свойства, но также они могут иметь дополнительные нецифровые свойства и методы, которые нам обычно не нужны. Тем не менее, цикл `for..in`  выведет и их. Поэтому, если нам приходится иметь дело с объектами, похожими на массив, такие «лишние» свойства могут стать проблемой.
+    
+2. Цикл `for..in` оптимизируется в случае наличия обобщённого объекта, а не массива, и поэтому выполняется в 10-100 раз медленнее. Конечно, все равно это очень быстро. Увеличение скорости выполнения может иметь значение только при возникновении узких мест или казаться малозначимым. Но мы все же должны представлять разницу.   
 
-2. The `for..in` loop is optimized for generic objects, not arrays, and thus is 10-100 times slower. Of course, it's still very fast. The speedup may only matter in bottlenecks or seem irrelevant. But still we should be aware of the difference.
+Принято считать, что не следует использовать цикл `for..in` для массивов.   
 
-Generally, we shouldn't use `for..in` for arrays.
 
 
 ## A word about "length"
