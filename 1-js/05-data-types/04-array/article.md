@@ -320,67 +320,65 @@ for (let key in arr) {
     
 2. Цикл `for..in` оптимизируется в случае наличия обобщённого объекта, а не массива, и поэтому выполняется в 10-100 раз медленнее. Конечно, все равно это очень быстро. Увеличение скорости выполнения может иметь значение только при возникновении узких мест или казаться малозначимым. Но мы все же должны представлять разницу.   
 
-Принято считать, что не следует использовать цикл `for..in` для массивов.   
+В общем, не следует использовать цикл `for..in` для массивов.   
 
+## Немного о "length"
 
+Свойство `length` автоматически обновляется при изменении массива. Точнее, это не количество элементов массива, а наибольший цифровой индекс плюс один.
 
-## A word about "length"
-
-The `length` property automatically updates when we modify the array. To be precise, it is actually not the count of values in the array, but the greatest numeric index plus one.
-
-For instance, a single element with a large index gives a big length:
+Например, единственный элемент, имеющий большой индекс, дает большую длину:
 
 ```js run
 let fruits = [];
-fruits[123] = "Apple";
+fruits[123] = "Яблоко";
 
 alert( fruits.length ); // 124
 ```
 
-Note that we usually don't use arrays like that. 
+Обратите внимание, что обычно мы не используем массивы таким образом.
 
-Another interesting thing about the `length` property is that it's writable.
+Еще один интересный факт о свойстве `length` – его можно перезаписать.
 
-If we increase it manually, nothing interesting happens. But if we decrease it, the array is truncated. The process is irreversible, here's the example:
+Если мы вручную увеличим его, ничего интересного не произойдет. Но если мы уменьшим его, массив станет короче. Этот процесс необратим, как мы можем понять из примера:
 
 ```js run
 let arr = [1, 2, 3, 4, 5];
 
-arr.length = 2; // truncate to 2 elements
+arr.length = 2; // укорачиваем до 2 элементов
 alert( arr ); // [1, 2]
 
-arr.length = 5; // return length back
-alert( arr[3] ); // undefined: the values do not return
+arr.length = 5; // возвращаем length как было
+alert( arr[3] ); // undefined: значения не восстановились
 ```
 
-So, the simplest way to clear the array is: `arr.length = 0;`.
+Таким образом, самый простой способ очистить массив – это `arr.length = 0`
 
 
 ## new Array() [#new-array]
 
-There is one more syntax to create an array:
+Существует еще один вариант синтаксиса для создания массива:
 
 ```js
-let arr = *!*new Array*/!*("Apple", "Pear", "etc");
+let arr = *!*new Array*/!*("Яблоко", "Груша", "и тд");
 ```
 
-It's rarely used, because square brackets `[]` are shorter. Also there's a tricky feature with it.
+Он редко применяется, так как квадратные скобки `[]` короче. Кроме того, у него есть хитрая особенность.
 
-If `new Array` is called with a single argument which is a number, then it creates an array *without items, but with the given length*.
+Если `new Array` вызывается одним аргументом, который представляет собой число, он создает массив *без элементов, но с заданной длиной*.
 
-Let's see how one can shoot themself in the foot:
+Давайте посмотрим, как можно оказать себе медвежью услугу:
 
 ```js run
-let arr = new Array(2); // will it create an array of [2] ?
+let arr = new Array(2); // создадим ли массив [2] ?
 
-alert( arr[0] ); // undefined! no elements.
+alert( arr[0] ); // undefined! нет элементов.
 
 alert( arr.length ); // length 2
-```
+``` 
 
-In the code above, `new Array(number)` has all elements `undefined`.
+Как мы видим в коде, представленном выше, в `new Array(number)` все элементы равны `undefined`.
 
-To evade such surprises, we usually use square brackets, unless we really know what we're doing.
+Чтобы избежать появления таких неожиданных ситуаций, мы обычно используем квадратные скобки, если не знаем точно, что именно мы делаем. 
 
 ## Multidimensional arrays
 
