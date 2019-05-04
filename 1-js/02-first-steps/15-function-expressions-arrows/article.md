@@ -237,7 +237,7 @@ let sayHi = function(name) {  // (*) магии больше нет
 };
 ```
 
-Функциональные выражения создаются тогда, когда выполнение доходит до них. Это случится только на строке, помеченной звёздочкой `(*)`. Слишком поздно.
+Функциональные Выражения создаются тогда, когда выполнение доходит до них. Это случится только на строке, помеченной звёздочкой `(*)`. Слишком поздно.
 
 **Когда Объявление Функции создаётся для блока кода, оно становится доступно везде внутри блока. Но не снаружи него.**
 
@@ -248,19 +248,19 @@ let sayHi = function(name) {  // (*) магии больше нет
 Код, написанный подобным образом, работать не будет:
 
 ```js run
-let age = prompt("What is your age?", 18);
+let age = prompt("Сколько Вам лет?", 18);
 
 // в зависимости от условия объявляем функцию
 if (age < 18) {
 
   function welcome() {
-    alert("Hello!");
+    alert("Привет!");
   }
 
 } else {
 
   function welcome() {
-    alert("Greetings!");
+    alert("Здравствуйте!");
   }
 
 }
@@ -271,7 +271,7 @@ welcome(); // Ошибка: welcome is not defined
 */!*
 ```
 
-Это произошло, так как Объявление Функции видимо только внутри блока кода в котором располагается.
+Это произошло, так как Объявление Функции видимо только внутри блока кода, в котором располагается.
 
 Вот ещё один пример:
 
@@ -284,7 +284,7 @@ if (age < 18) {
 */!*
                            //  |
   function welcome() {     //  |  
-    alert("Hello!");       //  |  Объявление Функции доступно
+    alert("Привет!");      //  |  Объявление Функции доступно
   }                        //  |  во всём блоке кода, в котором объявлено
                            //  |
 *!*
@@ -294,7 +294,7 @@ if (age < 18) {
 } else {
 
   function welcome() {     //  для age = 16, эта функция "welcome" никогда не создастся
-    alert("Greetings!");
+    alert("Здравствуйте!");
   }
 }
 
@@ -306,72 +306,72 @@ welcome(); // Ошибка: welcome is not defined
 */!*
 ```
 
-What can we do to make `welcome` visible outside of `if`?
+Что можно сделать, чтобы `welcome` была видима снаружи `if`?
 
-The correct approach would be to use a Function Expression and assign `welcome` to the variable that is declared outside of `if` and has the proper visibility.
+Верным подходом будет воспользоваться Функциональным Выражением и присвоить значение `welcome` переменной, объявленной снаружи `if`, что обеспечит нам нужную видимость.
 
-Now it works as intended:
+Теперь работает как надо:
 
 ```js run
-let age = prompt("What is your age?", 18);
+let age = prompt("Сколько Вам лет?", 18);
 
 let welcome;
 
 if (age < 18) {
 
   welcome = function() {
-    alert("Hello!");
+    alert("Привет!");
   };
 
 } else {
 
   welcome = function() {
-    alert("Greetings!");
+    alert("Здравствуйте!");
   };
 
 }
 
 *!*
-welcome(); // ok now
+welcome(); // теперь всё в порядке
 */!*
 ```
 
-Or we could simplify it even further using a question mark operator `?`:
+Можно упростить этот код ещё сильнее, используя оператор вопросительного знака `?`:
 
 ```js run
-let age = prompt("What is your age?", 18);
+let age = prompt("Сколько Вам лет?", 18);
 
 let welcome = (age < 18) ?
-  function() { alert("Hello!"); } :
-  function() { alert("Greetings!"); };
+  function() { alert("Привет!"); } :
+  function() { alert("Здравствуйте!"); };
 
 *!*
-welcome(); // ok now
+welcome(); // теперь всё в порядке
 */!*
 ```
 
 
-```smart header="When should you choose Function Declaration versus Function Expression?"
-As a rule of thumb, when we need to declare a function, the first to consider is Function Declaration syntax, the one we used before. It gives more freedom in how to organize our code, because we can call such functions before they are declared.
+```smart header="Когда использовать Объявление Функции, а когда Функциональное Выражение?"
+Как правило, если нам понадобилась функция в первую очередь нужно рассматривать синтаксис Объявления Функции, который мы использовали до этого. Это даёт нам больше свободы в том, как мы можем организовывать код. Функции, объявленные таким образом можно вызывать до их объявления.
 
-It's also a little bit easier to look up `function f(…) {…}` in the code than `let f = function(…) {…}`. Function Declarations are more "eye-catching".
+Ещё такие функции `function f(…) {…}`, чуть более заметны в коде, чем `let f = function(…) {…}`. Объявления функций более распознаваемы.
 
-...But if a Function Declaration does not suit us for some reason (we've seen an example above), then Function Expression should be used.
+...Но если Объявление Функции нам не подходит по какой-то причине (мы рассмотрели это в примере выше), тогда должно быть использовано Функциональное Выражение.
 ```
 
 
-## Arrow functions [#arrow-functions]
+## Функции-стрелки [#arrow-functions]
 
-There's one more very simple and concise syntax for creating functions, that's often better than Function Expressions. It's called "arrow functions", because it looks like this:
+Существует ещё более простой и краткий синтаксис для создания функций, который часто лучше, чем синтаксис Функциональных Выражений. Он называется "функции-стрелки" или "стрелочные функции" (arrow functions), т.к. выглядит следующим образом:
 
 
 ```js
 let func = (arg1, arg2, ...argN) => expression
 ```
 
-...This creates a function `func` that has arguments `arg1..argN`, evaluates the `expression` on the right side with their use and returns its result.
+...Такой код создаёт функцию `func` с аргументами `arg1..argN` и вычисляет `expression` с правой стороны с их использованием, сразу возвращая результат.
 
-In other words, it's roughly the same as:
+Другими словами, это почти так же как:
 
 ```js
 let func = function(arg1, arg2, ...argN) {
@@ -379,14 +379,14 @@ let func = function(arg1, arg2, ...argN) {
 };
 ```
 
-...But much more concise.
+...Но гораздо более кратко.
 
-Let's see an example:
+Давайте взглянем на пример:
 
 ```js run
 let sum = (a, b) => a + b;
 
-/* The arrow function is a shorter form of:
+/* Функция-стрелка более краткая форма:
 
 let sum = function(a, b) {
   return a + b;
@@ -397,10 +397,10 @@ alert( sum(1, 2) ); // 3
 
 ```
 
-If we have only one argument, then parentheses can be omitted, making that even shorter:
+Если у нас только один аргумент, то круглые скобки можно опустить, сделав запись ещё короче:
 
 ```js run
-// same as
+// тоже что и
 // let double = function(n) { return n * 2 }
 *!*
 let double = n => n * 2;
@@ -409,7 +409,7 @@ let double = n => n * 2;
 alert( double(3) ); // 6
 ```
 
-If there are no arguments, parentheses should be empty (but they should be present):
+Если нет аргументов, исользуются пустые круглые скобки (их указывать обязательно):
 
 ```js run
 let sayHi = () => alert("Hello!");
@@ -417,63 +417,63 @@ let sayHi = () => alert("Hello!");
 sayHi();
 ```
 
-Arrow functions can be used in the same way as Function Expressions.
+Функции-стрелки могут быть использован, в качестве Функциональныех Выражений.
 
-For instance, here's the rewritten example with `welcome()`:
+Например, вот переписанный пример уже знакомой нам функции `welcome()`:
 
 ```js run
-let age = prompt("What is your age?", 18);
+let age = prompt("Сколько Вам лет?", 18);
 
 let welcome = (age < 18) ?
-  () => alert('Hello') :
-  () => alert("Greetings!");
+  () => alert('Привет') :
+  () => alert("Здравствуйте!");
 
-welcome(); // ok now
+welcome(); // теперь всё в порядке
 ```
 
-Arrow functions may appear unfamiliar and not very readable at first, but that quickly changes as the eyes get used to the structure.
+По началу Функции-стрелки могут позакаться необычными и трудно-читаемыми, но это быстро пройдёт, как только глаза привыкнут к этим конструкциям.
 
-They are very convenient for simple one-line actions, when we're just too lazy to write many words.
+Они очень удобны для простых однострочных действий, когда бывает утомительно писать много слов.
 
-```smart header="Multiline arrow functions"
+```smart header="Многострочные стрелочные функции"
 
-The examples above took arguments from the left of `=>` and evaluated the right-side expression with them.
+В примерах выше аргументы использовались слева от `=>`, а справа вычислялось выражение с ними.
 
-Sometimes we need something a little bit more complex, like multiple expressions or statements. It is also possible, but we should enclose them in curly braces. Then use a normal `return` within them.
+Иногда нам нужно кое-что более сложное, например, несколько выражений или инструкций. Это также возможно, но мы должны заключать такие выражения в фигурные скобки с использованием директивы `return` внутри них, как в обычной функции.
 
-Like this:
+Например:
 
 ```js run
-let sum = (a, b) => {  // the curly brace opens a multiline function
+let sum = (a, b) => {  // фигурная скобка, открывающая тело многострочной функции
   let result = a + b;
 *!*
-  return result; // if we use curly braces, use return to get results
+  return result; // если используются фигурные скобки, должна использоваться `return`, чтобы вернуть результат
 */!*
 };
 
 alert( sum(1, 2) ); // 3
 ```
 
-```smart header="More to come"
-Here we praised arrow functions for brevity. But that's not all! Arrow functions have other interesting features. We'll return to them later in the chapter <info:arrow-functions>.
+```smart header="Кое-что ещё"
+Здесь мы рассмотрели Функции-стрелки, с позиции их более краткой записи. Но это далеко не всё! Стрелочные функциио обладают другими интересными особенностями. Мы вернёмся к ним позже в главе <info:arrow-functions>.
 
-For now, we can already use them for one-line actions and callbacks.
+А пока, мы можем использовать их для простых однострочных действий и колбэков.
 ```
 
-## Summary
+## Итого
 
-- Functions are values. They can be assigned, copied or declared in any place of the code.
-- If the function is declared as a separate statement in the main code flow, that's called a "Function Declaration".
-- If the function is created as a part of an expression, it's called a "Function Expression".
-- Function Declarations are processed before the code block is executed. They are visible everywhere in the block.
-- Function Expressions are created when the execution flow reaches them.
+- Функции это значения. Они могут быть присвоены, скопированы или объявлены в другом месте кода.
+- Если функция объявлена, как отдельная инструкция в основном потоке кода, то это "Объявление Функции".
+- Если функция была создана, как часть выражения, такая функция называется "Функциональным Выражением".
+- Объявления Функций обрабатываются перед выполненеи блока кода. Они видны во всём блоке.
+- Функциональные Выражения создаются, только когда поток выполнения достигает их.
 
 
-In most cases when we need to declare a function, a Function Declaration is preferable, because it is visible prior to the declaration itself. That gives us more flexibility in code organization, and is usually more readable.
+В большинстве случаев, когда нам нужно создать фукнцию, предпочтительно использовать Объявление Функции, т.к. оно видимо до своего объявления в коде. Это позволяет более гибко организовывать код, и обычно улучшает его читаемость.
 
-So we should use a Function Expression only when a Function Declaration is not fit for the task. We've seen a couple of examples of that in this chapter, and will see more in the future.
+Таким образом, мы должны прибегать к Функциональным Выражениям в случае, когда Объявления Функций не подходят для нашей задачи. Мы рассмотрели несколько таких примеров в этой главе, и рассмотрим их ещё больше в будущем.
 
-Arrow functions are handy for one-liners. They come in two flavors:
+Стрелочные функции очень удобны для однострочных действий. Они бывают двух типов:
 
-1. Without curly braces: `(...args) => expression` -- the right side is an expression: the function evaluates it and returns the result.
-2. With curly braces: `(...args) => { body }` -- brackets allow us to write multiple statements inside the function, but we need an explicit `return` to return something.
+1. Без фигурных скобок: `(...args) => expression` -- правая сторона выражение: функция выполняет его и возвращает результат.
+2. С фигурными скобками: `(...args) => { body }` -- скобки позволяют нам писать многосточные инструкции внутри функции, но при этом необходимо указывать директиву `return`, чтобы вернуть какое либо значение.
