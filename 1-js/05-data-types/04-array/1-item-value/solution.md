@@ -1,17 +1,17 @@
-The result is `4`:
+Выведется `4`:
 
 
 ```js run
-let fruits = ["Apples", "Pear", "Orange"];
+let fruits = ["Яблоки", "Груша", "Апельсин"];
 
 let shoppingCart = fruits;
 
-shoppingCart.push("Banana");
+shoppingCart.push("Банан");
 
 *!*
 alert( fruits.length ); // 4
 */!*
 ```
 
-That's because arrays are objects. So both `shoppingCart` and `fruits` are the references to the same array.
+Потому, что массивы - это объекты. Обе переменные `shoppingCart` и `fruits` являются ссылками на один и тот же массив.
 
