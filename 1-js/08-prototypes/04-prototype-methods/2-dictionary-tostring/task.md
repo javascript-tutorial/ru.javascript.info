@@ -14,14 +14,14 @@ importance: 5
 let dictionary = Object.create(null);
 
 *!*
-// ваш код для добавляет метод dictionary.toString
+// ваш код, который добавляет метод dictionary.toString
 */!*
 
 // добавляем немного данных
 dictionary.apple = "Apple";
 dictionary.__proto__ = "test"; // здесь __proto__ -- это обычный ключ
 
-// только apple и __proto__ выведен в цикле
+// только apple и __proto__ выведены в цикле
 for(let key in dictionary) {
   alert(key); // "apple", затем "__proto__"
 }  
