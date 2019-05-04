@@ -380,9 +380,9 @@ alert( arr.length ); // length 2
 
 Чтобы избежать появления таких неожиданных ситуаций, мы обычно используем квадратные скобки, если не знаем точно, что именно мы делаем. 
 
-## Multidimensional arrays
+## Многомерные массивы
 
-Arrays can have items that are also arrays. We can use it for multidimensional arrays, to store matrices:
+Массивы могут содержать элементы, которые тоже являются массивами. Это можно использовать для создания многомерных массивов для хранения матриц:
 
 ```js run
 let matrix = [
@@ -391,14 +391,14 @@ let matrix = [
   [7, 8, 9]
 ];
 
-alert( matrix[1][1] ); // the central element
+alert( matrix[1][1] ); // центральный элемент 
 ```
 
 ## toString
 
-Arrays have their own implementation of `toString` method that returns a comma-separated list of elements.
+Массивы по-своему реализуют метод `toString`, который возвращает список элементов, разделенных запятыми.
 
-For instance:
+Например:
 
 
 ```js run
@@ -408,7 +408,7 @@ alert( arr ); // 1,2,3
 alert( String(arr) === '1,2,3' ); // true
 ```
 
-Also, let's try this:
+Также, давайте попробуем следующее:
 
 ```js run
 alert( [] + 1 ); // "1"
@@ -416,9 +416,9 @@ alert( [1] + 1 ); // "11"
 alert( [1,2] + 1 ); // "1,21"
 ```
 
-Arrays do not have `Symbol.toPrimitive`, neither a viable `valueOf`, they implement only `toString` conversion, so here `[]` becomes an empty string, `[1]` becomes `"1"` and `[1,2]` becomes `"1,2"`.
+Массивы не имеют ни `Symbol.toPrimitive`, ни функционирующего `valueOf`, они реализуют только преобразование `toString`, таким образом здесь `[]` становится пустой строкой, `[1]` становится `"1"`, а `[1,2]` становится `"1,2"`.
 
-When the binary plus `"+"` operator adds something to a string, it converts it to a string as well, so the next step looks like this:
+Когда бинарный оператор плюс `"+"` добавляет что-либо к строке, он тоже преобразует это в строку, таким образом:
 
 ```js run
 alert( "" + 1 ); // "1"
@@ -426,36 +426,37 @@ alert( "1" + 1 ); // "11"
 alert( "1,2" + 1 ); // "1,21"
 ```
 
-## Summary
+## Итого
 
-Array is a special kind of object, suited to storing and managing ordered data items.
+Массив – это особый тип объекта, предназначенный для работы с упорядоченным набором элементов.
 
-- The declaration:
+- Объявление:
 
     ```js
-    // square brackets (usual)
+    // квадратные скобки(чаще)
     let arr = [item1, item2...];
 
-    // new Array (exceptionally rare)
+    // new Array (редко)
     let arr = new Array(item1, item2...);
     ```
+    
+    Вызов `new Array(number)` создает массив с заданной длиной, но не имеющий элементов.
+    
+- Свойство `length` отражает длину массива или, если точнее, его последний цифровой индекс плюс один. Длина корректируется автоматически методами массива.
+- Если мы уменьшаем `length` вручную, массив укорачивется. 
 
-    The call to `new Array(number)` creates an array with the given length, but without elements.
+Мы можем использовать массив как двустороннюю очередь, используя следующие операции:  
 
-- The `length` property is the array length or, to be precise, its last numeric index plus one. It is auto-adjusted by array methods. 
-- If we shorten `length` manually, the array is truncated.
+- `push(...items)`добавляет `items` в конец массива. 
+- `pop()` удаляет элемент в конце массива и возвращает его. 
+- `shift()` удаляет элемент в начале массива и возвращает его. 
+- `unshift(...items)` добавляет `items` в начало массива.   
 
-We can use an array as a deque with the following operations:
-
-- `push(...items)` adds `items` to the end.
-- `pop()` removes the element from the end and returns it.
-- `shift()` removes the element from the beginning and returns it.
-- `unshift(...items)` adds items to the beginning.
-
-To loop over the elements of the array:
-  - `for (let i=0; i<arr.length; i++)` -- works fastest, old-browser-compatible.
-  - `for (let item of arr)` -- the modern syntax for items only,
-  - `for (let i in arr)` -- never use.
-
-We will return to arrays and study more methods to add, remove, extract elements and sort arrays in the chapter <info:array-methods>.
+Чтобы пройтись по элементам массива: 
+ - `for (let i=0; i<arr.length; i++)` -- работает быстрее всего, совместим со старыми браузерами.
+ - `for (let item of arr)` -- современный синтаксис только для значений элементов(к индексам нет доступа).
+ - `for (let i in arr)` -- никогда не используйте для массивов.
+ 
+Мы вернёмся к массивам и изучим другие методы добавления, удаления, выделения элементов и сортировки массивов в главе: <info:array-methods>. 
+    
 
