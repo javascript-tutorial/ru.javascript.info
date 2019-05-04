@@ -64,7 +64,7 @@ setTimeout(() => window.open('http://google.com'), 1000);
 
 ## Полный синтаксис window.open
 
-Синтакс открытия нового окна: `window.open(url, name, params)`:
+Синтаксис открытия нового окна: `window.open(url, name, params)`:
 
 url
 : URL для загрузки в новом окне.
