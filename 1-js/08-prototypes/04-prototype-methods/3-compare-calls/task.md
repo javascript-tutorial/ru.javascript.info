@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# The difference between calls
+# Разница между вызовами
 
-Let's create a new `rabbit` object:
+Давайте создадим новый объект `rabbit`:
 
 ```js
 function Rabbit(name) {
@@ -17,7 +17,7 @@ Rabbit.prototype.sayHi = function() {
 let rabbit = new Rabbit("Rabbit");
 ```
 
-These calls do the same thing or not?
+Все эти вызовы делают одно и тоже или нет?
 
 ```js
 rabbit.sayHi();
