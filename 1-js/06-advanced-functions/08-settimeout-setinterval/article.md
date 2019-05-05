@@ -133,14 +133,14 @@ setTimeout(() => { clearInterval(timerId); alert('stop'); }, 5000);
 Если выполните код ниже и не закроете окно `alert` в течение некоторого времени, тогда в Firefox/IE следующее окно `alert` появится как только закроется первое (2 секунды после прошлого вызова), а в Chrome/Opera/Safari -- спустя 2 секунды после закрытия (таймер не работал во время первого `alert`).
 ```
 
-## Recursive setTimeout
+## Рекурсивный setTimeout
 
-There are two ways of running something regularly.
+Есть два способа запустить что-то регулярно.
 
-One is `setInterval`. The other one is a recursive `setTimeout`, like this:
+Один из них `setInterval`. Другим является рекурсивный `setTimeout`. Например:
 
 ```js
-/** instead of:
+/** вместо:
 let timerId = setInterval(() => alert('tick'), 2000);
 */
 
@@ -152,21 +152,20 @@ let timerId = setTimeout(function tick() {
 }, 2000);
 ```
 
-The `setTimeout` above schedules the next call right at the end of the current one `(*)`.
+Метод `setTimeout` выше планирует следующий вызов прямо после окончания текущего `(*)`.
 
-The recursive `setTimeout` is a more flexible method than `setInterval`. This way the next call may be scheduled differently, depending on the results of the current one.
+Рекурсивный `setTimeout` более гибкий метод, чем `setInterval`. Таким образом, следующий вызов может быть задан по-разному, в зависимости от результатов текущего.
 
-For instance, we need to write a service that sends a request to the server every 5 seconds asking for data, but in case the server is overloaded, it should increase the interval to 10, 20, 40 seconds...
-
-Here's the pseudocode:
+Например, необходимо написать сервис, который отправляет запрос для получения данных на сервер каждые 5 секунд, но если сервер перегружен, то необходимо увеличить интревал запросов до 10, 20, 40 секунд...
+Вот псевдокод:
 ```js
 let delay = 5000;
 
 let timerId = setTimeout(function request() {
-  ...send request...
+  ...отправить запрос...
 
-  if (request failed due to server overload) {
-    // increase the interval to the next run
+  if (ошибка запроса из-за перегрузки сервера) {
+    // увеличить интервал для следующего запроса
     delay *= 2;
   }
 
@@ -176,11 +175,11 @@ let timerId = setTimeout(function request() {
 ```
 
 
-And if we regularly have CPU-hungry tasks, then we can measure the time taken by the execution and plan the next call sooner or later.
+И если мы постоянно получаем ресурсоемкие задачи, то затем можем измерить время, затраченное на выполнение, и спланировать следующий вызов раньше или позже.
 
-**Recursive `setTimeout` guarantees a delay between the executions, `setInterval` -- does not.**
+**Рекурсивный `setTimeout` гарантирует задержку между извлечениями, `setInterval` -- нет.**
 
-Let's compare two code fragments. The first one uses `setInterval`:
+Сравним два фрагмента кода. Первый использует `setInterval`:
 
 ```js
 let i = 1;
@@ -189,7 +188,7 @@ setInterval(function() {
 }, 100);
 ```
 
-The second one uses recursive `setTimeout`:
+Второй использует рекурсивный `setTimeout`:
 
 ```js
 let i = 1;
@@ -199,11 +198,11 @@ setTimeout(function run() {
 }, 100);
 ```
 
-For `setInterval` the internal scheduler will run `func(i)` every 100ms:
+Для `setInterval` внутренний планировщик выполнит `func(i)` каждые 100 мс:
 
 ![](setinterval-interval.png)
 
-Did you notice?
+Обратили внимание?
 
 **The real delay between `func` calls for `setInterval` is less than in the code!**
 
