@@ -1,61 +1,61 @@
-# Variables
+# Переменные
 
-Most of the time, a JavaScript application needs to work with information. Here are two examples:
-1. An online shop -- the information might include goods being sold and a shopping cart.
-2. A chat application -- the information might include users, messages, and much more.
+JavaScript-приложению обычно нужно работать с информацией. Например:
+1. Интернет магазин -- информация может включать продаваемые товары и корзину покупок.
+2. Чат -- информация может включать пользователей, сообщения и многое другое.
 
-Variables are used to store this information.
+Переменные используются для хранения этой информации.
 
-## A variable
+## Переменная
 
-A [variable](https://en.wikipedia.org/wiki/Variable_(computer_science)) is a "named storage" for data. We can use variables to store goodies, visitors, and other data.
+[Переменная](https://ru.wikipedia.org/wiki/%D0%9F%D0%B5%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%BD%D0%B0%D1%8F_(%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5)) -- это "именованное хранилище" для данных. Мы можем использовать переменные для хранения товаров, посетителей и других данных.
 
-To create a variable in JavaScript, use the `let` keyword.
+Для создания переменной в JavaScript, используйте ключевое слово `let`.
 
-The statement below creates (in other words: *declares* or *defines*) a variable with the name "message":
+Приведенная ниже инструкция создает (другими словами: *объявляет* или *определяет*) переменную с именем "message":
 
 ```js
 let message;
 ```
 
-Now, we can put some data into it by using the assignment operator `=`:
+Теперь можно поместить в неё некоторые данные, используя оператор присваивания `=`:
 
 ```js
 let message;
 
 *!*
-message = 'Hello'; // store the string
+message = 'Hello'; // хранит строку
 */!*
 ```
 
-The string is now saved into the memory area associated with the variable. We can access it using the variable name:
+Строка сохраняется в области памяти, связанной с переменной. Мы можем получить к ней доступ, используя имя переменной:
 
 ```js run
 let message;
 message = 'Hello!';
 
 *!*
-alert(message); // shows the variable content
+alert(message); // показывает содержимое переменной
 */!*
 ```
 
-To be concise, we can combine the variable declaration and assignment into a single line:
+Для краткости можно совместить объявление переменной и запись данных в одну строку:
 
 ```js run
-let message = 'Hello!'; // define the variable and assign the value
+let message = 'Hello!'; // определяем переменную и присваиваем ей значение
 
 alert(message); // Hello!
 ```
 
-We can also declare multiple variables in one line:
+Мы также можем объявить несколько переменных в одной строке:
 
 ```js no-beautify
 let user = 'John', age = 25, message = 'Hello';
 ```
 
-That might seem shorter, but we don't recommend it. For the sake of better readability, please use a single line per variable.
+Такой способ может показаться короче, но мы не рекомендуем его. Для лучшей читаемости объявляйте каждую переменную на новой строке.
 
-The multiline variant is a bit longer, but easier to read:
+Многострочный вариант немного длиннее, но легче для чтения:
 
 ```js
 let user = 'John';
@@ -63,14 +63,14 @@ let age = 25;
 let message = 'Hello';
 ```
 
-Some people also define multiple variables in this multiline style:
+Некоторые люди также определяют несколько переменных в многострочном стиле:
 ```js no-beautify
 let user = 'John',
   age = 25,
   message = 'Hello';
 ```
 
-...Or even in the "comma-first" style:
+...Или даже с запятой в начале строки:
 
 ```js no-beautify
 let user = 'John'
@@ -78,47 +78,47 @@ let user = 'John'
   , message = 'Hello';
 ```
 
-Technically, all these variants do the same thing. So, it's a matter of personal taste and aesthetics.
+В принципе, все эти варианты одинаковые. Так что это вопрос личного вкуса и эстетики.
 
 
-````smart header="`var` instead of `let`"
-In older scripts, you may also find another keyword: `var` instead of `let`:
+````smart header="`var` вместо `let`"
+В старых скриптах вы также можете найти другое ключевое слово: `var` вместо `let`:
 
 ```js
 *!*var*/!* message = 'Hello';
 ```
 
-The `var` keyword is *almost* the same as `let`. It also declares a variable, but in a slightly different, "old-school" way.
+Ключевое слово `var` *почти* то же самое, что и `let`. Оно объявляет переменную, но немного по-другому, "устаревшим" способом.
 
-There are subtle differences between `let` and `var`, but they do not matter for us yet. We'll cover them in detail in the chapter <info:var>.
+Есть тонкие различия между `let` и `var`, но они пока не имеют для нас значения. Мы подробно рассмотрим их в этой главе <info:var>.
 ````
 
-## A real-life analogy
+## Аналогия из жизни
 
-We can easily grasp the concept of a "variable" if we imagine it as a "box" for data, with a uniquely-named sticker on it.
+Мы легко поймем концепцию "переменной", если представим ее в виде "коробки" для данных с уникальным названием на ней.
 
-For instance, the variable `message` can be imagined as a box labeled `"message"` with the value `"Hello!"` in it:
+Например, переменную `message` можно представить как коробку с названием `"message"` и значением `"Hello!"` внутри:
 
 ![](variable.png)
 
-We can put any value in the box.
+Мы можем положить любое значение в коробку.
 
-We can also change it as many times as we want:
+Мы также можем изменить его столько раз, сколько захотим:
 ```js run
 let message;
 
 message = 'Hello!';
 
-message = 'World!'; // value changed
+message = 'World!'; // значение изменено
 
 alert(message);
 ```
 
-When the value is changed, the old data is removed from the variable:
+При изменении значения старые данные удаляются из переменной:
 
 ![](variable-change.png)
 
-We can also declare two variables and copy data from one into the other.
+Мы также можем объявить две переменные и скопировать данные из одной в другую.
 
 ```js run
 let hello = 'Hello world!';
@@ -126,99 +126,99 @@ let hello = 'Hello world!';
 let message;
 
 *!*
-// copy 'Hello world' from hello into message
+// копируем значение 'Hello world' из переменной hello в переменную message
 message = hello;
 */!*
 
-// now two variables hold the same data
+// теперь две переменные содержат одинаковые данные
 alert(hello); // Hello world!
 alert(message); // Hello world!
 ```
 
-```smart header="Functional languages"
-It's interesting to note that [functional](https://en.wikipedia.org/wiki/Functional_programming) programming languages, like [Scala](http://www.scala-lang.org/) or [Erlang](http://www.erlang.org/), forbid changing variable values.
+```smart header="Функциональные языки программирования"
+Примечательно, что существуют [функциональные](https://ru.wikipedia.org/wiki/%D0%A4%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%BE%D0%BD%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%B5_%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5) языки программирования, такие как [Scala](http://www.scala-lang.org/) или [Erlang](http://www.erlang.org/), которые запрещают изменять значение переменной.
 
-In such languages, once the value is stored "in the box", it's there forever. If we need to store something else, the language forces us to create a new box (declare a new variable). We can't reuse the old one.
+В таких языках, однажды сохраненное "в коробку" значение остается там навсегда. Если нам нужно сохранить что-то другое, язык заставляет нас создать новую коробку (объявить новую переменную). Мы не можем использовать старую переменную.
 
-Though it may seem a little odd at first sight, these languages are quite capable of serious development. More than that, there are areas like parallel computations where this limitation confers certain benefits. Studying such a language (even if you're not planning to use it soon) is recommended to broaden the mind.
+Хотя на первый взгляд это может показаться немного странным, эти языки вполне подходят для серьезной разработки. Более того, есть такая область как параллельные вычисления, где это ограничение дает определенные преимущества. Изучение такого языка (даже если вы не планируете использовать его в ближайшее время) рекомендуется для расширения кругозора.
 ```
 
-## Variable naming [#variable-naming]
+## Имена переменных [#variable-naming]
 
-There are two limitations on variable names in JavaScript:
+В JavaScript есть два ограничения, касающиеся имён переменных :
 
-1. The name must contain only letters, digits, or the symbols `$` and `_`.
-2. The first character must not be a digit.
+1. Имя переменной должно содержать только буквы, цифры или символы `$` и `_`.
+2. Первый символ не должен быть цифрой.
 
-Examples of valid names:
+Примеры допустимых имен:
 
 ```js
 let userName;
 let test123;
 ```
 
-When the name contains multiple words, [camelCase](https://en.wikipedia.org/wiki/CamelCase) is commonly used. That is: words go one after another, each word except first starting with a capital letter: `myVeryLongName`.
+Если имя содержит несколько слов, обычно используется [верблюжья нотация](https://ru.wikipedia.org/wiki/CamelCase). То есть слова следуют одно за другим, где каждое слово начинается с заглавной буквы: `myVeryLongName`.
 
-What's interesting -- the dollar sign `'$'` and the underscore `'_'` can also be used in names. They are regular symbols, just like letters, without any special meaning.
+Самое интересное -- знак доллара `'$'` и подчеркивание `'_'` также можно использовать в названиях. Это обычные символы, как и буквы, без какого-либо особого значения.
 
-These names are valid:
+Эти имена являются допустимыми:
 
 ```js run untrusted
-let $ = 1; // declared a variable with the name "$"
-let _ = 2; // and now a variable with the name "_"
+let $ = 1; // объявили переменную с именем "$"
+let _ = 2; // а теперь переменную с именем "_"
 
 alert($ + _); // 3
 ```
 
-Examples of incorrect variable names:
+Примеры неправильных имен переменных:
 
 ```js no-beautify
-let 1a; // cannot start with a digit
+let 1a; // не может начинаться с цифры
 
-let my-name; // hyphens '-' aren't allowed in the name
+let my-name; // дефис '-' не разрешен в имени
 ```
 
-```smart header="Case matters"
-Variables named `apple` and `AppLE` are two different variables.
+```smart header="Регистр имеет значение"
+Переменные с именами `apple` and `AppLE` -- это две разные переменные.
 ```
 
-````smart header="Non-English letters are allowed, but not recommended"
-It is possible to use any language, including cyrillic letters or even hieroglyphs, like this:
+````smart header="Не-латинские буквы разрешены, но не рекомендуются"
+Можно использовать любой язык, включая кириллицу или даже иероглифы, например:
 
 ```js
 let имя = '...';
 let 我 = '...';
 ```
 
-Technically, there is no error here, such names are allowed, but there is an international tradition to use English in variable names. Even if we're writing a small script, it may have a long life ahead. People from other countries may need to read it some time.
+Технически здесь нет ошибки, такие имена разрешены, но есть международная традиция использовать английский язык в именах переменных. Даже если мы пишем небольшой скрипт, у него может быть долгая жизнь впереди. Людям из других стран, возможно, придется прочесть его не один раз.
 ````
 
-````warn header="Reserved names"
-There is a [list of reserved words](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Lexical_grammar#Keywords), which cannot be used as variable names because they are used by the language itself.
+````warn header="Зарезервированные имена"
+Существует [список зарезервированных слов](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Lexical_grammar#%D0%9A%D0%BB%D1%8E%D1%87%D0%B5%D0%B2%D1%8B%D0%B5_%D1%81%D0%BB%D0%BE%D0%B2%D0%B0), которые нельзя использовать в качестве имен переменных, потому что они используются самим языком.
 
-For example: `let`, `class`, `return`, and `function` are reserved.
+Например: `let`, `class`, `return` и `function` зарезервированы.
 
-The code below gives a syntax error:
+Приведенный ниже код дает синтаксическую ошибку:
 
 ```js run no-beautify
-let let = 5; // can't name a variable "let", error!
-let return = 5; // also can't name it "return", error!
+let let = 5; // нельзя назвать переменную "let", ошибка!
+let return = 5; // также нельзя назвать переменную "return", ошибка!
 ```
 ````
 
-````warn header="An assignment without `use strict`"
+````warn header="Создание переменной без использования `use strict`"
 
-Normally, we need to define a variable before using it. But in the old times, it was technically possible to create a variable by a mere assignment of the value without using `let`. This still works now if we don't put `use strict` in our scripts to maintain compatibility with old scripts.
+Обычно нам нужно определить переменную перед ее использованием. Но в старые времена было технически возможно создать переменную простым присвоением значения без использования `let`. Это все еще работает, если мы не включаем `строгий режим` в наших файлах для поддержания совместимости со старыми сценариями.
 
 ```js run no-strict
-// note: no "use strict" in this example
+// заметка: "use strict" в этом примере не используется
 
-num = 5; // the variable "num" is created if it didn't exist
+num = 5; // если переменная "num" не существовала, она создается
 
 alert(num); // 5
 ```
 
-This is a bad practice and would cause an error in strict mode:
+Это плохая практика и приведет к ошибке в строгом режиме:
 
 ```js
 "use strict";
@@ -229,32 +229,32 @@ num = 5; // error: num is not defined
 ```
 ````
 
-## Constants
+## Константы
 
-To declare a constant (unchanging) variable, use `const` instead of `let`:
+Чтобы объявить константу (неизменяемую) переменную, используйте `const` вместо `let`:
 
 ```js
 const myBirthday = '18.04.1982';
 ```
 
-Variables declared using `const` are called "constants". They cannot be changed. An attempt to do so would cause an error:
+Переменные объявленные с помощью `const`, называются "константами". Их нельзя изменить. Попытка сделать это приведет к ошибке:
 
 ```js run
 const myBirthday = '18.04.1982';
 
-myBirthday = '01.01.2001'; // error, can't reassign the constant!
+myBirthday = '01.01.2001'; // ошибка, константу нельзя повторно определить!
 ```
 
-When a programmer is sure that a variable will never change, they can declare it with `const` to guarantee and clearly communicate that fact to everyone.
+Если программист уверен, что переменная никогда не будет меняться, он может гарантировать это и наглядно донести до каждого, объявив ее через `const`.
 
 
-### Uppercase constants
+### Константы в верхнем регистре
 
-There is a widespread practice to use constants as aliases for difficult-to-remember values that are known prior to execution.
+Широко распространена практика использования констант в качестве псевдонимов для трудно запоминаемых значений, которые известны до начала исполнения сценария.
 
-Such constants are named using capital letters and underscores.
+Названия таких констант пишутся с использованием заглавных букв и подчеркивания.
 
-Like this:
+Вот так:
 
 ```js run
 const COLOR_RED = "#F00";
@@ -262,69 +262,70 @@ const COLOR_GREEN = "#0F0";
 const COLOR_BLUE = "#00F";
 const COLOR_ORANGE = "#FF7F00";
 
-// ...when we need to pick a color
+// ...когда нам нужно выбрать цвет
 let color = COLOR_ORANGE;
 alert(color); // #FF7F00
 ```
 
-Benefits:
+Преимущества:
 
-- `COLOR_ORANGE` is much easier to remember than `"#FF7F00"`.
-- It is much easier to mistype `"#FF7F00"` than `COLOR_ORANGE`.
-- When reading the code, `COLOR_ORANGE` is much more meaningful than `#FF7F00`.
+- `COLOR_ORANGE` гораздо легче запомнить, чем `"#FF7F00"`.
+- Гораздо легче допустить ошибку при вводе `"#FF7F00"`, чем при вводе `COLOR_ORANGE`.
+- При чтении кода, `COLOR_ORANGE` намного понятнее, чем `#FF7F00`.
 
-When should we use capitals for a constant and when should we name it normally? Let's make that clear.
+Когда мы должны использовать для констант заглавные буквы, а когда называть их нормально? Давайте разберемся с этим.
 
-Being a "constant" just means that a variable's value never changes. But there are constants that are known prior to execution (like a hexadecimal value for red) and there are constants that are *calculated* in run-time, during the execution, but do not change after their initial assignment.
+Название "константа" просто означает, что значение переменной никогда не меняется. Но есть константы, которые известны до выполнения (например, шестнадцатеричное значение для красного цвета), а есть константы, которые *вычисляются* во время выполнения сценария, но не изменяются после их первоначального назначения.
 
-For instance:
+Например:
 ```js
-const pageLoadTime = /* time taken by a webpage to load */;
+const pageLoadTime = /* время потраченное на загрузку веб-страницы */;
 ```
 
-The value of `pageLoadTime` is not known prior to the page load, so it's named normally. But it's still a constant because it doesn't change after assignment.
+Значение `pageLoadTime` не известно до загрузки страницы, поэтому ее имя записано обычными, а не прописными буквами. Но это все еще константа, потому что она не изменяется после назначения.
 
-In other words, capital-named constants are only used as aliases for "hard-coded" values.  
+Другими словами, константы с именами, записанными заглавными буквами,  используются только как псевдонимы для "жестко закодированных" значений.  
 
-## Name things right
+## Придумывайте правильные имена
 
-Talking about variables, there's one more extremely important thing.
+В разговоре о переменных необходимо упомянуть, что есть еще одна чрезвычайно важная вещь.
 
-Please name your variables sensibly. Take time to think about this.
+Название переменной должно иметь ясный и понятный смысл, говорить о том, какие данные в ней хранятся.
 
-Variable naming is one of the most important and complex skills in programming. A quick glance at variable names can reveal which code was written by a beginner versus an experienced developer.
+Именование переменных -- это один из самых важных и сложных навыков в программировании. Быстрый взгляд на имена переменных может показать, какой код был написан новичком, а какой опытным разработчиком.
 
-In a real project, most of the time is spent modifying and extending an existing code base rather than writing something completely separate from scratch. When we return to some code after doing something else for a while, it's much easier to find information that is well-labeled. Or, in other words, when the variables have good names.
+В реальном проекте большая часть времени тратится на изменение и расширение существующей кодовой базы, а не на написание чего-то совершенно нового с нуля. Когда мы возвращаемся к какому-то коду, после выполнения чего-то другого в течение некоторого времени, гораздо легче найти информацию, которая хорошо размечена. Или, другими словами, когда переменные имеют хорошие имена.
 
-Please spend time thinking about the right name for a variable before declaring it. Doing so will repay you handsomely.
+Пожалуйста, потратьте время на обдумывание правильного имени переменной перед ее объявлением. Делайте так, и будете вознаграждены.
 
-Some good-to-follow rules are:
+Несколько хороших правил:
 
-- Use human-readable names like `userName` or `shoppingCart`.
-- Stay away from abbreviations or short names like `a`, `b`, `c`, unless you really know what you're doing.
-- Make names maximally descriptive and concise. Examples of bad names are `data` and `value`. Such names say nothing. It's only okay to use them if the context of the code makes it exceptionally obvious which data or value the variable is referencing.
-- Agree on terms within your team and in your own mind. If a site visitor is called a "user" then we should name related variables `currentUser` or `newUser` instead of `currentVisitor` or `newManInTown`.
+- Используйте легко читаемые имена, такие как `userName` или `shoppingCart`.
+- Избегайте использования аббревиатур или коротких имен, таких как `a`, `b`, `c`, за исключением тех случаев, когда вы точно знаете, что так нужно.
+- Делайте имена максимально описательными и лаконичными. Примеры плохих имен `data` и `value`. Такие имена ничего не говорят. Их можно использовать только в том случае, если из контекста кода очевидно, на какие данные или значения ссылается переменная.
+- Договоритесь с вашей командой о используемых терминах. Если посетитель сайта называется "user" тогда мы должны назвать связанные с ним переменные  `currentUser` или `newUser` вместо того, чтобы называть их `currentVisitor` или `newManInTown`.
 
-Sounds simple? Indeed it is, but creating descriptive and concise variable names in practice is not. Go for it.
+Звучит просто? Действительно это так, но на практике создание описательных и кратких имен переменных -- редкость. Действуйте.
 
-```smart header="Reuse or create?"
-And the last note. There are some lazy programmers who, instead of declaring new variables, tend to reuse existing ones.
 
-As a result, their variables are like boxes into which people throw different things without changing their stickers. What's inside the box now? Who knows? We need to come closer and check.
+```smart header="Переиспользовать или создавать?"
+И последняя заметка. Есть ленивые программисты, которые вместо объявления новых переменных, повторно используют существующие.
 
-Such programmers save a little bit on variable declaration but lose ten times more on debugging.
+В результате их переменные похожи на коробки, в которые люди бросают разные предметы, не меняя на них стикеры. Что сейчас находится внутри коробки? Кто знает? Нам необходимо подойти поближе и проверить.
 
-An extra variable is good, not evil.
+Такие программисты экономят немного на объявлении переменных, но теряют в десять раз больше при отладке.
 
-Modern JavaScript minifiers and browsers optimize code well enough, so it won't create performance issues. Using different variables for different values can even help the engine optimize your code.
+Дополнительная переменная - это добро, а не зло.
+
+Современные JavaScript-минификаторы и браузеры оптимизируют код достаточно хорошо, поэтому он не создает проблем с производительностью. Использование разных переменных для разных значений может даже помочь движку оптимизировать ваш код.
 ```
 
-## Summary
+## Итого
 
-We can declare variables to store data by using the `var`, `let`, or `const` keywords.
+Мы можем объявить переменные для хранения данных с помощью ключевых слов `var`, `let` или `const`.
 
-- `let` -- is a modern variable declaration. The code must be in strict mode to use `let` in Chrome (V8).
-- `var` -- is an old-school variable declaration. Normally we don't use it at all, but we'll cover subtle differences from `let` in the chapter <info:var>, just in case you need them.
-- `const` -- is like `let`, but the value of the variable can't be changed.
+- `let` -- это современный способ объявления. При использовании `let` в Chrome (V8) должен быть включен строгий режим.
+- `var` -- это устаревший способ объявления. Обычно мы не используем его вообще, но мы рассмотрим тонкие отличия от `let` в главе <info:var>, на случай, если это всё-таки вам понадобится.
+- `const` -- похож на `let`, но значение переменной не может изменяться.
 
-Variables should be named in a way that allows us to easily understand what's inside them.
+Переменные должны быть названы таким образом, чтобы мы могли легко понять, что у них внутри.
