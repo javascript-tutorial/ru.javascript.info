@@ -387,7 +387,7 @@ longEar.eat(); // Error: Maximum call stack size exceeded
     // то же что и
     rabbit.eat.call(this);
     ```
-2. В строке `(*)` в `rabbit.eat` мы хотим передать вызов выше по цепочке, но `this = longEar`, поэтому` this .__ proto __. eat` снова равен `rabbit.eat`! 
+2. В строке `(*)` в `rabbit.eat` мы хотим передать вызов выше по цепочке, но `this=longEar`, поэтому `this.__proto__.eat` снова равен `rabbit.eat`! 
 
     ```js
     // внутри rabbit.eat() у нас также this = longEar
