@@ -1,4 +1,4 @@
-# Scheduling: setTimeout and setInterval
+# Планирование: setTimeout and setInterval
 
 Вы можете вызвать функцию не в данный момент, а позже в определенное время. Это называется "планирование вызова".
 
@@ -107,30 +107,30 @@ alert(timerId); // тот же идентификатор (не принимае
 
 ## setInterval
 
-The `setInterval` method has the same syntax as `setTimeout`:
+Метод `setInterval` имеет какой же синтаксис как `setTimeout`:
 
 ```js
 let timerId = setInterval(func|code, [delay], [arg1], [arg2], ...)
 ```
 
-All arguments have the same meaning. But unlike `setTimeout` it runs the function not only once, but regularly after the given interval of time.
+Все аргументы имеют такое же значение. Но отличие метода от `setTimeout` в том, что функция запускается не один раз, а периодически после указанного интервала времени.
 
-To stop further calls, we should call `clearInterval(timerId)`.
+Чтобы остановить дальнейшее выполнение функции необходимо вызвать `clearInterval(timerId)`.
 
-The following example will show the message every 2 seconds. After 5 seconds, the output is stopped:
+Следующий пример выводит сообщение каждые 2 секунды. Через 5 секунд вывод прекращается:
 
 ```js run
-// repeat with the interval of 2 seconds
+// повторить с интервалом 2 секунды
 let timerId = setInterval(() => alert('tick'), 2000);
 
-// after 5 seconds stop
+// остановить вывод через 5 секунд
 setTimeout(() => { clearInterval(timerId); alert('stop'); }, 5000);
 ```
 
 ```smart header="Modal windows freeze time in Chrome/Opera/Safari"
-In browsers IE and Firefox the internal timer continues "ticking" while showing `alert/confirm/prompt`, but in Chrome, Opera and Safari the internal timer becomes "frozen".
+В браузерах IE и Firefox внутренний счетчик продолжает подсчет времени после показа `alert/confirm/prompt`, но в Chrome, Opera и Safari внутренний счетчик в это время останаливается.
 
-So if you run the code above and don't dismiss the `alert` window for some time, then in Firefox/IE next `alert` will be shown immediately as you do it (2 seconds passed from the previous invocation), and in Chrome/Opera/Safari -- after 2 more seconds (timer did not tick during the `alert`).
+Если выполните код ниже и не закроете окно `alert` в течение некоторого времени, тогда в Firefox/IE следующее окно `alert` появится как только закроется первое (2 секунды после прошлого вызова), а в Chrome/Opera/Safari -- спустя 2 секунды после закрытия (таймер не работал во время первого `alert`).
 ```
 
 ## Recursive setTimeout
