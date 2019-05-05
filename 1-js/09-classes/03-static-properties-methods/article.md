@@ -83,7 +83,7 @@ class Article {
 *!*
   static createTodays() {
     // помним, что this = Article
-    return new this("Дайджест за сегодня", new Date());
+    return new this("Сегодняшний дайджест", new Date());
   }
 */!*
 }
