@@ -208,22 +208,22 @@ setTimeout(function run() {
 
 Это нормально, потому что время, затраченное на выполнение `func`, "потребляет" часть интервала времени.
 
-It is possible that `func`'s execution turns out to be longer than we expected and takes more than 100ms.
+Вполне возможно, что выполнение `func` окажется дольше, чем мы ожидали, и займет более 100 мс.
 
-In this case the engine waits for `func` to complete, then checks the scheduler and if the time is up, runs it again *immediately*.
+В данном случае движок ждет окончания выполнения `func` и затем проверяет планировщик и, если время истекло, *немедленно* запускает его снова.
 
-In the edge case, if the function always executes longer than `delay` ms, then the calls will happen without a pause at all.
+В крайнем случае, если функция всегда выполняется дольше, чем задержка `delay`, то в таком случае вызовы будут выполняться без задержек вовсе.
 
-And here is the picture for the recursive `setTimeout`:
+Ниже представлено изображение, показывающее процесс работы рекурсивного `setTimeout`:
 
 ![](settimeout-interval.png)
 
-**The recursive `setTimeout` guarantees the fixed delay (here 100ms).**
+**Рекурсивный`setTimeout` гарантирует фиксированную задержку (здесь 100 мс).**
 
-That's because a new call is planned at the end of the previous one.
+Это потому, что новый вызов планируется в конце предыдущего.
 
-````smart header="Garbage collection"
-When a function is passed in `setInterval/setTimeout`, an internal reference is created to it and saved in the scheduler. It prevents the function from being garbage collected, even if there are no other references to it.
+````smart header="Сборщик мусора"
+Когда функция передается в `setInterval/setTimeout`, на него создается внутренняя ссылка и сохраняется в планировщике. Это предотвращает попадание функции в сборщик муссора, даже если на нее нет других ссылок.
 
 ```js
 // the function stays in memory until the scheduler calls it
