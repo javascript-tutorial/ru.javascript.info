@@ -89,7 +89,7 @@ rabbit.hide(); // White Rabbit hides!
 
 Если метод не найден в `Rabbit.prototype`, JavaScript возьмет его из `Animal.prototype`.
 
-Как мы помним из главы <info:native-prototypes> в JavaScript используется то же наследования на прототипах для встроенных объектов.Например `Date.prototype.[[Prototype]]` это `Object.prototype`, поэтому у дат есть универсальные методы объекта.
+Как мы помним из главы <info:native-prototypes>, в JavaScript используется одно и то же наследование на прототипах для встроенных объектов. Например `Date.prototype.[[Prototype]]` это `Object.prototype`, поэтому у дат есть универсальные методы объекта.
 
 ````smart header="После `extends` разрешены любые выражения"
 Синтаксис создания класса допускает указывать после `extends` не только класс, но любое выражение. 
