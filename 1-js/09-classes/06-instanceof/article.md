@@ -11,7 +11,7 @@
 obj instanceof Class
 ```
 
-Оператор вернёт `true`, если `obj` принадлежит классу `Class` (или класс наследует от него).
+Оператор вернёт `true`, если `obj` принадлежит классу `Class` (или класс наследуется от него).
 
 Например:
 
@@ -44,7 +44,7 @@ alert( arr instanceof Array ); // true
 alert( arr instanceof Object ); // true
 ```
 
-Пожалуйста, обратите внимание, что `arr` также принадлежит классу `Object`. Это потому, что `Array` наследуется от `Object`.
+Пожалуйста, обратите внимание, что `arr` также принадлежит классу `Object`, потому что `Array` наследуется от `Object`.
 
 Оператор `instanceof` просматривает цепочку прототипов для проверки, и это также свободно настраивается с помощью статичного метода `Symbol.hasInstance`.
 
@@ -94,7 +94,7 @@ alert( arr instanceof Object ); // true
 
 ![](instanceof.png)
 
-Кстати, есть метод [objA.isPrototypeOf(objB)], которые возвращает `true`, если объект `objA` есть где-то в прототипной цепочки объекта `objB`. Так что `obj instanceof Class` можно перефразировать как `Class.prototype.isPrototypeOf(obj)`.
+Кстати, есть метод [objA.isPrototypeOf(objB)], которые возвращает `true`, если объект `objA` есть где-то в прототипной цепочке объекта `objB`. Так что `obj instanceof Class` можно перефразировать как `Class.prototype.isPrototypeOf(obj)`.
 
 Забавно, но сам конструктор `Class` не участвует в процессе проверки! Важна только цепочка прототипов `Class.prototype`.
 
@@ -206,6 +206,6 @@ alert( {}.toString.call(new XMLHttpRequest()) ); // [object XMLHttpRequest]
 | `{}.toString` | примитивы, встроенные объекты, объекты с `Symbol.toStringTag`   |       строка |
 | `instanceof`  | объекты        |  true/false      |
 
-Как мы можем видеть, технически `{}.toString` "более продвинут", чем `typeof`. 
+Как мы можем видеть, технически `{}.toString` "более продвинут", чем `typeof`.
 
 И оператор `instanceof` действительно сияет, когда мы работаем с иерархией классов и хотим делать проверки с учётом наследования.
