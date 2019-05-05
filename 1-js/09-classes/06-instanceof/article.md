@@ -117,7 +117,7 @@ alert( rabbit instanceof Rabbit ); // false
 
 Это одна из причин избегать изменения `prototype`. Просто для безопасности.
 
-## Бонус: Object.toString для типизации
+## Бонус: toString Объекта для типизации
 
 Мы уже знаем, что обычные объекты преобразуется к строке как `[object Object]`:
 
@@ -167,9 +167,9 @@ alert( s.call(alert) ); // [object Function]
 
 ### Symbol.toStringTag
 
-The behavior of Object `toString` can be customized using a special object property `Symbol.toStringTag`.
+Поведение метода объектов `toString` можно настраивать, используя специальное свойство объекта `Symbol.toStringTag`.
 
-For instance:
+Например:
 
 ```js run
 let user = {
@@ -179,10 +179,10 @@ let user = {
 alert( {}.toString.call(user) ); // [object User]
 ```
 
-For most environment-specific objects, there is such a property. Here are few browser specific examples:
+Такое свойство есть у большей части объектов специфичных для определённых окружений. Вот несколько примеров специфичных для браузера:
 
 ```js run
-// toStringTag for the envinronment-specific object and class:
+// toStringTag для объекта и класса специфичных для окружения:
 alert( window[Symbol.toStringTag]); // window
 alert( XMLHttpRequest.prototype[Symbol.toStringTag] ); // XMLHttpRequest
 
@@ -190,11 +190,12 @@ alert( {}.toString.call(window) ); // [object Window]
 alert( {}.toString.call(new XMLHttpRequest()) ); // [object XMLHttpRequest]
 ```
 
-As you can see, the result is exactly `Symbol.toStringTag` (if exists), wrapped into `[object ...]`.
+Как вы можете видеть, вывод `Symbol.toStringTag` (если он имеется) точно также обернут в `[object ...]`.
 
+В заверешние мы имеем "typeof на стеройдах", который не только работает с примитивными типами данных, но также и со встроенными объектами, и даже быть настроен. 
 At the end we have "typeof on steroids" that not only works for primitive data types, but also for built-in objects and even can be customized.
 
-It can be used instead of `instanceof` for built-in objects when we want to get the type as a string rather than just to check.
+Он может использоваться вместо `instanceof` для встроенных объектов, когда мы хотим получить тип как строку, нежели просто делать проверку.
 
 ## Summary
 
