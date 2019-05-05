@@ -192,21 +192,20 @@ alert( {}.toString.call(new XMLHttpRequest()) ); // [object XMLHttpRequest]
 
 Как вы можете видеть, вывод `Symbol.toStringTag` (если он имеется) точно также обернут в `[object ...]`.
 
-В заверешние мы имеем "typeof на стеройдах", который не только работает с примитивными типами данных, но также и со встроенными объектами, и даже быть настроен. 
-At the end we have "typeof on steroids" that not only works for primitive data types, but also for built-in objects and even can be customized.
+В завершение мы имеем "typeof на стероидах", который не только работает с примитивными типами данных, но также и со встроенными объектами, и даже быть настроен.
 
 Он может использоваться вместо `instanceof` для встроенных объектов, когда мы хотим получить тип как строку, нежели просто делать проверку.
 
-## Summary
+## Итого
 
-Let's recap the type-checking methods that we know:
+Давайте вспомним, какие методы для проверки типа мы знаем: 
 
-|               | works for   |  returns      |
-|---------------|-------------|---------------|
-| `typeof`      | primitives  |  string       |
-| `{}.toString` | primitives, built-in objects, objects with `Symbol.toStringTag`   |       string |
-| `instanceof`  | objects     |  true/false   |
+|               | работает для   |  возвращает      |
+|---------------|----------------|------------------|
+| `typeof`      | примитивы      |  строка          |
+| `{}.toString` | примитивы, встроенные объекты, объекты с `Symbol.toStringTag`   |       строка |
+| `instanceof`  | объекты        |  true/false      |
 
-As we can see, `{}.toString` is technically a "more advanced" `typeof`.
+Как мы можем видеть, технически `{}.toString` "более продвинут", чем `typeof`. 
 
-And `instanceof` operator really shines when we are working with a class hierarchy and want to check for the class taking into account inheritance.
+И оператор `instanceof` действительно сияет, когда мы работаем с иерархией классов и хотим делать проверки с учетом наследования.
