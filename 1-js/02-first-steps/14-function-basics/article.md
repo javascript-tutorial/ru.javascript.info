@@ -16,7 +16,7 @@ It looks like this:
 
 ```js
 function showMessage() {
-  alert( 'Hello everyone!' );
+  alert( 'Всем привет!' );
 }
 ```
 
@@ -30,7 +30,7 @@ For instance:
 
 ```js run
 function showMessage() {
-  alert( 'Hello everyone!' );
+  alert( 'Всем привет!' );
 }
 
 *!*
@@ -54,13 +54,17 @@ For example:
 ```js run
 function showMessage() {
 *!*
+<<<<<<< HEAD
   let message = "Hello, I'm JavaScript!"; // local variable
+=======
+  let message = "Привет, я JavaScript!"; // локальная переменная
+>>>>>>> translate examples
 */!*
 
   alert( message );
 }
 
-showMessage(); // Hello, I'm JavaScript!
+showMessage(); // Привет, я JavaScript!
 
 alert( message ); // <-- Error! The variable is local to the function
 ```
@@ -70,14 +74,14 @@ alert( message ); // <-- Error! The variable is local to the function
 A function can access an outer variable as well, for example:
 
 ```js run no-beautify
-let *!*userName*/!* = 'John';
+let *!*userName*/!* = 'Вася';
 
 function showMessage() {
-  let message = 'Hello, ' + *!*userName*/!*;
+  let message = 'Привет, ' + *!*userName*/!*;
   alert(message);
 }
 
-showMessage(); // Hello, John
+showMessage(); // Привет, Вася
 ```
 
 The function has full access to the outer variable. It can modify it as well.
@@ -85,20 +89,32 @@ The function has full access to the outer variable. It can modify it as well.
 For instance:
 
 ```js run
-let *!*userName*/!* = 'John';
+let *!*userName*/!* = 'Вася';
 
 function showMessage() {
+<<<<<<< HEAD
   *!*userName*/!* = "Bob"; // (1) changed the outer variable
+=======
+  *!*userName*/!* = "Петя"; // (1) изменяем значение внешней переменной
+>>>>>>> translate examples
 
-  let message = 'Hello, ' + *!*userName*/!*;
+  let message = 'Привет, ' + *!*userName*/!*;
   alert(message);
 }
 
+<<<<<<< HEAD
 alert( userName ); // *!*John*/!* before the function call
 
 showMessage();
 
 alert( userName ); // *!*Bob*/!*, the value was modified by the function
+=======
+alert( userName ); // *!*Вася*/!* перед вызовом функции
+
+showMessage();
+
+alert( userName ); // *!*Петя*/!*, значение внешней переменной было изменено функцией
+>>>>>>> translate examples
 ```
 
 The outer variable is only used if there's no local one. So an occasional modification may happen if we forget `let`.
@@ -106,21 +122,29 @@ The outer variable is only used if there's no local one. So an occasional modifi
 If a same-named variable is declared inside the function then it *shadows* the outer one. For instance, in the code below the function uses the local `userName`. The outer one is ignored:
 
 ```js run
-let userName = 'John';
+let userName = 'Вася';
 
 function showMessage() {
 *!*
+<<<<<<< HEAD
   let userName = "Bob"; // declare a local variable
+=======
+  let userName = "Петя"; // объявляем локальную переменную
+>>>>>>> translate examples
 */!*
 
-  let message = 'Hello, ' + userName; // *!*Bob*/!*
+  let message = 'Привет, ' + userName; // *!*Петя*/!*
   alert(message);
 }
 
 // the function will create and use its own userName
 showMessage();
 
+<<<<<<< HEAD
 alert( userName ); // *!*John*/!*, unchanged, the function did not access the outer variable
+=======
+alert( userName ); // *!*Вася*/!*, не изменилась, у функции нет доступа в внешней переменной
+>>>>>>> translate examples
 ```
 
 ```smart header="Global variables"
@@ -143,8 +167,8 @@ function showMessage(*!*from, text*/!*) { // arguments: from, text
 }
 
 *!*
-showMessage('Ann', 'Hello!'); // Ann: Hello! (*)
-showMessage('Ann', "What's up?"); // Ann: What's up? (**)
+showMessage('Аня', 'Привет!'); // Аня: Привет! (*)
+showMessage('Аня', "Как дела?"); // Аня: Как дела? (**)
 */!*
 ```
 
@@ -163,12 +187,17 @@ function showMessage(from, text) {
   alert( from + ': ' + text );
 }
 
-let from = "Ann";
+let from = "Аня";
 
-showMessage(from, "Hello"); // *Ann*: Hello
+showMessage(from, "Привет"); // *Аня*: Привет
 
+<<<<<<< HEAD
 // the value of "from" is the same, the function modified a local copy
 alert( from ); // Ann
+=======
+// значение "from" осталось прежним, функция изменила значение локальной переменной
+alert( from ); // Аня
+>>>>>>> translate examples
 ```
 
 ## Default values
@@ -178,24 +207,34 @@ If a parameter is not provided, then its value becomes `undefined`.
 For instance, the aforementioned function `showMessage(from, text)` can be called with a single argument:
 
 ```js
-showMessage("Ann");
+showMessage("Аня");
 ```
 
+<<<<<<< HEAD
 That's not an error. Such a call would output `"Ann: undefined"`. There's no `text`, so it's assumed that `text === undefined`.
+=======
+Это не приведёт к ошибке. Такой вызов выведет `"Аня: undefined"`. В вызове не указан параметр `text`, поэтому предполагается, что `text === undefined`.
+>>>>>>> translate examples
 
 If we want to use a "default" `text` in this case, then we can specify it after `=`:
 
 ```js run
-function showMessage(from, *!*text = "no text given"*/!*) {
+function showMessage(from, *!*text = "текст не добавлен"*/!*) {
   alert( from + ": " + text );
 }
 
-showMessage("Ann"); // Ann: no text given
+showMessage("Аня"); // Аня: текст не добавлен
 ```
 
+<<<<<<< HEAD
 Now if the `text` parameter is not passed, it will get the value `"no text given"`
 
 Here `"no text given"` is a string, but it can be a more complex expression, which is only evaluated and assigned if the parameter is missing. So, this is also possible:
+=======
+Теперь, если параметр `text` не указан, его значением будет `"текст не добавлен"`
+
+В данном случае `"текст не добавлен"` это строка, но на её месте могло бы быть и более сложное выражение, которое бы вычислялось и присваивалось при отсутствии параметра. Например:
+>>>>>>> translate examples
 
 ```js run
 function showMessage(from, text = anotherFunction()) {
@@ -220,7 +259,7 @@ For instance, an explicit check for being `undefined`:
 function showMessage(from, text) {
 *!*
   if (text === undefined) {
-    text = 'no text given';
+    text = 'текст не добавлен';
   }
 */!*
 
@@ -232,8 +271,13 @@ function showMessage(from, text) {
 
 ```js
 function showMessage(from, text) {
+<<<<<<< HEAD
   // if text is falsy then text gets the "default" value
   text = text || 'no text given';
+=======
+  // Если значение text ложно, тогда присвоить параметру text значение по умолчанию
+  text = text || 'текст не добавлен';
+>>>>>>> translate examples
   ...
 }
 ```
@@ -269,17 +313,17 @@ function checkAge(age) {
 */!*
   } else {
 *!*
-    return confirm('Do you have permission from your parents?');
+    return confirm('А родители разрешили?');
 */!*
   }
 }
 
-let age = prompt('How old are you?', 18);
+let age = prompt('Сколько вам лет?', 18);
 
 if ( checkAge(age) ) {
-  alert( 'Access granted' );
+  alert( 'Доступ получен' );
 } else {
-  alert( 'Access denied' );
+  alert( 'Доступ закрыт' );
 }
 ```
 
@@ -295,7 +339,7 @@ function showMovie(age) {
 */!*
   }
 
-  alert( "Showing you the movie" ); // (*)
+  alert( "Вам показывается кино" ); // (*)
   // ...
 }
 ```
