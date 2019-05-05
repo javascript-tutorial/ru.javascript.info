@@ -1,20 +1,20 @@
-# Greedy and lazy quantifiers
+# Жадные и ленивые квантификаторы
 
-Quantifiers are very simple from the first sight, but in fact they can be tricky.
+На первый взгляд квантификаторы очень просты, но на самом деле, всё не так просто.
 
-We should understand how the search works very well if we plan to look for something more complex than `pattern:/\d+/`.
+Нужно очень хорошо разбираться, как работает поиск, если планируешь использовать что-то более сложное, чем: `pattern:/\d+/`.
 
-Let's take the following task as an example.
+Давайте, в качестве примера, рассмотрим следующую задачу:
 
-We have a text and need to replace all quotes `"..."` with guillemet marks: `«...»`. They are preferred for typography in many countries.
+У нас есть текст, в котором нужно заменить все кавычки `"..."` на "ёлочки": `«...»`. Которые используются в типографике многих стран.
 
-For instance: `"Hello, world"` should become `«Hello, world»`. Some countries prefer other quotes, like `„Witam, świat!”` (Polish) or `「你好，世界」` (Chinese), but for our task let's choose `«...»`.
+Например: `"Привет, мир"` должно превратиться в `«Привет, мир»`. Некоторые страны предпочитают другие кавычки, вроде `„Witam, świat!”` (польский) или `「你好，世界」` (китайский), но для нашей задачи давайте выберем `«...»`.
 
-The first thing to do is to locate quoted strings, and then we can replace them.
+Первое, что нам нужно, это найти строки с кавычками, а затем -- мы можем их заменить.
 
-A regular expression like `pattern:/".+"/g` (a quote, then something, then the other quote) may seem like a good fit, but it isn't!
+Регулярное выражение вроде `pattern:/".+"/g` (кавычка, какой-то текст, другая кавычка) может выглядеть хорошим решением, но это не так!
 
-Let's try it:
+Давайте проверим это:
 
 ```js run
 let reg = /".+"/g;
@@ -24,75 +24,75 @@ let str = 'a "witch" and her "broom" is one';
 alert( str.match(reg) ); // "witch" and her "broom"
 ```
 
-...We can see that it works not as intended!
+...Как мы видим, это работает не как задумано!
 
-Instead of finding two matches `match:"witch"` and `match:"broom"`, it finds one: `match:"witch" and her "broom"`.
+Вместо того, чтобы найти два совпадения `match:"width"` и `match:"broom"`, было найдено одно:`match:"witch" and her "broom"`. 
 
-That can be described as "greediness is the cause of all evil".
+Это можно описать, как "жадность -- причина всех зол".
 
-## Greedy search
+## Жадный поиск
 
-To find a match, the regular expression engine uses the following algorithm:
+Чтобы найти совпадение, движок регулярного выражения следует следующему алгоритму:
 
-- For every position in the string
-    - Match the pattern at that position.
-    - If there's no match, go to the next position.
+- Для каждой позиции в строке
+    - Совпадение шаблона на текущей позиции
+    - Если нет совпадения, переход к следующей позиции
 
-These common words do not make it obvious why the regexp fails, so let's elaborate how the search works for the pattern `pattern:".+"`.
+Эти общие слова никак не объясняют, почему регулярное выражение работает неправильно, так что давайте разберём подробно, как работает шаблон `pattern:".+"`.
 
-1. The first pattern character is a quote `pattern:"`.
+1. Первый символ шаблона -- это кавычка `pattern:"`.
 
-    The regular expression engine tries to find it at the zero position of the source string `subject:a "witch" and her "broom" is one`, but there's `subject:a` there, so there's immediately no match.
+    Движок регулярного выражения пытается найти его на нулевой позиции исходной строки `subject:a "witch" and her "broom" is one`, но там находится `subject:a`, так что совпадения сразу нет.
 
-    Then it advances: goes to the next positions in the source string and tries to find the first character of the pattern there, and finally finds the quote at the 3rd position:
+    Затем он продолжает: двигается к следующей позиции исходной строки и пытается найти первый символ шаблона там. И, наконец, находит кавычку на третьей позиции:
 
     ![](witch_greedy1.png)
 
-2. The quote is detected, and then the engine tries to find a match for the rest of the pattern. It tries to see if the rest of the subject string conforms to `pattern:.+"`.
+2. Кавычка замечена, после чего движок пытается найти совпадение для оставшегося шаблона. Пытается увидеть, удовлетворяет ли остаток строки шаблону `pattern:.+"`.
 
-    In our case the next pattern character is `pattern:.` (a dot). It denotes "any character except a newline", so the next string letter `match:'w'` fits:
+    В нашем случае следующий символ шаблона: `pattern:.` (точка). Она обозначает "любой символ, кроме новой строки", так что следующая буква строки `match:'w'` подходит.
 
     ![](witch_greedy2.png)
 
-3. Then the dot repeats because of the quantifier `pattern:.+`. The regular expression engine builds the match by taking characters one by one while it is possible.
+3. Затем точка повторяется из-за квантификатора `pattern:.+`. Движок регулярного выражения строит совпадение, беря символы один за другим, пока это возможно.
 
-    ...When it becomes impossible? All characters match the dot, so it only stops when it reaches the end of the string:
+      ...Когда же это перестанет быть возможным? Точке соответствуют любые символы, так что движок остановется только тогда, когда достигнет конца строки: 
 
     ![](witch_greedy3.png)
 
-4. Now the engine finished repeating for `pattern:.+` and tries to find the next character of the pattern. It's the quote `pattern:"`. But there's a problem: the string has finished, there are no more characters!
+4. Тогда движок перестанет повторяться для `pattern:.+` и попробует найти следующий символ шаблона. Это кавычка `pattern:"`. Но есть проблема: строка закончилась, больше нет символов!
 
-    The regular expression engine understands that it took too many `pattern:.+` and starts to *backtrack*.
+    Движок регулярного выражения понимает, что захватил слишком много `pattern:.+` и начинает *отступать*.
 
-    In other words, it shortens the match for the quantifier by one character:
+    Другими словами, он сокращает совпадение по квантификатору на один символ:
 
     ![](witch_greedy4.png)
 
-    Now it assumes that `pattern:.+` ends one character before the end and tries to match the rest of the pattern from that position.
+    Теперь он предполагает, что `pattern:.+` заканчивается за один символ до конца строки и пытается сопоставить остаток шаблона для этой позиции.
 
-    If there were a quote there, then that would be the end, but the last character is `subject:'e'`, so there's no match.
+    Если бы тут была кавычка, тогда бы работа закончилась, но последний символ -- это `subject:'e'`, так что он не подходит.
 
-5. ...So the engine decreases the number of repetitions of `pattern:.+` by one more character:
+5. ...Поэтому движок уменьшает количество повторений `pattern:.+` на ещё один символ:
 
     ![](witch_greedy5.png)
 
-    The quote `pattern:'"'` does not match `subject:'n'`.
+    Кавычка `pattern:'"'`не соответствует `subject:'n'`.
 
-6. The engine keep backtracking: it decreases the count of repetition for `pattern:'.'` until the rest of the pattern (in our case `pattern:'"'`) matches:
+6. Движок продолжает отступать: он уменьшает количество повторений `pattern:'.'` пока оставшийся шаблон (в нашем случае `pattern:'"'`) не совпадёт:
 
     ![](witch_greedy6.png)
 
-7. The match is complete.
+7. Совпадение найдено.
 
-8. So the first match is `match:"witch" and her "broom"`. The further search starts where the first match ends, but there are no more quotes in the rest of the string `subject:is one`, so no more results.
+8. Так что первое совпадение: `match:"witch" and her "boom"`. Дальнейший поиск продолжается с того места, где закончился предыдущий, в оставшейся строке `subject:is one` нет кавычек, так что совпадений больше нет.
 
-That's probably not what we expected, but that's how it works.
+Это определённо не то, что мы ожидали. Но так оно работает.
 
-**In the greedy mode (by default) the quantifier is repeated as many times as possible.**
+**В жадном режиме (по умолчанию) квантификатор повторяется столько раз, сколько это возможно.**
 
-The regexp engine tries to fetch as many characters as it can by `pattern:.+`, and then shortens that one by one.
+Движок регулярного выражения пытается получить максимальное количество символов соответствующих `pattern:.+`, а потом сократить это количество символ за символом.
 
-For our task we want another thing. That's what the lazy quantifier mode is for.
+Для нашей задачи мы хотим другого. Именно для этого и создан "ленивый" квантификатор.
 
 ## Lazy mode
 
