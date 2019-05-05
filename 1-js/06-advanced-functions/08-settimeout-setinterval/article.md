@@ -204,9 +204,9 @@ setTimeout(function run() {
 
 Обратили внимание?
 
-**The real delay between `func` calls for `setInterval` is less than in the code!**
+**Реальная задержка между `func` для `setInterval` меньше, чем видно в коде!**
 
-That's normal, because the time taken by `func`'s execution "consumes" a part of the interval.
+Это нормально, потому что время, затраченное на выполнение `func`, "потребляет" часть интервала времени.
 
 It is possible that `func`'s execution turns out to be longer than we expected and takes more than 100ms.
 
