@@ -16,7 +16,7 @@
 
 ```js
 function showMessage() {
-  alert( 'Hello everyone!' );
+  alert( 'Всем привет!' );
 }
 ```
 
@@ -30,7 +30,7 @@ function showMessage() {
 
 ```js run
 function showMessage() {
-  alert( 'Hello everyone!' );
+  alert( 'Всем привет!' );
 }
 
 *!*
@@ -54,13 +54,13 @@ showMessage();
 ```js run
 function showMessage() {
 *!*
-  let message = "Hello, I'm JavaScript!"; // локальная переменная
+  let message = "Привет, я JavaScript!"; // локальная переменная
 */!*
 
   alert( message );
 }
 
-showMessage(); // Hello, I'm JavaScript!
+showMessage(); // Привет, я JavaScript!
 
 alert( message ); // <-- будет ошибка, т.к. переменная видна только внутри функции
 ```
@@ -70,14 +70,14 @@ alert( message ); // <-- будет ошибка, т.к. переменная в
 У функции есть доступ к внешним переменным, например:
 
 ```js run no-beautify
-let *!*userName*/!* = 'John';
+let *!*userName*/!* = 'Вася';
 
 function showMessage() {
-  let message = 'Hello, ' + *!*userName*/!*;
+  let message = 'Привет, ' + *!*userName*/!*;
   alert(message);
 }
 
-showMessage(); // Hello, John
+showMessage(); // Привет, Вася
 ```
 
 Функция обладает полным доступом к внешним переменным и может изменять их значение.
@@ -85,20 +85,20 @@ showMessage(); // Hello, John
 Например:
 
 ```js run
-let *!*userName*/!* = 'John';
+let *!*userName*/!* = 'Вася';
 
 function showMessage() {
-  *!*userName*/!* = "Bob"; // (1) изменяем значение внешней переменной
+  *!*userName*/!* = "Петя"; // (1) изменяем значение внешней переменной
 
-  let message = 'Hello, ' + *!*userName*/!*;
+  let message = 'Привет, ' + *!*userName*/!*;
   alert(message);
 }
 
-alert( userName ); // *!*John*/!* перед вызовом функции
+alert( userName ); // *!*Вася*/!* перед вызовом функции
 
 showMessage();
 
-alert( userName ); // *!*Bob*/!*, значение внешней переменной было изменено функцией
+alert( userName ); // *!*Петя*/!*, значение внешней переменной было изменено функцией
 ```
 
 Внешние переменные используются только если в теле функции нет локальных. Это случается, если мы забываем объявить их с помощью ключевого слова `let`.
@@ -106,21 +106,21 @@ alert( userName ); // *!*Bob*/!*, значение внешней перемен
 Если одноимённая переменная объявляется внутри функции, тогда она перекрывает внешнюю. Например, в коде ниже функция использует локальную переменную `userName`. Внешняя будет проигнорирована:
 
 ```js run
-let userName = 'John';
+let userName = 'Вася';
 
 function showMessage() {
 *!*
-  let userName = "Bob"; // объявляем локальную переменную
+  let userName = "Петя"; // объявляем локальную переменную
 */!*
 
-  let message = 'Hello, ' + userName; // *!*Bob*/!*
+  let message = 'Привет, ' + userName; // *!*Петя*/!*
   alert(message);
 }
 
 // функция создаст и будет использовать свою собственную локальную переменную userName
 showMessage();
 
-alert( userName ); // *!*John*/!*, не изменилась, у функции нет доступа в внешней переменной
+alert( userName ); // *!*Вася*/!*, не изменилась, у функции нет доступа в внешней переменной
 ```
 
 ```smart header="Глобальные переменные"
@@ -143,8 +143,8 @@ function showMessage(*!*from, text*/!*) { // аргументы: from, text
 }
 
 *!*
-showMessage('Ann', 'Hello!'); // Ann: Hello! (*)
-showMessage('Ann', "What's up?"); // Ann: What's up? (**)
+showMessage('Аня', 'Привет!'); // Аня: Привет! (*)
+showMessage('Аня', "Как дела?"); // Аня: Как дела? (**)
 */!*
 ```
 
@@ -163,12 +163,12 @@ function showMessage(from, text) {
   alert( from + ': ' + text );
 }
 
-let from = "Ann";
+let from = "Аня";
 
-showMessage(from, "Hello"); // *Ann*: Hello
+showMessage(from, "Привет"); // *Аня*: Привет
 
 // значение "from" осталось прежним, функция изменила значение локальной переменной
-alert( from ); // Ann
+alert( from ); // Аня
 ```
 
 ## Параметры по умолчанию
@@ -178,24 +178,24 @@ alert( from ); // Ann
 Например, вышеупомянутая функция `showMessage(from, text)` может быть вызвана с одним аргументом:
 
 ```js
-showMessage("Ann");
+showMessage("Аня");
 ```
 
-Это не приведёт к ошибке. Такой вызов выведет `"Ann: undefined"`. В вызове не указан параметр `text`, поэтому предполагается, что `text === undefined`.
+Это не приведёт к ошибке. Такой вызов выведет `"Аня: undefined"`. В вызове не указан параметр `text`, поэтому предполагается, что `text === undefined`.
 
 Если мы хотим задать параметру `text` значение по умолчанию, мы должны указать его после `=`:
 
 ```js run
-function showMessage(from, *!*text = "no text given"*/!*) {
+function showMessage(from, *!*text = "текст не добавлен"*/!*) {
   alert( from + ": " + text );
 }
 
-showMessage("Ann"); // Ann: no text given
+showMessage("Аня"); // Аня: текст не добавлен
 ```
 
-Теперь, если параметр `text` не указан, его значением будет `"no text given"`
+Теперь, если параметр `text` не указан, его значением будет `"текст не добавлен"`
 
-В данном случае `"no text given"` это строка, но на её месте могло бы быть и более сложное выражение, которое бы вычислялось и присваивалось при отсутствии параметра. Например:
+В данном случае `"текст не добавлен"` это строка, но на её месте могло бы быть и более сложное выражение, которое бы вычислялось и присваивалось при отсутствии параметра. Например:
 
 ```js run
 function showMessage(from, text = anotherFunction()) {
@@ -220,7 +220,7 @@ function showMessage(from, text = anotherFunction()) {
 function showMessage(from, text) {
 *!*
   if (text === undefined) {
-    text = 'no text given';
+    text = 'текст не добавлен';
   }
 */!*
 
@@ -233,7 +233,7 @@ function showMessage(from, text) {
 ```js
 function showMessage(from, text) {
   // Если значение text ложно, тогда присвоить параметру text значение по умолчанию
-  text = text || 'no text given';
+  text = text || 'текст не добавлен';
   ...
 }
 ```
@@ -269,17 +269,17 @@ function checkAge(age) {
 */!*
   } else {
 *!*
-    return confirm('Do you have permission from your parents?');
+    return confirm('А родители разрешили?');
 */!*
   }
 }
 
-let age = prompt('How old are you?', 18);
+let age = prompt('Сколько вам лет?', 18);
 
 if ( checkAge(age) ) {
-  alert( 'Access granted' );
+  alert( 'Доступ получен' );
 } else {
-  alert( 'Access denied' );
+  alert( 'Доступ закрыт' );
 }
 ```
 
@@ -295,7 +295,7 @@ function showMovie(age) {
 */!*
   }
 
-  alert( "Showing you the movie" ); // (*)
+  alert( "Вам показывается кино" ); // (*)
   // ...
 }
 ```
