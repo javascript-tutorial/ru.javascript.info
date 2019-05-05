@@ -1,4 +1,4 @@
-Используя оператор `?`:
+Using a question mark operator `'?'`:
 
 ```js
 function checkAge(age) {
@@ -6,7 +6,7 @@ function checkAge(age) {
 }
 ```
 
-Используя оператор `||` (самый короткий вариант):
+Using OR `||` (the shortest variant):
 
 ```js
 function checkAge(age) {
@@ -14,4 +14,4 @@ function checkAge(age) {
 }
 ```
 
-Обратите внимание, что круглые скобки вокруг `age > 18` не обязательны. Их наличие необходимо для более лучшего понимания.
+Note that the parentheses around `age > 18` are not required here. They exist for better readabilty.
