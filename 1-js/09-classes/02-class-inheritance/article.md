@@ -176,7 +176,7 @@ rabbit.run(5); // White Rabbit runs with speed 5.
 rabbit.stop(); // White Rabbit stopped. White rabbit hides!
 ```
 
-Теперь у класса `Rabbit` есть метод  `stop` который вызывает родительский `super.stop()` в процессе выполнения.
+Теперь у класса `Rabbit` есть метод `stop`, который вызывает родительский `super.stop()` в процессе выполнения.
 
 ````smart header="У стрелочных функци нет `super`"
 Как упоминалось в главе <info:arrow-functions>, стрелочные функции не имеют `super`.
