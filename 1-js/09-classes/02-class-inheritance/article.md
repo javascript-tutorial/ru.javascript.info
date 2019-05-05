@@ -164,7 +164,7 @@ class Rabbit extends Animal {
 
 *!*
   stop() {
-    super.stop(); // вызываем рподительский метод stop
+    super.stop(); // вызываем родительский метод stop
     this.hide(); // и затем hide
   }
 */!*
