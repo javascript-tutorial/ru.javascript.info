@@ -176,7 +176,7 @@ alert(Object.keys(chineseDictionary)); // hello,bye
 Современные способы установки и прямого доступа к прототипу это:
 
 - [Object.create(proto[, descriptors])](mdn:js/Object/create) -- создаёт пустой объект со свойством `[[Prototype]]`, указанным как `proto` (может быть `null`), и необязательными дескрипторами свойств.
-- [Object.getPrototypeOf(obj)](mdn:js/Object.getPrototypeOf) -- возвращает свойство `[[Prototype]]` объекта `obj` (то же самое что и геттер `__proto__`).
+- [Object.getPrototypeOf(obj)](mdn:js/Object.getPrototypeOf) -- возвращает свойство `[[Prototype]]` объекта `obj` (то же самое, что и геттер `__proto__`).
 - [Object.setPrototypeOf(obj, proto)](mdn:js/Object.setPrototypeOf) -- устанавливает свойство `[[Prototype]]` объекта `obj` как `proto` (то же самое что и сеттер `__proto__`).
 
 Встроенный геттер/сеттер __proto__ не безопасен, если мы хотим использовать *созданные пользователями* ключи в объекте. Как минимум потому, что пользователь может ввести "proto" как ключ, от чего может возникнуть ошибка. Если повезёт - последствия будут лёгкими, но обычно они непредсказуемы.
