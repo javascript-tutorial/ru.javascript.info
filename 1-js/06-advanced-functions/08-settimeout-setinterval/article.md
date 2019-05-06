@@ -320,7 +320,7 @@ count();
 
 Затем следующиый вызов планируется в `(**)` если мы еще не закончили.
 
-Pauses between `count` executions provide just enough "breath" for the JavaScript engine to do something else, to react to other user actions.
+Задержки между выполнениями `count` обеспечивают достаточно "воздуха" для движка JavaScript, чтобы делать что-то еще и реагировать на другие действия пользователей.
 
 The notable thing is that both variants -- with and without splitting the job by `setTimeout` -- are comparable in speed. There's no much difference in the overall counting time.
 
