@@ -241,9 +241,9 @@ setTimeout(function() {...}, 100);
 
 Это планирование вызова `func` настолько быстро, насколько это возможно. Но планировщик будет вызывать ее только после завершения текущего кода.
 
-So the function is scheduled to run "right after" the current code. In other words, *asynchronously*.
+Так вызов функции запланировал сразу после выполнения текущего кода. Другими словами, *асинхронно*.
 
-For instance, this outputs "Hello", then immediately "World":
+Например, этот код выводит "Hello" и затем сразу "World":
 
 ```js run
 setTimeout(() => alert("World"));
@@ -251,7 +251,7 @@ setTimeout(() => alert("World"));
 alert("Hello");
 ```
 
-The first line "puts the call into calendar after 0ms". But the scheduler will only "check the calendar" after the current code is complete, so `"Hello"` is first, and `"World"` -- after it.
+Первая строка "помещает вызов в календарь через 0 мс". Но планировщик "проверит календарь" после того, как текущий код завершится. Поэтому `"Hello"` выводится первым, а `"World"` после него.
 
 ### Splitting CPU-hungry tasks
 
