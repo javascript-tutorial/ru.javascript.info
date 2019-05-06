@@ -1,160 +1,160 @@
-# Type Conversions
+# Преобразование типов
 
-Most of the time, operators and functions automatically convert the values given to them to the right type. 
+Чаще всего, операторы и функции автоматически приводят переданные им значения к нужному типу.
 
-For example, `alert` automatically converts any value to a string to show it. Mathematical operations convert values to numbers.
+Например, `alert` автоматически преобразует любое значение к строке. Математические операторы преобразуют значения к числам.  
 
-There are also cases when we need to explicitly convert a value to the expected type.
+Есть также случаи, когда нам нужно явно преобразовать значение в ожидаемый тип.
 
-```smart header="Not talking about objects yet"
-In this chapter, we won't cover objects. Instead, we'll study primitives first. Later, after we learn about objects, we'll see how object conversion works in the chapter <info:object-toprimitive>.
+```smart header="Пока что мы не говорим об объектах"
+В этой главе мы не касаемся объектов. Сначала мы разберем преобразование примитивных значений. Мы разберем преобразование объектов позже, в главе <info:object-toprimitive>.
 ```
 
-## ToString
+## Строковое преобразование
 
-String conversion happens when we need the string form of a value.
+Строковое преобразование происходит, когда требуется представление чего-либо в виде строки. 
 
-For example, `alert(value)` does it to show the value.
+Например, `alert(value)` преобразует значение к строке.
 
-We can also call the `String(value)` function to convert a value to a string:
+Также мы можем использовать функцию `String(value)` чтобы преобразовать значение к строке:
 
 ```js run
 let value = true;
 alert(typeof value); // boolean
 
 *!*
-value = String(value); // now value is a string "true"
+value = String(value); // теперь value это строка "true"
 alert(typeof value); // string
 */!*
 ```
 
-String conversion is mostly obvious. A `false` becomes `"false"`, `null` becomes `"null"`, etc.
+Преобразование происходит наиболее очевидным способом. `false` становится `"false"`, `null` становится `"null"` и т.п.
 
-## ToNumber
+## Численное преобразование
 
-Numeric conversion happens in mathematical functions and expressions automatically.
+Численное преобразование происходит в математических функциях и выражениях.
 
-For example, when division `/` is applied to non-numbers:
+Например, когда операция деления `/` применяется не к числу:
 
 ```js run
-alert( "6" / "2" ); // 3, strings are converted to numbers
+alert( "6" / "2" ); // 3, Строки преобразуются в значения.
 ```
 
-We can use the `Number(value)` function to explicitly convert a `value` to a number:
+Мы можем использовать функцию `Number(value)` чтобы явно преобразовать `value` к числу:
 
 ```js run
 let str = "123";
 alert(typeof str); // string
 
-let num = Number(str); // becomes a number 123
+let num = Number(str); // становится числом 123
 
 alert(typeof num); // number
 ```
 
-Explicit conversion is usually required when we read a value from a string-based source like a text form but expect a number to be entered.
+Явноe преобразование часто применяется, когда мы ожидаем получить число из строковых источников, вроде форм текстового ввода.
 
-If the string is not a valid number, the result of such a conversion is `NaN`. For instance:
+Если строка не может быть явно приведена к числу, то результатом преобразования будет `NaN` Например:
 
 ```js run
-let age = Number("an arbitrary string instead of a number");
+let age = Number("Любая строка вместо числа");
 
-alert(age); // NaN, conversion failed
+alert(age); // NaN, преобразование  не удалось
 ```
 
-Numeric conversion rules:
+Правила численного преобразования:
 
-| Value |  Becomes... |
-|-------|-------------|
+| Значение |  Преобразуется в... |
+|----------|-------------|
 |`undefined`|`NaN`|
 |`null`|`0`|
-|<code>true&nbsp;and&nbsp;false</code> | `1` and `0` |
-| `string` | Whitespaces from the start and end are removed. If the remaining string is empty, the result is `0`. Otherwise, the number is "read" from the string. An error gives `NaN`. |
+|<code>true&nbsp;/&nbsp;false</code> | `1` / `0` |
+| `string` | Пробельные символы по краям обрезаются. Далее, если остаётся пустая строка, то `0`, иначе из непустой строки "считывается" число. При ошибке результат `NaN`.|
 
-Examples:
+Примеры:
 
 ```js run
 alert( Number("   123   ") ); // 123
-alert( Number("123z") );      // NaN (error reading a number at "z")
+alert( Number("123z") );      // NaN (ошибка чтения числа в "z")
 alert( Number(true) );        // 1
 alert( Number(false) );       // 0
 ```
 
-Please note that `null` and `undefined` behave differently here: `null` becomes zero while `undefined` becomes `NaN`.
+Учтите, что `null` и `undefined` ведут себя по-разному. Так, `null` становится нулём, тогда как `undefined` приводится к `NaN`.
 
-````smart header="Addition '+' concatenates strings"
-Almost all mathematical operations convert values to numbers. A notable exception is addition `+`. If one of the added values is a string, the other one is also converted to a string.
+````smart header="Сложение '+' объединяет строки"
+Почти все математические операторы выполняют численное преобразование. Исключение составляет `+`. Если одно из слагаемых является строкой, тогда и все остальные приводятся к строкам.
 
-Then, it concatenates (joins) them:
+Тогда, они конкатенируются (присоединяются) друг к другу:
 
 ```js run
-alert( 1 + '2' ); // '12' (string to the right)
-alert( '1' + 2 ); // '12' (string to the left)
+alert( 1 + '2' ); // '12' (строка справа)
+alert( '1' + 2 ); // '12' (строка слева)
 ```
 
-This only happens when at least one of the arguments is a string. Otherwise, values are converted to numbers.
+Так происходит, только если хотя бы один из аргументов является строкой. Во всех остальных случаях, значения складываются как числа.
 ````
 
-## ToBoolean
+## Логическое преобразование
 
-Boolean conversion is the simplest one.
+Логическое преобразование самое простое.
 
-It happens in logical operations (later we'll meet condition tests and other similar things) but can also be performed explicitly with a call to `Boolean(value)`.
+Происходит в логических операторах  (позже мы познакомимся с условиями подобными конструкциями) но так же может быть выполнено явно с помощью функции `Boolean(value)`.
 
-The conversion rule:
+Правило преобразования:
 
-- Values that are intuitively "empty", like `0`, an empty string, `null`, `undefined`, and `NaN`, become `false`.
-- Other values become `true`.
+- Значения, которые интуитивно "пустые", вроде `0`, пустой строки, `null`, `undefined`, и `NaN`, становятся `false`.
+- Все остальные значения становятся `true`.
 
-For instance:
+Например:
 
 ```js run
 alert( Boolean(1) ); // true
 alert( Boolean(0) ); // false
 
-alert( Boolean("hello") ); // true
+alert( Boolean("Привет!") ); // true
 alert( Boolean("") ); // false
 ```
 
-````warn header="Please note: the string with zero `\"0\"` is `true`"
-Some languages (namely PHP) treat `"0"` as `false`. But in JavaScript, a non-empty string is always `true`.
+````warn header="Учтите, что строчка с нулём `\"0\"` это `true`"
+Некоторые языки (к примеру, PHP) воспринимают `"0"` как `false`. Но в JavaScript, если строка не пустая, то она всегда `true`.
 
 ```js run
 alert( Boolean("0") ); // true
-alert( Boolean(" ") ); // spaces, also true (any non-empty string is true)
+alert( Boolean(" ") ); // пробел это тоже true (любая непустая строка это true)
 ```
 ````
 
 
-## Summary
+## Итого
 
-The three most widely used type conversions are to string, to number, and to boolean.
+Существует 3 наиболее широко используемых преобразований: строковое, численное и логическое.
 
-**`ToString`** -- Occurs when we output something. Can be performed with `String(value)`. The conversion to string is usually obvious for primitive values.
+**`Строковое`** -- Происходит, когда там нужно что-то вывести. Может быть вызвано с помощью `String(value)`. Для примитивных значений работает очевидным образом.
 
-**`ToNumber`** -- Occurs in math operations. Can be performed with `Number(value)`.
+**`Численное`** -- Происходит в математических операциях. Может быть вызвано с помощью `Number(value)`.
 
-The conversion follows the rules:
+Преобразование подчиняется правилам:
 
-| Value |  Becomes... |
+| Значение |  Становится... |
 |-------|-------------|
 |`undefined`|`NaN`|
 |`null`|`0`|
 |<code>true&nbsp;/&nbsp;false</code> | `1 / 0` |
-| `string` | The string is read "as is", whitespaces from both sides are ignored. An empty string becomes `0`. An error gives `NaN`. |
+| `string` | Пробельные символы по краям обрезаются. Далее, если остаётся пустая строка, то `0`, иначе из непустой строки "считывается" число. При ошибке результат `NaN`.|
 
-**`ToBoolean`** -- Occurs in logical operations. Can be performed with `Boolean(value)`.
+**`Логическое`** -- Происходит в логических операторах. Может быть вызвано с помощью `Boolean(value)`.
 
-Follows the rules:
+Подчиняется правилам:
 
-| Value |  Becomes... |
-|-------|-------------|
+| Значение |  Становится... |
+|----------|-------------|
 |`0`, `null`, `undefined`, `NaN`, `""` |`false`|
-|any other value| `true` |
+|любое другое значение| `true` |
 
 
-Most of these rules are easy to understand and memorize. The notable exceptions where people usually make mistakes are:
+Большую часть из этих правил легко понять и запомнить. Особые случаи, в которых часто допускаются ошибки:
 
-- `undefined` is `NaN` as a number, not `0`.
-- `"0"` and space-only strings like `"   "` are true as a boolean.
+- `undefined` при численном преобразовании становится `NaN`, не `0`.
+- `"0"` и строки с одними пробелами вроде `"   "` при логическом преобразовании всегда `true`.
 
-Objects aren't covered here. We'll return to them later in the chapter <info:object-toprimitive> that is devoted exclusively to objects after we learn more basic things about JavaScript.
+В этой главе мы не говорили об объектах. Мы вернемся к ним позже, в главе <info:object-toprimitive>, посвященной только объектам, сразу после того как узнаем больше про основы JavaScript.
