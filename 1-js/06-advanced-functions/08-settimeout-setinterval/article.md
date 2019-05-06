@@ -223,16 +223,16 @@ setTimeout(function run() {
 Это потому, что новый вызов планируется в конце предыдущего.
 
 ````smart header="Сборщик мусора"
-Когда функция передается в `setInterval/setTimeout`, на него создается внутренняя ссылка и сохраняется в планировщике. Это предотвращает попадание функции в сборщик муссора, даже если на нее нет других ссылок.
+Когда функция передается в `setInterval/setTimeout`, на нее создается внутренняя ссылка и сохраняется в планировщике. Это предотвращает попадание функции в сборщик муссора, даже если на нее нет других ссылок.
 
 ```js
-// the function stays in memory until the scheduler calls it
+// функция остается в памяти до тех пор, пока планировщик обращается к ней
 setTimeout(function() {...}, 100);
 ```
 
-For `setInterval` the function stays in memory until `clearInterval` is called.
+Для `setInterval` функция остается в памяти до тех, пока не будет вызван `clearInterval`.
 
-There's a side-effect. A function references the outer lexical environment, so, while it lives, outer variables live too. They may take much more memory than the function itself. So when we don't need the scheduled function anymore, it's better to cancel it, even if it's very small.
+Это сайд—эффект. Функция ссылается на внешнее лексическое окружение, поэтому пока она существует, внешние переменные существуют тоже. Они могут больше памяти, чем сама функция. hey may take much more memory than the function itself. Поэтому если нет больше необходимости планирования вызова функции, то лучше отменить его, даже если он очень маленький.
 ````
 
 ## setTimeout(...,0)
