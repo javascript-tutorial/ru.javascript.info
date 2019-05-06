@@ -109,7 +109,7 @@ Pattern `pattern:\bJava\b` также совпадает. Но не `pattern:\b�
 ```js run
 alert( "Привет, Java!".match(/\bПривет\b/) ); // Привет
 alert( "Привет, Java!".match(/\bJava\b/) );  // Java
-alert( "Привет, Java!".match(/\bПривед\b/) );  // null (no match)
+alert( "Привет, Java!".match(/\bПривед\b/) );  // null (нет совпадения)
 alert( "Привет, Java!".match(/\bJava!\b/) ); // null (no match)
 ```
 
