@@ -255,11 +255,7 @@ alert( "A\nB".match(/A.B/s) ); // A\nB (совпадение!)
 
 ...Но это не все!
 
-<<<<<<< HEAD
 Современный JavaScript также позволяет искать символы по их свойствам Юникода, например:
-=======
-Modern JavaScript also allows to look for characters by their Unicode properties, for instance:
->>>>>>> master
 
 - Кириллица: `pattern:\p{Script=Cyrillic}` или `pattern:\p{sc=Cyrillic}`.
 - Тире (будь то короткое `-` или длинное тире `—`): `pattern:\p{Dash_Punctuation}` или `pattern:\p{pd}`.
