@@ -253,17 +253,17 @@ alert("Hello");
 
 Первая строка "помещает вызов в календарь через 0 мс". Но планировщик "проверит календарь" после того, как текущий код завершится. Поэтому `"Hello"` выводится первым, а `"World"` после него.
 
-### Splitting CPU-hungry tasks
+### Разделение ресурсоемких задач
 
-There's a trick to split CPU-hungry tasks using `setTimeout`.
+Рассмотрим вариант разделения ресурсоемких задача при помощи `setTimeout`.
 
-For instance, a syntax-highlighting script (used to colorize code examples on this page) is quite CPU-heavy. To highlight the code, it performs the analysis, creates many colored elements, adds them to the document -- for a big text that takes a lot. It may even cause the browser to "hang", which is unacceptable.
+Например, скрипт подсветки синтаксиса (используется для изменения цвета кода в примерах на данной страницы) довольно прожорлив. Для подсветки кода он выполняет анализ, создает много цветных элементов, добавляет их в документ -- для большого текста это требует значительных ресурсов. Это может даже привести к "зависанию" браузера, что недопустимо.
 
-So we can split the long text into pieces. First 100 lines, then plan another 100 lines using `setTimeout(..., 0)`, and so on.
+Но мы можем разделить длинный текст на части. Обрабатываем первые 100 строк, планируем следующие 100 строк кода с помощью `setTimeout(..., 0)` и т.д.
 
-For clarity, let's take a simpler example for consideration. We have a function to count from `1` to `1000000000`.
+Для ясности рассмотрим более простой пример. Имеем функцию, которая ведет счет от `1` до `1000000000`.
 
-If you run it, the CPU will hang. For server-side JS that's clearly noticeable, and if you are running it in-browser, then try to click other buttons on the page -- you'll see that whole JavaScript actually is paused, no other actions work until it finishes.
+Если запустить ее, то процессор на время зависнет. Это хорошо заметно на серверном JS. Если запустить код в браузере и попробовать кликнуть на другие кнопки на странице, то вы увидите, что весь JavaScript фактически приостановлен и никакие другие действия не работают, пока он не завершится.
 
 ```js run
 let i = 0;
@@ -272,20 +272,20 @@ let start = Date.now();
 
 function count() {
 
-  // do a heavy job
+  // выполнить тяжелую работы
   for (let j = 0; j < 1e9; j++) {
     i++;
   }
 
-  alert("Done in " + (Date.now() - start) + 'ms');
+  alert("Выполнено в " + (Date.now() - start) + ' мс');
 }
 
 count();
 ```
 
-The browser may even show "the script takes too long" warning (but hopefully it won't, because the number is not very big).
+Браузер даже может показать предупреждение, что "скрипт выполняется слишком долго" (надеюсь этого не произойдет, потому что число не очень большое).
 
-Let's split the job using the nested `setTimeout`:
+Разделим задание при помощи вложенного `setTimeout`:
 
 ```js run
 let i = 0;
@@ -294,15 +294,15 @@ let start = Date.now();
 
 function count() {
 
-  // do a piece of the heavy job (*)
+  // сделать кусок тяжелой работы (*)
   do {
     i++;
   } while (i % 1e6 != 0);
 
   if (i == 1e9) {
-    alert("Done in " + (Date.now() - start) + 'ms');
+    alert("Выполнено в " + (Date.now() - start) + ' мс');
   } else {
-    setTimeout(count); // schedule the new call (**)
+    setTimeout(count); // планируем новый вызов (**)
   }
 
 }
@@ -310,15 +310,15 @@ function count() {
 count();
 ```
 
-Now the browser UI is fully functional during the "counting" process.
+Теперь интерфейс в браузере польностью доступен с течение всего процесса "подсчета".
 
-We do a part of the job `(*)`:
+Мы делаем часть работы `(*)`:
 
-1. First run: `i=1...1000000`.
-2. Second run: `i=1000001..2000000`.
-3. ...and so on, the `while` checks if `i` is evenly divided by `1000000`.
+1. Первый запуск: `i=1...1000000`.
+2. Второй: `i=1000001..2000000`.
+3. ... и т.д., пока `while` проверяет делится ли `i` ровно на `1000000`.
 
-Then the next call is scheduled in `(**)` if we're not done yet.
+Затем следующиый вызов планируется в `(**)` если мы еще не закончили.
 
 Pauses between `count` executions provide just enough "breath" for the JavaScript engine to do something else, to react to other user actions.
 
