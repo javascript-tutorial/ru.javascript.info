@@ -237,9 +237,9 @@ setTimeout(function() {...}, 100);
 
 ## setTimeout(...,0)
 
-There's a special use case: `setTimeout(func, 0)`, or just `setTimeout(func)`.
+Особый вариант использования: `setTimeout(func, 0)` или просто `setTimeout(func)`.
 
-This schedules the execution of `func` as soon as possible. But scheduler will invoke it only after the current code is complete.
+Это планирование вызова `func` настолько быстро, насколько это возможно. Но планировщик будет вызывать ее только после завершения текущего кода.
 
 So the function is scheduled to run "right after" the current code. In other words, *asynchronously*.
 
