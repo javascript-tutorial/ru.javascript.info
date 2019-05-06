@@ -183,7 +183,7 @@ alert(Object.keys(chineseDictionary)); // hello,bye
 
 Тогда мы можем использовать либо `Object.create(null)` для создания "очень пустого" объекта, либо использовать коллекцию `Map`.
 
-Также, `Object.create` даёт нам лёгкий способ создать поверхностную копию объекты со всеми дескрипторами:
+Кроме этого, `Object.create` даёт нам лёгкий способ создать поверхностную копию объекта со всеми дескрипторами:
 
 ```js
 let clone = Object.create(Object.getPrototypeOf(obj), Object.getOwnPropertyDescriptors(obj));
