@@ -462,9 +462,9 @@ arr.sort( (a, b) => a - b );
 
 ### reverse
 
-The method [arr.reverse](mdn:js/Array/reverse) reverses the order of elements in `arr`.
+Метод [arr.reverse](mdn:js/Array/reverse) меняет порядок элементов в `arr`.
 
-For instance:
+Например:
 
 ```js run
 let arr = [1, 2, 3, 4, 5];
@@ -473,27 +473,27 @@ arr.reverse();
 alert( arr ); // 5,4,3,2,1
 ```
 
-It also returns the array `arr` after the reversal.
+Он также возвращает массив `arr` с изменённым порядком элементов.
 
-### split and join
+### split и join
 
-Here's the situation from the real life. We are writing a messaging app, and the person enters the comma-delimited list of receivers: `John, Pete, Mary`. But for us an array of names would be much more comfortable than a single string. How to get it?
+Ситуация из реальной жизни. Мы пишем сервис отсылки сообщений и посетитель вводит имена тех, кому его отправить: `Вася, Петя, Маша`.    Но нам-то гораздо удобнее работать с массивом имен, чем с одной строкой. Как это сделать?
 
-The [str.split(delim)](mdn:js/String/split) method does exactly that. It splits the string into an array by the given delimiter `delim`.
+Метод [str.split(delim)](mdn:js/String/split) именно это и делает. Он разбивает строку на массив по заданному разделителю `delim`.
 
-In the example below, we split by a comma followed by space:
+В примере ниже таким разделителем является строка из запятой и пробела.
 
 ```js run
-let names = 'Bilbo, Gandalf, Nazgul';
+let names = 'Вася, Петя, Маша';
 
 let arr = names.split(', ');
 
 for (let name of arr) {
-  alert( `A message to ${name}.` ); // A message to Bilbo  (and other names)
+  alert( `Вам сообщение ${name}.` ); // Вам сообщение Вася (и другие имена)
 }
 ```
 
-The `split` method has an optional second numeric argument -- a limit on the array length. If it is provided, then the extra elements are ignored. In practice it is rarely used though:
+У метода `split` есть необязательный второй числовой аргумент -- ограничение на количество элементов в массиве. Если их больше, чем указано – остаток массива будет отброшен. На практике это редко используется:
 
 ```js run
 let arr = 'Bilbo, Gandalf, Nazgul, Saruman'.split(', ', 2);
@@ -501,19 +501,19 @@ let arr = 'Bilbo, Gandalf, Nazgul, Saruman'.split(', ', 2);
 alert(arr); // Bilbo, Gandalf
 ```
 
-````smart header="Split into letters"
-The call to `split(s)` with an empty `s` would split the string into an array of letters:
+````smart header="Разбивка по буквам"
+Вызов `split(s)` с пустой `s` разбил бы строку на массив букв:
 
 ```js run
-let str = "test";
+let str = "тест";
 
-alert( str.split('') ); // t,e,s,t
+alert( str.split('') ); // т,е,с,т
 ```
 ````
 
-The call [arr.join(separator)](mdn:js/Array/join) does the reverse to `split`. It creates a string of `arr` items glued by `separator` between them.
+Вызов [arr.join(separator)](mdn:js/Array/join) делает в точности противоположное `split`. Он создаёт строку из елементов `arr` используя `separator` как разделитель.
 
-For instance:
+Например:
 
 ```js run
 let arr = ['Bilbo', 'Gandalf', 'Nazgul'];
@@ -525,13 +525,14 @@ alert( str ); // Bilbo;Gandalf;Nazgul
 
 ### reduce/reduceRight
 
-When we need to iterate over an array -- we can use `forEach`, `for` or `for..of`.
+Если нам нужно перебрать массив -- мы можем использовать `forEach`,` for` или `for..of`.
 
-When we need to iterate and return the data for each element -- we can use `map`.
+Если нам нужно перебрать массив и возвратить данные для каждого элемента -- мы используем `map`.
 
-The methods [arr.reduce](mdn:js/Array/reduce) and [arr.reduceRight](mdn:js/Array/reduceRight) also belong to that breed, but are a little bit more intricate. They are used to calculate a single value based on the array.
+Методы [arr.reduce](mdn:js/Array/reduce) и [arr.reduceRight](mdn:js/Array/reduceRight) похожы на методы выше, но они немного сложнее.
+Они используются для вычисления на основе массива какого-нибудь единого значения.
 
-The syntax is:
+Синтаксис:
 
 ```js
 let value = arr.reduce(function(previousValue, item, index, array) {
@@ -539,19 +540,19 @@ let value = arr.reduce(function(previousValue, item, index, array) {
 }, initial);
 ```
 
-The function is applied to the elements. You may notice the familiar arguments, starting from the 2nd:
+К каждому элементу применяется функция. Аргументы, начиная со второго, уже знакомы нам:
 
-- `item` -- is the current array item.
-- `index` -- is its position.
-- `array` -- is the array.
+- `item` -- текущий элемент массива.
+- `index` -- его позиция.
+- `array` -- сам массив.
 
-So far, like `forEach/map`. But there's one more argument:
+Не так давно мы видели их в `forEach / map`. Но есть еще один аргумент:
 
-- `previousValue` -- is the result of the previous function call, `initial` for the first call.
+- `previousValue` -- это результат предыдущего вызова функции, а `initial` нужен для первого вызова.
 
-The easiest way to grasp that is by example.
+Этот метод проще всего понять, рассмотрев пример.
 
-Here we get a sum of array in one line:
+Тут мы получим сумму всех элементов массива всего одной строкой:
 
 ```js run
 let arr = [1, 2, 3, 4, 5];
@@ -561,62 +562,62 @@ let result = arr.reduce((sum, current) => sum + current, 0);
 alert(result); // 15
 ```
 
-Here we used the most common variant of `reduce` which uses only 2 arguments.
+Здесь мы использовали наиболее распространенный вариант `reduce`, который использует только 2 аргумента.
 
-Let's see the details of what's going on.
+Давайте детальнее разберём как это работает.
 
-1. On the first run, `sum` is the initial value (the last argument of `reduce`), equals `0`, and `current` is the first array element, equals `1`. So the result is `1`.
-2. On the second run, `sum = 1`, we add the second array element (`2`) to it and return.
-3. On the 3rd run, `sum = 3` and we add one more element to it, and so on...
+1. При первом запуске `sum` -- это начальное значение (последний аргумент `reduce`), равен `0`, а `current` -- первый элемент массива, равен `1`. Таким образом, результат равен `1`.
+2. При втором запуске, `sum = 1`, и к нему мы добавляем второй элемент массива (`2`).
+3. На 3-м запуске, `sum = 3`, к которому мы добавлем следующий элемент, и так далее...
 
-The calculation flow:
+Поток вычислений получается такой:
 
 ![](reduce.png)
 
-Or in the form of a table, where each row represents a function call on the next array element:
+В виде таблицы где каждая строка – вызов функции на очередном элементе массива:
 
 |   |`sum`|`current`|`result`|
 |---|-----|---------|---------|
-|the first call|`0`|`1`|`1`|
-|the second call|`1`|`2`|`3`|
-|the third call|`3`|`3`|`6`|
-|the fourth call|`6`|`4`|`10`|
-|the fifth call|`10`|`5`|`15`|
+|первый вызов|`0`|`1`|`1`|
+|второй вызов|`1`|`2`|`3`|
+|третий вызов|`3`|`3`|`6`|
+|четвёртый вызов|`6`|`4`|`10`|
+|пятый вызов|`10`|`5`|`15`|
 
 
-As we can see, the result of the previous call becomes the first argument of the next one.
+Как видно, результат предыдущего вызова передаётся в первый аргумент следующего.
 
-We also can omit the initial value:
+Также мы можем опустить начальное значение:
 
 ```js run
 let arr = [1, 2, 3, 4, 5];
 
-// removed initial value from reduce (no 0)
+// убрано начальное значение (нет 0 в конце)
 let result = arr.reduce((sum, current) => sum + current);
 
 alert( result ); // 15
 ```
 
-The result is the same. That's because if there's no initial, then `reduce` takes the first element of the array as the initial value and starts the iteration from the 2nd element.
+Результат – точно такой же! Это потому, что при отсутствии `initial` в качестве первого значения берётся первый элемент массива, а перебор стартует со второго.
 
-The calculation table is the same as above, minus the first row.
+Таблица вычислений будет такая же, за вычетом первой строки.
 
-But such use requires an extreme care. If the array is empty, then `reduce` call without initial value gives an error.
+Но такое использование требует крайней осторожности. Если массив пуст, то вызов `reduce` без начального значения выдаст ошибку.
 
-Here's an example:
+Вот пример:
 
 ```js run
 let arr = [];
 
 // Error: Reduce of empty array with no initial value
-// if the initial value existed, reduce would return it for the empty arr.
+// если бы существовало начальное значение, reduce вернул бы его для пустого массива.
 arr.reduce((sum, current) => sum + current);
 ```
 
 
-So it's advised to always specify the initial value.
+Поэтому рекомендуется всегда указывать начальное значение.
 
-The method [arr.reduceRight](mdn:js/Array/reduceRight) does the same, but goes from right to left.
+Метод [arr.reduceRight](mdn:js/Array/reduceRight) работает аналогично, но идёт по массиву справа-налево.
 
 
 ## Array.isArray
