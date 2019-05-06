@@ -22,7 +22,7 @@ for(let key in dictionary) {
   alert(key); // "apple", затем "__proto__"
 }  
 
-// список свойств разделённых запятой выведен с помощью toString
+// список свойств, разделённых запятой, выведен с помощью toString
 alert(dictionary); // "apple,__proto__"
 ```
 
