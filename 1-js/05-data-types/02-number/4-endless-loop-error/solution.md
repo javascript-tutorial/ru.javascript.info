@@ -1,6 +1,6 @@
-That's because `i` would never equal `10`.
+Потому что `i` никогда не станет равным `10`.
 
-Run it to see the *real* values of `i`:
+Запустите скрипт и вы увидите *реальные* значения `i`:
 
 ```js run
 let i = 0;
@@ -10,8 +10,8 @@ while (i < 11) {
 }
 ```
 
-None of them is exactly `10`.
+Ни одно из этих чисел не равно `10`. 
 
-Such things happen because of the precision losses when adding fractions like `0.2`.
+Это происходит из-за потери точности, при прибавлении таких дробей как `0.2`.
 
-Conclusion: evade equality checks when working with decimal fractions.
+Вывод: избегайте проверок на равенство при работе с десятичными дробями. 
