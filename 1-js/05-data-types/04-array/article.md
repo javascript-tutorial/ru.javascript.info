@@ -78,7 +78,7 @@ alert( arr[1].name ); // Джон
 arr[3](); // привет
 ```
 
-````smart header="Trailing comma"
+````smart header="Висячая запятая"
 Массив, так же, как и объект, может оканчиваться запятой:
 ```js 
 let fruits = [
