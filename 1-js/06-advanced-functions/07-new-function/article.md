@@ -53,13 +53,13 @@ func();
 ```js run
 
 function getFunc() {
-    let value = "test";
+  let value = "test";
 
-    *!*
-    let func = new Function('alert(value)');
-    */!*
+  *!*
+  let func = new Function('alert(value)');
+  */!*
 
-    return func;
+  return func;
 }
 
 getFunc()(); // ошибка: значение не определено
@@ -69,13 +69,13 @@ getFunc()(); // ошибка: значение не определено
 
 ```js run
 function getFunc() {
-    let value = "test";
+  let value = "test";
 
-    *!*
-    let func = function() { alert(value); };
-    */!*
+  *!*
+  let func = function() { alert(value); };
+  */!*
 
-    return func;
+  return func;
 }
 
 getFunc()(); // *!*"test"*/!*, из лексического окружения функции getFunc
