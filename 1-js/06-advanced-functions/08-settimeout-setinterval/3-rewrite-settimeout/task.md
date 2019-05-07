@@ -1,12 +1,12 @@
-importance: 4
+важность: 4
 
 ---
 
-# Rewrite setTimeout with setInterval
+# Перепишите setTimeout с помощью setInterval
 
-Here's the function that uses nested `setTimeout` to split a job into pieces.
+Эта функция использует вложенный `setTimeout` для разделения задачи на части.
 
-Rewrite it to `setInterval`:
+Перепишите ее, используя `setInterval`:
 
 ```js run
 let i = 0;
@@ -16,12 +16,12 @@ let start = Date.now();
 function count() {
 
   if (i == 1000000000) {
-    alert("Done in " + (Date.now() - start) + 'ms');
+    alert("Выполнено в " + (Date.now() - start) + 'ms');
   } else {
     setTimeout(count);
   }
 
-  // a piece of heavy job
+  // часть тяжелой задачи
   for(let j = 0; j < 1000000; j++) {
     i++;
   }
