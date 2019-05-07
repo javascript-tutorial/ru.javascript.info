@@ -134,7 +134,7 @@ alert(obj.toString()); // то же самое
 
 Согласно [спецификации](https://tc39.github.io/ecma262/#sec-object.prototype.tostring) встроенный метод `toString` может бы позаимствован у объекта и вызван в контексте любого другого значения. И результат зависит от типа этого значения.
 
-- Для числа, это будет `[object Number]`
+- Для числа это будет `[object Number]`
 - Для булева типа это будет `[object Boolean]`
 - Для `null`: `[object Null]`
 - Для `undefined`: `[object Undefined]`
