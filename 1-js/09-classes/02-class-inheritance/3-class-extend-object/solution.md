@@ -44,7 +44,7 @@ alert( Rabbit.__proto__ === Object ); // (2) true
 class Rabbit extends Object {}
 
 *!*
-//обычно мы вызываем Object.getOwnPropertyNames
+// обычно мы вызываем Object.getOwnPropertyNames
 alert ( Rabbit.getOwnPropertyNames({a: 1, b: 2})); // a,b
 */!*
 ```
