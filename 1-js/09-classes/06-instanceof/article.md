@@ -53,7 +53,7 @@ alert( arr instanceof Object ); // true
 1. Если имеется статический метод `Symbol.hasInstance`, тогда используется он. Таким образом:
 
     ```js run
-    // предполагаем, все что может есть, - это животное
+    // предполагаем, все, что может есть, - животное
     class Animal {
       static [Symbol.hasInstance](obj) {
         if (obj.canEat) return true;
