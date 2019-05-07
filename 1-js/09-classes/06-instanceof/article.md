@@ -125,7 +125,7 @@ alert( rabbit instanceof Rabbit ); // false
 let obj = {};
 
 alert(obj); // [object Object]
-alert(obj.toString()); // тоже самое
+alert(obj.toString()); // то же самое
 ```
 
 Так работает реализация метода `toString` у объектов. Но у `toString` имеются скрытые возможности, которые делают метод гораздо более мощным. Мы можем использовать его как расширенную версию `typeof` и как альтернативу `instanceof`.
