@@ -18,7 +18,7 @@
 let timerId = setTimeout(func|code, [delay], [arg1], [arg2], ...)
 ```
 
-Parameters:
+Параметры:
 
 `func|code`
 : функция или строка кода для выполнения.
@@ -440,22 +440,22 @@ And if we use `setTimeout` to split it into pieces then changes are applied in-b
 
 Now the `<div>` shows increasing values of `i`.
 
-## Summary
+## Итого
 
-- Methods `setInterval(func, delay, ...args)` and `setTimeout(func, delay, ...args)` allow to run the `func` regularly/once after `delay` milliseconds.
-- To cancel the execution, we should call `clearInterval/clearTimeout` with the value returned by `setInterval/setTimeout`.
-- Nested `setTimeout` calls is a more flexible alternative to `setInterval`. Also they can guarantee the minimal time *between* the executions.
-- Zero-timeout scheduling `setTimeout(...,0)` is used to schedule the call "as soon as possible, but after the current code is complete".
+- Методы `setInterval(func, delay, ...args)` и `setTimeout(func, delay, ...args)` позволяют выполнять `func` регулярно или только один раз после задержки `delay`, заданной в мс.
+- Для отмены выполнения необходимо вызвать `clearInterval/clearTimeout` со значением, которое возвращают методы `setInterval/setTimeout`.
+- Вложенный вызов `setTimeout` более гибкая альтернатива `setInterval`. Также они могут гарантировать минимальное время *между* выполнениями.
+- Планирование с нулевой задержкой `setTimeout(...,0)` используется для вызовов, которые должны быть исполнены "как можно скорее, после завершения исполнения текущего кода".
 
-Some use cases of `setTimeout(...,0)`:
-- To split CPU-hungry tasks into pieces, so that the script doesn't "hang"
-- To let the browser do something else while the process is going on (paint the progress bar).
+Некоторые случаи использования `setTimeout(...,0)`:
+- разделить ресурсоемкие задачи на части, чтобы скрипт не "зависал",
+- позволить браузеру сделать что-то еще, пока идет процесс (отрисовка статуса загрузки).
 
-Please note that all scheduling methods do not *guarantee* the exact delay. We should not rely on that in the scheduled code.
+Обратите внимание, что все методы планирования не дают *гарантию* точности задержки. Поэтому не стоит полагаться на это в запланированном коде.
 
-For example, the in-browser timer may slow down for a lot of reasons:
-- The CPU is overloaded.
-- The browser tab is in the background mode.
-- The laptop is on battery.
+Например, таймер в браузере может замедляться по многим причинам:
+- Перегружен процессор.
+- Вкладка браузера в фоновом режиме.
+- Работа ноутбука от аккумулятора.
 
-All that may increase the minimal timer resolution (the minimal delay) to 300ms or even 1000ms depending on the browser and settings.
+Все это может увеличивать минимальное временное разрешение (минимальная задержка) до 300 или даже 1000 мс в зависимости от браузера и настроек.
