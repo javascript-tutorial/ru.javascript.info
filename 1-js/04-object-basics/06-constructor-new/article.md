@@ -113,9 +113,9 @@ new User(); // function User { ... }
 function User(name) {
   if (!new.target) { // в случае если вызов без оператора new
     return new User(name); // ...добавили оператор new за вас
-
+  }
+  
   this.name = name;
-  };
 }
 
 let vasya = User("Вася"); // переадресовываем вызовы на new User
