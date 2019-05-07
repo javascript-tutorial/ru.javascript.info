@@ -5,7 +5,7 @@ let name = prompt("Ваше имя?", "");
 alert(name);
 ```
 
-Код всей страницы:
+Вся страница:
 
 ```html
 <!DOCTYPE html>
