@@ -139,11 +139,11 @@ elem.onclick = sayThanks;
 
 Удалить обработчик можно присвоив значение `null` определённому событию -- `elem.onclick = null`.
 
-## Accessing the element: this
+## Доступ к элементу через this
 
-The value of `this` inside a handler is the element. The one which has the handler on it.
+`this` -- это элемент, на котором сработал обработчик.
 
-In the code below `button` shows its contents using `this.innerHTML`:
+В примере ниже, нажатие на кнопку `button` покажет её содержимое `this.innerHTML`:
 
 ```html height=50 autorun
 <button onclick="alert(this.innerHTML)">Нажми меня</button>
@@ -151,9 +151,9 @@ In the code below `button` shows its contents using `this.innerHTML`:
 
 ## Возможные ошибки
 
-If you're starting to work with event -- please note some subtleties.
+Если вы только начинаете работать с событиями -- пожалуйста, обратите внимание на некоторые тонкости.
 
-**The function should be assigned as `sayThanks`, not `sayThanks()`.**
+**Функцию-обработчик следует назначать без скобок `sayThanks`. Использование `sayThanks()` - не верно.**
 
 ```js
 // правильно
@@ -165,38 +165,38 @@ button.onclick = sayThanks();
 
 Если мы добавляем скобки, тогда `sayThanks()` -- вернёт результат выполнения функции, таким образом `onclick` в последнем примере станет равным `undefined` (как результат выполнения функции), и как следствие код будет не рабочим.
 
-...But in the markup we do need the brackets:
+...но, в разметке скобки необходимы:
 
 ```html
 <input type="button" id="button" onclick="sayThanks()">
 ```
 
-The difference is easy to explain. When the browser reads the attribute, it creates a handler function with the body from its content.
+Различие легко объяснить. Когда браузер читает атрибут, он создаёт функцию-обработчик с телом из его содержимого.
 
-So the last example is the same as:
+Поэтому, следующий пример аналогичен предыдущему:
 ```js
 button.onclick = function() {
 *!*
-  sayThanks(); // the attribute content
+  sayThanks(); // содержимое атрибута
 */!*
 };
 ```
 
-**Use functions, not strings.**
+**Используйте именно функции, а не строки.**
 
-The assignment `elem.onclick = "alert(1)"` would work too. It works for compatibility reasons, but strongly not recommended.
+Назначение `elem.onclick = "alert(1)"` тоже будет работать. Это сделано из соображений совместимости, но строго не рекомендуется в использовании.
 
-**Don't use `setAttribute` for handlers.**
+**Не используйте `setAttribute` для обработчиков.**
 
-Such a call won't work:
+Следующий вызов не сработает:
 
 ```js run no-beautify
-// a click on <body> will generate errors,
-// because attributes are always strings, function becomes a string
+// нажатие по <body> сгенерирует ошибки,
+// потому что атрибуты всегда строки, и в данном случае функция становится строкой
 document.body.setAttribute('onclick', function() { alert(1) });
 ```
 
-**DOM-property case matters.**
+**Регистр DOM-свойства имеет значение.**
 
 Assign a handler to `elem.onclick`, not `elem.ONCLICK`, because DOM properties are case-sensitive.
 
