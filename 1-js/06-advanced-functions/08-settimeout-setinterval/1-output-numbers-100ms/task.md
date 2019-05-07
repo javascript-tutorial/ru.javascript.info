@@ -1,13 +1,13 @@
-importance: 5
+важность: 5
 
 ---
 
-# Output every second
+# Вывод каждую секунду
 
-Write a function `printNumbers(from, to)` that outputs a number every second, starting from `from` and ending with `to`.
+Напишите функцию `printNumbers(from, to)`, которая выводит число каждую секунду, начиная от `from` и заканчивая `to`.
 
-Make two variants of the solution.
+Сделайте два варианта решения.
 
-1. Using `setInterval`.
-2. Using recursive `setTimeout`.
+1. Используя `setInterval`.
+2. Используя рекурсивный `setTimeout`.
 
