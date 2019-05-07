@@ -204,27 +204,27 @@ alert( c ); // 0
 Забавный код, не так ли? Мы должны понять, как это работает, потому что иногда мы видим это в сторонних библиотеках, но не должны писать ничего подобного сами. Такие трюки определенно не делают код более понятным или читабельным.
 ````
 
-## Remainder %
+## Остаток %
 
-The remainder operator `%`, despite its appearance, is not related to percents.
+Оператор остатка `%`, несмотря на его внешний вид, не связан с процентами.
 
-The result of `a % b` is the remainder of the integer division of `a` by `b`.
+Результатом `a % b` является остаток от целочисленного деления `a` на `b`.
 
-For instance:
+Например:
 
 ```js run
-alert( 5 % 2 ); // 1 is a remainder of 5 divided by 2
-alert( 8 % 3 ); // 2 is a remainder of 8 divided by 3
-alert( 6 % 3 ); // 0 is a remainder of 6 divided by 3
+alert( 5 % 2 ); // 1, остаток от деления 5 на 2
+alert( 8 % 3 ); // 2, остаток от деления 8 на 3
+alert( 6 % 3 ); // 0, остаток от деления 6 на 3
 ```
 
-## Exponentiation **
+## Возведение в степень **
 
-The exponentiation operator `**` is a recent addition to the language.
+Оператор возведения в степень `**` является недавним дополнением к языку.
 
-For a natural number `b`, the result of `a ** b` is `a` multiplied by itself `b` times.
+Для натурального числа `b` результат `a ** b` равен `a`, умноженное на себя `b` раз.
 
-For instance:
+Например:
 
 ```js run
 alert( 2 ** 2 ); // 4  (2 * 2)
@@ -232,40 +232,40 @@ alert( 2 ** 3 ); // 8  (2 * 2 * 2)
 alert( 2 ** 4 ); // 16 (2 * 2 * 2 * 2)
 ```
 
-The operator works for non-integer numbers as well.
+Оператор работает и для нецелых чисел.
 
-For instance:
+Например:
 
 ```js run
-alert( 4 ** (1/2) ); // 2 (power of 1/2 is the same as a square root, that's maths)
-alert( 8 ** (1/3) ); // 2 (power of 1/3 is the same as a cubic root)
+alert( 4 ** (1/2) ); // 2 (степень 1/2 равна квадратному корню, это математика)
+alert( 8 ** (1/3) ); // 2 (степень 1/3 равна кубическому корню)
 ```
 
-## Increment/decrement
+## Инкремент/декремент
 
 <!-- Can't use -- in title, because built-in parse turns it into – -->
 
-Increasing or decreasing a number by one is among the most common numerical operations.
+Увеличение или уменьшение числа на единицу является одной из наиболее распространенных числовых операций.
 
-So, there are special operators for it:
+Итак, для этого есть специальные операторы:
 
-- **Increment** `++` increases a variable by 1:
+- **Инкремент** `++` увеличивает переменную на 1:
 
     ```js run no-beautify
     let counter = 2;
-    counter++;      // works the same as counter = counter + 1, but is shorter
+    counter++;      // работает так же, как counter = counter + 1, но короче
     alert( counter ); // 3
     ```
-- **Decrement** `--` decreases a variable by 1:
+- **Декремент** `--` уменьшает переменную на 1:
 
     ```js run no-beautify
     let counter = 2;
-    counter--;      // works the same as counter = counter - 1, but is shorter
+    counter--;      // работает так же, как counter = counter - 1, но короче
     alert( counter ); // 1
     ```
 
 ```warn
-Increment/decrement can only be applied to variables. Trying to use it on a value like `5++` will give an error.
+Инкремент/декремент может применяться только к переменным. Попытка использовать его для значения типа "5++" приведет к ошибке.
 ```
 
 The operators `++` and `--` can be placed either before or after a variable.

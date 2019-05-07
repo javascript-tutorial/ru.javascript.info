@@ -1,10 +1,10 @@
-importance: 3
+важность: 3
 
 ---
 
-# Assignment result
+# Результат назначения
 
-What are the values of `a` and `x` after the code below?
+Каковы значения `a` и` x` после кода ниже?
 
 ```js
 let a = 2;
