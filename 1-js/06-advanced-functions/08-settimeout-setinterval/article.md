@@ -239,9 +239,9 @@ setTimeout(function() {...}, 100);
 
 Особый вариант использования: `setTimeout(func, 0)` или просто `setTimeout(func)`.
 
-Это планирование вызова `func` настолько быстро, насколько это возможно. Но планировщик будет вызывать функцию только после завершения текущего кода.
+Это планирование вызова `func` настолько быстро, насколько это возможно. Но планировщик будет вызывать функцию только после завершения выполнения текущего кода.
 
-Так вызов функции запланирован сразу после выполнения текущего кода. Другими словами, *асинхронно*.
+Так вызов функции будет запланирован сразу после выполнения текущего кода. Другими словами, *асинхронно*.
 
 Например, этот код выводит "Привет" и затем сразу "Мир":
 
@@ -322,11 +322,11 @@ count();
 
 Задержки между выполнениями `count` обеспечивают достаточно "воздуха" для движка JavaScript, чтобы делать что-то еще и реагировать на другие действия пользователей.
 
-The notable thing is that both variants -- with and without splitting the job by `setTimeout` -- are comparable in speed. There's no much difference in the overall counting time.
+Примечательно, что оба варианта -- с разделением задачи с помощью `setTimeout`и без -- сопоставимы по скорости. Нет существенной разницы в общем затраченном времени.
 
-To make them closer, let's make an improvement.
+Чтобы сделать их ближе, введем улучшение.
 
-We'll move the scheduling in the beginning of the `count()`:
+Перенесем планирование в начало `count()`:
 
 ```js run
 let i = 0;
@@ -335,9 +335,9 @@ let start = Date.now();
 
 function count() {
 
-  // move the scheduling at the beginning
+  // перенесли планирование в начало
   if (i < 1e9 - 1e6) {
-    setTimeout(count); // schedule the new call
+    setTimeout(count); // планируем новый вызов
   }
 
   do {
@@ -345,7 +345,7 @@ function count() {
   } while (i % 1e6 != 0);
 
   if (i == 1e9) {
-    alert("Done in " + (Date.now() - start) + 'ms');
+    alert("Выполнено в " + (Date.now() - start) + 'ms');
   }
 
 }
@@ -353,44 +353,44 @@ function count() {
 count();
 ```
 
-Now when we start to `count()` and know that we'll need to `count()` more, we schedule that immediately, before doing the job.
+Теперь когда запускаем `count()` и узнаем, что нам будет нужен ещё `count()`, мы планируем это сразу перед выполнением работы.
 
-If you run it, it's easy to notice that it takes significantly less time.
+Если запустите этот код, то легко заметите, что он занимает существенно меньше времени.
 
-````smart header="Minimal delay of nested timers in-browser"
-In the browser, there's a limitation of how often nested timers can run. The [HTML5 standard](https://www.w3.org/TR/html5/webappapis.html#timers) says: "after five nested timers, the interval is forced to be at least four milliseconds.".
+````smart header="Минимальная задержка вложенных таймеров в браузере"
+В браузере есть ограничение, как часто внутренние счетчики могут выполняться. В  [стандарте HTML](https://www.w3.org/TR/html5/webappapis.html#timers) говорится: "после пяти вложенных таймеров интервал должен составлять не менее четырех миллисекунд.".
 
-Let's demonstrate what it means with the example below. The `setTimeout` call in it re-schedules itself after `0ms`. Each call remembers the real time from the previous one in the `times` array. What do the real delays look like? Let's see:
+Продемонстрируем в примере ниже, что это означает . Вызов `setTimeout` повторно вызывает себя через 0 мс. Каждый вызов запоминает реальное время от предыдущего вызова в массиве `times. Какова реальная задержка? Посмотрим:
 
 ```js run
 let start = Date.now();
 let times = [];
 
 setTimeout(function run() {
-  times.push(Date.now() - start); // remember delay from the previous call
+  times.push(Date.now() - start); // запоминаем задержку от предыдущего вызова
 
-  if (start + 100 < Date.now()) alert(times); // show the delays after 100ms
-  else setTimeout(run); // else re-schedule
+  if (start + 100 < Date.now()) alert(times); // показываем задержку через 100 мс
+  else setTimeout(run); // если нужно ещё запланировать
 });
 
-// an example of the output:
+// пример вывода:
 // 1,1,1,1,9,15,20,24,30,35,40,45,50,55,59,64,70,75,80,85,90,95,100
 ```
 
-First timers run immediately (just as written in the spec), and then the delay comes into play and we see `9, 15, 20, 24...`.
+Первый таймер запускается сразу (как и указано в спецификации) и затем задержка вступает в игру и мы видим `9, 15, 20, 24...`.
 
-That limitation comes from ancient times and many scripts rely on it, so it exists for historical reasons.
+Это ограничение существует давно и многие скрипты полагаются на него, поэтому оно существует по историческим причинам. 
 
-For server-side JavaScript, that limitation does not exist, and there exist other ways to schedule an immediate asynchronous job, like [process.nextTick](https://nodejs.org/api/process.html) and [setImmediate](https://nodejs.org/api/timers.html) for Node.js. So the notion is browser-specific only.
+Этого ограничения в серверном JavaScript не существует и там есть другие способы планирования немедленной асинхронной работы. Например, [process.nextTick](https://nodejs.org/api/process.html) и [setImmediate](https://nodejs.org/api/timers.html) для Node.js. Так что это ограничение относится только к браузерам.
 ````
 
-### Allowing the browser to render
+### Даем возможность отрисовки браузеру
 
-Another benefit for in-browser scripts is that they can show a progress bar or something to the user. That's because the browser usually does all "repainting" after the script is complete.
+Другим преимуществом для браузерных скриптов является возможность показа процесса загрузки или чего-либо ещё пользователю. Это связано с тем, что браузер обычно выполняет все «перерисовки» после завершения скрипта.
 
-So if we do a single huge function then even if it changes something, the changes are not reflected in the document till it finishes.
+Поэтому, если мы делаем одну огромную функцию, то даже если она что-то меняет, изменения не отразятся в документе до ее завершения.
 
-Here's the demo:
+Демо:
 ```html run
 <div id="progress"></div>
 
@@ -400,8 +400,8 @@ Here's the demo:
   function count() {
     for (let j = 0; j < 1e6; j++) {
       i++;
-      // put the current i into the <div>
-      // (we'll talk more about innerHTML in the specific chapter, should be obvious here)
+      // вставляем текущее значение i в <div>
+      // (об innerHTML поговорим в отдельной главе, но его смысл должен быть понятен)
       progress.innerHTML = i;
     }
   }
@@ -410,9 +410,9 @@ Here's the demo:
 </script>
 ```
 
-If you run it, the changes to `i` will show up after the whole count finishes.
+Если запустить код, то изменение i будет показано только после того, как весь подсчет закончится.
 
-And if we use `setTimeout` to split it into pieces then changes are applied in-between the runs, so this looks better:
+Но если использовать `setTimeout` для разделения его на куски, то изменения будут применены между запусками. Это выглядит гораздо лучше:
 
 ```html run
 <div id="progress"></div>
@@ -422,7 +422,7 @@ And if we use `setTimeout` to split it into pieces then changes are applied in-b
 
   function count() {
 
-    // do a piece of the heavy job (*)
+    // сделать часть тяжелой работы (*)
     do {
       i++;
       progress.innerHTML = i;
@@ -438,7 +438,7 @@ And if we use `setTimeout` to split it into pieces then changes are applied in-b
 </script>
 ```
 
-Now the `<div>` shows increasing values of `i`.
+Теперь в `<div>` показано изменение `i`.
 
 ## Итого
 
