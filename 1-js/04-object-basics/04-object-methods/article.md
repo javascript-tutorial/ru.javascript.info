@@ -277,76 +277,76 @@ user.hi();
 
 Итак, каким же образом информация (значение) о `this` передается из первой части во вторую?
 
-If we put these operations on separate lines, then `this` will be lost for sure:
+Если мы поместим эти операции в отдельные строки, тогда `this`, конечно, будет потеряно:
 
 ```js run
 let user = {
-  name: "John",
+  name: "Джон",
   hi() { alert(this.name); }
 }
 
 *!*
-// split getting and calling the method in two lines
+// разделим получение метода объекта и его вызов в разные строки
 let hi = user.hi;
-hi(); // Error, because this is undefined
+hi(); // Ошибка, потому что значением `this` является undefined
 */!*
 ```
 
-Here `hi = user.hi` puts the function into the variable, and then on the last line it is completely standalone, and so there's no `this`.
+Вот здесь при `hi = user.hi` мы сохранили в переменной ссылку на функцию (метод) и затем в последней строке при вызове функции из переменной это уже совершенно самостоятельная и автономная функция (не привязанная к объекту), и поэтом тут уже нет `this`.
 
-**To make `user.hi()` calls work, JavaScript uses a trick -- the dot `'.'` returns not a function, but a value of the special [Reference Type](https://tc39.github.io/ecma262/#sec-reference-specification-type).**
+**Чтобы сделать вызов `user.hi()` работающим правильно, JavaScript использует трюк, при котором вызов через точку `'.'` возвращает не саму функцию (т.е. не саму ссылку на эту функцию), а специальное значение ссылочного типа, называемого [Reference Type](https://tc39.github.io/ecma262/#sec-reference-specification-type).**
 
-The Reference Type is a "specification type". We can't explicitly use it, but it is used internally by the language.
+Этот ссылочный тип (Reference Type) является внутренним типом. Мы не можем явно использовать его, но он используется внутри языка.
 
-The value of Reference Type is a three-value combination `(base, name, strict)`, where:
+Значением ссылочного типа является комбинация из трех значений `(base, name, strict)`, где
 
-- `base` is the object.
-- `name` is the property.
-- `strict` is true if `use strict` is in effect.
+- `base` - это база, т.е. объект.
+- `name` - это свойство объекта.
+- `strict` - это режим исполнения. Является true ессли действует строгий режим (`use strict`).
 
-The result of a property access `user.hi` is not a function, but a value of Reference Type. For `user.hi` in strict mode it is:
+Результатом доступа к свойству `user.hi` является не функция (ссылка на функцию), а значение ссылочного типа. Для `user.hi` в строгом режиме оно будет таким:
 
 ```js
-// Reference Type value
+// значение ссылочного типа (Reference Type)
 (user, "hi", true)
 ```
 
-When parentheses `()` are called on the Reference Type, they receive the full information about the object and its method, and can set the right `this` (`=user` in this case).
+Когда скобки `()` применяются к значению ссылочного типа (происходит вызов), то полная информация об объекте и его методе является доступной и может быть установлено правильное значение `this` (`=user` в данном случае). Т.о. значение `this` определяется значением `base` (база), которое храниться в получаемом (на этапе доступа к свойству) специальном внутреннем объекте ссылочного типа (Reference Type).
 
-Any other operation like assignment `hi = user.hi` discards the reference type as a whole, takes the value of `user.hi` (a function) and passes it on. So any further operation "loses" `this`.
+Любая другая операция, подобная присваиванию `hi = user.hi` теряет получаемый ссылочный тип и вместо него берет самое значение `user.hi` (функцию) и передает его. Поэтому дальнейшие операция с `hi` (вызов) теряет значение `this`.
 
-So, as the result, the value of `this` is only passed the right way if the function is called directly using a dot `obj.method()` or square brackets `obj['method']()` syntax (they do the same here). Later in this tutorial, we will learn various ways to solve this problem such as [func.bind()](/bind#solution-2-bind).
+Таким образом, значение `this` передается правильно, только если функция вызывается напрямую с использованием синтексиса точки `obj.method()` или квадратных скобок `obj['method']()` (они делают тоже самое). Позднее в этом учебники мы изучим различные варианты решения проблемы потери значения `this`. Например, такие как [func.bind()](/bind#solution-2-bind).
 
-## Arrow functions have no "this"
+## У стерлочных функций нет "this"
 
-Arrow functions are special: they don't have their "own" `this`. If we reference `this` from such a function, it's taken from the outer "normal" function.
+Стрелочные функции особенные: у них нет своего "собственного" `this`. Если мы используем `this` внутри стрелочной функции, то оно (значение `this`) берется из внешней "нормальной" функции.
 
-For instance, here `arrow()` uses `this` from the outer `user.sayHi()` method:
+Для примера, здесь `arrow()` использует значение `this` из внешнего `user.sayHi()` метода:
 
 ```js run
 let user = {
-  firstName: "Ilya",
+  firstName: "Илья",
   sayHi() {
     let arrow = () => alert(this.firstName);
     arrow();
   }
 };
 
-user.sayHi(); // Ilya
+user.sayHi(); // Илья
 ```
 
-That's a special feature of arrow functions, it's useful when we actually do not want to have a separate `this`, but rather to take it from the outer context. Later in the chapter <info:arrow-functions> we'll go more deeply into arrow functions.
+Это является особенностью стрелочных функций. Они полезны когда мы на самом деле не хотим иметь отдельное значение `this`, а хотим брать его из внешнего контекста. Позднее в главе <info:arrow-functions> мы погрузимся глубже в тему стрелочных функций.
 
 
-## Summary
+## Итого
 
-- Functions that are stored in object properties are called "methods".
-- Methods allow objects to "act" like `object.doSomething()`.
-- Methods can reference the object as `this`.
+- Функции, которые находятся в объекте в качестве его свойств называеются "методами".
+- Методы позволяют объектам "действовать" подобно `object.doSomething()`.
+- Методы могут ссылаться на объект через `this`.
 
-The value of `this` is defined at run-time.
-- When a function is declared, it may use `this`, but that `this` has no value until the function is called.
-- That function can be copied between objects.
-- When a function is called in the "method" syntax: `object.method()`, the value of `this` during the call is `object`.
+Значение `this` определяется во время исполнения кода.
+- Когда функция объявлена, она может использовать `this`, но это `this` не имеет значения (не содержит его в себе) до тех пор, пока функция не будет вызывана.
+- Эта функция может быть скопирована между объектами (из одного объекта в другой).
+- Когда функция вызывается синтаксисом "метода" - `object.method()`, значением `this` во время вызова является `object`. И это значение не меняется на протяжении исполнения кода метода (нельзя перезаписать значение `this` внутри метода).
 
-Please note that arrow functions are special: they have no `this`. When `this` is accessed inside an arrow function, it is taken from outside.
+Пожалуйста, отметьте, что стрелочные функции являются особенными - у них нет значения `this`. Когда внутри стрелочной функции обращаются к `this`, то его значение берется снаружи (из внешнего контекста - т.е. значением `this` внутри стрелочной функции будет такое значение, которое было у `this` во внешнем контексте из которого вызвана стрелочная функция).
