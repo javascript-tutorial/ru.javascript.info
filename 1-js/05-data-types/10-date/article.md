@@ -1,23 +1,23 @@
-# Date and time
+# Дата и время
 
-Let's meet a new built-in object: [Date](mdn:js/Date). It stores the date, time and provides methods for date/time management.
+Представляем вам ещё один встроенный объект: [Date](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date). В нём хранятся дата и время, а также методы их обработки.
 
-For instance, we can use it to store creation/modification times, to measure time, or just to print out the current date.
+Например, данный объект можно использовать для хранения времени создания/изменения, для измерения времени или просто для вывода текущей даты.
 
-## Creation
+## Создание
 
-To create a new `Date` object call `new Date()` with one of the following arguments:
+Для создания нового объекта `Date` нужно вызвать конструктор `new Date()`:
 
 `new Date()`
-: Without arguments -- create a `Date` object for the current date and time:
+: При отсутствии аргументов объект `Date` создаётся на текущие дату и время:
 
     ```js run
     let now = new Date();
-    alert( now ); // shows current date/time
+    alert( now ); // текущие дата и время
     ```
 
 `new Date(milliseconds)`
-: Create a `Date` object with the time equal to number of milliseconds (1/1000 of a second) passed after the Jan 1st of 1970 UTC+0.
+: В аргумент можно передать количество миллисекунд (одна тысячная секунды), что поместит в созданный объект `Date`, прошедш   object with the time equal to number of milliseconds (1/1000 of a second) passed after the Jan 1st of 1970 UTC+0.
 
     ```js run
     // 0 means 01.01.1970 UTC+0
@@ -29,7 +29,7 @@ To create a new `Date` object call `new Date()` with one of the following argume
     alert( Jan02_1970 );
     ```
 
-    The number of milliseconds that has passed since the beginning of 1970 is called a *timestamp*.
+    Количество миллисекунд, прошедшее с начала 1970 года, обозначается термином *отметка времени* (англ. timestamp).
 
     It's a lightweight numeric representation of a date. We can always create a date from a timestamp using `new Date(timestamp)` and convert the existing `Date` object to a timestamp using the `date.getTime()` method (see below).
 
@@ -74,43 +74,43 @@ To create a new `Date` object call `new Date()` with one of the following argume
 
 ## Access date components
 
-There are many methods to access the year, month and so on from the `Date` object. But they can be easily remembered when categorized.
+Из объекта `Date` можно выделить и более конкретные значения, такие как год или месяц. Для этого используется множество методов, но если их категоризировать, то они легко запоминаются:
 
 [getFullYear()](mdn:js/Date/getFullYear)
-: Get the year (4 digits)
+: Возвращаются четыре цифры, соответствующие году.
 
 [getMonth()](mdn:js/Date/getMonth)
-: Get the month, **from 0 to 11**.
+: Получаем порядковый номер месяца **от 0 до 11**.
 
 [getDate()](mdn:js/Date/getDate)
-: Get the day of month, from 1 to 31, the name of the method does look a little bit strange.
+: Возвращается день месяца, от 1 до 31, что несколько противоречит названию метода.
 
 [getHours()](mdn:js/Date/getHours), [getMinutes()](mdn:js/Date/getMinutes), [getSeconds()](mdn:js/Date/getSeconds), [getMilliseconds()](mdn:js/Date/getMilliseconds)
-: Get the corresponding time components.
+: Получаем, соответственно, часы, минуты, секунды или миллисекунды.
 
 ```warn header="Not `getYear()`, but `getFullYear()`"
-Many JavaScript engines implement a non-standard method `getYear()`. This method is deprecated. It returns 2-digit year sometimes. Please never use it. There is `getFullYear()` for the year.
+Во многих интерпретаторах JavaScript предусмотрен нестандартный и устаревший метод `getYear()`, который порой возвращает год в виде двух цифр. Пожалуйста, обходите его стороной. Если нужно значение года, используйте `getFullYear()`.
 ```
 
-Additionally, we can get a day of week:
+Кроме того, можно получить определённый день недели:
 
 [getDay()](mdn:js/Date/getDay)
-: Get the day of week, from `0` (Sunday) to `6` (Saturday). The first day is always Sunday, in some countries that's not so, but can't be changed.
+: Возвращается значение в пределах от `0` (воскресенье) до `6` (суббота). Несмотря на то, что в ряде стран за первый день недели принят понедельник, в JavaScript начало недели приходится на воскресенье.
 
-**All the methods above return the components relative to the local time zone.**
+**Все вышеперечисленные методы возвращают значения в соответствии с местной часовой зоной.**
 
-There are also their UTC-counterparts, that return day, month, year and so on for the time zone UTC+0: [getUTCFullYear()](mdn:js/Date/getUTCFullYear), [getUTCMonth()](mdn:js/Date/getUTCMonth), [getUTCDay()](mdn:js/Date/getUTCDay). Just insert the `"UTC"` right after `"get"`.
+Однако существуют и их UTC-вариации, возвращающие день, месяц, год для часовой зоны UTC+0: [getUTCFullYear()](mdn:js/Date/getUTCFullYear), [getUTCMonth()](mdn:js/Date/getUTCMonth), [getUTCDay()](mdn:js/Date/getUTCDay). Для их использования требуется перед `"get"` подставить `"UTC"`.
 
-If your local time zone is shifted relative to UTC, then the code below shows different hours:
+Если ваша местная часовая зона сдвинута относительно, то следующий код вернёт разные значения:
 
 ```js run
-// current date
+// текущая дата
 let date = new Date();
 
-// the hour in your current time zone
+// час в вашей текущей часовой зоне
 alert( date.getHours() );
 
-// the hour in UTC+0 time zone (London time without daylight savings)
+// час в часовой зоне UTC+0 (лондонское время без перехода на летнее время)
 alert( date.getUTCHours() );
 ```
 
@@ -255,7 +255,7 @@ for (let i = 0; i < 100000; i++) {
 let end = Date.now(); // done
 */!*
 
-alert( `The loop took ${end - start} ms` ); // subtract numbers, not dates
+alert( `The loop took ${end - start} ms` ); // вычитаются числа, а не даты
 ```
 
 ## Benchmarking
