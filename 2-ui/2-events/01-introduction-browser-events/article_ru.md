@@ -34,7 +34,7 @@
 
 Обработчики - это способ запустить определённый JavaScript код в случае тех или иных действий пользователя.
 
-Существует несколько способов назначить обработчик. Рассмотрим их все и начнём с самого простого.
+Существует несколько способов назначить обработчик. Рассмотрим их все, и начнём с самого простого.
 
 ### Использование HTML-атрибута  
 
@@ -198,44 +198,44 @@ document.body.setAttribute('onclick', function() { alert(1) });
 
 **Регистр DOM-свойства имеет значение.**
 
-Assign a handler to `elem.onclick`, not `elem.ONCLICK`, because DOM properties are case-sensitive.
+Важно, что DOM-свойства чувствительны к регистру и правильный вызов выглядит: `elem.onclick`, но не `elem.ONCLICK`.
 
 ## addEventListener
 
-The fundamental problem of the aforementioned ways to assign handlers -- we can't assign multiple handlers to one event.
+Основная проблема в вышеперечисленных способах назначения обработчика -- мы не можем назначить несколько обработчиков на одно событие.
 
-For instance, one part of our code wants to highlight a button on click, and another one wants to show a message.
+Например, одна часть нашего кода подсвечивает кнопку по нажатию на неё, а другая часть -- показывает сообщение.
 
-We'd like to assign two event handlers for that. But a new DOM property will overwrite the existing one:
+Первое решение, которое приходит для решения это назначить два обработчика события на один DOM элемент. Но, это решение не сработает, поскольку новое DOM-свойство перезапишет уже существующее:
 
 ```js no-beautify
 input.onclick = function() { alert(1); }
 // ...
-input.onclick = function() { alert(2); } // replaces the previous handler
+input.onclick = function() { alert(2); } // перезапишет предыдущий обработчик
 ```
 
-Web-standard developers understood that long ago and suggested an alternative way of managing handlers using special methods `addEventListener` and `removeEventListener`. They are free of such a problem.
+Разработчики стандартов достаточно давно это поняли и предложили альтернативный способ назначения и удаления обработчиков при помощи специальных методов `addEventListener` и `removeEventListener`, которые не имеют вышеуказанного недостатка.
 
-The syntax to add a handler:
+Назначение обработчика осуществляется вызовом `addEventListener` с тремя аргументами:
 
 ```js
 element.addEventListener(event, handler[, options]);
 ```
 
 `event`
-: Event name, e.g. `"click"`.
+: название события, например: `"click"`;
 
 `handler`
-: The handler function.
+: ссылка на функцию-обработчик;
 
 `options`
-: An additional optional object with properties:
-    - `once`: if `true`, then the listener is automatically removed after it triggers.
-    - `capture`: the phrase where to handle the event, to be covered later in the chapter <info:bubbling-and-capturing>. For historical reasons, `options` can also be `false/true`, that's the same as `{capture: false/true}`.
-    - `passive`: if `true`, then the handler will not `preventDefault()`, we'll cover that later in <info:default-browser-action>.
+: необязательный объект со свойствами:
+    - `once`: если `true`, тогда listener автоматически удаляется после срабатывания;
+    - `capture`: the phrase where to handle the event, to be covered later in the chapter; <info:bubbling-and-capturing>. По историческим причинам, `options` также может быть `false/true`, это тоже самое что `{capture: false/true}`;
+    - `passive`: если `true`, тогда обработчик не сможет вызвать `preventDefault()`, мы рассмотрим это позже, в разделе <info:default-browser-action>.
 
 
-To remove the handler, use `removeEventListener`:
+Для удаления обработчика используется `removeEventListener`:
 
 ```js
 element.removeEventListener(event, handler[, options]);
