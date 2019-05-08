@@ -2,13 +2,13 @@ importance: 4
 
 ---
 
-# Sum with closures
+# Сумма с помощью замыканий
 
-Write function `sum` that works like this: `sum(a)(b) = a+b`.
+Напишите функцию `sum`, которая работает таким образом: `sum(a)(b) = a+b`.
 
-Yes, exactly this way, using double parentheses (not a mistype).
+Да, именно таким образом, используя двойные круглые скобки (не опечатка).
 
-For instance:
+Например:
 
 ```js
 sum(1)(2) = 3

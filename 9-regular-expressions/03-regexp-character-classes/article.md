@@ -113,7 +113,7 @@ alert( "Hello, Java!".match(/\bHell\b/) );  // null (no match)
 alert( "Hello, Java!".match(/\bJava!\b/) ); // null (no match)
 ```
 
-Once again let's note that `pattern:\b` makes the searching engine to test for the boundary, so that `pattern:Java\b` finds `match:Java` only when followed by a word boundary, but it does not add a letter to the result.   §
+Once again let's note that `pattern:\b` makes the searching engine to test for the boundary, so that `pattern:Java\b` finds `match:Java` only when followed by a word boundary, but it does not add a letter to the result.
 
 Usually we use `\b` to find standalone English words. So that if we want `"Java"` language then `pattern:\bJava\b` finds exactly a standalone word and ignores it when it's a part of `"JavaScript"`.
 
@@ -255,7 +255,7 @@ There exist following character classes:
 
 ...But that's not all!
 
-Modern Javascript also allows to look for characters by their Unicode properties, for instance:
+Modern JavaScript also allows to look for characters by their Unicode properties, for instance:
 
 - A cyrillic letter is: `pattern:\p{Script=Cyrillic}` or `pattern:\p{sc=Cyrillic}`.
 - A dash (be it a small hyphen `-` or a long dash `—`): `pattern:\p{Dash_Punctuation}` or `pattern:\p{pd}`.
