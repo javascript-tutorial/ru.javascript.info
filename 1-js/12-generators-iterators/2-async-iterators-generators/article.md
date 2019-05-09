@@ -121,7 +121,7 @@ let range = {
 
 Например, оператор расширения (spread operator) не будет работать:
 ```js
-alert([...range]); // Ошибка, нет Symbol.iterator
+alert( [...range] ); // Ошибка, нет Symbol.iterator
 ```
 
 Это естественно, так как он ожидает `Symbol.iterator`, как и `for..of` без `await`.
