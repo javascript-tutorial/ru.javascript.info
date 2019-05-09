@@ -1,40 +1,40 @@
-**Error**!
+**Ошибка**!
 
-Try it:
+Попробуйте это:
 
 ```js run
 let user = {
-  name: "John",
+  name: "Джон",
   go: function() { alert(this.name) }
 }
 
-(user.go)() // error!
+(user.go)() // ошибка!
 ```
 
-The error message in most browsers does not give understanding what went wrong.
+Сообщение об ошибке в большинстве браузеров не дает понимания что же пошло не так.
 
-**The error appears because a semicolon is missing after `user = {...}`.**
+**Ошибка появляется потому что точка с запятой пропущена после `user = {...}`.**
 
-JavaScript does not assume a semicolon before a bracket `(user.go)()`, so it reads the code like:
+JavaScript не встречает точку с запятой перед круглой скобкой `(user.go)()`, поэтом читает этот код так:
 
 ```js no-beautify
 let user = { go:... }(user.go)()
 ```
 
-Then we can also see that such a joint expression is syntactically a call of the object `{ go: ... }` as a function with the argument `(user.go)`. And that also happens on the same line with `let user`, so the `user` object has not yet even been defined, hence the error. 
+Теперь мы тоже можем уведить, что такое объединенное выражение синтаксически является вызовом объекта `{ go: ... }` как функции с аргументом `(user.go)`. И это также происходит в той же строчке с объявлением переменной `let user`, т.е. объект `user` еще даже не определен, поэтому получается ошибка.
 
-If we insert the semicolon, all is fine:
+Если мы вставим точку с запятой - все заработает:
 
 ```js run
 let user = {
-  name: "John",
+  name: "Джон",
   go: function() { alert(this.name) }
 }*!*;*/!*
 
-(user.go)() // John
+(user.go)() // Джон
 ```
 
-Please note that brackets around `(user.go)` do nothing here. Usually they setup the order of operations, but here the dot `.` works first anyway, so there's no effect. Only the semicolon thing matters.
+Пожалуста, обратите внимание, что круглые скобки вокруг `(user.go)` здесь ничего не значат. Обычно они определяют последовательность операций (оператор группировки), но здесь вызов метода через точку `.` срабатывает первым в любом случае, поэтому группировка ни на что не влияет. Только точка с запятой имеет значение.
 
 
 
