@@ -295,7 +295,7 @@ async function* fetchCommits(repo) {
 
     const body = await response.json(); // (2) парсинг ответа в JSON (массив коммитов)
 
-    // (3) Ccылка на следующую страницу находится в заголовках, извлеките ее
+    // (3) Ссылка на следующую страницу находится в заголовках, извлеките ее
     let nextPage = response.headers.get('Link').match(/<(.*?)>; rel="next"/);
     nextPage = nextPage && nextPage[1];
 
