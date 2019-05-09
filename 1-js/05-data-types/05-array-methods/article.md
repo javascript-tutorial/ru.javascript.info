@@ -36,7 +36,7 @@ That's natural, because `delete obj.key` removes a value by the `key`. It's all 
 
 So, special methods should be used.
 
-The [arr.splice(str)](mdn:js/Array/splice) method is a swiss army knife for arrays. It can do everything: add, remove and insert elements.
+The [arr.splice(str)](mdn:js/Array/splice) method is a swiss army knife for arrays. It can do everything: insert, remove and replace elements.
 
 The syntax is:
 
@@ -239,7 +239,7 @@ These are methods to search for something in an array.
 The methods [arr.indexOf](mdn:js/Array/indexOf), [arr.lastIndexOf](mdn:js/Array/lastIndexOf) and [arr.includes](mdn:js/Array/includes) have the same syntax and do essentially the same as their string counterparts, but operate on items instead of characters:
 
 - `arr.indexOf(item, from)` looks for `item` starting from index `from`, and returns the index where it was found, otherwise `-1`.
-- `arr.lastIndexOf(item, from)` -- same, but looks from right to left.
+- `arr.lastIndexOf(item, from)` -- same, but looks for from right to left.
 - `arr.includes(item, from)` -- looks for `item` starting from index `from`, returns `true` if found.
 
 For instance:
