@@ -93,7 +93,7 @@ alert( n.toFixed(2) ); // 1.23
 ```js run
 alert( typeof 0 ); // "число"
 
-alert( typeof new Number(0) ); // "объект"!
+alert( typeof new Number(0) ); // "object"!
 ```
 
 Объекты в if всегда дают true, так что в примере ниже будет показан alert:
