@@ -1,12 +1,12 @@
 # Жадные и ленивые квантификаторы
 
-На первый взгляд квантификаторы очень просты, но на самом деле, всё не так просто.
+На первый взгляд квантификаторы очень просты, но на самом деле это не так.
 
 Нужно очень хорошо разбираться, как работает поиск, если планируешь использовать что-то более сложное, чем: `pattern:/\d+/`.
 
-Давайте, в качестве примера, рассмотрим следующую задачу:
+Давайте в качестве примера рассмотрим следующую задачу:
 
-У нас есть текст, в котором нужно заменить все кавычки `"..."` на "ёлочки": `«...»`. Которые используются в типографике многих стран.
+У нас есть текст, в котором нужно заменить все кавычки `"..."` на "ёлочки" `«...»`, которые используются в типографике многих стран.
 
 Например: `"Привет, мир"` должно превратиться в `«Привет, мир»`. Некоторые страны предпочитают другие кавычки, вроде `„Witam, świat!”` (польский) или `「你好，世界」` (китайский), но для нашей задачи давайте выберем `«...»`.
 
@@ -14,7 +14,7 @@
 
 Регулярное выражение вроде `pattern:/".+"/g` (кавычка, какой-то текст, другая кавычка) может выглядеть хорошим решением, но это не так!
 
-Давайте проверим это:
+Давайте это проверим:
 
 ```js run
 let reg = /".+"/g;
@@ -24,7 +24,7 @@ let str = 'a "witch" and her "broom" is one';
 alert( str.match(reg) ); // "witch" and her "broom"
 ```
 
-...Как мы видим, это работает не как задумано!
+...Как мы видим, регулярное выражение работает не как задумано!
 
 Вместо того, чтобы найти два совпадения `match:"width"` и `match:"broom"`, было найдено одно:`match:"witch" and her "broom"`. 
 
@@ -32,7 +32,7 @@ alert( str.match(reg) ); // "witch" and her "broom"
 
 ## Жадный поиск
 
-Чтобы найти совпадение, движок регулярного выражения следует следующему алгоритму:
+Чтобы найти совпадение, движок регулярного выражения работает по следующему алгоритму:
 
 - Для каждой позиции в строке
     - Совпадение шаблона на текущей позиции
@@ -42,25 +42,25 @@ alert( str.match(reg) ); // "witch" and her "broom"
 
 1. Первый символ шаблона -- это кавычка `pattern:"`.
 
-    Движок регулярного выражения пытается найти его на нулевой позиции исходной строки `subject:a "witch" and her "broom" is one`, но там находится `subject:a`, так что совпадения сразу нет.
+    Движок регулярного выражения пытается найти его на нулевой позиции исходной строки `subject:a "witch" and her "broom" is one`, но там -- `subject:a`, так что совпадения нет.
 
-    Затем он продолжает: двигается к следующей позиции исходной строки и пытается найти первый символ шаблона там. И, наконец, находит кавычку на третьей позиции:
+    Он продолжает: двигается к следующей позиции исходной строки и пытается найти первый символ шаблона там. И, наконец, находит кавычку на третьей позиции:
 
     ![](witch_greedy1.png)
 
-2. Кавычка замечена, после чего движок пытается найти совпадение для оставшегося шаблона. Пытается увидеть, удовлетворяет ли остаток строки шаблону `pattern:.+"`.
+2. Кавычка замечена, после чего движок пытается найти совпадение для оставшегося шаблона. Смотрит, удовлетворяет ли остаток строки шаблону `pattern:.+"`.
 
     В нашем случае следующий символ шаблона: `pattern:.` (точка). Она обозначает "любой символ, кроме новой строки", так что следующая буква строки `match:'w'` подходит.
 
     ![](witch_greedy2.png)
 
-3. Затем точка повторяется из-за квантификатора `pattern:.+`. Движок регулярного выражения строит совпадение, беря символы один за другим, пока это возможно.
+3. Затем точка повторяется из-за квантификатора `pattern:.+`. Движок регулярного выражения строит совпадение, принимая символы один за другим, пока это возможно.
 
-      ...Когда же это перестанет быть возможным? Точке соответствуют любые символы, так что движок остановется только тогда, когда достигнет конца строки: 
+      ...До каких пор? Точке соответствуют любые символы, так что движок остановится только тогда, когда достигнет конца строки: 
 
     ![](witch_greedy3.png)
 
-4. Тогда движок перестанет повторяться для `pattern:.+` и попробует найти следующий символ шаблона. Это кавычка `pattern:"`. Но есть проблема: строка закончилась, больше нет символов!
+4. Тогда он перестанет повторять `pattern:.+` и попробует найти следующий символ шаблона. Это кавычка `pattern:"`. Но есть проблема: строка закончилась, больше нет символов!
 
     Движок регулярного выражения понимает, что захватил слишком много `pattern:.+` и начинает *отступать*.
 
@@ -84,7 +84,7 @@ alert( str.match(reg) ); // "witch" and her "broom"
 
 7. Совпадение найдено.
 
-8. Так что первое совпадение: `match:"witch" and her "boom"`. Дальнейший поиск продолжается с того места, где закончился предыдущий, в оставшейся строке `subject:is one` нет кавычек, так что совпадений больше нет.
+8. Так что первое совпадение: `match:"witch" and her "boom"`. Дальнейший поиск продолжается с того места, где закончился предыдущий. В оставшейся строке `subject:is one` нет кавычек, так что совпадений больше нет.
 
 Это определённо не то, что мы ожидали. Но так оно работает.
 
@@ -92,17 +92,17 @@ alert( str.match(reg) ); // "witch" and her "broom"
 
 Движок регулярного выражения пытается получить максимальное количество символов соответствующих `pattern:.+`, а потом сократить это количество символ за символом.
 
-Для нашей задачи мы хотим другого. Именно для этого и создан "ленивый" квантификатор.
+В нашей задаче мы хотим другого. Для чего и создан ленивый квантификатор.
 
-## Lazy mode
+## Ленивый режим
 
-The lazy mode of quantifier is an opposite to the greedy mode. It means: "repeat minimal number of times".
+Квантификатор ленивого режима противоположен квантификатору жадного. Это значит: "повторяется минимальное количество раз".
 
-We can enable it by putting a question mark `pattern:'?'` after the quantifier, so that it becomes  `pattern:*?` or `pattern:+?` or even `pattern:??` for `pattern:'?'`.
+Мы можем включить его, вставив знак вопроса `pattern:'?'` после квантификатора, получая `pattern:*?` или `pattern:+?` или даже `pattern:??` для `pattern:'?'`. 
 
-To make things clear: usually a question mark `pattern:?` is a quantifier by itself (zero or one), but if added *after another quantifier (or even itself)* it gets another meaning -- it switches the matching mode from greedy to lazy.
+Проясним: обычно знак вопроса `pattern:?` сам по себе является квантификатором (ноль или один), но, если он добавлен *после другого квантификтора (или даже после самого себя)*, он получает другое значение -- он меняет режим совпадения с жадного на ленивый.
 
-The regexp `pattern:/".+?"/g` works as intended: it finds `match:"witch"` and `match:"broom"`:
+Регулярное выражение `pattern:/".+?"/g` работает как задумано, оно находит `match:"witch"` и `match:"broom"`:
 
 ```js run
 let reg = /".+?"/g;
@@ -112,68 +112,68 @@ let str = 'a "witch" and her "broom" is one';
 alert( str.match(reg) ); // witch, broom
 ```
 
-To clearly understand the change, let's trace the search step by step.
+Чтобы лучше понять, что поменялось, давайте рассмотрим процесс поиска шаг за шагом.
 
-1. The first step is the same: it finds the pattern start `pattern:'"'` at the 3rd position:
+1. Первый шаг будет таким же: движок находит начало шаблона `pattern:'"'` на 3-ей позиции:
 
     ![](witch_greedy1.png)
 
-2. The next step is also similar: the engine finds a match for the dot `pattern:'.'`:
+2. Следующий шаг аналогичен: он найдёт совпадение для точки `pattern:'.'`:
 
     ![](witch_greedy2.png)
 
-3. And now the search goes differently. Because we have a lazy mode for `pattern:+?`, the engine doesn't try to match a dot one more time, but stops and tries to match the rest of the pattern  `pattern:'"'` right now:
+3. А отсюда поиск продолжится по-другому. Из-за того, что у нас включён ленивый режим для `pattern:+?`, движок не будет пытаться найти совпадение для точки ещё раз, оно остановится и попробует найти совпадение для оставшегося шаблона `pattern:'"'` прямо сейчас:
 
     ![](witch_lazy3.png)
 
-    If there were a quote there, then the search would end, but there's `'i'`, so there's no match.
-4. Then the regular expression engine increases the number of repetitions for the dot and tries one more time:
+    Если бы на этом месте была кавычка, то поиск бы закончился, но там находится `'i'`, то есть совпадения нет.
+4. Тогда движок регулярного выражения увеличит количество повторений для точки и попробует ещё раз:
 
     ![](witch_lazy4.png)
 
-    Failure again. Then the number of repetitions is increased again and again...
-5. ...Till the match for the rest of the pattern is found:
+    Опять неудача. Тогда количество повторений будет увеличено ещё и ещё...
+5. ...до тех пор, пока совпадение для оставшегося шаблона не будет найдено:
 
     ![](witch_lazy5.png)
 
-6. The next search starts from the end of the current match and yield one more result:
+6. Следующий поиск начнётся с того места, где закончилось текущее совпадение и у нас будет ещё один результат:
 
     ![](witch_lazy6.png)
 
-In this example we saw how the lazy mode works for `pattern:+?`. Quantifiers `pattern:+?` and `pattern:??` work the similar way -- the regexp engine increases the number of repetitions only if the rest of the pattern can't match on the given position.
+В этом примере мы увидели, как ленивый режим работает для `pattern:+?`. Квантификаторы `pattern:+?` и `pattern:??` работают аналогичным образом -- движок регулярного выражения увеличит количество совпадений, только если не сможет найти совпадение для оставшегося шаблона на текущей позиции.
 
-**Laziness is only enabled for the quantifier with `?`.**
+**Ленивый режим включается только для квантификаторов с `?`.**
 
-Other quantifiers remain greedy.
+Остальные квантификаторы остаются жадными.
 
-For instance:
+Например:
 
 ```js run
 alert( "123 456".match(/\d+ \d+?/g) ); // 123 4
 ```
 
-1. The pattern `pattern:\d+` tries to match as many numbers as it can (greedy mode), so it finds  `match:123` and stops, because the next character is a space `pattern:' '`.
-2. Then there's a space in pattern, it matches.
-3. Then there's `pattern:\d+?`. The quantifier is in lazy mode, so it finds one digit `match:4` and tries to check if the rest of the pattern matches from there.
+1. Шаблон `pattern:\d+` пытается найти столько цифр, сколько возможно (жадный режим), так что он находит `match:123` и останавливается, потому что следующим символом будет пробел `pattern:' '`.
+2. Дальше в шаблоне пробел, так что есть совпадение.
+3. Затем идёт `pattern:\d+?`. Квантификатор находится в ленивом режиме, так что он находит одну цифру `match:4` и проверяет, есть ли совпадение для оставшегося шаблона с этого места.
 
-    ...But there's nothing in the pattern after `pattern:\d+?`.
+    ...Но в шаблоне `pattern:\d+?` больше ничего нет.
 
-    The lazy mode doesn't repeat anything without a need. The pattern finished, so we're done. We have a match `match:123 4`.
-4. The next search starts from the character `5`.
+    Ленивый режим ничего не повторяет без необходимости. Шаблон закончился, как и поиск. Мы получаем `match:123 4`. 
+4. Следующий поиск начинается с символа `5`.
 
-```smart header="Optimizations"
-Modern regular expression engines can optimize internal algorithms to work faster. So they may work a bit different from the described algorithm.
+```smart header="Оптимизации"
+Современные движки регулярных выражений могут оптимизировать внутренние алгоритмы ради ускорения. Так что их работа может несколько отличаться от описанного алгоритма.
 
-But to understand how regular expressions work and to build regular expressions, we don't need to know about that. They are only used internally to optimize things.
+Но нам не нужно этого знать для понимания того, как пишутся и работают регулярные выражения. Оптимизация -- это внутренний процесс, мы его не увидим.
 
-Complex regular expressions are hard to optimize, so the search may work exactly as described as well.
+Сложные регулярные выражения трудно оптимизировать, так что поиск может работать в точности так, как было описано.
 ```
 
-## Alternative approach
+## Альтернативный подход
 
-With regexps, there's often more than one way to do the same thing.
+С регулярными выражениями часто есть несколько путей добиться одного и того же результата.
 
-In our case we can find quoted strings without lazy mode using the regexp `pattern:"[^"]+"`:
+В нашем случаем мы можем найти кавычки без использования ленивого режима с помощью регулярного выражения `pattern:"[^"]+"`:
 
 ```js run
 let reg = /"[^"]+"/g;
@@ -183,122 +183,123 @@ let str = 'a "witch" and her "broom" is one';
 alert( str.match(reg) ); // witch, broom
 ```
 
-The regexp `pattern:"[^"]+"` gives correct results, because it looks for a quote `pattern:'"'` followed by one or more non-quotes `pattern:[^"]`, and then the closing quote.
+Регулярное выражение `pattern:"[^"]+"` получит нужный результат, потому что оно ищет кавычку `pattern:'"'`, за которой следует один или несколько символов "не-кавычек" `pattern:[^"]`, а затем -- закрывающая кавычка.
 
-When the regexp engine looks for `pattern:[^"]+` it stops the repetitions when it meets the closing quote, and we're done.
+Движок регулярного выражения заканчивает поиск `pattern:[^"]`, когда встречает закрывающую кавычку.
 
-Please note, that this logic does not replace lazy quantifiers!
+Обратите внимание, что эта логика не заменяет ленивые квантификаторы!
 
-It is just different. There are times when we need one or another.
+Просто она работает по-другому. Временами на нужен первый вариант, временами -- второй.
 
-**Let's see an example where lazy quantifiers fail and this variant works right.**
+**Давайте посмотрим пример, в котором ленивый квантификатор не может справиться, а второй вариант работает правильно.**
 
-For instance, we want to find links of the form `<a href="..." class="doc">`, with any `href`.
+Например, мы хотим найти ссылки вида `<a href="..." class="doc">`, у которых есть `href`.
 
-Which regular expression to use?
+Какое регулярное выражение нам нужно использовать?
 
-The first idea might be: `pattern:/<a href=".*" class="doc">/g`.
+Первой мыслью может быть: `pattern:/<a href=".*" class="doc">/g`.
 
-Let's check it:
+Давайте проверим:
 ```js run
 let str = '...<a href="link" class="doc">...';
 let reg = /<a href=".*" class="doc">/g;
 
-// Works!
+// Работает!
 alert( str.match(reg) ); // <a href="link" class="doc">
 ```
 
-It worked. But let's see what happens if there are many links in the text?
+Регулярное выражение работает. Но, давайте посмотрим, что произойдёт, если в тексте будет много ссылок?
 
 ```js run
 let str = '...<a href="link1" class="doc">... <a href="link2" class="doc">...';
 let reg = /<a href=".*" class="doc">/g;
 
-// Whoops! Two links in one match!
+// Упс! Две ссылки в одном совпадении!
 alert( str.match(reg) ); // <a href="link1" class="doc">... <a href="link2" class="doc">
 ```
 
-Now the result is wrong for the same reason as our "witches" example. The quantifier `pattern:.*` took too many characters.
+В данном случае мы получили неправильный результат по той же причине, что в примере с "witches". Квантификатор `pattern:.*` забирает слишком много символов.
 
-The match looks like this:
+Совпадение будет выглядеть так:
 
 ```html
 <a href="....................................." class="doc">
 <a href="link1" class="doc">... <a href="link2" class="doc">
 ```
 
-Let's modify the pattern by making the quantifier `pattern:.*?` lazy:
+Давайте изменим шаблон, сделав квантификатор ленивым `pattern:.*?`:
 
 ```js run
 let str = '...<a href="link1" class="doc">... <a href="link2" class="doc">...';
 let reg = /<a href=".*?" class="doc">/g;
 
-// Works!
+// Работает!
 alert( str.match(reg) ); // <a href="link1" class="doc">, <a href="link2" class="doc">
 ```
 
-Now it seems to work, there are two matches:
+Теперь, кажется, что всё работает правильно. У нас есть два совпадения:
 
 ```html
 <a href="....." class="doc">    <a href="....." class="doc">
 <a href="link1" class="doc">... <a href="link2" class="doc">
 ```
 
-...But let's test it on one more text input:
+...Но давайте попробуем его на ещё одном тексте:
 
 ```js run
 let str = '...<a href="link1" class="wrong">... <p style="" class="doc">...';
 let reg = /<a href=".*?" class="doc">/g;
 
-// Wrong match!
+// Неправильное совпадение!
 alert( str.match(reg) ); // <a href="link1" class="wrong">... <p style="" class="doc">
 ```
 
-Now it fails. The match includes not just a link, but also a lot of text after it, including `<p...>`.
+Теперь оно не справилось. В совпадении находится не только ссылка, но и текст после неё, включая `<p...>`.
 
-Why?
+Почему?
 
-That's what's going on:
+Происходит следующее:
 
-1. First the regexp finds a link start `match:<a href="`.
-2. Then it looks for `pattern:.*?`: takes one character (lazily!), check if there's a match for `pattern:" class="doc">` (none).
-3. Then takes another character into `pattern:.*?`, and so on... until it finally reaches `match:" class="doc">`.
+1. Первым делом регулярное выражение находит начало ссылки `match:<a href="`.
+2. Затем оно ищет `pattern:.*?`, берёт один символ (лениво!) и проверяет, есть ли совпадение для `pattern:"` (нет).
+3. Затем берёт другой символ для `pattern:.*?`, и так далее... Пока, наконец, не достигнет `match:" class="doc">`.
 
-But the problem is: that's already beyound the link, in another tag `<p>`. Not what we want.
+Но с этим есть проблема: это совпадение находится уже за границей ссылки, в другом теге `<p>`. Что нам не подходит.
 
-Here's the picture of the match aligned with the text:
+Вот как оно выглядит по отношению к исходному тексту:
 
 ```html
 <a href="..................................." class="doc">
 <a href="link1" class="wrong">... <p style="" class="doc">
 ```
 
-So the laziness did not work for us here.
+Итак, в данном случае ленивый режим нам не подходит.
 
-We need the pattern to look for `<a href="...something..." class="doc">`, but both greedy and lazy variants have problems.
+Нам нужен шаблон для поиска `<a href="...something..." class="doc">`, но и с ленивым и с жадным режимами есть проблема.
 
-The correct variant would be: `pattern:href="[^"]*"`. It will take all characters inside the `href` attribute till the nearest quote, just what we need.
+Правильным вариантом может стать: `pattern:href="[^"]*"`. Он найдёт все символы внутри аттрибута `href` до ближайшей следующей кавычки, как раз то, что нам нужно.
 
-A working example:
+Работающий пример:
 
 ```js run
 let str1 = '...<a href="link1" class="wrong">... <p style="" class="doc">...';
 let str2 = '...<a href="link1" class="doc">... <a href="link2" class="doc">...';
 let reg = /<a href="[^"]*" class="doc">/g;
 
-// Works!
-alert( str1.match(reg) ); // null, no matches, that's correct
+// Работает!
+alert( str1.match(reg) ); // совпадений нет, всё правильно
 alert( str2.match(reg) ); // <a href="link1" class="doc">, <a href="link2" class="doc">
 ```
 
-## Summary
+## Итого
 
-Quantifiers have two modes of work:
+У квантификаторов есть два режима работы:
 
-Greedy
-: By default the regular expression engine tries to repeat the quantifier as many times as possible. For instance, `pattern:\d+` consumes all possible digits. When it becomes impossible to consume more (no more digits or string end), then it continues to match the rest of the pattern. If there's no match then it decreases the number of repetitions (backtracks) and tries again.
+Жадный
+: По умолчанию движок регулярного выражения пытается повторить квантификатор столько раз, сколько это возможно. Например, `pattern:\d+` получит все возможные цифры. Когда цифры закончатся или он дойдёт до конца строки, движок продолжит искать совпадение для оставшегося шаблона. Если совпадения не будет, он уменьшит количество повторов (отступит) и попробует снова.
 
-Lazy
-: Enabled by the question mark `pattern:?` after the quantifier. The regexp engine tries to match the rest of the pattern before each repetition of the quantifier.
+Ленивый
+: Включается с помощью знака вопроса `pattern:?` после квантификатора. Движок регулярного выражения пытается найти совпадение для оставшегося шаблона перед каждым повторением квантификатора.
 
-As we've seen, the lazy mode is not a "panacea" from the greedy search. An alternative is a "fine-tuned" greedy search, with exclusions. Soon we'll see more examples of it.
+Как мы увидели, ленивый режим не "панацея" от всех проблем жадного поиска. В качестве альтернативы может выступать "хорошо настроенный" жадный поиск с исключениями. Вскоре мы увидим больше таких примеров.
+

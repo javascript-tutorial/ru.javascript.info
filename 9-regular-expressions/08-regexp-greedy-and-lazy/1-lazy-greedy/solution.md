@@ -1,6 +1,6 @@
 
-The result is: `match:123 4`.
+Результат будет: `match:123 4`.
 
-First the lazy `pattern:\d+?` tries to take as little digits as it can, but it has to reach the space, so it takes  `match:123`.
+Первым делом ленивый `pattern:\d+?` попытается получить так мало цифр, как он сможет. Но он должен дойти до пробела, так что совпадением будет `match:123`.
 
-Then the second `\d+?` takes only one digit, because that's enough.
+Затем, второй `\d+?` возьмёт только одну цифру, потому что этого будет достаточно.
