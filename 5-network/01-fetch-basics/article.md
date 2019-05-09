@@ -169,7 +169,7 @@ let response = fetch(protectedUrl, {
 - **`method`** -- HTTP метод, например `POST`,
 - **`body`** -- один из:
   - строка (например JSON),
-  - объект `FormData`, для отправки данных как `form/multipart`,
+  - объект `FormData` для отправки данных как `form/multipart`,
   - `Blob`/`BufferSource` для отправки бинарных данных,
   - [URLSearchParams](info:url) для отправки таких данных как `x-www-form-urlencoded`, используется очень редко.
 
