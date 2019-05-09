@@ -50,7 +50,7 @@ alert( arr instanceof Object ); // true
 
 Алгоритм работы `obj instanceof Class` работает примерно так:
 
-1. Если имеется статичный метод `Symbol.hasInstance`, тогда используется он. Таким образом:
+1. Если имеется статический метод `Symbol.hasInstance`, тогда вызови его: `Class[Symbol.hasInstance](obj)`. Он должен вернут либо `true`, либо `false`. Конец. Пример:
 
     ```js run
     // предполагаем, все что может есть, - это животное
