@@ -37,7 +37,7 @@ let f = user.sayHi;
 setTimeout(f, 1000); // lost user context
 ```
 
-The method `setTimeout` in-browser is a little special: it sets `this=window` for the function call (for Node.JS, `this` becomes the timer object, but doesn't really matter here). So for `this.firstName` it tries to get `window.firstName`, which does not exist. In other similar cases as we'll see, usually `this` just becomes `undefined`.
+The method `setTimeout` in-browser is a little special: it sets `this=window` for the function call (for Node.js, `this` becomes the timer object, but doesn't really matter here). So for `this.firstName` it tries to get `window.firstName`, which does not exist. In other similar cases as we'll see, usually `this` just becomes `undefined`.
 
 The task is quite typical -- we want to pass an object method somewhere else (here -- to the scheduler) where it will be called. How to make sure that it will be called in the right context?
 
@@ -100,7 +100,7 @@ The basic syntax is:
 ```js
 // more complex syntax will be little later
 let boundFunc = func.bind(context);
-````
+```
 
 The result of `func.bind(context)` is a special function-like "exotic object", that is callable as function and transparently passes the call to `func` setting `this=context`.
 

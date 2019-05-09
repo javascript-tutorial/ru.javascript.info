@@ -1,7 +1,53 @@
 
 # Class inheritance
 
-Classes can extend one another. There's a nice syntax, technically based on the prototypal inheritance.
+Let's say we have two classes.
+
+`Animal`:
+
+```js
+class Animal {
+  constructor(name) {
+    this.speed = 0;
+    this.name = name;
+  }
+  run(speed) {
+    this.speed += speed;
+    alert(`${this.name} runs with speed ${this.speed}.`);
+  }
+  stop() {
+    this.speed = 0;
+    alert(`${this.name} stopped.`);
+  }
+}
+
+let animal = new Animal("My animal");
+```
+
+![](rabbit-animal-independent-animal.png)
+
+
+...And `Rabbit`:
+
+```js
+class Rabbit {
+  constructor(name) {
+    this.name = name;
+  }
+  hide() {
+    alert(`${this.name} hides!`);
+  }
+}
+
+let rabbit = new Rabbit("My rabbit");
+```
+
+![](rabbit-animal-independent-rabbit.png)
+
+
+Right now they are fully independent.
+
+But we'd want `Rabbit` to extend `Animal`. In other words, rabbits should be based on animals, have access to methods of `Animal` and extend them with its own methods.
 
 To inherit from another class, we should specify `"extends"` and the parent class before the brackets `{..}`.
 
@@ -9,32 +55,28 @@ Here `Rabbit` inherits from `Animal`:
 
 ```js run
 class Animal {
-
   constructor(name) {
     this.speed = 0;
     this.name = name;
   }
-
   run(speed) {
     this.speed += speed;
     alert(`${this.name} runs with speed ${this.speed}.`);
   }
-
   stop() {
     this.speed = 0;
     alert(`${this.name} stopped.`);
   }
-
 }
 
+// Inherit from Animal by specifying "extends Animal"
 *!*
-// Inherit from Animal
 class Rabbit extends Animal {
+*/!*
   hide() {
     alert(`${this.name} hides!`);
   }
 }
-*/!*
 
 let rabbit = new Rabbit("White Rabbit");
 
@@ -42,11 +84,15 @@ rabbit.run(5); // White Rabbit runs with speed 5.
 rabbit.hide(); // White Rabbit hides!
 ```
 
-The `extends` keyword actually adds a `[[Prototype]]` reference from `Rabbit.prototype` to `Animal.prototype`, just as you expect it to be, and as we've seen before.
+Now the `Rabbit` code became a bit shorter, as it uses `Animal` constructor by default, and it also can `run`, as animals do.
+
+Internally, `extends` keyword adds `[[Prototype]]` reference from `Rabbit.prototype` to `Animal.prototype`:
 
 ![](animal-rabbit-extends.png)
 
-So now `rabbit` has access both to its own methods and to methods of `Animal`.
+So, if a method is not found in `Rabbit.prototype`, JavaScript takes it from `Animal.prototype`.
+
+As we can recall from the chapter <info:native-prototypes>, JavaScript uses the same prototypal inheritance for build-in objects. E.g. `Date.prototype.[[Prototype]]` is `Object.prototype`, so dates have generic object methods.
 
 ````smart header="Any expression is allowed after `extends`"
 Class syntax allows to specify not just a class, but any expression after `extends`.
