@@ -273,7 +273,7 @@ let range = {
 То, что нам бы помогло в этом случае, - это итерируемый источник коммитов, чтобы можно было использовать его таким вот образом:
 
 ```js
-let repo = 'javascript-tutorial/en.javascript.info'; // репозиторий на Github, откуда брать коммиты
+let repo = 'javascript-tutorial/en.javascript.info'; // репозиторий на GitHub, откуда брать коммиты
 
 for await (let commit of fetchCommits(repo)) {
   // обработка коммитов
