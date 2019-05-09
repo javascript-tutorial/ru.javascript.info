@@ -1,78 +1,78 @@
-# Methods of primitives
+# Методы с примитивными типами данных
 
-JavaScript allows us to work with primitives (strings, numbers, etc.) as if they were objects.
+JavaScript позволяет нам работать с примитивными типами данных (далее: примитивы) - строки, числа, и т.д., так, как если бы они были объектами.
 
-They also provide methods to call as such. We will study those soon, but first we'll see how it works because, of course, primitives are not objects (and here we will make it even clearer).
+Они даже предоставляют методы. Мы изучим их позже, а сначала разберем, как это все работает, потому что, конечно, примитивы - не объекты.
 
-Let's look at the key distinctions between primitives and objects.
+Давайте взглянем на ключевые различия между примитивами и объектами.
 
-A primitive
+Примитив
 
-- Is a value of a primitive type.
-- There are 6 primitive types: `string`, `number`, `boolean`, `symbol`, `null` and `undefined`.
+- Это значение «примитивного» типа.
+- Есть 6 примитивных типов: `string`, `number`, `boolean`, `symbol`, `null` и `undefined`.
 
-An object
+Объект
 
-- Is capable of storing multiple values as properties.
-- Can be created with `{}`, for instance: `{name: "John", age: 30}`. There are other kinds of objects in JavaScript; functions, for example, are objects.
+- Может хранить множество значений как свойства.
+- Объявляется при помощи фигурных скобок `{}`, например: `{name: "Рома", age: 30}`. В JavaScript есть и другие виды объектов: например, функции тоже являются объектами.
 
-One of the best things about objects is that we can store a function as one of its properties.
+Одна из лучших особенностей объектов это то, что мы можем хранить функцию как одно из свойств объекта.
 
 ```js run
-let john = {
-  name: "John",
+let roma = {
+  name: "Рома",
   sayHi: function() {
-    alert("Hi buddy!");
+    alert("Привет, дружище!");
   }
 };
 
-john.sayHi(); // Hi buddy!
+roma.sayHi(); // Привет, дружище!
 ```
 
-So here we've made an object `john` with the method `sayHi`.
+Здесь мы создали объект `roma` с методом `sayHi`.
 
-Many built-in objects already exist, such as those that work with dates, errors, HTML elements, etc. They have different properties and methods.
+Существует множество встроенных объектов. Например, те, которые работают с датами, ошибками, HTML-элементами и т.д. Они имеют различные свойства и методы.
 
-But, these features come with a cost!
+Однако у этих возможностей есть обратная сторона!
 
-Objects are "heavier" than primitives. They require additional resources to support the internal machinery. But as properties and methods are very useful in programming, JavaScript engines try to optimize them to reduce the additional burden.
+Объекты «тяжелее» примитивов. Они нуждаются в дополнительных ресурсах для поддержания внутренней структуры. Но так как свойства и методы очень полезны в программировании, движки JavaScript оптимизируют их для уменьшения дополнительной нагрузки.
 
-## A primitive as an object
+## Примитив как объект
 
-Here's the paradox faced by the creator of JavaScript:
+Вот парадокс, с которым столкнулся создатель JavaScript:
 
-- There are many things one would want to do with a primitive like a string or a number. It would be great to access them as methods.
-- Primitives must be as fast and lightweight as possible.
+- Есть много всего, что хотелось бы сделать с примитивами, такими как строка или число. Было бы замечательно, если бы мы могли работать с ними через вызовы методов.
+- Примитивы должны быть как можно легкими и быстрыми.
 
-The solution looks a little bit awkward, but here it is:
+Вот решение, хотя выглядит оно немного неуклюже:
 
-1. Primitives are still primitive. A single value, as desired.
-2. The language allows access to methods and properties of strings, numbers, booleans and symbols.
-3. When this happens, a special "object wrapper" is created that provides the extra functionality, and then is destroyed.
+1. Примитивы остаются примитивами. Одно значение, как и хотелось.
+2. Язык позволяет иметь доступ к методам и свойствам строк, чисел, булевых значений и символов.
+3. Чтобы это работало, создается специальный "объект-обертка", который предоставляет дополнительную функциональность, а после удаляется.
 
-The "object wrappers" are different for each primitive type and are called: `String`, `Number`, `Boolean` and `Symbol`. Thus, they provide different sets of methods.
+Каждый примитив имеет свой собственный "объект-обертку", которые называются: `String`, `Number`, `Boolean` и `Symbol`. Таким образом, они имеют разный набор методов.
 
-For instance, there exists a method [str.toUpperCase()](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/String/toUpperCase) that returns a capitalized string.
+К примеру, существует метод [str.toUpperCase()](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/String/toUpperCase), который возвращает cтроку в верхнем регистре.
 
-Here's how it works:
+Вот как он работает:
 
 ```js run
-let str = "Hello";
+let str = "Привет";
 
-alert( str.toUpperCase() ); // HELLO
+alert( str.toUpperCase() ); // ПРИВЕТ
 ```
 
-Simple, right? Here's what actually happens in `str.toUpperCase()`:
+Очень просто, не правда ли? Вот, что на самом деле происходит в `str.toUpperCase()`:
 
-1. The string `str` is a primitive. So in the moment of accessing its property, a special object is created that knows the value of the string, and has useful methods, like `toUpperCase()`.
-2. That method runs and returns a new string (shown by `alert`).
-3. The special object is destroyed, leaving the primitive `str` alone.
+1. Строка `str` - примитив. В момент обращения к его свойству, создается специальный объект, который знает значение строки и имеет такие полезные методы, как `toUpperCase()`.
+2. Этот метод запускается и возвращает новую строку (показывается в `alert`).
+3. Специальный объект удаляется, оставляя только примитив `str`.
 
-So primitives can provide methods, but they still remain lightweight.
+Получается, что примитивы могут предоставлять методы, и в то же время оставаться «лёгкими».
 
-The JavaScript engine highly optimizes this process. It may even skip the creation of the extra object at all. But it must still adhere to the specification and behave as if it creates one.
+Движок JavaScript очень оптимизирует этот процесс. Он даже может пропустить создание специального объекта. Однако, он все же должен придерживаться спецификаций и работать так, как будто он его создает.
 
-A number has methods of its own, for instance, [toFixed(n)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed) rounds the number to the given precision:
+Число имеет собственный набор методов. Например, [toFixed(n)](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed) округляет число до n знаков после запятой.
 
 ```js run
 let n = 1.23456;
@@ -80,51 +80,52 @@ let n = 1.23456;
 alert( n.toFixed(2) ); // 1.23
 ```
 
-We'll see more specific methods in chapters <info:number> and <info:string>.
+Более подробно с различными свойствами и методами мы познакомимся в главах <info:number> и <info:string>.
 
 
-````warn header="Constructors `String/Number/Boolean` are for internal use only"
-Some languages like Java allow us to create "wrapper objects" for primitives explicitly using a syntax like `new Number(1)` or `new Boolean(false)`.
+````warn header="Конструкторы `String/Number/Boolean` предназначены только для внутреннего пользования"
+Некоторые языки, такие как Java позволяют создание "объектов-оберток" для примитивов при помощи такого синтаксиса как `new Number(1)` или `new Boolean(false)`.
 
-In JavaScript, that's also possible for historical reasons, but highly **unrecommended**. Things will go crazy in several places.
+В JavaScript, это тоже возможно по историческим причинам, но очень **не рекомендуется**. В некоторых местах последствия могут быть катастрофическими.
 
-For instance:
+Например:
 
 ```js run
-alert( typeof 1 ); // "number"
+alert( typeof 0 ); // "число"
 
-alert( typeof new Number(1) ); // "object"!
+alert( typeof new Number(0) ); // "object"!
 ```
 
-And because what follows, `zero`, is an object, the alert will show up:
+Объекты в if всегда дают true, так что в примере ниже будет показан alert:
 
 ```js run
 let zero = new Number(0);
 
-if (zero) { // zero is true, because it's an object
-  alert( "zero is truthy?!?" );
+if (zero) {
+  // zero возвращает "true", так как является объектом
+  alert( "zero имеет «истинное» значение?!?" );
 }
 ```
 
-On the other hand, using the same functions `String/Number/Boolean` without `new` is a totally sane and useful thing. They convert a value to the corresponding type: to a string, a number, or a boolean (primitive).
+С другой стороны, использование функций `String/Number/Boolean` без оператора `new` - вполне разумно и полезно. Они превращают значение в соответствующий примитивный тип: в строку, в число, в булевой тип.
 
-For example, this is entirely valid:
+К примеру, следующее вполне допустимо:
+
 ```js
-let num = Number("123"); // convert a string to number
+let num = Number("123"); // превращает строку в число
 ```
-````
+`````
 
 
-````warn header="null/undefined have no methods"
-The special primitives `null` and `undefined` are exceptions. They have no corresponding "wrapper objects" and provide no methods. In a sense, they are "the most primitive".
+````warn header="null/undefined не имеют методов"
+Особенные примитивы `null` and `undefined` являются исключениями. У них нет соответствующих "объектов-оберток" и они не имеют никаких методов. В некотором смысле, они "самые примитивные".
 
-An attempt to access a property of such value would give the error:
-
+Попытка доступа к свойствам такого значения возвратит ошибку:
 ```js run
-alert(null.test); // error
+alert(null.test); // ошибка
 ````
 
-## Summary
+## Итого
 
-- Primitives except `null` and `undefined` provide many helpful methods. We will study those in the upcoming chapters.
-- Formally, these methods work via temporary objects, but JavaScript engines are well tuned to optimize that internally, so they are not expensive to call.
+- Все примитивы кроме `null` и `undefined` предоставляют множество полезных методов. Мы познакомимся с ними поближе в следующих главах.
+- Формально, эти методы работают с помощью временных объектов, но движки JavaScript очень хорошо оптимизируют этот процесс внутренне, так что их вызов не требует много ресурсов.
