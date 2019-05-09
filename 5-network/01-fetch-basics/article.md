@@ -227,7 +227,7 @@ alert(result.message);
 </script>
 ```
 
-Объект [FormData](https://xhr.spec.whatwg.org/#formdata) автоматически кодирует данные формы, поля `<input type="file">` также обрабатываются, и отправляет это с использованием заголовка `Content-Type: form/multipart`.
+Объект [FormData](https://xhr.spec.whatwg.org/#formdata) автоматически кодирует данные формы, поля `<input type="file">` также обрабатываются, а затем отправляет их с использованием заголовка `Content-Type: form/multipart`.
 
 ## Отправка изображения
 
