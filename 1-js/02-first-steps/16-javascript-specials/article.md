@@ -103,7 +103,7 @@ More in: <info:variables> and <info:types>.
 We're using a browser as a working environment, so basic UI functions will be:
 
 [`prompt(question, [default])`](mdn:api/Window/prompt)
-: Ask a `question`, and return either what the visitor entered or `null` if they pressed "cancel".
+: Ask a `question`, and return either what the visitor entered or `null` if they clicked "cancel".
 
 [`confirm(question)`](mdn:api/Window/confirm)
 : Ask a `question` and suggest to choose between Ok and Cancel. The choice is returned as `true/false`.
@@ -161,7 +161,7 @@ Comparisons
 
     Other comparisons convert to a number as well.
 
-    The strict equality operator `===` doesn't do the conversion: different types always mean different values for it, so:
+    The strict equality operator `===` doesn't do the conversion: different types always mean different values for it.
 
     Values `null` and `undefined` are special: they equal `==` each other and don't equal anything else.
 
