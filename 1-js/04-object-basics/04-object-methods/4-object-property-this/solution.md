@@ -1,10 +1,10 @@
-**Answer: an error.**
+**Ответ: ошибка.**
 
-Try it:
+Проверьте:
 ```js run
 function makeUser() {
   return {
-    name: "John",
+    name: "Джон",
     ref: this
   };
 };
@@ -14,20 +14,20 @@ let user = makeUser();
 alert( user.ref.name ); // Error: Cannot read property 'name' of undefined
 ```
 
-That's because rules that set `this` do not look at object literals. 
+Это потому, что правила, которые определяют значения `this` не воспринимают объектные литералы.
 
-Here the value of `this` inside `makeUser()` is `undefined`, because it is called as a function, not as a method.
+Вот здесь значение `this` внутри `makeUser()` является `undefined`, потому что `makeUser()` вызвано как функция, не как метод.
 
-And the object literal itself has no effect on `this`. The value of `this` is one for the whole function, code blocks and object literals do not affect it.
+И литерал объекта сам по себе не влияет на `this`. Значение `this` одно для всей функции, блоков кода и объектные литералы не воздействуют на него.
 
-So `ref: this` actually takes current `this` of the function.
+Таким образом, когда создается объект (который возвращается из функции `makeUser()`) и нужно присвоить значение его свойству `ref` - вычисляется значение `this`, которое берет текущее значение `this` функции `makeUser()`.
 
-Here's the opposite case:
+Тут противоположный случай:
 
 ```js run
 function makeUser() {
   return {
-    name: "John",
+    name: "Джон",
 *!*
     ref() {
       return this;
@@ -38,9 +38,9 @@ function makeUser() {
 
 let user = makeUser();
 
-alert( user.ref().name ); // John
+alert( user.ref().name ); // Джон
 ```
 
-Now it works, because `user.ref()` is a method. And the value of `this` is set to the object before dot `.`.
+Здесь тоже `makeUser()` вызывается как функция, не как метод. Но теперь это работает, потому что свойство `ref` создаваемого объекта является методом. Теперь это свойство ссылается на код функции, возвращающей `this` - т.е. при возващении созданного объекта, значение `this` уже не вычисляется, поскольку код функции не исполняется, `ref` просто ссылается на этот код. Когда же `ref` вызывается как метод  объекта `user.ref()` - значение `this` внутри метода вычисляется и ссылается на объект, который идет перед точкой `.` (т.е. объект из которого вызывается метод).
 
 
