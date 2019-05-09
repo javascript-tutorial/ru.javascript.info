@@ -301,7 +301,7 @@ async function* fetchCommits(repo) {
 
     url = nextPage;
 
-    for(let commit of body) { // (4) возвращайте коммиты по одному до окончания страницы
+    for(let commit of body) { // (4) вернуть коммиты по одному до окончания страницы
       yield commit;
     }
   }
