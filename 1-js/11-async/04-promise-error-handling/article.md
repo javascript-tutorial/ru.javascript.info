@@ -76,7 +76,7 @@ new Promise((resolve, reject) => {
 
 The "invisible `try..catch`" around the executor automatically catches the error and treats it as a rejection.
 
-That's so not only in the executor, but in handlers as well. If we `throw` inside a `.then` handler, that means a rejected promise, so the control jumps to the nearest error handler.
+This happens not only in the executor, but in its handlers as well. If we `throw` inside a `.then` handler, that means a rejected promise, so the control jumps to the nearest error handler.
 
 Here's an example:
 
@@ -90,7 +90,7 @@ new Promise((resolve, reject) => {
 }).catch(alert); // Error: Whoops!
 ```
 
-That's so not only for `throw`, but for any errors, including programming errors as well:
+This happens for all errors, not just those caused by the `throw` statement. For example, a programming error:
 
 ```js run
 new Promise((resolve, reject) => {
@@ -102,7 +102,7 @@ new Promise((resolve, reject) => {
 }).catch(alert); // ReferenceError: blabla is not defined
 ```
 
-As a side effect, the final `.catch` not only catches explicit rejections, but also occasional errors in the handlers above.
+The final `.catch` not only catches explicit rejections, but also occasional errors in the handlers above.
 
 ## Rethrowing
 
@@ -120,7 +120,7 @@ new Promise((resolve, reject) => {
 
   throw new Error("Whoops!");
 
-}).catch(function(error) {
+}).catch(function(error) { 
 
   alert("The error is handled, continue normally");
 
@@ -169,7 +169,7 @@ Let's improve error handling for the user-loading example.
 
 The promise returned by [fetch](mdn:api/WindowOrWorkerGlobalScope/fetch) rejects when it's impossible to make a request. For instance, a remote server is not available, or the URL is malformed. But if the remote server responds with error 404, or even error 500, then it's considered a valid response.
 
-What if the server returns a non-JSON page with error 500 in the line `(*)`? What if there's no such user, and github returns a page with error 404 at `(**)`?
+What if the server returns a non-JSON page with error 500 in the line `(*)`? What if there's no such user, and GitHub returns a page with error 404 at `(**)`?
 
 ```js run
 fetch('no-such-user.json') // (*)
@@ -219,7 +219,7 @@ The great thing about having our own class for errors is that we can easily chec
 
 For instance, we can make a request, and then if we get 404 -- ask the user to modify the information.
 
-The code below loads a user with the given name from github. If there's no such user, then it asks for the correct name:
+The code below loads a user with the given name from GitHub. If there's no such user, then it asks for the correct name:
 
 ```js run
 function demoGithubUser() {
@@ -266,7 +266,7 @@ new Promise(function() {
 
 In case of an error, the promise state becomes "rejected", and the execution should jump to the closest rejection handler. But there is no such handler in the examples above. So the error gets "stuck".
 
-In practice, just like with a regular unhandled errors, it means that something terribly gone wrong, the script probably died.
+In practice, just like with a regular unhandled errors, it means that something has terribly gone wrong, the script probably died.
 
 Most JavaScript engines track such situations and generate a global error in that case. We can see it in the console.
 
@@ -292,7 +292,7 @@ If an error occurs, and there's no `.catch`, the `unhandledrejection` handler tr
 
 Usually such errors are unrecoverable, so our best way out is to inform the user about the problem and probably report the incident to the server.
 
-In non-browser environments like Node.JS there are other similar ways to track unhandled errors.
+In non-browser environments like Node.js there are other similar ways to track unhandled errors.
 
 
 ## Summary
