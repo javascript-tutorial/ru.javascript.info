@@ -11,7 +11,7 @@
 ```html
 <template>
   <tr>
-    <td>Contents</td>
+    <td>Содержимое</td>
   </tr>
 </template>
 ```
@@ -26,7 +26,7 @@
     p { font-weight: bold; }
   </style>
   <script>
-    alert("Hello");
+    alert("Привет");
   </script>
 </template>
 ```
@@ -46,9 +46,9 @@
 ```html run
 <template id="tmpl">
   <script>
-    alert("Hello");
+    alert("Привет");
   </script>
-  <div class="message">Hello, world!</div>
+  <div class="message">Привет, Мир!</div>
 </template>
 
 <script>
@@ -72,7 +72,7 @@
   <p id="message"></p>
 </template>
 
-<div id="elem">Click me</div>
+<div id="elem">Нажми на меня</div>
 
 <script>
   elem.onclick = function() {
@@ -82,7 +82,7 @@
     elem.shadowRoot.append(tmpl.content.cloneNode(true)); // (*)
 */!*
 
-    elem.shadowRoot.getElementById('message').innerHTML = "Hello from the shadows!";
+    elem.shadowRoot.getElementById('message').innerHTML = "Привет из теней!";
   };
 </script>
 ```
