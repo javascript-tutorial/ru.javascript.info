@@ -622,16 +622,16 @@ arr.reduce((sum, current) => sum + current);
 
 ## Array.isArray
 
-Arrays do not form a separate language type. They are based on objects.
+Массивы не образуют отдельный тип языка. Они основаны на объектах.
 
-So `typeof` does not help to distinguish a plain object from an array:
+Поэтому `typeof` не может отличить простой объект от массива:
 
 ```js run
-alert(typeof {}); // object
-alert(typeof []); // same
+alert(typeof {}); // объект
+alert(typeof []); // то же объект
 ```
 
-...But arrays are used so often that there's a special method for that: [Array.isArray(value)](mdn:js/Array/isArray). It returns `true` if the `value` is an array, and `false` otherwise.
+...Но массивы используются насколько часто, что для этого придумали специальный метод: [Array.isArray(value)](mdn:js/Array/isArray). Он возвращает `true`, если` value` массив, и `false` если нет.
 
 ```js run
 alert(Array.isArray({})); // false
@@ -639,25 +639,25 @@ alert(Array.isArray({})); // false
 alert(Array.isArray([])); // true
 ```
 
-## Most methods support "thisArg"
+## Большинство методов поддерживают "thisArg"
 
-Almost all array methods that call functions -- like `find`, `filter`, `map`, with a notable exception of `sort`, accept an optional additional parameter `thisArg`.
+Почти все методы массива, которые вызывают функции -- такие как `find`, `filter`, `map`, за исключением метода `sort`, принимают необязательный параметр `thisArg`.
 
-That parameter is not explained in the sections above, because it's rarely used. But for completeness we have to cover it.
+Этот параметр не объяснялся выше, так как очень редко используется, но для наиболее полного понимания темы мы обязаны его рассмотреть.
 
-Here's the full syntax of these methods:
+Вот полный синтаксис этих методов:
 
 ```js
 arr.find(func, thisArg);
 arr.filter(func, thisArg);
 arr.map(func, thisArg);
 // ...
-// thisArg is the optional last argument
+// thisArg - это необязательный последний аргумент
 ```
 
-The value of `thisArg` parameter becomes `this` for `func`.
+Значение параметра `thisArg` становится `this` для `func`.
 
-For instance, here we use an object method as a filter and `thisArg` comes in handy:
+Например, вот тут мы используем метод объекта как фильтр и `thisArg` нам очень поможет:
 
 ```js run
 let user = {
@@ -674,63 +674,64 @@ let users = [
 ];
 
 *!*
-// find all users younger than user
+// найти всех пользователей моложе чем заданный
 let youngerUsers = users.filter(user.younger, user);
 */!*
 
 alert(youngerUsers.length); // 2
 ```
 
-In the call above, we use `user.younger` as a filter and also provide `user` as the context for it. If we didn't provide the context, `users.filter(user.younger)` would call `user.younger` as a standalone function, with `this=undefined`. That would mean an instant error.
+В вызове выше, мы используем `user.younger` как фильтр а также отдаём `user` в качестве контекста для него. Если бы мы не предоставляли контекст, 
+`users.filter(user.younger)` вызвал бы `user.younger` как отдельную функцию, с `this = undefined`. Это означало бы мгновенную ошибку.
 
-## Summary
+## Итого
 
-A cheatsheet of array methods:
+Шпаргалка методов массива:
 
-- To add/remove elements:
-  - `push(...items)` -- adds items to the end,
-  - `pop()` -- extracts an item from the end,
-  - `shift()` -- extracts an item from the beginning,
-  - `unshift(...items)` -- adds items to the beginning.
-  - `splice(pos, deleteCount, ...items)` -- at index `pos` delete `deleteCount` elements and insert `items`.
-  - `slice(start, end)` -- creates a new array, copies elements from position `start` till `end` (not inclusive) into it.
-  - `concat(...items)` -- returns a new array: copies all members of the current one and adds `items` to it. If any of `items` is an array, then its elements are taken.
+- Для добавления/удаления элементов:  
+  - `push (... items)` -- добавляет элементы в конец,
+  - `pop()` -- извлекает элемент с конца,
+  - `shift()` -- извлекает элемент с начала,
+  - `unshift(... items)` -- добавляет элементы в начало.
+  - `splice(pos, deleteCount, ... items)` -- по индексу `pos` удаляет` deleteCount` элементы и вставляет `items`.
+  - `slice(start, end)` -- создает новый массив, копируя в него элементы с позиции `start` до `end` (не включая `end`).
+  - `concat(... items)` -- возвращает новый массив: копирует все члены текущего массива и добавляет к нему `items`. Если какой-либо из `items` является массивом, тогда берутся его элементы.  
 
-- To search among elements:
-  - `indexOf/lastIndexOf(item, pos)` -- look for `item` starting from position `pos`, return the index or `-1` if not found.
-  - `includes(value)` -- returns `true` if the array has `value`, otherwise `false`.
-  - `find/filter(func)` -- filter elements through the function, return first/all values that make it return `true`.
-  - `findIndex` is like `find`, but returns the index instead of a value.
+- Для поиска среди элементов:
+  - `indexOf/lastIndexOf(item, pos)` -- ищет `item`, начиная с позиции `pos` и возвращает его индекс, или `-1` если ничего не найдено.
+  - `includes(value)` -- возвращает `true`, если массив имеет значение` value`, в противном случае `false`.
+  - `find/filter(func)` -- фильтрует элементы через функцию и отдаёт первые/все значения, которые при прохождении через неё возвращают `true`.
+  - `findIndex` похож на `find`, но возвращает индекс вместо значения.
   
-- To iterate over elements:
-  - `forEach(func)` -- calls `func` for every element, does not return anything.
+- Для перебора элементов:
+  - `forEach(func)` -- вызывает `func` для каждого элемента. Ничего не возвращает.
 
-- To transform the array:
-  - `map(func)` -- creates a new array from results of calling `func` for every element.
-  - `sort(func)` -- sorts the array in-place, then returns it.
-  - `reverse()` -- reverses the array in-place, then returns it.
-  - `split/join` -- convert a string to array and back.
-  - `reduce(func, initial)` -- calculate a single value over the array by calling `func` for each element and passing an intermediate result between the calls.
+- Для преобразования массива:
+  - `map(func)` -- создаёт новый массив из результатоы вызова `func` для каждого элемента.
+  - `sort(func)` -- сортирует массив на месте, а потом возвращает его.
+  - `reverse()` -- инвертирует массив на месте, а потом возвращает его.
+  - `split/join` -- преобразует строку в массив и обратно.
+  - `reduce(func, initial)` -- вычисляет одно значение из всего массива, вызывая `func` для каждого элемента и передавая промежуточный результат между вызовами.
 
-- Additionally:
-  - `Array.isArray(arr)` checks `arr` for being an array.
+- Дополнительно:
+  - `Array.isArray(arr)` проверяет является ли `arr` массивом.
 
-Please note that methods `sort`, `reverse` and `splice` modify the array itself.
+Обратите внимание, что методы `sort`,` reverse` и `splice` изменяют исходный массив.
 
-These methods are the most used ones, they cover 99% of use cases. But there are few others:
+Изученных нами методов достаточно в 99% случаях, но существуют и другие.
 
-- [arr.some(fn)](mdn:js/Array/some)/[arr.every(fn)](mdn:js/Array/every) checks the array.
+- [arr.some(fn)](mdn:js/Array/some)/[arr.every(fn)](mdn:js/Array/every) проверяет массив.
 
-  The function `fn` is called on each element of the array similar to `map`. If any/all results are `true`, returns `true`, otherwise `false`.
+  Функция `fn` вызывается для каждого элемента массива аналогично `map`. Если какие-либо/все результаты являются `true`, он возвращает` true`, иначе `false`.
 
-- [arr.fill(value, start, end)](mdn:js/Array/fill) -- fills the array with repeating `value` from index `start` to `end`.
+- [arr.fill(value, start, end)](mdn:js/Array/fill) -- заполняет массив повторяющимся `value` начиная с индекса `start` до `end`.
 
-- [arr.copyWithin(target, start, end)](mdn:js/Array/copyWithin) -- copies its elements from position `start` till position `end` into *itself*, at position `target` (overwrites existing).
+- [arr.copyWithin(target, start, end)](mdn:js/Array/copyWithin) -- копирует свои элементы начиная со `start` и заканчивая `end` в *собственную*, позицию `target` (перезаписывает существующие).
 
-For the full list, see the [manual](mdn:js/Array).
+Полный список см. в [руководстве](mdn:js/Array).
 
-From the first sight it may seem that there are so many methods, quite difficult to remember. But actually that's much easier than it seems.
+На первый взгляд может показаться, что существует очень много разных методов, которые довольно сложно запомнить. Но на самом деле это гораздо проще, чем кажется.
 
-Look through the cheatsheet just to be aware of them. Then solve the tasks of this chapter to practice, so that you have experience with array methods.
+Поближе ознакомьтесь со шпаргалкой представленной выше, а затем, чтобы попрактиковаться, решите задачи предложенные в данной главе. Так вы получите необходимый опыт в правильном использовании методов массива.
 
-Afterwards whenever you need to do something with an array, and you don't know how -- come here, look at the cheatsheet and find the right method. Examples will help you to write it correctly. Soon you'll automatically remember the methods, without specific efforts from your side.
+Всякий раз, когда вам нужно что-то сделать с массивом, и вы не знаете, как это сделать -- приходите сюда, посмотрите на таблицу и найдите правильный метод. Примеры помогут вам всё сделать правильно и вскоре вы автоматически запомните методы без особых усилий с вашей стороны.
