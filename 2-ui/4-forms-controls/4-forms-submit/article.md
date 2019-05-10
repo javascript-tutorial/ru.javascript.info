@@ -58,7 +58,7 @@ let form = document.createElement('form');
 form.action = 'https://google.com/search';
 form.method = 'GET';
 
-form.innerHTML = '<input name="q" value="javascript info">';
+form.innerHTML = '<input name="q" value="test">';
 
 // перед отправкой формы, её нужно вставить в document
 document.body.append(form);
