@@ -1,14 +1,14 @@
 
-Let's examine what's done inside `makeArmy`, and the solution will become obvious.
+Давайте посмотрим, что происходит внутри `makeArmy`, и решение станет очевидным.
 
-1. It creates an empty array `shooters`:
+1. Она создаёт пустой массив `shooters`:
 
     ```js
     let shooters = [];
     ```
-2. Fills it in the loop via `shooters.push(function...)`.
+2. В цикле заполняет его `shooters.push(function...)`.
 
-    Every element is a function, so the resulting array looks like this:
+    Каждый элемент -- это функция, так что получится такой массив:
 
     ```js no-beautify
     shooters = [
@@ -25,25 +25,25 @@ Let's examine what's done inside `makeArmy`, and the solution will become obviou
     ];
     ```
 
-3. The array is returned from the function.
+3. Функция возвращает массив.
 
-Then, later, the call to `army[5]()` will get the element `army[5]` from the array (it will be a function) and call it.
+Позже вызов `army[5]()` получит элемент `army[5]` из массива (это будет функция) и вызовет её.
 
-Now why all such functions show the same?
+Теперь, почему все эти функции показывают одно и то же?
 
-That's because there's no local variable `i` inside `shooter` functions. When such a function is called, it takes `i` from its outer lexical environment.
+Всё потому, что внутри функций  `shooter` нет локальной переменной `i`. Когда вызывается такая функция, она берёт `i` из своего внешнего лексического окружения.
 
-What will be the value of `i`?
+Какое будет значение у `i`?
 
-If we look at the source:
+Если мы посмотрим в исходный код:
 
 ```js
 function makeArmy() {
   ...
   let i = 0;
   while (i < 10) {
-    let shooter = function() { // shooter function
-      alert( i ); // should show its number
+    let shooter = function() { // функция shooter
+      alert( i ); // должна выводить порядковый номер
     };
     ...
   }
@@ -51,11 +51,11 @@ function makeArmy() {
 }
 ```
 
-...We can see that it lives in the lexical environment associated with the current `makeArmy()` run. But when `army[5]()` is called, `makeArmy` has already finished its job, and `i` has the last value: `10` (the end of `while`).
+...Мы увидим, что оно живёт в лексическом окружении, связанном с текущим вызовом `makeArmy()`. Но, когда вызывается `army[5]()`, `makeArmy` уже завершила свою работу, и последнее значение `i`: 10 (конец цикла `while`).
 
-As a result, all `shooter` functions get from the outer lexical envrironment the same, last value `i=10`.
+Как результат, все функции `shooter` получат одно и то же из внешнего окружения: последнее значение `i=10`.
 
-We can fix it by moving the variable definition into the loop:
+Мы можем это исправить, переместив определение переменной в цикл:
 
 ```js run demo
 function makeArmy() {
@@ -65,10 +65,12 @@ function makeArmy() {
 *!*
   for(let i = 0; i < 10; i++) {
 */!*
-    let shooter = function() { // shooter function
-      alert( i ); // should show its number
+    let shooter = function() { // функция shooter
+      alert( i ); // должна выводить порядковый номер
     };
     shooters.push(shooter);
+
+
   }
 
   return shooters;
@@ -80,15 +82,15 @@ army[0](); // 0
 army[5](); // 5
 ```
 
-Now it works correctly, because every time the code block in `for (let i=0...) {...}` is executed, a new Lexical Environment is created for it, with the corresponding variable `i`.
+Теперь она работает правильно, потому что каждый раз, когда выполняется блок кода `for (let i=0...) {...}`, для него создается новое лексическое окружение с соответствующей переменной `i`.
 
-So, the value of `i` now lives a little bit closer. Not in `makeArmy()` Lexical Environment, but in the Lexical Environment that corresponds the current loop iteration. That's why now it works.
+Так что значение `i` теперь живёт немного ближе. Не в лексическом окружении `makeArmy()`, а в лексическом окружении, которое соответствует текущей итерации цикла. Вот почему теперь она работает.
 
 ![](lexenv-makearmy.png)
 
-Here we rewrote `while` into `for`.
+Здесь мы переписали `while` в `for`.
 
-Another trick could be possible, let's see it for better understanding of the subject:
+Можно использовать другой трюк, давайте рассмотрим его для лучшего понимания предмета: 
 
 ```js run
 function makeArmy() {
@@ -99,8 +101,8 @@ function makeArmy() {
 *!*
     let j = i;
 */!*
-    let shooter = function() { // shooter function
-      alert( *!*j*/!* ); // should show its number
+    let shooter = function() { // функция shooter
+      alert( *!*j*/!* ); // должна выводить порядковый номер
     };
     shooters.push(shooter);
     i++;
@@ -115,6 +117,6 @@ army[0](); // 0
 army[5](); // 5
 ```
 
-The `while` loop, just like `for`, makes a new Lexical Environment for each run. So here we make sure that it gets the right value for a `shooter`.
+Цикл `while` так же, как и `for`, создаёт новое лексическое окружение для каждой итерации. Так что тут мы хотим убедиться, что он получит правильное значение для `shooter`.
 
-We copy `let j = i`. This makes a loop body local `j` and copies the value of `i` to it. Primitives are copied "by value", so we actually get a complete independent copy of `i`, belonging to the current loop iteration.
+Мы копируем `let j = i`. Это создаёт локальную для итерации переменную `j` и копирует в неё `i`. Примитивы копируются "по значению", поэтому мы получаем совершенно независимую копию `i`, принадлежащую текущей итерации цикла.
