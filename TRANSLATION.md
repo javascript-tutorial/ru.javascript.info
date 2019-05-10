@@ -1,13 +1,89 @@
+# Перевод
 
-# The JavaScript Tutorial
+Перевод не обязательно должен быть слово-в-слово.
 
-This repository hosts the translation of the [Modern JavaScript Tutorial](https://javascript.info).
+Он должен быть без ошибок и, по сути, верным, хорошо объясняющим.
 
-The full list of translations and leads is at <https://github.com/iliakan/javascript-tutorial-en>.
+Если вы видите, что исходный текст может быть улучшен – отлично, пришлите, пожалуйста, PR.
 
-Please contact the translation lead for any questions. 
-Contact @iliakan there's no answer or the translation appears to be stalled. 
+> **Важно!**
+>
+> Сохраняйте переносы строк (пустые строки) и структуру абзацов «как есть»: это упрощает объединение будущих изменений из английской версии в перевод.
 
-If there are other translators, notify them (create an issue?) when you're taking a chapter.
+## Текст в коде
+
+- Комментарии в коде – переводить.
+- Строки в примерах – можно переводить, но не обязательно.
+- Названия переменных, классы, идентификаторы – не надо переводить.
+
+Например:
+
+```js
+// Example
+const text = "Hello, world";
+document.querySelector('.hello').innerHTML = text;
+```
+
+✅ ХОРОШО (переведен комментарий):
+
+```js
+// Пример
+const text = 'Hello, world';
+document.querySelector('.hello').innerHTML = text;
+```
+
+✅ ТОЖЕ ОК (переведен комментарий и текст):
+
+```js
+// Пример
+const text = 'Привет, мир';
+document.querySelector('.hello').innerHTML = text;
+```
 
 
+## Внешние ссылки
+
+Если есть внешняя ссылка на MDN или Wikipedia, например https://en.wikipedia.org/wiki/JavaScript, но есть версия этой же статьи на русском, поменяйте ссылку.
+
+Например:
+
+```md
+[JavaScript](https://en.wikipedia.org/wiki/JavaScript) is a programming language.
+```
+
+✅ ПОСЛЕ ЗАМЕНЫ (en -> ru):
+
+```md
+[JavaScript](https://ru.wikipedia.org/wiki/JavaScript) – это язык программирования.
+```
+
+Если статья на MDN переведена частично, это тоже подходит.
+
+В случае, если у ссылки нет эквивалента на русском, оставьте её как есть.
+
+## И ещё пара деталей :)
+
+- _Вы_ и его производные пишите с маленькой буквы
+- Используйте букву `ё` ([этот npm-пакет](https://github.com/hcodes/eyo) может проверить текст и вставить её, где нужно)
+- Не знаете, как перевести термин? [Словарь «Веб-стандартов»](https://github.com/web-standards-ru/dictionary/blob/master/dictionary.md) поможет!
+- Названия компаний (Google), библиотек (Jest) и аббревиатуры (DOM) не переводятся.
+- **importance: n** встречающееся в начале задач - служебное поле, перевод не требуется.
+
+## Соглашение по переводу (глоссарий)
+
+**Пожалуйста, поддерживайте глоссарий в алфавитном порядке.**
+
+| Оригинальный термин | Перевод           |
+|:--------------------|:------------------|
+| backtick            | обратный апостроф |
+| Summary             | Итого             |
+
+
+## Ресурсы по переводу
+
+Чтобы улучшить ваш перевод и, вообще, письмо, полезные статьи:
+
+* [Берегись канцелярита!](http://www.vavilon.ru/noragal/slovo2.html)
+* [Словесная алгебра](http://www.vavilon.ru/noragal/slovo4.html)
+* [Поиск переводов в контексте](https://context.reverso.net/перевод/)
+* [DeepL - переводчик на нейросетях](https://www.deepl.com/translator)

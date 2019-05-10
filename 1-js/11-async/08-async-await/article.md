@@ -12,7 +12,7 @@ async function f() {
 }
 ```
 
-The word "async" before a function means one simple thing: a function always returns a promise. Even If a function actually returns a non-promise value, prepending the function definition with the "async" keyword directs Javascript to automatically wrap that value in a resolved promise.
+The word "async" before a function means one simple thing: a function always returns a promise. Even If a function actually returns a non-promise value, prepending the function definition with the "async" keyword directs JavaScript to automatically wrap that value in a resolved promise.
 
 For instance, the code above returns a resolved promise with the result of `1`, let's test it:
 
@@ -24,7 +24,7 @@ async function f() {
 f().then(alert); // 1
 ```
 
-...We could explicitly return a promise, that would be the same:
+...We could explicitly return a promise, that would be the same as:
 
 ```js run
 async function f() {
@@ -72,7 +72,7 @@ Let's emphasize: `await` literally makes JavaScript wait until the promise settl
 It's just a more elegant syntax of getting the promise result than `promise.then`, easier to read and write.
 
 ````warn header="Can't use `await` in regular functions"
-If we try to use `await` in non-async function, that would be a syntax error:
+If we try to use `await` in non-async function, there would be a syntax error:
 
 ```js run
 function f() {
@@ -263,7 +263,7 @@ f().catch(alert); // TypeError: failed to fetch // (*)
 */!*
 ```
 
-If we forget to add `.catch` there, then we get an unhandled promise error (and can see it in the console). We can catch such errors using a global event handler as described in the chapter <info:promise-error-handling>.
+If we forget to add `.catch` there, then we get an unhandled promise error (viewable in the console). We can catch such errors using a global event handler as described in the chapter <info:promise-error-handling>.
 
 
 ```smart header="`async/await` and `promise.then/catch`"
