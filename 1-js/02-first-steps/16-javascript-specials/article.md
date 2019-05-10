@@ -105,7 +105,7 @@ typeof function(){} == "function" // функции в языке на особ�
 [`prompt(question, [default])`](https://developer.mozilla.org/ru/docs/Web/API/Window/prompt)
 : Задаёт посетителю вопрос (`question`) и ждёт от него ответ. На выходе получается либо строка с ответом, либо `null`, если посетитель нажал на кнопку "Отмена".
 
-[`confirm(вопрос)`](https://developer.mozilla.org/ru/docs/Web/API/Window/confirm)
+[`confirm(question)`](https://developer.mozilla.org/ru/docs/Web/API/Window/confirm)
 : Задаём посетителю `вопрос`, на который он может ответить с помощью кнопок "ОК" или "Отмена", что вернёт нам `true` или `false`, соответственно.
 
 [`alert(сообщение)`](https://developer.mozilla.org/ru/docs/Web/API/Window/alert)
