@@ -39,7 +39,7 @@
 ```html autorun height=60
 <form onsubmit="alert('submit!');return false">
  <input type="text" size="30" value="При нажатии Enter будет click">
- <input type="submit" value="Отправить" *!*onclick="alert('click!')"*/!*>
+ <input type="submit" value="Отправить" *!*onclick="alert('click')"*/!*>
 </form>
 ```
 
