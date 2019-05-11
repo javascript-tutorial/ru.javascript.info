@@ -2,13 +2,12 @@ importance: 2
 
 ---
 
-# The name of JavaScript
+# Официальное название JavaScript
 
-Using the `if..else` construct, write the code which asks: 'What is the "official" name of JavaScript?'
+Используя конструкцию `if..else`, напишите код, который будет спрашивать: 'Каково "официальное" название JavaScript?'
 
-If the visitor enters "ECMAScript", then output "Right!", otherwise -- output: "Didn't know? ECMAScript!"
+Если пользователь вводит "ECMAScript", то выводить: "Верно!", в противном случае -- выводить: "Не знаете? ECMAScript!"
 
 ![](ifelse_task2.png)
 
 [demo src="ifelse_task2"]
-
