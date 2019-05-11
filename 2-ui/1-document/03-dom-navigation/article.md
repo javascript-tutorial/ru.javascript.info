@@ -5,7 +5,7 @@ libs:
 ---
 
 
-# Walking the DOM
+# Навигация по DOM-элементам
 
 The DOM allows us to do anything with elements and their contents, but first we need to reach the corresponding DOM object, get it into a variable, and then we are able to modify it.
 
