@@ -1,10 +1,10 @@
-importance: 2
+важность: 2
 
 ---
 
-# Chaining
+# Цепь вызовов
 
-There's a `ladder` object that allows to go up and down:
+Это лестница - объект, который позволяет подниматься вверх и спускаться:
 
 ```js
 let ladder = {
@@ -15,13 +15,13 @@ let ladder = {
   down() { 
     this.step--;
   },
-  showStep: function() { // shows the current step
+  showStep: function() { // показывает текущую ступеньку
     alert( this.step );
   }
 };
 ```
 
-Now, if we need to make several calls in sequence, can do it like this:
+Теперь, если нам нужно сделать несколько последовательных вызовов, мы можем выполнить это так:
 
 ```js
 ladder.up();
@@ -30,10 +30,10 @@ ladder.down();
 ladder.showStep(); // 1
 ```
 
-Modify the code of `up`, `down` and `showStep` to make the calls chainable, like this:
+Измените код методов `up`, `down` и `showStep` таким образом, чтобы их вызов можно было сделать по цепочке, например так:
 
 ```js
 ladder.up().up().down().showStep(); // 1
 ```
 
-Such approach is widely used across JavaScript libraries.
+Такой подход широко используется в библиотеках JavaScript. 
