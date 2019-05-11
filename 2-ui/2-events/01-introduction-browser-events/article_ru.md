@@ -242,10 +242,9 @@ element.removeEventListener(event, handler[, options]);
 ```
 
 ````warn header="Удаление требует ту же самую функцию"
-Что-бы удалить обработчик мы должны передать точно такую же функцию, которая была назначена в качестве обработчика.
-To remove a handler we should pass exactly the same function as was assigned.
+Для удаления нужно передать именно ту функцию-обработчик которая была назначена.
 
-Не работает:
+Не сработает:
 
 ```js no-beautify
 elem.addEventListener( "click" , () => alert('Спасибо!'));
@@ -253,9 +252,9 @@ elem.addEventListener( "click" , () => alert('Спасибо!'));
 elem.removeEventListener( "click", () => alert('Спасибо!'));
 ```
 
-The handler won't be removed, because `removeEventListener` gets another function -- with the same code, but that doesn't matter.
+В `removeEventListener` передана не та же функция, а другая, с одинаковым кодом.
 
-Here's the right way:
+Вот так правильно:
 
 ```js
 function handler() {
@@ -267,13 +266,13 @@ input.addEventListener("click", handler);
 input.removeEventListener("click", handler);
 ```
 
-Please note -- if we don't store the function in a variable, then we can't remove it. There's no way to "read back" handlers assigned by `addEventListener`.
+Обратим внимание – если функцию не сохранить где-либо, а просто передать в `addEventListener`, как в предыдущем коде, то потом получить её обратно, чтобы снять обработчик, будет невозможно. Нет способа, который позволяет считать обработчики событий, назначенные через `addEventListener`.
 ````
 
-Multiple calls to `addEventListener` allow to add multiple handlers, like this:
+Метод `addEventListener` позволяет добавлять несколько обработчиков на одно событие одного элемента, например:
 
 ```html run no-beautify
-<input id="elem" type="button" value="Click me"/>
+<input id="elem" type="button" value="Нажми меня"/>
 
 <script>
   function handler1() {
@@ -281,13 +280,13 @@ Multiple calls to `addEventListener` allow to add multiple handlers, like this:
   };
 
   function handler2() {
-    alert('Спасибо снова!');
+    alert('Снова спасибо!');
   }
 
 *!*
-  elem.onclick = () => alert("Hello");
+  elem.onclick = () => alert("Привет");
   elem.addEventListener("click", handler1); // Спасибо!
-  elem.addEventListener("click", handler2); // Спасибо снова!
+  elem.addEventListener("click", handler2); // Снова спасибо!
 */!*
 </script>
 ```
@@ -313,7 +312,7 @@ Try the code below. In most browsers only the second handler works, not the firs
   }
 </style>
 
-<input type="button" id="elem" onclick="this.classList.toggle('wide')" value="Click me">
+<input type="button" id="elem" onclick="this.classList.toggle('wide')" value="Нажми меня">
 
 <script>
   elem.ontransitionend = function() {
@@ -338,7 +337,7 @@ When an event happens, the browser creates an *event object*, puts details into 
 Here's an example of getting mouse coordinates from the event object:
 
 ```html run
-<input type="button" value="Click me" id="elem">
+<input type="button" value="Нажми меня" id="elem">
 
 <script>
   elem.onclick = function(*!*event*/!*) {
@@ -381,7 +380,7 @@ For instance:
 
 
 ```html run
-<button id="elem">Click me</button>
+<button id="elem">Нажми меня</button>
 
 <script>
   elem.addEventListener('click', {
@@ -398,7 +397,7 @@ We could also use a class for that:
 
 
 ```html run
-<button id="elem">Click me</button>
+<button id="elem">Нажми меня</button>
 
 <script>
   class Menu {
@@ -427,7 +426,7 @@ Here the same object handles both events. Please note that we need to explicitly
 The method `handleEvent` does not have to do all the job by itself. It can call other event-specific methods instead, like this:
 
 ```html run
-<button id="elem">Click me</button>
+<button id="elem">Нажми меня</button>
 
 <script>
   class Menu {
