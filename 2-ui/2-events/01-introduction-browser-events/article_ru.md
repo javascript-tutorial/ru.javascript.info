@@ -230,8 +230,8 @@ element.addEventListener(event, handler[, options]);
 
 `options`
 : необязательный объект со свойствами:
-    - `once`: если `true`, тогда listener автоматически удаляется после срабатывания;
-    - `capture`: the phrase where to handle the event, to be covered later in the chapter; <info:bubbling-and-capturing>. По историческим причинам, `options` также может быть `false/true`, это тоже самое что `{capture: false/true}`;
+    - `once`: если `true`, тогда listener(функция назначения обработчика) автоматически удаляется после срабатывания;
+    - `capture`: порядок обработки событий, будет рассматриваться далее, в главе <info:bubbling-and-capturing>. По историческим причинам, `options` также может быть `false/true`, это тоже самое что `{capture: false/true}`;
     - `passive`: если `true`, тогда обработчик не сможет вызвать `preventDefault()`, мы рассмотрим это позже, в разделе <info:default-browser-action>.
 
 
@@ -241,15 +241,16 @@ element.addEventListener(event, handler[, options]);
 element.removeEventListener(event, handler[, options]);
 ```
 
-````warn header="Removal requires the same function"
+````warn header="Удаление требует ту же самую функцию"
+Что-бы удалить обработчик мы должны передать точно такую же функцию, которая была назначена в качестве обработчика.
 To remove a handler we should pass exactly the same function as was assigned.
 
-That doesn't work:
+Не работает:
 
 ```js no-beautify
-elem.addEventListener( "click" , () => alert('Thanks!'));
+elem.addEventListener( "click" , () => alert('Спасибо!'));
 // ....
-elem.removeEventListener( "click", () => alert('Thanks!'));
+elem.removeEventListener( "click", () => alert('Спасибо!'));
 ```
 
 The handler won't be removed, because `removeEventListener` gets another function -- with the same code, but that doesn't matter.
@@ -258,7 +259,7 @@ Here's the right way:
 
 ```js
 function handler() {
-  alert( 'Thanks!' );
+  alert( 'Спасибо!' );
 }
 
 input.addEventListener("click", handler);
@@ -276,17 +277,17 @@ Multiple calls to `addEventListener` allow to add multiple handlers, like this:
 
 <script>
   function handler1() {
-    alert('Thanks!');
+    alert('Спасибо!');
   };
 
   function handler2() {
-    alert('Thanks again!');
+    alert('Спасибо снова!');
   }
 
 *!*
   elem.onclick = () => alert("Hello");
-  elem.addEventListener("click", handler1); // Thanks!
-  elem.addEventListener("click", handler2); // Thanks again!
+  elem.addEventListener("click", handler1); // Спасибо!
+  elem.addEventListener("click", handler2); // Спасибо снова!
 */!*
 </script>
 ```
@@ -316,12 +317,12 @@ Try the code below. In most browsers only the second handler works, not the firs
 
 <script>
   elem.ontransitionend = function() {
-    alert("DOM property"); // doesn't work
+    alert("DOM property"); // не работает
   };
 
 *!*
   elem.addEventListener("transitionend", function() {
-    alert("addEventListener"); // shows up when the animation finishes
+    alert("addEventListener"); // сообщение покажется, когда анимация закончится;
   });
 */!*
 </script>
@@ -404,10 +405,10 @@ We could also use a class for that:
     handleEvent(event) {
       switch(event.type) {
         case 'mousedown':
-          elem.innerHTML = "Mouse button pressed";
+          elem.innerHTML = "Кнопка мыши нажата";
           break;
         case 'mouseup':
-          elem.innerHTML += "...and released.";
+          elem.innerHTML += "...и отпущена.";
           break;
       }
     }
@@ -437,11 +438,11 @@ The method `handleEvent` does not have to do all the job by itself. It can call 
     }
 
     onMousedown() {
-      elem.innerHTML = "Mouse button pressed";
+      elem.innerHTML = "Кнопка мыши нажата";
     }
 
     onMouseup() {
-      elem.innerHTML += "...and released.";
+      elem.innerHTML += "...и отпущена.";
     }
   }
 
@@ -453,13 +454,13 @@ The method `handleEvent` does not have to do all the job by itself. It can call 
 
 Now event handlers are clearly separated, that may be easier to support.
 
-## Summary
+## Итого
 
-There are 3 ways to assign event handlers:
+Существует три способа назначения обработчика событий:
 
-1. HTML attribute: `onclick="..."`.
-2. DOM property: `elem.onclick = function`.
-3. Methods: `elem.addEventListener(event, handler[, phase])` to add, `removeEventListener` to remove.
+1. HTML атрибут: `onclick="..."`.
+2. DOM свойство: `elem.onclick = function`.
+3. Методы: `elem.addEventListener(event, handler[, phase])` to add, `removeEventListener` to remove.
 
 HTML attributes are used sparingly, because JavaScript in the middle of an HTML tag looks a little bit odd and alien. Also can't write lots of code in there.
 
