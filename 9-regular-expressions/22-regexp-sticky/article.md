@@ -53,7 +53,7 @@ let regexp = /function/y;
 regexp.lastIndex = 5;
 */!*
 
-alert (regexp.exec(str)); // null (совпадение не найдено, в отличии от флага "g"!)
+alert (regexp.exec(str)); // null (совпадение не найдено, в отличие от флага "g"!)
 
 *!*
 regexp.lastIndex = 14;
