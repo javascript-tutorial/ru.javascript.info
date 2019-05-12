@@ -421,7 +421,7 @@ input.removeEventListener("click", handler);
 </script>
 ```
 
-Here the same object handles both events. Please note that we need to explicitly setup the events to listen using `addEventListener`. The `menu` object only gets `mousedown` and `mouseup` here, not any other types of events.
+Здесь тот же самый объект обрабатывает оба события. Обратите внимание, что мы должны явно указать обработчик событий через `addEventListener`. В нашем случае объект `menu` получает только `mousedown` и `mouseup` типы событий, и никакой другой.
 
 The method `handleEvent` does not have to do all the job by itself. It can call other event-specific methods instead, like this:
 
@@ -451,15 +451,15 @@ The method `handleEvent` does not have to do all the job by itself. It can call 
 </script>
 ```
 
-Now event handlers are clearly separated, that may be easier to support.
+Сейчас обработчики событий вынесены в отдельные методы, что упрощает их поддержку в дальнейшем.
 
 ## Итого
 
 Существует три способа назначения обработчика событий:
 
-1. HTML атрибут: `onclick="..."`.
-2. DOM свойство: `elem.onclick = function`.
-3. Методы: `elem.addEventListener(event, handler[, phase])` to add, `removeEventListener` to remove.
+1. HTML атрибут: `onclick="..."`;
+2. DOM свойство: `elem.onclick = function`;
+3. Методы: `elem.addEventListener(event, handler[, phase])` для добавления, `removeEventListener` для удаления.
 
 HTML attributes are used sparingly, because JavaScript in the middle of an HTML tag looks a little bit odd and alien. Also can't write lots of code in there.
 
