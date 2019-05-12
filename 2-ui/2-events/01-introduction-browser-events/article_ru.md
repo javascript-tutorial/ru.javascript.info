@@ -461,12 +461,12 @@ The method `handleEvent` does not have to do all the job by itself. It can call 
 2. DOM свойство: `elem.onclick = function`;
 3. Методы: `elem.addEventListener(event, handler[, phase])` для добавления, `removeEventListener` для удаления.
 
-HTML attributes are used sparingly, because JavaScript in the middle of an HTML tag looks a little bit odd and alien. Also can't write lots of code in there.
+HTML атрибуты используются редко, потому что JavaScript посередине HTML разметки выглядит немного странно и чужеродно. Также, в HTML атрибуте не рекомендуется писать много кода, в силу его сложности поддержки. 
 
-DOM properties are ok to use, but we can't assign more than one handler of the particular event. In many cases that limitation is not pressing.
+DOM свойства хороши в использовании, но мы не можем назначить более одного обработчика для определённого события. Во многих случаях это ограничение не является критичным. 
 
-The last way is the most flexible, but it is also the longest to write. There are few events that only work with it, for instance `transtionend` and `DOMContentLoaded` (to be covered). Also `addEventListener` supports objects as event handlers. In that case the method `handleEvent` is called in case of the event.
+Последний способ наиболее гибкий, но он же и самый длинный для написания. Существует ряд событий, которые работают только с этими методами, например `transtionend` и `DOMContentLoaded` (будет рассмотрен далее). Также `addEventListener` поддерживает объекты в качестве обработчика событий. В этом случае `handleEvent` метод вызывается в случае появления события. 
 
-No matter how you assign the handler -- it gets an event object as the first argument. That object contains the details about what's happened.
+Не важно каким способом вы назначаете обработчик -- он получает объект события в качестве первого аргумента. Этот объект содержит детали срабатывания обработчика. 
 
-We'll learn more about events in general and about different types of events in the next chapters.
+Более подробно о событиях в целом и о различных типах событий мы узнаем в следующих главах.
