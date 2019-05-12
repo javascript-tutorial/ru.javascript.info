@@ -1,261 +1,264 @@
-# Introduction to browser events
+# Введение в браузерные события
 
-*An event* is a signal that something has happened. All DOM nodes generate such signals (but events are not limited to DOM).
+Для реакции на действия посетителя и внутреннего взаимодействия скриптов существуют *события*.
 
-Here's a list of the most useful DOM events, just to take a look at:
+*Событие* это сигнал от браузера вашему коду о том, что что-то произошло. Все DOM узлы генерируют такие сигналы(но события не ограничены DOM-ом).
 
-**Mouse events:**
-- `click` -- when the mouse clicks on an element (touchscreen devices generate it on a tap).
-- `contextmenu` -- when the mouse right-clicks on an element.
-- `mouseover` / `mouseout` -- when the mouse cursor comes over / leaves an element.
-- `mousedown` / `mouseup` -- when the mouse button is pressed / released over an element.
-- `mousemove` -- when the mouse is moved.
+Ниже представлен список наиболее часто используемых DOM событий:
 
-**Form element events:**
-- `submit` -- when the visitor submits a `<form>`.
-- `focus` --  when the visitor focuses on an element, e.g. on an `<input>`.
+**События мыши:**
+- `click` -- нажатие левой кнопки мыши по определённому элементу (сенсорные устройства генерируют их по нажатию на экран);
+- `contextmenu` -- нажатие правой кнопки мыши по элементу;
+- `mouseover` / `mouseout` -- наведение мыши / убрать мышь с элемента;
+- `mousedown` / `mouseup` -- нажатие кнопки мыши / отпускание кнопки мыши на элементе;
+- `mousemove` -- движение мышки;
 
-**Keyboard events:**
-- `keydown` and `keyup` -- when the visitor presses and then releases the button.
+**События на элементах формы:**
+- `submit` -- когда пользователь нажимает кнопку отправления формы;
+- `focus` --  когда пользователь фокусируется на элементе формы, например на поле ввода -- `<input>`.
 
-**Document events:**
-- `DOMContentLoaded` -- when the HTML is loaded and processed, DOM is fully built.
+**События клавиатуры:**
+- `keydown` и `keyup` -- когда пользователь нажал и отпустил кнопку клавиатуры.
 
-**CSS events:**
-- `transitionend` -- when a CSS-animation finishes.
+**События документа:**
+- `DOMContentLoaded` -- когда HTML загружен и DOM полностью построен.
 
-There are many other events. We'll get into more details of particular events in next chapters.
+**События CSS:**
+- `transitionend` -- когда закончилась CSS-анимация.
 
-## Event handlers
+Вообще существует много различных событий. Некоторые из них мы рассмотрим более детально в следующих главах.
 
-To react on events we can assign a *handler* -- a function that runs in case of an event.
+## Обработчики событий
 
-Handlers are a way to run JavaScript code in case of user actions.
+Что-бы отреагировать на событие мы можем назначить *обработчик* -- функцию, которая запускается как только событие произошло.
 
-There are several ways to assign a handler. Let's see them, starting from the simplest one.
+Обработчики - это способ запустить определённый JavaScript код в случае тех или иных действий пользователя.
 
-### HTML-attribute
+Существует несколько способов назначить обработчик. Рассмотрим их все, и начнём с самого простого.
 
-A handler can be set in HTML with an attribute named `on<event>`.
+### Использование HTML-атрибута  
 
-For instance, to assign a `click` handler for an `input`, we can use `onclick`, like here:
+Обработчик может быть установлен как часть HTML кода с атрибутом `on<event>`.
+
+Например, что-бы назначить обработчик нажатия мышкой -- `click` по кнопке `input`, мы можем использовать атрибут `onclick`:
 
 ```html run
-<input value="Click me" *!*onclick="alert('Click!')"*/!* type="button">
+<input value="Нажми меня" *!*onclick="alert('Клик!')"*/!* type="button">
 ```
 
-On mouse click, the code inside `onclick` runs.
+При нажатии мышкой на кнопку "Нажми меня" выполниться код внутри атрибута `onclick`.
 
-Please note that inside `onclick` we use single quotes, because the attribute itself is in double quotes. If we forget that the code is inside the attribute and use double quotes inside, like this:  `onclick="alert("Click!")"`, then it won't work right.
+Следует помнить, что внутри атрибута `onclick` мы используем одинарные кавычки, поскольку сам атрибут в двойных. Если использовать двойные кавычки внутри, как это указано здесь: `onclick="alert("Click!")"` то такой код не сработает.
 
-An HTML-attribute is not a convenient place to write a lot of code, so we'd better create a JavaScript function and call it there.
+Очевидным недостатком использования HTML-атрибута является неудобство поддержки при большом количестве кода. 
+В таком случае лучше использовать JavaScript функцию, как это показано в примере ниже:
 
-Here a click runs the function `countRabbits()`:
+Нажатие на кнопку "Сосчитать кроликов!" запустит функцию `countRabbits()`:
 
 ```html autorun height=50
 <script>
   function countRabbits() {
     for(let i=1; i<=3; i++) {
-      alert("Rabbit number " + i);
+      alert("Кролик номер " + i);
     }
   }
 </script>
 
-<input type="button" *!*onclick="countRabbits()"*/!* value="Count rabbits!">
+<input type="button" *!*onclick="countRabbits()"*/!* value="Сосчитать кроликов!">
 ```
 
-As we know, HTML attribute names are not case-sensitive, so `ONCLICK` works as well as `onClick` and `onCLICK`... But usually attributes are lowercased: `onclick`.
+Как известно, имена HTML атрибутов не чувствительны к регистру, таким образом `ONCLICK` работает так же как и `onClick` и `onCLICK`... Но, как правило, атрибуты пишут в нижнем регистре: `onclick`.
 
-### DOM property
+### Использование свойства DOM-объекта
 
-We can assign a handler using a DOM property `on<event>`.
+Ещё один способ назначения обработчика через свойство DOM-элемента `on<event>`.
 
-For instance, `elem.onclick`:
+Например, `elem.onclick`:
 
 ```html autorun
-<input id="elem" type="button" value="Click me">
+<input id="elem" type="button" value="Нажми меня">
 <script>
 *!*
   elem.onclick = function() {
-    alert('Thank you');
+    alert('Спасибо');
   };
 */!*
 </script>
 ```
 
-If the handler is assigned using an HTML-attribute then the browser reads it, creates a new function from the attribute content and writes it to the DOM property.
+Если обработчик назначен через HTML-атрибут, тогда браузер читает его, создаёт новую функцию из содержимого этого атрибута и записывает её в свойство DOM-элемента. 
 
-So this way is actually the same as the previous one.
+В целом, этот способ аналогичен предыдущему.
 
-**The handler is always in the DOM property: the HTML-attribute is just one of the ways to initialize it.**
+**Обработчик всегда хранится в DOM-свойстве, а атрибут – лишь один из способов его инициализации.**
 
-These two code pieces work the same:
+Следующие два примера работают одинаково:
 
-1. Only HTML:
+1. Только HTML:
 
     ```html autorun height=50
-    <input type="button" *!*onclick="alert('Click!')"*/!* value="Button">
+    <input type="button" *!*onclick="alert('Клик!')"*/!* value="Кнопка">
     ```
 2. HTML + JS:
 
     ```html autorun height=50
-    <input type="button" id="button" value="Button">
+    <input type="button" id="button" value="Кнопка">
     <script>
     *!*
       button.onclick = function() {
-        alert('Click!');
+        alert('Клик!');
       };
     */!*
     </script>
     ```
 
-**As there's only one `onclick` property, we can't assign more than one event handler.**
+**Поскольку уже используется одно свойство `onclick`, в данном случае мы не можем назначить более одного обработчика событий.**
 
-In the example below adding a handler with JavaScript overwrites the existing handler:
+В следующем примере обработчик добавленый из JavaScript кода перезапишет существующий обработчик:
 
 ```html run height=50 autorun
-<input type="button" id="elem" onclick="alert('Before')" value="Click me">
+<input type="button" id="elem" onclick="alert('До')" value="Click me">
 <script>
 *!*
-  elem.onclick = function() { // overwrites the existing handler
-    alert('After'); // only this will be shown
+  elem.onclick = function() { // перезаписывает существующий обработчик
+    alert('После'); // только это будет показано
   };
 */!*
 </script>
 ```
 
-By the way, we can assign an existing function as a handler directly:
+Мы также можем назначить существующую функцию в качестве обработчика событий:
 
 ```js
 function sayThanks() {
-  alert('Thanks!');
+  alert('Спасибо!');
 }
 
 elem.onclick = sayThanks;
 ```
 
-To remove a handler -- assign `elem.onclick = null`.
+Удалить обработчик можно присвоив значение `null` определённому событию -- `elem.onclick = null`.
 
-## Accessing the element: this
+## Доступ к элементу через this
 
-The value of `this` inside a handler is the element. The one which has the handler on it.
+`this` -- это элемент, на котором сработал обработчик.
 
-In the code below `button` shows its contents using `this.innerHTML`:
+В примере ниже, нажатие на кнопку `button` покажет её содержимое `this.innerHTML`:
 
 ```html height=50 autorun
-<button onclick="alert(this.innerHTML)">Click me</button>
+<button onclick="alert(this.innerHTML)">Нажми меня</button>
 ```
 
-## Possible mistakes
+## Возможные ошибки
 
-If you're starting to work with event -- please note some subtleties.
+Если вы только начинаете работать с событиями -- пожалуйста, обратите внимание на некоторые тонкости.
 
-**The function should be assigned as `sayThanks`, not `sayThanks()`.**
+**Функцию-обработчик следует назначать без скобок `sayThanks`. Использование `sayThanks()` - не верно.**
 
 ```js
-// right
+// правильно
 button.onclick = sayThanks;
 
-// wrong
+// не верно
 button.onclick = sayThanks();
 ```
 
-If we add brackets, then `sayThanks()` --  will be the *result* of the function execution, so `onclick` in the last code becomes `undefined` (the function returns nothing). That won't work.
+Если мы добавляем скобки, тогда `sayThanks()` -- вернёт результат выполнения функции, таким образом `onclick` в последнем примере станет равным `undefined` (как результат выполнения функции), и как следствие код будет не рабочим.
 
-...But in the markup we do need the brackets:
+...но, в разметке скобки необходимы:
 
 ```html
 <input type="button" id="button" onclick="sayThanks()">
 ```
 
-The difference is easy to explain. When the browser reads the attribute, it creates a handler function with the body from its content.
+Различие легко объяснить. Когда браузер читает атрибут, он создаёт функцию-обработчик с телом из его содержимого.
 
-So the last example is the same as:
+Поэтому, следующий пример аналогичен предыдущему:
 ```js
 button.onclick = function() {
 *!*
-  sayThanks(); // the attribute content
+  sayThanks(); // содержимое атрибута
 */!*
 };
 ```
 
-**Use functions, not strings.**
+**Используйте именно функции, а не строки.**
 
-The assignment `elem.onclick = "alert(1)"` would work too. It works for compatibility reasons, but strongly not recommended.
+Назначение `elem.onclick = "alert(1)"` тоже будет работать. Это сделано из соображений совместимости, но строго не рекомендуется в использовании.
 
-**Don't use `setAttribute` for handlers.**
+**Не используйте `setAttribute` для обработчиков.**
 
-Such a call won't work:
+Следующий вызов не сработает:
 
 ```js run no-beautify
-// a click on <body> will generate errors,
-// because attributes are always strings, function becomes a string
+// нажатие по <body> сгенерирует ошибки,
+// потому что атрибуты всегда строки, и в данном случае функция становится строкой
 document.body.setAttribute('onclick', function() { alert(1) });
 ```
 
-**DOM-property case matters.**
+**Регистр DOM-свойства имеет значение.**
 
-Assign a handler to `elem.onclick`, not `elem.ONCLICK`, because DOM properties are case-sensitive.
+Важно, что DOM-свойства чувствительны к регистру и правильный вызов выглядит: `elem.onclick`, но не `elem.ONCLICK`.
 
 ## addEventListener
 
-The fundamental problem of the aforementioned ways to assign handlers -- we can't assign multiple handlers to one event.
+Основная проблема в вышеперечисленных способах назначения обработчика -- мы не можем назначить несколько обработчиков на одно событие.
 
-For instance, one part of our code wants to highlight a button on click, and another one wants to show a message.
+Например, одна часть нашего кода подсвечивает кнопку по нажатию на неё, а другая часть -- показывает сообщение.
 
-We'd like to assign two event handlers for that. But a new DOM property will overwrite the existing one:
+Первое решение, которое приходит для решения это назначить два обработчика события на один DOM элемент. Но, это решение не сработает, поскольку новое DOM-свойство перезапишет уже существующее:
 
 ```js no-beautify
 input.onclick = function() { alert(1); }
 // ...
-input.onclick = function() { alert(2); } // replaces the previous handler
+input.onclick = function() { alert(2); } // перезапишет предыдущий обработчик
 ```
 
-Web-standard developers understood that long ago and suggested an alternative way of managing handlers using special methods `addEventListener` and `removeEventListener`. They are free of such a problem.
+Разработчики стандартов достаточно давно это поняли и предложили альтернативный способ назначения и удаления обработчиков при помощи специальных методов `addEventListener` и `removeEventListener`, которые не имеют вышеуказанного недостатка.
 
-The syntax to add a handler:
+Назначение обработчика осуществляется вызовом `addEventListener` с тремя аргументами:
 
 ```js
 element.addEventListener(event, handler[, options]);
 ```
 
 `event`
-: Event name, e.g. `"click"`.
+: название события, например: `"click"`;
 
 `handler`
-: The handler function.
+: ссылка на функцию-обработчик;
 
 `options`
-: An additional optional object with properties:
-    - `once`: if `true`, then the listener is automatically removed after it triggers.
-    - `capture`: the phrase where to handle the event, to be covered later in the chapter <info:bubbling-and-capturing>. For historical reasons, `options` can also be `false/true`, that's the same as `{capture: false/true}`.
-    - `passive`: if `true`, then the handler will not `preventDefault()`, we'll cover that later in <info:default-browser-action>.
+: необязательный объект со свойствами:
+    - `once`: если `true`, тогда listener(функция назначения обработчика) автоматически удаляется после срабатывания;
+    - `capture`: порядок обработки событий, будет рассматриваться далее, в главе <info:bubbling-and-capturing>. По историческим причинам, `options` также может быть `false/true`, это тоже самое что `{capture: false/true}`;
+    - `passive`: если `true`, тогда обработчик не сможет вызвать `preventDefault()`, мы рассмотрим это позже, в разделе <info:default-browser-action>.
 
 
-To remove the handler, use `removeEventListener`:
+Для удаления обработчика используется `removeEventListener`:
 
 ```js
 element.removeEventListener(event, handler[, options]);
 ```
 
-````warn header="Removal requires the same function"
-To remove a handler we should pass exactly the same function as was assigned.
+````warn header="Удаление требует ту же самую функцию"
+Для удаления нужно передать именно ту функцию-обработчик которая была назначена.
 
-That doesn't work:
+Не сработает:
 
 ```js no-beautify
-elem.addEventListener( "click" , () => alert('Thanks!'));
+elem.addEventListener( "click" , () => alert('Спасибо!'));
 // ....
-elem.removeEventListener( "click", () => alert('Thanks!'));
+elem.removeEventListener( "click", () => alert('Спасибо!'));
 ```
 
-The handler won't be removed, because `removeEventListener` gets another function -- with the same code, but that doesn't matter.
+В `removeEventListener` передана не та же функция, а другая, с одинаковым кодом.
 
-Here's the right way:
+Вот так правильно:
 
 ```js
 function handler() {
-  alert( 'Thanks!' );
+  alert( 'Спасибо!' );
 }
 
 input.addEventListener("click", handler);
@@ -263,39 +266,39 @@ input.addEventListener("click", handler);
 input.removeEventListener("click", handler);
 ```
 
-Please note -- if we don't store the function in a variable, then we can't remove it. There's no way to "read back" handlers assigned by `addEventListener`.
+Обратим внимание – если функцию не сохранить где-либо, а просто передать в `addEventListener`, как в предыдущем коде, то потом получить её обратно, чтобы снять обработчик, будет невозможно. Нет способа, который позволяет считать обработчики событий, назначенные через `addEventListener`.
 ````
 
-Multiple calls to `addEventListener` allow to add multiple handlers, like this:
+Метод `addEventListener` позволяет добавлять несколько обработчиков на одно событие одного элемента, например:
 
 ```html run no-beautify
-<input id="elem" type="button" value="Click me"/>
+<input id="elem" type="button" value="Нажми меня"/>
 
 <script>
   function handler1() {
-    alert('Thanks!');
+    alert('Спасибо!');
   };
 
   function handler2() {
-    alert('Thanks again!');
+    alert('Снова спасибо!');
   }
 
 *!*
-  elem.onclick = () => alert("Hello");
-  elem.addEventListener("click", handler1); // Thanks!
-  elem.addEventListener("click", handler2); // Thanks again!
+  elem.onclick = () => alert("Привет");
+  elem.addEventListener("click", handler1); // Спасибо!
+  elem.addEventListener("click", handler2); // Снова спасибо!
 */!*
 </script>
 ```
 
-As we can see in the example above, we can set handlers *both* using a DOM-property and `addEventListener`. But generally we use only one of these ways.
+Как видно из примера выше, можно одновременно назначать обработчики и через DOM-свойство и через `addEventListener`. Однако, во избежание путаницы, рекомендуется выбрать один способ.
 
-````warn header="For some events, handlers only work with `addEventListener`"
-There exist events that can't be assigned via a DOM-property. Must use `addEventListener`.
+````warn header="Для некоторых событий обработчик можно назначить только через `addEventListener`"
+Существуют события, которые нельзя назначить через DOM-свойство, а только через `addEventListener`.
 
-For instance, the event `transitionend` (CSS animation finished) is like that.
+Например, событие `transitionend` (окончание CSS анимации).
 
-Try the code below. In most browsers only the second handler works, not the first one.
+Выполните следующий код. В большинстве браузеров только второй обработчик сработает.
 
 ```html run
 <style>
@@ -309,102 +312,102 @@ Try the code below. In most browsers only the second handler works, not the firs
   }
 </style>
 
-<input type="button" id="elem" onclick="this.classList.toggle('wide')" value="Click me">
+<input type="button" id="elem" onclick="this.classList.toggle('wide')" value="Нажми меня">
 
 <script>
   elem.ontransitionend = function() {
-    alert("DOM property"); // doesn't work
+    alert("DOM свойство"); // не сработает
   };
 
 *!*
   elem.addEventListener("transitionend", function() {
-    alert("addEventListener"); // shows up when the animation finishes
+    alert("addEventListener"); // сообщение покажется, когда анимация закончится;
   });
 */!*
 </script>
 ```
 ````
 
-## Event object
+## Объект события(Event object)
 
-To properly handle an event we'd want to know more about what's happened. Not just a "click" or a "keypress", but what were the pointer coordinates? Which key was pressed? And so on.
+Для правильной обработки событий было бы хорошо знать больше о том, что произошло. Например, не только о том что пользователь нажал мышкой "click" или клавишей клавиатуры "keypress", но, и какие были координаты у курсора мышки, какая кнопка была нажата и т.д. 
 
-When an event happens, the browser creates an *event object*, puts details into it and passes it as an argument to the handler.
+Когда событие произошло, браузер создаёт *объект события*, в него записывает детали и, в качестве аргумента передаёт его обработчику. 
 
-Here's an example of getting mouse coordinates from the event object:
+Пример ниже показывает получение координат курсора мышки из объекта события:
 
 ```html run
-<input type="button" value="Click me" id="elem">
+<input type="button" value="Нажми меня" id="elem">
 
 <script>
   elem.onclick = function(*!*event*/!*) {
-    // show event type, element and coordinates of the click
-    alert(event.type + " at " + event.currentTarget);
-    alert("Coordinates: " + event.clientX + ":" + event.clientY);
+    // показываем тип события, сам элемент и координаты нажатия курсора мышки
+    alert(event.type + " на " + event.currentTarget);
+    alert("Координаты: " + event.clientX + ":" + event.clientY);
   };
 </script>
 ```
 
-Some properties of `event` object:
+Некоторые свойства объекта события:
 
 `event.type`
-: Event type, here it's `"click"`.
+: тип события, например `"click"`;
 
 `event.currentTarget`
-: Element that handled the event. That's exactly the same as `this`, unless you bind `this` to something else, and then `event.currentTarget` becomes useful.
+: элемент на котором обработалось событие. Это тоже самое, что `this`, конечно, если вы этот `this` не связали с чем-то другим. В таком случае `event.currentTarget` станет бесполезным;
 
 `event.clientX / event.clientY`
-: Window-relative coordinates of the cursor, for mouse events.
+: координаты курсора мышки относительно окна браузера; 
 
-There are more properties. They depend on the event type, so we'll study them later when we come to different events in details.
+Конечно свойств гораздо больше рассмотреных, и все они зависят от типа события. Мы будем рассматривать некоторые из них по мере знакомства с другими событиями.
 
-````smart header="The event object is also accessible from HTML"
-If we assign a handler in HTML, we can also use the `event` object, like this:
+````smart header="Объект события также доступен из HTML"
+Если мы назначим обработчик в HTML, мы также можем использовать объект события, как это показано здесь:
 
 ```html autorun height=60
-<input type="button" onclick="*!*alert(event.type)*/!*" value="Event type">
+<input type="button" onclick="*!*alert(event.type)*/!*" value="Тип события">
 ```
 
-That's possible because when the browser reads the attribute, it creates a handler like this:  `function(event) { alert(event.type) }`. That is: its first argument is called `"event"`, and the body is taken from the attribute.
+Это возможно потому что, когда браузер прочитал атрибут он создаёт обработчик вида: `function(event) { alert(event.type) }`. То есть, его первый аргумент называется `"event"`, а тело функции берётся из атрибута.
 ````
 
 
-## Object handlers: handleEvent
+## Объекты-обработчики: handleEvent
 
-We can assign an object as an event handler using `addEventListener`. When an event occurs, its `handleEvent` method is called with it.
+Мы можем назначить объект в качестве обработчика событий используя `addEventListener`. Когда совершается событие вызывается его `handleEvent` метод.
 
-For instance:
+Например:
 
 
 ```html run
-<button id="elem">Click me</button>
+<button id="elem">Нажми меня</button>
 
 <script>
   elem.addEventListener('click', {
     handleEvent(event) {
-      alert(event.type + " at " + event.currentTarget);
+      alert(event.type + " на " + event.currentTarget);
     }
   });
 </script>
 ```
 
-In other words, when `addEventListener` receives an object as the handler, it calls `object.handleEvent(event)` in case of an event.
+Другими словами, когда `addEventListener` получает объект как обработчик, он вызывает `object.handleEvent(event)` в случае этого события.
 
-We could also use a class for that:
+Или мы можем использовать класс:
 
 
 ```html run
-<button id="elem">Click me</button>
+<button id="elem">Нажми меня</button>
 
 <script>
   class Menu {
     handleEvent(event) {
       switch(event.type) {
         case 'mousedown':
-          elem.innerHTML = "Mouse button pressed";
+          elem.innerHTML = "Кнопка мыши нажата";
           break;
         case 'mouseup':
-          elem.innerHTML += "...and released.";
+          elem.innerHTML += "...и отпущена.";
           break;
       }
     }
@@ -418,12 +421,12 @@ We could also use a class for that:
 </script>
 ```
 
-Here the same object handles both events. Please note that we need to explicitly setup the events to listen using `addEventListener`. The `menu` object only gets `mousedown` and `mouseup` here, not any other types of events.
+Здесь тот же самый объект обрабатывает оба события. Обратите внимание, что мы должны явно указать обработчик событий через `addEventListener`. В нашем случае объект `menu` получает только `mousedown` и `mouseup` типы событий, и никакой другой.
 
 The method `handleEvent` does not have to do all the job by itself. It can call other event-specific methods instead, like this:
 
 ```html run
-<button id="elem">Click me</button>
+<button id="elem">Нажми меня</button>
 
 <script>
   class Menu {
@@ -434,11 +437,11 @@ The method `handleEvent` does not have to do all the job by itself. It can call 
     }
 
     onMousedown() {
-      elem.innerHTML = "Mouse button pressed";
+      elem.innerHTML = "Кнопка мыши нажата";
     }
 
     onMouseup() {
-      elem.innerHTML += "...and released.";
+      elem.innerHTML += "...и отпущена.";
     }
   }
 
@@ -448,22 +451,22 @@ The method `handleEvent` does not have to do all the job by itself. It can call 
 </script>
 ```
 
-Now event handlers are clearly separated, that may be easier to support.
+Сейчас обработчики событий вынесены в отдельные методы, что упрощает их поддержку в дальнейшем.
 
-## Summary
+## Итого
 
-There are 3 ways to assign event handlers:
+Существует три способа назначения обработчика событий:
 
-1. HTML attribute: `onclick="..."`.
-2. DOM property: `elem.onclick = function`.
-3. Methods: `elem.addEventListener(event, handler[, phase])` to add, `removeEventListener` to remove.
+1. HTML атрибут: `onclick="..."`;
+2. DOM свойство: `elem.onclick = function`;
+3. Методы: `elem.addEventListener(event, handler[, phase])` для добавления, `removeEventListener` для удаления.
 
-HTML attributes are used sparingly, because JavaScript in the middle of an HTML tag looks a little bit odd and alien. Also can't write lots of code in there.
+HTML атрибуты используются редко, потому что JavaScript посередине HTML разметки выглядит немного странно и чужеродно. Также, в HTML атрибуте не рекомендуется писать много кода, в силу его сложности поддержки. 
 
-DOM properties are ok to use, but we can't assign more than one handler of the particular event. In many cases that limitation is not pressing.
+DOM свойства хороши в использовании, но мы не можем назначить более одного обработчика для определённого события. Во многих случаях это ограничение не является критичным. 
 
-The last way is the most flexible, but it is also the longest to write. There are few events that only work with it, for instance `transtionend` and `DOMContentLoaded` (to be covered). Also `addEventListener` supports objects as event handlers. In that case the method `handleEvent` is called in case of the event.
+Последний способ наиболее гибкий, но он же и самый длинный для написания. Существует ряд событий, которые работают только с этими методами, например `transtionend` и `DOMContentLoaded` (будет рассмотрен далее). Также `addEventListener` поддерживает объекты в качестве обработчика событий. В этом случае `handleEvent` метод вызывается в случае появления события. 
 
-No matter how you assign the handler -- it gets an event object as the first argument. That object contains the details about what's happened.
+Не важно каким способом вы назначаете обработчик -- он получает объект события в качестве первого аргумента. Этот объект содержит детали срабатывания обработчика. 
 
-We'll learn more about events in general and about different types of events in the next chapters.
+Более подробно о событиях в целом и о различных типах событий мы узнаем в следующих главах.
