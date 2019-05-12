@@ -291,14 +291,14 @@ input.removeEventListener("click", handler);
 </script>
 ```
 
-As we can see in the example above, we can set handlers *both* using a DOM-property and `addEventListener`. But generally we use only one of these ways.
+Как видно из примера выше, можно одновременно назначать обработчики и через DOM-свойство и через `addEventListener`. Однако, во избежание путаницы, рекомендуется выбрать один способ.
 
-````warn header="For some events, handlers only work with `addEventListener`"
-There exist events that can't be assigned via a DOM-property. Must use `addEventListener`.
+````warn header="Для некоторых событий обработчик можно назначить только через `addEventListener`"
+Существуют события, которые нельзя назначить через DOM-свойство, а только через `addEventListener`.
 
-For instance, the event `transitionend` (CSS animation finished) is like that.
+Например, событие `transitionend` (окончание CSS анимации).
 
-Try the code below. In most browsers only the second handler works, not the first one.
+Выполните следующий код. В большинстве браузеров только второй обработчик сработает.
 
 ```html run
 <style>
@@ -316,7 +316,7 @@ Try the code below. In most browsers only the second handler works, not the firs
 
 <script>
   elem.ontransitionend = function() {
-    alert("DOM property"); // не работает
+    alert("DOM свойство"); // не сработает
   };
 
 *!*
@@ -328,55 +328,55 @@ Try the code below. In most browsers only the second handler works, not the firs
 ```
 ````
 
-## Event object
+## Объект события(Event object)
 
-To properly handle an event we'd want to know more about what's happened. Not just a "click" or a "keypress", but what were the pointer coordinates? Which key was pressed? And so on.
+Для правильной обработки событий было бы хорошо знать больше о том, что произошло. Например, не только о том что пользователь нажал мышкой "click" или клавишей клавиатуры "keypress", но, и какие были координаты у курсора мышки, какая кнопка была нажата и т.д. 
 
-When an event happens, the browser creates an *event object*, puts details into it and passes it as an argument to the handler.
+Когда событие произошло, браузер создаёт *объект события*, в него записывает детали и, в качестве аргумента передаёт его обработчику. 
 
-Here's an example of getting mouse coordinates from the event object:
+Пример ниже показывает получение координат курсора мышки из объекта события:
 
 ```html run
 <input type="button" value="Нажми меня" id="elem">
 
 <script>
   elem.onclick = function(*!*event*/!*) {
-    // show event type, element and coordinates of the click
-    alert(event.type + " at " + event.currentTarget);
-    alert("Coordinates: " + event.clientX + ":" + event.clientY);
+    // показываем тип события, сам элемент и координаты нажатия курсора мышки
+    alert(event.type + " на " + event.currentTarget);
+    alert("Координаты: " + event.clientX + ":" + event.clientY);
   };
 </script>
 ```
 
-Some properties of `event` object:
+Некоторые свойства объекта события:
 
 `event.type`
-: Event type, here it's `"click"`.
+: тип события, например `"click"`;
 
 `event.currentTarget`
-: Element that handled the event. That's exactly the same as `this`, unless you bind `this` to something else, and then `event.currentTarget` becomes useful.
+: элемент на котором обработалось событие. Это тоже самое, что `this`, конечно, если вы этот `this` не связали с чем-то другим. В таком случае `event.currentTarget` станет бесполезным;
 
 `event.clientX / event.clientY`
-: Window-relative coordinates of the cursor, for mouse events.
+: координаты курсора мышки относительно окна браузера; 
 
-There are more properties. They depend on the event type, so we'll study them later when we come to different events in details.
+Конечно свойств гораздо больше рассмотреных, и все они зависят от типа события. Мы будем рассматривать некоторые из них по мере знакомства с другими событиями.
 
-````smart header="The event object is also accessible from HTML"
-If we assign a handler in HTML, we can also use the `event` object, like this:
+````smart header="Объект события также доступен из HTML"
+Если мы назначим обработчик в HTML, мы также можем использовать объект события, как это показано здесь:
 
 ```html autorun height=60
-<input type="button" onclick="*!*alert(event.type)*/!*" value="Event type">
+<input type="button" onclick="*!*alert(event.type)*/!*" value="Тип события">
 ```
 
-That's possible because when the browser reads the attribute, it creates a handler like this:  `function(event) { alert(event.type) }`. That is: its first argument is called `"event"`, and the body is taken from the attribute.
+Это возможно потому что, когда браузер прочитал атрибут он создаёт обработчик вида: `function(event) { alert(event.type) }`. То есть, его первый аргумент называется `"event"`, а тело функции берётся из атрибута.
 ````
 
 
-## Object handlers: handleEvent
+## Объекты-обработчики: handleEvent
 
-We can assign an object as an event handler using `addEventListener`. When an event occurs, its `handleEvent` method is called with it.
+Мы можем назначить объект в качестве обработчика событий используя `addEventListener`. Когда совершается событие вызывается его `handleEvent` метод.
 
-For instance:
+Например:
 
 
 ```html run
@@ -385,15 +385,15 @@ For instance:
 <script>
   elem.addEventListener('click', {
     handleEvent(event) {
-      alert(event.type + " at " + event.currentTarget);
+      alert(event.type + " на " + event.currentTarget);
     }
   });
 </script>
 ```
 
-In other words, when `addEventListener` receives an object as the handler, it calls `object.handleEvent(event)` in case of an event.
+Другими словами, когда `addEventListener` получает объект как обработчик, он вызывает `object.handleEvent(event)` в случае этого события.
 
-We could also use a class for that:
+Или мы можем использовать класс:
 
 
 ```html run
