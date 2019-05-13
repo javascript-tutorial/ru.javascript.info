@@ -1,12 +1,12 @@
-importance: 5
+важность: 5
 
 ---
 
-# Which handlers run?
+# Какой обработчик запустится?
 
-There's a button in the variable. There are no handlers on it.
+В переменной `button` находится кнопка. Изначально на ней нет обработчиков.
 
-Which handlers run on click after the following code? Which alerts show up?
+Который из обработчиков запуститься? Что будет выведено при клике после выполнения кода?
 
 ```js no-beautify
 button.addEventListener("click", () => alert("1"));
