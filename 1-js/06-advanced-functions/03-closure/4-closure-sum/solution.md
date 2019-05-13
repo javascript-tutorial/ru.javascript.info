@@ -1,12 +1,12 @@
-For the second parentheses to work, the first ones must return a function.
+Чтобы вторые скобки заработали, первые -- должны вернуть функцию.
 
-Like this:
+Вот так:
 
 ```js run
 function sum(a) {
 
   return function(b) {
-    return a + b; // takes "a" from the outer lexical environment
+    return a + b; // берёт "a" из внешнего лексического окружения
   };
 
 }

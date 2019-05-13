@@ -2,8 +2,8 @@ importance: 3
 
 ---
 
-# Check the range outside
+# Проверка значения вне диапазона
 
-Write an `if` condition to check that `age` is NOT between 14 and 90 inclusively.
+Напишите условие `if` для проверки, что значение переменной `age` НЕ находится в диапазоне `14` и `90` включительно.
 
-Create two variants: the first one using NOT `!`, the second one -- without it.
+Напишите два варианта: первый с использованием оператора НЕ `!`, второй – без этого оператора.
