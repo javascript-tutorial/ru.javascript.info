@@ -175,7 +175,7 @@
 
 Например:
 ```js
-// получить все элементы `div` в документе
+// получить все элементы div в документе
 let divs = document.getElementsByTagName('div');
 ```
 
@@ -247,9 +247,9 @@ document.getElementsByTagName('input')[0].value = 5;
   // ищем по имени атрибута
   let form = document.getElementsByName('my-form')[0];
 
-  // ищем по классу внутри `form`
+  // ищем по классу внутри form
   let articles = form.getElementsByClassName('article');
-  alert(articles.length); // 2, находим два элемента с классом `article`
+  alert(articles.length); // 2, находим два элемента с классом article
 </script>
 ```
 
