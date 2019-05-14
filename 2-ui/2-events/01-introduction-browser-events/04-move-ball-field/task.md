@@ -1,21 +1,21 @@
-importance: 5
+важность: 5
 
 ---
 
-# Move the ball across the field
+# Двигать мяч по полю
 
-Move the ball across the field to a click. Like this:
+При нажатии на поле перемещать мяч в место клика. Пример:
 
 [iframe src="solution" height="260" link]
 
-Requirements:
+Требования:
 
-- The ball center should come exactly under the pointer on click (if possible without crossing the field edge).
-- CSS-animation is welcome.
-- The ball must not cross field boundaries.
-- When the page is scrolled, nothing should break.
+- Центр мяча должен совпадать с местом нажатия мыши (если это возможно без пересечения краёв поля);
+- CSS-анимация желательна, но не обязательна;
+- Мяч ни в коем случае не должен пересекать границы поля;
+- При скроле страницы ничего не должно ломаться;
 
-Notes:
+Заметки:
 
-- The code should also work with different ball and field sizes, not be bound to any fixed values.
-- Use properties `event.clientX/event.clientY` for click coordinates.
+- Код должен уметь работать с различными размерами мяча и поля, не привязываться к каким-либо фиксированым значениям;
+- Используйте свойства `event.clientX/event.clientY` для определения координат мыши при клике;
