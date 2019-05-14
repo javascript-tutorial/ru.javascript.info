@@ -323,7 +323,7 @@ import {sayHi} from 'sayHi'; // Ошибка, "голый" модуль
 </script>
 
 <script nomodule>
-  alert("Современные браузеры понимают оба атрибута и type=module, и nomodule, поэтому пропускают этот тэг script")
+  alert("Современные браузеры понимают оба атрибута - и type=module, и nomodule, поэтому пропускают этот тег script")
   alert("Старые браузеры игнорируют скрипты с неизвестным атрибутом type=module, но выполняют этот.");
 </script>
 ```
