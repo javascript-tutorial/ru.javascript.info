@@ -1,22 +1,22 @@
 
-Here's the explanations.
+Вот как это объясняется.
 
-1. That's a regular object method call.
+1. Это обычный вызов метода объекта через точку `.` и `this` ссылается на объект перед точкой.
+	
+2. Здесь тоже самое. Круглые скобки (оператор группировки) тут не изменяют порядок выполнения операций - доступ к методу через точку в любом случае срабатываем первым.
 
-2. The same, brackets do not change the order of operations here, the dot is first anyway.
-
-3. Here we have a more complex call `(expression).method()`. The call works as if it were split into two lines:
+3. Здесь мы имеем более сложный вызов `(expression).method()`. Такой вызов работает как если бы он был разделен на 2 строчки:
 
     ```js no-beautify
-    f = obj.go; // calculate the expression
-    f();        // call what we have
+    f = obj.go; // вычисляется выражение (переменная f ссылается на код функции)
+    f();        // вызов функции, на котору ссылается f
     ```
+    
+    Здесь `f()` выполняется как функция, без передачи значения `this`.
 
-    Here `f()` is executed as a function, without `this`.
+4. Тут похожая ситуация со случаем `(3)` - идет потеря значения `this`.
 
-4. The similar thing as `(3)`, to the left of the dot `.` we have an expression.
+Чтобы объяснить поведение в примерах `(3)` и `(4)` нам нужно напомнить, что доступ к свойсву (через точку или квадратные скобки) возвращает специлальное значение ссылочного типа (Reference Type).
 
-To explain the behavior of `(3)` and `(4)` we need to recall that property accessors (dot or square brackets) return a value of the Reference Type.  
-
-Any operation on it except a method call (like assignment `=` or `||`) turns it into an ordinary value, which does not carry the information allowing to set `this`.
+За исключением вызова метода, любая другая операция (подобно операции присваивания `=` или сравнения через логические операторы, например `||`) превращает это значение в обычное, которое не несет информации, позволяющей установить `this`.
 
