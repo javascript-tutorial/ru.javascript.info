@@ -1,12 +1,12 @@
-To bounce we can use CSS property `top` and `position:absolute` for the ball inside the field with `position:relative`.
+Чтобы заставить мячик прыгать можно использовать CSS-свойство `top` и задать мячику `position:absolute`, внутри поля с `position:relative`.
 
-The bottom coordinate of the field is `field.clientHeight`. But the `top` property gives coordinates for the top of the ball, the edge position is `field.clientHeight - ball.clientHeight`.
+Нижняя координата поля -- `field.clientHeight`. Но свойство `top` соответствует координате мяча от верхней границы мяча, конечная позиция мяча может быть вычислена так: `field.clientHeight - ball.clientHeight`.
 
-So we animate the `top` from `0` to `field.clientHeight - ball.clientHeight`.
+Итак мы анимируем свойство `top` от `0` до `field.clientHeight - ball.clientHeight`.
 
-Now to get the "bouncing" effect we can use the timing function `bounce` in `easeOut` mode.
+Теперь, чтобы получить эффект "скачущего" мяча, мы можем использовать временную функцию `bounce` в режиме `easeOut`.
 
-Here's the final code for the animation:
+Вот конечный код для анимации:
 
 ```js
 let to = field.clientHeight - ball.clientHeight;
