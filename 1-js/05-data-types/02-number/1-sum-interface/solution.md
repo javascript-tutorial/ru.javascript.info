@@ -1,12 +1,12 @@
 
 
 ```js run demo
-let a = +prompt("The first number?", "");
-let b = +prompt("The second number?", "");
+let a = +prompt("Введите первое число", "");
+let b = +prompt("Введите второе число", "");
 
 alert( a + b );
 ```
 
-Note the unary plus `+` before `prompt`. It immediately converts the value to a number.
+Обратите внимание, что мы использовали унарный оператор `+` перед `prompt`, он преобразует значение в числовой формат.
 
-Otherwise, `a` and `b` would be string their sum would be their concatenation, that is: `"1" + "2" = "12"`.
+В противном случае, `a` и `b` будут строками, и после суммирования произойдет конкатенация двух строк, а именно: `"1" + "2" = "12"`.
