@@ -1,12 +1,12 @@
-# Coding Style
+# Советы по стилю кода
 
-Our code must be as clean and easy to read as possible.
+Наш код должен быть максимально читаемым и понятным.
 
-That is actually the art of programming -- to take a complex task and code it in a way that is both correct and human-readable.
+That is actually the art of programming -- to take a complex task and code it in a way that is both correct and human-readable.  /Для этого нужен хороший стиль написания кода. В этой главе мы рассмотрим компоненты такого стиля.
 
-## Syntax
+## Синтаксис
 
-Here is a cheatsheet with some suggested rules (see below for more details):
+Шпаргалка с правилами синтаксиса (их варианты детально разобраны далее):
 
 ![](code-style.png)
 <!--
@@ -34,13 +34,13 @@ if (n < 0) {
 
 -->
 
-Now let's discuss the rules and reasons for them in detail.
+Не всё здесь однозначно, так что разберём эти правила подробнее.
 
 ```warn header="Irony Detected"
-Nothing is set in stone here. These are style preferences, not religious dogmas.
+Здесь нет ничего основанного на камне. Это стилевые предпочтения, а не религиозные догмы.
 ```
 
-### Curly Braces
+### Фигурные скобки
 
 In most JavaScript projects curly braces are written in "Egyptian" style with the opening brace on the same line as the corresponding keyword -- not on a new line. There should also be a space before the opening bracket, like this:
 
@@ -76,13 +76,13 @@ In summary:
 - For very short code, one line is acceptable. For example: `if (cond) return null`.
 - But a separate line for each statement in brackets is usually easier to read.
 
-### Line Length
+### Длина строки
 
 No one likes to read a long horizontal line of code. It's best practice to split them up and limit the length of your lines.
 
 The maximum line length should be agreed upon at the team-level. It's usually 80 or 120 characters.
 
-### Indents
+### Отступы
 
 There are two types of indents:
 
@@ -123,7 +123,7 @@ There are two types of indents:
 
     Insert an extra newline where it helps to make the code more readable. There should not be more than nine lines of code without a vertical indentation.
 
-### Semicolons
+### Точка с запятой
 
 A semicolon should be present after each statement, even if it could possibly be skipped.
 
@@ -131,7 +131,7 @@ There are languages where a semicolon is truly optional and it is rarely used. I
 
 As you become more mature as a programmer, you may choose a no-semicolon style like [StandardJS](https://standardjs.com/). Until then, it's best to use semicolons to avoid possible pitfalls.
 
-### Nesting Levels
+### Уровни вложенности
 
 Try to avoid nesting code too many levels deep.
 
@@ -251,7 +251,7 @@ Most of time, the second variant is preferred.
 
 That's because when reading code, we first want to know *what it does*. If the code goes first, then it provides that information. Then, maybe we won't need to read the functions at all, especially if their names are descriptive of what they actually do.
 
-## Style Guides
+## Руководства по стилю
 
 A style guide contains general rules about "how to write" code, e.g. which quotes to use, how many spaces to indent, where to put line breaks, etc. A lot of minor things.
 
@@ -269,7 +269,7 @@ Some popular choices:
 
 If you're a novice developer, start with the cheatsheet at the beginning of this chapter. Once you've mastered that you can browse other style guides to pick up common principles and decide which one you like best.
 
-## Automated Linters
+## Автоматизированные средства проверки (линтеры)
 
 Linters are tools that can automatically check the style of your code and make suggestions for refactoring.
 
@@ -315,7 +315,7 @@ It is also possible to download style rule sets from the web and extend them ins
 
 Also certain IDEs have built-in linting, which is convenient but not as customizable as ESLint.
 
-## Summary
+## Итого
 
 All syntax rules described in this chapter (and in the style guides referenced) aim to increase the readability of your code, but all of them are debatable.
 

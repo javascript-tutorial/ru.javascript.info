@@ -1,12 +1,12 @@
 
-You could note the following:
+Вы могли заметить следующие недостатки, сверху-вниз:
 
 ```js no-beautify
-function pow(x,n)  // <- no space between arguments
-{  // <- figure bracket on a separate line
-  let result=1;   // <- no spaces before or after =
-  for(let i=0;i<n;i++) {result*=x;}   // <- no spaces
-  // the contents of { ... } should be on a new line
+function pow(x,n)  // <- отсутствует пробел между аргументами
+{  // <- фигурная скобка на отдельной строке
+  let result=1;   // <- нет пробелов вокруг знака =
+  for(let i=0;i<n;i++) {result*=x;}   // <- нет пробелов
+  // содержимое скобок { ... } лучше вынести на отдельную строку
   return result;
 }
 
@@ -23,7 +23,7 @@ else // <- could write it on a single line like "} else {"
 }
 ```
 
-The fixed variant:
+Исправленный вариант:
 
 ```js
 function pow(x, n) {
@@ -40,8 +40,8 @@ let x = prompt("x?", "");
 let n = prompt("n?", "");
 
 if (n < 0) {
-  alert(`Power ${n} is not supported,
-    please enter an integer number greater than zero`);
+  alert(`Степень ${n} не поддерживается,
+    пожалуйста введите целую степень, большую 0`);
 } else {
   alert( pow(x, n) );
 }
