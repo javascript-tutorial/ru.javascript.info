@@ -2,12 +2,12 @@ importance: 5
 
 ---
 
-# Animate the ball bouncing to the right
+# Создайте анимацию мячика прыгающего вправо 
 
-Make the ball bounce to the right. Like this:
+Сделайте отскок мяча вправо. Как в примере:
 
 [iframe height=250 src="solution"]
 
-Write the animation code. The distance to the left is `100px`.
+Напишите код для анимации. Расстояние слева `100px`.
 
-Take the solution of the previous task <info:task/animate-ball> as the source.
+Возьмите решение предыдущей задач <info:task/animate-ball> за основу.
