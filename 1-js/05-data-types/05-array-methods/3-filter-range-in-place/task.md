@@ -1,18 +1,18 @@
-importance: 4
+важность: 4
 
 ---
 
-# Filter range "in place"
+# Фильтрация массива "на месте"
 
-Write a function `filterRangeInPlace(arr, a, b)` that gets an array `arr` and removes from it all values except those that are between `a` and `b`. The test is: `a ≤ arr[i] ≤ b`.
+Напишите функцию `filterRangeInPlace(arr, a, b)` которая принимает массив `arr` и удаляет из него все значения кроме тех, которые находятся между `a` and `b`. То есть, проверка имеет вид `a ≤ arr[i] ≤ b`.
 
-The function should only modify the array. It should not return anything.
+Функция должна изменять принимаемый массив и ничего не возвращать.
 
-For instance:
+Например:
 ```js
 let arr = [5, 3, 8, 1];
 
-filterRangeInPlace(arr, 1, 4); // removed the numbers except from 1 to 4
+filterRangeInPlace(arr, 1, 4); // удалены числа вне диапазона 1..4
 
 alert( arr ); // [3, 1]
 ```
