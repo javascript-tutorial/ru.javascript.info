@@ -1,31 +1,31 @@
 
-# Getting all properties
+# Получение всех свойств
 
-There are many ways to get keys/values from an object.
+Существует множество способов получить пару: ключ/значение из объекта.
 
-Most of them operate on the object itself, excluding the prototype, let's recall them:
+Большинство из них производят операции над самим объектом, исключая прототип, давайте их перечислим:
 
-- [Object.keys(obj)](mdn:js/Object/keys) / [Object.values(obj)](mdn:js/Object/values) / [Object.entries(obj)](mdn:js/Object/entries) -- returns an array of enumerable own string property names/values/key-value pairs. These methods only list *enumerable* properties, and those that have *strings as keys*.
+- [Object.keys(obj)](mdn:js/Object/keys) / [Object.values(obj)](mdn:js/Object/values) / [Object.entries(obj)](mdn:js/Object/entries) -- возвращают массив строк, содержащих собственные перечислимые имена/значения/пары ключ-значение свойств. Эти методы возвращают только *перечислимые* свойства, и те, у которых *ключи являются строками*.
 
-If we want symbolic properties:
+Если нам нужны символьные свойства:
 
-- [Object.getOwnPropertySymbols(obj)](mdn:js/Object/getOwnPropertySymbols) -- returns an array of all own symbolic property names.
+- [Object.getOwnPropertySymbols(obj)](mdn:js/Object/getOwnPropertySymbols) -- возвращает массив имён всех собственных символьных свойств.
 
-If we want non-enumerable properties:
+Если нам нужны неперечислимые свойства:
 
-- [Object.getOwnPropertyNames(obj)](mdn:js/Object/getOwnPropertyNames) -- returns an array of all own string property names.
+- [Object.getOwnPropertyNames(obj)](mdn:js/Object/getOwnPropertyNames) -- возвращает массив имён всех собственных неперчислимых свойств.
 
-If we want *all* properties:
+Если нам нужны *все* свойства:
 
-- [Reflect.ownKeys(obj)](mdn:js/Reflect/ownKeys) -- returns an array of all own property names.
+- [Reflect.ownKeys(obj)](mdn:js/Reflect/ownKeys) -- возвращает массив имён всёх собственных свойств.
 
-These methods are a bit different about which properties they return, but all of them operate on the object itself. Properties from the prototype are not listed.
+Эти методы отличаются лишь свойствами, которые они возвращают, но все они совершают операции над самим объектом. Свойства прототипа не перечисляются.
 
-## for..in loop
+## Цикл for..in
 
-The `for..in` loop is different: it loops over inherited properties too.
+Цикл `for..in` отличается: он перебирает наследуемые свойства.
 
-For instance:
+Например:
 
 ```js run
 let animal = {
@@ -38,19 +38,19 @@ let rabbit = {
 };
 
 *!*
-// only own keys
+// только собственные ключи
 alert(Object.keys(rabbit)); // jumps
 */!*
 
 *!*
-// inherited keys too
-for(let prop in rabbit) alert(prop); // jumps, then eats
+// включая наследуемые свойства
+for(let prop in rabbit) alert(prop); // jumps, затем eats
 */!*
 ```
 
-If that's not what we want, and we'd like to exclude inherited properties, there's a built-in method [obj.hasOwnProperty(key)](mdn:js/Object/hasOwnProperty): it returns `true` if `obj` has its own (not inherited) property named `key`.
+Если это не то, что нам нужно и мы хотим исключить наследуемые свойства, есть встроенный метод [obj.hasOwnProperty(key)](mdn:js/Object/hasOwnProperty): он возвращает `true` если `obj` имеет собственное (не наследуемое) свойство с именем `key`.
 
-So we can filter out inherited properties (or do something else with them):
+Таким образом, мы можем отфильтровывать наследуемые свойства (или делать с ними что-то ещё):
 
 ```js run
 let animal = {
@@ -64,20 +64,20 @@ let rabbit = {
 
 for(let prop in rabbit) {
   let isOwn = rabbit.hasOwnProperty(prop);
-  alert(`${prop}: ${isOwn}`); // jumps: true, then eats: false
+  alert(`${prop}: ${isOwn}`); // jumps: true, затем eats: false
 }
 ```
 
-Here we have the following inheritance chain: `rabbit`, then `animal`, then `Object.prototype` (because `animal` is a literal object `{...}`, so it's by default), and then `null` above it:
+Здесь мы имеем следующую цепочку наследования: `rabbit`, затем `animal`, затем `Object.prototype` (т.к. `animal` -- это литеральный объект `{...}`, его прототип устанавливается по-умолчанию), и в завершении `null`:
 
 ![](rabbit-animal-object.png)
 
-Note, there's one funny thing. Where is the method `rabbit.hasOwnProperty` coming from? Looking at the chain we can see that the method is provided by `Object.prototype.hasOwnProperty`. In other words, it's inherited.
+Обратите внимание на один забавный момент. Откуда взялся метод `rabbit.hasOwnProperty`? Взглянув на цепь, мы можем видеть, что метод получен из `Object.prototype.hasOwnProperty`. Другими словами, он наследуется.
 
-...But why `hasOwnProperty` does not appear in `for..in` loop, if it lists all inherited properties?  The answer is simple: it's not enumerable. Just like all other properties of `Object.prototype`. That's why they are not listed.
+...Но почему `hasOwnProperty` не появляется в цикле `for..in`, если он перебирает все наследуемые свойства?  Ответ прост: оно неперечислимое. Как и все остальные свойства `Object.prototype`. Поэтому они и не выводятся.
 
-## Summary
+## Итого
 
-Most methods ignore inherited properties, with a notable exception of `for..in`.
+Большинство методов игнорируют наследуемые свойства, за исключением `for..in`.
 
-For the latter we can use [obj.hasOwnProperty(key)](mdn:js/Object/hasOwnProperty): it returns `true` if `obj` has its own (not inherited) property named `key`.
+Для последнего мы можем использовать [obj.hasOwnProperty(key)](mdn:js/Object/hasOwnProperty): он возвращает `true` если `obj` имеет собственное (не наследуемое) свойство с именем `key`.
