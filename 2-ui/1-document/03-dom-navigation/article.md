@@ -7,35 +7,35 @@ libs:
 
 # Навигация по DOM-элементам
 
-The DOM allows us to do anything with elements and their contents, but first we need to reach the corresponding DOM object, get it into a variable, and then we are able to modify it.
+DOM позволяет нам делать что угодно с элементами и их содержимым, но для начала нам нужно добраться до соответствующего DOM объекта, положить его в переменную, и только после этого мы сможем изменять его.
 
-All operations on the DOM start with the `document` object. From it we can access any node.
+Вск операции с DOM начинаются с объекта `document`. Из него мы можем получить доступ к любому узлу.
 
-Here's a picture of links that allow for travel between DOM nodes:
+Так выглядят основные ссылки, по которым можно переходить между узлами DOM:
 
 ![](dom-links.png)
 
-Let's discuss them in more detail.
+Давайте поговорим об этом подробнее.
 
-## On top: documentElement and body
+## Сверху: documentElement и body
 
-The topmost tree nodes are available directly as `document` properties:
+Самые верхние элементы дерева доступны, как свойства объекта `document`:
 
 `<html>` = `document.documentElement`
-: The topmost document node is `document.documentElement`. That's DOM node of `<html>` tag.
+: Самый верхний узел документа `document.documentElement`. В DOM он соответствует тегу `<html>`.
 
 `<body>` = `document.body`
-: Another widely used DOM node is the `<body>` element -- `document.body`.
+: Другой часто используемый узел DOM -- узел тега `<body>` -- `document.body`.
 
 `<head>` = `document.head`
-: The `<head>` tag is available as `document.head`.
+: Тег `<head>` доступен как `document.head`.
 
-````warn header="There's a catch: `document.body` can be `null`"
-A script cannot access an element that doesn't exist at the moment of running.
+````warn header="Есть одна тонкость: `document.body` может быть равен `null`"
+Нельзя получить доступ к элементу, которого еще не существует в момент выполнения скрипта.
 
-In particular, if a script is inside `<head>`, then `document.body` is unavailable, because the browser did not read it yet.
+В частности, если скрипт находится в `<head>`, то в нём не доступен `document.body` , потому что браузер его еще не прочитал.
 
-So, in the example below the first `alert` shows `null`:
+Поэтому, в примере ниже первый `alert` выведет `null`:
 
 ```html run
 <html>
@@ -43,7 +43,7 @@ So, in the example below the first `alert` shows `null`:
 <head>
   <script>
 *!*
-    alert( "From HEAD: " + document.body ); // null, there's no <body> yet
+    alert( "From HEAD: " + document.body ); // null, <body> еще нет
 */!*
   </script>
 </head>
@@ -51,7 +51,7 @@ So, in the example below the first `alert` shows `null`:
 <body>
 
   <script>
-    alert( "From BODY: " + document.body ); // HTMLBodyElement, now it exists
+    alert( "From BODY: " + document.body ); // HTMLBodyElement, теперь он есть
   </script>
 
 </body>
@@ -59,27 +59,27 @@ So, in the example below the first `alert` shows `null`:
 ```
 ````
 
-```smart header="In the DOM world `null` means \"doesn't exist\""
-In the DOM, the `null` value means "doesn't exist" or "no such node".
+```smart header="В мире DOM `null` означает \"не существует\""
+В DOM, значение `null` означает "не существует" или "нет такого узла".
 ```
 
-## Children: childNodes, firstChild, lastChild
+## Дети: childNodes, firstChild, lastChild
 
-There are two terms that we'll use from now on:
+Здесь и далее мы будем использовать два принципиально разных термина:
 
-- **Child nodes (or children)** -- elements that are direct children. In other words, they are nested exactly in the given one. For instance, `<head>` and `<body>` are children of `<html>` element.
-- **Descendants** -- all elements that are nested in the given one, including children, their children and so on.
+- **Дочерние элементы (или дети)** -- элементы которые являются непосредственными детьми узла. Другими словами, они имеют один уровень вложенности. Например, `<head>` и `<body>` являются детьми эелемента `<html>`.
+- **Потомки** -- все элементы, которые лежат внутри данного, включая детей, их детей и т.д., до последнего вложенного элемента.
 
-For instance, here `<body>` has children `<div>` and `<ul>` (and few blank text nodes):
+На примере ниже детьми тега `<body>` являются тег `<div>` и `<ul>` (и несколько пустых текстовых узлов):
 
 ```html run
 <html>
 <body>
-  <div>Begin</div>
+  <div>Начало</div>
 
   <ul>
     <li>
-      <b>Information</b>
+      <b>Информация</b>
     </li>
   </ul>
 </body>
