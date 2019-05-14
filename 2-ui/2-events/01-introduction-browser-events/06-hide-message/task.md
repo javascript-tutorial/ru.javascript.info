@@ -1,13 +1,13 @@
-importance: 5
+важность: 5
 
 ---
 
-# Add a closing button
+# Добавить кнопку закрытия
 
-There's a list of messages.
+Есть список сообщений.
 
-Use JavaScript to add a closing button to the right-upper corner of each message.
+Используя JavaScript для каждого сообщения добавьте в верхний правый угол кнопку закрытия.
 
-The result should look like this:
+Результат должен выглядеть, как показано здесь:
 
 [iframe src="solution" height=450]
