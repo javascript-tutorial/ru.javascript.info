@@ -153,7 +153,7 @@ alert(user); // toString -> John
 alert(user + 500); // toString -> John500
 ```
 
-В отсутствии `Symbol.toPrimitive` и `valueOf`, `toString` обработает все случаи преобразований к примитивам.
+В отсутствие `Symbol.toPrimitive` и `valueOf`, `toString` обработает все случаи преобразований к примитивам.
 
 
 ## Возвращаемые типы
