@@ -103,7 +103,7 @@ function promisify(f, manyArgs = false) {
 
 // использование:
 f = promisify(f, true);
-f(arg1, arg2, ...).then(arrayOfResults => ..., err => ...)
+f(...).then(arrayOfResults => ..., err => ...)
 ```
 
 В некоторых случая `err` может отсутствовать: `callback(result)`, или могут быть встречаться экзотические варианты формата колбэка, которые мы можем промисифицировать самостоятельно.
