@@ -30,9 +30,9 @@ ul {
 ul img {
   width: 130px;
   height: 130px;
-  display: block; /* removes extra space near images */
+  display: block; /* убираем пустое место вокруг картинок */
 }
 
 ul li {
-  display: inline-block; /* removes extra space between list items
+  display: inline-block; /* убираем пустое место между li элементами списка */
 }
