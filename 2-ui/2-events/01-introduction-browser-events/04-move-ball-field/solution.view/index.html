@@ -43,7 +43,7 @@
       let fieldCoords = this.getBoundingClientRect();
 
       // мяч имеет абсолютное позиционирование(position:absolute), поле - относительное(position:relative)
-      // таким образом, координаты мяча расчитываются относительно внутреннего, верхнего левого угла поля
+      // таким образом, координаты мяча рассчитываются относительно внутреннего, верхнего левого угла поля
       let ballCoords = {
         top: event.clientY - fieldCoords.top - field.clientTop - ball.clientHeight / 2,
         left: event.clientX - fieldCoords.left - field.clientLeft - ball.clientWidth / 2
