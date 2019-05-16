@@ -235,7 +235,7 @@ document.getElementsByTagName('input')[0].value = 5;
 ```
 ````
 
-Ищем `.article` элементы:
+Ищем элементы с классом `.article`:
 
 ```html run height=50
 <form name="my-form">
