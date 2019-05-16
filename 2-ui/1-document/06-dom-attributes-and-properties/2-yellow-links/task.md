@@ -24,7 +24,7 @@ importance: 3
 </ul>
 
 <script>
-  // Установка стилей для одной ссылки
+  // добавление стиля для одной ссылки
   let link = document.querySelector('a');
   link.style.color = 'orange';
 </script>

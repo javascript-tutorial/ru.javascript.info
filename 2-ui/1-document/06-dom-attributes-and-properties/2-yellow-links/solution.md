@@ -24,10 +24,10 @@ for (let link of links) {
 
 Пожалуйста, обратите внимание: мы используем `link.getAttribute('href')`. Не `link.href`, потому что нам нужно значение из HTML.
 
-...Другой, более простой путь -- добавить проверку в CSS селектор:
+...Другой, более простой путь -- добавить проверку в CSS-селектор:
 
 ```js
-// искать все ссылки, href которых содержит ://
+// найти все ссылки, атрибут href у которых содержит ://
 // и при этом href не начинается с http://internal.com
 let selector = 'a[href*="://"]:not([href^="http://internal.com"])';
 let links = document.querySelectorAll(selector);
