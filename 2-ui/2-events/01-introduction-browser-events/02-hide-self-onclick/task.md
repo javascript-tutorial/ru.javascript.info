@@ -8,5 +8,5 @@ importance: 5
 
 ```online
 Например:
-<input type="button" onclick="this.hidden=true" value="Нажми, чтобы спрятать">
+<input type="button" onclick="this.hidden=true" value="Нажмите, чтобы спрятать">
 ```
