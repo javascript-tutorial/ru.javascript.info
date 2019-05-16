@@ -365,4 +365,4 @@ document.getElementsByTagName('input')[0].value = 5;
 - Метод `elem.closest(css)` ищет ближайшего по иерархии предка, соответствующему данному CSS-селектору. Сам элемент также включён в поиск.
 
 И давайте упомянем ещё один метод, который проверяет наличие отношений "потомок-предок":
--  `elemA.contains(elemB)` вернёт `true` если `elemB` находится внутри `elemA` (`elemA` яляется предком `elemB`) или `elemA==elemB`.
+-  `elemA.contains(elemB)` вернёт `true`, если `elemB` находится внутри `elemA` (`elemA` яляется предком `elemB`) или когда `elemA==elemB`.
