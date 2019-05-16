@@ -225,7 +225,7 @@ function sayHi(name) {
 
 Функция `sayHi` была создана, когда движок JavaScript подготавливал скрипт к выполнению, и такая функция видна повсюду в этом скрипте.
 
-...В случае с Function Expression, такой код вызовет ошибку:
+...Если бы это было Function Expression, то такой код вызовет ошибку:
 
 ```js run refresh untrusted
 *!*
