@@ -1,4 +1,4 @@
-# Function expressions and arrows
+# Function Expression и функции-стрелки
 
 Функции в JavaScript, это не магическая языковая структура, а специальный вид значений.
 
