@@ -65,7 +65,7 @@
 ```
 
 ```warn header="Только `document.getElementById`, а не `anyNode.getElementById`"
-Метод `getElementById` можно вызвать только для объекта `document`. Он осуществляет поиск по `id` по всему `document`.
+Метод `getElementById` можно вызвать только для объекта `document`. Он осуществляет поиск по `id` по всему документу.
 ```
 
 ## querySelectorAll [#querySelectorAll]
