@@ -1,46 +1,46 @@
-# Quantifiers +, *, ? and {n}
+# Квантификаторы +, *, ? и {n}
 
-Let's say we have a string like `+7(903)-123-45-67` and want to find all numbers in it. But unlike before, we are interested not in single digits, but full numbers: `7, 903, 123, 45, 67`.
+Давайте возьмём строку вида `+7(903)-123-45-67` и найдём все числа в ней. Но теперь нас интересуют не цифры по отдельности, а именно числа: `7, 903, 123, 45, 67`.
 
-A number is a sequence of 1 or more digits `\d`. To mark how many we need, we need to append a *quantifier*.
+Число — это последовательность из 1 или более цифр `\d`. Чтобы отметить количество повторений, нам нужно указать *квантификатор*.
 
-## Quantity {n}
+## Количество {n}
 
-The simplest quantifier is a number in curly braces: `pattern:{n}`.
+Самый простой квантификатор — это число в фигурных скобках: `pattern:{n}`.
 
-A quantifier is appended to a character (or a character class, or a `[...]` set etc) and specifies how many we need.
+Он добавляется к символу (или символу класса, или `[...]` набору символов и т.д.) и указывает сколько их нам нужно.
 
-It has a few advanced forms, let's see examples:
+У него есть несколько продвинутых подходов, давайте посмотрим примеры:
 
-The exact count: `{5}`
-: `pattern:\d{5}` denotes exactly 5 digits, the same as `pattern:\d\d\d\d\d`.
+Точное количество: `{5}`
+: Регэксп `pattern:\d{5}` обозначает ровно 5 цифр, в точности как `pattern:\d\d\d\d\d`.
 
-    The example below looks for a 5-digit number:
-
-    ```js run
-    alert( "I'm 12345 years old".match(/\d{5}/) ); //  "12345"
-    ```
-
-    We can add `\b` to exclude longer numbers: `pattern:\b\d{5}\b`.
-
-The range: `{3,5}`, match 3-5 times
-: To find numbers from 3 to 5 digits we can put the limits into curly braces: `pattern:\d{3,5}`
+    Следующий пример находит пятизначное число:
 
     ```js run
-    alert( "I'm not 12, but 1234 years old".match(/\d{3,5}/) ); // "1234"
+    alert( "Мне 12345 лет".match(/\d{5}/) ); //  "12345"
     ```
 
-    We can omit the upper limit.
+    Мы можем добавить `\b` чтобы исключить числа длинней: `pattern:\b\d{5}\b`.
 
-    Then a regexp `pattern:\d{3,}` looks for sequences of digits of length `3` or more:
+Диапазон: `{3,5}`, от 3 до 5 
+: Для того, чтобы найти числа c диапазоном от 3 до 5 знаков, мы можем указать границы в фигурных скобках: `pattern:\d{3,5}`
 
     ```js run
-    alert( "I'm not 12, but 345678 years old".match(/\d{3,}/) ); // "345678"
+    alert( "Мне не 12, а 1234 года".match(/\d{3,5}/) ); // "1234"
     ```
 
-Let's return to the string `+7(903)-123-45-67`.
+    Мы можем не указывать последнее значение.
 
-A number is a sequence of one or more digits in a row. So the regexp is `pattern:\d{1,}`:
+    Тогда регэксп `pattern:\d{3,}` найдет последовательность чисел, длиной от `3` и более цифр:
+
+    ```js run
+    alert( "Мне не 12, а 345678 лет".match(/\d{3,}/) ); // "345678"
+    ```
+
+Давайте вернёмся к строке `+7(903)-123-45-67`.
+
+Число это последовательность одной или более цифр. Поэтому регэксп будет `pattern:\d{1,}`:
 
 ```js run
 let str = "+7(903)-123-45-67";
@@ -50,14 +50,14 @@ let numbers = str.match(/\d{1,}/g);
 alert(numbers); // 7,903,123,45,67
 ```
 
-## Shorthands
+## Короткие обозначения
 
-There are shorthands for most used quantifiers:
+Для самых часто востребованных квантификаторов есть короткие обозначения:
 
 `+`
-: Means "one or more", the same as `{1,}`.
+: Означает «один или более», то же что `{1,}`.
 
-    For instance, `pattern:\d+` looks for numbers:
+    Например, `pattern:\d+` находит числа:
 
     ```js run
     let str = "+7(903)-123-45-67";
@@ -66,75 +66,77 @@ There are shorthands for most used quantifiers:
     ```
 
 `?`
-: Means "zero or one", the same as `{0,1}`. In other words, it makes the symbol optional.
+: Означает «ноль или один», то же что и `{0,1}`. По сути, делает символ необязательным.
 
-    For instance, the pattern `pattern:ou?r` looks for `match:o` followed by zero or one `match:u`, and then `match:r`.
+    Например, регэксп `pattern:ou?r` найдёт `match:o` после которого, возможно, следует `match:u`, и затем `match:r`.
 
-    So, `pattern:colou?r` finds both `match:color` and `match:colour`:
+    Поэтому регэксп `pattern:colou?r` найдёт оба: `match:color` и `match:colour`:
 
     ```js run
-    let str = "Should I write color or colour?";
+    let str = "Следует писать color или colour?";
 
     alert( str.match(/colou?r/g) ); // color, colour
     ```
 
 `*`
-: Means "zero or more", the same as `{0,}`. That is, the character may repeat any times or be absent.
+: Означает «ноль или более», то же что `{0,}`. То есть, символ может повторяться много раз или вообще отсутствовать.
 
-    For example, `pattern:\d0*` looks for a digit followed by any number of zeroes:
+    Например, регэксп `pattern:\d0*` находит цифру вместе со всеми нулями, которые идут за ней (но могут и не идти):
 
     ```js run
     alert( "100 10 1".match(/\d0*/g) ); // 100, 10, 1
     ```
 
-    Compare it with `'+'` (one or more):
+    Сравните это с `'+'` (один или более):
 
     ```js run
     alert( "100 10 1".match(/\d0+/g) ); // 100, 10
     // 1 not matched, as 0+ requires at least one zero
+    // 1 не подходит, т.к 0+ требует как минимум один ноль
     ```
 
-## More examples
+## Ещё примеры
 
-Quantifiers are used very often. They serve as the main "building block" of complex regular expressions, so let's see more examples.
+Эти квантификаторы принадлежат к числу самых важных «строительных блоков» для сложных регулярных выражений, поэтому мы рассмотрим ещё примеры.
 
-Regexp "decimal fraction" (a number with a floating point): `pattern:\d+\.\d+`
-: In action:
+Регэксп «десятичная дробь» (число с плавающей точкой): `pattern:\d+\.\d+`
+: В действии:
     ```js run
     alert( "0 1 12.345 7890".match(/\d+\.\d+/g) ); // 12.345
     ```
 
-Regexp "open HTML-tag without attributes", like `<span>` or `<p>`: `pattern:/<[a-z]+>/i`
-: In action:
+Регэксп «открывающий HTML-тег без атрибутов», такой как `<span>` или `<p>`: `pattern:/<[a-z]+>/i`
+: В действии:
 
     ```js run
     alert( "<body> ... </body>".match(/<[a-z]+>/gi) ); // <body>
     ```
 
-    We look for character `pattern:'<'` followed by one or more English letters, and then  `pattern:'>'`.
+    Это регулярное выражение ищет символ `pattern:'<'` за которым идут одна или более букв английского алфавита, и затем `pattern:'>'`.
 
-Regexp "open HTML-tag without attributes" (improved): `pattern:/<[a-z][a-z0-9]*>/i`
-: Better regexp: according to the standard, HTML tag name may have a digit at any position except the first one, like `<h1>`.
-
-    ```js run
-    alert( "<h1>Hi!</h1>".match(/<[a-z][a-z0-9]*>/gi) ); // <h1>
-    ```
-
-Regexp "opening or closing HTML-tag without attributes": `pattern:/<\/?[a-z][a-z0-9]*>/i`
-: We added an optional slash `pattern:/?` before the tag. Had to escape it with a backslash, otherwise JavaScript would think it is the pattern end.
+Регэксп «открывающий HTML-тег без атрибутов» (лучше): `pattern:/<[a-z][a-z0-9]*>/i`
+: Здесь регулярное выражение расширено: в соответствие со стандартом, HTML-тег может иметь символ цифры на любой позиции, кроме первой, например `<h1>`.
 
     ```js run
-    alert( "<h1>Hi!</h1>".match(/<\/?[a-z][a-z0-9]*>/gi) ); // <h1>, </h1>
+    alert( "<h1>Привет!</h1>".match(/<[a-z][a-z0-9]*>/gi) ); // <h1>
     ```
 
-```smart header="To make a regexp more precise, we often need make it more complex"
-We can see one common rule in these examples: the more precise is the regular expression -- the longer and more complex it is.
+Регэксп «открывающий или закрывающий HTML-тег без атрибутов»: `pattern:/<\/?[a-z][a-z0-9]*>/i`
+: В предыдущий паттерн мы добавили необязательный `pattern:/?`. Его понадобилось заэкранировать, чтобы JavaScript не принял его за конец шаблона.
 
-For instance, for HTML tags we could use a simpler regexp: `pattern:<\w+>`.
+    ```js run
+    alert( "<h1>Привет!</h1>".match(/<\/?[a-z][a-z0-9]*>/gi) ); // <h1>, </h1>
+    ```
 
-...But because `pattern:\w` means any English letter or a digit or `'_'`, the regexp also matches non-tags, for instance `match:<_>`. So it's much simpler than `pattern:<[a-z][a-z0-9]*>`, but less reliable.
+```smart header="Чтобы регулярное выражение было точнее, нам часто приходится делать его сложнее"
 
-Are we ok with `pattern:<\w+>` or we need `pattern:<[a-z][a-z0-9]*>`?
+В этих примерах мы видим общее правило: чем точнее регулярное выражение -- тем оно длиннее и сложнее.
 
-In real life both variants are acceptable. Depends on how tolerant we can be to "extra" matches and whether it's difficult or not to filter them out by other means.
+Например, для HTML-тегов, скорее всего, подошло бы и более простое регулярное выражение : `pattern:<\w+>`.
+
+...Но т.к класс `pattern:\w` означает любую английскую букву или цифру или `'_'`,  то для такого регэксп подойдут и не теги, например `match:<_>`. Однако он гораздо проще, чем регэксп `pattern:<[a-z][a-z0-9]*>`, но менее точный.
+
+Подойдёт ли нам `pattern:<\w+>` или нужно использовать `pattern:<[a-z][a-z0-9]*>`?
+
+В реальной жизни допустимы оба варианта. Ответ на подобные вопросы зависит от того, насколько реально важна точность и насколько потом будет сложно или не сложно отфильтровать лишние совпадения.
 ```
