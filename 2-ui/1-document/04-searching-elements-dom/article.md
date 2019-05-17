@@ -157,7 +157,7 @@
   alert(chapter.closest('.book')); // UL
   alert(chapter.closest('.contents')); // DIV
 
-  alert(chapter.closest('h1')); // null (потому что h1 не предок)
+  alert(chapter.closest('h1')); // null (потому что h1 -- не предок)
 </script>
 ```
 
