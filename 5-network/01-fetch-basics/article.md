@@ -18,7 +18,7 @@ let promise = fetch(url, [options])
 
 Процесс получения ответа обычно происходит в два этапа.
 
-**`promise` выполняется с помощью встроенного объекта класса [Response](https://fetch.spec.whatwg.org/#response-class), как только сервер отправит ответ с заголовками.**
+**Результатом `promise` является объект встроенного класса [Response](https://fetch.spec.whatwg.org/#response-class), он появляется, как только сервер пришлет заголовки ответа.**
 
 Таким образом, можно проверить статус HTTP-запроса и определить, выполнился ли он успешно, а также посмотреть заголовки, но пока без тела ответа.
 
@@ -77,7 +77,7 @@ fetch('https://api.github.com/repos/javascript-tutorial/en.javascript.info/commi
 ```js
 let text = await response.text();
 ```
-И для примера работы с бинарными данными, давайте запросим и выведем на экран изображение (см. главу [Blob](info:blob), чтобы узнать про операции с Blob):
+Для примера работы с бинарными данными, давайте запросим и выведем на экран изображение (см. главу [Blob](info:blob), чтобы узнать про операции с Blob):
 
 ```js async run
 let response = await fetch('/article/fetch/logo-fetch.svg');
