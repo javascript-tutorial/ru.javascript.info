@@ -7,15 +7,15 @@ libs:
 
 # Навигация по DOM-элементам
 
-DOM позволяет нам делать что угодно с элементами и их содержимым, но для начала нам нужно добраться до соответствующего DOM объекта, положить его в переменную, и только после этого мы сможем изменять его.
+DOM позволяет нам делать что угодно с элементами и их содержимым, но для начала нужно получить соответствующий DOM-объект, положить его в переменную, и только после этого мы сможем изменять его.
 
-Вск операции с DOM начинаются с объекта `document`. Из него мы можем получить доступ к любому узлу.
+Все операции с DOM начинаются с объекта `document`. Из него мы можем получить доступ к любому узлу.
 
 Так выглядят основные ссылки, по которым можно переходить между узлами DOM:
 
 ![](dom-links.png)
 
-Давайте поговорим об этом подробнее.
+Поговорим об этом подробнее.
 
 ## Сверху: documentElement и body
 
@@ -25,7 +25,7 @@ DOM позволяет нам делать что угодно с элемент
 : Самый верхний узел документа `document.documentElement`. В DOM он соответствует тегу `<html>`.
 
 `<body>` = `document.body`
-: Другой часто используемый узел DOM -- узел тега `<body>` -- `document.body`.
+: Другой часто используемый DOM-узел -- узел тега `<body>` -- `document.body`.
 
 `<head>` = `document.head`
 : Тег `<head>` доступен как `document.head`.
@@ -33,7 +33,7 @@ DOM позволяет нам делать что угодно с элемент
 ````warn header="Есть одна тонкость: `document.body` может быть равен `null`"
 Нельзя получить доступ к элементу, которого еще не существует в момент выполнения скрипта.
 
-В частности, если скрипт находится в `<head>`, то в нём не доступен `document.body` , потому что браузер его еще не прочитал.
+В частности, если скрипт находится в `<head>`, `document.body` в нём не доступен, потому что браузер его еще не прочитал.
 
 Поэтому, в примере ниже первый `alert` выведет `null`:
 
@@ -60,17 +60,17 @@ DOM позволяет нам делать что угодно с элемент
 ````
 
 ```smart header="В мире DOM `null` означает \"не существует\""
-В DOM, значение `null` означает "не существует" или "нет такого узла".
+В DOM, значение `null` значит "не существует" или "нет такого узла".
 ```
 
 ## Дети: childNodes, firstChild, lastChild
 
 Здесь и далее мы будем использовать два принципиально разных термина:
 
-- **Дочерние элементы (или дети)** -- элементы которые являются непосредственными детьми узла. Другими словами, они имеют один уровень вложенности. Например, `<head>` и `<body>` являются детьми эелемента `<html>`.
+- **Дочерние элементы (или дети)** -- элементы, которые являются непосредственными детьми узла. Другими словами, они имеют один уровень вложенности. Например, `<head>` и `<body>` являются детьми элемента `<html>`.
 - **Потомки** -- все элементы, которые лежат внутри данного, включая детей, их детей и т.д., до последнего вложенного элемента.
 
-На примере ниже детьми тега `<body>` являются тег `<div>` и `<ul>` (и несколько пустых текстовых узлов):
+На примере ниже детьми тега `<body>` являются теги `<div>` и `<ul>` (и несколько пустых текстовых узлов):
 
 ```html run
 <html>
@@ -86,22 +86,22 @@ DOM позволяет нам делать что угодно с элемент
 </html>
 ```
 
-...And if we ask for all descendants of `<body>`, then we get direct children `<div>`, `<ul>` and also more nested elements like `<li>` (being a child of `<ul>`) and `<b>` (being a child of `<li>`) -- the entire subtree.
+...И если мы запросим всех потомков тега `<body>`, то получим прямых наследников -- `<div>` и `<ul>`, а также вложенные в них элементы --`<li>` (будет потомком `<ul>`) и `<b>` (будет потомком `<li>`) -- все элементы дерева.
 
-**The `childNodes` collection provides access to all child nodes, including text nodes.**
+**Псевдо-массив `childNodes` обеспечивает доступ ко всем дочерним узлам, включая текстовые узлы.**
 
-The example below shows children of `document.body`:
+Пример ниже последовательно выведет элементы-потомки `document.body`:
 
 ```html run
 <html>
 <body>
-  <div>Begin</div>
+  <div>Начало</div>
 
   <ul>
-    <li>Information</li>
+    <li>Информация</li>
   </ul>
 
-  <div>End</div>
+  <div>Конец</div>
 
   <script>
 *!*
@@ -110,153 +110,153 @@ The example below shows children of `document.body`:
     }
 */!*
   </script>
-  ...more stuff...
+  ...какой-то HTML-код...
 </body>
 </html>
 ```
 
-Please note an interesting detail here. If we run the example above, the last element shown is `<script>`. In fact, the document has more stuff below, but at the moment of the script execution the browser did not read it yet, so the script doesn't see it.
+Обратим внимание на маленькую деталь. Если запустить пример выше, то последним будет выведен элемент `<script>`. На самом деле, в документе есть ещё "какой-то HTML-код", но на момент выполнения скрипта браузер ещё до него не дошёл, поэтому скрипт не видит его.
 
-**Properties `firstChild` and `lastChild` give fast access to the first and last children.**
+**Свойства `firstChild` и `lastChild` обеспечивают быстрый доступ к первому и последнему элементу.**
 
-They are just shorthands. If there exist child nodes, then the following is always true:
+Существует одна закономерность. Если у тега есть дочерние узлы, условие ниже всегда верно:
 ```js
 elem.childNodes[0] === elem.firstChild
 elem.childNodes[elem.childNodes.length - 1] === elem.lastChild
 ```
 
-There's also a special function `elem.hasChildNodes()` to check whether there are any child nodes.
+Для проверки наличия дочерних узлов существует также специальная функция `elem.hasChildNodes()`.
 
-### DOM collections
+### DOM-коллекции
 
-As we can see, `childNodes` looks like an array. But actually it's not an array, but rather a *collection* -- a special array-like iterable object.
+Можно увидеть, что `childNodes` похожи на массивы. На самом деле это не массивы, а скорее *коллекции* -- специальные массивы, наподобие итерируемых объектов.
 
-There are two important consequences:
+Из этого следует два важных вывода:
 
-1. We can use `for..of` to iterate over it:
+1. Для перебора *коллекции* мы можем использовать `for..of`:
   ```js
   for (let node of document.body.childNodes) {
-    alert(node); // shows all nodes from the collection
+    alert(node); // показывает все узлы коллекции
   }
   ```
-  That's because it's iterable (provides the `Symbol.iterator` property, as required).
+  Это работает, потому что у коллекции есть встроенный итератор (в случае необходимости используется метод `Symbol.iterator`).
 
-2. Array methods won't work, because it's not an array:
+2. Методы массивов не будут работать, потому что коллекция -- это не массив:
   ```js run
-  alert(document.body.childNodes.filter); // undefined (there's no filter method!)
+  alert(document.body.childNodes.filter); // undefined (у коллекции нет метода filter!)
   ```
 
-The first thing is nice. The second is tolerable, because we can use `Array.from` to create a "real" array from the collection, if we want array methods:
+Первое решение для нас предпочтительнее. Но можно пользоваться и вторым, ведь если мы хотим работать с методами массивов, то для создания "настоящего" массива из коллекции мы можем использовать метод `Array.from`:
 
   ```js run
-  alert( Array.from(document.body.childNodes).filter ); // now it's there
+  alert( Array.from(document.body.childNodes).filter ); // теперь childNodes массив
   ```
 
-```warn header="DOM collections are read-only"
-DOM collections, and even more -- *all* navigation properties listed in this chapter are read-only.
+```warn header="DOM-коллекции только для чтения"
+DOM-коллекции, и почти -- *все* навигационные свойства, перечисленные в этой главе, доступны только для чтения.
 
-We can't replace a child by something else by assigning `childNodes[i] = ...`.
+Мы не можем заменить ребенка чем-то другим просто написав `childNodes[i] = ...`.
 
-Changing DOM needs other methods. We will see them in the next chapter.
+Для изменения DOM требуются другие методы. Мы увидим их в следующей главе.
 ```
 
-```warn header="DOM collections are live"
-Almost all DOM collections with minor exceptions are *live*. In other words, they reflect the current state of DOM.
+```warn header="DOM-коллекции живые"
+Почти все DOM-коллекции за небольшим исключением *живые*. Другими словами, они отражают текущее состояние DOM.
 
-If we keep a reference to `elem.childNodes`, and add/remove nodes into DOM, then they appear in the collection automatically.
+Если мы сохраним ссылку на `elem.childNodes`, и добавим/удалим узлы в DOM, то они появятся в сохраненной коллекции автоматически.
 ```
 
-````warn header="Don't use `for..in` to loop over collections"
-Collections are iterable using `for..of`. Sometimes people try to use `for..in` for that.
+````warn header="Не используйте цикл `for..in` для перебора коллекции"
+Коллекции перебираются циклом `for..of`. Некоторые начинающие разработчики пытаются использовать для этого цикл `for..in`.
 
-Please, don't. The `for..in` loop iterates over all enumerable properties. And collections have some "extra" rarely used properties that we usually do not want to get:
+Не делайте так. Цикл `for..in` перебирает все перечисляемые свойства. А у коллекций есть некоторые "лишние", редко используемые свойства, которые обычно нам не нужны:
 
 ```html run
 <body>
 <script>
-  // shows 0, 1, length, item, values and more.
+  // выводит 0, 1, length, item, values и другие свойства.
   for (let prop in document.body.childNodes) alert(prop);
 </script>
 </body>
 ````
 
-## Siblings and the parent
+## Соседи и родитель
 
-*Siblings* are nodes that are children of the same parent. For instance, `<head>` and `<body>` are siblings:
+*Соседи* -- это узлы, у которых один и тот же родитель. Например, `<head>` и `<body>` соседи:
 
-- `<body>` is said to be the "next" or "right" sibling of `<head>`,
-- `<head>` is said to be the "previous" or "left" sibling of `<body>`.
+- говорят, что `<head>` "следующий" или "правый" сосед `<body>`
+- также можно сказать, что `<body>` "предыдущий" или "левый" сосед `<head>`.
 
-The parent is available as `parentNode`.
+Родитель доступен, через `parentNode`.
 
-The next node in the same parent (next sibling) is `nextSibling`, and the previous one is `previousSibling`.
+Следующий узел того же родителя (следующий сосед), как `nextSibling`, а предыдущий, как `previousSibling`.
 
-For instance:
+Например:
 
 ```html run
 <html><head></head><body><script>
-  // HTML is "dense" to evade extra "blank" text nodes.
+  // HTML записан таким образом, чтобы избежать лишних, "пустых" текстовых узлов.
 
-  // parent of <body> is <html>
-  alert( document.body.parentNode === document.documentElement ); // true
+  // родителем <body> является <html>
+  alert( document.body.parentNode === document.documentElement ); // выведет true
 
-  // after <head> goes <body>
+  // после <head> идет <body>
   alert( document.head.nextSibling ); // HTMLBodyElement
 
-  // before <body> goes <head>
+  // перед <body> находится <head>
   alert( document.body.previousSibling ); // HTMLHeadElement
 </script></body></html>
 ```
 
-## Element-only navigation
+## Навигация только по элементам
 
-Navigation properties listed above refer to *all* nodes. For instance, in `childNodes` we can see both text nodes, element nodes, and even comment nodes if there exist.
+Навигационные ссылки, описанные выше, равно касаются *всех* узлов в документе. В частности, в `childNodes` сосуществуют и текстовые узлы и узлы-элементы и узлы-комментарии, если они есть.
 
-But for many tasks we don't want text or comment nodes. We want to manipulate element nodes that represent tags and form the structure of the page.
+Но для большинства задач текстовые узлы и узлы-комментарии нам не нужны. Мы хотим манипулировать узлами-элементами, которые представляют собой теги и формируют структуру страницы.
 
-So let's see more navigation links that only take *element nodes* into account:
+Поэтому давайте рассмотри дополнительный набор ссылок, которые учитывают только *узлы-элементы*:
 
 ![](dom-links-elements.png)
 
-The links are similar to those given above, just with `Element` word inside:
+Эти ссылки похожи на те, что раньше, только в ряде мест стоит слово `Element`:
 
-- `children` -- only those children that are element nodes.
-- `firstElementChild`, `lastElementChild` -- first and last element children.
-- `previousElementSibling`, `nextElementSibling` -- neighbour elements.
-- `parentElement` -- parent element.
+- `children` -- только те дети, у которых есть узлы-элементы.
+- `firstElementChild`, `lastElementChild` -- первый и последний дочерний элемент.
+- `previousElementSibling`, `nextElementSibling` -- соседи-элементы.
+- `parentElement` -- родитель-элемент.
 
-````smart header="Why `parentElement`? Can the parent be *not* an element?"
-The `parentElement` property returns the "element" parent, while `parentNode` returns "any node" parent. These properties are usually the same: they both get the parent.
+````smart header="Зачем нужен `parentElement`? Разве может родитель быть *не* элементом?"
+Свойство `parentElement` возвращает родитель "элемента", а `parentNode` возвращает "любой узел" родитель. Обычно эти свойства одинаковы: они оба получают родителя.
 
-With the one exception of `document.documentElement`:
+Но есть одно исключение `document.documentElement`:
 
 ```js run
-alert( document.documentElement.parentNode ); // document
-alert( document.documentElement.parentElement ); // null
+alert( document.documentElement.parentNode ); // выведет document
+alert( document.documentElement.parentElement ); // выведет null
 ```
 
-In other words, the `documentElement` (`<html>`) is the root node. Formally, it has `document` as its parent. But `document` is not an element node, so `parentNode` returns it and `parentElement` does not.
+Другими словами, свойство `documentElement` (`<html>`) -- это корневой узел. Формально, его родителем является `document`. Но `document` -- это не узел-элемент, и `parentNode` вернет его, а `parentElement` нет.
 
-This loop travels up from an arbitrary element `elem` to `<html>`, but not to the `document`:
+Этот цикл перемещается вверх от произвольного элемента `elem` к `<html>`, но не к `document`:
 ```js
 while(elem = elem.parentElement) {
-  alert( elem ); // parent chain till <html>
+  alert( elem ); // цепочка дойдет до <html>
 }
 ```
 ````
 
-Let's modify one of the examples above: replace `childNodes` with `children`. Now it shows only elements:
+Изменим один из примеров выше: заменим `childNodes` на `children`. Теперь цикл выводит только элементы:
 
 ```html run
 <html>
 <body>
-  <div>Begin</div>
+  <div>Начало</div>
 
   <ul>
-    <li>Information</li>
+    <li>Информация</li>
   </ul>
 
-  <div>End</div>
+  <div>Конец</div>
 
   <script>
 *!*
@@ -270,59 +270,59 @@ Let's modify one of the examples above: replace `childNodes` with `children`. No
 </html>
 ```
 
-## More links: tables [#dom-navigation-tables]
+## Ещё немного ссылок: таблицы [#dom-navigation-tables]
 
-Till now we described the basic navigation properties.
+До сих пор мы описывали основные навигационные ссылки.
 
-Certain types of DOM elements may provide additional properties, specific to their type, for convenience.
+Некоторые типы DOM-элементов предоставляют для удобства дополнительные свойства, специфичные для их типа.
 
-Tables are a great example and important particular case of that.
+Таблицы -- отличный пример таких элементов.
 
-**The `<table>`** element supports (in addition to the given above) these properties:
-- `table.rows` -- the collection of `<tr>` elements of the table.
-- `table.caption/tHead/tFoot` -- references to elements `<caption>`, `<thead>`, `<tfoot>`.
-- `table.tBodies` -- the collection of `<tbody>` elements (can be many according to the standard).
+**Элемент `<table>`** (в дополнение к тем, о которых речь шла выше) поддерживает следующие свойства:
+- `table.rows` -- коллекция строк `<tr>` таблицы.
+- `table.caption/tHead/tFoot` -- ссылки на элементы таблицы `<caption>`, `<thead>`, `<tfoot>`.
+- `table.tBodies` -- коллекция элементов таблицы `<tbody>` (по спецификации их может быть больше одного).
 
-**`<thead>`, `<tfoot>`, `<tbody>`** elements provide the `rows` property:
-- `tbody.rows` -- the collection of `<tr>` inside.
+**`<thead>`, `<tfoot>`, `<tbody>`** предоставляют свойство `rows`:
+- `tbody.rows` -- коллекция строк `<tr>` секции.
 
 **`<tr>`:**
-- `tr.cells` -- the collection of `<td>` and `<th>` cells inside the given `<tr>`.
-- `tr.sectionRowIndex` -- the position (index) of the given `<tr>` inside the enclosing `<thead>/<tbody>/<tfoot>`.
-- `tr.rowIndex` -- the number of the `<tr>` in the table as a whole (including all table rows).
+- `tr.cells` -- коллекция `<td>` и `<th>` ячеек, находящихся внутри строки `<tr>`.
+- `tr.sectionRowIndex` -- номер строки `<tr>` в текущей секции `<thead>/<tbody>/<tfoot>`.
+- `tr.rowIndex` -- номер строки `<tr>` в таблице (включая все строки таблицы).
 
 **`<td>` and `<th>`:**
-- `td.cellIndex` -- the number of the cell inside the enclosing `<tr>`.
+- `td.cellIndex` -- номер ячейки в строке `<tr>`.
 
-An example of usage:
+Пример использования:
 
 ```html run height=100
 <table id="table">
   <tr>
-    <td>one</td><td>two</td>
+    <td>один</td><td>два</td>
   </tr>
   <tr>
-    <td>three</td><td>four</td>
+    <td>три</td><td>четыре</td>
   </tr>
 </table>
 
 <script>
-  // get the content of the first row, second cell
-  alert( table.*!*rows[0].cells[1]*/!*.innerHTML ) // "two"
+  // выводит содержимое первой строки, второй ячейки
+  alert( table.*!*rows[0].cells[1]*/!*.innerHTML ) // "два"
 </script>
 ```
 
-The specification: [tabular data](https://html.spec.whatwg.org/multipage/tables.html).
+Спецификация: [tabular data](https://html.spec.whatwg.org/multipage/tables.html).
 
-There are also additional navigation properties for HTML forms. We'll look at them later when we start working with forms.
+Существуют также дополнительные навигационные ссылки для HTML-форм. Мы рассмотрим их позже, когда начнем работать с формами.
 
-# Summary
+# Итого
 
-Given a DOM node, we can go to its immediate neighbours using navigation properties.
+Получив DOM-узел, мы можем перейти к его ближайшим соседям используя навигационные ссылки.
 
-There are two main sets of them:
+Есть два возможных варианта:
 
-- For all nodes: `parentNode`, `childNodes`, `firstChild`, `lastChild`, `previousSibling`, `nextSibling`.
-- For element nodes only: `parentElement`, `children`, `firstElementChild`, `lastElementChild`, `previousElementSibling`, `nextElementSibling`.
+- Для все узлов: `parentNode`, `childNodes`, `firstChild`, `lastChild`, `previousSibling`, `nextSibling`.
+- Только для узлов-элементов: `parentElement`, `children`, `firstElementChild`, `lastElementChild`, `previousElementSibling`, `nextElementSibling`.
 
-Some types of DOM elements, e.g. tables, provide additional properties and collections to access their content.
+Некоторые виды DOM-элементов, например таблицы, предоставляют дополнительные ссылки и коллекции для доступа к своему содержимому.

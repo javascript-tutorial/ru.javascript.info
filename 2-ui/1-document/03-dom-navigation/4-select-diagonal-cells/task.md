@@ -2,17 +2,17 @@ importance: 5
 
 ---
 
-# Select all diagonal cells
+# Выделите ячейки по диагонали
 
-Write the code to paint all diagonal table cells in red.
+Напишите код, который выделит красным цветом все ячейки в таблице по диагонали.
 
-You'll need to get all diagonal `<td>` from the `<table>` and paint them using the code:
+Вам нужно получить из таблицы `<table>` все диагональные `<td>` и выделить их используя код:
 
 ```js
-// td should be the reference to the table cell
+// в переменной td DOM-элемент для тега <td>
 td.style.backgroundColor = 'red';
 ```
 
-The result should be:
+Должно получиться так:
 
 [iframe src="solution" height=180]
