@@ -1,24 +1,24 @@
-# Bubbling and capturing
+# Всплытие и перехват
 
-Let's start with an example.
+Давайте начнём с примера.
 
-This handler is assigned to `<div>`, but also runs if you click any nested tag like `<em>` or `<code>`:
+Этот обработчик для `<div>` сработает, если вы кликните по вложенному тегу `<em>` или `<code>`:
 
 ```html autorun height=60
-<div onclick="alert('The handler!')">
-  <em>If you click on <code>EM</code>, the handler on <code>DIV</code> runs.</em>
+<div onclick="alert('Обработчик!')">
+  <em>Если вы кликните на <code>EM</code>, сработает обработчик на <code>DIV</code></em>
 </div>
 ```
 
-Isn't it a bit strange? Why does the handler on `<div>` run if the actual click was on `<em>`?
+Вам не кажется это странным? Почему же сработал обработчик на `<div>`, если клик произошёл на `<em>`?
 
-## Bubbling
+## Всплытие
 
-The bubbling principle is simple.
+Принцип всплытия очень простой.
 
-**When an event happens on an element, it first runs the handlers on it, then on its parent, then all the way up on other ancestors.**
+**Когда на элементе происходит событие, обработчики сначала срабатывают на нём, потом на его родителе, затем выше и так далее, вверх по цепочке вложенности.**
 
-Let's say we have 3 nested elements `FORM > DIV > P` with a handler on each of them:
+Например, есть 3 вложенных элемента `FORM > DIV > P`, с обработчиком на каждом:
 
 ```html run autorun
 <style>
@@ -35,22 +35,22 @@ Let's say we have 3 nested elements `FORM > DIV > P` with a handler on each of t
 </form>
 ```
 
-A click on the inner `<p>` first runs `onclick`:
-1. On that `<p>`.
-2. Then on the outer `<div>`.
-3. Then on the outer `<form>`.
-4. And so on upwards till the `document` object.
+Клик по внутреннему `<p>` вызовет обработчик `onclick`:
+1. Сначала на самом `<p>`.
+2. Потом на внешнем `<div>`.
+3. Затем на внешнем `<form>`.
+4. И так далее вверх по цепочке до самого `document`.
 
 ![](event-order-bubbling.png)
 
-So if we click on `<p>`, then we'll see 3 alerts: `p` -> `div` -> `form`.
+Поэтому если кликнуть на `<p>`, то мы увидим три оповещения: `p` -> `div` -> `form`.
 
-The process is called "bubbling", because events "bubble" from the inner element up through parents like a bubble in the water.
+Этот процесс называется "всплытием", потому что события "всплывают" от внутреннего элемента вверх через родителей, подобно тому, как всплывает пузырек воздуха в воде.
 
-```warn header="*Almost* all events bubble."
-The key word in this phrase is "almost".
+```warn header="*Почти* все события всплывают."
+Ключевое слово в этой фразе -- "почти".
 
-For instance, a `focus` event does not bubble. There are other examples too, we'll meet them. But still it's an exception, rather than a rule, most events do bubble.
+Например, событие `focus` не всплывает. В дальнейшем мы увидим и другие примеры. Однако, стоит понимать, что это скорее исключение, чем правило, всё-таки большинство событий всплывают.
 ```
 
 ## event.target
