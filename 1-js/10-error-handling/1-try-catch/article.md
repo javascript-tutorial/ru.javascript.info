@@ -1,10 +1,10 @@
-# Error handling, "try..catch"
+# Обработка ошибок, "try..catch"
 
-No matter how great we are at programming, sometimes our scripts have errors. They may occur because of our mistakes, an unexpected user input, an erroneous server response and for a thousand of other reasons.
+Неважно насколько мы хороши в программировании, иногда наши скрипты содержат ошибки. Они могут возникать из-за наших промахов, неожиданного ввода пользователя, неправильного ответа сервера и по тысяче других причин.
 
-Usually, a script "dies" (immediately stops) in case of an error, printing it to console.
+Обычно, скрипт "падает" (сразу же останавливается) в случае ошибки, с выводом ошибки в консоль.
 
-But there's a syntax construct `try..catch` that allows to "catch" errors and, instead of dying, do something more reasonable.
+Но есть синтаксическая конструкция `try..catch`, которая позволяет "перехватывать" ошибки, и вместо падения, сделать что-то более осмысленное.
 
 ## The "try..catch" syntax
 
