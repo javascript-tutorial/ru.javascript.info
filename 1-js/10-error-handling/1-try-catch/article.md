@@ -6,117 +6,117 @@
 
 Но есть синтаксическая конструкция `try..catch`, которая позволяет "перехватывать" ошибки, и вместо падения, сделать что-то более осмысленное.
 
-## The "try..catch" syntax
+## Синтаксис "try..catch"
 
-The `try..catch` construct has two main blocks: `try`, and then `catch`:
+Конструкция `try..catch` состоит из двух основных блоков: `try`, и затем `catch`:
 
 ```js
 try {
 
-  // code...
+  // код...
 
 } catch (err) {
 
-  // error handling
+  // обработка ошибки
 
 }
 ```
 
-It works like this:
+Работает она так:
 
-1. First, the code in `try {...}` is executed.
-2. If there were no errors, then `catch(err)` is ignored: the execution reaches the end of `try` and then jumps over `catch`.
-3. If an error occurs, then `try` execution is stopped, and the control flows to the beginning of `catch(err)`. The `err` variable (can use any name for it) contains an error object with details about what's happened.
+1. Сначала выполняется код внутри блока `try {...}`.
+2. Если в нём нет ошибок, то блок `catch(err)` игнорируется: выполнение доходит до конца `try` и потом прыгает через `catch`.
+3. Если в нем возникает ошибка, то выполнение `try` прерывается, и поток управления переходит в начало `catch(err)`. Переменная `err` (можно использовать любое имя) содержит объект ошибки с подробной информацией о произошедшем.
 
 ![](try-catch-flow.png)
 
-So, an error inside the `try {…}` block does not kill the script: we have a chance to handle it in `catch`.
+Таким образом, при ошибке в блоке `try {…}` скрипт не "падает", и мы получаем возможность обработать ошибку внутри `catch`.
 
-Let's see more examples.
+Давайте рассмотрим больше примеров.
 
-- An errorless example: shows `alert` `(1)` and `(2)`:
+- Пример без ошибок: выведет  `alert` `(1)` и `(2)`:
 
     ```js run
     try {
 
-      alert('Start of try runs');  // *!*(1) <--*/!*
+      alert('Начало блока try');  // *!*(1) <--*/!*
 
-      // ...no errors here
+      // ...код без ошибок
 
-      alert('End of try runs');   // *!*(2) <--*/!*
+      alert('Конец блока try');   // *!*(2) <--*/!*
 
     } catch(err) {
 
-      alert('Catch is ignored, because there are no errors'); // (3)
+      alert('catch игнорируется, так как нет ошибок'); // (3)
 
     }
 
-    alert("...Then the execution continues");
+    alert("...Потом код продолжит выполнение");
     ```
-- An example with an error: shows `(1)` and `(3)`:
+- Пример с ошибками: выведет `(1)` и `(3)`:
 
     ```js run
     try {
 
-      alert('Start of try runs');  // *!*(1) <--*/!*
+      alert('Начало блока try');  // *!*(1) <--*/!*
 
     *!*
-      lalala; // error, variable is not defined!
+      lalala; // ошибка, переменная не определена!
     */!*
 
-      alert('End of try (never reached)');  // (2)
+      alert('Конец блока try (никогда не выполнится)');  // (2)
 
     } catch(err) {
 
-      alert(`Error has occurred!`); // *!*(3) <--*/!*
+      alert(`Возникла ошибка!`); // *!*(3) <--*/!*
 
     }
 
-    alert("...Then the execution continues");
+    alert("...Потом код продолжит выполнение");
     ```
 
 
-````warn header="`try..catch` only works for runtime errors"
-For `try..catch` to work, the code must be runnable. In other words, it should be valid JavaScript.
+````warn header="`try..catch` работает только для ошибок, возникающих во время исполнения кода"
+Чтобы `try..catch` работал, код должен быть выполнимым. Другими словами, это должен быть корректный JavaScript код.
 
-It won't work if the code is syntactically wrong, for instance it has unmatched curly braces:
+Он не сработает, если код синтаксически неверен, например, содержит несовпадающее количество фигурных скобок:
 
 ```js run
 try {
   {{{{{{{{{{{{
 } catch(e) {
-  alert("The engine can't understand this code, it's invalid");
+  alert("Движок не может понять этот код, он не корректен");
 }
 ```
 
-The JavaScript engine first reads the code, and then runs it. The errors that occur on the reading phrase are called "parse-time" errors and are unrecoverable (from inside that code). That's because the engine can't understand the code.
+JavaScript движок сначала читает код, а затем исполняет его. Ошибки, которые возникают во время фазы чтения, называются ошибками парсинга. Их нельзя обработать (изнутри этого кода), потому что движок не понимает код.
 
-So, `try..catch` can only handle errors that occur in the valid code. Such errors are called "runtime errors" or, sometimes, "exceptions".
+Таким образом, `try..catch` может обрабатывать ошибки, которые возникают в корректном коде. Такие ошибки называют "ошибками во время выполнения", а иногда "исключениями".
 ````
 
 
-````warn header="`try..catch` works synchronously"
-If an exception happens in "scheduled" code, like in `setTimeout`, then `try..catch` won't catch it:
+````warn header="`try..catch` работает синхронно"
+Ошибку, которая произойдёт в коде, запланированном "на будущее", например в `setTimeout`, `try..catch` не поймает:
 
 ```js run
 try {
   setTimeout(function() {
-    noSuchVariable; // script will die here
+    noSuchVariable; // скрипт упадет тут
   }, 1000);
 } catch (e) {
-  alert( "won't work" );
+  alert( "не сработает" );
 }
 ```
 
-That's because `try..catch` actually wraps the `setTimeout` call that schedules the function. But the function itself is executed later, when the engine has already left the `try..catch` construct.
+Это потому что `try..catch` на самом деле оборачивает вызов `setTimeout`, которые планирует выполнение функции. Но сама функция выполняется позже, когда движок уже покинул конструкцию `try..catch`.
 
-To catch an exception inside a scheduled function, `try..catch` must be inside that function:
+Чтобы поймать исключение внутри запланированной функции, `try..catch` должен находиться внутри самой этой функции:
 ```js run
 setTimeout(function() {
   try {    
-    noSuchVariable; // try..catch handles the error!
+    noSuchVariable; // try..catch обрабатывает ошибку!
   } catch {
-    alert( "error is caught here!" );
+    alert( "ошибка поймана тут!" );
   }
 }, 1000);
 ```
