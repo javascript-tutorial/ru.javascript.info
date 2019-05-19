@@ -1,7 +1,7 @@
 
-# Rewrite with arrow functions
+# Перепишите с использованием функции-стрелки
 
-Replace Function Expressions with arrow functions in the code:
+Замените код Function Expression стрелочной функцией:
 
 ```js run
 function ask(question, yes, no) {
@@ -10,8 +10,8 @@ function ask(question, yes, no) {
 }
 
 ask(
-  "Do you agree?",
-  function() { alert("You agreed."); },
-  function() { alert("You canceled the execution."); }
+  "Вы согласны?",
+  function() { alert("Вы согласились."); },
+  function() { alert("Вы отменили выполнение."); }
 );
 ```
