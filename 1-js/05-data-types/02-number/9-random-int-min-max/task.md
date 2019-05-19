@@ -2,14 +2,14 @@ importance: 2
 
 ---
 
-# A random integer from min to max
+# Случайное целое число от min до max
 
-Create a function `randomInteger(min, max)` that generates a random *integer* number from `min` to `max` including both `min` and `max` as possible values.
+Напишите функцию `randomInteger(min, max)`, которая генерирует случайное *целое* (integer) число от `min` до `max` (включительно).
 
-Any number from the interval `min..max` must appear with the same probability.
+Любое число из интервала `min..max` должно появляться с одинаковой вероятностью.
 
 
-Examples of its work:
+Пример работы функции:
 
 ```js
 alert( randomInteger(1, 5) ); // 1
@@ -17,4 +17,4 @@ alert( randomInteger(1, 5) ); // 3
 alert( randomInteger(1, 5) ); // 5
 ```
 
-You can use the solution of the [previous task](info:task/random-min-max) as the base.
+Можно использовать решение из [предыдущей задачи](info:task/random-min-max).
