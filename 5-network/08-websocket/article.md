@@ -96,7 +96,7 @@ Sec-WebSocket-Version: 13
 - `Sec-WebSocket-Version` -- WebSocket protocol version, 13 is the current one.
 
 ```smart header="WebSocket handshake can't be emulated"
-We can't use `XMLHttpRequest` or `fetch` to make this kind of HTTP-request, because Javascript is not allowed to set these headers.
+We can't use `XMLHttpRequest` or `fetch` to make this kind of HTTP-request, because JavaScript is not allowed to set these headers.
 ```
 
 If the server agrees to switch to WebSocket, it should send code 101 response:
@@ -274,7 +274,7 @@ To get connection state, additionally there's `socket.readyState` property with 
 
 ## Chat example
 
-Let's review a chat example using browser WebSocket API and Node.JS WebSocket module <https://github.com/websockets/ws>.
+Let's review a chat example using browser WebSocket API and Node.js WebSocket module <https://github.com/websockets/ws>.
 
 HTML: there's a `<form>` to send messages and a `<div>` for incoming messages:
 
@@ -289,7 +289,7 @@ HTML: there's a `<form>` to send messages and a `<div>` for incoming messages:
 <div id="messages"></div>
 ```
 
-Javascript is also simple. We open a socket, then on form submission -- `socket.send(message)`, on incoming message -- append it to `div#messages`:
+JavaScript is also simple. We open a socket, then on form submission -- `socket.send(message)`, on incoming message -- append it to `div#messages`:
 
 ```js
 let socket = new WebSocket("wss://javascript.info/article/websocket/chat/ws");
@@ -314,7 +314,7 @@ socket.onmessage = function(event) {
 
 Server-side code is a little bit beyound our scope here. We're using browser WebSocket API, a server may have another library.
 
-Still it can also be pretty simple. We'll use Node.JS with <https://github.com/websockets/ws> module for websockets.
+Still it can also be pretty simple. We'll use Node.js with <https://github.com/websockets/ws> module for websockets.
 
 The algorithm will be:
 1. Create `clients = new Set()` -- a set of sockets.

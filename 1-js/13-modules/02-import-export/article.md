@@ -1,4 +1,3 @@
-
 # Export and Import
 
 Export and import directives are very versatile.
@@ -29,7 +28,7 @@ For instance, here all exports are valid:
 ````smart header="No semicolons after export class/function"
 Please note that `export` before a class or a function does not make it a [function expression](info:function-expressions-arrows). It's still a function declaration, albeit exported.
 
-Most Javascript style guides recommend semicolons after statements, but not after function and class declarations.
+Most JavaScript style guides recommend semicolons after statements, but not after function and class declarations.
 
 That's why there should be no semicolons at the end of `export class` and `export function`.
 
@@ -355,7 +354,7 @@ export {login, logout};
 import User from './user.js';
 export {User};
 
-import Githib from './providers/github.js';
+import Github from './providers/github.js';
 export {Github};
 ...
 ```
@@ -370,14 +369,14 @@ export {login, logout} from './helpers.js';
 
 export {default as User} from './user.js';
 
-export {default as Githib} from './providers/github.js';
+export {default as Github} from './providers/github.js';
 ...
 ```
 
 ````warn header="Re-exporting default is tricky"
 Please note: `export User from './user.js'` won't work. It's actually a syntax error. To re-export the default export, we must mention it explicitly `{default as ...}`, like in the example above.
 
-Also, there's another oddity: `export * from './user.js'` re-exports only named exports, exluding the default one. Once again, we need to mention it explicitly.
+Also, there's another oddity: `export * from './user.js'` re-exports only named exports, excluding the default one. Once again, we need to mention it explicitly.
 
 For instance, to re-export everything, two statements will be necessary:
 ```js
