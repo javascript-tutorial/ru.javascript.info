@@ -1,7 +1,7 @@
 ﻿
 # MutationObserver: Наблюдатель за изменениями 
 
-`MutationObserver` - это встроенный объект, наблюдающий за DOM-элементом и запускающий коллбэк в случае изменений.
+`MutationObserver` - это встроенный объект, наблюдающий за DOM-элементом и запускающий колбэк в случае изменений.
 
 Сначала мы ознакомимся с синтаксисом, а затем познакомимся с реальными случаями использования.
 
@@ -9,7 +9,7 @@
 
 `MutationObserver` лёгок в использовании.
 
-Сначала мы создаём наблюдатель за изменениями с помощью коллбэк-функции:
+Сначала мы создаём наблюдатель за изменениями с помощью колбэк-функции:
 
 ```js
 let observer = new MutationObserver(callback);
@@ -32,7 +32,7 @@ observer.observe(node, config);
 
 Затем, после изменений, выполняется  `callback`  со списком объектов [MutationRecord](https://dom.spec.whatwg.org/#mutationrecord) в качестве первого аргумента, а сам наблюдатель вторым аргументом.
 
-[MutationRecord](https://dom.spec.whatwg.org/#mutationrecord) объекты имеют следующие свойства:
+Объекты [MutationRecord](https://dom.spec.whatwg.org/#mutationrecord)имеют следующие свойства:
 
 - `type` -- тип изменения, один из
    - `"attributes"` (измененный атрибут)
@@ -55,7 +55,7 @@ let observer = new MutationObserver(mutationRecords => {
   console.log(mutationRecords); // console.log(изменения)
 });
 observer.observe(elem, {
-  // наблюдать за всем кроме атрибутов
+  // наблюдать за всем, кроме атрибутов
   childList: true,
   subtree: true,
   characterDataOldValue: true
@@ -167,7 +167,7 @@ snippets.forEach(Prism.highlightElem);
 
 Вот работающий пример.
 
-Если вы запустите этот код, он начнёт наблюдать за элементом ниже, выделяя любой пример кода, который появляется там:
+Если вы запустите этот код, он начнёт наблюдать за элементом ниже, подсвечивая код любого примера кода, который появляется там:
 
 ```js run
 let observer = new MutationObserver(mutations => {
@@ -176,10 +176,10 @@ let observer = new MutationObserver(mutations => {
     // проверка новых узлов
 
     for(let node of mutation.addedNodes) {
-      // мы будем отслеживать только узлы-элементы, другие (текстовые) 				пропустить
+      // мы будем отслеживать только узлы-элементы, другие (текстовые) пропустить
       if (!(node instanceof HTMLElement)) continue;
 
-      // проверить не является ли вставленный элемент примером кода
+      // проверить, не является ли вставленный элемент примером кода
       if (node.matches('pre[class*="language-"]')) {
         Prism.highlightElement(node);
       }
@@ -221,11 +221,11 @@ demoElem.innerHTML = `Фрагмент кода ниже:
 
 Есть метод для остановки наблюдения за узлами:
 
-`observer.disconnect()` -- останавливает наблюдение.
+- `observer.disconnect()` -- останавливает наблюдение.
 
 К тому же:
 
-`mutationRecords = observer.takeRecords()` -- получает список необработанных записей изменений, которые произошли, но коллбэк для них ещё не выполнился.
+- `mutationRecords = observer.takeRecords()` -- получает список необработанных записей изменений, которые произошли, но колбэк для них ещё не выполнился.
 
 ```js
 // мы отключаем наблюдатель 
