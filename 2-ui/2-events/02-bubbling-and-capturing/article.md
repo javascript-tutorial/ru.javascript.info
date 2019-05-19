@@ -55,64 +55,64 @@
 
 ## event.target
 
-A handler on a parent element can always get the details about where it actually happened.
+Всегда можно узнать, на каком конкретно элементе произошло событие.
 
-**The most deeply nested element that caused the event is called a *target* element, accessible as `event.target`.**
+**Самый глубокий элемент, который вызывает событие, называется *исходным* элементом, и он доступен через `event.target`.**
 
-Note the differences from `this` (=`event.currentTarget`):
+Отличия от `this` (=`event.currentTarget`):
 
-- `event.target` -- is the "target" element that initiated the event, it doesn't change through the bubbling process.
-- `this` -- is the "current" element, the one that has a currently running handler on it.
+- `event.target` -- это "исходный" элемент, на котором произошло событие, в процессе всплытия он неизменен.
+- `this` -- это "текущий" элемент, до которого дошло всплытие, на нём сейчас выполняется обработчик.
 
-For instance, if we have a single handler `form.onclick`, then it can "catch" all clicks inside the form. No matter where the click happened, it bubbles up to `<form>` and runs the handler.
+Например, если стоит только один обработчик `form.onclick`, то он "поймает" все клики внутри формы. Где бы ни был клик внутри –- он всплывёт до элемента `<form>`, на котором сработает обработчик.
 
-In `form.onclick` handler:
+При этом внутри обработчика`form.onclick`:
 
-- `this` (`=event.currentTarget`) is the `<form>` element, because the handler runs on it.
-- `event.target` is the concrete element inside the form that actually was clicked.
+- `this` (`=event.currentTarget`) всегда будет элемент `<form>`, так как обработчик сработал на ней.
+- `event.target` будет содержать ссылку на конкретный элемент внутри формы, на котором произошёл клик.
 
-Check it out:
+Попробуйте сами:
 
 [codetabs height=220 src="bubble-target"]
 
-It's possible that `event.target` equals `this` -- when the click is made directly on the `<form>` element.
+Возможна и ситуация, когда `event.target` и `this` -- один и тот же элемент, например, если клик был на самом элементе `<form>`.
 
-## Stopping bubbling
+## Прекращение всплытия
 
-A bubbling event goes from the target element straight up. Normally it goes upwards till `<html>`, and then to `document` object, and some events even reach `window`, calling all handlers on the path.
+Всплытие идёт с "исходного" элемента прямо наверх. По умолчанию событие будет всплывать до элемента `<html>`, а затем до объекта `document`, а иногда даже до `window`, вызывая все обработчики на своем пути.
 
-But any handler may decide that the event has been fully processed and stop the bubbling.
+Но любой промежуточный обработчик может решить, что событие полностью обработано, и остановить всплытие.
 
-The method for it is `event.stopPropagation()`.
+Для этого нужно вызвать метод `event.stopPropagation()`.
 
-For instance, here `body.onclick` doesn't work if you click on `<button>`:
+Например, здесь при клике на кнопку `<button>` обработчик `body.onclick` не сработает:
 
 ```html run autorun height=60
-<body onclick="alert(`the bubbling doesn't reach here`)">
-  <button onclick="event.stopPropagation()">Click me</button>
+<body onclick="alert(`сюда всплытие не дойдёт`)">
+  <button onclick="event.stopPropagation()">Кликни меня</button>
 </body>
 ```
 
 ```smart header="event.stopImmediatePropagation()"
-If an element has multiple event handlers on a single event, then even if one of them stops the bubbling, the other ones still execute.
+Если у элемента есть несколько обработчиков на одно событие, то даже при прекращении всплытия все они будут выполнены.
 
-In other words, `event.stopPropagation()` stops the move upwards, but on the current element all other handlers will run.
+То есть, `event.stopPropagation()` препятствует продвижению события дальше, но на текущем элементе все обработчики будут вызваны.
 
-To stop the bubbling and prevent handlers on the current element from running, there's a method `event.stopImmediatePropagation()`. After it no other handlers execute.
+Для того, чтобы полностью остановить обработку, существует метод `event.stopImmediatePropagation()`. Он не только предотвращает всплытие, но и останавливает обработку событий на текущем элементе.
 ```
 
-```warn header="Don't stop bubbling without a need!"
-Bubbling is convenient. Don't stop it without a real need: obvious and architecturally well-thought.
+```warn header="Не прекращайте всплытие без необходимости!"
+Всплытие -- это удобно. Не прекращайте его без явной нужды, очевидной и архитектурно прозрачной.
 
-Sometimes `event.stopPropagation()` creates hidden pitfalls that later may become problems.
+Зачастую прекращение всплытия через `event.stopPropagation()` свои подводные камни, которые со временем могут стать проблемами.
 
-For instance:
+Например:
 
-1. We create a nested menu. Each submenu handles clicks on its elements and calls `stopPropagation` so that the outer menu won't trigger.
-2. Later we decide to catch clicks on the whole window, to track users' behavior (where people click). Some analytic systems do that. Usually the code uses `document.addEventListener('click'…)` to catch all clicks.
-3. Our analytic won't work over the area where clicks are stopped by `stopPropagation`. We've got a "dead zone".
+1. Мы делаем вложенное меню. Оно обрабатывает клики на своих элементах и делает для них `stopPropagation`, чтобы не открывать внешнее меню.
+2. Позже мы решили отслеживать все клики в окне, для какой-то своей функциональности, к примеру, для статистики – где вообще у нас кликают люди. Некоторые системы аналитики так делают. Обычно используют `document.addEventListener('click'…)`, чтобы отлавливать все клики.
+3. Наша аналитика не будет работать над областью, где клики прекращаются `stopPropagation`. Получилась «мёртвая зона».
 
-There's usually no real need to prevent the bubbling. A task that seemingly requires that may be solved by other means. One of them is to use custom events, we'll cover them later. Also we can write our data into the `event` object in one handler and read it in another one, so we can pass to handlers on parents information about the processing below.
+Зачастую нет никакой необходимости прекращать всплытие. Задача, которая, казалось бы, требует этого, может быть решена иначе. Например, с помощью создания своего уникального события, о том, как это делать, мы поговорим позже. Также мы можем записывать какаю-то служебную информацию в объект `event` в одном обработчике, а читать в другом, таким образом мы можем сообщить родительскому, что обрабатывать событие уже не нужно.
 ```
 
 
