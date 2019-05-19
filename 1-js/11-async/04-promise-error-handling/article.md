@@ -1,31 +1,31 @@
 
-# Error handling with promises
+# Промисы: обработка ошибок
 
-Asynchronous actions may sometimes fail: in case of an error the corresponding promise becomes rejected. For instance, `fetch` fails if the remote server is not available. We can use `.catch` to handle errors (rejections).
+Иногда при выполнении асинхронного кода могут возникать ошибки: соответствующий промис будет отклонён. Например, если удалённый сервер не доступен, то `fetch` вернёт ошибку. Мы можем использовать `.catch`, чтобы перехватывать эти ошибки (отклонённые промисы).
 
-Promise chaining is great at that aspect. When a promise rejects, the control jumps to the closest rejection handler down the chain. That's very convenient in practice.
+Для перехватывания ошибок хорошо подходят цепочки промисов. Если промис будет отклонён, то управление над промисом переходит в ближайший перехватчик, дальше по цепочке. Это очень удобно на практике.
 
-For instance, in the code below the URL is wrong (no such server) and `.catch` handles the error:
+Например, в представленном ниже примере указана неправильная ссылка (сервер не существует) и `.catch` перехватывает ошибку:
 
 ```js run
 *!*
-fetch('https://no-such-server.blabla') // rejects
+fetch('https://no-such-server.blabla') // ошибка
 */!*
   .then(response => response.json())
-  .catch(err => alert(err)) // TypeError: failed to fetch (the text may vary)
+  .catch(err => alert(err)) // TypeError: failed to fetch (текст может отличаться)
 ```
 
-Or, maybe, everything is all right with the server, but the response is not valid JSON:
+Или, может быть, с сервером всё в порядке, но в ответе мы получим некорректный JSON:
 
 ```js run
-fetch('/') // fetch works fine now, the server responds successfully
+fetch('/') // сейчас fetch выполнится, сервер успешно отвечает
 *!*
-  .then(response => response.json()) // rejects: the page is HTML, not a valid json
+  .then(response => response.json()) // ошибка: HTML-страница вместо ожидаемой json-строки
 */!*
   .catch(err => alert(err)) // SyntaxError: Unexpected token < in JSON at position 0
 ```
 
-The easiest way to catch all errors is to append `.catch` to the end of chain:
+Самый лёгкий путь, перехватить все ошибки - добавить `.catch` в конец цепочки:
 
 ```js run
 fetch('/article/promise-chaining/user.json')
@@ -48,13 +48,13 @@ fetch('/article/promise-chaining/user.json')
 */!*
 ```
 
-Normally, `.catch` doesn't trigger at all, because there are no errors. But if any of the promises above rejects (a network problem or invalid json or whatever), then it would catch it.
+Так как здесь нет ошибок, то `.catch` вообще не выполнится. Но если любой из промисов будет отклонён (проблемы с сетью или некорректная json-строка, или что угодно другое), то ошибка будет перехвачена.
 
-## Implicit try..catch
+## Неявный try..catch
 
-The code of a promise executor and promise handlers has an "invisible `try..catch`" around it. If an error happens, it gets caught and treated as a rejection.
+Вокруг промисов и обработчиков промисов встроен "скрытый `try..catch`". Если происходит ошибка, то он перехватывает её и рассматривает как отклонённый промис.
 
-For instance, this code:
+Например, этот код:
 
 ```js run
 new Promise((resolve, reject) => {
@@ -64,7 +64,7 @@ new Promise((resolve, reject) => {
 }).catch(alert); // Error: Whoops!
 ```
 
-...Works exactly the same as this:
+...Работает так же, как и этот:
 
 ```js run
 new Promise((resolve, reject) => {
@@ -74,45 +74,45 @@ new Promise((resolve, reject) => {
 }).catch(alert); // Error: Whoops!
 ```
 
-The "invisible `try..catch`" around the executor automatically catches the error and treats it as a rejection.
+"Скрытый `try..catch`", вокруг промиса, автоматически перехватывает ошибку и рассматривает её как отклонённый промис.
 
-That's so not only in the executor, but in handlers as well. If we `throw` inside a `.then` handler, that means a rejected promise, so the control jumps to the nearest error handler.
+Это работает не только в промисе, но и в обработчиках. Если мы пробросим ошибку (`throw`) из обработчика (`.then`), то управление переходит к ближайшему обработчику ошибок, промис будет рассматриваться как отклонённый.
 
-Here's an example:
+Пример:
 
 ```js run
 new Promise((resolve, reject) => {
   resolve("ok");
 }).then((result) => {
 *!*
-  throw new Error("Whoops!"); // rejects the promise
+  throw new Error("Whoops!"); // пробрасываем ошибку
 */!*
 }).catch(alert); // Error: Whoops!
 ```
 
-That's so not only for `throw`, but for any errors, including programming errors as well:
+Это работает не только для `throw`, но и для любых ошибок, включая программные ошибки:
 
 ```js run
 new Promise((resolve, reject) => {
   resolve("ok");
 }).then((result) => {
 *!*
-  blabla(); // no such function
+  blabla(); // нет такой функции
 */!*
 }).catch(alert); // ReferenceError: blabla is not defined
 ```
 
-As a side effect, the final `.catch` not only catches explicit rejections, but also occasional errors in the handlers above.
+Как побочный эффект, финальный `.catch` не только перехватывает явно отклонённые промисы, но и случайные ошибки в обработчиках выше.
 
-## Rethrowing
+## Повторное пробрасывание ошибок (rethrowing)
 
-As we already noticed, `.catch` behaves like `try..catch`. We may have as many `.then` handlers as we want, and then use a single `.catch` at the end to handle errors in all of them.
+Как мы уже заметили, `.catch` ведёт себя как `try..catch`. У нас может быть столько обработчиков `.then`, сколько мы хотим, и затем использовать один `.catch`, в конце, чтобы перехватить ошибки из всех обработчиков.
 
-In a regular `try..catch` we can analyze the error and maybe rethrow it if can't handle. The same thing is possible for promises.
+В обычном `try..catch` мы можем проанализировать ошибку и повторно пробросить дальше, если не можем её обработать. То же самое возможно для промисов.
 
-If we `throw` inside `.catch`, then the control goes to the next closest error handler. And if we handle the error and finish normally, then it continues to the closest successful `.then` handler.
+Если мы пробросим (`throw`) ошибку внутри блока `.catch`, то управление перейдет к следующему ближайшему обработчику ошибок. И если мы обработаем ошибку, и завершим работу обработчика нормально, то продолжит работу ближайший успешный обработчик `.then`.
 
-In the example below the `.catch` successfully handles the error:
+В примере ниже, `.catch` успешно обрабатывает ошибку:
 
 ```js run
 // the execution: catch -> then
@@ -122,14 +122,14 @@ new Promise((resolve, reject) => {
 
 }).catch(function(error) {
 
-  alert("The error is handled, continue normally");
+  alert("Ошибка обработана, продолжить работу");
 
-}).then(() => alert("Next successful handler runs"));
+}).then(() => alert("Следующий успешный запуск обработчика"));
 ```
 
-Here the `.catch` block finishes normally. So the next successful `.then` handler is called.
+Здесь блок `.catch` завершается нормально. Поэтому вызывается следующий успешный обработчик `.then`.
 
-In the example below we see the other situation with `.catch`. The handler `(*)` catches the error and just can't handle it (e.g. it only knows how to handle `URIError`), so it throws it again:
+В примере ниже мы видим другую ситуацию с блоком `.catch`. Обработчик `(*)` перехватывает ошибку и не может обработать её (например, он знает как обработать только `URIError`), поэтому ошибка пробрасывается снова:
 
 ```js run
 // the execution: catch -> catch -> then
@@ -140,36 +140,36 @@ new Promise((resolve, reject) => {
 }).catch(function(error) { // (*)
 
   if (error instanceof URIError) {
-    // handle it
+    // обрабатываем ошибку
   } else {
-    alert("Can't handle such error");
+    alert("Не могу обработать ошибку");
 
 *!*
-    throw error; // throwing this or another error jumps to the next catch
+    throw error; // пробрасывает эту или другую ошибку в следующий catch
 */!*
   }
 
 }).then(function() {
-  /* never runs here */
+  /* никогда не выполнится */
 }).catch(error => { // (**)
 
-  alert(`The unknown error has occurred: ${error}`);
-  // don't return anything => execution goes the normal way
+  alert(`Неизвестная ошибка: ${error}`);
+  // ничего не возвращаем => выполнение продолжается в нормальном режиме
 
 });
 ```
 
-Then the execution jumps from the first `.catch` `(*)` to the next one `(**)` down the chain.
+Затем управление переходит от первого блока `.catch` `(*)`, к следующему `(**)`, вниз по цепочке.
 
-In the section below we'll see a practical example of rethrowing.
+В следующем разделе мы рассмотрим практическое применение повторного пробрасывания.
 
-## Fetch error handling example
+## Пример обработки fetch ошибок
 
-Let's improve error handling for the user-loading example.
+Давайте улучшим обработку ошибок для примера "загрузка пользователя".
 
-The promise returned by [fetch](mdn:api/WindowOrWorkerGlobalScope/fetch) rejects when it's impossible to make a request. For instance, a remote server is not available, or the URL is malformed. But if the remote server responds with error 404, or even error 500, then it's considered a valid response.
+Промис, возвращаемый [fetch](mdn:api/WindowOrWorkerGlobalScope/fetch), считается отклонённым, когда невозможно сделать запрос. Например, удалённый сервер недоступен или неверный URL. Но, если удалённый сервер отвечает с ошибкой 404 или даже 500, тогда ответ считается действительным (корректным).
 
-What if the server returns a non-JSON page with error 500 in the line `(*)`? What if there's no such user, and github returns a page with error 404 at `(**)`?
+Что если в строке с `(*)` сервер возвращает не JSON страницу с 500 ошибкой? Что если такого пользователя нет и github возвращает страницу с 404 ошибкой в строке с `(**)`?
 
 ```js run
 fetch('no-such-user.json') // (*)
@@ -181,11 +181,11 @@ fetch('no-such-user.json') // (*)
 ```
 
 
-As of now, the code tries to load the response as JSON no matter what and dies with a syntax error. You can see that by running the example above, as the file `no-such-user.json` doesn't exist.
+На данный момент код пытается загрузить ответ как JSON строку, несмотря ни на что и умирает с синтаксической ошибкой. Вы можете сами увидеть это, запустите представленный выше пример, так как файл `no-such-user.json` не существует.
 
-That's not good, because the error just falls through the chain, without details: what failed and where.
+Это не хорошо, потому что ошибка просто проваливается сквозь всю цепочку, без подробностей: что за ошибка и где.
 
-So let's add one more step: we should check the `response.status` property that has HTTP status, and if it's not 200, then throw an error.
+Итак, давайте добавим ещё один шаг: мы должны проверить свойство `response.status`, которое есть в HTTP и если статус не 200, тогда пробросим ошибку.
 
 ```js run
 class HttpError extends Error { // (1)
@@ -211,15 +211,15 @@ loadJson('no-such-user.json') // (3)
   .catch(alert); // HttpError: 404 for .../no-such-user.json
 ```
 
-1. We make a custom class for HTTP Errors to distinguish them from other types of errors. Besides, the new class has a constructor that accepts `response` object and saves it in the error. So error-handling code will be able to access it.
-2. Then we put together the requesting and error-handling code into a function that fetches the `url` *and* treats any non-200 status as an error. That's convenient, because we often need such logic.
-3. Now `alert` shows a more helpful descriptive message.
+1. Мы создали специальный класс для HTTP ошибок, чтобы отличать их от других типов ошибок. Кроме того, новый класс имеет конструктор, который принимает объект `response` и сохраняет его ошибках. Таким образом, код обработки ошибок сможет получить к нему доступ.
+2. Затем мы объединили код запроса данных и обработки ошибки в одну функцию, которая получает данные по `url` *и* обрабатывает ответ со статусом 200 как выполнившийся, а любой другой статус, как ошибку. Это удобно, потому что нам часто необходима такая логика.
+3. Сейчас `alert` показывает более полезное сообщение.
 
-The great thing about having our own class for errors is that we can easily check for it in error-handling code.
+Самое замечательное в нашем собственном классе для ошибок заключается в том, что мы можем легко проверить его в коде обработки ошибок.
 
-For instance, we can make a request, and then if we get 404 -- ask the user to modify the information.
+Например, мы можем создать запрос и после, если получим 404 -- попросить пользователя поправить введённую информацию.
 
-The code below loads a user with the given name from github. If there's no such user, then it asks for the correct name:
+Код ниже загружает пользователя с указанным именем из github. Если такого пользователя не существует, то он запрашивает ввести правильное имя:
 
 ```js run
 function demoGithubUser() {
@@ -234,7 +234,7 @@ function demoGithubUser() {
 *!*
       if (err instanceof HttpError && err.response.status == 404) {
 */!*
-        alert("No such user, please reenter.");
+        alert("Нет такого пользователя, пожалуйста, заполните снова.");
         return demoGithubUser();
       } else {
         throw err; // (*)
@@ -245,76 +245,76 @@ function demoGithubUser() {
 demoGithubUser();
 ```
 
-Please note: `.catch` here catches all errors, but it "knows how to handle" only `HttpError 404`. In that particular case it means that there's no such user, and `.catch` just retries in that case.
+Обратите внимание: в приведённом коде `.catch` перехватывает все ошибки, но "знает как обработать" только `HttpError 404`. В данном примере это означает, что пользователя не существует, в этом случае `.catch` повторно запускает ввод имени.
 
-For other errors, it has no idea what could go wrong. Maybe a programming error or something. So it just rethrows it in the line `(*)`.
+Для других ошибок, код понятия не имеет, что могло пойти не так. Может быть это программная ошибка или что-то другое. Поэтому просто повторно пробрасывает её в строке с `(*)`.
 
-## Unhandled rejections
+## Необработанные ошибки
 
-What happens when an error is not handled? For instance, after the rethrow `(*)` in the example above.
+Что произойдёт, если ошибка не будет обработана? Например, после повторного пробрасывания в строке с `(*)` в примере выше.
 
-Or we could just forget to append an error handler to the end of the chain, like here:
+Или мы просто забыли добавить обработку ошибки в самый конец цепочки, как здесь:
 
 ```js untrusted run refresh
 new Promise(function() {
-  noSuchFunction(); // Error here (no such function)
+  noSuchFunction(); // Ошибка (нет такой функции)
 })
   .then(() => {
-    // zero or many promise handlers
-  }); // without .catch at the end!
+    // ничего или множество обработчиков промиса
+  }); // без .catch в самом конце!
 ```
 
-In case of an error, the promise state becomes "rejected", and the execution should jump to the closest rejection handler. But there is no such handler in the examples above. So the error gets "stuck".
+В случае ошибки промис становится "отклонённым" и выполнение переходит к ближайшему обработчику ошибок. Но в примере ниже нет никакого обработчика. Поэтому ошибка как-бы "застревает".
 
-In practice, just like with a regular unhandled errors, it means that something terribly gone wrong, the script probably died.
+На практике, как и при обычных необработанных ошибках это означает, что что-то ужасно пошло не так, скрипт, возможно, умер.
 
-Most JavaScript engines track such situations and generate a global error in that case. We can see it in the console.
+Большинство JavaScript движков отслеживают такие ситуации и генерируют в этом случае глобальную ошибку. Мы можем увидеть это в консоли.
 
-In the browser we can catch such errors using the event `unhandledrejection`:
+В браузере мы можем поймать такие ошибки, используя событие `unhandledrejection`:
 
 ```js run
 *!*
 window.addEventListener('unhandledrejection', function(event) {
-  // the event object has two special properties:
-  alert(event.promise); // [object Promise] - the promise that generated the error
-  alert(event.reason); // Error: Whoops! - the unhandled error object
+  // объект события имеет два специальных свойства:
+  alert(event.promise); // [object Promise] - промис, который сгенерировал ошибку
+  alert(event.reason); // Error: Whoops! - необработанный объект ошибки
 });
 */!*
 
 new Promise(function() {
   throw new Error("Whoops!");
-}); // no catch to handle the error
+}); // нет обработчика ошибок
 ```
 
-The event is the part of the [HTML standard](https://html.spec.whatwg.org/multipage/webappapis.html#unhandled-promise-rejections).
+Это событие является частью [HTML стандарта](https://html.spec.whatwg.org/multipage/webappapis.html#unhandled-promise-rejections).
 
-If an error occurs, and there's no `.catch`, the `unhandledrejection` handler triggers, and gets the `event` object with the information about the error, so we can do something.
+Если происходит ошибка и она не перехватывается, отсутствует `.catch`, тогда тригерится событие `unhandledrejection` и объект `event` получает информацию об ошибке, поэтому мы можем хоть как-то отреагировать на ошибку.
 
-Usually such errors are unrecoverable, so our best way out is to inform the user about the problem and probably report the incident to the server.
+Обычно такие ошибки неустранимы, поэтому лучше всего - информировать пользователя о проблеме и возможно, отправить информацию об ошибке на сервер.
 
-In non-browser environments like Node.JS there are other similar ways to track unhandled errors.
+В не браузерных средах, таких как Node.JS, есть другие похожие способы отслеживания необработанных ошибок.
 
 
-## Summary
+## Итого
 
-- `.catch` handles promise rejections of all kinds: be it a `reject()` call, or an error thrown in a handler.
-- We should place `.catch` exactly in places where we want to handle errors and know how to handle them. The handler should analyze errors (custom error classes help) and rethrow unknown ones.
-- It's normal not to use `.catch` if we don't know how to handle errors (all errors are unrecoverable).
-- In any case we should have the `unhandledrejection` event handler (for browsers, and analogs for other environments), to track unhandled errors and inform the user (and probably our server) about the them, so that our app never "just dies".
+- `.catch` перехватывает все виды отклонённых промисов: будет это вызов `reject()` или ошибка пробросится (throw) в обработчике.
+- Необходимо размещать `.catch` там, где мы точно хотим обработать ошибку и знаем, как её обработать. Обработчик должен проанализировать ошибку (помогают пользовательские классы ошибок) или повторно пробросить её, если ничего не знает о ней.
+- Это нормально, не использовать `.catch`, если мы не знаем как обработать ошибку (невозможно исправить все ошибки).
+- В любом случае нам следует использовать обработчик события `unhandledrejection` (для браузеров и аналог для других окружений), чтобы отслеживать необработанные ошибки и информировать об этом пользователя (и, возможно, наш сервер) о них, так что наше приложение никогда "не умрёт".
 
-And finally, if we have load-indication, then `.finally` is a great handler to stop it when the fetch is complete:
+И наконец, если у нас имеется индикатор загрузки, тогда `.finally` - отличный обработчик окончания загрузки, когда загрузка завершена:
 
 ```js run
 function demoGithubUser() {
   let name = prompt("Enter a name?", "iliakan");
 
 *!*
-  document.body.style.opacity = 0.3; // (1) start the indication
+  document.body.style.opacity = 0.3; // (1) запускаем индикатор загрузки
 */!*
 
   return loadJson(`https://api.github.com/users/${name}`)
 *!*
-    .finally(() => { // (2) stop the indication
+    .finally(() => { // (2) останавливаем индикатор загрузки
       document.body.style.opacity = '';
       return new Promise(resolve => setTimeout(resolve, 0)); // (*)
     })
@@ -325,7 +325,7 @@ function demoGithubUser() {
     })
     .catch(err => {
       if (err instanceof HttpError && err.response.status == 404) {
-        alert("No such user, please reenter.");
+        alert("Нет такого пользователя, пожалуйста, заполните снова.");
         return demoGithubUser();
       } else {
         throw err;
@@ -336,8 +336,8 @@ function demoGithubUser() {
 demoGithubUser();
 ```
 
-Here on the line `(1)` we indicate loading by dimming the document. The method doesn't matter, could use any type of indication instead.
+Здесь, в строке `(1)`, мы запускаем индикатор загрузки, затемняя документ. Метод не имеет значения, можно использовать любой другой индикатор загрузки.
 
-When the promise is settled, be it a successful fetch or an error, `finally` triggers at the line `(2)` and stops the indication.
+Когда промис будет выполнен, будет он успешно выполнен или произойдёт ошибка, `finally` сработает в строке `(2)` и остановит индикатор загрузки.
 
-There's a little browser trick `(*)` with returning a zero-timeout promise from `finally`. That's because some browsers (like Chrome) need "a bit time" outside promise handlers to paint document changes. So it ensures that the indication is visually stopped before going further on the chain.
+Здесь есть небольшой браузерный трюк в строке с `(*)`, где возвращаем в `finally` промис с нулевым таймаутом. Просто некоторым браузерам (например, Chrome) нужно "немного времени" вне обработчиков промиса, чтобы отрисовать изменения в документе. Таким образом, это гарантирует, что индикатор загрузки визуально остановится, прежде чем управление пойдёт дальше по цепочке.
