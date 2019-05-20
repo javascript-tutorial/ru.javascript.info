@@ -70,7 +70,7 @@ alert(numbers); // 7,903,123,45,67
 
     Например, паттерн `pattern:ou?r` найдёт `match:o` после которого, возможно, следует `match:u`, а затем `match:r`.
 
-    Поэтому регэксп `pattern:colou?r` найдёт оба: `match:color` и `match:colour`:
+    Поэтому паттерн `pattern:colou?r` найдёт оба: `match:color` и `match:colour`:
 
     ```js run
     let str = "Следует писать color или colour?";
