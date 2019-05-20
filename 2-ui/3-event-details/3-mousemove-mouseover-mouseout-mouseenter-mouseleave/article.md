@@ -1,42 +1,42 @@
-# Moving: mouseover/out, mouseenter/leave
+# События мыши: mouseover/-out, mouseenter/-leave
 
-Let's dive into more details about events that happen when mouse moves between elements.
+В этой главе мы более подробно рассмотрим события, возникающие при движении указателя мыши (и иных управляющих курсором устройств) над элементами страницы.
 
 ## Mouseover/mouseout, relatedTarget
 
-The `mouseover` event occurs when a mouse pointer comes over an element, and `mouseout` -- when it leaves.
+Событие `mouseover` происходит разово в момент, когда курсор оказывается над элементом, а событие `mouseout` -- тоже разово, но в момент, когда курсор уходит с элемента.
 
 ![](mouseover-mouseout.png)
 
-These events are special, because they have a `relatedTarget`.
+Эти события являются особенными, потому что у них имеется свойство `relatedTarget`.
 
-For `mouseover`:
+Для события `mouseover`:
 
-- `event.target` -- is the element where the mouse came over.
-- `event.relatedTarget` -- is the element from which the mouse came.
+- `event.target` -- это элемент, на который курсор зашёл.
+- `event.relatedTarget` -- это элемент, с которого курсор ушёл.
 
-For `mouseout` the reverse:
+Для события `mouseout` наоброт:
 
-- `event.target` -- is the element that mouse left.
-- `event.relatedTarget` -- is the new under-the-pointer element (that mouse left for).
+- `event.target` -- это элемент, с которого курсор ушёл.
+- `event.relatedTarget` -- это элемент, на который курсор зашёл.
 
 ```online
-In the example below each face feature is an element. When you move the mouse, you can see mouse events in the text area.
+В примере ниже каждое изображение - отдельный элемент. При движении курсора по этим элементам в текстовом поле отображаются произошедшие события.
 
-Each event has the information about where the element came and where it came from.
+Каждое из них содержит информацию о том, откуда на соответствующий элемент пришёл и куда с него ушёл курсор.
 
 [codetabs src="mouseoverout" height=280]
 ```
 
-```warn header="`relatedTarget` can be `null`"
-The `relatedTarget` property can be `null`.
+```warn header="Свойство `relatedTarget` может быть `null`"
+Свойство `relatedTarget` может быть `null`.
 
-That's normal and just means that the mouse came not from another element, but from out of the window. Or that it left the window.
+Это нормально и означает, что курсор пришёл не с другого элемента, а из-за пределов окна браузера. Или же, наоборот, ушёл за пределы окна.
 
-We should keep that possibility in mind when using `event.relatedTarget` in our code. If we access `event.relatedTarget.tagName`, then there will be an error.
+Разработчикам следует держать в голове такие варианты при использовании `event.relatedTarget` в своём коде. Если, например, написать `event.relatedTarget.tagName`, то при отсутствии `event.relatedTarget` будет ошибка.
 ```
 
-## Events frequency
+## Частота запуска событий
 
 The `mousemove` event triggers when the mouse moves. But that doesn't mean that every pixel leads to an event.
 
