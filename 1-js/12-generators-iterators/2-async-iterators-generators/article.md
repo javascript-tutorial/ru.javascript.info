@@ -239,7 +239,7 @@ let range = {
 */!*
     for(let value = this.from; value <= this.to; value++) {
 
-      // делает паузу между значениями, ожидая чего-либо  
+      // делает паузу между значениями, ожидая чего-либо
       await new Promise(resolve => setTimeout(resolve, 1000));
 
       yield value;
@@ -334,28 +334,28 @@ async function* fetchCommits(repo) {
 
 Как раз то, что мы и хотели. Внутренняя механика по-страничной подгрузки данных невидна снаружи. Для нас это просто async-генератор, возвращающий коммиты.
 
-## Summary
+## Итого
 
-Regular iterators and generators work fine with the data that doesn't take time to generate.
+Обычные итераторы и генераторы прекрасно работают с данными, генерация которых не требует времени.
 
-When we expect the data to come asynchronously, with delays, their async counterparts can be used, and `for await..of` instead of `for..of`.
+Когда мы ожидаем, что данные будут поступать асинхронно, с задержками, могут быть использованы их async-аналоги, и цикл `for await..of` вместо `for..of`.
 
-Syntax differences between async and regular iterators:
+Синтаксические различия между async и обычными итераторами:
 
-|       | Iterators | Async iterators |
+|       | Обычные итераторы | Async-итераторы |
 |-------|-----------|-----------------|
-| Object method to provide iteraterable | `Symbol.iterator` | `Symbol.asyncIterator` |
-| `next()` return value is              | any value         | `Promise`  |
+| Встроенный метод для перебора | `Symbol.iterator` | `Symbol.asyncIterator` |
+| `next()` возвращаемое значение              | любое         | `Promise`  |
 
-Syntax differences between async and regular generators:
+Синтаксические различия между async и обычными генераторами:
 
-|       | Generators | Async generators |
+|       | Обычные генераторы | Async-генераторы |
 |-------|-----------|-----------------|
-| Declaration | `function*` | `async function*` |
-| `generator.next()` returns              | `{value:…, done: true/false}`         | `Promise` that resolves to `{value:…, done: true/false}`  |
+| Объявление | `function*` | `async function*` |
+| `generator.next()` возвращает              | `{value:…, done: true/false}`         | Создаёт успешно выполнившийся `Promise` с результатом `{value:…, done: true/false}`  |
 
-In web-development we often meet streams of data, when it flows chunk-by-chunk. For instance, downloading or uploading a big file.
+В веб-разработке нам часто встречаются потоки данных, когда они поступают пакет-за-пакетом. Например, скачивание или выгрузка больших файлов.
 
-We could use async generators to process such data, but there's also another API called Streams, that may be more convenient, as it provides special interfaces to transform the data and to pass it from one stream to another (e.g. download from one place and immediately send elsewhere). But they are also more complex.
+Для обработки таких данных мы можем воспользоваться async-генераторами, но также существует и другое API называемое Потоками (Streams), оно может быть более удобным, т.к. предоставляет специальный интерфейс для преобразования данных и передачи их от одного потока к другому (например, загрузка из одного места и моментальная передача куда-нибудь ещё). Это АPI имеет более сложное устройство.
 
-Streams API not a part of JavaScript language standard. Streams and async generators complement each other, both are great ways to handle async data flows.
+API Потоков не является частью стандарта языка JavaScript. Потоки и async-генераторы хорошо дополняют друг друга. Обе этих технологии прекрасный способ обработки потоков асинхронных данных.
