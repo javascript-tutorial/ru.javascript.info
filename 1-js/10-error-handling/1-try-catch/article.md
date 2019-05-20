@@ -122,46 +122,46 @@ setTimeout(function() {
 ```
 ````
 
-## Error object
+## Объект ошибки
 
-When an error occurs, JavaScript generates an object containing the details about it. The object is then passed as an argument to `catch`:
+Когда возникает ошибка, JavaScript генерирует объект, содержащий её детали. Затем объект передается как аргумент в блок `catch`:
 
 ```js
 try {
   // ...
-} catch(err) { // <-- the "error object", could use another word instead of err
+} catch(err) { // <-- объект ошибки, можно использовать другое название вместо err
   // ...
 }
 ```
 
-For all built-in errors, the error object inside `catch` block has two main properties:
+Для всех встроенных ошибок, объект ошибки внутри `catch` имеет два основных свойства:
 
 `name`
-: Error name. For an undefined variable that's `"ReferenceError"`.
+: Имя ошибки. Для неопределенных переменных это `"ReferenceError"`.
 
 `message`
-: Textual message about error details.
+: Текстовое сообщение о деталях ошибки.
 
-There are other non-standard properties available in most environments. One of most widely used and supported is:
+Имеются также другие нестандартные свойства доступные в большинстве окружений. Одно из самых широко используемых и поддерживаемых это:
 
 `stack`
-: Current call stack: a string with information about the sequence of nested calls that led to the error. Used for debugging purposes.
+: Текущий стек вызова: строка содержащая информацияю о последовательности вложенных вызовов, которые привели к ошибке. Используется в целях отладки.
 
-For instance:
+Например:
 
 ```js run untrusted
 try {
 *!*
-  lalala; // error, variable is not defined!
+  lalala; // ошибка, перерменная не определена!
 */!*
 } catch(err) {
   alert(err.name); // ReferenceError
-  alert(err.message); // lalala is not defined
-  alert(err.stack); // ReferenceError: lalala is not defined at ...
+  alert(err.message); // lalala не определена
+  alert(err.stack); // ReferenceError: lalala не определена в ...
 
-  // Can also show an error as a whole
-  // The error is converted to string as "name: message"
-  alert(err); // ReferenceError: lalala is not defined
+  // Может также вывести ошибку как целое
+  // Ошибка приводится к строке как "name: message"
+  alert(err); // ReferenceError: lalala не определена
 }
 ```
 
