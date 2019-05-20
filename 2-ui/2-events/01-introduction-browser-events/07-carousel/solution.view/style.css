@@ -60,7 +60,7 @@ body {
   padding: 0;
   list-style: none;
   transition: margin-left 250ms;
-  /* удаляем пустое пространство между inline-block li элементами */
+  /* удаляем пустое пространство между элементами li, у которых установлен inline-block */
   /* http://davidwalsh.name/remove-whitespace-inline-block */
   font-size: 0;
 }
