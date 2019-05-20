@@ -2,32 +2,32 @@ importance: 5
 
 ---
 
-# Modal form
+# Модальное диалоговое окно с формой
 
-Create a function `showPrompt(html, callback)` that shows a form with the message `html`, an input field and buttons `OK/CANCEL`.
+Создайте функцию `showPrompt(html, callback)`, которая выводит форму с сообщением (`html`), полем ввода и кнопками `OK/ОТМЕНА`.
 
-- A user should type something into a text field and press `key:Enter` or the OK button, then `callback(value)` is called with the value they entered.
-- Otherwise if the user presses `key:Esc` or CANCEL, then `callback(null)` is called.
+- Пользователь должен ввести что-то в текстовое поле и нажать `key:Enter` или кнопку "OK", после чего должна вызываться функция `callback(value)` со значением поля.
+- Если пользователь нажимает `key:Esc` или кнопку "ОТМЕНА", тогда вызывается `callback(null)`.
 
-In both cases that ends the input process and removes the form.
+В обоих случаях нужно завершить процесс ввода и закрыть диалоговое окно с формой.
 
-Requirements:
+Требования:
 
-- The form should be in the center of the window.
-- The form is *modal*. In other words, no interaction with the rest of the page is possible until the user closes it.
-- When the form is shown, the focus should be inside the `<input>` for the user.
-- Keys `key:Tab`/`key:Shift+Tab` should shift the focus between form fields, don't allow it to leave for other page elements.
+- Форма должна быть в центре окна.
+- Форма является *модальным окном*, это значит, что никакое взаимодействие с остальной частью страницы невозможно, пока пользователь не закроет его.
+- При показе формы, фокус должен находиться сразу внутри `<input>`.
+- Клавиши `key:Tab`/`key:Shift+Tab` должны переключать фокус между полями формы, не позволяя ему переходить к другим элементам страницы.
 
-Usage example:
+Пример использования:
 
 ```js
-showPrompt("Enter something<br>...smart :)", function(value) {
+showPrompt("Введите что-нибудь<br>...умное :)", function(value) {
   alert(value);
 });
 ```
 
-A demo in the iframe:
+Демо в фрейме:
 
 [iframe src="solution" height=160 border=1]
 
-P.S. The source document has HTML/CSS for the form with fixed positioning, but it's up to you to make it modal.
+P.S. HTML/CSS исходного кода к этой задаче содержит форму с фиксированным позиционированием, но вы должны сделать её модальной.

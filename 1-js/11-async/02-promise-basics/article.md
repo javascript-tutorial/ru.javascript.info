@@ -148,7 +148,7 @@ The second argument of `.then` is a function that:
 1. runs when the Promise is rejected, and
 2. receives the error.
 
-For instance, here's a reaction to a successfuly resolved promise:
+For instance, here's a reaction to a successfully resolved promise:
 
 ```js run
 let promise = new Promise(function(resolve, reject) {
@@ -290,7 +290,7 @@ function loadScript(src, callback) {
   script.src = src;
 
   script.onload = () => callback(null, script);
-  script.onerror = () => callback(new Error(`Script load error ` + src));
+  script.onerror = () => callback(new Error(`Script load error for ${src}`));
 
   document.head.append(script);
 }
@@ -307,7 +307,7 @@ function loadScript(src) {
     script.src = src;
 
     script.onload = () => resolve(script);
-    script.onerror = () => reject(new Error("Script load error: " + src));
+    script.onerror = () => reject(new Error(`Script load error for ${src}`));
 
     document.head.append(script);
   });

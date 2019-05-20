@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# Sort by field
+# Сортировать по полю
 
-We've got an array of objects to sort:
+У нас есть массив объектов, который нужно отсортировать:
 
 ```js
 let users = [
@@ -14,23 +14,23 @@ let users = [
 ];
 ```
 
-The usual way to do that would be:
+Обычный способ был бы таким:
 
 ```js
-// by name (Ann, John, Pete)
+// по имени (Ann, John, Pete)
 users.sort((a, b) => a.name > b.name ? 1 : -1);
 
-// by age (Pete, Ann, John)
+// по возрасту (Pete, Ann, John)
 users.sort((a, b) => a.age > b.age ? 1 : -1);
 ```
 
-Can we make it even less verbose, like this?
+Можем мы сделать его более кратким, например, вот так?
 
 ```js
 users.sort(byField('name'));
 users.sort(byField('age'));
 ```
 
-So, instead of writing a function, just put `byField(fieldName)`.
+Таким образом, чтобы вместо функции, мы просто писали `byField(fieldName)`.
 
-Write the function `byField` that can be used for that.
+Напишите функцию `byField`, которая может быть использована для этого.
