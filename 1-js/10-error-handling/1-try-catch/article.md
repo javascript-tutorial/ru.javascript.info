@@ -336,65 +336,65 @@ try {
 
 Теперь блок `catch` становится единственным место для обработки всех ошибок: и для `JSON.parse`, и для других случаев.
 
-## Rethrowing
+## Проброс исключения
 
-In the example above we use `try..catch` to handle incorrect data. But is it possible that *another unexpected error* occurs within the `try {...}` block? Like a variable is undefined or something else, not just that "incorrect data" thing.
+В примере выше мы использовали `try..catch` для обработки некорректных данных. Но возможно ли, что *другая неожиданная ошибка* может возникнуть внутри блока `try {...}`? Такая как неопределенная переменная или какая-то еще, а не только ошибка связанная с некорректными данными.
 
-Like this:
+Пример:
 
 ```js run
-let json = '{ "age": 30 }'; // incomplete data
+let json = '{ "age": 30 }'; // данные неполны
 
 try {
-  user = JSON.parse(json); // <-- forgot to put "let" before user
+  user = JSON.parse(json); // <-- забыл добавить "let" перед user
 
   // ...
 } catch(err) {
   alert("JSON Error: " + err); // JSON Error: ReferenceError: user is not defined
-  // (no JSON Error actually)
+  // (не JSON ошибка на самом деле)
 }
 ```
+ 
+Конечно, возможно все! Программисты совершают ошибки. Даже в утилитах с открытым исходным кодом, используемых миллионами людей на протяжении десятилетий -- вдруг может быть обнаружена ошибка, которая приводит к ужасным взломам (как это случилось с инструментом `ssh`).
 
-Of course, everything's possible! Programmers do make mistakes. Even in open-source utilities used by millions for decades -- suddenly a crazy bug may be discovered that leads to terrible hacks (like it happened with the `ssh` tool).
+В нашем случае `try..catch` предназначен для выявления ошибок связанным с некорректными данными. Но по своей природе, `catch` получает *все* свои ошибки из `try`. Здесь он получает неожиданную ошибку, но все также показывает то же самое сообщение `"JSON Error"`. Это неправильно и также затрудняет отладку кода.
 
-In our case, `try..catch` is meant to catch "incorrect data" errors. But by its nature, `catch` gets *all* errors from `try`. Here it gets an unexpected error, but still shows the same `"JSON Error"` message. That's wrong and also makes the code more difficult to debug.
-
-Fortunately, we can find out which error we get, for instance from its `name`:
+К счастью, мы можем выяснить, какую ошибку мы получим, например, по ее свойству `name`:
 
 ```js run
 try {
   user = { /*...*/ };
 } catch(e) {
 *!*
-  alert(e.name); // "ReferenceError" for accessing an undefined variable
+  alert(e.name); // "ReferenceError" из-за неопределенной переменной
 */!*
 }
 ```
 
-The rule is simple:
+Правило простое:
 
-**Catch should only process errors that it knows and "rethrow" all others.**
+**`catch` должен обрабатывать только те ошибки, которые ему известны, и "пробрасывать" все остальные.**
 
-The "rethrowing" technique can be explained in more detail as:
+Техника "проброс исключения" может быть объяснена более детально как:
 
-1. Catch gets all errors.
-2. In `catch(err) {...}` block we analyze the error object `err`.
-2. If we don't know how to handle it, then we do `throw err`.
+1. Блок `catch` получает все ошибки.
+2. В блоке `catch(err) {...}` мы анализируем объект ошибки `err`.
+3. Если мы не знаем как её обработать, тогда делаем `throw err`.
 
-In the code below, we use rethrowing so that `catch` only handles `SyntaxError`:
+В коде ниже, мы используем проброс исключением таким образом, что `catch` обрабатывает только `SyntaxError`:
 
 ```js run
-let json = '{ "age": 30 }'; // incomplete data
+let json = '{ "age": 30 }'; // данные неполны
 try {
 
   let user = JSON.parse(json);
 
   if (!user.name) {
-    throw new SyntaxError("Incomplete data: no name");
+    throw new SyntaxError("Данные неполны: нет имени");
   }
 
 *!*
-  blabla(); // unexpected error
+  blabla(); // неожиданная ошибка
 */!*
 
   alert( user.name );
@@ -412,11 +412,11 @@ try {
 }
 ```
 
-The error throwing on line `(*)` from inside `catch` block "falls out" of `try..catch` and can be either caught by an outer `try..catch` construct (if it exists), or it kills the script.
+Ошибка в строке `(*)` из блока `catch` "выпадает наружу" и может быть поймана другой внешней конструкцией `try..catch` (если есть), или "повалит скрипт".
 
-So the `catch` block actually handles only errors that it knows how to deal with and "skips" all others.
+Таким образом блок `catch` фактически обрабатывает только те ошибки, с которыми он знает, как справляться, и пропускает остальные.
 
-The example below demonstrates how such errors can be caught by one more level of `try..catch`:
+Пример ниже демонстрирует как такие ошибки могут быть пойманы с помощью еще одного уровня `try..catch`:
 
 ```js run
 function readData() {
@@ -425,13 +425,13 @@ function readData() {
   try {
     // ...
 *!*
-    blabla(); // error!
+    blabla(); // ошибка!
 */!*
   } catch (e) {
     // ...
     if (e.name != 'SyntaxError') {
 *!*
-      throw e; // rethrow (don't know how to deal with it)
+      throw e; // проброс исключения (не знаю как это обработать)
 */!*
     }
   }
@@ -441,12 +441,12 @@ try {
   readData();
 } catch (e) {
 *!*
-  alert( "External catch got: " + e ); // caught it!
+  alert( "Внешний catch поймал: " + e ); // поймал!
 */!*
 }
 ```
 
-Here `readData` only knows how to handle `SyntaxError`, while the outer `try..catch` knows how to handle everything.
+Здесь `readData` знает только как обработать `SyntaxError`, тогда как внеший `try..catch` знает, как обработать все.
 
 ## try..catch..finally
 
