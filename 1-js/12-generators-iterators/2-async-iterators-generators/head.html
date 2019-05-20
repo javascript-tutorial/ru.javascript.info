@@ -4,18 +4,18 @@
 
     while (url) {
       const response = await fetch(url, {
-        headers: {'User-Agent': 'Our script'}, // github requires user-agent header
+        headers: {'User-Agent': 'Our script'}, // github запрашивает заголовок user-agent
       });
 
-      const body = await response.json(); // parses response as JSON (array of commits)
+      const body = await response.json(); // ответ парсится, как JSON (массив коммитов)
 
-      // the URL of the next page is in the headers, extract it
+      // URL следующей страницы в заголовках, извлечём их
       let nextPage = response.headers.get('Link').match(/<(.*?)>; rel="next"/);
       nextPage = nextPage && nextPage[1];
 
       url = nextPage;
 
-      // yield commits one by one, when they finish - fetch a new page url
+      // последовательно выгрузим коммиты один за одним, когда закончим - загрузить url новой страницы
       for(let commit of body) {
         yield commit;
       }
