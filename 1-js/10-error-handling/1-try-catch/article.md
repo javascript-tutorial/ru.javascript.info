@@ -233,67 +233,67 @@ try {
 
 Здесь мы используем блок `catch` только для вывода сообщения, но мы также можем сделать гораздо больше: отправить новый сетевой запрос, предложить посетителю альтернативный способ, отослать информацию об ошибке на сервер для логгирования, ... Намного лучше, чем просто "падение".
 
-## Throwing our own errors
+## Генерация своих ошибок
 
-What if `json` is syntactically correct, but doesn't have a required `name` property?
+Что если `json` синтаксически корректен, но не содержит необходимого свойства `name`?
 
-Like this:
+Например так:
 
 ```js run
-let json = '{ "age": 30 }'; // incomplete data
+let json = '{ "age": 30 }'; // данные неполны
 
 try {
 
-  let user = JSON.parse(json); // <-- no errors
+  let user = JSON.parse(json); // <-- выполнится без ошибок
 *!*
-  alert( user.name ); // no name!
+  alert( user.name ); // нет свойства name!
 */!*
 
 } catch (e) {
-  alert( "doesn't execute" );
+  alert( "не выполнится" );
 }
 ```
 
-Here `JSON.parse` runs normally, but the absence of `name` is actually an error for us.
+Здесь `JSON.parse` выполнится без ошибок, но на самом деле отсутствие свойства `name` для нас ошибка.
 
-To unify error handling, we'll use the `throw` operator.
+Для того, чтобы унифицировать обработку ошибок, мы воспользуемся оператором `throw`.
 
-### "Throw" operator
+### Оператор "throw"
 
-The `throw` operator generates an error.
+Оператор "throw" генерирует ошибку.
 
-The syntax is:
+Синтаксис:
 
 ```js
 throw <error object>
 ```
 
-Technically, we can use anything as an error object. That may be even a primitive, like a number or a string, but it's better to use objects, preferably with `name` and `message` properties (to stay somewhat compatible with built-in errors).
+Технически в качестве объекта ошибки можно передать что угодно. Это может быть даже примитив, число или строка, но всё же лучше, чтобы это был объект, желательно со свойствами `name` и `message` (для совместимости со встроенными ошибками).
 
-JavaScript has many built-in constructors for standard errors: `Error`, `SyntaxError`, `ReferenceError`, `TypeError` and others. We can use them to create error objects as well.
+В JavaScript есть множество встроенных конструкторов для стандартных ошибок: `Error`, `SyntaxError`, `ReferenceError`, `TypeError` и другие. Можно использовать и их для создания объектов ошибки.  
 
-Their syntax is:
+Их синтаксис:
 
 ```js
 let error = new Error(message);
-// or
+// или
 let error = new SyntaxError(message);
 let error = new ReferenceError(message);
 // ...
 ```
 
-For built-in errors (not for any objects, just for errors), the `name` property is exactly the name of the constructor. And `message` is taken from the argument.
+Для встроенных ошибок (не для любых объектов, только для ошибок), свойство `name` -- это в точности имя конструктора. И свойство `message` берется из аргумента.  
 
-For instance:
+Например:
 
 ```js run
-let error = new Error("Things happen o_O");
+let error = new Error("Такое произошло o_O");
 
 alert(error.name); // Error
-alert(error.message); // Things happen o_O
+alert(error.message); // Такое произошло o_O
 ```
 
-Let's see what kind of error `JSON.parse` generates:
+Давайте посмотрим какую ошибку генерирует `JSON.parse`:
 
 ```js run
 try {
@@ -306,35 +306,35 @@ try {
 }
 ```
 
-As we can see, that's a `SyntaxError`.
+Как мы видим, это `SyntaxError`.
 
-And in our case, the absence of `name` could be treated as a syntax error also, assuming that users must have a `name`.
+И в нашем случае отсутствие свойства `name` может рассматриваться как синтаксическая ошибка, предполагая что пользователи должны иметь имена.
 
-So let's throw it:
+Давайте пробросим ее:
 
 ```js run
-let json = '{ "age": 30 }'; // incomplete data
+let json = '{ "age": 30 }'; // данные неполны
 
 try {
 
-  let user = JSON.parse(json); // <-- no errors
+  let user = JSON.parse(json); // <-- выполнится без ошибок
 
   if (!user.name) {
 *!*
-    throw new SyntaxError("Incomplete data: no name"); // (*)
+    throw new SyntaxError("Данные неполны: нет имени"); // (*)
 */!*
   }
 
   alert( user.name );
 
 } catch(e) {
-  alert( "JSON Error: " + e.message ); // JSON Error: Incomplete data: no name
+  alert( "JSON Error: " + e.message ); // JSON Error: Данные неполны: нет имени
 }
 ```
 
-In the line `(*)`, the `throw` operator generates a `SyntaxError` with the given `message`, the same way as JavaScript would generate it itself. The execution of `try` immediately stops and the control flow jumps into `catch`.
+В строке `(*)` оператор `throw` генерирует `SyntaxError` с указанным `message`. Таким же образом JavaScript генерирует ошибку сам. Выполнение блока `try` немедленно останавливается и поток управления прыгает в `catch`.
 
-Now `catch` became a single place for all error handling: both for `JSON.parse` and other cases.
+Теперь блок `catch` становится единственным место для обработки всех ошибок: и для `JSON.parse`, и для других случаев.
 
 ## Rethrowing
 
