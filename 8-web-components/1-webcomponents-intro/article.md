@@ -1,76 +1,76 @@
-# From the orbital height
+# С орбитальной высоты
 
-This section describes a set of modern standards for "web components".
+Этот раздел описывает набор современных стандартов для "веб-компонентов".
 
-As of now, these standards are under development. Some features are well-supported and integrated into the modern HTML/DOM standard, while others are yet in draft stage. You can try examples in any browser, Google Chrome is probably the most up to date with these features. Guess, that's because Google fellows are behind many of the related specifications.
+На текущий момент, эти стандарты находятся в процессе разработки. Некоторые фичи имеют хорошую поддержку и интеграцию в современный стандарт HTML/DOM, в то время как другие пока еще в черновиках. Вы можете попробовать примеры в любом современном браузере (Google Chrome, скорее всего, имеет наиболее полную поддержку, так как ребята из Google стоят за большинством спецификаций по этой теме).
 
-## What's common between...
+## Что общего между...
 
-The whole component idea is nothing new. It's used in many frameworks and elsewhere.
+В идее самостоятельного компонента нет ничего нового. Такой подход используется во многих фреймворках.
 
-Before we move to implementation details, take a look at this great achievement of humanity:
+Прежде чем мы погрузимся в детали реализации, взгляните на это великое достижение человечества:
 
 ![](satellite.jpg)
 
-That's the International Space Station (ISS).
+Это международная космическая станция (МКС).
 
-And this is how it's made inside (approximately):
+А это то, как она устроена (приблизительно):
 
 ![](satellite-expanded.jpg)
 
-The International Space Station:
-- Consists of many components.
-- Each component, in its turn, has many smaller details inside.
-- The components are very complex, much more complicated than most websites.
-- Components are developed internationally, by teams from different countries, speaking different languages.
+Международная космическая станция:
+- Состоит из множества компонентов.
+- Каждый компонент в свою очередь, состоит из множества более мелких деталей.
+- Компоненты имеют очень сложное устройство, и гораздо сложнее большинства сайтов.
+- Компоненты разработаны на международной основе, командами из разных стран и говорящих на разных языках.
 
-...And this thing flies, keeps humans alive in space!
+...И эта штука летает, поддерживая жизни людей в космосе!
 
-How such complex devices are created?
+Как создаются столь сложные устройства?
 
-Which principles we could borrow to make our development same-level reliable and scalable? Or, at least, close to it.
+Какие принципы мы могли бы позаимствовать, чтобы сделать нашу разработку такой же надежной и масштабируемой? Или, по крайней мере, приблизиться к такому уровню.
 
-## Component architecture
+## Компонентная архитектура
 
-The well known rule for developing complex software is: don't make complex software.
+Хорошо известное правило разработки сложного программного обеспечения гласит: не создавай сложное программное обеспечение.
 
-If something becomes complex -- split it into simpler parts and connect in the most obvious way.
+Если что то становится сложным -- раздели это на более простые части и соедини наиболее очевидным способом.
 
-**A good architect is the one who can make the complex simple.**
+**Хороший архитектор -- это тот, кто может сделать сложное простым.**
 
-We can split user interface into visual components: each of them has own place on the page, can "do" a well-described task, and is separate from the others.
+Мы можем разделить пользовательский интерфейс на визуальные компоненты: каждый из них занимает свое место на странице, выполняет определенную задачу, и отделен от остальных.
 
-Let's take a look at a website, for example Twitter.
+Рассмотрим какой-нибудь сайт, например Twitter.
 
-It naturally splits into components:
+Он естественным образом разделен на компоненты:
 
 ![](web-components-twitter.png)
 
-1. Top navigation.
-2. User info.
-3. Follow suggestions.
-4. Submit form.
-5. (and also 6, 7) -- messages.
+1. Верхняя навигация.
+2. Данные пользователя.
+3. Предложения подписаться.
+4. Форма отправки сообщения.
+5. (а так же 6 и 7) -- сообщения.
 
-Components may have subcomponents, e.g. messages may be parts of a higher-level "message list" component. A clickable user picture itself may be a component, and so on.
+Компоненты могут содержать подкомпоненты, например сообщения могут быть частями родительского компонента "список сообщений". Кликабельное фото пользователя может быть самостоятельным компонентом и т.д.
 
-How do we decide, what is a component? That comes from intuition, experience and common sense. Usually it's a separate visual entity that we can describe in terms of what it does and how it interacts with the page. In the case above, the page has blocks, each of them plays its own role, it's logical to make these components.
+Как мы определяем, что является компонентом? Это приходит из соображений здравого смысла, а также с интуицией и опытом. Обычно это объект, отделимый визуально, который мы можем описать с точки зрения того, что он делает и как он взаимодействует со страницей. В примере выше, страница содержит блоки, каждый из которых играет свою роль, и логично выделить их в компоненты.
 
-A component has:
-- its own JavaScript class.
-- DOM structure, managed solely by its class, outside code doesn't access it ("encapsulation" principle).
-- CSS styles, applied to the component.
-- API: events, class methods etc, to interact with other components.
+Компонент имеет:
+- свой собственный JavaScript-класс.
+- DOM-структура управляется исключительно своим классом, и внешний код не имеет к ней доступа (принцип "инкапсуляции").
+- CSS-стили, примененные к компоненту.
+- API: события, методы класса и т.п., для взаимодействия с другими компонентами.
 
-Once again, the whole "component" thing is nothing special.
+Еще раз заметим, в компонентном подходе как таковом нет ничего особенного.
 
-There exist many frameworks and development methodologies to build them, each one with its own bells and whistles. Usually, special CSS classes and conventions are used to provide "component feel" -- CSS scoping and DOM encapsulation.
+Существует множество фреймворков и методов разработки для их создания, каждый из которых со своими плюсами и минусами. Обычно особые CSS классы и соглашения используются для эмуляции компонентов -- области видимости CSS и инкапсуляция DOM.
 
-"Web components" provide built-in browser capabilities for that, so we don't have to emulate them any more.
+"Веб-компоненты" предоставляют встроенные возможности браузера для этого, поэтому нам больше не нужно эмулировать их.
 
-- [Custom elements](https://html.spec.whatwg.org/multipage/custom-elements.html#custom-elements) -- to define custom HTML elements.
-- [Shadow DOM](https://dom.spec.whatwg.org/#shadow-trees) -- to create an internal DOM for the component, hidden from the others.
-- [CSS Scoping](https://drafts.csswg.org/css-scoping/) -- to declare styles that only apply inside the Shadow DOM of the component.
-- [Event retargeting](https://dom.spec.whatwg.org/#retarget) and other minor stuff to make custom components better fit the development.
+- [Пользовательские элементы](https://html.spec.whatwg.org/multipage/custom-elements.html#custom-elements) -- для определения пользовательских HTML-элементов.
+- [Теневой DOM](https://dom.spec.whatwg.org/#shadow-trees) -- для создания внутреннего DOM компонента, скрытого от остальных.
+- [Области видимости CSS](https://drafts.csswg.org/css-scoping/) -- для определения стилей, которые применяются только внутри теневого DOM компонента.
+- [Перенаправление событий](https://dom.spec.whatwg.org/#retarget) и другие мелочи для создания более удобных в разработке пользовательских компонентов.
 
-In the next chapter we'll go into details of "Custom Elements" -- the fundamental and well-supported feature of web components, good on its own.
+В следующей главе мы погрузимся в "пользовательские элементы" -- фундаментальную для веб-компонентов технологию, имеющую хорошую поддержку в браузерах.

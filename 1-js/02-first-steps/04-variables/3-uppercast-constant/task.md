@@ -2,9 +2,9 @@ importance: 4
 
 ---
 
-# Uppercase const?
+# Какие буквы (заглавные или строчные) использовать для имен констант?
 
-Examine the following code:
+Рассмотрим следующий код:
 
 ```js
 const birthday = '18.04.1982';
@@ -12,13 +12,13 @@ const birthday = '18.04.1982';
 const age = someCode(birthday);
 ```
 
-Here we have a constant `birthday` date and the `age` is calculated from `birthday` with the help of some code (it is not provided for shortness, and because details don't matter here).
+У нас есть константа `birthday`, а также `age`, которая вычисляется при помощи некоторого кода, используя значение из `birthday` (в данном случае детали не имеют значения, поэтому код не рассматривается).
 
-Would it be right to use upper case for `birthday`? For `age`? Or even for both?
+Можно ли использовать заглавные буквы для имени `birthday`? А для `age`? Или одновременно для обеих переменных?
 
 ```js
-const BIRTHDAY = '18.04.1982'; // make uppercase?
+const BIRTHDAY = '18.04.1982'; // использовать заглавные буквы?
 
-const AGE = someCode(BIRTHDAY); // make uppercase?
+const AGE = someCode(BIRTHDAY); // а здесь?
 ```
 

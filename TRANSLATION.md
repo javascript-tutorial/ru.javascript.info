@@ -67,6 +67,7 @@ document.querySelector('.hello').innerHTML = text;
 - Используйте букву `ё` ([этот npm-пакет](https://github.com/hcodes/eyo) может проверить текст и вставить её, где нужно)
 - Не знаете, как перевести термин? [Словарь «Веб-стандартов»](https://github.com/web-standards-ru/dictionary/blob/master/dictionary.md) поможет!
 - Названия компаний (Google), библиотек (Jest) и аббревиатуры (DOM) не переводятся.
+- **importance: n** встречающееся в начале задач - служебное поле, перевод не требуется.
 
 ## Соглашение по переводу (глоссарий)
 
@@ -74,7 +75,10 @@ document.querySelector('.hello').innerHTML = text;
 
 | Оригинальный термин | Перевод           |
 |:--------------------|:------------------|
-| backtick            | обратный апостроф |
+| backtick            | обратная кавычка  |
+| character class     | символьный класс  |
+| Summary             | Итого             |
+
 
 ## Ресурсы по переводу
 
@@ -82,3 +86,5 @@ document.querySelector('.hello').innerHTML = text;
 
 * [Берегись канцелярита!](http://www.vavilon.ru/noragal/slovo2.html)
 * [Словесная алгебра](http://www.vavilon.ru/noragal/slovo4.html)
+* [Поиск переводов в контексте](https://context.reverso.net/перевод/)
+* [DeepL - переводчик на нейросетях](https://www.deepl.com/translator)

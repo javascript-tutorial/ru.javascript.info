@@ -1,114 +1,114 @@
-# Sets and ranges [...]
+# Наборы и диапазоны [...]
 
-Several characters or character classes inside square brackets `[…]` mean to "search for any character among given".
+Несколько символов или символьных классов в квадратных скобках `[…]` означают "искать любой символ из заданных".
 
-## Sets
+## Наборы
 
-For instance, `pattern:[eao]` means any of the 3 characters: `'a'`, `'e'`, or `'o'`.
+Для примера, `pattern:[eao]` означает любой из 3-х символов: `'a'`, `'e'` или `'o'`.
 
-That's called a *set*. Sets can be used in a regexp along with regular characters:
+Это называется *набором*. Наборы могут использоваться в регулярных выражениях вместе с обычными символами:
 
 ```js run
-// find [t or m], and then "op"
+// найти [t или m], а за ними "op"
 alert( "Mop top".match(/[tm]op/gi) ); // "Mop", "top"
 ```
 
-Please note that although there are multiple characters in the set, they correspond to exactly one character in the match.
+Обратите внимание, что в наборе несколько символов, но в результате он соответствует ровно одному символу.
 
-So the example above gives no matches:
+Так что приведенный ниже пример не дает совпадений:
 
 ```js run
-// find "V", then [o or i], then "la"
-alert( "Voila".match(/V[oi]la/) ); // null, no matches
+// найти "V", затем [o или i], потом "la"
+alert( "Voila".match(/V[oi]la/) ); // null, нет совпадений
 ```
 
-The pattern assumes:
+Шаблон предполагает:
 
 - `pattern:V`,
-- then *one* of the letters `pattern:[oi]`,
-- then `pattern:la`.
+- затем *один* из символов `pattern:[oi]`,
+- потом `pattern:la`.
 
-So there would be a match for `match:Vola` or `match:Vila`.
+В этом случае совпадениями могут быть `match:Vola` или `match:Vila`.
 
-## Ranges
+## Диапазоны
 
-Square brackets may also contain *character ranges*.
+Еще квадратные скобки могут содержать *диапазоны символов*.
 
-For instance, `pattern:[a-z]` is a character in range from `a` to `z`, and `pattern:[0-5]` is a digit from `0` to `5`.
+К примеру, `pattern:[a-z]` соответствует символу в диапазоне от `a` до `z`, или `pattern:[0-5]` -- цифра от `0` до `5`.
 
-In the example below we're searching for `"x"` followed by two digits or letters from `A` to `F`:
+В приведенном ниже примере мы ищем `"x"`, за которым следуют две цифры или буквы от `A` до `F`:
 
 ```js run
 alert( "Exception 0xAF".match(/x[0-9A-F][0-9A-F]/g) ); // xAF
 ```
 
-Please note that in the word `subject:Exception` there's a substring `subject:xce`. It didn't match the pattern, because the letters are lowercase, while in the set `pattern:[0-9A-F]` they are uppercase.
+Обратите внимание, что в слове `subject:Exception` есть подстрока `subject:xce`. Это не соответствует шаблону, потому что буквы строчные, а в наборе `pattern:[0-9A-F]` они прописные.
 
-If we want to find it too, then we can add a range `a-f`: `pattern:[0-9A-Fa-f]`. The `i` flag would allow lowercase too.
+Если мы хотим найти и то и другое, то мы можем добавить еще диапазон `a-f`: `pattern:[0-9A-Fa-f]`. Флаг `i` также допускает использование строчных букв.
 
-**Character classes are shorthands for certain character sets.**
+**Символьные Классы являются сокращениями для определенных наборов символов.**
 
-For instance:
+Например:
 
-- **\d** -- is the same as `pattern:[0-9]`,
-- **\w** -- is the same as `pattern:[a-zA-Z0-9_]`,
-- **\s** -- is the same as `pattern:[\t\n\v\f\r ]` plus few other unicode space characters.
+- **\d** -- то же самое, что и `pattern:[0-9]`,
+- **\w** -- то же самое, что и `pattern:[a-zA-Z0-9_]`,
+- **\s** -- то же самое, что и `pattern:[\t\n\v\f\r ]` плюс несколько других символов Юникода.
 
-We can use character classes inside `[…]` as well.
+Еще мы можем использовать символьные классы внутри `[…]`.
 
-For instance, we want to match all wordly characters or a dash, for words like "twenty-third". We can't do it with `pattern:\w+`, because `pattern:\w` class does not include a dash. But we can use `pattern:[\w-]`.
+Например, мы хотим найти все символы, используемые в словах, а также тире, чтобы найти слова вида "twenty-third". Мы не можем сделать это с помощью `pattern:\w+`, потому что класс `pattern:\w` не содержит тире. Но можно использовать `pattern:[\w-]`.
 
-We also can use a combination of classes to cover every possible character, like `pattern:[\s\S]`. That matches spaces or non-spaces -- any character. That's wider than a dot `"."`, because the dot matches any character except a newline.
+Можем использовать и несколько классов вместе, например `pattern:[\s\S]` означает "пробельные символы или не-пробельные символы" -- то есть, вообще, любой символ. Это шире, чем точка `"."`, так как точка соответствует любому символу, кроме перевода строки (если не указан флаг `s`).
 
-## Excluding ranges
+## Исключающие диапазоны
 
-Besides normal ranges, there are "excluding" ranges that look like `pattern:[^…]`.
+Помимо обычных диапазонов, есть "исключающие" диапазоны, которые выглядят как `pattern:[^…]`.
 
-They are denoted by a caret character `^` at the start and match any character *except the given ones*.
+Они обозначаются символом каретки `^` в начале диапазона и соответствуют любому символу *за исключением заданных*.
 
-For instance:
+Например:
 
-- `pattern:[^aeyo]` -- any character except  `'a'`, `'e'`, `'y'` or `'o'`.
-- `pattern:[^0-9]` -- any character except a digit, the same as `\D`.
-- `pattern:[^\s]` -- any non-space character, same as `\S`.
+- `pattern:[^aeyo]` -- любой символ, за исключением `'a'`, `'e'`, `'y'` или `'o'`.
+- `pattern:[^0-9]` -- любой символ, за исключением цифры, то же, что и `\D`.
+- `pattern:[^\s]` -- любой непробельный символ, то же, что и `\S`.
 
-The example below looks for any characters except letters, digits and spaces:
+Пример ниже ищет любые символы, кроме букв, цифр и пробелов:
 
 ```js run
-alert( "alice15@gmail.com".match(/[^\d\sA-Z]/gi) ); // @ and .
+alert( "alice15@gmail.com".match(/[^\d\sA-Z]/gi) ); // @ и .
 ```
 
-## No escaping in […]
+## В экранировании нет необходимости
 
-Usually when we want to find exactly the dot character, we need to escape it like `pattern:\.`. And if we need a backslash, then we use `pattern:\\`.
+Обычно, когда мы хотим найти именно точку, нам нужно экранировать её как `pattern:\.`. А если нам нужна обратная косая черта, тогда используем `pattern:\\`.
 
-In square brackets the vast majority of special characters can be used without escaping:
+В квадратных скобках большинство специальных символов можно использовать без экранирования:
 
-- A dot `pattern:'.'`.
-- A plus `pattern:'+'`.
-- Parentheses `pattern:'( )'`.
-- Dash `pattern:'-'` in the beginning or the end (where it does not define a range).
-- A caret `pattern:'^'` if not in the beginning (where it means exclusion).
-- And the opening square bracket `pattern:'['`.
+- Точка `pattern:'.'`.
+- Плюс `pattern:'+'`.
+- Круглые скобки `pattern:'( )'`.
+- Тире `pattern:'-'` в начале или в конце (где этот символ не определяет диапазон).
+- Символ каретки `pattern:'^'`, если не в начале (где это означает исключение).
+- И открывающая квадратная скобка `pattern:'['`.
 
-In other words, all special characters are allowed except where they mean something for square brackets.
+Другими словами, разрешены все специальные символы, кроме случаев, когда они означают что-то особое для диапазонов.
 
-A dot `"."` inside square brackets means just a dot. The pattern `pattern:[.,]` would look for one of characters: either a dot or a comma.
+Точка `"."` внутри квадратных скобок -- просто точка. Шаблон `pattern:[.,]` будет искать один из символов: точку или запятую.
 
-In the example below the regexp `pattern:[-().^+]` looks for one of the characters `-().^+`:
+В приведенном ниже примере регулярное выражение `pattern:[-().^+]` ищет один из символов `-().^+`:
 
 ```js run
-// No need to escape
+// Нет необходимости в экранировании
 let reg = /[-().^+]/g;
 
-alert( "1 + 2 - 3".match(reg) ); // Matches +, -
+alert( "1 + 2 - 3".match(reg) ); // Совпадения +, -
 ```
 
-...But if you decide to escape them "just in case", then there would be no harm:
+...Но если вы решите экранировать "на всякий случай", то не будет никакого вреда:
 
 ```js run
-// Escaped everything
+// Экранирование всех возможных символов
 let reg = /[\-\(\)\.\^\+]/g;
 
-alert( "1 + 2 - 3".match(reg) ); // also works: +, -
+alert( "1 + 2 - 3".match(reg) ); // также работает: +, -
 ```
