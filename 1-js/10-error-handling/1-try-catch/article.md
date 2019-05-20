@@ -165,51 +165,51 @@ try {
 }
 ```
 
-## Optional "catch" binding
+## Необязательное связывание "catch"
 
 [recent browser=new]
 
-If we don't need error details, `catch` may omit it:
+Если вам не нужны детали ошибки, `catch` можно пропустить:
 
 ```js
 try {
   // ...
 } catch {
-  // error object omitted
+  // объект ошибки пропущен
 }
 ```
 
-## Using "try..catch"
+## Использование "try..catch"
 
-Let's explore a real-life use case of `try..catch`.
+Давайте рассмотрим реальные случаи использования `try..catch`.
 
-As we already know, JavaScript supports the [JSON.parse(str)](mdn:js/JSON/parse) method to read JSON-encoded values.
+Как мы уже знаем, JavaScript поддерживает метод [JSON.parse(str)](mdn:js/JSON/parse) для чтения закодированных JSON значений.
 
-Usually it's used to decode data received over the network, from the server or another source.
+Обычно он используется для декодирования данных полученных по сети, от сервера или из другого источника.
 
-We receive it and call `JSON.parse`, like this:
+Мы получаем их и вызываем `JSON.parse`, вот так:
 
 ```js run
-let json = '{"name":"John", "age": 30}'; // data from the server
+let json = '{"name":"John", "age": 30}'; // данные с сервера
 
 *!*
-let user = JSON.parse(json); // convert the text representation to JS object
+let user = JSON.parse(json); // преобразовали текстовое представление в JS объект
 */!*
 
-// now user is an object with properties from the string
+// теперь user -- это объект со свойствами из строки
 alert( user.name ); // John
 alert( user.age );  // 30
 ```
 
-You can find more detailed information about JSON in the <info:json> chapter.
+Вы можете найти более детальную информацию о JSON в главе <info:json>.
 
-**If `json` is malformed, `JSON.parse` generates an error, so the script "dies".**
+**Если `json` некорректен, `JSON.parse` генерирует ошибку, то есть скрипт "падает".**
 
-Should we be satisfied with that? Of course, not!
+Устроит ли нас такое поведение? Конечно нет!
 
-This way, if something's wrong with the data, the visitor will never know that (unless they open the developer console). And people really don't like when something "just dies" without any error message.
+Получается, что если вдруг что-то не так с данными, то посетитель никогда (если, конечно, не откроет консоль) об этом не узнает. А люди очень не любят, когда что-то "просто падает", без всякого сообщения об ошибке.
 
-Let's use `try..catch` to handle the error:
+Давайте используем `try..catch` для обработки ошибки:
 
 ```js run
 let json = "{ bad json }";
@@ -217,21 +217,21 @@ let json = "{ bad json }";
 try {
 
 *!*
-  let user = JSON.parse(json); // <-- when an error occurs...
+  let user = JSON.parse(json); // <-- тут возникает ошибка...
 */!*
-  alert( user.name ); // doesn't work
+  alert( user.name ); // не сработает
 
 } catch (e) {
 *!*
-  // ...the execution jumps here
-  alert( "Our apologies, the data has errors, we'll try to request it one more time." );
+  // ...выполнения прыгает сюда
+  alert( "Извините, в данных ошибка, мы попробуем получить их ещё раз." );
   alert( e.name );
   alert( e.message );
 */!*
 }
 ```
 
-Here we use the `catch` block only to show the message, but we can do much more: send a new network request, suggest an alternative to the visitor, send information about the error to a logging facility, ... . All much better than just dying.
+Здесь мы используем блок `catch` только для вывода сообщения, но мы также можем сделать гораздо больше: отправить новый сетевой запрос, предложить посетителю альтернативный способ, отослать информацию об ошибке на сервер для логгирования, ... Намного лучше, чем просто "падение".
 
 ## Throwing our own errors
 
