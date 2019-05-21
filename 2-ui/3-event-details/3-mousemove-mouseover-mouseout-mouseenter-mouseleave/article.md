@@ -1,4 +1,4 @@
-# Движение: mouseover/-out, mouseenter/-leave
+# Движение: mouseover/out, mouseenter/leave
 
 В этой главе мы более подробно рассмотрим события, возникающие при движении указателя (курсора) мыши над элементами страницы.
 
@@ -84,7 +84,7 @@
 
 На примере ниже можно увидеть забавную последовательность сгенерированных событий.
 
-Красный `<div>` находится внутри синего. На синем `<div>`-е определены обработчики событий `mouseover/-out`, которые отображают всю информацию по ним в текстовое поле ниже.
+Красный `<div>` находится внутри синего. На синем `<div>`-е определены обработчики событий `mouseover/out`, которые отображают всю информацию по ним в текстовое поле ниже.
 
 Попробуйте зайти курсором на синий элемент, а затем перейдите на красный -- и смотрите, какие события сгенерировались:
 
@@ -96,43 +96,43 @@
 
 Таким образом, для обработчика, который не принимает во внимание свойство `target`, ситуация выглядит так, как будто курсор ушёл с родительского элемента, запустив `mouseout` на строке `(2)`, а затем вернулся обратно, запустив `mouseover` на строке `(3)`.
 
-Если постоянно передвигать курсор мышки между элементами, то мы получим много "ложных" срабатываний обработчиков. В простых случаях это может быть незаметно для пользователя, но в сложных случаях могут проявляться нежелательные побочные эффекты.
+Если постоянно передвигать курсор мышки с/на элемент, то мы получим много "ложных" срабатываний обработчиков. В простых случаях это может быть незаметно для пользователя, но в сложных случаях могут проявляться нежелательные побочные эффекты.
 
 Чтобы их избежать, можно использовать события `mouseenter/mouseleave`.
 
-## Events mouseenter and mouseleave
+## События mouseenter и mouseleave
 
-Events `mouseenter/mouseleave` are like `mouseover/mouseout`. They also trigger when the mouse pointer enters/leaves the element.
+События `mouseenter/mouseleave` похожи на `mouseover/mouseout`. Они тоже генерируются, когда курсор мыши заходит на элемент или покидает его.
 
-But there are two differences:
+Но есть и пара важных отличий:
 
-1. Transitions inside the element are not counted.
-2. Events `mouseenter/mouseleave` do not bubble.
+1. Переходы внутри элемента на дочерние элементы не считаются.
+2. События `mouseenter/mouseleave` не всплывают.
 
-These events are intuitively very clear.
+Эти события интуитивно очень понятны.
 
-When the pointer enters an element -- the `mouseenter` triggers, and then doesn't matter where it goes while inside the element. The `mouseleave` event only triggers when the cursor leaves it.
+Когда курсор становится над элементом -- генерируется `mouseenter`, и не имеет значения, где именно находится курсор внутри элемента. Событие `mouseleave` происходит, когда курсор покидает элемент.
 
-If we make the same example, but put `mouseenter/mouseleave` on the blue `<div>`, and do the same -- we can see that events trigger only on entering and leaving the blue `<div>`. No extra events when going to the red one and back. Children are ignored.
+Если мы вернёмся к одному из прошлых примеров и в этот раз поставим обработчики событий `mouseenter/mouseleave` на синий `<div>`, а далее произведем те же действия -- мы увидим, что сгенерируются только события, связанные с движением курсора относительно синего `<div>`. Ничего не произойдет при переходе на красный `<div>` и обратно. Переходы с/на дочерние элементы игнорируются.
 
 [codetabs height=340 src="mouseleave"]
 
-## Event delegation
+## Делегирование событий
 
-Events `mouseenter/leave` are very simple and easy to use. But they do not bubble. So we can't use event delegation with them.
+События `mouseenter/leave` простые и легкие в использовании. Но они не всплывают. Таким образом, мы не можем их делегировать.
 
-Imagine we want to handle mouse enter/leave for table cells. And there are hundreds of cells.
+Представьте ситуацию, что мы хотим обрабатывать события, сгенерированные при движении курсора по ячейкам таблицы. И в таблице сотни ячеек.
 
-The natural solution would be -- to set the handler on `<table>` and process events there. But `mouseenter/leave` don't bubble. So if such event happens on `<td>`, then only a handler on that `<td>` can catch it.
+Очевидное решение -- определить обработчик на родительском элементе `<table>` и там обрабатывать возникающие события. Но `mouseenter/leave` не всплывают. То есть если событие происходит на ячейке `<td>`, то только обработчик на `<td>` может поймать его.
 
-Handlers for `mouseenter/leave` on `<table>` only trigger on entering/leaving the whole table. It's impossible to get any information about transitions inside it.
+Обработчики событий `mouseenter/leave` на `<table>` срабатывают, если курсор оказывается над таблицей в целом или же уходит с неё. Невозможно получить какую-либо информацию о переходах между ячейками внутри таблицы.
 
-Not a problem -- let's use `mouseover/mouseout`.
+Не проблема -- давайте использовать `mouseover/mouseout`.
 
-A simple handler may look like this:
+Простой обработчик может выглядеть так:
 
 ```js
-// let's highlight cells under mouse
+// Давайте выделим ячейки под курсором
 table.onmouseover = function(event) {
   let target = event.target;
   target.style.background = 'pink';
@@ -148,38 +148,38 @@ table.onmouseout = function(event) {
 [codetabs height=480 src="mouseenter-mouseleave-delegation"]
 ```
 
-These handlers work when going from any element to any inside the table.
+Эти обработчики срабатывают, когда курсор передвигается между элементами внутри таблицы (не только `<td>`).
 
-But we'd like to handle only transitions in and out of `<td>` as a whole. And highlight the cells as a whole. We don't want to handle transitions that happen between the children of `<td>`.
+Но мы бы хотели, чтобы они срабатывали только на переходах между ячейками и выделяли ячейку целиком. Мы не хотим обрабатывать события переходов курсора между элементами внутри ячейки `<td>`.
 
-One of solutions:
+Одно из решений:
 
-- Remember the currently highlighted `<td>` in a variable.
-- On `mouseover` -- ignore the event if we're still inside the current `<td>`.
-- On `mouseout` -- ignore if we didn't leave the current `<td>`.
+- Запоминать выделенную в данный момент ячейку `<td>` в переменную.
+- На `mouseover` -- игнорировать событие, если мы всё ещё внутри той же самой ячейки `<td>`.
+- На `mouseout` -- игнорировать событие, если это не уход с текущей ячейки `<td>`.
 
-That filters out "extra" events when we are moving between the children of `<td>`.
+Это отфильтровывает все лишние события, возникающие при переходе курсора между дочерними элементами `<td>`.
 
 ```offline
-The details are in the [full example](sandbox:mouseenter-mouseleave-delegation-2).
+Детали реализации в [полном примере](sandbox:mouseenter-mouseleave-delegation-2).
 ```
 
 ```online
-Here's the full example with all details:
+Полный пример со всеми деталями:
 
 [codetabs height=380 src="mouseenter-mouseleave-delegation-2"]
 
-Try to move the cursor in and out of table cells and inside them. Fast or slow -- doesn't matter. Only `<td>` as a whole is highlighted unlike the example before.
+Попробуйте подвигать курсор между ячейками и внутри них. Быстро или медленно - без разницы. В отличие от предыдущего примера выделяется только сама ячейка `<td>`.
 ```
 
 
-## Summary
+## Итого
 
-We covered events `mouseover`, `mouseout`, `mousemove`, `mouseenter` and `mouseleave`.
+Мы рассмотрели события `mouseover`, `mouseout`, `mousemove`, `mouseenter` и `mouseleave`.
 
-Things that are good to note:
+Стоит отметить, что:
 
-- A fast mouse move can make `mouseover, mousemove, mouseout` to skip intermediate elements.
-- Events `mouseover/out` and `mouseenter/leave` have an additional target: `relatedTarget`. That's the element that we are coming from/to, complementary to `target`.
-- Events `mouseover/out` trigger even when we go from the parent element to a child element. They assume that the mouse can be only over one element at one time -- the deepest one.
-- Events `mouseenter/leave` do not bubble and do not trigger when the mouse goes to a child element. They only track whether the mouse comes inside and outside the element as a whole.
+- Быстрое движение мышкой может не запустить события `mouseover, mousemove, mouseout` на промежуточных элементах.
+- События `mouseover/out` и `mouseenter/leave` имеют дополнительное свойство: `relatedTarget`. Оно дополняет свойство `target` и содержит ссылку на элемент, с/на который мы переходим.
+- События `mouseover/out` запускаются, даже когда происходит переход с родительского на дочерний элемент. В этом случае предполагается, что курсор мыши может быть только над одним элементом в любой момент времени - над самым глубоко вложенным.
+- События `mouseenter/leave` не всплывают и не генерируются, когда курсор переходит на дочерний элемент. Они следят только за переходами с/на сам элемент, не принимая во внимание его дочерние элементы.
