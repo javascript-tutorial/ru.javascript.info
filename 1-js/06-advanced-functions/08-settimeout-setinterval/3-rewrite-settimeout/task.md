@@ -2,7 +2,7 @@ importance: 4
 
 ---
 
-# Перепишите setTimeout с помощью setInterval
+# Перепишите setTimeout на setInterval
 
 Эта функция использует вложенный `setTimeout` для разделения задачи на части.
 
