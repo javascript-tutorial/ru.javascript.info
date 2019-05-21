@@ -1,39 +1,39 @@
-# Infinite backtracking problem
+# Проблема поиска с вечным возвратом
 
-Some regular expressions are looking simple, but can execute veeeeeery long time, and even "hang" the JavaScript engine.
+Некоторые регулярные выражения выглядят просто, но могут выполняться оооочень долго, и даже "подвешивать" движок JavaScript.
 
-Sooner or later most developers occasionally face such behavior.
+Рано или поздно большинство разработчиков с этим сталкиваются.
 
-The typical situation -- a regular expression works fine sometimes, but for certain strings it "hangs"  consuming 100% of CPU.
+Типичная ситуация: регулярное выражение работает нормально, но иногда, с некоторыми строками, зависает и потребляет 100% CPU.
 
-In a web-browser it kills the page. Not a good thing for sure.
+В веб-браузере такой случай убивает страницу. Явно плохая ситуация.
 
-For server-side Javascript it may become a vulnerability, and it uses regular expressions to process user data. Bad input will make the process hang, causing denial of service. The author personally saw and reported such vulnerabilities even for very well-known and widely used programs.
+Такой код, выполняемый на стороне сервера, может стать уязвимостью, а он использует регулярные выражения для обработки пользовательских данных. Некорректный ввод данных приведет к зависанию процесса и, как следствие, отказу сервиса. Автор(?) лично видел и сообщал о таких уязвимостях даже для очень известных и широко используемых программ.
 
-So the problem is definitely worth to deal with.
+Так что проблема, несомненно, достойна рассмотрения.
 
-## Introduction
+## Вступление
 
-The plan will be like this:
+План будет следующим:
 
-1. First we see the problem how it may occur.
-2. Then we simplify the situation and see why it occurs.
-3. Then we fix it.
+1. Сперва мы рассмотрим проблему так, как она может произойти.
+2. Затем мы упростим ситуацию и разберемся почему так происходит.
+3. И, на конец, исправим её.
 
-For instance let's consider searching tags in HTML.
+Например, давайте рассмотрим поиск тегов в HTML.
 
-We want to find all tags, with or without attributes -- like `subject:<a href="..." class="doc" ...>`. We need the regexp to work reliably, because HTML comes from the internet and can be messy.
+Мы хотим найти все теги с (или без) атрибутами, типа: `subject:<a href="..." class="doc" ...>`. Нужно чтобы регулярное выражение работало надёжно, так как HTML приходит из Интернета и может быть запутанным.
 
-In particular, we need it to match tags like `<a test="<>" href="#">` -- with `<` and `>` in attributes. That's allowed by [HTML standard](https://html.spec.whatwg.org/multipage/syntax.html#syntax-attributes).
+В частности, нам нужно, чтобы оно соответствовало тегам типа: `<a test="<>" href="#">` -- т.е. с символами `<` и `>` в атрибутах, так как это поддерживается [стандартом HTML](https://html.spec.whatwg.org/multipage/syntax.html#syntax-attributes).
 
-Now we can see that a simple regexp like `pattern:<[^>]+>` doesn't work, because it stops at the first `>`, and we need to ignore `<>` if inside an attribute.
+Как мы видим, простое регулярное выражение `pattern:<[^>]+>` не работает, потому что оно останавливает поиск на первом `>`, а нам нужно игнорировать `<>` если они являются частью атрибута.
 
 ```js run
-// the match doesn't reach the end of the tag - wrong!
+// поиск не достигает конца тега - неверно!
 alert( '<a test="<>" href="#">'.match(/<[^>]+>/) ); // <a test="<>
 ```
 
-To correctly handle such situations we need a more complex regular expression. It will have the form  `pattern:<tag (key=value)*>`.
+Чтобы поддерживать такие случаи корректно  To correctly handle such situations we need a more complex regular expression. It will have the form  `pattern:<tag (key=value)*>`.
 
 1. For the `tag` name: `pattern:\w+`,
 2. For the `key` name: `pattern:\w+`,
