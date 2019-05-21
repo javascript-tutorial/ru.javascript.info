@@ -10,16 +10,16 @@ function pow(x,n)  // <- отсутствует пробел между аргу
   return result;
 }
 
-let x=prompt("x?",''), n=prompt("n?",'') // <-- technically possible,
-// but better make it 2 lines, also there's no spaces and missing ;
-if (n<0)  // <- no spaces inside (n < 0), and should be extra line above it
-{   // <- figure bracket on a separate line
-  // below - long lines can be split into multiple lines for improved readability
-  alert(`Power ${n} is not supported, please enter an integer number greater than zero`);
+let x=prompt("x?",''), n=prompt("n?",'') // <-- технически допустимо,
+// но лучше написать в 2 строки, также нет пробелов и ; точки с запятой
+if (n<0)  // <- нет пробелов, стоит добавить строку от предыдущего
+{   // <- фигурная скобка на отдельной строке
+  // ниже - слишком длинная строка, лучше разбить для улучшения читаемости
+  alert(`Степень ${n} не поддерживается, введите целую степень, большую 0`);
 }
-else // <- could write it on a single line like "} else {"
+else // <- можно на одной строке, вместе: "} else {"
 {
-  alert(pow(x,n))  // no spaces and missing ;
+  alert(pow(x,n))  // вложенный вызов функции, нет пробелов и ;
 }
 ```
 
@@ -41,7 +41,7 @@ let n = prompt("n?", "");
 
 if (n < 0) {
   alert(`Степень ${n} не поддерживается,
-    пожалуйста введите целую степень, большую 0`);
+    введите целую степень, большую 0`);
 } else {
   alert( pow(x, n) );
 }

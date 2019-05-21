@@ -1,12 +1,12 @@
 # Советы по стилю кода
 
-Наш код должен быть максимально читаемым и понятным.
+Код должен быть максимально читаемым и понятным.
 
-That is actually the art of programming -- to take a complex task and code it in a way that is both correct and human-readable.  /Для этого нужен хороший стиль написания кода. В этой главе мы рассмотрим компоненты такого стиля.
+Это и есть искусство программирования - взять сложную задачу и написать ее так, чтобы она была правильной и удобочитаемой. Для этого нужен _хороший стиль_ написания кода. В этой главе мы рассмотрим компоненты такого стиля.
 
 ## Синтаксис
 
-Шпаргалка с правилами синтаксиса (их варианты детально разобраны далее):
+Шпаргалка с правилами синтаксиса (детально их варианты разобраны далее):
 
 ![](code-style.png)
 <!--
@@ -25,8 +25,8 @@ let x = prompt("x?", "");
 let n = prompt("n?", "");
 
 if (n < 0) {
-  alert(`Power ${n} is not supported,
-    please enter an integer number, greater than 0`);
+  alert(`Степень ${n} не поддерживается,
+   введите целую степень, большую 0`);
 } else {
   alert( pow(x, n) );
 }
@@ -36,67 +36,67 @@ if (n < 0) {
 
 Не всё здесь однозначно, так что разберём эти правила подробнее.
 
-```warn header="Irony Detected"
-Здесь нет ничего основанного на камне. Это стилевые предпочтения, а не религиозные догмы.
+```warn header="Ирония"
+Здесь нет чего-либо высеченного на камне. Это стилевые предпочтения, а не религиозные догмы.
 ```
 
 ### Фигурные скобки
 
-In most JavaScript projects curly braces are written in "Egyptian" style with the opening brace on the same line as the corresponding keyword -- not on a new line. There should also be a space before the opening bracket, like this:
+В большинстве JavaScript проектов фигурные скобки пишутся в так называемом "египетском" стиле с открывающей скобкой в той же строке, что и соответствующее ключевое слово - не в новой строке. Перед открывающей скобкой должен быть пробел, как здесь:
 
 ```js
 if (condition) {
-  // do this
-  // ...and that
-  // ...and that
+  // делай это
+  // ...и это
+  // ...и потом это
 }
 ```
 
-A single-line construct is an important edge case. Should we use brackets at all? If yes, then where?
+Однострочная конструкция - важный крайний случай. Должны ли мы использовать скобки вообще? Если да, то где?
 
-Here are the annotated variants so you can judge their readability for yourself:
+Ниже приведены аннотированные варианты, чтобы вы могли оценить их читаемость самостоятельно:
 
 <!--
 ```js no-beautify
-if (n < 0) {alert(`Power ${n} is not supported`);}
+if (n < 0) {alert(`Степень ${n} не поддерживается`);}
 
-if (n < 0) alert(`Power ${n} is not supported`);
+if (n < 0) alert(`Степень ${n} не поддерживается`);
 
 if (n < 0)
-  alert(`Power ${n} is not supported`);
+  alert(`Степень ${n} не поддерживается`);
 
 if (n < 0) {
-  alert(`Power ${n} is not supported`);
+  alert(`Степень ${n} не поддерживается`);
 }
 ```
 -->
 ![](figure-bracket-style.png)
 
-In summary:
-- For very short code, one line is acceptable. For example: `if (cond) return null`.
-- But a separate line for each statement in brackets is usually easier to read.
+В итоге:
+- Для очень короткого кода допустима одна строка. Например: `if (cond) return null`.
+- Но отдельная строка для каждого оператора в скобках обычно легче для восприятия.
 
 ### Длина строки
 
-No one likes to read a long horizontal line of code. It's best practice to split them up and limit the length of your lines.
+Никто не любит читать длинные горизонтальные строки кода. Лучше всего разбить их на части и ограничить длину строк.
 
-The maximum line length should be agreed upon at the team-level. It's usually 80 or 120 characters.
+Максимальную длину строки согласовывают в команде. Обычно это `80` или `120` символов.
 
 ### Отступы
 
-There are two types of indents:
+Существует два типа отступов:
 
-- **Horizontal indents: 2 or 4 spaces.**
+- **Горизонтальные отступы, при вложенности – два (или четыре) пробела.**
 
-    A horizontal indentation is made using either 2 or 4 spaces or the "Tab" symbol. Which one to choose is an old holy war. Spaces are more common nowadays.
+    Горизонтальный отступ выполняется с помощью 2 или 4 пробелов, или символа "Tab". Какой из них выбрать - это уже старый холивар. Пробелы более распространены в наши дни.
 
-    One advantage of spaces over tabs is that spaces allow more flexible configurations of indents than the "Tab" symbol.
+    Одним из преимуществ пробелов над тамбуляцией заключается в том, что пробелы допускают более гибкие конфигурации отступов, чем символ "Tab".
 
-    For instance, we can align the arguments with the opening bracket, like this:
+    Например, мы можем выровнять аргументы относительно открывающей скобки:
 
     ```js no-beautify
     show(parameters,
-         aligned, // 5 spaces padding at the left  
+         aligned, // 5 пробелов слева  
          one,
          after,
          another
@@ -105,9 +105,9 @@ There are two types of indents:
     }
     ```
 
-- **Vertical indents: empty lines for splitting code into logical blocks.**
+- **Вертикальные отступы, для лучшей разбивки кода – перевод строки**
 
-    Even a single function can often be divided into logical blocks. In the example below, the initialization of variables, the main loop and returning the result are split vertically:
+    Даже одну функцию часто можно разделить на логические блоки. В примере ниже разделены инициализация переменных, основной цикл и возвращаемый результат:
 
     ```js
     function pow(x, n) {
@@ -121,38 +121,38 @@ There are two types of indents:
     }
     ```
 
-    Insert an extra newline where it helps to make the code more readable. There should not be more than nine lines of code without a vertical indentation.
+    Вставляйте дополнительный перевод строки туда, где это сделает код более читаемым. Не должно быть более 9 строк кода подряд без вертикального отступа.
 
 ### Точка с запятой
 
-A semicolon should be present after each statement, even if it could possibly be skipped.
+Точки с запятой должны присутствовать после каждого утверждения, даже если их, казалось бы, можно пропустить.
 
-There are languages where a semicolon is truly optional and it is rarely used. In JavaScript, though, there are cases where a line break is not interpreted as a semicolon, leaving the code vulnerable to errors.
+Есть языки, в которых точка с запятой необязательна и редко используется. Однако в JavaScript бывают случаи, когда перенос строки не интерпретируется как точка с запятой, что делает код уязвимым для ошибок.
 
-As you become more mature as a programmer, you may choose a no-semicolon style like [StandardJS](https://standardjs.com/). Until then, it's best to use semicolons to avoid possible pitfalls.
+Когда вы станете более зрелым программистом, вы можете выбрать стиль без точки с запятой, такой как в [StandardJS](https://standardjs.com/). До тех пор лучше использовать точку с запятой, чтобы избежать возможных подводных камней.
 
 ### Уровни вложенности
 
-Try to avoid nesting code too many levels deep.
+Уровней вложенности должно быть немного.
 
-Sometimes it's a good idea to use the ["continue"](info:while-for#continue) directive in a loop to avoid extra nesting.
+Иногда полезно использовать директиву ["continue"](info:while-for#continue) в цикле, чтобы избежать лишней вложенности.
 
-For example, instead of adding a nested `if` conditional like this:
+Например, вместо добавления вложенного условия `if`, как это:
 
 ```js
 for (let i = 0; i < 10; i++) {
-  if (cond) {
-    ... // <- one more nesting level
+  if (подходит) {
+    ... // <- еще один уровень вложенности
   }
 }
 ```
 
-We can write:
+Используйте:
 
 ```js
 for (let i = 0; i < 10; i++) {
-  if (!cond) *!*continue*/!*;
-  ...  // <- no extra nesting level
+  if (*!* !не*/!* подходит) *!*continue*/!*;
+  ...  // <- нет лишнего уровня вложенности
 }
 ```
 
