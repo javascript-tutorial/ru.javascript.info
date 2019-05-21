@@ -1,188 +1,188 @@
 # Promise
 
-Imagine that you're a top singer, and fans ask day and night for your upcoming single.
+Представьте, что вы известный певец, которого фанаты постоянно донимают расспросами о предстоящем сингле.
 
-To get some relief, you promise to send it to them when it's published. You give your fans a list to which they can subscribe for updates. They can fill in their email addresses, so that when the song becomes available, all subscribed parties instantly receive it. And even if something goes very wrong, say, if plans to publish the song are cancelled, they will still be notified.
+Чтобы получить передышку, вы обещаете разослать его им, когда он будет опубликован. Вы даете фанатам список, в который они могут записаться, чтобы получить новости. Они могут оставить свой e-mail, чтобы когда песня выйдет сразу получить её. И даже больше, если, например, вы передумаете выпускать песню, они также получат уведомление об этом.
 
-Everyone is happy, because the people don't crowd you any more, and fans, because they won't miss the single.
+Все счастливы! Вы счастливы, потому что вас больше не донимают фанаты, а фанаты - могут больше не беспокоится, что пропустят новый сингл.
 
-This is a real-life analogy for things we often have in programming:
+Это аналогия из реальной жизни для того, с чем программисты сталкиваются часто:
 
-1. A "producing code" that does something and takes time. For instance, the code loads a remote script. That's a "singer".
-2. A "consuming code" that wants the result of the "producing code" once it's ready. Many functions  may need that result. These are the "fans".
-3. A *promise* is a special JavaScript object that links the "producing code" and the "consuming code" together. In terms of our analogy: this is the "subscription list". The "producing code" takes whatever time it needs to produce the promised result, and the "promise" makes that result available to all of the subscribed code when it's ready.
+1. "Певец" - это "создающий" код, который делает что-то, что занимает время. Например, скачивает новый скрипт.
+2. "Фанаты" - это "потребляющий" код, который хочет получить результат "создающего" кода, когда он будет готов. Этот результат может быть необходим большому количеству функций.
+3. *Promise* (обещание) - это специальный объект в JavaScript, который связывает "создающий" и "потребляющий" коды вместе. В терминах нашей аналогии - это "список подписок". "Создающий" код может выполнятся любое необходимое ему время, чтобы получить обещанный результат, а *обещание* делает результат доступным для всего кода, который подписан на него, когда результат готов.
 
-The analogy isn't terribly accurate, because JavaScript promises are more complex than a simple subscription list: they have additional features and limitations. But it's fine to begin with.
+Аналогия не совсем точна, потому что промисы в JavaScript более сложные, чем простой список подписки: они обладают дополнительными функциями и ограничениями. Но для начала она хорошо подходит.
 
-The constructor syntax for a promise object is:
+Синтаксис создания `Promise`:
 
 ```js
 let promise = new Promise(function(resolve, reject) {
-  // executor (the producing code, "singer")
+  // исполнитель ("создающий код", "певец")
 });
 ```
 
-The function passed to `new Promise` is called the *executor*. When the promise is created, this executor function runs automatically. It contains the producing code, that should eventually produce a result. In terms of the analogy above: the executor is the "singer".
+Функция, которая передаётся в конструкцию  `new Promise` называется *исполнитель*. Когда `Promise` создан, функция исполнитель запускается автоматически. Она содержит "создающий" код, который в конечном итоге должен создать результат. В терминах аналогии: *исполнитель* - это "певец".
 
-The resulting `promise` object has internal properties:
+Объект `Promise`, полученный в результате выполнения конструктора, имеет внутренние свойства:
 
-- `state` — initially "pending", then changes to either "fulfilled" or "rejected",
-- `result` — an arbitrary value of your choosing, initially `undefined`.
+- `state` (состояние) — вначале `pending` ("ожидание"), потом может измениться на `fulfilled` («выполнено успешно») or `rejected` («выполнено с ошибкой»),
+- `result` (результат) — имеет произвольное значение, по вашему выбору, вначале `undefined`.
 
-When the executor finishes the job, it should call one of the functions that it gets as arguments:
+Когда исполнитель заканчивает задачу, должна быть вызвана одна из функций, переданных в него как аргумент:
 
-- `resolve(value)` — to indicate that the job finished successfully:
-    - sets `state` to `"fulfilled"`,
-    - sets `result` to `value`.
-- `reject(error)` — to indicate that an error occurred:
-    - sets `state` to `"rejected"`,
-    - sets `result` to `error`.
+- `resolve(value)` — чтобы сообщить, что работа выполнена успешно:
+    - устанавливает в `state` значение `"fulfilled"`,
+    - устанавливает в  `result` значение `value`.
+- `reject(error)` — чтобы сообщить, что произошла ошибка:
+    - устанавливает в `state` значение `"rejected"`,
+    - устанавливает в `result` значение `error`.
 
 ![](promise-resolve-reject.png)
 
-Later we'll see how these changes become known to "fans".
+Позже мы рассмотрим, как "фанаты" узнают об этих изменениях.
 
-Here's an example of a Promise constructor and a simple executor function with its "producing code" (the `setTimeout`):
+Ниже пример с конструктором `Promise` и простого исполнителя с "создающим" кодом (`setTimeout`):
 
 ```js run
 let promise = new Promise(function(resolve, reject) {
-  // the function is executed automatically when the promise is constructed
+  // функция выполнится автоматически, когда Promise будет создан
 
-  // after 1 second signal that the job is done with the result "done"
+  // через 1 секунду появится сигнал, что задача выполнена с результатом "done"
   setTimeout(() => *!*resolve("done")*/!*, 1000);
 });
 ```
 
-We can see two things by running the code above:
+Мы можем наблюдать две вещи, запустив код выше:
 
-1. The executor is called automatically and immediately (by the `new Promise`).
-2. The executor receives two arguments: `resolve` and `reject` — these functions are pre-defined by the JavaScript engine. So we don't need to create them. Instead, we should write the executor to call them when ready.
+1. Исполнитель вызывается автоматически и сразу (с помощью `new Promise`).
+2. Исполнитель получает два аргумента: `resolve` и `reject` — эти функции предопределены в JavaScript. Таким образом нам не нужно их создавать, а вместо этого мы должны написать функцию-исполнитель таким образом, чтобы вызвать их в конце.
 
-After one second of "processing" the executor calls `resolve("done")` to produce the result:
+Через одну секунду "обработки" исполнитель вызовет `resolve("done")`, чтобы передать результат:
 
 ![](promise-resolve-1.png)
 
-That was an example of a successful job completion, a "fulfilled promise".
+Это был пример успешно выполненной задачи, "выполненный успешно" `Promise`.
 
-And now an example of the executor rejecting the promise with an error:
+А теперь пример, в котором исполнитель сообщит, что задача выполнена с ошибкой:
 
 ```js
 let promise = new Promise(function(resolve, reject) {
-  // after 1 second signal that the job is finished with an error
+  // через секунду будет сообщено, что задача выполнена с ошибкой
   setTimeout(() => *!*reject(new Error("Whoops!"))*/!*, 1000);
 });
 ```
 
 ![](promise-reject-1.png)
 
-To summarize, the executor should do a job (something that takes time usually) and then call `resolve` or `reject` to change the state of the corresponding Promise object.
+Суммируем, то что мы пока узнали: исполнитель выполняет задачу (что-то что занимает время, обычно) и после этого вызывает `resolve` или `reject`, чтобы изменить состояние соответствующего `Promise`.
 
-The Promise that is either resolved or rejected is called "settled", as opposed to a "pending" Promise.
+`Promise` независимо от того, как он был завершен (с ошибкой или без) называется "решенный", в отличии от "ожидающего" `Promise`.
 
-````smart header="There can be only a single result or an error"
-The executor should call only one `resolve` or one `reject`. The promise's state change is final.
+````smart header="Может быть что-то одно, либо результат, либо ошибка"
+Исполнитель должен вызвать что-то одно: `resolve` или `reject`. Состояние промиса может быть изменено только один раз.
 
-All further calls of `resolve` and `reject` are ignored:
+Все последующие вызовы `resolve` и `reject` будут проигнорированы:
 
 ```js
 let promise = new Promise(function(resolve, reject) {
   resolve("done");
 
-  reject(new Error("…")); // ignored
-  setTimeout(() => resolve("…")); // ignored
+  reject(new Error("…")); // игнорируется
+  setTimeout(() => resolve("…")); // игнорируется
 });
 ```
 
-The idea is that a job done by the executor may have only one result or an error.
+Идея в том, что задача выполненная исполнителем может иметь только что-то одно: результат или ошибку.
 
-Also, `resolve`/`reject` expect only one argument (or none) and will ignore additional arguments.
+Также, `resolve`/`reject` ожидают только один аргумент (или ни одного), а все дополнительные аргументы будут проигнорированы.
 ````
 
-```smart header="Reject with `Error` objects"
-In case something goes wrong, we can call `reject` with any type of argument (just like `resolve`). But it is recommended to use `Error` objects (or objects that inherit from `Error`). The reasoning for that will soon become apparent.
+```smart header="`Reject` с объектом `Error`"
+В случаях, когда что-то пошло неправильно, `reject` может быть вызван с любым типом аргумента (как и `resolve`). Рекомендуется использовать объект `Error` (или унаследованный от него объект). Обоснование для этого скоро станет очевидным.
 ```
 
-````smart header="Immediately calling `resolve`/`reject`"
-In practice, an executor usually does something asynchronously and calls `resolve`/`reject` after some time, but it doesn't have to. We also can call `resolve` or `reject` immediately, like this:
+````smart header="Мгновенный вызов `resolve`/`reject`"
+Обычно, исполнитель делает что-то асинхронное и после этого вызывает `resolve`/`reject`  через какое-то время, но это не обязательно. `resolve` или `reject` могут быть вызваны сразу, как в примере:
 
 ```js
 let promise = new Promise(function(resolve, reject) {
-  // not taking our time to do the job
-  resolve(123); // immediately give the result: 123
+  // задача не требующая времени
+  resolve(123); // мгновенно присвоит в результат: 123
 });
 ```
 
-For instance, this might happen when we start to do a job but then see that everything has already been completed.
+Это может случится, когда задача началась, но в процессе её выполнения стало понятно, что всё уже выполнено.
 
-That's fine. We immediately have a resolved Promise, nothing wrong with that.
+Всё в порядке, мы сразу получим успешно завершенный `Promise`, в этом нет чего-то неправильного.
 ````
 
-```smart header="The `state` and `result` are internal"
-The properties `state` and `result` of the Promise object are internal. We can't directly access them from our "consuming code". We can use the methods `.then`/`.catch`/`.finally` for that. They are described below.
+```smart header="Свойства `state` и `result` - внутренние"
+Свойства `state` и `result` - это внутренние свойства объекта `Promise` и мы не имеем к ним прямого доступа из "потребляющего" кода. Для этого следует использовать методы `.then`/`.catch`/`.finally`, про них речь пойдет дальше.
 ```
 
-## Consumers: then, catch, finally
+## Потребители: then, catch, finally
 
-A Promise object serves as a link between the executor (the "producing code" or "singer") and the consuming functions (the "fans"), which will receive the result or error. Consuming functions can be registered (subscribed) using methods `.then`, `.catch` and `.finally`.
+Объект `Promise` служит связующем звеном между исполнителем ("создающим" кодом или "певцом") и функциями-потребителями ("фанатами"), которые получат, либо результат, либо ошибку. Функции-потребители могут быть зарегистрированы (подписаны) с помощью методов `.then`, `.catch` и `.finally`.
 
-### then
+### then (после)
 
-The most important, fundamental one is `.then`.
+Наиболее важный и фундаментальный метод - `.then`.
 
-The syntax is:
+Синтаксис:
 
 ```js
 promise.then(
-  function(result) { *!*/* handle a successful result */*/!* },
-  function(error) { *!*/* handle an error */*/!* }
+  function(result) { *!*/* обработает успешное выполнение исполнителя */*/!* },
+  function(error) { *!*/* обработает ошибку */*/!* }
 );
 ```
 
-The first argument of `.then` is a function that:
+Первый аргумент метода `.then` - функция, которая
 
-1. runs when the Promise is resolved, and
-2. receives the result.
+1. выполняется, когда `Promise` переходит в состояние `fulfilled`
+2. получает результат.
 
-The second argument of `.then` is a function that:
+Второй аргумент `.then`  - функция, которая:
 
-1. runs when the Promise is rejected, and
-2. receives the error.
+1. выполняется, когда `Promise` переходит в состояние `rejected`
+2. получает ошибку.
 
-For instance, here's a reaction to a successfully resolved promise:
+Например, ниже реакции на успешно завершенный промис:
 
 ```js run
 let promise = new Promise(function(resolve, reject) {
   setTimeout(() => resolve("done!"), 1000);
 });
 
-// resolve runs the first function in .then
+// resolve запустит первую функцию, переданную в .then
 promise.then(
 *!*
-  result => alert(result), // shows "done!" after 1 second
+  result => alert(result), // покажет "done!" через секунду
 */!*
-  error => alert(error) // doesn't run
+  error => alert(error) // не будет запущена
 );
 ```
 
-The first function was executed.
+Первая функция была выполнена.
 
-And in the case of a rejection -- the second one:
+И в случае ошибки -- вторая:
 
 ```js run
 let promise = new Promise(function(resolve, reject) {
   setTimeout(() => reject(new Error("Whoops!")), 1000);
 });
 
-// reject runs the second function in .then
+// reject запустит вторую функцию, переданную в .then
 promise.then(
-  result => alert(result), // doesn't run
+  result => alert(result), // не будет запущена
 *!*
-  error => alert(error) // shows "Error: Whoops!" after 1 second
+  error => alert(error) // покажет "Error: Whoops!" через секунду
 */!*
 );
 ```
 
-If we're interested only in successful completions, then we can provide only one function argument to `.then`:
+Если нам важен только результат успешного выполнения задачи, тогда в `then` может быть передана только одна функция:
 
 ```js run
 let promise = new Promise(resolve => {
@@ -190,14 +190,13 @@ let promise = new Promise(resolve => {
 });
 
 *!*
-promise.then(alert); // shows "done!" after 1 second
+promise.then(alert); // покажет "done!" через секунду
 */!*
 ```
 
-### catch
+### catch (поймать)
 
-If we're interested only in errors, then we can use `null` as the first argument: `.then(null, errorHandlingFunction)`. Or we can use `.catch(errorHandlingFunction)`, which is exactly the same:
-
+Если нам важно только обработать ошибку, тогда можно передать `null` в качестве первого аргумента: `.then(null, errorHandlingFunction)`. Или можно использовать метод `.catch(errorHandlingFunction)`, который сделает тоже самое:
 
 ```js run
 let promise = new Promise((resolve, reject) => {
@@ -205,84 +204,83 @@ let promise = new Promise((resolve, reject) => {
 });
 
 *!*
-// .catch(f) is the same as promise.then(null, f)
-promise.catch(alert); // shows "Error: Whoops!" after 1 second
+// .catch(f) это тоже самое promise.then(null, f)
+promise.catch(alert); // покажет "Error: Whoops!" через секунду
 */!*
 ```
 
-The call `.catch(f)` is a complete analog of `.then(null, f)`, it's just a shorthand.
+Вызов `.catch(f)` это полный аналог `.then(null, f)`, просто это более короткая запись.
 
-### finally
+### finally (в конце)
 
-Just like there's a `finally` clause in a regular `try {...} catch {...}`, there's `finally` in promises.
+В промисах `finally` работает также как в обычном `try {...} catch {...}`.
 
-The call `.finally(f)` is similar to `.then(f, f)` in the sense that it always runs when the promise is settled: be it resolve or reject.
+Вызов `.finally(f)` это тоже самое, что передать в `.then(f, f)`, в том смысле, что "потребляющий" код выполниться в любом случае, когда промис станет решённым: успешно или с ошибкой.
 
-`finally` is a good handler for performing cleanup, e.g. stopping our loading indicators, as they are not needed any more, no matter what the outcome is.
+`finally` хорошо подходит для очистки, например остановки индикаторов загрузки, поскольку они будут не нужны в независимости от результата.
 
-Like this:
+Например:
 
 ```js
 new Promise((resolve, reject) => {
-  /* do something that takes time, and then call resolve/reject */
+  /* сделать что-то, что займет время, и после вызвать resolve/reject */
 })
 *!*
-  // runs when the promise is settled, doesn't matter successfully or not
+  // выполнится когда промис завершиться, независимо успешно или нет
   .finally(() => stop loading indicator)
 */!*
   .then(result => show result, err => show error)
 ```
 
-It's not exactly an alias though. There are several important differences:
+Это не совсем псевдоним, как можно подумать. Существует несколько важных отличий:
 
-1. A `finally` handler has no arguments. In `finally` we don't know whether the promise is successful or not. That's all right, as our task is usually to perform "general" finalizing procedures.
-2. Finally passes through results and errors to the next handler.
+1. Функция вызываемая из `finally` не имеет аргументов. В `finally` неизвестно, как был завершен `Promise`. Это правильно, потому что задача здесь заключается в выполнении "общих" процедур завершения задачи.
+2. `Finally` пропустит результат или ошибку к следующим обработчикам.
 
-    For instance, here the result is passed through `finally` to `then`:
+    Например, здесь результат проходит через `finally` к `then`:
     ```js run
     new Promise((resolve, reject) => {
       setTimeout(() => resolve("result"), 2000)
     })
       .finally(() => alert("Promise ready"))
-      .then(result => alert(result)); // <-- .then handles the result
+      .then(result => alert(result)); // <-- .then обработает результат
     ```
 
-    And here there's an error in the promise, passed through `finally` to `catch`:
+    А здесь ошибка из промиса, пройдет через `finally` к `catch`:
 
     ```js run
     new Promise((resolve, reject) => {
       throw new Error("error");
     })
       .finally(() => alert("Promise ready"))
-      .catch(err => alert(err));  // <-- .catch handles the error object
+      .catch(err => alert(err));  // <-- .catch обработает объект ошибки
     ```  
 
-    That's very convenient, because finally is not meant to process promise results. So it passes them through.
+    Это очень удобно, потому что `finaly` не предназначен для обработки результата `Promise`. Он просто пропускает их через себя.
 
-    We'll talk more about promise chaining and result-passing between handlers in the next chapter.
+    Мы поговорим о создании цепочек промисов и передаче результатов между обработчиками в следующей главе.
 
-3. Last, but not least, `.finally(f)` is a more convenient syntax than `.then(f, f)`: no need to duplicate the function.
+3. Последнее, но не менее значимое, `.finally(f)` более удобный синтаксис, чем у`.then(f, f)`: не надо дублировать функции.
 
-````smart header="On settled promises handlers runs immediately"
-If a promise is pending, `.then/catch/finally` handlers wait for the result. Otherwise, if a promise has already settled, they execute immediately:
+````smart header="На завершенных промисах обработчики запускаются сразу"
+Если промис в состоянии ожидания, обработчики в `.then/catch/finally` будут ждать окончания. Однако, если промис уже решен, тогда они выполнятся сразу:
 
 ```js run
-// an immediately resolved promise
+// мгновенный перевод промиса в состояние решён
 let promise = new Promise(resolve => resolve("done!"));
 
-promise.then(alert); // done! (shows up right now)
+promise.then(alert); // done! (появляется прямо сейчас)
 ```
-
-The good thing is: a `.then` handler is guaranteed to run whether the promise takes time or settles it immediately.
+Хорошо то, что обработчик `.then` гарантированно запустится в любом случае: если `Promise` занимает время или выполняется мгновенно.
 ````
 
-Next, let's see more practical examples of how promises can help us to write asynchronous code.
+Дальше рассмотрим несколько практических примеров того, как `Promise` может помочь написанию асинхронного кода.
 
-## Example: loadScript
+## Пример: loadScript
 
-We've got the `loadScript` function for loading a script from the previous chapter.
+У нас есть функция `loadScript` для загрузки скрипта из предыдущей главы.
 
-Here's the callback-based variant, just to remind us of it:
+Давайте вспомним, как выглядел вариант с callback-функцией:
 
 ```js
 function loadScript(src, callback) {
@@ -296,9 +294,9 @@ function loadScript(src, callback) {
 }
 ```
 
-Let's rewrite it using Promises.
+Теперь перепишем её используя `Promise`.
 
-The new function `loadScript` will not require a callback. Instead, it will create and return a Promise object that resolves when the loading is complete. The outer code can add handlers (subscribing functions) to it using `.then`:
+Новая функция `loadScript` не требует callback. Вместо этого она будет создавать и возвращать объект `Promise`, который будет переходить в состояние решен, когда загрузка закончится. Внешний код может добавлять обработчики (функции-подписчиков) используя для этого метод `.then`:
 
 ```js run
 function loadScript(src) {  
@@ -314,7 +312,7 @@ function loadScript(src) {
 }
 ```
 
-Usage:
+Применение:
 
 ```js run
 let promise = loadScript("https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.js");
@@ -327,12 +325,12 @@ promise.then(
 promise.then(script => alert('One more handler to do something else!'));
 ```
 
-We can immediately see a few benefits over the callback-based pattern:
+Сразу видны преимущество над подходом с callback-функцией:
 
 
 | Promises | Callbacks |
 |----------|-----------|
-| Promises allow us to do things in the natural order. First, we run `loadScript(script)`, and `.then` we write what to do with the result. | We must have a `callback` function at our disposal when calling `loadScript(script, callback)`. In other words, we must know what to do with the result *before* `loadScript` is called. |
-| We can call `.then` on a Promise as many times as we want. Each time, we're adding a new "fan", a new subscribing function, to the "subscription list". More about this in the next chapter: [](info:promise-chaining). | There can be only one callback. |
+| Промисы позволяют делать вещи в естественном порядке. Сначала запускается `loadScript(script)`, и затем (`.then`) мы пишем, что делать с результатом. | У нас должна быть `callback-функция` на момент вызова `loadScript(script, callback)`. Другими словами, нам нужно знать что делать с результатом, *перед тем*, как вызвать `loadScript`. |
+| Мы можем вызывать `.then` у `Promise` столько раз, сколько захотим. Каждый раз, мы добавляем нового "фаната", новую функцию-подписчика, в "список подписок". Больше об этом в следующей главе: [](info:promise-chaining). | Callback-функция может быть только одна. |
 
-So Promises give us better code flow and flexibility. But there's more. We'll see that in the next chapters.
+Таким образом, промисы позволяют улучшить порядок кода и дают нам гибкость. Но это ещё не всё. Мы увидим это в следующих главах.
