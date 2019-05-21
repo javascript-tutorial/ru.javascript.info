@@ -208,7 +208,7 @@ alert( counter() ); // 10
 
 ## Named Function Expression
 
-Named Function Expression, или NFE -- это термин для Function Expression у которого есть имя.
+Named Function Expression или NFE -- это термин для Function Expression у которого есть имя.
 
 Например, давайте объявим Function Expression:
 
