@@ -190,26 +190,26 @@ elem.addEventListener(..., true)
 Если мы добавили обработчик вот так `addEventListener(..., true)`, то мы должны передать то же значение аргумента `capture` в `removeEventListener(..., true)`, когда снимаем обработчик.
 ```
 
-## Summary
+## Итого
 
-The event handling process:
+Алгоритм:
 
-- When an event happens -- the most nested element where it happens gets labeled as the "target element" (`event.target`).
-- Then the event first moves from the document root down to the `event.target`, calling handlers assigned with `addEventListener(...., true)` on the way (`true` is a shorthand for `{capture: true}`).
-- Then the event moves from `event.target` up to the root, calling handlers assigned using  `on<event>` and `addEventListener` without the 3rd argument or with the 3rd argument `false`.
+- При наступлении события -- элемент, на котором оно произошло, помечается как "целевой" (`event.target`).
+- Далее событие сначала двигается вниз от корня документа к `event.target`, по пути вызывая обработчики, поставленные через `addEventListener(...., true), где `true` -- это сокращение для `{capture: true}`.
+- Далее событие двигается от `event.target` вверх к корню документа, по пути вызывая обработчики, поставленные через `on<event>` и `addEventListener` без третьего аргумента или с третьим аргументом равным `false`.
 
-Each handler can access `event` object properties:
+Каждый обработчик имеет доступ к свойствам события `event`:
 
-- `event.target` -- the deepest element that originated the event.
-- `event.currentTarget` (=`this`) -- the current element that handles the event (the one that has the handler on it)
-- `event.eventPhase` -- the current phase (capturing=1, bubbling=3).
+- `event.target` -- самый глубокий элемент, на котором произошло событие.
+- `event.currentTarget` (=`this`) -- элемент, на котором в данный момент сработал обработчик (тот, на котором "висит" конкретный обработчик)
+- `event.eventPhase` -- на какой фазе он сработал (погружение=1, всплытие=3).
 
-Any event handler can stop the event by calling `event.stopPropagation()`, but that's not recommended, because we can't really be sure we won't need it above, maybe for completely different things.
+Любой обработчик может остановить событие вызовом `event.stopPropagation()`, но делать это не рекомендуется, так как в дальнейшем это событие может понадобиться, иногда для самых неожиданных вещей.
 
-The capturing phase is used very rarely, usually we handle events on bubbling. And there's a logic behind that.
+В современной разработке стадия погружения используется очень редко, обычно события обрабатываются во время всплытия. И в этом есть скрытый смысл.
 
-In real world, when an accident happens, local authorities react first. They know best the area where it happened. Then higher-level authorities if needed.
+В реальном мире, когда происходит чрезвычайная ситуация, местные службы реагируют первыми. Они знают лучше всех местность, в которой это произошло, и другие детали. Вышестоящие инстанции подключаются уже после этого при необходимости.
 
-The same for event handlers. The code that set the handler on a particular element knows maximum  details about the element and what it does. A handler on a particular `<td>` may be suited for that exactly `<td>`, it knows everything about it, so it should get the chance first. Then its immediate parent also knows about the context, but a little bit less, and so on till the very top element that handles general concepts and runs the last.
+Тоже самое справедливо для обработчиков событий. Код, который "навесил" обработчик на конкретный элемент, знает максимум деталей об элементе и его предназначении. Например, обработчик на определенном `<td>` скорее всего подходит только для этого конкретного `<td>`, он знает все о нем, поэтому он должен отработать первым. Далее имеет смысл передать обработку события родителю -- он тоже понимает, что происходит, но уже менее детально, далее – выше, и так далее, до самого объекта `document`, обработчик на котором реализовывает самую общую функциональность уровня документа.
 
-Bubbling and capturing lay the foundation for "event delegation" -- an extremely powerful event handling pattern that we study in the next chapter.
+Всплытие и погружение являются основой для "делегирования событий" -- очень мощного приема обработки событий. Его мы изучим в следующей главе.
