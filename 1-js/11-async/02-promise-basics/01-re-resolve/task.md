@@ -2,7 +2,7 @@
 # Re-resolve a promise?
 
 
-What's the output of the code below? 
+Что выведет код ниже? 
 
 ```js
 let promise = new Promise(function(resolve, reject) {
