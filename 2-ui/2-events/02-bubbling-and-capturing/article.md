@@ -116,42 +116,42 @@
 ```
 
 
-## Capturing
+## Погружение
 
-There's another phase of event processing called "capturing". It is rarely used in real code, but sometimes can be useful.
+Существует еще одна фаза из жизненного цикла события -- "погружение". Она очень редко используется в реальном коде, однако тоже может быть полезной.
 
-The standard [DOM Events](http://www.w3.org/TR/DOM-Level-3-Events/) describes 3 phases of event propagation:
+Стандарт [DOM Events](http://www.w3.org/TR/DOM-Level-3-Events/) описывает 3 фазы прохода события:
 
-1. Capturing phase -- the event goes down to the element.
-2. Target phase -- the event reached the target element.
-3. Bubbling phase -- the event bubbles up from the element.
+1. Фаза перехвата (capturing phase) -- событие сначала идет сверху вниз.
+2. Фаза цели (target phase) -- событие достигло целевого(исходного) элемента.
+3. Фаза всплытия (bubbling stage) -- событие начинает всплывать.
 
-Here's the picture of a click on `<td>` inside a table, taken from the specification:
+Картинка из спецификации демонстрирует, как это работает при клике по ячейке `<td>`, расположенной внутри таблицы:
 
 ![](eventflow.png)
 
-That is: for a click on `<td>` the event first goes through the ancestors chain down to the element (capturing), then it reaches the target, and then it goes up (bubbles), calling handlers on its way.
+То есть, при клике на `<td>` событие путешествует по цепочке родителей сначала вниз к элементу (погружается), затем оно достигает целевой элемент, а потом наверх (всплывает), по пути вызывая обработчики.
 
-**Before we only talked about bubbling, because the capturing phase is rarely used. Normally it is invisible to us.**
+**Ранее мы говорили только о всплытии, потому что другие стадии, как правило, не используются и проходят незаметно для нас.**
 
-Handlers added using `on<event>`-property or using HTML attributes or using `addEventListener(event, handler)` don't know anything about capturing, they only run on the 2nd and 3rd phases.
+Обработчики, добавленные через `on<event>`-свойство или через HTML-атрибуты или через `addEventListener(event, handler)`, ничего не знают о фазе перехвата, а работают только на 2-ой и 3-ей фазах.
 
-To catch an event on the capturing phase, we need to set the handler `capture` option to `true`:
+Чтобы поймать событие на стадии перехвата, нужно использовать третий аргумент `capture` вот так:
 
 ```js
 elem.addEventListener(..., {capture: true})
-// or, just "true" is an alias to {capture: true}
+// или просто "true", как сокращение к {capture: true}
 elem.addEventListener(..., true)
 ```
 
-There are two possible values of the `capture` option:
+Существуют два варианта значения аргумента `capture`:
 
-- If it's `false` (default), then the handler is set on the bubbling phase.
-- If it's `true`, then the handler is set on the capturing phase.
+- Если аргумент `false` (по умолчанию), то событие будет поймано при всплытии.
+- Если аргумент `true`, то событие будет перехвачено по дороге вниз при погружении.
 
-Note that while formally there are 3 phases, the 2nd phase ("target phase": the event reached the element) is not handled separately: handlers on both capturing and bubbling phases trigger at that phase.
+Обратите внимание, что хоть и формально существует 3 фазы, 2-ую фазу ("фазу цели": событие достигло элемента) нельзя обработать отдельно, при ее достижении вызываются все обработчики: и на всплытие, и на погружение.
 
-Let's see both capturing and bubbling in action:
+Давайте посмотрим на это в действии:
 
 ```html run autorun height=140 edit
 <style>
@@ -169,25 +169,25 @@ Let's see both capturing and bubbling in action:
 
 <script>
   for(let elem of document.querySelectorAll('*')) {
-    elem.addEventListener("click", e => alert(`Capturing: ${elem.tagName}`), true);
-    elem.addEventListener("click", e => alert(`Bubbling: ${elem.tagName}`));
+    elem.addEventListener("click", e => alert(`Погружение: ${elem.tagName}`), true);
+    elem.addEventListener("click", e => alert(`Всплытие: ${elem.tagName}`));
   }
 </script>
 ```
 
-The code sets click handlers on *every* element in the document to see which ones are working.
+Здесь обработчики навешиваются на *каждый* элемент в документе, чтобы увидеть в каком порядке они вызываются по мере прохода события.
 
-If you click on `<p>`, then the sequence is:
+Если вы кликните по `<p>`, то последовательность следующая:
 
-1. `HTML` -> `BODY` -> `FORM` -> `DIV` -> `P` (capturing phase, the first listener), and then:
-2. `P` -> `DIV` -> `FORM` -> `BODY` -> `HTML` (bubbling phase, the second listener).
+1. `HTML` -> `BODY` -> `FORM` -> `DIV` -> `P` (фаза погружения, первый обработчик), а потом:
+2. `P` -> `DIV` -> `FORM` -> `BODY` -> `HTML` (фаза всплытия, второй обработчик).
 
-Please note that `P` shows up two times: at the end of capturing and at the start of bubbling.
+Обратите внимание, что `P` появляется два раза: в конце погружения и в начале всплытия.
 
-There's a property `event.eventPhase` that tells us the number of the phase on which the event was caught. But it's rarely used, because we usually know it in the handler.
+Существует свойство `event.eventPhase` содержащее номер фазы, на которой событие было поймано. Но оно используется редко, ведь мы обычно знаем об этом в обработчике.
 
-```smart header="To remove the handler, `removeEventListener` needs the same phase"
-If we `addEventListener(..., true)`, then we should mention the same phase in `removeEventListener(..., true)` to correctly remove the handler.
+```smart header="Чтобы убрать обработчик, `removeEventListener` нужна та же фаза"
+Если мы добавили обработчик вот так `addEventListener(..., true)`, то мы должны передать то же значение аргумента `capture` в `removeEventListener(..., true)`, когда снимаем обработчик.
 ```
 
 ## Summary
