@@ -38,67 +38,67 @@
 
 ## Частота запуска событий
 
-The `mousemove` event triggers when the mouse moves. But that doesn't mean that every pixel leads to an event.
+Событие `mousemove` происходит при движении мыши. Однако, это не означает, что указанное событие генерируется при прохождении каждого пикселя.
 
-The browser checks the mouse position from time to time. And if it notices changes then triggers the events.
+Браузер периодически проверяет позицию курсора и, заметив изменения, генерирует события `mousemove`.
 
-That means that if the visitor is moving the mouse very fast then DOM-elements may be skipped:
+Это означает, что если пользователь двигает мышкой очень быстро, то некоторые DOM-элементы могут быть пропущены:
 
 ![](mouseover-mouseout-over-elems.png)
 
-If the mouse moves very fast from `#FROM` to `#TO` elements as painted above, then intermediate `<div>` (or some of them) may be skipped. The `mouseout` event may trigger on `#FROM` and then immediately `mouseover` on `#TO`.
+Если курсор мыши двигается очень быстро с `#FROM` на `#TO` элемент, как это показано выше, то лежащие между ними `<div>`-ы (или некоторые из них) могут быть пропущены. Событие `mouseout` может запуститься на элементе `#FROM` и затем сразу же сгенерируется `mouseover` на элементе `#TO`.
 
-In practice that's helpful, because if there may be many intermediate elements. We don't really want to process in and out of each one.
+На практике это даже может быть полезно, потому что если промежуточных элементов много, то на самом деле не хотелось бы обрабатывать события `mouseout` и `mouseover` для каждого из них.
 
-On the other hand, we should keep in mind that we can't assume that the mouse slowly moves from one event to another. No, it can "jump".
+С другой стороны, не стоит рассчитывать, что курсор мыши будет медленно переходить от одного элемента к другому. Он может и "прыгать".
 
-In particular it's possible that the cursor jumps right inside the middle of the page from out of the window. And `relatedTarget=null`, because it came from "nowhere":
+В частности, возможно, что курсор запрыгнет в середину страницы из-за пределов окна браузера, и в таком случае получится, что `relatedTarget=null`, так как курсор пришёл "из ниоткуда":
 
 ![](mouseover-mouseout-from-outside.png)
 
 <div style="display:none">
-In case of a fast move, intermediate elements may trigger no events. But if the mouse enters the element (`mouseover`), when we're guaranteed to have `mouseout` when it leaves it.
+В случае быстрого прохождения курсором промежуточных элементов события вообще могут не генерироваться. Но если уж курсор пришёл на элемент (было сгенерировано `mouseover`), то гарантировано при выходе с того элемента будет запущено событие `mouseout`.
 </div>
 
 ```online
-Check it out "live" on a teststand below.
+Проверьте это в песочнице ниже.
 
-The HTML is two nested `<div>` elements. If you move the mouse fast over them, then there may be no events at all, or maybe only the red div triggers events, or maybe the green one.
+Вёрстка состоит из двух элементов типа `<div>`, один из которых вложен в другой. Если быстро провести мышью над ними, то может не будет сгенерировано никаких событий вообще, а может события будут запущены только на красном элементе, а может только на зеленом.
 
-Also try to move the pointer over the red `div`, and then move it out quickly down through the green one. If the movement is fast enough then the parent element is ignored.
+Также попробуйте поставить курсор на красный элемент, а затем очень быстро сделайте движение мышкой вниз через зеленый элемент. Если у вас получилось достаточно быстро, то на родительском элементе не было сгенерировано никаких событий.
 
 [codetabs height=360 src="mouseoverout-fast"]
 ```
 
-## "Extra" mouseout when leaving for a child
+## "Лишний" mouseout при уходе на потомка
 
-Imagine -- a mouse pointer entered an element. The `mouseover` triggered. Then the cursor goes into a child element. The interesting fact is that `mouseout` triggers in that case. The cursor is still in the element, but we have a `mouseout` from it!
+Представьте ситуацию -- курсор мыши зашёл на элемент. Сгенерировано событие `mouseover`. Затем курсор перешёл на дочерний элемент. Интересно, что в таком случае будет сгенерировано `mouseout`. То есть курсор всё ещё на элементе, но мы получили `mouseout`!
 
 ![](mouseover-to-child.png)
 
-That seems strange, but can be easily explained.
+Это выглядит странно, но легко объясняется.
 
-**According to the browser logic, the mouse cursor may be only over a *single* element at any time -- the most nested one (and top by z-index).**
+**По логике браузера, курсор мыши может быть только над одним элементом в любой момент времени - над самым глубоко вложенным (и имеющим самое большое значение z-index).**
 
-So if it goes to another element (even a descendant), then it leaves the previous one. That simple.
+Таким образом, если курсор переходит на другой элемент (пусть даже дочерний), то он покидает предыдущий. Достаточно просто.
 
-There's a funny consequence that we can see on the example below.
+На примере ниже можно увидеть забавную последовательность сгенерированных событий.
 
-The red `<div>` is nested inside the blue one. The blue `<div>` has `mouseover/out` handlers that log all events in the textarea below.
+Красный `<div>` находится внутри синего. На синем `<div>`-е определены обработчики событий `mouseover/-out`, которые отображают всю информацию по ним в текстовое поле ниже.
 
-Try entering the blue element and then moving the mouse on the red one -- and watch the events:
+Попробуйте зайти курсором на синий элемент, а затем перейдите на красный -- и смотрите, какие события сгенерировались:
 
 [codetabs height=360 src="mouseoverout-child"]
 
-1. On entering the blue one -- we get `mouseover [target: blue]`.
-2. Then after moving from the blue to the red one -- we get `mouseout [target: blue]` (left the parent).
-3. ...And immediately `mouseover [target: red]`.
+1. При входе на синий элемент -- мы получили `mouseover [target: blue]`.
+2. Затем при переходе на красный -- `mouseout [target: blue]` (уход с родителя).
+3. ...и сразу же `mouseover [target: red]`.
 
-So, for a handler that does not take `target` into account, it looks like we left the parent in `mouseout` in `(2)` and returned back to it by `mouseover` in `(3)`.
+Таким образом, для обработчика, который не принимает во внимание свойство `target`, ситуация выглядит так, как будто курсор ушёл с родительского элемента, запустив `mouseout` на строке `(2)`, а затем вернулся обратно, запустив `mouseover` на строке `(3)`.
 
-If we perform some actions on entering/leaving the element, then we'll get a lot of extra "false" runs. For simple stuff that may be unnoticeable. For complex things that may bring unwanted side-effects.
+Если постоянно передвигать курсор мышки между элементами, то мы получим много "ложных" срабатываний обработчиков. В простых случаях это может быть незаметно для пользователя, но в сложных случаях могут проявляться нежелательные побочные эффекты.
 
-We can fix it by using `mouseenter/mouseleave` events instead.
+Чтобы их избежать, можно использовать события `mouseenter/mouseleave`.
 
 ## Events mouseenter and mouseleave
 
