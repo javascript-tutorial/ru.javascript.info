@@ -72,11 +72,11 @@ alert( str.search(substr) ); // 2
 Таким образом, мы можем выяснить, что нам нужно искать и создать из этого `new RegExp`:
 
 ```js run
-let search = prompt("Что вы хотите найти?", "люблю");
-let regexp = new RegExp(search);
+let search = prompt("Что вы хотите найти?", "h2");
+let regexp = new RegExp(`<${tag}>`);
 
-// find whatever the user wants
-alert( "Я люблю JavaScript".search(regexp));
+// по умолчанию найдет <h2>
+alert( "<h1> <h2> <h3>".search(regexp));
 ```
 ````
 
