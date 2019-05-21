@@ -286,7 +286,7 @@ new Promise(function() {
 }); // нет обработчика ошибок
 ```
 
-Это событие является частью [HTML стандарта](https://html.spec.whatwg.org/multipage/webappapis.html#unhandled-promise-rejections).
+Это событие является частью [HTML-стандарта](https://html.spec.whatwg.org/multipage/webappapis.html#unhandled-promise-rejections).
 
 Если происходит ошибка и она не перехватывается, отсутствует `.catch`, тогда тригерится событие `unhandledrejection`, и объект `event` получает информацию об ошибке, поэтому мы можем хоть как-то отреагировать на ошибку.
 
