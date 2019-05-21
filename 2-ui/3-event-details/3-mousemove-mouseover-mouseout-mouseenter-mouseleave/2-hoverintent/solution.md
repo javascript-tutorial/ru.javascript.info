@@ -1,18 +1,18 @@
 
-The algorithm looks simple:
-1. Put `onmouseover/out` handlers on the element. Also can use `onmouseenter/leave` here, but they are less universal, won't work if we introduce delegation.
-2. When a mouse cursor entered the element, start measuring the speed on `mousemove`.
-3. If the speed is slow, then run `over`.
-4. Later if we're out of the element, and `over` was executed, run `out`.
+Алгоритм выглядит просто:
+1. Назначаем обработчики `onmouseover/out` на элементе. Также можно было бы использовать `onmouseenter/leave`, но они менее универсальны и не сработают с делегированием.
+2. Когда курсор переходит на элемент, начинаем измерять скорость его движения, используя `mousemove`.
+3. Если скорость низкая, то вызываем `over`.
+4. Позже, если мы уже не на элементе и `over` отработал, вызываем `out`.
 
-The question is: "How to measure the speed?"
+Вопрос: "Как измерить скорость?"
 
-The first idea would be: to run our function every `100ms` and measure the distance between previous and new coordinates. If it's small, then the speed is small.
+Первая приходящая в голову идея: запускать нашу функцию каждые `100ms` и находить разницу между прежними и текущими координатами курсора. Если она мала, то значит и скорость низкая.
 
-Unfortunately, there's no way to get "current mouse coordinates" in JavaScript. There's no function like `getCurrentMouseCoordinates()`.
+К сожалению, в JavaScript нет возможности получать текущие координаты мыши. Не существует функции типа `getCurrentMouseCoordinates()`.
 
-The only way to get coordinates is to listen to mouse events, like `mousemove`.
+Единственный путь - это подписаться и слушать события мыши, например `mousemove`.
 
-So we can set a handler on `mousemove` to track coordinates and remember them. Then we can compare them, once per `100ms`.
+Таким образом, мы определяем обработчик на событие `mousemove`, чтобы отслеживать координаты и запоминать их. Затем мы можем сравнивать результаты каждые `100ms`.
 
-P.S. Please note: the solution tests use `dispatchEvent` to see if the tooltip works right.
+P.S. Пожалуйста, заметьте: тесты для решения этой задачи используют `dispatchEvent`, чтобы проверить, что тултип работает корректно.

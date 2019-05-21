@@ -1,38 +1,38 @@
-// <td> under the mouse right now (if any)
+// ячейка <td> под курсором в данный момент (если есть)
 let currentElem = null;
 
 table.onmouseover = function(event) {
   if (currentElem) {
-    // before entering a new element, the mouse always leaves the previous one
-    // if we didn't leave <td> yet, then we're still inside it, so can ignore the event
+    // перед тем, как войти на следующий элемент, курсор всегда покидает предыдущий
+    // если мы ещё не ушли с <td>, то мы внутри него и игнорируем такое событие
     return;
   }
 
   let target = event.target.closest('td');
   if (!target || !table.contains(target)) return;
 
-  // yeah we're inside <td> now
+  // даа... мы внутри <td> сейчас
   currentElem = target;
   target.style.background = 'pink';
 };
 
 
 table.onmouseout = function(event) {
-  // if we're outside of any <td> now, then ignore the event
+  // если мы вне всякого <td>, то игнорируем событие
   if (!currentElem) return;
 
-  // we're leaving the element -- where to? Maybe to a child element?
+  // мы покидаем элемент -- но куда? Возможно, на дочерний элемент?
   let relatedTarget = event.relatedTarget;
-  if (relatedTarget) { // possible: relatedTarget = null
+  if (relatedTarget) { // возможно: relatedTarget = null
     while (relatedTarget) {
-      // go up the parent chain and check -- if we're still inside currentElem
-      // then that's an internal transition -- ignore it
+      // поднимаемся по дереву элементов и проверяем -- внутри ли мы currentElem или нет
+      // если это переход внутри элемента -- игнорируем
       if (relatedTarget == currentElem) return;
       relatedTarget = relatedTarget.parentNode;
     }
   }
 
-  // we left the element. really.
+  // мы действительно покинули элемент
   currentElem.style.background = '';
   currentElem = null;
 };

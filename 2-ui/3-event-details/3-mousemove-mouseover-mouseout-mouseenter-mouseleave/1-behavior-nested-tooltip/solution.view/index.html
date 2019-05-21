@@ -1,12 +1,12 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="ru">
 
 <head>
   <meta charset="utf-8">
   <style>
     body {
       height: 2000px;
-      /* the tooltip should work after page scroll too */
+      /* тултип должен работать и после скролла страницы */
     }
 
     .tooltip {
@@ -49,16 +49,16 @@
 <body>
 
 
-  <div data-tooltip="Here is the house interior" id="house">
-    <div data-tooltip="Here is the roof" id="roof"></div>
+  <div data-tooltip="Здесь домашний интерьер" id="house">
+    <div data-tooltip="Здесь крыша" id="roof"></div>
 
-    <p>Once upon a time there was a mother pig who had three little pigs.</p>
+    <p>Жили-были на свете три поросенка. Три брата. Все одинакового роста, кругленькие, розовые, с одинаковыми веселыми хвостиками.</p>
 
-    <p>The three little pigs grew so big that their mother said to them, "You are too big to live here any longer. You must go and build houses for yourselves. But take care that the wolf does not catch you."
+    <p>Даже имена у них были похожи. Звали поросят: Ниф-Ниф, Нуф-Нуф и Наф-Наф. Все лето они кувыркались в зеленой траве, грелись на солнышке, нежились в лужах.</p>
 
-    <p>The three little pigs set off. "We will take care that the wolf does not catch us," they said.</p>
+    <p>Но вот наступила осень. Солнце уже не так сильно припекало, серые облака тянулись над пожелтевшим лесом.</p>
 
-    <p>Soon they met a man. <a href="https://en.wikipedia.org/wiki/The_Three_Little_Pigs" data-tooltip="Read on…">Hover over me</a></p>
+    <p>- Пора нам подумать о зиме, - сказал как-то Наф-Наф. <a href="https://ru.wikipedia.org/wiki/%D0%A2%D1%80%D0%B8_%D0%BF%D0%BE%D1%80%D0%BE%D1%81%D1%91%D0%BD%D0%BA%D0%B0" data-tooltip="Читать далее…">Наведи курсор на меня</a></p>
 
   </div>
 
@@ -66,24 +66,24 @@
     let tooltip;
 
     document.onmouseover = function(event) {
-      // important: a fast-moving mouse may "jump" right to a child on an annotated node, skipping the parent
-      // so mouseover may happen on a child.
+      // важно: быстро движущийся курсор может прыгнуть сразу к дочернему элементу, пропустив родительский
+      // то есть событие mouseover может произойти на дочернем элементе.
 
       let anchorElem = event.target.closest('[data-tooltip]');
 
       if (!anchorElem) return;
 
-      // show tooltip and remember it
+      // показываем тултип и запоминаем его
       tooltip = showTooltip(anchorElem, anchorElem.dataset.tooltip);
     }
 
     document.onmouseout = function() {
-      // it is possible that mouseout triggered, but we're still inside the element (cause of bubbling)
-      // but in this case we'll have an immediate mouseover,
-      // so the tooltip will be destroyed and shown again
+      // из-за всплытия событий возможно, что запустилось mouseout, но мы всё ещё внутри элемента
+      // но в этом случае сразу же последует событие mouseover,
+      // то есть тултип исчезнет и потом снова покажется
       //
-      // that's an overhead, but here it's not visible
-      // can be fixed with additional checks
+      // это уже вне данной задачи, но тут тултип невидим
+      // может быть исправлено дополнительными проверками
       if (tooltip) {
         tooltip.remove();
         tooltip = false;
@@ -100,7 +100,7 @@
 
       let coords = anchorElem.getBoundingClientRect();
 
-      // position the tooltip over the center of the element
+      // позиционируем тултип над центром элемента
       let left = coords.left + (anchorElem.offsetWidth - tooltipElem.offsetWidth) / 2;
       if (left < 0) left = 0;
 
