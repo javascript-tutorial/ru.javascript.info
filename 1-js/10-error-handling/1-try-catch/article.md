@@ -450,33 +450,33 @@ try {
 
 ## try..catch..finally
 
-Wait, that's not all.
+Подождите, это еще не все.
 
-The `try..catch` construct may have one more code clause: `finally`.
+Конструкция `try..catch` может содержать еще одну секцию: `finally`.
 
-If it exists, it runs in all cases:
+Если секция есть, то она выполняется в любом случае:
 
-- after `try`, if there were no errors,
-- after `catch`, if there were errors.
+- после `try`, если не было ошибок,
+- после `catch`, если ошибки были.
 
-The extended syntax looks like this:
+Расширенный синтаксис выглядит следующим образом:
 
 ```js
 *!*try*/!* {
-   ... try to execute the code ...
+   ... пробуем выполнить код...
 } *!*catch*/!*(e) {
-   ... handle errors ...
+   ... обрабатываем ошибки ...
 } *!*finally*/!* {
-   ... execute always ...
+   ... выполняем всегда ...
 }
 ```
 
-Try running this code:
+Попробуйте запустить такой код:
 
 ```js run
 try {
   alert( 'try' );
-  if (confirm('Make an error?')) BAD_CODE();
+  if (confirm('Сгенерировать ошибку?')) BAD_CODE();
 } catch (e) {
   alert( 'catch' );
 } finally {
@@ -484,27 +484,27 @@ try {
 }
 ```
 
-The code has two ways of execution:
+У кода два способа выполнения:
 
-1. If you answer "Yes" to "Make an error?", then `try -> catch -> finally`.
-2. If you say "No", then `try -> finally`.
+1. Если вы ответите на вопрос "Сгенерировать ошибку?" утвердительно, то `try -> catch -> finally`.
+2. Если ответите отрицательно, то `try -> finally`.
 
-The `finally` clause is often used when we start doing something before `try..catch` and want to finalize it in any case of outcome.
+Секцию `finally` часто используют, чтобы завершить действие начатое еще до `try..catch` при любом случае исхода.
 
-For instance, we want to measure the time that a Fibonacci numbers function `fib(n)` takes. Naturally, we can start measuring before it runs and finish afterwards. But what if there's an error during the function call? In particular, the implementation of `fib(n)` in the code below returns an error for negative or non-integer numbers.
+Например, мы хотим измерить время, которое занимает функция чисел Фибоначчи `fib(n)`. Естественно, мы можем начать измерения до того, как функция начнет выполняться и закончить после. Но что делать, если при вызове функции возникла ошибка? В частности, реализация `fib(n)` в приведенном ниже коде возвращает ошибку для отрицательных и для нецелых чисел.
 
-The `finally` clause is a great place to finish the measurements no matter what.
+Секция `finally` отлично подходит для завершения измерений несмотря ни на что.
 
-Here `finally` guarantees that the time will be measured correctly in both situations -- in case of a successful execution of `fib` and in case of an error in it:
+Здесь `finally` гарантирует, что время будет измерено корректно в обеих ситуациях -- в случае успешного завершения `fib` и в случае ошибки:
 
 ```js run
-let num = +prompt("Enter a positive integer number?", 35)
+let num = +prompt("Введите положительное целое число?", 35)
 
 let diff, result;
 
 function fib(n) {
   if (n < 0 || Math.trunc(n) != n) {
-    throw new Error("Must not be negative, and also an integer.");
+    throw new Error("Должно быть неотрицательным целым числом.");
   }
   return n <= 1 ? n : fib(n - 1) + fib(n - 2);
 }
@@ -521,26 +521,25 @@ try {
 }
 */!*
 
-alert(result || "error occured");
+alert(result || "возникла ошибка");
 
-alert( `execution took ${diff}ms` );
+alert( `Выполнение заняло ${diff}ms` );
 ```
 
-You can check by running the code with entering `35` into `prompt` -- it executes normally, `finally` after `try`. And then enter `-1` -- there will be an immediate error, an the execution will take `0ms`. Both measurements are done correctly.
+Вы можете проверить, запустив этот код и введя `35` в `prompt` -- он завершится нормально, `finally` выполнится после `try`. А затем введите `-1` -- незамедлительно произойдет ошибка, выполнение займет `0ms`. Оба измерения выполняются корректно.
 
-In other words, there may be two ways to exit a function: either a `return` or `throw`. The `finally` clause handles them both.
+Другими словами, может быть два способа выйти из функции: либо через `return`, либо через `throw`. Секция `finally` обрабатывает и то, и другое.
 
 
-```smart header="Variables are local inside `try..catch..finally`"
-Please note that `result` and `diff` variables in the code above are declared *before* `try..catch`.
-
-Otherwise, if `let` were made inside the `{...}` block, it would only be visible inside of it.
+```smart header="Переменные внутри `try..catch..finally` локальны"
+Обратите внимание, что переменные `result` и `diff` в коде выше объявлены *до* `try..catch`.
+В противном случае, если бы `let` был использован внутри блока `{...}`, переменные были бы видна только внутри него.
 ```
 
-````smart header="`finally` and `return`"
-The `finally` clause works for *any* exit from `try..catch`. That includes an explicit `return`.
+````smart header="`finally` и `return`"
+Блок `finally` срабатывает при *любом* выходе из `try..catch`, в том числе и `return`.
 
-In the example below, there's a `return` in `try`. In this case, `finally` is executed just before the control returns to the outer code.
+В примере ниже из `try` происходит `return`, но `finally` получает управление до того, как контроль возвращается во внешний код.
 
 ```js run
 function func() {
@@ -559,25 +558,25 @@ function func() {
   }
 }
 
-alert( func() ); // first works alert from finally, and then this one
+alert( func() ); // сначала срабатывает alert из finally, а затем этот код
 ```
 ````
 
 ````smart header="`try..finally`"
 
-The `try..finally` construct, without `catch` clause, is also useful. We apply it when we don't want to handle errors right here, but want to be sure that processes that we started are finalized.
+Конструкция `try..finally` без секции `catch` также полезна. Мы применяем ее, когда не хотим обрабатывать ошибки прямо на месте, но хотим быть уверены, что начатые процессы завершились.
 
 ```js
 function func() {
-  // start doing something that needs completion (like measurements)
+  // начать делать что-то, что требует завершения (например, измерения)
   try {
     // ...
   } finally {
-    // complete that thing even if all dies
+    // завершить это даже если все упадет
   }
 }
 ```
-In the code above, an error inside `try` always falls out, because there's no `catch`. But `finally` works before the execution flow jumps outside.
+В приведенном выше коде, ошибка всегда выпадает наружу, потому что тут нет блока `catch`. Но `finally` отрабатывает до того, как поток управления выпрыгнет наружу.
 ````
 
 ## Global catch
