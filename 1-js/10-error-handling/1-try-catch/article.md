@@ -640,35 +640,35 @@ window.onerror = function(message, url, line, col, error) {
 3. Когда возникает ошибка, он отправляет сетевой запрос о ней в сервис.
 4. Мы можем войти в сервисный веб-интерфейс и увидеть ошибки.
 
-## Summary
+## Итого
 
-The `try..catch` construct allows to handle runtime errors. It literally allows to try running the code and catch errors that may occur in it.
+Конструкция `try..catch` позволяет обрабатывать ошибки во время исполнения кода. Она буквально позволяет попытаться запустить код и поймать ошибки, которые могут в нём возникнуть.
 
-The syntax is:
+Синтаксис:
 
 ```js
 try {
-  // run this code
+  // исполняем код
 } catch(err) {
-  // if an error happened, then jump here
-  // err is the error object
+  // если случилась ошибка, прыгаем сюда
+  // err -- это объект ошибки
 } finally {
-  // do in any case after try/catch
+  // выполняем всегда после try/catch
 }
 ```
 
-There may be no `catch` section or no `finally`, so `try..catch` and `try..finally` are also valid.
+Секций `catch` или `finally` может не быть, а поэтому `try..catch` и `try..finally` также корректны.
 
-Error objects have following properties:
+Объекты ошибок содержат следующие свойства:
 
-- `message` -- the human-readable error message.
-- `name` -- the string with error name (error constructor name).
-- `stack` (non-standard) -- the stack at the moment of error creation.
+- `message` -- понятное человеку сообщение.
+- `name` -- строка с именем ошибки (имя конструктора ошибки).
+- `stack` (не стандартно) -- стек на момент создания ошибки.
 
-If error is not needed, we can omit it by using `catch {` instead of `catch(err) {`.
+Если ошибка не нужна, мы можем пропустить ее использую `catch {` вместо `catch(err) {`.
 
-We can also generate our own errors using the `throw` operator. Technically, the argument of `throw` can be anything, but usually it's an error object inheriting from the built-in `Error` class. More on extending errors in the next chapter.
+Мы можем также сгенерировать собственные ошибки используя оператор `throw`. Аргументом `throw` может быть что угодно, но обычно это объект ошибки, наследуемый от встроенного класса `Error`. Подробнее о расширении возможностей ошибок см. в следующей главе.  
 
-Rethrowing is a basic pattern of error handling: a `catch` block usually expects and knows how to handle the particular error type, so it should rethrow errors it doesn't know.
+Проброс исключения -- это базовый шаблон обработки ошибок: блок `catch` обычно ожидает и знает как обработать определенный тип ошибок, поэтому он должен пробрасывать ошибки, о которых он не знает.
 
-Even if we don't have `try..catch`, most environments allow to setup a "global" error handler to catch errors that "fall out". In-browser that's `window.onerror`.
+Даже если у нас нет `try...catch`, большинство сред позволяют настроить "глобальный" обработчик ошибок, чтобы ловить ошибки, которые "выпадают наружу". В браузере это `window.onerror`.
