@@ -1,10 +1,10 @@
-We need to find the beginning of the comment `match:<!--`, then everything till the end of `match:-->`.
+Нам нужно найти начало комментария `match:<!--`. После этого, весь текст до конца комментария `match:-->`.
 
-The first idea could be `pattern:<!--.*?-->` -- the lazy quantifier makes the dot stop right before  `match:-->`.
+Первой идеей может быть `pattern:<!--.*?-->` -- ленивый квантификатор остановит точку прямо перед `match:-->`.
 
-But a dot in JavaScript means "any symbol except the newline". So multiline comments won't be found.
+Но точка в JavaScript означает "любой символ, кроме новой строки". Так что многострочные комментарии не будут найдены.
 
-We can use `pattern:[\s\S]` instead of the dot to match "anything":
+Мы можем использовать `pattern:[\s\S]` вместо точки, чтобы найти "всё":
 
 ```js run
 let reg = /<!--[\s\S]*?-->/g;

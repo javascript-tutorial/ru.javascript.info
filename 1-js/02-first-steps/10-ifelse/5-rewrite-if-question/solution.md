@@ -1,6 +1,5 @@
 
 
 ```js
-result = (a + b < 4) ? 'Below' : 'Over';
+result = (a + b < 4) ? 'Мало' : 'Много';
 ```
-
