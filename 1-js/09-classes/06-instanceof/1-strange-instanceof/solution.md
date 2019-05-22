@@ -1,7 +1,7 @@
-Yeah, looks strange indeed.
+Да, действительно, выглядит странно.
 
-But `instanceof` does not care about the function, but rather about its `prototype`, that it matches against the prototype chain.
+Но `instanceof` не учитывает саму функцию при проверке, а только `prototype`, который проверяется на совпадения в прототипной цепочке.
 
-And here `a.__proto__ == B.prototype`, so `instanceof` returns `true`.
+И в данном примере `a.__proto__ == B.prototype`, так что `instanceof` возвращает `true`.
 
-So, by the logic of `instanceof`, the `prototype` actually defines the type, not the constructor function.
+Таким образом, по логике `instanceof`, именно `prototype` в действительности определяет тип, а не функция-конструктор.

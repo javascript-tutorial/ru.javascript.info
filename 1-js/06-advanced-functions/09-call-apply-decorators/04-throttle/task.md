@@ -2,47 +2,49 @@ importance: 5
 
 ---
 
-# Throttle decorator
+# Тормозящий (throttling) декоратор
 
-Create a "throttling" decorator `throttle(f, ms)` -- that returns a wrapper, passing the call to `f` at maximum once per `ms` milliseconds. Those calls that fall into the "cooldown" period, are ignored.
+Создайте "тормозящий" декоратор `throttle(f, ms)` - который возвращает обёртку, передавая вызов в `f` не более одного раза в `ms` миллисекунд. Те вызовы, которые попадают в период "торможения", игнорируются.
 
-**The difference with `debounce` -- if an ignored call is the last during the cooldown, then it executes at the end of the delay.**
+**Отличие от `debounce` - если проигнорированный вызов является последним во время "задержки", то он выполняется в конце.**
 
-Let's check the real-life application to better understand that requirement and to see where it comes from.
+Давайте рассмотрим реальное приложение, чтобы лучше понять это требование и выяснить, откуда оно взято.
 
-**For instance, we want to track mouse movements.**
+**Например, мы хотим отслеживать движения указателя.**
 
-In browser we can setup a function to run at every mouse micro-movement and get the pointer location as it moves. During an active mouse usage, this function usually runs very frequently, can be something like 100 times per second (every 10 ms).
 
-**The tracking function should update some information on the web-page.**
+В браузере мы можем объявить функцию, которая будет запускаться при каждом движении указателя и получать его местоположение. Во время активного использования мыши эта функция запускается очень часто, это может происходить около 100 раз в секунду (каждые 10 мс).
 
-Updating function `update()` is too heavy to do it on every micro-movement. There is also no sense in making it more often than once per 100ms.
+**Отслеживающая функция должна обновлять некоторую информацию на веб-странице.**
 
-So we'll assign `throttle(update, 100)` as the function to run on each mouse move instead of the original `update()`. The decorator will be called often, but `update()` will be called at maximum once per 100ms.
+Функция обновления `update()` слишком ресурсоёмкая, чтобы делать это при каждом микродвижении. Также нет смысла делать это чаще, чем один раз в 100 мс.
 
-Visually, it will look like this:
 
-1. For the first mouse movement the decorated variant passes the call to `update`. That's important, the user sees our reaction to their move immediately.
-2. Then as the mouse moves on, until `100ms` nothing happens. The decorated variant ignores calls.
-3. At the end of `100ms` -- one more `update` happens with the last coordinates. 
-4. Then, finally, the mouse stops somewhere. The decorated variant waits until `100ms` expire and then runs `update` with last coordinates. So, perhaps the most important, the final mouse coordinates are processed.
+Поэтому мы обернем вызов в декоратор: будем использовать throttle(update, 100) как функцию, которая будет запускаться при каждом перемещении указателя вместо оригинальной update(). Декоратор будет вызываться часто, но `update()` будет вызываться максимум раз в 100 мс.
 
-A code example:
+Визуально это будет выглядеть вот так:
+
+1. Для первого движения указателя декорированный вариант передает вызов в `update`. Это важно, т.к. пользователь сразу видит нашу реакцию на его перемещение.
+2. Затем, когда указатель продолжает движение, в течение 100 мс ничего не происходит. Декорированный вариант игнорирует вызовы.
+3. По истечению 100 мс происходит еще один вызов `update` с последними координатами. 
+4. Затем, наконец, указатель где-то останавливается. Декорированный вариант ждёт, пока не истечёт 100 мс и затем вызывает `update` с последними координатами. Так что, пожалуй, самое главное то, что окончательные координаты указателя обработаны.
+
+Пример кода:
 
 ```js
 function f(a) {
   console.log(a)
-};
+}
 
-// f1000 passes calls to f at maximum once per 1000 ms
+// f1000 передает вызовы f максимум раз в 1000 мс
 let f1000 = throttle(f, 1000);
 
-f1000(1); // shows 1
-f1000(2); // (throttling, 1000ms not out yet)
-f1000(3); // (throttling, 1000ms not out yet)
+f1000(1); // показывает 1
+f1000(2); // (ограничение, 1000 мс еще нет)
+f1000(3); // (ограничение, 1000 мс еще нет)
 
-// when 1000 ms time out...
-// ...outputs 3, intermediate value 2 was ignored
+// когда 1000 мс истекли ...
+// ...выводим 3, промежуточное значение 2 было проигнорировано
 ```
 
-P.S. Arguments and the context `this` passed to `f1000` should be passed to the original `f`.
+P.S. Аргументы и контекст `this`, переданные в `f1000`, должны быть переданы в оригинальную `f`.

@@ -2,17 +2,17 @@ importance: 5
 
 ---
 
-# Can I add a string property?
+# Можно ли добавить свойство строке?
 
 
-Consider the following code:
+Взгляните на следующий код:
 
 ```js
-let str = "Hello";
+let str = "Привет";
 
 str.test = 5;
 
 alert(str.test);
 ```
 
-How do you think, will it work? What will be shown?
+Как вы думаете, это сработает? Что выведется на экран?
