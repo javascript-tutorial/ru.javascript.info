@@ -1,12 +1,12 @@
 
-# Extending built-in classes
+# Расширение встроенных классов
 
-Built-in classes like Array, Map and others are extendable also.
+От встроенных классов, таких как `Array`, `Map` и других, тоже можно наследовать.
 
-For instance, here `PowerArray` inherits from the native `Array`:
+Например, в этом примере `PowerArray` наследуется от встроенного `Array`:
 
 ```js run
-// add one more method to it (can do more)
+// добавим один метод (можно более одного)
 class PowerArray extends Array {
   isEmpty() {
     return this.length === 0;
@@ -21,21 +21,21 @@ alert(filteredArr); // 10, 50
 alert(filteredArr.isEmpty()); // false
 ```
 
-Please note a very interesting thing. Built-in methods like `filter`, `map` and others -- return new objects of exactly the inherited type. They rely on the `constructor` property to do so.
+Обратите внимание на интересный момент: встроенные методы, такие как `filter`, `map` и другие возвращают новые объекты созданного пользовательского типа. Для этого они используют свойство `constructor`.
 
-In the example above,
+В примере выше,
 ```js
 arr.constructor === PowerArray
 ```
 
-So when `arr.filter()` is called, it internally creates the new array of results exactly as `new PowerArray`.
-That's actually very cool, because we can keep using `PowerArray` methods further on the result.
+Таким образом, при вызове метода `arr.filter()` он внутри создаёт массив результатов, именно используя `new PowerArray`, а не обычный массив.
+Это замечательно, поскольку можно продолжать использовать методы `PowerArray` далее на результатах.
 
-Even more, we can customize that behavior.
+Более того, мы можем настроить это поведение.
 
-There's a special static getter `Symbol.species`, if exists, it returns the constructor to use in such cases.
+При помощи специального статического геттера `Symbol.species` можно вернуть конструктор, который JavaScript будет использовать в `filter`, `map` и других методах для создания новых объектов.
 
-If we'd like built-in methods like `map`, `filter` will return regular arrays, we can return `Array` in `Symbol.species`, like here:
+Если бы мы хотели, чтобы методы `map`, `filter` и т. д. возвращали обычные массивы, мы можем вернуть `Array` в `Symbol.species`, вот так:
 
 ```js run
 class PowerArray extends Array {
@@ -44,7 +44,7 @@ class PowerArray extends Array {
   }
 
 *!*
-  // built-in methods will use this as the constructor
+  // встроенные методы будут использовать этот метод как конструктор
   static get [Symbol.species]() {
     return Array;
   }
@@ -54,29 +54,29 @@ class PowerArray extends Array {
 let arr = new PowerArray(1, 2, 5, 10, 50);
 alert(arr.isEmpty()); // false
 
-// filter creates new array using arr.constructor[Symbol.species] as constructor
+// filter создаст новый массив, используя arr.constructor[Symbol.species] как конструктор
 let filteredArr = arr.filter(item => item >= 10);
 
 *!*
-// filteredArr is not PowerArray, but Array
+// filteredArr не является PowerArray, это Array
 */!*
 alert(filteredArr.isEmpty()); // Error: filteredArr.isEmpty is not a function
 ```
 
-As you can see, now `.filter` returns `Array`. So the extended functionality is not passed any further.
+Как вы видите, теперь `.filter` возвращает `Array`. Расширенная функциональность не будет передаваться далее.
 
-## No static inheritance in built-ins
+## Отсутствие статического наследования встроенных классов
 
-Built-in objects have their own static methods, for instance `Object.keys`, `Array.isArray` etc.
+У встроенных объектов есть собственные статические методы, например `Object.keys`, `Array.isArray` и т. д.
 
-And we've already been talking about native classes extending each other: `Array.[[Prototype]] = Object`.
+Мы уже говорили ранее о встроенных классах, которые расширяют друг друга: `Array.[[Prototype]] = Object`.
 
-But statics are an exception. Built-in classes don't inherit static properties from each other.
+Но статические методы - исключение. Встроенные классы не наследуют статические методы друг друга.
 
-In other words, the prototype of built-in constructor `Array` does not point to `Object`. This way `Array` and `Date` do not have `Array.keys` or `Date.keys`. And that feels natural.
+Другими словами, прототип встроенного конструктора `Array` не содержит указателя на `Object`. Таким образом, `Array` и `Date` не содержат `Array.keys` или `Date.keys`. И это выглядит естественно.
 
-Here's the picture structure for `Date` and `Object`:
+Ниже вы видите структуру `Date` и `Object`:
 
 ![](object-date-inheritance.png)
 
-Note, there's no link between `Date` and `Object`. Both `Object` and `Date` exist independently. `Date.prototype` inherits from `Object.prototype`, but that's all.
+Следует отметить, что здесь нет связи между `Date` и `Object`. Как `Object`, так и `Date` существуют независимо. `Date.prototype` наследуется только от `Object.prototype`.
