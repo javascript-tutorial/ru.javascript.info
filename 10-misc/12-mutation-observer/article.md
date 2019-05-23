@@ -35,9 +35,9 @@ observer.observe(node, config);
 Объекты [MutationRecord](https://dom.spec.whatwg.org/#mutationrecord)имеют следующие свойства:
 
 - `type` -- тип изменения, один из
-   - `"attributes"` (измененный атрибут)
-   - `"characterData"` (измененные данные)
-   - `"childList"` (добавленные/удаленные элементы),
+   - `"attributes"` изменен атрибут
+   - `"characterData"` изменены данные `elem.data`, это для текстовых узлов
+   - `"childList"` добавлены/удаленые дочерние элементы,
 - `target` -- где произошло изменение: элемент для "attributes", текстовый узел для "characterData", или элемент для "childList" изменения,
 - `addedNodes/removedNodes`  -- добавленные/удаленные узлы,
 - `previousSibling/nextSibling` -- предыдущий или следующий одноуровневый элемент для добавленных/удаленных элементов,

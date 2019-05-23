@@ -292,7 +292,7 @@ let fruits = ["Яблоко", "Апельсин", "Слива"];
 
 // проходит по значениям
 for (let fruit of fruits) {
-  alert( fruit ); 
+  alert( fruit );
 }
 ```
 
