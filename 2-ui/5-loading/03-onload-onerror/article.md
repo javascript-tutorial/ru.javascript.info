@@ -1,17 +1,17 @@
-# Resource loading: onload and onerror
+# Загрузка ресурсов: onload and onerror
 
-The browser allows to track the loading of external resources -- scripts, iframes, pictures and so on.
+Браузер позволяет отслеживать загрузку сторонних ресурсов: скриптов, iframe'ов, изображений и др.
 
-There are two events for it:
+Для этого существуют два события:
 
-- `onload` -- successful load,
-- `onerror` -- an error occurred.
+- `load` -- успешная загрузка,
+- `error` -- во время загрузки произошла ошибка.
 
-## Loading a script
+## Загрузка скриптов
 
-Let's say we need to load a third-party script and call a function that resides there.
+Допустим, нам нужно загрузить сторонний скрипт и вызвать функцию, которая объявлена в этом скрипте.
 
-We can load it dynamically, like this:
+Мы можем загрузить этот скрипт динамически:
 
 ```js
 let script = document.createElement('script');
@@ -20,106 +20,106 @@ script.src = "my.js";
 document.head.append(script);
 ```
 
-...But how to run the function that is declared inside that script? We need to wait until the script loads, and only then we can call it.
+...Но как нам вызвать функцию, которая объявлена внутри того скрипта? Нам нужно подождать пока скрипт загрузится, и только потом мы можем ее вызвать.
 
 ```smart
-For our own scripts we could use [JavaScript modules](info:modules) here, but they are not widely adopted by third-party libraries.
+Для наших собственных скриптов мы можем использовать [JavaScript модули](info:modules), но они не слишком широко растпространены в сторонних библиотеках.
 ```
 
 ### script.onload
 
-The main helper is the `load` event. It triggers after the script was loaded and executed.
+Главный помощник - это событие `load`. Оно срабатывает после того, как скрипт был загружен и выполнен.
 
-For instance:
+Например:
 
 ```js run untrusted
 let script = document.createElement('script');
 
-// can load any script, from any domain
+// мы можем загрузить любой скрипт с любого домена
 script.src = "https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.3.0/lodash.js"
 document.head.append(script);
 
 *!*
 script.onload = function() {
-  // the script creates a helper function "_"
-  alert(_); // the function is available
+  // в скрипте создается вспомогательная функция с именем "_"
+  alert(_); // функция доступна
 };
 */!*
 ```
 
-So in `onload` we can use script variables, run functions etc.
+Таким образом в обработчике `onload` мы можем использовать переменные, вызывать функции и т.д., которые предоставляет нам сторонний скрипт.
 
-...And what if the loading failed? For instance, there's no such script (error 404) or the server or the server is down (unavailable).
+...А что если во время загрузки произошла ошибка? Например, такого скрипта нет (ошибка 404), или сервер был недоступен.
 
 ### script.onerror
 
-Errors that occur during the loading of the script can be tracked on `error` event.
+Ошибки, которые возникают во время загрузки скрипта, могут быть отслежены с помощью события `error`.
 
-For instance, let's request a script that doesn't exist:
+Например, давайте запросим скрипт, которго не существует:
 
 ```js run
 let script = document.createElement('script');
-script.src = "https://example.com/404.js"; // no such script
+script.src = "https://example.com/404.js"; // такого файла не существует
 document.head.append(script);
 
 *!*
 script.onerror = function() {
-  alert("Error loading " + this.src); // Error loading https://example.com/404.js
+  alert("Error loading " + this.src); // Ошибка загрузки https://example.com/404.js
 };
 */!*
 ```
 
-Please note that we can't get HTTP error details here. We don't know was it error 404 or 500 or something else. Just that the loading failed.
+Обратите внимание, что мы не можем получить описание HTTP-ошибки. Мы не знаем, была ли это ошибка 404, или 500, или какая-то другая. Знаем только, что во время загрузки произошла ошибка.
 
 ```warn
-Events `onload`/`onerror` track only the loading itself.
+Обработчики `onload`/`onerror` отслеживают только сам процесс загрузки.
 
-Errors during script processing and execution are out of the scope of these events. To track script errors, one can use `window.onerror` global handler.
+Ошибки обработки и выполнения загруженного скрипта ими не отслеживаются. Чтобы "поймать" ошибки в скрипте, нужно воспользоваться глобальным обработчиком `window.onerror`.
 ```
 
-## Other resources
+## Другие ресурсы
 
-The `load` and `error` events also work for other resources, basically for any resource that has an external `src`.
+События `load` и `error` также срабатывают и для других ресурсов, а вообще, для любых ресурсов, у которых внешний `src`.
 
-For example:
+Например:
 
 ```js run
 let img = document.createElement('img');
 img.src = "https://js.cx/clipart/train.gif"; // (*)
 
 img.onload = function() {
-  alert(`Image loaded, size ${img.width}x${img.height}`);
+  alert(`Изображение загружено, размеры ${img.width}x${img.height}`);
 };
 
 img.onerror = function() {
-  alert("Error occured while loading image");
+  alert("Ошибка во время загрузки изображения");
 };
 ```
 
-There are some notes though:
+Однако, есть некоторые особенности:
 
-- Most resources start loading when they are added to the document. But `<img>` is an exception. It starts loading when it gets an src `(*)`.
-- For `<iframe>`, the `iframe.onload` event triggers when the iframe loading finished, both for successful load and in case of an error.
+- Большинство ресурсов начинают загружаться после их добавления в document. За исключением `<img>`. Изображения начинают загружаться только когда у них имеется атрибут src `(*)`.
+- Для `<iframe>`, событие `load` срабатывает по окончании загрузки iframe как в случае успеха, так и в случае ошибки загрузки.
 
-That's for historical reasons.
+Такое поведение у `<iframe>` сложилось по историческим причинам.
 
-## Crossorigin policy
+## Кросс-доменная политика
 
-There's a rule: scripts from one site can't access contents of the other site. So, e.g. a script at `https://facebook.com` can't read the user's mailbox at `https://gmail.com`.
+Есть правило: скрипты с одного сайта не могут получить доступ к содержимому другого сайта. Например, скрипт с `https://facebook.com` не может прочитать почту пользователя на `https://gmail.com`.
 
-Or, to be more precise, one origin (domain/port/protocol triplet) can't access the content from another one. So even if we have a subdomain, or just another port, these are different origins, no access to each other.
+Или, если быть более точным, один источник (домен/порт/триплет протокола) не может получить доступ к содержимому другого источника. Даже домен и поддомен, или просто другой порт, будут считаться разными источниками, не имеющими доступа друг к другу.
 
-This rule also affects resources from other domains.
+Это правило также касается ресурсов с других доменов.
 
-If we're using a script from another domain, and there's an error in it, we can't get error details.
+Если мы используем скрипт с другого домена, и в нем имеется ошибка, мы не сможем узнать детали этой ошибки.
 
-For example, let's take a script with a single (bad) function call:
+Для примера, давайте возьмем скрипт с одним вызовом функции (которой не существует):
 ```js
 // 📁 error.js
 noSuchFunction();
 ```
 
-Now load it from our domain:
+Теперь загрузим этот скрипт с нашего домена:
 
 ```html run height=0
 <script>
@@ -130,14 +130,14 @@ window.onerror = function(message, url, line, col, errorObj) {
 <script src="/article/onload-onerror/crossorigin/error.js"></script>
 ```
 
-We can see a good error report, like this:
+Мы видим нормальный отчет об ошибке:
 
 ```
 Uncaught ReferenceError: noSuchFunction is not defined
 https://javascript.info/article/onload-onerror/crossorigin/error.js, 1:1
 ```
 
-Now let's load the same script from another domain:
+А теперь загрузим этот же скрипт с другого домена:
 
 ```html run height=0
 <script>
@@ -148,40 +148,40 @@ window.onerror = function(message, url, line, col, errorObj) {
 <script src="https://cors.javascript.info/article/onload-onerror/crossorigin/error.js"></script>
 ```
 
-The report is different, like this:
+Отчет отличается:
 
 ```
 Script error.
 , 0:0
 ```
 
-Details may vary depeding on the browser, but the idea is same: any information about the internals of a script is hidden. Exactly because it's from another domain.
+Детали отчета могут варьироваться в зависимости от браузера, но идея общая: любая информация о внутренностях скрипта спрятана. Именно потому, что скрипт загружен с другого домена.
 
-Why do we need the details?
+Зачем нам могут быть нужны детали?
 
-There are many services (and we can build our own) that listen to `window.onerror`, save errors at the server and provide an interface to access and analyze them. That's great, as we can see real errors, triggered by our users. But we can't see any error information for scripts from other domains.
+Существует много сервисов (и мы можем сделать наш собственный), которые обрабатывают `window.onerror`, сохраняют отчет на сервере и предоставляют доступ к этому отчету для анализа. Это здорово, потому что мы можем увидеть реальные ошибки, которые были вызваны при работе наших пользователей. Но мы не можем увидеть ошибки сторонних скриптов "на прямую".
 
-Similar cross-origin policy (CORS) is enforced for other types of resources as well.
+Похожая кросс-доменная политика (CORS) внедрена и в отношении других ресурсов.
 
-**To allow cross-origin access, we need `crossorigin` attribute, plus the remote server must provide special headers.**
+**Чтобы разрешить кросс-доменный доступ, нам нужно воспользоваться атрибутом `crossorigin`, и кроме того, удаленный сервер должен предоставить специальные заголовки.**
 
-There are three levels of cross-origin access:
+Существует три уровня кросс-доменного доступа:
 
-1. **No `crossorigin` attribute** -- access prohibited.
-2. **`crossorigin="anonymous"`** -- access allowed if the server responds with the header `Access-Control-Allow-Origin` with `*` or our origin. Browser does not send authorization information and cookies to remote server.
-3. **`crossorigin="use-credentials"`** -- access allowed if the server sends back the header `Access-Control-Allow-Origin` with our origin and `Access-Control-Allow-Credentials: true`.  Browser sends authorization information and cookies to remote server.
+1. **Атрибут `crossorigin` отсутствует** -- доступ запрещен.
+2. **`crossorigin="anonymous"`** -- доступ разрешен, если сервер отвечает с заголовком `Access-Control-Allow-Origin` со значениями `*` или наш домен. Браузер не отправляет авторизационную информацию и куки на удаленный сервер.
+3. **`crossorigin="use-credentials"`** -- доступ разрешен, если сервер отвечает с заголовками `Access-Control-Allow-Origin` со значением наш домен и `Access-Control-Allow-Credentials: true`. Браузер отправляет авторизационную информацию и куки на удаленный сервер.
 
 ```smart
-You can read more about cross-origin access in the chapter <info:fetch-crossorigin>. It describes `fetch` method for network requests, but the policy is exactly the same.
+Почитать больше о кросс-доменных доступах вы можете в главе <info:fetch-crossorigin>. Там описан метод `fetch` для сетевых запросов, но политика там точно такая же.
 
-Such thing as "cookies" is out of our current scope, but you can read about them in the chapter <info:cookie>.
+Такие вещи как куки (cookies) вне нашего текущего поля освещения, но вы можете почитать о них в главе <info:cookie>.
 ```
 
-In our case, we didn't have any crossorigin attribute. So the cross-origin access was prohibited. Let's add it.
+В нашем случае, атрибут `crossorigin` отсутствовал. Поэтому кросс-доменный доступ был запрещен. Давайте добавим его.
 
-We can choose between `"anonymous"` (no cookies sent, one server-side header needed) and `"use-credentials"` (sends cookies too, two server-side headers needed).
+Мы можем выбрать `"anonymous"` (куки не отправляются, требуется один серверный заголовок) или `"use-credentials"` (куки отправляются, требуются два серверных заголовка) в качестве значения атрибута.
 
-If we don't care about cookies, then `"anonymous"` is a way to go:
+Если куки нас не волнуют, тогда смело выбираем `"anonymous"`:
 
 ```html run height=0
 <script>
@@ -192,15 +192,15 @@ window.onerror = function(message, url, line, col, errorObj) {
 <script *!*crossorigin="anonymous"*/!* src="https://cors.javascript.info/article/onload-onerror/crossorigin/error.js"></script>
 ```
 
-Now, assuming that the server provides `Access-Control-Allow-Origin` header, everything's fine. We have the full error report.
+Теперь, при условии, что сервер предоставил заголовок `Access-Control-Allow-Origin`, все хорошо. У нас есть полный отчет по ошибкам.
 
-## Summary
+## Итого
 
-Images `<img>`, external styles, scripts and other resources provide `load` and `error` events to track their loading:
+Изображения `<img>`, внешние стили, скрипты и другие ресурсы предоставляют события `load` и `error` для отслеживания загрузки:
 
-- `load` triggers on a successful load,
-- `error` triggers on a failed load.
+- `load` срабатывает при успешной загрузке,
+- `error` срабатывает при ошибке загрузки.
 
-The only exception is `<iframe>`: for historical reasons it always triggers `load`, for any load completion, even if the page is not found.
+Единственное исключение - это `<iframe>`: по историческим причинам, срабатывает всегда `load`, вне зависимости от того, завершилась загрузка успешно или в случае, если страница не была найдена.
 
-The `readystatechange` event also works for resources, but is rarely used, because `load/error` events are simpler.
+Событие `readystatechange` также работает для ресурсов, но используется редко, потому что события `load/error` проще в использовании.
