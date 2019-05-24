@@ -2,13 +2,12 @@ importance: 5
 
 ---
 
-# if (a string with zero)
+# if (строка с нулём)
 
-Will `alert` be shown?
+Выведется ли `alert`?
 
 ```js
 if ("0") {
-  alert( 'Hello' );
+  alert( 'Привет' );
 }
 ```
-

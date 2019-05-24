@@ -1,7 +1,7 @@
-We need to choose the right Bezier curve for that animation. It should have `y>1` somewhere for the plane to "jump out".
+Для такой анимации необходимо подобрать правильную кривую Безье. Для того чтобы самолет "выпрыгнул", она должна иметь `y>1` на одном из участков.
 
-For instance, we can take both control points with `y>1`, like: `cubic-bezier(0.25, 1.5, 0.75, 1.5)`.
+Например, мы можем указать `y>1` для обеих контрольных точек: `cubic-bezier(0.25, 1.5, 0.75, 1.5)`.
 
-The graph:
+График кривой Безье:
 
 ![](bezier-up.png)
