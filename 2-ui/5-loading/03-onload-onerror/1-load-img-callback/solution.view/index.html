@@ -21,7 +21,7 @@
       }
     }
 
-    // ---------- The test ----------
+    // ---------- тест ----------
 
     let sources = [
       "https://en.js.cx/images-load/1.jpg",
@@ -29,13 +29,13 @@
       "https://en.js.cx/images-load/3.jpg"
     ];
 
-    // add random characters to prevent browser caching
+    // добавляем случайное число, чтобы избежать кеширования
     for (let i = 0; i < sources.length; i++) {
       sources[i] += '?' + Math.random();
     }
 
-    // for each image,
-    // let's create another img with the same src and check that we have its width immediately
+    // для каждого изображения
+    // создадим другое изображение с аналогичным src и проверим, получаем ли мы его ширину мгновенно
     function testLoaded() {
       let widthSum = 0;
       for (let i = 0; i < sources.length; i++) {
@@ -46,7 +46,7 @@
       alert(widthSum);
     }
 
-    // should output 300
+    // должно выводиться 300
     preloadImages(sources, testLoaded);
   </script>
 
