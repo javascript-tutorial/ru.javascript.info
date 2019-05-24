@@ -75,7 +75,7 @@ document.querySelector('.hello').innerHTML = text;
 
 | Оригинальный термин | Перевод           |
 |:--------------------|:------------------|
-| backtick            | обратный апостроф |
+| backtick            | обратная кавычка  |
 | character class     | символьный класс  |
 | Summary             | Итого             |
 

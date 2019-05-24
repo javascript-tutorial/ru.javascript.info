@@ -1,286 +1,282 @@
-# Arrays 
+# Массивы
 
-Objects allow you to store keyed collections of values. That's fine.
+Объекты позволяют хранить данные со строковыми ключами. Это замечательно.
 
-But quite often we find that we need an *ordered collection*, where we have a 1st, a 2nd, a 3rd element and so on. For example, we need that to store a list of something: users, goods, HTML elements etc. 
+Но довольно часто мы понимаем, что нам необходима *упорядоченная коллекция* данных, в которой присутствуют 1-й, 2-й, 3-й элементы и т.д. Например, она понадобится нам для хранения списка чего-либо: пользователей, товаров, элементов HTML и т.д.  
 
-It is not convenient to use an object here, because it provides no methods to manage the order of elements. We can’t insert a new property “between” the existing ones. Objects are just not meant for such use.
+В этом случае использовать объект неудобно, так как он не предоставляет методов управления порядком элементов. Мы не можем вставить новое свойство "между" уже существующими. Объекты просто не предназначены для этих целей.
 
-There exists a special data structure named `Array`, to store ordered collections. 
+Для хранения упорядоченных коллекций существует особая структура данных, которая называется массив, `Array`.
 
-## Declaration
+## Объявление
 
-There are two syntaxes for creating an empty array:
+Существует два варианта синтаксиса для создания пустого массива:
 
 ```js
 let arr = new Array();
 let arr = [];
 ```
 
-Almost all the time, the second syntax is used. We can supply initial elements in the brackets:
+Практически всегда используется второй вариант синтаксиса. В скобках мы можем указать начальные значения элементов:
 
 ```js
-let fruits = ["Apple", "Orange", "Plum"];
+let fruits = ["Яблоко", "Апельсин", "Слива"];
 ```
 
-Array elements are numbered, starting with zero.
+Элементы массива нумеруются, начиная с нуля. 
 
-We can get an element by its number in square brackets:
+Мы можем получить элемент, указав его номер в квадратных скобках: 
 
 ```js run
-let fruits = ["Apple", "Orange", "Plum"];
+let fruits = ["Яблоко", "Апельсин", "Слива"];
 
-alert( fruits[0] ); // Apple
-alert( fruits[1] ); // Orange
-alert( fruits[2] ); // Plum
+alert( fruits[0] ); // Яблоко
+alert( fruits[1] ); // Апельсин
+alert( fruits[2] ); // Слива
 ```
 
-We can replace an element:
+Мы можем заменить элемент: 
 
 ```js
-fruits[2] = 'Pear'; // now ["Apple", "Orange", "Pear"]
+fruits[2] = 'Груша'; // теперь ["Яблоко", "Апельсин", "Груша"]
 ```
 
-...Or add a new one to the array:
+…Или добавить новый к существующему массиву: 
 
 ```js
-fruits[3] = 'Lemon'; // now ["Apple", "Orange", "Pear", "Lemon"]
+fruits[3] = 'Лимон'; // теперь ["Яблоко", "Апельсин", "Груша", "Лимон"]
 ```
 
-The total count of the elements in the array is its `length`:
+Общее число элементов массива содержится в его свойстве `length`: 
 
 ```js run
-let fruits = ["Apple", "Orange", "Plum"];
+let fruits = ["Яблоко", "Апельсин", "Слива"];
 
 alert( fruits.length ); // 3
 ```
 
-We can also use `alert` to show the whole array.
+Вывести массив целиком можно при помощи `alert`.
 
 ```js run
-let fruits = ["Apple", "Orange", "Plum"];
+let fruits = ["Яблоко", "Апельсин", "Слива"];
 
-alert( fruits ); // Apple,Orange,Plum
+alert( fruits ); // Яблоко, Апельсин, Слива
 ```
 
-An array can store elements of any type.
+В массиве могут храниться элементы любого типа. 
 
-For instance:
+Например:
 
 ```js run no-beautify
-// mix of values
-let arr = [ 'Apple', { name: 'John' }, true, function() { alert('hello'); } ];
+// разные типы значений
+let arr = [ 'Яблоко', { name: 'Джон' }, true, function() { alert('привет'); } ];
 
-// get the object at index 1 and then show its name
-alert( arr[1].name ); // John
+// получить элемент с индексом 1(объект) и затем показать его свойство
+alert( arr[1].name ); // Джон
 
-// get the function at index 3 and run it
-arr[3](); // hello
+// получить элемент с индексом 3(функция) и выполнить её
+arr[3](); // привет
 ```
 
-
-````smart header="Trailing comma"
-An array, just like an object, may end with a comma:
+````smart header="Висячая запятая"
+Массив, так же, как и объект, может оканчиваться запятой:
 ```js 
 let fruits = [
-  "Apple", 
-  "Orange", 
-  "Plum"*!*,*/!*
+  "Яблоко", 
+  "Апельсин", 
+  "Слива"*!*,*/!*
 ];
 ```
 
-The "trailing comma" style makes it easier to insert/remove items, because all lines become alike.
+"Висячая запятая" упрощает процесс добавления/удаления элементов, так как все строки становятся идентичными.
 ````
 
+## Методы pop/push, shift/unshift
 
-## Methods pop/push, shift/unshift
+[Очередь](https://ru.wikipedia.org/wiki/Очередь_(программирование)) – один из самых распространенных вариантов применения массива. В области компьютерных наук так называется упорядоченная коллекция элементов, поддерживающая два вида операций:
 
-A [queue](https://en.wikipedia.org/wiki/Queue_(abstract_data_type)) is one of most common uses of an array. In computer science, this means an ordered collection of elements which supports two operations:
-
-- `push` appends an element to the end.
-- `shift` get an element from the beginning, advancing the queue, so that the 2nd element becomes the 1st.
+- `push` добавляет элемент в конец.
+- `shift` удаляет элемент в начале, сдвигая очередь, так что второй элемент становится первым. 
 
 ![](queue.png)
 
-Arrays support both operations.
+Массивы поддерживают обе операции.
 
-In practice we need it very often. For example, a queue of messages that need to be shown on-screen.
+На практике необходимость в этом возникает очень часто. Например, очередь сообщений, которые надо показать на экране.
 
-There's another use case for arrays -- the data structure named [stack](https://en.wikipedia.org/wiki/Stack_(abstract_data_type)). 
+Существует и другой вариант применения для массивов – структура данных, называемая [стек](https://ru.wikipedia.org/wiki/Стек)).
 
-It supports two operations:
+Она поддерживает два вида операций: 
 
-- `push` adds an element to the end.
-- `pop` takes an element from the end.
+- `push` добавляет элемент в конец.
+- `pop` удаляет последний элемент.
 
-So new elements are added or taken always from the "end".
+Таким образом, новые элементы всегда добавляются или удаляются из «конца».
 
-A stack is usually illustrated as a pack of cards: new cards are added to the top or taken from the top:
+Примером стека обычно служит колода карт: новые карты кладутся наверх и берутся тоже сверху:
 
 ![](stack.png)
 
-For stacks, the latest pushed item is received first, that's also called LIFO (Last-In-First-Out) principle. For queues, we have FIFO (First-In-First-Out).
+Массивы в JavaScript могут работать и как очередь, и как стек. Мы можем добавлять/удалять элементы как в начало, так и в конец массива.
 
-Arrays in JavaScript can work both as a queue and as a stack. They allow you to add/remove elements both to/from the beginning or the end. 
+В компьютерных науках структура данных, делающая это возможным, называется [двусторонняя очередь](https://ru.wikipedia.org/wiki/Двухсторонняя_очередь).
 
-In computer science the data structure that allows it is called [deque](https://en.wikipedia.org/wiki/Double-ended_queue).
+**Методы, работающие с концом массива:**
 
-**Methods that work with the end of the array:**
-
-`pop`
-: Extracts the last element of the array and returns it:
+`pop` 
+: Удаляет последний элемент из массива и возвращает его:
 
     ```js run
-    let fruits = ["Apple", "Orange", "Pear"];
-
-    alert( fruits.pop() ); // remove "Pear" and alert it
-
-    alert( fruits ); // Apple, Orange
+    let fruits = ["Яблоко", "Апельсин", "Груша"];
+    
+    alert( fruits.pop() ); // удаляем "Груша" и выводим его
+    
+    alert( fruits ); // Яблоко, Апельсин
     ```
-
+    
 `push`
-: Append the element to the end of the array:
+: Добавляет элемент в конец массива: 
 
     ```js run
-    let fruits = ["Apple", "Orange"];
-
-    fruits.push("Pear");
-
-    alert( fruits ); // Apple, Orange, Pear
+    let fruits = ["Яблоко", "Апельсин"];
+    
+    fruits.push("Груша");
+    
+    alert( fruits ); // Яблоко, Апельсин, Груша
     ```
 
-    The call `fruits.push(...)` is equal to `fruits[fruits.length] = ...`.
+    Вызов `fruits.push(...)` равнозначен `fruits[fruits.length] = ...`.
 
-**Methods that work with the beginning of the array:**
+**Методы, работающие с началом массива:**
 
 `shift`
-: Extracts the first element of the array and returns it:
+: Удаляет из массива первый элемент и возвращает его:
 
     ```js
-    let fruits = ["Apple", "Orange", "Pear"];
+    let fruits = ["Яблоко", "Апельсин", "Груша"];
 
-    alert( fruits.shift() ); // remove Apple and alert it
+    alert( fruits.shift() ); // удаляем Яблоко и выводим его
 
-    alert( fruits ); // Orange, Pear
+    alert( fruits ); // Апельсин, Груша
     ```
-
+    
 `unshift`
-: Add the element to the beginning of the array:
+: Добавляет элемент в начало массива:
 
     ```js
-    let fruits = ["Orange", "Pear"];
-
-    fruits.unshift('Apple');
-
-    alert( fruits ); // Apple, Orange, Pear
+    let fruits = ["Апельсин", "Груша"];
+    
+    fruits.unshift('Яблоко');
+    
+    alert( fruits ); // Яблоко, Апельсин, Груша
     ```
 
-Methods `push` and `unshift` can add multiple elements at once:
+Методы `push` и `unshift` могут добавлять сразу несколько элементов:  
 
 ```js run
-let fruits = ["Apple"];
+let fruits = ["Яблоко"];
 
-fruits.push("Orange", "Peach");
-fruits.unshift("Pineapple", "Lemon");
+fruits.push("Апельсин", "Груша");
+fruits.unshift("Ананас", "Лимон");
 
-// ["Pineapple", "Lemon", "Apple", "Orange", "Peach"]
+// ["Ананас", "Лимон", "Яблоко", "Апельсин", "Груша"]
 alert( fruits );
 ```
 
-## Internals
+## Внутреннее устройство массива
 
-An array is a special kind of object. The square brackets used to access a property `arr[0]` actually come from the object syntax. Numbers are used as keys. 
+Массив – это особый подвид объектов. Квадратные скобки, используемые для того, чтобы получить доступ к свойству ```arr[0]``` - это по сути обычный синтаксис доступа по ключу, как ```obj[key]```, где в роли ```obj``` у нас ```arr```, а в качестве ключа - числовой индекс.
 
-They extend objects providing special methods to work with ordered collections of data and also the `length` property. But at the core it's still an object.
+Массивы расширяют объекты, так как предусматривают специальные методы для работы с упорядоченными коллекциями данных, а также свойство `length`. Но в основе все равно лежит объект.
 
-Remember, there are only 7 basic types in JavaScript. Array is an object and thus behaves like an object. 
+Следует помнить, что в JavaScript  существует всего 7 основных типов данных. Массив является объектом и, следовательно, ведет себя как объект.
 
-For instance, it is copied by reference:
+Например, копируется по ссылке: 
 
 ```js run
-let fruits = ["Banana"]
+let fruits = ["Банан"]
 
-let arr = fruits; // copy by reference (two variables reference the same array)
+let arr = fruits; // копируется по ссылке (2 переменных ссылаются на один и тот же массив)
 
 alert( arr === fruits ); // true
  
-arr.push("Pear"); // modify the array by reference
+arr.push("Груша"); // массив меняется по ссылке
 
-alert( fruits ); // Banana, Pear - 2 items now
+alert( fruits ); // Банан, Груша - теперь 2 элемента
 ```
 
-...But what makes arrays really  special is their internal representation. The engine tries to store its elements in the contiguous memory area, one after another, just as depicted on the illustrations in this chapter, and there are other optimizations as well, to make arrays work really fast.
+...Но то, что действительно делает массивы особенными - это их внутреннее представление. Движок JavaScript старается хранить элементы массива в непрерывной области памяти, один за другим, так, как это показано на иллюстрациях к этой главе. Существуют и другие способы оптимизации, благодаря которым массивы работают очень быстро.
 
-But they all break if we quit working with an array as with an "ordered collection" and start working with it as if it were a regular object.
+Но все они утратят эффективность, если мы перестанем работать с массивом, как с «упорядоченной коллекцией данных», и начнем использовать его как обычный объект.
 
-For instance, technically we can do this:
+Например, технически, мы можем сделать следующее:
 
 ```js
-let fruits = []; // make an array
+let fruits = []; // создаём массив
 
-fruits[99999] = 5; // assign a property with the index far greater than its length
+fruits[99999] = 5; // создаём свойство с индексом, намного превышающим длину массива
 
-fruits.age = 25; // create a property with an arbitrary name
+fruits.age = 25; // создаём свойство с произвольным именем
 ```
 
-That's possible, because arrays are objects at their base. We can add any properties to them.
+Это возможно, потому что в основе массива лежит объект. Мы можем присвоить ему любые свойства. 
 
-But the engine will see that we're working with the array as with a regular object. Array-specific optimizations are not suited for such cases and will be turned off, their benefits disappear.
+Но движок поймёт, что мы работаем с массивом, как с обычным объектом. Способы оптимизации, используемые для массивов, в этом случае не подходят и поэтому они будут отключены и никакой выгоды не принесут.
 
-The ways to misuse an array:
+Варианты неправильного применения массива:
 
-- Add a non-numeric property like `arr.test = 5`. 
-- Make holes, like: add `arr[0]` and then `arr[1000]` (and nothing between them).
-- Fill the array in the reverse order, like `arr[1000]`, `arr[999]` and so on.
+- Добавление нечислового свойства, например:  `arr.test = 5`.
+- Создание «дыр», например: добавление `arr[0]`, затем `arr[1000]` (между ними ничего нет).
+- Заполнение массива в обратном порядке, например: `arr[1000]`, `arr[999]` и т.д.
 
-Please think of arrays as special structures to work with the *ordered data*. They provide special methods for that. Arrays are carefully tuned inside JavaScript engines to work with contiguous ordered data, please use them this way. And if you need arbitrary keys, chances are high that you actually require a regular object `{}`.
+Массив следует считать особой структурой, позволяющей работать с *упорядоченными данными*. Для этого массивы предоставляют специальные методы. Массивы тщательно настроены в движках JavaScript для работы с однотипными упорядоченными данными, поэтому, пожалуйста, используйте их в таких случаях. Если вам нужны произвольные ключи, скорее всего вам потребуется обычный объект `{}`.
 
-## Performance
+## Эффективность
 
-Methods `push/pop` run fast, while `shift/unshift` are slow.
+Методы `push/pop` выполняются быстро, а методы `shift/unshift` – медленно.
 
 ![](array-speed.png)
 
-Why is it faster to work with the end of an array than with its beginning? Let's see what happens during the execution:
+Почему работать с концом массива быстрее, чем с его началом? Давайте посмотрим, что происходит во время выполнения:
 
 ```js
-fruits.shift(); // take 1 element from the start
+fruits.shift(); // удаляем 1-ый элемент  с начала
 ```
 
-It's not enough to take and remove the element with the number `0`. Other elements need to be renumbered as well.
+Просто взять и удалить элемент с номером `0` недостаточно. Нужно также заново пронумеровать остальные элементы. 
 
-The `shift` operation must do 3 things:
+Операция `shift` должна выполнить 3 действия:
 
-1. Remove the element with the index `0`.
-2. Move all elements to the left, renumber them from the index `1` to `0`, from `2` to `1` and so on.
-3. Update the `length` property.
+1. Удалить элемент с индексом `0`.
+2. Сдвинуть все элементы влево, заново пронумеровать их, заменив `1` на `0`, `2` на `1` и т.д. 
+3. Обновить свойство `length` .
 
 ![](array-shift.png)
 
-**The more elements in the array, the more time to move them, more in-memory operations.**
+**Чем больше элементов содержит массив, тем больше времени потребуется для того, чтобы их переместить, больше операций с памятью.**
 
-The similar thing happens with `unshift`: to add an element to the beginning of the array, we need first to move existing elements to the right, increasing their indexes.
+То же самое происходит с `unshift` : чтобы добавить элемент в начало массива, нам нужно сначала сдвинуть существующие элементы вправо, увеличивая их индексы.
 
-And what's with `push/pop`? They do not need to move anything. To extract an element from the end, the `pop` method cleans the index and shortens `length`.
+А что же с `push/pop`? Им не нужно ничего перемещать. Чтобы удалить элемент в конце массива, метод `pop` очищает индекс и уменьшает значение `length`.
 
-The actions for the `pop` operation:
+Действия при операции `pop`:
 
 ```js
-fruits.pop(); // take 1 element from the end
+fruits.pop(); // удаляем 1 элемент с конца
 ```
 
 ![](array-pop.png)
 
-**The `pop` method does not need to move anything, because other elements keep their indexes. That's why it's blazingly fast.**
+**Метод `pop` не требует перемещения, потому что остальные элементы остаются на тех же индексах. Именно поэтому он выполняется очень быстро.**
 
-The similar thing with the `push` method.
+Аналогично работает метод `push`.
 
-## Loops
+## Перебор элементов
 
-One of the oldest ways to cycle array items is the `for` loop over indexes:
+Одним из самых старых способов перебора элементов массива является цикл for по цифровым индексам: 
 
 ```js run
-let arr = ["Apple", "Orange", "Pear"];
+let arr = ["Яблоко", "Апельсин", "Груша"];
 
 *!*
 for (let i = 0; i < arr.length; i++) {
@@ -289,103 +285,102 @@ for (let i = 0; i < arr.length; i++) {
 }
 ```
 
-But for arrays there is another form of loop, `for..of`:
+Но для массивов возможен и другой вариант цикла, `for..of`:
 
 ```js run
-let fruits = ["Apple", "Orange", "Plum"];
+let fruits = ["Яблоко", "Апельсин", "Слива"];
 
-// iterates over array elements
+// проходит по значениям
 for (let fruit of fruits) {
-  alert( fruit ); 
+  alert( fruit );
 }
 ```
 
-The `for..of` doesn't give access to the number of the current element, just its value, but in most cases that's enough. And it's shorter.
+Цикл `for..of` не предоставляет доступа к номеру текущего элемента, только к его значению, но в большинстве случаев этого достаточно. А также это короче.
 
-Technically, because arrays are objects, it is also possible to use `for..in`:
+Технически, так как массив является объектом, можно использовать и вариант `for..in`:
 
 ```js run
-let arr = ["Apple", "Orange", "Pear"];
+let arr = ["Яблоко", "Апельсин", "Груша"];
 
 *!*
 for (let key in arr) {
 */!*
-  alert( arr[key] ); // Apple, Orange, Pear
+  alert( arr[key] ); // Яблоко, Апельсин, Груша
 }
 ```
 
-But that's actually a bad idea. There are potential problems with it:
+Но на самом деле это плохая идея. Существуют скрытые недостатки этого способа:
 
-1. The loop `for..in` iterates over *all properties*, not only the numeric ones.
+1. Цикл `for..in` выполняет перебор *всех свойств* объекта, а не только цифровых.
 
-    There are so-called "array-like" objects in the browser and in other environments, that *look like arrays*. That is, they have `length` and indexes properties, but they may also have other non-numeric properties and methods, which we usually don't need. The `for..in` loop will list them though. So if we need to work with array-like objects, then these "extra" properties can become a problem.
+    В браузере и других программных средах также существуют так называемые "псевдомассивы" - объекты, которые *выглядят, как массив*. То есть, у них есть свойство `length` и индексы, но также они могут иметь дополнительные нечисловые свойства и методы, которые нам обычно не нужны. Тем не менее, цикл `for..in` выведет и их. Поэтому, если нам приходится иметь дело с объектами, похожими на массив, такие "лишние" свойства могут стать проблемой.
+    
+2. Цикл for..in оптимизирован под произвольные объекты, не массивы, и поэтому в 10-100 раз медленнее. Увеличение скорости выполнения может иметь значение только при возникновении узких мест. Но мы все же должны представлять разницу.
 
-2. The `for..in` loop is optimized for generic objects, not arrays, and thus is 10-100 times slower. Of course, it's still very fast. The speedup may only matter in bottlenecks or seem irrelevant. But still we should be aware of the difference.
+В общем, не следует использовать цикл `for..in` для массивов.   
 
-Generally, we shouldn't use `for..in` for arrays.
+## Немного о "length"
 
+Свойство `length` автоматически обновляется при изменении массива. Если быть точными, это не количество элементов массива, а наибольший цифровой индекс плюс один.
 
-## A word about "length"
-
-The `length` property automatically updates when we modify the array. To be precise, it is actually not the count of values in the array, but the greatest numeric index plus one.
-
-For instance, a single element with a large index gives a big length:
+Например, единственный элемент, имеющий большой индекс, дает большую длину:
 
 ```js run
 let fruits = [];
-fruits[123] = "Apple";
+fruits[123] = "Яблоко";
 
 alert( fruits.length ); // 124
 ```
 
-Note that we usually don't use arrays like that. 
+Обратите внимание, что обычно мы не используем массивы таким образом.
 
-Another interesting thing about the `length` property is that it's writable.
+Еще один интересный факт о свойстве `length` – его можно перезаписать.
 
-If we increase it manually, nothing interesting happens. But if we decrease it, the array is truncated. The process is irreversible, here's the example:
+Если мы вручную увеличим его, ничего интересного не произойдет. Но если мы уменьшим его, массив станет короче. Этот процесс необратим, как мы можем понять из примера:
 
 ```js run
 let arr = [1, 2, 3, 4, 5];
 
-arr.length = 2; // truncate to 2 elements
+arr.length = 2; // укорачиваем до 2 элементов
 alert( arr ); // [1, 2]
 
-arr.length = 5; // return length back
-alert( arr[3] ); // undefined: the values do not return
+arr.length = 5; // возвращаем length как было
+alert( arr[3] ); // undefined: значения не восстановились
 ```
 
-So, the simplest way to clear the array is: `arr.length = 0;`.
+Таким образом, самый простой способ очистить массив – это `arr.length = 0;`.
 
 
 ## new Array() [#new-array]
 
-There is one more syntax to create an array:
+Существует еще один вариант синтаксиса для создания массива:
 
 ```js
-let arr = *!*new Array*/!*("Apple", "Pear", "etc");
+let arr = *!*new Array*/!*("Яблоко", "Груша", "и тд");
 ```
 
-It's rarely used, because square brackets `[]` are shorter. Also there's a tricky feature with it.
+Он редко применяется, так как квадратные скобки `[]` короче. Кроме того, у него есть хитрая особенность.
 
-If `new Array` is called with a single argument which is a number, then it creates an array *without items, but with the given length*.
+Если `new Array` вызывается одним аргументом, который представляет собой число, он создает массив *без элементов, но с заданной длиной*.
 
-Let's see how one can shoot themself in the foot:
+Давайте посмотрим, как можно оказать себе медвежью услугу:
 
 ```js run
-let arr = new Array(2); // will it create an array of [2] ?
+let arr = new Array(2); // создадим ли массив [2] ?
 
-alert( arr[0] ); // undefined! no elements.
+alert( arr[0] ); // undefined! нет элементов.
 
 alert( arr.length ); // length 2
-```
+``` 
 
-In the code above, `new Array(number)` has all elements `undefined`.
+Как мы видим в коде, представленном выше, в `new Array(number)` все элементы равны `undefined`.
 
-To evade such surprises, we usually use square brackets, unless we really know what we're doing.
+Чтобы избежать появления таких неожиданных ситуаций, мы обычно используем квадратные скобки, если конечно не знаем точно, что именно здесь нужен `Array`. 
 
-## Multidimensional arrays
+## Многомерные массивы
 
-Arrays can have items that are also arrays. We can use it for multidimensional arrays, to store matrices:
+Массивы могут содержать элементы, которые тоже являются массивами. Это можно использовать для создания многомерных массивов, например, для хранения матриц:
 
 ```js run
 let matrix = [
@@ -394,14 +389,14 @@ let matrix = [
   [7, 8, 9]
 ];
 
-alert( matrix[1][1] ); // the central element
+alert( matrix[1][1] ); // центральный элемент 
 ```
 
 ## toString
 
-Arrays have their own implementation of `toString` method that returns a comma-separated list of elements.
+Массивы по-своему реализуют метод `toString`, который возвращает список элементов, разделенных запятыми.
 
-For instance:
+Например:
 
 
 ```js run
@@ -411,7 +406,7 @@ alert( arr ); // 1,2,3
 alert( String(arr) === '1,2,3' ); // true
 ```
 
-Also, let's try this:
+Также, давайте попробуем следующее:
 
 ```js run
 alert( [] + 1 ); // "1"
@@ -419,9 +414,9 @@ alert( [1] + 1 ); // "11"
 alert( [1,2] + 1 ); // "1,21"
 ```
 
-Arrays do not have `Symbol.toPrimitive`, neither a viable `valueOf`, they implement only `toString` conversion, so here `[]` becomes an empty string, `[1]` becomes `"1"` and `[1,2]` becomes `"1,2"`.
+Массивы не имеют ни `Symbol.toPrimitive`, ни функционирующего `valueOf`, они реализуют только преобразование `toString`, таким образом здесь `[]` становится пустой строкой, `[1]` становится `"1"`, а `[1,2]` становится `"1,2"`.
 
-When the binary plus `"+"` operator adds something to a string, it converts it to a string as well, so the next step looks like this:
+Когда бинарный оператор плюс `"+"` добавляет что-либо к строке, он тоже преобразует это в строку, таким образом:
 
 ```js run
 alert( "" + 1 ); // "1"
@@ -429,36 +424,37 @@ alert( "1" + 1 ); // "11"
 alert( "1,2" + 1 ); // "1,21"
 ```
 
-## Summary
+## Итого
 
-Array is a special kind of object, suited to storing and managing ordered data items.
+Массив – это особый тип объекта, предназначенный для работы с упорядоченным набором элементов.
 
-- The declaration:
+- Объявление:
 
     ```js
-    // square brackets (usual)
+    // квадратные скобки(чаще)
     let arr = [item1, item2...];
 
-    // new Array (exceptionally rare)
+    // new Array (редко)
     let arr = new Array(item1, item2...);
     ```
+    
+    Вызов `new Array(number)` создает массив с заданной длиной, но без элементов.
+    
+- Свойство `length` отражает длину массива или, если точнее, его последний цифровой индекс плюс один. Длина корректируется автоматически методами массива.
+- Если мы уменьшаем `length` вручную, массив укорачивается. 
 
-    The call to `new Array(number)` creates an array with the given length, but without elements.
+Мы можем использовать массив как двустороннюю очередь, используя следующие операции:  
 
-- The `length` property is the array length or, to be precise, its last numeric index plus one. It is auto-adjusted by array methods. 
-- If we shorten `length` manually, the array is truncated.
+- `push(...items)`добавляет `items` в конец массива. 
+- `pop()` удаляет элемент в конце массива и возвращает его. 
+- `shift()` удаляет элемент в начале массива и возвращает его. 
+- `unshift(...items)` добавляет `items` в начало массива.   
 
-We can use an array as a deque with the following operations:
-
-- `push(...items)` adds `items` to the end.
-- `pop()` removes the element from the end and returns it.
-- `shift()` removes the element from the beginning and returns it.
-- `unshift(...items)` adds items to the beginning.
-
-To loop over the elements of the array:
-  - `for (let i=0; i<arr.length; i++)` -- works fastest, old-browser-compatible.
-  - `for (let item of arr)` -- the modern syntax for items only,
-  - `for (let i in arr)` -- never use.
-
-We will return to arrays and study more methods to add, remove, extract elements and sort arrays in the chapter <info:array-methods>.
+Чтобы пройтись по элементам массива: 
+ - `for (let i=0; i<arr.length; i++)` -- работает быстрее всего, совместим со старыми браузерами.
+ - `for (let item of arr)` -- современный синтаксис только для значений элементов(к индексам нет доступа).
+ - `for (let i in arr)` -- никогда не используйте для массивов.
+ 
+Мы вернёмся к массивам и изучим другие методы добавления, удаления, выделения элементов и сортировки массивов в главе: <info:array-methods>.
+    
 
