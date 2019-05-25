@@ -1,99 +1,99 @@
 
-# Escaping, special characters
+# Экранирование, специальные символы
 
-As we've seen, a backslash `"\"` is used to denote character classes. So it's a special character in regexps (just like in a regular string).
+Как мы уже видели, обратная косая черта `"\"` используется для обозначения классов символов. Это специальный символ в регулярных выражениях (как и в обычных строках).
 
-There are other special characters as well, that have special meaning in a regexp. They are used to do more powerful searches. Here's a full list of them: `pattern:[ \ ^ $ . | ? * + ( )`.
+Есть и другие специальные символы, которые имеют особое значение в регулярном выражении. Они используются для более сложных поисковых конструкций. Вот полный перечень этих символов: `pattern:[ \ ^ $ . | ? * + ( )`.
 
-Don't try to remember the list -- soon we'll deal with each of them separately and you'll know them by heart automatically.
+Не надо пытаться запомнить этот список -- скоро мы разберемся с каждым из них по отдельности, и таким образом вы выучите их "автоматически".
 
-## Escaping
+## Экранирование символов
 
-Let's say we want to find a dot literally. Not "any character", but just a dot.
+Допустим, мы хотим найти буквально точку. Не "любой символ", а именно точку.
 
-To use a special character as a regular one, prepend it with a backslash: `pattern:\.`.
+Чтобы использовать специальный символ как обычный, добавьте к нему обратную косую черту: `pattern:\.`.
 
-That's also called "escaping a character".
+Это называется "экранирование символа".
 
-For example:
+К примеру:
 ```js run
-alert( "Chapter 5.1".match(/\d\.\d/) ); // 5.1 (match!)
-alert( "Chapter 511".match(/\d\.\d/) ); // null (looking for a real dot \.)
+alert( "Глава 5.1".match(/\d\.\d/) ); // 5.1 (совпадение!)
+alert( "Глава 511".match(/\d\.\d/) ); // null ("\." - ищет обычную точку)
 ```
 
-Parentheses are also special characters, so if we want them, we should use `pattern:\(`. The example below looks for a string `"g()"`:
+Круглые скобки также являются специальными символами, поэтому, если нам нужно использовать именно их, нужно указать `pattern:\(`. В приведенном ниже примере ищется строка `"g()"`:
 
 ```js run
 alert( "function g()".match(/g\(\)/) ); // "g()"
 ```
 
-If we're looking for a backslash `\`, it's a special character in both regular strings and regexps, so we should double it.
+Если мы ищем обратную косую черту `\`, это специальный символ как в обычных строках, так и в регулярных выражениях, поэтому мы должны удвоить её.
 
 ```js run
 alert( "1\\2".match(/\\/) ); // '\'
 ```
 
-## A slash
+## Косая черта
 
-A slash symbol `'/'` is not a special character, but in JavaScript it is used to open and close the regexp: `pattern:/...pattern.../`, so we should escape it too.
+Символ косой черты `'/'` не является специальным символом, но в JavaScript он используется для открытия и закрытия регулярного выражения: `pattern:/...pattern.../`, поэтому мы должны экранировать его.
 
-Here's what a search for a slash `'/'` looks like:
+Вот как выглядит поиск самой косой черты `'/'`:
 
 ```js run
 alert( "/".match(/\//) ); // '/'
 ```
 
-On the other hand, if we're not using `/.../`, but create a regexp using `new RegExp`, then we don't need to escape it:
+С другой стороны, если мы не используем короткую запись `/.../`, а создаем регулярное выражение, используя `new RegExp`, тогда нам не нужно экранировать косую черту:
 
 ```js run
 alert( "/".match(new RegExp("/")) ); // '/'
-```                                                                                                                                                                                   
+```
 
 ## new RegExp
 
-If we are creating a regular expression with `new RegExp`, then we don't have to escape `/`, but need to do some other escaping.
+Если мы создаем регулярное выражение с помощью `new RegExp`, то нам не нужно учитывать `/`, но нужно дополнительное экранирование.
 
-For instance, consider this:
+Рассмотрим такой пример:
 
 ```js run
 let reg = new RegExp("\d\.\d");
 
-alert( "Chapter 5.1".match(reg) ); // null
+alert( "Глава 5.1".match(reg) ); // null
 ```
 
-It worked with `pattern:/\d\.\d/`, but with `new RegExp("\d\.\d")` it doesn't, why?
+Поиск работает с `pattern:/\d\.\d/`, но не работает с `new RegExp("\d\.\d")`, почему?
 
-The reason is that backslashes are "consumed" by a string. Remember, regular strings have their own special characters like `\n`, and a backslash is used for escaping.
+Причина в том, что символы обратной косой черты "съедаются" строкой. Как вы помните, что обычные строки имеют свои специальные символы, такие как `\n`, и для экранирования используется обратная косая черта.
 
-Please, take a look, what "\d\.\d" really is:
+Вот как воспринимается строка "\d\.\d":
 
 ```js run
 alert("\d\.\d"); // d.d
 ```
 
-The quotes "consume" backslashes and interpret them, for instance:
+Кавычки "съедают" символы обратной косой черты для себя, например:
 
-- `\n` -- becomes a newline character,
-- `\u1234` -- becomes the Unicode character with such code,
-- ...And when there's no special meaning: like `\d` or `\z`, then the backslash is simply removed.
+- `\n` -- становится символом перевода строки,
+- `\u1234` -- становится символом Юникода с указанным номером,
+- ...А когда нет особого значения: как например для `\d` или`\z`, обратная косая черта просто удаляется.
 
-So the call to `new RegExp` gets a string without backslashes. That's why it doesn't work!
+Таким образом, вызов `new RegExp` получает строку без обратной косой черты. Вот почему поиск не работает!
 
-To fix it, we need to double backslashes, because quotes turn `\\` into `\`:
+Чтобы исправить это, нам нужно удвоить обратную косую черту, потому что кавычки превращают `\\` в `\`:
 
 ```js run
 *!*
 let regStr = "\\d\\.\\d";
 */!*
-alert(regStr); // \d\.\d (correct now)
+alert(regStr); // \d\.\d (теперь правильно)
 
 let reg = new RegExp(regStr);
 
-alert( "Chapter 5.1".match(reg) ); // 5.1
+alert( "Глава 5.1".match(reg) ); // 5.1
 ```
 
-## Summary
+## Итого
 
-- To search special characters `pattern:[ \ ^ $ . | ? * + ( )` literally, we need to prepend them with `\` ("escape them").
-- We also need to escape `/` if we're inside `pattern:/.../` (but not inside `new RegExp`).
-- When passing a string `new RegExp`, we need to double backslashes `\\`, cause strings consume one of them.
+- Для поиска специальных символов `pattern:[ \ ^ $ . | ? * + ( )` в буквальном смысле, нам нужно добавить перед ними `\` ("экранировать их").
+- Нам также нужно экранировать `/`, если мы используем `pattern:/.../` (но не `new RegExp`).
+- При передаче строки в `new RegExp` нужно удвоить обратную косую черту `\\` для экранирования специальных символов, потому что строки будут использовать одну из них для своих целей.
