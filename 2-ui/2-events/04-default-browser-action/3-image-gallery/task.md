@@ -2,12 +2,12 @@ importance: 5
 
 ---
 
-# Image gallery
+# Галерея изображений
 
-Create an image gallery where the main image changes by the click on a thumbnail.
+Создайте галерею изображений, в которой основное изображение изменяется при клике на уменьшенный вариант.
 
-Like this:
+Например:
 
 [iframe src="solution" height=600]
 
-P.S. Use event delegation.
+P.S. Применяйте делегирование.

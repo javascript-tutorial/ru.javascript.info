@@ -1,5 +1,5 @@
-That's a great use of the event delegation pattern.
+Это – классическая задача на тему делегирования.
 
-In real life instead of asking we can send a "logging" request to the server that saves the information about where the visitor left. Or we can load the content and show it right in the page (if allowable).
+В реальной жизни, мы можем перехватить событие и создать AJAX-запрос к серверу, который сохранит информацию о том, по какой ссылке ушел посетитель. Или мы можем загрузить содержимое и отобразить его прямо на странице (если допустимо).
 
-All we need is to catch the `contents.onclick` and use `confirm` to ask the user. A good idea would be to use `link.getAttribute('href')` instead of `link.href` for the URL. See the solution for details.
+Всё, что нам необходимо это поймать событие `contents.onclick` и использовать функцию `confirm`, чтобы задать вопрос пользователю. Хорошей идеей было бы использовать `link.getAttribute('href')` вместо `link.href` для ссылок. Смотрите решение в песочнице.

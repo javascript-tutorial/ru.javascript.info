@@ -2,15 +2,15 @@ importance: 5
 
 ---
 
-# Catch links in the element
+# Поймайте переход по ссылке
 
-Make all links inside the element with `id="contents"` ask the user if they really want to leave. And if they don't then don't follow.
+Сделайте так, чтобы при клике на ссылки внутри элемента `id="contents"` пользователю выводился вопрос о том, действительно ли он хочет покинуть страницу и если он не хочет, то прерывать переход по ссылке.
 
-Like this:
+Так это должно работать:
 
 [iframe height=100 border=1 src="solution"]
 
-Details:
+Детали:
 
-- HTML inside the element may be loaded or regenerated dynamically at any time, so we can't find all links and put handlers on them. Use the event delegation.
-- The content may have nested tags. Inside links too, like `<a href=".."><i>...</i></a>`.
+- Содержимое `#contents` может быть загружено динамически и присвоено при помощи `innerHTML`. Так что найти все ссылки и поставить на них обработчики нельзя. Используйте делегирование.
+- Содержимое может содержать вложенные теги, *в том числе внутри ссылок*, например, `<a href=".."><i>...</i></a>`.
