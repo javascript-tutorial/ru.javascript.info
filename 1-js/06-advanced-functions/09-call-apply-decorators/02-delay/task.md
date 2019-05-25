@@ -2,25 +2,24 @@ importance: 5
 
 ---
 
-# Delaying decorator
+# Задерживающий декоратор
 
-Create a decorator `delay(f, ms)` that delays each call of `f` by `ms` milliseconds.
-
-For instance:
+Создайте декоратор `delay(f, ms)`, который задерживает каждый вызов `f` на `ms` миллисекунд.
+Например:
 
 ```js
 function f(x) {
   alert(x);
 }
 
-// create wrappers
+// создаем обертки
 let f1000 = delay(f, 1000);
 let f1500 = delay(f, 1500);
 
-f1000("test"); // shows "test" after 1000ms
-f1500("test"); // shows "test" after 1500ms
+f1000("test"); // показывает "test" после 1000 мс
+f1500("test"); // показывает "test" после 1500 мс
 ```
 
-In other words, `delay(f, ms)` returns a "delayed by `ms`" variant of `f`.
+Другими словами, `delay(f, ms)` возвращает вариант `f` с "задержкой на `ms` мс".
 
-In the code above, `f` is a function of a single argument, but your solution should pass all arguments and the context `this`.
+В приведенном выше коде `f` - функция с одним аргументом, но ваше решение должно передавать все аргументы и контекст `this`.

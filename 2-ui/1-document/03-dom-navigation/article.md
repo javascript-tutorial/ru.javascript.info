@@ -7,7 +7,7 @@ libs:
 
 # Walking the DOM
 
-The DOM allows us to do anything with elements and their contents, but first we need to reach the corresponding DOM object, get it into a variable, and then we are able to modify it.
+The DOM allows us to do anything with elements and their contents, but first we need to reach the corresponding DOM object.
 
 All operations on the DOM start with the `document` object. From it we can access any node.
 
@@ -86,7 +86,7 @@ For instance, here `<body>` has children `<div>` and `<ul>` (and few blank text 
 </html>
 ```
 
-...And if we ask for all descendants of `<body>`, then we get direct children `<div>`, `<ul>` and also more nested elements like `<li>` (being a child of `<ul>`) and `<b>` (being a child of `<li>`) -- the entire subtree.
+...And all descendants of `<body>` are not only direct children `<div>`, `<ul>` but also more deeply nested elements, such as `<li>` (a child of `<ul>`) and `<b>` (a child of `<li>`) -- the entire subtree.
 
 **The `childNodes` collection provides access to all child nodes, including text nodes.**
 
@@ -237,7 +237,12 @@ alert( document.documentElement.parentElement ); // null
 
 In other words, the `documentElement` (`<html>`) is the root node. Formally, it has `document` as its parent. But `document` is not an element node, so `parentNode` returns it and `parentElement` does not.
 
-Sometimes that matters when we're walking over the chain of parents and call a method on each of them, but `document` doesn't have it, so we exclude it.
+This loop travels up from an arbitrary element `elem` to `<html>`, but not to the `document`:
+```js
+while(elem = elem.parentElement) {
+  alert( elem ); // parent chain till <html>
+}
+```
 ````
 
 Let's modify one of the examples above: replace `childNodes` with `children`. Now it shows only elements:

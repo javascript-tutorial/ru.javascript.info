@@ -2,24 +2,24 @@ importance: 5
 
 ---
 
-# Filter through function
+# Фильтрация с помощью функции
 
-We have a built-in method `arr.filter(f)` for arrays. It filters all elements through the function `f`. If it returns `true`, then that element is returned in the resulting array.
+У нас есть встроенный метод `arr.filter(f)` для массивов. Он фильтрует все элементы с помощью функции `f`. Если она возвращает `true`, то элемент добавится в возвращаемый массив.
 
-Make a set of "ready to use" filters:
+Сделайте набор "готовых к употреблению" фильтров:
 
-- `inBetween(a, b)` -- between `a` and `b` or equal to them (inclusively).
-- `inArray([...])` -- in the given array.
+- `inBetween(a, b)` -- между `a` и `b` или идентично им (включительно).
+- `inArray([...])` -- в данном массиве.
 
-The usage must be like this:
+Они должны использоваться таким образом:
 
-- `arr.filter(inBetween(3,6))` -- selects only values between 3 and 6.
-- `arr.filter(inArray([1,2,3]))` -- selects only elements matching with one of the members of `[1,2,3]`.
+- `arr.filter(inBetween(3,6))` -- выбирает только значения межу 3 и 6.
+- `arr.filter(inArray([1,2,3]))` -- выбирает только элементы, совпадающие с одним из элементом массива
 
-For instance:
+Например:
 
 ```js
-/* .. your code for inBetween and inArray */
+/* .. ваш код для inBetween и inArray */
 let arr = [1, 2, 3, 4, 5, 6, 7];
 
 alert( arr.filter(inBetween(3, 6)) ); // 3,4,5,6
