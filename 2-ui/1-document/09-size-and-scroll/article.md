@@ -1,13 +1,13 @@
-# Element size and scrolling
+# Размеры и прокрутка элементов
 
-There are many JavaScript properties that allow us to read information about element width, height and other geometry features.
+Существует множество JavaScript-свойтв, которые позволяют считывать информацию об элементе: ширину, высоту и другие геометрические характеристики.
 
-We often need them when moving or positioning elements in JavaScript, to correctly calculate coordinates.
+Они часто требуются, когда нам нужно передвигать или позиционировать элементы с помощью JavaScript, для того, чтобы правильно вычислить координаты.
 
 
-## Sample element
+## Простой пример
 
-As a sample element to demonstrate properties we'll use the one given below:
+В качестве простого примера демонстрации свойств мы будем использовать следующий элемент:
 
 ```html no-beautify
 <div id="example">
@@ -18,55 +18,55 @@ As a sample element to demonstrate properties we'll use the one given below:
     width: 300px;
     height: 200px;
     border: 25px solid #E8C48F;
-    padding: 20px;              
-    overflow: auto;             
+    padding: 20px;
+    overflow: auto;
   }
 </style>
 ```
 
-It has the border, padding and scrolling. The full set of features. There are no margins, as they are not the part of the element itself, and there are no special properties for them.
+У элемента есть рамка (border), поля внутреннего отступа (padding) и прокрутка. Полный набор характеристик. Обратите внимание, тут нет внешних отступов (margin), т.к. они не являются непосредственной частью элемента, и у него нет соответствующих JavaScript-свойств.
 
-The element looks like this:
+Результат выглядит так:
 
 ![](metric-css.png)
 
-You can [open the document in the sandbox](sandbox:metric).
+Вы можете [открыть этот документ в песочнице](sandbox:metric).
 
-```smart header="Mind the scrollbar"
-The picture above demonstrates the most complex case when the element has a scrollbar. Some browsers (not all) reserve the space for it by taking it from the content.
+```smart header="Внимание, полоса прокрутки"
+В иллюстрации выше намеренно продемонстрирован самый сложный и полный случай, когда у элемента есть ещё и полоса прокрутки. Некоторые браузеры (не все) оставляют место для неё забирая его у области отведённой для содержимого.
 
-So, without scrollbar the content width would be `300px`, but if the scrollbar is `16px` wide (the width may vary between devices and browsers) then only `300 - 16 = 284px` remains, and we should take it into account. That's why examples from this chapter assume that there's a scrollbar. If there's no scrollbar, then things are just a bit simpler.
+Таким образом, без учёта полосы прокрутки ширина области содержимого будет `300px`, но если предположить, что ширина полосы прокрутки равна `16px` (её точное значение зависит от устройства и браузера), тогда остаётся только `300 - 16 = 284px` и мы должны это учитывать. Вот почему примеры в этой главе даны с полосой прокрутки. Если её не будет, то вычисления будут немного проще.
 ```
 
-```smart header="The `padding-bottom` may be filled with text"
-Usually paddings are shown empty on illustrations, but if there's a lot of text in the element and it overflows, then browsers show the "overflowing" text at `padding-bottom`, so you can see that in examples. But the padding is still there, unless specified otherwise.
+```smart header="CSS-свойство `padding-bottom` может быть заполнено текстом"
+Обычно внутренние отступы изображены пустыми на иллюстрациях, но если элемент содержит много текста, они могут перекрывать друг друга, в этом случае браузеры отображают такой текст "перекрывающим" `нижний внутренний отступ` (padding-bottom). Вы можете наблюдать это в примерах. Несмотря на это, отступы есть, пока не указано иное.
 ```
 
-## Geometry
+## Метрики
 
-Element properties that provide width, height and other geometry are always numbers. They are assumed to be in pixels.
+Свойства элемента отражают ширину, высоту и другие геометрические характеристики всегда в виде чисел. Предполагается, что они в пикселях.
 
-Here's the overall picture:
+Вот общая картина:
 
 ![](metric-all.png)
 
-They are many properties, it's difficult to fit them all in the single picture, but their values are simple and easy to understand.
+Существует множество свойств, и довольно трудно поместить их всех на одном изображении, но их значения просты и понятны.
 
-Let's start exploring them from the outside of the element.
+Давайте начнём исследовать их снаружи элемента и во внутрь.
 
-## offsetParent, offsetLeft/Top
+## Свойства: offsetParent, offsetLeft/Top
 
-These properties are rarely needed, but still they are the "most outer" geometry properties, so we'll start with them.
+Эти свойства редко используются, но так как они являются "самыми внешними" метриками, мы начнём с них.
 
-The `offsetParent` is the nearest ancestor that is:
+В свойстве `offsetParent` находится ближайший родитель элемента:
 
-1. CSS-positioned (`position` is `absolute`, `relative`, `fixed` or `sticky`),
-2. or `<td>`, `<th>`, `<table>`,
-2. or `<body>`.
+1. он является CSS-спозиционированным (когда CSS-свойство `position` равно `absolute`, `relative`, `fixed` или `sticky`),
+2. или `<td>`, `<th>`, `<table>`,
+2. или `<body>`.
 
-In most practical cases we can use `offsetParent` to get the nearest CSS-positioned ancestor. And `offsetLeft/offsetTop` provide x/y coordinates relative to its upper-left corner.
+В большинстве практических ситуаций мы можем использовать `offsetParent`, чтобы получить ближайшего CSS-спозиционированного родителя. Свойства `offsetLeft/offsetTop` содержат x/y координаты относительно верхнего-левого родительского угла.
 
-In the example below the inner `<div>` has `<main>` as `offsetParent` and `offsetLeft/offsetTop` shifts from its upper-left corner (`180`):
+В примере ниже внутренний `<div>` имеет элемент `<main>` в качестве `offsetParent`, а свойства `offsetLeft/offsetTop` являются сдвигами относительно верхнего-левого угла (`180`):
 
 ```html run height=10
 <main style="position: relative" id="main">
@@ -84,33 +84,33 @@ In the example below the inner `<div>` has `<main>` as `offsetParent` and `offse
 ![](metric-offset-parent.png)
 
 
-There are several occasions when `offsetParent` is `null`:
+Существует несколько частных случаев, когда `offsetParent` равно `null`:
 
-1. For not shown elements (`display:none` or not in the document).
-2. For `<body>` and `<html>`.
-3. For elements with `position:fixed`.
+1. Для скрытых элементов (с CSS-свойством `display:none`, либо когда его нет в документе).
+2. Для элементов `<body>` и `<html>`.
+3. Для элементов с `position:fixed`.
 
-## offsetWidth/Height
+## Свойства: offsetWidth/Height
 
-Now let's move on to the element itself.
+Теперь переходим к самому элементу.
 
-These two properties are the simplest ones. They provide the "outer" width/height of the element. Or, in other words, its full size including borders.
+Эти два свойства – самые простые. Они содержат "внешнюю" ширину/высоту элемента, то есть его полный размер, включая рамки.
 
 ![](metric-offset-width-height.png)
 
-For our sample element:
+Для нашего элемента:
 
-- `offsetWidth = 390` -- the outer width, can be calculated as inner CSS-width (`300px`) plus paddings (`2 * 20px`) and borders (`2 * 25px`).
-- `offsetHeight = 290` -- the outer height.
+- `offsetWidth = 390` -- внешняя ширина блока, её можно получить сложением CSS-ширины (`300px`), полей(`2 * 20px`) и рамок (`2 * 25px`).
+- `offsetHeight = 290` -- внешняя высота блока.
 
-````smart header="Geometry properties for not shown elements are zero/null"
-Geometry properties are calculated only for shown elements.
+````smart header="Метрики для невидимых элементов равны нулю."
+Координаты и размеры в JavaScript устанавливаются только для видимых элементов.
 
-If an element (or any of its ancestors) has `display:none` or is not in the document, then all geometry properties are zero or `null` depending on what it is.
+Если элемент (или любой его родитель) имеет `display:none` или отсутствует в документе, то все его метрики равны нулю или `null`, в зависимости от того, что это.
 
-For example, `offsetParent` is `null`, and `offsetWidth`, `offsetHeight` are `0`.
+Например, свойство `offsetParent` является `null`, а `offsetWidth`, `offsetHeight` -- `0`.
 
-We can use this to check if an element is hidden, like this:
+Мы можем выполнить проверку на видимость, вот так:
 
 ```js
 function isHidden(elem) {
@@ -118,51 +118,51 @@ function isHidden(elem) {
 }
 ```
 
-Please note that such `isHidden` returns `true` for elements that are on-screen, but have zero sizes (like an empty `<div>`).
+Отметим, что функция `isHidden` вернёт `true` для элементов, которые, как бы есть на экране, но их размеры равны нулю (например, пустые `<div>`).
 ````
 
-## clientTop/Left
+## Свойства: clientTop/Left
 
-Inside the element we have the borders.
+Далее внутри элемента у нас рамки (border).
 
-To measure them, there are properties `clientTop` and `clientLeft`.
+Для них есть свойства-метрики `clientTop` и `clientLeft`.
 
-In our example:
+В нашем примере:
 
-- `clientLeft = 25` -- left border width
-- `clientTop = 25` -- top border width
+- `clientLeft = 25` -- ширина левой рамки
+- `clientTop = 25` -- ширина верхней рамки
 
 ![](metric-client-left-top.png)
 
-...But to be precise -- they are not borders, but relative coordinates of the inner side from the outer side.
+...На на самом деле -- оно вовсе не рамки, а отступ внутренней части элемента от внешней.
 
-What's the difference?
+В чём же разница?
 
-It becomes visible when the document is right-to-left (the operating system is in Arabic or Hebrew languages). The scrollbar is then not on the right, but on the left, and then `clientLeft` also includes the scrollbar width.
+Она возникает, когда документ располагается справа налево (операционная система на арабском языке или иврите). Полоса прокрутки в этом случае находится слева, и тогда свойство `clientLeft` включает в себя еще и ширину полосы прокрутки.
 
-In that case, `clientLeft` would be not `25`, but with the scrollbar width `25 + 16 = 41`:
+В этом случае, `clientLeft` будет равно `25`, но с прокруткой -- `25 + 16 = 41`:
 
 ![](metric-client-left-top-rtl.png)
 
-## clientWidth/Height
+## Свойства: clientWidth/Height
 
-These properties provide the size of the area inside the element borders.
+Эти свойства -- размер элемента внутри рамок border.
 
-They include the content width together with paddings, but without the scrollbar:
+Они включают в себя ширину содержимого width вместе с полями padding, но без прокрутки:
 
 ![](metric-client-width-height.png)
 
-On the picture above let's first consider `clientHeight`: it's easier to evaluate. There's no horizontal scrollbar, so it's exactly the sum of what's inside the borders: CSS-height `200px` plus top and bottom paddings (`2 * 20px`) total `240px`.
+На рисунке выше посмотрим вначале на `clientHeight`: её посчитать проще всего. Горизонтально прокрутки нет, так что это в точности то, что внутри рамок: CSS-высота `200px` плюс верхнее и нижнее поля (`2 * 20px`), итого `240px`.
 
-Now `clientWidth` -- here the content width is not `300px`, but `284px`, because `16px` are occupied by the scrollbar. So the sum is `284px` plus left and right paddings, total `324px`.
+Теперь `clientWidth` -- ширина содержимого здесь равна не `300px`, а `284px`, т.к. `16px` отведено для полосы прокрутки. Таким образом: `284px` плюс левый и правый отступы -- всего `324px`.
 
-**If there are no paddings, then `clientWidth/Height` is exactly the content area, inside the borders and the scrollbar (if any).**
+**Если нет внутренних отступов, то `clientWidth/Height` в точности равны размеру области содержимого, внутри рамок и полосы прокрутки (если она есть).**
 
 ![](metric-client-width-nopadding.png)
 
-So when there's no padding we can use `clientWidth/clientHeight` to get the content area size.
+Поэтому, в тех случаях, когда мы точно знаем, что отступов нет, можно использовать `clientWidth/clientHeight` для получения размеров внутренней области содержимого.
 
-## scrollWidth/Height
+## Свойства: scrollWidth/Height
 
 - Properties `clientWidth/clientHeight` only account for the visible part of the element.
 - Properties `scrollWidth/scrollHeight` also include the scrolled out (hidden) parts:
