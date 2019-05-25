@@ -1,6 +1,6 @@
-Differences:
+Отличия:
 
-1. `clientWidth` is numeric, while `getComputedStyle(elem).width` returns a string with `px` at the end.
-2. `getComputedStyle` may return non-numeric width like `"auto"` for an inline element.
-3. `clientWidth` is the inner content area of the element plus paddings, while CSS width (with standard `box-sizing`) is the inner content area *without paddings*.
-4. If there's a scrollbar and the browser reserves the space for it, some browser substract that space from CSS width (cause it's not available for content any more), and some do not. The `clientWidth` property is always the same: scrollbar size is substracted if reserved.
+1. `clientWidth` возвращает число, а `getComputedStyle(elem).width` - строку с `px` на конце.
+2. `getComputedStyle` не всегда даст ширину, он может вернуть, к примеру, `"auto"` для инлайнового элемента.
+3. `clientWidth` соответствует внутренней видимой области элемента, включая padding, а CSS-ширина width (при стандартном значении `box-sizing`) соответствует внутренней видимой области *без padding*.
+4. Если есть полоса прокрутки, и для неё зарезервировано место, то некоторые браузеры вычитают его из CSS-ширины width (т.к. оно больше недоступно для содержимого), а некоторые - нет. Свойство `clientWidth` всегда ведёт себя одинаково: оно всегда обозначает размер за вычетом прокрутки, т.е. реально доступный для содержимого.
