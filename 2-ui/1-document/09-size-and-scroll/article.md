@@ -11,7 +11,7 @@
 
 ```html no-beautify
 <div id="example">
-  ...Text...
+  ...Текст...
 </div>
 <style>
   #example {
@@ -164,62 +164,62 @@ function isHidden(elem) {
 
 ## Свойства: scrollWidth/Height
 
-- Properties `clientWidth/clientHeight` only account for the visible part of the element.
-- Properties `scrollWidth/scrollHeight` also include the scrolled out (hidden) parts:
+- Свойства `clientWidth/clientHeight` относятся только к видимой области элемента.
+- Свойства `scrollWidth/scrollHeight` добавляют к ней прокрученную (которую не видно) по горизонтали/вертикали:
 
 ![](metric-scroll-width-height.png)
 
-On the picture above:
+На рисунке выше:
 
-- `scrollHeight = 723` -- is the full inner height of the content area including the scrolled out parts.
-- `scrollWidth = 324` -- is the full inner width, here we have no horizontal scroll, so it equals `clientWidth`.
+- `scrollHeight = 723` -- полная внутренняя высота, включая прокрученную область.
+- `scrollWidth = 324` -- полная внутренняя ширина, в данном случае прокрутки нет, поэтому она равна `clientWidth`.
 
-We can use these properties to expand the element wide to its full width/height.
+Эти свойства можно использовать, чтобы "распахнуть" элемент на всю ширину/высоту.
 
-Like this:
+Таким кодом:
 
 ```js
-// expand the element to the full content height
+// распахнуть элемент на всю высоту
 element.style.height = `${element.scrollHeight}px`;
 ```
 
 ```online
-Click the button to expand the element:
+Нажмите на кнопку, чтобы распахнуть элемент:
 
-<div id="element" style="width:300px;height:200px; padding: 0;overflow: auto; border:1px solid black;">text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text</div>
+<div id="element" style="width:300px;height:200px; padding: 0;overflow: auto; border:1px solid black;">текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст</div>
 
 <button style="padding:0" onclick="element.style.height = `${element.scrollHeight}px`">element.style.height = `${element.scrollHeight}px`</button>
 ```
 
-## scrollLeft/scrollTop
+## Свойства: scrollLeft/scrollTop
 
-Properties `scrollLeft/scrollTop` are the width/height of the hidden, scrolled out part of the element.
+Свойства `scrollLeft/scrollTop` -- ширина/высота невидимой, прокрученной в данный момент, части элемента слева и сверху.
 
-On the picture below we can see `scrollHeight` and `scrollTop` for a block with a vertical scroll.
+Следующая иллюстрация показывает значения `scrollHeight` и `scrollTop` для блока с вертикальной прокруткой.
 
 ![](metric-scroll-top.png)
 
-In other words, `scrollTop` is "how much is scrolled up".
+Другими словами, свойство `scrollTop` -- это "сколько уже прокручено вверх".
 
-````smart header="`scrollLeft/scrollTop` can be modified"
-Most of the geometry properties here are read-only, but `scrollLeft/scrollTop` can be changed, and the browser will scroll the element.
+````smart header="`scrollLeft/scrollTop` можно изменять"
+В отличие от большинства свойств, которые доступны только для чтения, значения `scrollLeft/scrollTop` можно изменить, и браузер выполнит прокрутку элемента..
 
 ```online
-If you click the element below, the code `elem.scrollTop += 10` executes. That makes the element content scroll `10px` down.
+При клике на следующий элемент будет выполняться код  `elem.scrollTop += 10`. Поэтому он будет прокручиваться на `10px` вниз.
 
-<div onclick="this.scrollTop+=10" style="cursor:pointer;border:1px solid black;width:100px;height:80px;overflow:auto">Click<br>Me<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9</div>
+<div onclick="this.scrollTop+=10" style="cursor:pointer;border:1px solid black;width:100px;height:80px;overflow:auto">Кликни<br>Меня<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9</div>
 ```
 
-Setting `scrollTop` to `0` or `Infinity` will make the element scroll to the very top/bottom respectively.
+Установка значения `scrollTop` на `0` или `Infinity` прокрутит элемент в самый верх/низ соответственно.
 ````
 
-## Don't take width/height from CSS
+## Не стоит брать width/height из CSS
 
-We've just covered geometry properties of DOM elements. They are normally used to get widths, heights and calculate distances.
+Мы рассмотрели метрики – свойства, которые есть у DOM-элементов. Их обычно используют для получения их различных высот, ширин и прочих расстояний.
 
-But as we know from the chapter <info:styles-and-classes>, we can read CSS-height and width using `getComputedStyle`.
+Но как мы знаем из главы <info:styles-and-classes>, CSS-высоту и ширину можно извлечь, используя `getComputedStyle`.
 
-So why not to read the width of an element like this?
+Не лучше ли получать ширину так, вместо метрик?
 
 ```js run
 let elem = document.body;
@@ -227,13 +227,13 @@ let elem = document.body;
 alert( getComputedStyle(elem).width ); // show CSS width for elem
 ```
 
-Why should we use geometry properties instead? There are two reasons:
+Почему мы должны использовать свойства метрик вместо этого? На это есть две причины:
 
-1. First, CSS width/height depend on another property: `box-sizing` that defines "what is" CSS width and height. A change in `box-sizing` for CSS purposes may break such JavaScript.
-2. Second, CSS `width/height` may be `auto`, for instance for an inline element:
+1. Во-первых, CSS-свойства width/height зависят от другого свойства -- `box-sizing` которое определяет, "что такое", собственно, эти CSS-ширина и высота. Получается, что изменение `box-sizing`, к примеру, для более удобной вёрстки, сломает такой JavaScript.
+2. Во-вторых, в CSS свойства `width/height` могут быть равны `auto`, например, для инлайн-элемента:
 
     ```html run
-    <span id="elem">Hello!</span>
+    <span id="elem">Привет!</span>
 
     <script>
     *!*
@@ -242,34 +242,34 @@ Why should we use geometry properties instead? There are two reasons:
     </script>
     ```
 
-    From the CSS standpoint, `width:auto` is perfectly normal, but in JavaScript we need an exact size in `px` that we can use in calculations. So here CSS width is useless at all.
+    Конечно, с точки зрения CSS `width:auto` is perfectly normal, – совершенно нормально, но нам-то в JavaScript нужен конкретный размер в `px`, который мы могли бы использовать для вычислений. Получается, что в данном случае ширина width из CSS вообще бесполезна.
 
-And there's one more reason: a scrollbar. Sometimes the code that works fine without a scrollbar starts to bug with it, because a scrollbar takes the space from the content in some browsers. So the real width available for the content is *less* than CSS width. And `clientWidth/clientHeight` take that into account.
+Есть и ещё одна причина: Полоса прокрутки. Бывает без полосы прокрутки код работает прекрасно, но стоит ей появиться, как начинают появляться баги. Так происходит потому, что полоса прокрутки "отъедает" место от области внутреннего содежимого в некоторых браузерах. Таким образом, реальная ширина содержимого *меньше* CSS-ширины. И это учитывают свойства `clientWidth/clientHeight`.
 
-...But with `getComputedStyle(elem).width` the situation is different. Some browsers (e.g. Chrome) return the real inner width, minus the scrollbar, and some of them (e.g. Firefox) -- CSS width (ignore the scrollbar). Such cross-browser differences is the reason not to use `getComputedStyle`, but rather rely on geometry properties.
+...Но с `getComputedStyle(elem).width` ситуация иная. Некоторые браузеры (например, Chrome) возвращают реальную внутреннюю ширину, минус ширину полосы прокрутки, а некоторые (например, Firefox) -- именно CSS-свойство (игнорируя полосу прокрутки). Эти кросс-браузерные отличия – ещё один повод не использовать `getComputedStyle`, а использовать свойства-метрики.
 
 ```online
-If your browser reserves the space for a scrollbar (most browsers for Windows do), then you can test it below.
+Если ваш браузер показывает полосу прокрутки (например, под Windows почти все браузеры так делают), то вы можете протестировать это сами, нажав на кнопку в ифрейме ниже.
 
 [iframe src="cssWidthScroll" link border=1]
 
-The element with text has CSS `width:300px`.
+У элемента с текстом в стилях указано CSS-свойство `width:300px`.
 
-On a Desktop Windows OS, Firefox, Chrome, Edge all reserve the space for the scrollbar. But  Firefox shows `300px`, while Chrome and Edge show less. That's because Firefox returns the CSS width and other browsers return the "real" width.
+На момент написания этой статьи под Windows OS, все браузеры: Firefox, Chrome, Edge -- учитывали место для полосы прокрутки. Но Firefox отображал `300px`, в то время, как Chrome и Edge -- меньше. Это из-за того, что Firefox возвращал именно CSS-ширину, а остальные браузеры -- "реальную" ширину, за вычетом прокрутки.
 ```
 
-Please note that the described difference is only about reading `getComputedStyle(...).width` from JavaScript, visually everything is correct.
+Заметьте, что описанные разночтения касаются только чтения свойства `getComputedStyle(...).width` из JavaScript, визуальное отображение корректно в обоих случаях.
 
-## Summary
+## Итого
 
-Elements have the following geometry properties:
+У элементов есть следующие метрики:
 
-- `offsetParent` -- is the nearest positioned ancestor or `td`, `th`, `table`, `body`.
-- `offsetLeft/offsetTop` -- coordinates relative to the upper-left edge of `offsetParent`.
-- `offsetWidth/offsetHeight` -- "outer" width/height of an element including borders.
-- `clientLeft/clientTop` -- the distance from the upper-left outer corner to its upper-left inner corner. For left-to-right OS they are always the widths of left/top borders. For right-to-left OS the vertical scrollbar is on the left so `clientLeft` includes its width too.
-- `clientWidth/clientHeight` -- the width/height of the content including paddings, but without the scrollbar.
-- `scrollWidth/scrollHeight` -- the width/height of the content including the scrolled out parts. Also includes paddings, but not the scrollbar.
-- `scrollLeft/scrollTop` -- width/height of the scrolled out part of the element, starting from its upper-left corner.
+- `offsetParent` -- ближайший CSS-спозиционированный родитель или `td`, `th`, `table`, `body`.
+- `offsetLeft/offsetTop` -- позиция в пикселях верхнего левого угла, относительно `offsetParent`.
+- `offsetWidth/offsetHeight` -- "внешняя" ширина/высота элемента, включая рамки.
+- `clientLeft/clientTop` -- расстояние от верхнего-левого внешнего угла до верхнего-левого внутренного угла элемента. Для операционных систем с ориентацией слева на право, эти свойства равны ширинам левой/верхней рамки. Если же вертикальная полоса прокрутки находится слева, то `clientLeft` включает в своё значение её ширину.
+- `clientWidth/clientHeight` -- ширина/высота содержимого вместе с полями внутреннего отступа, но без полосы прокрутки.
+- `scrollWidth/scrollHeight` -- ширина/высота содержимого, включая прокручиваемую область. Включает в себя внутренние отступы и не включает полосы прокрутки.
+- `scrollLeft/scrollTop` -- ширина/высота прокрученной части элемента, считается от верхнего левого угла.
 
-All properties are read-only except `scrollLeft/scrollTop`. They make the browser scroll the element if changed.
+Все свойства, доступны только для чтения, кроме `scrollLeft/scrollTop`. Изменение этих свойств заставляет браузер прокручивать элемент.
