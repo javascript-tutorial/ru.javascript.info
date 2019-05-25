@@ -2,12 +2,12 @@ importance: 5
 
 ---
 
-# Animate the flying plane (CSS)
+# Анимировать самолет с перелетом (CSS)
 
-Modify the solution of the previous task <info:task/animate-logo-css> to make the plane grow more than it's original size 400x240px (jump out), and then return to that size.
+Модифицируйте решение предыдущей задачи <info:task/animate-logo-css> , чтобы в процессе анимации изображение выросло больше своего стандартного размера 400x240px («выпрыгнуло»), а затем вернулось к нему.
 
-Here's how it should look (click on the plane):
+Должно получиться, как в примере ниже (клик на самолет):
 
 [iframe src="solution" height=350]
 
-Take the solution of the previous task as the source.
+В качестве исходного кода возьмите решение прошлой задачи.

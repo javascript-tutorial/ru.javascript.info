@@ -2,7 +2,7 @@
 
 ```js
 let user = {
-  name: "John Smith",
+  name: "Василий Иванович",
   age: 35
 };
 
@@ -10,4 +10,3 @@ let user = {
 let user2 = JSON.parse(JSON.stringify(user));
 */!*
 ```
-
