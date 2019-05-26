@@ -4,13 +4,13 @@
   padding: 0;
   display: block;
   resize: none;
-  /* remove resizing handle in Firefox */
+  /* отключаем ресайз в Firefox */
   
   outline: none;
-  /* remove outline on focus in Chrome */
+  /* удаляем рамку при фокусировке в Chrome */
   
   overflow: auto;
-  /* remove scrollbar in IE */
+  /* удаляем полосу прокрутки в IE */
 }
 
 .edit-controls {
