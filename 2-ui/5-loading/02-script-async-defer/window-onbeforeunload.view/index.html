@@ -7,13 +7,13 @@
   <script>
     function setHandler() {
       window.onbeforeunload = function() {
-        return "There are unsaved changes. Leave now?";
+        return "Есть несохранённые изменения. Уйти сейчас?";
       };
     }
   </script>
 
-  <button onclick="setHandler()">Set window.onbeforeunload</button>
+  <button onclick="setHandler()">Установить window.onbeforeunload</button>
 
-  <a href="http://example.com">Leave for EXAMPLE.COM</a>
+  <a href="http://example.com">Перейти на EXAMPLE.COM</a>
 </body>
 </html>
