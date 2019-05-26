@@ -120,7 +120,7 @@ new Promise((resolve, reject) => {
 
   throw new Error("Whoops!");
 
-}).catch(function(error) { 
+}).catch(function(error) {
 
   alert("Ошибка обработана, продолжить работу");
 
@@ -318,7 +318,7 @@ function demoGithubUser() {
 *!*
     .finally(() => { // (2) останавливаем индикатор загрузки
       document.body.style.opacity = '';
-      return new Promise(resolve => setTimeout(resolve, 0)); // (*)
+      return new Promise(resolve => setTimeout(resolve)); // (*)
     })
 */!*
     .then(user => {
