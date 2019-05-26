@@ -1,35 +1,35 @@
 
-# Fetch: Abort
+# Fetch: Прерывание запроса
 
-Aborting a `fetch` is a little bit tricky. Remember, `fetch` returns a promise. And JavaScript generally has no concept of "aborting" a promise. So how can we cancel a fetch?
+Прервать выполнение метода `fetch` немного сложно. Как вы помните, метод `fetch` возвращает промис. А в JavaScript в целом нет понятия "отмены" промиса. Итак, как можно отменить вызов `fetch`?
 
-There's a special built-in object for such purposes: `AbortController`.
+Для таких целей существует специальный встроенный объект: `AbortController`.
 
-The usage is pretty simple:
+Использовать его достаточно просто:
 
-- Step 1: create a controller:
+- Шаг 1: создаем контроллер:
 
     ```js
     let controller = new AbortController();
     ```
 
-    A controller is an extremely simple object. It has a single method `abort()`, and a single property `signal`. When `abort()` is called, the `abort` event triggers on `controller.signal`:
+    Контроллер - чрезвычайно простой объект. Он имеет единственный метод `abort()` и единственное свойство `signal`. Когда вызывается метод `abort()`, событие прерывания срабатывает на `controller.signal`:
 
-    Like this:
+    Вот так:
 
     ```js run
     let controller = new AbortController();
     let signal = controller.signal;
 
-    // triggers when controller.abort() is called
-    signal.addEventListener('abort', () => alert("abort!"));
+    // срабатывает при вызове controller.abort()
+    signal.addEventListener('abort', () => alert("прервать!"));
 
-    controller.abort(); // abort!
+    controller.abort(); // прервать!
 
-    alert(signal.aborted); // true (after abort)
+    alert(signal.aborted); // true (после прерывания)
     ```
 
-- Step 2: pass the `signal` property to `fetch` option:
+- Шаг 2: передайте свойство `signal` опцией в метод `fetch`:
 
     ```js
     let controller = new AbortController();
@@ -38,20 +38,20 @@ The usage is pretty simple:
     });
     ```
 
-    Now `fetch` listens to the signal.
+    Теперь метод `fetch` слушает сигнал.
 
-- Step 3: to abort, call `controller.abort()`:
+- Шаг 3: чтобы прервать выполнение `fetch`, вызовите `controller.abort()`:
 
     ```js
     controller.abort();
     ```
 
-    We're done: `fetch` gets the event from `signal` and aborts the request.
+    Вот и всё: `fetch` получает событие из `signal` и прерывает запрос.
 
-When a fetch is aborted, its promise rejects with an error named `AbortError`, so we should handle it:
+Когда `fetch` прерывается, его промис отклоняется с ошибкой `AbortError`, поэтому мы должны обработать ее:
 
 ```js run async
-// abort in 1 second
+// прервать через 1 секунду
 let controller = new AbortController();
 setTimeout(() => controller.abort(), 1000);
 
@@ -60,20 +60,20 @@ try {
     signal: controller.signal
   });
 } catch(err) {
-  if (err.name == 'AbortError') { // handle abort()
-    alert("Aborted!");
+  if (err.name == 'AbortError') { // обработь ошибку от вызова abort()
+    alert("Прервано!");
   } else {
     throw err;
   }
 }
 ```
 
-**`AbortController` is scalable, it allows to cancel multiple fetches at once.**
+**`AbortController` - масштабируемый, он позволяет отменить несколько вызовов `fetch` одновременно.**
 
-For instance, here we fetch many `urls` in parallel, and the controller aborts them all:
+Например, здесь мы запрашиваем много URL параллельно, и контроллер прерывает их все:
 
 ```js
-let urls = [...]; // a list of urls to fetch in parallel
+let urls = [...]; // список URL для запроса параллельно
 
 let controller = new AbortController();
 
@@ -83,11 +83,11 @@ let fetchJobs = urls.map(url => fetch(url, {
 
 let results = await Promise.all(fetchJobs);
 
-// from elsewhere:
-// controller.abort() stops all fetches
+// вызов откуда-нибудь еще:
+// controller.abort() прерывает все вызовы `fetch`
 ```
 
-If we have our own jobs, different from `fetch`, we can use a single `AbortController` to stop those, together with fetches.
+Если у нас есть собственные задачи, отличные от `fetch`, мы можем использовать один `AbortController` для их остановки вместе с `fetch`.
 
 
 ```js
@@ -105,6 +105,6 @@ let fetchJobs = urls.map(url => fetch(url, {
 
 let results = await Promise.all([...fetchJobs, ourJob]);
 
-// from elsewhere:
-// controller.abort() stops all fetches and ourJob
+// вызов откуда-нибудь еще:
+// controller.abort() прерывает все вызовы `fetch` и наши задачи
 ```
