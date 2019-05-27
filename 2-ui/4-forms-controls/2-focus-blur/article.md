@@ -66,7 +66,7 @@
 </style>
 
 Ваш email: <input type="email" id="input">
-<input type="text" style="width:280px" placeholder="сделайте email невалидным и кликните сюда">
+<input type="text" style="width:280px" placeholder="введите неверный email и кликните сюда">
 
 <script>
   input.onblur = function() {
