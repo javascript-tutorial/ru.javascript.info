@@ -1,5 +1,5 @@
 
-# Делегирование событий
+# Event delegation
 
 Capturing and bubbling allow us to implement one of most powerful event handling patterns called *event delegation*.
 
