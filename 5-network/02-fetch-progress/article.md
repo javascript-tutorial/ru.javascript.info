@@ -1,7 +1,7 @@
 
 # Fetch: Download progress
 
-Fetch allows to track download progress, but not upload progress.
+`Fetch` allows to track download progress, but not upload progress.
 
 Please note: there's currently no way for fetch to track upload progress. For that purpose, please use [XMLHttpRequest](info:xmlhttprequest).
 
@@ -39,7 +39,7 @@ Here's the full code to get response and log the progress, more explanations fol
 
 ```js run async
 // Step 1: start the fetch and obtain a reader
-let response = await fetch('https://api.github.com/repos/iliakan/javascript-tutorial-en/commits?per_page=100');
+let response = await fetch('https://api.github.com/repos/javascript-tutorial/en.javascript.info/commits?per_page=100');
 
 const reader = response.body.getReader();
 

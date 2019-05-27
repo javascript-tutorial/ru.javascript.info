@@ -11,33 +11,33 @@ describe("throttle(f, 1000)", function() {
     this.clock = sinon.useFakeTimers();
   });
 
-  it("the first call runs now", function() {
-    f1000(1); // runs now
+  it("1-й вызов происходит немедленно", function() {
+    f1000(1); // вызов происходит немедленно
     assert.equal(log, "1");
   });
 
-  it("then calls are ignored till 1000ms when the last call works", function() {
-    f1000(2); // (throttling - less than 1000ms since the last run)
-    f1000(3); // (throttling - less than 1000ms since the last run)
-    // after 1000 ms f(3) call is scheduled
+  it("далее вызовы игнорируются до истечения 1000 мс от последнего вызова", function() {
+    f1000(2); // (задержка - менее 1000 мс с момента последнего вызов)
+    f1000(3); // (задержка - менее 1000 мс с момента последнего вызов)
+    // запланирован вызов спустя f(3) 1000 мс
 
-    assert.equal(log, "1"); // right now only the 1st call done
+    assert.equal(log, "1"); // прямо сейчас только 1-й вызов завершен
 
-    this.clock.tick(1000); // after 1000ms...
-    assert.equal(log, "13"); // log==13, the call to f1000(3) is made
+    this.clock.tick(1000); // через 1000 мс...
+    assert.equal(log, "13"); // log==13, произошел вызов f1000(3)
   });
 
-  it("the third call waits 1000ms after the second call", function() {
+  it("3-й вызов ждет 1000 мс от 2-го", function() {
     this.clock.tick(100);
-    f1000(4); // (throttling - less than 1000ms since the last run)
+    f1000(4); // (задержка - менее 1000 мс с момента последнего вызов)
     this.clock.tick(100);
-    f1000(5); // (throttling - less than 1000ms since the last run)
+    f1000(5); // (задержка - менее 1000 мс с момента последнего вызов)
     this.clock.tick(700);
-    f1000(6); // (throttling - less than 1000ms since the last run)
+    f1000(6); // (задержка - менее 1000 мс с момента последнего вызов)
 
-    this.clock.tick(100); // now 100 + 100 + 700 + 100 = 1000ms passed
+    this.clock.tick(100); // теперь прошло 100 + 100 + 700 + 100 = 1000 мс
 
-    assert.equal(log, "136"); // the last call was f(6)
+    assert.equal(log, "136"); // последний вызов был f(6)
   });
 
   after(function() {
