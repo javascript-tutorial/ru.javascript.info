@@ -1,21 +1,21 @@
-importance: 4
+важность: 4
 
 ---
 
-# Get average age
+# Получить средний возраст
 
-Write the function `getAverageAge(users)` that gets an array of objects with property `age` and returns the average age.
+Напишите функцию `getAverageAge(users)`, которая принимает массив объектов со свойством `age` и возвращает средний возраст.
 
-The formula for the average is `(age1 + age2 + ... + ageN) / N`.
+Формула вычисления среднего арифметического значения: `(age1 + age2 + ... + ageN) / N`.
 
-For instance:
+Например:
 
 ```js no-beautify
-let john = { name: "John", age: 25 };
-let pete = { name: "Pete", age: 30 };
-let mary = { name: "Mary", age: 29 };
+let vasya = { name: "Вася", age: 25 };
+let petya = { name: "Петя", age: 30 };
+let masha = { name: "Маша", age: 29 };
 
-let arr = [ john, pete, mary ];
+let arr = [ vasya, petya, masha ];
 
 alert( getAverageAge(arr) ); // (25 + 30 + 29) / 3 = 28
 ```
