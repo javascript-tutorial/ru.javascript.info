@@ -4,7 +4,7 @@
   padding: 0;
   display: block;
   resize: none;
-  /* отключаем изменение размера текстовой области в Firefox */
+  /* отключаем изменение размера мышью в Firefox */
   
   outline: none;
   /* удаляем обводку при фокусировке в Chrome */
