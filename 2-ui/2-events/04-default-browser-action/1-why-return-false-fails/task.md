@@ -4,7 +4,7 @@ importance: 3
 
 # Почему не работает return false?
 
-Почему в этом документе `return false` не работает?
+Почему в коде ниже `return false` не работает?
 
 ```html autorun run
 <script>
@@ -14,7 +14,7 @@ importance: 3
   }
 </script>
 
-<a href="http://w3.org" onclick="handler()">w3.org</a>
+<a href="http://w3.org" onclick="handler()">браузер перейдёт/откроет w3.org</a>
 ```
 
 Браузер переходит по указанной ссылке, но нам этого не нужно.
