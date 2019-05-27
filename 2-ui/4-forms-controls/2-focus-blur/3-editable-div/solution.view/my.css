@@ -20,6 +20,6 @@
 }
 
 .edit:focus {
+  /* удаление обводки фокуса в Safari */
   outline: none;
-  /* удаление рамки фокуса в Safari */
 }

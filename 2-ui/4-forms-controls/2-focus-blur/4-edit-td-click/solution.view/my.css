@@ -3,14 +3,15 @@
   margin: 0;
   padding: 0;
   display: block;
-  resize: none;
+
   /* отключаем изменение размера мышью в Firefox */
+  resize: none;
   
-  outline: none;
   /* удаляем обводку при фокусировке в Chrome */
+  outline: none;
   
-  overflow: auto;
   /* удаляем полосу прокрутки в IE */
+  overflow: auto;
 }
 
 .edit-controls {
