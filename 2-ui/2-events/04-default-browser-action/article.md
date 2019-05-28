@@ -179,7 +179,7 @@ menu.onclick = function(event) {
 
 
 ```html autorun height=80 no-beautify run
-<p>клик правой кнопкой мыши для меню документа (добавлен event.defaultPrevented)</p>
+<p>Кликните правой кнопкой мыши для меню документа (добавлен event.defaultPrevented)</p>
 <button id="elem">Кликните правой кнопкой для меню кнопки</button>
 
 <script>
