@@ -3,7 +3,7 @@
 Тогда разница между его полной шириной `offsetWidth` и шириной внутреннего содержимого `clientWidth` будет равна как раз прокрутке:
 
 ```js run
-// создадим эелемент с прокруткой
+// создадим элемент с прокруткой
 let div = document.createElement('div');
 
 div.style.overflowY = 'scroll';
