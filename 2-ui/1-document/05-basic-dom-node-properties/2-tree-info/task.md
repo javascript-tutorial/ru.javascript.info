@@ -2,13 +2,13 @@ importance: 5
 
 ---
 
-# Count descendants
+# Считаем потомков
 
-There's a tree structured as nested `ul/li`.
+У нас есть дерево, структурированное, как вложенные списки `ul/li`.
 
-Write the code that for each `<li>` shows:
+Напишите код, который выведет каждый элемент списка `<li>`:
 
-1. What's the text inside it (without the subtree)
-2. The number of nested `<li>` -- all descendants, including the deeply nested ones.
+1. Выведите также текст, который содержится в каждом элементе списка (кроме поддерева)
+2. Выведите число потомков списка `<li>` -- всех потомков, включая все уровни вложенности.
 
 [demo src="solution"]

@@ -1,4 +1,4 @@
-Let's make a loop over `<li>`:
+Пройдем циклом по все элементам `<li>`:
 
 ```js
 for (let li of document.querySelectorAll('li')) {
@@ -6,14 +6,14 @@ for (let li of document.querySelectorAll('li')) {
 }
 ```
 
-In the loop we need to get the text inside every `li`. We can read it directly from the first child node, that is the text node:
+В цикле нам нужно получить текст всех элементов `li`. Мы можем прочитать его прямо из первого дочернего узла, это будет текстовый узел:
 
 ```js
 for (let li of document.querySelectorAll('li')) {
   let title = li.firstChild.data;
 
-  // title is the text in <li> before any other nodes
+  // переменная title содержит текст элемента <li> 
 }
 ```
 
-Then we can get the number of descendants `li.getElementsByTagName('li')`.
+Так мы сможем узнать количество потомков `li.getElementsByTagName('li')`.length

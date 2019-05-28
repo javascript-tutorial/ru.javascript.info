@@ -10,8 +10,8 @@ The answer: **`BODY`**.
 </script>
 ```
 
-What's going on step by step:
+Происходящее по шагам:
 
-1. The content of `<body>` is replaced with the comment. The comment is `<!--BODY-->`, because `body.tagName == "BODY"`. As we remember, `tagName` is always uppercase in HTML.
-2. The comment is now the only child node, so we get it in `body.firstChild`.
-3. The `data` property of the comment is its contents (inside `<!--...-->`): `"BODY"`.
+1. Заменяем содержимое `<body>` на комментарий. Он будет иметь вид `<!--BODY-->`, т.к. `body.tagName == "BODY"`. Как мы помним свойство `tagName` в HTML всегда находится в верхнем регистре.
+2. Этот комментарий теперь является первым и единственным потомком `body.firstChild`.
+3. Значение свойства `data` теперь (внутри `<!--...-->`): `"BODY"`.
