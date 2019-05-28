@@ -286,6 +286,7 @@ new User('John');
 
 ```js
 import {User} from './user.js';
+// import {MyUser} won't work, the name must be {User}
 ```
 
 Для экспорта по умолчанию мы можем выбрать любое имя при импорте:

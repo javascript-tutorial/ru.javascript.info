@@ -1,63 +1,63 @@
-# JavaScript animations
+# JavaScript-анимации
 
-JavaScript animations can handle things that CSS can't.
+С помощью JavaScript-анимаций можно делать вещи, которые нельзя реализовать на CSS.
 
-For instance, moving along a complex path, with a timing function different from Bezier curves, or an animation on a canvas.
+Например, движение по сложному пути с временной функцией, отличной от кривой Безье, или canvas-анимации.
 
-## Using setInterval
+## Использование setInterval
 
-An animation can be implemented as a sequence of frames -- usually small changes to HTML/CSS properties.
+Анимация реализуется через последовательность кадров, каждый из которых немного меняет HTML/CSS-свойства.
 
-For instance, changing `style.left` from `0px` to `100px` moves the element. And if we increase it in `setInterval`, changing by `2px` with a tiny delay, like 50 times per second, then it looks smooth. That's the same principle as in the cinema: 24 frames per second is enough to make it look smooth.
+Например, изменение `style.left` от `0px` до `100px` -- двигает элемент. И если мы будем делать это с помощью `setInterval`, изменяя на `2px` с небольшими интервалами времени, например 50 раз в секунду, тогда изменения будут выглядеть плавными. Принцип такой же, как в кино: 24 кадров в секунду достаточно, чтобы создать эффект плавности.
 
-The pseudo-code can look like this:
+Псевдокод мог бы выглядеть так:
 
 ```js
 let timer = setInterval(function() {
   if (animation complete) clearInterval(timer);
   else increase style.left by 2px
-}, 20); // change by 2px every 20ms, about 50 frames per second
+}, 20); // изменять на 2px каждые 20ms, это около 50 кадров в секунду
 ```
 
-More complete example of the animation:
+Более детальная реализация этой анимации:
 
 ```js
-let start = Date.now(); // remember start time
+let start = Date.now(); // запомнить время начала
 
 let timer = setInterval(function() {
-  // how much time passed from the start?
+  // сколько времени прошло с начала анимации?
   let timePassed = Date.now() - start;
 
   if (timePassed >= 2000) {
-    clearInterval(timer); // finish the animation after 2 seconds
+    clearInterval(timer); // закончить анимацию через 2 секунды
     return;
   }
 
-  // draw the animation at the moment timePassed
+  // отрисовать анимацию на момент timePassed, прошедший с начала анимации
   draw(timePassed);
 
 }, 20);
 
-// as timePassed goes from 0 to 2000
-// left gets values from 0px to 400px
+// в то время как timePassed идет от 0 до 2000
+// left изменяет значение от 0px до 400px
 function draw(timePassed) {
   train.style.left = timePassed / 5 + 'px';
 }
 ```
 
-Click for the demo:
+Для просмотра примера, кликните на него:
 
 [codetabs height=200 src="move"]
 
-## Using requestAnimationFrame
+## Использование requestAnimationFrame
 
-Let's imagine we have several animations running simultaneously.
+Теперь давайте представим, что у нас есть несколько анимаций, работающих одновременно.
 
-If we run them separately, then even though each one has `setInterval(..., 20)`, then the browser would have to repaint much more often than every `20ms`.
+Если мы запустим их независимо с помощью `setInterval(..., 20)`, тогда браузеру будет необходимо выполнять отрисовку гораздо чаще, чем раз в `20ms`.
 
-That's because they have different starting time, so "every 20ms" differs between different animations. The intervals are not alignned. So we'll have several independent runs within `20ms`.
+Это происходит из-за того, что каждая анимация имеет свое собственное время старта и "каждые 20 миллисекунд" для разных анимаций -- разные. Интервалы не выравнены и у нас будет несколько независимых срабатываний в течение `20ms`.
 
-In other words, this:
+Другими словами:
 
 ```js
 setInterval(function() {
@@ -67,40 +67,40 @@ setInterval(function() {
 }, 20)
 ```
 
-...Is lighter than three independent calls:
+...Меньше нагружают систему, чем три независимых функции:
 
 ```js
-setInterval(animate1, 20); // independent animations
-setInterval(animate2, 20); // in different places of the script
+setInterval(animate1, 20); // независимые анимации
+setInterval(animate2, 20); // в разных местах кода
 setInterval(animate3, 20);
 ```
 
-These several independent redraws should be grouped together, to make the redraw easier for the browser (and hence smoother for people).
+Эти независимые перерисовки лучше сгруппировать вместе, тогда они будут легче для браузера, а значит - не грузить процессор и более плавно выглядеть.
 
-There's one more thing to keep in mind. Sometimes when CPU is overloaded, or there are other reasons to redraw less often (like when the browser tab is hidden), so we really shouldn't run it every `20ms`.
+Существует еще одна вещь, про которую надо помнить: когда CPU перегружен или есть другие причины делать перерисовку реже (например, когда вкладка браузера скрыта), нам не следует делать её каждые `20ms`.
 
-But how do we know about that in JavaScript? There's a specification [Animation timing](http://www.w3.org/TR/animation-timing/) that provides the function `requestAnimationFrame`. It addresses all these issues and even more.
+Но как нам узнать об этом в JavaScript? Спецификация [Animation timing](http://www.w3.org/TR/animation-timing/) описывает функцию `requestAnimationFrame`, которая решает все описанные проблемы и делает даже больше.
 
-The syntax:
+Синтаксис:
 ```js
 let requestId = requestAnimationFrame(callback)
 ```
 
-That schedules the `callback` function to run in the closest time when the browser wants to do animation.
+Такой вызов планирует запуск функции `callback` на ближайшее время, когда браузер сочтёт возможным осуществить анимацию.
 
-If we do changes in elements in `callback` then they will be grouped together with other `requestAnimationFrame` callbacks and with CSS animations. So there will be one geometry recalculation and repaint instead of many.
+Если в `callback` происходит изменение элемента, тогда оно будет сгруппировано с другими `requestAnimationFrame` и CSS-анимациями. Таким образом браузер выполнит один геометрический пересчёт и отрисовку, вместо нескольких.
 
-The returned value `requestId` can be used to cancel the call:
+Значение `requestId` может быть использовано для отмены анимации:
 ```js
-// cancel the scheduled execution of callback
+// отмена запланированного запуска callback
 cancelAnimationFrame(requestId);
 ```
 
-The `callback` gets one argument -- the time passed from the beginning of the page load in microseconds. This time can also be obtained by calling [performance.now()](mdn:api/Performance/now).
+Функция `callback` имеет один аргумент -- время прошедшее с момента начала загрузки страницы в миллисекундах. Это значение может быть получено с помощью вызова [performance.now()](mdn:api/Performance/now).
 
-Usually `callback` runs very soon, unless the CPU is overloaded or the laptop battery is almost discharged, or there's another reason.
+Как правило, `callback` запускается очень скоро, если только не перегружен CPU или не разряжена батарея ноутбука, или у браузера нет какой-то ещё причины замедлиться.
 
-The code below shows the time between first 10 runs for `requestAnimationFrame`. Usually it's 10-20ms:
+Код ниже показывает время между первыми 10 запусками `requestAnimationFrame`. Обычно оно 10-20 мс:
 
 ```html run height=40 refresh
 <script>
@@ -116,9 +116,9 @@ The code below shows the time between first 10 runs for `requestAnimationFrame`.
 </script>
 ```
 
-## Structured animation
+## Структура анимации
 
-Now we can make a more universal animation function based on `requestAnimationFrame`:
+Теперь мы можем создать более сложную функцию анимации с помощью `requestAnimationFrame`:
 
 ```js
 function animate({timing, draw, duration}) {
@@ -126,14 +126,14 @@ function animate({timing, draw, duration}) {
   let start = performance.now();
 
   requestAnimationFrame(function animate(time) {
-    // timeFraction goes from 0 to 1
+    // timeFraction изменяется от 0 до 1
     let timeFraction = (time - start) / duration;
     if (timeFraction > 1) timeFraction = 1;
 
-    // calculate the current animation state
-    let progress = timing(timeFraction)
+    // вычисление текущего состояния анимации
+    let progress = timing(timeFraction);
 
-    draw(progress); // draw it
+    draw(progress); // отрисовать её
 
     if (timeFraction < 1) {
       requestAnimationFrame(animate);
@@ -143,15 +143,15 @@ function animate({timing, draw, duration}) {
 }
 ```
 
-Function `animate` accepts 3 parameters that essentially describes the animation:
+Функция `animate` имеет три аргумента, которые описывают анимацию:
 
 `duration`
-: Total time of animation. Like, `1000`.
+: Продолжительность анимации. Например, `1000`.
 
 `timing(timeFraction)`
-: Timing function, like CSS-property `transition-timing-function` that gets the fraction of time that passed (`0` at start, `1` at the end) and returns the animation completion (like `y` on the Bezier curve).
+: Функция расчёта времени, как CSS-свойство `transition-timing-function`, которая будет вычислять прогресс анимации (как ось `y` у кривой Безье) в зависимости от прошедшего времени (`0` в начале, `1` в конце).
 
-    For instance, a linear function means that the animation goes on uniformly with the same speed:
+    Например, линейная функция значит, что анимация идёт с одной и той же скоростью:
 
     ```js
     function linear(timeFraction) {
@@ -159,33 +159,33 @@ Function `animate` accepts 3 parameters that essentially describes the animation
     }
     ```
 
-    It's graph:
+    График функции:
     ![](linear.png)
 
-    That's just like `transition-timing-function: linear`. There are more interesting variants shown below.
+    Это как если бы в `transition-timing-function` передать значение `linear`. Ниже будут представлены более интересные примеры.
 
 `draw(progress)`
-: The function that takes the animation completion state and draws it. The value `progress=0` denotes the beginning animation state, and `progress=1` -- the end state.
+: Функция отрисовки, которая получает аргументом значение прогресса анимации и отрисовывает его. Значение `progress=0` означает что анимация находится в начале, и значение `progress=1` -- в конце.
 
-    This is that function that actually draws out the animation.
+    Эта та функция, которая на самом деле и рисует анимацию.
 
-    It can move the element:
+    Вот как она могла бы двигать элемент:
     ```js
     function draw(progress) {
       train.style.left = progress + 'px';
     }
     ```
 
-    ...Or do anything else, we can animate anything, in any way.
+    ...Или делать что-нибудь ещё. Мы можем анимировать что угодно, как захотим.
 
 
-Let's animate the element `width` from `0` to `100%` using our function.
+Теперь давайте используем нашу функцию, чтобы анимировать свойство `width` от `0` до `100%`.
 
-Click on the element for the demo:
+Нажмите на элемент для того, чтобы посмотреть пример:
 
 [codetabs height=60 src="width"]
 
-The code for it:
+Код:
 
 ```js
 animate({
@@ -199,19 +199,19 @@ animate({
 });
 ```
 
-Unlike CSS animation, we can make any timing function and any drawing function here. The timing function is not limited by Bezier curves. And `draw` can go beyond properties, create new elements for like fireworks animation or something.
+В отличие от CSS-анимаций, можно создать любую функцию расчёта времени и любую функцию отрисовки. Функция расчёта времени не будет ограничена только кривой Безье, а функция `draw` может менять не только свойства, но и создавать новые элементы (например, для создания анимации фейерверка).
 
-## Timing functions
+## Функции расчёта времени
 
-We saw the simplest, linear timing function above.
+Мы уже рассмотрели самый простой пример линейной функции расчёта времени выше.
 
-Let's see more of them. We'll try movement animations with different timing functions to see how they work.
+Давайте посмотрим другие. Мы попробуем выполнить анимации с разными функциями расчёта времени, чтобы посмотреть как они работают.
 
-### Power of n
+### Степень n
 
-If we want to speed up the animation, we can use `progress` in the power `n`.
+Если мы хотим ускорить анимацию, мы можем возвести `progress` в степень `n`.
 
-For instance, a parabolic curve:
+Например, параболическая кривая:
 
 ```js
 function quad(timeFraction) {
@@ -219,27 +219,27 @@ function quad(timeFraction) {
 }
 ```
 
-The graph:
+График:
 
 ![](quad.png)
 
-See in action (click to activate):
+Посмотрим в действии (нажмите для активации):
 
 [iframe height=40 src="quad" link]
 
-...Or the cubic curve or event greater `n`. Increasing the power makes it speed up faster.
+...Или кубическая кривая, или любой другой множитель `n`. Повышение степени увеличивает скорость анимации.
 
-Here's the graph for `progress` in the power `5`:
+Вот график для функции `progress` в степени `5`:
 
 ![](quint.png)
 
-In action:
+В действии:
 
 [iframe height=40 src="quint" link]
 
-### The arc
+### Дуга
 
-Function:
+Функция:
 
 ```js
 function circ(timeFraction) {
@@ -247,19 +247,19 @@ function circ(timeFraction) {
 }
 ```
 
-The graph:
+График:
 
 ![](circ.png)
 
 [iframe height=40 src="circ" link]
 
-### Back: bow shooting
+### Обратно: выстрел из лука
 
-This function does the "bow shooting". First we "pull the bowstring", and then "shoot".
+Эта функция совершает "выстрел из лука". В начале "натягивается тетива", а затем "выстрел".
 
-Unlike previous functions, it depends on an additional parameter `x`, the "elasticity coefficient". The distance of "bowstring pulling" is defined by it.
+В отличие от предыдущей функции, теперь всё зависит от дополнительного параметра `x` -- "коэффициента эластичности". Он определяет силу "натяжения тетивы".
 
-The code:
+Код:
 
 ```js
 function back(x, timeFraction) {
@@ -267,19 +267,19 @@ function back(x, timeFraction) {
 }
 ```
 
-**The graph for `x = 1.5`:**
+**График для `x = 1.5`:**
 
 ![](back.png)
 
-For animation we use it with a specific value of `x`. Example for `x = 1.5`:
+Для анимации мы используем `x` с определенным значением. Пример для `x` со значением `1.5`:
 
 [iframe height=40 src="back" link]
 
-### Bounce
+### Отскоки
 
-Imagine we are dropping a ball. It falls down, then bounces back a few times and stops.
+Представьте, что мы бросили мяч вниз. Он падает, ударяется о землю, подскакивает несколько раз и останавливается.
 
-The `bounce` function does the same, but in the reverse order: "bouncing" starts immediately. It uses few special coefficients for that:
+Функции `bounce` делает то же самое, но в обратном порядке: "отскоки" начинаются сразу. Для этого заданы специальные коэффициенты:
 
 ```js
 function bounce(timeFraction) {
@@ -291,13 +291,13 @@ function bounce(timeFraction) {
 }
 ```
 
-In action:
+В действии:
 
 [iframe height=40 src="bounce" link]
 
-### Elastic animation
+### Эластичная анимация
 
-One more "elastic" function that accepts an additional parameter `x` for the "initial range".
+Еще одна "эластичная" функция, которая принимает дополнительный параметр `x` для "начального отрезка".
 
 ```js
 function elastic(x, timeFraction) {
@@ -305,31 +305,30 @@ function elastic(x, timeFraction) {
 }
 ```
 
-**The graph for `x=1.5`:**
+**График для `x=1.5`:**
 ![](elastic.png)
 
-In action for `x=1.5`:
+В действии со значением `x=1.5`:
 
 [iframe height=40 src="elastic" link]
 
-## Reversal: ease*
+## Реверсивные функции: ease*
 
-So we have a collection of timing functions. Their direct application is called "easeIn".
+Итак у нас получилась коллекция функций расчёта времени. Их прямое использование называется «easeIn».
 
-Sometimes we need to show the animation in the reverse order. That's done with the "easeOut" transform.
+Иногда нужно показать анимацию в обратном режиме. Преобразование функции, которое даёт такой эффект, называется «easeOut».
 
 ### easeOut
 
-In the "easeOut" mode the `timing` function is put into a wrapper `timingEaseOut`:
+В режиме "easeOut" `timing` функции оборачиваются функцией `timingEaseOut`:
 
 ```js
 timingEaseOut(timeFraction) = 1 - timing(1 - timeFraction)
 ```
-
-In other words, we have a "transform" function `makeEaseOut` that takes a "regular" timing function and returns the wrapper around it:
+Другими словами, мы имеем функцию "преобразования" -- `makeEaseOut`, которая берет "обычную" функцию расчёта времени и возвращает обёртку над ней:
 
 ```js
-// accepts a timing function, returns the transformed variant
+// принимает функцию расчёта времени и возрващает преобразованный вариант
 function makeEaseOut(timing) {
   return function(timeFraction) {
     return 1 - timing(1 - timeFraction);
@@ -337,42 +336,42 @@ function makeEaseOut(timing) {
 }
 ```
 
-For instance, we can take the `bounce` function described above and apply it:
+Например, мы можем взять функцию `bounce` описанную выше:
 
 ```js
 let bounceEaseOut = makeEaseOut(bounce);
 ```
 
-Then the bounce will be not in the beginning, but at the end of the animation. Looks even better:
+Таким образом, отскоки будут не в начале функции, а в конце. Смотрится гораздо лучше:
 
 [codetabs src="bounce-easeout"]
 
-Here we can see how the transform changes the behavior of the function:
+Ниже мы можем увидеть, как трансформации изменяют поведение функции:
 
 ![](bounce-inout.png)
 
-If there's an animation effect in the beginning, like bouncing -- it will be shown at the end.
+Если раньше анимационный эффект, такой как отскоки, был в начале, то после трансформации он будет показан в конце.
 
-In the graph above the <span style="color:#EE6B47">regular bounce</span> has the red color, and the <span style="color:#62C0DC">easeOut bounce</span> is blue.
+На графике выше красным цветом обозначена <span style="color:#EE6B47">обычная функция</span> и синим -- <span style="color:#62C0DC">после easeOut</span>.
 
-- Regular bounce -- the object bounces at the bottom, then at the end sharply jumps to the top.
-- After `easeOut` -- it first jumps to the top, then bounces there.
+- Обычный скачок -- объект сначала медленно скачет внизу, а затем резко подпрыгивает вверх.
+- Обратный `easeOut` -- объект вначале прыгает вверх, и затем скачет там.
 
 ### easeInOut
 
-We also can show the effect both in the beginning and the end of the animation. The transform is called "easeInOut".
+Мы можем применить эффект дважды -- в начале и конце анимации. Такая трансформация называется "easeInOut".
 
-Given the timing function, we calculate the animation state like this:
+Для функции расчёта времени, анимация будет вычисляться следующим образом:
 
 ```js
-if (timeFraction <= 0.5) { // first half of the animation
+if (timeFraction <= 0.5) { // первая половина анимации
   return timing(2 * timeFraction) / 2;
-} else { // second half of the animation
+} else { // вторая половина анимации
   return (2 - timing(2 * (1 - timeFraction))) / 2;
 }
 ```
 
-The wrapper code:
+Код функции-обертки:
 
 ```js
 function makeEaseInOut(timing) {
@@ -387,37 +386,37 @@ function makeEaseInOut(timing) {
 bounceEaseInOut = makeEaseInOut(bounce);
 ```
 
-In action, `bounceEaseInOut`:
+В действии, `bounceEaseInOut`:
 
 [codetabs src="bounce-easeinout"]
 
-The "easeInOut" transform joins two graphs into one: `easeIn` (regular) for the first half of the animation and `easeOut` (reversed) -- for the second part.
+Функция "easeInOut" объединяет два графика в один: `easeIn` (обычный) для первой половины анимации and `easeOut` (обратный) -- для второй половины.
 
-The effect is clearly seen if we compare the graphs of `easeIn`, `easeOut` and `easeInOut` of the `circ` timing function:
+Разница хорошо заметна, если сравнивать графики `easeIn`, `easeOut` и `easeInOut` для функции `circ`:
 
 ![](circ-ease.png)
 
-- <span style="color:#EE6B47">Red</span> is the regular variantof `circ` (`easeIn`).
-- <span style="color:#8DB173">Green</span> -- `easeOut`.
-- <span style="color:#62C0DC">Blue</span> -- `easeInOut`.
+- <span style="color:#EE6B47">Красный</span> обычный вариант `circ` (`easeIn`).
+- <span style="color:#8DB173">Зеленый</span> -- `easeOut`.
+- <span style="color:#62C0DC">Синий</span> -- `easeInOut`.
 
-As we can see, the graph of the first half of the animation is the scaled down `easeIn`, and the second half is the scaled down `easeOut`. As a result, the animation starts and finishes with the same effect.
+Как видно, график первой половины анимации представляет собой уменьшенный `easeIn`, а второй – уменьшенный `easeOut`. В результате, анимация начинается и заканчивается одинаковым эффектом.
 
-## More interesting "draw"
+## Более интересная функция "draw"
 
-Instead of moving the element we can do something else. All we need is to write the write the proper `draw`.
+Вместо передвижения элемента мы можем делать что-нибудь ещё. Всё, что нам нужно -- это правильно написать функцию `draw`.
 
-Here's the animated "bouncing" text typing:
+Вот пример "скачущей" анимации набирающегося текста:
 
 [codetabs src="text"]
 
-## Summary
+## Итого
 
-For animations that CSS can't handle well, or those that need tight control, JavaScript can help. JavaScript animations should be implemented via `requestAnimationFrame`. That built-in method allows to setup a callback function to run when the browser will be preparing a repaint. Usually that's very soon, but the exact time depends on the browser.
+JavaScript может помочь в тех случаях, когда CSS не справляется или нужен жесткий контроль над анимацией. JavaScript-анимации должны быть сделаны с помощью `requestAnimationFrame`. Это встроенный метод браузера, который вызывает переданную в него функцию в тот момент, когда браузер готовится совершить перерисовку (обычно это происходит быстро, но конкретные задержки зависят от браузера).
 
-When a page is in the background, there are no repaints at all, so the callback won't run: the animation will be suspended and won't consume resources. That's great.
+Когда вкладка скрыта, на ней совсем не происходит перерисовок, и функция не будет вызвана: анимация будет приостановлена и не потратит ресурсы. Это хорошо.
 
-Here's the helper `animate` function to setup most animations:
+Вспомогательная функция `animate` для создания анимации:
 
 ```js
 function animate({timing, draw, duration}) {
@@ -425,14 +424,14 @@ function animate({timing, draw, duration}) {
   let start = performance.now();
 
   requestAnimationFrame(function animate(time) {
-    // timeFraction goes from 0 to 1
+    // timeFraction изменяется от 0 до 1
     let timeFraction = (time - start) / duration;
     if (timeFraction > 1) timeFraction = 1;
 
-    // calculate the current animation state
+    // вычисление текущего состояния анимации
     let progress = timing(timeFraction);
 
-    draw(progress); // draw it
+    draw(progress); // отрисовать её
 
     if (timeFraction < 1) {
       requestAnimationFrame(animate);
@@ -442,14 +441,14 @@ function animate({timing, draw, duration}) {
 }
 ```
 
-Options:
+Опции:
 
-- `duration` -- the total animation time in ms.
-- `timing` -- the function to calculate animation progress. Gets a time fraction from 0 to 1, returns the animation progress, usually from 0 to 1.
-- `draw` -- the function to draw the animation.
+- `duration` -- общая продолжительность анимации в миллисекундах.
+- `timing` -- функция вычисления прогресса анимации. Получается момент времени от 0 до 1, возвращает прогресс анимации, обычно тоже от 0 до 1.
+- `draw` -- функция отрисовки анимации.
 
-Surely we could improve it, add more bells and whistles, but JavaScript animations are not applied on a daily basis. They are used to do something interesting and non-standard. So you'd want to add the features that you need when you need them.
+Конечно, мы могли бы улучшить вспомогательную функцию и добавить в неё больше наворотов. Но JavaScript-анимации не каждый день используются, а только когда хотят сделать что-то интересное и необычное. Не стоит усложнять функцию до тех пор пока это вам не понадобились.
 
-JavaScript animations can use any timing function. We covered a lot of examples and transformations to make them even more versatile. Unlike CSS, we are not limited to Bezier curves here.
+JavaScript-анимации могут использовать любые функции расчёта времени. Мы рассмотрели множество примеров и их вариаций, чтобы сделать их еще более универсальными. В отличие от CSS, мы здесь не ограничены только кривой Безье.
 
-The same is about `draw`: we can animate anything, not just CSS properties.
+То же самое и с `draw`: мы можем анимировать всё что угодно, не только CSS-свойства.

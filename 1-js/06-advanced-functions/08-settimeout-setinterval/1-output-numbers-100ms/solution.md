@@ -40,3 +40,25 @@ printNumbers(5, 10);
 
 Заметим, что в обоих решениях есть начальная задержка перед первым выводом. Она составляет одну секунду (1000мс). Если мы хотим, чтобы функция запускалась сразу же, то надо добавить такой запуск вручную на отдельной строке, вот так:
 
+If we also want the function to run immediately, then we can add an additional call on a separate line, like this:
+
+```js run
+function printNumbers(from, to) {
+  let current = from;
+
+  function go() {
+    alert(current);
+    if (current == to) {
+      clearInterval(timerId);
+    }
+    current++;
+  }
+
+*!*
+  go();
+*/!*
+  let timerId = setInterval(go, 1000);
+}
+
+printNumbers(5, 10);
+```
