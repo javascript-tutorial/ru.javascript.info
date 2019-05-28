@@ -60,7 +60,7 @@
 
 В свойстве `offsetParent` находится ближайший родитель элемента:
 
-1. он является CSS-спозиционированным (когда CSS-свойство `position` равно `absolute`, `relative`, `fixed` или `sticky`),
+1. он является CSS-позиционированным (когда CSS-свойство `position` равно `absolute`, `relative`, `fixed` или `sticky`),
 2. или `<td>`, `<th>`, `<table>`,
 2. или `<body>`.
 
