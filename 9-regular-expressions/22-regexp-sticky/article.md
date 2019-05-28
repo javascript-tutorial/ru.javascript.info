@@ -1,49 +1,51 @@
 
-# Sticky flag "y", searching at position
+# Липкий флаг "y", поиск на конкретной позиции
 
-To grasp the use case of `y` flag, and see how great it is, let's explore a practical use case.
+Чтобы разобрать флаг `y` и понять, чем же он так хорош, рассмотрим практический пример.
 
-One of common tasks for regexps is "parsing": when we get a text and analyze it for logical components, build a structure.
+Одна из часто встречающихся задач регулярных выражений -- "парсинг": мы имеем текст и с помощью регулярных выражений разделяем его на логические компоненты, получаем структуру.
 
-For instance, there are HTML parsers for browser pages, that turn text into a structured document. There are parsers for programming languages, like Javascript, etc.
+Например, в браузерах существует HTML-парсер, который превращает текст в структурированный документ. Также существуют парсеры для языков программирования, как JavaScript и любых других.
 
-Writing parsers is a special area, with its own tools and algorithms, so we don't go deep in there, but there's a very common question: "What is the text at the given position?".
+Мы не будем погружаться глубоко в тему написания парсеров (это специализированная область со своим набором инструментов и алгоритмов). Но в процессе их работы, вообще, в процессе анализа текста, очень часто возникает вопрос: "Что за сущность находится в тексте на заданной позиции?"
 
-For instance, for a programming language variants can be like:
-- Is it a "name" `pattern:\w+`?
-- Or is it a number `pattern:\d+`?
-- Or an operator `pattern:[+-/*]`?
-- (a syntax error if it's not anything in the expected list)
+Например, для языка программирования варианты могут быть следующие:
+- Это название переменной или функции `pattern:\w+`?
+- Или число `pattern:\d+`?
+- Или оператор `pattern:[+-/*]`?
+- (Или же это синтаксическая ошибка, если не попадает ни под один из ожидаемых вариантов)
 
-In Javascript, to perform a search starting from a given position, we can use `regexp.exec` with `regexp.lastIndex` property, but that's not what we need!
+Обычно поиск ищет в строке с начала, а не с нужной позиции. Можно, конечно, сделать подстроку и искать в ней, но это приведёт к очень существенному замедлению работы, так как таких поисков много.
 
-We'd like to check the match exactly at given position, not "starting" from it.
+Ещё один вариант - использовать `regexp.exec` с определенным свойством `regexp.lastIndex`, но это тоже не совсем то, так как он ищет везде, начиная с `lastIndex` и далее.
 
-Here's a (failing) attempt to use `lastIndex`:
+Мы хотим проверять текст именно в той позиции, которую мы указали, а не "начиная" с неё.
+
+В примере показано (ошибочное) использование `lastIndex`:
 
 ```js run
 let str = "(text before) function ...";
 
-// attempting to find function at position 5:
-let regexp = /function/g; // must use "g" flag, otherwise lastIndex is ignored
+// попробуем найти слово function на позиции 5:
+let regexp = /function/g; // необходимо использовать флаг "g", в противном случае свойство lastIndex будет проигнорировано
 regexp.lastIndex = 5
 
 alert (regexp.exec(str)); // function
 ```
 
-The match is found, because `regexp.exec` starts to search from the given position and goes on by the text, successfully matching "function" later.
+Регулярное выражение находит совпадение, потому что метод `regexp.exec` начинает искать с указанной позиции и продвигается дальше по тексту и находит совпадение в слове "function".
 
-We could work around that by checking if "`regexp.exec(str).index` property is `5`, and if not, ignore the much. But the main problem here is performance.
+Чтобы узнать, находится ли совпадение в нужном месте можно использовать свойство `regexp.exec(str).index` и проверить равно ли оно `5`, если нет, тогда игнорировать результат. Такое решение -- рабочее, но оно имеет проблему производительности.
 
-The regexp engine does a lot of unnecessary work by scanning at further positions. The delays are clearly noticeable if the text is long, because there are many such searches in a parser.
+Алгоритм проверки регулярного выражение сделает ненужную работу по проверки текста после указанного значения. Нам просто-напросто не нужно искать после нужной позиции и тратить на это время, причём существенное, если текст большой.
 
-## The "y" flag
+## Флаг "y"
 
-So we've came to the problem: how to search for a match, starting exactly at the given position.
+Итак, мы пришли к проблеме: как проверить на совпадение с регулярным выражением ровно на конкретной позиции.
 
-That's what `y` flag does. It makes the regexp search only at the `lastIndex` position.
+Ответ: флаг `y`, который создан именно для этого. С ним поиск производиться только в позиции, указанной в свойстве `lastIndex`.
 
-Here's an example
+Пример:
 
 ```js run
 let str = "(text before) function ...";
@@ -53,19 +55,19 @@ let regexp = /function/y;
 regexp.lastIndex = 5;
 */!*
 
-alert (regexp.exec(str)); // null (no match, unlike "g" flag!)
+alert (regexp.exec(str)); // null (совпадение не найдено, в отличие от флага "g"!)
 
 *!*
 regexp.lastIndex = 14;
 */!*
 
-alert (regexp.exec(str)); // function (match!)
+alert (regexp.exec(str)); // function (совпадение!)
 ```
 
-As we can see, now the regexp is only matched at the given position.
+Как мы видим, теперь регулярное выражение проверяет на совпадение только в указанной позиции.
 
-So what `y` does is truly unique, and very important for writing parsers.
+Именно это делает флаг `y` уникальным, и очень важным при написании парсера.
 
-The `y` flag allows to apply a regular expression (or many of them one-by-one) exactly at the given position and when we understand what's there, we can move on -- step by step examining the text.
+Флаг `y` позволяет проверять регулярное выражение именно на конкретной позиции и двигаться дальше, после того как парсер определит, что именно находится в этой позиции -- шаг за шагом исследуя текст.
 
-Without the flag the regexp engine always searches till the end of the text, that takes time, especially if the text is large. So our parser would be very slow. The `y` flag is exactly the right thing here.
+Без этого флага регулярное выражение будет выполнять поиск до конца текста, что будет занимать время, особенно, если текст большой. Таким образом парсер будет очень медленным. Флаг `y` для подобных задач -- именно то, что нужно.

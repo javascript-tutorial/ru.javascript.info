@@ -30,7 +30,7 @@ As said in the [specification](https://tc39.github.io/ecma262/#sec-jobs-and-job-
 - The queue is first-in-first-out: tasks enqueued first are run first.
 - Execution of a task is initiated only when nothing else is running.
 
-Or, to say that simply, when a promise is ready, its `.then/catch/finally` handlers are put into the queue. They are not executed yet. Javascript engine takes a task from the queue and executes it, when it becomes free from the current code.
+Or, to say that simply, when a promise is ready, its `.then/catch/finally` handlers are put into the queue. They are not executed yet. JavaScript engine takes a task from the queue and executes it, when it becomes free from the current code.
 
 That's why "code finished" in the example above shows first.
 
@@ -54,7 +54,7 @@ Now the order is as intended.
 
 ## Event loop
 
-In-browser Javascript, as well as Node.js, is based on an *event loop*.
+In-browser JavaScript, as well as Node.js, is based on an *event loop*.
 
 "Event loop" is a process when the engine sleeps and waits for events, then reacts on those and sleeps again.
 
@@ -167,7 +167,7 @@ setTimeout(() => promise.catch(err => alert('caught')));
 window.addEventListener('unhandledrejection', event => alert(event.reason));
 ```
 
-Now the unhandled rejction appears again. Why? Because `unhandledrejection` triggers when the microtask queue is complete. The engine examines promises and, if any of them is in "rejected" state, then the event is generated.
+Now the unhandled rejection appears again. Why? Because `unhandledrejection` triggers when the microtask queue is complete. The engine examines promises and, if any of them is in "rejected" state, then the event is generated.
 
 In the example, the `.catch` added by `setTimeout` triggers too, of course it does, but later, after `unhandledrejection` has already occurred.
 

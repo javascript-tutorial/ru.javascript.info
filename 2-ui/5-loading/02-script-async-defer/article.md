@@ -75,14 +75,14 @@ Deferred scripts keep their relative order, just like regular scripts.
 So, if we have a long script first, and then a smaller one, then the latter one waits.
 
 ```html
-<script async src="https://javascript.info/article/script-async-defer/long.js"></script>
-<script async src="https://javascript.info/article/script-async-defer/small.js"></script>
+<script defer src="https://javascript.info/article/script-async-defer/long.js"></script>
+<script defer src="https://javascript.info/article/script-async-defer/small.js"></script>
 ```
 
 ```smart header="The small script downloads first, runs second"
 Browsers scan the page for scripts and download them in parallel, to improve performance. So in the example above both scripts download in parallel. The `small.js` probably makes it first.
 
-But the specification requres scripts to execute in the document order, so it waits for `long.js` to execute.
+But the specification requires scripts to execute in the document order, so it waits for `long.js` to execute.
 ```
 
 ```smart header="The `defer` attribute is only for external scripts"
@@ -92,7 +92,7 @@ The `defer` attribute is ignored if the script has no `src`.
 
 ## async
 
-The `async` attribute means that a script is completely independant:
+The `async` attribute means that a script is completely independent:
 
 - The page doesn't wait for async scripts, the contents is processed and displayed.
 - `DOMContentLoaded` and async scripts don't wait each other:
@@ -120,7 +120,7 @@ So, if we have several `async` scripts, they may execute in any order. Whatever 
 2. `DOMContentLoaded` may happen both before and after `async`, no guarantees here.
 3. Async scripts don't wait for each other. A smaller script `small.js` goes second, but probably loads before `long.js`, so runs first. That's called a "load-first" order.
 
-Async scripts are great when we integrate an independant third-party script into the page: counters, ads and so on.
+Async scripts are great when we integrate an independent third-party script into the page: counters, ads and so on.
 
 ```html
 <script async src="https://google-analytics.com/analytics.js"></script>
@@ -129,7 +129,7 @@ Async scripts are great when we integrate an independant third-party script into
 
 ## Dynamic scripts
 
-We can also create a script dynamically using Javascript:
+We can also create a script dynamically using JavaScript:
 
 ```js run
 let script = document.createElement('script');
