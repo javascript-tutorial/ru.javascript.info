@@ -263,7 +263,7 @@ alert( '12345678901234567890123456789123456789z'.match(/(\d+?)*$/) );
 Откат в этой логике в принципе не предусмотрен, поскольку предпросмотр "откатываться" не умеет. То есть, если предпросмотр нашёл 5 `pattern:a+`, и в результате поиск не удался, то он не будет откатываться на 4 повторения.
 
 ```smart
-Больше о взаимодействиях сверхжадных кватификаторов и предпросмотра вы можете найти в статьях [Regex: Emulate Atomic Grouping (and Possessive Quantifiers) with LookAhead](http://instanceof.me/post/52245507631/regex-emulate-atomic-grouping-with-lookahead) и [Mimicking Atomic Groups](http://blog.stevenlevithan.com/archives/mimic-atomic-groups).
+Больше о взаимодействиях сверхжадных квантификаторов и предпросмотра вы можете найти в статьях [Regex: Emulate Atomic Grouping (and Possessive Quantifiers) with LookAhead](http://instanceof.me/post/52245507631/regex-emulate-atomic-grouping-with-lookahead) и [Mimicking Atomic Groups](http://blog.stevenlevithan.com/archives/mimic-atomic-groups).
 ```
 
 Такой метод нивелирует проблему.
@@ -283,7 +283,7 @@ let badInput = `<tag a=b  a=b  a=b  a=b  a=b  a=b  a=b  a=b
   a=b  a=b  a=b  a=b  a=b  a=b  a=b  a=b  a=b  a=b  a=b  a=b  a=b`;
 
 alert( goodInput.match(fixedReg) ); // <a test="<>" href="#">, <b>
-alert( badInput.match(fixedReg) ); // null (нет резульатов, отработало быстро!)
+alert( badInput.match(fixedReg) ); // null (нет результатов, отработало быстро!)
 ```
 
 Отлично, всё работает! Нашло как длинный тег  `match:<a test="<>" href="#">`, так и одинокий `match:<b>`, и (!) не "вешает" интерпретатор при некорректных данных.
