@@ -32,7 +32,7 @@ class HoverIntent {
   onMouseOver(event) {
 
     if (this.isOverElement) {
-      // Мы над элементом, игнорируем событие,
+      // Игнорируем событие над элементом,
       // так как мы уже измеряем скорость
       return;
     }
