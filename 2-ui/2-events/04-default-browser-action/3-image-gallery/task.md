@@ -10,4 +10,4 @@ importance: 5
 
 [iframe src="solution" height=600]
 
-P.S. Применяйте делегирование.
+P.S. Используйте делегирование.
