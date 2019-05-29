@@ -2,8 +2,8 @@ importance: 5
 
 ---
 
-# Output even numbers in the loop
+# Выведите чётные числа
 
-Use the `for` loop to output even numbers from `2` to `10`.
+При помощи цикла `for` выведите чётные числа от `2` до `10`.
 
 [demo]
