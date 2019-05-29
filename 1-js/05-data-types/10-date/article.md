@@ -1,89 +1,89 @@
 # Дата и время
 
-Представляем вам ещё один встроенный объект: [Date](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date). В нём хранятся дата и время, а также методы их обработки.
+Рассмотрим новый встроенный объект: [Date](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date). Он хранит в себе дату, время и предоставляет методы управления датой/временем.
 
-Например, данный объект можно использовать для хранения времени создания/изменения, для измерения времени или просто для вывода текущей даты.
+Например, его можно использовать для хранения времени создания/изменения, для измерения времени или просто для вывода текущей даты.
 
 ## Создание
 
-Для создания нового объекта `Date` нужно вызвать конструктор `new Date()`:
+Для создания нового объекта `Date` нужно вызвать конструктор `new Date()` с одним из следующих аргументов:
 
 `new Date()`
-: При отсутствии аргументов объект `Date` создаётся на текущие дату и время:
+: Без аргументов -- создаёт объект `Date` на текущие дату и время:
 
     ```js run
     let now = new Date();
-    alert( now ); // текущие дата и время
+    alert( now ); // показывает текущие дату и время
     ```
 
 `new Date(milliseconds)`
-: В аргумент можно передать количество миллисекунд (одна тысячная секунды), что поместит в созданный объект `Date`, прошедш   object with the time equal to number of milliseconds (1/1000 of a second) passed after the Jan 1st of 1970 UTC+0.
+: Создаёт объект `Date` с временем, равным количеству миллисекунд (тысячная доля секунды), прошедших с 1 января 1970 года UTC+0.    
 
     ```js run
-    // 0 means 01.01.1970 UTC+0
+    // 0 означает 01.01.1970 UTC+0
     let Jan01_1970 = new Date(0);
     alert( Jan01_1970 );
 
-    // now add 24 hours, get 02.01.1970 UTC+0
+    // теперь добавим 24 часа и получим 02.01.1970 UTC+0
     let Jan02_1970 = new Date(24 * 3600 * 1000);
     alert( Jan02_1970 );
     ```
 
-    Количество миллисекунд, прошедшее с начала 1970 года, обозначается термином *отметка времени* (англ. timestamp).
+    Количество миллисекунд, прошедших с начала 1970 года, называется *отметкой времени* (англ. timestamp).
 
-    It's a lightweight numeric representation of a date. We can always create a date from a timestamp using `new Date(timestamp)` and convert the existing `Date` object to a timestamp using the `date.getTime()` method (see below).
+    Это легковесное численное представление даты. Всегда можно получить дату из таймстемпа с помощью `new Date(timestamp)` и привести существующий объект `Date` к таймстемпу, используя метод `date.getTime()` (см. ниже).
 
 `new Date(datestring)`
-: If there is a single argument, and it's a string, then it is parsed with the `Date.parse` algorithm (see below).
+: Если аргумент всего один, и это строка, то она обрабатывается(?) алгоритмом `Date.parse` (см. ниже).
 
 
     ```js run
     let date = new Date("2017-01-26");
     alert(date);
-    // The time portion of the date is assumed to be midnight GMT and 
-    // is adjusted according to the timezone the code is run in
-    // So the result could be
-    // Thu Jan 26 2017 11:00:00 GMT+1100 (Australian Eastern Daylight Time)
-    // or
-    // Wed Jan 25 2017 16:00:00 GMT-0800 (Pacific Standard Time)
+    // Временная составляющая даты по умолчанию соответствует полночи по Гринвичу и 
+    // смещается в соответствии с часовой зоной места выполнения кода
+    // Так что в результате можно получить
+    // Thu Jan 26 2017 11:00:00 GMT+1100 (восточноавстралийское время)
+    // или
+    // Wed Jan 25 2017 16:00:00 GMT-0800 (тихоокеанское время)
     ```
 
 `new Date(year, month, date, hours, minutes, seconds, ms)`
-: Create the date with the given components in the local time zone. Only two first arguments are obligatory.
+: Создаёт объект `Date` с заданными компонентами в местной временной зоне. Обязательны только первые два аргумента.
 
-    Note:
+    Учтите:
 
-    - The `year` must have 4 digits: `2013` is okay, `98` is not.
-    - The `month` count starts with `0` (Jan), up to `11` (Dec).
-    - The `date` parameter is actually the day of month, if absent then `1` is assumed.
-    - If `hours/minutes/seconds/ms` is absent, they are assumed to be equal `0`.
+    - `year` должен состоять из четырёх цифр: значение `2013` корректно, `98` -- нет.
+    - `month` начинается с `0` (январь) по `11` (декабрь).
+    - Параметр `date` здесь представляет собой день месяца. Если параметр не задан, то принимается значение `1`.
+    - Если параметры `hours/minutes/seconds/ms` отсутствуют, их значением становится `0`.
 
-    For instance:
+    Например:
 
     ```js
     new Date(2011, 0, 1, 0, 0, 0, 0); // // 1 Jan 2011, 00:00:00
-    new Date(2011, 0, 1); // the same, hours etc are 0 by default
+    new Date(2011, 0, 1); // то же самое, так как часы и проч. равны 0
     ```
 
-    The minimal precision is 1 ms (1/1000 sec):
+    Минимальная точность – 1 мс (1/1000 секунды):
 
     ```js run
     let date = new Date(2011, 0, 1, 2, 3, 4, 567);
     alert( date ); // 1.01.2011, 02:03:04.567
     ```
 
-## Access date components
+## Получение компонентов даты
 
-Из объекта `Date` можно выделить и более конкретные значения, такие как год или месяц. Для этого используется множество методов, но если их категоризировать, то они легко запоминаются:
+Существует множество методов получения года, месяца и т.д. из объекта `Date`. Но если их классифицировать, то они легко запоминаются:
 
 [getFullYear()](mdn:js/Date/getFullYear)
-: Возвращаются четыре цифры, соответствующие году.
+: Получаем год (4 цифры)
 
 [getMonth()](mdn:js/Date/getMonth)
-: Получаем порядковый номер месяца **от 0 до 11**.
+: Получаем месяц, **от 0 до 11**.
 
 [getDate()](mdn:js/Date/getDate)
-: Возвращается день месяца, от 1 до 31, что несколько противоречит названию метода.
+: Получаем день месяца, от 1 до 31, что несколько противоречит названию метода.
 
 [getHours()](mdn:js/Date/getHours), [getMinutes()](mdn:js/Date/getMinutes), [getSeconds()](mdn:js/Date/getSeconds), [getMilliseconds()](mdn:js/Date/getMilliseconds)
 : Получаем, соответственно, часы, минуты, секунды или миллисекунды.
@@ -95,7 +95,7 @@
 Кроме того, можно получить определённый день недели:
 
 [getDay()](mdn:js/Date/getDay)
-: Возвращается значение в пределах от `0` (воскресенье) до `6` (суббота). Несмотря на то, что в ряде стран за первый день недели принят понедельник, в JavaScript начало недели приходится на воскресенье.
+: Возвращает день недели от `0` (воскресенье) до `6` (суббота). Несмотря на то, что в ряде стран за первый день недели принят понедельник, в JavaScript начало недели приходится на воскресенье.
 
 **Все вышеперечисленные методы возвращают значения в соответствии с местной часовой зоной.**
 
