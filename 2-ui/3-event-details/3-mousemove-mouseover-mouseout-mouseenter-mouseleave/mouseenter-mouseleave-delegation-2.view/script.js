@@ -11,7 +11,7 @@ table.onmouseover = function(event) {
   let target = event.target.closest('td');
   if (!target || !table.contains(target)) return;
 
-  // даа... мы внутри <td> сейчас
+  // отлично, мы сейчас внутри <td>
   currentElem = target;
   target.style.background = 'pink';
 };
