@@ -118,7 +118,7 @@ function readFile(input) {
 
 Помимо методов и свойств `Blob`, объекты `File` также имеют свойства `fileName` и `lastModified` плюс внутреннюю возможность чтения из файловой системы. Обычно мы получаем `File` объекты из пользовательского ввода, такого как `<input>` или drag'n'drop.
 
-Объекты `FileReader` могут читать из файла или Blob в одном из трех форматов:
+Объекты `FileReader` могут читать из файла или Blob в одном из трёх форматов:
 - Строка (`readAsText`).
 - `ArrayBuffer` (`readAsArrayBuffer`).
 - Данные в формате base64 для URL (`readAsDataURL`).
