@@ -1,6 +1,6 @@
-The solution is actually pretty simple.
+Решение задачи довольно простое.
 
-Take a look at this:
+Посмотрите:
 
 ```js
 Promise.all(
@@ -10,11 +10,11 @@ Promise.all(
 )
 ```
 
-Here we have an array of `fetch(...)` promises that goes to `Promise.all`.
+Тут у нас массив, состоящий из промисов `fetch(...)`, который передаётся в `Promise.all`.
 
-We can't change the way `Promise.all` works: if it detects an error, then it rejects with it. So we need to prevent any error from occurring. Instead, if a `fetch` error happens, we need to treat it as a "normal" result.
+Мы не можем поменять работу `Promise.all`: при ошибке в любом из входящих в него промисов - весь Promise.all завершится с этой ошибкой.
 
-Here's how:
+Вот так:
 
 ```js
 Promise.all(
@@ -24,18 +24,18 @@ Promise.all(
 )
 ```
 
-In other words, the `.catch` takes an error for all of the promises and returns it normally. By the rules of how promises work, if a `.then/catch` handler returns a value (doesn't matter if it's an error object or something else), then the execution continues the "normal" flow.
+Другими словами, `.catch` перехватывает ошибки в промисах и возвращает их как нормальный результат. Согласно документации, если `.then/catch` вернёт значение (не важно, ошибка это или что-то другое), тогда выполнение продолжится в "нормальном" потоке.
 
-So the `.catch` returns the error as a "normal" result into the outer `Promise.all`.
+Итак, `.catch` вернёт ошибку как "нормальный" результат в `Promise.all`.
 
-This code:
+Этот код:
 ```js
 Promise.all(
   urls.map(url => fetch(url))
 )
 ```
 
-Can be rewritten as:
+Можно переписать так:
 
 ```js
 Promise.all(

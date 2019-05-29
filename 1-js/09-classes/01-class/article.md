@@ -168,12 +168,12 @@ Although, there are important differences.
     alert(User); // class User { ... }
     ```
 
-2. Class methods are non-enumerable
+2. Class methods are non-enumerable.
     A class definition sets `enumerable` flag to `false` for all methods in the `"prototype"`.
 
     That's good, because if we `for..in` over an object, we usually don't want its class methods.
 
-3. Classes always `use strict`
+3. Classes always `use strict`.
     All code inside the class construct is automatically in strict mode.
 
 
@@ -232,7 +232,7 @@ new User().sayHi(); // Hello
 
 ## Getters/setters, other shorthands
 
-Classes also include getters/setters, generators, computed properties etc.
+Just like literal objects, classes may include getters/setters, generators, computed properties etc.
 
 Here's an example for `user.name` implemented using `get/set`:
 
@@ -241,7 +241,7 @@ class User {
 
   constructor(name) {
     // invokes the setter
-    this._name = name;
+    this.name = name;
   }
 
 *!*
@@ -325,24 +325,6 @@ The property is not placed into `User.prototype`. Instead, it is created by `new
 
 ## Summary
 
-JavaScript provides many ways to create a class.
-
-First, as per the general object-oriented terminology, a class is something that provides "object templates", allows to create same-structured objects.
-
-When we say "a class", that doesn't necessary means the `class` keyword.
-
-This is a class:
-
-```js
-function User(name) {
-  this.sayHi = function() {
-    alert(name);
-  }
-}
-```
-
-...But in most cases `class` keyword is used, as it provides great syntax and many additional features.
-
 The basic class syntax looks like this:
 
 ```js
@@ -363,6 +345,6 @@ class MyClass {
 }
 ```
 
-`MyClass` is technically a function, while methods are written to `MyClass.prototype`.
+`MyClass` is technically a function (the one that we provide as `constructor`), while methods, getters and settors are written to `MyClass.prototype`.
 
 In the next chapters we'll learn more about classes, including inheritance and other features.

@@ -24,7 +24,7 @@ const text = "Hello, world";
 document.querySelector('.hello').innerHTML = text;
 ```
 
-✅ ХОРОШО (переведен комментарий):
+✅ ХОРОШО (переведён комментарий):
 
 ```js
 // Пример
@@ -32,7 +32,7 @@ const text = 'Hello, world';
 document.querySelector('.hello').innerHTML = text;
 ```
 
-✅ ТОЖЕ ОК (переведен комментарий и текст):
+✅ ТОЖЕ ОК (переведён комментарий и текст):
 
 ```js
 // Пример
@@ -76,21 +76,18 @@ document.querySelector('.hello').innerHTML = text;
 | Оригинальный термин    | Перевод                                                                        |
 | :--------------------- | :----------------------------------------------------------------------------- |
 | Arrow function         | Стрелочная функция                                                             |
-| Backtick               | Обратный апостроф                                                              |
-| Bitwise operator       | (по)битовый оператор/операция?                                                 |
-| Breakpoint             | Точка останова                                                                 |
-| Comparison             | Операция сравнения (а не сравнивания)                                          |
-| Construct              | Конструкция (switch называется то конструкцией, то оператором. Как правильно?) |
-| Conversion             | Конвертирование (а не конвертация)                                             |
-| Expression             | Выражение                                                                      |
-| Function expression    | Функциональное выражение                                                       |
-| JavaScript             | vs Javascript                                                                  |
-| Left click/right click | Левый/правый щелчок/клик? Пример: кликните/щёлкните? левой кнопкой мыши        |
-| More in / Details in   | Подробнее / Подробности?                                                       |
-| Script                 | Скрипт (а не сценарий)                                                         |
-| Statement              | Инструкция (оператор?)                                                         |
+| Backtick               | Обратная кавычка                                                              |
+| Bitwise operator       | Побитовый оператор                                              |
+| Breakpoint             | Точка останова     |                                              
+| Character class        | Символьный класс  |
+| Comparison             | Операция сравнения                                     |
+| Construct              | Конструкция                                     |
+| Conversion             | Конвертирование                                            |
+| Left click/right click | Левый/правый клик? Кликните? левой кнопкой мыши        |
+| More in / Details in   | Подробнее в                                                      |
+| Script                 | Скрипт                                                        |
+| Statement              | Инструкция                                                       |
 | Summary                | Итого                                                                          |
-
 
 ## Ресурсы по переводу
 

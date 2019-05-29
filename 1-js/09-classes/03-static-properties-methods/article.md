@@ -1,9 +1,9 @@
 
-# Static properties and methods
+# Статические свойства и методы
 
-We can also assign a method to the class function, not to its `"prototype"`. Such methods are called *static*.
+Мы также можем присвоить метод функции-классу, а не её прототипу (`"prototype"`). Такие методы называются *статическими*.
 
-An example:
+Пример:
 
 ```js run
 class User {
@@ -17,7 +17,7 @@ class User {
 User.staticMethod(); // true
 ```
 
-That actually does the same as assigning it as a function property:
+Это фактически то же самое, что присвоить метод как свойство функции:
 
 ```js
 function User() { }
@@ -27,11 +27,11 @@ User.staticMethod = function() {
 };
 ```
 
-The value of `this` inside `User.staticMethod()` is the class constructor `User` itself (the "object before dot" rule).
+Значением `this` внутри `User.staticMethod()` является сам конструктор класса `User` (правило "объект до точки").
 
-Usually, static methods are used to implement functions that belong to the class, but not to any particular object of it.
+Обычно статические методы используются для реализации функций, принадлежащих классу, но не к каким-то конкретным его объектам.
 
-For instance, we have `Article` objects and need a function to compare them. The natural choice would be `Article.compare`, like this:
+Например, есть объекты статей `Article` и нужна функция для их сравнения. Естественным выбором будет такой метод `Article.compare`:
 
 ```js run
 class Article {
@@ -47,10 +47,10 @@ class Article {
 */!*
 }
 
-// usage
+// использование
 let articles = [
-  new Article("Mind", new Date(2019, 1, 1)),
-  new Article("Body", new Date(2019, 0, 1)),
+  new Article("HTML", new Date(2019, 1, 1)),
+  new Article("CSS", new Date(2019, 0, 1)),
   new Article("JavaScript", new Date(2019, 11, 1))
 ];
 
@@ -58,20 +58,20 @@ let articles = [
 articles.sort(Article.compare);
 */!*
 
-alert( articles[0].title ); // Body
+alert( articles[0].title ); // CSS
 ```
 
-Here `Article.compare` stands "over" the articles, as a means to compare them. It's not a method of an article, but rather of the whole class.
+Здесь метод `Article.compare` стоит "над" статьями, как способ их сравнения. Это метод не отдельной статьи, а всего класса.
 
-Another example would be a so-called "factory" method. Imagine, we need few ways to create an article:
+Другим примером может быть так называемый "фабричный" метод. Представим, что нам нужно создавать статьи различными способами:
 
-1. Create by given parameters (`title`, `date` etc).
-2. Create an empty article with today's date.
+1. Создание через заданные параметры (`title`, `date` и т. д.).
+2. Создание пустой статьи с сегодняшней датой.
 3. ...
 
-The first way can be implemented by the constructor. And for the second one we can make a static method of the class.
+Первый способ может быть реализован через конструктор. А для второго можно использовать статический метод класса.
 
-Like `Article.createTodays()` here:
+Такой как `Article.createTodays()` в следующем примере:
 
 ```js run
 class Article {
@@ -82,52 +82,52 @@ class Article {
 
 *!*
   static createTodays() {
-    // remember, this = Article
-    return new this("Today's digest", new Date());
+    // помним, что this = Article
+    return new this("Сегодняшний дайджест", new Date());
   }
 */!*
 }
 
 let article = Article.createTodays();
 
-alert( article.title ); // Todays digest
+alert( article.title ); // Сегодняшний дайджест
 ```
 
-Now every time we need to create a today's digest, we can call `Article.createTodays()`. Once again, that's not a method of an article, but a method of the whole class.
+Теперь каждый раз, когда нам нужно создать сегодняшний дайджест, нужно вызывать `Article.createTodays()`. Ещё раз, это не метод одной статьи, а метод всего класса.
 
-Static methods are also used in database-related classes to search/save/remove entries from the database, like this:
+Статические методы также используются в классах, относящихся к базам данных, для поиска/сохранения/удаления вхождений в базу данных, например:
 
 ```js
-// assuming Article is a special class for managing articles
-// static method to remove the article:
+// предположим, что Article - это специальный класс для управления статьями
+// статический метод для удаления статьи:
 Article.remove({id: 12345});
 ```
 
-## Static properties
+## Статические свойства
 
 [recent browser=Chrome]
 
-Static properties are also possible, just like regular class properties:
+Статические свойства также возможны, как и обычные свойства класса:
 
 ```js run
 class Article {
-  static publisher = "Ilya Kantor";
+  static publisher = "Илья Кантор";
 }
 
-alert( Article.publisher ); // Ilya Kantor
+alert( Article.publisher ); // Илья Кантор
 ```
 
-That is the same as a direct assignment to `Article`:
+Это то же самое, что и прямое присваивание `Article`:
 
 ```js
-Article.publisher = "Ilya Kantor";
+Article.publisher = "Илья Кантор";
 ```
 
-## Statics and inheritance
+## Статика и наследование
 
-Statics are inherited, we can access `Parent.method` as `Child.method`.
+Статика наследуется, мы можем получить доступ к `Parent.method`, используя `Child.method`.
 
-For instance, `Animal.compare` in the code below is inherited and accessible as `Rabbit.compare`:
+Например, метод `Animal.compare` в коде ниже наследуется и доступен как `Rabbit.compare`:
 
 ```js run
 class Animal {
@@ -139,7 +139,7 @@ class Animal {
 
   run(speed = 0) {
     this.speed += speed;
-    alert(`${this.name} runs with speed ${this.speed}.`);
+    alert(`${this.name} бежит со скоростью ${this.speed}.`);
   }
 
 *!*
@@ -150,59 +150,59 @@ class Animal {
 
 }
 
-// Inherit from Animal
+// Наследуется от Animal
 class Rabbit extends Animal {
   hide() {
-    alert(`${this.name} hides!`);
+    alert(`${this.name} прячется!`);
   }
 }
 
 let rabbits = [
-  new Rabbit("White Rabbit", 10),
-  new Rabbit("Black Rabbit", 5)
+  new Rabbit("Белый кролик", 10),
+  new Rabbit("Чёрный кролик", 5)
 ];
 
 *!*
 rabbits.sort(Rabbit.compare);
 */!*
 
-rabbits[0].run(); // Black Rabbit runs with speed 5.
+rabbits[0].run(); // Чёрный кролик бежит со скоростью 5.
 ```
 
-Now we can call `Rabbit.compare` assuming that the inherited `Animal.compare` will be called.
+Мы можем вызвать `Rabbit.compare`, имея ввиду, что будет вызван унаследованный `Animal.compare`.
 
-How does it work? Again, using prototypes. As you might have already guessed, extends also gives `Rabbit` the `[[Prototype]]` reference to `Animal`.
+Как это работает? Снова с использованием прототипов. Как вы уже могли предположить, `extends` даёт Rabbit ссылку `[[Prototype]]` на Animal.
 
 
 ![](animal-rabbit-static.png)
 
-So, `Rabbit` function now inherits from `Animal` function. And `Animal` function normally has `[[Prototype]]` referencing `Function.prototype`, because it doesn't `extend` anything.
+Итак, функция `Rabbit` теперь наследуется от функции `Animal`. А функция `Animal` имеет `[[Prototype]]`, равный `Function.prototype`, потому что не расширяет (`extend`) что-либо.
 
-Here, let's check that:
+Давайте это проверим:
 
 ```js run
 class Animal {}
 class Rabbit extends Animal {}
 
-// for static properties and methods
+// для статических свойств и методов
 alert(Rabbit.__proto__ === Animal); // true
 
-// and the next step is Function.prototype
+// а ещё шаг наверх ведёт к Function.prototype
 alert(Animal.__proto__ === Function.prototype); // true
 
-// that's in addition to the "normal" prototype chain for object methods
+// обычная цепочка прототипов для методов объектов
 alert(Rabbit.prototype.__proto__ === Animal.prototype);
 ```
 
-This way `Rabbit` has access to all static methods of `Animal`.
+Таким образом `Rabbit` имеет доступ ко всем статическим методам `Animal`.
 
-## Summary
+## Итого
 
-Static methods are used for the functionality that doesn't relate to a concrete class instance, doesn't require an instance to exist, but rather belongs to the class as a whole, like `Article.compare` -- a generic method to compare two articles.
+Статические методы используются для функциональности, которая относится не к конкретному объекту класса, не требует существования этого объекта, а скорее принадлежит полностью классу, как например `Article.compare` -- универсальный метод для сравнения двух статей.
 
-Static properties are used when we'd like to store class-level data, also not bound to an instance.
+Статические свойства используются в тех случаях, когда мы хотели бы сохранить данные на уровне класса, а не какого-то одного объекта.
 
-The syntax is:
+Синтаксис:
 
 ```js
 class MyClass {
@@ -214,13 +214,13 @@ class MyClass {
 }
 ```
 
-That's technically the same as assigning to the class itself:
+Технически это то же самое, что и присвоение классу:
 
 ```js
 MyClass.property = ...
 MyClass.method = ...
 ```
 
-Static properties are inherited.
+Статические свойства наследуются.
 
-Technically, for `class B extends A` the prototype of the class `B` itself points to `A`: `B.[[Prototype]] = A`. So if a field is not found in `B`, the search continues in `A`.
+Технически, для `class B extends A` прототип класса `B` указывает на `A`: `B.[[Prototype]] = A`. Таким образом, если поле не найдено в `B`, поиск продолжается в `A`.

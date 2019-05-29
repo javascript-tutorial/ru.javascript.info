@@ -1,6 +1,6 @@
-Let's walk the array items:
-- For each item we'll check if the resulting array already has that item.
-- If it is so, then ignore, otherwise add to results.
+Давайте пройдёмся по элементам массива:
+- Для каждого элемента мы проверим, есть ли он в массиве с результатом.
+- Если есть, то игнорируем его, а если нет - добавляем к результатам.
 
 ```js run demo
 function unique(arr) {
@@ -15,25 +15,25 @@ function unique(arr) {
   return result;
 }
 
-let strings = ["Hare", "Krishna", "Hare", "Krishna",
-  "Krishna", "Krishna", "Hare", "Hare", ":-O"
+let strings = ["кришна", "кришна", "харе", "харе",
+  "харе", "харе", "кришна", "кришна", ":-O"
 ];
 
-alert( unique(strings) ); // Hare, Krishna, :-O
+alert( unique(strings) ); // кришна, харе, :-O
 ```
 
-The code works, but there's a potential performance problem in it.
+Код работает, но в нём есть потенциальная проблема с производительностью.
 
-The method `result.includes(str)` internally walks the array `result` and compares each element against `str` to find the match.
+Метод `result.includes(str)` внутри себя обходит массив `result` и сравнивает каждый элемент с `str`, чтобы найти совпадение.
 
-So if there are `100` elements in `result` and no one matches `str`, then it will walk the whole `result` and do exactly `100` comparisons. And if `result` is large, like `10000`, then there would be `10000` comparisons.
+Таким образом, если `result` содержит `100` элементов и ни один не совпадает со `str`, тогда он обойдёт весь `result` и сделает ровно `100` сравнений. А если `result` большой, например, `10000`, то будет произведено `10000` сравнений.
 
-That's not a problem by itself, because JavaScript engines are very fast, so walk `10000` array is a matter of microseconds.
+Само по себе это не проблема, потому что движки JavaScript очень быстрые, поэтому обход `10000` элементов массива занимает считанные микросекунды.
 
-But we do such test for each element of `arr`, in the `for` loop.
+Но мы делаем такую проверку для каждого элемента `arr` в цикле `for`.
 
-So if `arr.length` is `10000` we'll have something like `10000*10000` = 100 millions of comparisons. That's a lot.
+Поэтому, если `arr.length` равен `10000`, у нас будет что-то вроде `10000*10000` = 100 миллионов сравнений. Это многовато.
 
-So the solution is only good for small arrays.
+Вот почему данное решение подходит только для небольших массивов.
 
-Further in the chapter <info:map-set-weakmap-weakset> we'll see how to optimize it.
+Далее в главе <info:map-set-weakmap-weakset> мы увидим, как его оптимизировать.
