@@ -1,70 +1,70 @@
 # ArrayBuffer, binary arrays
 
-In web-development we meet binary data mostly while dealing with files (create, upload, download). Another typical use case is image processing.
+В сфере веб-разработки мы встречаемся с бинарными данными чаще всего тогда, когда требуется выполнить какие-то действия над файлами (создать, загрузить или скачать). Другим типичным примером является обработка изображений.
 
-That's all possible in JavaScript, and binary operations are high-performant.
+Всё это возможно осуществить на JavaScript. Более того, операции над бинарными данными являются высокопроизводительными.
 
-Although, there's a bit of confusion, because there are many classes. To name a few:
-- `ArrayBuffer`, `Uint8Array`, `DataView`, `Blob`, `File`, etc.
+Обилие классов для работы с бинарными данными может вас немного запутать. Назовём некоторые из них:
+- `ArrayBuffer`, `Uint8Array`, `DataView`, `Blob`, `File` и т.д.
 
-Binary data in JavaScript is implemented in a non-standard way, compared to other languages. But when we sort things out, everything becomes fairly simple.
+Работа с бинарными данными в JavaScript реализована нестандартно по сравнению с другими языками программирования. Но когда мы в этом разберёмся, то всё окажется весьма просто.
+объект/класс?
+**Базовый объект для работы с бинарными данными `ArrayBuffer` -- представляет собой ссылку на непрерывную область памяти фиксированной длины.**
 
-**The basic binary object is `ArrayBuffer` -- a reference to a fixed-length contiguous memory area.**
-
-We create it like this:
+Вот так мы можем создать его экземпляр:
 ```js run
-let buffer = new ArrayBuffer(16); // create a buffer of length 16
+let buffer = new ArrayBuffer(16); // создаётся буфер длиной 16 байт
 alert(buffer.byteLength); // 16
 ```
 
-This allocates a contiguous memory area of 16 bytes and pre-fills it with zeroes.
+Инструкция выше выделяет непрерывную область памяти размером 16 байт и заполняет её нулями.
 
-```warn header="`ArrayBuffer` is not an array of something"
-Let's eliminate a possible source of confusion. `ArrayBuffer` has nothing in common with `Array`:
-- It has a fixed length, we can't increase or decrease it.
-- It takes exactly that much space in the memory.
-- To access individual bytes, another "view" object is needed, not `buffer[index]`.
+```warn header="`ArrayBuffer` -- это не массив!"
+Давайте внесём ясность, чтобы не запутаться. `ArrayBuffer` не имеет ничего общего с `Array`:
+- его длина фиксирована, мы не можем увеличивать или уменьшать её.
+- `ArrayBuffer` занимает ровно столько места в памяти, сколько указывается при создании.
+- Для доступа к отдельным байтам нужен вспомогательный объект-представление, `buffer[index]` не сработает.
 ```
 
-`ArrayBuffer` is a memory area. What's stored in it? It has no clue. Just a raw sequence of bytes.
+`ArrayBuffer` -- это область памяти. Что там хранится? Без понятия. Просто необработанный массив байтов.
 
-**To manipulate an `ArrayBuffer`, we need to use a "view" object.**
+**Для работы с `ArrayBuffer` нам нужен специальный объект для представления данных.**
 
-A view object does not store anything on it's own. It's the "eyeglasses" that give an interpretation of the bytes stored in the `ArrayBuffer`.
+Такие объекты не хранят какое-то собственное содержимое. Они интерпретируют бинарные данные, хранящиеся в `ArrayBuffer`.
 
-For instance:
+Например:
 
-- **`Uint8Array`** -- treats each byte in `ArrayBuffer` as a separate number, with possible values are from 0 to 255 (a byte is 8-bit, so it can hold only that much). Such value is called a "8-bit unsigned integer".
-- **`Uint16Array`** -- treats every 2 bytes as an integer, with possible values from 0 to 65535. That's called a "16-bit unsigned integer".
-- **`Uint32Array`** -- treats every 4 bytes as an integer, with possible values from 0 to 4294967295. That's called a "32-bit unsigned integer".
-- **`Float64Array`** -- treats every 8 bytes as a floating point number with possible values from <code>5.0x10<sup>-324</sup></code> to <code>1.8x10<sup>308</sup></code>.
+- **`Uint8Array`** -- представляет каждый байт в `ArrayBuffer` как отдельное число; возможные значения находятся в промежутке между 0 и 255 (в байте 8 бит, отсюда такой набор значений). Такие значения называются "8-битное беззнаковое целое".
+- **`Uint16Array`** -- представляет каждые 2 байта в `ArrayBuffer` как целое число; возможные значения находятся в промежутке между 0 и 65535. Такие значения называются "16-битное беззнаковое целое".
+- **`Uint32Array`** -- представляет каждые 4 байта в `ArrayBuffer` как целое число; возможные значения находятся в промежутке между 0 и 4294967295. Такие значения называются "32-битное беззнаковое целое".
+- **`Float64Array`** -- представляет каждые 8 байт в `ArrayBuffer` как число с плавающей точкой; возможные значения находятся в промежутке между <code>5.0x10<sup>-324</sup></code> и <code>1.8x10<sup>308</sup></code>.
 
-So, the binary data in an `ArrayBuffer` of 16 bytes can be interpreted as 16 "tiny numbers", or 8 bigger numbers (2 bytes each), or 4 even bigger (4 bytes each), or 2 floating-point values with high precision (8 bytes each).
+Таким образом, бинарные данные из `ArrayBuffer` размером 16 байт могут быть представлены как 16 чисел маленькой разрядности или как 8 чисел большей разрядности (по 2 байта каждое), или как 4 числа ещё большей разрядности (по 4 байта каждое), или как 2 числа с плавающей точкой (по 8 байт каждое), позволяющие проводить вычисления с высокой точностью.
 
 ![](arraybuffer-views.png)
 
-`ArrayBuffer` is the core object, the root of everything, the raw binary data.
+`ArrayBuffer` -- это корневой объект, основа всего, необработанные бинарные данные.
 
-But if we're going to write into it, or iterate over it, basically for almost any operation – we must use a view, e.g:
+Но если мы собираемся что-то записать в него или пройтись по его содержимому, да и вообще для любых действий мы должны использовать какой-то объект-представление, например:
 
 ```js run
-let buffer = new ArrayBuffer(16); // create a buffer of length 16
+let buffer = new ArrayBuffer(16); // создаётся буфер длиной 16 байт
 
 *!*
-let view = new Uint32Array(buffer); // treat buffer as a sequence of 32-bit integers
+let view = new Uint32Array(buffer); // представим содержимое как последовательность 32-битных целых чисел
 
-alert(Uint32Array.BYTES_PER_ELEMENT); // 4 bytes per integer
+alert(Uint32Array.BYTES_PER_ELEMENT); // 4 байта на каждое целое число
 */!*
 
-alert(view.length); // 4, it stores that many integers
-alert(view.byteLength); // 16, the size in bytes
+alert(view.length); // 4, именно столько чисел сейчас хранится в буфере
+alert(view.byteLength); // 16, размер содержимого в байтах
 
-// let's write a value
+// давайте запишем какое-нибудь значение
 view[0] = 123456;
 
-// iterate over values
+// теперь пройдёмся по всем значениям
 for(let num of view) {
-  alert(num); // 123456, then 0, 0, 0 (4 values total)
+  alert(num); // 123456, потом 0, 0, 0 (всего 4 значения)
 }
 
 ```
@@ -261,7 +261,7 @@ There are also two additional terms:
 - `ArrayBufferView` is an umbrella term for all these kinds of views.
 - `BufferSource` is an umbrella term for `ArrayBuffer` or `ArrayBufferView`.
 
-These are used in descriptions of methods that operate on binary data. `BufferSource` is one of the most common terms, as it means "any kind of binary data" -- an `ArrayBuffer` or a view over it. 
+These are used in descriptions of methods that operate on binary data. `BufferSource` is one of the most common terms, as it means "any kind of binary data" -- an `ArrayBuffer` or a view over it.
 
 
 Here's a cheatsheet:
