@@ -7,7 +7,7 @@
 
 Использовать его достаточно просто:
 
-- Шаг 1: создаем контроллер:
+- Шаг 1: создаём контроллер:
 
     ```js
     let controller = new AbortController();
@@ -48,7 +48,7 @@
 
     Вот и всё: `fetch` получает событие из `signal` и прерывает запрос.
 
-Когда `fetch` прерывается, его промис отклоняется с ошибкой `AbortError`, поэтому мы должны обработать ее:
+Когда `fetch` прерывается, его промис отклоняется с ошибкой `AbortError`, поэтому мы должны обработать её:
 
 ```js run async
 // прервать через 1 секунду
@@ -83,7 +83,7 @@ let fetchJobs = urls.map(url => fetch(url, {
 
 let results = await Promise.all(fetchJobs);
 
-// вызов откуда-нибудь еще:
+// вызов откуда-нибудь ещё:
 // controller.abort() прерывает все вызовы `fetch`
 ```
 
@@ -105,6 +105,6 @@ let fetchJobs = urls.map(url => fetch(url, {
 
 let results = await Promise.all([...fetchJobs, ourJob]);
 
-// вызов откуда-нибудь еще:
+// вызов откуда-нибудь ещё:
 // controller.abort() прерывает все вызовы `fetch` и наши задачи
 ```

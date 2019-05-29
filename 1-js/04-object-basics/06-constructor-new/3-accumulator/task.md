@@ -2,7 +2,7 @@ importance: 5
 
 ---
 
-# Создаем Accumulator
+# Создаём Accumulator
 
 Создайте функцию-конструктор `Accumulator(startingValue)`.
 
