@@ -24,7 +24,7 @@ const text = "Hello, world";
 document.querySelector('.hello').innerHTML = text;
 ```
 
-✅ ХОРОШО (переведен комментарий):
+✅ ХОРОШО (переведён комментарий):
 
 ```js
 // Пример
@@ -32,7 +32,7 @@ const text = 'Hello, world';
 document.querySelector('.hello').innerHTML = text;
 ```
 
-✅ ТОЖЕ ОК (переведен комментарий и текст):
+✅ ТОЖЕ ОК (переведён комментарий и текст):
 
 ```js
 // Пример

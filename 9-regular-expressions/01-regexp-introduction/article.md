@@ -60,7 +60,7 @@ alert( str.search(substr) ); // 2
 
 - регулярное выражение -- `pattern:красный`
 - строка (там где происходит поиск) -- `subject:синий`
-- результат -- `match:зеленый`
+- результат -- `match:зелёный`
 ```
 
 
@@ -75,7 +75,7 @@ alert( str.search(substr) ); // 2
 let search = prompt("Что вы хотите найти?", "h2");
 let regexp = new RegExp(`<${tag}>`);
 
-// по умолчанию найдет <h2>
+// по умолчанию найдёт <h2>
 alert( "<h1> <h2> <h3>".search(regexp));
 ```
 ````
