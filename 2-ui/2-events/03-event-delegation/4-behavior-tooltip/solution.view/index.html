@@ -6,7 +6,7 @@
   <style>
     body {
       height: 2000px;
-      /* make body scrollable, the tooltip should work after the scroll */
+      /* доавим body прокрутку, подсказка должна работать и с прокруткой */
     }
 
     .tooltip {
@@ -25,13 +25,13 @@
 
 <body>
 
-  <p>LaLaLa LaLaLa LaLaLa LaLaLa LaLaLa LaLaLa LaLaLa LaLaLa LaLaLa</p>
-  <p>LaLaLa LaLaLa LaLaLa LaLaLa LaLaLa LaLaLa LaLaLa LaLaLa LaLaLa</p>
+  <p>ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя</p>
+  <p>ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя</p>
 
-  <button data-tooltip="the tooltip is longer than the element">Short button</button>
-  <button data-tooltip="HTML<br>tooltip">One more button</button>
+  <button data-tooltip="эта подсказка должна быть длиннее, чем элемент">Маленькая кнопка</button>
+  <button data-tooltip="HTML<br>подсказка">Ещё одна</button>
 
-  <p>Scroll the page to make buttons appear on the top, check if the tooltips show up correctly.</p>
+  <p>Прокрутите страницу, чтобы кнопки оказались сверху, проверьте правильно ли выводятся подсказки.</p>
 
 
   <script>
@@ -40,25 +40,25 @@
     document.onmouseover = function(event) {
       let target = event.target;
 
-      // if we have tooltip HTML...
+      // получим содержимое подсказки...
       let tooltipHtml = target.dataset.tooltip;
       if (!tooltipHtml) return;
 
-      // ...create the tooltip element
+      // ...создадим элемент подсказки
 
       tooltipElem = document.createElement('div');
       tooltipElem.className = 'tooltip';
       tooltipElem.innerHTML = tooltipHtml;
       document.body.append(tooltipElem);
 
-      // position it above the annotated element (top-center)
+      // спозиционируем его сверху от аннотируемого элемента (top-center)
       let coords = target.getBoundingClientRect();
 
       let left = coords.left + (target.offsetWidth - tooltipElem.offsetWidth) / 2;
-      if (left < 0) left = 0; // don't cross the left window edge
+      if (left < 0) left = 0; // не заезжать за левый край окна
 
       let top = coords.top - tooltipElem.offsetHeight - 5;
-      if (top < 0) { // if crossing the top window edge, show below instead
+      if (top < 0) { // если подсказка не помещается сверху, то отображать её снизу
         top = coords.top + target.offsetHeight + 5;
       }
 
