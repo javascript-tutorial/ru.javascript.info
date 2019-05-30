@@ -2,12 +2,12 @@ importance: 5
 
 ---
 
-# Hide messages with delegation
+# Скрытие сообщения с помощью делегирования
 
-There's a list of messages with removal buttons `[x]`. Make the buttons work.
+Дан список сообщений с кнопкой для удаления `[x]`. Заставьте кнопку работать.
 
-Like this:
+В результате, должно работать вот так:
 
 [iframe src="solution" height=420]
 
-P.S. Should be only one event listener on the container, use event delegation.
+P.S. Используйте делегирование событий. Один обработчик для всего.
