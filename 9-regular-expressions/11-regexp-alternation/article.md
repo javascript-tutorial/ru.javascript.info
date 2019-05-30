@@ -1,56 +1,56 @@
-# Alternation (OR) |
+# Альтернация (или) |
 
-Alternation is the term in regular expression that is actually a simple "OR".
+Альтернация – термин в регулярных выражениях, которому в русском языке соответствует слово «ИЛИ». 
 
-In a regular expression it is denoted with a vertical line character `pattern:|`.
+В регулярных выражениях она обозначается символом вертикальной черты `pattern:|`.
 
-For instance, we need to find programming languages: HTML, PHP, Java or JavaScript.
+Например, нам нужно найти языки программирования: HTML, PHP, Java и JavaScript.
 
-The corresponding regexp: `pattern:html|php|java(script)?`.
+Соответствующее регулярное выражение: `pattern:html|php|java(script)?`.
 
-A usage example:
+Пример использования:
 
 ```js run
 let reg = /html|php|css|java(script)?/gi;
 
-let str = "First HTML appeared, then CSS, then JavaScript";
+let str = "Сначала появился HTML, затем CSS, потом JavaScript";
 
 alert( str.match(reg) ); // 'HTML', 'CSS', 'JavaScript'
 ```
 
-We already know a similar thing -- square brackets. They allow to choose between multiple character, for instance `pattern:gr[ae]y` matches `match:gray` or `match:grey`.
+Мы уже знаем похожую вещь -- квадратные скобки. Они позволяют выбирать между несколькими символами, например  `pattern:gr[ae]y` найдёт `match:gray`, либо `match:grey`.
 
-Square brackets allow only characters or character sets. Alternation allows any expressions. A regexp `pattern:A|B|C` means one of expressions `A`, `B` or `C`.
+Квадратные скобки работают только с символами или последовательностями символов. Альтернация работает с любыми выражениями. Регэксп  `pattern:A|B|C` обозначает поиск одного из выражений: `A`, `B` или `C`.
 
-For instance:
+Например:
 
-- `pattern:gr(a|e)y` means exactly the same as `pattern:gr[ae]y`.
-- `pattern:gra|ey` means `match:gra` or `match:ey`.
+- `pattern:gr(a|e)y` означает точно то же, что и `pattern:gr[ae]y`.
+- `pattern:gra|ey` означает `match:gra` или `match:ey`.
 
-To separate a part of the pattern for alternation we usually enclose it in parentheses, like this: `pattern:before(XXX|YYY)after`.
+Для отделения части паттерна с альтернацией мы обычно заключаем его в скобки, как здесь: `pattern:before(XXX|YYY)after`.
 
-## Regexp for time
+## Регулярное выражение для времени
 
-In previous chapters there was a task to build a regexp for searching time in the form `hh:mm`, for instance `12:00`. But a simple `pattern:\d\d:\d\d` is too vague. It accepts `25:99` as the time (99 seconds is valid, but shouldn't be).
+В предыдущих главах было задание написать регулярное выражение для поиска времени в формате  `чч:мм`, например `12:00`. Но паттерн `pattern:\d\d:\d\d` слишком неопределённый. Он принимает `25:99` за время (99 секунд возможны, но так не должно быть).
 
-How can we make a better one?
+Как сделать лучшее выражение?
 
-We can apply more careful matching. First, the hours:
+Мы можем применить более тщательное сравнение. Во-первых, часы: 
 
-- If the first digit is `0` or `1`, then the next digit can by anything.
-- Or, if the first digit is `2`, then the next must be `pattern:[0-3]`.
+- Если первая цифра `0` или `1`, тогда следующая цифра может быть любой.
+- Или если первая цифра `2`, тогда следующая должна быть `pattern:[0-3]`.
 
-As a regexp: `pattern:[01]\d|2[0-3]`.
+В виде регулярного выражения: `pattern:[01]\d|2[0-3]`.
 
-Next, the minutes must be from `0` to `59`. In the regexp language that means `pattern:[0-5]\d`: the first digit `0-5`, and then any digit.
+Затем, минуты должны быть от `0` до `59`. На языке регулярных выражений это означает `pattern:[0-5]\d`: первая цифра `0-5`, а за ней любая.
 
-Let's glue them together into the pattern: `pattern:[01]\d|2[0-3]:[0-5]\d`.
+Давайте соединим их в одно выражение: `pattern:[01]\d|2[0-3]:[0-5]\d`.
 
-We're almost done, but there's a problem. The alternation `pattern:|` now happens to be between `pattern:[01]\d` and `pattern:2[0-3]:[0-5]\d`.
+Почти готово, но есть проблема. Сейчас альтернация `pattern:|` выбирает между `pattern:[01]\d` и `pattern:2[0-3]:[0-5]\d`.
 
-That's wrong, as it should be applied only to hours `[01]\d` OR `2[0-3]`. That's a common mistake when starting to work with regular expressions.
+Это неправильно, так как она должна примениться только к часам `[01]\d` ИЛИ `2[0-3]`. Это частая ошибка в начале работы с регулярными выражениями. 
 
-The correct variant:
+Правильный вариант:
 
 ```js run
 let reg = /([01]\d|2[0-3]):[0-5]\d/g;
