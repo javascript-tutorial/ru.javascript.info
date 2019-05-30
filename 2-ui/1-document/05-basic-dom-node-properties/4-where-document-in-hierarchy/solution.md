@@ -19,7 +19,7 @@ alert(document.constructor.name); // HTMLDocument
 
 Пройдем по цепочке прототипов по ссылке`__proto__`.
 
-Как мы знаем, методы класса находятся в  `prototype` конструктора. Например, в `HTMLDocument.prototype` находятся методы для объектов типа documents.
+Как мы знаем, методы класса находятся в  `prototype` конструктора. Например, в `HTMLDocument.prototype` находятся методы для объектов типа document.
 
 Также, внутри `prototype` есть ссылка на функцию-конструктор:
 
