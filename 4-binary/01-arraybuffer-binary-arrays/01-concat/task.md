@@ -1,4 +1,4 @@
 
-# Concatenate typed arrays
+# Соедините типизированные массивы
 
-Given an array of `Uint8Array`, write a function `concat(arrays)` that returns a concatenation of them into a single array.
+Предполагается, что дан массив из типизированных массивов `Uint8Array`. Напишите функцию `concat(arrays)`, которая возвращает типизированный массив, получившийся как результат соединения переданных.
