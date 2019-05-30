@@ -8,4 +8,4 @@ importance: 4
 
 Какое место он занимает в DOM-иерархии?
 
-Наследует ли он `Node` или `Element`, или может `HTMLElement`?
+Наследует ли он от `Node` или от `Element`, или может от `HTMLElement`?
