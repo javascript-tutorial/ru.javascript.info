@@ -1,32 +1,32 @@
-# Find quoted strings
+# Найдите строки в кавычках
 
-Create a regexp to find strings in double quotes `subject:"..."`.
+Создайте регулярное выражение для поиска строк в двойных кавычках `subject:"..."`.
 
-The important part is that strings should support escaping, in the same way as JavaScript strings do. For instance, quotes can be inserted as `subject:\"` a newline as `subject:\n`, and the slash itself as `subject:\\`.
+Важно, что в строке поддерживается экранирование при помощи слеша -- в таком же виде, как в обычных строках JavaScript. Например, кавычки могут быть вставлены ввиде `subject:\"`, новая линия как `subject:\n` и сам слеш как `subject:\\`.
 
 ```js
-let str = "Just like \"here\".";
+let str = "Как вот \"здесь\".";
 ```
 
-For us it's important that an escaped quote `subject:\"` does not end a string.
+Здесь особо важно, что двойная кавычка после слэша `subject:\"` не оканчивает строку.
 
-So we should look from one quote to the other ignoring escaped quotes on the way.
+Поэтому мы должны искать от одной кавычки до другой, игнорируя встречающиеся экранированные кавычки. 
 
-That's the essential part of the task, otherwise it would be trivial.
+ этом и состоит основная сложность задачи, которая без этого условия была бы элементарной.
 
-Examples of strings to match:
+Пример совпадающих строк:
 ```js
 .. *!*"test me"*/!* ..  
-.. *!*"Say \"Hello\"!"*/!* ... (escaped quotes inside)
-.. *!*"\\"*/!* ..  (double slash inside)
-.. *!*"\\ \""*/!* ..  (double slash and an escaped quote inside)
+.. *!*"Скажи \"Привет\"!"*/!* ... (строка с экранированными кавычками)
+.. *!*"\\"*/!* ..  (внутри двойной слеш)
+.. *!*"\\ \""*/!* ..  (внутри двойной слеш и экранированная кавычка)
 ```
 
-In JavaScript we need to double the slashes to pass them right into the string, like this:
+В JavaScript приходится удваивать слеши, чтобы найти их в строке, как здесь:
 
 ```js run
-let str = ' .. "test me" .. "Say \\"Hello\\"!" .. "\\\\ \\"" .. ';
+let str = ' .. "test me" .. "Скажи \\"Привет\\"!" .. "\\\\ \\"" .. ';
 
-// the in-memory string
-alert(str); //  .. "test me" .. "Say \"Hello\"!" .. "\\ \"" ..
+// эта строка в памяти:
+alert(str); //  .. "test me" .. "Скажи \"Привет\"!" .. "\\ \"" ..
 ```
