@@ -147,7 +147,7 @@ interface HTMLInputElement: HTMLElement {
 
 ## Тег: nodeName и tagName
 
-Получив DOM-узел из свойств `nodeName` и `tagName`, мы можем получить имя его тега:
+Получив DOM-узел, мы можем узнать имя его тега из свойств `nodeName` и `tagName`:
 
 Например:
 
