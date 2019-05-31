@@ -1,41 +1,41 @@
-# Capturing groups
+# Скобочные группы
 
-A part of a pattern can be enclosed in parentheses `pattern:(...)`. This is called a "capturing group".
+Часть шаблона можно заключить в скобки `pattern:(...)`. Это называется "скобочная группа".
 
-That has two effects:
+У такого выделения есть два эффекта:
 
-1. It allows to place a part of the match into a separate array.
-2. If we put a quantifier after the parentheses, it applies to the parentheses as a whole, not the last character.
+1. Позволяет поместить часть совпадения в отдельный массив.
+2. Если установить квантификтор после скобок, то он будет применяться к всему содержимому скобки, а не к одному символу.
 
-## Example
+## Пример
 
-In the example below the pattern `pattern:(go)+` finds one or more `match:'go'`:
+В примере ниже шаблон `pattern:(go)+` один или более `match:'go'`:
 
 ```js run
 alert( 'Gogogo now!'.match(/(go)+/i) ); // "Gogogo"
 ```
 
-Without parentheses, the pattern `pattern:/go+/` means `subject:g`, followed by `subject:o` repeated one or more times. For instance, `match:goooo` or `match:gooooooooo`.
+Без скобок, шаблон `pattern:/go+/` означает `subject:g` и, идущий после него, `subject:o`, который повторяется один или более раз. Например, `match:goooo` или `match:gooooooooo`.
 
-Parentheses group the word `pattern:(go)` together.
+Скобки группирую символы в слово `pattern:(go)`.
 
-Let's make something more complex -- a regexp to match an email.
+Сделаем что-то более сложное -- регулярное выражение, которое соответствует адресу электронной почты.
 
-Examples of emails:
+Пример такой почты:
 
 ```
 my@mail.com
 john.smith@site.com.uk
 ```
 
-The pattern: `pattern:[-.\w]+@([\w-]+\.)+[\w-]{2,20}`.
+Шаблон: `pattern:[-.\w]+@([\w-]+\.)+[\w-]{2,20}`.
 
-1. The first part `pattern:[-.\w]+` (before `@`) may include any alphanumeric word characters, a dot and a dash, to match `match:john.smith`.
-2. Then `pattern:@`, and the domain. It may be a subdomain like `host.site.com.uk`, so we match it as "a word followed by a dot `pattern:([\w-]+\.)` (repeated), and then the last part must be a word: `match:com` or `match:uk` (but not very long: 2-20 characters).
+1. Первая часть `pattern:[-.\w]+` (перед `@`) может включать любые числовые или буквенные символы, точку и тире, чтобы соответствовать `match:john.smith`.
+2. Затем идет `pattern:@` и домен. Это может быть поддомен (например, `host.site.com.uk`), поэтому мы сопоставляем его как слово, за которым следует точка `pattern:([\w-]+\.)` (повторяется). Затем в конце должно быть слово: `match:com` или `match:uk` (но не очень длинное: 2-20 символов).
 
-That regexp is not perfect, but good enough to fix errors or occasional mistypes.
+Это выражение не идеально, но достаточно хорошее для исправления ошибок и опечаток.
 
-For instance,  we can find all emails in the string:
+Например,  мы можем найти все электронные адреса в строке:
 
 ```js run
 let reg = /[-.\w]+@([\w-]+\.)+[\w-]{2,20}/g;
@@ -43,7 +43,7 @@ let reg = /[-.\w]+@([\w-]+\.)+[\w-]{2,20}/g;
 alert("my@mail.com @ his@site.com.uk".match(reg)); // my@mail.com, his@site.com.uk
 ```
 
-In this example parentheses were used to make a group for repeating `pattern:(...)+`. But there are other uses too, let's see them.
+В примере скобки используются для создания повторяющейся группы `pattern:(...)+`. Но есть и другие применения. Посмотрим на них.
 
 ## Contents of parentheses  
 
