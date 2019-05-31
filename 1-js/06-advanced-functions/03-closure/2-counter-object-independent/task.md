@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Counter object
+# Объект счётчика
 
-Here a counter object is made with the help of the constructor function.
+Здесь объект счётчика создан с помощью функции-конструктора.
 
-Will it work? What will it show?
+Будет ли он работать? Что покажет?
 
 ```js
 function Counter() {
