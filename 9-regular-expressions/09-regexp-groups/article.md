@@ -47,7 +47,7 @@ alert("my@mail.com @ his@site.com.uk".match(reg)); // my@mail.com, his@site.com.
 
 ## Содержимое скобок  
 
-Parentheses are numbered from left to right. The search engine remembers the content of each and allows to reference it in the pattern or in the replacement string.
+Группы скобок нумируются слева направо. Поисковый движок запоминает содержимое в каждой группе и позволяет ссылаться на него в шаблоне регулярного выражения или строке для замены.
 
 For instance, we'd like to find HTML tags `pattern:<.*?>`, and process them.
 
