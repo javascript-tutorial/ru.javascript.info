@@ -6,7 +6,7 @@ for (let li of document.querySelectorAll('li')) {
 }
 ```
 
-В цикле нам нужно получить текст всех элементов `li`. Мы можем прочитать его прямо из первого дочернего узла, это будет текстовый узел:
+В цикле нам нужно получить текст в каждом элементе `li`. Мы можем прочитать текст из первого дочернего узла `li`, который будет текстовым узлом:
 
 ```js
 for (let li of document.querySelectorAll('li')) {
@@ -16,4 +16,4 @@ for (let li of document.querySelectorAll('li')) {
 }
 ```
 
-Так мы сможем узнать количество потомков `li.getElementsByTagName('li')`.length
+Так мы сможем получить количество потомков как `li.getElementsByTagName('li')`.length

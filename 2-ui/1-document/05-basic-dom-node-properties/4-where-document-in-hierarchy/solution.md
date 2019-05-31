@@ -1,5 +1,5 @@
 
-Объектом какого класса является document, можно выяснить так:
+Объектом какого класса является `document`, можно выяснить так:
 
 ```js run
 alert(document); // [object HTMLDocument]
@@ -21,13 +21,13 @@ alert(document.constructor.name); // HTMLDocument
 
 Как мы знаем, методы класса находятся в  `prototype` конструктора. Например, в `HTMLDocument.prototype` находятся методы для объектов типа document.
 
-Также, внутри `prototype` есть ссылка на функцию-конструктор:
+Также внутри `prototype` есть ссылка на функцию-конструктор:
 
 ```js run
 alert(HTMLDocument.prototype.constructor === HTMLDocument); // true
 ```
 
-Для встроенных классов во всех прототипах есть ссылка `constructor`, и мы можем получить `constructor.name`, чтобы увидеть имя класса. Сделаем это для всех объектов в прототипной цепочке  `document`:
+Чтобы получить имя класса в строковой форме, используем `constructor.name`. Сделаем это для всей цепочки прототипов `document` до класса `Node`:
 
 ```js run
 alert(HTMLDocument.prototype.constructor.name); // HTMLDocument
