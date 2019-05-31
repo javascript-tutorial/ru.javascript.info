@@ -45,7 +45,7 @@ alert("my@mail.com @ his@site.com.uk".match(reg)); // my@mail.com, his@site.com.
 
 В примере скобки используются для создания повторяющейся группы `pattern:(...)+`. Но есть и другие применения. Посмотрим на них.
 
-## Contents of parentheses  
+## Содержимое скобок  
 
 Parentheses are numbered from left to right. The search engine remembers the content of each and allows to reference it in the pattern or in the replacement string.
 
