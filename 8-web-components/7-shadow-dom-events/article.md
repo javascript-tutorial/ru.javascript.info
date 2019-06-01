@@ -115,7 +115,7 @@ userCard.onclick = e => alert(`Внешний целевой элемент: ${e
 - `wheel`,
 - `beforeinput`, `input`, `keydown`, `keyup`.
 
-Все события прикосновений и события курсора также имеют `composed: true`.
+Все события прикосновений (touch events) и события курсора (pointer events) также имеют `composed: true`.
 
 Хотя есть и события, имеющие `composed: false`:
 
