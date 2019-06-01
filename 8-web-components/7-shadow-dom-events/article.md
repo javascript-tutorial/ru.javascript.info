@@ -21,7 +21,7 @@ customElements.define('user-card', class extends HTMLElement {
       <button>Нажми меня</button>
     </p>`;
     this.shadowRoot.firstElementChild.onclick =
-      e => alert("Свойство target события внутри компонента: " + e.target.tagName);
+      e => alert("Внутренний целевой элемент: " + e.target.tagName);
   }
 });
 
