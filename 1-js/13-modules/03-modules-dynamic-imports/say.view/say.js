@@ -1,11 +1,11 @@
 export function hi() {
-  alert(`Hello`);
+  alert(`Привет`);
 }
 
 export function bye() {
-  alert(`Bye`);
+  alert(`Пока`);
 }
 
 export default function() {
-  alert("Module loaded (export default)!");
+  alert("Модуль загружен (экспорт по умолчанию)!");
 }

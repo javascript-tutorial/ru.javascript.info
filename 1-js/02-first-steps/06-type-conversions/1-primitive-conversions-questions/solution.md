@@ -16,9 +16,9 @@ null + 1 = 1 // (5)
 undefined + 1 = NaN // (6)
 ```
 
-1. The addition with a string `"" + 1` converts `1` to a string: `"" + 1 = "1"`, and then we have `"1" + 0`, the same rule is applied.
-2. The subtraction `-` (like most math operations) only works with numbers, it converts an empty string `""` to `0`.
-3. The addition with a string appends the number `5` to the string.
-4. The subtraction always converts to numbers, so it makes `"  -9  "` a number `-9` (ignoring spaces around it).
-5. `null` becomes `0` after the numeric conversion.
-6. `undefined` becomes `NaN` after the numeric conversion.
+1. Сложение со строкой `"" + 1` преобразует `1` к строке: `"" + 1 = "1"`, и в следующем случае `"1" + 0`, работает то же самое правило.
+2. Вычитание `-` (как и большинство математических операторов) работает только с числами, пустая строка `""` приводится к `0`.
+3. Складываясь со строкой, `5` становится строчкой.
+4. Вычитание всегда преобразует к числу, значит строка `"  -9  "` становится числом `-9` (пробелы по краям обрезаются).
+5. `null` становится `0` после численного преобразования.
+6. `undefined` становится `NaN` после численного преобразования.
