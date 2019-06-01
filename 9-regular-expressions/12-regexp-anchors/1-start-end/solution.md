@@ -1,6 +1,5 @@
+Единственной подходящей строкой будет пустая: она начинается и в тот же момент заканчивается.
 
-The empty string is the only match: it starts and immediately finishes.
+Это задание еще раз показывает что якори являются не символами, а тестами.
 
-The task once again demonstrates that anchors are not characters, but tests.
-
-The string is empty `""`. The engine first matches the `pattern:^` (input start), yes it's there, and then immediately the end `pattern:$`, it's here too. So there's a match.
+Строка `""` пустая. Движок пытается найти совпадение с `pattern:^` (начало ввода), да, оно на месте, и в тот же момент ищет совпадение с `pattern:$`, оно тоже на месте. То есть это полное совпадение.
