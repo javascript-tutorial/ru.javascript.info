@@ -27,7 +27,7 @@ alert(document.constructor.name); // HTMLDocument
 alert(HTMLDocument.prototype.constructor === HTMLDocument); // true
 ```
 
-Чтобы получить имя класса в строковой форме, используем `constructor.name`. Сделаем это для всей цепочки прототипов `document` до класса `Node`:
+Чтобы получить имя класса в строковой форме, используем `constructor.name`. Сделаем это для всей цепочки прототипов `document` вверх до класса `Node`:
 
 ```js run
 alert(HTMLDocument.prototype.constructor.name); // HTMLDocument
