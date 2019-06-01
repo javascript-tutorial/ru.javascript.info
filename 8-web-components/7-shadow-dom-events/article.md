@@ -107,7 +107,7 @@ userCard.onclick = e => alert(`Внешний целевой элемент: ${e
 
 Это поведение регулируется с помощью свойства `composed` объекта события. Если оно `true`, то событие пересекает границу. Иначе, оно может быть поймано лишь внутри теневого DOM.
 
-Если вы посмотрите в [спецификации UI Events](https://www.w3.org/TR/uievents), большинство событий имеют `composed: true`:
+Если посмотреть в [спецификацию UI Events](https://www.w3.org/TR/uievents), то большинство событий имеют `composed: true`:
 
 - `blur`, `focus`, `focusin`, `focusout`,
 - `click`, `dblclick`,
