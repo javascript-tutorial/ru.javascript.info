@@ -26,7 +26,7 @@ customElements.define('user-card', class extends HTMLElement {
 });
 
 document.onclick =
-  e => alert("Свойство target события вне компонента: " + e.target.tagName);
+  e => alert("Внешний целевой элемент: " + e.target.tagName);
 </script>
 ```
 
