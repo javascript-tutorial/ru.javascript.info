@@ -2,23 +2,22 @@ importance: 5
 
 ---
 
-# Debounce decorator
+# Декоратор debounce
 
-The result of `debounce(f, ms)` decorator should be a wrapper that passes the call to `f` at maximum once per `ms` milliseconds.
+Результатом декоратора `debounce(f, ms)` должна быть обёртка, которая передаёт вызов `f` не более одного раза в `ms` миллисекунд.
+Другими словами, когда мы вызываем `debounce`, это гарантирует, что все остальные вызовы будут игнорироваться в течение `ms`.
 
-In other words, when we call a "debounced" function, it guarantees that all other future in the closest `ms` milliseconds will be ignored.
-
-For instance:
+Например:
 
 ```js no-beautify
 let f = debounce(alert, 1000);
 
-f(1); // runs immediately
-f(2); // ignored
+f(1); // выполняется немедленно
+f(2); // проигнорирован
 
-setTimeout( () => f(3), 100); // ignored ( only 100 ms passed )
-setTimeout( () => f(4), 1100); // runs
-setTimeout( () => f(5), 1500); // ignored (less than 1000 ms from the last run)
+setTimeout( () => f(3), 100); // проигнорирован (прошло только 100 мс)
+setTimeout( () => f(4), 1100); // выполняется
+setTimeout( () => f(5), 1500); // проигнорирован (прошло только 100 мс от последнего вызова)
 ```
 
-In practice `debounce` is useful for functions that retrieve/update something when we know that nothing new can be done in such a short period of time, so it's better not to waste resources.
+На практике `debounce` полезен для функций, которые получают/обновляют данные, и мы знаем, что повторный вызов в течение короткого промежутка времени не даст ничего нового. Так что лучше не тратить на него ресурсы.

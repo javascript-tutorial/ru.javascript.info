@@ -2,22 +2,22 @@ importance: 4
 
 ---
 
-# Filter unique array members
+# Оставить уникальные элементы массива
 
-Let `arr` be an array.
+Пусть `arr` – массив строк.
 
-Create a function `unique(arr)` that should return an array with unique items of `arr`.
+Напишите функцию `unique(arr)`, которая возвращает массив, содержащий только уникальные элементы `arr`.
 
-For instance:
+Например:
 
 ```js
 function unique(arr) {
-  /* your code */
+  /* ваш код */
 }
 
-let strings = ["Hare", "Krishna", "Hare", "Krishna",
-  "Krishna", "Krishna", "Hare", "Hare", ":-O"
+let strings = ["кришна", "кришна", "харе", "харе",
+  "харе", "харе", "кришна", "кришна", ":-O"
 ];
 
-alert( unique(strings) ); // Hare, Krishna, :-O
+alert( unique(strings) ); // кришна, харе, :-O
 ```
