@@ -1,12 +1,12 @@
-# Scrolling
+# Прокрутка
 
-Scroll events allow to react on a page or element scrolling. There are quite a few good things we can do here.
+События прокрутки позволяют реагировать на прокрутку страницы или элемента. Есть немало хороших вещей, которые можно сделать.
 
-For instance:
-- Show/hide additional controls or information depending on where in the document the user is.
-- Load more data when the user scrolls down till the end of the page.
+Например:
+- Показать/скрыть дополнительные элементы управления или информацию, основываясь на том, в какой части документа находится пользователь.
+- Загрузить больше данных, когда пользователь прокручивает страницу вниз до конца.
 
-Here's a small function to show the current scroll:
+Вот небольшая функция для отображения текущей прокрутки:
 
 ```js autorun
 window.addEventListener('scroll', function() {
@@ -15,23 +15,23 @@ window.addEventListener('scroll', function() {
 ```
 
 ```online
-In action:
+В действии:
 
-Current scroll = <b id="showScroll">scroll the window</b>
+Текущая прокрутка = <b id="showScroll">прокрутите окно</b>
 ```
 
-The `scroll` event works both on the `window` and on scrollable elements.
+Событие `scroll` работает как на `window`, так и на прокручиваемых элементах.
 
-## Prevent scrolling
+## Предотвращение прокрутки
 
-How do we make something unscrollable? We can't prevent scrolling by using `event.preventDefault()` in `onscroll` listener, because it triggers *after* the scroll has already happened.
+Как можно сделать что-то непрокручиваемым? Нельзя предотвратить прокрутку, используя `event.preventDefault()` в обработчике `onscroll`, потому что он срабатывает *после* того, как прокрутка уже произошла.
 
-But we can prevent scrolling by `event.preventDefault()` on an event that causes the scroll.
+Но можно предотвратить прокрутку, используя `event.preventDefault()` на событии, которое вызывает её.
 
-For instance:
-- `wheel` event -- a mouse wheel roll (a "scrolling" touchpad action generates it too).
-- `keydown` event for `key:pageUp` and `key:pageDown`.
+Например:
+- Событие `wheel` -- прокрутка колеса мыши ("прокручивание" тачпада также его генерирует).
+- Событие `keydown` для клавиш `key:pageUp` и `key:pageDown`.
 
-Sometimes that may help. But there are more ways to scroll, so it's quite hard to handle all of them. So it's more reliable to use CSS to make something unscrollable, like `overflow` property.
+Иногда это может помочь. Но есть и другие способы прокрутки, поэтому достаточно сложно обработать их всех. Более надёжный способ -- использовать CSS, чтобы сделать что-то непрокручиваемым, например, свойство `overflow`.
 
-Here are few tasks that you can solve or look through to see the applications on `onscroll`.
+Вот несколько задач, которые вы можете решить или просмотреть, чтобы увидеть применение `onscroll`.

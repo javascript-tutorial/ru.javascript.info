@@ -2,29 +2,29 @@ importance: 4
 
 ---
 
-# Load visible images
+# Загрузка видимых изображений
 
-Let's say we have a slow-speed client and want to save their mobile traffic.
+Допустим, у нас есть клиент с низкой скоростью соединения, и мы хотим сэкономить его трафик.
 
-For that purpose we decide not to show images immediately, but rather replace them with placeholders, like this:
+Для этого мы решили не показывать изображения сразу, а заменять их на «макеты», как тут:
 
 ```html
 <img *!*src="placeholder.svg"*/!* width="128" height="128" *!*data-src="real.jpg"*/!*>
 ```
 
-So, initially all images are `placeholder.svg`. When the page scrolls to the position where the user can see the image -- we change `src` to the one in `data-src`, and so the image loads.
+Итак, изначально все изображения -- `placeholder.svg`. Когда страница прокручивается до того положения, где пользователь может увидеть изображение -- мы меняем `src` на значение из `data-src`, и таким образом изображение загружается.
 
-Here's an example in `iframe`:
+Вот пример в `iframe`:
 
 [iframe src="solution"]
 
-Scroll it to see images load "on-demand".
+Прокрутите его, чтобы увидеть загрузку изображений "по требованию".
 
-Requirements:
-- When the page loads, those images that are on-screen should load immediately, prior to any scrolling.
-- Some images may be regular, without `data-src`. The code should not touch them.
-- Once an image is loaded, it should not reload any more when scrolled in/out.
+Требования:
+- При загрузке страницы те изображения, которые отображаются на экране, должны загружаться непосредственно перед любой прокруткой.
+- Некоторые изображения могут быть обычными, без `data-src`. Код не должен касаться их.
+- Если изображение загрузилось, оно не должно больше перезагружаться при прокрутке.
 
-P.S. If you can, make a more advanced solution that would "preload" images that are one page below/after the current position.
+P.S. Если можете, реализуйте более продвинутое решение, которое будет "предварительно загружать" изображения на одну страницу ниже/после текущей позиции.
 
-P.P.S. Only vertical scroll is to be handled, no horizontal scrolling.
+P.P.S. Обработать нужно только вертикальную прокрутку, горизонтальную не требуется.
