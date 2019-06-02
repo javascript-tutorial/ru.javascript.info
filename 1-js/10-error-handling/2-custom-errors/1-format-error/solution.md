@@ -8,7 +8,7 @@ class FormatError extends SyntaxError {
 
 let err = new FormatError("ошибка форматирования");
 
-alert( err.message ); // ошибка формата
+alert( err.message ); // ошибка форматирования
 alert( err.name ); // FormatError
 alert( err.stack ); // stack
 
