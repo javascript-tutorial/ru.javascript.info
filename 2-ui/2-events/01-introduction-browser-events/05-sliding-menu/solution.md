@@ -12,7 +12,7 @@
 <div class="menu">
   <span class="title">Сладости (нажми меня)!</span>
   <ul>
-    <li>Пирожное</li>
+   <li>Пирожное</li>
     <li>Пончик</li>
     <li>Мёд</li>
   </ul>
