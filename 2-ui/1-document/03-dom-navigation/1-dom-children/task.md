@@ -2,23 +2,23 @@ importance: 5
 
 ---
 
-# DOM children
+# Дочерние элементы в DOM
 
-For the page:
+Для страницы:
 
 ```html
 <html>
 <body>
-  <div>Users:</div>
+  <div>Пользователи:</div>
   <ul>
-    <li>John</li>
-    <li>Pete</li>
+    <li>Джон</li>
+    <li>Пит</li>
   </ul>
 </body>
 </html>
 ```
 
-How to access:
-- The `<div>` DOM node?
-- The `<ul>` DOM node?
-- The second `<li>` (with Pete)?
+Как получить:
+- Напишите код, который получит элемент `<div>`?
+- Напишите код, который получит `<ul>`?
+- Напишите код, который получит второй `<li>` (с именем Пит)?
