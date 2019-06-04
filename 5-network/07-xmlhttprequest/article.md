@@ -143,7 +143,7 @@ We can use `xhr.responseType` property to set the response format:
 
 - `""` (default) -- get as string,
 - `"text"` -- get as string,
-- `"arraybuffer"` -- get as `ArrayBuffer` (for binary data, see chapter <info:arraybuffer-and-views>),
+- `"arraybuffer"` -- get as `ArrayBuffer` (for binary data, see chapter <info:arraybuffer-binary-arrays>),
 - `"blob"` -- get as `Blob` (for binary data, see chapter <info:blob>),
 - `"document"` -- get as XML document (can use XPath and other XML methods),
 - `"json"` -- get as JSON (parsed automatically).
@@ -261,7 +261,7 @@ There are 3 methods for HTTP-headers:
     ```
 
     ````warn header="Can't remove a header"
-    Another peciliarity of `XMLHttpRequest` is that one can't undo `setRequestHeader`.
+    Another peculiarity of `XMLHttpRequest` is that one can't undo `setRequestHeader`.
 
     Once the header is set, it's set. Additional calls add information to the header, don't overwrite it.
 
@@ -495,7 +495,7 @@ There are actually more events, the [modern specification](http://www.w3.org/TR/
 - `loadstart` -- the request has started.
 - `progress` -- a data packet of the response has arrived, the whole response body at the moment is in `responseText`.
 - `abort` -- the request was canceled by the call `xhr.abort()`.
-- `error` -- connection error has occured, e.g. wrong domain name. Doesn't happen for HTTP-errors like 404.
+- `error` -- connection error has occurred, e.g. wrong domain name. Doesn't happen for HTTP-errors like 404.
 - `load` -- the request has finished successfully.
 - `timeout` -- the request was canceled due to timeout (only happens if it was set).
 - `loadend` -- the request has finished (succeffully or not).
