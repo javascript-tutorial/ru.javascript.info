@@ -1,6 +1,6 @@
-# Loop-based solution
+# Решение с использованием цикла
 
-The loop-based variant of the solution:
+Решение с использованием цикла:
 
 ```js run
 let list = {
@@ -30,7 +30,7 @@ function printList(list) {
 printList(list);
 ```
 
-Please note that we use a temporary variable `tmp` to walk over the list. Technically, we could use a function parameter `list` instead:
+Обратите внимание, что мы используем временную переменную `tmp` для перемещения по списку. Технически, мы могли бы использовать параметр функции `list` вместо неё:
 
 ```js
 function printList(list) {
@@ -43,15 +43,15 @@ function printList(list) {
 }
 ```
 
-...But that would be unwise. In the future we may need to extend a function, do something else with the list. If we change `list`, then we loose such ability.
+...Но это было бы необдуманно. В будущем нам может понадобиться расширить функцию, сделать что-нибудь еще со списком. Если мы меняем `list`, то теряем такую возможность.
 
-Talking about good variable names, `list` here is the list itself. The first element of it. And it should remain like that. That's clear and reliable.
+Говоря о хороших именах для переменных, `list` здесь - это сам список, его первый элемент. Это ясно и надежно.
 
-From the other side, the role of `tmp` is exclusively a list traversal, like `i` in the `for` loop.
+С другой стороны, `tmp` используется исплючительно для обхода списка, как `i` в цикле `for`.
 
-# Recursive solution
+# Решение через рекурсию
 
-The recursive variant of `printList(list)` follows a simple logic: to output a list we should output the current element `list`, then do the same for `list.next`:
+Рекурсивный вариант `printList(list)` следует простой логике: для вывода списка мы должны вывести текущий `list`, затем сделать то же самое для `list.next`:
 
 ```js run
 let list = {
@@ -70,10 +70,10 @@ let list = {
 
 function printList(list) {
 
-  alert(list.value); // output the current item
+  alert(list.value); // выводим текущий элемент
 
   if (list.next) {
-    printList(list.next); // do the same for the rest of the list
+    printList(list.next); // делаем то же самое для остальной части списка
   }
 
 }
@@ -81,8 +81,8 @@ function printList(list) {
 printList(list);
 ```
 
-Now what's better?
+Какой способ лучше?
 
-Technically, the loop is more effective. These two variants do the same, but the loop does not spend resources for nested function calls.
+Технически, способ с циклом более эффективный. В обоих реализациях делается то же самое, но для цикла не тратятся ресурсы для вложенных вызовов.
 
-From the other side, the recursive variant is shorter and sometimes easier to understand.
+С другой стороны, рекурсивный вариант более короткий и, возможно, более простой для понимания.

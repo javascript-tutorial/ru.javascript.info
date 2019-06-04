@@ -1,10 +1,10 @@
-importance: 5
+важность: 5
 
 ---
 
-# Output a single-linked list
+# Вывод односвязного списка
 
-Let's say we have a single-linked list (as described in the chapter <info:recursion>):
+Допустим, у нас есть односвязный список (как описано в главе <info:recursion>):
 
 ```js
 let list = {
@@ -22,8 +22,8 @@ let list = {
 };
 ```
 
-Write a function `printList(list)` that outputs list items one-by-one.
+Напишите функцию `printList(list)` который выводит элементы списка по одному.
 
-Make two variants of the solution: using a loop and using recursion.
+Сделайте два варианта решения: используя цикл и через рекурсию.
 
-What's better: with recursion or without it?
+Как лучше: с рекурсией или без?

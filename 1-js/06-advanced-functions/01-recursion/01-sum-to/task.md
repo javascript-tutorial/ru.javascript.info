@@ -1,12 +1,10 @@
-importance: 5
+важность: 5
 
 ---
 
-# Sum all numbers till the given one
+# Вычислить сумму чисел до данного
 
-Write a function `sumTo(n)` that calculates the sum of numbers `1 + 2 + ... + n`.
-
-For instance:
+Напишите функцию sumTo(n), которая для данного n вычисляет сумму чисел от 1 до n, например:
 
 ```js no-beautify
 sumTo(1) = 1
@@ -17,20 +15,20 @@ sumTo(4) = 4 + 3 + 2 + 1 = 10
 sumTo(100) = 100 + 99 + ... + 2 + 1 = 5050
 ```
 
-Make 3 solution variants:
+Сделайте три варианта решения:
 
-1. Using a for loop.
-2. Using a recursion, cause `sumTo(n) = n + sumTo(n-1)` for `n > 1`.
-3. Using the [arithmetic progression](https://en.wikipedia.org/wiki/Arithmetic_progression) formula.
+1. С использованием цикла.
+2. Через рекурсию, т.к. `sumTo(n) = n + sumTo(n-1)` for `n > 1`.
+3. С использованием формулы [арифметической прогрессии](https://ru.wikipedia.org/wiki/Арифметическая_прогрессия).
 
-An example of the result:
+Пример работы вашей функции:
 
 ```js
-function sumTo(n) { /*... your code ... */ }
+function sumTo(n) { /*... ваш код ... */ }
 
 alert( sumTo(100) ); // 5050
 ```
 
-P.S. Which solution variant is the fastest? The slowest? Why?
+P.S. Какой вариант решения самый быстрый? Самый медленный? Почему
 
-P.P.S. Can we use recursion to count `sumTo(100000)`? 
+P.P.S. Mожно ли при помощи рекурсии посчитать sumTo(100000)?
