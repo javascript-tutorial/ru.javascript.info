@@ -18,10 +18,10 @@
 ```html
 <table>
   <tr>
-    <th colspan="3"><em>Bagua</em> Chart: Direction, Element, Color, Meaning</th>
+    <th colspan="3">Квадрат <em>Bagua</em>: Направление, Элемент, Цвет, Значение</th>
   </tr>
   <tr>
-    <td>...<strong>Northwest</strong>...</td>
+    <td>...<strong>Северо-Запад</strong>...</td>
     <td>...</td>
     <td>...</td>
   </tr>
