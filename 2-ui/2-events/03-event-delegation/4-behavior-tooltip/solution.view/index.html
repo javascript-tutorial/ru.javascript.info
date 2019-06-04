@@ -6,7 +6,7 @@
   <style>
     body {
       height: 2000px;
-      /* доавим body прокрутку, подсказка должна работать и с прокруткой */
+      /* добавим body прокрутку, подсказка должна работать и с прокруткой */
     }
 
     .tooltip {
@@ -25,13 +25,13 @@
 
 <body>
 
-  <p>ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя</p>
-  <p>ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя</p>
+  <p>LaLaLa LaLaLa LaLaLa LaLaLa LaLaLa LaLaLa LaLaLa LaLaLa LaLaLa</p>
+  <p>LaLaLa LaLaLa LaLaLa LaLaLa LaLaLa LaLaLa LaLaLa LaLaLa LaLaLa</p>
 
   <button data-tooltip="эта подсказка должна быть длиннее, чем элемент">Короткая кнопка</button>
   <button data-tooltip="HTML<br>подсказка">Ещё кнопка</button>
 
-  <p>Прокрутите страницу, чтобы кнопки оказались у верхнего края, проверьте правильно ли выводятся подсказки.</p>
+  <p>Прокрутите страницу, чтобы кнопки оказались у верхнего края, а затем проверьте, правильно ли выводятся подсказки.</p>
 
 
   <script>
@@ -40,11 +40,11 @@
     document.onmouseover = function(event) {
       let target = event.target;
 
-      // получим содержимое подсказки...
+      // если у нас есть подсказка...
       let tooltipHtml = target.dataset.tooltip;
       if (!tooltipHtml) return;
 
-      // ...создадим элемент подсказки
+      // ...создадим элемент для подсказки
 
       tooltipElem = document.createElement('div');
       tooltipElem.className = 'tooltip';
