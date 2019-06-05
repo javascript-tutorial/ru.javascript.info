@@ -182,7 +182,7 @@ table.onclick = function(event) {
 
 ### Пример "Счётчик"
 
-Например, здесь HTML-атрибут `data-counter` добавляет кнопкам поведение: "увеличение счётчика при клике":
+Например, здесь HTML-атрибут `data-counter` добавляет кнопкам поведение: "увеличить значение при клике":
 
 ```html run autorun height=60
 Counter: <input type="button" value="1" data-counter>
