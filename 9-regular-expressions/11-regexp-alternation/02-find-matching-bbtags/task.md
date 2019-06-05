@@ -32,7 +32,7 @@
 Например:
 
 ```js
-let reg = /ваше регулярное выражение/g;
+let reg = /ваше регулярное выражение/флаги;
 
 let str = "..[url]http://ya.ru[/url]..";
 alert( str.match(reg) ); // [url]http://ya.ru[/url]
@@ -41,7 +41,7 @@ alert( str.match(reg) ); // [url]http://ya.ru[/url]
 Если теги вложены, то нужно искать самый внешний тег (при желании можно продолжить поиск в его содержимом):
 
 ```js
-let reg = /ваше регулярное выражение/g;
+let reg = /ваше регулярное выражение/флаги;
 
 let str = "..[url][b]http://ya.ru[/b][/url]..";
 alert( str.match(reg) ); // [url][b]http://ya.ru[/b][/url]
