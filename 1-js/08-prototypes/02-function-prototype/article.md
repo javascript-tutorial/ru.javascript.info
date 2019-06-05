@@ -43,7 +43,7 @@ On the picture, `"prototype"` is a horizontal arrow, meaning a regular property,
 ```smart header="`F.prototype` only used at `new F` time"
 `F.prototype` property is only used when `new F` is called, it assigns `[[Prototype]]` of the new object. After that, there's no connection between `F.prototype` and the new object. Think of it as a "one-time gift".
 
-If, after the creation, `F.prototype` property changes (`F.property = <another object>`), then new objects created by `new F` will have another object as `[[Prototype]]`, but already existing objects keep the old one.
+If, after the creation, `F.prototype` property changes (`F.prototype = <another object>`), then new objects created by `new F` will have another object as `[[Prototype]]`, but already existing objects keep the old one.
 ```
 
 ## Default F.prototype, constructor property
@@ -162,7 +162,7 @@ Everything is quite simple, just few notes to make things clear:
 
 - The `F.prototype` property is not the same as `[[Prototype]]`. The only thing `F.prototype` does: it sets `[[Prototype]]` of new objects when `new F()` is called.
 - The value of `F.prototype` should be either an object or null: other values won't work.
--  The `"prototype"` property only has such a special effect when is set to a constructor function, and invoked with `new`.
+-  The `"prototype"` property only has such a special effect when set on a constructor function, and invoked with `new`.
 
 On regular objects the `prototype` is nothing special:
 ```js

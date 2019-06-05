@@ -1,23 +1,23 @@
-# File and FileReader
+# File и FileReader
 
-A [File](https://www.w3.org/TR/FileAPI/#dfn-file) object inhereits from `Blob`, but is extended with filesystem-related capabilities.
+Объект [File](https://www.w3.org/TR/FileAPI/#dfn-file) наследуется от объекта `Blob` и возможностями по взаимодействию с файловой системой.
 
-There are two ways to obtain it.
+Есть два способа его получить.
 
-First, there's a constructor, similar to `Blob`:
+Во-первых, есть конструктор, похожий на `Blob`:
 
 ```js
 new File(fileParts, fileName, [options])
 ```
 
-- **`fileParts`** -- is an array of Blob/BufferSource/String value, same as `Blob`.
-- **`fileName`** -- file name string.
-- **`options`** -- optional object:
-    - **`lastModified`** -- a timestamp (integer date) of last modification.
+- **`fileParts`** -- массив значений Blob/BufferSource/String, такой же как `Blob`.
+- **`fileName`** -- строка имени файла.
+- **`options`** -- необязательный объект:
+    - **`lastModified`** -- дата последнего изменения в формате timestamp (целое число).
 
-Second, more often we get a file from `<input type="file">` or drag'n'drop or other browser interfaces. Then the file gets these from OS.
+Во-вторых, чаще всего мы получаем файл из `<input type="file">` или через перетаскивание с помощью мыши, или других интерфейсов браузера. Затем этот файл получает нужную информацию из ОС.
 
-For instance:
+Например:
 
 ```html run
 <input type="file" onchange="showFile(this)">
@@ -26,50 +26,50 @@ For instance:
 function showFile(input) {
   let file = input.files[0];
 
-  alert(`File name: ${file.name}`); // e.g my.png
-  alert(`Last modified: ${file.lastModified}`); // e.g 1552830408824
+  alert(`File name: ${file.name}`); // например, my.png
+  alert(`Last modified: ${file.lastModified}`); // например, 1552830408824
 }
 </script>
 ```
 
 ```smart
-The input may select multiple files, so `input.files` is an array-like object with them. Here we have only one file, so we just take `input.files[0]`.
+Через `<input>` можно выбрать несколько файлов, поэтому `input.files` -- псевдомассив выбранных файлов. Здесь у нас только один файл, поэтому мы просто берём `input.files[0]`.
 ```
 
 ## FileReader
 
-[FileReader](https://www.w3.org/TR/FileAPI/#dfn-filereader) is an object with the sole purpose of reading from `Blob` (and hence `File` too) objects.
+[FileReader](https://www.w3.org/TR/FileAPI/#dfn-filereader) объект, цель которого: читать данные из `Blob` (и, следовательно, `File` тоже).
 
-It's event based, as reading from disk may take time.
+Данные передаются при помощи событий, так как чтение с диска может занять время.
 
-The constructor:
+Конструктор:
 
 ```js
-let reader = new FileReader(); // no arguments
+let reader = new FileReader(); // без аргументов
 ```
+    
+Основные методы:
 
-The main methods:
+- **`readAsArrayBuffer(blob)`** -- считать данные как `ArrayBuffer`
+- **`readAsText(blob, [encoding])`** -- считать данные как строку (кодировка по умолчанию: `utf-8`)
+- **`readAsDataURL(blob)`** -- считать данные как base64-кодированный URL.
+- **`abort()`** -- отменить операцию.
 
-- **`readAsArrayBuffer(blob)`** -- read the data as `ArrayBuffer`
-- **`readAsText(blob, [encoding])`** -- read the data as a string (encoding is `utf-8` by default)
-- **`readAsDataURL(blob)`** -- encode the data as base64 data url.
-- **`abort()`** -- cancel the operation.
+В процессе чтения можно "слушать" следующие события:
+- `loadstart` -- чтение начато.
+- `progress` -- срабатывает во время чтения данных.
+- `load` -- нет ошибок, чтение окончено.
+- `abort` -- вызван `abort()`.
+- `error` -- произошла ошибка.
+- `loadend` -- чтение завершено (успешно или нет).
 
-As the reading proceeds, there are events:
-- `loadstart` -- loading started.
-- `progress` -- occurs during reading.
-- `load` -- no errors, reading complete.
-- `abort` -- `abort()` called.
-- `error` -- error has occured.
-- `loadend` -- reading finished with either success or failure.
+Когда чтение закончено, мы сможем получить доступ к его результату следующим образом:
+- `reader.result` результат чтения (если оно успешно)
+- `reader.error` объект ошибки (при неудаче).
 
-When the reading is finished, we can access the result as:
-- `reader.result` is the result (if successful)
-- `reader.error` is the error (if failed).
+Наиболее часто используемые события - это, конечно же, `load` и `error`.
 
-The most widely used events are for sure `load` and `error`.
-
-Here's an example of reading a file:
+Вот пример чтения файла:
 
 ```html run
 <input type="file" onchange="readFile(this)">
@@ -94,35 +94,34 @@ function readFile(input) {
 </script>
 ```
 
-```smart header="`FileReader` for blobs"
-As mentioned in the chapter <info:blob>, `FileReader` works for any blobs, not just files.
+```smart header="`FileReader` для Blob"
+Как упоминалось в главе <info:blob>, `FileReader` работает для любых объектов Blob, а не только для файлов.
 
-So we can use it to convert a blob to another format:
-- `readAsArrayBuffer(blob)` -- to `ArrayBuffer`,
-- `readAsText(blob, [encoding])` -- to string (an alternative to `TextDecoder`),
-- `readAsDataURL(blob)` -- to base64 data url.
+Поэтому мы можем использовать его для преобразования Blob в другой формат:
+- `readAsArrayBuffer(blob)` -- в `ArrayBuffer`,
+- `readAsText(blob, [encoding])` -- в строку (альтернатива `TextDecoder`),
+- `readAsDataURL(blob)` -- в формат base64-кодированного URL.
 ```
 
 
-```smart header="`FileReaderSync` is available for workers only"
-For Web Workers, there also exists a synchronous variant of `FileReader`, called [FileReaderSync](https://www.w3.org/TR/FileAPI/#FileReaderSync).
+```smart header="`FileReaderSync` доступен только для веб-воркеров"
+Для веб-воркеров существует также и синхронный вариант `FileReader`, именуемый [FileReaderSync](https://www.w3.org/TR/FileAPI/#FileReaderSync).
 
-Its reading methods `read*` do not generate events, but rather return a result, as regular functions do.
+Его методы считывания `read*` не генерируют события, а возвращают результат, как это делают обычные функции.
 
-That's only inside a Web Worker though, because delays and hang-ups in Web Workers are less important, they do not affect the page.
+Но это только внутри веб-воркера, поскольку задержки в синхронных вызовах, которые возможны при чтении из файла, в веб-воркерах менее важны. Они не влияют на страницу.
 ```
 
-## Summary
+## Итого
 
-`File` object inherit from `Blob`.
+`File` объекты наследуют от `Blob`.
 
-In addition to `Blob` methods and properties, `File` objects also have `fileName` and `lastModified` properties, plus the internal ability to read from filesystem. We usually get `File` objects from user input, like `<input>` or drag'n'drop.
+Помимо методов и свойств `Blob`, объекты `File` также имеют свойства `fileName` и `lastModified` плюс внутреннюю возможность чтения из файловой системы. Обычно мы получаем объекты `File` из пользовательского ввода, например, через `<input>` или перетаскиванием с помощью мыши.
 
-`FileReader` objects can read from a file or a blob, in one of three formats:
-- String (`readAsText`).
+Объекты `FileReader` могут читать из файла или Blob в одном из трёх форматов:
+- Строка (`readAsText`).
 - `ArrayBuffer` (`readAsArrayBuffer`).
-- Data url, base-64 encoded (`readAsDataURL`).
+- URL в формате base64 (`readAsDataURL`).
 
-In many cases though, we don't have to read the file contents. Just as we did with blobs, we can create a short url with `URL.createObjectURL(file)` and assign it to `<a>` or `<img>`. This way the file can be downloaded or shown up as an image, as a part of canvas etc.
-
-And if we're going to send a `File` over a network, that's also easy, as network API like `XMLHttpRequest` or `fetch` natively accepts `File` objects.
+Однако, во многих случаях нам не нужно читать содержимое файла. Как и в случае с Blob, мы можем создать короткий URL с помощью `URL.createObjectURL(file)` и использовать его в теге `<a>` или `<img>`. Таким образом, файл может быть загружен или показан в виде изображения, как часть canvas и т.д.
+И если мы собираемся отправить `File` по сети, то это также легко, поскольку сетевой API, такой как `XMLHttpRequest` или `fetch`, изначально принимает объекты `File`.
