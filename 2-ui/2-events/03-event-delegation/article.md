@@ -73,7 +73,7 @@ function highlight(td) {
 ```html
 <td>
 *!*
-  <strong>Northwest</strong>
+  <strong>Северо-Запад</strong>
 */!*
   ...
 </td>
