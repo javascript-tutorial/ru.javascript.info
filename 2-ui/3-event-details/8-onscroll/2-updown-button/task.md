@@ -2,15 +2,15 @@ importance: 5
 
 ---
 
-# Up/down button
+# Кнопка вверх/вниз
 
-Create a "to the top" button to help with page scrolling.
+Создайте кнопку "наверх", чтобы помочь с прокруткой страницы.
 
-It should work like this:
-- While the page is not scrolled down at least for the window height -- it's invisible.
-- When the page is scrolled down more than the window height -- there appears an "upwards" arrow in the left-top corner. If the page is scrolled back, it disappears.
-- When the arrow is clicked, the page scrolls to the top.
+Она должна работать следующим образом:
+- Пока страница не прокручена вниз хотя бы на высоту окна -- кнопка невидима.
+- Когда страница прокручена вниз больше, чем на высоту окна -- появляется стрелка "наверх" в левом верхнем углу. Если страница прокручивается назад, стрелка исчезает.
+- Когда нажимается стрелка, страница прокручивается вверх.
 
-Like this:
+Как тут:
 
 [iframe border="1" height="200" link src="solution"]
