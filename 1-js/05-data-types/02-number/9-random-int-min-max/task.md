@@ -12,9 +12,9 @@ importance: 2
 Пример работы функции:
 
 ```js
-alert( random(1, 5) ); // 1
-alert( random(1, 5) ); // 3
-alert( random(1, 5) ); // 5
+alert( randomInteger(1, 5) ); // 1
+alert( randomInteger(1, 5) ); // 3
+alert( randomInteger(1, 5) ); // 5
 ```
 
 Можно использовать решение из [предыдущей задачи](info:task/random-min-max).

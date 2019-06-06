@@ -35,7 +35,7 @@ The value of `document.cookie` consists of `name=value` pairs, delimited by `; `
 
 To find a particular cookie, we can split `document.cookie` by `; `, and then find the right name. We can use either a regular expression or array functions to do that.
 
-We leave it as an excercise for the reader. Also, at the end of the chapter you'll find helper functions to manipulate cookies.
+We leave it as an exercise for the reader. Also, at the end of the chapter you'll find helper functions to manipulate cookies.
 
 ## Writing to document.cookie
 
@@ -167,7 +167,7 @@ document.cookie = "user=John; max-age=0";
 
 The cookie should be transferred only over HTTPS.
 
-**By default, if we set a cookie at `http://site.com`, then it also appears at `https://site.com` and vise versa.**
+**By default, if we set a cookie at `http://site.com`, then it also appears at `https://site.com` and vice versa.**
 
 That is, cookies are domain-based, they do not distinguish between the protocols.
 
@@ -232,7 +232,7 @@ Lax mode, just like `strict`, forbids the browser to send cookies when coming fr
 A `samesite=lax` cookie is sent if both of these conditions are true:
 1. The HTTP method is "safe" (e.g. GET, but not POST).
 
-    The full list safe of HTTP methods is in the [RFC7231 specification](https://tools.ietf.org/html/rfc7231). Basically, these are the methods that should be used for reading, but not writing the data. They must not perform any data-changing operations. Following a link is always GET, the safe method.
+    The full list of safe HTTP methods is in the [RFC7231 specification](https://tools.ietf.org/html/rfc7231). Basically, these are the methods that should be used for reading, but not writing the data. They must not perform any data-changing operations. Following a link is always GET, the safe method.
 
 2. The operation performs top-level navigation (changes URL in the browser address bar).
 
@@ -253,13 +253,13 @@ But we surely can use `samesite` together with other protection measures, like x
 
 ## httpOnly
 
-This option has nothing to do with Javascript, but we have to mention it for completeness.
+This option has nothing to do with JavaScript, but we have to mention it for completeness.
 
 The web-server uses `Set-Cookie` header to set a cookie. And it may set the `httpOnly` option.
 
 This option forbids any JavaScript access to the cookie. We can't see such cookie or manipulate it using `document.cookie`.
 
-That's used as a precaution measure, to protect from certain attacks when a hacker injects his own Javascript code into a page and waits for a user to visit that page. That shouldn't be possible at all, a hacker should not be able to inject their code into our site, but there may be bugs that let hackers do it.
+That's used as a precaution measure, to protect from certain attacks when a hacker injects his own JavaScript code into a page and waits for a user to visit that page. That shouldn't be possible at all, a hacker should not be able to inject their code into our site, but there may be bugs that let hackers do it.
 
 
 Normally, if such thing happens, and a user visits a web-page with hacker's code, then that code executes and gains access to `document.cookie` with user cookies containing authentication information. That's bad.

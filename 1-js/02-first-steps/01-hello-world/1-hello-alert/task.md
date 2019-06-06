@@ -2,11 +2,10 @@ importance: 5
 
 ---
 
-# Show an alert
+# Вызвать alert
 
-Create a page that shows a message "I'm JavaScript!".
+Создайте страницу, которая отобразит сообщение "I'm JavaScript!".
 
-Do it in a sandbox, or on your hard drive, doesn't matter, just ensure that it works.
+Выполните это задание в песочнице, либо на вашем жёстком диске, где не важно, главное - проверьте что она работает.
 
 [demo src="solution"]
-

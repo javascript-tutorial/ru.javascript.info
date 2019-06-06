@@ -7,7 +7,7 @@ What's interesting about them is that the data survives a page refresh (for `ses
 We already have cookies. Why additional objects?
 
 - Unlike cookies, web storage objects are not sent to server with each request. Because of that, we can store much more. Most browsers allow at least 2 megabytes of data (or more) and have settings to configure that.
-- The server can't manipulate storage objects via HTTP headers, everything's done in JavaScript.
+- Also unlike cookies, the server can't manipulate storage objects via HTTP headers. Everything's done in JavaScript.
 - The storage is bound to the origin (domain/protocol/port triplet). That is, different protocols or subdomains infer different storage objects, they can't access data from each other.
 
 Both storage objects provide same methods and properties:
@@ -18,6 +18,8 @@ Both storage objects provide same methods and properties:
 - `clear()` -- delete everything.
 - `key(index)` -- get the key on a given position.
 - `length` -- the number of stored items.
+
+As you can see, it's like a `Map` collection (`setItem/getItem/removeItem`), but also keeps elements order and allows to access by index with `key(index)`.
 
 Let's see how it works.
 
@@ -71,11 +73,11 @@ That's allowed for historical reasons, and mostly works, but generally not recom
 
 ## Looping over keys
 
-Methods provide get/set/remove functionality. But how to get all the keys?
+As we've seen, the methods provide get/set/remove functionality. But how to get all saved values or keys?
 
 Unfortunately, storage objects are not iterable.
 
-One way is to use "array-like" iteration:
+One way is to loop over them as over an array:
 
 ```js run
 for(let i=0; i<localStorage.length; i++) {
@@ -84,9 +86,9 @@ for(let i=0; i<localStorage.length; i++) {
 }
 ```
 
-Another way is to use object-specific `for key in localStorage` loop.
+Another way is to use `for key in localStorage` loop, just as we do with regular objects.
 
-That iterates over keys, but also outputs few built-in fields that we don't need:
+It iterates over keys, but also outputs few built-in fields that we don't need:
 
 ```js run
 // bad try
@@ -122,7 +124,7 @@ The latter works, because `Object.keys` only returns the keys that belong to the
 
 Please note that both key and value must be strings.
 
-If we any other type, like a number, or an object, it gets converted to string automatically:
+If were any other type, like a number, or an object, it gets converted to string automatically:
 
 ```js run
 sessionStorage.user = {name: "John"};
@@ -180,7 +182,7 @@ That's exactly because `sessionStorage` is bound not only to the origin, but als
 
 When the data gets updated in `localStorage` or `sessionStorage`, [storage](https://www.w3.org/TR/webstorage/#the-storage-event) event triggers, with properties:
 
-- `key` – the key that was changed (null if `.clear()` is called).
+- `key` – the key that was changed (`null` if `.clear()` is called).
 - `oldValue` – the old value (`null` if the key is newly added).
 - `newValue` – the new value (`null` if the key is removed).
 - `url` – the url of the document where the update happened.
@@ -210,7 +212,7 @@ localStorage.setItem('now', Date.now());
 
 Please note that the event also contains: `event.url` -- the url of the document where the data was updated.
 
-Also, `event.storageArea` contains the storage object -- the event is the same for both `sessionStorage` and `localStorage`, so `storageArea` references the one that was modified. We may event want to set something back in it, to "respond" to a change.
+Also, `event.storageArea` contains the storage object -- the event is the same for both `sessionStorage` and `localStorage`, so `storageArea` references the one that was modified. We may even want to set something back in it, to "respond" to a change.
 
 **That allows different windows from the same origin to exchange messages.**
 
@@ -238,7 +240,7 @@ API:
 - `key(index)` -- get the key on a given position.
 - `length` -- the number of stored items.
 - Use `Object.keys` to get all keys.
-- Can use the keys as object properties, in that case `storage` event doesn't trigger.
+- Can use the keys as object properties, in that case `storage` event isn't triggered.
 
 Storage event:
 
