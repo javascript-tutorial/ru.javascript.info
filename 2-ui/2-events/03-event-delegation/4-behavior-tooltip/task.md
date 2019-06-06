@@ -2,35 +2,35 @@ importance: 5
 
 ---
 
-# Tooltip behavior
+# Поведение "подсказка"
 
-Create JS-code for the tooltip behavior.
+Напишите JS-код, реализующий поведение "подсказка".
 
-When a mouse comes over an element with `data-tooltip`, the tooltip should appear over it, and when it's gone then hide.
+При наведении мыши на элемент с атрибутом `data-tooltip`, над ним должна показываться подсказка и скрываться при переходе на другой элемент.
 
-An example of annotated HTML:
+Пример HTML с подсказками:
 ```html
-<button data-tooltip="the tooltip is longer than the element">Short button</button>
-<button data-tooltip="HTML<br>tooltip">One more button</button>
+<button data-tooltip="эта подсказка длиннее, чем элемент">Короткая кнопка</button>
+<button data-tooltip="HTML<br>подсказка">Ещё кнопка</button>
 ```
 
-Should work like this:
+Результат в ифрейме с документом:
 
 [iframe src="solution" height=200 border=1]
 
-In this task we assume that all elements with `data-tooltip` have only text inside. No nested tags.
+В этой задаче мы полагаем, что во всех элементах с атрибутом `data-tooltip` -- только текст. То есть, в них нет вложенных тегов (пока).
 
-Details:
+Детали оформления:
 
-- The tooltip should not cross window edges. Normally it should be above the element, but if the element is at the page top and there's no space for the tooltip, then below it.
-- The tooltip is given in the `data-tooltip` attribute. It can be arbitrary HTML.
+- Подсказка не должна вылезать за границы экрана, в том числе если страница частично прокручена, если нельзя показать сверху -- показывать снизу элемента.
+- Текст подсказки брать из значения атрибута `data-tooltip`. Это может быть произвольный HTML.
 
-You'll need two events here:
-- `mouseover` triggers when a pointer comes over an element.
-- `mouseout` triggers when a pointer leaves an element.
+Для решения вам понадобятся два события:
+- `mouseover` срабатывает, когда указатель мыши заходит на элемент.
+- `mouseout` срабатывает, когда указатель мыши уходит с элемента.
 
-Please use event delegation: set up two handlers on `document` to track all "overs" and "outs" from elements with `data-tooltip` and manage tooltips from there.
+Примените делегирование событий: установите оба обработчика на элемент `document`, чтобы отслеживать "заход" и "уход" курсора на элементы с атрибутом `data-tooltip` и управлять подсказками с их же помощью.
 
-After the behavior is implemented, even people unfamiliar with JavaScript can add annotated elements.
+После реализации поведения -- люди, даже не знакомые с JavaScript смогут добавлять подсказки к элементам.
 
-P.S. To keep things natural and simple: only one tooltip may show up at a time.
+P.S. В один момент может быть показана только одна подсказка.
