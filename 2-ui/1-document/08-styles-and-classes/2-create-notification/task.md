@@ -13,7 +13,7 @@ importance: 5
 showNotification({
   top: 10, // 10px сверху окна (по умолчанию 0px)
   right: 10, // 10px от правого края окна (по умолчанию 0px)
-  html: "Hello!", // HTML уведомления
+  html: "Hello!", // HTML-уведомление
   className: "welcome" // дополнительный класс для div (необязательно)
 });
 ```
