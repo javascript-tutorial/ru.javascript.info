@@ -2,11 +2,12 @@ importance: 5
 
 ---
 
-# Error creating an instance
+# Ошибка создания экземпляра класса
 
-Here's the code with `Rabbit` extending `Animal`.
+В коде ниже класс `Rabbit` наследует `Animal`.
 
-Unfortunately, `Rabbit` objects can't be created. What's wrong? Fix it.
+К сожалению, объект класса `Rabbit` не создаётся. Что не так? Исправьте ошибку.
+
 ```js run
 class Animal {
 

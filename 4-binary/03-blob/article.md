@@ -59,7 +59,7 @@ blob.slice([byteStart], [byteEnd], [contentType]);
 
 Blob может быть использован как URL для `<a>`, `<img>` или других тегов, для показа содержимого.
 
-Давайте начнем с простого примера. При клике на ссылку мы загружаем динамически генерируемый Blob с `hello world` содержимым как файл:
+Давайте начнём с простого примера. При клике на ссылку мы загружаем динамически генерируемый Blob с `hello world` содержимым как файл:
 
 ```html run
 <!-- download атрибут указывает браузеру делать загрузку вместо навигации -->
@@ -72,7 +72,7 @@ link.href = URL.createObjectURL(blob);
 </script>
 ```
 
-Мы так же можем создать ссылку динамически, используя только JavaScript, и эмулировать на ней клик, используя `link.click()`, тогда загрузка начнется автоматически.
+Мы так же можем создать ссылку динамически, используя только JavaScript, и эмулировать на ней клик, используя `link.click()`, тогда загрузка начнётся автоматически.
 
 Далее простой пример создания "на лету" и загрузки Blob объекта, без использования HTML:
 
@@ -89,7 +89,7 @@ link.click();
 URL.revokeObjectURL(link.href);
 ```
 
-**`URL.createObjectURL` берет Blob и создает уникальный URL для него, в форме `blob:<origin>/<uuid>`.**
+**`URL.createObjectURL` берет Blob и создаёт уникальный URL для него, в форме `blob:<origin>/<uuid>`.**
 
 Вот как выглядит сгенерированный URL:
 
@@ -97,7 +97,7 @@ URL.revokeObjectURL(link.href);
 blob:https://javascript.info/1e67e00e-860d-40a5-89ae-6ab0cbee6273
 ```
 
-Браузер для каждого url, сгенерированного через `URL.createObjectURL`, сохраняет внутреннее соответствие url -> blob. Таким образом url содержит короткий код, но это дает доступ к большому Blob-объекту.
+Браузер для каждого url, сгенерированного через `URL.createObjectURL`, сохраняет внутреннее соответствие url -> blob. Таким образом url содержит короткий код, но это даёт доступ к большому Blob-объекту.
 
 Сгенерированный url действителен только пока текущий документ открыт. И это позволяет ссылаться на сгенерированный в нем Blob в `<img>`, `<a>` или любом другом объекте, ожидающим url.
 
@@ -165,15 +165,15 @@ reader.onload = function() {
 Операции с изображениями выполняются через `<canvas>` элемент:
 
 1. Для отрисовки изображения (или его части) на холсте( canvas) используется [canvas.drawImage](https://developer.mozilla.org/ru/docs/Web/API/CanvasRenderingContext2D/drawImage).
-2. Вызов canvas метода [.toBlob(callback, format, quality)](https://developer.mozilla.org/ru/docs/Web/API/HTMLCanvasElement/toBlob) создает Blob и вызывает функцию `callback` при завершении.
+2. Вызов canvas метода [.toBlob(callback, format, quality)](https://developer.mozilla.org/ru/docs/Web/API/HTMLCanvasElement/toBlob) создаёт Blob и вызывает функцию `callback` при завершении.
 
 В примере ниже, изображение просто копируется, но мы можем взять его часть, или трансформировать его на canvas перед созданием Blob:
 
 ```js run
-// берем любое изображение
+// берём любое изображение
 let img = document.querySelector('img');
 
-// создаем <canvas> того же размера
+// создаём <canvas> того же размера
 let canvas = document.createElement('canvas');
 canvas.width = img.clientWidth;
 canvas.height = img.clientHeight;
