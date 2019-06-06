@@ -257,7 +257,6 @@ pseudo
 ```
 
 ````warn header="`getComputedStyle` требует полное свойство!"
-We should always ask for the exact property that we want, like `paddingLeft` or `marginTop` or `borderTopWidth`. Otherwise the correct result is not guaranteed.
 Для правильного получения значения нужно указать точное свойство. Например: `paddingLeft`, `marginTop`, `borderTopWidth`. При обращении к сокращенному: `padding``, `margin`, `border` – правильный результат не гарантируется.
 
 Например, если есть свойства `paddingLeft/paddingTop`, то что мы получим вызывая `getComputedStyle(elem).padding`? Ничего, или, может быть, "сгенерированное" значение из известных внутренних отступов? Стандарта для этого нет.
