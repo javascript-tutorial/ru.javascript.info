@@ -52,7 +52,7 @@ elem.style.top = top; // например, '456px'
 <body class="main page">
   <script>
 *!*
-    // добавдение класса
+    // добавление класса
     document.body.classList.add('article');
 */!*
 
