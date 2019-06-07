@@ -2,14 +2,14 @@ importance: 2
 
 ---
 
-# Show the sign
+# Покажите знак числа
 
-Using `if..else`, write the code which gets a number via `prompt` and then shows in `alert`:
+Используя конструкцию `if..else`, напишите код, который получает число через `prompt`, а затем выводит в `alert`:
 
-- `1`, if the value is greater than zero,
-- `-1`, if less than zero,
-- `0`, if equals zero.
+- `1`, если значение больше нуля,
+- `-1`, если значение меньше нуля,
+- `0`, если значение равно нулю.
 
-In this task we assume that the input is always a number.
+Предполагается, что пользователь вводит только числа.
 
 [demo src="if_sign"]
