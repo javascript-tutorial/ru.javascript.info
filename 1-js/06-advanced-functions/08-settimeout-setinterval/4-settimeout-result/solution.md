@@ -1,14 +1,14 @@
 
-Any `setTimeout` will run only after the current code has finished.
+Любой вызов `setTimeout` будет выполнен только после того, как текущий код завершится.
 
-The `i` will be the last one: `100000000`.
+Последним значением `i` будет: `100000000`.
 
 ```js run
 let i = 0;
 
 setTimeout(() => alert(i), 100); // 100000000
 
-// assume that the time to execute this function is >100ms
+// предположим, что время выполнения этой функции >100 мс
 for(let j = 0; j < 100000000; j++) {
   i++; 
 }

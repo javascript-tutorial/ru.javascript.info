@@ -164,14 +164,14 @@ class CoffeeMachine {
   }
 
   *!*getWaterAmount()*/!* {
-    return this.waterAmount;
+    return this._waterAmount;
   }
 }
 
 new CoffeeMachine().setWaterAmount(100);
 ```
 
-That looks a bit longer, but functions are more flexible. They can accept multiple arguments (even if we don't need them right now). So, for the future, just in case we need to refactor something, functions are a safer choise.
+That looks a bit longer, but functions are more flexible. They can accept multiple arguments (even if we don't need them right now). So, for the future, just in case we need to refactor something, functions are a safer choice.
 
 Surely, there's a tradeoff. On the other hand, get/set syntax is shorter, so ultimately there's no strict rule, it's up to you to decide.
 ````
@@ -215,7 +215,7 @@ class CoffeeMachine {
   }
 
   get waterAmount() {
-    return this.waterAmount;
+    return this._waterAmount;
   }
 
 }
@@ -262,7 +262,7 @@ Unlike protected ones, private fields are enforced by the language itself. That'
 But if we inherit from `CoffeeMachine`, then we'll have no direct access to `#waterAmount`. We'll need to rely on `waterAmount` getter/setter:
 
 ```js
-class CoffeeMachine extends CoffeeMachine() {
+class MegaCoffeeMachine extends CoffeeMachine() {
   method() {
 *!*
     alert( this.#waterAmount ); // Error: can only access from CoffeeMachine

@@ -1,8 +1,8 @@
-# Fault-tolerant Promise.all
+# Отказоустойчивый Promise.all
 
-We'd like to fetch multiple URLs in parallel.
+Мы бы хотели загрузить несколько ссылок параллельно.
 
-Here's the code to do that:
+Как можно это сделать:
 
 ```js run
 let urls = [
@@ -20,13 +20,13 @@ Promise.all(urls.map(url => fetch(url)))
   });
 ```
 
-The problem is that if any of requests fails, then `Promise.all` rejects with the error, and we lose the results of all the other requests.
+Проблема в том, что если какой-нибудь промис завершится ошибкой, то `Promise.all` вернёт эту ошибку и мы потеряем уже загруженные ссылки.
 
-That's not good.
+Это не хорошо.
 
-Modify the code so that the array `responses` in the line `(*)` would include the response objects for successful fetches and error objects for failed ones.
+Исправьте код так, чтобы массив `responses` в строке `(*)` включал в себя объекты с успешно выполненными запросами и объекты с ошибками.
 
-For instance, if one of the URLs is bad, then it should be like:
+Например, если одна из указанных ссылок некорректная, то результат должен быть примерно таким:
 
 ```js
 let urls = [
@@ -35,14 +35,14 @@ let urls = [
   'http://no-such-url'
 ];
 
-Promise.all(...) // your code to fetch URLs...
-  // ...and pass fetch errors as members of the resulting array...
+Promise.all(...) // код для получения данных с указанных ссылок
+  // ...и передаём полученные ошибки в качестве элементов массива...
   .then(responses => {  
-    // 3 urls => 3 array members
+    // 3 ссылки => 3 элемента массива
     alert(responses[0].status); // 200
     alert(responses[1].status); // 200
-    alert(responses[2]); // TypeError: failed to fetch (text may vary)
+    alert(responses[2]); // TypeError: failed to fetch (сообщение ошибки зависит от браузера)
   });
 ```
 
-P.S. In this task you don't have to load the full response using `response.text()` or `response.json()`. Just handle fetch errors the right way.
+P.S. В этой задаче вам не надо загружать всю страницу, используя `response.text()` или `response.json()`. Просто обработайте ошибки правильно.

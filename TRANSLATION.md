@@ -24,7 +24,7 @@ const text = "Hello, world";
 document.querySelector('.hello').innerHTML = text;
 ```
 
-✅ ХОРОШО (переведен комментарий):
+✅ ХОРОШО (переведён комментарий):
 
 ```js
 // Пример
@@ -32,7 +32,7 @@ const text = 'Hello, world';
 document.querySelector('.hello').innerHTML = text;
 ```
 
-✅ ТОЖЕ ОК (переведен комментарий и текст):
+✅ ТОЖЕ ОК (переведён комментарий и текст):
 
 ```js
 // Пример
@@ -67,14 +67,27 @@ document.querySelector('.hello').innerHTML = text;
 - Используйте букву `ё` ([этот npm-пакет](https://github.com/hcodes/eyo) может проверить текст и вставить её, где нужно)
 - Не знаете, как перевести термин? [Словарь «Веб-стандартов»](https://github.com/web-standards-ru/dictionary/blob/master/dictionary.md) поможет!
 - Названия компаний (Google), библиотек (Jest) и аббревиатуры (DOM) не переводятся.
+- **importance: n** встречающееся в начале задач - служебное поле, перевод не требуется.
 
 ## Соглашение по переводу (глоссарий)
 
 **Пожалуйста, поддерживайте глоссарий в алфавитном порядке.**
 
-| Оригинальный термин | Перевод           |
-|:--------------------|:------------------|
-| backtick            | обратный апостроф |
+| Оригинальный термин    | Перевод                                                                        |
+| :--------------------- | :----------------------------------------------------------------------------- |
+| Arrow function         | Стрелочная функция                                                             |
+| Backtick               | Обратная кавычка                                                              |
+| Bitwise operator       | Побитовый оператор                                              |
+| Breakpoint             | Точка останова     |                                              
+| Character class        | Символьный класс  |
+| Comparison             | Операция сравнения                                     |
+| Construct              | Конструкция                                     |
+| Conversion             | Конвертирование                                            |
+| Left click/right click | Левый/правый клик? Кликните? левой кнопкой мыши        |
+| More in / Details in   | Подробнее в                                                      |
+| Script                 | Скрипт                                                        |
+| Statement              | Инструкция                                                       |
+| Summary                | Итого                                                                          |
 
 ## Ресурсы по переводу
 
@@ -82,3 +95,5 @@ document.querySelector('.hello').innerHTML = text;
 
 * [Берегись канцелярита!](http://www.vavilon.ru/noragal/slovo2.html)
 * [Словесная алгебра](http://www.vavilon.ru/noragal/slovo4.html)
+* [Поиск переводов в контексте](https://context.reverso.net/перевод/)
+* [DeepL - переводчик на нейросетях](https://www.deepl.com/translator)
