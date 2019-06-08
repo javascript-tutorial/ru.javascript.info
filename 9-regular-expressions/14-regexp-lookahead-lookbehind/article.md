@@ -1,105 +1,108 @@
-# Lookahead and lookbehind
+# Опережающие и ретроспективные проверки
 
-Sometimes we need to match a pattern only if followed by another pattern. For instance, we'd like to get the price from a string like `subject:1 turkey costs 30€`.
+В некоторых случаях, нам нужен паттерн, который следует за опеределённым паттерном. Например, нам нужно найти цену одной индейки из строки `subject:1 индейка стоит 30€`.
 
-We need a number (let's say a price has no decimal point) followed by `subject:€` sign.
+Следовательно, нам нужно число (в данном примере - это целое число), после которого следует знак валюты `subject:€`.
 
-That's what lookahead is for.
+Именно для таких задач и существует опережающая проверка.
 
-## Lookahead
+## Опережающая проверка
 
-The syntax is: `pattern:x(?=y)`, it means "look for `pattern:x`, but match only if followed by `pattern:y`".
+Синтаксис: `pattern:x(?=y)`
+Пояснение: найди такой `pattern:х`, за которым обязательно следует `pattern:y`.
 
-For an integer amount followed by `subject:€`, the regexp will be `pattern:\d+(?=€)`:
+Следовательно, в данном примере регулярное выражение для суммы денег, которая следует за `subject:€` будет `pattern:\d+(?=€)`:
 
 ```js run
-let str = "1 turkey costs 30€";
+let str = "1 индейка стоит 30€";
 
-alert( str.match(/\d+(?=€)/) ); // 30 (correctly skipped the sole number 1)
+alert( str.match(/\d+(?=€)/) ); // 30 (число 1 было проигнорировано, так как за ним НЕ следует `subject:€`)
 ```
 
-Let's say we want a quantity instead, that is a number, NOT followed by `subject:€`.
+Допустим, в этот раз нам нужно узнать количество индеек, которое можно купить за 30€ - число, за которым НЕ следует `subject:€`.
 
-Here a negative lookahead can be applied.
+Для этой задачи мы можем применить негативную опережающую проверку.
 
-The syntax is: `pattern:x(?!y)`, it means "search `pattern:x`, but only if not followed by `pattern:y`".
+Синтаксис: `pattern:x(?!y)`
+Пояснение: найди такой `pattern:х`, за которым НЕ следует `pattern:y`.
 
 ```js run
-let str = "2 turkeys cost 60€";
+let str = "2 индейки стоят 60€";
 
-alert( str.match(/\d+(?!€)/) ); // 2 (correctly skipped the price)
+alert( str.match(/\d+(?!€)/) ); // 2 (в этот раз была проигнорирована цена)
 ```
 
-## Lookbehind
+## Ретроспективная проверка
 
-Lookahead allows to add a condition for "what goes after".
+Пользуясь опережающей проверкой, мы можем добавить условие об элементе, "который идёт после".
 
-Lookbehind is similar, but it looks behind. That is, it allows to match a pattern only if there's something before.
+Ретроспективная проверка выполняет такую же функцию, но с просмотром назад. Другими словами, она позволяет найти паттерн, только если перед ним идёт определённый паттерн.
 
-The syntax is:
-- Positive lookbehind: `pattern:(?<=y)x`, matches `pattern:x`, but only if it follows after `pattern:y`.
-- Negative lookbehind: `pattern:(?<!y)x`, matches `pattern:x`, but only if there's no `pattern:y` before.
+Синтаксис:
+- Позитивная ретроспективная проверка: `pattern:(?<=y)x`, выдаёт совпадение на `pattern:x`, при условии, что перед ним ЕСТЬ `pattern:y`.
+- Негативная ретроспективная проверка: `pattern:(?<!y)x`, выдаёт совпадение на `pattern:x`, при условии, что перед ним НЕТ `pattern:y`.
 
-For example, let's change the price to US dollars. The dollar sign is usually before the number, so to look for `$30` we'll use `pattern:(?<=\$)\d+` -- an amount preceeded by `subject:$`:
+Чтобы протестировать ретроспективную проверку, давайте поменяем валюту на доллары США. Знак доллара обычно ставится перед суммой денег, поэтому для того чтобы найти `$30`, мы используем `pattern:(?<=\$)\d+`, так как это даст нам сумму перед `subject:$`.
 
 ```js run
-let str = "1 turkey costs $30";
+let str = "1 индейка стоит $30";
 
-alert( str.match(/(?<=\$)\d+/) ); // 30 (skipped the sole number)
+alert( str.match(/(?<=\$)\d+/) ); // 30 (проигнорировалось число 1)
 ```
 
-And, to find the quantity -- a number, not preceeded by `subject:$`, we can use a negative lookbehind `pattern:(?<!\$)\d+`:
+Если нам необходимо найти количество индеек - число, которое идёт перед `subject:$`, мы можем использовать негативную ретроспективную проверку `pattern:(?<!\$)\d+`:
 
 ```js run
-let str = "2 turkeys cost $60";
+let str = "2 индейки стоят $60";
 
-alert( str.match(/(?<!\$)\d+/) ); // 2 (skipped the price)
+alert( str.match(/(?<!\$)\d+/) ); // 2 (проигнорировалась цена)
 ```
 
-## Capture groups
+## Захват групп
 
-Generally, what's inside the lookaround (a common name for both lookahead and lookbehind) parentheses does not become a part of the match.
+Как правило, то что находится внутри lookaround (общее наименование для опережающей и ретроспективной проверок), не включается в результат совпадения.
 
-E.g. in the pattern `pattern:\d+(?!€)`, the `pattern:€` sign doesn't get captured as a part of the match.
+Например, в паттерне `pattern:\d+(?!€)` знак `pattern:€` не будет захвачен в результат совпадения.
 
-But if we want to capture the whole lookaround expression or a part of it, that's possible. Just need to wrap that into additional parentheses.
+Однако, существует способ, чтобы захватить весь lookaround или же его часть. Нам всего лишь нужно заключить lookaround в дополнительные скобки.
 
-For instance, here the currency `pattern:(€|kr)` is captured, along with the amount:
+Например, в нижеследующем случае, валюта `pattern:(€|kr)` будет захвачена также как и сумма:
 
 ```js run
-let str = "1 turkey costs 30€";
-let reg = /\d+(?=(€|kr))/; // extra parentheses around €|kr
+let str = "1 индейка стоит 30€";
+let reg = /\d+(?=(€|kr))/; // добавлены дополнительные скобки вокруг €|kr
 
 alert( str.match(reg) ); // 30, €
 ```
 
-And here's the same for lookbehind:
+Тоже самое можно применить к ретроспективной проверке:
 
 ```js run
-let str = "1 turkey costs $30";
+let str = "1 индейка стоит $30";
 let reg = /(?<=(\$|£))\d+/;
 
 alert( str.match(reg) ); // 30, $
 ```
 
-Please note that for lookbehind the order stays be same, even though lookahead parentheses are before the main pattern.
+Обратите внимание, что порядок выдачи результата ретроспективной проверки идентичен порядку опережающей проверки, несмотря на то, что в опережающей проверке скобки расположены ПЕРЕД главным паттерном.
 
-Usually parentheses are numbered left-to-right, but lookbehind is an exception, it is always captured after the main pattern. So the match for `pattern:\d+` goes in the result first, and then for `pattern:(\$|£)`.
+Обычно, порядок действия в случае наличия скобок - это слева направо. Однако, ретроспективная проверка является исключением, её порядок захвата всегда идёт ПОСЛЕ главного паттерна. Поэтому, в данном примере, результат совпадения для `pattern:\d+` будет идти первым, а результат для `pattern:(\$|£)` будет вторым.
 
+## Итого
 
-## Summary
+Опережающая и ретроспективная проверки (обычно их называют lookaround) удобны для простых регулярных выражений, когда мы не хотим включать определённый паттерн в совпадение в зависимости от контекста до или после.
 
-Lookahead and lookbehind (commonly referred to as "lookaround") are useful for simple regular expressions, when we'd like not to take something into the match depending on the context before/after it.
+В некоторых случаях, мы можем сделать это вручную - использовать match all и потом отфильтровать по контексту в цикле.
+Важно не забывать, что `str.matchAll` и `reg.exec` возвращают совпадения с `.index` проперти, поэтому мы знаем его точное расположение.
+Однако, для таких заданий лучше использовать регулярные выражения.
 
-Sometimes we can do the same manually, that is: match all and filter by context in the loop. Remember, `str.matchAll` and `reg.exec` return matches with `.index` property, so we know where exactly in the text it is. But generally regular expressions can do it better.
+Виды lookaround:
 
-Lookaround types:
+| Паттерн            | Тип                        | Совпадение                      |
+|--------------------|----------------------------|---------------------------------|
+| `pattern:x(?=y)`   | Позитивная опережающая     | `x`, если за ним следует `y`    |
+| `pattern:x(?!y)`   | Негативная опережаюшая     | `x`, если за ним НЕ следует `y` |
+| `pattern:(?<=y)x`  | Позитивная ретроспективная | `x`, если следует за `y`        |
+| `pattern:(?<!y)x`  | Негативная ретроспективная | `x`, если НЕ следует за `y`     |
 
-| Pattern            | type             | matches |
-|--------------------|------------------|---------|
-| `pattern:x(?=y)`   | Positive lookahead | `x` if followed by `y` |
-| `pattern:x(?!y)`   | Negative lookahead | `x` if not followed by `y` |
-| `pattern:(?<=y)x` |  Positive lookbehind | `x` if after `y` |
-| `pattern:(?<!y)x` | Negative lookbehind | `x` if not after `y` |
-
-Lookahead can also used to disable backtracking. Why that may be needed -- see in the next chapter.
+Опережающая проверка также может быть использована, чтобы отключить возвраты. Для чего нам это может понадобиться, вы узнаете в следующей главе.
