@@ -146,7 +146,7 @@ date = date.toUTCString();
 document.cookie = "user=John; expires=" + date;
 ```
 
-Если мы установим в `expires` прошедшую дату, то cookie удалится.
+Если мы установим в `expires` прошедшую дату, то куки удалится.
 
 -  **`max-age=3600`**
 
