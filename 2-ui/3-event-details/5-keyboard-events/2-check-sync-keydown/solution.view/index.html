@@ -2,7 +2,7 @@
 <html>
 <body>
 
-  <p>Press "Q" and "W" together (can be in any language).</p>
+  <p>Нажмите "Q" и "W" вместе (язык значения не играет).</p>
 
   <script>
     function runOnKeys(func, ...codes) {
@@ -11,19 +11,18 @@
       document.addEventListener('keydown', function(event) {
         pressed.add(event.code);
 
-        for (let code of codes) { // are all keys in the set?
+        for (let code of codes) { // все ли клавиши из набора нажаты?
           if (!pressed.has(code)) {
             return;
           }
         }
 
-        // yes, they are
+        // да, все
 
-        // during the alert, if the visitor releases the keys,
-        // JavaScript does not get the "keyup" event
-        // and pressed set will keep assuming that the key is pressed
-        // so, to evade "sticky" keys, we reset the status
-        // if the user wants to run the hotkey again - let them press all keys again
+        // во время вывода сообщения, если пользователь отпустит клавиши
+        // событие "keyup" не произойдет, так как "alert" полностью 
+        // блокирует выполнение скрипта
+        // и в коллекции останутся значения. Поэтому мы очищаем коллекцию 
         pressed.clear();
 
         func();
@@ -36,7 +35,7 @@
     }
 
     runOnKeys(
-      () => alert("Hello!"),
+      () => alert("Привет!"),
       "KeyQ",
       "KeyW"
     );
