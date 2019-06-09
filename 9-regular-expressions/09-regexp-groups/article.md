@@ -49,11 +49,11 @@ alert("my@mail.com @ his@site.com.uk".match(reg)); // my@mail.com, his@site.com.
 
 Группы скобок нумируются слева направо. Поисковый движок запоминает содержимое в каждой группе и позволяет ссылаться на него в шаблоне регулярного выражения или строке для замены.
 
-For instance, we'd like to find HTML tags `pattern:<.*?>`, and process them.
+Например, мы хотим найти HTML теги `pattern:<.*?>` и обрадотать их.
 
-Let's wrap the inner content into parentheses, like this: `pattern:<(.*?)>`.
+Давайте заключим внутреннее содержимое в круглые скобки: `pattern:<(.*?)>`.
 
-We'll get them into an array:
+Соберем их в массив:
 
 ```js run
 let str = '<h1>Hello, world!</h1>';
@@ -62,14 +62,14 @@ let reg = /<(.*?)>/;
 alert( str.match(reg) ); // Array: ["<h1>", "h1"]
 ```
 
-The call to [String#match](mdn:js/String/match) returns groups only if the regexp has no `pattern:/.../g` flag.
+Вызов [String#match](mdn:js/String/match) возвращает группы только если регулярное выражение не имеет флаг `pattern:/.../g`.
 
-If we need all matches with their groups then we can use `.matchAll` or `regexp.exec` as described in <info:regexp-methods>:
+Если необходимы все совпадения с их группировкой, то мы можем использовать `.matchAll` или `regexp.exec` как описано в <info:regexp-methods>:
 
 ```js run
 let str = '<h1>Hello, world!</h1>';
 
-// two matches: opening <h1> and closing </h1> tags
+// два совпадения: теги открытия <h1> и закрытия </h1>
 let reg = /<(.*?)>/g;
 
 let matches = Array.from( str.matchAll(reg) );
@@ -78,7 +78,7 @@ alert(matches[0]); //  Array: ["<h1>", "h1"]
 alert(matches[1]); //  Array: ["</h1>", "/h1"]
 ```
 
-Here we have two matches for `pattern:<(.*?)>`, each of them is an array with the full match and groups.
+Здесь мы имеем два совпадения для `pattern:<(.*?)>`. Каждый из них является массивом с полным совдаением и группой.
 
 ## Nested groups
 
