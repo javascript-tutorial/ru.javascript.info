@@ -1,5 +1,5 @@
 
-First, let's see how *not* to do it:
+Сначала давайте посмотрим, как *не* сделать это:
 
 ```js
 function clear(elem) {
@@ -9,11 +9,11 @@ function clear(elem) {
 }
 ```
 
-That won't work, because the call to `remove()` shifts the collection `elem.childNodes`, so elements start from the index `0` every time. But `i` increases, and some elements will be skipped.
+Это не будет работать, потому что вызов `remove()` сдвигает коллекцию `elem.childNodes`, поэтому элементы начинаются каждый раз с индекса `0`. А `i` увеличивается и некоторые элементы будут пропущены.
 
-The `for..of` loop also does the same.
+Цикл `for..of` делает тоже самое.
 
-The right variant could be:
+Правильным вариантом может быть:
 
 ```js
 function clear(elem) {
@@ -23,7 +23,7 @@ function clear(elem) {
 }
 ```
 
-And also there's a simpler way to do the same:
+А также есть более простой способ сделать то же самое:
 
 ```js
 function clear(elem) {

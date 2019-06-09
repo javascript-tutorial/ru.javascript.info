@@ -2,10 +2,10 @@ importance: 4
 
 ---
 
-# Colored clock with setInterval
+# Цветные часы с использованием setInterval
 
-Create a colored clock like here:
+Создайте цветные часы как в примере ниже:
 
 [iframe src="solution" height=60]
 
-Use HTML/CSS for the styling, Javascript only updates time in elements.
+Используйте HTML/CSS для стилизации, Javascript только обновляет время в элементах.

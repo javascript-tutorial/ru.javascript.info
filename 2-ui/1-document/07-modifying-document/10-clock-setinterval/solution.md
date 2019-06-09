@@ -1,6 +1,6 @@
-First, let's make HTML/CSS.
+Для начала, придумаем подходящую HTML/CSS-структуру.
 
-Each component of the time would look great in its own `<span>`:
+Здесь каждый компонент времени удобно поместить в соответствующий `<span>`:
 
 ```html
 <div id="clock">
@@ -8,9 +8,9 @@ Each component of the time would look great in its own `<span>`:
 </div>
 ```
 
-Also we'll need CSS to color them.
+Каждый `span` раскрашивается при помощи CSS.
 
-The `update` function will refresh the clock, to be called by `setInterval` every second:
+Функция `update` будет обновлять часы, `setInterval` вызывает её каждую секунду:
 
 ```js
 function update() {
@@ -32,14 +32,14 @@ function update() {
 }
 ```
 
-In the line `(*)` we every time check the current date. The calls to `setInterval` are not reliable: they may happen with delays.
+В строке (*) каждый раз мы получаем текущую дату. Вызовы `setInterval` не надежны: они могут происходить с задержками
 
-The clock-managing functions:
+Функция `clockStart` для запуска часов:
 
 ```js
 let timerId;
 
-function clockStart() { // run the clock
+function clockStart() { // запустить часы
   timerId = setInterval(update, 1000);
   update(); // (*)
 }
@@ -50,4 +50,4 @@ function clockStop() {
 }
 ```
 
-Please note that the call to `update()` is not only scheduled in `clockStart()`, but immediately run in the line `(*)`. Otherwise the visitor would have to wait till the first execution of `setInterval`. And the clock would be empty till then.
+Обратите внимание, что вызов `update` не только запланирован, но и тут же производится в строке `(*)`. Иначе посетителю пришлось бы ждать до первого выполнения `setInterval`, то есть целую секунду.

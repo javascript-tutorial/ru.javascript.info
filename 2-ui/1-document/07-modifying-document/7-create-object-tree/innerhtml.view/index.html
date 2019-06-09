@@ -6,19 +6,19 @@
 
   <script>
     let data = {
-      "Fish": {
-        "trout": {},
-        "salmon": {}
+      "Рыбы": {
+        "форель": {},
+        "лосось": {}
       },
 
-      "Tree": {
-        "Huge": {
-          "sequoia": {},
-          "oak": {}
+      "Деревья": {
+        "Огромные": {
+          "секвойя": {},
+          "дуб": {}
         },
-        "Flowering": {
-          "redbud": {},
-          "magnolia": {}
+        "Цветковые": {
+          "редбуд": {},
+          "магнолия": {}
         }
       }
     };
@@ -27,7 +27,7 @@
       container.innerHTML = createTreeText(obj);
     }
 
-    function createTreeText(obj) { // standalone recursive function
+    function createTreeText(obj) { // автономная рекурсивная функция
       let li = '';
       let ul;
       for (let key in obj) {

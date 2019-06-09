@@ -2,22 +2,22 @@ importance: 1
 
 ---
 
-# Why does "aaa" remain?
+# Почему остаётся "aaa"?
 
-Run the example. Why does `table.remove()` not delete the text `"aaa"`?
+Запустите этот пример. Почему вызов `removeChild` не удалил текст `"aaa"`?
 
 ```html height=100 run
 <table id="table">
   aaa
   <tr>
-    <td>Test</td>
+    <td>Тест</td>
   </tr>
 </table>
 
 <script>
-  alert(table); // the table, as it should be
+  alert(table); // таблица, пока всё правильно
 
   table.remove();
-  // why there's still aaa in the document?
+  // почему в документе остался текст?
 </script>
 ```

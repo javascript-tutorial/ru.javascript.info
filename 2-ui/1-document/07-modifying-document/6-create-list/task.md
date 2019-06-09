@@ -2,18 +2,18 @@ importance: 4
 
 ---
 
-# Create a list
+# Создать список
 
-Write an interface to create a list from user input.
+Напишите интерфейс для создания списка.
 
-For every list item:
+Для каждого пункта:
 
-1. Ask a user about its content using `prompt`.
-2. Create the `<li>` with it and add it to `<ul>`.
-3. Continue until the user cancels the input (by pressing `key:Esc` or CANCEL in prompt).
+1. Запрашивайте содержимое пункта у пользователя с помощью  `prompt`.
+2. Создавайте пункт `li` и добавляйте его к `<ul>`.
+3. Процесс прерывается, когда пользователь нажимает ESC или вводит пустую строку.
 
-All elements should be created dynamically.
+Все элементы должны создаваться динамически.
 
-If a user types HTML-tags, they should be treated like a text.
+Если посетитель вводит теги – пусть в списке они показываются как обычный текст.
 
 [demo src="solution"]
