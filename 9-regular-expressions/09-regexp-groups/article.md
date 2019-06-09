@@ -105,13 +105,13 @@ alert(result); // <span class="my">, span class="my", span, class="my"
 
 ![](regexp-nested-groups.png)
 
-At the zero index of the `result` is always the full match.
+С нулевым индексом `result` всегда идет совпадение полностью.
 
-Then groups, numbered from left to right. Whichever opens first gives the first group `result[1]`. Here it encloses the whole tag content.
+Затем группы, нумеруемые слева направо. Та, которая открывается первой, получает первую группу `result[1]`. Она заключает в себе все содержимое тега.
 
-Then in `result[2]` goes the group from the second opening `pattern:(` till the corresponding `pattern:)` -- tag name, then we don't group spaces, but group attributes for `result[3]`.
+Затем в `result[2]` идет группа от второй открывающей скобки  `pattern:(` до соответствующей `pattern:)` -- имя тега, тогда мы группируем не пространства, а группу аттрибутов для `result[3]`.
 
-**If a group is optional and doesn't exist in the match, the corresponding `result` index is present (and equals `undefined`).**
+**Даже если скобочная группа необязательна и не входит в совпадение, соответствующий элемент массива `result` существует (и равен `undefined`).**
 
 For instance, let's consider the regexp `pattern:a(z)?(c)?`. It looks for `"a"` optionally followed by `"z"` optionally followed by `"c"`.
 
