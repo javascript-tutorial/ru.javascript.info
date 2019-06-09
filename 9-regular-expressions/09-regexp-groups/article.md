@@ -80,17 +80,17 @@ alert(matches[1]); //  Array: ["</h1>", "/h1"]
 
 Здесь мы имеем два совпадения для `pattern:<(.*?)>`. Каждый из них является массивом с полным совдаением и группой.
 
-## Nested groups
+## Вложенные группы
 
-Parentheses can be nested. In this case the numbering also goes from left to right.
+Скобки могут быть и вложенными. В этом случае нумерация также идёт слева направо.
 
-For instance, when searching a tag in `subject:<span class="my">` we may be interested in:
+Например, при поиске тега в `subject:<span class="my">` нас может интересовать:
 
-1. The tag content as a whole: `match:span class="my"`.
-2. The tag name: `match:span`.
-3. The tag attributes: `match:class="my"`.
+1. Содержимое тега целиком: `match:span class="my"`.
+2. Название тега: `match:span`.
+3. Аттрибуты тега: `match:class="my"`.
 
-Let's add parentheses for them:
+Давайте добавим скобки для них:
 
 ```js run
 let str = '<span class="my">';
@@ -101,7 +101,7 @@ let result = str.match(reg);
 alert(result); // <span class="my">, span class="my", span, class="my"
 ```
 
-Here's how groups look:
+Вот так выглядят скобочные группы:
 
 ![](regexp-nested-groups.png)
 
