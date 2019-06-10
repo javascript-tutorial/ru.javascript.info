@@ -528,7 +528,7 @@ ul.append(...getListContent()); // append + оператор "..." = друзь�
 
 - Задан список узлов и строк:
   - `node.append(...nodes or strings)` -- вставляет в `node` в конец,
-  - `node.prepend(...nodes or strings)` -- вставляет в `node`в начало,
+  - `node.prepend(...nodes or strings)` -- вставляет в `node` в начало,
   - `node.before(...nodes or strings)` –- вставляет прямо перед `node`,
   - `node.after(...nodes or strings)` –- вставляет сразу после `node`,
   - `node.replaceWith(...nodes or strings)` –- заменяет `node`.
