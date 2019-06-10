@@ -1,11 +1,11 @@
 
-# Global object
+# Глобальный объект
 
-The global object provides variables and functions that are available anywhere. Mostly, the ones that are built into the language or the host environment1.
+Глобальный объект предоставляет переменные и функции, доступные в любом месте программы. В основном те, что встроенны в язык или среду исполнения. The global object provides variables and functions that are available anywhere. Mostly, the ones that are built into the language or the host environment.
 
-In a browser it is named "window", for Node.js it is "global", for other environments it may have another name.
+В браузере он назыается "window", в Node.js — "global", в другой среде исполнения глобальный объект может называться иначе. In a browser it is named "window", for Node.js it is "global", for other environments it may have another name.
 
-For instance, we can call `alert` as a method of `window`:
+Например, мы можем вызвать `alert` как метод `window`: For instance, we can call `alert` as a method of `window`:
 
 ```js run
 alert("Hello");
