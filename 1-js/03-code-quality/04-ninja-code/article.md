@@ -141,7 +141,11 @@ i = i ? i < 0 ? Math.max(0, len + i) : i : 0;
 
 Это не только затруднит идентификацию того, что *сейчас* находится в переменной, но и сделает почти невозможным поиск места, в котором конкретное значение было присвоено.
 
+<<<<<<< HEAD
 Цель - развить интуицию и память читающего код программиста. Ну а пока интуация слаба, он может построчно анализировать код и конспектировать изменения переменных для каждой ветки исполнения.
+=======
+That would make it really hard to identify what's exactly in the variable *now*. And also where it comes from. The purpose is to develop the intuition and memory of a person reading the code. A person with weak intuition would have to analyze the code line-by-line and track the changes through every code branch.
+>>>>>>> 9cb33f4039e5751bfd0e2bca565a37aa463fb477
 
 **Продвинутый вариант этого подхода – незаметно (!) подменить переменную на нечто похожее, например:**
 
@@ -155,7 +159,13 @@ function ninjaFunction(elem) {
 }
 ```
 
+<<<<<<< HEAD
 Программист, пожелавший добавить действия с `elem` во вторую часть функции, будет удивлён. Лишь во время отладки, посмотрев весь код, он с удивлением обнаружит, что оказывается имел дело с клоном!
+=======
+A fellow programmer who wants to work with `elem` in the second half of the function will be surprised... Only during the debugging, after examining the code they will find out that they're working with a clone!
+
+Seen in code regularly. Deadly effective even against an experienced ninja.
+>>>>>>> 9cb33f4039e5751bfd0e2bca565a37aa463fb477
 
 Регулярные встречи с этим приемом на практике говорят: защититься невозможно. Эффективно даже против опытного ниндзи.
 
@@ -169,9 +179,13 @@ function ninjaFunction(elem) {
 
 ## Покажите вашу любовь к разработке
 
+<<<<<<< HEAD
 Пусть все видят, какими замечательными сущностями вы оперируете! Имена `superElement`, `megaFrame` и `niceItem` при благоприятном положении звёзд могут привести к просветлению читающего.
 
 Действительно, с одной стороны, кое-что написано: `super..`, `mega..`, `nice..` С другой – это не несёт никакой конкретики. Читающий может решить поискать в этом глубинный смысл и замедитировать на часок-другой оплаченного рабочего времени.
+=======
+Indeed, from one hand, something is written: `super..`, `mega..`, `nice..` But from the other hand -- that brings no details. A reader may decide to look for a hidden meaning and meditate for an hour or two of their paid working time.
+>>>>>>> 9cb33f4039e5751bfd0e2bca565a37aa463fb477
 
 ## Перекрывайте внешние переменные
 
@@ -180,7 +194,11 @@ function ninjaFunction(elem) {
 Пребывая же в темноте, увидишь все, что находится на свету.
 ```
 
+<<<<<<< HEAD
 Почему бы не использовать одинаковые переменные внутри и снаружи функции? Это просто и не требует придумывать новых имён.
+=======
+Use same names for variables inside and outside a function. As simple. No efforts to invent new names.
+>>>>>>> 9cb33f4039e5751bfd0e2bca565a37aa463fb477
 
 ```js
 let *!*user*/!* = authenticateUser();

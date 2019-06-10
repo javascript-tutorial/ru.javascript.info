@@ -1,6 +1,10 @@
 # Обратные ссылки в шаблоне: \n и \k
 
+<<<<<<< HEAD
 Доступ к содержимому скобочных групп есть не только в результате или в строке замены, но и в самом шаблоне.
+=======
+We can use the contents of capturing groups `(...)` not only in the result or in the replacement string, but also in the pattern itself.
+>>>>>>> 9cb33f4039e5751bfd0e2bca565a37aa463fb477
 
 ## Обратная ссылка по номеру: \n
 
@@ -14,6 +18,10 @@
 
 Можно добавить оба вида кавычек в квадратные скобки: `pattern:['"](.*?)['"]`, но в таком случае будут находиться строки со смешанными кавычками, например `match:"...'` и `match:'..."`. Это приведёт к ошибке, когда одна кавычка окажется внутри других, как в строке `subject:"She's the one!"`:
 
+<<<<<<< HEAD
+=======
+We can put both kinds of quotes in the square brackets: `pattern:['"](.*?)['"]`, but it would find strings with mixed quotes, like `match:"...'` and `match:'..."`. That would lead to incorrect matches when one quote appears inside other ones, like the string `subject:"She's the one!"`:
+>>>>>>> 9cb33f4039e5751bfd0e2bca565a37aa463fb477
 
 ```js run
 let str = `He said: "She's the one!".`;
@@ -26,7 +34,11 @@ alert( str.match(reg) ); // "She'
 
 Как видно, шаблон нашёл открывающую кавычку `match:"`, а после нашёл текст вплоть до следующей кавычки `match:'`, после чего поиск завершился.
 
+<<<<<<< HEAD
 Для того, чтобы шаблон искал закрывающую кавычку такую же, как и открывающую, обернём открывающие кавычки в скобочную группу и используем обратную ссылку на неё:
+=======
+To make sure that the pattern looks for the closing quote exactly the same as the opening one, we can wrap it into a capturing group and use the backreference.
+>>>>>>> 9cb33f4039e5751bfd0e2bca565a37aa463fb477
 
 Вот верный код:
 

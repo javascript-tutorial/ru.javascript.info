@@ -187,10 +187,20 @@ loadScript("/article/script-async-defer/small.js");
 | `async` | *Порядок загрузки* (кто загрузится первым, тот и сработает).|  Не имеет значения. Может загрузиться и выполниться до того, как страница полностью загрузится. Такое случается, если скрипты маленькие или хранятся в кеше, а документ достаточно большой. |
 | `defer` | *Порядок документа* (как расположены в документе). |  Выполняется после того, как документ загружен и обработан  (ждёт), непосредственно перед `DOMContentLoaded`. |
 
+<<<<<<< HEAD
 ```warn header="Страница без скриптов должна быть рабочей"
 Пожалуйста, помните, что когда вы используете `defer`, страница видна до того, как скрипт загрузится и подключит все графические компоненты.
 
 Поэтому кнопки должны быть отключены с помощью CSS или другим образом. 
+=======
+```warn header="Page without scripts should be usable"
+Please note that if you're using `defer`, then the page is visible *before* the script loads.
+
+So the user may read the page, but some graphical components are probably not ready yet.
+
+There should be "loading" indication in proper places, not-working buttons disabled, to clearly show the user what's ready and what's not.
+```
+>>>>>>> 9cb33f4039e5751bfd0e2bca565a37aa463fb477
 
 На практике `defer` используется для скриптов, которым требуется доступ ко всему DOM и/или важен их относительный порядок выполнения.
 

@@ -169,7 +169,11 @@ function curry(f) {
 
 Продвинутое каррирование позволяет вызывать функцию, как обычно, так и с частичным применением.
 
+<<<<<<< HEAD
 Например, у нас есть функция логирования `log(date, importance, message)`, которая форматирует и выводит информацию. В реальных проектах у таких функций есть много других полезных возможностей, например, посылать логи по сети:
+=======
+For instance, we have the logging function `log(date, importance, message)` that formats and outputs the information. In real projects such functions also have many other useful features like sending logs over the network, here we just use `alert`:
+>>>>>>> 9cb33f4039e5751bfd0e2bca565a37aa463fb477
 
 ```js
 function log(date, importance, message) {
@@ -183,6 +187,7 @@ function log(date, importance, message) {
 log = _.curry(log);
 ```
 
+<<<<<<< HEAD
 После этого `log` продолжает работать нормально:
 
 ```js
@@ -190,11 +195,16 @@ log(new Date(), "DEBUG", "some debug");
 ```
 
 ...Но также работает вариант с каррированием:
+=======
+After that `log` work both the normal way and in the curried form:
+>>>>>>> 9cb33f4039e5751bfd0e2bca565a37aa463fb477
 
 ```js
+log(new Date(), "DEBUG", "some debug"); // log(a,b,c)
 log(new Date())("DEBUG")("some debug"); // log(a)(b)(c)
 ```
 
+<<<<<<< HEAD
 Давайте сделаем удобную функцию для логов с текущим временем:
 
 ```js
@@ -206,11 +216,24 @@ todayLog("INFO", "message"); // [HH:mm] INFO message
 ```
 
 А теперь удобная функция для логов отладки с текущим временем:
+=======
+Now we can easily make a convenience function for current logs:
 
 ```js
-let todayDebug = todayLog("DEBUG");
+// currentLog will be the partial of log with fixed first argument
+let currentLog = log(new Date());
 
-todayDebug("message"); // [HH:mm] DEBUG message
+// use it
+currentLog("INFO", "message"); // [HH:mm] INFO message
+```
+
+And here's a convenience function for current debug messages:
+>>>>>>> 9cb33f4039e5751bfd0e2bca565a37aa463fb477
+
+```js
+let todayDebug = currentLog("DEBUG");
+
+currentLog("message"); // [HH:mm] DEBUG message
 ```
 
 Итак:

@@ -53,9 +53,23 @@ alert("some code");
 
 Иногда, когда `use strict` имеет значение, вы можете получить неправильные результаты.
 
+<<<<<<< HEAD
 Даже если мы нажмём `key:Shift+Enter` для ввода нескольких строк и напишем вверху `use strict` -- это не сработает. Это связано с тем, как консоль выполняет код внутри.
 
 Надёжный способ сделать так, чтобы `use strict` заработал, это ввести код в консоль следующим образом:
+=======
+You can try to press `key:Shift+Enter` to input multiple lines, and put `use strict` on top, like this:
+
+```js
+'use strict'; <Shift+Enter for a newline>
+//  ...your code
+<Enter to run>
+```
+
+It works in most browsers, namely Firefox and Chrome.
+
+If it doesn't, the most reliable way to ensure `use strict` would be to input the code into console like this:
+>>>>>>> 9cb33f4039e5751bfd0e2bca565a37aa463fb477
 
 ```js
 (function() {
