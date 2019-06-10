@@ -8,4 +8,4 @@ importance: 4
 
 [iframe src="solution" height=60]
 
-Для стилизации используйте HTML/CSS, Javascript должен только обновлять время в элементах.
+Для стилизации используйте HTML/CSS, JavaScript должен только обновлять время в элементах.
