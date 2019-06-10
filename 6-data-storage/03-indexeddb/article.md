@@ -154,8 +154,8 @@ let openRequest = indexedDB.open("db", 1);
 // создаём хранилище объектов для books, если ешё не существует
 openRequest.onupgradeneeded = function() {
   let db = openRequest.result;
-  if (!db.objectStoreNames.contains('books')) {
-    db.createObjectStore('books', {keyPath: 'id'});
+  if (!db.objectStoreNames.contains('books')) { // if there's no "books" store
+    db.createObjectStore('books', {keyPath: 'id'}); // create it
   }
 };
 ```
@@ -345,7 +345,7 @@ request.onerror = function(event) {
   if (request.error.name == "ConstraintError") {
     console.log("Книга с таким id уже существует"); // обрабатываем ошибку
     event.preventDefault(); // предотвращаем отмену транзакции
-    ...можно попробовать использовать другой ключ...
+    // ...можно попробовать использовать другой ключ...
   } else {
     // неизвестная ошибка
     // транзакция будет отменена
@@ -523,7 +523,7 @@ let request = priceIndex.getAll(IDBKeyRange.upperBound(5));
 
 ## Удаление из хранилища
 
-Метод `delete` удаляет значения по запросу, формат вызова такой же как в `getAll`.
+Метод `delete` удаляет значения по запросу, формат вызова такой же как в `getAll`:
 
 - **`delete(query)`** -- производит удаление соответствующих запросу значений.
 
@@ -671,7 +671,7 @@ try {
 
 ### Обработка ошибок
 
-Если мы не перехватим ошибку, то она "провалится" дальше, до ближайшего внешнего `try..catch`.
+Если мы не перехватим ошибку, то она "вывалится" наружу, вверх по стеку вызовов, до ближайшего внешнего `try..catch`.
 
 Необработанная ошибка становится событием "unhandled promise rejection" в объекте `window`.
 

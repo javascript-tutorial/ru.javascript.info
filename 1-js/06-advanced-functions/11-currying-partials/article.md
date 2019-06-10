@@ -169,7 +169,7 @@ function curry(f) {
 
 Продвинутое каррирование позволяет вызывать функцию, как обычно, так и с частичным применением.
 
-Например, у нас есть функция логирования `log(date, importance, message)`, которая форматирует и выводит информацию. В реальных проектах у таких функций есть много других полезных возможностей, например, посылать логи по сети:
+Например, у нас есть функция логирования `log(date, importance, message)`, которая форматирует и выводит информацию. В реальных проектах у таких функций есть много других полезных возможностей, например, посылать логи по сети, здесь для простоты используем `alert`:
 
 ```js
 function log(date, importance, message) {
@@ -192,6 +192,7 @@ log(new Date(), "DEBUG", "some debug");
 ...Но также работает вариант с каррированием:
 
 ```js
+log(new Date(), "DEBUG", "some debug"); // log(a,b,c)
 log(new Date())("DEBUG")("some debug"); // log(a)(b)(c)
 ```
 
@@ -199,18 +200,18 @@ log(new Date())("DEBUG")("some debug"); // log(a)(b)(c)
 
 ```js
 // todayLog будет частичным применением функции log с фиксированным первым аргументом
-let todayLog = log(new Date());
+let logNow = log(new Date());
 
 // используем её
-todayLog("INFO", "message"); // [HH:mm] INFO message
+logNow("INFO", "message"); // [HH:mm] INFO message
 ```
 
 А теперь удобная функция для логов отладки с текущим временем:
 
 ```js
-let todayDebug = todayLog("DEBUG");
+let debugNow = logNow("DEBUG");
 
-todayDebug("message"); // [HH:mm] DEBUG message
+debugNow("message"); // [HH:mm] DEBUG message
 ```
 
 Итак:
