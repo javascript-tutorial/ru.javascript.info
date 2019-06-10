@@ -1,7 +1,7 @@
 
 # Global object
 
-The global object provides variables and functions that are available anywhere. Mostly, the ones that are built into the language or the host environment.
+The global object provides variables and functions that are available anywhere. Mostly, the ones that are built into the language or the host environment1.
 
 In a browser it is named "window", for Node.js it is "global", for other environments it may have another name.
 
