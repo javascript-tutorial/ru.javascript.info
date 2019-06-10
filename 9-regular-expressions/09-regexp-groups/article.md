@@ -113,39 +113,39 @@ alert(result); // <span class="my">, span class="my", span, class="my"
 
 **Даже если скобочная группа необязательна и не входит в совпадение, соответствующий элемент массива `result` существует (и равен `undefined`).**
 
-For instance, let's consider the regexp `pattern:a(z)?(c)?`. It looks for `"a"` optionally followed by `"z"` optionally followed by `"c"`.
+Например, рассмотрим регэксп `pattern:a(z)?(c)?`. Он ищет `"a"`, за которой не обязательно идёт буква `"z"`, за которой не обязательно идёт буква `"c"`.
 
-If we run it on the string with a single letter `subject:a`, then the result is:
+Если запустить его на строку из одной буквы `subject:a`, то результат будет таков:
 
 ```js run
 let match = 'a'.match(/a(z)?(c)?/);
 
 alert( match.length ); // 3
-alert( match[0] ); // a (whole match)
+alert( match[0] ); // a (всё совпадение)
 alert( match[1] ); // undefined
 alert( match[2] ); // undefined
 ```
 
-The array has the length of `3`, but all groups are empty.
+Массив имеет длинну `3`, но все скобочные группы пустые.
 
-And here's a more complex match for the string `subject:ack`:
+А теперь более сложная ситуация для строки `subject:ack`:
 
 ```js run
 let match = 'ack'.match(/a(z)?(c)?/)
 
 alert( match.length ); // 3
-alert( match[0] ); // ac (whole match)
-alert( match[1] ); // undefined, because there's nothing for (z)?
+alert( match[0] ); // ac (всё совпадение)
+alert( match[1] ); // undefined, потому что для (z)? ничего нет
 alert( match[2] ); // c
 ```
 
-The array length is permanent: `3`. But there's nothing for the group `pattern:(z)?`, so the result is `["ac", undefined, "c"]`.
+Длинна массива всегда: `3`. Для группы `pattern:(z)?` ничего нет, поэтому результат `["ac", undefined, "c"]`.
 
-## Named groups
+## Именованные группы
 
-Remembering groups by their numbers is hard. For simple patterns it's doable, but for more complex ones we can give names to parentheses.
+Запоминать группы по числам сложно. Для простых шаблонов это допустимо, но в более сложных случаях мы можем дать имена скобкам.
 
-That's done by putting `pattern:?<name>` immediately after the opening paren, like this:
+Это делается добавлением `pattern:?<name>` непосредственно после открытия скобки. Например:
 
 ```js run
 *!*
@@ -160,11 +160,11 @@ alert(groups.month); // 04
 alert(groups.day); // 30
 ```
 
-As you can see, the groups reside in the `.groups` property of the match.
+Как вы можете видеть, группы располагаются в свойстве  `.groups` совпадения.
 
-We can also use them in replacements, as `pattern:$<name>` (like `$1..9`, but name instead of a digit).
+МЫ также можем использовать их для замены, как `pattern:$<name>` (как в случае с `$1..9`, но использовать имя вместо цифры).
 
-For instance, let's rearrange the date into `day.month.year`:
+Например, давайте переделаем информацию о дате `day.month.year`:
 
 ```js run
 let dateRegexp = /(?<year>[0-9]{4})-(?<month>[0-9]{2})-(?<day>[0-9]{2})/;
@@ -176,7 +176,7 @@ let rearranged = str.replace(dateRegexp, '$<day>.$<month>.$<year>');
 alert(rearranged); // 30.04.2019
 ```
 
-If we use a function, then named `groups` object is always the last argument:
+Если используем функцию, тогда именованный объект `groups` всегда является последним аргументом:
 
 ```js run
 let dateRegexp = /(?<year>[0-9]{4})-(?<month>[0-9]{2})-(?<day>[0-9]{2})/;
@@ -191,9 +191,9 @@ let rearranged = str.replace(dateRegexp,
 alert(rearranged); // 30.04.2019
 ```
 
-Usually, when we intend to use named groups, we don't need positional arguments of the function. For the majority of real-life cases we only need `str` and `groups`.
+Обычно, когдам мы планируем использовать именованные группы, то нам не нужны позиционированные аргументы функции. Для большинства реальных случаев нам нужны только `str` и` groups`.
 
-So we can write it a little bit shorter:
+Таким образом, мы можем написать это немного короче:
 
 ```js
 let rearranged = str.replace(dateRegexp, (str, ...args) => {
@@ -206,20 +206,20 @@ let rearranged = str.replace(dateRegexp, (str, ...args) => {
 ```
 
 
-## Non-capturing groups with ?:
+## Исключение из запоминания через ?:
 
-Sometimes we need parentheses to correctly apply a quantifier, but we don't want the contents in results.
+Бывает так, что скобки нужны, чтобы квантификатор правильно применился, но мы не хотим содержимое в результате.
 
-A group may be excluded by adding `pattern:?:` in the beginning.
+Скобочную группу можно исключить из запоминаемых и нумеруемых, добавив в её начало `pattern:?:`.
 
-For instance, if we want to find `pattern:(go)+`, but don't want to remember the contents (`go`) in a separate array item, we can write: `pattern:(?:go)+`.
+Например, если мы хотим найти `pattern:(go)+`, но не хотим запоминать содержимое (`go`) в отдельный элемент массива, то можем написать так: `pattern:(?:go)+`.
 
-In the example below we only get the name "John" as a separate member of the `results` array:
+В примере ниже мы получаем только имя "John", как отдельный член массива `results`:
 
 ```js run
 let str = "Gogo John!";
 *!*
-// exclude Gogo from capturing
+// исключает Gogo из запоминания
 let reg = /(?:go)+ (\w+)/i;
 */!*
 
@@ -229,9 +229,9 @@ alert( result.length ); // 2
 alert( result[1] ); // John
 ```
 
-## Summary
+## Итого
 
-- Parentheses can be:
-  - capturing `(...)`, ordered left-to-right, accessible by number.
-  - named capturing `(?<name>...)`, accessible by name.
-  - non-capturing `(?:...)`, used only to apply quantifier to the whole groups.
+- Скобки могут:
+  - запоминать `(...)`, нумеровать слева направо, давать доступ по номеру.
+  - именовать группы `(?<name>...)`, давать доступ по имени.
+  - исключать из запоминания `(?:...)`, использоваться только для применения квантификатора ко всем группам.
