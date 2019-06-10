@@ -3,7 +3,7 @@
 
 The global object provides variables and functions that are available anywhere. Mostly, the ones that are built into the language or the host environment.
 
-In a browser it is named "window", for Node.JS it is "global", for other environments it may have another name.
+In a browser it is named "window", for Node.js it is "global", for other environments it may have another name.
 
 For instance, we can call `alert` as a method of `window`:
 
@@ -79,7 +79,7 @@ No, it's not, because it may lead to naming conflicts: the same variable name ca
 
 As of now, the multi-purpose `window` is considered a design mistake in the language.
 
-Luckily, there's a "road out of hell", called "Javascript modules".
+Luckily, there's a "road out of hell", called "JavaScript modules".
 
 If we set `type="module"` attribute on a `<script>` tag, then such script is considered a separate "module" with its own top-level scope (lexical environment), not interfering with `window`.
 

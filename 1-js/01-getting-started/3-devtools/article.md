@@ -1,64 +1,64 @@
-# Developer console
+# Консоль разработчика
 
-Code is prone to errors. You will quite likely make errors... Oh, what am I talking about? You are *absolutely* going to make errors, at least if you're a human, not a [robot](https://en.wikipedia.org/wiki/Bender_(Futurama)).
+Код уязвим для ошибок. И вы, скорее всего, будете делать ошибки в коде... Впрочем, давайте будем откровенны: вы *точно* будете совершать ошибки в коде. В конце концов, вы человек, а не [робот](https://ru.wikipedia.org/wiki/%D0%91%D0%B5%D0%BD%D0%B4%D0%B5%D1%80_(%D0%A4%D1%83%D1%82%D1%83%D1%80%D0%B0%D0%BC%D0%B0)).
 
-But in the browser, users don't see errors by default. So, if something goes wrong in the script, we won't see what's broken and can't fix it.
+Но по умолчанию в браузере ошибки не видны. То есть, если что-то пойдёт не так, мы не увидим, что именно сломалось и не сможем это починить.
 
-To see errors and get a lot of other useful information about scripts, "developer tools" have been embedded in browsers.
+Для решения задач такого рода в браузер встроены так называемые "Инструменты разработки" (Developer tools, или сокращённо — devtools).
 
-Most developers lean towards Chrome or Firefox for development because those browsers have the best developer tools. Other browsers also provide developer tools, sometimes with special features, but are usually playing "catch-up" to Chrome or Firefox. So most developers have a "favorite" browser and switch to others if a problem is browser-specific.
+Chrome и Firefox снискали любовь подавляющего большинства программистов во многом благодаря своим отменным инструментам разработчика. Остальные браузеры хоть и оснащены подобными инструментами, но все же зачастую находятся в роли догоняющих и по качеству и по количеству свойств и особенностей. В общем, почти у всех программистов есть свой "любимый" браузер. Другие используются только для отлова и исправления специфичных "браузерозависимых" багов.
 
-Developer tools are potent; they have many features. To start, we'll learn how to open them, look at errors, and run JavaScript commands.
+Для начала знакомства с этими мощными инструментами давайте выясним, как их открывать, смотреть ошибки и запускать команды JavaScript.
 
 ## Google Chrome
 
-Open the page [bug.html](bug.html).
+Откройте страницу [bug.html](bug.html).
 
-There's an error in the JavaScript code on it. It's hidden from a regular visitor's eyes, so let's open developer tools to see it.
+В её JavaScript код закралась ошибка. Она не видна обычному посетителю, поэтому давайте найдём её при помощи devtools.
 
-Press `key:F12` or, if you're on Mac, then `key:Cmd+Opt+J`.
+Нажмите `key:F12` или, если вы используете Mac, `key:Cmd+Opt+J`.
 
-The developer tools will open on the Console tab by default.
+По умолчанию в инструментах разработчика откроется вкладка Console (консоль).
 
-It looks somewhat like this:
+Она выглядит приблизительно следующим образом:
 
 ![chrome](chrome.png)
 
-The exact look of developer tools depends on your version of Chrome. It changes from time to time but should be similar.
+Точный внешний вид инструментов разработки зависит от используемой версии Chrome. Время от времени некоторые детали изменяются, но в целом внешний вид остаётся примерно похожим на предыдущие версии.
 
-- Here we can see the red-colored error message. In this case, the script contains an unknown "lalala" command.
-- On the right, there is a clickable link to the source `bug.html:12` with the line number where the error has occurred.
+- В консоли мы можем увидеть сообщение об ошибке, отрисованное красным цветом. В нашем случае скрипт содержит неизвестную команду "lalala".
+- Справа присутствует кликабельная ссылка на исходный код `bug.html:12` с номером строки кода, в которой эта ошибка и произошла.
 
-Below the error message, there is a blue `>` symbol. It marks a "command line" where we can type JavaScript commands. Press `key:Enter` to run them (`key:Shift+Enter` to input multi-line commands).
+Под сообщением об ошибке находится синий символ `>`. Он обозначает командную строку, в ней мы можем редактировать и запускать JavaScript-команды. Для их запуска нажмите `key:Enter` (для переноса строки жмите `key:Shift+Enter`).
 
-Now we can see errors, and that's enough for a start. We'll come back to developer tools later and cover debugging more in-depth in the chapter <info:debugging-chrome>.
+Теперь мы явно видим ошибки, для начала этого вполне достаточно. Мы ещё вернёмся к инструментам разработчика позже и более подробно рассмотрим отладку кода в главе <info:debugging-chrome>.
 
 
-## Firefox, Edge, and others
+## Firefox, Edge и другие
 
-Most other browsers use `key:F12` to open developer tools.
+Инструменты разработчика в большинстве браузеров привязаны к кнопке `key:F12`.
 
-The look & feel of them is quite similar. Once you know how to use one of these tools (you can start with Chrome), you can easily switch to another.
+Их внешний вид и принципы работы мало чем отличаются. Разобравшись с инструментами в одном браузере вы без труда сможете работать с ними и в другом.
 
 ## Safari
 
-Safari (Mac browser, not supported by Windows/Linux) is a little bit special here. We need to enable the "Develop menu" first.
+Safari (браузер для Mac, не поддерживается в системах Windows/Linux) все же имеет небольшое отличие. Для начала работы нам нужно включить "Меню разработки" ("Developer menu").
 
-Open Preferences and go to the "Advanced" pane. There's a checkbox at the bottom:
+Откройте настройки (Preferences) и перейдите к панели "Продвинутые" (Advanced). В самом низу вы найдёте чекбокс:
 
 ![safari](safari.png)
 
-Now `key:Cmd+Opt+C` can toggle the console. Also, note that the new top menu item named "Develop" has appeared. It has many commands and options.
+Теперь консоль можно активировать нажатием клавиш `key:Cmd+Opt+C`. Также обратите внимание на новый элемент меню "Разработка" ("Develop"). В нем содержится большое количество команд и настроек.
 
-## Multi-line input
+## Многострочный ввод
 
-Usually, when we put a line of code into the console, and then press `key:Enter`, it executes.
+Обычно, при нажатии `key:Enter` введённая строка кода сразу выполняется.
 
-To insert multiple line, press `key:Shift+Enter`.
+Чтобы перенести строку нажмите `key:Shift+Enter`.
 
-## Summary
+## Итого
 
-- Developer tools allow us to see errors, run commands, examine variables, and much more.
-- They can be opened with `key:F12` for most browsers on Windows. Chrome for Mac needs `key:Cmd+Opt+J`, Safari: `key:Cmd+Opt+C` (need to enable first).
+- Инструменты разработчика позволяют нам смотреть ошибки, выполнять команды, проверять значение переменных и ещё много всего полезного.
+- В большинстве браузеров, работающих под Windows, инструменты разработчика можно открыть, нажав `key:F12`. В Chrome для Mac используйте комбинацию `key:Cmd+Opt+J`, Safari: `key:Cmd+Opt+C` (необходимо предварительное включение "меню разработчика").
 
-Now we have the environment ready. In the next section, we'll get down to JavaScript.
+Теперь наше окружение полностью настроено. В следующем разделе мы перейдём непосредственно к JavaScript.

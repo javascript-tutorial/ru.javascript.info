@@ -1,10 +1,10 @@
 <!doctype html>
 <script src="https://cdn.jsdelivr.net/npm/idb@3.0.2/build/idb.min.js"></script>
 
-<button onclick="addBook()">Add a book</button>
-<button onclick="clearBooks()">Clear books</button>
+<button onclick="addBook()">Добавить книгу</button>
+<button onclick="clearBooks()">Очистить хранилище</button>
 
-<p>Books list:</p>
+<p>Список книг:</p>
 
 <ul id="listElem"></ul>
 
@@ -29,10 +29,10 @@ async function list() {
 
   if (books.length) {
     listElem.innerHTML = books.map(book => `<li>
-        name: ${book.name}, price: ${book.price}
+        название: ${book.name}, цена: ${book.price}
       </li>`).join('');
   } else {
-    listElem.innerHTML = '<li>No books yet. Please add books.</li>'
+    listElem.innerHTML = '<li>Книг пока нет. Пожалуйста, добавьте книги.</li>'
   }
 
 
@@ -45,8 +45,8 @@ async function clearBooks() {
 }
 
 async function addBook() {
-  let name = prompt("Book name?");
-  let price = +prompt("Book price?");
+  let name = prompt("Название книги");
+  let price = +prompt("Цена книги");
 
   let tx = db.transaction('books', 'readwrite');
 
@@ -55,7 +55,7 @@ async function addBook() {
     await list();
   } catch(err) {
     if (err.name == 'ConstraintError') {
-      alert("Such book exists already");
+      alert("Такая книга уже существует");
       await addBook();
     } else {
       throw err;
@@ -64,7 +64,7 @@ async function addBook() {
 }
 
 window.addEventListener('unhandledrejection', event => {
-  alert("Error: " + event.reason.message);
+  alert("Ошибка: " + event.reason.message);
 });
 
 </script>

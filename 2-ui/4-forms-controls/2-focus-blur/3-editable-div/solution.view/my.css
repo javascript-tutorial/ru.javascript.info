@@ -14,12 +14,12 @@
 }
 
 .edit {
-  /* replace padding with border (still 3px not to shift the contents) */
+  /* замена внутреннего отступа рамкой (по-прежнему 3px, и содержимое не смещается) */
   border: 3px solid blue;
   padding: 0px;
 }
 
 .edit:focus {
+  /* удаление обводки фокуса в Safari */
   outline: none;
-  /* remove focus border in Safari */
 }

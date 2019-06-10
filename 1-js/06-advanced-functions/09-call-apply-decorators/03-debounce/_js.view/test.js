@@ -7,7 +7,7 @@ describe("debounce", function() {
     this.clock.restore();
   });
 
-  it("calls the function at maximum once in ms milliseconds", function() {
+  it("вызывает функцию один раз в 'ms' мс", function() {
     let log = '';
 
     function f(a) {
@@ -16,18 +16,18 @@ describe("debounce", function() {
 
     f = debounce(f, 1000);
 
-    f(1); // runs at once
-    f(2); // ignored
+    f(1); // вызвана
+    f(2); // проигнорирована
 
-    setTimeout(() => f(3), 100);  // ignored (too early)
-    setTimeout(() => f(4), 1100); // runs (1000 ms passed)
-    setTimeout(() => f(5), 1500); // ignored (less than 1000 ms from the last run)
+    setTimeout(() => f(3), 100);  // проигнорирована (слишком рано)
+    setTimeout(() => f(4), 1100); // вызвана (1000 мс истекли)
+    setTimeout(() => f(5), 1500); // проигнорирована (менее 1000 мс с последнего вызова)
 
     this.clock.tick(5000);
     assert.equal(log, "14");
   });
 
-  it("keeps the context of the call", function() {
+  it("сохраняет контекст вызова", function() {
     let obj = {
       f() {
         assert.equal(this, obj);

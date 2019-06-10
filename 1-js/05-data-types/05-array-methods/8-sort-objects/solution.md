@@ -3,16 +3,16 @@ function sortByAge(arr) {
   arr.sort((a, b) => a.age > b.age ? 1 : -1);
 }
 
-let john = { name: "John", age: 25 };
-let pete = { name: "Pete", age: 30 };
-let mary = { name: "Mary", age: 28 };
+let vasya = { name: "Вася", age: 25 };
+let petya = { name: "Петя", age: 30 };
+let masha = { name: "Маша", age: 28 };
 
-let arr = [ pete, john, mary ];
+let arr = [ vasya, petya, masha ];
 
 sortByAge(arr);
 
-// now sorted is: [john, mary, pete]
-alert(arr[0].name); // John
-alert(arr[1].name); // Mary
-alert(arr[2].name); // Pete
+// теперь отсортировано: [vasya, masha, petya]
+alert(arr[0].name); // Вася
+alert(arr[1].name); // Маша
+alert(arr[2].name); // Петя
 ```

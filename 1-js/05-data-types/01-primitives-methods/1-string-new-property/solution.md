@@ -1,31 +1,26 @@
 
-Try running it:
+Попробуйте запустить код:
 
 ```js run
-let str = "Hello";
+let str = "Привет";
 
 str.test = 5; // (*)
 
-alert(str.test); 
+alert(str.test);
 ```
 
-There may be two kinds of result:
-1. `undefined`
-2. An error.
+В зависимости от того, используете ли вы cтрогий режим (`use strict`) или нет, результат может быть:
+1. `undefined` (без strict)
+2. Ошибка (strict mode)
 
-Why? Let's replay what's happening at line `(*)`:
+Почему? Давайте посмотрим что происходит в строке кода, отмеченной `(*)`:
 
-1. When a property of `str` is accessed, a "wrapper object" is created.
-2. The operation with the property is carried out on it. So, the object gets the `test` property.
-3. The operation finishes and the "wrapper object" disappears.
+1. В момент обращения к свойству `str` создаётся "объект-обёртка".
+2. В cтрогом режиме, попытка изменения этого объекта выдаёт ошибку.
+3. В стандартном режиме, операция продолжается, объект получает свойство `test`, но после этого "объект-обёртка" удаляется.
 
-So, on the last line, `str` has no trace of the property. A new wrapper object for every object operation on a string.
+Выходит, в стандартном режиме на последней линии `str` больше не имеет свойства `test`.
 
-Some browsers though may decide to further limit the programmer and disallow to assign properties to primitives at all. That's why in practice we can also see errors at line `(*)`. It's a little bit farther from the specification though.
+**Данный пример наглядно показывает, что примитивы не являются объектами.**
 
-**This example clearly shows that primitives are not objects.**
-
-They just can not store data. 
-
-All property/method operations are performed with the help of temporary objects.
-
+Они не могут хранить дополнительные данные.

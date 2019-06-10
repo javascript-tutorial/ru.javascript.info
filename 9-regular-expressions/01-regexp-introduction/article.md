@@ -1,127 +1,127 @@
-# Patterns and flags
+# Паттерны и флаги
 
-Regular expressions is a powerful way of searching and replacing inside a string.
+Регулярные выражения – мощное средство поиска и замены в строке.
 
-In JavaScript regular expressions are implemented using objects of a built-in `RegExp` class and integrated with strings.
+В JavaScript регулярные выражения реализованы отдельным объектом `RegExp` и интегрированы в методы строк.
 
-Please note that regular expressions vary between programming languages. In this tutorial we concentrate on JavaScript. Of course there's a lot in common, but they are a somewhat different in Perl, Ruby, PHP etc.
+Обратите внимание, что регулярные выражения различаются в зависимости от языка программирования. В этом уроке мы сконцентрируемся на JavaScript. Конечно, есть много общего, но есть и некоторые различия в Perl, Ruby, PHP и т.д.
 
-## Regular expressions
+## Регулярные выражения
 
-A regular expression (also "regexp", or just "reg") consists of a *pattern* and optional *flags*.
+Регулярное выражение (оно же "регэксп", "регулярка" или просто "рег"), состоит из *паттерна* (он же "шаблон") и необязательных *флагов*.
 
-There are two syntaxes to create a regular expression object.
+Существует два синтаксиса создания объекта регулярного выражения.
 
-The long syntax:
-
-```js
-regexp = new RegExp("pattern", "flags");
-```
-
-...And the short one, using slashes `"/"`:
+Полный синтаксис:
 
 ```js
-regexp = /pattern/; // no flags
-regexp = /pattern/gmi; // with flags g,m and i (to be covered soon)
+regexp = new RegExp("шаблон", "флаги");
 ```
 
-Slashes `"/"` tell JavaScript that we are creating a regular expression. They play the same role as quotes for strings.
+... И короткий синтаксис, использующий слеши `"/"`:
 
-## Usage
+```js
+regexp = /pattern/; // без флагов
+regexp = /pattern/gmi; //  с флагами gmi (будут описаны далее)
+```
 
-To search inside a string, we can use method [search](mdn:js/String/search).
+Слеши `"/"` говорят JavaScript о том, что это регулярное выражение. Они играют здесь ту же роль, что и кавычки для обозначения строк.
 
-Here's an example:
+## Использование
+
+Для поиска внутри строки мы можем использовать метод [search](mdn:js/String/search).
+
+Вот простой пример:
 
 ```js run
-let str = "I love JavaScript!"; // will search here
+let str = "Я люблю JavaScript!"; // будем искать в этой строке
 
-let regexp = /love/;
+let regexp = /люблю/;
 alert( str.search(regexp) ); // 2
 ```
 
-The `str.search` method looks for the pattern `pattern:/love/` and returns the position inside the string. As we might guess, `pattern:/love/` is the simplest possible pattern. What it does is a simple substring search.
+Метод `str.search` ищет `pattern:/люблю/` и возвращает позицию внутри строки. Как можно догадаться, `pattern:/люблю/` - простейший возможный шаблон. То, что он делает, это обычный поиск подстроки.
 
-The code above is the same as:
+Код выше - то же самое, что и:
 
 ```js run
-let str = "I love JavaScript!"; // will search here
+let str = "Я люблю JavaScript!"; // будем искать в этой строке
 
-let substr = 'love';
+let substr = 'люблю';
 alert( str.search(substr) ); // 2
 ```
 
-So searching for `pattern:/love/` is the same as searching for `"love"`.
+Поэтому поиск для `pattern:/люблю/` то же самое, что и поиск `'люблю'`.
 
-But that's only for now. Soon we'll create more complex regular expressions with much more searching power.
+Но это лишь пока. Очень скоро мы создадим более сложные регулярные выражения, и тогда увидим, что они гораздо мощнее.
 
-```smart header="Colors"
-From here on the color scheme is:
+```smart header="Цветовые обозначения"
+Здесь и далее в тексте используется следующая цветовая схема:
 
-- regexp -- `pattern:red`
-- string (where we search) -- `subject:blue`
-- result -- `match:green`
+- регулярное выражение -- `pattern:красный`
+- строка (там где происходит поиск) -- `subject:синий`
+- результат -- `match:зелёный`
 ```
 
 
-````smart header="When to use `new RegExp`?"
-Normally we use the short syntax `/.../`. But it does not allow any variable insertions, so we must know the exact regexp at the time of writing the code.
+````smart header="Когда использовать `new RegExp`?"
+Обычно мы используем короткий синтаксис `/.../`. Но он не поддерживает вставки переменных `${...}`.
 
-On the other hand, `new RegExp` allows to construct a pattern dynamically from a string.
+С другой стороны, `new RegExp` позволяет динамически создавать шаблон из строки.
 
-So we can figure out what we need to search and create `new RegExp` from it:
+Таким образом, мы можем выяснить, что нам нужно искать и создать из этого `new RegExp`:
 
 ```js run
-let search = prompt("What you want to search?", "love");
-let regexp = new RegExp(search);
+let search = prompt("Что вы хотите найти?", "h2");
+let regexp = new RegExp(`<${tag}>`);
 
-// find whatever the user wants
-alert( "I love JavaScript".search(regexp));
+// по умолчанию найдёт <h2>
+alert( "<h1> <h2> <h3>".search(regexp));
 ```
 ````
 
 
-## Flags
+## Флаги
 
-Regular expressions may have flags that affect the search.
+Регулярные выражения могут иметь флаги, которые влияют на поиск.
 
-There are only 5 of them in JavaScript:
+В JavaScript их всего шесть:
 
 `i`
-: With this flag the search is case-insensitive: no difference between `A` and `a` (see the example below).
+: С этим флагом поиск не зависит от регистра: нет разницы между `A` и `a` (см. пример ниже).
 
 `g`
-: With this flag the search looks for all matches, without it -- only the first one (we'll see uses in the next chapter).
+: С этим флагом поиск ищет все совпадения, без него - только первое (мы увидим его использование в следующей главе).
 
 `m`
-: Multiline mode (covered in the chapter <info:regexp-multiline-mode>).
+: Многострочный режим (рассматривается в главе <info:regexp-multiline-mode>).
 
 `s`
-: "Dotall" mode, allows `.` to match newlines (covered in the chapter <info:regexp-character-classes>).
+: Режим "Dotall" позволяет `.` соответствовать символу новой строки (рассматривается в главе <info:regexp-character-classes>).
 
 `u`
-: Enables full unicode support. The flag enables correct processing of surrogate pairs. More about that in the chapter <info:regexp-unicode>.
+: Включает полную поддержку юникода. Флаг разрешает корректную обработку суррогатных пар (подробнее об этом в главе <info:regexp-unicode>).
 
 `y`
-: Sticky mode (covered in the chapter <info:regexp-sticky>)
+: Режим закрепления (описан в главе <info:regexp-sticky>)
 
-We'll cover all these flags further in the tutorial.
+Мы рассмотрим все эти флаги далее в этом учебнике.
 
-For now, the simplest flag is `i`, here's an example:
+На данный момент самый простой флаг - это `i`, вот пример:
 
 ```js run
-let str = "I love JavaScript!";
+let str = "Я люблю JavaScript!";
 
-alert( str.search(/LOVE/i) ); // 2 (found lowercased)
+alert( str.search(/ЛЮБЛЮ/i) ); // 2 (найдено в нижнем регистре)
 
-alert( str.search(/LOVE/) ); // -1 (nothing found without 'i' flag)
+alert( str.search(/ЛЮБЛЮ/) ); // -1 (без флага 'i' ничего не найдено)
 ```
 
-So the `i` flag already makes regular expressions more powerful than a simple substring search. But there's so much more. We'll cover other flags and features in the next chapters.
+Таким образом, уже просто флаг `i` делает регулярные выражения более мощными, нежели чем простой поиск по подстроке. Но возможно гораздо больше. Мы рассмотрим другие флаги и функции в следующих главах.
 
 
-## Summary
+## Итого
 
-- A regular expression consists of a pattern and optional flags: `g`, `i`, `m`, `u`, `s`, `y`.
-- Without flags and special symbols that we'll study later, the search by a regexp is the same as a  substring search.
-- The method `str.search(regexp)` returns the index where the match is found or `-1` if there's no match. In the next chapter we'll see other methods.
+- Регулярное выражение состоит из шаблона и необязательных флагов: `g`, `i`, `m`, `u`, `s`, `y`.
+- Без флагов и специальных символов, которые мы изучим позже, поиск по регулярному выражению аналогичен поиску по подстроке.
+- Метод `str.search(regexp)` возвращает индекс, в котором найдено совпадение, или -1, если совпадения нет. В следующей главе мы увидим другие методы.
