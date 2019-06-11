@@ -81,9 +81,9 @@ window.alert("Hello");
 
 К счастью, есть "дорога из ада" — JavaScript модули. Luckily, there's a "road out of hell", called "JavaScript modules".
 
-If we set `type="module"` attribute on a `<script>` tag, then such script is considered a separate "module" with its own top-level scope (lexical environment), not interfering with `window`.
+Если мы установим тегу `<script>` атрибут `type="module"`, такой скрипт будет считаться отдельным модулем сосбственной областью видимости верхнего уровня (лексическим окружением) не пересекающейся с `window`.  If we set `type="module"` attribute on a `<script>` tag, then such script is considered a separate "module" with its own top-level scope (lexical environment), not interfering with `window`.
 
-- In a module, `var x` does not become a property of `window`:
+- В модуле `var x` не станет свойством `window`:  - In a module, `var x` does not become a property of `window`:
 
     ```html run
     <script type="module">
@@ -93,7 +93,7 @@ If we set `type="module"` attribute on a `<script>` tag, then such script is con
     </script>
     ```
 
-- Two modules that do not see variables of each other:
+- Два модуля, которые не видят переменные друг друга: - Two modules that do not see variables of each other:
 
     ```html run
     <script type="module">
@@ -102,11 +102,11 @@ If we set `type="module"` attribute on a `<script>` tag, then such script is con
 
     <script type="module">
       alert(window.x); // undefined
-      alert(x); // Error: undeclared variable
+      alert(x); // Ошибка: переменная не объявлена Error: undeclared variable
     </script>
     ```
 
-- And, the last minor thing, the top-level value of `this` in a module is `undefined` (why should it be `window` anyway?):
+- И последнее, в модуле значение `this` на верхнем уровне равно `undefined` (действительно, почему должно быть `window`?): - And, the last minor thing, the top-level value of `this` in a module is `undefined` (why should it be `window` anyway?):
 
     ```html run
     <script type="module">
@@ -114,42 +114,42 @@ If we set `type="module"` attribute on a `<script>` tag, then such script is con
     </script>
     ```
 
-**Using `<script type="module">` fixes the design flaw of the language by separating top-level scope from `window`.**
+**Используйте `<script type="module">`, чтобы исправить недостаток проектирования языка, отделяя область видимости верхнего уровня от `window`. Using `<script type="module">` fixes the design flaw of the language by separating top-level scope from `window`.**
 
-We'll cover more features of modules later, in the chapter [](info:modules).
+Мы рассмотрим другие свойства модулей позже в главе  We'll cover more features of modules later, in the chapter [](info:modules).
 
-## Valid uses of the global object
+## Допустимое (правильное?) использование глобального объекта  Valid uses of the global object
 
-1. Using global variables is generally discouraged. There should be as few global variables as possible, but if we need to make something globally visible, we may want to put it into `window` (or `global` in Node.js).
+1. Обычно не рекомендуется использовать глобальные переменные. Желатьльно, применать как можно мешьше таких переменных. Однако, если нужно поместить что-либо в глобальную область видимости, мы можем захотеть добавить это в `window` (или `global` в Node.js) Using global variables is generally discouraged. There should be as few global variables as possible, but if we need to make something globally visible, we may want to put it into `window` (or `global` in Node.js).
 
-    Here we put the information about the current user into a global object, to be accessible from all other scripts:
+    Мы помещаем информацию о текущем пользователе в глобальный объект, чтобы она была доступна другим скриптам. Here we put the information about the current user into a global object, to be accessible from all other scripts:
 
     ```js run
-    // explicitly assign it to `window`
+    // явное назначение свойства `window`  explicitly assign it to `window`
     window.currentUser = {
       name: "John",
       age: 30
     };
 
-    // then, elsewhere, in another script
+    // далее, где угодно в другом скрипте  then, elsewhere, in another script
     alert(window.currentUser.name); // John
     ```
 
-2. We can test the global object for support of modern language features.
+2. Мы можем проверить, поддерживает ли глобальный объект современные возможности языка.  We can test the global object for support of modern language features.
 
-    For instance, test if a build-in `Promise` object exists (it doesn't in really old browsers):
+    Например, проверить наличие встроенного объекта `Promise` (такая поддержка отсутствует в очень старых браузерах). For instance, test if a build-in `Promise` object exists (it doesn't in really old browsers):
     ```js run
     if (!window.Promise) {
-      alert("Your browser is really old!");
+      alert("Ваш браузер очень старый!"); alert("Your browser is really old!");
     }
     ```
 
-3. We can create "polyfills": add functions that are not supported by the environment (say, an old browser), but exist in the modern standard.
+3. Мы можем создать полифилл: добавить функции, которые не поддерживаются окружением (скажем, старым браузером), но сущемтвуют в современном стандарте.  We can create "polyfills": add functions that are not supported by the environment (say, an old browser), but exist in the modern standard.
 
     ```js run
     if (!window.Promise) {
-      window.Promise = ... // custom implementation of the modern language feature
+      window.Promise = ... // собственная реализация современной возможности языка custom implementation of the modern language feature
     }
     ```
 
-...And of course, if we're in a browser, using `window` to access browser window features (not as a global object) is completely fine.
+...И конечно, если в браузере мы используем `window` для доступа к функциям окна браузера (не как глобального объекта) это вполне нормально.  And of course, if we're in a browser, using `window` to access browser window features (not as a global object) is completely fine.
