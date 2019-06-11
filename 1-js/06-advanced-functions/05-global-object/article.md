@@ -14,44 +14,44 @@ alert("Hello");
 window.alert("Hello");
 ```
 
-We can reference other built-in functions like `Array` as `window.Array` and create our own properties on it.
+Мы можем ссылаться на другие встроенные функции типа `Array` как `window.Array` или создавать свои собственные свойства глобального объекта.  We can reference other built-in functions like `Array` as `window.Array` and create our own properties on it.
 
-## Browser: the "window" object
+## Браузер: объект "window" Browser: the "window" object
 
-For historical reasons, in-browser `window` object is a bit messed up.
+По историческим причинам, браузерный объект `window` выглядит слегка запутанно. For historical reasons, in-browser `window` object is a bit messed up.
 
-1. It provides the "browser window" functionality, besides playing the role of a global object.
+1. Он предоставляет инструменты для работы с окном браузера, а также играет роль глобального объекта.  It provides the "browser window" functionality, besides playing the role of a global object.
 
-    We can use `window` to access properties and methods, specific to the browser window:
+    Мы можем использовать `window` для доступа к свойствам и методам характерным для окна браузера. We can use `window` to access properties and methods, specific to the browser window:
 
     ```js run
-    alert(window.innerHeight); // shows the browser window height
+    alert(window.innerHeight); // выводит высоту окна браузера  shows the browser window height
 
-    window.open('http://google.com'); // opens a new browser window
+    window.open('http://google.com'); // открывает новое окно браузера opens a new browser window
     ```
 
-2. Top-level `var` variables and function declarations automatically become properties of `window`.
+2. Если переменные, объявленные с помощью `var` или декларации функиций находятся на верхнем уровне программы, то они автоматически становятся свойствами `window`. Top-level `var` variables and function declarations automatically become properties of `window`.
 
-    For instance:
+    Например For instance:
     ```js untrusted run no-strict refresh
     var x = 5;
 
-    alert(window.x); // 5 (var x becomes a property of window)
+    alert(window.x); // 5 (var x становиться свойством window) 5 (var x becomes a property of window)
 
     window.x = 0;
 
-    alert(x); // 0, variable modified
+    alert(x); // 0, переменная изменена variable modified
     ```
 
-    Please note, that doesn't happen with more modern `let/const` declarations:
+    Обратите внимание, что этого не происходит с более современными `let/const` объявлениями. Please note, that doesn't happen with more modern `let/const` declarations:
 
     ```js untrusted run no-strict refresh
     let x = 5;
 
-    alert(window.x); // undefined ("let" doesn't create a window property)
+    alert(window.x); // undefined ("let" не создаёт свойства window) undefined ("let" doesn't create a window property)
     ```
 
-3. Also, all scripts share the same global scope, so variables declared in one `<script>` become visible in  another ones:
+3. Кроме того, все скрипты имеют общюю глобальную область видимотси, поэтому переменные, объявленные в одном теге `<script>` становятся видимыми в других. Also, all scripts share the same global scope, so variables declared in one `<script>` become visible in  another ones:
 
     ```html run
     <script>
@@ -65,21 +65,21 @@ For historical reasons, in-browser `window` object is a bit messed up.
     </script>
     ```
 
-4. And, a minor thing, but still: the value of `this` in the global scope is `window`.
+4. Мелочь, но всё же, значение `this` в глобальной области видимости — `window`. And, a minor thing, but still: the value of `this` in the global scope is `window`.
 
     ```js untrusted run no-strict refresh
     alert(this); // window
     ```
 
-Why was it made like this? At the time of the language creation, the idea to merge multiple aspects into a single `window` object was to "make things simple". But since then many things changed. Tiny scripts became big applications that require proper architecture.
+Почему было сделано так? На момент создания языка, объединение нескольких аспектов в одном объекте `window`, должно было "упростить" работу. Но с тех пор многое изменилось. Крошечные скрипты превратились в крупные приложения, требующие правльной архитектуры.  Why was it made like this? At the time of the language creation, the idea to merge multiple aspects into a single `window` object was to "make things simple". But since then many things changed. Tiny scripts became big applications that require proper architecture.
 
-Is it good that different scripts (possibly from different sources) see variables of each other?
+Хорошо ли, что разные скрипты (возможно из разных источников) "видят" переменные друг друга? Is it good that different scripts (possibly from different sources) see variables of each other?
 
-No, it's not, because it may lead to naming conflicts: the same variable name can be used in two scripts for different purposes, so they will conflict with each other.
+Нет, потому что это может привести к конфликту имён: одинаковые имена переменных могут использоваться двумя скриптами для различных целей и эти переменные будут конфликтовать между собой.  No, it's not, because it may lead to naming conflicts: the same variable name can be used in two scripts for different purposes, so they will conflict with each other.
 
-As of now, the multi-purpose `window` is considered a design mistake in the language.
+Сейчас, многоцелевой `window` считается ошибкой проектирования языка. As of now, the multi-purpose `window` is considered a design mistake in the language.
 
-Luckily, there's a "road out of hell", called "JavaScript modules".
+К счастью, есть "дорога из ада" — JavaScript модули. Luckily, there's a "road out of hell", called "JavaScript modules".
 
 If we set `type="module"` attribute on a `<script>` tag, then such script is considered a separate "module" with its own top-level scope (lexical environment), not interfering with `window`.
 
