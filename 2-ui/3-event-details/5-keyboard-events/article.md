@@ -1,135 +1,135 @@
-# Keyboard: keydown and keyup
+# Клавиатура: keydown и keyup
 
-Before we get to keyboard, please note that on modern devices there are other ways to "input something". For instance, people use speech recognition (especially on mobile devices) or copy/paste with the mouse.
+Прежде чем перейти к клавиатуре, обратите внимание, что на современных устройствах есть и другие способы "ввести что-то". Например, распознавание речи (это особенно актуально на мобильных устройствах) или Копировать/Вставить с помощью мыши.
 
-So if we want to track any input into an `<input>` field, then keyboard events are not enough. There's another event named `input` to handle changes of an `<input>` field, by any means. And it may be a better choice for such task. We'll cover it later in the chapter <info:events-change-input>.
+Поэтому, если мы хотим корректно отслеживать ввод в поле `<input>`, то одних клавиатурных событий недостаточно. Существует специальное событие `input`, которое следит за любыми изменениями в поле `<input>`. И оно справляется со своей задачей намного лучше. Мы рассмотрим его позже в главе <info:events-change-input>.
 
-Keyboard events should be used when we want to handle keyboard actions (virtual keyboard also counts). For instance, to react on arrow keys `key:Up` and `key:Down` or hotkeys (including combinations of keys).
+События клавиатуры же должны использоваться, если мы хотим обрабатывать взаимодействие пользователя конкретно с клавиатурой (в том числе виртуальной). К примеру, если нам нужно реагировать на стрелочные клавиши `key:Up` и `key:Down` или горячие клавиши (включая комбинации клавиш).
 
 
-## Teststand [#keyboard-test-stand]
+## Тестовый стенд [#keyboard-test-stand]
 
 ```offline
-To better understand keyboard events, you can use the [teststand](sandbox:keyboard-dump).
+Для того, чтобы лучше понять, как работают события клавиатуры, можно использовать [тестовый стенд](sandbox:keyboard-dump).
 ```
 
 ```online
-To better understand keyboard events, you can use the teststand below.
+Для того, чтобы лучше понять, как работают события клавиатуры, можно использовать тестовый стенд ниже.
 
-Try different key combinations in the text field.
+Сфокусируйтесь на поле и нажмите какую-нибудь клавишу.
 
 [codetabs src="keyboard-dump" height=480]
 ```
 
 
-## Keydown and keyup
+## Keydown и keyup
 
-The `keydown` events happens when a key is pressed down, and then `keyup` -- when it's released.
+Событие `keydown` происходит при нажатии клавиши, а `keyup` -- при отпускании.
 
-### event.code and event.key
+### event.code и event.key
 
-The `key` property of the event object allows to get the character, while the `code` property of the event object allows to get the "physical key code".
+У объекта события есть свойство `key`, чьё значение -- символ, и свойство `code` -- "физический код клавиши".
 
-For instance, the same key `key:Z` can be pressed with or without `Shift`. That gives us two different characters: lowercase `z` and uppercase `Z`.
+Так, ту же самую клавишу `Z` можно нажать с клавишей `Shift` и без неё. В результе получится два разных символа: `z` в нижнем регистре и `Z` в верхнем регистре.
 
-The `event.key` is exactly the character, and it will be different. But `event.code` is the same:
+Свойство `event.key` -- это непосредственно символ, и он может различаться. Но `event.code` всегда будет тот же:
 
-| Key          | `event.key` | `event.code` |
+| Клавиша          | `event.key` | `event.code` |
 |--------------|-------------|--------------|
-| `key:Z`      |`z` (lowercase)         |`KeyZ`        |
-| `key:Shift+Z`|`Z` (uppercase)          |`KeyZ`        |
+| `key:Z`          |`z` (нижний регистр)         |`KeyZ`        |
+| `key:Shift+Z`    |`Z` (Верхний регистр)          |`KeyZ`        |
 
 
-If a user works with different languages, then switching to another language would make a totally different character instead of `"Z"`. That will become the value of `event.key`, while `event.code` is always the same: `"KeyZ"`.
+Если пользователь работает с разными языками, то при переключении на другой язык символ изменится с `"Z"` на совершенно другой. Получившееся станет новым значением `event.key`, тогда как `event.code` останется тем же: `"KeyZ"`.
 
-```smart header="\"KeyZ\" and other key codes"
-Every key has the code that depends on its location on the keyboard. Key codes described in the [UI Events code specification](https://www.w3.org/TR/uievents-code/).
+```smart header="\"KeyZ\" и другие клавишные коды"
+У каждой клавиши есть код, который зависит от её расположения на клавиатуре. Подробно о клавишных кодах можно прочитать в [спецификации о кодах событий UI](https://www.w3.org/TR/uievents-code/).
 
-For instance:
-- Letter keys have codes `"Key<letter>"`: `"KeyA"`, `"KeyB"` etc.
-- Digit keys have codes: `"Digit<number>"`: `"Digit0"`, `"Digit1"` etc.
-- Special keys are coded by their names: `"Enter"`, `"Backspace"`, `"Tab"` etc.
+Например:
+- Буквенные клавиши имеют коды по типу `"Key<буква>"`: `"KeyA"`, `"KeyB"` и т.д.
+- Коды числовых клавиш строятся по принципу: `"Digit<число>"`: `"Digit0"`, `"Digit1"` и т.д.
+- Код специальных клавиш -- это их имя: `"Enter"`, `"Backspace"`, `"Tab"` и т.д.
 
-There are several widespread keyboard layouts, and the specification gives key codes for each of them.
+Существует несколько широко распостранённых раскладок клавиатуры, и в спецификации приведены клавишные коды к каждой из них.
 
-See [alphanumeric section of the spec](https://www.w3.org/TR/uievents-code/#key-alphanumeric-section) for more codes, or just try the [teststand](#keyboard-test-stand) above.
+Смотрите [раздел спецификации, посвящённый буквенно-цифровым клавишам](https://www.w3.org/TR/uievents-code/#key-alphanumeric-section), там полный список кодов, или просто нажмите нужную клавишу на тестовом стенде [teststand](#keyboard-test-stand) выше.
 ```
 
-```warn header="Case matters: `\"KeyZ\"`, not `\"keyZ\"`"
-Seems obvious, but people still make mistakes.
+```warn header="Регистр важен: `\"KeyZ\"`, а не `\"keyZ\"`"
+Выглядит очевидно, но многие всё равно ошибаются.
 
-Please evade mistypes: it's `KeyZ`, not `keyZ`. The check like `event.code=="keyZ"` won't work: the first letter of `"Key"` must be uppercase.
+Пожалуйста, избегайте опечаток: правильно `KeyZ`, а не `keyZ`. Условие `event.code=="keyZ"` работать не будет: первая буква в слове `"Key"` должна быть заглавная.
 ```
 
 
-What if a key does not give any character? For instance, `key:Shift` or `key:F1` or others. For those keys `event.key` is approximately the same as `event.code`:
+Но что делать, если клавиша не буквенно-цифровая? Например, `Shift` или `F1`, или какая-либо другая специальная клавиша? В таких случаях значение свойства `event.key` примерно тоже, что и у `event.code`:
 
 
-| Key          | `event.key` | `event.code` |
+| Клавиша          | `event.key` | `event.code` |
 |--------------|-------------|--------------|
-| `key:F1`      |`F1`          |`F1`        |
-| `key:Backspace`      |`Backspace`          |`Backspace`        |
-| `key:Shift`|`Shift`          |`ShiftRight` or `ShiftLeft`        |
+| `F1`      |`F1`          |`F1`        |
+| `Backspace`      |`Backspace`          |`Backspace`        |
+| `key:Shift`|`Shift`          |`ShiftRight` или `ShiftLeft`        |
 
-Please note that `event.code` specifies exactly which key is pressed. For instance, most keyboards have two `key:Shift` keys: on the left and on the right side. The `event.code` tells us exactly which one was pressed, and `event.key` is responsible for the "meaning" of the key: what it is (a "Shift").
+Обратите внимание, что `event.code` точно указывает, какая именно клавиша нажата. Так, большинство клавиатур имеют по две клавиши `Shift`: слева и справа. `event.code` уточняет, какая именно из них была нажата, в то время как `event.key` сообщает о "смысле" клавиши: что вообще было нажато (`Shift`).
 
-Let's say, we want to handle a hotkey: `key:Ctrl+Z` (or `key:Cmd+Z` for Mac). Most text editors hook the "Undo" action on it. We can set a listener on `keydown` and check which key is pressed -- to detect when we have the hotkey.
+Допустим, мы хотим обработать горячую клавишу `Ctrl+Z` (или `Cmd+Z` для Mac). Большинство текстовых редакторов к этой комбинации подключают действие "Отменить". Мы можем захотеть поставить обработчик событий на `keydown` и проверять, какая клавиша была нажата -- чтобы для каких-то наших целей распознать, когда произойдет нажатие горячей клавиши.
 
-There's a dilemma here: in such a listener, should we check the value of `event.key` or `event.code`?
+Здесь возникает дилемма: в нашем обработчике стоит проверять значение `event.key` или `event.code`?
 
-On one hand, the value of `event.key` changes depending on the language. If the visitor has several languages in OS and switches between them, the same key gives different characters. So it makes sense to check `event.code`, it's always the same.
+С одной стороны, значение `event.key` изменяется в зависимости от языка, и если у пользователя установлено в ОС несколько языков, и он переключается между ними, нажатие на одну и ту же клавишу будет давать разные символы. Так что имеет смысл проверять `event.code`, ведь его значение всегда одно и тоже.
 
-Like this:
+Вот пример кода: 
 
 ```js run
 document.addEventListener('keydown', function(event) {
   if (event.code == 'KeyZ' && (event.ctrlKey || event.metaKey)) {
-    alert('Undo!')
+    alert('Отменить!')
   }
 });
 ```
 
-On the other hand, there's a problem with `event.code`. For different keyboard layouts, the same key may have different labels (letters).
+С другой стороны, с `event.code` тоже есть проблемы. На разных раскладках к одной и той же клавише могут быть привязаны разные символы (буквы).
 
-For example, here are US layout ("QWERTY") and German layout ("QWERTZ") under it (courtesy of Wikipedia):
+Например, вот схема стандартной (US) раскладки ("QWERTY") и под ней немецкой ("QWERTZ") раскладки (предоставлены Википедией):
 
 ![](us-layout.png)
 
 ![](german-layout.png)
 
-For the same key, US layout has "Z", while German layout has "Y" (letters are swapped).
+Для одной и той же клавиши в американской раскладке значение `event.code` равно "Z", в то время как в немецкой "Y".
 
-So, `event.code` will equal `KeyZ` for people with German layout when they press "Y".
+Таким образом, для пользователей с немецкой раскладкой `event.code` при нажатии на "Y" будет равен `KeyZ`.
 
-That sounds odd, but so it is. The [specification](https://www.w3.org/TR/uievents-code/#table-key-code-alphanumeric-writing-system) explicitly mentions such behavior.
+Звучит странно, но тут уж ничего не поделать. В [спецификации](https://www.w3.org/TR/uievents-code/#table-key-code-alphanumeric-writing-system) прямо упоминается такое поведение.
 
-- `event.code` has the benefit of staying always the same, bound to the physical key location, even if the visitor changes languages. So hotkeys that rely on it work well even in case of a language switch.
-- `event.code` may match a wrong character for unexpected layout. Same letters in different layouts may map to different physical keys, leading to different codes. That happens for several codes, e.g. `keyA`, `keyQ`, `keyZ` (as we've seen). You can find the list in the [specification](https://www.w3.org/TR/uievents-code/#table-key-code-alphanumeric-writing-system).
+- Преимущество `event.code` заключается в том, что его значение всегда остается неизменным, будучи привязанным к физическому местоположению клавиши, даже если пользователь меняет язык. Так что горячие клавиши, использующие это свойство, будут работать даже в случае переключения языка. 
+- `event.code` может содержать неправильный символ на нестандартной раскладке. Одни и те же буквы на разных раскладках могут сопоставляться с разными физическими клавишами, что приводит к разным кодам.  К счастью, это происходит не со всеми кодами, а с несколькими, например `keyA`, `keyQ`, `keyZ` (как мы уже видели), и не происходит со специальными клавишами, такими как `Shift`. Вы можете найти полный список проблемных кодов в [спецификации](https://www.w3.org/TR/uievents-code/#table-key-code-alphanumeric-writing-system).
 
-So, to reliably track layout-dependent characters, `event.key` may be a better way.
+Таким образом, чтобы отслеживать символы, зависящие от раскладки, `event.key` надёжнее.
 
-## Auto-repeat
+## Автоповтор
 
-If a key is being pressed for a long enough time, it starts to "auto-repeat": the `keydown` triggers again and again, and then when it's released we finally get `keyup`. So it's kind of normal to have many `keydown` and a single `keyup`.
+При долгом нажатии клавиши возникает автоповтор: `keydown` срабатывает снова и снова, и когда клавишу отпускают, то отрабатывает `keyup`. Так что ситуация, когда много `keydown`и один `keyup`, абсолютно нормальна.
 
-For events triggered by auto-repeat, the event object has `event.repeat` property set to `true`.
+Для событий, вызванных автоповтором, у объекта события свойство `event.repeat` равно `true`.
 
 
-## Default actions
+## Действия по умолчанию
 
-Default actions vary, as there are many possible things that may be initiated by the keyboard.
+Действия по умолчанию весьма разнообразны, много чего можно инициировать нажатием на клавиатуре.
 
-For instance:
+Для примера:
 
-- A character appears on the screen (the most obvious outcome).
-- A character is deleted (`key:Delete` key).
-- The page is scrolled (`key:PageDown` key).
-- The browser opens the "Save Page" dialog (`key:Ctrl+S`)
--  ...and so on.
+- Появление символа (самое очевидное).
+- Удаление символа (клавиша `key:Delete`).
+- Прокрутка страницы (клавиша `key:PageDown`).
+- Открытие диалогового окна браузера "Сохранить" (`key:Ctrl+S`)
+-  ...и так далее.
 
-Preventing the default action on `keydown` can cancel most of them, with the exception of OS-based special keys. For instance, on Windows `key:Alt+F4` closes the current browser window. And there's no way to stop it by preventing the default action in JavaScript.
+Предотвращение стандартного действия с помощью `event.preventDefault()` работает практически во всех сценариях, кроме тех, которые происходят на уровне операционной системы. Например, комбинация Alt+F4 инициирует закрытие браузера в Windows, что бы мы ни делали в JavaScript.
 
-For instance, the `<input>` below expects a phone number, so it does not accept keys except digits, `+`, `()` or `-`:
+Для примера, `<input>` ниже ожидает телефонный номер, так что ничего кроме чисел, `+`, `()` или `-` принято не будет:
 
 ```html autorun height=60 run
 <script>
@@ -137,12 +137,12 @@ function checkPhoneKey(key) {
   return (key >= '0' && key <= '9') || key == '+' || key == '(' || key == ')' || key == '-';
 }
 </script>
-<input *!*onkeydown="return checkPhoneKey(event.key)"*/!* placeholder="Phone, please" type="tel">
+<input *!*onkeydown="return checkPhoneKey(event.key)"*/!* placeholder="Введите номер телефона" type="tel">
 ```
 
-Please note that special keys like `key:Backspace`, `key:Left`, `key:Right`, `key:Ctrl+V` do not work in the input. That's a side-effect of the strict filter `checkPhoneKey`.
+Заметьте, что специальные клавиши по типу `key:Backspace`, `key:Left`, `key:Right`, `key:Ctrl+V` не работают как должны в поле для ввода. Это побочный эффект жесткого фильтра `checkPhoneKey`.
 
-Let's relax it a little bit:
+Добавим ему немного больше свободы:
 
 
 ```html autorun height=60 run
@@ -152,35 +152,35 @@ function checkPhoneKey(key) {
     key == 'ArrowLeft' || key == 'ArrowRight' || key == 'Delete' || key == 'Backspace';
 }
 </script>
-<input onkeydown="return checkPhoneKey(event.key)" placeholder="Phone, please" type="tel">
+<input onkeydown="return checkPhoneKey(event.key)" placeholder="Введите номер телефона" type="tel">
 ```
 
-Now arrows and deletion works well.
+Теперь стрелочки и удаление прекрасно работают.
 
-...But we still can enter anything by using a mouse and right-click + Paste. So the filter is not 100% reliable. We can just let it be like that, because most of time it works. Or an alternative approach would be to track the `input` event -- it triggers after any modification. There we can check the new value and highlight/modify it when it's invalid.
+...Но мы всё равно можем ввести что угодно с помощью правого клика + Вставить. Так что наш фильтр тоже не обладает 100% надёжностью. Мы можем просто оставить всё как есть, потому что в большинстве случаев это работает. Альтернатива -- отслеживать событие `input`, оно генерируется после любых изменений в поле `<input>`, и мы можем проверять новое значение и подчеркивать/изменять его, если оно не подходит.
 
-## Legacy
+## "Дела минувших дней"
 
-In the past, there was a `keypress` event, and also `keyCode`, `charCode`, `which` properties of the event object.
+В прошлом существовало также событие `keypress`, а также свойства `keyCode`, `charCode`, `which` у объекта события.
 
-There were so many browser incompatibilities that developers of the specification decided to deprecate all of them. The old code still works, as browsers keep supporting them, but there's totally no need to use those any more.
+Но количество браузерных несовместимостей при работе с ними было столь велико, что у разработчиков спецификации не было другого выхода, кроме как объявить их устаревшими и создать новые, современные события (которые и описываются в этой главе). Старый код ещё работает, так как браузеры продолжают поддерживать и `keypress`, и `keyCode` с `charCode`, и `which`, но более нет никакой необходимости в их использовании.
 
-There was a time when this chapter included their detailed description. But as of now it was removed and replaced with more details about the modern event handling.
+Было время, когда эта глава включала их подробное описание. Но браузеры уже давно поддерживают современные события, поэтому это описание было удалено, и вместо него были добавлены дополнительные детали по современным событиям.
 
-## Summary
+## Итого
 
-Pressing a key always generates a keyboard event, be it symbol keys or special keys like `key:Shift` or `key:Ctrl` and so on. The only exception is `key:Fn` key that sometimes presents on a laptop keyboard. There's no keyboard event for it, because it's often implemented on lower level than OS.
+Нажатие клавиши всегда генерирует клавиатурное событие, будь то буквенно-цифровая клавиша или специальная типа `key:Shift` или `key:Ctrl` и т.д. Единственным исключением является клавиша `Fn`, которая присутствует на клавиатуре некоторых ноутбуков. События на клавиатуре для неё нет, потому что она обычно работает на уровне более низком, чем даже ОС.
 
-Keyboard events:
+События клавиатуры:
 
-- `keydown` -- on pressing the key (auto-repeats if the key is pressed for long),
-- `keyup` -- on releasing the key.
+- `keydown` -- при нажатии на клавишу (если клавиша остается нажатой, происходит автоповтор),
+- `keyup` -- при отпускании клавиши.
 
-Main keyboard event properties:
+Главные свойства для работы с клавиатурными событиями:
 
-- `code` -- the "key code" (`"KeyA"`, `"ArrowLeft"` and so on), specific to the physical location of the key on keyboard.
-- `key` -- the character (`"A"`, `"a"` and so on), for non-character keys usually has the same value  as `code`.
+- `code` -- "код клавиши" (`"KeyA"`, `"ArrowLeft"` и так далее), особый код, привязанный к физическому расположению клавиши на клавиатуре.
+- `key` -- символ (`"A"`, `"a"` и так далее), для не буквенно-цифровых групп клавиш (таких как `key:Esc`) обычно имеет то же значение, что и `code`.
 
-In the past, keyboard events were sometimes used to track user input in form fields. That's not reliable, because the input can come from various sources. We have `input` and `change` events to handle any input (covered later in the chapter <info:events-change-input>). They trigger after any kind of input, including copy-pasting or speech recognition.
+В прошлом события клавиатуры иногда ипользовались для отслеживания ввода данных пользователем в полях формы. Это не надёжно, потому как ввод данных не обязательно может осуществляться с помощью клавиатуры. Существуют события `input` и `change` специально для обработки ввода (рассмотренные позже в главе <info:events-change-input>). Они срабатывают в результате любого ввода, включая Копировать/Вставить мышью и распознование речи.
 
-We should use keyboard events when we really want keyboard. For example, to react on hotkeys or special keys.
+События клавиатуры же должны использоваться только по назначению -- для клавиатуры. Например, чтобы реагировать на горячие или специальные клавиши.
