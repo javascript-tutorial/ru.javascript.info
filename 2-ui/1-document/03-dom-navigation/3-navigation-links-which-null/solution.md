@@ -1,6 +1,4 @@
-1. Yes, true. The element `elem.lastChild` is always the last one, it has no `nextSibling`.
-2. No, wrong, because `elem.children[0]` is the first child *among elements*. But there may exist non-element nodes before it. So `previousSibling` may be a text node. Also, if there are no children, then trying to access `elem.children[0]`
+1. Да. Верно. Элемент `elem.lastChild` всегда последний, у него нет ссылки `nextSibling`.
+2. Нет. Неверно. Потому что `elem.children[0]` -- потомок-элемент. Но перед ним могут быть другие узлы. Например, `previousSibling` может быть текстовым узлом.
 
-Please note: for both cases if there are no children, then there will be an error.
-
-If there are no children, `elem.lastChild` is `null`, so we can't access `elem.lastChild.nextSibling`. And the collection `elem.children` is empty (like an empty array `[]`).
+Обратите внимание, что в обоих случаях, если детей нет, то будет ошибка. При этом `elem.lastChild` равен `null`, а значит -- ошибка при попытке доступа к `elem.lastChild.nextSibling`.

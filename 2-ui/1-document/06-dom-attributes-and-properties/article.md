@@ -1,18 +1,18 @@
-# Attributes and properties
+# Атрибуты и свойства
 
-When the browser loads the page, it "reads" (another word: "parses") the HTML and generates DOM objects from it. For element nodes, most standard HTML attributes automatically become properties of DOM objects.
+Когда браузер загружает страницу, он "читает" (также говорят: "парсит") HTML и генерирует из него DOM-объекты. Для узлов-элементов большинство стандартных HTML-атрибутов автоматически становятся свойствами DOM-объектов.
 
-For instance, if the tag is `<body id="page">`, then the DOM object has `body.id="page"`.
+Например, для такого тега `<body id="page">` у DOM-объекта будет такое свойство `body.id="page"`.
 
-But the attribute-property mapping is not one-to-one! In this chapter we'll pay attention to separate these two notions, to see how to work with them, when they are the same, and when they are different.
+Но преобразование атрибута в свойство происходит не один-в-один! В этой главе мы уделим внимание различию этих двух понятий, чтобы посмотреть, как работать с ними, когда они одинаковые, а когда разные.
 
-## DOM properties
+## DOM-свойства
 
-We've already seen built-in DOM properties. There's a lot. But technically no one limits us, and if it's not enough -- we can add our own.
+Ранее мы уже видели встроенные DOM-свойства. Их много. Но технически нас никто не ограничивает, и если этого мало -- мы можем добавить своё собственное свойство.
 
-DOM nodes are regular JavaScript objects. We can alter them.
+DOM-узлы -- это обычные объекты JavaScript. Мы можем их изменять.
 
-For instance, let's create a new property in `document.body`:
+Например, создадим новое свойство для `document.body`:
 
 ```js run
 document.body.myData = {
@@ -23,17 +23,17 @@ document.body.myData = {
 alert(document.body.myData.title); // Imperator
 ```
 
-We can add a method as well:
+Мы можем добавить и метод:
 
 ```js run
 document.body.sayTagName = function() {
   alert(this.tagName);
 };
 
-document.body.sayTagName(); // BODY (the value of "this" in the method is document.body)
+document.body.sayTagName(); // BODY (значением "this" в этом методе будет document.body)
 ```
 
-We can also modify built-in prototypes like `Element.prototype` and add new methods to all elements:
+Также можно изменять встроенные прототипы, такие как `Element.prototype` и добавлять новые методы ко всем элементам:
 
 ```js run
 Element.prototype.sayHi = function() {
@@ -44,59 +44,59 @@ document.documentElement.sayHi(); // Hello, I'm HTML
 document.body.sayHi(); // Hello, I'm BODY
 ```
 
-So, DOM properties and methods behave just like those of regular JavaScript objects:
+Итак, DOM-свойства и методы ведут себя так же, как и обычные объекты JavaScript:
 
-- They can have any value.
-- They are case-sensitive (write `elem.nodeType`, not `elem.NoDeTyPe`).
+- Им можно присвоить любое значение.
+- Они регистрозависимы (нужно писать `elem.nodeType`, не `elem.NoDeTyPe`).
 
-## HTML attributes
+## HTML-атрибуты
 
-In HTML, tags may have attributes. When the browser parses the HTML to create DOM objects for tags, it recognizes *standard* attributes and creates DOM properties from them.
+В HTML у тегов могут быть атрибуты. Когда браузер парсит HTML, чтобы создать DOM-объекты для тегов, он распознаёт *стандартные* атрибуты и создаёт DOM-свойства для них.
 
-So when an element has `id` or another *standard* attribute, the corresponding property gets created. But that doesn't happen if the attribute is non-standard.
+Таким образом, когда у элемента есть `id` или другой *стандартный* атрибут, создаётся соответствующее свойство. Но этого не происходит, если атрибут нестандартный.
 
-For instance:
+Например:
 ```html run
 <body id="test" something="non-standard">
   <script>
     alert(document.body.id); // test
 *!*
-    // non-standard attribute does not yield a property
+    // нестандартный атрибут не преобразуется в свойство
     alert(document.body.something); // undefined
 */!*
   </script>
 </body>
 ```
 
-Please note that a standard attribute for one element can be unknown for another one. For instance, `"type"` is standard for `<input>` ([HTMLInputElement](https://html.spec.whatwg.org/#htmlinputelement)), but not for `<body>` ([HTMLBodyElement](https://html.spec.whatwg.org/#htmlbodyelement)). Standard attributes are described in the specification for the corresponding element class.
+Пожалуйста, учтите, что стандартный атрибут для одного тега может быть нестандартным для другого. Например, атрибут `"type"` является стандартным для элемента `<input>` ([HTMLInputElement](https://html.spec.whatwg.org/#htmlinputelement)), но не является стандартным для `<body>` ([HTMLBodyElement](https://html.spec.whatwg.org/#htmlbodyelement)). Стандартные атрибуты описаны в спецификации для соответствующего класса элемента.
 
-Here we can see it:
+Мы можем увидеть это на примере ниже:
 ```html run
 <body id="body" type="...">
   <input id="input" type="text">
   <script>
     alert(input.type); // text
 *!*
-    alert(body.type); // undefined: DOM property not created, because it's non-standard
+    alert(body.type); // undefined: DOM-свойство не создалось, потому что оно нестандартное
 */!*
   </script>
 </body>
 ```
 
-So, if an attribute is non-standard, there won't be a DOM-property for it. Is there a way to access such attributes?
+Таким образом, для нестандартных атрибутов не будет соответствующих DOM-свойств. Есть ли способ получить такие атрибуты?
 
-Sure. All attributes are accessible by using the following methods:
+Конечно. Все атрибуты доступны с помощью следующих методов:
 
-- `elem.hasAttribute(name)` -- checks for existence.
-- `elem.getAttribute(name)` -- gets the value.
-- `elem.setAttribute(name, value)` -- sets the value.
-- `elem.removeAttribute(name)` -- removes the attribute.
+- `elem.hasAttribute(name)` -- проверяет наличие атрибута.
+- `elem.getAttribute(name)` -- получает значение атрибута.
+- `elem.setAttribute(name, value)` -- устанавливает значение атрибута.
+- `elem.removeAttribute(name)` -- удаляет атрибут.
 
-These methods operate exactly with what's written in HTML.
+Этим методы работают именно с тем, что написано в HTML.
 
-Also one can read all attributes using `elem.attributes`: a collection of objects that belong to a built-in [Attr](https://dom.spec.whatwg.org/#attr) class, with `name` and `value` properties.
+Кроме этого, получить все атрибуты элемента можно с помощью свойства `elem.attributes`: коллекция объектов, которая принадлежит ко встроенному классу [Attr](https://dom.spec.whatwg.org/#attr) со свойствами `name` и `value`.
 
-Here's a demo of reading a non-standard property:
+Вот демонстрация чтения нестандартного свойства:
 
 ```html run
 <body something="non-standard">
@@ -108,43 +108,43 @@ Here's a demo of reading a non-standard property:
 </body>
 ```
 
-HTML attributes have the following features:
+У HTML-атрибутов есть следующие особенности:
 
-- Their name is case-insensitive (`id` is same as `ID`).
-- Their values are always strings.
+- Их имена регистронезависимы (`id` то же самое, что и `ID`).
+- Их значения всегда являются строками.
 
-Here's an extended demo of working with attributes:
+Расширенная демонстрация работы с атрибутами:
 
 ```html run
 <body>
   <div id="elem" about="Elephant"></div>
 
   <script>
-    alert( elem.getAttribute('About') ); // (1) 'Elephant', reading
+    alert( elem.getAttribute('About') ); // (1) 'Elephant', чтение
 
-    elem.setAttribute('Test', 123); // (2), writing
+    elem.setAttribute('Test', 123); // (2), запись
 
-    alert( elem.outerHTML ); // (3), see it's there
+    alert( elem.outerHTML ); // (3), проверка на наличие
 
-    for (let attr of elem.attributes) { // (4) list all
+    for (let attr of elem.attributes) { // (4) весь список
       alert( `${attr.name} = ${attr.value}` );
     }
   </script>
 </body>
 ```
 
-Please note:
+Пожалуйста, обратите внимание:
 
-1. `getAttribute('About')` -- the first letter is uppercase here, and in HTML it's all lowercase. But that doesn't matter: attribute names are case-insensitive.
-2. We can assign anything to an attribute, but it becomes a string. So here we have `"123"` as the value.
-3. All attributes including ones that we set are visible in `outerHTML`.
-4. The `attributes` collection is iterable and has all the attributes of the element (standard and non-standard) as objects with `name` and `value` properties.
+1. `getAttribute('About')` -- здесь первая буква заглавная, а в HTML -- строчная. Но это не важно: имена атрибутов регистронезависимы.
+2. Мы можем присвоить что угодно атрибуту, но это станет строкой. Поэтому в этой строчке мы получаем значение `"123"`.
+3. Все атрибуты, в том числе те, которые мы установили, видны в `outerHTML`.
+4. Коллекция `attributes` является итерируемой. В ней есть все элементы атрибута (стандартные и нестандартные) в виде объектов со свойствами `name` и `value`.
 
-## Property-attribute synchronization
+## Синхронизация между атрибутами и свойствами
 
-When a standard attribute changes, the corresponding property is auto-updated, and (with some exceptions) vice versa.
+Когда стандартный атрибут изменяется, соответствующее свойство автоматически обновляется. Это работает и в обратную сторону (за некоторыми исключениями).
 
-In the example below `id` is modified as an attribute, and we can see the property changed too. And then the same backwards:
+В примере ниже `id` модифицируется как атрибут, и можно увидеть, что свойство также изменено. То же самое работает и в обратную сторону:
 
 ```html run
 <input>
@@ -152,17 +152,17 @@ In the example below `id` is modified as an attribute, and we can see the proper
 <script>
   let input = document.querySelector('input');
 
-  // attribute => property
+  // атрибут => свойство
   input.setAttribute('id', 'id');
-  alert(input.id); // id (updated)
+  alert(input.id); // id (обновлено)
 
-  // property => attribute
+  // свойство => атрибут
   input.id = 'newId';
-  alert(input.getAttribute('id')); // newId (updated)
+  alert(input.getAttribute('id')); // newId (обновлено)
 </script>
 ```
 
-But there are exclusions, for instance `input.value` synchronizes only from attribute -> to property, but not back:
+Но есть и исключения, например, `input.value` синхронизируется только в одну сторону -- атрибут -> значение, но не в обратную:
 
 ```html run
 <input>
@@ -170,108 +170,108 @@ But there are exclusions, for instance `input.value` synchronizes only from attr
 <script>
   let input = document.querySelector('input');
 
-  // attribute => property
+  // атрибут => значение
   input.setAttribute('value', 'text');
   alert(input.value); // text
 
 *!*
-  // NOT property => attribute
+  // свойство => атрибут
   input.value = 'newValue';
-  alert(input.getAttribute('value')); // text (not updated!)
+  alert(input.getAttribute('value')); // text (не обновилось!)
 */!*
 </script>
 ```
 
-In the example above:
-- Changing the attribute `value` updates the property.
-- But the property change does not affect the attribute.
+В примере выше:
+- Изменение атрибута `value` обновило свойство.
+- Но изменение свойства не повлияло на атрибут.
 
-That "feature" may actually come in handy, because the user actions may lead to `value` changes, and then after them, if we want to recover the "original" value from HTML, it's in the attribute.
+Иногда эта "особенность" может пригодиться, потому что действия пользователя могут приводить к изменениям `value`, и если после этого мы захотим восстановить "оригинальное" значение из HTML, оно будет в атрибуте.
 
-## DOM properties are typed
+## DOM-свойства типизированы
 
-DOM properties are not always strings. For instance, the `input.checked` property (for checkboxes) is a boolean:
+DOM-свойства не всегда являются строками. Например, свойство `input.checked` (для чекбоксов) имеет булевый тип:
 
 ```html run
 <input id="input" type="checkbox" checked> checkbox
 
 <script>
-  alert(input.getAttribute('checked')); // the attribute value is: empty string
-  alert(input.checked); // the property value is: true
+  alert(input.getAttribute('checked')); // значение атрибута: пустая строка
+  alert(input.checked); // значение свойства: true
 </script>
 ```
 
-There are other examples. The `style` attribute is a string, but the `style` property is an object:
+Есть и другие примеры. Атрибут `style` -- строка, но свойство `style` является объектом:
 
 ```html run
 <div id="div" style="color:red;font-size:120%">Hello</div>
 
 <script>
-  // string
+  // строка
   alert(div.getAttribute('style')); // color:red;font-size:120%
 
-  // object
+  // объект
   alert(div.style); // [object CSSStyleDeclaration]
   alert(div.style.color); // red
 </script>
 ```
 
-Most properties are strings though.
+Хотя большинство свойств, всё же, строки.
 
-Quite rarely, even if a DOM property type is a string, it may differ from the attribute. For instance, the `href` DOM property is always a *full* URL, even if the attribute contains a relative URL or just a `#hash`.
+При этом некоторые из них, хоть и строки, могут отличаться от атрибутов. Например, DOM-свойство `href` всегда содержит *полный* URL, даже если атрибут содержит относительный URL или просто `#hash`.
 
-Here's an example:
+Ниже пример:
 
 ```html height=30 run
 <a id="a" href="#hello">link</a>
 <script>
-  // attribute
+  // атрибут
   alert(a.getAttribute('href')); // #hello
 
-  // property
-  alert(a.href ); // full URL in the form http://site.com/page#hello
+  // свойство
+  alert(a.href ); // полный URL в виде http://site.com/page#hello
 </script>
 ```
 
-If we need the value of `href` or any other attribute exactly as written in the HTML, we can use `getAttribute`.
+Если нужно значение `href` или любого другого атрибута в точности, как оно записано в HTML, можно воспользоваться `getAttribute`.
 
 
-## Non-standard attributes, dataset
+## Нестандартные атрибуты, dataset
 
-When writing HTML, we use a lot of standard attributes. But what about non-standard, custom ones? First, let's see whether they are useful or not? What for?
+При написании HTML мы используем много стандартных атрибутов. Но что насчёт нестандартных, пользовательских? Во-первых, давайте посмотрим, полезны они или нет? Для чего они нужны?
 
-Sometimes non-standard attributes are used to pass custom data from HTML to JavaScript, or to "mark" HTML-elements for JavaScript.
+Иногда нестандартные атрибуты используются для передачи пользовательских данных из HTML в JavaScript, или чтобы "помечать" HTML-элементы для JavaScript.
 
-Like this:
+Как тут:
 
 ```html run
-<!-- mark the div to show "name" here -->
+<!-- пометить div, чтобы показать здесь поле "name" -->
 <div *!*show-info="name"*/!*></div>
-<!-- and age here -->
+<!-- а здесь возраст -->
 <div *!*show-info="age"*/!*></div>
 
 <script>
-  // the code finds an element with the mark and shows what's requested
+  // код находит элемент с пометкой и показывает запрошенную информацию
   let user = {
     name: "Pete",
     age: 25
   };
 
   for(let div of document.querySelectorAll('[show-info]')) {
-    // insert the corresponding info into the field
+    // вставить соответствующую информацию в поле
     let field = div.getAttribute('show-info');
-    div.innerHTML = user[field]; // Pete, then age
+    div.innerHTML = user[field]; // Pete, потом возраст
   }
 </script>
 ```
 
-Also they can be used to style an element.
+Также они могут быть использованы, чтобы стилизовать элементы.
 
-For instance, here for the order state the attribute `order-state` is used:
+Например, здесь для состояния заказа используется атрибут `order-state`:
 
 ```html run
 <style>
-  /* styles rely on the custom attribute "order-state" */
+  /* стили зависят от пользовательского атрибута "order-state" */
   .order[order-state="new"] {
     color: green;
   }
@@ -298,24 +298,24 @@ For instance, here for the order state the attribute `order-state` is used:
 </div>
 ```
 
-Why the attribute may be preferable to classes like `.order-state-new`, `.order-state-pending`, `order-state-canceled`?
+Почему атрибут может быть предпочтительнее таких классов, как `.order-state-new`, `.order-state-pending`, `order-state-canceled`?
 
-That's because an attribute is more convenient to manage. The state can be changed as easy as:
+Это потому, что атрибутом удобнее управлять. Состояние может быть изменено достаточно просто:
 
 ```js
-// a bit simpler than removing old/adding a new class
+// немного проще, чем удаление старого/добавление нового класса
 div.setAttribute('order-state', 'canceled');
 ```
 
-But there may be a possible problem with custom attributes. What if we use a non-standard attribute for our purposes and later the standard introduces it and makes it do something? The HTML language is alive, it grows, more attributes appear to suit the needs of developers. There may be unexpected effects in such case.
+Но с пользовательскими атрибутами могут возникнуть проблемы. Что если мы используем нестандартный атрибут для наших целей, а позже он появится в стандарте и будет выполнять какую-то функцию? Язык HTML живой, он растёт, появляется больше атрибутов, чтобы удовлетворить потребности разработчиков. В этом случае могут возникнуть неожиданные эффекты.
 
-To avoid conflicts, there exist [data-*](https://html.spec.whatwg.org/#embedding-custom-non-visible-data-with-the-data-*-attributes) attributes.
+Чтобы избежать конфликтов, существуют атрибуты вида [data-*](https://html.spec.whatwg.org/#embedding-custom-non-visible-data-with-the-data-*-attributes).
 
-**All attributes starting with "data-" are reserved for programmers' use. They are available in the `dataset` property.**
+**Все атрибуты, начинающиеся с префикса "data-", зарезервированы для использования программистами. Они доступны в свойстве `dataset`.**
 
-For instance, if an `elem` has an attribute named `"data-about"`, it's available as `elem.dataset.about`.
+Например, если у `elem` есть атрибут `"data-about"`, то обратиться к нему можно как `elem.dataset.about`.
 
-Like this:
+Как тут:
 
 ```html run
 <body data-about="Elephants">
@@ -324,9 +324,9 @@ Like this:
 </script>
 ```
 
-Multiword attributes like `data-order-state` become camel-cased: `dataset.orderState`.
+Атрибуты, состоящие из нескольких слов, к примеру `data-order-state`, становятся свойствами, записанными с помощью верблюжьей нотации: `dataset.orderState`.
 
-Here's a rewritten "order state" example:
+Вот переписанный пример "состояния заказа":
 
 ```html run
 <style>
@@ -348,39 +348,39 @@ Here's a rewritten "order state" example:
 </div>
 
 <script>
-  // read
+  // чтение
   alert(order.dataset.orderState); // new
 
-  // modify
+  // изменение
   order.dataset.orderState = "pending"; // (*)
 </script>
 ```
 
-Using `data-*` attributes is a valid, safe way to pass custom data.
+Использование `data-*` атрибутов -- валидный, безопасный способ передачи пользовательских данных.
 
-Please note that we can not only read, but also modify data-attributes. Then CSS updates the view accordingly: in the example above the last line `(*)` changes the color to blue.
+Пожалуйста, примите во внимание, что мы можем не только читать, но и изменять data-атрибуты. Тогда CSS обновит представление соответствующим образом: в примере выше последняя строка `(*)` меняет цвет на синий.
 
-## Summary
+## Итого
 
-- Attributes -- is what's written in HTML.
-- Properties -- is what's in DOM objects.
+- Атрибуты -- это то, что написано в HTML.
+- Свойства -- это то, что находится в DOM-объектах.
 
-A small comparison:
+Небольшое сравнение:
 
-|            | Properties | Attributes |
+|            | Свойства | Атрибуты |
 |------------|------------|------------|
-|Type|Any value, standard properties have types described in the spec|A string|
-|Name|Name is case-sensitive|Name is not case-sensitive|
+|Тип|Любое значение, стандартные свойства имеют типы, описанные в спецификации|Строка|
+|Имя|Имя регистрозависимо|Имя регистронезависимо|
 
-Methods to work with attributes are:
+Методы для работы с атрибутами:
 
-- `elem.hasAttribute(name)` -- to check for existence.
-- `elem.getAttribute(name)` -- to get the value.
-- `elem.setAttribute(name, value)` -- to set the value.
-- `elem.removeAttribute(name)` -- to remove the attribute.
-- `elem.attributes` is a collection of all attributes.
+- `elem.hasAttribute(name)` -- проверить на наличие.
+- `elem.getAttribute(name)` -- получить значение.
+- `elem.setAttribute(name, value)` -- установить значение.
+- `elem.removeAttribute(name)` -- удалить атрибут.
+- `elem.attributes` -- это коллекция всех атрибутов.
 
-For most situations using DOM properties is preferable. We should refer to attributes only when DOM properties do not suit us, when we need exactly attributes, for instance:
+В большинстве ситуаций предпочтительнее использовать DOM-свойства. Нужно использовать атрибуты только тогда, когда DOM-свойства не подходят, когда нужны именно атрибуты, например:
 
-- We need a non-standard attribute. But if it starts with `data-`, then we should use `dataset`.
-- We want to read the value "as written" in HTML. The value of the DOM property may be different, for instance the `href` property is always a full URL, and we may want to get the "original" value.
+- Нужен нестандартный атрибут. Но если он начинается с `data-`, тогда нужно использовать `dataset`.
+- Мы хотим получить именно то значение, которое написано в HTML. Значение DOM-свойства может быть другим, например, свойство `href` -- всегда полный URL, а нам может понадобиться получить "оригинальное" значение.

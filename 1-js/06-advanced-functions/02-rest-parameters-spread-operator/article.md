@@ -1,20 +1,20 @@
-# Rest parameters and spread operator
+# Остаточные параметры и оператор расширения
 
-Many JavaScript built-in functions support an arbitrary number of arguments.
+Многие встроенные функции JavaScript поддерживают произвольное количество аргументов.
 
-For instance:
+Например:
 
-- `Math.max(arg1, arg2, ..., argN)` -- returns the greatest of the arguments.
-- `Object.assign(dest, src1, ..., srcN)` -- copies properties from `src1..N` into `dest`.
-- ...and so on.
+- `Math.max(arg1, arg2, ..., argN)` – вычисляет максимальное число из переданных.
+- `Object.assign(dest, src1, ..., srcN)` – копирует свойства из исходных объектов `src1..N` в целевой объект `dest`.
+- ...и так далее.
 
-In this chapter we'll learn how to do the same. And, more importantly, how to feel comfortable working with such functions and arrays.
+В этой главе мы узнаем, как делать то же более удобно.
 
-## Rest parameters `...`
+## Остаточные параметры (`...`) 
 
-A function can be called with any number of arguments, no matter how it is defined.
+Вызывать функцию можно с любым количеством аргументов, независимо от того, как она была определена.
 
-Like here:
+Например:
 ```js run
 function sum(a, b) {
   return a + b;
@@ -23,14 +23,14 @@ function sum(a, b) {
 alert( sum(1, 2, 3, 4, 5) );
 ```
 
-There will be no error because of "excessive" arguments. But of course in the result only the first two will be counted.
+Лишние аргументы не вызовут ошибку. Но, конечно, посчитаются только первые два значения.
 
-The rest parameters can be mentioned in a function definition with three dots `...`. They literally mean "gather the remaining parameters into an array".
+*Остаточные параметры* могут быть обозначены через три точки `...`. Буквально это значит: "собери оставшиеся параметры и положи их в массив".
 
-For instance, to gather all arguments into array `args`:
+Попробуем так создать массив `args`:
 
 ```js run
-function sumAll(...args) { // args is the name for the array
+function sumAll(...args) { // args — имя массива
   let sum = 0;
 
   for (let arg of args) sum += arg;
@@ -43,41 +43,41 @@ alert( sumAll(1, 2) ); // 3
 alert( sumAll(1, 2, 3) ); // 6
 ```
 
-We can choose to get the first parameters as variables, and gather only the rest.
+Мы можем положить первые несколько параметров в переменные и "собрать" остальные.
 
-Here the first two arguments go into variables and the rest go into `titles` array:
+В примере ниже первые два аргумента функции станут именем и фамилией, а третий и последующие станут массивом `titles`:
 
 ```js run
 function showName(firstName, lastName, ...titles) {
-  alert( firstName + ' ' + lastName ); // Julius Caesar
+  alert( firstName + ' ' + lastName ); // Юлий Цезарь
 
-  // the rest go into titles array
-  // i.e. titles = ["Consul", "Imperator"]
-  alert( titles[0] ); // Consul
-  alert( titles[1] ); // Imperator
+  // Оставшиеся параметры пойдут в массив
+  // titles = ["Консул", "Император"]
+  alert( titles[0] ); // Консул
+  alert( titles[1] ); // Император
   alert( titles.length ); // 2
 }
 
-showName("Julius", "Caesar", "Consul", "Imperator");
+showName("Юлий", "Цезарь", "Консул", "Император");
 ```
 
-````warn header="The rest parameters must be at the end"
-The rest parameters gather all remaining arguments, so the following does not make sense and causes an error:
+````warn header="Остаточные параметры должны располагаться в конце"
+Остаточные параметры собирают все остальные аргументы, поэтому бессмысленно писать что-либо после них. Это вызовет ошибку:
 
 ```js
-function f(arg1, ...rest, arg2) { // arg2 after ...rest ?!
-  // error
+function f(arg1, ...rest, arg2) { // arg2 после ...rest ?!
+  // Ошибка
 }
 ```
 
-The `...rest` must always be last.
+`...rest` должен всегда быть последним.
 ````
 
-## The "arguments" variable
+## Переменная "arguments" [#the-arguments-variable]
 
-There is also a special array-like object named `arguments` that contains all arguments by their index.
+Все аргументы функции находятся в псевдомассиве `argument`, по своему порядковому номеру.
 
-For instance:
+Например:
 
 ```js run
 function showName() {
@@ -85,59 +85,60 @@ function showName() {
   alert( arguments[0] );
   alert( arguments[1] );
 
-  // it's iterable
-  // for(let arg of arguments) alert(arg);
+  // Объект arguments можно перебирать
+  // for (let arg of arguments) alert(arg);
 }
 
-// shows: 2, Julius, Caesar
-showName("Julius", "Caesar");
+// Вывод: 2, Юлий, Цезарь
+showName("Юлий", "Цезарь");
 
-// shows: 1, Ilya, undefined (no second argument)
-showName("Ilya");
+// Вывод: 1, Илья, undefined (второго аргумента нет)
+showName("Илья");
 ```
 
-In old times, rest parameters did not exist in the language, and using `arguments` was the only way to get all arguments of the function, no matter their total number.
+Раньше в языке не было остаточных параметров, и получить все аргументы функции можно было только с помощью `arguments`. Независимо от того, сколько этих аргументов.
 
-And it still works, we can use it today.
+Этот способ всё ещё работает, мы можем использовать его и сегодня.
 
-But the downside is that although `arguments` is both array-like and iterable, it's not an array. It does not support array methods, so we can't call `arguments.map(...)` for example.
+Но у него есть один недостаток. Хотя `arguments` похож на массив и он тоже перебираемый, это всё же не массив. Он не поддерживает методы объекта `Array`, поэтому мы не можем, например, вызвать `arguments.map(...)`.
 
-Also, it always contains all arguments. We can't capture them partially, like we did with rest parameters.
+К тому же, `arguments` всегда содержит все аргументы функции — мы не можем получить их часть. Остаточные параметры позволяют это сделать.
 
-So when we need these features, then rest parameters are preferred.
+Соответственно, для более удобной работы с аргументами лучше использовать остаточные параметры.
 
-````smart header="Arrow functions do not have `\"arguments\"`"
-If we access the `arguments` object from an arrow function, it takes them from the outer "normal" function.
+````smart header="Стрелочные функции не имеют `\"arguments\"`"
+Если мы обратимся к `arguments` из стрелочной функции, то получим аргументы внешней "нормальной" функции.
 
-Here's an example:
+Пример:
 
 ```js run
 function f() {
   let showArg = () => alert(arguments[0]);
-  showArg();
+  showArg(2);
 }
 
 f(1); // 1
 ```
+
 ````
 
-As we remember, arrow functions don't have their own `this`. Now we know they don't have the special `arguments` object either.
+Как мы помним, у стрелочных функций нет собственного `this`. Теперь мы знаем, что нет и своего объекта `arguments`.
 
-## Spread operator [#spread-operator]
+## Оператор расширения [#spread-operator]
 
-We've just seen how to get an array from the list of parameters.
+Мы узнали, как получить массив из списка параметров.
 
-But sometimes we need to do exactly the reverse.
+Но иногда нужно сделать в точности противоположное.
 
-For instance, there's a built-in function [Math.max](mdn:js/Math/max) that returns the greatest number from a list:
+Например, есть встроенная функция [Math.max](mdn:js/Math/max). Она возвращает наибольшее число из списка:
 
 ```js run
 alert( Math.max(3, 5, 1) ); // 5
 ```
 
-Now let's say we have an array `[3, 5, 1]`. How do we call `Math.max` with it?
+Представим, что числа заданы массивом. Как вызвать `Math.max` с `[3, 5, 1]` в качестве параметров?
 
-Passing it "as is" won't work, because `Math.max` expects a list of numeric arguments, not a single array:
+Просто так их не вставишь — `Math.max` ожидает получить список чисел, а не один массив.
 
 ```js run
 let arr = [3, 5, 1];
@@ -147,21 +148,21 @@ alert( Math.max(arr) ); // NaN
 */!*
 ```
 
-And surely we can't manually list items in the code `Math.max(arr[0], arr[1], arr[2])`, because we may be unsure how many there are. As our script executes, there could be a lot, or there could be none. And that would get ugly.
+Конечно, мы можем вводить числа вручную : `Math.max(arr[0], arr[1], arr[2])`. Но, во-первых, это плохо выглядит, а, во-вторых, мы не всегда знаем, сколько будет аргументов. Их может быть как очень много, так и не быть совсем.
 
-*Spread operator* to the rescue! It looks similar to rest parameters, also using `...`, but does quite the opposite.
+И тут нам поможет *оператор расширения*. Он похож на остаточные параметры – тоже использует `...`, но делает совершенно противоположное.
 
-When `...arr` is used in the function call, it "expands" an iterable object `arr` into the list of arguments.
+Когда `...arr` используется при вызове функции, он "расширяет" перебираемый объект `arr` в список аргументов.
 
-For `Math.max`:
+Для `Math.max`:
 
 ```js run
 let arr = [3, 5, 1];
 
-alert( Math.max(...arr) ); // 5 (spread turns array into a list of arguments)
+alert( Math.max(...arr) ); // 5 (оператор "раскрывает" массив в список аргументов)
 ```
 
-We also can pass multiple iterables this way:
+Этим же способом мы можем передать несколько итерируемых объектов:
 
 ```js run
 let arr1 = [1, -2, 3, 4];
@@ -170,8 +171,7 @@ let arr2 = [8, 3, -8, 1];
 alert( Math.max(...arr1, ...arr2) ); // 8
 ```
 
-We can even combine the spread operator with normal values:
-
+Мы даже можем комбинировать оператор расширения с обычными значениями:
 
 ```js run
 let arr1 = [1, -2, 3, 4];
@@ -180,7 +180,7 @@ let arr2 = [8, 3, -8, 1];
 alert( Math.max(1, ...arr1, 2, ...arr2, 25) ); // 25
 ```
 
-Also, the spread operator can be used to merge arrays:
+Оператор расширения можно использовать для слияния массивов:
 
 ```js run
 let arr = [3, 5, 1];
@@ -190,56 +190,56 @@ let arr2 = [8, 9, 15];
 let merged = [0, ...arr, 2, ...arr2];
 */!*
 
-alert(merged); // 0,3,5,1,2,8,9,15 (0, then arr, then 2, then arr2)
+alert(merged); // 0,3,5,1,2,8,9,15 (0, затем arr, затем 2, в конце arr2)
 ```
 
-In the examples above we used an array to demonstrate the spread operator, but any iterable will do.
+В примерах выше мы использовали массив, чтобы продемонстрировать свойства оператора расширения, но он работает с любым перебираемым объектом.
 
-For instance, here we use the spread operator to turn the string into array of characters:
+Например, оператор расширения подойдёт для того, чтобы превратить строку в массив символов:
 
 ```js run
-let str = "Hello";
+let str = "Привет";
 
-alert( [...str] ); // H,e,l,l,o
+alert( [...str] ); // П,р,и,в,е,т
 ```
 
-The spread operator internally uses iterators to gather elements, the same way as `for..of` does.
+Посмотрим, что происходит. Под капотом оператор расширения использует итераторы, чтобы собирать элементы. Так же, как это делает `for..of`.
 
-So, for a string, `for..of` returns characters and `...str` becomes `"H","e","l","l","o"`. The list of characters is passed to array initializer `[...str]`.
+Цикл `for..of` перебирает строку как последовательность символов, поэтому из `...str` получается `"П", "р", "и", "в", "е", "т"`. Получившиеся символы собираются в массив при помощи стандартного объявления массива: `[...str]`.
 
-For this particular task we could also use `Array.from`, because it converts an iterable (like a string) into an array:
+Для этой задачи мы можем использовать и `Array.from`. Он тоже преобразует перебираемый объект (такой как строка) в массив:
 
 ```js run
-let str = "Hello";
+let str = "Привет";
 
-// Array.from converts an iterable into an array
-alert( Array.from(str) ); // H,e,l,l,o
+// Array.from преобразует перебираемый объект в массив 
+alert( Array.from(str) ); // П,р,и,в,е,т
 ```
 
-The result is the same as `[...str]`.
+Результат аналогичен `[...str]`.
 
-But there's a subtle difference between `Array.from(obj)` and `[...obj]`:
+Но между `Array.from(obj)` и `[...obj]` есть разница:
 
-- `Array.from` operates on both array-likes and iterables.
-- The spread operator operates only on iterables.
+- `Array.from` работает как с псевдомассивами, так и с итерируемыми объектами
+- Оператор расширения работает только с итерируемыми объектами
 
-So, for the task of turning something into an array, `Array.from` tends to be more universal.
+Выходит, что если нужно сделать из чего угодно массив, `Array.from` — более универсальный метод.
 
 
-## Summary
+## Итого
 
-When we see `"..."` in the code, it is either rest parameters or the spread operator.
+Когда мы видим `"..."` в коде, это могут быть как остаточные параметры, так и оператор расширения.
 
-There's an easy way to distinguish between them:
+Как отличить их друг от друга:
 
-- When `...` is at the end of function parameters, it's "rest parameters" and gathers the rest of the list of arguments into an array.
-- When `...` occurs in a function call or alike, it's called a "spread operator" and expands an array into a list.
+- Если `...` располагается в конце аргументов функции, то это "остаточные параметры". Он собирает остальные неуказанные аргументы и делает из них массив.
+- Если `...` встретился в вызове функции или где-либо ещё, то это "оператор расширения". Он извлекает элементы из массива.
 
-Use patterns:
+Полезно запомнить:
 
-- Rest parameters are used to create functions that accept any number of arguments.
-- The spread operator is used to pass an array to functions that normally require a list of many arguments.
+- Остаточные параметры используются, чтобы создавать новые функции с неопределённым числом аргументов.
+- С помощью оператора расширения можно вставить массив в функцию, которая по умолчанию работает с обычным списком аргументов.
 
-Together they help to travel between a list and an array of parameters with ease.
+Вместе эти конструкции помогают легко преобразовывать наборы значений в массивы и обратно.
 
-All arguments of a function call are also available in "old-style" `arguments`: array-like iterable object.
+К аргументам функции можно обращаться и по-старому — через псевдомассив `arguments`.

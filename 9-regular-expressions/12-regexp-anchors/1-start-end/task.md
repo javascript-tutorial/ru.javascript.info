@@ -1,3 +1,3 @@
-# Regexp ^$
+# Регулярное выражение ^$
 
-Which string matches the pattern `pattern:^$`?
+Какая строка подойдет под шаблон `pattern:^$`?
