@@ -1,27 +1,27 @@
-There are many ways, for instance:
+Есть несколько способов для получения элементов, например:
 
 
-The `<div>` DOM node:
+DOM-узел элемента `<div>`:
 
 ```js
 document.body.firstElementChild
-// or
+// или
 document.body.children[0]
-// or (the first node is space, so we take 2nd)
+// или (первый узел пробел, поэтому выбираем второй)
 document.body.childNodes[1]
 ```
 
-The `<ul>` DOM node:
+DOM-узел элемента `<ul>`:
 
 ```js
 document.body.lastElementChild
-// or
+// или
 document.body.children[1]
 ```
 
-The second `<li>` (with Pete):
+Второй `<li>` (с именем Пит):
 
 ```js
-// get <ul>, and then get its last element child
+// получаем <ul>, и его последнего ребенка
 document.body.lastElementChild.lastElementChild
 ```

@@ -3,114 +3,113 @@ libs:
 
 ---
 
-# Function binding
+# Привязка контекста к функции
 
-When using `setTimeout` with object methods or passing object methods along, there's a known problem: "losing `this`".
+При использовании `setTimeout` с методами объекта (или при передаче методов объекта) возникает известная проблема: "потеря `this`".
 
-Suddenly, `this` just stops working right. The situation is typical for novice developers, but happens with experienced ones as well.
+Внезапно, `this` просто перестает работать правильно. Такая ситуация типична для новичков, но также случается и с опытными разработчиками.
 
-## Losing "this"
+## Потеря "this"
 
-We already know that in JavaScript it's easy to lose `this`. Once a method is passed somewhere separately from the object -- `this` is lost.
+Мы уже знаем, что в JavaScript легко потерять `this`: когда метод передается где-то отдельно от объекта - `this` теряется.
 
-Here's how it may happen with `setTimeout`:
+Вот как это может произойти с `setTimeout`:
 
 ```js run
 let user = {
-  firstName: "John",
+  firstName: "Вася",
   sayHi() {
-    alert(`Hello, ${this.firstName}!`);
+    alert(`Привет, ${this.firstName}!`);
   }
 };
 
 *!*
-setTimeout(user.sayHi, 1000); // Hello, undefined!
+setTimeout(user.sayHi, 1000); // Привет, undefined!
 */!*
 ```
 
-As we can see, the output shows not "John" as `this.firstName`, but `undefined`!
+При запуске этого кода мы видим, что вызов `this.firstName` возвращает не "Вася", а `undefined`!
 
-That's because `setTimeout` got the function `user.sayHi`, separately from the object. The last line can be rewritten as:
+Это произошло потому, что `setTimeout` получил функцию `sayHi`, отдельно от объекта `user` (именно здесь функция и потеряла контекст). То есть последняя строка может быть переписана как:
 
 ```js
 let f = user.sayHi;
-setTimeout(f, 1000); // lost user context
+setTimeout(f, 1000); // контекст user потеряли
 ```
 
-The method `setTimeout` in-browser is a little special: it sets `this=window` for the function call (for Node.js, `this` becomes the timer object, but doesn't really matter here). So for `this.firstName` it tries to get `window.firstName`, which does not exist. In other similar cases as we'll see, usually `this` just becomes `undefined`.
+Метод `setTimeout` в браузере имеет особенность: он устанавливает `this=window` для вызова функции (в Node.js `this` становится объектом таймера, но здесь это не имеет значения). Таким образом, для `this.firstName` он пытается получить `window.firstName`, которого не существует. В других подобных случаях, как мы увидим, обычно `this` просто становится `undefined`.
 
-The task is quite typical -- we want to pass an object method somewhere else (here -- to the scheduler) where it will be called. How to make sure that it will be called in the right context?
+Задача довольно типичная - мы хотим передать метод объекта куда-то ещё (в этом конкретном случае - в планировщик), где он будет вызван. Как бы сделать так, чтобы он вызывался в правильном контексте?
 
-## Solution 1: a wrapper
+## Решение 1: сделать функцию-обёртку
 
-The simplest solution is to use a wrapping function:
+Самый простой вариант решения – это обернуть вызов в анонимную функцию, создав замыкание:
 
 ```js run
 let user = {
-  firstName: "John",
+  firstName: "Вася",
   sayHi() {
-    alert(`Hello, ${this.firstName}!`);
+    alert(`Привет, ${this.firstName}!`);
   }
 };
 
 *!*
 setTimeout(function() {
-  user.sayHi(); // Hello, John!
+  user.sayHi(); // Привет, Вася!
 }, 1000);
 */!*
 ```
 
-Now it works, because it receives `user` from the outer lexical environment, and then calls the method normally.
+Теперь код работает корректно, так как объект `user` достаётся из замыкания, а затем вызывается его метод `sayHi`.
 
-The same, but shorter:
+То же самое, только короче:
 
 ```js
-setTimeout(() => user.sayHi(), 1000); // Hello, John!
+setTimeout(() => user.sayHi(), 1000); // Привет, Вася!
 ```
 
-Looks fine, but a slight vulnerability appears in our code structure.
+Выглядит хорошо, но теперь в нашем коде появилась небольшая уязвимость.
 
-What if before `setTimeout` triggers (there's one second delay!) `user` changes value? Then, suddenly, it will call the wrong object!
-
+Что произойдёт, если до момента срабатывания `setTimeout` (ведь задержка составляет целую секунду!) в переменную `user` будет записано другое значение? Тогда вызов неожиданно будет совсем не тот!
 
 ```js run
 let user = {
-  firstName: "John",
+  firstName: "Вася",
   sayHi() {
-    alert(`Hello, ${this.firstName}!`);
+    alert(`Привет, ${this.firstName}!`);
   }
 };
 
 setTimeout(() => user.sayHi(), 1000);
 
-// ...within 1 second
-user = { sayHi() { alert("Another user in setTimeout!"); } };
+// ...в течение 1 секунды
+user = { sayHi() { alert("Другой пользователь в 'setTimeout'!"); } };
 
-// Another user in setTimeout?!?
+// Другой пользователь в 'setTimeout'!
 ```
 
-The next solution guarantees that such thing won't happen.
+Следующее решение гарантирует, что такого не случится.
 
-## Solution 2: bind
+## Решение 2: привязать контекст с помощью bind
 
-Functions provide a built-in method [bind](mdn:js/Function/bind) that allows to fix `this`.
+В современном JavaScript у функций есть встроенный метод [bind](mdn:js/Function/bind), который позволяет зафиксировать `this`.
 
-The basic syntax is:
+Базовый синтаксис `bind`:
 
 ```js
-// more complex syntax will be little later
+// полный синтаксис будет представлен немного позже
 let boundFunc = func.bind(context);
-````
+```
 
-The result of `func.bind(context)` is a special function-like "exotic object", that is callable as function and transparently passes the call to `func` setting `this=context`.
+Результатом вызова `func.bind(context)` является особый "экзотический объект" (термин взят из спецификации), который вызывается как функция и прозрачно передает вызов в `func`, при этом устанавливая `this=context`.
 
-In other words, calling `boundFunc` is like `func` with fixed `this`.
+Другими словами, вызов `boundFunc` подобен вызову `func` с фиксированным `this`.
 
-For instance, here `funcUser` passes a call to `func` with `this=user`:
+Например, здесь `funcUser` передает вызов в `func`, фиксируя `this=user`:
 
 ```js run  
 let user = {
-  firstName: "John"
+  firstName: "Вася"
 };
 
 function func() {
@@ -119,39 +118,38 @@ function func() {
 
 *!*
 let funcUser = func.bind(user);
-funcUser(); // John  
+funcUser(); // Вася  
 */!*
 ```
 
-Here `func.bind(user)` as a "bound variant" of `func`, with fixed `this=user`.
+Здесь `func.bind(user)` - это "связанный вариант" `func`, с фиксированным `this=user`.
 
-All arguments are passed to the original `func` "as is", for instance:
+Все аргументы передаются исходному методу `func` "как есть", например:
 
 ```js run  
 let user = {
-  firstName: "John"
+  firstName: "Вася"
 };
 
 function func(phrase) {
   alert(phrase + ', ' + this.firstName);
 }
 
-// bind this to user
+// привязка this к user
 let funcUser = func.bind(user);
 
 *!*
-funcUser("Hello"); // Hello, John (argument "Hello" is passed, and this=user)
+funcUser("Привет"); // Привет, Вася (аргумент "Привет" передан, при этом this = user)
 */!*
 ```
 
-Now let's try with an object method:
-
+Теперь давайте попробуем с методом объекта:
 
 ```js run
 let user = {
-  firstName: "John",
+  firstName: "Вася",
   sayHi() {
-    alert(`Hello, ${this.firstName}!`);
+    alert(`Привет, ${this.firstName}!`);
   }
 };
 
@@ -159,18 +157,18 @@ let user = {
 let sayHi = user.sayHi.bind(user); // (*)
 */!*
 
-sayHi(); // Hello, John!
+sayHi(); // Привет, Вася!
 
-setTimeout(sayHi, 1000); // Hello, John!
+setTimeout(sayHi, 1000); // Привет, Вася!
 ```
 
-In the line `(*)` we take the method `user.sayHi` and bind it to `user`. The `sayHi` is a "bound" function, that can be called alone or passed to `setTimeout` -- doesn't matter, the context will be right.
+В строке `(*)` мы берем метод `user.sayHi` и привязываем его к `user`. Теперь `SayHi` - это "связанная" функция, которая может быть вызвана отдельно или передана в `setTimeout` (контекст всегда будет правильным).
 
-Here we can see that arguments are passed "as is", only `this` is fixed by `bind`:
+Здесь мы можем видеть, что `bind` исправляет только `this`, а аргументы передаются "как есть":
 
 ```js run
 let user = {
-  firstName: "John",
+  firstName: "Вася",
   say(phrase) {
     alert(`${phrase}, ${this.firstName}!`);
   }
@@ -178,12 +176,12 @@ let user = {
 
 let say = user.say.bind(user);
 
-say("Hello"); // Hello, John ("Hello" argument is passed to say)
-say("Bye"); // Bye, John ("Bye" is passed to say)
+say("Привет"); // Привет, Вася (аргумент "Привет" передан в функцию "say")
+say("Пока"); // Пока, Вася (аргумент "Пока" передан в функцию "say")
 ```
 
-````smart header="Convenience method: `bindAll`"
-If an object has many methods and we plan to actively pass it around, then we could bind them all in a loop:
+````smart header="Удобный метод: `bindAll`"
+Если у объекта много методов и мы планируем их активно передавать, то можно привязать контекст для них всех в цикле:
 
 ```js
 for (let key in user) {
@@ -193,11 +191,11 @@ for (let key in user) {
 }
 ```
 
-JavaScript libraries also provide functions for convenient mass binding , e.g. [_.bindAll(obj)](http://lodash.com/docs#bindAll) in lodash.
+Некоторые JS-библиотеки предоставляют встроенные функции для удобной массовой привязки контекста, например [_.bindAll(obj)](http://lodash.com/docs#bindAll) в lodash.
 ````
 
-## Summary
+## Итого
 
-Method `func.bind(context, ...args)` returns a "bound variant" of function `func` that fixes the context `this` and first arguments if given.
+Метод `func.bind(context, ...args)` возвращает "связанный вариант" функции `func`, который фиксирует контекст `this` и первые аргументы, если они заданы.
 
-Usually we apply `bind` to fix `this` in an object method, so that we can pass it somewhere. For example, to `setTimeout`. There are more reasons to `bind` in the modern development, we'll meet them later.
+Обычно мы применяем `bind`, для исправления `this` в методе объекта, чтобы мы могли передать его куда-нибудь. Например, в `setTimeout`. В современной разработке существуют и другие причины для "связывания", мы встретимся с ними позже.
