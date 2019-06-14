@@ -23,33 +23,33 @@
 
 <body>
 
-  Deposit calculator.
+  Депозитный калькулятор.
 
   <form name="calculator">
     <table>
       <tr>
-        <td>Initial deposit</td>
+        <td>Первоначальный депозит</td>
         <td>
           <input name="money" type="number" value="10000" required>
         </td>
       </tr>
       <tr>
-        <td>How many months?</td>
+        <td>Сколько месяцев?</td>
         <td>
           <select name="months">
-            <option value="3">3 (minimum)</option>
-            <option value="6">6 (half-year)</option>
-            <option value="12" selected>12 (one year)</option>
-            <option value="18">18 (1.5 years)</option>
-            <option value="24">24 (2 years)</option>
-            <option value="30">30 (2.5 years)</option>
-            <option value="36">36 (3 years)</option>
-            <option value="60">60 (5   years)</option>
+            <option value="3">3 (минимум)</option>
+            <option value="6">6 (пол года)</option>
+            <option value="12" selected>12 (год)</option>
+            <option value="18">18 (1.5 года)</option>
+            <option value="24">24 (2 года)</option>
+            <option value="30">30 (2.5 года)</option>
+            <option value="36">36 (3 года)</option>
+            <option value="60">60 (5 лет)</option>
           </select>
         </td>
       </tr>
       <tr>
-        <td>Interest per year?</td>
+        <td>Проценты в год?</td>
         <td>
           <input name="interest" type="number" value="5" required>
         </td>
@@ -62,8 +62,8 @@
 
   <table id="diagram">
     <tr>
-      <th>Was:</th>
-      <th>Becomes:</th>
+      <th>Было:</th>
+      <th>Стало:</th>
     </tr>
     <tr>
       <th id="money-before"></th>
@@ -81,7 +81,7 @@
 
     let form = document.forms.calculator;
 
-    // your code
+    // ваш код
   </script>
 
 

@@ -1,21 +1,21 @@
-importance: 5
+важность: 5
 
 ---
 
-# Deposit calculator
+# Депозитный калькулятор
 
-Create an interface that allows to enter a sum of bank deposit and percentage, then calculates how much it will be after given periods of time.
+Создайте интерфейс, позволяющий ввести сумму банковского вклада и процент, а затем рассчитать, сколько он будет через заданные промежутки времени.
 
-Here's the demo:
+Демо-версия:
 
 [iframe src="solution" height="350" border="1"]
 
-Any input change should be processed immediately.
+Любое изменение входа должно быть обработано немедленно.
 
-The formula is:
+Формула:
 ```js
-// initial: the initial money sum
-// interest: e.g. 0.05 means 5% per year
-// years: how many years to wait
+// initial: начальная сумма денег
+// interest: проценты, например, 0,05 означает 5% в год
+// years: сколько лет ждать
 let result = Math.round(initial * (1 + interest * years));
 ```
