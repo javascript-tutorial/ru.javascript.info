@@ -2,42 +2,42 @@ importance: 4
 
 ---
 
-# Sortable table
+# Сортируемая таблица
 
-Make the table sortable: clicks on `<th>` elements should sort it by corresponding column.
+Сделать таблицу сортируемой: при клике на элемент `<th>` строки таблицы должны сортироваться по соответствующему столбцу.
 
-Each `<th>` has the type in the attribute, like this:
+Каждый элемент `<th>` имеет атрибут data-type:
 
 ```html
 <table id="grid">
   <thead>
     <tr>
 *!*
-      <th data-type="number">Age</th>
-      <th data-type="string">Name</th>
+      <th data-type="number">Возраст</th>
+      <th data-type="string">Имя</th>
 */!*
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>5</td>
-      <td>John</td>
+      <td>Вася</td>
     </tr>
     <tr>
       <td>10</td>
-      <td>Ann</td>
+      <td>Петя</td>
     </tr>
     ...
   </tbody>
 </table>
 ```
 
-In the example above the first column has numbers, and the second one -- strings. The sorting function should handle sort according to the type.
+В примере выше первый столбец содержит числа, а второй -- строки. Функция сотрировки должна это учитывать, ведь числа сортируются иначе, чем строки.
 
-Only `"string"` and `"number"` types should be supported.
+Сортировка должна поддерживать только типы `"string"` и `"number"`.
 
-The working example:
+Работающий пример:
 
 [iframe border=1 src="solution" height=190]
 
-P.S. The table can be big, with any number of rows and columns.
+P.S. Таблица может быть большой, с любым числом строк и столбцов.

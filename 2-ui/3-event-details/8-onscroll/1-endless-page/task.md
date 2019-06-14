@@ -2,19 +2,19 @@ importance: 5
 
 ---
 
-# Endless page
+# Бесконечная страница
 
-Create an endless page. When a visitor scrolls it to the end, it auto-appends current date-time to the text (so that a visitor can scroll more).
+Создайте бесконечную страницу. Когда посетитель прокручивает её до конца, она автоматически добавляет текущие время и дату в текст (чтобы посетитель мог прокрутить ещё).
 
-Like this:
+Как тут:
 
 [iframe src="solution" height=200]
 
-Please note two important features of the scroll:
+Пожалуйста, обратите внимание на две важные особенности прокрутки:
 
-1. **The scroll is "elastic".** We can scroll a little beyond the document start or end in some browsers/devices (empty space below is shown, and then the document will automatically "bounces back" to normal).
-2. **The scroll is imprecise.** When we scroll to page end, then we may be in fact like 0-50px away from the real document bottom.
+1. **Прокрутка "эластична".** Можно прокрутить немного дальше начала или конца документа на некоторых браузерах/устройствах (после появляется пустое место, а затем документ автоматически "отскакивает" к нормальному состоянию).
+2. **Прокрутка неточна.** Если прокрутить страницу до конца, можно оказаться в 0-50px от реальной нижней границы документа.
 
-So, "scrolling to the end" should mean that the visitor is no more than 100px away from the document end.
+Таким образом, "прокрутка до конца" должна означать, что посетитель находится на расстоянии не более 100px от конца документа.
 
-P.S. In real life we may want to show "more messages" or "more goods".
+P.S. В реальной жизни мы можем захотеть показать "больше сообщений" или "больше товаров".

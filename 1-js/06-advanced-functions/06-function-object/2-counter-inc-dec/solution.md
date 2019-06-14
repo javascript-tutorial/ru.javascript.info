@@ -1,2 +1,2 @@
 
-The solution uses `count` in the local variable, but addition methods are written right into the `counter`. They share the same outer lexical environment and also can access the current `count`.
+В решении использована локальная переменная `count`, а методы сложения записаны прямо в `counter`. Они разделяют одно и то же лексическое окружение и также имеют доступ к текущей переменной `count`.

@@ -17,36 +17,36 @@
 <body>
 
   <ul class="tree" id="tree">
-    <li>Animals
+    <li>Животные
       <ul>
-        <li>Mammals
+        <li>Млекопитающие
           <ul>
-            <li>Cows</li>
-            <li>Donkeys</li>
-            <li>Dogs</li>
-            <li>Tigers</li>
+            <li>Коровы</li>
+            <li>Ослы</li>
+            <li>Собаки</li>
+            <li>Тигры</li>
           </ul>
         </li>
-        <li>Other
+        <li>Другие
           <ul>
-            <li>Snakes</li>
-            <li>Birds</li>
-            <li>Lizards</li>
+            <li>Змеи</li>
+            <li>Птицы</li>
+            <li>Ящерицы</li>
           </ul>
         </li>
       </ul>
     </li>
-    <li>Fishes
+    <li>Рыбы
       <ul>
-        <li>Aquarium
+        <li>Аквариумные
           <ul>
-            <li>Guppy</li>
-            <li>Angelfish</li>
+            <li>Гуппи</li>
+            <li>Скалярии</li>
           </ul>
         </li>
-        <li>Sea
+        <li>Морские
           <ul>
-            <li>Sea trout</li>
+            <li>Морская форель</li>
           </ul>
         </li>
       </ul>
@@ -54,15 +54,15 @@
   </ul>
 
   <script>
-    // move all text into <span>
-    // they occupy exactly the place necessary for the text,
+    // поместить все текстовые узлы в элемент <span>
+    // он занимает только то место, которое необходимо для текста
     for (let li of tree.querySelectorAll('li')) {
       let span = document.createElement('span');
       li.prepend(span);
-      span.append(span.nextSibling); // move the text node into span
+      span.append(span.nextSibling); // поместить текстовый узел внутрь элемента <span>
     }
 
-    // catch clicks on whole tree
+    //  ловим клики на всём дереве
     tree.onclick = function(event) {
 
       if (event.target.tagName != 'SPAN') {
@@ -70,7 +70,7 @@
       }
 
       let childrenContainer = event.target.parentNode.querySelector('ul');
-      if (!childrenContainer) return; // no children
+      if (!childrenContainer) return; // нет детей
 
       childrenContainer.hidden = !childrenContainer.hidden;
     }

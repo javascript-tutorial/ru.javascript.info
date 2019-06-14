@@ -1,9 +1,9 @@
 
-First, we need to find all external references.
+Во-первых, мы должны найти все внешние ссылки.
 
-There are two ways.
+Это можно сделать двумя способами.
 
-The first is to find all links using `document.querySelectorAll('a')` and then filter out what we need:
+Первый -- это найти все ссылки, используя `document.querySelectorAll('a')`, а затем отфильтровать ненужное:
 
 ```js
 let links = document.querySelectorAll('a');
@@ -12,23 +12,23 @@ for (let link of links) {
 *!*
   let href = link.getAttribute('href');
 */!*
-  if (!href) continue; // no attribute
+  if (!href) continue; // нет атрибута
 
-  if (!href.includes('://')) continue; // no protocol
+  if (!href.includes('://')) continue; // нет протокола
 
-  if (href.startsWith('http://internal.com')) continue; // internal
+  if (href.startsWith('http://internal.com')) continue; // внутренняя
 
   link.style.color = 'orange';
 }
 ```
 
-Please note: we use `link.getAttribute('href')`. Not `link.href`, because we need the value from HTML.
+Пожалуйста, обратите внимание: мы используем `link.getAttribute('href')`. Не `link.href`, потому что нам нужно значение из HTML.
 
-...Another, simpler way would be to add the checks to CSS selector:
+...Другой, более простой путь -- добавить проверку в CSS-селектор:
 
 ```js
-// look for all links that have :// in href
-// but href doesn't start with http://internal.com
+// найти все ссылки, атрибут href у которых содержит ://
+// и при этом href не начинается с http://internal.com
 let selector = 'a[href*="://"]:not([href^="http://internal.com"])';
 let links = document.querySelectorAll(selector);
 
