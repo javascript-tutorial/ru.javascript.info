@@ -1,19 +1,19 @@
 
-# The old "var"
+# Устаревшая директива "var"
 
-In the very first chapter about [variables](info:variables), we mentioned three ways of variable declaration:
+В самой первой главе про [переменные](info:variables), мы ознакомились с 3 способами объявления переменных:
 
 1. `let`
 2. `const`
 3. `var`
 
-`let` and `const` behave exactly the same way in terms of Lexical Environments.
+`let` и `const` имеют одинаковое поведение в пределах лексического окружения.
 
-But `var` is a very different beast, that originates from very old times. It's generally not used in modern scripts, but still lurks in the old ones.
+Но `var` это совершенно другая сущность, берущая своё начало с давних времен. Обычно она не используется в современных скриптах, но всё ещё может скрываться в старых.
 
-If you don't plan on meeting such scripts you may even skip this chapter or postpone it, but then there's a chance that it bites you later.
+Если в данный момент вы не работаете с подобными скриптами вы можете пропустить или отложить прочтение данной главы, однако, есть шанс, что вы столкнетесь с этим в будущем. 
 
-From the first sight, `var` behaves similar to `let`. That is, declares a variable:
+На первый взгляд, поведение `var` подобно `let`. Например, объявление переменной:
 
 ```js run
 function sayHi() {
@@ -27,27 +27,27 @@ sayHi();
 alert(phrase); // Error, phrase is not defined
 ```
 
-...But here are the differences.
+...Однако отличия всё же есть.
 
-## "var" has no block scope
+## "var" не ограничивается блочной областью видимости
 
-`var` variables are either function-wide or global, they are visible through blocks.
+Область видимости переменных `var` ограничивается либо функцией либо они могут быть глобальными, они доступны за пределами блоков.
 
-For instance:
+Например:
 
 ```js
 if (true) {
-  var test = true; // use "var" instead of "let"
+  var test = true; // используем "var" вместо "let"
 }
 
 *!*
-alert(test); // true, the variable lives after if
+alert(test); // true, переменная существует за блоком if
 */!*
 ```
 
-If we used `let test` on the 2nd line, then it wouldn't be visible to `alert`. But `var` ignores code blocks, so we've got a global `test`.
+Если мы используем `let test` на строке 2 - в этом случае переменная не будет доступна при вызове `alert`. Но `var` игнорирует блочную область видимости, поэтому мы получили глобальную переменную `test`.
 
-The same thing for loops: `var` cannot be block- or loop-local:
+Аналогично для циклов: `var` не может быть блочной или локальной внутри цикла:
 
 ```js
 for (var i = 0; i < 10; i++) {
@@ -55,11 +55,11 @@ for (var i = 0; i < 10; i++) {
 }
 
 *!*
-alert(i); // 10, "i" is visible after loop, it's a global variable
+alert(i); // 10, переменная "i" доступна вне цикла, т.к. является глобальной переменной
 */!*
 ```
 
-If a code block is inside a function, then `var` becomes a function-level variable:
+Если блок кода находится внутри функции - в этом случае область видимости `var` ограничена только функцией:
 
 ```js
 function sayHi() {
@@ -67,22 +67,22 @@ function sayHi() {
     var phrase = "Hello";
   }
 
-  alert(phrase); // works
+  alert(phrase); // "Hello"
 }
 
 sayHi();
 alert(phrase); // Error: phrase is not defined
 ```
 
-As we can see, `var` pierces through `if`, `for` or other code blocks. That's because a long time ago in JavaScript blocks had no Lexical Environments. And `var` is a remnant of that.
+Как видим, `var` выходит за пределы блоков `if`, `for` и подобных. Это происходит потому, что на заре развития JavaScript блоки кода не имели лексического окружения. Поэтому, можно сказать, `var` это пережиток прошлого.
 
-## "var" are processed at the function start
+## "var" обрабатывается в начале функции
 
-`var` declarations are processed when the function starts (or script starts for globals).
+Объявления переменных `var` обрабатываются в начале выполнения функции (или запуска скрипта, в случае, когда переменная является глобальной).
 
-In other words, `var` variables are defined from the beginning of the function, no matter where the definition is (assuming that the definition is not in the nested function).
+Другими словами, переменные `var` объявляются в начале функции, вне зависимости от того, в каком месте функции реально находится её объявление (при условии, что оно не находится во вложенной функции).
 
-So this code:
+Т.е. этот код:
 
 ```js
 function sayHi() {
@@ -96,7 +96,7 @@ function sayHi() {
 }
 ```
 
-...Is technically the same as this (moved `var phrase` above):
+...Технически является равноценным следующему (объявление переменной `var phrase` перемещено в начало функции):
 
 ```js
 function sayHi() {
@@ -110,7 +110,7 @@ function sayHi() {
 }
 ```
 
-...Or even as this (remember, code blocks are ignored):
+...И даже коду ниже (запомните, блочная область видимости игнорируется):
 
 ```js
 function sayHi() {
@@ -126,13 +126,13 @@ function sayHi() {
 }
 ```
 
-People also call such behavior "hoisting" (raising), because all `var` are "hoisted" (raised) to the top of the function.
+Это поведение называется "hoisting" (всплытие, поднятие), потому что все объявления переменных `var` "всплывают" в самый верх функции.
 
-So in the example above, `if (false)` branch never executes, but that doesn't matter. The `var` inside it is processed in the beginning of the function, so at the moment of `(*)` the variable exists.
+В примере выше, `if (false)` условие никогда не выполнится. Но это никаким образом не препятствует созданию переменной `var phrase`, которое находится внутри него, поскольку объявления `var` "всплывают" в начало функции. Т.е. в момент присвоения значения `(*)` переменная уже существует.
 
-**Declarations are hoisted, but assignments are not.**
+**Объявления переменных "всплывают", однако присвоения значения - нет."**
 
-That's better to demonstrate with an example, like this:
+Нагляднее будет продемонстрировать следующий пример:
 
 ```js run
 function sayHi() {
@@ -146,40 +146,40 @@ function sayHi() {
 sayHi();
 ```
 
-The line `var phrase = "Hello"` has two actions in it:
+Строка `var phrase = "Hello"` состоит из двух действий:
 
-1. Variable declaration `var`
-2. Variable assignment `=`.
+1. Объявление переменной `var`
+2. Присвоение значения в переменную `=`.
 
-The declaration is processed at the start of function execution ("hoisted"), but the assignment always works at the place where it appears. So the code works essentially like this:
+Объявление переменной обрабатывается в начале выполнения функции ("всплытие"), однако присвоение значения всегда происходит в том строке кода, где оно указано. Т.е. код выполняется по следующему сценарию:
 
 ```js run
 function sayHi() {
 *!*
-  var phrase; // declaration works at the start...
+  var phrase; // объявление переменной срабатывает в начале...
 */!*
 
   alert(phrase); // undefined
 
 *!*
-  phrase = "Hello"; // ...assignment - when the execution reaches it.
+  phrase = "Hello"; // ...присвоение - в момент, когда исполнится данная строка кода.
 */!*
 }
 
 sayHi();
 ```
 
-Because all `var` declarations are processed at the function start, we can reference them at any place. But variables are undefined until the assignments.
+Поскольку все объявления переменных `var` обрабатываются в начале функции - мы можем ссылаться на них в любом месте. Однако, переменные имеют значение undefined до строки с присвоением значения.
 
-In both examples above `alert` runs without an error, because the variable `phrase` exists. But its value is not yet assigned, so it shows `undefined`.
+В обоих примерах выше вызов `alert` происходил без ошибки, потому что переменная `phrase` уже существовала. Но её значение ещё не было присвоено, поэтому мы получали `undefined`.
 
-## Summary
+## Итого
 
-There are two main differences of `var`:
+Существует 2 основных отличия `var`:
 
-1. Variables have no block scope, they are visible minimum at the function level.
-2. Variable declarations are processed at function start.
+1. Переменные `var` не имеют блочной области видимости, они ограничены, как минимум, телом функции.
+2. Объявления (инициализация) переменных производится в начале исполнения функции.
 
-There's one more minor difference related to the global object, we'll cover that in the next chapter.
+Есть ещё одно небольшое отличие, относящееся к глобальному объекту, мы рассмотрим его в следующей главе.
 
-These differences are actually a bad thing most of the time. Block-level variables is such a great thing. That's why `let` was introduced in the standard long ago, and is now a major way (along with `const`) to declare a variable.
+Все эти отличия могут послужить причиной появления не совсем очевидных последствий. Переменные с блочной видимостью - отличное решение. Поэтому, много времени назад, переменные `let` и `const` были введены в стандарт и сейчас являются основным способом объявления переменных.
