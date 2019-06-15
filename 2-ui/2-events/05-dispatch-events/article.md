@@ -1,29 +1,29 @@
-# Dispatching custom events
+# Генерация событий на элементах
 
-We can not only assign handlers, but also generate events from JavaScript.
+Можно не только назначать обработчики на события, но и генерировать их самому прямо из JavaScript кода.
 
-Custom events can be used to create "graphical components". For instance, a root element of the menu may trigger events telling what happens with the menu: `open` (menu open),  `select` (an item is selected) and so on.
+Такие события могут быть использованы при создании "графических компонент". К примеру, меню, генерирует события, к этому меню относящиеся: `open` (меню раскрыто), `select` (выбран пункт меню) и другие.
 
-Also we can generate built-in events like `click`, `mousedown` etc, that may be good for testing.
+Также можно генерировать встроенные события, такие как `click`, `mousedown` и другие, что бывает полезно для автоматического тестирования.
 
-## Event constructor
+## Конструктор Event
 
-Events form a hierarchy, just like DOM element classes. The root is the built-in [Event](http://www.w3.org/TR/dom/#event) class.
+События формируют иерархию, которая подобна той, что мы уже видели на примере классов DOM-элементов. Корневой встроенный класс -- [Event](http://www.w3.org/TR/dom/#event).
 
-We can create `Event` objects like this:
+Вот так можно создать событие, с помощью класса `Event`:
 
 ```js
-let event = new Event(event type[, options]);
+let event = new Event(тип события[, флаги]);
 ```
 
-Arguments:
+Где:
 
-- *event type* -- may be any string, like `"click"` or our own like `"hey-ho!"`.
-- *options* -- the object with two optional properties:
-  - `bubbles: true/false` -- if `true`, then the event bubbles.
-  - `cancelable: true/false` -- if `true`, then the "default action"  may be prevented. Later we'll see what it means for custom events.
+- *Тип события* -- строка, например, `"click"` или любая другая `"hey-ho!"`.
+- *Флаги* -- объект с двумя не обязательными свойствами:
+  - `bubbles: true/false` -- если `true`, тогда событие всплывает.
+  - `cancelable: true/false` -- если `true`, тогда можно отменить действие по умолчанию. Позже мы разберём, что это значит для пользовательский событий.
 
-  By default both are false: `{bubbles: false, cancelable: false}`.
+  По умолчанию они оба false: `{bubbles: false, cancelable: false}`.
 
 ## dispatchEvent
 
