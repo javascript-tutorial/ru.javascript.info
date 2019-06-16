@@ -2,15 +2,15 @@ importance: 5
 
 ---
 
-# Sort the table
+# Сортировка таблицы
 
-There's a table:
+Таблица:
 
 <table>
 <tr>
-  <th>Name</th>
-  <th>Surname</th>
-  <th>Age</th>
+  <th>Имя</th>
+  <th>Фамилия</th>
+  <th>Возраст</th>
 </tr>
 <tr>
   <td>John</td>
@@ -34,6 +34,6 @@ There's a table:
 </tr>
 </table>
 
-There may be more rows in it.
+Может быть больше строк.
 
-Write the code to sort it by the `"name"` column.
+Напишите код для сортировки по столбцу `"name"`.

@@ -1,24 +1,24 @@
-# Bubbling and capturing
+# Всплытие и погружение
 
-Let's start with an example.
+Давайте начнём с примера.
 
-This handler is assigned to `<div>`, but also runs if you click any nested tag like `<em>` or `<code>`:
+Этот обработчик для `<div>` сработает, если вы кликните по любому из вложенных тегов, будь то `<em>` или `<code>`:
 
 ```html autorun height=60
-<div onclick="alert('The handler!')">
-  <em>If you click on <code>EM</code>, the handler on <code>DIV</code> runs.</em>
+<div onclick="alert('Обработчик!')">
+  <em>Если вы кликните на <code>EM</code>, сработает обработчик на <code>DIV</code></em>
 </div>
 ```
 
-Isn't it a bit strange? Why does the handler on `<div>` run if the actual click was on `<em>`?
+Вам не кажется это странным? Почему же сработал обработчик на `<div>`, если клик произошёл на `<em>`?
 
-## Bubbling
+## Всплытие
 
-The bubbling principle is simple.
+Принцип всплытия очень простой.
 
-**When an event happens on an element, it first runs the handlers on it, then on its parent, then all the way up on other ancestors.**
+**Когда на элементе происходит событие, обработчики сначала срабатывают на нём, потом на его родителе, затем выше и так далее, вверх по цепочке предков.**
 
-Let's say we have 3 nested elements `FORM > DIV > P` with a handler on each of them:
+Например, есть 3 вложенных элемента `FORM > DIV > P` с обработчиком на каждом:
 
 ```html run autorun
 <style>
@@ -35,123 +35,123 @@ Let's say we have 3 nested elements `FORM > DIV > P` with a handler on each of t
 </form>
 ```
 
-A click on the inner `<p>` first runs `onclick`:
-1. On that `<p>`.
-2. Then on the outer `<div>`.
-3. Then on the outer `<form>`.
-4. And so on upwards till the `document` object.
+Клик по внутреннему `<p>` вызовет обработчик `onclick`:
+1. Сначала на самом `<p>`.
+2. Потом на внешнем `<div>`.
+3. Затем на внешнем `<form>`.
+4. И так далее вверх по цепочке до самого `document`.
 
 ![](event-order-bubbling.png)
 
-So if we click on `<p>`, then we'll see 3 alerts: `p` -> `div` -> `form`.
+Поэтому если кликнуть на `<p>`, то мы увидим три оповещения: `p` -> `div` -> `form`.
 
-The process is called "bubbling", because events "bubble" from the inner element up through parents like a bubble in the water.
+Этот процесс называется "всплытием", потому что события "всплывают" от внутреннего элемента вверх через родителей подобно тому, как всплывает пузырёк воздуха в воде.
 
-```warn header="*Almost* all events bubble."
-The key word in this phrase is "almost".
+```warn header="*Почти* все события всплывают."
+Ключевое слово в этой фразе -- "почти".
 
-For instance, a `focus` event does not bubble. There are other examples too, we'll meet them. But still it's an exception, rather than a rule, most events do bubble.
+Например, событие `focus` не всплывает. В дальнейшем мы увидим и другие примеры. Однако, стоит понимать, что это скорее исключение, чем правило, всё-таки большинство событий всплывают.
 ```
 
 ## event.target
 
-A handler on a parent element can always get the details about where it actually happened.
+Всегда можно узнать, на каком конкретно элементе произошло событие.
 
-**The most deeply nested element that caused the event is called a *target* element, accessible as `event.target`.**
+**Самый глубокий элемент, который вызывает событие, называется *целевым* элементом, и он доступен через `event.target`.**
 
-Note the differences from `this` (=`event.currentTarget`):
+Отличия от `this` (=`event.currentTarget`):
 
-- `event.target` -- is the "target" element that initiated the event, it doesn't change through the bubbling process.
-- `this` -- is the "current" element, the one that has a currently running handler on it.
+- `event.target` -- это "целевой" элемент, на котором произошло событие, в процессе всплытия он неизменен.
+- `this` -- это "текущий" элемент, до которого дошло всплытие, на нём сейчас выполняется обработчик.
 
-For instance, if we have a single handler `form.onclick`, then it can "catch" all clicks inside the form. No matter where the click happened, it bubbles up to `<form>` and runs the handler.
+Например, если стоит только один обработчик `form.onclick`, то он "поймает" все клики внутри формы. Где бы ни был клик внутри –- он всплывёт до элемента `<form>`, на котором сработает обработчик.
 
-In `form.onclick` handler:
+При этом внутри обработчика`form.onclick`:
 
-- `this` (`=event.currentTarget`) is the `<form>` element, because the handler runs on it.
-- `event.target` is the concrete element inside the form that actually was clicked.
+- `this` (`=event.currentTarget`) всегда будет элемент `<form>`, так как обработчик сработал на ней.
+- `event.target` будет содержать ссылку на конкретный элемент внутри формы, на котором произошёл клик.
 
-Check it out:
+Попробуйте сами:
 
 [codetabs height=220 src="bubble-target"]
 
-It's possible that `event.target` equals `this` -- when the click is made directly on the `<form>` element.
+Возможна и ситуация, когда `event.target` и `this` -- один и тот же элемент, например, если клик был на самом элементе `<form>`.
 
-## Stopping bubbling
+## Прекращение всплытия
 
-A bubbling event goes from the target element straight up. Normally it goes upwards till `<html>`, and then to `document` object, and some events even reach `window`, calling all handlers on the path.
+Всплытие идёт с "целевого" элемента прямо наверх. По умолчанию событие будет всплывать до элемента `<html>`, а затем до объекта `document`, а иногда даже до `window`, вызывая все обработчики на своём пути.
 
-But any handler may decide that the event has been fully processed and stop the bubbling.
+Но любой промежуточный обработчик может решить, что событие полностью обработано, и остановить всплытие.
 
-The method for it is `event.stopPropagation()`.
+Для этого нужно вызвать метод `event.stopPropagation()`.
 
-For instance, here `body.onclick` doesn't work if you click on `<button>`:
+Например, здесь при клике на кнопку `<button>` обработчик `body.onclick` не сработает:
 
 ```html run autorun height=60
-<body onclick="alert(`the bubbling doesn't reach here`)">
-  <button onclick="event.stopPropagation()">Click me</button>
+<body onclick="alert(`сюда всплытие не дойдёт`)">
+  <button onclick="event.stopPropagation()">Кликни меня</button>
 </body>
 ```
 
 ```smart header="event.stopImmediatePropagation()"
-If an element has multiple event handlers on a single event, then even if one of them stops the bubbling, the other ones still execute.
+Если у элемента есть несколько обработчиков на одно событие, то даже при прекращении всплытия все они будут выполнены.
 
-In other words, `event.stopPropagation()` stops the move upwards, but on the current element all other handlers will run.
+То есть, `event.stopPropagation()` препятствует продвижению события дальше, но на текущем элементе все обработчики будут вызваны.
 
-To stop the bubbling and prevent handlers on the current element from running, there's a method `event.stopImmediatePropagation()`. After it no other handlers execute.
+Для того, чтобы полностью остановить обработку, существует метод `event.stopImmediatePropagation()`. Он не только предотвращает всплытие, но и останавливает обработку событий на текущем элементе.
 ```
 
-```warn header="Don't stop bubbling without a need!"
-Bubbling is convenient. Don't stop it without a real need: obvious and architecturally well-thought.
+```warn header="Не прекращайте всплытие без необходимости!"
+Всплытие -- это удобно. Не прекращайте его без явной нужды, очевидной и архитектурно прозрачной.
 
-Sometimes `event.stopPropagation()` creates hidden pitfalls that later may become problems.
+Зачастую прекращение всплытия через `event.stopPropagation()` имеет свои подводные камни, которые со временем могут стать проблемами.
 
-For instance:
+Например:
 
-1. We create a nested menu. Each submenu handles clicks on its elements and calls `stopPropagation` so that the outer menu won't trigger.
-2. Later we decide to catch clicks on the whole window, to track users' behavior (where people click). Some analytic systems do that. Usually the code uses `document.addEventListener('click'…)` to catch all clicks.
-3. Our analytic won't work over the area where clicks are stopped by `stopPropagation`. We've got a "dead zone".
+1. Мы делаем вложенное меню.  Каждое подменю обрабатывает клики на своих элементах и делает для них `stopPropagation`, чтобы не открывать внешнее меню.
+2. Позже мы решили отслеживать все клики в окне для какой-то своей функциональности, к примеру, для статистики – где вообще у нас кликают люди. Некоторые системы аналитики так делают. Обычно используют `document.addEventListener('click'…)`, чтобы отлавливать все клики.
+3. Наша аналитика не будет работать над областью, где клики прекращаются `stopPropagation`. Получилась «мёртвая зона».
 
-There's usually no real need to prevent the bubbling. A task that seemingly requires that may be solved by other means. One of them is to use custom events, we'll cover them later. Also we can write our data into the `event` object in one handler and read it in another one, so we can pass to handlers on parents information about the processing below.
+Зачастую нет никакой необходимости прекращать всплытие. Задача, которая, казалось бы, требует этого, может быть решена иначе. Например, с помощью создания своего уникального события, о том, как это делать, мы поговорим позже. Также мы можем записывать какую-то служебную информацию в объект `event` в одном обработчике, а читать в другом, таким образом мы можем сообщить обработчикам на родительских элементах информацию о том, что событие уже было как-то обработано.
 ```
 
 
-## Capturing
+## Погружение
 
-There's another phase of event processing called "capturing". It is rarely used in real code, but sometimes can be useful.
+Существует ещё одна фаза из жизненного цикла события -- "погружение" (иногда её называют "перехват"). Она очень редко используется в реальном коде, однако тоже может быть полезной.
 
-The standard [DOM Events](http://www.w3.org/TR/DOM-Level-3-Events/) describes 3 phases of event propagation:
+Стандарт [DOM Events](http://www.w3.org/TR/DOM-Level-3-Events/) описывает 3 фазы прохода события:
 
-1. Capturing phase -- the event goes down to the element.
-2. Target phase -- the event reached the target element.
-3. Bubbling phase -- the event bubbles up from the element.
+1. Фаза погружения (capturing phase) -- событие сначала идёт сверху вниз.
+2. Фаза цели (target phase) -- событие достигло целевого(исходного) элемента.
+3. Фаза всплытия (bubbling stage) -- событие начинает всплывать.
 
-Here's the picture of a click on `<td>` inside a table, taken from the specification:
+Картинка из спецификации демонстрирует, как это работает при клике по ячейке `<td>`, расположенной внутри таблицы:
 
 ![](eventflow.png)
 
-That is: for a click on `<td>` the event first goes through the ancestors chain down to the element (capturing), then it reaches the target, and then it goes up (bubbles), calling handlers on its way.
+То есть при клике на `<td>` событие путешествует по цепочке родителей сначала вниз к элементу (погружается), затем оно достигает целевой элемент, а потом всплывает наверх, вызывая по пути обработчики.
 
-**Before we only talked about bubbling, because the capturing phase is rarely used. Normally it is invisible to us.**
+**Ранее мы говорили только о всплытии, потому что другие стадии, как правило, не используются и проходят незаметно для нас.**
 
-Handlers added using `on<event>`-property or using HTML attributes or using `addEventListener(event, handler)` don't know anything about capturing, they only run on the 2nd and 3rd phases.
+Обработчики, добавленные через `on<event>`-свойство или через HTML-атрибуты, или через `addEventListener(event, handler)`, ничего не знают о фазе погружения, а работают только на 2-ой и 3-ей фазах.
 
-To catch an event on the capturing phase, we need to set the handler `capture` option to `true`:
+Чтобы поймать событие на стадии погружения, нужно использовать третий аргумент `capture` вот так:
 
 ```js
 elem.addEventListener(..., {capture: true})
-// or, just "true" is an alias to {capture: true}
+// или просто "true", как сокращение для {capture: true}
 elem.addEventListener(..., true)
 ```
 
-There are two possible values of the `capture` option:
+Существуют два варианта значений опции `capture`:
 
-- If it's `false` (default), then the handler is set on the bubbling phase.
-- If it's `true`, then the handler is set on the capturing phase.
+- Если аргумент `false` (по умолчанию), то событие будет поймано при всплытии.
+- Если аргумент `true`, то событие будет перехвачено при погружении.
 
-Note that while formally there are 3 phases, the 2nd phase ("target phase": the event reached the element) is not handled separately: handlers on both capturing and bubbling phases trigger at that phase.
+Обратите внимание, что хоть и формально существует 3 фазы, 2-ую фазу ("фазу цели": событие достигло элемента) нельзя обработать отдельно, при её достижении вызываются все обработчики: и на всплытие, и на погружение.
 
-Let's see both capturing and bubbling in action:
+Давайте посмотрим и всплытие и погружение в действии:
 
 ```html run autorun height=140 edit
 <style>
@@ -169,47 +169,47 @@ Let's see both capturing and bubbling in action:
 
 <script>
   for(let elem of document.querySelectorAll('*')) {
-    elem.addEventListener("click", e => alert(`Capturing: ${elem.tagName}`), true);
-    elem.addEventListener("click", e => alert(`Bubbling: ${elem.tagName}`));
+    elem.addEventListener("click", e => alert(`Погружение: ${elem.tagName}`), true);
+    elem.addEventListener("click", e => alert(`Всплытие: ${elem.tagName}`));
   }
 </script>
 ```
 
-The code sets click handlers on *every* element in the document to see which ones are working.
+Здесь обработчики навешиваются на *каждый* элемент в документе, чтобы увидеть в каком порядке они вызываются по мере прохода события.
 
-If you click on `<p>`, then the sequence is:
+Если вы кликните по `<p>`, то последовательность следующая:
 
-1. `HTML` -> `BODY` -> `FORM` -> `DIV` -> `P` (capturing phase, the first listener), and then:
-2. `P` -> `DIV` -> `FORM` -> `BODY` -> `HTML` (bubbling phase, the second listener).
+1. `HTML` -> `BODY` -> `FORM` -> `DIV` -> `P` (фаза погружения, первый обработчик), а потом:
+2. `P` -> `DIV` -> `FORM` -> `BODY` -> `HTML` (фаза всплытия, второй обработчик).
 
-Please note that `P` shows up two times: at the end of capturing and at the start of bubbling.
+Обратите внимание, что `P` появляется два раза: в конце погружения и в начале всплытия.
 
-There's a property `event.eventPhase` that tells us the number of the phase on which the event was caught. But it's rarely used, because we usually know it in the handler.
+Существует свойство `event.eventPhase`, содержащее номер фазы, на которой событие было поймано. Но оно используется редко, ведь мы обычно знаем об этом в обработчике.
 
-```smart header="To remove the handler, `removeEventListener` needs the same phase"
-If we `addEventListener(..., true)`, then we should mention the same phase in `removeEventListener(..., true)` to correctly remove the handler.
+```smart header="Чтобы убрать обработчик, `removeEventListener` нужна та же фаза"
+Если мы добавили обработчик вот так `addEventListener(..., true)`, то мы должны передать то же значение аргумента `capture` в `removeEventListener(..., true)`, когда снимаем обработчик.
 ```
 
-## Summary
+## Итого
 
-The event handling process:
+Алгоритм:
 
-- When an event happens -- the most nested element where it happens gets labeled as the "target element" (`event.target`).
-- Then the event first moves from the document root down to the `event.target`, calling handlers assigned with `addEventListener(...., true)` on the way (`true` is a shorthand for `{capture: true}`).
-- Then the event moves from `event.target` up to the root, calling handlers assigned using  `on<event>` and `addEventListener` without the 3rd argument or with the 3rd argument `false`.
+- При наступлении события -- элемент, на котором оно произошло, помечается как "целевой" (`event.target`).
+- Далее событие сначала двигается вниз от корня документа к `event.target`, по пути вызывая обработчики, поставленные через `addEventListener(...., true), где `true` -- это сокращение для `{capture: true}`.
+- Далее событие двигается от `event.target` вверх к корню документа, по пути вызывая обработчики, поставленные через `on<event>` и `addEventListener` без третьего аргумента или с третьим аргументом равным `false`.
 
-Each handler can access `event` object properties:
+Каждый обработчик имеет доступ к свойствам события `event`:
 
-- `event.target` -- the deepest element that originated the event.
-- `event.currentTarget` (=`this`) -- the current element that handles the event (the one that has the handler on it)
-- `event.eventPhase` -- the current phase (capturing=1, bubbling=3).
+- `event.target` -- самый глубокий элемент, на котором произошло событие.
+- `event.currentTarget` (=`this`) -- элемент, на котором в данный момент сработал обработчик (тот, на котором "висит" конкретный обработчик)
+- `event.eventPhase` -- на какой фазе он сработал (погружение=1, всплытие=3).
 
-Any event handler can stop the event by calling `event.stopPropagation()`, but that's not recommended, because we can't really be sure we won't need it above, maybe for completely different things.
+Любой обработчик может остановить событие вызовом `event.stopPropagation()`, но делать это не рекомендуется, так как в дальнейшем это событие может понадобиться, иногда для самых неожиданных вещей.
 
-The capturing phase is used very rarely, usually we handle events on bubbling. And there's a logic behind that.
+В современной разработке стадия погружения используется очень редко, обычно события обрабатываются во время всплытия. И в этом есть логика.
 
-In real world, when an accident happens, local authorities react first. They know best the area where it happened. Then higher-level authorities if needed.
+В реальном мире, когда происходит чрезвычайная ситуация, местные службы реагируют первыми. Они знают лучше всех местность, в которой это произошло, и другие детали. Вышестоящие инстанции подключаются уже после этого и при необходимости.
 
-The same for event handlers. The code that set the handler on a particular element knows maximum  details about the element and what it does. A handler on a particular `<td>` may be suited for that exactly `<td>`, it knows everything about it, so it should get the chance first. Then its immediate parent also knows about the context, but a little bit less, and so on till the very top element that handles general concepts and runs the last.
+Тоже самое справедливо для обработчиков событий. Код, который "навесил" обработчик на конкретный элемент, знает максимум деталей об элементе и его предназначении. Например, обработчик на определённом `<td>` скорее всего подходит только для этого конкретного `<td>`, он знает все о нём, поэтому он должен отработать первым. Далее имеет смысл передать обработку события родителю -- он тоже понимает, что происходит, но уже менее детально, далее – выше, и так далее, до самого объекта `document`, обработчик на котором реализовывает самую общую функциональность уровня документа.
 
-Bubbling and capturing lay the foundation for "event delegation" -- an extremely powerful event handling pattern that we study in the next chapter.
+Всплытие и погружение являются основой для "делегирования событий" -- очень мощного приёма обработки событий. Его мы изучим в следующей главе.
