@@ -25,16 +25,16 @@ let event = new Event(тип события[, флаги]);
 
   По умолчанию они оба false: `{bubbles: false, cancelable: false}`.
 
-## dispatchEvent
+## Метод dispatchEvent
 
-After an event object is created, we should "run" it on an element using the call  `elem.dispatchEvent(event)`.
+После того, как объект события создан, мы должны инициировать его на элементе вызвав метод `elem.dispatchEvent(event)`.
 
-Then handlers react on it as if it were a regular built-in event. If the event was created with the `bubbles` flag, then it bubbles.
+После чего обработчики отработают будто это обычное встроенное событие. Если при создании указан флаг `bubbles`, то оно будет всплывать.
 
-In the example below the `click` event is initiated in JavaScript. The handler works same way as if the button was clicked:
+В примере ниже событие `click` инициируется JavaScript кодом. Обработчик отработает также, если бы кликнули по кнопке:
 
 ```html run no-beautify
-<button id="elem" onclick="alert('Click!');">Autoclick</button>
+<button id="elem" onclick="alert('Клик!');">Автоклик</button>
 
 <script>
   let event = new Event("click");
@@ -43,9 +43,9 @@ In the example below the `click` event is initiated in JavaScript. The handler w
 ```
 
 ```smart header="event.isTrusted"
-There is a way to tell a "real" user event from a script-generated one.
+В тоже время, можно легко отличить "настоящее" событие от сгенерированного кодом.
 
-The property `event.isTrusted` is `true` for events that come from real user actions and `false` for script-generated events.
+Свойство `event.isTrusted` принимает значение `true` для событий, создаваемых реальными действиями пользователя, и `false` для генерируемых кодом.
 ```
 
 ## Bubbling example
