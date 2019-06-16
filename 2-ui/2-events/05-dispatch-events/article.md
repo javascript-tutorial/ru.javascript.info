@@ -48,33 +48,33 @@ let event = new Event(тип события[, флаги]);
 Свойство `event.isTrusted` принимает значение `true` для событий, создаваемых реальными действиями пользователя, и `false` для генерируемых кодом.
 ```
 
-## Bubbling example
+## Пример всплытия
 
-We can create a bubbling event with the name `"hello"` and catch it on `document`.
+Мы можем создать событие, которое всплывает, с именем `"hello"` и поймать его на `document`.
 
-All we need is to set `bubbles` to `true`:
+Всё, что нужно сделать -- это установить флаг `bubbles` в `true`:
 
 ```html run no-beautify
-<h1 id="elem">Hello from the script!</h1>
+<h1 id="elem">Привет из кода!</h1>
 
 <script>
-  // catch on document...
+  // ловим на document...
   document.addEventListener("hello", function(event) { // (1)
-    alert("Hello from " + event.target.tagName); // Hello from H1
+    alert("Привет от " + event.target.tagName); // Привет от H1
   });
 
-  // ...dispatch on elem!
+  // ...инициализация события на элементе!
   let event = new Event("hello", {bubbles: true}); // (2)
   elem.dispatchEvent(event);
 </script>
 ```
 
-Notes:
+Обратите внимание::
 
-1. We should use `addEventListener` for our custom events, because `on<event>` only exists for built-in events, `document.onhello` doesn't work.
-2. Must set `bubbles:true`, otherwise the event won't bubble up.
+1. Мы должны использовать `addEventListener` для наших собственных событий, т.к. `on<event>`-свойства существуют только для встроенных событий, `document.onhello` не сработает.
+2. Мы обязаны передать флаг `bubbles:true`, иначе наше событие не будет всплывать.
 
-The bubbling mechanics is the same for built-in (`click`) and custom (`hello`) events. There are also capturing and bubbling stages.
+Механизм всплытия идентичен как для встроенного события (`click`), так и для пользовательского события (`hello`). Также одинакова работа фаз всплытия и погружения.
 
 ## MouseEvent, KeyboardEvent and others
 
