@@ -2,13 +2,13 @@ importance: 5
 
 ---
 
-# Tree menu
+# Раскрывающееся дерево
 
-Create a tree that shows/hides node children on click:
+Создайте дерево, которое по клику на заголовок скрывает-показывает потомков:
 
 [iframe border=1 src="solution"]
 
-Requirements:
+Требования:
 
-- Only one event handler (use delegation)
-- A click outside the node title (on an empty space) should not do anything.
+- Использовать только один обработчик событий (применить делегирование)
+- Клик вне текста заголовка (на пустом месте) ничего делать не должен.

@@ -2,24 +2,24 @@ importance: 5
 
 ---
 
-# Create an extendable calculator
+# Создать расширяемый калькулятор
 
-Create a constructor function `Calculator` that creates "extendable" calculator objects.
+Создайте функцию конструктор `Calculator`, которая создаёт "расширяемые" объекты калькулятора.
 
-The task consists of two parts.
+Задание состоит из двух частей.
 
-1. First, implement the method `calculate(str)` that takes a string like `"1 + 2"` in the format "NUMBER operator NUMBER" (space-delimited) and returns the result. Should understand plus `+` and minus `-`.
+1. Во-первых, реализуйте метод `calculate(str)`, который принимает строку типа `"1 + 2"` в формате "ЧИСЛО оператор ЧИСЛО" (разделено пробелами) и возвращает результат. Метод должен понимать плюс `+` и минус `-`.
 
-    Usage example:
+    Пример использования:
 
     ```js
     let calc = new Calculator;
 
     alert( calc.calculate("3 + 7") ); // 10
     ```
-2. Then add the method `addMethod(name, func)` that teaches the calculator a new operation. It takes the operator `name` and the two-argument function `func(a,b)` that implements it.
+2. Затем добавьте метод `addMethod(name, func)`, который добавляет в калькулятор новые операции. Он принимает оператор `name` и функцию с двумя аргументами `func(a,b)`, которая описывает его.
 
-    For instance, let's add the multiplication `*`, division `/` and power `**`:
+    Например, давайте добавим умножение `*`, деление `/` и мощность `**`:
 
     ```js
     let powerCalc = new Calculator;
@@ -31,6 +31,6 @@ The task consists of two parts.
     alert( result ); // 8
     ```
 
-- No brackets or complex expressions in this task.
-- The numbers and the operator are delimited with exactly one space.
-- There may be error handling if you'd like to add it.
+- Для этой задачи не нужны скобки или сложные выражения.
+- Числа и оператор разделены ровно одним пробелом.
+- Не лишним будет добавить обработку ошибок.

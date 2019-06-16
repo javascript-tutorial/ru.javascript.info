@@ -2,29 +2,29 @@ importance: 5
 
 ---
 
-# "Smart" tooltip
+# "Умная" подсказка
 
-Write a function that shows a tooltip over an element only if the visitor moves the mouse *over it*, but not *through it*.
+Напишите функцию, которая показывает подсказку над элементом только в случае, когда пользователь двигает курсор *над ним*, но не *через него*.
 
-In other words, if the visitor moves the mouse on the element and stopped -- show the tooltip. And if they just moved the mouse through fast, then no need, who wants extra blinking?
+Другими словами, если пользователь подвинул курсор на элементе и остановился -- показывать подсказку. А если он просто быстро провёл курсором по элементу, то не надо ничего показывать. Кому понравится лишнее мелькание?
 
-Technically, we can measure the mouse speed over the element, and if it's slow then we assume that it comes "over the element" and show the tooltip, if it's fast -- then we ignore it.
+Технически, мы бы могли измерять скорость прохода курсора мыши над элементом, и если она низкая, то можно посчитать, что пользователь поставил курсор над элементом, и показать ему подсказку. А если скорость высокая, то тогда не показывать.
 
-Make a universal object `new HoverIntent(options)` for it. With `options`:
+Создайте для этого универсальный объект `new HoverIntent(options)` с `options`:
 
-- `elem` -- element to track.
-- `over` -- a function to call if the mouse is slowly moving the element.
-- `out` -- a function to call when the mouse leaves the element (if `over` was called).
+- `elem` -- отслеживаемый элемент.
+- `over` -- функция, вызываемая, если курсор медленно двигается над элементом.
+- `out` -- функция, вызываемая при уходе курсора с элемента (если было наведение).
 
-An example of using such object for the tooltip:
+Пример использования такого объекта для показа подсказки:
 
 ```js
-// a sample tooltip
+// пример подсказки
 let tooltip = document.createElement('div');
 tooltip.className = "tooltip";
 tooltip.innerHTML = "Tooltip";
 
-// the object will track mouse and call over/out
+// объект будет отслеживать движение мыши и вызывать функции over/out
 new HoverIntent({
   elem,
   over() {
@@ -38,10 +38,10 @@ new HoverIntent({
 });
 ```
 
-The demo:
+Демо:
 
 [iframe src="solution" height=140]
 
-If you move the mouse over the "clock" fast then nothing happens, and if you do it slow or stop on them, then there will be a tooltip.
+Если двигать кусор над "часами" быстро, то ничего не произойдет, а если вы замедлите движение курсора над элементом или остановите его, то будет показана подсказка.
 
-Please note: the tooltip doesn't "blink" when the cursor moves between the clock subelements.
+Обратите внимание: подсказка не должна пропадать (мигать), когда курсор переходит между дочерними элементами часов.

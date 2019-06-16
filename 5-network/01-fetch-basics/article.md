@@ -18,7 +18,7 @@ let promise = fetch(url, [options])
 
 Процесс получения ответа обычно происходит в два этапа.
 
-**Результатом `promise` является объект встроенного класса [Response](https://fetch.spec.whatwg.org/#response-class), он появляется, как только сервер пришлет заголовки ответа.**
+**Результатом `promise` является объект встроенного класса [Response](https://fetch.spec.whatwg.org/#response-class), он появляется, как только сервер пришлёт заголовки ответа.**
 
 Таким образом, можно проверить статус HTTP-запроса и определить, выполнился ли он успешно, а также посмотреть заголовки, но пока без тела ответа.
 
@@ -86,7 +86,7 @@ let response = await fetch('/article/fetch/logo-fetch.svg');
 let blob = await response.blob(); // скачиваем как Blob-объект
 */!*
 
-// создаем <img>
+// создаём <img>
 let img = document.createElement('img');
 img.style = 'position:fixed;top:10px;left:10px;width:100px';
 document.body.append(img);
@@ -137,7 +137,7 @@ let response = fetch(protectedUrl, {
 });
 ```
 
-...Но существует список [запрещенных HTTP-заголовков](https://fetch.spec.whatwg.org/#forbidden-header-name), которые мы не можем установить:
+...Но существует список [запрещённых HTTP-заголовков](https://fetch.spec.whatwg.org/#forbidden-header-name), которые мы не можем установить:
 
 - `Accept-Charset`, `Accept-Encoding`
 - `Access-Control-Request-Headers`

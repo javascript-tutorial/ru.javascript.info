@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# The sibling question
+# Вопрос о соседях
 
-If `elem` -- is an arbitrary DOM element node...
+Если `elem` -- произвольный узел DOM-элемента...
 
-- Is it true that `elem.lastChild.nextSibling` is always `null`?
-- Is it true that `elem.children[0].previousSibling` is always `null` ?
+- Правда, что `elem.lastChild.nextSibling` всегда равен `null`?
+- Правда, что `elem.children[0].previousSibling` всегда равен `null` ?
