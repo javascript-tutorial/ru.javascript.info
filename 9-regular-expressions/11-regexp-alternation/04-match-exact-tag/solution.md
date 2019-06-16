@@ -1,13 +1,13 @@
 
-The pattern start is obvious: `pattern:<style`.
+Начало шаблона очевидно: `pattern:<style`.
 
-...But then we can't simply write `pattern:<style.*?>`, because `match:<styler>` would match it.
+...А вот дальше… Мы не можем написать просто `pattern:<style.*?>`, потому что `match:<styler>` удовлетворяет этому выражению.
 
-We need either a space after `match:<style` and then optionally something else or the ending `match:>`.
+После `match:<style` должен быть либо пробел, после которого может быть что-то ещё, либо закрытие тега `match:>`.
 
-In the regexp language: `pattern:<style(>|\s.*?>)`.
+На языке регулярных выражений: `pattern:<style(>|\s.*?>)`.
 
-In action:
+В действии:
 
 ```js run
 let reg = /<style(>|\s.*?>)/g;

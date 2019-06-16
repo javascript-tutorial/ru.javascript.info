@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# Insert the HTML in the list
+# Вставьте HTML в список
 
-Write the code to insert `<li>2</li><li>3</li>` between two `<li>` here:
+Напишите код для вставки `<li>2</li><li>3</li>` между этими двумя `<li>`:
 
 ```html
 <ul id="ul">

@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Army of functions
+# Армия функций
 
-The following code creates an array of `shooters`.
+Следующий код создаёт массив из стрелков (`shooters`).
 
-Every function is meant to output its number. But something is wrong...
+Каждая функция предназначена выводить их порядковые номера. Но что-то пошло не так...
 
 ```js run
 function makeArmy() {
@@ -14,8 +14,8 @@ function makeArmy() {
 
   let i = 0;
   while (i < 10) {
-    let shooter = function() { // shooter function
-      alert( i ); // should show its number
+    let shooter = function() { // функция shooter
+      alert( i ); // должна выводить порядковый номер
     };
     shooters.push(shooter);
     i++;
@@ -26,10 +26,10 @@ function makeArmy() {
 
 let army = makeArmy();
 
-army[0](); // the shooter number 0 shows 10
-army[5](); // and number 5 also outputs 10...
-// ... all shooters show 10 instead of their 0, 1, 2, 3...
+army[0](); // у 0-го стрелка будет номер 10
+army[5](); // и у 5-го стрелка тоже будет номер 10
+// ... у всех стрелков будет номер 10, вместо 0, 1, 2, 3...
 ```
 
-Why all shooters show the same? Fix the code so that they work as intended.
+Почему у всех стрелков одинаковые номера? Почините код, чтобы он работал как задумано.
 

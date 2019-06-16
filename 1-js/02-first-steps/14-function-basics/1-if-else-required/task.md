@@ -2,11 +2,11 @@ importance: 4
 
 ---
 
-# Is "else" required?
+# Обязателен ли "else"?
 
-The following function returns `true` if the parameter `age` is greater than `18`.
+Следующая функция возвращает `true`, если параметр `age` больше `18`.
 
-Otherwise it asks for a confirmation and returns its result:
+В ином случае она запрашивает подтверждение через `confirm` и возвращает его результат:
 
 ```js
 function checkAge(age) {
@@ -21,7 +21,7 @@ function checkAge(age) {
 }
 ```
 
-Will the function work differently if `else` is removed?
+Будет ли эта функция работать как-то иначе, если убрать `else`?
 
 ```js
 function checkAge(age) {
@@ -35,4 +35,4 @@ function checkAge(age) {
 }
 ```
 
-Is there any difference in the behavior of these two variants?
+Есть ли хоть одно отличие в поведении этого варианта?
