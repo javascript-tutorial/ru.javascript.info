@@ -124,21 +124,21 @@ alert( `I'm the Walrus!` ); // I'm the Walrus!
 alert( `The backslash: \\` ); // The backslash: \
 ```
 
-## String length
+## Длина строки
 
 
-The `length` property has the string length:
+Свойство `length` показывает длину строки:
 
 ```js run
 alert( `My\n`.length ); // 3
 ```
 
-Note that `\n` is a single "special" character, so the length is indeed `3`.
+Обратите внимание, `\n` — это спецсимвол, поэтому тут всё правильно: длина строки `3`.
 
-```warn header="`length` is a property"
-People with a background in some other languages sometimes mistype by calling `str.length()` instead of just `str.length`. That doesn't work.
+```warn header="`length` — это свойство"
+Бывает так, что люди с практикой в других языках случайно пытаются вызвать length, добавляя круглые скобки: они пишут `str.length()` вместо `str.length`. Это не работает.
 
-Please note that `str.length` is a numeric property, not a function. There is no need to add parenthesis after it.
+Запомните, `str.length` — это числовое свойство, а не функция. Поэтому добавлять скобки не нужно.
 ```
 
 ## Accessing characters
