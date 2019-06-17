@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# Destructuring assignment
+# Деструктурирующее присваивание
 
-We have an object:
+У нас есть объект:
 
 ```js
 let user = {
@@ -13,18 +13,18 @@ let user = {
 };
 ```
 
-Write the destructuring assignment that reads:
+Напишите деструктурирующее присваивание, которое:
 
-- `name` property into the variable `name`.
-- `years` property into the variable `age`.
-- `isAdmin` property into the variable `isAdmin` (false if absent)
+- свойство `name` присвоит в переменную `name`.
+- свойство `years` присвоит в переменную `age`.
+- свойство `isAdmin` присвоит в переменную `isAdmin` (false, если отсутствует)
 
-The values after the assignment should be:
+Переменные после присваивания должны быть:
 
 ```js
 let user = { name: "John", years: 30 };
 
-// your code to the left side:
+// ваш код должен быть с левой стороны:
 // ... = user
 
 alert( name ); // John
