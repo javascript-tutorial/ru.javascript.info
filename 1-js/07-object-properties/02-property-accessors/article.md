@@ -1,31 +1,31 @@
 
-# Property getters and setters
+# Свойства - геттеры и сеттеры
 
-There are two kinds of properties.
+Есть два типа свойств объекта.
 
-The first kind is *data properties*. We already know how to work with them. Actually, all properties that we've been using till now were data properties.
+Первый тип это *data properties (свойства данных)*. Мы уже знаем, как работать с ними. На самом деле, все свойства, которые мы использовали до текущего момента были свойствами данных.
 
-The second type of properties is something new. It's *accessor properties*. They are essentially functions that work on getting and setting a value, but look like regular properties to an external code.
+Второй тип свойств мы еще не рассматривали. Это *accessor properties (свойства доступа)*. По своей сути это функции, которые используют для присвоения и получения значения, но во внешнем коде они выглядят как обычные свойства объекта.
 
-## Getters and setters
+## Геттеры и сеттеры
 
-Accessor properties are represented by "getter" and "setter" methods. In an object literal they are denoted by `get` and `set`:
+Свойства доступа представлены как "геттер" и "сеттер" методы. В литерале объекта они представлены методами `get` и `set`:
 
 ```js
 let obj = {
   *!*get propName()*/!* {
-    // getter, the code executed on getting obj.propName
+    // геттер, код получения obj.propName
   },
 
   *!*set propName(value)*/!* {
-    // setter, the code executed on setting obj.propName = value
+    // сеттер, код присвоения obj.propName = value
   }
 };
 ```
 
-The getter works when `obj.propName` is read, the setter -- when it is assigned.
+Геттер срабатывает, когда `obj.propName` читается, сеттер -- когда значение назначается.
 
-For instance, we have a `user` object with `name` and `surname`:
+Для примера, у нас есть объект `user` со свойствами `name` и `surname`:
 
 ```js run
 let user = {
@@ -34,7 +34,7 @@ let user = {
 };
 ```
 
-Now we want to add a "fullName" property, that should be "John Smith". Of course, we don't want to copy-paste existing information, so we can implement it as an accessor:
+Сейчас, мы хотим добавить свойство объекта "fullName", которое должно стать "John Smith". Само собой, мы не хотим дублировать уже имеющуюся информацию. Мы можем реализовать это с использованием свойств доступа.
 
 ```js run
 let user = {
@@ -53,11 +53,11 @@ alert(user.fullName); // John Smith
 */!*
 ```
 
-From outside, an accessor property looks like a regular one. That's the idea of accessor properties. We don't *call* `user.fullName` as a function, we *read* it normally: the getter runs behind the scenes.
+Снаружи, свойство доступа выглядит как обычное свойство. В этом и заключается идея свойств доступа. Мы не хотим *вызывать* `user.fullName` как функцию, мы *читаем* как обычное свойство: геттер выполнит всю работу за кулисами.
 
-As of now, `fullName` has only a getter. If we attempt to assign `user.fullName=`, there will be an error.
+На данный момент, `fullName` имеет только геттер. Если попытаться присвоить значение свойству `user.fullName`, то это вызовет ошибку.
 
-Let's fix it by adding a setter for `user.fullName`:
+Давайте исправим это добавив сеттер для `user.fullName`:
 
 ```js run
 let user = {
@@ -75,39 +75,39 @@ let user = {
 */!*
 };
 
-// set fullName is executed with the given value.
+// присвоим fullName значение.
 user.fullName = "Alice Cooper";
 
 alert(user.name); // Alice
 alert(user.surname); // Cooper
 ```
 
-Now we have a "virtual" property. It is readable and writable, but in fact does not exist.
+Сейчас мы имеем "виртуальное" свойство. Его можно прочитать и изменить, но по факту его не существует.
 
 ```smart header="Accessor properties are only accessible with get/set"
-Once a property is defined with `get prop()` or `set prop()`, it's an accessor property, not a data property any more.
+Как только свойство определено с помощью `get prop()` или `set prop()`, оно становится свойством доступа, а не свойством данных.
 
-- If there's a getter -- we can read `object.prop`, otherwise we can't.
-- If there's a setter -- we can set `object.prop=...`, otherwise we can't.
+- Если определен геттер -- мы можем прочитать свойство `object.prop`, иначе нет.
+- Если определен сеттер -- мы может установить свойство `object.prop=...`, иначе нет.
 
-And in either case we can't `delete` an accessor property.
+И в любом другом случае мы не можем удалить свойство доступа.
 ```
 
 
-## Accessor descriptors
+## Дескрипторы свойств доступа
 
-Descriptors for accessor properties are different -- as compared with data properties.
+Дескрипторы свойств доступа отличаются в сравнении со свойствами данных.
 
-For accessor properties, there is no `value` and `writable`, but instead there are `get` and `set` functions.
+Свойства доступа не имеют `value` и `writable`, но взамен предлагают `get` и `set` функции.
 
-So an accessor descriptor may have:
+Таким образом, дескриптор доступа может иметь:
 
-- **`get`** -- a function without arguments, that works when a property is read,
-- **`set`** -- a function with one argument, that is called when the property is set,
-- **`enumerable`** -- same as for data properties,
-- **`configurable`** -- same as for data properties.
+- **`get`** -- функция без аргументов, которая сработает при чтении свойства,
+- **`set`** -- функция, принимающая один аргумент, вызываемая при присвоении свойства,
+- **`enumerable`** -- то же самое, что и для свойств данных,
+- **`configurable`** -- то же самое, что и для свойств данных.
 
-For instance, to create an accessor `fullName` with `defineProperty`, we can pass a descriptor with `get` and `set`:
+Например, чтобы создать метод доступа `fullName` с `defineProperty`, мы можем передать дескриптор с использованием `get` и `set`:
 
 ```js run
 let user = {
@@ -132,13 +132,13 @@ alert(user.fullName); // John Smith
 for(let key in user) alert(key); // name, surname
 ```
 
-Please note once again that a property can be either an accessor or a data property, not both.
+Обратите внимание, что свойство объекта может быть только свойством доступа или свойством данных.
 
-If we try to supply both `get` and `value` in the same descriptor, there will be an error:
+Если вы попытаетесь подставить `get` и `value` в одном дескрипторе, это вызовет ошибку:
 
 ```js run
 *!*
-// Error: Invalid property descriptor.
+// Ошибка: Неправильное свойство дескриптора.
 */!*
 Object.defineProperty({}, 'prop', {
   get() {
@@ -149,11 +149,11 @@ Object.defineProperty({}, 'prop', {
 });
 ```
 
-## Smarter getters/setters
+## Умные геттеры/сеттеры
 
-Getters/setters can be used as wrappers over "real" property values to gain more control over them.
+Геттеры/сеттеры можно использоваться как обертки над "реальными" значениями свойств, чтобы получить больше контроля над ними.
 
-For instance, if we want to forbid too short names for `user`, we can store `name` in a special property `_name`. And filter assignments in the setter:
+Например, если мы хотим запретить устанавливать короткое имя для `user`, мы можем хранить `name` в специальном свойстве `_name`, отфильтровав значение в сеттере:
 
 ```js run
 let user = {
@@ -163,7 +163,7 @@ let user = {
 
   set name(value) {
     if (value.length < 4) {
-      alert("Name is too short, need at least 4 characters");
+      alert("Короткое имя, должно быть более 4 символов");
       return;
     }
     this._name = value;
@@ -173,17 +173,17 @@ let user = {
 user.name = "Pete";
 alert(user.name); // Pete
 
-user.name = ""; // Name is too short...
+user.name = ""; // Короткое имя...
 ```
 
-Technically, the external code may still access the name directly by using `user._name`. But there is a widely known agreement that properties starting with an underscore `"_"` are internal and should not be touched from outside the object.
+Техничесски, внешний код все еще может получить доступ к имени напрямую с помощью `user._name`, но существует широко известное соглашение о том, что свойства, которые начинаются с симовала `"_"` являются внутренними и не должны быть затронутыми вне объекта.
 
 
-## Using for compatibility
+## Использование для совместимости
 
-One of the great ideas behind getters and setters -- they allow to take control over a "normal" data property and tweak it at any moment.
+Одна отличная идея за геттерами и сеттерами -- они позволяют взять под контроль "обычные" свойства данных и корректировать их в любой момент.
 
-For instance, we started implementing user objects using data properties `name` and `age`:
+Пример, ранее мы начали реализовывать объект `user` используя свойства данных `name` и `age`:
 
 ```js
 function User(name, age) {
@@ -196,7 +196,7 @@ let john = new User("John", 25);
 alert( john.age ); // 25
 ```
 
-...But sooner or later, things may change. Instead of `age` we may decide to store `birthday`, because it's more precise and convenient:
+...Но рано или поздно, все может измениться. Взамен `age` мы можем решить хранить `birthday`, потому что так более точно и удобно:
 
 ```js
 function User(name, birthday) {
@@ -207,11 +207,11 @@ function User(name, birthday) {
 let john = new User("John", new Date(1992, 6, 1));
 ```
 
-Now what to do with the old code that still uses `age` property?
+Что нам делать со старым кодом который использует свойство `age`?
 
-We can try to find all such places and fix them, but that takes time and can be hard to do if that code is written by other people. And besides, `age` is a nice thing to have in `user`, right? In some places it's just what we want.
+Мы можем попытаться найти все такие места и изменить их, но это отнимает время и может быть тяжело выполнимо, если этот код был написан другими людьми. И кроме того, `age` это отличное свойство для `user`, верно? В некоторых ситуациях, это то, что нам нужно.
 
-Adding a getter for `age` mitigates the problem:
+Добавление геттера для `age` смягчит эту проблему:
 
 ```js run no-beautify
 function User(name, birthday) {
@@ -219,7 +219,7 @@ function User(name, birthday) {
   this.birthday = birthday;
 
 *!*
-  // age is calculated from the current date and birthday
+  // возраст рассчитывается из текущей даты и дня рождения
   Object.defineProperty(this, "age", {
     get() {
       let todayYear = new Date().getFullYear();
@@ -232,7 +232,7 @@ function User(name, birthday) {
 let john = new User("John", new Date(1992, 6, 1));
 
 alert( john.birthday ); // birthday is available
-alert( john.age );      // ...as well as the age
+alert( john.age );      // ...а также возраст
 ```
 
-Now the old code works too and we've got a nice additional property.
+Теперь старый код тоже работает, и у нас есть отличное дополнительное свойство.
