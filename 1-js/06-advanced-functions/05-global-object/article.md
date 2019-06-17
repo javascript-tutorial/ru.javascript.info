@@ -48,7 +48,7 @@ window.currentUser = {
 alert(currentUser.name); // John
 
 // или, если у нас есть локальная переменная с именем "value",
-// полумим её из window явно (безопасно!)
+// получим её из window явно (безопасно!)
 alert(window.currentUser.name); // John
 ```
 
