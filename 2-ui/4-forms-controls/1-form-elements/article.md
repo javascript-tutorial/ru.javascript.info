@@ -8,7 +8,7 @@
 
 Формы в документе входят в специальную коллекцию `document.forms`.
 
-Для получения формы мы можем использовать в *именованной* коллекции как имя формы, так и его номер.
+Для получения формы мы можем использовать в *именованной* коллекции как имя формы, так и её номер.
 
 ```js no-beautify
 document.forms.my - форма с именем "my" (name="my")
@@ -55,7 +55,7 @@ alert(ageElems[0].value); // 10, the first input value
 </script>
 ```
 
-Эти навигационные элементы не зависят от структуры тэгов внутри формы. Все элементы, как бы глубоко они ни находились в форме, доступны в коллекции `form.elements`.
+Эти навигационные элементы не зависят от структуры тегов внутри формы. Все элементы, как бы глубоко они ни находились в форме, доступны в коллекции `form.elements`.
 
 ````smart header="`<fieldset>` как \"подформа\""
 Форма может содержать один или несколько элементов `<fieldset>` внутри себя. Они также поддерживают свойство `elements`.
@@ -86,7 +86,7 @@ alert(ageElems[0].value); // 10, the first input value
 ```
 ````
 
-````warn header="Короткое замечание: `form.name`"
+````warn header="Сокращённая форма записи: `form.name`"
 Есть более короткая запись: мы можем получить доступ к элементу через `form[index/name]`. 
 
 Вместо `form.elements.login` мы можем написать `form.login`.
@@ -103,7 +103,7 @@ alert(ageElems[0].value); // 10, the first input value
 <script>
   alert(form.elements.login == form.login); // true, ведь это одинаковые <input>
 
-  form.login.name = "username"; // изменяем свойство name у элемента <input>
+  form.login.name = "username"; // изменяем свойство name у элемента input
 
   // form.elements обновили свои имена:
   alert(form.elements.login); // undefined
@@ -150,10 +150,9 @@ alert(ageElems[0].value); // 10, the first input value
 
 Рассмотрим элементы управления формой, обратим внимание на их особенности.
 
-### <input> и <textarea>
+### input и textarea
 
-Normally, we can access the value as `input.value` or `input.checked` for checkboxes.
-Обычно, мы можем получить доступ к значению элемента, используя `input.value` или `input.checked` для флажков.
+Обычно мы можем получить доступ к значению элемента, используя `input.value` или `input.checked` для чекбоксов.
 
 Вот так:
 
@@ -161,16 +160,16 @@ Normally, we can access the value as `input.value` or `input.checked` for checkb
 input.value = "Новое значение";
 textarea.value = "Новый текст";
 
-input.checked = true; // для флажков и переключателей
+input.checked = true; // для чекбоксов и переключателей
 ```
 
 ```warn header="Используйте `textarea.value` вместо `textarea.innerHTML`"
-Обратите внимание, что мы никогда не должны использовать `textarea.InternalHTML`: он хранит только тот HTML, который был изначально на странице, а не текущее значение. 
+Обратите внимание, что мы никогда не должны использовать `textarea.innerHTML`: он хранит только тот HTML, который был изначально на странице, а не текущее значение. 
 ```
 
-### <select> и <option>
+### select и option
 
-Тэг `<select>` имеет 3 важных свойства:
+Элемент `<select>` имеет 3 важных свойства:
 
 1. `select.options` -- коллекция из элементов `<option>`,
 2. `select.value` -- значение выбранного `<option>`,
@@ -213,7 +212,7 @@ input.checked = true; // для флажков и переключателей
 </select>
 
 <script>
-  // получаем все выбранные значения из <select multiple>
+  // получаем все выбранные значения из списка множественного выбора
   let selected = Array.from(select.options)
     .filter(option => option.selected)
     .map(option => option.value);
@@ -222,11 +221,11 @@ input.checked = true; // для флажков и переключателей
 </script>
 ```
 
-Полное описание элемента `<select>` доступна на <https://html.spec.whatwg.org/multipage/forms.html#the-select-element>.
+Полное описание элемента `<select>` доступно на <https://html.spec.whatwg.org/multipage/forms.html#the-select-element>.
 
 ### new Option
 
-В описании [элемента <option>](https://html.spec.whatwg.org/multipage/forms.html#the-option-element) есть красивый короткий синтаксис для создания элемента <option>:
+В описании [элемента option](https://html.spec.whatwg.org/multipage/forms.html#the-option-element) есть красивый короткий синтаксис для создания элемента <option>:
 
 ```js
 option = new Option(text, value, defaultSelected, selected);
@@ -278,7 +277,7 @@ let option = new Option("Текст", "value", true, true);
 `element.form`
 : Элементы ссылаются на свою форму в свойстве `form`.
 
-Значение элементов формы доступны через `input.value`, `textarea.value`, `select.value` и т.д. либо  `input.checked` для флажков и переключателей.
+Значения элементов формы доступны через `input.value`, `textarea.value`, `select.value` и т.д. либо  `input.checked` для чекбоксов и переключателей.
 
 Для элемента `<select>` мы также можем получить индекс выбранной опции через `select.selectedIndex`, либо используя коллекцию опций `select.options`. Полное описание этого и других элементов находится по адресу <https://html.spec.whatwg.org/multipage/forms.html>.
 
