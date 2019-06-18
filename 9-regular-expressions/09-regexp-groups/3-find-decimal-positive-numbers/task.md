@@ -1,12 +1,12 @@
-# Find positive numbers
+# Найти положительные числа
 
-Create a regexp that looks for positive numbers, including those without a decimal point.
+Создайте регэксп, который ищет положительные числа, включая числа без десятичной части.
 
-An example of use:
+Пример использования:
 ```js
-let reg = /your regexp/g;
+let reg = /ваш регэксп/g;
 
 let str = "1.5 0 -5 12. 123.4.";
 
-alert( str.match(reg) ); // 1.5, 12, 123.4 (ignores 0 and -5)
+alert( str.match(reg) ); // 1.5, 12, 123.4 (игнорирует 0 и -5)
 ```
