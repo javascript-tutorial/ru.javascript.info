@@ -203,16 +203,16 @@ alert( str ); // hi
 
 В последующих разделах мы увидим больше примеров.
 
-## Changing the case
+## Изменение регистра
 
-Methods [toLowerCase()](mdn:js/String/toLowerCase) and [toUpperCase()](mdn:js/String/toUpperCase) change the case:
+Методы [toLowerCase()](mdn:js/String/toLowerCase) и [toUpperCase()](mdn:js/String/toUpperCase) меняют регистр символов:
 
 ```js run
 alert( 'Interface'.toUpperCase() ); // INTERFACE
 alert( 'Interface'.toLowerCase() ); // interface
 ```
 
-Or, if we want a single character lowercased:
+Если мы захотим перевести в нижний регистр какой-то конкретный символ:
 
 ```js
 alert( 'Interface'[0].toLowerCase() ); // 'i'
