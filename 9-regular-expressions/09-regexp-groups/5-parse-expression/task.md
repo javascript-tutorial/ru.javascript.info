@@ -1,23 +1,23 @@
-# Parse an expression
+# Разобрать выражение
 
-An arithmetical expression consists of 2 numbers and an operator between them, for instance:
+Арифметическое выражение включает два числа и оператор между ними. Например:
 
 - `1 + 2`
 - `1.2 * 3.4`
 - `-3 / -6`
 - `-2 - 2`
 
-The operator is one of: `"+"`, `"-"`, `"*"` or `"/"`.
+Оператором может быть: `"+"`, `"-"`, `"*"` или `"/"`.
 
-There may be extra spaces at the beginning, at the end or between the parts.
+В выражении могут быть пробелы вначале, конце или между частями выражения.
 
-Create a function `parse(expr)` that takes an expression and returns an array of 3 items:
+Создайте функцию `parse(expr)`, которая принимает выражение и возвращает массив из трех элементов:
 
-1. The first number.
-2. The operator.
-3. The second number.
+1. Первое число.
+2. Оператор.
+3. Второе число.
 
-For example:
+Например:
 
 ```js
 let [a, op, b] = parse("1.2 * 3.4");
