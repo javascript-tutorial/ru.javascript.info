@@ -141,37 +141,37 @@ alert( `My\n`.length ); // 3
 Запомните, `str.length` — это числовое свойство, а не функция. Поэтому добавлять скобки не нужно.
 ```
 
-## Accessing characters
+## Доступ к символам
 
-To get a character at position `pos`, use square brackets `[pos]` or call the method [str.charAt(pos)](mdn:js/String/charAt). The first character starts from the zero position:
+Получить символ, который занимает позицию `pos`, можно с помощью квадратных скобок: `[pos]`. Также можно использовать метод `charAt`: [str.charAt(pos)](mdn:js/String/charAt). Первый символ занимает нулевую позицию:
 
 ```js run
 let str = `Hello`;
 
-// the first character
+// получаем первый символ
 alert( str[0] ); // H
 alert( str.charAt(0) ); // H
 
-// the last character
+// получаем последний символ
 alert( str[str.length - 1] ); // o
 ```
 
-The square brackets are a modern way of getting a character, while `charAt` exists mostly for historical reasons.
+Квадратные скобки — современный способ получить символ, в то время как `charAt` существует в основном по историческим причинам.
 
-The only difference between them is that if no character is found, `[]` returns `undefined`, and `charAt` returns an empty string:
+Разница только в том, что если символ с такой позицией отсутствует, тогда `[]` вернёт `undefined`, а `charAt` — пустую строку:
 
 ```js run
 let str = `Hello`;
 
 alert( str[1000] ); // undefined
-alert( str.charAt(1000) ); // '' (an empty string)
+alert( str.charAt(1000) ); // '' (пустая строка)
 ```
 
-We can also iterate over characters using `for..of`:
+Также можно проитерировать строку посимвольно, используя `for..of`:
 
 ```js run
 for (let char of "Hello") {
-  alert(char); // H,e,l,l,o (char becomes "H", then "e", then "l" etc)
+  alert(char); // H,e,l,l,o (char — сначала "H", потом "e", потом "l" и т. д.)
 }
 ```
 
