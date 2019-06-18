@@ -86,6 +86,7 @@ document.querySelector('.hello').innerHTML = text;
 | Left click/right click | Левый/правый клик? Кликните? левой кнопкой мыши        |
 | More in / Details in   | Подробнее в                                                      |
 | Script                 | Скрипт                                                        |
+| Section                | Раздел |
 | Statement              | Инструкция                                                       |
 | Summary                | Итого                                                                          |
 
