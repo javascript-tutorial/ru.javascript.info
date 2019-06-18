@@ -16,5 +16,5 @@ importance: 5
 Используя JavaScript:
 
 1. Выведите значение и текст выбранного пункта.
-2. Добавьте опцию: `<option value="classic">Classic</option>`.
+2. Добавьте пункт: `<option value="classic">Классика</option>`.
 3. Сделайте его выбранным.
