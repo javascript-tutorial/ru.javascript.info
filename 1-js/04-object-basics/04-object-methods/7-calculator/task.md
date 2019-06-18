@@ -20,5 +20,5 @@ alert( calculator.sum() );
 alert( calculator.mul() );
 ```
 
-[демо]
+[demo]
 
