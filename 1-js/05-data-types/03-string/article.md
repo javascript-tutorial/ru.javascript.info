@@ -175,32 +175,33 @@ for (let char of "Hello") {
 }
 ```
 
-## Strings are immutable
+## Строки неизменяемы
 
-Strings can't be changed in JavaScript. It is impossible to change a character.
 
-Let's try it to show that it doesn't work:
+Содержимое строки в JavaScript нельзя изменить. Нельзя взять символ посередине и заменить его. Как только строка создана — она такая навсегда.
+
+Давайте продемонстрируем, что это не работает:
 
 ```js run
 let str = 'Hi';
 
-str[0] = 'h'; // error
-alert( str[0] ); // doesn't work
+str[0] = 'h'; // ошибка
+alert( str[0] ); // не работает
 ```
 
-The usual workaround is to create a whole new string and assign it to `str` instead of the old one.
+Можно создать новую строку и записать её в ту же самую переменную вместо старой.
 
-For instance:
+Например:
 
 ```js run
 let str = 'Hi';
 
-str = 'h' + str[1];  // replace the string
+str = 'h' + str[1];  // заменяем строку
 
 alert( str ); // hi
 ```
 
-In the following sections we'll see more examples of this.
+В последующих разделах мы увидим больше примеров.
 
 ## Changing the case
 
