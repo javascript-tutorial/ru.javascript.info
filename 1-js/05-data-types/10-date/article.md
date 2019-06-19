@@ -404,18 +404,18 @@ let date = new Date( Date.parse('2012-01-26T13:51:50.417-07:00') );
 alert(date);  
 ```
 
-## Summary
+## Итого
 
-- Date and time in JavaScript are represented with the [Date](mdn:js/Date) object. We can't create "only date" or "only time": `Date` objects always carry both.
-- Months are counted from zero (yes, January is a zero month).
-- Days of week in `getDay()` are also counted from zero (that's Sunday).
-- `Date` auto-corrects itself when out-of-range components are set. Good for adding/subtracting days/months/hours.
-- Dates can be subtracted, giving their difference in milliseconds. That's because a `Date` becomes the timestamp when converted to a number.
-- Use `Date.now()` to get the current timestamp fast.
+- Дата и время в JavaScript представлены объектом [Date](mdn:js/Date). Нельзя создать "только дату" или "только время": объекты `Date` всегда содержат и то, и другое.
+- Счёт месяцев начинается с нуля (да, январь -- это нулевой месяц).
+- Дни недели в `getDay()` также отсчитываются с нуля, что соответствует воскресенью.
+- Объект `Date` самокорректируется при введении значений out-of-range components are set. Good for adding/subtracting days/months/hours.
+- Даты можно вычитать и разница возвращается в миллисекундах. Так происходит, потому что при конвертировании в число объект `Date` становится отметкой времени.
+- Используйте `Date.now()` для быстрого получения текущей отметки времени.
 
-Note that unlike many other systems, timestamps in JavaScript are in milliseconds, not in seconds.
+Учтите, что в отличие от других систем, отметки времени в JavaScript измеряются в миллисекундах, а не в секундах.
 
-Also, sometimes we need more precise time measurements. JavaScript itself does not have a way to measure time in microseconds (1 millionth of a second), but most environments provide it. For instance, browser has [performance.now()](mdn:api/Performance/now) that gives the number of milliseconds from the start of page loading with microsecond precision (3 digits after the point):
+Также порой требуются более точные измерения времени. JavaScript itself does not have a way to measure time in microseconds (1 millionth of a second), but most environments provide it. For instance, browser has [performance.now()](mdn:api/Performance/now) that gives the number of milliseconds from the start of page loading with microsecond precision (3 digits after the point):
 
 ```js run
 alert(`Loading started ${performance.now()}ms ago`);
