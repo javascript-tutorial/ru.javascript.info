@@ -6,19 +6,19 @@
 
   <script>
     let data = {
-      "Fish": {
-        "trout": {},
-        "salmon": {}
+      "Рыбы": {
+        "форель": {},
+        "лосось": {}
       },
 
-      "Tree": {
-        "Huge": {
-          "sequoia": {},
-          "oak": {}
+      "Деревья": {
+        "Огромные": {
+          "секвойя": {},
+          "дуб": {}
         },
-        "Flowering": {
-          "redbud": {},
-          "magnolia": {}
+        "Цветковые": {
+          "яблоня": {},
+          "магнолия": {}
         }
       }
     };
@@ -28,8 +28,8 @@
     }
 
     function createTreeDom(obj) {
-      // if there's no children, then the call returns undefined
-      // and the <ul> won't be created
+      // если нет дочерних элементов, то вызов возвращает undefined
+      // и элемент <ul> не будет создан
       if (!Object.keys(obj).length) return;
 
       let ul = document.createElement('ul');
