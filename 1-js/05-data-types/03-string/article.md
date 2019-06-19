@@ -218,30 +218,30 @@ alert( 'Interface'.toLowerCase() ); // interface
 alert( 'Interface'[0].toLowerCase() ); // 'i'
 ```
 
-## Searching for a substring
+## Поиск подстроки
 
-There are multiple ways to look for a substring within a string.
+Существует несколько способов поиска подстроки.
 
 ### str.indexOf
 
-The first method is [str.indexOf(substr, pos)](mdn:js/String/indexOf).
+Первый метод — [str.indexOf(substr, pos)](mdn:js/String/indexOf).
 
-It looks for the `substr` in `str`, starting from the given position `pos`, and returns the position where the match was found or `-1` if nothing can be found.
+Он ищет подстроку `substr` в строке `str`, начиная с позиции `pos`, и возвращает позицию, на которой располагается совпадение, либо `-1` при отсутствии совпадений.
 
-For instance:
+Например:
 
 ```js run
 let str = 'Widget with id';
 
-alert( str.indexOf('Widget') ); // 0, because 'Widget' is found at the beginning
-alert( str.indexOf('widget') ); // -1, not found, the search is case-sensitive
+alert( str.indexOf('Widget') ); // 0, потому что подстрока 'Widget' найдена в начале
+alert( str.indexOf('widget') ); // -1, совпадений нет, поиск чувствителен к регистру
 
-alert( str.indexOf("id") ); // 1, "id" is found at the position 1 (..idget with id)
+alert( str.indexOf("id") ); // 1, подстрока "id" найдена на позиции 1 (..idget with id)
 ```
 
-The optional second parameter allows us to search starting from the given position.
+Необязательный второй аргумент позволяет начать поиск с определённой позиции.
 
-For instance, the first occurrence of `"id"` is at position `1`. To look for the next occurrence, let's start the search from position `2`:
+Например, первое вхождение `"id"` — на позиции `1`. Для того, чтобы найти следующее, начнём поиск с позиции `2`:
 
 ```js run
 let str = 'Widget with id';
@@ -249,30 +249,29 @@ let str = 'Widget with id';
 alert( str.indexOf('id', 2) ) // 12
 ```
 
-
-If we're interested in all occurrences, we can run `indexOf` in a loop. Every new call is made with the position after the previous match:
+Чтобы найти все вхождения подстроки, нужно запустить `indexOf` в цикле. Каждый раз, получив очередную позицию, начинаем следующий поиск со следующей:
 
 
 ```js run
-let str = 'As sly as a fox, as strong as an ox';
+let str = 'Ослик Иа-Иа посмотрел на виадук';
 
-let target = 'as'; // let's look for it
+let target = 'Иа'; // цель поиска
 
 let pos = 0;
 while (true) {
   let foundPos = str.indexOf(target, pos);
   if (foundPos == -1) break;
 
-  alert( `Found at ${foundPos}` );
-  pos = foundPos + 1; // continue the search from the next position
+  alert( `Найдено тут: ${foundPos}` );
+  pos = foundPos + 1; // продолжаем со следующей позиции
 }
 ```
 
-The same algorithm can be layed out shorter:
+Тот же алгоритм можно записать и короче:
 
 ```js run
-let str = "As sly as a fox, as strong as an ox";
-let target = "as";
+let str = "Ослик Иа-Иа посмотрел на виадук";
+let target = "Иа";
 
 *!*
 let pos = -1;
@@ -283,24 +282,25 @@ while ((pos = str.indexOf(target, pos + 1)) != -1) {
 ```
 
 ```smart header="`str.lastIndexOf(substr, position)`"
-There is also a similar method [str.lastIndexOf(substr, position)](mdn:js/String/lastIndexOf) that searches from the end of a string to its beginning.
+Также есть похожий метод [str.lastIndexOf(substr, position)](mdn:js/String/lastIndexOf), который ищет с конца строки к её началу.
 
-It would list the occurrences in the reverse order.
+
+Он используется тогда, когда нужно получить самое последнее вхождение: перед концом строки или начинающееся до (включительно) определённой позиции.
 ```
 
-There is a slight inconvenience with `indexOf` in the `if` test. We can't put it in the `if` like this:
+Есть некоторое неудобство с `indexOf` в условии `if`. Такое условие не будет работать:
 
 ```js run
 let str = "Widget with id";
 
 if (str.indexOf("Widget")) {
-    alert("We found it"); // doesn't work!
+    alert("Совпадение есть"); // не работает
 }
 ```
 
-The `alert` in the example above doesn't show because `str.indexOf("Widget")` returns `0` (meaning that it found the match at the starting position). Right, but `if` considers `0` to be `false`.
+Мы ищем подстроку `"Widget"`, и она здесь есть, прямо на позиции `0`. Но `alert` не показывается, т. к. `str.indexOf("Widget")` возвращает `0`, и `if` решает, что тест не пройден.
 
-So, we should actually check for `-1`, like this:
+Поэтому надо делать проверку на `-1`:
 
 ```js run
 let str = "Widget with id";
@@ -308,50 +308,50 @@ let str = "Widget with id";
 *!*
 if (str.indexOf("Widget") != -1) {
 */!*
-    alert("We found it"); // works now!
+    alert("Совпадение есть"); // теперь работает
 }
 ```
 
-````smart header="The bitwise NOT trick"
-One of the old tricks used here is the [bitwise NOT](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators#Bitwise_NOT) `~` operator. It converts the number to a 32-bit integer (removes the decimal part if exists) and then reverses all bits in its binary representation.
+````smart header="Фокус с побитовым НЕ"
+Существует старый фокус с использованием [побитового оператора НЕ](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators#Bitwise_NOT) — `~`. Он преобразует число в 32-разрядное целое со знаком — signed 32-bit integer. Десятичная дробь, в случае, если она присутствует, отбрасывается. Все биты числа инвертируются.
 
-For 32-bit integers the call `~n` means exactly the same as `-(n+1)` (due to IEEE-754 format).
+Для 32-разрядных целых `~n` означает то же, что `-(n+1)` (согласно формату IEEE-754).
 
-For instance:
+В частности:
 
 ```js run
-alert( ~2 ); // -3, the same as -(2+1)
-alert( ~1 ); // -2, the same as -(1+1)
-alert( ~0 ); // -1, the same as -(0+1)
+alert( ~2 ); // -3, то же, что -(2+1)
+alert( ~1 ); // -2, то же, что -(1+1)
+alert( ~0 ); // -1, то же, что -(0+1)
 *!*
 alert( ~-1 ); // 0, the same as -(-1+1)
 */!*
 ```
 
-As we can see, `~n` is zero only if `n == -1`.
+Таким образом, `~n` равняется 0 только при `n == -1`.
 
-So, the test `if ( ~str.indexOf("...") )` is truthy that the result of `indexOf` is not `-1`. In other words, when there is a match.
+Соответственно, проверка `if ( ~str.indexOf("...") )` означает, что результат `indexOf` отличен от `-1`, совпадение есть.
 
-People use it to shorten `indexOf` checks:
+Это можно использовать, чтобы сделать проверку `indexOf` компактнее:
 
 ```js run
 let str = "Widget";
 
 if (~str.indexOf("Widget")) {
-  alert( 'Found it!' ); // works
+  alert( 'Совпадение есть' ); // работает
 }
 ```
 
-It is usually not recommended to use language features in a non-obvious way, but this particular trick is widely used in old code, so we should understand it.
+Обычно использовать возможности языка каким-либо неочевидным образом не рекомендуется, но этот фокус широко используется в старом коде, поэтому его важно понимать.
 
-Just remember: `if (~str.indexOf(...))` reads as "if found".
+Просто запомните: `if (~str.indexOf(...))` означает «если найдено».
 ````
 
 ### includes, startsWith, endsWith
 
-The more modern method [str.includes(substr, pos)](mdn:js/String/includes) returns `true/false` depending on whether `str` contains `substr` within.
+Более современный метод [str.includes(substr, pos)](mdn:js/String/includes) возвращает `true`, если в строке `str` есть подстрока `substr`, либо `false`, если нет.
 
-It's the right choice if we need to test for the match, but don't need its position:
+Это — правильный выбор, если нам необходимо проверить, есть ли совпадение, но позиция не нужна:
 
 ```js run
 alert( "Widget with id".includes("Widget") ); // true
@@ -359,18 +359,18 @@ alert( "Widget with id".includes("Widget") ); // true
 alert( "Hello".includes("Bye") ); // false
 ```
 
-The optional second argument of `str.includes` is the position to start searching from:
+Необязательный второй аргумент `str.includes` позволяет начать поиск с определённой позиции:
 
 ```js run
 alert( "Midget".includes("id") ); // true
-alert( "Midget".includes("id", 3) ); // false, from position 3 there is no "id"
+alert( "Midget".includes("id", 3) ); // false, поиск начат с позиции 3
 ```
 
-The methods [str.startsWith](mdn:js/String/startsWith) and [str.endsWith](mdn:js/String/endsWith) do exactly what they say:
+Методы [str.startsWith](mdn:js/String/startsWith) и [str.endsWith](mdn:js/String/endsWith) проверяют, соответственно, начинается ли и заканчивается ли строка определённой строкой:
 
 ```js run
-alert( "Widget".startsWith("Wid") ); // true, "Widget" starts with "Wid"
-alert( "Widget".endsWith("get") );   // true, "Widget" ends with "get"
+alert( "Widget".startsWith("Wid") ); // true, "Wid" — начало "Widget"
+alert( "Widget".endsWith("get") ); // true, "get" — окончание "Widget"
 ```
 
 ## Getting a substring
