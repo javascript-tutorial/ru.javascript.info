@@ -1,93 +1,92 @@
+# Приватные и защищенне методы и свойства
 
-# Private and protected properties and methods
+Один из важнейших принципов объектно-ориентированного программирования -- разделение внутреннего и внешнего интерфесов.
 
-One of the most important principles of object oriented programming -- delimiting internal interface from the external one.
+Это обязательная практика в разработке чего-либо сложнее, чем "hello world".
 
-That is "a must" practice in developing anything more complex than a "hello world" app.
+Чтобы понять этот принцип, давайте на секунду забудем о программировании и обратим взгляд на реальный мир.
 
-To understand this, let's break away from development and turn our eyes into the real world.
+Устройства, которыми мы пользуемся, обычно довольно сложно устроены. Но разделение внутреннего и внешнего интерфейсов позволяет нам пользоваться ими без каких-либо проблем.
 
-Usually, devices that we're using are quite complex. But delimiting the internal interface from the external one allows to use them without problems.
+## Пример из реальной жизни
 
-## A real-life example
-
-For instance, a coffee machine. Simple from outside: a button, a display, a few holes...And, surely, the result -- great coffee! :)
+Например, кофеварка. Простая снаружи: кнопка, экран, несколько отверстий... И, конечно, как результат -- прекрасный кофе ! :)
 
 ![](coffee.jpg)
 
-But inside... (a picture from the repair manual)
+Но внутри... (картинка из инструкции по ремонту)
 
 ![](coffee-inside.jpg)
 
-A lot of details. But we can use it without knowing anything.
+Множество деталей. Но мы можем пользоваться ею ничего об этом не зная.
 
-Coffee machines are quite reliable, aren't they? We can use one for years, and only if something goes wrong -- bring it for repairs.
+Кофеварки довольно надежны, не так ли? Мы можем пользоваться ими годами, и если что то пойдет не так - отнесем в ремонт.
 
-The secret of reliability and simplicity of a coffee machine -- all details are well-tuned and *hidden* inside.
+Секрет надежности и простоты кофемашины -- все детали хорошо отлажены и *спрятаны* внутри.
 
-If we remove the protective cover from the coffee machine, then using it will be much more complex (where to press?), and dangerous (it can electrocute).
+Если мы снимем защитную крышку с кофемашины, то пользоваться ею будет гораздо сложнее (куда нажимать?) и опасно (может привести к поражению электрическим током).
 
-As we'll see, in programming objects are like coffee machines.
+Как мы увидим, в программировании объекты похожи на кофемашины.
 
-But in order to hide inner details, we'll use not a protective cover, but rather special syntax of the language and conventions.
+Но чтобы скрыть внутренние детали, мы будем использовать не защитную крышку, а специальный синтаксис языка и соглашения.
 
-## Internal and external interface
+## Внутренный и внешнией интерфейсыъ
 
-In object-oriented programming, properties and methods are split into two groups:
+В объектно-ориентированном программировании свойства и методы разделены на 2 группы:
 
-- *Internal interface* -- methods and properties, accessible from other methods of the class, but not from the outside.
-- *External interface* -- methods and properties, accessible also from outside the class.
+- *Внутренний интерфейс* -- методы и свойства доступны из других методов класса, но не доступны снаружи класса.
+- *Внешний интерфейс* -- методы и свойства доступны снаружи класса.
 
-If we continue the analogy with the coffee machine -- what's hidden inside: a boiler tube, heating element, and so on -- is its internal interface.
+Если мы продолжаем аналогию с кофеваркой -- что скрыто внутри: трубка кипятильника, нагревательный элемент и т.д. -- это внутренний интерфейс.
 
-An internal interface is used for the object to work, its details use each other. For instance, a boiler tube is attached to the heating element.
+Внутренний интерфейс используется для работы объекта, его детали используют друг друга. Например, трубка кипятильника прикреплена к нагревательному элементу.
 
-But from the outside a coffee machine is closed by the protective cover, so that no one can reach those. Details are hidden and inaccessible. We can use its features via the external interface.
+Но снаружи кофемашина закрыта защитной крышкой, так что никто этого не может до этого добраться. Детали скрыты и недоступны. Мы можем использовать их функции через внешний интерфейс. 
 
-So, all we need to use an object is to know its external interface. We may be completely unaware how it works inside, and that's great.
+Итак, все, что нам нужно для использования объекта, это знать его внешний интерфейс. Мы можем совершенно не знать, как это работает внутри, и это здорово.
 
-That was a general introduction.
+Это было общее введение.
 
-In JavaScript, there are three types of properties and members:
+В JavaScript есть три типа свойств и членов:
 
-- Public: accessible from anywhere. They comprise the external interface. Till now we were only using public properties and methods.
-- Private: accessible only from inside the class. These are for the internal interface.
+- Публичные: доступны отовсюду. Они составляют внешний интерфейс. До этого момента мы использовали только публичные свойства и методы.
+- Приватные: доступны только внутри класса. Они для внутреннего интерфейса.
 
-In many other languages there also exist "protected" fields: accessible only from inside the class and those extending it. They are also useful for the internal interface. They are in a sense more widespread than private ones, because we usually want inheriting classes to gain access to properly do the extension.
+Во многих других языках также существуют «защищенные» поля: доступные только внутри класса и тех, которые его расширяют. Они также полезны для внутреннего интерфейса. В некотором смысле они более распространены, чем частные, потому что мы обычно хотим, чтобы наследующие классы получали доступ для правильного выполнения расширения.
 
-Protected fields are not implemented in JavaScript on the language level, but in practice they are very convenient, so they are emulated.
+Защищенные поля не представлены в JavaScript на уровне языка, но на практике они очень удобны, поэтому их эмулируют. 
 
-In the next step we'll make a coffee machine in JavaScript with all these types of properties. A coffee machine has a lot of details, we won't model them to stay simple (though we could).
+В следующей главе мы будем делать кофеварку на JavaScript со всеми этими типами свойств. Кофеварка имеет множество деталей, мы не будем их моделировать для простоты примера (хотя могли бы).
 
-## Protecting "waterAmount"
+## Защищенное свойство "waterAmount"
 
-Let's make a simple coffee machine class first:
+Давайте для начала создадим простой класс Кофеварка:
 
 ```js run
 class CoffeeMachine {
-  waterAmount = 0; // the amount of water inside
+  waterAmount = 0; // количество воды внутри
 
   constructor(power) {
     this.power = power;
-    alert( `Created a coffee-machine, power: ${power}` );
+    alert( `Создана кофеварка, мощность: ${power}` );
   }
 
 }
 
-// create the coffee machine
+// создаем кофеварку
 let coffeeMachine = new CoffeeMachine(100);
 
-// add water
+// добавляем воды
 coffeeMachine.waterAmount = 200;
 ```
 
-Right now the properties `waterAmount` and `power` are public. We can easily get/set them from the outside to any value.
+Прямо сейчас своства `waterAmount` и `power` публичные. Мы можем легко получать и устанавливать их в любое значение извне.
 
-Let's change `waterAmount` property to protected to have more control over it. For instance, we don't want anyone to set it below zero.
+Давайте изменим свойство `waterAmount` на защищенное, чтобы иметь больше контроля над ним. Например, мы не хотим, чтобы кто-либо устанавливал его ниже нуля.
 
-**Protected properties are usually prefixed with an underscore `_`.**
+**Защищенные свойства обычно начинаются с префикса `_`.**
 
-That is not enforced on the language level, but there's a convention that such properties and methods should not be accessed from the outside. Most programmers follow it.
+Это не применяется на уровне языка, но существует соглашение, что такие свойства и методы не должны быть доступны извне. Большинство программистов следуют этому.
 
 So our property will be called `_waterAmount`:
 
