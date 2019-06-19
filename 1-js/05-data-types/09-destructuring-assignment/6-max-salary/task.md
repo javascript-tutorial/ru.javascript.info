@@ -4,7 +4,7 @@ importance: 5
 
 # Максимальная зарплата 
 
-Это объект `salaries`:
+У нас есть объект `salaries` с зарплатами:
 
 ```js
 let salaries = {
