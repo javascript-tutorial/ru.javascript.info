@@ -101,7 +101,7 @@
 
 Однако существуют и их UTC-вариации, возвращающие день, месяц, год для часовой зоны UTC+0: [getUTCFullYear()](mdn:js/Date/getUTCFullYear), [getUTCMonth()](mdn:js/Date/getUTCMonth), [getUTCDay()](mdn:js/Date/getUTCDay). Для их использования требуется перед `"get"` подставить `"UTC"`.
 
-Если ваша местная часовая зона сдвинута относительно, то следующий код вернёт разные значения:
+Если ваша местная часовая зона смещена относительно UTC, то следующий код вернёт разные значения:
 
 ```js run
 // текущая дата
@@ -114,24 +114,24 @@ alert( date.getHours() );
 alert( date.getUTCHours() );
 ```
 
-Besides the given methods, there are two special ones that do not have a UTC-variant:
+Помимо вышеприведённых методов, существует два особенных метода, не имеющих варианта с UTC:
 
 [getTime()](mdn:js/Date/getTime)
-: Returns the timestamp for the date -- a number of milliseconds passed from the January 1st of 1970 UTC+0.
+: Для заданной даты возвращает отметку времени -- количество миллисекунд, прошедших с 1 января 1970 года UTC+0.
 
 [getTimezoneOffset()](mdn:js/Date/getTimezoneOffset)
-: Returns the difference between the local time zone and UTC, in minutes:
+: Возвращает разницу в минутах между местной часовой зоной и UTC:
 
     ```js run
-    // if you are in timezone UTC-1, outputs 60
-    // if you are in timezone UTC+3, outputs -180
+    // если вы в часовой зоне UTC-1, то выводится 60
+    // если вы в часовой зоне UTC+3, выводится -180
     alert( new Date().getTimezoneOffset() );
 
     ```
 
-## Setting date components
+## Задание компонентов времени
 
-The following methods allow to set date/time components:
+Следующие методы позволяют задать компоненты даты/времени:
 
 - [`setFullYear(year [, month, date])`](mdn:js/Date/setFullYear)
 - [`setMonth(month [, date])`](mdn:js/Date/setMonth)
@@ -142,36 +142,36 @@ The following methods allow to set date/time components:
 - [`setMilliseconds(ms)`](mdn:js/Date/setMilliseconds)
 - [`setTime(milliseconds)`](mdn:js/Date/setTime) (sets the whole date by milliseconds since 01.01.1970 UTC)
 
-Every one of them except `setTime()` has a UTC-variant, for instance: `setUTCHours()`.
+У всех методов, кроме `setTime()`, есть вариант для UTC, например: `setUTCHours()`.
 
-As we can see, some methods can set multiple components at once, for example `setHours`. The components that are not mentioned are not modified.
+Как видим, некоторые методы могут задавать сразу несколько компонентов, например: `setHours`. Компоненты, не указанные выше, изменять нельзя. The components that are not mentioned are not modified.
 
-For instance:
+Пример:
 
 ```js run
 let today = new Date();
 
 today.setHours(0);
-alert(today); // still today, but the hour is changed to 0
+alert(today); // всё равно выводится сегодняшняя дата, но значение часа будет 0
 
 today.setHours(0, 0, 0, 0);
-alert(today); // still today, now 00:00:00 sharp.
+alert(today); // всё равно выводится сегодняшняя дата, но время будет 00:00:00.
 ```
 
-## Autocorrection
+## Автоисправление
 
-The *autocorrection* is a very handy feature of `Date` objects. We can set out-of-range values, and it will auto-adjust itself.
+*Автоисправление* -- это очень полезная возможность объектов `Date`. Можно задать значения, выходящие за рамки формата, и эти значения будут автоматически откорректированы.
 
-For instance:
+Пример:
 
 ```js run
 let date = new Date(2013, 0, *!*32*/!*); // 32 Jan 2013 ?!?
-alert(date); // ...is 1st Feb 2013!
+alert(date); // ...1st Feb 2013!
 ```
 
 Out-of-range date components are distributed automatically.
 
-Let's say we need to increase the date "28 Feb 2016" by 2 days. It may be "2 Mar" or "1 Mar" in case of a leap-year. We don't need to think about it. Just add 2 days. The `Date` object will do the rest:
+Предположим, нам требуется увеличить дату "28 февраля 2016" на два дня. В зависимости от того, високосный это год или нет, результатом будет "2 марта" или "1 марта". Нам об этом думать не нужно. Просто прибавляем два дня. Объект `Date` позаботится об остальном:
 
 ```js run
 let date = new Date(2016, 1, 28);
@@ -182,51 +182,51 @@ date.setDate(date.getDate() + 2);
 alert( date ); // 1 Mar 2016
 ```
 
-That feature is often used to get the date after the given period of time. For instance, let's get the date for "70 seconds after now":
+Эту возможность часто используют, чтобы получить дату по прошествии заданного отрезка времени. Например, получим дату "спустя 70 секунд с текущего момента":
 
 ```js run
 let date = new Date();
 date.setSeconds(date.getSeconds() + 70);
 
-alert( date ); // shows the correct date
+alert( date ); // показывает правильную дату
 ```
 
-We can also set zero or even negative values. For example:
+Также можно задавать нулевые или даже отрицательные значения. Например:
 
 ```js run
 let date = new Date(2016, 0, 2); // 2 Jan 2016
 
-date.setDate(1); // set day 1 of month
+date.setDate(1); // задаёт первый день месяца set day 1 of month
 alert( date );
 
 date.setDate(0); // min day is 1, so the last day of the previous month is assumed
 alert( date ); // 31 Dec 2015
 ```
 
-## Date to number, date diff
+## Приведение даты к числу, разницы дат
 
-When a `Date` object is converted to number, it becomes the timestamp same as `date.getTime()`:
+Если объект `Date` привести к числовому значению, то получим отметку времени, по аналогии с `date.getTime()`:
 
 ```js run
 let date = new Date();
-alert(+date); // the number of milliseconds, same as date.getTime()
+alert(+date); // количество миллисекунд, по аналогии с date.getTime()
 ```
 
-The important side effect: dates can be subtracted, the result is their difference in ms.
+Важное побочное явление: даты можно вычитать, в результате получаем разницу в миллисекундах.
 
-That can be used for time measurements:
+Этот приём используется для измерения времени:
 
 ```js run
-let start = new Date(); // start counting
+let start = new Date(); // начинаем считать
 
-// do the job
+// производим некие вычисления
 for (let i = 0; i < 100000; i++) {
   let doSomething = i * i * i;
 }
 
-let end = new Date(); // done
+let end = new Date(); // заканчиваем считать
 
-alert( `The loop took ${end - start} ms` );
+alert( `Цикл отработал за ${end - start} миллисекунд` );
 ```
 
 ## Date.now()
