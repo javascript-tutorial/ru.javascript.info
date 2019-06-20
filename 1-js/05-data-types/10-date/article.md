@@ -219,7 +219,7 @@ alert(+date); // количество миллисекунд, по аналог�
 ```js run
 let start = new Date(); // начинаем считать
 
-// производим некие вычисления
+// выполняем некоторые действия
 for (let i = 0; i < 100000; i++) {
   let doSomething = i * i * i;
 }
@@ -231,58 +231,58 @@ alert( `Цикл отработал за ${end - start} миллисекунд` 
 
 ## Date.now()
 
-If we only want to measure the difference, we don't need the `Date` object.
+Если нужно просто получить разницу между датами, объект `Date` нам для этого не нужен.
 
-There's a special method `Date.now()` that returns the current timestamp.
+Существует специальный метод `Date.now()`, возвращающий текущую отметку времени.
 
-It is semantically equivalent to `new Date().getTime()`, but it doesn't create an intermediate `Date` object. So it's faster and doesn't put pressure on garbage collection.
+Семантически он эквивалентен `new Date().getTime()`, однако метод не создаёт промежуточный объект `Date`. Так что этот способ работает быстрее и не нагружает сборщик мусора.
 
-It is used mostly for convenience or when performance matters, like in games in JavaScript or other specialized applications.
+Данный метод удобен в использовании и также полезен, когда важно быстродействие, например, при разработке игр на JavaScript или других специализированных приложений.
 
-So this is probably better:
+Вероятно, предыдущий пример лучше переписать так:
 
 ```js run
 *!*
-let start = Date.now(); // milliseconds count from 1 Jan 1970
+let start = Date.now(); // счёт в миллисекундах с 1 января 1970 года
 */!*
 
-// do the job
+// выполняем некоторые действия
 for (let i = 0; i < 100000; i++) {
   let doSomething = i * i * i;
 }
 
 *!*
-let end = Date.now(); // done
+let end = Date.now(); // заканчиваем считать
 */!*
 
-alert( `The loop took ${end - start} ms` ); // вычитаются числа, а не даты
+alert( `Цикл отработал за ${end - start} миллисекунд` ); // вычитаются числа, а не даты
 ```
 
-## Benchmarking
+## Тестирование производительности
 
-If we want a reliable benchmark of CPU-hungry function, we should be careful.
+К вопросам надёжного тестирования производительности функций, требовательных к ресурсам ЦП, нужно подходить с осторожностью.
 
-For instance, let's measure two functions that calculate the difference between two dates: which one is faster?
+Например, сравним две функции, вычисляющие разницу между двумя датами: какая сработает быстрее?
 
 ```js
-// we have date1 and date2, which function faster returns their difference in ms?
+// есть date1 и date2, какая функция быстрее вернёт разницу между ними в миллисекундах?
 function diffSubtract(date1, date2) {
   return date2 - date1;
 }
 
-// or
+// или
 function diffGetTime(date1, date2) {
   return date2.getTime() - date1.getTime();
 }
 ```
 
-These two do exactly the same thing, but one of them uses an explicit `date.getTime()` to get the date in ms, and the other one relies on a date-to-number transform. Their result is always the same.
+Обе функции делают буквально одно и то же, только одна использует явный метод `date.getTime()` для получения даты в миллисекундах, а другая полагается на приведение даты к числу. Результат их работы всегда будет одним и тем же.
 
-So, which one is faster?
+Но какая функция быстрее?
 
-The first idea may be to run them many times in a row and measure the time difference. For our case, functions are very simple, so we have to do it around 100000 times.
+Для начала можно запустить их много раз подряд и засечь разницу. В нашем случае функции очень простые, так что потребуется где-то 100000 повторений.
 
-Let's measure:
+Проведём измерения:
 
 ```js run
 function diffSubtract(date1, date2) {
@@ -302,23 +302,23 @@ function bench(f) {
   return Date.now() - start;
 }
 
-alert( 'Time of diffSubtract: ' + bench(diffSubtract) + 'ms' );
-alert( 'Time of diffGetTime: ' + bench(diffGetTime) + 'ms' );
+alert( 'Время diffSubtract: ' + bench(diffSubtract) + 'мс' );
+alert( 'Время diffGetTime: ' + bench(diffGetTime) + 'мс' );
 ```
 
-Wow! Using `getTime()` is so much faster! That's because there's no type conversion, it is much easier for engines to optimize.
+Вот это да! Метод `getTime()` работает ощутимо быстрее! Всё потому, что не производится конвертирование типов и интерпретаторам такое намного легче оптимизировать.
 
-Okay, we have something. But that's not a good benchmark yet.
+Замечательно, это уже что-то. Но до хорошего бенчмарка нам ещё далеко.
 
-Imagine that at the time of running `bench(diffSubtract)` CPU was doing something in parallel, and it was taking resources. And by the time of running `bench(diffGetTime)` the work has finished.
+Представьте, что при выполнении `bench(diffSubtract)` ЦП параллельно работал над чём-то ещё, также потребляющим ресурсы. А когда началось выполнение `bench(diffGetTime)`, процесс уже завершился.
 
-A pretty real scenario for a modern multi-process OS.
+Достаточно реалистичный сценарий для современных многопроцессорных операционных систем.
 
-As a result, the first benchmark will have less CPU resources than the second. That may lead to wrong results.
+В результате, у первого бенчмарка окажется меньше ресурсов ЦП, чем у второго. Это может исказить результаты.
 
-**For more reliable benchmarking, the whole pack of benchmarks should be rerun multiple times.**
+**Для получения наиболее достоверные результаты тестирования производительности весь набор бенчмарков нужно запускать по несколько раз.**
 
-Here's the code example:
+Рассмотрим пример:
 
 ```js run
 function diffSubtract(date1, date2) {
@@ -342,18 +342,18 @@ let time1 = 0;
 let time2 = 0;
 
 *!*
-// run bench(upperSlice) and bench(upperLoop) each 10 times alternating
+// bench(upperSlice) и bench(upperLoop) запускаются по очереди 10 раз
 for (let i = 0; i < 10; i++) {
   time1 += bench(diffSubtract);
   time2 += bench(diffGetTime);
 }
 */!*
 
-alert( 'Total time for diffSubtract: ' + time1 );
-alert( 'Total time for diffGetTime: ' + time2 );
+alert( 'Итоговое время diffSubtract: ' + time1 );
+alert( 'Итоговое время diffGetTime: ' + time2 );
 ```
 
-Modern JavaScript engines start applying advanced optimizations only to "hot code" that executes many times (no need to optimize rarely executed things). So, in the example above, first executions are not well-optimized. We may want to add a heat-up run:
+Современные интерпретаторы JavaScript start applying advanced optimizations only to "hot code" that executes many times (no need to optimize rarely executed things). So, in the example above, first executions are not well-optimized. We may want to add a heat-up run:
 
 ```js
 // added for "heating up" prior to the main loop
