@@ -239,7 +239,7 @@ switch (age) {
     ```
 
 2. Function Expression: функция как часть выражения
-jcj,t
+
     ```js
     let sum = function(a, b) {
       let result = a + b;
