@@ -2,8 +2,8 @@ importance: 3
 
 ---
 
-# Check the range between
+# Проверка значения из диапазона
 
-Write an "if" condition to check that `age` is between `14` and `90` inclusively.
+Напишите условие `if` для проверки, что переменная `age` находится в диапазоне между `14` и `90` включительно.
 
-"Inclusively" means that `age` can reach the edges `14` or `90`.
+"Включительно" означает, что значение переменной `age` может быть равно `14` или `90`.

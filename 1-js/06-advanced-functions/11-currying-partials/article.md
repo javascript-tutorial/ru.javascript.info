@@ -3,21 +3,20 @@ libs:
 
 ---
 
-# Currying and partials
+# Каррирование и частичное применение
 
-Until now we have only been talking about binding `this`. Let's take it a step further.
+До сих пор мы говорили только о привязывании `this`. Давайте шагнём дальше.
 
-We can bind not only `this`, but also arguments. That's rarely done, but sometimes can be handy.
+Мы можем привязать не только `this`, но и аргументы. Это делается редко, но иногда может быть полезно.
 
-The full syntax of `bind`:
+Полный синтаксис `bind`:
 
 ```js
 let bound = func.bind(context, arg1, arg2, ...);
 ```
+Это позволяет привязать контекст, например, `this` и начать передавать аргументы функции.
 
-It allows to bind context as `this` and starting arguments of the function.
-
-For instance, we have a multiplication function `mul(a, b)`:
+Например, у нас есть функция умножения `mul(a, b)`:
 
 ```js
 function mul(a, b) {
@@ -25,7 +24,7 @@ function mul(a, b) {
 }
 ```
 
-Let's use `bind` to create a function `double` on its base:
+Давайте воспользуемся `bind`, чтобы создать функцию `double` на её основе:
 
 ```js run
 function mul(a, b) {
@@ -41,13 +40,13 @@ alert( double(4) ); // = mul(2, 4) = 8
 alert( double(5) ); // = mul(2, 5) = 10
 ```
 
-The call to `mul.bind(null, 2)` creates a new function `double` that passes calls to `mul`, fixing `null` as the context and `2` as the first argument. Further arguments are passed "as is".
+Вызов `mul.bind(null, 2)` создаёт новую функцию `double`, которая передаёт вызов `mul`, фиксируя `null` как контекст и `2` -- как первый аргумент. Следующие аргументы передаются "как есть".
 
-That's called [partial function application](https://en.wikipedia.org/wiki/Partial_application) -- we create a new function by fixing some parameters of the existing one.
+Это называется [частичное применение](https://ru.wikipedia.org/wiki/Частичное_применение) -- мы создаём новую функцию, фиксируя некоторые из существующих параметров.
 
-Please note that here we actually don't use `this` here. But `bind` requires it, so we must put in something like `null`.
+Обратите внимание, что в данном случае мы на самом деле не используем `this`. Но для `bind` это обязательный параметр, так что мы должны передать туда что-нибудь вроде `null`.
 
-The function `triple` in the code below triples the value:
+В следующем коде функция `triple` умножает значение на три:
 
 ```js run
 function mul(a, b) {
@@ -63,23 +62,23 @@ alert( triple(4) ); // = mul(3, 4) = 12
 alert( triple(5) ); // = mul(3, 5) = 15
 ```
 
-Why do we usually make a partial function?
+Для чего мы обычно создаём частично применённую функцию?
 
-The benefit is that we can create an independent function with a readable name (`double`, `triple`). We can use it and not provide first argument of every time as it's fixed with `bind`.
+Польза от этого в том, что возможно создать независимую функцию с понятным названием (`double`, `triple`). Мы можем использовать её и не передавать каждый раз первый аргумент, т.к. он зафиксирован с помощью `bind`.
 
-In other cases, partial application is useful when we have a very generic function and want a less universal variant of it for convenience.
+В других случаях частичное применение полезно, когда у нас есть очень общая функция и для удобства мы хотим создать её частный вариант.
 
-For instance, we have a function `send(from, to, text)`. Then, inside a `user` object we may want to use a partial variant of it: `sendTo(to, text)` that sends from the current user.
+Например, у нас есть функция `send(from, to, text)`. Потом внутри объекта `user` мы можем захотеть использовать её частный вариант: `sendTo(to, text)`, который отправляет текст от имени текущего пользователя.
 
-## Going partial without context
+## Частичное применение без контекста
 
-What if we'd like to fix some arguments, but not bind `this`?
+Что если мы хотим зафиксировать некоторые аргументы, но не привязывать `this`?
 
-The native `bind` does not allow that. We can't just omit the context and jump to arguments.
+Встроенный `bind` не позволяет этого. Мы не можем просто опустить контекст и перейти  к аргументам.
 
-Fortunately, a `partial` function for binding only arguments can be easily implemented.
+К счастью, несложно создать частично применённую функцию, которая привязывает только аргументы.
 
-Like this:
+Вот так:
 
 ```js run
 *!*
@@ -98,36 +97,36 @@ let user = {
   }
 };
 
-// add a partial method that says something now by fixing the first argument
+// добавляем частично применённый метод, который говорит что-нибудь в настоящее время за счёт фиксирования первого аргумента
 user.sayNow = partial(user.say, new Date().getHours() + ':' + new Date().getMinutes());
 
 user.sayNow("Hello");
-// Something like:
+// Что-то вроде этого:
 // [10:00] John: Hello!
 ```
 
-The result of `partial(func[, arg1, arg2...])` call is a wrapper `(*)` that calls `func` with:
-- Same `this` as it gets (for `user.sayNow` call it's `user`)
-- Then gives it `...argsBound` -- arguments from the `partial` call (`"10:00"`)
-- Then gives it `...args` -- arguments given to the wrapper (`"Hello"`)
+Результатом вызова `partial(func[, arg1, arg2...])` будет обёртка `(*)`, которая вызывает `func` с:
+- Тем же `this`, который она получает (для вызова `user.sayNow` -- это будет `user`)
+- Затем передаёт ей `...argsBound` -- аргументы из вызова `partial` (`"10:00"`)
+- Затем передаёт ей `...args` -- аргументы, полученные обёрткой (`"Hello"`)
 
-So easy to do it with the spread operator, right?
+Благодаря оператору расширения `...` это реализовать очень легко, не правда ли?
 
-Also there's a ready [_.partial](https://lodash.com/docs#partial) implementation from lodash library.
+Также есть готовый вариант [_.partial](https://lodash.com/docs#partial) из библиотеки lodash.
 
-## Currying
+## Каррирование
 
-Sometimes people mix up partial function application mentioned above with another thing named "currying". That's another interesting technique of working with functions that we just have to mention here.
+Иногда люди смешивают упомянутое выше частичное применение функции с другой возможностью, называемой "каррирование". Это ещё одна интересная техника работы с функциями, которую мы должны упомянуть здесь.
 
-[Currying](https://en.wikipedia.org/wiki/Currying) is a transformation of functions that translates a function from callable as `f(a, b, c)` into callable as `f(a)(b)(c)`. In JavaScript, we usually make a wrapper to keep the original function.
+[Каррирование](https://ru.wikipedia.org/wiki/Каррирование) -- это трансформация функций таким образом, чтобы они принимали  аргументы не так `f(a, b, c)`, а вот так `f(a)(b)(c)`. В JavaScript мы обычно делаем обёртку, чтобы хранить оригинальную функцию.
 
-Currying doesn't call a function. It just transforms it.
+Каррирование не вызывает функцию. Оно просто трансформирует её.
 
-Let's create a helper `curry(f)` function that performs currying for a two-argument `f`. In other words, `curry(f)` for two-argument `f(a, b)` translates it into `f(a)(b)`
+Давайте создадим вспомогательную функцию `curry(f)`, которая выполняет каррирование бинарной функции `f`. Другими словами, `curry(f)` для бинарной функции f(a, b)` трансформирует её в `f(a)(b)`.
 
 ```js run
 *!*
-function curry(f) { // curry(f) does the currying transform
+function curry(f) { // curry(f) выполняет каррирование
   return function(a) {
     return function(b) {
       return f(a, b);
@@ -136,7 +135,7 @@ function curry(f) { // curry(f) does the currying transform
 }
 */!*
 
-// usage
+// использование
 function sum(a, b) {
   return a + b;
 }
@@ -146,31 +145,31 @@ let carriedSum = curry(sum);
 alert( carriedSum(1)(2) ); // 3
 ```
 
-As you can see, the implementation is a series of wrappers.
+Как вы видите, реализация состоит из множества обёрток.
 
-- The result of `curry(func)` is a wrapper `function(a)`.
-- When it is called like `sum(1)`, the argument is saved in the Lexical Environment, and a new wrapper is returned `function(b)`.
-- Then `sum(1)(2)` finally calls `function(b)` providing `2`, and it passes the call to the original multi-argument `sum`.
+- Результат `curry(func)` -- обёртка `function(a)`.
+- Когда она вызывается как `sum(1)`, аргумент сохраняется в лексическом окружении и возвращается новая обёртка `function(b)`.
+- После чего `sum(1)(2)`, наконец, вызывает `function(b)`, предоставляя `2` и передаёт вызов к оригинальной мультиарной функции `sum`. 
 
-More advanced implementations of currying like [_.curry](https://lodash.com/docs#curry) from lodash library do something more sophisticated. They return a wrapper that allows a function to be called normally when all arguments are supplied *or* returns a partial otherwise.
+Более продвинутая реализация каррирования, как [_.curry](https://lodash.com/docs#curry) из библиотеки lodash, делает нечто более сложное. Она возвращает обёртку, которая позволяет выполнить функцию, если переданы все аргументы, в противном же случае -- возвращает частично применённую функцию.
 
 ```js
 function curry(f) {
   return function(...args) {
-    // if args.length == f.length (as many arguments as f has),
-    //   then pass the call to f
-    // otherwise return a partial function that fixes args as first arguments
+    // if args.length == f.length (количество аргументов, принимаемое f).
+    //   тогда передаёт вызов f
+    // в противном случае возвращает частично применённую функцию, которая фиксирует первые аргументы
   };
 }
 ```
 
-## Currying? What for?
+## Каррирование? Зачем?
 
-To understand the benefits we definitely need a worthy real-life example.
+Чтобы понять выгоду, нам определенно нужен пример из реальной жизни.
 
-Advanced currying allows the function to be both callable normally and partially.
+Продвинутое каррирование позволяет вызывать функцию, как обычно, так и с частичным применением.
 
-For instance, we have the logging function `log(date, importance, message)` that formats and outputs the information. In real projects such functions also have many other useful features like sending logs over the network:
+Например, у нас есть функция логирования `log(date, importance, message)`, которая форматирует и выводит информацию. В реальных проектах у таких функций есть много других полезных возможностей, например, посылать логи по сети, здесь для простоты используем `alert`:
 
 ```js
 function log(date, importance, message) {
@@ -178,51 +177,52 @@ function log(date, importance, message) {
 }
 ```
 
-Let's curry it!
+А теперь давайте применим к ней каррирование!
 
 ```js
 log = _.curry(log);
 ```
 
-After that `log` still works the normal way:
+После этого `log` продолжает работать нормально:
 
 ```js
 log(new Date(), "DEBUG", "some debug");
 ```
 
-...But also can be called in the curried form:
+...Но также работает вариант с каррированием:
 
 ```js
+log(new Date(), "DEBUG", "some debug"); // log(a,b,c)
 log(new Date())("DEBUG")("some debug"); // log(a)(b)(c)
 ```
 
-Let's get a convenience function for today's logs:
+Давайте сделаем удобную функцию для логов с текущим временем:
 
 ```js
-// todayLog will be the partial of log with fixed first argument
-let todayLog = log(new Date());
+// logNow будет частичным применением функции log с фиксированным первым аргументом
+let logNow = log(new Date());
 
-// use it
-todayLog("INFO", "message"); // [HH:mm] INFO message
+// используем её
+logNow("INFO", "message"); // [HH:mm] INFO message
 ```
 
-And now a convenience function for today's debug messages:
+А теперь удобная функция для логов отладки с текущим временем:
 
 ```js
-let todayDebug = todayLog("DEBUG");
+let debugNow = logNow("DEBUG");
 
-todayDebug("message"); // [HH:mm] DEBUG message
+debugNow("message"); // [HH:mm] DEBUG message
 ```
 
-So:
-1. We didn't lose anything after currying: `log` is still callable normally.
-2. We were able to generate partial functions such as for today's logs.
+Итак:
+1. Мы ничего не потеряли после каррирования: `log` всё так же можно вызывать нормально.
+2. Мы смогли создать частично применённые функции, как сделали для логов с текущим временем.
 
-## Advanced curry implementation
+## Продвинутая реализация каррирования
 
-In case you'd like to get in details (not obligatory!), here's the "advanced" curry implementation that we could use above.
+В случае, если вам интересны детали (не обязательно!), вот "продвинутая" реализация каррирования, которую мы могли бы использовать выше.
 
-It's pretty short:
+Она очень короткая:
 
 ```js
 function curry(func) {
@@ -240,7 +240,7 @@ function curry(func) {
 }
 ```
 
-Usage examples:
+Примеры использования:
 
 ```js
 function sum(a, b, c) {
@@ -249,17 +249,17 @@ function sum(a, b, c) {
 
 let curriedSum = curry(sum);
 
-alert( curriedSum(1, 2, 3) ); // 6, still callable normally
-alert( curriedSum(1)(2,3) ); // 6, currying of 1st arg
-alert( curriedSum(1)(2)(3) ); // 6, full currying
+alert( curriedSum(1, 2, 3) ); // 6, всё ещё можно вызывать нормально
+alert( curriedSum(1)(2,3) ); // 6, каррирование первого аргумента
+alert( curriedSum(1)(2)(3) ); // 6, каррирование всех аргументов
 ```
 
-The new `curry` may look complicated, but it's actually easy to understand.
+Новое `curry` может выглядеть сложным, но на самом деле его легко понять.
 
-The result of `curry(func)` is the wrapper `curried` that looks like this:
+Результат `curry(func)` -- это обёртка `curried`, которая выглядит так:
 
 ```js
-// func is the function to transform
+// func -- функция, которую мы трансформируем
 function curried(...args) {
   if (args.length >= func.length) { // (1)
     return func.apply(this, args);
@@ -271,39 +271,39 @@ function curried(...args) {
 };
 ```
 
-When we run it, there are two branches:
+Когда мы запускаем её, есть два пути:
 
-1. Call now: if passed `args` count is the same as the original function has in its definition (`func.length`) or longer, then just pass the call to it.
-2. Get a partial: otherwise, `func` is not called yet. Instead, another wrapper `pass` is returned, that will re-apply `curried` providing previous arguments together with the new ones. Then on a new call, again, we'll get either a new partial (if not enough arguments) or, finally, the result.
+1. Вызвать сейчас: если количество переданных аргументов `args` совпадает с количеством аргументов при объявлении функции (`func.length`) или больше, тогда вызов просто переходит к ней.
+2. Частичное применение: в противном случае `func` не вызывается сразу. Вместо этого, возвращается другая обёртка `pass`, которая снова применит `curried`, передав предыдущие аргументы вместе с новыми. Затем при новом вызове, мы опять получим, либо новое частичное применение (если аргументов не достаточно), либо, наконец, результат.
 
-For instance, let's see what happens in the case of `sum(a, b, c)`. Three arguments, so `sum.length = 3`.
+Например, давайте посмотрим, что произойдёт в случае `sum(a, b, c)`. У неё три аргумента, так что `sum.length = 3`.
 
-For the call `curried(1)(2)(3)`:
+Для вызова `curried(1)(2)(3)`:
 
-1. The first call `curried(1)` remembers `1` in its Lexical Environment, and returns a wrapper `pass`.
-2. The wrapper `pass` is called with `(2)`: it takes previous args (`1`), concatenates them with what it got `(2)` and calls `curried(1, 2)` with them together.
+1. Первый вызов `curried(1)` запоминает `1` в своём лексическом окружении и возвращает обёртку `pass`.
+2. Обёртка `pass` вызывается с `(2)`: она берёт предыдущие аргументы (`1`), объединяет их с тем, что получила сама `(2)` и вызывает `curried(1, 2)` со всеми ними.
 
-    As the argument count is still less than 3, `curry` returns `pass`.
-3. The wrapper `pass` is called again with `(3)`,  for the next call `pass(3)` takes previous args (`1`, `2`) and adds `3` to them, making the call `curried(1, 2, 3)` -- there are `3` arguments at last, they are given to the original function.
+    Так как число аргументов всё ещё меньше 3-х, `curry` возвращает `pass`.
+3. Обёртка `pass` вызывается снова с `(3)`. Для следующего вызова `pass(3)` берёт предыдущие аргументы (`1`, `2`) и добавляет к ним `3`, делая вызов `curried(1, 2, 3)` -- наконец 3 аргумента, и они передаются оригинальной функции.
 
-If that's still not obvious, just trace the calls sequence in your mind or on the paper.
+Если всё ещё не понятно, просто распишите последовательность вызовов на бумаге.
 
-```smart header="Fixed-length functions only"
-The currying requires the function to have a known fixed number of arguments.
+```smart header="Только функции с фиксированным количеством аргументов"
+Для каррирования необходима функция с известным фиксированным количеством аргументов.
 ```
 
-```smart header="A little more than currying"
-By definition, currying should convert `sum(a, b, c)` into `sum(a)(b)(c)`.
+```smart header="Немного больше, чем каррирование"
+По определению, каррирование должно превращать `sum(a, b, c)` в `sum(a)(b)(c)`.
 
-But most implementations of currying in JavaScript are advanced, as described: they also keep the function callable in the multi-argument variant.
+Но, как было описано, большинство реализаций каррирования в JavaScript более продвинуты: они также оставляют вариант вызова функции с несколькими аргументами.
 ```
 
-## Summary
+## Итого
 
-- When we fix some arguments of an existing function, the resulting (less universal) function is called *a partial*. We can use `bind` to get a partial, but there are other ways also.
+- Когда мы фиксируем некоторые аргументы какой-нибудь существующей функции, результатом (менее универсальным) будет функция *частично применённая*. Чтобы получить частичное применение, мы можем использовать `bind`, но есть и другие пути.
 
-    Partials are convenient when we don't want to repeat the same argument over and over again. Like if we have a `send(from, to)` function, and `from` should always be the same for our task, we can get a partial and go on with it.
+    Частичное применение удобно, когда мы не хотим повторять один и тот же аргумент много раз. Например, когда у нас есть функция `send(from, to)`, и `from` всё время будет одинаков для нашей задачи, мы можем создать частично применённую функцию и дальше работать с ней.
 
-- *Currying* is a transform that makes `f(a,b,c)` callable as `f(a)(b)(c)`. JavaScript implementations usually both keep the function callable normally and return the partial if arguments count is not enough.
+- *Каррирование* -- это трансформация, которая превращает вызов `f(a, b, c)` в `f(a)(b)(c)`. В JavaScript реализация обычно позволяет вызывать функцию обоими вариантами: либо нормально, либо возвращает частично применённую функцию, если количество аргументов недостаточно.
 
-    Currying is great when we want easy partials. As we've seen in the logging example: the universal function `log(date, importance, message)` after currying gives us partials when called with one argument like `log(date)` or two arguments `log(date, importance)`.  
+    Каррирование подходит тогда, когда мы хотим легко использовать частичное применение. Как мы видели в примерах с логами: универсальная функция `log(date, importance, message)` после каррирования возвращает нам частично применённую функцию, когда вызывается с одним аргументом, как `log(date)` или двумя аргументами, как `log(date, importance)`.

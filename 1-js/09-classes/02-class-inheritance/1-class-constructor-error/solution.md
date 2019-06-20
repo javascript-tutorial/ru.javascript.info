@@ -1,6 +1,6 @@
-That's because the child constructor must call `super()`.
+Ошибка возникает потому, что конструктор дочернего класса должен вызывать `super()`.
 
-Here's the corrected code:
+Вот правильный код:
 
 ```js run
 class Animal {
@@ -21,7 +21,7 @@ class Rabbit extends Animal {
 }
 
 *!*
-let rabbit = new Rabbit("White Rabbit"); // ok now
+let rabbit = new Rabbit("White Rabbit"); // ошибки нет
 */!*
 alert(rabbit.name); // White Rabbit
 ```

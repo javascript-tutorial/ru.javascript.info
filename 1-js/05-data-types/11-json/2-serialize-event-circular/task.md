@@ -2,13 +2,13 @@ importance: 5
 
 ---
 
-# Exclude backreferences
+# Исключить обратные ссылки
 
-In simple cases of circular references, we can exclude an offending property from serialization by its name.
+В простых случаях циклических ссылок мы можем исключить нарушающее свойство из сериализации по его имени.
 
-But sometimes there are many backreferences. And names may be used both in circular references and normal properties.
+Но иногда есть много обратных ссылок. И имена могут использоваться как в циклических ссылках, так и в обычных свойствах.
 
-Write `replacer` function to stringify everything, but remove properties that reference `meetup`:
+Напишите функцию `replacer` для JSON-преобразования, которая удалит свойства, ссылающиеся на `meetup`:
 
 ```js run
 let room = {
@@ -16,27 +16,26 @@ let room = {
 };
 
 let meetup = {
-  title: "Conference",
-  occupiedBy: [{name: "John"}, {name: "Alice"}],
+  title: "Совещание",
+  occupiedBy: [{name: "Иванов"}, {name: "Петров"}],
   place: room
 };
 
 *!*
-// circular references 
+// цикличные ссылки 
 room.occupiedBy = meetup;
 meetup.self = meetup;
 */!*
 
 alert( JSON.stringify(meetup, function replacer(key, value) {
-  /* your code */
+  /* ваш код */
 }));
 
-/* result should be:
+/* в результате должно быть:
 {
-  "title":"Conference",
-  "occupiedBy":[{"name":"John"},{"name":"Alice"}],
+  "title":"Совещание",
+  "occupiedBy":[{"name":"Иванов"},{"name":"Петров"}],
   "place":{"number":23}
 }
 */
 ```
-
