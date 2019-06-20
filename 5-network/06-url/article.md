@@ -1,7 +1,7 @@
 
 # URL объекты
 
-Встроенный класс [URL](https://developer.mozilla.org/ru/docs/Web/API/URL/URL) предоставляет удобный интерфейс для создания и анализа URL-адресов.
+Встроенный класс [URL](https://url.spec.whatwg.org/#api) предоставляет удобный интерфейс для создания и анализа URL-адресов.
 
 Мы не обязаны его использовать. Нет сетевых методов, которые требуют `URL` объект, достаточно использовать строку. Но иногда он может быть полезным.
 
@@ -61,7 +61,7 @@ alert(url); // https://javascript.info/profile/tester
 
 В очень старых браузерах, до появления `URL`, мы использовали встроенные функции `encodeURIComponent/decodeURIComponent`.
 
-Сейчас в этом нет необходимости: `url.searchParams` -- это объект типа [URLSearchParams](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams/URLSearchParams).
+Сейчас в этом нет необходимости: `url.searchParams` -- это объект типа [URLSearchParams](https://url.spec.whatwg.org/#urlsearchparams).
 
 Он предоставляет удобные методы для работы с параметрами:
 
