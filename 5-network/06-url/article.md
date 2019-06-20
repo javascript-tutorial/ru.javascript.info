@@ -3,7 +3,7 @@
 
 Встроенный класс [URL](https://url.spec.whatwg.org/#api) предоставляет удобный интерфейс для создания и анализа URL-адресов.
 
-Мы не обязаны его использовать. Нет сетевых методов, которые требуют объект `URL`, достаточно использовать строку. Но иногда он может быть полезным.
+Нет сетевых методов, которые требуют объект URL, обычные строки вполне подходят. Так что, технически, мы не обязаны использовать URL. Но иногда он может быть весьма удобным.
 
 ## Создание URL
 
@@ -13,10 +13,29 @@
 new URL(url, [base])
 ```
 
-- **`url`** -- URL-адрес
-- **`base`** -- дополнительные опции для `url`
+- **`url`** -- URL-адрес или путь, если указан второй параметр
+- **`base`** -- "базовый" URL, если указан, то адрес будет создан относительно `base` (пример ниже)
 
-Объект `URL` позволяет нам получить доступ к его свойствам, поэтому это отличный способ распарсить URL-адрес, например:
+Эти два URL одинаковы:
+
+```js run
+let url1 = new URL('https://javascript.info/profile/admin');
+let url2 = new URL('/profile/admin', 'https://javascript.info');
+
+alert(url1); // https://javascript.info/profile/admin
+alert(url2); // https://javascript.info/profile/admin
+```
+
+Переход к пути относительно текущего URL:
+
+```js run
+let url = new URL('https://javascript.info/profile/admin');
+let testerUrl = new URL('tester', url);
+
+alert(testerUrl); // https://javascript.info/profile/tester
+```
+
+Объект `URL` даёт доступ к компонентам URL, поэтому это отличный способ "распарсить" URL-адрес, например:
 
 ```js run
 let url = new URL('https://javascript.info/url');
@@ -30,38 +49,26 @@ alert(url.pathname); // /url
 
 ![](url-object.png)
 
-- `href` это полный URL-адрес, точно такой же, как `url.toString()`
-- `protocol` заканчивается символом двоеточия `:`
-- `search` начинается с вопросительного знака `?`
+- `href` это полный URL-адрес, то же самое, что `url.toString()`
+- `protocol` - протокол, заканчивается символом двоеточия `:`
+- `search` строка параметров, начинается с вопросительного знака `?`
 - `hash` начинается с символа `#`
 - также есть свойства `user` и `password`, если используется HTTP-аутентификация.
-
-Мы можем использовать объект `URL` для создания относительных URL-адресов, используя второй аргумент:
-
-```js run
-let url = new URL('profile/admin', 'https://javascript.info');
-
-alert(url); // https://javascript.info/profile/admin
-
-url = new URL('tester', url); // перейти к 'tester' относительно текущего URL
-
-alert(url); // https://javascript.info/profile/tester
-```
 
 ```smart header="We can use `URL` everywhere instead of a string"
 Мы можем использовать объект `URL` в методах `fetch` или `XMLHttpRequest` и почти во всех других, где ожидается URL-строка.
 В подавляющем большинстве методов он автоматически конвертируется в строку.
 ```
 
-## Параметры поиска
+## SearchParams "?..."
 
-Допустим, мы хотим создать URL-адрес с заданными параметрами, например, `https://google.com/search?query=value`.
+Допустим, мы хотим создать URL-адрес с заданными параметрами, например, `https://google.com/search?query=JavaScript`.
 
-Они должны быть правильно закодированы.
+Параметры должны быть правильно закодированы, чтобы они могли содержать не-латинские буквы, пробелы и т.п.
 
-В очень старых браузерах, до появления `URL`, мы использовали встроенные функции `encodeURIComponent/decodeURIComponent`.
+Когда-то давно, до появления объекта `URL`, использовались встроенные функции `encodeURIComponent/decodeURIComponent`, у них есть ряд недостатков, которые, к счастью, уже не актуальны.
 
-Сейчас в этом нет необходимости: `url.searchParams` -- это объект типа [URLSearchParams](https://url.spec.whatwg.org/#urlsearchparams).
+Сейчас в них нет необходимости: у `URL` есть свойство `url.searchParams` -- объект типа [URLSearchParams](https://url.spec.whatwg.org/#urlsearchparams).
 
 Он предоставляет удобные методы для работы с параметрами:
 
@@ -72,7 +79,7 @@ alert(url); // https://javascript.info/profile/tester
 - **`has(name)`** -- проверить наличие параметра,
 - **`set(name, value)`** -- задать/заменить параметр,
 - **`sort()`** -- отсортировать параметры по имени, используется редко,
-- ...и также методы для итерации, как в объектах `Map`.
+- ...и является перебираемым, по аналогии с `Map`.
 
 Таким образом, `URL` объект также дает возможность оперировать параметрами URL-адреса.
 
@@ -80,16 +87,16 @@ alert(url); // https://javascript.info/profile/tester
 
 ```js run
 let url = new URL('https://google.com/search');
-url.searchParams.set('query', 'проверь меня!');
+url.searchParams.set('query', 'test me!'); // добавим параметр, содержащий пробел и !
 
-alert(url); // https://google.com/search?query=проверь+меня%21
+alert(url); // https://google.com/search?query=test+me%21
 
 url.searchParams.set('tbs', 'qdr:y'); // добавить параметр для диапазона дат: прошлый год
 
-alert(url); // https://google.com/search?query=проверь+меня%21&tbs=qdr%3Ay
+alert(url); // https://google.com/search?query=test+me%21&tbs=qdr%3Ay
 
-// перебор параметров поиска (декодирование)
+// перебор параметров поиска (декодированных)
 for(let [name, value] of url.searchParams) {
-  alert(`${name}=${value}`); // query=проверь меня!, далее tbs=qdr:y
+  alert(`${name}=${value}`); // query=test me!, далее tbs=qdr:y
 }
 ```
