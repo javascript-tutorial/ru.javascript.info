@@ -1,5 +1,5 @@
 describe("multiplyNumeric", function() {
-  it("multiplies all numeric properties by 2", function() {
+  it("умножаем все числовые свойства на 2", function() {
     let menu = {
       width: 200,
       height: 300,

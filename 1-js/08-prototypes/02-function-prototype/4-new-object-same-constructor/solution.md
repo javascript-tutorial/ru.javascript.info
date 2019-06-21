@@ -1,6 +1,6 @@
-We can use such approach if we are sure that `"constructor"` property has the correct value.
+Мы можем использовать такой способ, если мы уверены в том, что свойство `"constructor"` существующего объекта имеет корректное значение.
 
-For instance, if we don't touch the default `"prototype"`, then this code works for sure:
+Например, если мы не меняли `"prototype"`, используемый по умолчанию, то код ниже, без сомнений, сработает:
 
 ```js run
 function User(name) {
@@ -10,14 +10,14 @@ function User(name) {
 let user = new User('John');
 let user2 = new user.constructor('Pete');
 
-alert( user2.name ); // Pete (worked!)
+alert( user2.name ); // Pete (сработало!)
 ```
 
-It worked, because `User.prototype.constructor == User`.
+Всё получилось, потому что `User.prototype.constructor == User`.
 
-..But if someone, so to say, overwrites `User.prototype` and forgets to recreate `"constructor"`, then it would fail.
+...Но если кто-то перезапишет `User.prototype` и забудет заново назначить свойство `"constructor"`, то ничего не выйдет.
 
-For instance:
+Например:
 
 ```js run
 function User(name) {
@@ -33,12 +33,12 @@ let user2 = new user.constructor('Pete');
 alert( user2.name ); // undefined
 ```
 
-Why `user2.name` is `undefined`?
+Почему `user2.name` приняло значение `undefined`?
 
-Here's how `new user.constructor('Pete')` works:
+Рассмотрим, как отработал вызов `new user.constructor('Pete')`:
 
-1. First, it looks for `constructor` in `user`. Nothing.
-2. Then it follows the prototype chain. The prototype of `user` is `User.prototype`, and it also has nothing.
-3. The value of `User.prototype` is a plain object `{}`, its prototype is `Object.prototype`. And there is `Object.prototype.constructor == Object`. So it is used.
+1. Сначала ищется свойство `constructor` в объекте `user`. Не нашлось.
+2. Потом задействуется поиск по цепочке прототипов. Прототип объекта `user` -- это `User.prototype`, и там тоже нет искомого свойства.
+3. Значение `User.prototype` -- это пустой объект `{}`, чей прототип -- `Object.prototype`. `Object.prototype.constructor == Object`. Таким образом, свойство `constructor` всё-таки найдено.
 
-At the end, we have `let user2 = new Object('Pete')`. The built-in `Object` constructor ignores arguments, it always creates an empty object -- that's what we have in `user2` after all.
+Наконец срабатывает `let user2 = new Object('Pete')`, но встроенный в `Object` конструктор игнорирует аргументы, новый объект всегда создаётся пустым -- это как раз то, чему равен `user2` в итоге.

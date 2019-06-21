@@ -1,57 +1,48 @@
-# Code editors
+# Редакторы кода
 
-A code editor is the place where programmers spend most of their time.
+Большую часть своего рабочего времени программисты проводят в редакторах кода.
 
-There are two main types of code editors: IDEs and lightweight editors. Many people use one tool of each type.
+Есть два основных типа редакторов: IDE и "лёгкие" редакторы. Многие используют по одному инструменту каждого типа.
 
 ## IDE
 
-The term [IDE](https://en.wikipedia.org/wiki/Integrated_development_environment) (Integrated Development Environment) refers to a powerful editor with many features that usually operates on a "whole project." As the name suggests, it's not just an editor, but a full-scale "development environment."
+Термином [IDE](https://ru.wikipedia.org/wiki/Integrated_development_environment) (Integrated Development Environment, "интегрированная среда разработки") называют мощные редакторы с множеством функций, которые работают в рамках целого проекта. Как видно из названия, это не просто редактор, а полноценная **среда для разработки**.
 
-An IDE loads the project (which can be many files), allows navigation between files, provides autocompletion based on the whole project (not just the open file), and integrates with a version management system (like [git](https://git-scm.com/)), a testing environment, and other "project-level" stuff.
+IDE загружает проект (который может состоять из множества файлов), позволяет переключаться между файлами, предлагает автодополнение по коду всего проекта (а не только открытого файла), также она  интегрирована с системой контроля версий (например, такой как [git](https://git-scm.com/)), средой для тестирования и другими инструментами на уровне всего проекта.
 
-If you haven't selected an IDE yet, consider the following options:
+Если вы ещё не выбрали себе IDE, присмотритесь к этим:
 
-- [WebStorm](http://www.jetbrains.com/webstorm/) for frontend development. The same company offers other editors for other languages (paid).
-- [Netbeans](http://netbeans.org/) (free).
 
-All of these IDEs are cross-platform.
+- [Visual Studio Code](https://code.visualstudio.com/) (бесплатно).
+- [WebStorm](http://www.jetbrains.com/webstorm/) (платно).
 
-For Windows, there's also "Visual Studio", not to be confused with "Visual Studio Code." "Visual Studio" is a paid and mighty Windows-only editor, well-suited for the .NET platform. A free version of it is called [Visual Studio Community](https://www.visualstudio.com/vs/community/).
+Обе IDE -- кроссплатформенные.
 
-Many IDEs are paid but have a trial period. Their cost is usually negligible compared to a qualified developer's salary, so just choose the best one for you.
+Для Windows есть ещё Visual Studio (не путать с Visual Studio Code). Visual Studio - это платная мощная среда разработки, которая работает только на Windows. Она хорошо подходит для .NET платформы. У неё есть бесплатная версия, которая называется [Visual Studio Community](https://www.visualstudio.com/vs/community/).
 
-## Lightweight editors
+Многие IDE платные, но у них есть пробный период. Их цена обычно незначительна по сравнению с зарплатой квалифицированного разработчика, так что пробуйте и выбирайте ту, что вам подходит лучше других.
 
-"Lightweight editors" are not as powerful as IDEs, but they're fast, elegant and simple.
+## "Лёгкие" редакторы
 
-They are mainly used to open and edit a file instantly.
+"Лёгкие" редакторы менее мощные, чем IDE, но они отличаются скоростью, удобным интерфейсом и простотой.
 
-The main difference between a "lightweight editor" and an "IDE" is that an IDE works on a project-level, so it loads much more data on start, analyzes the project structure if needed and so on. A lightweight editor is much faster if we need only one file.
+В основном их используют для того, чтобы быстро открыть и отредактировать нужный файл.
 
-In practice, lightweight editors may have a lot of plugins including directory-level syntax analyzers and autocompleters, so there's no strict border between a lightweight editor and an IDE.
+Главное отличие между "лёгким" редактором и IDE состоит в том, что IDE работает на уровне целого проекта, поэтому она загружает больше данных при запуске, анализирует структуру проекта, если это необходимо, и так далее. Если вы работаете только с одним файлом, то гораздо быстрее открыть его в "лёгком" редакторе.
 
-The following options deserve your attention:
+На практике "лёгкие" редакторы могут иметь множество плагинов, включая автодополнение и анализаторы синтаксиса на уровне директории, поэтому границы между IDE и "лёгкими" редакторами размыты.
 
-- [Visual Studio Code](https://code.visualstudio.com/) (cross-platform, free) also has many IDE-like features.
-- [Atom](https://atom.io/) (cross-platform, free).
-- [Sublime Text](http://www.sublimetext.com) (cross-platform, shareware).
-- [Notepad++](https://notepad-plus-plus.org/) (Windows, free).
-- [Vim](http://www.vim.org/) and [Emacs](https://www.gnu.org/software/emacs/) are also cool if you know how to use them.
+Следующие варианты заслуживают вашего внимания:
 
-## My favorites
+- [Atom](https://atom.io/) (кроссплатформенный, бесплатный).
+- [Sublime Text](http://www.sublimetext.com) (кроссплатформенный, условно-бесплатный).
+- [Notepad++](https://notepad-plus-plus.org/) (Windows, бесплатный).
+- [Vim](http://www.vim.org/) и [Emacs](https://www.gnu.org/software/emacs/) тоже хороши, если знать, как ими пользоваться.
 
-The personal preference of the author is to have both an IDE for projects and a lightweight editor for quick and easy file editing.
+## Не будем ссориться
 
-I'm using:
+Редакторы, перечисленные выше, известны автору давно и заслужили много хороших отзвывов от коллег.
 
-- As an IDE for JS -- [WebStorm](http://www.jetbrains.com/webstorm/) (I switch to one of the other JetBrains offerings when using other languages)
-- As a lightweight editor -- [Sublime Text](http://www.sublimetext.com) or [Atom](https://atom.io/).
+Конечно же, есть много других отличных редакторов. Выбирайте тот, который вам больше нравится.
 
-## Let's not argue
-
-The editors in the lists above are those that either I or my friends whom I consider good developers have been using for a long time and are happy with.
-
-There are other great editors in our big world. Please choose the one you like the most.
-
-The choice of an editor, like any other tool, is individual and depends on your projects, habits, and personal preferences.
+Выбор редактора, как и любого другого инструмента, индивидуален и зависит от ваших проектов, привычек и личных предпочтений.
