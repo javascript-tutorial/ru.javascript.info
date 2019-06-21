@@ -2,8 +2,8 @@
 let eventMixin = {
 
   /**
-   * Подпишемся на событие, используя:
-   *  menu.on('select', function(item) { ... }
+   * Подписаться на событие, использование:
+   * menu.on('select', function(item) { ... }
   */
   on(eventName, handler) {
     if (!this._eventHandlers) this._eventHandlers = {};
@@ -14,8 +14,8 @@ let eventMixin = {
   },
 
   /**
-   * Отменим подписку, используя:
-   *  menu.off('select', handler)
+   * Отменить подписку, использование:
+   * menu.off('select', handler)
    */
   off(eventName, handler) {
     let handlers = this._eventHandlers && this._eventHandlers[eventName];
@@ -28,8 +28,8 @@ let eventMixin = {
   },
 
   /**
-   * Запустим событие и добавим к нему данные
-   *  this.trigger('select', data1, data2);
+   * Сгенерировать событие с указанным именем и данными
+   * this.trigger('select', data1, data2);
    */
   trigger(eventName, ...args) {
     if (!this._eventHandlers || !this._eventHandlers[eventName]) {
