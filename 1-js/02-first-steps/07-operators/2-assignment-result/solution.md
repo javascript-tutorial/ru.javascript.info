@@ -1,5 +1,5 @@
-The answer is:
+Ответ:
 
-- `a = 4` (multiplied by 2)
-- `x = 5` (calculated as 1 + 4)
+- `a = 4` (умножается на 2)
+- `x = 5` (суммируется 1 + 4)
 
