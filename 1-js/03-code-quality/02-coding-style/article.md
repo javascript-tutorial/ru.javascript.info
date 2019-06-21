@@ -156,16 +156,16 @@ for (let i = 0; i < 10; i++) {
 }
 ```
 
-A similar thing can be done with `if/else` and `return`.
+Аналогичная ситуация – с `if/else` и `return`.
 
-For example, two constructs below are identical.
+Например, две нижеследующие конструкции идентичны.
 
-Option 1:
+Первая:
 
 ```js
 function pow(x, n) {
   if (n < 0) {
-    alert("Negative 'n' not supported");
+    alert("Отрицательные значения 'n' не поддерживаются");
   } else {
     let result = 1;
 
@@ -178,12 +178,12 @@ function pow(x, n) {
 }
 ```
 
-Option 2:
+Вторая:
 
 ```js
 function pow(x, n) {
   if (n < 0) {
-    alert("Negative 'n' not supported");
+    alert("Отрицательные значения 'n' не поддерживаются");
     return;
   }
 
@@ -197,16 +197,16 @@ function pow(x, n) {
 }
 ```
 
-The second one is more readable because the "edge case" of `n < 0` is handled early on. Once the check is done we can move on to the "main" code flow without the need for additional nesting.
+Второй вариант является более читабельным, потому что "крайний случай" `n < 0` обрабатывается на ранней стадии. После проверки можно переходить к "основному" потоку кода без необходимости дополнительного вложения.
 
-## Function Placement
+## Размещение функций
 
-If you are writing several "helper" functions and the code that uses them, there are three ways to organize the functions.
+Если вы пишете несколько "вспомогательных" функций и далее используемый ими код, то существует три способа организации функций.
 
-1. Functions declared above the code that uses them:
+1. Функции, объявленные над кодом, который их вызовет:
 
     ```js
-    // *!*function declarations*/!*
+    // *!*объявление функций*/!*
     function createElement() {
       ...
     }
@@ -219,20 +219,20 @@ If you are writing several "helper" functions and the code that uses them, there
       ...
     }
 
-    // *!*the code which uses them*/!*
+    // *!*код, который использует их*/!*
     let elem = createElement();
     setHandler(elem);
     walkAround();
     ```
-2. Code first, then functions
+2. Сначала код, затем функции
 
     ```js
-    // *!*the code which uses the functions*/!*
+    // *!*код, использующий функции*/!*
     let elem = createElement();
     setHandler(elem);
     walkAround();
 
-    // --- *!*helper functions*/!* ---
+    // --- *!*вспомогательные функции*/!* ---
     function createElement() {
       ...
     }
@@ -245,54 +245,54 @@ If you are writing several "helper" functions and the code that uses them, there
       ...
     }
     ```
-3. Mixed: a function is declared where it's first used.
+3. Смешанный стиль: функция объявляется там, где она используется впервые.
 
-Most of time, the second variant is preferred.
+В большинстве случаев второй вариант является предпочтительным.
 
-That's because when reading code, we first want to know *what it does*. If the code goes first, then it provides that information. Then, maybe we won't need to read the functions at all, especially if their names are descriptive of what they actually do.
+Это потому, что при чтении кода мы сначала хотим знать, *что он делает*. Если сначала первым записан код, то он предоставляет эту информацию. Тогда, может быть, нам вообще не нужно будет читать функции, особенно если их имена описывают то, что они на самом деле выполняют.
 
-## Руководства по стилю
+## Руководства по стилю кода
 
-A style guide contains general rules about "how to write" code, e.g. which quotes to use, how many spaces to indent, where to put line breaks, etc. A lot of minor things.
+Руководство по стилю содержит общие правила о том, как писать код, например: какие кавычки использовать, сколько пробелов отступать, куда помещать разрывы строк и так далее - в общем, множество мелочей.
 
-When all members of a team use the same style guide, the code looks uniform, regardless of which team member wrote it.
+Когда все участники команды используют одно и то же руководство по стилю, код выглядит одинаково, независимо от того, кто бы из команды его написал.
 
-Of course, a team can always write their own style guide. Most of the time though, there's no need to. There are many existing tried and true options to choose from, so adopting one of these is usually your best bet.
+Конечно, команда всегда может написать собственное руководство по стилю. Хотя в большинстве случаев в этом нет необходимости. Существует множество проверенных и верных вариантов на выбор, поэтому использование одного из них, как правило, будет лучшим вариантом.
 
-Some popular choices:
+Большинство есть на английском, сообщите мне, если найдёте хороший перевод:
 
 - [Google JavaScript Style Guide](https://google.github.io/styleguide/javascriptguide.xml)
-- [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript)
-- [Idiomatic.JS](https://github.com/rwaldron/idiomatic.js)
-- [StandardJS](https://standardjs.com/)
-- (plus many more)
+- [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript) (есть [перевод](https://leonidlebedev.github.io/javascript-airbnb/))
+- [Idiomatic.JS](https://github.com/rwaldron/idiomatic.js) (есть [перевод](https://github.com/leonidlebedev/javascript-airbnb))
+- [Стандартный стиль JavaScript](https://standardjs.com/)
+- (и еще множество других)
 
-If you're a novice developer, start with the cheatsheet at the beginning of this chapter. Once you've mastered that you can browse other style guides to pick up common principles and decide which one you like best.
+Если вы начинающий разработчик, то начните со шпаргалки в начале этой главы. Как только вы освоитесь, просмотрите другие руководства, чтобы выбрать общие принципы и решить, какой из них вам больше подходит.
 
 ## Автоматизированные средства проверки (линтеры)
 
-Linters are tools that can automatically check the style of your code and make suggestions for refactoring.
+Линтеры - это инструменты, которые могут автоматически проверять стиль вашего кода и вносить предложения по рефакторингу.
 
-The great thing about them is that style-checking can also find some bugs, like typos in variable or function names. Because of this feature, installing a linter is recommended even if you don't want to stick to one particular "code style".
+Самое замечательное в них то, что проверка стиля может также найти некоторые ошибки, такие как опечатки в именах переменных или функций. Из-за этой особенности, установка средства проверки рекомендуется, даже если вы не хотите придерживаться одного конкретного "стиля кода".
 
-Here are the most well-known linting tools:
+Вот самые известные инструменты для подкладки:
 
-- [JSLint](http://www.jslint.com/) -- one of the first linters.
-- [JSHint](http://www.jshint.com/) -- more settings than JSLint.
-- [ESLint](http://eslint.org/) -- probably the newest one.
+- [JSLint](http://www.jslint.com/) -- проверяет код на соответствие [стилю JSLint](http://www.jslint.com/lint.html), в онлайн-интерфейсе вверху можно ввести код, а внизу различные настройки проверки, чтобы сделать её более мягкой.
+- [JSHint](http://www.jshint.com/) -- вариант JSLint с большим количеством настроек.
+- [ESLint](http://eslint.org/) -- наверное, самый новый.
 
-All of them can do the job. The author uses [ESLint](http://eslint.org/).
+Все они выполняют свою работу. Автор пользуется [ESLint](http://eslint.org/).
 
-Most linters are integrated with many popular editors: just enable the plugin in the editor and configure the style.
+Большинство линтеров интегрированы со многими популярными редакторами: просто включите плагин в редакторе и настройте стиль.
 
-For instance, for ESLint you should do the following:
+Например, для ESLint вы должны выполнить следующее:
 
-1. Install [Node.JS](https://nodejs.org/).
-2. Install ESLint with the command `npm install -g eslint` (npm is a JavaScript package installer).
-3. Create a config file named `.eslintrc` in the root of your JavaScript project (in the folder that contains all your files).
-4. Install/enable the plugin for your editor that integrates with ESLint. The majority of editors have one.
+1. Установить [Node.JS](https://nodejs.org/).
+2. Установите ESLint с помощью команды `npm install -g eslint` (npm - установщик пакета JavaScript).
+3. Создайте файл конфигурации с именем `.eslintrc` в корне вашего JavaScript-проекта (в папке, содержащей все ваши файлы).
+4. Установите/включите плагин для вашего редактора, который интегрируется с ESLint. У большинства редакторов он есть.
 
-Here's an example of an `.eslintrc` file:
+Вот пример файла `.eslintrc`:
 
 ```js
 {
@@ -309,16 +309,16 @@ Here's an example of an `.eslintrc` file:
 }
 ```
 
-Here the directive `"extends"` denotes that the configuration is based on the "eslint:recommended" set of settings. After that, we specify our own.
+Здесь директива `"extends"` означает, что конфигурация основана на наборе настроек "eslint:recommended". После этого мы уточняем наши собственные.
 
-It is also possible to download style rule sets from the web and extend them instead. See <http://eslint.org/docs/user-guide/getting-started> for more details about installation.
+Кроме того, возможно загрузить наборы правил стиля из сети и расширить их. Смотрите <https://eslint.org/docs/user-guide/getting-started> для получения более подробной информации об установке.
 
-Also certain IDEs have built-in linting, which is convenient but not as customizable as ESLint.
+Также некоторые среды разработки имеют встроенное средство проверки, что может быть удобно, но не так настраиваемо, как ESLint.
 
 ## Итого
 
-All syntax rules described in this chapter (and in the style guides referenced) aim to increase the readability of your code, but all of them are debatable.
+Все правила синтаксиса, описанные в этой главе (и в ссылках на руководства по стилю), направлены на повышение читаемости вашего кода, но все они они спорны.
 
-When we think about writing "better" code, the questions we should ask are, "What makes the code more readable and easier to understand?" and "What can help us avoid errors?" These are the main things to keep in mind when choosing and debating code styles.
+Когда мы думаем о написании "лучшего" кода, мы должны задать следующие вопросы: "Что делает код более читаемым и легким для понимания?" и "Что может помочь нам избежать ошибок". Это основные моменты, о которых следует помнить при выборе и обсуждении стилей кода.
 
-Reading popular style guides will allow you to keep up to date with the latest ideas about code style trends and best practices.
+Чтение популярных руководств по стилю позволит вам быть в курсе последних идей о тенденциях стилей кода и лучших практиках.
