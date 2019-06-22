@@ -86,16 +86,16 @@ coffeeMachine.waterAmount = 200;
 
 **Защищенные свойства обычно начинаются с префикса `_`.**
 
-Это не применяется на уровне языка, но существует соглашение, что такие свойства и методы не должны быть доступны извне. Большинство программистов следуют этому.
+Это не синтаксис языка: существует соглашение, что такие свойства и методы не должны быть доступны извне. Большинство программистов следуют этому соглашению.
 
-So our property will be called `_waterAmount`:
+Итак, наше свойство будет называться `_waterAmount`:
 
 ```js run
 class CoffeeMachine {
   _waterAmount = 0;
 
   set waterAmount(value) {
-    if (value < 0) throw new Error("Negative water");
+    if (value < 0) throw new Error("Отрицательное количество воды");
     this._waterAmount = value;
   }
 
@@ -109,16 +109,16 @@ class CoffeeMachine {
 
 }
 
-// create the coffee machine
+// создаем новую кофеварку
 let coffeeMachine = new CoffeeMachine(100);
 
-// add water
-coffeeMachine.waterAmount = -10; // Error: Negative water
+// устанавливаем количество воды
+coffeeMachine.waterAmount = -10; // Error: Отрицательное количество воды
 ```
 
-Now the access is under control, so setting the water below zero fails.
+Теперь доступ под контролем, поэтому установка воды ниже нуля не удалась. 
 
-## Read-only "power"
+## Свойство только для чтения "power"
 
 For `power` property, let's make it read-only. It sometimes happens that a property must be set at creation time only, and then never modified.
 
