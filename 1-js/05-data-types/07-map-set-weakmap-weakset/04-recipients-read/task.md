@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# Store "unread" flags
+# Хранение отметок "не прочитано"
 
-There's an array of messages:
+У нас есть массив сообщений:
 
 ```js
 let messages = [
@@ -14,10 +14,10 @@ let messages = [
 ];
 ```
 
-Your code can access it, but the messages are managed by someone else's code. New messages are added, old ones are removed regularly by that code, and you don't know the exact moments when it happens.
+У вас есть к ним доступ, но управление этим массивом происходит где-то еще. Добавляются новые сообщений и удаляются старые, и вы не знаете в какой момент это может произойти.
 
-Now, which data structure you could use to store information whether the message "have been read"? The structure must be well-suited to give the answer "was it read?" for the given message object.
+Имея такую вводную информацию решите, какую структуру данных вы могли бы использовать для ответа на вопрос: было ли сообщение прочитано? Структура должна быть хорошо приспособлена, чтобы однозначно сказать было ли прочитано это сообщение для каждого объекта сообщения.
 
-P.S. When a message is removed from `messages`, it should disappear from your structure as well.
+P.S. Когда сообщение удаляется из массива `messages`, оно должно также исчезать из структуры данных.
 
-P.P.S. We shouldn't modify message objects directly. If they are managed by someone else's code, then adding extra properties to them may have bad consequences.
+P.P.S. М не можем вручную модифицировать объект. Если сообщения управляются каким-то другим кодом, то вмешательство в этот процесс может привести к плохим последствиям.

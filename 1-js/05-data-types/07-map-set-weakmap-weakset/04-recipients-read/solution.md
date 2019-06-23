@@ -1,4 +1,4 @@
-The sane choice here is a `WeakSet`:
+Подходящий вариант -- это использование `WeakSet`:
 
 ```js
 let messages = [
@@ -9,33 +9,33 @@ let messages = [
 
 let readMessages = new WeakSet();
 
-// two messages have been read
+// Два сообщения были прочитаны
 readMessages.add(messages[0]);
 readMessages.add(messages[1]);
-// readMessages has 2 elements
+// readMessages содержит 2 элемента
 
-// ...let's read the first message again!
+// ...давайте снова прочитаем первое сообщение!
 readMessages.add(messages[0]);
-// readMessages still has 2 unique elements
+// readMessages до сих пор содержит 2 элемента
 
-// answer: was the message[0] read?
+// Вопрос: было ли сообщение message[0] прочитано?
 alert("Read message 0: " + readMessages.has(messages[0])); // true
 
 messages.shift();
-// now readMessages has 1 element (technically memory may be cleaned later)
+// теперь readMessages содержит 1 элемент (хотя технически память может быть очищена позже)
 ```
 
-The `WeakSet` allows to store a set of messages and easily check for the existance of a message in it.
+`WeakSet` позволяет хранить набор сообщений, и легко проверять наличие сообщения в нем.
 
-It cleans up itself automatically. The tradeoff is that we can't iterate over it. We can't get "all read messages" directly. But we can do it by iterating over all messages and filtering those that are in the set.
+Он очищается автоматически. Компромисс в том, что мы не можем перебрать его. Мы не можем получить «все прочитанные сообщения» напрямую. Но мы можем сделать это, перебирая все сообщения и фильтруя те, которые находятся в коллекции `WeakSet`.
 
-P.S. Adding a property of our own to each message may be dangerous if messages are managed by someone else's code, but we can make it a symbol to evade conflicts.
+P.S. Добавление собственного свойства к каждому сообщению может быть опасным, если сообщения управляются чужим кодом, но мы можем сделать это с помощью символов, чтобы избежать конфликтов.
 
-Like this:
+Например:
 ```js
-// the symbolic property is only known to our code
+// свойство и символом вместо имени, которое известно только нашему коду
 let isRead = Symbol("isRead");
 messages[0][isRead] = true;
 ```
 
-Now even if someone else's code uses `for..in` loop for message properties, our secret flag won't appear.
+Теперь, даже если чужой код использует цикл `for..in` для перебора свойств сообщения, наш секретный флаг не появится.
