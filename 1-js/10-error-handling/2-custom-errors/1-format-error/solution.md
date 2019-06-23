@@ -6,9 +6,9 @@ class FormatError extends SyntaxError {
   }
 }
 
-let err = new FormatError("formatting error");
+let err = new FormatError("ошибка форматирования");
 
-alert( err.message ); // formatting error
+alert( err.message ); // ошибка форматирования
 alert( err.name ); // FormatError
 alert( err.stack ); // stack
 

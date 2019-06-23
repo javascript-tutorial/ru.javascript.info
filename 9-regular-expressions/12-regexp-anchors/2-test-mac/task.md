@@ -1,20 +1,20 @@
-# Check MAC-address
+# Проверьте MAC-адрес
 
-[MAC-address](https://en.wikipedia.org/wiki/MAC_address) of a network interface consists of 6 two-digit hex numbers separated by a colon.
+[MAC-адрес](https://ru.wikipedia.org/wiki/MAC_address) сетевого интерфейса состоит из 6-ти двузначных шестнадцатеричных чисел, разделённых двоеточиями.
 
-For instance: `subject:'01:32:54:67:89:AB'`.
+Например: `subject:'01:32:54:67:89:AB'`.
 
-Write a regexp that checks whether a string is MAC-address.
+Напишите регулярное выражение, которое проверит, является ли строка MAC-адресом.
 
-Usage:
+Использование:
 ```js
-let reg = /your regexp/;
+let reg = /ваш regexp/;
 
 alert( reg.test('01:32:54:67:89:AB') ); // true
 
-alert( reg.test('0132546789AB') ); // false (no colons)
+alert( reg.test('0132546789AB') ); // false (нет двоеточий)
 
-alert( reg.test('01:32:54:67:89') ); // false (5 numbers, must be 6)
+alert( reg.test('01:32:54:67:89') ); // false (5 чисел, должно быть 6)
 
-alert( reg.test('01:32:54:67:89:ZZ') ) // false (ZZ ad the end)
+alert( reg.test('01:32:54:67:89:ZZ') ) // false (ZZ в конце строки)
 ```

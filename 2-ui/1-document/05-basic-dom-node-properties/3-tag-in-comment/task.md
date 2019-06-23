@@ -2,9 +2,9 @@ importance: 3
 
 ---
 
-# Tag in comment
+# Тег в комментарии
 
-What does this code show?
+Что выведет этот код?
 
 ```html
 <script>
@@ -12,6 +12,6 @@ What does this code show?
 
   body.innerHTML = "<!--" + body.tagName + "-->";
 
-  alert( body.firstChild.data ); // what's here?
+  alert( body.firstChild.data ); // что выведет?
 </script>
 ```

@@ -164,7 +164,7 @@ class CoffeeMachine {
   }
 
   *!*getWaterAmount()*/!* {
-    return this.waterAmount;
+    return this._waterAmount;
   }
 }
 
@@ -214,7 +214,7 @@ class CoffeeMachine {
   }
 
   get waterAmount() {
-    return this.waterAmount;
+    return this._waterAmount;
   }
 
 }
@@ -261,7 +261,7 @@ alert(machine.#waterAmount); // Error
 Но если мы наследуем от `CoffeeMachine`, то мы не получим прямого доступа к `#waterAmount`. Мы будем вынуждены полагаться на геттер/сеттер `waterAmount`:
 
 ```js
-class CoffeeMachine extends CoffeeMachine() {
+class MegaCoffeeMachine extends CoffeeMachine() {
   method() {
 *!*
     alert( this.#waterAmount ); // Error: can only access from CoffeeMachine

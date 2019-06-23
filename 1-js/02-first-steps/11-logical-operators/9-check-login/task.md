@@ -2,24 +2,24 @@ importance: 3
 
 ---
 
-# Check the login
+# Проверка логина
 
-Write the code which asks for a login with `prompt`.
+Напишите код, который будет спрашивать логин с помощью `prompt`.
 
-If the visitor enters `"Admin"`, then `prompt` for a password, if the input is an empty line or `key:Esc` -- show "Canceled.", if it's another string -- then show "I don't know you".
+Если посетитель вводит "Admin", то `prompt` запрашивает пароль, если ничего не введено или нажата клавиша `key:Esc` – показать "Canceled.", в противном случае отобразить "I don't know you".
 
-The password is checked as follows:
+Пароль проверять так:
 
-- If it equals "TheMaster", then show "Welcome!",
-- Another string -- show "Wrong password",
-- For an empty string or cancelled input, show "Canceled."
+- Если введён пароль "TheMaster", то выводить "Welcome!",
+- Иначе – "Wrong password",
+- При отмене – "Canceled".
 
-The schema:
+Блок-схема:
 
 ![](ifelse_task.png)
 
-Please use nested `if` blocks. Mind the overall readability of the code.
+Для решения используйте вложенные блоки `if`. Обращайте внимание на стиль и читаемость кода.
 
-Hint:  passing an empty input to a prompt returns an empty string `''`. Pressing `key:ESC` during a prompt returns `null`.
+Подсказка: передача пустого ввода в приглашение возвращает пустую строку `''`. Нажатие клавиши `ESC` во время запроса возвращает`null`.
 
 [demo]

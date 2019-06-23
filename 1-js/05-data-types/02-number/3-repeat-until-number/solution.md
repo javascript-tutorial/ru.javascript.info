@@ -4,7 +4,7 @@ function readNumber() {
   let num;
 
   do {
-    num = prompt("Enter a number please?", 0);
+    num = prompt("Введите число", 0);
   } while ( !isFinite(num) );
 
   if (num === null || num === '') return null;
@@ -12,12 +12,12 @@ function readNumber() {
   return +num;
 }
 
-alert(`Read: ${readNumber()}`);
+alert(`Число: ${readNumber()}`);
 ```
 
-The solution is a little bit more intricate that it could be because we need to handle `null`/empty lines.
+Решение немного сложнее, чем могло бы быть, потому что нам надо обрабатывать `null` и пустую строку.
 
-So we actually accept the input until it is a "regular number". Both `null` (cancel) and empty line also fit that condition, because in numeric form they are `0`.
+Следовательно, запрашиваем ввод числового значения, пока посетитель его не введёт. И `null` (отмена) и пустая строка также соответствуют данному условию, потому что при приведении к числу они равны `0`. 
 
-After we stopped, we need to treat `null` and empty line specially (return `null`), because converting them to a number would return `0`.
+После того, как цикл завершится, нам нужно проверить введённое значение на `null` и пустую строку (вернуть `null`), потому что после преобразования `null` в число, функция вернёт `0`.
 
