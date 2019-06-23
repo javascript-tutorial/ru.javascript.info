@@ -2,18 +2,18 @@ importance: 4
 
 ---
 
-# Add the decorating "defer()" to functions
+# Добавьте функциям декорирующий метод "defer()"
 
-Add to the prototype of all functions the method `defer(ms)`, that returns a wrapper, delaying the call by `ms` milliseconds.
+Добавьте всем функциям в прототип метод `defer(ms)`, который возвращает обёртку, откладывающую вызов функции на `ms` миллисекунд.
 
-Here's an example of how it should work:
+Например, должно работать так:
 
 ```js
 function f(a, b) {
   alert( a + b );
 }
 
-f.defer(1000)(1, 2); // shows 3 after 1 second
+f.defer(1000)(1, 2); // выведет 3 через 1 секунду.
 ```
 
-Please note that the arguments should be passed to the original function.
+Пожалуйста, заметьте, что аргументы должны корректно передаваться оригинальной функции.

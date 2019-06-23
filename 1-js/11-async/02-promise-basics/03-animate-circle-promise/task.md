@@ -1,9 +1,9 @@
 
 # Animated circle with promise
 
-Rewrite the `showCircle` function in the solution of the task <info:task/animate-circle-callback> so that it returns a promise instead of accepting a callback.
+Перепишите функцию `showCircle`, написанную в задании <info:task/animate-circle-callback> таким образом, чтобы она возвращала промис, вместо того чтобы принимать в аргументы функцию-callback.
 
-The new usage:
+Новое использование:
 
 ```js
 showCircle(150, 150, 100).then(div => {
@@ -12,4 +12,4 @@ showCircle(150, 150, 100).then(div => {
 });
 ```
 
-Take the solution of the task <info:task/animate-circle-callback> as the base.
+Возьмите решение из <info:task/animate-circle-callback> в качестве основы.

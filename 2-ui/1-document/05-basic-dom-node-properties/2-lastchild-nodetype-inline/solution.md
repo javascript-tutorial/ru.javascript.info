@@ -1,8 +1,8 @@
-There's a catch here.
+Здесь есть подвох.
 
-At the time of `<script>` execution the last DOM node is exactly `<script>`, because the browser did not process the rest of the page yet.
+Во время выполнения `<script>` последним DOM-узлом является `<script>`, потому что браузер ещё не обработал остальную часть страницы.
 
-So the result is `1` (element node).
+Поэтому результатом будет `1` (узел-элемент).
 
 ```html run height=60
 <html>

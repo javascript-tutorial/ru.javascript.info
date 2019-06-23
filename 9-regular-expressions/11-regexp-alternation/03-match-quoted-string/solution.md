@@ -1,17 +1,17 @@
-The solution: `pattern:/"(\\.|[^"\\])*"/g`.
+Решение: `pattern:/"(\\.|[^"\\])*"/g`.
 
-Step by step:
+Шаг за шагом:
 
-- First we look for an opening quote `pattern:"`
-- Then if we have a backslash `pattern:\\` (we technically have to double it in the pattern, because it is a special character, so that's a single backslash in fact), then any character is fine after it (a dot).
-- Otherwise we take any character except a quote (that would mean the end of the string) and a backslash (to prevent lonely backslashes, the backslash is only used with some other symbol after it): `pattern:[^"\\]`
-- ...And so on till the closing quote.
+- Сначала ищем открывающую кавычку `pattern:"`
+- Затем, если есть обратный слеш `pattern:\\` (удвоение обратного слеша – техническое, потому что это спец.символ, на самом деле там один обратный слеш), то после него также подойдёт любой символ (точка).
+- Иначе берём любой символ, кроме кавычек (которые будут означать конец строки) и обратного слеша (чтобы предотвратить одинокие обратные слеши, сам по себе единственный обратный слеш не нужен, он должен экранировать какой-то символ) `pattern:[^"\\]`
+- ...И так далее, до закрывающей кавычки.
 
-In action:
+В действии:
 
 ```js run
 let reg = /"(\\.|[^"\\])*"/g;
-let str = ' .. "test me" .. "Say \\"Hello\\"!" .. "\\\\ \\"" .. ';
+let str = ' .. "test me" .. "Скажи \\"Привет\\"!" .. "\\\\ \\"" .. ';
 
-alert( str.match(reg) ); // "test me","Say \"Hello\"!","\\ \""
+alert( str.match(reg) ); // "test me","Скажи \"Привет\"!","\\ \""
 ```

@@ -1,54 +1,54 @@
 
-# Dynamic imports
+# Динамические импорты
 
-Export and import statements that we covered in previous chaters are called "static".
+Инструкции экспорта и импорта, которые мы рассматривали в предыдущей главе, называются "статическими".
 
-That's because they are indeed static. The syntax is very strict.
+Это потому, что они на самом деле статические. Синтаксис у них весьма строг.
 
-First, we can't dynamicaly generate any parameters of `import`.
+Во-первых, мы не можем динамически задавать никакие из параметров `import`.
 
-The module path must be a primitive string, can't be a function call. This won't work:
+Путь к модулю должен быть строковым примитивом и не может быть вызовом функции. Вот так работать не будет:
 
 ```js
-import ... from *!*getModuleName()*/!*; // Error, only from "string" is allowed
+import ... from *!*getModuleName()*/!*; // Ошибка, должна быть строка
 ```
 
-Second, we can't import conditionally or at run-time:
+Во-вторых, мы не можем делать импорт в зависимости от условий или в процессе выполнения.
 
 ```js
 if(...) {
-  import ...; // Error, not allowed!
+  import ...; // Ошибка, запрещено
 }
 
 {
-  import ...; // Error, we can't put import in any block
+  import ...; // Ошибка, мы не можем ставить импорт в блок
 }
 ```
 
-That's because, import/export aim to provide a backbone for the code structure. That's a good thing, as code structure can be analyzed, modules can be gathered and bundled together, unused exports can be removed (tree-shaken). That's possible only because everything is fixed.
+Всё это следствие того, что цель импорта/экспорта -- создать костяк структуры кода. Благодаря чему она может быть проанализирована, модули могут быть собраны и связаны друг с другом, а неиспользуемые экспорты удалены. Это возможно только благодаря тому, что всё статично.
 
-But how do we import a module dynamically, on-demand?
+Но как мы можем импортировать модуль динамически, по запросу?
 
-## The import() function
+## Функция import()
 
-The `import(module)` function can be called from anywhere. It returns a promise that resolves into a module object.
+Функция `import(module)` может быть вызвана из любого места. Она вернёт промис, а он в свою очередь -- объект модуля.
 
-The usage pattern looks like this:
+Использовать её мы можем, например, вот так:
 
 ```js run
-let modulePath = prompt("Module path?");
+let modulePath = prompt("Путь к модулю?");
 
 import(modulePath)
-  .then(obj => <module object>)
-  .catch(err => <loading error, no such module?>)
+  .then(obj => <объект модуля>)
+  .catch(err => <ошибка загрузки, нет такого модуля?>)
 ```
 
-Or, we could use `let module = await import(modulePath)` if inside an async function.
+Или если внутри асинхронной функции, то можно вот так: `let module = await import(modulePath)`.
 
-Like this:
+Как здесь:
 
 [codetabs src="say" current="index.html"]
 
-So, dynamic imports are very simple to use.
+Так что использовать динамические импорты очень легко.
 
-Also, dynamic imports work in regular scripts, they don't require `script type="module"`.
+Кроме этого, динамические импорты работают в обычных скриптах, для них не требуется `script type="module"`.
