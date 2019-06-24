@@ -1,22 +1,41 @@
 
-# URL objects
+# Объекты URL
 
-The built-in [URL](https://url.spec.whatwg.org/#api) class provides a convenient interface for creating and parsing URLs.
+Встроенный класс [URL](https://url.spec.whatwg.org/#api) предоставляет удобный интерфейс для создания и анализа URL-адресов.
 
-We don't have to use it at all. There are no networking methods that require exactly an `URL` object, strings are good enough. But sometimes it can be really helpful.
+Нет сетевых методов, которые требуют объект URL, обычные строки вполне подходят. Так что, технически, мы не обязаны использовать URL. Но иногда он может быть весьма удобным.
 
-## Creating an URL
+## Создание URL
 
-The syntax to create a new URL object:
+Синтаксис создания нового объекта URL:
 
 ```js
 new URL(url, [base])
 ```
 
-- **`url`** -- the text url
-- **`base`** -- an optional base for the `url`
+- **`url`** -- URL-адрес или путь, если указан второй параметр
+- **`base`** -- "базовый" URL, если указан, то адрес будет создан относительно `base` (пример ниже)
 
-The `URL` object immediately allows us to access its components, so it's a nice way to parse the url, e.g.:
+Эти два URL одинаковы:
+
+```js run
+let url1 = new URL('https://javascript.info/profile/admin');
+let url2 = new URL('/profile/admin', 'https://javascript.info');
+
+alert(url1); // https://javascript.info/profile/admin
+alert(url2); // https://javascript.info/profile/admin
+```
+
+Переход к пути относительно текущего URL:
+
+```js run
+let url = new URL('https://javascript.info/profile/admin');
+let testerUrl = new URL('tester', url);
+
+alert(testerUrl); // https://javascript.info/profile/tester
+```
+
+Объект `URL` даёт доступ к компонентам URL, поэтому это отличный способ "распарсить" URL-адрес, например:
 
 ```js run
 let url = new URL('https://javascript.info/url');
@@ -26,71 +45,58 @@ alert(url.host);     // javascript.info
 alert(url.pathname); // /url
 ```
 
-Here's the cheatsheet:
+Вот шпаргалка:
 
 ![](url-object.png)
 
-- `href` is the full url, same as `url.toString()`
-- `protocol` ends with the colon character `:`
-- `search` starts with the question mark `?`
-- `hash` starts with the hash character `#`
-- there are also `user` and `password` properties if HTTP authentication is present.
-
-We can also use `URL` to create relative urls, using the second argument:
-
-```js run
-let url = new URL('profile/admin', 'https://javascript.info');
-
-alert(url); // https://javascript.info/profile/admin
-
-url = new URL('tester', url); // go to 'tester' relative to current url path
-
-alert(url); // https://javascript.info/profile/tester
-```
+- `href` это полный URL-адрес, то же самое, что `url.toString()`
+- `protocol` - протокол, заканчивается символом двоеточия `:`
+- `search` строка параметров, начинается с вопросительного знака `?`
+- `hash` начинается с символа `#`
+- также есть свойства `user` и `password`, если используется HTTP-аутентификация.
 
 ```smart header="We can use `URL` everywhere instead of a string"
-We can use an `URL` object in `fetch` or `XMLHttpRequest`, almost everywhere where a string url is expected.
-
-In the vast majority of methods it's automatically converted to a string.
+Мы можем использовать объект `URL` в методах `fetch` или `XMLHttpRequest` и почти во всех других, где ожидается URL-строка.
+В подавляющем большинстве методов он автоматически конвертируется в строку.
 ```
 
-## SearchParams
+## SearchParams "?..."
 
-Let's say we want to create an url with given search params, for instance, `https://google.com/search?query=value`.
+Допустим, мы хотим создать URL-адрес с заданными параметрами, например, `https://google.com/search?query=JavaScript`.
 
-They must be correctly encoded.
+Параметры должны быть правильно закодированы, чтобы они могли содержать не-латинские буквы, пробелы и т.п.
 
-In very old browsers, before `URL` appeared, we'd use built-in functions `encodeURIComponent/decodeURIComponent`.
+Когда-то давно, до появления объекта `URL`, использовались встроенные функции `encodeURIComponent/decodeURIComponent`, у них есть ряд недостатков, которые, к счастью, уже не актуальны.
 
-Now, there's no need: `url.searchParams` is an object of type [URLSearchParams](https://url.spec.whatwg.org/#urlsearchparams).
+Сейчас в них нет необходимости: у `URL` есть свойство `url.searchParams` -- объект типа [URLSearchParams](https://url.spec.whatwg.org/#urlsearchparams).
 
-It provides convenient methods for search parameters:
+Он предоставляет удобные методы для работы с параметрами:
 
-- **`append(name, value)`** -- add the parameter,
-- **`delete(name)`** -- remove the parameter,
-- **`get(name)`** -- get the parameter,
-- **`getAll(name)`** -- get all parameters with that name (if many, e.g. `?user=John&user=Pete`),
-- **`has(name)`** -- check for the existance of the parameter,
-- **`set(name, value)`** -- set/replace the parameter,
-- **`sort()`** -- sort parameters by name, rarely needed,
-- ...and also iterable, similar to `Map`.
+- **`append(name, value)`** -- добавить параметр,
+- **`delete(name)`** -- удалить параметр,
+- **`get(name)`** -- получить параметр,
+- **`getAll(name)`** -- получить все параметры с этим именем (если их много, например: `?user=John&user=Pete`),
+- **`has(name)`** -- проверить наличие параметра,
+- **`set(name, value)`** -- задать/заменить параметр,
+- **`sort()`** -- отсортировать параметры по имени, используется редко,
+- ...и является перебираемым, по аналогии с `Map`.
 
-So, `URL` object also provides an easy way to operate on url parameters.
+Таким образом, `URL` объект также дает возможность оперировать параметрами URL-адреса.
 
-For example:
+Пример:
 
 ```js run
 let url = new URL('https://google.com/search');
-url.searchParams.set('query', 'test me!');
+url.searchParams.set('query', 'test me!'); // добавим параметр, содержащий пробел и !
 
 alert(url); // https://google.com/search?query=test+me%21
 
-url.searchParams.set('tbs', 'qdr:y'); // add param for date range: past year
+url.searchParams.set('tbs', 'qdr:y'); // добавить параметр для диапазона дат: прошлый год
 
 alert(url); // https://google.com/search?query=test+me%21&tbs=qdr%3Ay
 
-// iterate over search parameters (decoded)
+// перебор параметров поиска (декодированных)
 for(let [name, value] of url.searchParams) {
-  alert(`${name}=${value}`); // query=test me!, then tbs=qdr:y
+  alert(`${name}=${value}`); // query=test me!, далее tbs=qdr:y
 }
 ```
