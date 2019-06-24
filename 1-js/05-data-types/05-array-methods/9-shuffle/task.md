@@ -2,11 +2,11 @@ importance: 3
 
 ---
 
-# Shuffle an array
+# Перемешайте массив
 
-Write the function `shuffle(array)` that shuffles (randomly reorders) elements of the array.
+Напишите функцию `shuffle(array)`, которая перемешивает (переупорядочивает случайным образом) элементы массива.
 
-Multiple runs of `shuffle` may lead to different orders of elements. For instance:
+Многократные прогоны через `shuffle` могут привести к разным последовательностям элементов. Например:
 
 ```js
 let arr = [1, 2, 3];
@@ -22,4 +22,4 @@ shuffle(arr);
 // ...
 ```
 
-All element orders should have an equal probability. For instance, `[1,2,3]` can be reordered as `[1,2,3]` or `[1,3,2]` or `[3,1,2]` etc, with equal probability of each case.
+Все последовательности элементов должны иметь одинаковую вероятность. Например, `[1,2,3]` может быть переупорядочено как `[1,2,3]` или `[1,3,2]`, или `[3,1,2]` и т.д., с равной вероятностью каждого случая.

@@ -1,27 +1,27 @@
 
-# The "new Function" syntax
+# Синтаксис "new Function"
 
-There's one more way to create a function. It's rarely used, but sometimes there's no alternative.
+Существует ещё один вариант объявлять функции. Он используется крайне редко, но иногда другого решения не найти.
 
-## Syntax
+## Синтаксис
 
-The syntax for creating a function:
+Синтаксис для объявления функции:
 
 ```js
-let func = new Function ([arg1[, arg2[, ...argN]],] functionBody)
+let func = new Function([arg1, arg2, ...argN], functionBody);
 ```
 
-In other words, function parameters (or, more precisely, names for them) go first, and the body is last. All arguments are strings.
+Функция создается с заданными аргументами `arg1...argN` и телом `functionBody`.
 
-It's easier to understand by looking at an example. Here's a function with two arguments:
+Это проще понять на конкретном примере. Здесь объявлена функция с двумя аргументами:
 
 ```js run
-let sum = new Function('a', 'b', 'return a + b'); 
+let sum = new Function('a', 'b', 'return a + b');
 
 alert( sum(1, 2) ); // 3
 ```
 
-If there are no arguments, then there's only a single argument, the function body:
+А вот функция без аргументов, в этом случае достаточно указать только тело:
 
 ```js run
 let sayHi = new Function('alert("Hello")');
@@ -29,26 +29,28 @@ let sayHi = new Function('alert("Hello")');
 sayHi(); // Hello
 ```
 
-The major difference from other ways we've seen is that the function is created literally from a string, that is passed at run time. 
+Главное отличие от других способов объявления функции, которые были рассмотрены ранее, заключается в том, что функция создаётся полностью "на лету" из строки, переданной во время выполнения.
 
-All previous declarations required us, programmers, to write the function code in the script.
+Все предыдущие объявления требовали от нас, программистов, писать объявление функции в скрипте.
 
-But `new Function` allows to turn any string into a function. For example, we can receive a new function from a server and then execute it:
+Но `new Function` позволяет превратить любую строку в функцию. Например, можно получить новую функцию с сервера и затем выполнить ее:
 
 ```js
-let str = ... receive the code from a server dynamically ...
+let str = ... код, полученный с сервера динамически ...
 
 let func = new Function(str);
 func();
 ```
 
-It is used in very specific cases, like when we receive code from a server, or to dynamically compile a function from a template. The need for that usually arises at advanced stages of development.
+Это используется в очень специфических случаях, например, когда мы получаем код с сервера для динамической компиляции функции из шаблона, в сложных веб-приложениях.
 
-## Closure
+## Замыкание
 
-Usually, a function remembers where it was born in the special property `[[Environment]]`. It references the Lexical Environment from where it's created.
+Обычно функция помнит, где родилась, в специальном свойстве `[[Environment]]`. Это ссылка на лексическое окружение (Lexical Environment), в котором она создана.
 
-But when a function is created using `new Function`, its `[[Environment]]` references not the current Lexical Environment, but instead the global one.
+Но когда функция создаётся с использованием `new Function`, её `[[Environment]]` - это ссылка не на текущее лексическое окружение, а на глобальное. Поэтому такая функция не имеет доступа к внешним переменным, только к глобальным.
+
+So, such function doesn't have access to outer variables, only to the global ones.
 
 ```js run
 
@@ -62,12 +64,12 @@ function getFunc() {
   return func;
 }
 
-getFunc()(); // error: value is not defined
+getFunc()(); // ошибка: value не определено
 ```
 
-Compare it with the regular behavior:
+Сравним это с обычным объявлением:
 
-```js run 
+```js run
 function getFunc() {
   let value = "test";
 
@@ -78,60 +80,44 @@ function getFunc() {
   return func;
 }
 
-getFunc()(); // *!*"test"*/!*, from the Lexical Environment of getFunc
+getFunc()(); // *!*"test"*/!*, из лексического окружения функции getFunc
 ```
 
-This special feature of `new Function` looks strange, but appears very useful in practice.
+Эта особенность `new Function` выглядит странно, но оказывается очень полезной на практике.
 
-Imagine that we must create a function from a string. The code of that function is not known at the time of writing the script (that's why we don't use regular functions), but will be known in the process of execution. We may receive it from the server or from another source.
+Представьте, что нужно создать функцию из строки. Код этой функции неизвестен во время написания скрипта (вот поэтому не используем обычные функции), а будет определён только в процессе выполнения. Мы можем получить код с сервера или другого ресурса.
 
-Our new function needs to interact with the main script.
+Наша новая функция должна взаимодействовать с основным скриптом.
 
-Perhaps we want it to be able to access outer local variables?
+Что если бы она имела доступ к внешним переменным?
 
-The problem is that before JavaScript is published to production, it's compressed using a *minifier* -- a special program that shrinks code by removing extra comments, spaces and -- what's important, renames local variables into shorter ones.
+Проблема в том, что перед отправкой JavaScript-кода на реальные работающие проекты код сжимается с помощью *минификатора* - специальной программы, которая уменьшает размер кода, удаляя комментарии, лишние пробелы, и, что самое главное, локальным переменным даются укороченные имена.
 
-For instance, if a function has `let userName`, minifier replaces it `let a` (or another letter if this one is occupied), and does it everywhere. That's usually a safe thing to do, because the variable is local, nothing outside the function can access it. And inside the function, minifier replaces every mention of it. Minifiers are smart, they analyze the code structure, so they don't break anything. They're not just a dumb find-and-replace.
+Например, если в функции объявляется переменная `let userName`, то минификатор изменяет её на `let a` (или другую букву, если она не занята), и изменяет её везде. Обычно так делать безопасно, потому что переменная является локальной и никто снаружи не имеет к ней достп. И внутри функции минификатор заменяет каждое её упоминание. Минификаторы достаточно умные. Они не просто "тупой" поиск-замена, они анализируют структуру кода, и поэтому ничего не ломают.
 
-But, if `new Function` could access outer variables, then it would be unable to find `userName`, since this is passed in as a string *after* the code is minified.
+Так что если бы даже `new Function` и имела доступ к внешним переменным, она не смогла бы найти переименованную `userName`.
 
-**Even if we could access outer lexical environment in `new Function`, we would have problems with minifiers.**
+**Если бы `new Function` имела доступ к внешним переменным, при этом были бы проблемы с минификаторами.**
 
-The "special feature" of `new Function` saves us from mistakes.
+Чтобы передать что-то в функцию, созданную как `new Function`, нужно использовать ее аргументы.
 
-And it enforces better code. If we need to pass something to a function created by `new Function`, we should pass it explicitly as an argument.
+## Итого
 
-Our "sum" function actually does that right:
-
-```js run 
-*!*
-let sum = new Function('a', 'b', 'return a + b');
-*/!*
-
-let a = 1, b = 2;
-
-*!*
-// outer values are passed as arguments
-alert( sum(a, b) ); // 3
-*/!*
-```
-
-## Summary
-
-The syntax:
+Синтаксис:
 
 ```js
-let func = new Function(arg1, arg2, ..., body);
+let func = new Function ([arg1, arg2, ...argN], functionBody);
 ```
 
-For historical reasons, arguments can also be given as a comma-separated list. 
+По историческим причинам аргументы также могут быть объявлены через запятую в одной строке.
 
-These three mean the same:
+Эти 3 строки ниже эквивалентны:
 
-```js 
-new Function('a', 'b', 'return a + b'); // basic syntax
-new Function('a,b', 'return a + b'); // comma-separated
-new Function('a , b', 'return a + b'); // comma-separated with spaces
+```js
+new Function('a', 'b', 'return a + b'); // стандартный синтаксис
+new Function('a,b', 'return a + b'); // через запятую в одной строке
+new Function('a , b', 'return a + b'); // через запятую с пробелами в одной строке
 ```
 
-Functions created with `new Function`, have `[[Environment]]` referencing the global Lexical Environment, not the outer one. Hence, they cannot use outer variables. But that's actually good, because it saves us from errors. Passing parameters explicitly is a much better method architecturally and causes no problems with minifiers.
+Функции, объявленные через `new Function`, имеют `[[Environment]]`, ссылающийся на глобальное лексическое окружение, а не на родительское. Поэтому, они не могут использовать внешние локальные переменные. Но это очень хорошо, потому что это избавляет нас от ошибок. Переданные явно параметры - гораздо лучшее архитектурное решение, которое не вызывает проблем у минификаторов.
+

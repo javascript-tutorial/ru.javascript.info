@@ -1,48 +1,48 @@
-# Find bbtag pairs
+# Найдите пары BB-кодов
 
-A "bb-tag" looks like `[tag]...[/tag]`, where `tag` is one of: `b`, `url` or `quote`.
+[BB-код](https://ru.wikipedia.org/wiki/BBCode) имеет вид `[tag]...[/tag]`, где `tag`-- это один из: `b`, `url` или `quote`.
 
-For instance:
+Например:
 ```
-[b]text[/b]
-[url]http://google.com[/url]
-```
-
-BB-tags can be nested. But a tag can't be nested into itself, for instance:
-
-```
-Normal:
-[url] [b]http://google.com[/b] [/url]
-[quote] [b]text[/b] [/quote]
-
-Impossible:
-[b][b]text[/b][/b]
+[b]текст[/b]
+[url]http://ya.ru[/url]
 ```
 
-Tags can contain line breaks, that's normal:
+BB-коды могут быть вложенными. Но сам в себя тег быть вложен не может, например:
+
+```
+Допустимо:
+[url] [b]http://ya.ru[/b] [/url]
+[quote] [b]текст[/b] [/quote]
+
+Нельзя:
+[b][b]текст[/b][/b]
+```
+
+Теги могут содержать переносы строк, это допустимо:
 
 ```
 [quote]
-  [b]text[/b]
+  [b]текст[/b]
 [/quote]
 ```
 
-Create a regexp to find all BB-tags with their contents.
+Создайте регулярное выражение для поиска всех BB-кодов и их содержимого.
 
-For instance:
+Например:
 
 ```js
-let reg = /your regexp/g;
+let reg = /ваше регулярное выражение/флаги;
 
-let str = "..[url]http://google.com[/url]..";
-alert( str.match(reg) ); // [url]http://google.com[/url]
+let str = "..[url]http://ya.ru[/url]..";
+alert( str.match(reg) ); // [url]http://ya.ru[/url]
 ```
 
-If tags are nested, then we need the outer tag (if we want we can continue the search in its content):
+Если теги вложены, то нужно искать самый внешний тег (при желании можно продолжить поиск в его содержимом):
 
 ```js
-let reg = /your regexp/g;
+let reg = /ваше регулярное выражение/флаги;
 
-let str = "..[url][b]http://google.com[/b][/url]..";
-alert( str.match(reg) ); // [url][b]http://google.com[/b][/url]
+let str = "..[url][b]http://ya.ru[/b][/url]..";
+alert( str.match(reg) ); // [url][b]http://ya.ru[/b][/url]
 ```

@@ -1,23 +1,23 @@
-# Form properties and methods
+# Свойства и методы формы
 
-Forms and control elements, such as `<input>` have a lot of special properties and events.
+Формы и элементы управления, такие как `<input>`, имеют множество специальных свойств и событий.
 
-Working with forms can be much more convenient if we know them.
+Работать с формами станет намного удобнее, когда мы их изучим.
 
-## Navigation: form and elements
+## Навигация: формы и элементы
 
-Document forms are members of the special collection `document.forms`.
+Формы в документе входят в специальную коллекцию `document.forms`.
 
-That's a *named* collection: we can use both the name and the number to get the form.
+Это - так называемая "именованная" коллекция: мы можем использовать для получения формы как её имя, так и порядковый номер в документе.
 
 ```js no-beautify
-document.forms.my - the form with name="my"
-document.forms[0] - the first form in the document
+document.forms.my - форма с именем "my" (name="my")
+document.forms[0] - первая форма в документе
 ```
 
-When we have a form, then any element is available in the named collection `form.elements`.
+Когда мы уже получили форму, любой элемент доступен в именованной коллекции `form.elements`.
 
-For instance:
+Например:
 
 ```html run height=40
 <form name="my">
@@ -26,19 +26,19 @@ For instance:
 </form>
 
 <script>
-  // get the form
+  // получаем форму
   let form = document.forms.my; // <form name="my"> element
 
-  // get the element
+  // получаем элемент
   let elem = form.elements.one; // <input name="one"> element
 
   alert(elem.value); // 1
 </script>
 ```
 
-There may be multiple elements with the same name, that's often the case with radio buttons.
+Может быть несколько элементов с одним и тем же именем, это часто бывает с кнопками-переключателями `radio`.
 
-In that case `form.elements[name]` is a collection, for instance:
+В этом случае `form.elements[name]` является коллекцией, например:
 
 ```html run height=40
 <form>
@@ -55,13 +55,12 @@ alert(ageElems[0].value); // 10, the first input value
 </script>
 ```
 
-These navigation properties do not depend on the tag structure. All elements, no matter how deep they are in the form, are available in `form.elements`.
+Эти навигационные свойства не зависят от структуры тегов внутри формы. Все элементы, как бы глубоко они ни находились в форме, доступны в коллекции `form.elements`.
 
+````smart header="`<fieldset>` формы как \"подформа\""
+Форма может содержать один или несколько элементов `<fieldset>` внутри себя. Они также поддерживают свойство `elements`.
 
-````smart header="Fieldsets as \"subforms\""
-A form may have one or many `<fieldset>` elements inside it. They also support the `elements` property.
-
-For instance:
+Например:
 
 ```html run height=80
 <body>
@@ -79,7 +78,7 @@ For instance:
     let fieldset = form.elements.userFields;
     alert(fieldset); // HTMLFieldSetElement
 
-    // we can get the input both from the form and from the fieldset
+    // мы можем получить информацию как из формы, так и из fieldset
     alert(fieldset.elements.login == form.elements.login); // true
 */!*
   </script>
@@ -87,14 +86,14 @@ For instance:
 ```
 ````
 
-````warn header="Shorter notation: `form.name`"
-There's a shorter notation: we can access the element as `form[index/name]`.
+````warn header="Сокращённая форма записи: `form.name`"
+Есть более короткая запись: мы можем получить доступ к элементу через `form[index/name]`. 
 
-Instead of `form.elements.login` we can write `form.login`.
+Вместо `form.elements.login` мы можем написать `form.login`.
 
-That also works, but there's a minor issue: if we access an element, and then change its `name`, then it is still available under the old name (as well as under the new one).
+Это также работает, но есть небольшая проблема: если мы получаем элемент, а затем меняем его свойство `name`, то он всё ещё будет доступен под старым именем (также, как и под новым).
 
-That's easy to see in an example:
+В этом легче разобраться на примере:
 
 ```html run height=40
 <form id="form">
@@ -102,35 +101,34 @@ That's easy to see in an example:
 </form>
 
 <script>
-  alert(form.elements.login == form.login); // true, the same <input>
+  alert(form.elements.login == form.login); // true, ведь это одинаковые <input>
 
-  form.login.name = "username"; // change the name of the input
+  form.login.name = "username"; // изменяем свойство name у элемента input
 
-  // form.elements updated the name:
+  // form.elements обновили свои имена:
   alert(form.elements.login); // undefined
   alert(form.elements.username); // input
 
 *!*
-  // the direct access now can use both names: the new one and the old one
+  // теперь для прямого доступа мы можем использовать оба имени: новое и старое
   alert(form.username == form.login); // true
 */!*
 </script>
 ```
 
-That's usually not a problem, because we rarely change names of form elements.
+Обычно это не вызывает проблем, так как мы редко меняем имена у элементов формы.
 
 ````
 
-## Backreference: element.form
+## Обратная ссылка: element.form
 
-For any element, the form is available as `element.form`. So a form references all elements, and elements
-reference the form.
+Для любого элемента форма доступна через `element.form`. Так что форма ссылается на все элементы, а эти элементы ссылаются на форму.
 
-Here's the picture:
+Вот иллюстрация:
 
 ![](form-navigation.png)
 
-For instance:
+Пример:
 
 ```html run height=40
 <form id="form">
@@ -148,139 +146,141 @@ For instance:
 </script>
 ```
 
-## Form elements
+## Элементы формы
 
-Let's talk about form controls, pay attention to their specific features.
+Рассмотрим элементы управления, используемые в формах, обращая внимание на их особенности.
 
-### input and textarea
+### input и textarea
 
-Normally, we can access the value as `input.value` or `input.checked` for checkboxes.
+К их значению можно получить доступ через свойство `input.value` (строка) или `input.checked` (булево значение) для чекбоксов.
 
-Like this:
+Вот так:
 
 ```js
-input.value = "New value";
-textarea.value = "New text";
+input.value = "Новое значение";
+textarea.value = "Новый текст";
 
-input.checked = true; // for a checkbox or radio button
+input.checked = true; // для чекбоксов и переключателей
 ```
 
-```warn header="Use `textarea.value`, not `textarea.innerHTML`"
-Please note that we should never use `textarea.innerHTML`: it stores only the HTML that was initially on the page, not the current value.
+```warn header="Используйте `textarea.value` вместо `textarea.innerHTML`"
+Обратим внимание: хоть `<textarea>...</textarea>` и хранит значение как вложенный HTML, нам не следует использовать `textarea.innerHTML`. Там хранится только тот HTML, который был изначально на странице, а не текущее значение.
 ```
 
-### select and option
+### select и option
 
-A `<select>` element has 3 important properties:
+Элемент `<select>` имеет 3 важных свойства:
 
-1. `select.options` -- the collection of `<option>` elements,
-2. `select.value` -- the value of the chosen option,
-3. `select.selectedIndex` -- the number of the selected option.
+1. `select.options` -- коллекция из элементов `<option>`,
+2. `select.value` -- значение выбранного в данный момент `<option>`,
+3. `select.selectedIndex` -- номер выбранного `<option>`.
 
-So we have three ways to set the value of a `<select>`:
+Имеется три способа задать значение для `<select>`:
 
-1. Find the needed `<option>` and set `option.selected` to `true`.
-2. Set `select.value` to the value.
-3. Set `select.selectedIndex` to the number of the option.
+1. Найти необходимый `<option>` и установить в `option.selected` значение `true`.
+2. Установить в `select.value` значение нужного нам `<option>`.
+3. Установить в `select.selectedIndex` номер `<option>`.
 
-The first way is the most obvious, but `(2)` and `(3)` are usually more convenient.
+Первый способ наиболее понятный, но `(2)` и `(3)` являются более удобными при работе.
 
-Here is an example:
+Вот эти способы на примере:
 
 ```html run
 <select id="select">
-  <option value="apple">Apple</option>
-  <option value="pear">Pear</option>
-  <option value="banana">Banana</option>
+  <option value="apple">Яблоко</option>
+  <option value="pear">Груша</option>
+  <option value="banana">Банан</option>
 </select>
 
 <script>
-  // all three lines do the same thing
+  // все три строки делают одно и то же
   select.options[2].selected = true;
   select.selectedIndex = 2;
   select.value = 'banana';
 </script>
 ```
 
-Unlike most other controls, `<select multiple>` allows multiple choice. In that case we need to walk over `select.options` to get all selected values.
+В отличие от большинства других элементов управления, `<select multiple>` позволяет нам выбрать несколько вариантов. В этом случае нам необходимо пройтись по `select.options`, чтобы получить все выбранные значения.
 
-Like this:
+Например так:
 
 ```html run
 <select id="select" *!*multiple*/!*>
-  <option value="blues" selected>Blues</option>
-  <option value="rock" selected>Rock</option>
-  <option value="classic">Classic</option>
+  <option value="blues" selected>Блюз</option>
+  <option value="rock" selected>Рок</option>
+  <option value="classic">Классика</option>
 </select>
 
 <script>
-  // get all selected values from multi-select
+  // получаем все выбранные значения из списка множественного выбора
   let selected = Array.from(select.options)
     .filter(option => option.selected)
     .map(option => option.value);
 
-  alert(selected); // blues,rock  
+  alert(selected); // Блюз,Рок
 </script>
 ```
 
-The full specification of the `<select>` element is available at <https://html.spec.whatwg.org/multipage/forms.html#the-select-element>.
+Полное описание элемента `<select>` доступно в спецификации <https://html.spec.whatwg.org/multipage/forms.html#the-select-element>.
 
 ### new Option
 
-In the specification of [the option element](https://html.spec.whatwg.org/multipage/forms.html#the-option-element) there's a nice short syntax to create `<option>` elements:
+Элемент `<option>` редко используется сам по себе, но и здесь есть кое-что интересное.
+
+В описании [элемента option](https://html.spec.whatwg.org/multipage/forms.html#the-option-element) есть красивый короткий синтаксис для создания элемента <option>:
 
 ```js
 option = new Option(text, value, defaultSelected, selected);
 ```
 
-Parameters:
+Параметры:
 
-- `text` -- the text inside the option,
-- `value` -- the option value,
-- `defaultSelected` -- if `true`, then `selected` attribute is created,
-- `selected` -- if `true`, then the option is selected.
+- `text` -- текст внутри <option>,
+- `value` -- значение,
+- `defaultSelected` -- если `true`, то ставится HTML-атрибут `selected`,
+- `selected` -- если `true`, то <option> будет выбранным.
 
-For instance:
-
-```js
-let option = new Option("Text", "value");
-// creates <option value="value">Text</option>
-```
-
-The same element selected:
+Пример:
 
 ```js
-let option = new Option("Text", "value", true, true);
+let option = new Option("Текст", "value");
+// создаст <option value="value">Текст</option>
 ```
 
-```smart header="Additional properties of `<option>`"
-Option elements have additional properties:
+Тот же элемент, но выбранный:
+
+```js
+let option = new Option("Текст", "value", true, true);
+```
+
+```smart header="Дополнительные свойства `<option>`"
+Элементы `<option>` имеют дополнительные свойства:
 
 `selected`
-: Is the option selected.
+: Выбрана ли опция.
 
 `index`
-: The number of the option among the others in its `<select>`.
+: Номер опции среди других в списке `<select>`.
 
 `text`
-: Text content of the option (seen by the visitor).
+: Содержимое опции (то, что видит посетитель).
 ```
 
-## Summary
+## Итого
 
-Form navigation:
+Свойства для навигации по формам:
 
 `document.forms`
-: A form is available as `document.forms[name/index]`.
+: Форма доступна через `document.forms[name/index]`.
 
 `form.elements`  
-: Form elements are available as `form.elements[name/index]`, or can use just `form[name/index]`. The `elements` property also works for `<fieldset>`.
+: Элементы формы доступны через `form.elements[name/index]`, или можно просто использовать `form[name/index]`. Свойство `elements` также работает для `<fieldset>`.
 
 `element.form`
-: Elements reference their form in the `form` property.
+: Элементы ссылаются на свою форму в свойстве `form`.
 
-Value is available as `input.value`, `textarea.value`, `select.value` etc, or `input.checked` for checkboxes and radio buttons.
+Значения элементов формы доступны через `input.value`, `textarea.value`, `select.value` и т.д. либо  `input.checked` для чекбоксов и переключателей.
 
-For `<select>` we can also get the value by the index `select.selectedIndex` or through the options collection `select.options`. The full specification of this and other elements is at <https://html.spec.whatwg.org/multipage/forms.html>.
+Для элемента `<select>` мы также можем получить индекс выбранного пункта через `select.selectedIndex`, либо используя коллекцию пунктов `select.options`. Полное описание этого и других элементов находится находится в спецификации, по адресу <https://html.spec.whatwg.org/multipage/forms.html>.
 
-These are the basics to start working with forms. In the next chapter we'll cover `focus` and `blur` events that may occur on any element, but are mostly handled on forms.
+Это были основы для начала работы с формами. Далее в учебнике мы встретим ещё много примеров. В следующей главе мы рассмотрим такие события, как `focus` и `blur`, которые могут происходить на любом элементе, но чаще всего обрабатываются в формах.

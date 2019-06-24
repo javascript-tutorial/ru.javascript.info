@@ -1,20 +1,20 @@
 
-Answers:
+Ответы:
 
-1. `true`. 
+1. `true`.
 
-    The assignment to `Rabbit.prototype` sets up `[[Prototype]]` for new objects, but it does not affect the existing ones. 
+    Присвоение нового значения свойству `Rabbit.prototype` влияет на `[[Prototype]]` вновь создаваемых объектов, но не на прототип уже существующих.
 
-2. `false`. 
+2. `false`.
 
-    Objects are assigned by reference. The object from `Rabbit.prototype` is not duplicated, it's still a single object is referenced both by `Rabbit.prototype` and by the `[[Prototype]]` of `rabbit`. 
+    Объекты присваиваются по ссылке. Не создаётся копия `Rabbit.prototype`, это всегда один объект, на который ссылается и `Rabbit.prototype`, и `[[Prototype]]` объекта `rabbit`.
 
-    So when we change its content through one reference, it is visible through the other one.
+    Таким образом, когда мы изменяем этот объект по одной ссылке, изменения видны и по другой.
 
 3. `true`.
 
-    All `delete` operations are applied directly to the object. Here `delete rabbit.eats` tries to remove `eats` property from `rabbit`, but it doesn't have it. So the operation won't have any effect.
+    Операция `delete` применяется к свойствам конкретного объекта, на котором она вызвана. Здесь `delete rabbit.eats` пытается удалить свойство `eats` из объекта `rabbit`, но его там нет. Таким образом, просто ничего не произойдёт.
 
 4. `undefined`.
 
-    The property `eats` is deleted from the prototype, it doesn't exist any more.
+    Свойство `eats` удалено из прототипа, оно больше не существует.
