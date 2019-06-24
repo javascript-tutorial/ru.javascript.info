@@ -101,10 +101,9 @@ new User("Dude").sayHi(); // Hello Dude!
 
 ![](mixin-inheritance.png)
 
-Так как super ищет родительские методы в `[[HomeObject]].[[Prototype]]`, это означает `sayHiMixin.[[Prototype]]`, а не `User.[[Prototype]]`.
 Это связано с тем, что методы `sayHi` и `sayBye` были изначально созданы в объекте `sayHiMixin`. Так что их внутреннее свойство `[[HomeObject]]` ссылается на `sayHiMixin`, как показано на картинке выше.
 
-Вызов `super` ищет родительские методы в `[[HomeObject]].__proto__`, что означает `sayHiMixin.__proto__`, а не `User.__proto__`.
+Так как `super` ищет родительские методы в `[[HomeObject]].[[Prototype]]`, это означает `sayHiMixin.[[Prototype]]`, а не `User.[[Prototype]]`.
 
 ## EventMixin
 
