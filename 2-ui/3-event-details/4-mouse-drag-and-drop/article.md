@@ -255,44 +255,44 @@ function onMouseMove(event) {
   if (currentDroppable != droppableBelow) { // если были какие-либо изменения
     // пролетаем ли мы над droppable или нет
     // внимание: оба значения могут быть null
-    //   currentDroppable=null если мы не над droppable (например, над пустым пространством)
-    //   droppableBelow=null если мы не над droppable именно сейчас, пока длится это событие
+    // currentDroppable=null, если мы не над droppable (например, над пустым пространством)
+    // droppableBelow=null, если мы не над droppable именно сейчас, пока длится это событие
 
     if (currentDroppable) {
-      // the logic to process "flying out" of the droppable (remove highlight)
+      // логика обработки процесса, когда мы покидаем droppable (удаляем подсветку)
       leaveDroppable(currentDroppable);
     }
     currentDroppable = droppableBelow;
     if (currentDroppable) {
-      // the logic to process "flying in" of the droppable
+      // логика обработки процесса, когда мы входим в зону droppable
       enterDroppable(currentDroppable);
     }
   }
 }
 ```
 
-In the example below when the ball is dragged over the soccer gate, the gate is highlighted.
+В приведенном ниже примере, когда мяч перетаскивается через футбольные ворота, ворота подсвечиваются.
 
 [codetabs height=250 src="ball4"]
 
-Now we have the current "drop target" in the variable `currentDroppable` during the whole process and can use it to highlight or any other stuff.
+Теперь в течение всего процесса в переменной `currentDroppable` мы храним текущую «цель удаления», и мы можем использовать её для того, чтобы выделить цель или любых других вещей.
 
-## Summary
+## Итого
 
-We considered a basic `Drag'n'Drop` algorithm.
+Мы рассмотрели основной алгоритм `Drag'n'Drop`.
 
-The key components:
+Ключевые идеи:
 
-1. Events flow: `ball.mousedown` -> `document.mousemove` -> `ball.mouseup` (cancel native `ondragstart`).
-2. At the drag start -- remember the initial shift of the pointer relative to the element: `shiftX/shiftY` and keep it during the dragging.
-3. Detect droppable elements under the pointer using `document.elementFromPoint`.
+1. Потоки событий: `ball.mousedown` -> `document.mousemove` -> `ball.mouseup` (отменяющий стандартный `ondragstart`).
+2. В начале перетаскивания: запомните начальное смещение указателя относительно элемента: `shiftX/shiftY` -- и сохраните его при перетаскивании.
+3. Выявите droppable элементы под указателем с помощью `document.elementFromPoint`.
 
-We can lay a lot on this foundation.
+На этой основе мы можем сделать многое.
 
-- On `mouseup` we can finalize the drop: change data, move elements around.
-- We can highlight the elements we're flying over.
-- We can limit dragging by a certain area or direction.
-- We can use event delegation for `mousedown/up`. A large-area event handler that checks  `event.target` can manage Drag'n'Drop for hundreds of elements.
-- And so on.
+- На `mouseup` мы можем завершить сбрасывание: изменить данные, переместить элементы.
+- Мы можем подсветить элементы, пока мышь "пролетает" над ними.
+- Мы можем ограничить перетаскивание определенной областью или направлением.
+- Мы можем использовать делегирование событий для `mousedown/up`. Обработчик событий большой площади, который проверяет `event.target`, может управлять Drag’n’Drop для сотен элементов.
+- И так далее.
 
-There are frameworks that build architecture over it: `DragZone`, `Droppable`, `Draggable` and other classes. Most of them do the similar stuff to described above, so it should be easy to understand them now. Or roll our own, because you already know how to handle the process, and it may be more flexible than to adapt something else.
+Существуют фреймворки, которые строят архитектуру поверх этого алгоритма, создавая такие классы, как `DragZone`, `Droppable`, `Draggable`. Большинство из них делают вещи, аналогичные описанным выше, поэтому вам должно быть легко их понять сейчас. Или создавайте ваш собственный, потому что вы уже знаете, как управлять процессом, и он может быть более гибким, чем адаптация чего-то готового.
