@@ -1,4 +1,4 @@
 
-We have a horizontal Drag'n'Drop here.
+В этом случае настроим горизонтальный Drag'n'Drop.
 
-To position the element we use `position:relative` and slider-relative coordinates for the thumb. Here it's more convenient here than `position:absolute`.
+Для позиционирования элемента используем `position:relative` и координаты ползунка для синего блока. Это лучше, чем `position:absolute`.
