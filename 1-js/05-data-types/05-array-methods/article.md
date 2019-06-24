@@ -11,7 +11,11 @@
 - `arr.shift()` -- извлекает элемент из начала,
 - `arr.unshift(...items)` -- добавляет элементы в начало.
 
+<<<<<<< HEAD
 Есть и другие.
+=======
+Here are a few others.
+>>>>>>> 9b5c1c95ec8a466150e519b0e94748717c747b09
 
 ### splice
 
@@ -238,9 +242,15 @@ arr.forEach(function(item, index, array) {
 
 Методы [arr.indexOf](mdn:js/Array/indexOf), [arr.lastIndexOf](mdn:js/Array/lastIndexOf) и [arr.includes](mdn:js/Array/includes) имеют одинаковый синтаксис и делают по сути то же самое, что и их строковые аналоги, но работают с элементами вместо символов:
 
+<<<<<<< HEAD
 - `arr.indexOf(item, from)` ищет `item`, начиная с индекса `from`, и возвращает индекс, на котором был найден искомый элемент, в противном случае `-1`.
 - `arr.lastIndexOf(item, from)` -- то же самое, но ищет справа налево.
 - `arr.includes(item, from)` -- ищет `item`, начиная с индекса `from`, и возвращает `true`, если поиск успешен.
+=======
+- `arr.indexOf(item, from)` -- looks for `item` starting from index `from`, and returns the index where it was found, otherwise `-1`.
+- `arr.lastIndexOf(item, from)` -- same, but looks for from right to left.
+- `arr.includes(item, from)` -- looks for `item` starting from index `from`, returns `true` if found.
+>>>>>>> 9b5c1c95ec8a466150e519b0e94748717c747b09
 
 Например:
 
@@ -418,7 +428,11 @@ alert(arr);  // *!*1, 2, 15*/!*
 
 Теперь всё работает как надо.
 
+<<<<<<< HEAD
 Давайте отойдём в сторону и подумаем, что же происходит. Упомянутый ранее массив `arr` может быть массивом чего угодно, верно? Он может содержать числа, строки, элементы HTML или что-то ещё. У нас есть набор *чего-то*. Чтобы отсортировать его, нам нужна *упорядочивающая функция*, которая знает, как сравнивать его элементы. По умолчанию элементы сортируются как строки.
+=======
+Let's step aside and think what's happening. The `arr` can be array of anything, right? It may contain numbers or strings or HTML elements or whatever. We have a set of *something*. To sort it, we need an *ordering function* that knows how to compare its elements. The default is a string order.
+>>>>>>> 9b5c1c95ec8a466150e519b0e94748717c747b09
 
 Метод `arr.sort(fn)` имеет встроенную реализацию алгоритма сортировки. Нам не нужно заботиться о том, как это на самом деле работает (в большинстве случаев это оптимизированная [быстрая сортировка](https://ru.wikipedia.org/wiki/%D0%91%D1%8B%D1%81%D1%82%D1%80%D0%B0%D1%8F_%D1%81%D0%BE%D1%80%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%BA%D0%B0)). Она проходится по массиву, сравнивает его элементы с помощью предоставленной функции и переупорядочивает их. Все, что остаётся нам, это предоставить `fn`, которая делает это сравнение.
 
@@ -474,7 +488,11 @@ alert( arr ); // 5,4,3,2,1
 
 ### split и join
 
+<<<<<<< HEAD
 Ситуация из реальной жизни. Мы пишем приложение для обмена сообщениями, и посетитель вводит имена тех, кому его отправить: `Вася, Петя, Маша`. Но нам-то гораздо удобнее работать с массивом имён, чем с одной строкой. Как это сделать?
+=======
+Here's the situation from real life. We are writing a messaging app, and the person enters the comma-delimited list of receivers: `John, Pete, Mary`. But for us an array of names would be much more comfortable than a single string. How to get it?
+>>>>>>> 9b5c1c95ec8a466150e519b0e94748717c747b09
 
 Метод [str.split(delim)](mdn:js/String/split) именно это и делает. Он разбивает строку на массив по заданному разделителю `delim`.
 
@@ -548,7 +566,11 @@ let value = arr.reduce(function(previousValue, item, index, array) {
 
 Этот метод проще всего понять, рассмотрев пример.
 
+<<<<<<< HEAD
 Тут мы получим сумму всех элементов массива всего одной строкой:
+=======
+Here we get a sum of an array in one line:
+>>>>>>> 9b5c1c95ec8a466150e519b0e94748717c747b09
 
 ```js run
 let arr = [1, 2, 3, 4, 5];
@@ -681,7 +703,11 @@ alert(youngerUsers.length); // 2
 
 ## Итого
 
+<<<<<<< HEAD
 Шпаргалка по методам массива:
+=======
+A cheat sheet of array methods:
+>>>>>>> 9b5c1c95ec8a466150e519b0e94748717c747b09
 
 - Для добавления/удаления элементов:  
   - `push (...items)` -- добавляет элементы в конец,
@@ -727,6 +753,12 @@ alert(youngerUsers.length); // 2
 
 На первый взгляд может показаться, что существует очень много разных методов, которые довольно сложно запомнить. Но на самом деле это гораздо проще, чем кажется.
 
+<<<<<<< HEAD
 Поближе ознакомьтесь со шпаргалкой, представленной выше, а затем, чтобы попрактиковаться, решите задачи, предложенные в данной главе. Так вы получите необходимый опыт в правильном использовании методов массива.
 
 Всякий раз, когда вам будет необходимо что-то сделать с массивом и вы не знаете, как это сделать -- приходите сюда, посмотрите на таблицу и найдите правильный метод. Примеры помогут вам всё сделать правильно, и вскоре вы автоматически запомните методы без особых усилий с вашей стороны.
+=======
+Look through the cheat sheet just to be aware of them. Then solve the tasks of this chapter to practice, so that you have experience with array methods.
+
+Afterwards whenever you need to do something with an array, and you don't know how -- come here, look at the cheat sheet and find the right method. Examples will help you to write it correctly. Soon you'll automatically remember the methods, without specific efforts from your side.
+>>>>>>> 9b5c1c95ec8a466150e519b0e94748717c747b09

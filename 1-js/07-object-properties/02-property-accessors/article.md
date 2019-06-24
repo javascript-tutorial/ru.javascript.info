@@ -3,7 +3,11 @@
 
 Есть два типа свойств объекта.
 
+<<<<<<< HEAD
 Первый тип это *свойства-данные (data properties)*. Мы уже знаем, как работать с ними. Все свойства, которые мы использовали до текущего момента были свойствами-данными.
+=======
+The first kind is *data properties*. We already know how to work with them. All properties that we've been using till now were data properties.
+>>>>>>> 9b5c1c95ec8a466150e519b0e94748717c747b09
 
 Второй тип свойств мы ещё не рассматривали. Это *свойства-аксессоры (accessor properties)*. По своей сути это функции, которые используются для присвоения и получения значения, но во внешнем коде они выглядят как обычные свойства объекта.
 
@@ -82,7 +86,11 @@ alert(user.name); // Alice
 alert(user.surname); // Cooper
 ```
 
+<<<<<<< HEAD
 В итоге мы получили "виртуальное" свойство fullName. Его можно прочитать и изменить, но по факту его не существует.
+=======
+As the result, we have a "virtual" property `fullName`. It is readable and writable, but in fact does not exist.
+>>>>>>> 9b5c1c95ec8a466150e519b0e94748717c747b09
 
 ```smart header="Accessor properties are only accessible with get/set"
 Как только свойство определено с помощью `get prop()` или `set prop()`, оно становится свойством-аксессором, а не свойством-данных.
@@ -181,9 +189,15 @@ user.name = ""; // Имя слишком короткое...
 
 ## Использование для совместимости
 
+<<<<<<< HEAD
 Одна из хороших идей, стоящих за геттерами и сеттерами -- они позволяют в любой момент взять "обычное" свойство и изменить его поведение, поменяв на геттер и сеттер.
 
 Например, мы начали реализовывать объект `user`, используя свойства-данные `name` и `age`:
+=======
+One of the great ideas behind getters and setters -- they allow to take control over a "regular" data property at any moment by replacing it with getter and setter and tweak its behavior.
+
+Let's say we started implementing user objects using data properties `name` and `age`:
+>>>>>>> 9b5c1c95ec8a466150e519b0e94748717c747b09
 
 ```js
 function User(name, age) {
@@ -209,9 +223,15 @@ let john = new User("John", new Date(1992, 6, 1));
 
 Что нам делать со старым кодом, который использует свойство `age`?
 
+<<<<<<< HEAD
 Мы можем попытаться найти все такие места и изменить их, но это отнимает время и может быть выполнимо, если код был написан/используется многими другими людьми. И кроме того, `age` -- это отличное свойство для `user`, верно? В некоторых ситуациях это то, что нам нужно.
 
 Добавление геттера для `age` решит проблему:
+=======
+We can try to find all such places and fix them, but that takes time and can be hard to do if that code is written/used by many other people. And besides, `age` is a nice thing to have in `user`, right? In some places it's just what we want.
+
+Adding a getter for `age` solves the problem:
+>>>>>>> 9b5c1c95ec8a466150e519b0e94748717c747b09
 
 ```js run no-beautify
 function User(name, birthday) {
