@@ -1,1 +1,1 @@
-Hello from the server!
+Привет от сервера!

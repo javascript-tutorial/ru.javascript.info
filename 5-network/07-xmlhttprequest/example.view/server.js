@@ -34,7 +34,7 @@ function accept(req, res) {
       'Cache-Control': 'no-cache'
     });
 
-    res.write(JSON.stringify({message: "Hello, world!"}));
+    res.write(JSON.stringify({message: "Привет, мир!"}));
     res.end();
   } else {
     file.serve(req, res);
