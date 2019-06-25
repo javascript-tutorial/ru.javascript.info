@@ -10,7 +10,7 @@
 let url = location.host == 'localhost' ?
   'ws://localhost:8080/ws' : location.host == 'javascript.local' ?
   `ws://javascript.local/article/websocket/chat/ws` : // интеграция для разработки с локальным сайтом
-  `wss://javascript.info/article/websocket/chat/ws`; // продуктивная интеграция с javascript.info
+  `wss://javascript.info/article/websocket/chat/ws`; // боевая интеграция с javascript.info
 
 let socket = new WebSocket(url);
 
