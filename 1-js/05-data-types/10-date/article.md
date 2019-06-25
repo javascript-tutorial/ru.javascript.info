@@ -353,50 +353,50 @@ alert( 'Итоговое время diffSubtract: ' + time1 );
 alert( 'Итоговое время diffGetTime: ' + time2 );
 ```
 
-Современные интерпретаторы JavaScript start applying advanced optimizations only to "hot code" that executes many times (no need to optimize rarely executed things). So, in the example above, first executions are not well-optimized. We may want to add a heat-up run:
+Современные интерпретаторы JavaScript начинают применять современные оптимизации только к "горячему коду", выполняющемуся несколько раз (незачем оптимизировать то, что выполняется редко). Так что в примере выше первые запуски не оптимизированы должным образом. Нелишним будет добавить следующий код для разогрева:
 
 ```js
-// added for "heating up" prior to the main loop
+// добавляем для "разогрева" перед основным циклом
 bench(diffSubtract);
 bench(diffGetTime);
 
-// now benchmark
+// а теперь тестируем производительность
 for (let i = 0; i < 10; i++) {
   time1 += bench(diffSubtract);
   time2 += bench(diffGetTime);
 }
 ```
 
-```warn header="Be careful doing microbenchmarking"
-Modern JavaScript engines perform many optimizations. They may tweak results of "artificial tests" compared to "normal usage", especially when we benchmark something very small. So if you seriously want to understand performance, then please study how the JavaScript engine works. And then you probably won't need microbenchmarks at all.
+```warn header="Тестируйте производительность с осторожностью"
+Современные интерпретаторы JavaScript выполняют множество оптимизаций. Они могут повлиять на результаты "искусственных тестов" по сравнению с "нормальным использованием", особенно если мы тестируем что-то немасштабное. Поэтому если хотите серьёзно понять производительность, пожалуйста, изучите, как работают интерпретаторы JavaScript. И тогда вам, вероятно, совершенно не понадобятся микробенчмарки.
 
-The great pack of articles about V8 can be found at <http://mrale.ph>.
+Огромный набор статей о V8 можно найти здесь <http://mrale.ph>.
 ```
 
 ## Date.parse from a string
 
-The method [Date.parse(str)](mdn:js/Date/parse) can read a date from a string.
+Метод [Date.parse(str)](mdn:js/Date/parse) может выделить дату из строки.
 
-The string format should be: `YYYY-MM-DDTHH:mm:ss.sssZ`, where:
+Формат строки должен быть следующим: `YYYY-MM-DDTHH:mm:ss.sssZ`, где:
 
-- `YYYY-MM-DD` -- is the date: year-month-day.
-- The character `"T"` is used as the delimiter.
-- `HH:mm:ss.sss` -- is the time: hours, minutes, seconds and milliseconds.
-- The optional `'Z'` part denotes the time zone in the format `+-hh:mm`. A single letter `Z` that would mean UTC+0.
+- `YYYY-MM-DD` -- это дата: год-месяц-день.
+- Символ `"T"` используется в качестве разделителя.
+- `HH:mm:ss.sss` -- время: часы, минуты, секунды и миллисекунды.
+- Необязательная часть `'Z'` обозначает часовую зону в формате `+-hh:mm`. Если указать просто букву `Z`, то получим UTC+0.
 
-Shorter variants are also possible, like `YYYY-MM-DD` or `YYYY-MM` or even `YYYY`.
+Возможны и более короткие варианты, например, `YYYY-MM-DD` или `YYYY-MM` или даже `YYYY`.
 
-The call to `Date.parse(str)` parses the string in the given format and returns the timestamp (number of milliseconds from 1 Jan 1970 UTC+0). If the format is invalid, returns `NaN`.
+Вызов `Date.parse(str)` обрабатывает строку в заданном формате и возвращает метку времени (количество миллисекунд с 1 января 1970 года UTC+0). Если формат неправильный, возвращается `NaN`.
 
-For instance:
+Например:
 
 ```js run
 let ms = Date.parse('2012-01-26T13:51:50.417-07:00');
 
-alert(ms); // 1327611110417  (timestamp)
+alert(ms); // 1327611110417  (метка времени)
 ```
 
-We can instantly create a `new Date` object from the timestamp:
+Можно мгновенно воздать объект `new Date` из метки времени:
 
 ```js run
 let date = new Date( Date.parse('2012-01-26T13:51:50.417-07:00') );
@@ -415,13 +415,13 @@ alert(date);
 
 Учтите, что в отличие от других систем, отметки времени в JavaScript измеряются в миллисекундах, а не в секундах.
 
-Также порой требуются более точные измерения времени. JavaScript itself does not have a way to measure time in microseconds (1 millionth of a second), but most environments provide it. For instance, browser has [performance.now()](mdn:api/Performance/now) that gives the number of milliseconds from the start of page loading with microsecond precision (3 digits after the point):
+Также порой нам нужно более точно измерить время. Собственными средствами JavaScript измерять время в микросекундах (одна миллионная секунды) нельзя, но в большинстве сред такая возможность есть. К примеру, в браузерах есть метод [performance.now()](mdn:api/Performance/now), возвращающих количество миллисекунд с начала загрузки страницы с точностью до микросекунд (3 цифры после точки):
 
 ```js run
-alert(`Loading started ${performance.now()}ms ago`);
-// Something like: "Loading started 34731.26000000001ms ago"
-// .26 is microseconds (260 microseconds)
-// more than 3 digits after the decimal point are precision errors, but only the first 3 are correct
+alert(`Загрузка началась ${performance.now()}мс назад`);
+// Получаем что-то вроде: "Загрузка началась 34731.26000000001мс назад"
+// .26 –- это микросекунды (260 микросекунд)
+// корректными являются только первые три цифры после точки, а остальные -- это ошибка точности
 ```
 
-Node.js has `microtime` module and other ways. Technically, any device and environment allows to get more precision, it's just not in `Date`.
+В Node.js для этого предусмотрен модуль `microtime` и ряд других способов. Технически, любое устройство или среда позволяет добиться большей точности, просто её нет в объекте `Date`.
