@@ -9,7 +9,7 @@ function accept(req, res) {
     res.end();
     return;
   }
-  // может быть подключен: постоянное-соединение, обновить
+  // может быть подключён: keep-alive, Upgrade
   if (req.headers.connection.match(/\bupgrade\b/i)) {
     res.end();
     return;
