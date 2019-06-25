@@ -9,12 +9,12 @@
 <script>
 let url = location.host == 'localhost' ?
   'ws://localhost:8080/ws' : location.host == 'javascript.local' ?
-  `ws://javascript.local/article/websocket/chat/ws` : // dev integration with local site
-  `wss://javascript.info/article/websocket/chat/ws`; // prod integration with javascript.info
+  `ws://javascript.local/article/websocket/chat/ws` : // интеграция для разработки с локальным сайтом
+  `wss://javascript.info/article/websocket/chat/ws`; // продуктивная интеграция с javascript.info
 
 let socket = new WebSocket(url);
 
-// send message from the form
+// отправка сообщения из формы
 document.forms.publish.onsubmit = function() {
   let outgoingMessage = this.message.value;
 
@@ -22,7 +22,7 @@ document.forms.publish.onsubmit = function() {
   return false;
 };
 
-// handle incoming messages
+// прослушка входящих сообщений
 socket.onmessage = function(event) {
   let incomingMessage = event.data;
   showMessage(incomingMessage);
@@ -30,7 +30,7 @@ socket.onmessage = function(event) {
 
 socket.onclose = event => console.log(`Closed ${event.code}`);
 
-// show message in div#messages
+// отображение информации в div#messages
 function showMessage(message) {
   let messageElem = document.createElement('div');
   messageElem.textContent = message;

@@ -4,12 +4,12 @@ const ws = require('ws');
 const wss = new ws.Server({noServer: true});
 
 function accept(req, res) {
-  // all incoming requests must be websockets
+  // все входящие запросы должны использовать websockets
   if (!req.headers.upgrade || req.headers.upgrade.toLowerCase() != 'websocket') {
     res.end();
     return;
   }
-  // can be Connection: keep-alive, Upgrade
+  // может быть подключен: постоянное-соединение, обновить
   if (req.headers.connection.match(/\bupgrade\b/i)) {
     res.end();
     return;
@@ -19,11 +19,11 @@ function accept(req, res) {
 }
 
 function onConnect(ws) {
-  ws.on('message', function (message) {
-    let name = message.match(/\w+$/) || "Guest";
-    ws.send(`Hello, ${name}!`);
+  ws.on('сообщение', function (message) {
+    let name = message.match(/\w+$/) || "Гость";
+    ws.send(`Привет, ${name}!`);
 
-    setTimeout(() => ws.close(1000, "Bye!"), 5000);
+    setTimeout(() => ws.close(1000, "Пока!"), 5000);
   });
 }
 
