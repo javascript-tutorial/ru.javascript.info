@@ -1,12 +1,12 @@
-# Fetch: Cross-Origin Requests
+# Fetch: Cross-Origin Запросы
 
-If we make a `fetch` from an arbitrary web-site, that will probably fail.
+Если мы сделаем запрос через `fetch` с произвольного вебсайта, он, вероятно, завершится неудачей.
 
-The core concept here is *origin* -- a domain/port/protocol triplet.
+Ключевой концепцией здесь является *origin* (источник) -- тройка домен/порт/протокол.
 
-Cross-origin requests -- those sent to another domain (even a subdomain) or protocol or port -- require special headers from the remote side. That policy is called "CORS": Cross-Origin Resource Sharing.
+Cross-origin запросы -- запросы, отправленные на другой домен (или даже поддомен), или протокол, или порт -- требуют специальных заголовков от удалённой стороны. Эта политика называется "CORS": Cross-Origin Resource Sharing («совместное использование ресурсов между разными источниками»).
 
-For instance, let's try fetching `http://example.com`:
+Например, давайте попробуем запросить `http://example.com`:
 
 ```js run async
 try {
@@ -16,65 +16,65 @@ try {
 }
 ```
 
-Fetch fails, as expected.
+Fetch не удался, как и ожидалось.
 
-## Why?
+## Почему?
 
-Because cross-origin restrictions protect the internet from evil hackers.
+Потому что cross-origin ограничения защищают интернет от злых хакеров.
 
-Seriously. Let's make a very brief historical digression.
+Серьёзно. Давайте сделаем краткое историческое отступление.
 
-For many years JavaScript did not have any special methods to perform network requests.
+Многие годы JavaScript не имел специальных методов для выполнения сетевых запросов.
 
-**A script from one site could not access the content of another site.**
+**Скрипт с одного сайта не мог получить доступ к содержимому другого сайта.**
 
-That simple, yet powerful rule was a foundation of the internet security. E.g. a script from the page `hacker.com` could not access user's mailbox at `gmail.com`. People felt safe.
+Это простое, но могучее правило было основой интернет-безопасности. Например, скрипт со страницы `hacker.com` не мог получить доступ к почтовому ящику пользователя на `gmail.com`. И люди чувствовали себя в безопасности.
 
-But web developers demanded more power. A variety of tricks were invented to work around it.
+Но веб-разработчики жаждали большей власти. Чтобы обойти сей запрет, были придуманы разнообразные хитрости.
 
-One way to communicate with another server was to submit a `<form>` there. People submitted it into `<iframe>`, just to stay on the current page, like this:
+Одним из способов общения с другим сервером была отправка туда формы (`<form>`). Люди отправляли её в `<iframe>`, чтобы оставаться на текущей странице, вот так:
 
 ```html
-<!-- form target -->
+<!-- цель формы -->
 <iframe name="iframe"></iframe>
 
-<!-- a form could be dynamically generated and submited by JavaScript -->
+<!-- форма могла быть динамически сгенерирована и отправлена с помощью JavaScript -->
 <form target="iframe" method="POST" action="http://another.com/…">
   ...
 </form>
 
 ```
 
-- So, it was possible to make a GET/POST request to another site, even without networking methods.
-- But as it's forbidden to access the content of an `<iframe>` from another site, it wasn't possible to read the response.
+- Таким способом было возможно сделать GET/POST запрос к другому сайту даже без сетевых методов.
+- Но так как было запрещено получать доступ к содержимому `<iframe>` с другого сайта, прочитать ответ было невозможно.
 
-So, `<form>` allowed to submit the data anywhere, but the response content was unaccessible.
+Таким образом, `<form>` позволяла отправлять данные куда угодно, но содержимое ответа было недоступно.
 
-Another trick was to use a `<script src="http://another.com/…">` tag. A script could have any `src`, from any domain. But again -- it was impossible to access the raw content of such script.
+Ещё один трюк заключался в использовании `<script src="http://another.com/…">` тэга. `script` мог иметь любой `src`, с любым доменом. Но опять же -- было невозможно получить доступ к исходному содержимому этого скрипта.
 
-If `another.com` intended to expose data for this kind of access, then a so-called "JSONP (JSON with padding)" protocol was used.
+Если `another.com` хотел предоставить данные для такого доступа, тогда использовался так называемый "JSONP (JSON with padding)" протокол.
 
-Here's the flow:
+Вот последовательность:
 
-1. First, in advance, we declare a global function to accept the data, e.g. `gotWeather`.
-2. Then we make a `<script>` and pass its name as the `callback` query parameter, e.g. `src="http://another.com/weather.json?callback=gotWeather"`.
-3. The remote server dynamically generates a response that wraps the data into `gotWeather(...)` call.  
-4. As the script executes, `gotWeather` runs, and, as it's our function, we have the data.
+1. Сначала мы зараранее объявляем глобальную функцию для приёма данных, например `gotWeather`.
+2. Затем мы создаём `<script>` и передаём имя функции в качестве параметра запроса `callback`, например `src="http://another.com/weather.json?callback=gotWeather"`.
+3. Удалённый сервер динамически генерирует ответ и оборачивает данные в вызов `gotWeather(...)` (то есть отправляет данные в эту функцию в качестве аргументов).  
+4. По мере работы скрипта выполняется `gotWeather`, и, так как это наша функция, мы получаем данные.
 
-Here's an example of the code to receive the data in JSONP:
+Вот пример кода для получения данных в JSONP:
 
 ```js run
-// 1. Declare the function to process the data
+// 1. Объявить функцию для обработки данных
 function gotWeather({ temperature, humidity }) {
   alert(`temperature: ${temperature}, humidity: ${humidity}`);
 }
 
-// 2. Pass its name as the ?callback parameter for the script
+// 2. Передать её имя как callback параметр для скрипта
 let script = document.createElement('script');
 script.src = `https://cors.javascript.info/article/fetch-crossorigin/demo/script?callback=gotWeather`;
 document.body.append(script);
 
-// 3. The expected answer from the server looks like this:
+// 3. Ожидаемый ответ от сервера выглядит так:
 /*
 gotWeather({
   temperature: 25,
@@ -84,40 +84,40 @@ gotWeather({
 ```
 
 
-That works, and doesn't violate security, because both sides agreed to pass the data this way. And, when both sides agree, it's definitely not a hack. There are still services that provide such access, as it works even for very old browsers.
+Это работает и не нарушает безопасность, потому что обе стороны согласились передавать данные таким образом. А когда обе стороны согласны, то это определённо не хак. Всё ещё существуют сервисы, которые предоставляют такой доступ, так как это работает даже для очень старых браузеров.
 
-After a while, modern network methods appeared. At first, cross-origin requests were forbidden. But as a result of long discussions, cross-domain requests were  allowed, in a way that does not add any capabilities unless explicitly allowed by the server.
+Спустя некоторое время появились современные сетевые методы. Вначале cross-origin запросы были запрещены. Но в результате долгих дискуссий было разрешено делать кросс-доменные запросы таким способом, который не даёт каких-то новых возможностей, если это не было явно разрешено сервером.
 
-## Simple requests
+## Простые запросы
 
-[Simple requests](http://www.w3.org/TR/cors/#terminology) must satisfy the following conditions:
+[Простые запросы](http://www.w3.org/TR/cors/#terminology) должны удовлетворять следующим условиям:
 
-1. [Simple method](http://www.w3.org/TR/cors/#simple-method): GET, POST or HEAD
-2. [Simple headers](http://www.w3.org/TR/cors/#simple-header) -- only allowed:
+1. [Простой метод](http://www.w3.org/TR/cors/#simple-method): GET, POST или HEAD
+2. [Простые заголовки](http://www.w3.org/TR/cors/#simple-header) -- разрешены только:
     - `Accept`,
     - `Accept-Language`,
     - `Content-Language`,
-    - `Content-Type` with the value `application/x-www-form-urlencoded`, `multipart/form-data` or `text/plain`.
+    - `Content-Type` со значением `application/x-www-form-urlencoded`, `multipart/form-data` или `text/plain`.
 
-Any other request is considered "non-simple". For instance, a request with `PUT` method or with an `API-Key` HTTP-header does not fit the limitations.
+Любой другой запрос считается "непростым". Например, запрос с методом `PUT` или с HTTP-заголовком `API-Key` не соответствует условиям.
 
-**The essential difference is that a "simple request" can be made with a `<form>` or a `<script>`, without any special methods.**
+**Основное отличие состоит в том, что "простой запрос" может быть сделан через `<form>` или `<script>`, без каких-то специальных методов.**
 
-So, even a very old server should be ready to accept a simple request.
+Таким образом, даже очень старый сервер должен быть способен принять простой запрос.
 
-Contrary to that, requests with non-standard headers or e.g. method `DELETE` can't be created this way. For a long time JavaScript was unable to do such requests. So an old server may assume that such requests come from a privileged source, "because a webpage is unable to send them".
+В противоположность этому, запросы с нестандартными заголовками или, например, методом `DELETE` нельзя создать таким способом. Долгое время JavaScript не мог делать такие запросы. Поэтому старый сервер может предположить, что такие запросы поступают от привилегированного источника, "потому что веб-страница неспособна их посылать".
 
-When we try to make a non-simple request, the browser sends a special "preflight" request that asks the server -- does it agree to accept such cross-origin requests, or not?
+Когда мы пытаемся сделать непростой запрос, браузер посылает специальный "preflight" ("предполётный") запрос, который спрашивает у сервера -- согласен ли он принять такой cross-origin запрос или нет?
 
-And, unless the server explicitly confirms that with headers, a non-simple request is not sent.
+И, если сервер явно не даёт согласие в заголовках, непростой запрос не посылается.
 
-Now we'll go into details. All of them serve a single purpose -- to ensure that new cross-origin capabilities are only accessible with an explicit permission from the server.
+Далее мы углубимся в детали. Все они служат единственной цели -- гарантировать, что новые cross-origin возможности доступны только с явного согласия сервера.
 
-## CORS for simple requests
+## CORS для простых запросов
 
-If a request is cross-origin, the browser always adds `Origin` header to it.
+Если запрос cross-origin, браузер всегда добавляет к нему заголовок `Origin`.
 
-For instance, if we request `https://anywhere.com/request` from `https://javascript.info/page`, the headers will be like:
+Например, если мы запрашиваем `https://anywhere.com/request` от `https://javascript.info/page`, заголовки будут такими:
 
 ```
 GET /request
@@ -128,17 +128,17 @@ Origin: https://javascript.info
 ...
 ```
 
-As you can see, `Origin` contains exactly the origin (domain/protocol/port), without a path.
+Как вы можете видеть, `Origin` содержит именно origin (домен/протокол/порт), без пути.
 
-The server can inspect the `Origin` and, if it agrees to accept such a request, adds a special header `Access-Control-Allow-Origin` to the response. That header should contain the allowed origin (in our case `https://javascript.info`), or a star `*`. Then the response is successful, otherwise an error.
+Сервер может проверить `Origin` и, если он согласен принять такой запрос, добавить особый заголовок `Access-Control-Allow-Origin` к ответу. Этот заголовок должен содержать разрешённый origin (в нашем случае `https://javascript.info`) или звёздочку `*`. Тогда ответ успешен, в противном случае возникает ошибка.
 
-The browser plays the role of a trusted mediator here:
-1. It ensures that the corrent `Origin` is sent with a cross-domain request.
-2. If checks for correct `Access-Control-Allow-Origin` in the response, if it is so, then JavaScript access, otherwise forbids with an error.
+Здесь браузер играет роль доверенного посредника:
+1. Он гарантирует, что вместе с кросс-доменным запросом посылается правильный `Origin`.
+2. Он проверяет правильность `Access-Control-Allow-Origin` в ответе, и если всё хорошо, то JavaScript получает доступ к ответу сервера, в противном случае - доступ запрещается c ошибкой.
 
 ![](xhr-another-domain.png)
 
-Here's an example of an "accepting" response:
+Вот пример "принимающего" ответа:
 ```
 200 OK
 Content-Type:text/html; charset=UTF-8
@@ -147,9 +147,9 @@ Access-Control-Allow-Origin: https://javascript.info
 */!*
 ```
 
-## Response headers
+## Заголовки ответа
 
-For cross-origin request, by default JavaScript may only access "simple response headers":
+По умолчанию при cross-origin запросе JavaScript может получить доступ только к "простым заголовка ответа":
 
 - `Cache-Control`
 - `Content-Language`
@@ -158,17 +158,17 @@ For cross-origin request, by default JavaScript may only access "simple response
 - `Last-Modified`
 - `Pragma`
 
-Any other response header is forbidden.
+Любой другой заголовок ответа запрещён.
 
 ```smart header="Please note: no `Content-Length`"
-Please note: there's no `Content-Length` header in the list!
+Пожалуйста, обратите внимание: в списке нет заголовка `Content-Length`!
 
-So, if we're downloading something and would like to track the percentage of progress, then an additional permission is required to access that header (see below).
+Поэтому если мы загружаем что-то и хотели бы отслеживать процент прогресса, то требуется дополнительное разрешение для доступа к этому заголовку (читайте ниже).
 ```
 
-To grant JavaScript access to any other response header, the server must list it in the `Access-Control-Expose-Headers` header.
+Чтобы дать JavaScript-у доступ к любому другому заголовку ответа, сервер должен перечислить его в заголовке `Access-Control-Expose-Headers`.
 
-For example:
+Например:
 
 ```
 200 OK
@@ -181,30 +181,30 @@ Access-Control-Expose-Headers: Content-Length,API-Key
 */!*
 ```
 
-With such `Access-Control-Expose-Headers` header, the script is allowed to access `Content-Length` and `API-Key` headers of the response.
+С таким `Access-Control-Expose-Headers` заголовком скрипту разрешено обращаться к заголовкам `Content-Length` и `API-Key` ответа.
 
 
-## "Non-simple" requests
+## "Непростые" запросы
 
-We can use any HTTP-method: not just `GET/POST`, but also `PATCH`, `DELETE` and others.
+Мы можем использовать любой HTTP-метод: не только `GET/POST`, но и `PATCH`, `DELETE` и другие.
 
-Some time ago no one could even assume that a webpage is able to do such requests. So there may exist webservices that treat a non-standard method as a signal: "That's not a browser". They can take it into account when checking access rights.
+Некоторое время назад никто не мог даже предположить, что веб-страница способна делать такие запросы. Так что могут существовать веб-сервисы, которые рассматривают нестандартный метод как сигнал: "Это не браузер". Они могут учитывать это при проверке прав доступа.
 
-So, to avoid misunderstandings, any "non-simple" request -- that couldn't be done in the old times, the browser does not make such requests right away. Before it sends a preliminary, so-called "preflight" request, asking for permission.
+Поэтому, чтобы избежать недопониманий, браузер не делает "непростые" запросы (которые нельзя было сделать в прошлом) сразу. Перед этим он посылает предварительный, так назывемый "preflight" запрос, спрашивая разрешения.
 
-A preflight request uses method `OPTIONS` and has no body.
-- `Access-Control-Request-Method` header has the requested method.
-- `Access-Control-Request-Headers` header provides a comma-separated list of non-simple HTTP-headers.
+Предварительный запрос использует метод `OPTIONS` и не имеет тела.
+- Заголовок `Access-Control-Request-Method` содержит запрашиваемый метод.
+- Заголовок `Access-Control-Request-Headers` предоставляет разделённый запятыми список непростых HTTP-заголовков.
 
-If the server agrees to serve the requests, then it should respond with status 200, without body.
+Если сервер согласен обслуживать запросы, то он должен ответить со статусом 200, без тела.
 
-- The response header `Access-Control-Allow-Methods` must have the allowed method.
-- The response header `Access-Control-Allow-Headers` must have a list of allowed headers.
-- Additionally, the header `Access-Control-Max-Age` may specify a number of seconds to cache the permissions. So the browser won't have to send a preflight for subsequent requests that satisfy given permissions.
+- Заголовок ответа `Access-Control-Allow-Methods` должен содержать разрешённые методы.
+- Заголовок ответа `Access-Control-Allow-Headers` должен содержать список разрешённых заголовков.
+- Коме того, заголовок `Access-Control-Max-Age` может указывать количество секунд, но которое нужно закэшировать разрешения. Так что браузеру не придётся посылать preflight для последующих запросов, удовлетворяющих данным разрешениям.
 
 ![](xhr-preflight.png)
 
-Let's see how it works step-by-step on example, for a cross-domain `PATCH` request (this method is often used to update data):
+Давайте пошагово посмотрим, как это работает, на примере для кросс-доменного `PATCH` запроса (этот метод часто используется для обновления данных):
 
 ```js
 let response = await fetch('https://site.com/service.json', {
@@ -216,14 +216,14 @@ let response = await fetch('https://site.com/service.json', {
 });
 ```
 
-There are three reasons why the request is not simple (one is enough):
-- Method `PATCH`
-- `Content-Type` is not one of: `application/x-www-form-urlencoded`, `multipart/form-data`,  `text/plain`.
-- Custom `API-Key` header.
+Этот запрос не является простым по трём причинам (достаточно одной):
+- Метод `PATCH`
+- `Content-Type` не один из: `application/x-www-form-urlencoded`, `multipart/form-data`,  `text/plain`.
+- Кастомный `API-Key` заголовок.
 
-### Step 1 (preflight request)
+### Шаг 1 (preflight запрос)
 
-The browser, on its own, sends a preflight request that looks like this:
+Браузер сам посылает preflight запрос, который выглядит следующим образом:
 
 ```
 OPTIONS /service.json
@@ -233,22 +233,22 @@ Access-Control-Request-Method: PATCH
 Access-Control-Request-Headers: Content-Type,API-Key
 ```
 
-- Method: `OPTIONS`.
-- The path -- exactly the same as the main request: `/service.json`.
-- Cross-origin special headers:
-    - `Origin` -- the source origin.
-    - `Access-Control-Request-Method` -- requested method.
-    - `Access-Control-Request-Headers` -- a comma-separated list of "non-simple" headers.
+- Метод: `OPTIONS`.
+- Путь -- точно такой же как в главном запросе: `/service.json`.
+- Особые cross-origin заголовки:
+    - `Origin` -- origin источника.
+    - `Access-Control-Request-Method` -- запрашиваемый метод.
+    - `Access-Control-Request-Headers` -- разделённый запятыми список "непростых" заголовков.
 
-### Step 2 (preflight response)
+### Шаг 2 (preflight ответ)
 
-The server should respond with status 200 and headers:
+Сервер должен ответить со стастусом 200 и заголовками:
 - `Access-Control-Allow-Methods: PATCH`
 - `Access-Control-Allow-Headers: Content-Type,API-Key`.
 
-That would allow future communication, otherwise an error is triggered.
+Это разрешило бы будущюю коммуникацию, в противном случае возникает ошибка.
 
-If the server expects other methods and headers, makes sense to list them all at once, e.g:
+Если сервер ожидает другие методы и заголовки, имеет смысл перечислить их все сразу, например:
 
 ```
 200 OK
@@ -257,15 +257,15 @@ Access-Control-Allow-Headers: API-Key,Content-Type,If-Modified-Since,Cache-Contr
 Access-Control-Max-Age: 86400
 ```
 
-Now the browser can see that `PATCH` is in the list of allowed methods, and both headers are in the list too, so it sends out the main request.
+Теперь браузер может видеть, что `PATCH` есть в списке разрешённых методов, и оба заголовка тоже в списке, так что он посылает главный запрос.
 
-Besides, the preflight response is cached for time, specified by `Access-Control-Max-Age` header (86400 seconds, one day), so subsequent requests will not cause a preflight. Assuming that they fit the allowances, they will be sent directly.
+Кроме того, preflight ответ кэшируется на время, указанное в заголовке `Access-Control-Max-Age` (86400 секунд, один день), так что последующие запросы не вызовут preflight. Они будут посланы сразу при условии, что они соответствуют разрешениям.
 
-### Step 3 (actual request)
+### Шаг 3 (основной запрос)
 
-When the preflight is successful, the browser now makes the real request. Here the flow is the same as for simple requests.
+Если preflight успешен, браузер делает основной запрос. Поток здесь такой же, что и для простых запросов.
 
-The real request has `Origin` header (because it's cross-origin):
+Основной запрос имеет заголовок `Origin` (потому что он cross-origin):
 
 ```
 PATCH /service.json
@@ -275,32 +275,32 @@ API-Key: secret
 Origin: https://javascript.info
 ```
 
-### Step 4 (actual response)
+### Шаг 4 (основной ответ)
 
-The server should not forget to add `Access-Control-Allow-Origin` to the response. A successful preflight does not relieve from that:
+Сервер не должен забывать о добавлении `Access-Control-Allow-Origin` к ответу. Успешный preflight не осовбождает от этого:
 
 ```
 Access-Control-Allow-Origin: https://javascript.info
 ```
 
-Now everything's correct. JavaScript is able to read the full response.
+Теперь всё правильно. JavaScript может прочитать весь ответ.
 
 
-## Credentials
+## Пользовательские данные (credentials)
 
-A cross-origin request by default does not bring any credentials (cookies or HTTP authentication).
+Cross-origin запрос по умолчанию не содержит никаких пользовательских данных (куки или данные для HTTP аутентификации).
 
-That's uncommon for HTTP-requests. Usually, a request to `http://site.com` is accompanied by all cookies from that domain. But cross-domain requests made by JavaScript methods are an exception.
+Это необычно для HTTP-запросов. Обычно запрос к `http://site.com` сопровождается всеми куки из этого домена. Но кросс-доменные запросы, сделанные методами JavaScript - исключение.
 
-For example, `fetch('http://another.com')` does not send any cookies, even those that belong to `another.com` domain.
+Например, `fetch('http://another.com')` не посылает никаких куки, даже тех, которые принадлежат `another.com` домену.
 
-Why?
+Почему?
 
-That's because a request with credentials is much more powerful than an anonymous one. If allowed, it grants JavaScript the full power to act and access sensitive information on behalf of a user.
+Потому что запрос с пользовательскими данными намного более мощный, чем анонимный. Если он разрешён, то это даёт JavaScript доступ к конфиденциальной информации от имени пользователя.  
 
-Does the server really trust pages from `Origin` that much? A request with credentials needs an additional header to pass through.
+Сервер действительно настолько верит страницам с `Origin`? Запросу с пользовательскими данными нужен дополнительный заголовок, чтобы пройти.
 
-To enable credentials, we need to add the option `credentials: "include"`, like this:
+Чтобы включить пользовательские данные, нам нужно добавить опцию `credentials: "include"`, например так:
 
 ```js
 fetch('http://another.com', {
@@ -308,11 +308,11 @@ fetch('http://another.com', {
 });
 ```
 
-Now `fetch` sends cookies originating from `another.com` with the request.
+Теперь `fetch` посылает куки, происходящие от `another.com`, вместе с запросом.
 
-If the server wishes to accept the request with credentials, it should add a header `Access-Control-Allow-Credentials: true` to the response, in addition to `Access-Control-Allow-Origin`.
+Если сервер желает принять запрос с пользовательскими данными, он должен добавить заголовок `Access-Control-Allow-Credentials: true` к ответу, в дополнение к `Access-Control-Allow-Origin`.
 
-For example:
+Например:
 
 ```
 200 OK
@@ -320,35 +320,35 @@ Access-Control-Allow-Origin: https://javascript.info
 Access-Control-Allow-Credentials: true
 ```
 
-Please note: `Access-Control-Allow-Origin` is prohibited from using a star `*` for requests with credentials. There must be exactly the origin there, like above. That's an additional safety measure, to ensure that the server really knows who it trusts.
+Пожалуйста, обратите внимание: в `Access-Control-Allow-Origin` запрещено использовать звёздочку `*` для запросов с пользовательскими данными. Там должен быть именно origin, как показано выше. Это дополнительная мера безопасности, чтобы гарантировать, что сервер действительно знает, кому он доверяет.
 
 
-## Summary
+## Итог
 
-Networking methods split cross-origin requests into two kinds: "simple" and all the others.
+Сетевые методы разделяют cross-origin запросы на два вида: "простые" и все остальные.
 
-[Simple requests](http://www.w3.org/TR/cors/#terminology) must satisfy the following conditions:
-- Method: GET, POST or HEAD.
-- Headers -- we can set only:
+[Простые запросы](http://www.w3.org/TR/cors/#terminology) должны удовлетворять следующим условиям:
+- Метод: GET, POST или HEAD.
+- Заголовки -- мы можем установить только:
     - `Accept`
     - `Accept-Language`
     - `Content-Language`
-    - `Content-Type` to the value `application/x-www-form-urlencoded`, `multipart/form-data` or `text/plain`.
+    - `Content-Type` к значениям `application/x-www-form-urlencoded`, `multipart/form-data` или `text/plain`.
 
-The essential difference is that simple requests were doable since ancient times using `<form>` or `<script>` tags, while non-simple were impossible for browsers for a long time.
+Существенное отличие заключается в том, что простые запросы с давних времён выполнялись с использованием тэгов `<form>` или `<script>`, в то время как непростые долгое время были невозможны для браузеров.
 
-So, practical difference is that simple requests are sent right away, with `Origin` header, but for other ones the browser makes a preliminary "preflight" request, asking for permission.
+Таким образом, практическая разница состоит в том, что простые запросы отправляются сразу с заголовком `Origin`, а для других браузер делает предварительный "preflight" запрос, спрашивая разрешения.
 
-**For simple requests:**
+**Для простых запросов:**
 
-- → The browser sends `Origin` header with the origin.
-- ← For requests without credentials (default), the server should set:
-    - `Access-Control-Allow-Origin` to `*` or same as `Origin`
-- ← For requests with credentials, the server should set:
-    - `Access-Control-Allow-Origin` to `Origin`
-    - `Access-Control-Allow-Credentials` to `true`
+- → Браузер посылает заголовок `Origin` с origin.
+- ← Для запросов без учётных данных (по умолчанию), сервер должен установить:
+    - `Access-Control-Allow-Origin` к `*` или тому же значению, что и `Origin`
+- ← Для запросов с пользовательскими данными сервер должен установить:
+    - `Access-Control-Allow-Origin` к тому же, что и `Origin`
+    - `Access-Control-Allow-Credentials` к `true`
 
-Additionally, if JavaScript wants to access non-simple response headers:
+Дополнительно, если JavaScript хочет получить доступ к непростым заголовкам ответа:
 - `Cache-Control`
 - `Content-Language`
 - `Content-Type`
@@ -356,15 +356,15 @@ Additionally, if JavaScript wants to access non-simple response headers:
 - `Last-Modified`
 - `Pragma`
 
-...Then the server should list the allowed ones in `Access-Control-Expose-Headers` header.
+...То сервер должен перечислить разрешённые в заголовке `Access-Control-Expose-Headers`.
 
-**For non-simple requests, a preliminary "preflight" request is issued before the requested one:**
+**Для непростых запросов перед основным запросом отправляется предварительный "preflight" запрос:**
 
-- → The browser sends `OPTIONS` request to the same url, with headers:
-    - `Access-Control-Request-Method` has requested method.
-    - `Access-Control-Request-Headers` lists non-simple requested headers
-- ← The server should respond with status 200 and headers:
-    - `Access-Control-Allow-Methods` with a list of allowed methods,
-    - `Access-Control-Allow-Headers` with a list of allowed headers,
-    - `Access-Control-Max-Age` with a number of seconds to cache permissions.
-- Then the actual request is sent, the previous "simple" scheme is applied.
+- → Браузер посылает запрос `OPTIONS` на тот же адрес с заголовками:
+    - `Access-Control-Request-Method` содержит запрашиваемый метод,
+    - `Access-Control-Request-Headers` перечисляет непростые запрашиваемые заголовки
+- ← Сервер должен ответить со статусом 200 и заголовками:
+    - `Access-Control-Allow-Methods` со списком разрешённых методов,
+    - `Access-Control-Allow-Headers` со списком разрешённых заголовков,
+    - `Access-Control-Max-Age` с количеством секунд для кэширования разрешений
+- → Затем отправляется основной запрос, применяется предыдущая "простая" схема.
