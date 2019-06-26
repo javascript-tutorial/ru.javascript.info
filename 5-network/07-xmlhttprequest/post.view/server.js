@@ -17,7 +17,7 @@ function accept(req, res) {
       chunks.push(data);
       length += data.length;
 
-      // При данных весом более 10mb, прервать соединение!
+      // Данные весом более 10mb, прервать соединение!
       if (length > 1e8) {
         req.connection.destroy();
       }

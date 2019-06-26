@@ -10,7 +10,7 @@ let file = new static.Server('.', {
 function accept(req, res) {
 
   if (req.url == '/phones.json') {
-    // искусственная задержка для наглядности
+    // искусственная задержка, чтобы показать сообщение о загрузке данных
     setTimeout(function() {
       file.serve(req, res);
     }, 2000);
