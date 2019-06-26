@@ -1,8 +1,8 @@
 
 
-describe("calculator", function() {
+describe("калькулятор", function() {
   
-  context("when 2 and 3 entered", function() {
+  context("Когда 2 и 3 введены", function() {
     beforeEach(function() {
       sinon.stub(window, "prompt");
 
@@ -16,11 +16,11 @@ describe("calculator", function() {
       prompt.restore();
     });
 
-    it("the sum is 5", function() {
+    it("Сумма равна 5", function() {
       assert.equal(calculator.sum(), 5);
     });
 
-    it("the multiplication product is 6", function() {
+    it("Произведение равно 6", function() {
       assert.equal(calculator.mul(), 6);
     });
   });
