@@ -2,13 +2,13 @@ importance: 5
 
 ---
 
-#  How to find an ellipsis "..." ?
+#  Как найти многоточие "..." ?
 
-Create a regexp to find ellipsis: 3 (or more?) dots in a row.
+Напишите регулярное выражение, которое ищет многоточие (3 и более точек подряд).
 
-Check it:
+Проверьте его:
 
 ```js
-let reg = /your regexp/g;
-alert( "Hello!... How goes?.....".match(reg) ); // ..., .....
+let reg = /ваше выражение/g;
+alert( "Привет!... Как дела?.....".match(reg) ); // ..., .....
 ```

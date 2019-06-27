@@ -3,14 +3,14 @@
   margin: 0;
   padding: 0;
   display: block;
-  
-  /* remove resizing handle in Firefox */
+
+  /* отключаем изменение размера мышью в Firefox */
   resize: none;
   
-  /* remove outline on focus in Chrome */
+  /* удаляем обводку при фокусировке в Chrome */
   outline: none;
   
-  /* remove scrollbar in IE */
+  /* удаляем полосу прокрутки в IE */
   overflow: auto;
 }
 

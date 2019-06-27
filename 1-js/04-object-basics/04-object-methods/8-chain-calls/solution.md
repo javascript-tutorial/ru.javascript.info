@@ -1,4 +1,4 @@
-The solution is to return the object itself from every call.
+Решением является возврат самого объекта в каждом методе.
 
 ```js run demo
 let ladder = {
@@ -26,7 +26,7 @@ let ladder = {
 ladder.up().up().down().up().down().showStep(); // 1
 ```
 
-We also can write a single call per line. For long chains it's more readable:
+Мы также можем писать один вызов на одной строке. Для длинной цепи вызовов это более читабельно:
 
 ```js
 ladder

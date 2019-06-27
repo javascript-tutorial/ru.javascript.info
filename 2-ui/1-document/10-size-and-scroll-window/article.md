@@ -1,50 +1,51 @@
-# Window sizes and scrolling
+# Размеры и прокрутка окна
 
-How to find out the width and height of the browser window? How to get the full width and height of the document, including the scrolled out part? How to scroll the page using JavaScript?
+Как узнать ширину и высоту окна браузера? Как получить полную ширину и высоту документа, включая прокрученную часть? Как прокрутить страницу с помощью JavaScript?
 
-From the DOM point of view, the root document element is `document.documentElement`. That element corresponds to `<html>` and has geometry properties described in the [previous chapter](info:size-and-scroll). For some cases we can use it, but there are additional methods and peculiarities important enough to consider.
+С точки зрения DOM, корневым элементом документа является `document.documentElement`. Он соответствует тегу <html> и имеет геометрические свойства, описанные в [предыдущей статье](info:size-and-scroll). В некоторых случаях мы можем использовать их, однако есть дополнительные методы и особенности, которые необходимо учитывать.
 
-## Width/height of the window
+## Ширина/высота окна
 
-Properties `clientWidth/clientHeight` of `document.documentElement` is exactly what we want here:
+Свойства `clientWidth/clientHeight` из `document.documentElement` -- это именно то, что нам нужно:
 
 ![](document-client-width-height.png)
 
 ```online
-For instance, this button shows the height of your window:
+Например, эта кнопка показывает высоту вашего окна:
 
 <button onclick="alert(document.documentElement.clientHeight)">alert(document.documentElement.clientHeight)</button>
 ```
 
-````warn header="Not `window.innerWidth/Height`"
-Browsers also support properties `window.innerWidth/innerHeight`. They look like what we want. So what's the difference?
+````warn header="Не `window.innerWidth/Height`"
+Браузеры также поддерживают свойства `window.innerWidth/innerHeight`. Вроде бы, похоже на то, что нам нужно. Почему же не использовать их?
 
-If there's a scrollbar occupying some space, `clientWidth/clientHeight` provide the width/height inside it. In other words, they return width/height of the visible part of the document, available for the content.
+Если есть полоса прокрутки, и она занимает какое-то место, то свойства `clientWidth/clientHeight` указывают на ширину/высоту документа без неё (за её вычетом). Иными словами, они возвращают высоту/ширину видимой части документа, доступной для содержимого.
 
-And `window.innerWidth/innerHeight` ignore the scrollbar.
+A `window.innerWidth/innerHeight` игнорирует полосу прокрутки.
 
-If there's a scrollbar, and it occupies some space, then these two lines show different values:
+Если полоса прокрутки занимает некоторое место, то эти две строки выведут разные значения:
 ```js run
-alert( window.innerWidth ); // full window width
-alert( document.documentElement.clientWidth ); // window width minus the scrollbar
+alert( window.innerWidth ); // полная ширина окна
+alert( document.documentElement.clientWidth ); // ширина окна за вычетом полосы прокрутки
 ```
 
-In most cases we need the *available* window width: to draw or position something. That is: inside scrollbars if there are any. So we should use `documentElement.clientHeight/Width`.
+В большинстве случаев нам нужна *доступная* ширина окна: для рисования или позиционирования. Полоса прокрутки "отъедает" её часть. Поэтому следует использовать `documentElement.clientHeight/Width`.
 ````
 
-```warn header="`DOCTYPE` is important"
-Please note: top-level geometry properties may work a little bit differently when there's no `<!DOCTYPE HTML>` in HTML. Odd things are possible.
+```warn header="`DOCTYPE` -- это важно"
+Обратите внимание, что геометрические свойства верхнего уровня могут работать немного иначе, если в HTML нет <!DOCTYPE HTML>. Возможны странные вещи.
 
-In modern HTML we should always write `DOCTYPE`. Generally that's not a JavaScript question, but here it affects JavaScript as well.
+Вообще, это немного за рамками JavaScript, но в данном случае это повлияет на поведение скриптов.
 ```
 
-## Width/height of the document
+## Ширина/высота документа
 
-Theoretically, as the root document element is `documentElement.clientWidth/Height`, and it encloses all the content, we could measure its full size as `documentElement.scrollWidth/scrollHeight`.
+Теоретически, т.к. корневым элементом документа является `documentElement.clientWidth/Height`, и он включает в себя всё содержимое, мы можем измерить его полный размер как `documentElement.scrollWidth/scrollHeight`.
 
-These properties work well for regular elements. But for the whole page these properties do not work as intended. In Chrome/Safari/Opera if there's no scroll, then `documentElement.scrollHeight` may be even less than  `documentElement.clientHeight`! For regular elements that's a nonsense.
+Эти свойства хорошо подходят для обычных элементов. Но для целой страницы эти свойства работают не так, как предполагалось. В Chrome/Safari/Opera, если нет прокрутки, то `documentElement.scrollHeight` может быть даже меньше, чем
+`documentElement.clientHeight`! С точки зрения элемента это невозможная ситуация.
 
-To have a reliable result on the full document height, we should take the maximum of these properties:
+Чтобы надёжно получить полную высоту документа, нам следует взять максимальное из этих свойств:
 
 ```js run
 let scrollHeight = Math.max(
@@ -53,106 +54,107 @@ let scrollHeight = Math.max(
   document.body.clientHeight, document.documentElement.clientHeight
 );
 
-alert('Full document height, with scrolled out part: ' + scrollHeight);
+alert('Полная высота документа с прокручиваемой частью: ' + scrollHeight);
 ```
 
-Why so? Better don't ask. These inconsistencies come from ancient times, not a "smart" logic.
+Почему?
+Лучше не спрашивайте. Эти несоответствия идут с древних времён. Глубокой логики здесь нет.
 
-## Get the current scroll [#page-scroll]
+## Получение текущей прокрутки [#page-scroll]
 
-Regular elements have their current scroll state in `elem.scrollLeft/scrollTop`.
+Обычные элементы хранят текущее состояние прокрутки в `elem.scrollLeft/scrollTop`.
 
-What's with the page? Most browsers provide `documentElement.scrollLeft/Top` for the document scroll, but Chrome/Safari/Opera have bugs (like [157855](https://code.google.com/p/chromium/issues/detail?id=157855), [106133](https://bugs.webkit.org/show_bug.cgi?id=106133)) and we should use  `document.body` instead of `document.documentElement` there.
+Что же со страницей?
+В большинстве браузеров мы можем обратиться к `documentElement.scrollLeft/Top`, за исключением основанных на старом WebKit (Safari), где есть ошибки ([5991](https://bugs.webkit.org/show_bug.cgi?id=5991)), и там нужно использовать `document.body` вместо `document.documentElement`.
 
-Luckily, we don't have to remember these peculiarities at all, because of the special properties `window.pageXOffset/pageYOffset`:
+К счастью, нам совсем не обязательно запоминать эти особенности, потому что текущую прокрутку можно прочитать из свойств `window.pageXOffset/pageYOffset`:
 
 ```js run
-alert('Current scroll from the top: ' + window.pageYOffset);
-alert('Current scroll from the left: ' + window.pageXOffset);
+alert('Текущая прокрутка сверху: ' + window.pageYOffset);
+alert('Текущая прокрутка слева: ' + window.pageXOffset);
 ```
 
-These properties are read-only.
+Эти свойства доступны только для чтения.
 
-## Scrolling: scrollTo, scrollBy, scrollIntoView [#window-scroll]
+## Прокрутка: scrollTo, scrollBy, scrollIntoView [#window-scroll]
 
 ```warn
-To scroll the page from JavaScript, its DOM must be fully built.
+Для прокрутки страницы из JavaScript её DOM должен быть полностью построен.
 
-For instance, if we try to scroll the page from the script in `<head>`, it won't work.
+Например, если мы попытаемся прокрутить страницу из скрипта в `<head>`, это не сработает.
 ```
 
-Regular elements can be scrolled by changing `scrollTop/scrollLeft`.
+Обычные элементы можно прокручивать, изменяя `scrollTop/scrollLeft`.
 
-We can do the same for the page:
-- For all browsers except Chrome/Safari/Opera: modify  `document.documentElement.scrollTop/Left`.
-- In Chrome/Safari/Opera: use `document.body.scrollTop/Left` instead.
+Мы можем сделать то же самое для страниц, но:
+- В большинстве браузеров используется `document.documentElement.scrollTop/Left`.
+- В основанных на старом WebKit (Safari), как сказано выше, `document.body.scrollTop/Left`.
 
-It should work, but smells like cross-browser incompatibilities. Not good. Fortunately, there's a simpler, more universal solution: special methods  [window.scrollBy(x,y)](mdn:api/Window/scrollBy) and [window.scrollTo(pageX,pageY)](mdn:api/Window/scrollTo).
+В этих несовместимостях нет ничего хорошего, но запоминать их вовсе не надо. К счастью есть и более простое, универсальное решение: специальные методы `window.scrollBy(x,y)` и `window.scrollTo(pageX,pageY)`.
 
-- The method `scrollBy(x,y)` scrolls the page relative to its current position. For instance, `scrollBy(0,10)` scrolls the page `10px` down.
+- Метод `scrollBy(x,y)` прокручивает страницу относительно её текущего положения. Например, `scrollBy(0,10)` прокручивает страницу на `10px` вниз.
 
     ```online
-    The button below demonstrates this:
+    Кнопка ниже демонстрирует это:
 
     <button onclick="window.scrollBy(0,10)">window.scrollBy(0,10)</button>
     ```
-- The method `scrollTo(pageX,pageY)` scrolls the page relative to the document's top-left corner. It's like setting `scrollLeft/scrollTop`.
-
-    To scroll to the very beginning, we can use `scrollTo(0,0)`.
+- Метод `scrollTo(pageX,pageY)` прокручивает страницу на абсолютные координаты `(pageX,pageY)`. То есть, чтобы левый-верхний угол видимой части страницы имел данные координаты относительно левого верхнего угла документа. Это всё равно, что поставить `scrollLeft/scrollTop`.
+    Для прокрутки в самое начало мы можем использовать `scrollTo(0,0)`.
 
     ```online
     <button onclick="window.scrollTo(0,0)">window.scrollTo(0,0)</button>
     ```
 
-These methods work for all browsers the same way.
+Эти методы одинаково работают для всех браузеров.
 
 ## scrollIntoView
 
-For completeness, let's cover one more method:  [elem.scrollIntoView(top)](mdn:api/Element/scrollIntoView).
+Для полноты картины давайте рассмотрим ещё один метод: [elem.scrollIntoView(top)](mdn:api/Element/scrollIntoView).
 
-The call to `elem.scrollIntoView(top)` scrolls the page to make `elem` visible. It has one argument:
+Вызов `elem.scrollIntoView(top)` прокручивает страницу, чтобы `elem` оказался вверху.
+У него есть один аргумент:
 
-- if `top=true` (that's the default), then the page will be scrolled to make `elem` appear on the top of the window. The upper edge of the element is aligned with the window top.
-- if `top=false`, then the page scrolls to make `elem` appear at the bottom. The bottom edge of the element is aligned with the window bottom.
+- если `top=true` (по умолчанию), то страница будет прокручена, чтобы `elem` появился в верхней части окна. Верхний край элемента совмещён с верхней частью окна.
+- если `top=false`, то страница будет прокручена, чтобы `elem` появился внизу. Нижний край элемента будет совмещён с нижним краем окна.
 
 ```online
-The button below scrolls the page to make itself show at the window top:
+Кнопка ниже прокрутит страницу так, что она сама окажется вверху:
 
 <button onclick="this.scrollIntoView()">this.scrollIntoView()</button>
 
-And this button scrolls the page to show it at the bottom:
+А следующая кнопка прокрутит страницу так, что она сама окажется внизу
 
 <button onclick="this.scrollIntoView(false)">this.scrollIntoView(false)</button>
 ```
 
-## Forbid the scrolling
+## Запретить прокрутку
 
-Sometimes we need to make the document "unscrollable". For instance, when we need to cover it with a large message requiring immediate attention, and we want the visitor to interact with that message, not with the document.
+Иногда нам нужно сделать документ "непрокручиваемым". Например, при показе большого диалогового окна над документом – чтобы посетитель мог прокручивать это окно, но не документ.
 
-To make the document unscrollable, it's enough to set `document.body.style.overflow = "hidden"`. The page will freeze on its current scroll.
+Чтобы запретить прокрутку страницы, достаточно установить `document.body.style.overflow = "hidden"`.
 
 ```online
-Try it:
+Попробуйте сами:
 
 <button onclick="document.body.style.overflow = 'hidden'">`document.body.style.overflow = 'hidden'`</button>
 
 <button onclick="document.body.style.overflow = ''">`document.body.style.overflow = ''`</button>
 
-The first button freezes the scroll, the second one resumes it.
+Первая кнопка останавливает прокрутку, вторая возобновляет её.
 ```
+Аналогичным образом мы можем "заморозить" прокрутку для других элементов, а не только для `document.body`.
 
-We can use the same technique to "freeze" the scroll for other elements, not just for `document.body`.
+Недостатком этого способа является то, что сама полоса прокрутки исчезает. Если она занимала некоторую ширину, то теперь эта ширина освободится, и содержимое страницы расширится, текст «прыгнет», заняв освободившееся место.
 
-The drawback of the method is that the scrollbar disappears. If it occupied some space, then that space is now free, and the content "jumps" to fill it.
+Это выглядит немного странно, но это можно обойти, если сравнить `clientWidth` до и после остановки, и если `clientWidth` увеличится (значит полоса прокрутки исчезла), то добавим `padding` в `document.body` вместо полосы прокрутки, чтобы оставить ширину содержимого прежней.
 
-That looks a bit odd, but can be worked around if we compare `clientWidth` before and after the freeze, and if it increased (the scrollbar disappeared) then add `padding` to `document.body` in place of the scrollbar, to keep the content width the same.
+## Итого
 
-## Summary
+Размеры:
 
-Geometry:
-
-- Width/height of the visible part of the document (content area width/height): `document.documentElement.clientWidth/Height`
-- Width/height of the whole document, with the scrolled out part:
+- Ширина/высота видимой части документа (ширина/высота области содержимого): `document.documentElement.clientWidth/Height`
+- Ширина/высота всего документа с прокрученной частью:
 
     ```js
     let scrollHeight = Math.max(
@@ -162,11 +164,12 @@ Geometry:
     );
     ```
 
-Scrolling:
+Прокрутка:
 
-- Read the current scroll: `window.pageYOffset/pageXOffset`.
-- Change the current scroll:
+- Прокрутку окна можно получить так: `window.pageYOffset/pageXOffset`.
+- Изменить текущую прокрутку:
 
-    - `window.scrollTo(pageX,pageY)` -- absolute coordinates,
-    - `window.scrollBy(x,y)` -- scroll relative the current place,
-    - `elem.scrollIntoView(top)` -- scroll to make `elem` visible (align with the top/bottom of the window).
+    - `window.scrollTo(pageX,pageY)` -- абсолютные координаты,
+    - `window.scrollBy(x,y)` -- прокрутка относительно текущего места,
+    - `elem.scrollIntoView(top)` -- прокрутить страницу так, чтобы сделать `elem` видимым
+    (выровнять относительно верхней/нижней части окна).

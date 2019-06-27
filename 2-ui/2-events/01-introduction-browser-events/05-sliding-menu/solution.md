@@ -1,47 +1,47 @@
 
 # HTML/CSS
-First let's create HTML/CSS.
+Для начала создадим разметку HTML/CSS нашего меню.
 
-A menu is a standalone graphical component on the page, so it's better to put it into a single DOM element.
+Меню - это отдельный графический компонент на странице, так что его лучше вынести в отдельный DOM-элемент.
 
-A list of menu items can be laid out as a list `ul/li`.
+Список пунктов меню может быть представлен в виде списка `ul/li`.
 
-Here's the example structure:
+Пример HTML-структуры:
 
 ```html
 <div class="menu">
-  <span class="title">Sweeties (click me)!</span>
+  <span class="title">Сладости (нажми меня)!</span>
   <ul>
-    <li>Cake</li>
-    <li>Donut</li>
-    <li>Honey</li>
+    <li>Пирожное</li>
+    <li>Пончик</li>
+    <li>Мёд</li>
   </ul>
 </div>
 ```
 
-We use `<span>` for the title, because `<div>` has an implicit `display:block` on it, and it will occupy 100% of the horizontal width.
+Для заголовка мы используем тег `<span>`, потому что `<div>`, как и любой блочный элемент, имеет скрытое свойство `display:block`, а значит, занимает ширину 100%. 
 
-Like this:
-
-```html autorun height=50
-<div style="border: solid red 1px" onclick="alert(1)">Sweeties (click me)!</div>
-```
-
-So if we set `onclick` on it, then it will catch clicks to the right of the text.
-
-As `<span>` has an implicit `display: inline`, it occupies exactly enough place to fit all the text:
+Например:
 
 ```html autorun height=50
-<span style="border: solid red 1px" onclick="alert(1)">Sweeties (click me)!</span>
+<div style="border: solid red 1px" onclick="alert(1)">Сладости (нажми меня)!</div>
 ```
 
-# Toggling the menu
+Таким образом, если мы зададим обработчик события `onclick`, то он будет срабатывать по клику на всей ширине поля.
 
-Toggling the menu should change the arrow and show/hide the menu list.
+...тег `<span>` -- строчный элемент, по умолчанию имеет свойство `display: inline`, который занимает ровно столько места, сколько занимает сам текст:
 
-All these changes are perfectly handled by CSS. In JavaScript we should label the current state of the menu by adding/removing the class `.open`.
+```html autorun height=50
+<span style="border: solid red 1px" onclick="alert(1)">Сладости (нажми меня)!</span>
+```
 
-Without it, the menu will be closed:
+# Переключение меню
+
+Переключение меню должно менять стрелку и скрывать или показывать список элементов меню. 
+
+Все эти изменения прекрасно обрабатываются средствами CSS. Посредством JavaScript мы будем отмечать текущее состояние меню, добавляя или удаляя класс `.open`.
+
+Без класса `.open` меню будет закрыто:
 
 ```css
 .menu ul {
@@ -58,7 +58,7 @@ Without it, the menu will be closed:
 }
 ```
 
-...And with `.open` the arrow changes and the list shows up:
+...А с ним (с классом `.open`) стрелка будет меняться, и список будет показываться: 
 
 ```css
 .menu.open .title::before {
