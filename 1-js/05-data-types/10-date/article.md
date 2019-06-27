@@ -1,6 +1,6 @@
 # Дата и время
 
-Рассмотрим новый встроенный объект: [Date](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date). Он хранит в себе дату, время и предоставляет методы управления датой/временем.
+Рассмотрим новый встроенный объект: [Date](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date). Он хранит в себе дату и время, а также располагает методами управления ими.
 
 Например, его можно использовать для хранения времени создания/изменения, для измерения времени или просто для вывода текущей даты.
 
@@ -29,9 +29,9 @@
     alert( Jan02_1970 );
     ```
 
-    Количество миллисекунд, прошедших с начала 1970 года, называется *отметкой времени* (англ. timestamp).
+    Количество миллисекунд, прошедших с начала 1970 года, называется *меткой времени* (англ. timestamp).
 
-    Это легковесное численное представление даты. Всегда можно получить дату из таймстемпа с помощью `new Date(timestamp)` и привести существующий объект `Date` к таймстемпу, используя метод `date.getTime()` (см. ниже).
+    Это легковесное численное представление даты. Всегда можно получить дату из метки времени с помощью `new Date(timestamp)` и преобразовать существующий объект `Date` в метку времени, используя метод `date.getTime()` (см. ниже).
 
 `new Date(datestring)`
 : Если аргумент всего один, и это строка, то она обрабатывается(?) алгоритмом `Date.parse` (см. ниже).
@@ -76,16 +76,16 @@
 
 Существует множество методов получения года, месяца и т.д. из объекта `Date`. Но если их классифицировать, то они легко запоминаются:
 
-[getFullYear()](mdn:js/Date/getFullYear)
+[getFullYear()](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date/getFullYear)
 : Получаем год (4 цифры)
 
-[getMonth()](mdn:js/Date/getMonth)
+[getMonth()](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date/getMonth)
 : Получаем месяц, **от 0 до 11**.
 
-[getDate()](mdn:js/Date/getDate)
+[getDate()](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date/getDate)
 : Получаем день месяца, от 1 до 31, что несколько противоречит названию метода.
 
-[getHours()](mdn:js/Date/getHours), [getMinutes()](mdn:js/Date/getMinutes), [getSeconds()](mdn:js/Date/getSeconds), [getMilliseconds()](mdn:js/Date/getMilliseconds)
+[getHours()](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date/getHours), [getMinutes()](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date/getMinutes), [getSeconds()](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date/getSeconds), [getMilliseconds()](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date/getMilliseconds)
 : Получаем, соответственно, часы, минуты, секунды или миллисекунды.
 
 ```warn header="Not `getYear()`, but `getFullYear()`"
@@ -94,12 +94,12 @@
 
 Кроме того, можно получить определённый день недели:
 
-[getDay()](mdn:js/Date/getDay)
+[getDay()](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date/getDay)
 : Возвращает день недели от `0` (воскресенье) до `6` (суббота). Несмотря на то, что в ряде стран за первый день недели принят понедельник, в JavaScript начало недели приходится на воскресенье.
 
 **Все вышеперечисленные методы возвращают значения в соответствии с местной часовой зоной.**
 
-Однако существуют и их UTC-вариации, возвращающие день, месяц, год для часовой зоны UTC+0: [getUTCFullYear()](mdn:js/Date/getUTCFullYear), [getUTCMonth()](mdn:js/Date/getUTCMonth), [getUTCDay()](mdn:js/Date/getUTCDay). Для их использования требуется перед `"get"` подставить `"UTC"`.
+Однако существуют и их UTC-вариации, возвращающие день, месяц, год для часовой зоны UTC+0: [getUTCFullYear()](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date/getUTCFullYear), [getUTCMonth()](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date/getUTCMonth), [getUTCDay()](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date/getUTCDay). Для их использования требуется перед `"get"` подставить `"UTC"`.
 
 Если ваша местная часовая зона смещена относительно UTC, то следующий код вернёт разные значения:
 
@@ -116,10 +116,10 @@ alert( date.getUTCHours() );
 
 Помимо вышеприведённых методов, существует два особенных метода, не имеющих варианта с UTC:
 
-[getTime()](mdn:js/Date/getTime)
-: Для заданной даты возвращает отметку времени -- количество миллисекунд, прошедших с 1 января 1970 года UTC+0.
+[getTime()](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date/getTime)
+: Для заданной даты возвращает метку времени -- количество миллисекунд, прошедших с 1 января 1970 года UTC+0.
 
-[getTimezoneOffset()](mdn:js/Date/getTimezoneOffset)
+[getTimezoneOffset()](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date/getTimezoneOffset)
 : Возвращает разницу в минутах между местной часовой зоной и UTC:
 
     ```js run
@@ -133,14 +133,14 @@ alert( date.getUTCHours() );
 
 Следующие методы позволяют задать компоненты даты/времени:
 
-- [`setFullYear(year [, month, date])`](mdn:js/Date/setFullYear)
-- [`setMonth(month [, date])`](mdn:js/Date/setMonth)
-- [`setDate(date)`](mdn:js/Date/setDate)
-- [`setHours(hour [, min, sec, ms])`](mdn:js/Date/setHours)
-- [`setMinutes(min [, sec, ms])`](mdn:js/Date/setMinutes)
-- [`setSeconds(sec [, ms])`](mdn:js/Date/setSeconds)
-- [`setMilliseconds(ms)`](mdn:js/Date/setMilliseconds)
-- [`setTime(milliseconds)`](mdn:js/Date/setTime) (sets the whole date by milliseconds since 01.01.1970 UTC)
+- [`setFullYear(year [, month, date])`](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date/setFullYear)
+- [`setMonth(month [, date])`](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date/setMonth)
+- [`setDate(date)`](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date/setDate)
+- [`setHours(hour [, min, sec, ms])`](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date/setHours)
+- [`setMinutes(min [, sec, ms])`](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date/setMinutes)
+- [`setSeconds(sec [, ms])`](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date/setSeconds)
+- [`setMilliseconds(ms)`](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date/setMilliseconds)
+- [`setTime(milliseconds)`](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date/setTime) (задаёт дату в виде целого количества миллисекунд, прошедших с 01.01.1970 UTC)
 
 У всех методов, кроме `setTime()`, есть вариант для UTC, например: `setUTCHours()`.
 
@@ -203,9 +203,9 @@ date.setDate(0); // min day is 1, so the last day of the previous month is assum
 alert( date ); // 31 Dec 2015
 ```
 
-## Приведение даты к числу, разницы дат
+## Объект Date как число, разницы дат
 
-Если объект `Date` привести к числовому значению, то получим отметку времени, по аналогии с `date.getTime()`:
+Если объект `Date` преобразовать в число, то получим метку времени, по аналогии с `date.getTime()`:
 
 ```js run
 let date = new Date();
@@ -233,7 +233,7 @@ alert( `Цикл отработал за ${end - start} миллисекунд` 
 
 Если нужно просто получить разницу между датами, объект `Date` нам для этого не нужен.
 
-Существует специальный метод `Date.now()`, возвращающий текущую отметку времени.
+Существует специальный метод `Date.now()`, возвращающий текущую метку времени.
 
 Семантически он эквивалентен `new Date().getTime()`, однако метод не создаёт промежуточный объект `Date`. Так что этот способ работает быстрее и не нагружает сборщик мусора.
 
@@ -276,7 +276,7 @@ function diffGetTime(date1, date2) {
 }
 ```
 
-Обе функции делают буквально одно и то же, только одна использует явный метод `date.getTime()` для получения даты в миллисекундах, а другая полагается на приведение даты к числу. Результат их работы всегда будет одним и тем же.
+Обе функции делают буквально одно и то же, только одна использует явный метод `date.getTime()` для получения даты в миллисекундах, а другая полагается на преобразование даты в число. Результат их работы всегда будет одним и тем же.
 
 Но какая функция быстрее?
 
@@ -306,7 +306,7 @@ alert( 'Время diffSubtract: ' + bench(diffSubtract) + 'мс' );
 alert( 'Время diffGetTime: ' + bench(diffGetTime) + 'мс' );
 ```
 
-Вот это да! Метод `getTime()` работает ощутимо быстрее! Всё потому, что не производится конвертирование типов и интерпретаторам такое намного легче оптимизировать.
+Вот это да! Метод `getTime()` работает ощутимо быстрее! Всё потому, что не производится преобразование типов и интерпретаторам такое намного легче оптимизировать.
 
 Замечательно, это уже что-то. Но до хорошего бенчмарка нам ещё далеко.
 
@@ -375,7 +375,7 @@ for (let i = 0; i < 10; i++) {
 
 ## Date.parse from a string
 
-Метод [Date.parse(str)](mdn:js/Date/parse) может выделить дату из строки.
+Метод [Date.parse(str)](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date/parse) может выделить дату из строки.
 
 Формат строки должен быть следующим: `YYYY-MM-DDTHH:mm:ss.sssZ`, где:
 
@@ -406,16 +406,16 @@ alert(date);
 
 ## Итого
 
-- Дата и время в JavaScript представлены объектом [Date](mdn:js/Date). Нельзя создать "только дату" или "только время": объекты `Date` всегда содержат и то, и другое.
+- Дата и время в JavaScript представлены объектом [Date](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date). Нельзя создать "только дату" или "только время": объекты `Date` всегда содержат и то, и другое.
 - Счёт месяцев начинается с нуля (да, январь -- это нулевой месяц).
 - Дни недели в `getDay()` также отсчитываются с нуля, что соответствует воскресенью.
-- Объект `Date` самокорректируется при введении значений out-of-range components are set. Good for adding/subtracting days/months/hours.
-- Даты можно вычитать и разница возвращается в миллисекундах. Так происходит, потому что при конвертировании в число объект `Date` становится отметкой времени.
-- Используйте `Date.now()` для быстрого получения текущей отметки времени.
+- Объект `Date` самокорректируется при введении значений, выходящих за рамки допустимых значений. Это полезно для сложения/вычитания дней/месяцев/недель.
+- Даты можно вычитать и разница возвращается в миллисекундах. Так происходит, потому что при преобразовании в число объект `Date` становится меткой времени.
+- Используйте `Date.now()` для быстрого получения текущей метки времени.
 
-Учтите, что в отличие от других систем, отметки времени в JavaScript измеряются в миллисекундах, а не в секундах.
+Учтите, что в отличие от других систем, метки времени в JavaScript измеряются в миллисекундах, а не в секундах.
 
-Также порой нам нужно более точно измерить время. Собственными средствами JavaScript измерять время в микросекундах (одна миллионная секунды) нельзя, но в большинстве сред такая возможность есть. К примеру, в браузерах есть метод [performance.now()](mdn:api/Performance/now), возвращающих количество миллисекунд с начала загрузки страницы с точностью до микросекунд (3 цифры после точки):
+Также порой нам нужно более точно измерить время. Собственными средствами JavaScript измерять время в микросекундах (одна миллионная секунды) нельзя, но в большинстве сред такая возможность есть. К примеру, в браузерах есть метод [performance.now()](https://developer.mozilla.org/ru/docs/Web/API/Performance/now), возвращающих количество миллисекунд с начала загрузки страницы с точностью до микросекунд (3 цифры после точки):
 
 ```js run
 alert(`Загрузка началась ${performance.now()}мс назад`);
