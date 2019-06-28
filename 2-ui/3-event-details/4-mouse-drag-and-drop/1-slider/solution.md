@@ -1,4 +1,5 @@
+Как можно видеть из HTML/CSS, слайдер – это DIV, подкрашенный фоном/градиентом, внутри которого находится другой DIV, оформленный как бегунок, с position:relative.
 
-We have a horizontal Drag'n'Drop here.
+Бегунок немного поднят и вылезает по высоте из родителя.
 
-To position the element we use `position:relative` and slider-relative coordinates for the thumb. Here it's more convenient here than `position:absolute`.
+В этом случае мы реализуем горизонтальный Drag'n'Drop, ограниченный по ширине. Его особенность – в `position:relative` у переносимого элемента, т.е. координаты ставится не абсолютные, а относительно родителя.

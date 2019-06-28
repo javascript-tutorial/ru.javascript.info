@@ -2,19 +2,19 @@ importance: 5
 
 ---
 
-# Drag superheroes around the field
+# Расставить супергероев по полю
 
-This task can help you to check understanding of several aspects of Drag'n'Drop and DOM.
+В этой задаче вы можете проверить своё понимание сразу нескольких аспектов Drag’n’Drop и DOM.
 
-Make all elements with class `draggable` -- draggable. Like a ball in the chapter.
+Сделайте так, чтобы элементы с классом `draggable` можно было переносить мышкой. Как мяч в этой главе.
 
-Requirements:
+Требования к реализации:
 
-- Use event delegation to track drag start: a single event handler on `document` for `mousedown`.
-- If elements are dragged to top/bottom window edges -- the page scrolls up/down to allow further dragging.
-- There is no horizontal scroll.
-- Draggable elements should never leave the window, even after swift mouse moves.
+- Используйте делегацию событий для отслеживания начала перетаскивания: один обработчик событий на `document` для `mousedown`. 
+- Если элементы подносят к вертикальным краям окна – оно должно прокручиваться вниз/вверх чтобы позволить дальнейшее перетаскивание.
+- Горизонтальной прокрутки в этой задаче не существует.
+- Элемент при переносе, даже при резких движениях мышкой, не должен попасть вне окна.
 
-The demo is too big to fit it here, so here's the link.
+Футбольное поле слишком велико для размещения здесь, перейдите по ссылке ниже.
 
 [demo src="solution"]
