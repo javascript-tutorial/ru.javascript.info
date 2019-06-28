@@ -87,7 +87,7 @@ if (top != window) {
 
 ### Блокировка top-навигации
 
-Мы можем заблокировать переход вызванный сменой `top.location` в [beforeunload](info:onload-ondomcontentloaded#window.onbeforeunload) событии.
+Мы можем заблокировать переход, вызванный сменой `top.location` в [beforeunload](info:onload-ondomcontentloaded#window.onbeforeunload) событии.
 
 Верхняя страница (принадлежащая хакеру) устанавливает обработчик на это событие, и когда `iframe` пытается изменить `top.location`, посетитель видит сообщение с вопросом действительно ли он хочет покинуть эту страницу.
 
