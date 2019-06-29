@@ -283,7 +283,7 @@ function onMouseMove(event) {
 
 Ключевые идеи:
 
-1. Потоки событий: `ball.mousedown` -> `document.mousemove` -> `ball.mouseup` (отменяющий стандартный `ondragstart`).
+1. Поток событий: `ball.mousedown` -> `document.mousemove` -> `ball.mouseup` (отменяющий стандартный `ondragstart`).
 2. В начале перетаскивания: запомните начальное смещение указателя относительно элемента: `shiftX/shiftY` -- и сохраните его при перетаскивании.
 3. Выявите droppable элементы под указателем с помощью `document.elementFromPoint`.
 
