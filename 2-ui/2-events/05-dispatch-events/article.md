@@ -265,25 +265,25 @@ alert(event.clientX); // undefined, неизвестное свойство пр
 
 Now `dispatchEvent` runs asynchronously after the current code execution is finished, including `mouse.onclick`, so event handlers are totally separate.
 
-## Summary
+## Итого
 
-To generate an event, we first need to create an event object.
+Чтобы инициировать событие, сначала надо создать объект события.
 
-The generic `Event(name, options)` constructor accepts an arbitrary event name and the `options` object with two properties:
-  - `bubbles: true` if the event should bubble.
-  - `cancelable: true` if the `event.preventDefault()` should work.
+Общий конструктор `Event(name, options)` принимает обязательное имя события и `options`- объект с двумя свойствами:
+  - `bubbles: true` чтобы событие всплывало.
+  - `cancelable: true` если мы хотим, чтобы `event.preventDefault()` работал.
 
-Other constructors of native events like `MouseEvent`, `KeyboardEvent` and so on accept properties specific to that event type. For instance, `clientX` for mouse events.
+Особые конструкторы встроенных событий `MouseEvent`, `KeyboardEvent` и другие, принимают свойства специфичные для каждого конкретного типа событий. Например, `clientX` для событий мыши.
 
-For custom events we should use `CustomEvent` constructor. It has an additional option named `detail`, we should assign the event-specific data to it. Then all handlers can access it as `event.detail`.
+Для своих событие стоит использовать конструктор `CustomEvent`. У него есть дополнительная опция `detail`, через которую стоит передавать всю дополнительную информацию для нашего события. После чего все обработчики смогут получить к ней доступ через `event.detail`.
 
-Despite the technical possibility to generate browser events like `click` or `keydown`, we should use with the great care.
+Несмотря на техническую возможность генерировать встроенные браузерные события типа `click` или `keydown`– пользоваться ей стоит с большой осторожностью.
 
-We shouldn't generate browser events as it's a hacky way to run handlers. That's a bad architecture most of the time.
+В 98% случаев, когда разработчик хочет сгенерировать встроенное событие – это вызвано "кривой" архитектурой кода.
 
-Native events might be generated:
+Как правило встроенные события стоит инициировать:
 
-- As a dirty hack to make 3rd-party libraries work the needed way, if they don't provide other means of interaction.
-- For automated testing, to "click the button" in the script and see if the interface reacts correctly.
+- Либо как явный и грубый хак, чтобы заставить работать сторонние библиотеки, в которых не предусмотрены другие средства взаимодействия.
+- Либо для автоматического тестирования, чтобы скриптом "нажать на кнопку" и посмотреть, произошло ли нужное действие.
 
-Custom events with our own names are often generated for architectural purposes, to signal what happens inside our menus, sliders, carousels etc.
+Свои события с нашими собственными именам часто создают для улучшения архитектуры, чтобы сообщить о том, что происходит внутри наших меню, слайдеров, каруселей и т. д.
