@@ -127,34 +127,34 @@ alert(event.clientX); // undefined, неизвестное свойство пр
 
 Полный список свойств по типам событий вы найдёте в спецификации, например для [MouseEvent](https://www.w3.org/TR/uievents/#mouseevent).
 
-## Custom events
+## Свои события
 
-For our own, custom events like `"hello"` we should use `new CustomEvent`. Technically [CustomEvent](https://dom.spec.whatwg.org/#customevent) is the same as `Event`, with one exception.
+Для генерации своих событий, таких как `"hello"` стоит использовать конструктор  `new CustomEvent`. Технически, [CustomEvent](https://dom.spec.whatwg.org/#customevent) абсолютно идентичен `Event`, кроме небольшой детали.
 
-In the second argument (object) we can add an additional property `detail` for any custom information that we want to pass with the event.
+У второго аргумента-объекта есть дополнительное свойство `detail`, в котором можно указывать информацию для передачи в событие.
 
-For instance:
+Например:
 
 ```html run refresh
-<h1 id="elem">Hello for John!</h1>
+<h1 id="elem">Привет для Васи!</h1>
 
 <script>
-  // additional details come with the event to the handler
+  // дополнительная информация приходит в обработчик вместе с событием
   elem.addEventListener("hello", function(event) {
     alert(*!*event.detail.name*/!*);
   });
 
   elem.dispatchEvent(new CustomEvent("hello", {
 *!*
-    detail: { name: "John" }
+    detail: { name: "Вася" }
 */!*
   }));
 </script>
 ```
 
-The `detail` property can have any data. Technically we could live without, because we can assign any properties into a regular `new Event` object after its creation. But `CustomEvent` provides the special `detail` field for it to evade conflicts with other event properties.
+Свойство `detail` может содержать любые данные. Надо сказать, что никто не мешает и в обычное `new Event` записать любые свойства. Но `CustomEvent` предоставляет специальное поле `detail` во избежание конфликтов с другими свойствами события.
 
-The event class tells something about "what kind of event" it is, and if the event is custom, then we should use `CustomEvent` just to be clear about what it is.
+По конструктору, с помощью которого мы создаём событие, можно определить какое именно это событие, и если оно не браузерное, а своё, стоит всё-таки использовать `CustomEvent` просто для того, чтобы было понятнее.
 
 ## event.preventDefault()
 
