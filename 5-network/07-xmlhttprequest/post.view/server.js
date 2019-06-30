@@ -17,7 +17,7 @@ function accept(req, res) {
       chunks.push(data);
       length += data.length;
 
-      // More than 10mb, kill the connection!
+      // Данные весом более 10mb, прервать соединение!
       if (length > 1e8) {
         req.connection.destroy();
       }
@@ -28,16 +28,16 @@ function accept(req, res) {
 
       if (req.url == '/user') {
         res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ message: 'User saved' }));
+        res.end(JSON.stringify({ message: 'Пользователь сохранён' }));
       } else if (req.url == '/image') {
         res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ message: "Image saved", imageSize: length }));
+        res.end(JSON.stringify({ message: "Изображение сохранено", imageSize: length }));
       } else if (req.url == '/upload') {
         res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ message: "Upload complete", size: length }));
+        res.end(JSON.stringify({ message: "Загрузка завершена", size: length }));
       } else {
         res.writeHead(404);
-        res.end("Not found");
+        res.end("Не найдено");
       }
     });
 

@@ -1,166 +1,166 @@
-# Data types
+# Типы данных
 
-A variable in JavaScript can contain any data. A variable can at one moment be a string and at another be a number:
+Переменная в JavaScript может содержать любые данные. В один момент там может быть строка, а в другой - число:
 
 ```js
-// no error
+// Не будет ошибкой
 let message = "hello";
 message = 123456;
 ```
 
-Programming languages that allow such things are called "dynamically typed", meaning that there are data types, but variables are not bound to any of them.
+Языки программирования, в которых такое возможно, называются "динамически типизированными". Это значит, что типы данных есть, но переменные не привязаны ни к одному из них.
 
-There are seven basic data types in JavaScript. Here, we'll cover them in general and in the next chapters we'll talk about each of them in detail.
+Есть семь основных типов данных в JavaScript. В этой главе мы рассмотрим их в общем, а в следующих главах поговорим подробнее о каждом.
 
-## A number
+## Число
 
 ```js
 let n = 123;
 n = 12.345;
 ```
 
-The *number* type represents both integer and floating point numbers.
+*Числовой* тип данных представляет как целочисленные значения, так и числа с плавающей точкой.
 
-There are many operations for numbers, e.g. multiplication `*`, division `/`, addition `+`, subtraction `-`, and so on.
+Существует множество операций для чисел, например, умножение `*`, деление `/`, сложение `+`, вычитание `-` и так далее.
 
-Besides regular numbers, there are so-called "special numeric values" which also belong to this data type: `Infinity`, `-Infinity` and `NaN`.
+Помимо обычных чисел существуют так называемые "специальные числовые значения", которые относятся к этому типу данных: `Infinity`, `-Infinity` и `NaN`.
 
-- `Infinity` represents the mathematical [Infinity](https://en.wikipedia.org/wiki/Infinity) ∞. It is a special value that's greater than any number.
+- `Infinity` представляет собой математическую [бесконечность](https://ru.wikipedia.org/wiki/Бесконечность#В_математике) ∞. Это особое значение, которое больше любого числа.
 
-    We can get it as a result of division by zero:
+    Мы можем получить его в результате деления на ноль:
 
     ```js run
     alert( 1 / 0 ); // Infinity
     ```
 
-    Or just reference it directly:
+    Или задать его явно:
 
     ```js run
     alert( Infinity ); // Infinity
     ```
-- `NaN` represents a computational error. It is a result of an incorrect or an undefined mathematical operation, for instance:
+- `NaN` означает вычислительную ошибку. Это результат неправильной или неопределённой математической операции, например:
 
     ```js run
-    alert( "not a number" / 2 ); // NaN, such division is erroneous
+    alert( "не число" / 2 ); // NaN, такое деление является ошибкой
     ```
 
-    `NaN` is sticky. Any further operation on `NaN` returns `NaN`:
+    Значение `NaN` "прилипчиво".  Любая операция с `NaN` возвращает `NaN`:
 
     ```js run
-    alert( "not a number" / 2 + 5 ); // NaN
+    alert( "не число" / 2 + 5 ); // NaN
     ```
 
-    So, if there's a `NaN` somewhere in a mathematical expression, it propagates to the whole result.
+    Если где-то в математическом выражении есть `NaN`, то результатом вычислений с его участием будет `NaN`.
 
-```smart header="Mathematical operations are safe"
-Doing maths is "safe" in JavaScript. We can do anything: divide by zero, treat non-numeric strings as numbers, etc.
+```smart header="Математические операции -- безопасны"
+Математические операции в JavaScript "безопасны". Мы можем делать что угодно: делить на ноль, обращаться со строками как с числами и т.д.
 
-The script will never stop with a fatal error ("die"). At worst, we'll get `NaN` as the result.
+Скрипт никогда не остановится с фатальной ошибкой (не "умрёт"). В худшем случае мы получим `NaN` как результат его выполнения.
 ```
 
-Special numeric values formally belong to the "number" type. Of course they are not numbers in the common sense of this word.
+Специальные числовые значения относятся к типу "число". Конечно, это не числа в привычном значении этого слова.
 
-We'll see more about working with numbers in the chapter <info:number>.
+Подробнее о работе с числами мы поговорим в главе  <info:number>.
 
-## A string
+## Строка
 
-A string in JavaScript must be surrounded by quotes.
+Строка в JavaScript должна быть заключена в кавычки.
 
 ```js
-let str = "Hello";
-let str2 = 'Single quotes are ok too';
-let phrase = `can embed ${str}`;
+let str = "Привет";
+let str2 = 'Одинарные кавычки тоже подойдут';
+let phrase = `Обратные кавычки позволяют встраивать переменные ${str}`;
 ```
 
-In JavaScript, there are 3 types of quotes.
+В JavaScript существует три типа кавычек.
 
-1. Double quotes: `"Hello"`.
-2. Single quotes: `'Hello'`.
-3. Backticks: <code>&#96;Hello&#96;</code>.
+1. Двойные кавычки: `"Привет"`.
+2. Одинарные кавычки: `'Привет'`.
+3. Обратные кавычки: <code>&#96;Привет&#96;</code>.
 
-Double and single quotes are "simple" quotes. There's no difference between them in JavaScript.
+Двойные или одинарные кавычки являются "простыми", между ними нет разницы в JavaScript.
 
-Backticks are "extended functionality" quotes. They allow us to embed variables and expressions into a string by wrapping them in `${…}`, for example:
+Обратные кавычки же имеют "расширенный функционал". Они позволяют нам встраивать выражения в строку, заключая их в `${…}`. Например:
 
 ```js run
-let name = "John";
+let name = "Иван";
 
-// embed a variable
-alert( `Hello, *!*${name}*/!*!` ); // Hello, John!
+// Вставим переменную
+alert( `Привет, *!*${name}*/!*!` ); // Привет, Иван!
 
-// embed an expression
-alert( `the result is *!*${1 + 2}*/!*` ); // the result is 3
+// Вставим выражение
+alert( `результат: *!*${1 + 2}*/!*` ); // результат: 3
 ```
 
-The expression inside `${…}` is evaluated and the result becomes a part of the string. We can put anything in there: a variable like `name` or an arithmetical expression like `1 + 2` or something more complex.
+Выражение внутри `${…}` вычисляется, и его результат становится частью строки. Мы можем положить туда всё, что угодно: переменную `name` или выражение `1 + 2`, или что-то более сложное.
 
-Please note that this can only be done in backticks. Other quotes don't have this embedding functionality!
+Обратите внимание, что это можно делать только в обратных кавычках. Другие кавычки не имеют такого функционала встраивания!
 ```js run
-alert( "the result is ${1 + 2}" ); // the result is ${1 + 2} (double quotes do nothing)
+alert( "результат: ${1 + 2}" ); // результат: ${1 + 2} (двойные кавычки ничего не делают)
 ```
 
-We'll cover strings more thoroughly in the chapter <info:string>.
+Мы рассмотрим строки более подробно в главе <info:string>.
 
-```smart header="There is no *character* type."
-In some languages, there is a special "character" type for a single character. For example, in the C language and in Java it is `char`.
+```smart header="Нет *символьного* типа данных."
+В некоторых языках для одного символа существует специальный "символьный" тип. Например, в C и Java это `char`.
 
-In JavaScript, there is no such type. There's only one type: `string`. A string may consist of only one character or many of them.
+В JavaScript подобного типа нет, есть только тип `string`. Строка может содержать один символ или множество.
 ```
 
-## A boolean (logical type)
+## Булевый (логический) тип
 
-The boolean type has only two values: `true` and `false`.
+Булевый тип может принимать только два значения: `true` (истина) и `false` (ложь).
 
-This type is commonly used to store yes/no values: `true` means "yes, correct", and `false` means "no, incorrect".
+Такой тип, как правило, используется для хранения значений да/нет: `true` значит "да, правильно", а `false` значит "нет, не правильно".
 
-For instance:
+Например:
 
 ```js
-let nameFieldChecked = true; // yes, name field is checked
-let ageFieldChecked = false; // no, age field is not checked
+let nameFieldChecked = true; // да, поле отмечено
+let ageFieldChecked = false; // нет, поле не отмечено
 ```
 
-Boolean values also come as a result of comparisons:
+Булевы значения также могут быть результатом сравнений:
 
 ```js run
 let isGreater = 4 > 1;
 
-alert( isGreater ); // true (the comparison result is "yes")
+alert( isGreater ); // true (результатом сравнения будет "да")
 ```
 
-We'll cover booleans more deeply in the chapter <info:logical-operators>.
+Мы рассмотрим булевые значения более подробно в главе <info:logical-operators>.
 
-## The "null" value
+## Значение "null"
 
-The special `null` value does not belong to any of the types described above.
+Специальное значение `null` не относится ни к одному из типов, описанных выше.
 
-It forms a separate type of its own which contains only the `null` value:
+Оно формирует отдельный тип, который содержит только значение `null`:
 
 ```js
 let age = null;
 ```
 
-In JavaScript, `null` is not a "reference to a non-existing object" or a "null pointer" like in some other languages.
+В JavaScript `null` не является "ссылкой на несуществующий объект" или "нулевым указателем", как в некоторых других языках.
 
-It's just a special value which represents "nothing", "empty" or "value unknown".
+Это просто специальное значение, которое представляет собой "ничего", "пусто" или "значение неизвестно".
 
-The code above states that `age` is unknown or empty for some reason.
+В приведённом выше коде указано, что переменная `age` неизвестна или не имеет значения по какой-то причине.
 
-## The "undefined" value
+## Значение "undefined"
 
-The special value `undefined` also stands apart. It makes a type of its own, just like `null`.
+Специальное значение `undefined` также стоит особняком. Оно формирует тип из самого себя так же, как и `null`.
 
-The meaning of `undefined` is "value is not assigned".
+Оно означает, что "значение не было присвоено".
 
-If a variable is declared, but not assigned, then its value is `undefined`:
+Если переменная объявлена, но ей не присвоено никакого значения, то её значением будет `undefined`:
 
 ```js run
 let x;
 
-alert(x); // shows "undefined"
+alert(x); // выведет "undefined"
 ```
 
-Technically, it is possible to assign `undefined` to any variable:
+Технически мы можем присвоить значение `undefined` любой переменной:
 
 ```js run
 let x = 123;
@@ -170,28 +170,28 @@ x = undefined;
 alert(x); // "undefined"
 ```
 
-...But we don't recommend doing that. Normally, we use `null` to assign an "empty" or "unknown" value to a variable, and we use `undefined` for checks like seeing if a variable has been assigned.
+...Но так делать не рекомендуется. Обычно `null` используется для присвоения переменной "пустого" или "неизвестного" значения, а `undefined` для проверок, была ли переменная назначена.
 
-## Objects and Symbols
+## Объекты и символы
 
-The `object` type is special.
+Тип `object` (объект) -- особенный.
 
-All other types are called "primitive" because their values can contain only a single thing (be it a string or a number or whatever). In contrast, objects are used to store collections of data and more complex entities. We'll deal with them later in the chapter <info:object> after we learn more about primitives.
+Все остальные типы называются "примитивными", потому что их значениями могут быть только простые значения (будь то строка или число, или что-то ещё). Объекты же используются для хранения коллекций данных или более сложных объектов. Мы разберёмся с ними позднее в главе <info:object> после того, как узнаем больше о примитивах.
 
-The `symbol` type is used to create unique identifiers for objects. We have to mention it here for completeness, but it's better to study this type after objects.
+Тип `symbol` (символ) используется для создания уникальных идентификаторов объектов. Мы должны упомянуть об этом здесь для полноты картины, но этот тип лучше изучать после объектов.
 
-## The typeof operator [#type-typeof]
+## Оператор typeof [#type-typeof]
 
-The `typeof` operator returns the type of the argument. It's useful when we want to process values of different types differently or just want to do a quick check.
+Оператор `typeof` возвращает тип аргумента. Это полезно, когда мы хотим обрабатывать значения различных типов по-разному или просто хотим сделать проверку.
 
-It supports two forms of syntax:
+У него есть два синтаксиса:
 
-1. As an operator: `typeof x`.
-2. As a function: `typeof(x)`.
+1. Синтаксис оператора: `typeof x`.
+2. Синтаксис функции: `typeof(x)`.
 
-In other words, it works with parentheses or without them. The result is the same.
+Другими словами, он работает со скобками или без скобок. Результат одинаковый.
 
-The call to `typeof x` returns a string with the type name:
+Вызов `typeof x` возвращает строку с именем типа:
 
 ```js
 typeof undefined // "undefined"
@@ -217,29 +217,29 @@ typeof alert // "function"  (3)
 */!*
 ```
 
-The last three lines may need additional explanation:
+Последние три строки нуждаются в пояснении:
 
-1. `Math` is a built-in object that provides mathematical operations. We will learn it in the chapter <info:number>. Here, it serves just as an example of an object.
-2. The result of `typeof null` is `"object"`. That's wrong. It is an officially recognized error in `typeof`, kept for compatibility. Of course, `null` is not an object. It is a special value with a separate type of its own. So, again, this is an error in the language.
-3. The result of `typeof alert` is `"function"`, because `alert` is a function of the language. We'll study functions in the next chapters where we'll see that there's no special "function" type in JavaScript. Functions belong to the object type. But `typeof` treats them differently. Formally, it's incorrect, but very convenient in practice.
+1. `Math` - это встроенный объект, который предоставляет математические операции и константы. Мы рассмотрим его подробнее в главе <info:number>. Здесь он служит лишь примером объекта.
+2. Результатом вызова `typeof null` является `"object"`. Это неверно. Это официально признанная ошибка в `typeof`, сохранённая для совместимости. Конечно, `null` не является объектом. Это специальное значение с отдельным типом. Повторимся, это ошибка в языке.
+3. Вызов `typeof alert` возвращает `"function"`, потому что `alert` является функцией. Мы изучим функции в следующих главах, где заодно увидим, что в JavaScript нет специального типа "функция". Функции относятся к объектному типу. Но `typeof` обрабатывает их особым образом, возвращая `"function"`. Формально это неверно, но очень удобно на практике.
 
 
-## Summary
+## Итого
 
-There are 7 basic data types in JavaScript.
+В JavaScript есть 7 основных типов.
 
-- `number` for numbers of any kind: integer or floating-point.
-- `string` for strings. A string may have one or more characters, there's no separate single-character type.
-- `boolean` for `true`/`false`.
-- `null` for unknown values -- a standalone type that has a single value `null`.
-- `undefined` for unassigned values -- a standalone type that has a single value `undefined`.
-- `object` for more complex data structures.
-- `symbol` for unique identifiers.
+- `number` для любых чисел: целочисленных или чисел с плавающей точкой.
+- `string` для строк. Строка может содержать один или больше символов, нет отдельного символьного типа.
+- `boolean` для `true`/`false`.
+- `null` для неизвестных значений -- отдельный тип, имеющий одно значение `null`.
+- `undefined` для неприсвоенных значений -- отдельный тип, имеющий одно значение `undefined`.
+- `object` для более сложных структур данных.
+- `symbol` для уникальных идентификаторов.
 
-The `typeof` operator allows us to see which type is stored in a variable.
+Оператор `typeof` позволяет нам увидеть, какой тип данных сохранён в переменной.
 
-- Two forms: `typeof x` or `typeof(x)`.
-- Returns a string with the name of the type, like `"string"`.
-- For `null` returns `"object"` -- this is an error in the language, it's not actually an object.
+- Имеет две формы: `typeof x` или `typeof(x)`.
+- Возвращает строку с именем типа. Например, `"string"`.
+- Для `null` возвращается `"object"` -- это ошибка в языке, на самом деле это не объект.
 
-In the next chapters, we'll concentrate on primitive values and once we're familiar with them, we'll move on to objects.
+В следующих главах мы сконцентрируемся на примитивных значениях и, когда ознакомимся с ними, перейдем к объектам.

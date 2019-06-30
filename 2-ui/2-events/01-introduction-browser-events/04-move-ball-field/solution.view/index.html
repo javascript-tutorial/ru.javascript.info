@@ -27,41 +27,41 @@
 
 <body style="height:2000px">
 
-  Click on a field to move the ball there.
+  Нажмите на поле для перемещения мяча.
   <br>
 
 
   <div id="field">
-    <img src="https://en.js.cx/clipart/ball.svg" id="ball"> . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    <img src="https://ru.js.cx/clipart/ball.svg" id="ball"> . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
     . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
   </div>
 
   <script>
     field.onclick = function(event) {
 
-      // window-relative field coordinates
+      // координаты поля относительно окна браузера
       let fieldCoords = this.getBoundingClientRect();
 
-      // the ball has position:absolute, the field: position:relative
-      // so ball coordinates are relative to the field inner left-upper corner
+      // мяч имеет абсолютное позиционирование (position:absolute), поле - относительное (position:relative)
+      // таким образом, координаты мяча рассчитываются относительно внутреннего, верхнего левого угла поля
       let ballCoords = {
         top: event.clientY - fieldCoords.top - field.clientTop - ball.clientHeight / 2,
         left: event.clientX - fieldCoords.left - field.clientLeft - ball.clientWidth / 2
       };
 
-      // prevent crossing the top field boundary
+      // запрещаем пересекать верхнюю границу поля
       if (ballCoords.top < 0) ballCoords.top = 0;
 
-      // prevent crossing the left field boundary
+      // запрещаем пересекать левую границу поля
       if (ballCoords.left < 0) ballCoords.left = 0;
 
 
-      // // prevent crossing the right field boundary
+      // // запрещаем пересекать правую границу поля
       if (ballCoords.left + ball.clientWidth > field.clientWidth) {
         ballCoords.left = field.clientWidth - ball.clientWidth;
       }
 
-      // prevent crossing the bottom field boundary
+      // запрещаем пересекать нижнюю границу поля
       if (ballCoords.top + ball.clientHeight > field.clientHeight) {
         ballCoords.top = field.clientHeight - ball.clientHeight;
       }

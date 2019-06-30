@@ -1,9 +1,9 @@
-The HTML in the task is incorrect. That's the reason of the odd thing.
+HTML в задаче некорректен. В этом всё дело.
 
-The browser has to fix it automatically. But there may be no text inside the `<table>`: according to the spec only table-specific tags are allowed. So the browser adds `"aaa"` *before* the `<table>`.
+Браузер исправил ошибку автоматически. Но внутри `<table>` не может быть текста: в соответствии со спецификацией допускаются только табличные теги. Поэтому браузер добавляет `"aaa"` *до* `<table>`.
 
-Now it's obvious that when we remove the table, it remains.
+Теперь очевидно, что когда мы удаляем таблицу, текст остаётся.
 
-The question can be easily answered by exploring the DOM using the browser tools. It shows `"aaa"` before the `<table>`.
+На этот вопрос можно легко ответить, изучив DOM, используя инструменты браузера. Там можно увидеть `"aaa"` до элемента `<table>`.
 
-The HTML standard specifies in detail how to process bad HTML, and such behavior of the browser is correct.
+Вообще, в стандарте HTML описано, как браузеру обрабатывать некорректный HTML, так что такое действие браузера является правильным.
