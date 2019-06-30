@@ -1,84 +1,84 @@
-# ArrayBuffer, binary arrays
+# ArrayBuffer, бинарные массивы
 
-In web-development we meet binary data mostly while dealing with files (create, upload, download). Another typical use case is image processing.
+В сфере веб-разработки мы встречаемся с бинарными данными чаще всего тогда, когда требуется выполнить какие-то действия над файлами (создать, загрузить или скачать). Другим типичным примером такой встречи является обработка изображений.
 
-That's all possible in Javascript, and binary operations are high-performant.
+Всё это возможно осуществить на JavaScript. Более того, операции над бинарными данными являются высокопроизводительными.
 
-Although, there's a bit of confusion, because there are many classes. To name a few:
-- `ArrayBuffer`, `Uint8Array`, `DataView`, `Blob`, `File`, etc.
+Обилие классов для работы с бинарными данными может немного запутать. Вот некоторые из них:
+- `ArrayBuffer`, `Uint8Array`, `DataView`, `Blob`, `File` и т.д.
 
-Binary data in Javascript is implemented in a non-standard way, compared to other languages. But when we sort things out, everything becomes fairly simple.
+Работа с бинарными данными в JavaScript реализована нестандартно по сравнению с другими языками программирования. Но когда мы в этом разберёмся, то всё окажется весьма просто.
 
-**The basic binary object is `ArrayBuffer` -- a reference to a fixed-length contiguos memory area.**
+**Базовый объект для работы с бинарными данными имеет тип `ArrayBuffer` и представляет собой ссылку на непрерывную область памяти фиксированной длины.**
 
-We create it like this:
+Вот так мы можем создать его экземпляр:
 ```js run
-let buffer = new ArrayBuffer(16); // create a buffer of length 16
+let buffer = new ArrayBuffer(16); // создаётся буфер длиной 16 байт
 alert(buffer.byteLength); // 16
 ```
 
-This allocates a contiguous memory area of 16 bytes and pre-fills it with zeroes.
+Инструкция выше выделяет непрерывную область памяти размером 16 байт и заполняет её нулями.
 
-```warn header="`ArrayBuffer` is not an array of something"
-Let's eliminate a possible source of confusion. `ArrayBuffer` has nothing in common with `Array`:
-- It has a fixed length, we can't increase or decrease it.
-- It takes exactly that much space in the memory.
-- To access individual bytes, another "view" object is needed, not `buffer[index]`.
+```warn header="`ArrayBuffer` -- это не массив!"
+Давайте внесём ясность, чтобы не запутаться. `ArrayBuffer` не имеет ничего общего с `Array`:
+- его длина фиксирована, мы не можем увеличивать или уменьшать её.
+- `ArrayBuffer` занимает ровно столько места в памяти, сколько указывается при создании.
+- Для доступа к отдельным байтам нужен вспомогательный объект-представление, `buffer[index]` не сработает.
 ```
 
-`ArrayBuffer` is a memory area. What's stored in it? It has no clue. Just a raw sequence of bytes.
+`ArrayBuffer` -- это область памяти. Что там хранится? Этой информации нет. Просто необработанный ("сырой") массив байтов.
 
-**To manipulate an `ArrayBuffer`, we need to use a "view" object.**
+**Для работы с `ArrayBuffer` нам нужен специальный объект, реализующий "представление" данных.**
 
-A view object does not store anything on it's own. It's the "eyeglasses" that give an interpretation of the bytes stored in the `ArrayBuffer`.
+Такие объекты не хранят какое-то собственное содержимое. Они интерпретируют бинарные данные, хранящиеся в `ArrayBuffer`.
 
-For instance:
+Например:
 
-- **`Uint8Array`** -- treats each byte in `ArrayBuffer` as a separate number, with possible values are from 0 to 255 (a byte is 8-bit, so it can hold only that much). Such value is called a "8-bit unsigned integer".
-- **`Uint16Array`** -- treats every 2 bytes as an integer, with possible values from 0 to 65535. That's called a "16-bit unsigned integer".
-- **`Uint32Array`** -- treats every 4 bytes as an integer, with possible values from 0 to 4294967295. That's called a "32-bit unsigned integer".
-- **`Float64Array`** -- treats every 8 bytes as a floating point number with possible values from <code>5.0x10<sup>-324</sup></code> to <code>1.8x10<sup>308</sup></code>.
+- **`Uint8Array`** -- представляет каждый байт в `ArrayBuffer` как отдельное число; возможные значения находятся в промежутке от 0 до 255 (в байте 8 бит, отсюда такой набор). Такое значение называется "8-битное целое без знака".
+- **`Uint16Array`** -- представляет каждые 2 байта в `ArrayBuffer` как целое число; возможные значения находятся в промежутке от 0 до 65535. Такое значение называется "16-битное целое без знака".
+- **`Uint32Array`** -- представляет каждые 4 байта в `ArrayBuffer` как целое число; возможные значения находятся в промежутке от 0 до 4294967295. Такое значение называется "32-битное целое без знака".
+- **`Float64Array`** -- представляет каждые 8 байт в `ArrayBuffer` как число с плавающей точкой; возможные значения находятся в промежутке между <code>5.0x10<sup>-324</sup></code> и <code>1.8x10<sup>308</sup></code>.
 
-So, the binary data in an `ArrayBuffer` of 16 bytes can be interpreted as 16 "tiny numbers", or 8 bigger numbers (2 bytes each), or 4 even bigger (4 bytes each), or 2 floating-point values with high precision (8 bytes each).
+Таким образом, бинарные данные из `ArrayBuffer` размером 16 байт могут быть представлены как 16 чисел маленькой разрядности или как 8 чисел большей разрядности (по 2 байта каждое), или как 4 числа ещё большей разрядности (по 4 байта каждое), или как 2 числа с плавающей точкой высокой точности (по 8 байт каждое).
 
 ![](arraybuffer-views.png)
 
-`ArrayBuffer` is the core object, the root of everything, the raw binary data.
+`ArrayBuffer` -- это корневой объект, основа всего, необработанные бинарные данные.
 
-But if we're going to write into it, or iterate over it, basically for almost any operation – we must use a view, e.g:
+Но если мы собираемся что-то записать в него или пройтись по его содержимому, да и вообще для любых действий мы должны использовать какой-то объект-представление ("view"), например:
 
 ```js run
-let buffer = new ArrayBuffer(16); // create a buffer of length 16
+let buffer = new ArrayBuffer(16); // создаётся буфер длиной 16 байт
 
 *!*
-let view = new Uint32Array(buffer); // treat buffer as a sequence of 32-bit integers
+let view = new Uint32Array(buffer); // интерпретируем содержимое как последовательность 32-битных целых чисел без знака
 
-alert(Uint32Array.BYTES_PER_ELEMENT); // 4 bytes per integer
+alert(Uint32Array.BYTES_PER_ELEMENT); // 4 байта на каждое целое число
 */!*
 
-alert(view.length); // 4, it stores that many integers
-alert(view.byteLength); // 16, the size in bytes
+alert(view.length); // 4, именно столько чисел сейчас хранится в буфере
+alert(view.byteLength); // 16, размер содержимого в байтах
 
-// let's write a value
+// давайте запишем какое-нибудь значение
 view[0] = 123456;
 
-// iterate over values
+// теперь пройдёмся по всем значениям
 for(let num of view) {
-  alert(num); // 123456, then 0, 0, 0 (4 values total)
+  alert(num); // 123456, потом 0, 0, 0 (всего 4 значения)
 }
 
 ```
 
 ## TypedArray
 
-The common term for all these views (`Uint8Array`, `Uint32Array`, etc) is [TypedArray](https://tc39.github.io/ecma262/#sec-typedarray-objects). They share the same set of methods and properities.
+Общий термин для всех таких представлений (`Uint8Array`, `Uint32Array` и т.д.) -- это [TypedArray](https://tc39.github.io/ecma262/#sec-typedarray-objects), типизированный массив. У них имеется набор одинаковых свойств и методов.
 
-They are much more like regular arrays: have indexes and iterable.
+Они уже намного больше напоминают обычные массивы: элементы проиндексированы, и возможно осуществить обход содержимого.
 
 
-A typed array constructor (be it `Int8Array` or `Float64Array`, doesn't matter) behaves differently depending on argument types.
+Конструкторы типизированных массивов (будь то `Int8Array` или `Float64Array`, без разницы) ведут себя по-разному в зависимости от типа передаваемого им аргумента.
 
-There are 5 variants of arguments:
+Есть 5 вариантов создания типизированных массивов:
 
 ```js
 new TypedArray(buffer, [byteOffset], [length]);
@@ -88,92 +88,92 @@ new TypedArray(length);
 new TypedArray();
 ```
 
-1. If an `ArrayBuffer` argument is supplied, the view is created over it. We used that syntax already.
+1. Если передан аргумент типа `ArrayBuffer`, то создаётся объект-представление для него. Мы уже использовали этот синтаксис ранее.
 
-    Optionally we can provide `byteOffset` to start from (0 by default) and the `length` (till the end of the buffer by default), then the view will cover only a part of the `buffer`.
+    Дополнительно можно указать аргументы `byteOffset` (0 по умолчанию) и `length` (до конца буфера по умолчанию), тогда представление будет покрывать только часть данных в `buffer`.
 
-2. If an `Array`, or any array-like object is given, it creates a typed array of the same length and copies the content.
+2. Если в качестве аргумента передан `Array` или какой-нибудь псевдомассив, то будет создан типизированный массив такой же длины и с тем же содержимым.
 
-    We can use it to pre-fill the array with the data:
+    Мы можем использовать эту возможность, чтобы заполнить типизированный массив начальными данными:
     ```js run
     *!*
     let arr = new Uint8Array([0, 1, 2, 3]);
     */!*
-    alert( arr.length ); // 4
-    alert( arr[1] ); // 1
+    alert( arr.length ); // 4, создан бинарный массив той же длины
+    alert( arr[1] ); // 1, заполнен 4-мя байтами с указанными значениями
     ```
-3. If another `TypedArray` is supplied, it does the same: creates a typed array of the same length and copies values. Values are converted to the new type in the process.
+3. Если в конструктор передан другой объект типа `TypedArray`, то делается то же самое: создаётся типизированный массив с такой же длиной и в него копируется содержимое. При необходимости значения будут приведены к новому типу.
     ```js run
     let arr16 = new Uint16Array([1, 1000]);
     *!*
     let arr8 = new Uint8Array(arr16);
     */!*
     alert( arr8[0] ); // 1
-    alert( arr8[1] ); // 232 (tried to copy 1000, but can't fit 1000 into 8 bits)
+    alert( arr8[1] ); // 232, потому что 1000 не помещается в 8 бит (разъяснения будут ниже)
     ```
 
-4. For a numeric argument `length` -- creates the typed array to contain that many elements. Its byte length will be `length` multiplied by the number of bytes in a single item `TypedArray.BYTES_PER_ELEMENT`:
+4. Если передано число `length` -- будет создан типизированный массив, содержащий именно столько элементов. Размер нового массива в байтах будет равен числу элементов `length`, умноженному на размер одного элемента `TypedArray.BYTES_PER_ELEMENT`:
     ```js run
-    let arr = new Uint16Array(4); // create typed array for 4 integers
-    alert( Uint16Array.BYTES_PER_ELEMENT ); // 2 bytes per integer
-    alert( arr.byteLength ); // 8 (size in bytes)
+    let arr = new Uint16Array(4); // создаём типизированный массив для 4 целых 16-битных чисел без знака
+    alert( Uint16Array.BYTES_PER_ELEMENT ); // 2 байта на число
+    alert( arr.byteLength ); // 8 (размер массива в байтах)
     ```
 
-5. Without arguments, creates an zero-length typed array.
+5. При вызове без аргументов будет создан пустой типизированный массив.
 
-We can create a `TypedArray` directly, without mentioning `ArrayBuffer`. But a view cannot exist without an underlying `ArrayBuffer`, so gets created automatically in all these cases except the first one (when provided).
+Как видим, можно создавать типизированные массивы `TypedArray` напрямую, не передавая в конструктор объект типа `ArrayBuffer`. Но представления не могут существовать сами по себе без двоичных данных, так что на самом деле объект `ArrayBuffer` создаётся автоматически во всех случаях, кроме первого, когда он явно передан в конструктор представления.
 
-To access the `ArrayBuffer`, there are properties:
-- `arr.buffer` -- references the `ArrayBuffer`.
-- `arr.byteLength` -- the length of the `ArrayBuffer`.
+Для доступа к `ArrayBuffer` есть следующие свойства:
+- `arr.buffer` -- ссылка на объект `ArrayBuffer`.
+- `arr.byteLength` -- размер содержимого `ArrayBuffer` в байтах.
 
-So, we can always move from one view to another:
+Таким образом, мы всегда можем перейти от одного представления к другому:
 ```js
 let arr8 = new Uint8Array([0, 1, 2, 3]);
 
-// another view on the same data
+// другое представление на тех же данных
 let arr16 = new Uint16Array(arr8.buffer);
 ```
 
 
-Here's the list of typed arrays:
+Список типизированных массивов:
 
-- `Uint8Array`, `Uint16Array`, `Uint32Array` -- for integer numbers of 8, 16 and 32 bits.
-  - `Uint8ClampedArray` -- for 8-bit integers, "clamps" them on assignment (see below).
-- `Int8Array`, `Int16Array`, `Int32Array` -- for signed integer numbers (can be negative).
-- `Float32Array`, `Float64Array` -- for signed floating-point numbers of 32 and 64 bits.
+- `Uint8Array`, `Uint16Array`, `Uint32Array` -- целые беззнаковые числа по 8, 16 и 32 бита соответственно.
+  - `Uint8ClampedArray` -- 8-битные беззнаковые целые, обрезаются по верхней и нижней границе при присвоении (об этом ниже).
+- `Int8Array`, `Int16Array`, `Int32Array` -- целые числа со знаком (могут быть отрицательными).
+- `Float32Array`, `Float64Array` -- 32- и 64-битные числа со знаком и плавающей точкой.
 
-```warn header="No `int8` or similar single-valued types"
-Please note, despite of the names like `Int8Array`, there's no single-value type like `int`, or `int8` in Javascript.
+```warn header="Не существует примитивных типов данных `int8` и т.д."
+Обратите внимание: несмотря на названия вроде `Int8Array`, в JavaScript нет примитивных типов данных `int` или `int8`.
 
-That's logical, as `Int8Array` is not an array of these individual values, but rather a view on `ArrayBuffer`.
+Это логично, потому что `Int8Array` -- это не массив отдельных значений, а представление, основанное на бинарных данных из объекта типа `ArrayBuffer`.
 ```
 
-### Out-of-bounds behavior
+### Что будет, если выйти за пределы допустимых значений?
 
-What if we attempt to write an out-of-bounds value into a typed array? There will be no error. But extra bits are cut-off.
+Что если мы попытаемся записать в типизированный массив значение, которое превышает допустимое для данного массива? Ошибки не будет. Лишние биты просто будут отброшены.
 
-For instance, let's try to put 256 into `Uint8Array`. In binary form, 256 is `100000000` (9 bits), but `Uint8Array` only provides 8 bits per value, that makes the available range from 0 to 255.
+Например, давайте попытаемся записать число 256 в объект типа `Uint8Array`. В двоичном формате 256 представляется как `100000000` (9 бит), но `Uint8Array` предоставляет только 8 бит для значений. Это определяет диапазон допустимых значений от 0 до 255.
 
-For bigger numbers, only the rightmost (less significant) 8 bits are stored, and the rest is cut off:
+Если наше число больше, то только 8 младших битов (самые правые) будут записаны, а лишние - отбросятся:
 
 ![](8bit-integer-256.png)
 
-So we'll get zero.
+Таким образом, вместо 256 запишется 0.
 
-For 257, the binary form is `100000001` (9 bits), the rightmost 8 get stored, so we'll have `1` in the array:
+Число 257 в двоичном формате выглядит как `100000001` (9 бит), но принимаются во внимание только 8 самых правых битов, так что в объект будет записана единичка:
 
 ![](8bit-integer-257.png)
 
-In other words, the number modulo 2<sup>8</sup> is saved.
+Другими словами, записываются только значения по модулю 2<sup>8</sup>.
 
-Here's the demo:
+Вот демо:
 
 ```js run
 let uint8array = new Uint8Array(16);
 
 let num = 256;
-alert(num.toString(2)); // 100000000 (binary representation)
+alert(num.toString(2)); // 100000000 (в двоичном формате)
 
 uint8array[0] = 256;
 uint8array[1] = 257;
@@ -182,88 +182,88 @@ alert(uint8array[0]); // 0
 alert(uint8array[1]); // 1
 ```
 
-`Uint8ClampedArray` is special in this aspect, its behavior is different. It saves 255 for any number that is greater than 255, and 0 for any negative number. That behavior is useful for image processing.
+`Uint8ClampedArray`, упомянутый ранее, ведёт себя по-другому в данных обстоятельствах. В него записываются значения 255 для чисел, которые больше 255, и 0 для отрицательных чисел. Такое поведение полезно в некоторых ситуациях, например при обработке изображений.
 
-## TypedArray methods
+## Методы TypedArray
 
-`TypedArray` has regular `Array` methods, with notable exceptions.
+Типизированные массивы `TypedArray`, за некоторыми заметными исключениями, имеют те же методы, что и массивы `Array`.
 
-We can iterate, `map`, `slice`, `find`, `reduce` etc.
+Мы можем обходить их, вызывать `map`, `slice`, `find`, `reduce` и т.д.
 
-There are few things we can't do though:
+Однако, есть некоторые вещи, которые нельзя осуществить:
 
-- No `splice` -- we can't "delete" a value, because typed arrays are views on a buffer, and these are fixed, contiguous areas of memory. All we can do is to assign a zero.
-- No `concat` method.
+- Нет метода `splice` -- мы не можем удалять значения, потому что типизированные массивы - это всего лишь представления данных из буфера, а буфер - это непрерывная область памяти фиксированной длины. Мы можем только записать 0 вместо значения.
+- Нет метода `concat`.
 
-There are two additional methods:
+Но зато есть два дополнительных метода:
 
-- `arr.set(fromArr, [offset])` copies all elements from `fromArr` to the `arr`, starting at position `offset` (0 by default).
-- `arr.subarray([begin, end])` creates a new view of the same type from `begin` to `end` (exclusive). That's similar to `slice` method (that's also supported), but doesn't copy anything -- just creates a new view, to operate on the given piece of data.
+- `arr.set(fromArr, [offset])` копирует все элементы из `fromArr` в `arr`, начиная с позиции `offset` (0 по умолчанию).
+- `arr.subarray([begin, end])` создаёт новое представление того же типа для данных, начиная с позиции `begin` до `end` (не включая). Это похоже на метод `slice` (который также поддерживается), но при этом ничего не копируется -- просто создаётся новое представление, чтобы совершать какие-то операции над указанными данными.
 
-These methods allow us to copy typed arrays, mix them, create new arrays from existing ones, and so on.
-
+Эти методы позволяют нам копировать типизированные массивы, смешивать их, создавать новые на основе существующих и т.д.
 
 
 ## DataView
 
-[DataView](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView) is a special super-flexible "untyped" view over `ArrayBuffer`. It allows to access the data on any offset in any format.
+[DataView](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView) -- это специальное супергибкое нетипизированное представление данных из `ArrayBuffer`. Оно позволяет обращаться к данным на любой позиции и в любом формате.
 
-- For typed arrays, the constructor dictates what the format is. The whole array is supposed to be uniform. The i-th number is `arr[i]`.
-- With `DataView` we access the data with methods like `.getUint8(i)` or `.gteUint16(i)`. We choose the format at method call time instead of the construction time.
+- В случае типизированных массивов конструктор строго задаёт формат данных. Весь массив состоит из однотипных значений. Доступ к i-ому элементу можно получить как `arr[i]`.
+- В случае `DataView` доступ к данным осуществляется посредством методов типа `.getUint8(i)` или `.getUint16(i)`. Мы выбираем формат данных в момент обращения к ним, а не в момент их создания.
 
-The syntax:
+Синтаксис:
 
 ```js
 new DataView(buffer, [byteOffset], [byteLength])
 ```
 
-- **`buffer`** -- the underlying `ArrayBuffer`. Unlike typed arrays, `DataView` doesn't create a buffer on its own. We need to have it ready.
-- **`byteOffset`** -- the starting byte position of the view (by default 0).
-- **`byteLength`** -- the byte length of the view (by default till the end of `buffer`).
+- **`buffer`** -- ссылка на бинарные данные `ArrayBuffer`. В отличие от типизированных массивов, `DataView` не создаёт буфер автоматически. Нам нужно заранее подготовить его самим.
+- **`byteOffset`** -- начальная позиция данных для представления (по умолчанию 0).
+- **`byteLength`** -- длина данных (в байтах), используемых в представлении (по умолчанию - до конца `buffer`).
 
-For instance, here we extract numbers in different formats from the same buffer:
+Например, извлечём числа в разных форматах из одного и того же буфера двоичных данных:
 
 ```js run
+// бинарный массив из 4х байт, каждый имеет максимальное значение 255
 let buffer = new Uint8Array([255, 255, 255, 255]).buffer;
 
 let dataView = new DataView(buffer);
 
-// get 8-bit number at offset 0
+// получим 8-битное число на позиции 0
 alert( dataView.getUint8(0) ); // 255
 
-// now get 16-bit number at offset 0, that's 2 bytes, both with max value
-alert( dataView.getUint16(0) ); // 65535 (biggest 16-bit unsigned int)
+// а сейчас мы получим 16-битное число на той же позиции 0, оно состоит из 2-х байт, вместе составляющих число 65535
+alert( dataView.getUint16(0) ); // 65535 (максимальное 16-битное беззнаковое целое)
 
-// get 32-bit number at offset 0
-alert( dataView.getUint32(0) ); // 4294967295 (biggest 32-bit unsigned int)
+// получим 32-битное число на позиции 0
+alert( dataView.getUint32(0) ); // 4294967295 (максимальное 32-битное беззнаковое целое)
 
-dataView.setUint32(0, 0); // set 4-byte number to zero
+dataView.setUint32(0, 0); // при установке 4-байтового числа в 0, во все его 4 байта будут записаны нули
 ```
 
-`DataView` is great when we store mixed-format data in the same buffer. E.g we store a sequence of pairs (16-bit integer, 32-bit float). Then `DataView` allows to access them easily.
+Представление `DataView` отлично подходит, когда мы храним данные разного формата в одном буфере. Например, мы храним последовательность пар, первое значение пары 16-битное целое, а второе -- 32-битное с плавающей точкой. `DataView` позволяет легко получить доступ к обоим.
 
-## Summary
+## Итого
 
-`ArrayBuffer` is the core object, a reference to the fixed-length contiguous memory area.
+`ArrayBuffer` -- это корневой объект, ссылка на непрерывную область памяти фиксированной длины.
 
-To do almost any operation on `ArrayBuffer`, we need a view.
+Чтобы работать с объектами типа `ArrayBuffer`, нам нужно представление ("view").
 
-- It can be a `TypedArray`:
-    - `Uint8Array`, `Uint16Array`, `Uint32Array` -- for integer numbers of 8, 16 and 32 bits.
-    - `Uint8ClampedArray` -- for 8-bit integers, "clamps" them on assignment.
-    - `Int8Array`, `Int16Array`, `Int32Array` -- for signed integer numbers (can be negative).
-    - `Float32Array`, `Float64Array` -- for signed floating-point numbers of 32 and 64 bits.
-- Or a `DataView` -- the view that uses methods to specify a format, e.g. `getUint8(offset)`.
+- Это может быть типизированный массив`TypedArray`:
+    - `Uint8Array`, `Uint16Array`, `Uint32Array` -- для беззнаковых целых по 8, 16 и 32 бита соответственно.
+    - `Uint8ClampedArray` -- для 8-битных беззнаковых целых, которые обрезаются по верхней и нижней границе при присвоении.
+    - `Int8Array`, `Int16Array`, `Int32Array` -- для знаковых целых чисел (могут быть отрицательными).
+    - `Float32Array`, `Float64Array` -- для 32- и 64-битных знаковых чисел с плавающей точкой.
+- Или `DataView` -- представление, использующее отдельные методы, чтобы уточнить формат данных при обращении, например, `getUint8(offset)`.
 
-In most cases we create and operate directly on typed arrays, leaving `ArrayBuffer` under cover, as a "common discriminator". We can access it as `.buffer` and make another view if needed.
+Обычно мы создаем и работаем с типизированными массивами, оставляя `ArrayBuffer` "под капотом". Но мы можем в любой момент получить к нему доступ с помощью `.buffer` и при необходимости создать другое представление.
 
-There are also two additional terms:
-- `ArrayBufferView` is an umbrella term for all these kinds of views.
-- `BufferSource` is an umbrella term for `ArrayBuffer` or `ArrayBufferView`.
+Существуют ещё 2 дополнительных термина, которые используются в описаниях методов, работающих с бинарными данными:
+- `ArrayBufferView` -- это общее название для представлений всех типов.
+- `BufferSource` -- это общее название для `ArrayBuffer` или `ArrayBufferView`.
 
-These are used in descriptions of methods that operate on binary data. `BufferSource` is one of the most common teerms, as it means "any kind of binary data" -- an `ArrayBuffer` or a view over it. 
+Мы встретимся с ними в следующих главах. `BufferSource` встречается очень часто и означает "бинарные данные в любом виде" -- `ArrayBuffer` или его представление.
 
 
-Here's a cheatsheet:
+Вот шпаргалка:
 
 ![](arraybuffer-view-buffersource.png)

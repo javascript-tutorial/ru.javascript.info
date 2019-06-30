@@ -1,155 +1,87 @@
 
-# Global object
+# Глобальный объект
 
-The global object provides variables and functions that are available anywhere. Mostly, the ones that are built into the language or the host environment.
+Глобальный объект предоставляет переменные и функции, доступные в любом месте программы. В основном те, что встроены в язык или среду исполнения.
 
-In a browser it is named "window", for Node.JS it is "global", for other environments it may have another name.
+В браузере он называется `window`, в Node.js — `global`, в другой среде исполнения может называться иначе.
 
-For instance, we can call `alert` as a method of `window`:
+Недавно `globalThis` был добавлен в язык как стандартизированное имя для глобального объекта, которое должно поддерживаться в любом окружении. В некоторых браузерах, например Edge не на Chromium, `globalThis` ещё не поддерживается, но легко реализуется с помощью полифила.
+
+Ко всем свойствам глобального объекта можно обращаться напрямую:
 
 ```js run
-alert("Hello");
+alert("Привет");
 
-// the same as
-window.alert("Hello");
+// то же самое, что и
+window.alert("Привет");
 ```
 
-We can reference other built-in functions like `Array` as `window.Array` and create our own properties on it.
+В браузере глобальные функции и переменные, объявленные с помощью `var`, становятся свойствами глобального объекта:
 
-## Browser: the "window" object
+```js run untrusted refresh
+var gVar = 5;
 
-For historical reasons, in-browser `window` object is a bit messed up.
+alert(window.gVar); // 5 (становится свойством глобального объекта)
+```
 
-1. It provides the "browser window" functionality, besides playing the role of a global object.
+Пожалуйста, не полагайтесь на это. Такое поведение поддерживается для совместимости. В современных проектах, использующих JavaScript-модули, такого не происходит. Мы разберём их позже в главе  [](info:modules).
 
-    We can use `window` to access properties and methods, specific to the browser window:
+Кроме того, с более современными объявлениями переменных `let` и `const` такого не происходит:
 
-    ```js run
-    alert(window.innerHeight); // shows the browser window height
+```js run untrusted refresh
+let gLet = 5;
 
-    window.open('http://google.com'); // opens a new browser window
-    ```
+alert(window.gLet); // undefined (не становится свойством глобального объекта)
+```
 
-2. Top-level `var` variables and function declarations automatically become properties of `window`.
+Если свойство настольно важное, что вы хотите сделать его доступным для всей программы, запишите его в глобальный объект напрямую:
 
-    For instance:
-    ```js untrusted run no-strict refresh
-    var x = 5;
+```js run
+*!*
+// сделать информацию о текущем пользователе глобальной, для предоставления доступа к ней всем скриптам
+window.currentUser = {
+  name: "John"
+};
+*/!*
 
-    alert(window.x); // 5 (var x becomes a property of window)
+// где угодно в коде
+alert(currentUser.name); // John
 
-    window.x = 0;
+// или, если у нас есть локальная переменная с именем "currentUser",
+// получим её из window явно (безопасно!)
+alert(window.currentUser.name); // John
+```
 
-    alert(x); // 0, variable modified
-    ```
+При этом, обычно не рекомендуется использовать глобальные переменные. Следует применять их как можно реже. Дизайн кода, при котором функция получает входные параметры и выдаёт определённый результат, чище, надёжнее и удобнее для тестирования.
 
-    Please note, that doesn't happen with more modern `let/const` declarations:
+## Использование полифилов
 
-    ```js untrusted run no-strict refresh
-    let x = 5;
+Глобальный объект можно использовать, чтобы проверить поддержку современных возможностей языка.
 
-    alert(window.x); // undefined ("let" doesn't create a window property)
-    ```
+Например, проверить наличие встроенного объекта `Promise` (такая поддержка отсутствует в очень старых браузерах):
 
-3. Also, all scripts share the same global scope, so variables declared in one `<script>` become visible in  another ones:
+```js run
+if (!window.Promise) {
+  alert("Ваш браузер очень старый!");
+}
+```
 
-    ```html run
-    <script>
-      var a = 1;
-      let b = 2;
-    </script>
+Если нет (скажем, используется старый браузер), мы можем создать полифил: добавить функции, которые не поддерживаются окружением, но существуют в современном стандарте.
 
-    <script>
-      alert(a); // 1
-      alert(b); // 2
-    </script>
-    ```
+```js run
+if (!window.Promise) {
+  window.Promise = ... // собственная реализация современной возможности языка
+}
+```
 
-4. And, a minor thing, but still: the value of `this` in the global scope is `window`.
+## Итого
 
-    ```js untrusted run no-strict refresh
-    alert(this); // window
-    ```
+- Глобальный объект хранит переменные, которые должны быть доступны в любом месте программы.
 
-Why was it made like this? At the time of the language creation, the idea to merge multiple aspects into a single `window` object was to "make things simple". But since then many things changed. Tiny scripts became big applications that require proper architecture.
+    Это включает в себя как встроенные объекты, например, `Array`, так и характерные для окружения свойства, например, `window.innerHeight` -- высота окна браузера.
+- Глобальный объект имеет универсальное имя -- `globalThis`.
 
-Is it good that different scripts (possibly from different sources) see variables of each other?
-
-No, it's not, because it may lead to naming conflicts: the same variable name can be used in two scripts for different purposes, so they will conflict with each other.
-
-As of now, the multi-purpose `window` is considered a design mistake in the language.
-
-Luckily, there's a "road out of hell", called "Javascript modules".
-
-If we set `type="module"` attribute on a `<script>` tag, then such script is considered a separate "module" with its own top-level scope (lexical environment), not interfering with `window`.
-
-- In a module, `var x` does not become a property of `window`:
-
-    ```html run
-    <script type="module">
-      var x = 5;
-
-      alert(window.x); // undefined
-    </script>
-    ```
-
-- Two modules that do not see variables of each other:
-
-    ```html run
-    <script type="module">
-      let x = 5;
-    </script>
-
-    <script type="module">
-      alert(window.x); // undefined
-      alert(x); // Error: undeclared variable
-    </script>
-    ```
-
-- And, the last minor thing, the top-level value of `this` in a module is `undefined` (why should it be `window` anyway?):
-
-    ```html run
-    <script type="module">
-      alert(this); // undefined
-    </script>
-    ```
-
-**Using `<script type="module">` fixes the design flaw of the language by separating top-level scope from `window`.**
-
-We'll cover more features of modules later, in the chapter [](info:modules).
-
-## Valid uses of the global object
-
-1. Using global variables is generally discouraged. There should be as few global variables as possible, but if we need to make something globally visible, we may want to put it into `window` (or `global` in Node.js).
-
-    Here we put the information about the current user into a global object, to be accessible from all other scripts:
-
-    ```js run
-    // explicitly assign it to `window`
-    window.currentUser = {
-      name: "John",
-      age: 30
-    };
-
-    // then, elsewhere, in another script
-    alert(window.currentUser.name); // John
-    ```
-
-2. We can test the global object for support of modern language features.
-
-    For instance, test if a build-in `Promise` object exists (it doesn't in really old browsers):
-    ```js run
-    if (!window.Promise) {
-      alert("Your browser is really old!");
-    }
-    ```
-
-3. We can create "polyfills": add functions that are not supported by the environment (say, an old browser), but exist in the modern standard.
-
-    ```js run
-    if (!window.Promise) {
-      window.Promise = ... // custom implementation of the modern language feature
-    }
-    ```
-
-...And of course, if we're in a browser, using `window` to access browser window features (not as a global object) is completely fine.
+    ...Но чаще на него ссылаются по-старому, используя имя, характерное для данного окружения, такое как `window` (браузер) и `global` (Node.js). Так как `globalThis` появился недавно, он не поддерживается в IE и Edge (не-Chromium версия), но можно использовать полифил.
+- Следует хранить значения в глобальном объекте, только если они действительно глобальны для нашего проекта. И стараться свести их количество к минимуму.
+- В браузерах, если только мы не используем модули, глобальные функции и переменные, объявленные с помощью `var`, становятся свойствами глобального объекта.
+- Для того, чтобы код был проще и в будущем его легче было поддерживать, следует обращаться к свойствам глобального объекта напрямую, как `window.x`.

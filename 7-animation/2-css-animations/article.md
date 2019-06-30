@@ -1,16 +1,16 @@
-# CSS-animations
+# CSS-анимации
 
-CSS animations allow to do simple animations without JavaScript at all.
+CSS позволяет создавать простые анимации без использования JavaScript.
 
-JavaScript can be used to control CSS animation and make it even better with a little of code.
+JavaScript может быть использован для управления CSS-анимациями. Это позволит делать более сложные анимации, использую небольшие кусочки кода.
 
-## CSS transitions [#css-transition]
+## CSS-переходы [#css-transition]
 
-The idea of CSS transitions is simple. We describe a property and how its changes should be animated. When the property changes, the browser paints the animation.
+Идея CSS-переходов проста: мы указываем, что некоторое свойство должно быть анимировано и как оно должно быть анимировано. А когда свойство меняется, браузер сам обработает это изменение и отрисует анимацию.
 
-That is: all we need is to change the property. And the fluent transition is made by the browser.
+То есть, все что нам нужно, чтобы начать анимацию, а дальше браузер сделает плавный переход сам.
 
-For instance, the CSS below animates changes of `background-color` for 3 seconds:
+Например, CSS-код ниже анимирует трёх-секундное изменение`background-color`:
 
 ```css
 .animated {
@@ -19,12 +19,12 @@ For instance, the CSS below animates changes of `background-color` for 3 seconds
 }
 ```
 
-Now if an element has `.animated` class, any change of `background-color` is animated during 3 seconds.
+Теперь, если элементу установлен класс `.animated`, любое изменение свойства `background-color` будет анимироваться в течение трёх секунд.
 
-Click the button below to animate the background:
+Нажмите кнопку ниже, чтобы анимировать фон:
 
 ```html run autorun height=60
-<button id="color">Click me</button>
+<button id="color">Нажми меня</button>
 
 <style>
   #color {
@@ -40,19 +40,19 @@ Click the button below to animate the background:
 </script>
 ```
 
-There are 4 properties to describe CSS transitions:
+Существует 4 свойства для описания CSS-переходов:
 
-- `transition-property`
-- `transition-duration`
-- `transition-timing-function`
-- `transition-delay`
+- `transition-property` -- свойство перехода
+- `transition-duration` -- продолжительность перехода
+- `transition-timing-function` -- временная функция перехода
+- `transition-delay` -- задержка начала перехода
 
-We'll cover them in a moment, for now let's note that the common `transition` property allows to declare them together in the order: `property duration timing-function delay`, and also animate multiple properties at once.
+Далее мы рассмотрим их все, а сейчас ещё заметим, что есть также общее свойство `transition`, которое позволяет задать их одновременно в последовательности: `property duration timing-function delay`, а также анимировать несколько свойств одновременно.
 
-For instance, this button animates both `color` and `font-size`:
+Например, эта кнопка анимирует два свойства `color` и `font-size` одновременно:
 
 ```html run height=80 autorun no-beautify
-<button id="growing">Click me</button>
+<button id="growing">Нажми меня</button>
 
 <style>
 #growing {
@@ -70,29 +70,29 @@ growing.onclick = function() {
 </script>
 ```
 
-Now let's cover animation properties one by one.
+Теперь рассмотрим каждое свойство анимации по отдельности.
 
 ## transition-property
 
-In `transition-property` we write a list of property to animate, for instance: `left`, `margin-left`, `height`, `color`.
+В `transition-property` записывается список свойств, изменения которых необходимо анимировать, например: `left`, `margin-left`, `height`, `color`.
 
-Not all properties can be animated, but [many of them](http://www.w3.org/TR/css3-transitions/#animatable-properties-). The value `all` means "animate all properties".
+Анимировать можно не все свойства, но [многие из них](http://www.w3.org/TR/css3-transitions/#animatable-properties-). Значение свойства `all` означает "анимируй все свойства".
 
 ## transition-duration
 
-In `transition-duration` we can specify how long the animation should take. The time should be in [CSS time format](http://www.w3.org/TR/css3-values/#time): in seconds `s` or milliseconds `ms`.
+В `transition-duration` можно определить, сколько времени займёт анимация. Время должно быть задано в [формате времени CSS](http://www.w3.org/TR/css3-values/#time): в секундах `s` или миллисекундах `ms`.
 
 ## transition-delay
 
-In `transition-delay` we can specify the delay *before* the animation. For instance, if  `transition-delay: 1s`, then animation starts after 1 second after the change.
+В `transition-delay` можно определить задержку *перед* началом анимации. Например, если  `transition-delay: 1s`, тогда анимация начнётся через 1 секунду после изменения свойства.
 
-Negative values are also possible. Then the animation starts from the middle. For instance, if `transition-duration` is `2s`, and the delay is `-1s`, then the animation takes 1 second and starts from the half.
+Отрицательные значения также допустимы. В таком случае анимация начнётся с середины. Например, если `transition-duration` равно `2s`, а `transition-delay` -- `-1s`, тогда анимация займёт одну секунду и начнётся с середины.
 
-Here's the animation shifts numbers from `0` to `9` using CSS `translate` property:
+Здесь приведён пример анимации, сдвигающие цифры от `0` до `9` с использованием CSS-свойства `transform` со значением `translate`:
 
 [codetabs src="digits"]
 
-The `transform` property is animated like this:
+Свойство `transform` анимируется следующим образом:
 
 ```css
 #stripe.animate {
@@ -102,25 +102,25 @@ The `transform` property is animated like this:
 }
 ```
 
-In the example above JavaScript adds the class `.animate` to the element -- and the animation starts:
+В примере выше JavaScript-код добавляет класс `.animate` к элементу -- после чего начинается анимация:
 
 ```js
 stripe.classList.add('animate');
 ```
 
-We can also start it "from the middle", from the exact number, e.g. corresponding to the current second, using the negative `transition-delay`.
+Можно начать анимацию "с середины", с определённого числа, например, используя отрицательное значение `transition-delay`, соответствующие необходимому числу.
 
-Here if you click the digit -- it starts the animation from the current second:
+Если вы нажмёте на цифру ниже, то анимация начнётся с последней секунды:
 
 [codetabs src="digits-negative-delay"]
 
-JavaScript does it by an extra line:
+JavaScript делает это с помощью нескольких строк кода:
 
 ```js
 stripe.onclick = function() {
   let sec = new Date().getSeconds() % 10;
 *!*
-  // for instance, -3s here starts the animation from the 3rd second
+  // например, значение -3s здесь начнут анимацию с третьей секунды
   stripe.style.transitionDelay = '-' + sec + 's';
 */!*
   stripe.classList.add('animate');
@@ -129,60 +129,60 @@ stripe.onclick = function() {
 
 ## transition-timing-function
 
-Timing function describes how the animation process is distributed along the time. Will it start slowly and then go fast or vise versa.
+Временная функция описывает, как процесс анимации будет распределён во времени. Будет ли она начата медленно и затем ускорится или наоборот.
 
-That's the most complicated property from the first sight. But it becomes very simple if we devote a bit time to it.
+На первый взгляд это очень сложное свойство, но оно становится понятным, если уделить ему немного времени.
 
-That property accepts two kinds of values: a Bezier curve or steps. Let's start from the curve, as it's used more often.
+Это свойство может принимать два вида значений: кривую Безье или количество шагов. Давайте начнём с кривой Безье, как с наиболее часто используемой.
 
-### Bezier curve
+### Кривая Безье
 
-The timing function can be set as a [Bezier curve](/bezier-curve) with 4 control points that satisfies the conditions:
+Временная функция может быть задана, как [кривая Безье](/bezier-curve) с 4 контрольными точками, удовлетворяющими условиям:
 
-1. First control point: `(0,0)`.
-2. Last control point: `(1,1)`.
-3. For intermediate points values of `x` must be in the interval `0..1`, `y` can be anything.
+1. Первая контрольная точка: `(0,0)`.
+2. Последняя контрольная точка: `(1,1)`.
+3. Для промежуточных точек значение `x` должно быть `0..1`, значение `y` может принимать любое значение.
 
-The syntax for a Bezier curve in CSS: `cubic-bezier(x2, y2, x3, y3)`. Here we need to specify only 2nd and 3rd control points, because the 1st one is fixed to `(0,0)` and the 4th one is `(1,1)`.
+Синтаксис для кривых Безье в CSS: `cubic-bezier(x2, y2, x3, y3)`. Нам необходимо задать только вторую и третью контрольные точки, потому что первая зафиксирована со значением `(0,0)` и четвёртая - `(1,1)`.
 
-The timing function describes how fast the animation process goes in time.
+Временная функция описывает то, насколько быстро происходит анимации во времени.
 
-- The `x` axis is the time: `0` -- the starting moment, `1` -- the last moment of `transition-duration`.
-- The `y` axis specifies the completion of the process: `0` -- the starting value of the property, `1` -- the final value.
+- Ось `x` -- это ось времени: `0` -- начало анимации, `1` -- конец анимации, соответствующий значению в свойстве `transition-duration`.
+- Ось `y` -- это ось изменения значения: `0` -- начальное значения свойства, `1` -- конечное значение свойства.
 
-The simplest variant is when the animation goes uniformly, with the same linear speed. That can be specified by the curve `cubic-bezier(0, 0, 1, 1)`.
+Самым простым примером анимации является равномерная анимация с линейной скоростью. Она может быть задана с помощью кривой `cubic-bezier(0, 0, 1, 1)`.
 
-Here's how that curve looks:
+Вот как выглядит эта "кривая":
 
 ![](bezier-linear.png)
 
-...As we can see, it's just a straight line. As the time (`x`) passes, the completion (`y`) of the animation steadily goes from `0` to `1`.
+...Как мы видим, это прямая линия. Значению времени (`x`) соответствует, значение завершённости анимации (`y`) которое равномерно приближается от `0` к `1`.
 
-The train in the example below goes from left to right with the permanent speed (click it):
+В примере ниже поезд "едет" слева направо с одинаковой скоростью (нажмите на поезд):
 
 [codetabs src="train-linear"]
 
-The CSS `transition` is based on that curve:
+В свойстве `transition` указана следующая кривая Безье:
 
 ```css
 .train {
   left: 0;
   transition: left 5s cubic-bezier(0, 0, 1, 1);
-  /* JavaScript sets left to 450px */
+  /* JavaScript устанавливает свойство left равным 450px */
 }
 ```
 
-...And how can we show a train slowing down?
+...И как мы можем показать замедление поезда?
 
-We can use another Bezier curve: `cubic-bezier(0.0, 0.5, 0.5 ,1.0)`.
+Мы можем использовать другую кривую Безье: `cubic-bezier(0.0, 0.5, 0.5 ,1.0)`.
 
-The graph:
+Её график:
 
 ![](train-curve.png)
 
-As we can see, the process starts fast: the curve soars up high, and then slower and slower.
+Как видим, анимация начинается быстро: кривая быстро поднимается вверх, и затем все медленнее и медленнее.
 
-Here's the timing function in action (click the train):
+Ниже временная функция в действии (нажмите на поезд):
 
 [codetabs src="train"]
 
@@ -191,25 +191,24 @@ CSS:
 .train {
   left: 0;
   transition: left 5s cubic-bezier(0, .5, .5, 1);
-  /* JavaScript sets left to 450px */
+  /* JavaScript устанавливает свойство left равным 450px */
 }
 ```
 
-There are several built-in curves: `linear`, `ease`, `ease-in`, `ease-out` and `ease-in-out`.
+Есть несколько встроенных обозначений кривых Безье: `linear`, `ease`, `ease-in`, `ease-out` и `ease-in-out`.
 
-The `linear` is a shorthand for `cubic-bezier(0, 0, 1, 1)` -- a straight line, we saw it already.
+`linear` это короткая запись для `cubic-bezier(0, 0, 1, 1)` -- прямой линии, которую мы видели раньше.
 
-Other names are shorthands for the following `cubic-bezier`:
+Другие названия -- это также сокращения для других `cubic-bezier`:
 
 | <code>ease</code><sup>*</sup> | <code>ease-in</code> | <code>ease-out</code> | <code>ease-in-out</code> |
 |-------------------------------|----------------------|-----------------------|--------------------------|
 | <code>(0.25, 0.1, 0.25, 1.0)</code> | <code>(0.42, 0, 1.0, 1.0)</code> | <code>(0, 0, 0.58, 1.0)</code> | <code>(0.42, 0, 0.58, 1.0)</code> |
 | ![ease, figure](ease.png) | ![ease-in, figure](ease-in.png) | ![ease-out, figure](ease-out.png) | ![ease-in-out, figure](ease-in-out.png) |
 
-`*` -- by default, if there's no timing function, `ease` is used.
+`*` -- используется по умолчанию, если не задана другая временная функция.
 
-So we could use `ease-out` for our slowing down train:
-
+Для того, чтобы замедлить поезд, мы можем использовать `ease-out`:
 
 ```css
 .train {
@@ -219,13 +218,13 @@ So we could use `ease-out` for our slowing down train:
 }
 ```
 
-But it looks a bit differently.
+Но получившийся результат немного отличается.
 
-**A Bezier curve can make the animation "jump out" of its range.**
+**Кривая Безье может заставить анимацию «выпрыгивать» за пределы диапазона.**
 
-The control points on the curve can have any `y` coordinates: even negative or huge. Then the Bezier curve would also jump very low or high, making the animation go beyond its normal range.
+Контрольные точки могут иметь любые значения по оси `y`: отрицательные или сколь угодно большие. В таком случае кривая Безье будет также скакать очень высоко или очень низко, заставляя анимацию выходить за её нормальные пределы.
 
-In the example below the animation code is:
+В приведённом ниже примере код анимации:
 ```css
 .train {
   left: 100px;
@@ -234,41 +233,41 @@ In the example below the animation code is:
 }
 ```
 
-The property `left` should animate from `100px` to `400px`.
+Свойство `left` будет анимироваться от `100px` до `400px`.
 
-But if you click the train, you'll see that:
+Но когда вы нажмёте на поезд, вы увидите следующее:
 
-- First, the train goes *back*: `left` becomes less than `100px`.
-- Then it goes forward, a little bit farther than `400px`.
-- And then back again -- to `400px`.
+- Сначала, поезд поедет *назад*: `left` станет меньше, чем `100px`.
+- Затем он поедет вперёд, немного дальше, чем `400px`.
+- И затем вернётся назад -- в значение `400px`.
 
 [codetabs src="train-over"]
 
-Why it happens -- pretty obvious if we look at the graph of the given Bezier curve:
+Если мы взглянем на кривую Безье из примера -- становится понятно поведение поезда.
 
 ![](bezier-train-over.png)
 
-We moved the `y` coordinate of the 2nd point below zero, and for the 3rd point we made put it over `1`, so the curve goes out of the "regular" quadrant. The `y` is out of the "standard" range `0..1`.
+Мы вынесли координату `y` для первой опорной точки ниже нуля и выше единицы для третьей опорной точки, поэтому кривая вышла за пределы "обычного" квадрата. Значения `y` вышли из "стандартного" диапазона `0..1`.
 
-As we know, `y` measures "the completion of the animation process". The value `y = 0` corresponds to the starting property value and `y = 1` -- the ending value. So values `y<0` move the property lower than the starting `left` and `y>1` -- over the final `left`.
+Как мы знаем, ось `y` измеряет "завершённость процесса анимации". Значение `y = 0` соответствует начальному значению анимируемого свойства и `y = 1` -- конечному значению. Таким образом, `y<0` делает значение свойства `left` меньше начального значения и `y>1` -- больше конечного.
 
-That's a "soft" variant for sure. If we put `y` values like `-99` and `99` then the train would jump out of the range much more.
+Это, конечно, "мягкий" вариант. Если значение `y` будут `-99` и `99`, то поезд будет гораздо сильнее выпрыгивать за пределы.
 
-But how to make the Bezier curve for a specific task? There are many tools. For instance, we can do it on the site <http://cubic-bezier.com/>.
+Как сделать кривую Безье необходимую для конкретной задачи? Существует множество инструментов, например можно использовать с сайта <http://cubic-bezier.com/>.
 
-### Steps
+### Шаги
 
-Timing function `steps(number of steps[, start/end])` allows to split animation into steps.
+Временная функция `steps(количество шагов[, start/end])` позволяет разделить анимацию на шаги.
 
-Let's see that in an example with digits.
+Давайте рассмотрим это на уже знакомом нам примере с цифрами.
 
-Here's a list of digits, without any animations, just as a source:
+Ниже представлен список цифр, без какой-либо анимации, который мы будем использовать в качестве основы:
 
 [codetabs src="step-list"]
 
-We'll make the digits appear in a discrete way by making the part of the list outside of the red "window" invisible and shifting the list to the left with each step.
+Давайте сделаем так, чтобы цифры двигались не плавно, а появлялись одна за другой раздельно. Для этого скроем все что находится за красным "окошком" и будем сдвигать список влево по шагам.
 
-There will be 9 steps, a step-move for each digit:
+Всего будет 9 шагов, один шаг для каждой цифры:
 
 ```css
 #stripe.animate  {
@@ -277,58 +276,58 @@ There will be 9 steps, a step-move for each digit:
 }
 ```
 
-In action:
+В действии:
 
 [codetabs src="step"]
 
-The first argument of `steps(9, start)` is the number of steps. The transform will be split into 9 parts (10% each). The time interval is automatically divided into 9 parts as well, so `transition: 9s` gives us 9 seconds for the whole animation – 1 second per digit.
+Первый аргумент временной функции `steps(9, start)` -- количество шагов. Трансформация будет разделена на 9 частей (10% каждая). Временной интервал также будет разделён на 9 частей, таким образом свойство `transition: 9s` обеспечивает нам 9 секунду анимации, что даёт по одной секунде на цифру.
 
-The second argument is one of two words: `start` or `end`.
+Второй аргумент -- одно из ключевых слов: `start` или `end`.
 
-The `start` means that in the beginning of animation we need to do make the first step immediately.
+`start` -- означает, что в начале анимации нам необходимо перейти на первый шаг немедленно.
 
-We can observe that during the animation: when we click on the digit it changes to `1` (the first step) immediately, and then changes in the beginning of the next second.
+Мы можем наблюдать это во время анимации: когда пользователь нажимает на цифру, значение меняется на `1` (первый шаг) сразу и в следующий раз меняется уже в начале следующей секунды.
 
-The process is progressing like this:
+Анимация будет происходить так:
 
-- `0s` -- `-10%` (first change in the beginning of the 1st second, immediately)
+- `0s` -- `-10%` (первое изменение в начале первой секунды, сразу после нажатия)
 - `1s` -- `-20%`
 - ...
 - `8s` -- `-80%`
-- (the last second shows the final value).
+- (на протяжении последней секунды отображается последнее значение).
 
-The alternative value `end` would mean that the change should be applied not in the beginning, but at the end of each second.
+Альтернативное значение `end` означало бы, что изменения нужно применять не в начале, а в конце каждой секунды.
 
-So the process would go like this:
+Анимация будет происходить так:
 
 - `0s` -- `0`
-- `1s` -- `-10%` (first change at the end of the 1st second)
+- `1s` -- `-10%` (первое изменение произойдёт в конце первой секунды)
 - `2s` -- `-20%`
 - ...
 - `9s` -- `-90%`
 
-Here's `step(9, end)` in action (note the pause between the first digit change):
+Пример `step(9, end)` в действии (обратите внимание на паузу между первым изменением цифр):
 
 [codetabs src="step-end"]
 
-There are also shorthand values:
+Также есть сокращённые значения:
 
-- `step-start` -- is the same as `steps(1, start)`. That is, the animation starts immediately and takes 1 step. So it starts and finishes immediately, as if there were no animation.
-- `step-end` -- the same as `steps(1, end)`: make the animation in a single step at the end of `transition-duration`.
+- `step-start` -- то же самое, что `steps(1, start)`. Оно означает, что анимация начнётся сразу и произойдёт в один шаг. Таким образом она начнётся и завершится сразу, как будто и нет никакой анимации.
+- `step-end` -- то же самое, что `steps(1, end)`: выполнит анимацию за один шаг в конце `transition-duration`.
 
-These values are rarely used, because that's not really animation, but rather a single-step change.
+Такие значения используются редко, потому что это не совсем анимация, а точнее будет сказать одношаговые изменения.
 
-## Event transitionend
+## Событие transitionend
 
-When the CSS animation finishes the `transitionend` event triggers.
+Когда завершается анимация, срабатывает событие `transitionend`.
 
-It is widely used to do an action after the animation is done. Also we can join animations.
+Оно широко используется для выполнения действий после завершения анимации, а также для создания последовательности анимаций.
 
-For instance, the ship in the example below starts to swim there and back on click, each time farther and farther to the right:
+Например, корабль в приведённом ниже примере начинает плавать туда и обратно по клику, каждый раз все дальше и дальше вправо:
 
 [iframe src="boat" height=300 edit link]
 
-The animation is initiated by the function `go` that re-runs each time when the transition finishes and flips the direction:
+Анимация начинается с помощью функции `go`, которая вызывается каждый раз снова, когда переход заканчивается и меняется направление:
 
 ```js
 boat.onclick = function() {
@@ -337,11 +336,11 @@ boat.onclick = function() {
 
   function go() {
     if (times % 2) {
-      // swim to the right
+      // плыть вправо
       boat.classList.remove('back');
       boat.style.marginLeft = 100 * times + 200 + 'px';
     } else {
-      // swim to the left
+      // плыть влево
       boat.classList.add('back');
       boat.style.marginLeft = 100 * times - 200 + 'px';
     }
@@ -357,40 +356,40 @@ boat.onclick = function() {
 };
 ```
 
-The event object for `transitionend` has few specific properties:
+Объект события `transitionend` содержит ряд полезных свойства:
 
 `event.propertyName`
-: The property that has finished animating. Can be good if we animate multiple properties simultaneously.
+: Имя свойство, анимация которого завершилась. Может быть полезным, если мы анимируем несколько свойств.
 
 `event.elapsedTime`
-: The time (in seconds) that the animation took, without `transition-delay`.
+: Время (в секундах), которое заняла анимация, без учёта `transition-delay`.
 
-## Keyframes
+## Ключевые кадры
 
-We can join multiple simple animations together using the `@keyframes` CSS rule.
+Мы можем объединить несколько простых анимаций вместе, используя CSS-правило `@keyframes`.
 
-It specifies the "name" of the animation and rules: what, when and where to animate. Then using the `animation` property we attach the animation to the element and specify additional parameters for it.
+Оно определяет "имя" анимации и правила: что, когда и где анимировать. После этого можно использовать свойство `animation`, чтобы назначить анимацию на элемент и определить её дополнительные параметры.
 
-Here's an example with explanations:
+Ниже приведён пример с пояснениями:
 
 ```html run height=60 autorun="no-epub" no-beautify
 <div class="progress"></div>
 
 <style>
 *!*
-  @keyframes go-left-right {        /* give it a name: "go-left-right" */
-    from { left: 0px; }             /* animate from left: 0px */
-    to { left: calc(100% - 50px); } /* animate to left: 100%-50px */
+  @keyframes go-left-right {        /* объявляем имя анимации: "go-left-right" */
+    from { left: 0px; }             /* от: left: 0px */
+    to { left: calc(100% - 50px); } /* до: left: 100%-50px */
   }
 */!*
 
   .progress {
 *!*
     animation: go-left-right 3s infinite alternate;
-    /* apply the animation "go-left-right" to the element
-       duration 3 seconds
-       number of times: infinite
-       alternate direction every time
+    /* применить анимацию "go-left-right" на элементе
+       продолжительностью 3 секунды
+       количество раз: бесконечно (infinite)
+       менять направление анимации каждый раз (alternate)
     */
 */!*
 
@@ -403,25 +402,25 @@ Here's an example with explanations:
 </style>
 ```
 
-There are many articles about `@keyframes` and a [detailed specification](https://drafts.csswg.org/css-animations/).
+Существует множество статей про `@keyframes` и [детальная спецификация](https://drafts.csswg.org/css-animations/).
 
-Probably you won't need `@keyframes` often, unless everything is in the constant move on your sites.
+Скорее всего, вам нечасто понадобится `@keyframes`, разве что на вашем сайте все постоянно в движении.
 
-## Summary
+## Итого
 
-CSS animations allow to smoothly (or not) animate changes of one or multiple CSS properties.
+CSS-анимации позволяют плавно или не очень менять одно или несколько свойств.
 
-They are good for most animation tasks. We're also able to use JavaScript for animations, the next chapter is devoted to that.
+Они хорошо решают большинство задач по анимации. Также мы можем реализовать анимации через JavaScript, более подробно об этом - в следующей главе.
 
-Limitations of CSS animations compared to JavaScript animations:
+Ограничения CSS-анимаций в сравнении с JavaScript-анимациями:
 
-```compare plus="CSS animations" minus="JavaScript animations"
-+ Simple things done simply.
-+ Fast and lightweight for CPU.
-- JavaScript animations are flexible. They can implement any animation logic, like an "explosion" of an element.
-- Not just property changes. We can create new elements in JavaScript for purposes of animation.
+```compare plus="CSS-анимации" minus="JavaScript-анимации"
++ Простые анимации делаются просто.
++ Быстрые и не создают нагрузку на CPU.
+- JavaScript-анимации более гибкие. В них может присутствовать любая анимационная логика, как например "взорвать" элемент.
+- Можно изменять не только свойства. Мы можем создавать новые элементы с помощью JavaScript для анимации.
 ```
 
-The majority of animations can be implemented using CSS as described in this chapter. And  `transitionend` event allows to run JavaScript after the animation, so it integrates fine with the code.
+Большинство анимаций может быть реализовано с использованием CSS, как описано в этой главе. А событие `transitionend` позволяет запускать JavaScript после анимации, поэтому CSS-анимации прекрасно интегрируется с кодом.
 
-But in the next chapter we'll do some JavaScript animations to cover more complex cases.
+Но в следующей главе мы рассмотрим некоторые JavaScript-анимации, которые позволяют решать более сложные задачи.

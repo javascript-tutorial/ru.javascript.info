@@ -1,6 +1,6 @@
-A positive number with an optional decimal part is (per previous task): `pattern:\d+(\.\d+)?`.
+Положительное число с необязательным присутствием десятичной части (из прошлой задачи): `pattern:\d+(\.\d+)?`.
 
-Let's add an optional `-` in the beginning:
+Давайте добавим необязательный `-` в начало:
 
 ```js run
 let reg = /-?\d+(\.\d+)?/g;
