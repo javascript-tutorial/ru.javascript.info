@@ -558,102 +558,103 @@ alert( str );
 alert( 'Österreich'.localeCompare('Zealand') ); // -1
 ```
 
-У этого метода есть два дополнительных аргумента, которые указаны в [документации](mdn:js/String/localeCompare). Они позволяют указать язык (по умолчанию берётся из окружения) и определить дополнительные правила, такие как чувтсвительность к регистру, а также следует ли считать эквивалентными `"a"` и `"á"`.
+У этого метода есть два дополнительных аргумента, которые указаны в [документации](mdn:js/String/localeCompare). Они позволяют указать язык (по умолчанию берётся из окружения) и определить дополнительные правила, такие как чувствительность к регистру, а также следует ли считать эквивалентными `"a"` и `"á"`.
 
-## Internals, Unicode
+## Как всё устроено, юникод
 
-```warn header="Advanced knowledge"
-The section goes deeper into string internals. This knowledge will be useful for you if you plan to deal with emoji, rare mathematical or hieroglyphic characters or other rare symbols.
+```warn header="Глубокое погружение в тему"
+Этот раздел более подробно рассматривает то, как устроены строки. Такие знания пригодятся, если вы намерены работать с эмодзи, редкими математическими символами, иероглифами, либо с ещё какими-то редкими символами.
 
-You can skip the section if you don't plan to support them.
+Если вы не планируете их поддерживать, эту секцию можно пропустить.
 ```
 
-### Surrogate pairs
+### Суррогатные пары
 
-Most symbols have a 2-byte code. Letters in most european languages, numbers, and even most hieroglyphs, have a 2-byte representation.
+Многие символы возможно записать одним 16-битным словом: это и буквы большинства европейских языков, и числа, и даже многие иероглифы.
 
-But 2 bytes only allow 65536 combinations and that's not enough for every possible symbol. So rare symbols are encoded with a pair of 2-byte characters called "a surrogate pair".
+Но 16 битов — это 65536 комбинаций, так что на все символы этого, разумеется, недостаточно. Поэтому редкие символы записываются двумя словами — это также называется «суррогатная пара».
 
-The length of such symbols is `2`:
+Длина таких символов, использующих 2 байта — 2:
 
 ```js run
 alert( '𝒳'.length ); // 2, MATHEMATICAL SCRIPT CAPITAL X
 alert( '😂'.length ); // 2, FACE WITH TEARS OF JOY
-alert( '𩷶'.length ); // 2, a rare chinese hieroglyph
+alert( '𩷶'.length ); // 2, редкий китайский иероглиф
 ```
 
-Note that surrogate pairs did not exist at the time when JavaScript was created, and thus are not correctly processed by the language!
+Обратите внимание, суррогатные пары не существовали, когда был создан JavaScript, поэтому язык не обрабатывает их адекватно!
 
-We actually have a single symbol in each of the strings above, but the `length` shows a length of `2`.
+Ведь в каждой из этих строк только один символ, а `length` показывает длину `2`.
 
-`String.fromCodePoint` and `str.codePointAt` are few rare methods that deal with surrogate pairs right. They recently appeared in the language. Before them, there were only [String.fromCharCode](mdn:js/String/fromCharCode) and [str.charCodeAt](mdn:js/String/charCodeAt). These methods are actually the same as `fromCodePoint/codePointAt`, but don't work with surrogate pairs.
+`String.fromCodePoint` и `str.codePointAt` — два редких метода, правильно работающие с суррогатными парами, но они и появились в языке недавно. До них были только [String.fromCharCode](mdn:js/String/fromCharCode) и [str.charCodeAt](mdn:js/String/charCodeAt). Эти методы, вообще, делают то же самое, что `fromCodePoint/codePointAt`, но не работают с суррогатными парами.
 
-But, for instance, getting a symbol can be tricky, because surrogate pairs are treated as two characters:
+Получение символов может быть морокой, потому что суррогатная пара представлена как два символа:
 
 ```js run
-alert( '𝒳'[0] ); // strange symbols...
-alert( '𝒳'[1] ); // ...pieces of the surrogate pair
+alert( '𝒳'[0] ); // странные символы…
+alert( '𝒳'[1] ); // …части суррогатной пары
 ```
 
-Note that pieces of the surrogate pair have no meaning without each other. So the alerts in the example above actually display garbage.
+Части суррогатной пары не имеют смысла сами по себе, так что сообщения в этом примере покажут лишь мусор.
 
-Technically, surrogate pairs are also detectable by their codes: if a character has the code in the interval of `0xd800..0xdbff`, then it is the first part of the surrogate pair. The next character (second part) must have the code in interval `0xdc00..0xdfff`. These intervals are reserved exclusively for surrogate pairs by the standard.
+Технически, суррогатные пары возможно обнаружить по их кодам: если код символа находится в диапазоне `0xd800..0xdbff`, то это — первая часть суррогатной пары. Следующий символ — вторая часть — имеет код в диапазоне `0xdc00..0xdfff`. Эти два диапазона выделены исключительно для суррогатных пар по стандарту.
 
-In the case above:
+В данном случае:
 
 ```js run
-// charCodeAt is not surrogate-pair aware, so it gives codes for parts
+// charCodeAt не поддерживает суррогатные пары, поэтому возвращает код для их частей
 
-alert( '𝒳'.charCodeAt(0).toString(16) ); // d835, between 0xd800 and 0xdbff
-alert( '𝒳'.charCodeAt(1).toString(16) ); // dcb3, between 0xdc00 and 0xdfff
+alert( '𝒳'.charCodeAt(0).toString(16) ); // d835, между 0xd800 и 0xdbff
+alert( '𝒳'.charCodeAt(1).toString(16) ); // dcb3, между 0xdc00 и 0xdfff
 ```
 
-You will find more ways to deal with surrogate pairs later in the chapter <info:iterable>. There are probably special libraries for that too, but nothing famous enough to suggest here.
+Дальше в главе <info:iterable> будет подробнее рассказано про суррогатные пары. Возможно, в будущем мы включим в учебник информацию о каких-либо библиотеках для работы с ними.
 
-### Diacritical marks and normalization
+### Диакритические знаки и нормализация
 
-In many languages there are symbols that are composed of the base character with a mark above/under it.
+Во многих языках есть символы, состоящие из некоторого основного символа со знаком сверху или снизу.
 
-For instance, the letter `a` can be the base character for: `àáâäãåā`. Most common "composite" character have their own code in the UTF-16 table. But not all of them, because there are too many possible combinations.
+Например, буква `a` — это основа для `àáâäãåā`. Наиболее употребимые составные символы имеют свой собственный код в таблице UTF-16. Но не все, в силу большого количества комбинаций.
 
-To support arbitrary compositions, UTF-16 allows us to use several unicode characters. The base character and one or many "mark" characters that "decorate" it.
 
-For instance, if we have `S` followed by the special "dot above" character (code `\u0307`), it is shown as Ṡ.
+В UTF-16 есть символы, которые можно использовать для произвольного составления. Таким образом, к основному символу можно добавить один или несколько знаков.
+
+Например, если после `S` добавить специальный символ «точка сверху» (код `\u0307`), отобразится Ṡ.
 
 ```js run
 alert( 'S\u0307' ); // Ṡ
 ```
 
-If we need an additional mark above the letter (or below it) -- no problem, just add the necessary mark character.
+Если надо добавить сверху (или снизу) ещё один знак — без проблем, просто добавляем соответствующий символ.
 
-For instance, if we append a character "dot below" (code `\u0323`), then we'll have "S with dots above and below": `Ṩ`.
+Например, если добавить символ «точка снизу» (код `\u0323`), отобразится S с точками сверху и снизу: `Ṩ`.
 
-For example:
+Добавляем два символа:
 
 ```js run
 alert( 'S\u0307\u0323' ); // Ṩ
 ```
 
-This provides great flexibility, but also an interesting problem: two characters may visually look the same, but be represented with different unicode compositions.
+Это очень удобно, но надо помнить и об интересной проблеме: два символа могут выглядеть одинаково, хотя реально быть представлены по-разному.
 
-For instance:
+Например:
 
 ```js run
-alert( 'S\u0307\u0323' ); // Ṩ, S + dot above + dot below
-alert( 'S\u0323\u0307' ); // Ṩ, S + dot below + dot above
+alert( 'S\u0307\u0323' ); // Ṩ, S + точка сверху + точка снизу
+alert( 'S\u0323\u0307' ); // Ṩ, S + точка снизу + точка сверху
 
 alert( 'S\u0307\u0323' == 'S\u0323\u0307' ); // false
 ```
 
-To solve this, there exists a "unicode normalization" algorithm that brings each string to the single "normal" form.
+Для решения этой проблемы существует алгоритм «юникодной нормализации», приводящий каждую строку к единому «нормальному» виду.
 
-It is implemented by [str.normalize()](mdn:js/String/normalize).
+Его реализует метод [str.normalize()](mdn:js/String/normalize).
 
 ```js run
 alert( "S\u0307\u0323".normalize() == "S\u0323\u0307".normalize() ); // true
 ```
 
-It's funny that in our situation `normalize()` actually brings together a sequence of 3 characters to one: `\u1e68` (S with two dots).
+Забавно, но в нашем случае `normalize()` «схлопывает» последовательность из трёх символов в один: `\u1e68` — S с двумя точками.
 
 ```js run
 alert( "S\u0307\u0323".normalize().length ); // 1
@@ -661,9 +662,9 @@ alert( "S\u0307\u0323".normalize().length ); // 1
 alert( "S\u0307\u0323".normalize() == "\u1e68" ); // true
 ```
 
-In reality, this is not always the case. The reason being that the symbol `Ṩ` is "common enough", so UTF-16 creators included it in the main table and gave it the code.
+Разумеется, так происходит не всегда. Просто Ṩ — это достаточно часто используемый символ, поэтому создатели UTF-16 включили его в основную таблицу и присвоили ему код.
 
-If you want to learn more about normalization rules and variants -- they are described in the appendix of the Unicode standard: [Unicode Normalization Forms](http://www.unicode.org/reports/tr15/), but for most practical purposes the information from this section is enough.
+Подробнее о правилах нормализации и составлении символов можно прочитать в дополнении к стандарту Юникод: [Unicode Normalization Forms](http://www.unicode.org/reports/tr15/). В этом разделе представлено достаточно информации для использования в практических целях.
 
 
 ## Summary
