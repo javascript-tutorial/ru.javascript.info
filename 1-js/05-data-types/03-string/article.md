@@ -667,21 +667,21 @@ alert( "S\u0307\u0323".normalize() == "\u1e68" ); // true
 Подробнее о правилах нормализации и составлении символов можно прочитать в дополнении к стандарту Юникод: [Unicode Normalization Forms](http://www.unicode.org/reports/tr15/). В этом разделе представлено достаточно информации для использования в практических целях.
 
 
-## Summary
+## Итого
 
-- There are 3 types of quotes. Backticks allow a string to span multiple lines and embed expressions.
-- Strings in JavaScript are encoded using UTF-16.
-- We can use special characters like `\n` and insert letters by their unicode using `\u...`.
-- To get a character, use: `[]`.
-- To get a substring, use: `slice` or `substring`.
-- To lowercase/uppercase a string, use: `toLowerCase/toUpperCase`.
-- To look for a substring, use: `indexOf`, or `includes/startsWith/endsWith` for simple checks.
-- To compare strings according to the language, use: `localeCompare`, otherwise they are compared by character codes.
+- Есть три типа кавычек. Строки, использующие обратные апострофы, могут быть многострочными и включать выражения.
+- Строки в JavaScript кодируются в UTF-16.
+- Есть специальные символы, такие как `\n`, символ можно добавить по его юникодному коду, используя `\u...`.
+- Для получения символа, используйте `[]`.
+- Для получения подстроки используйте `slice` или `substring`.
+- Для того, чтобы перевести строку в нижний или верхний регистр, используйте `toLowerCase/toUpperCase`.
+- Для поиска подстроки используйте `indexOf` или `includes/startsWith/endsWith`, когда надо только проверить, есть ли вхождение.
+- Чтобы сравнить строки с учётом правил языка, используйте `localeCompare`.
 
-There are several other helpful methods in strings:
+Строки также имеют ещё кое-какие полезные методы:
 
-- `str.trim()` -- removes ("trims") spaces from the beginning and end of the string.
-- `str.repeat(n)` -- repeats the string `n` times.
-- ...and more. See the [manual](mdn:js/String) for details.
+- `str.trim()` — убирает пробелы в начале и конце строки.
+- `str.repeat(n)` — повторяет строку `n` раз.
+- …и другие. Больше информации можно найти в [руководстве](mdn:js/String).
 
-Strings also have methods for doing search/replace with regular expressions. But that topic deserves a separate chapter, so we'll return to that later.
+Также есть методы для поиска и замены с использованием регулярных выражений. Но эта тема достаточно большая, чтобы рассмотреть её в отдельной главе, поэтому мы вернёмся к ней позже.
