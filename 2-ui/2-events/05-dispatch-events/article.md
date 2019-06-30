@@ -76,9 +76,9 @@ let event = new Event(тип события[, флаги]);
 
 Механизм всплытия идентичен как для встроенного события (`click`), так и для пользовательского события (`hello`). Также одинакова работа фаз всплытия и погружения.
 
-## MouseEvent, KeyboardEvent and others
+## MouseEvent, KeyboardEvent и другие
 
-Here's a short list of classes for UI Events from the [UI Event specification](https://www.w3.org/TR/uievents):
+Для некоторых конкретных типов событий есть свои, специфические, конструкторы. Вот список конструкторов для различных событий интерфейса которые можно найти в спецификации [UI Event](https://www.w3.org/TR/uievents):
 
 - `UIEvent`
 - `FocusEvent`
@@ -87,11 +87,11 @@ Here's a short list of classes for UI Events from the [UI Event specification](h
 - `KeyboardEvent`
 - ...
 
-We should use them instead of `new Event` if we want to create such events. For instance, `new MouseEvent("click")`.
+Стоит использовать их вместе `new Event` если мы хотим создавать такие события. К примеру, `new MouseEvent("click")`.
 
-The right constructor allows to specify standard properties for that type of event.
+Специфический конструктор позволяет указать стандартные свойства для данного типа события.
 
-Like `clientX/clientY` for a mouse event:
+Например, `clientX/clientY` для события мыши:
 
 ```js run
 let event = new MouseEvent("click", {
@@ -106,26 +106,26 @@ alert(event.clientX); // 100
 */!*
 ```
 
-Please note: the generic `Event` constructor does not allow that.
+Обратите внимание: это нельзя было бы сделать с обычным конструктором `Event`.
 
-Let's try:
+Давайте проверим:
 
 ```js run
 let event = new Event("click", {
-  bubbles: true, // only bubbles and cancelable
-  cancelable: true, // work in the Event constructor
+  bubbles: true, // только свойства bubbles и cancelable
+  cancelable: true, // работают в конструкторе Event
   clientX: 100,
   clientY: 100
 });
 
 *!*
-alert(event.clientX); // undefined, the unknown property is ignored!
+alert(event.clientX); // undefined, неизвестное свойство проигнорировано!
 */!*
 ```
 
-Technically, we can work around that by assigning directly `event.clientX=100` after creation. So that's a matter of convenience and following the rules. Browser-generated events always have the right type.
+Впрочем, использование конкретного конструктора не является обязательным, можно обойтись `Event`,  а свойства записать в объект отдельно, после создания, вот так: `event.clientX=100`. Здесь это скорее вопрос удобства и желания следовать правилам. События, которые генерирует браузер, всегда имеют правильный тип.
 
-The full list of properties for different UI events is in the specification, for instance  [MouseEvent](https://www.w3.org/TR/uievents/#mouseevent).
+Полный список свойств по типам событий вы найдёте в спецификации, например для [MouseEvent](https://www.w3.org/TR/uievents/#mouseevent).
 
 ## Custom events
 
