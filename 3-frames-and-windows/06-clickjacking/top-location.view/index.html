@@ -21,7 +21,7 @@
 
       window.onbeforeunload = function() {
         window.onbeforeunload = null;
-        return "Ты хочешь покинуть эту страницу, так и не узнав все её секреты (ха-ха-ха)?";
+        return false;
       };
 
       document.body.insertAdjacentHTML('beforeend', '<iframe src="iframe.html">');
