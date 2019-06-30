@@ -5,7 +5,7 @@
 </head>
 <body>
 
-  <button onclick="loadPhones()">Load phones.json!</button>
+  <button onclick="loadPhones()">Загрузить phones.json!</button>
 
   <script>
     function loadPhones() {
@@ -15,10 +15,10 @@
       xhr.send();
 
       if (xhr.status != 200) {
-        // handle error
-        alert('Error ' + xhr.status + ': ' + xhr.statusText);
+        // обработка ошибки
+        alert('Ошибка ' + xhr.status + ': ' + xhr.statusText);
       } else {
-        // show result
+        // вывод результата
         alert(xhr.responseText);
       }
     }

@@ -2,8 +2,8 @@
 let eventMixin = {
 
   /**
-   * Subscribe to event, usage:
-   *  menu.on('select', function(item) { ... }
+   * Подписаться на событие, использование:
+   * menu.on('select', function(item) { ... }
   */
   on(eventName, handler) {
     if (!this._eventHandlers) this._eventHandlers = {};
@@ -14,8 +14,8 @@ let eventMixin = {
   },
 
   /**
-   * Cancel the subscription, usage:
-   *  menu.off('select', handler)
+   * Отменить подписку, использование:
+   * menu.off('select', handler)
    */
   off(eventName, handler) {
     let handlers = this._eventHandlers && this._eventHandlers[eventName];
@@ -28,15 +28,15 @@ let eventMixin = {
   },
 
   /**
-   * Generate the event and attach the data to it
-   *  this.trigger('select', data1, data2);
+   * Сгенерировать событие с указанным именем и данными
+   * this.trigger('select', data1, data2);
    */
   trigger(eventName, ...args) {
     if (!this._eventHandlers || !this._eventHandlers[eventName]) {
-      return; // no handlers for that event name
+      return; // обработчиков для этого события нет
     }
 
-    // call the handlers
+    // вызовем обработчики
     this._eventHandlers[eventName].forEach(handler => handler.apply(this, args));
   }
 };

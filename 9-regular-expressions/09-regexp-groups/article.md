@@ -1,41 +1,41 @@
-# Capturing groups
+# Скобочные группы
 
-A part of a pattern can be enclosed in parentheses `pattern:(...)`. This is called a "capturing group".
+Часть шаблона можно заключить в скобки `pattern:(...)`. Это называется "скобочная группа".
 
-That has two effects:
+У такого выделения есть два эффекта:
 
-1. It allows to place a part of the match into a separate array.
-2. If we put a quantifier after the parentheses, it applies to the parentheses as a whole, not the last character.
+1. Позволяет поместить часть совпадения в отдельный массив.
+2. Если установить квантификтор после скобок, то он будет применяться ко всему содержимому скобки, а не к одному символу.
 
-## Example
+## Пример
 
-In the example below the pattern `pattern:(go)+` finds one or more `match:'go'`:
+В примере ниже шаблон `pattern:(go)+` ищет как минимум одно совпадение с `match:'go'`:
 
 ```js run
 alert( 'Gogogo now!'.match(/(go)+/i) ); // "Gogogo"
 ```
 
-Without parentheses, the pattern `pattern:/go+/` means `subject:g`, followed by `subject:o` repeated one or more times. For instance, `match:goooo` or `match:gooooooooo`.
+Без скобок, шаблон `pattern:/go+/` означает символ `subject:g` и идущий после него символ `subject:o`, который повторяется один или более раз. Например, `match:goooo` или `match:gooooooooo`.
 
-Parentheses group the word `pattern:(go)` together.
+Скобки группируют символы в слово `pattern:(go)`.
 
-Let's make something more complex -- a regexp to match an email.
+Сделаем что-то более сложное -- регулярное выражение, которое соответствует адресу электронной почты.
 
-Examples of emails:
+Пример такой почты:
 
 ```
 my@mail.com
 john.smith@site.com.uk
 ```
 
-The pattern: `pattern:[-.\w]+@([\w-]+\.)+[\w-]{2,20}`.
+Шаблон: `pattern:[-.\w]+@([\w-]+\.)+[\w-]{2,20}`.
 
-1. The first part `pattern:[-.\w]+` (before `@`) may include any alphanumeric word characters, a dot and a dash, to match `match:john.smith`.
-2. Then `pattern:@`, and the domain. It may be a subdomain like `host.site.com.uk`, so we match it as "a word followed by a dot `pattern:([\w-]+\.)` (repeated), and then the last part must be a word: `match:com` or `match:uk` (but not very long: 2-20 characters).
+1. Первая часть `pattern:[-.\w]+` (перед `@`) может включать любые числовые или буквенные символы, точку и тире, чтобы соответствовать `match:john.smith`.
+2. Затем идёт `pattern:@` и домен. Это может быть поддомен (например, `host.site.com.uk`), поэтому мы сопоставляем его как слово, за которым следует точка `pattern:([\w-]+\.)` (повторяется). Затем в конце должно быть слово: `match:com` или `match:uk` (но не очень длинное: 2-20 символов).
 
-That regexp is not perfect, but good enough to fix errors or occasional mistypes.
+Это выражение не идеальное, но достаточно хорошее для исправления ошибок и опечаток.
 
-For instance,  we can find all emails in the string:
+Например, мы можем найти все электронные адреса в строке:
 
 ```js run
 let reg = /[-.\w]+@([\w-]+\.)+[\w-]{2,20}/g;
@@ -43,17 +43,17 @@ let reg = /[-.\w]+@([\w-]+\.)+[\w-]{2,20}/g;
 alert("my@mail.com @ his@site.com.uk".match(reg)); // my@mail.com, his@site.com.uk
 ```
 
-In this example parentheses were used to make a group for repeating `pattern:(...)+`. But there are other uses too, let's see them.
+В этом примере скобки были использованы для создания повторяющейся группы `pattern:(...)+`. Но есть и другие применения. Посмотрим на них.
 
-## Contents of parentheses  
+## Содержимое скобок  
 
-Parentheses are numbered from left to right. The search engine remembers the content of each and allows to reference it in the pattern or in the replacement string.
+Скобочные группы нумеруются слева направо. Поисковой движок запоминает содержимое, которое "поймала" каждая группа, и позволяет ссылаться на него в шаблоне регулярного выражения или строке для замены.
 
-For instance, we'd like to find HTML tags `pattern:<.*?>`, and process them.
+Например, мы хотим найти HTML теги `pattern:<.*?>` и обработать их.
 
-Let's wrap the inner content into parentheses, like this: `pattern:<(.*?)>`.
+Давайте заключим внутреннее содержимое в круглые скобки: `pattern:<(.*?)>`.
 
-We'll get them into an array:
+Мы получим как тег целиком, так и его содержимое в виде массива:
 
 ```js run
 let str = '<h1>Hello, world!</h1>';
@@ -62,14 +62,14 @@ let reg = /<(.*?)>/;
 alert( str.match(reg) ); // Array: ["<h1>", "h1"]
 ```
 
-The call to [String#match](mdn:js/String/match) returns groups only if the regexp has no `pattern:/.../g` flag.
+Вызов [String#match](mdn:js/String/match) возвращает группы, лишь если регулярное выражение ищет только первое совпадение, то есть не имеет флага `pattern:/.../g`.
 
-If we need all matches with their groups then we can use `.matchAll` or `regexp.exec` as described in <info:regexp-methods>:
+Если необходимы все совпадения с их группировкой, то мы можем использовать `.matchAll` или `regexp.exec`, как описано в <info:regexp-methods>:
 
 ```js run
 let str = '<h1>Hello, world!</h1>';
 
-// two matches: opening <h1> and closing </h1> tags
+// два совпадения: теги открытия <h1> и закрытия </h1>
 let reg = /<(.*?)>/g;
 
 let matches = Array.from( str.matchAll(reg) );
@@ -78,19 +78,19 @@ alert(matches[0]); //  Array: ["<h1>", "h1"]
 alert(matches[1]); //  Array: ["</h1>", "/h1"]
 ```
 
-Here we have two matches for `pattern:<(.*?)>`, each of them is an array with the full match and groups.
+Здесь мы имеем два совпадения для `pattern:<(.*?)>`. Каждое из них является массивом с полным совпадением и группами.
 
-## Nested groups
+## Вложенные группы
 
-Parentheses can be nested. In this case the numbering also goes from left to right.
+Скобки могут быть и вложенными. В этом случае нумерация также идёт слева направо.
 
-For instance, when searching a tag in `subject:<span class="my">` we may be interested in:
+Например, при поиске тега в `subject:<span class="my">` нас может интересовать:
 
-1. The tag content as a whole: `match:span class="my"`.
-2. The tag name: `match:span`.
-3. The tag attributes: `match:class="my"`.
+1. Содержимое тега целиком: `match:span class="my"`.
+2. Название тега: `match:span`.
+3. Атрибуты тега: `match:class="my"`.
 
-Let's add parentheses for them:
+Давайте добавим скобки для них:
 
 ```js run
 let str = '<span class="my">';
@@ -101,51 +101,53 @@ let result = str.match(reg);
 alert(result); // <span class="my">, span class="my", span, class="my"
 ```
 
-Here's how groups look:
+Вот так выглядят скобочные группы:
 
 ![](regexp-nested-groups.png)
 
-At the zero index of the `result` is always the full match.
+По нулевому индексу в `result` всегда идёт полное совпадение.
 
-Then groups, numbered from left to right. Whichever opens first gives the first group `result[1]`. Here it encloses the whole tag content.
+Затем следуют группы, нумеруемые слева направо. Группа, которая идёт первой, получает первый индекс в результате -- `result[1]`. Там находится всё содержимое тега.
 
-Then in `result[2]` goes the group from the second opening `pattern:(` till the corresponding `pattern:)` -- tag name, then we don't group spaces, but group attributes for `result[3]`.
+Затем в `result[2]` идёт группа, образованная второй открывающей скобкой `pattern:(` до следующей закрывающей скобки `pattern:)` -- имя тега, далее в `result[3]` мы группируем не пробелы, а атрибуты.
 
-**If a group is optional and doesn't exist in the match, the corresponding `result` index is present (and equals `undefined`).**
+**Даже если скобочная группа необязательна и не входит в совпадение, соответствующий элемент массива `result` существует (и равен `undefined`).**
 
-For instance, let's consider the regexp `pattern:a(z)?(c)?`. It looks for `"a"` optionally followed by `"z"` optionally followed by `"c"`.
+Например, рассмотрим регулярное выражение `pattern:a(z)?(c)?`. Оно ищет букву `"a"`, за которой опционально идёт буква `"z"`, за которой, в свою очередь, опционально идёт буква `"c"`.
 
-If we run it on the string with a single letter `subject:a`, then the result is:
+Если применить его к строке из одной буквы `subject:a`, то результат будет такой:
 
 ```js run
 let match = 'a'.match(/a(z)?(c)?/);
 
 alert( match.length ); // 3
-alert( match[0] ); // a (whole match)
+alert( match[0] ); // a (всё совпадение)
 alert( match[1] ); // undefined
 alert( match[2] ); // undefined
 ```
 
-The array has the length of `3`, but all groups are empty.
+Массив имеет длину `3`, но все скобочные группы пустые.
 
-And here's a more complex match for the string `subject:ack`:
+А теперь более сложная ситуация для строки `subject:ack`:
 
 ```js run
 let match = 'ack'.match(/a(z)?(c)?/)
 
 alert( match.length ); // 3
-alert( match[0] ); // ac (whole match)
-alert( match[1] ); // undefined, because there's nothing for (z)?
+alert( match[0] ); // ac (всё совпадение)
+alert( match[1] ); // undefined, потому что для (z)? ничего нет
 alert( match[2] ); // c
 ```
 
-The array length is permanent: `3`. But there's nothing for the group `pattern:(z)?`, so the result is `["ac", undefined, "c"]`.
+Длина массива всегда равна `3`. Для группы `pattern:(z)?` ничего нет, поэтому результат `["ac", undefined, "c"]`.
 
-## Named groups
+## Именованные группы
 
-Remembering groups by their numbers is hard. For simple patterns it's doable, but for more complex ones we can give names to parentheses.
+Запоминать группы по номерам не очень удобно. Для простых шаблонов это допустимо, но в более сложных случаях мы можем давать скобкам имена.
 
-That's done by putting `pattern:?<name>` immediately after the opening paren, like this:
+Это делается добавлением `pattern:?<name>` непосредственно после открытия скобки.
+
+Например:
 
 ```js run
 *!*
@@ -160,11 +162,11 @@ alert(groups.month); // 04
 alert(groups.day); // 30
 ```
 
-As you can see, the groups reside in the `.groups` property of the match.
+Как вы можете видеть, группы располагаются в свойстве  `.groups` совпадения.
 
-We can also use them in replacements, as `pattern:$<name>` (like `$1..9`, but name instead of a digit).
+Мы также можем использовать их в строке замены как `pattern:$<name>` (аналогично `$1..9`, но имя вместо цифры).
 
-For instance, let's rearrange the date into `day.month.year`:
+Например, давайте поменяем формат даты в `день.месяц.год`:
 
 ```js run
 let dateRegexp = /(?<year>[0-9]{4})-(?<month>[0-9]{2})-(?<day>[0-9]{2})/;
@@ -176,7 +178,7 @@ let rearranged = str.replace(dateRegexp, '$<day>.$<month>.$<year>');
 alert(rearranged); // 30.04.2019
 ```
 
-If we use a function, then named `groups` object is always the last argument:
+Если используем функцию для замены, тогда именованный объект `groups` всегда является последним аргументом:
 
 ```js run
 let dateRegexp = /(?<year>[0-9]{4})-(?<month>[0-9]{2})-(?<day>[0-9]{2})/;
@@ -191,9 +193,9 @@ let rearranged = str.replace(dateRegexp,
 alert(rearranged); // 30.04.2019
 ```
 
-Usually, when we intend to use named groups, we don't need positional arguments of the function. For the majority of real-life cases we only need `str` and `groups`.
+Обычно, когда мы планируем использовать именованные группы, то из всех аргументов функции нам нужны только `str` и` groups`.
 
-So we can write it a little bit shorter:
+Так что мы можем написать код чуть короче:
 
 ```js
 let rearranged = str.replace(dateRegexp, (str, ...args) => {
@@ -206,20 +208,20 @@ let rearranged = str.replace(dateRegexp, (str, ...args) => {
 ```
 
 
-## Non-capturing groups with ?:
+## Исключение из запоминания через ?:
 
-Sometimes we need parentheses to correctly apply a quantifier, but we don't want the contents in results.
+Бывает так, что скобки нужны, чтобы квантификатор правильно применился, но мы не хотим, чтобы их содержимое попало в результат.
 
-A group may be excluded by adding `pattern:?:` in the beginning.
+Скобочную группу можно исключить из запоминаемых и нумеруемых, добавив в её начало `pattern:?:`.
 
-For instance, if we want to find `pattern:(go)+`, but don't want to remember the contents (`go`) in a separate array item, we can write: `pattern:(?:go)+`.
+Например, если мы хотим найти `pattern:(go)+`, но не хотим запоминать содержимое (`go`) в отдельный элемент массива, то можем написать так: `pattern:(?:go)+`.
 
-In the example below we only get the name "John" as a separate member of the `results` array:
+В примере ниже мы получаем только имя "John" как отдельный член массива `results`:
 
 ```js run
 let str = "Gogo John!";
 *!*
-// exclude Gogo from capturing
+// исключает Gogo из запоминания
 let reg = /(?:go)+ (\w+)/i;
 */!*
 
@@ -229,9 +231,14 @@ alert( result.length ); // 2
 alert( result[1] ); // John
 ```
 
-## Summary
+## Итого
 
-- Parentheses can be:
-  - capturing `(...)`, ordered left-to-right, accessible by number.
-  - named capturing `(?<name>...)`, accessible by name.
-  - non-capturing `(?:...)`, used only to apply quantifier to the whole groups.
+Круглые скобки группируют вместе часть регулярного выражения, так что квантификатор применяется к ним в целом.
+
+Скобочные группы нумеруются слева направо и могут опционально именоваться с помощью `(?<name>...)`.
+
+На текст совпадения, соответствующий скобочной группе, можно ссылаться в строке замены через `$1`, `$2` и т.д. или по имени `$name`, если она именована.
+
+Часть совпадения, соответствующую скобочной группе, мы также получаем в результатах поиска, отдельным элементом массива (или в `.groups`, если группа именована).
+
+Можно исключить скобочную группу из запоминания, добавив в её начало `pattern:?:` -- `(?:...)`. Это используется, если необходимо применить квантификатор ко всей группе, но исключить попадание их содержимого в результат.

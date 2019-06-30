@@ -1,10 +1,10 @@
-**Answer: an error.**
+**Ответ: ошибка.**
 
-Try it:
+Проверьте:
 ```js run
 function makeUser() {
   return {
-    name: "John",
+    name: "Джон",
     ref: this
   };
 };
@@ -14,20 +14,20 @@ let user = makeUser();
 alert( user.ref.name ); // Error: Cannot read property 'name' of undefined
 ```
 
-That's because rules that set `this` do not look at object literals. 
+Это потому, что правила, которые определяют значение `this`, никак не смотрят на объявление объекта. Важен лишь момент вызова метода.
 
-Here the value of `this` inside `makeUser()` is `undefined`, because it is called as a function, not as a method.
+Здесь значение `this` внутри `makeUser()` является `undefined`, потому что `makeUser()` вызвана как функция, не через "точку" как метод.
 
-And the object literal itself has no effect on `this`. The value of `this` is one for the whole function, code blocks and object literals do not affect it.
+Литерал объекта сам по себе не влияет на `this`. Значение `this` одно для всей функции и блоков кода в ней, литеральные объекты не меняют его.
 
-So `ref: this` actually takes current `this` of the function.
+Таким образом, при создании объекта `ref: this` берёт текущее значение `this` функции `makeUser()`.
 
-Here's the opposite case:
+А вот противоположный случай:
 
 ```js run
 function makeUser() {
   return {
-    name: "John",
+    name: "Джон",
 *!*
     ref() {
       return this;
@@ -38,9 +38,9 @@ function makeUser() {
 
 let user = makeUser();
 
-alert( user.ref().name ); // John
+alert( user.ref().name ); // Джон
 ```
 
-Now it works, because `user.ref()` is a method. And the value of `this` is set to the object before dot `.`.
+Теперь это работает, поскольку `user.ref()` вызывается как метод. И значением `this` становится объект перед точкой `.`.
 
 
