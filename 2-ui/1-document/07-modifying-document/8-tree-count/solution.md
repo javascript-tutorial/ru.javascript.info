@@ -1,1 +1,1 @@
-To append text to each `<li>` we can alter the text node `data`.
+Чтобы добавить текст к каждому `<li>`, мы можем изменить текстовый узел `data`.

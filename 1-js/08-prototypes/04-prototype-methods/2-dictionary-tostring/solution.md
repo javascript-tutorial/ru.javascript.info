@@ -1,13 +1,13 @@
 
-The method can take all enumerable keys using `Object.keys` and output their list.
+В методе можно получить все перечисляемые ключи с помощью `Object.keys` и вывести их список.
 
-To make `toString` non-enumerable, let's define it using a property descriptor. The syntax of `Object.create` allows us to provide an object with property descriptors as the second argument.
+Чтобы сделать toString не перечисляемым, давайте определим его, используя дескриптор свойства. Синтаксис `Object.create` позволяет нам добавить в объект дескрипторы свойств как второй аргумент.
 
 ```js run
 *!*
 let dictionary = Object.create(null, {
-  toString: { // define toString property
-    value() { // the value is a function
+  toString: { // определяем свойство toString
+    value() { // значение -- это функция
       return Object.keys(this).join();
     }
   }
@@ -17,15 +17,15 @@ let dictionary = Object.create(null, {
 dictionary.apple = "Apple";
 dictionary.__proto__ = "test";
 
-// apple and __proto__ is in the loop
+// apple и __proto__ выведены в цикле
 for(let key in dictionary) {
-  alert(key); // "apple", then "__proto__"
+  alert(key); // "apple", затем "__proto__"
 }  
 
-// comma-separated list of properties by toString
+// список свойств, разделённых запятой, выведен с помощью toString
 alert(dictionary); // "apple,__proto__"
 ```
 
-When we create a property using a descriptor, its flags are `false` by default. So in the code above, `dictionary.toString` is non-enumerable.
+Когда мы создаём свойство с помощью дескриптора, все флаги по умолчанию имеют значение `false`. Таким образом, в коде выше `dictionary.toString` не перечисляемое свойство.
 
-See the the chapter [](info:property-descriptors) for review.
+Смотрите главу [](info:property-descriptors) для ознакомления.

@@ -1,15 +1,15 @@
 
-# Animated circle with callback
+# Анимация круга с помощью колбэка
 
-In the task <info:task/animate-circle> an animated growing circle is shown.
+В задаче <info:task/animate-circle> мы анимировали появление круга.
 
-Now let's say we need not just a circle, but to show a message inside it. The message should appear *after* the animation is complete (the circle is fully grown), otherwise it would look ugly.
+Давайте представим, что теперь нам нужен не просто круг, а круг с сообщением внутри. И сообщение должно появляться *после* анимации (когда круг достигнет своих размеров), иначе это будет некрасиво.
 
-In the solution of the task, the function `showCircle(cx, cy, radius)` draws the circle, but gives no way to track when it's ready.
+В том решении функция `showCircle(cx, cy, radius)` рисовала круг, но способа узнать, что всё нарисовано, не было.
 
-Add a callback argument: `showCircle(cx, cy, radius, callback)` to be called when the animation is complete. The `callback` should receive the circle `<div>` as an argument.
+Поэтому добавим в параметры колбэк: `showCircle(cx, cy, radius, callback)`, который выполним, когда анимация будет завершена. Функция `callback` добавить в наш круг `<div>` элемент.
 
-Here's the example:
+Посмотрите пример:
 
 ```js
 showCircle(150, 150, 100, div => {
@@ -18,8 +18,8 @@ showCircle(150, 150, 100, div => {
 });
 ```
 
-Demo:
+Демо:
 
 [iframe src="solution" height=260]
 
-Take the solution of the task <info:task/animate-circle> as the base.
+Возьмите за основу решение задачи <info:task/animate-circle>.

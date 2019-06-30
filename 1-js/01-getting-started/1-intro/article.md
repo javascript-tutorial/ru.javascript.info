@@ -1,120 +1,120 @@
-# An Introduction to JavaScript
+# Введение в JavaScript
 
-Let's see what's so special about JavaScript, what we can achieve with it, and which other technologies play well with it.
+Давайте посмотрим, что такого особенного в JavaScript, чего можно достичь с его помощью и какие другие технологии хорошо с ним работают.
 
-## What is JavaScript?
+## Что такое JavaScript?
 
-*JavaScript* was initially created to *"make web pages alive"*.
+Изначально *JavaScript* был создан, чтобы *"сделать веб-страницы живыми"*.
 
-The programs in this language are called *scripts*. They can be written right in a web page's HTML and executed automatically as the page loads.
+Программы на этом языке называются *скриптами*. Они могут встраиваться в HTML и выполняться автоматически при загрузке веб-страницы.
 
-Scripts are provided and executed as plain text. They don't need special preparation or compilation to run.
+Скрипты распространяются и выполняются как простой текст. Им не нужна специальная подготовка или компиляция для запуска.
 
-In this aspect, JavaScript is very different from another language called [Java](https://en.wikipedia.org/wiki/Java_(programming_language)).
+Это отличает JavaScript от другого языка - [Java](https://ru.wikipedia.org/wiki/Java).
 
-```smart header="Why <u>Java</u>Script?"
-When JavaScript was created, it initially had another name: "LiveScript". But Java was very popular at that time, so it was decided that positioning a new language as a "younger brother" of Java would help.
+```smart header="Почему <u>Java</u>Script?"
+Когда JavaScript создавался, у него было другое имя - "LiveScript". Однако, Java была очень популярная в то время и было решено, что позиционирование языка как  "младшего брата" Java будет полезно.
 
-But as it evolved, JavaScript became a fully independent language with its own specification called [ECMAScript](http://en.wikipedia.org/wiki/ECMAScript), and now it has no relation to Java at all.
+Со временем JavaScript стал полностью независимым языком со своей собственной спецификацией, называющейся [ECMAScript](http://ru.wikipedia.org/wiki/ECMAScript), и сейчас не имеет никакого отношения к Java.
 ```
 
-Today, JavaScript can execute not only in the browser, but also on the server, or actually on any device that has a special program called [the JavaScript engine](https://en.wikipedia.org/wiki/JavaScript_engine).
+Сегодня JavaScript может выполнятся не только в браузере, но и на сервере или на любом другом устройстве, которое имеет специальную программу, называющуюся ["движком" JavaScript](https://ru.wikipedia.org/wiki/%D0%94%D0%B2%D0%B8%D0%B6%D0%BE%D0%BA_JavaScript).
 
-The browser has an embedded engine sometimes called a "JavaScript virtual machine".
+У браузере есть собственный движок, который иногда называют "виртуальная машина JavaScript".
 
-Different engines have different "codenames". For example:
+Разные движки имеют разные "кодовые имена". Например:
 
-- [V8](https://en.wikipedia.org/wiki/V8_(JavaScript_engine)) -- in Chrome and Opera.
-- [SpiderMonkey](https://en.wikipedia.org/wiki/SpiderMonkey) -- in Firefox.
-- ...There are other codenames like "Trident" and "Chakra" for different versions of IE, "ChakraCore" for Microsoft Edge, "Nitro" and "SquirrelFish" for Safari, etc.
+- [V8](https://ru.wikipedia.org/wiki/V8_(%D0%B4%D0%B2%D0%B8%D0%B6%D0%BE%D0%BA_JavaScript)) -- в Chrome и Opera.
+- [SpiderMonkey](https://ru.wikipedia.org/wiki/SpiderMonkey) -- в Firefox.
+- ...Ещё есть "Trident" и "Chakra" для разных версий IE, "ChakraCore" для Microsoft Edge, "Nitro" и "SquirrelFish" для Safari и т.д.
 
-The terms above are good to remember because they are used in developer articles on the internet. We'll use them too. For instance, if "a feature X is supported by V8", then it probably works in Chrome and Opera.
+Эти названия полезно знать, так как они часто используются в статьях для разработчиков. Мы тоже будем их использовать. Например, если "функциональность X поддерживается V8", тогда "Х", скорее всего, работает в Chrome и Opera.
 
-```smart header="How do engines work?"
+```smart header="Как работают движки?"
 
-Engines are complicated. But the basics are easy.
+Движки сложны. Но основы понять легко.
 
-1. The engine (embedded if it's a browser) reads ("parses") the script.
-2. Then it converts ("compiles") the script to the machine language.
-3. And then the machine code runs, pretty fast.
+1. Движок (встроенный, если это браузер) читает ("парсит") сценарий.
+2. Затем он преобразует ("компилирует") сценарий в машинный язык.
+3. После этого машинный код запускается и весьма быстро работает.
 
-The engine applies optimizations at each step of the process. It even watches the compiled script as it runs, analyzes the data that flows through it, and applies optimizations to the machine code based on that knowledge. When it's done, scripts run quite fast.
+Движок применяет оптимизации на каждом этапе. Он даже просматривает скомпилированный скрипт во время его работы, анализируя проходящие через него данные, и применяет оптимизации к машинному коду, полагаясь на полученные знания. В результате скрипты работают очень быстро.
 ```
 
-## What can in-browser JavaScript do?
+## Что может JavaScript в браузере?
 
-Modern JavaScript is a "safe" programming language. It does not provide low-level access to memory or CPU, because it was initially created for browsers which do not require it.
+Современный JavaScript - это "безопасный" язык программирования. Он не предоставляет низкоуровневый доступ к памяти или процессору, потому что он изначально был создан для браузеров, не требующих этого.
 
-Javascript's capabilities greatly depend on the environment it's running in. For instance, [Node.JS](https://wikipedia.org/wiki/Node.js) supports functions that allow JavaScript to read/write arbitrary files, perform network requests, etc.
+Возможности JavaScript сильно зависят от окружения в котором он работает. Например, [Node.JS](https://ru.wikipedia.org/wiki/Node.js) поддерживает функции чтения/записи произвольных файлов, выполнения сетевых запросов, и т.д.
 
-In-browser JavaScript can do everything related to webpage manipulation, interaction with the user, and the webserver.
+В браузере для JavaScript доступно всё, что связано с манипулированием веб-страницами, взаимодействием с пользователем и веб-сервером.
 
-For instance, in-browser JavaScript is able to:
+Например, в браузере JavaScript может:
 
-- Add new HTML to the page, change the existing content, modify styles.
-- React to user actions, run on mouse clicks, pointer movements, key presses.
-- Send requests over the network to remote servers, download and upload files (so-called [AJAX](https://en.wikipedia.org/wiki/Ajax_(programming)) and [COMET](https://en.wikipedia.org/wiki/Comet_(programming)) technologies).
-- Get and set cookies, ask questions to the visitor, show messages.
-- Remember the data on the client-side ("local storage").
+- Добавлять новый HTML на страницу, изменять существующее содержимое, модифицировать стили.
+- Реагировать на действия пользователя, щелчки мыши, перемещения указателя, нажатия клавиш.
+- Отправлять сетевые запросы на удалённые сервера, скачивать и загружать файлы (технологии [AJAX](https://ru.wikipedia.org/wiki/AJAX) и [COMET](https://ru.wikipedia.org/wiki/Comet_(%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5))).
+- Получать и устанавливать куки, задавать вопросы посетителю, показывать сообщения.
+- Запоминать данные на стороне клиента ("local storage").
 
-## What CAN'T in-browser JavaScript do?
+## Что НЕ может JavaScript в браузере?
 
-JavaScript's abilities in the browser are limited for the sake of the user's safety. The aim is to prevent an evil webpage from accessing private information or harming the user's data.
+Возможности JavaScript в браузере ограничены ради безопасности пользователя. Цель заключается в предотвращении доступа не добросовестной веб-страницы к частной информации или нанесению ущерба данным пользователя.
 
-Examples of such restrictions include:
+Примеры таких ограничений включают в себя:
 
-- JavaScript on a webpage may not read/write arbitrary files on the hard disk, copy them or execute programs. It has no direct access to OS system functions.
+- JavaScript на веб-странице не может читать/записывать произвольные файлы на жёстком диске, копировать их или запускать программы. Он не имеет прямого доступа к системным функциям ОС.
 
-    Modern browsers allow it to work with files, but the access is limited and only provided if the user does certain actions, like "dropping" a file into a browser window or selecting it via an `<input>` tag.
+    Современные браузеры позволяют ему работать с файлами, но с ограниченным доступом и предоставляют его только если пользователь выполняет определённые действия, такие как "перетаскивание" файла в окно браузера или его выбор с помощью тега `<input>`.
 
-    There are ways to interact with camera/microphone and other devices, but they require a user's explicit permission. So a JavaScript-enabled page may not sneakily enable a web-camera, observe the surroundings and send the information to the [NSA](https://en.wikipedia.org/wiki/National_Security_Agency).
-- Different tabs/windows generally do not know about each other. Sometimes they do, for example when one window uses JavaScript to open the other one. But even in this case, JavaScript from one page may not access the other if they come from different sites (from a different domain, protocol or port).
+    Существуют способы взаимодействия с камерой/микрофоном и другими устройствами, но они требуют явного разрешения пользователя. Таким образом, страница с поддержкой JavaScript не может незаметно включить веб-камеру, наблюдать за происходящим и отправлять информацию в [ФСБ](https://ru.wikipedia.org/wiki/%D0%A4%D0%B5%D0%B4%D0%B5%D1%80%D0%B0%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F_%D1%81%D0%BB%D1%83%D0%B6%D0%B1%D0%B0_%D0%B1%D0%B5%D0%B7%D0%BE%D0%BF%D0%B0%D1%81%D0%BD%D0%BE%D1%81%D1%82%D0%B8_%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D0%B9%D1%81%D0%BA%D0%BE%D0%B9_%D0%A4%D0%B5%D0%B4%D0%B5%D1%80%D0%B0%D1%86%D0%B8%D0%B8).
+- Различные окна/вкладки не знают друг о друге. Иногда одно окно, используя JavaScript, открывает другое окно. Но даже в этом случае, JavaScript с одной страницы не имеет доступа к другой, если они пришли с разных сайтов (с другого домена, протокола или порта).
 
-    This is called the "Same Origin Policy". To work around that, *both pages* must contain a special JavaScript code that handles data exchange.
+    Это называется "Политика одинакового источника" (Same Origin Policy). Чтобы обойти это ограничение, обе страницы должны быть на это согласны и содержать JavaScript-код, который специальным образом обменивается данными.
 
-    This limitation is, again, for the user's safety. A page from `http://anysite.com` which a user has opened must not be able to access another browser tab with the URL `http://gmail.com` and steal information from there.
-- JavaScript can easily communicate over the net to the server where the current page came from. But its ability to receive data from other sites/domains is crippled. Though possible, it requires explicit agreement (expressed in HTTP headers) from the remote side. Once again, that's a safety limitation.
+    Это ограничение необходимо, опять же, для безопасности пользователя. Страница `http://anysite.com`, которую открыл пользователь, не должна иметь доступ к другой вкладке браузера с URL `http://gmail.com` и воровать информацию оттуда.
+- JavaScript может легко взаимодействовать с сервером, с которого пришла текущая страница. Но его способность получать данные с других сайтов/доменов ограничена. Хотя это возможно, требуется явное соглашение (выраженное в заголовках HTTP) с удалённой стороной. Опять же, это ограничение безопасности.
 
 ![](limitations.png)
 
-Such limits do not exist if JavaScript is used outside of the browser, for example on a server. Modern browsers also allow plugin/extensions which may ask for extended permissions.
+Подобные ограничения не действуют, если JavaScript используется вне браузера, например — на сервере. Современные браузеры предоставляют плагины/расширения с помощью которых можно запрашивать дополнительные разрешения.
 
-## What makes JavaScript unique?
+## Что делает JavaScript особенным?
 
-There are at least *three* great things about JavaScript:
+Как минимум *три* сильные стороны JavaScript:
 
 ```compare
-+ Full integration with HTML/CSS.
-+ Simple things are done simply.
-+ Support by all major browsers and enabled by default.
++ Полная интеграция с HTML/CSS.
++ Простые вещи делаются просто.
++ Поддерживается всеми основными браузерами и включён по умолчанию.
 ```
-Javascript is the only browser technology that combines these three things.
+JavaScript - это единственная браузерная технология, сочетающая в себе все эти три вещи.
 
-That's what makes JavaScript unique. That's why it's the most widespread tool for creating browser interfaces.
+Вот что делает JavaScript особенным. Вот почему это самый распространённый инструмент для создания интерфейсов в браузере.
 
-While planning to learn a new technology, it's beneficial to check its perspectives. So let's move on to the modern trends affecting it,  including new languages and browser abilities.
+Планируя изучить новую технологию, полезно оценить её перспективы. Итак, давайте перейдём к современным тенденциям, включая новые языки и браузерные технологии.
 
 
-## Languages "over" JavaScript
+## Языки "над" JavaScript
 
-The syntax of JavaScript does not suit everyone's needs. Different people want different features.
+Синтаксис JavaScript подходит не под все нужны. Разные люди хотят иметь разные возможности.
 
-That's to be expected, because projects and requirements are different for everyone.
+Это естественно, потому что проекты разные и требования к ним тоже разные.
 
-So recently a plethora of new languages appeared, which are *transpiled* (converted) to JavaScript before they run in the browser.
+Так, в последнее время, появилось много новых языков, которые *транспилируются* (конвертируются) в JavaScript прежде, чем запустятся в браузере.
 
-Modern tools make the transpilation very fast and transparent, actually allowing developers to code in another language and auto-converting it "under the hood".
+Современные инструменты делают транспиляцию очень быстрой и прозрачной, фактически позволяя разработчикам писать код на другом языке, автоматически преобразуя его в JavaScript "под капотом".
 
-Examples of such languages:
+Примеры таких языков:
 
-- [CoffeeScript](http://coffeescript.org/) is a "syntactic sugar" for JavaScript. It introduces shorter syntax, allowing us to write clearer and more precise code. Usually, Ruby devs like it.
-- [TypeScript](http://www.typescriptlang.org/) is concentrated on adding "strict data typing" to simplify the development and support of complex systems. It is developed by Microsoft.
-- [Dart](https://www.dartlang.org/) is a standalone language that has its own engine that runs in non-browser environments (like mobile apps). It was initially offered by Google as a replacement for JavaScript, but as of now, browsers require it to be transpiled to JavaScript just like the ones above.
+- [CoffeeScript](http://coffeescript.org/) добавляет "синтаксический сахар" для JavaScript. Он вводит более короткий синтаксис, которые позволяет писать чистый и лаконичный код. Обычно такое нравится Ruby-программистам.
+- [TypeScript](http://www.typescriptlang.org/) концентрируется на добавлении "строгой типизации" для упрощения разработки и поддержки больших и сложных систем. Разработан Microsoft.
+- [Dart](https://www.dartlang.org/) стоит особняком, потому что имеет собственный движок работающий вне браузера (например, в мобильных приложениях). Первоначально был предложен Google как замена JavaScript, но на данный момент, необходима его транспиляция для запуска, так же как для языков выше.
 
-There are more. Of course, even if we use one of these languages, we should also know JavaScript to really understand what we're doing.
+Есть и другие. Но даже если мы используем один из этих языков, мы, безусловно, должны знать JavaScript, чтобы действительно понимать, что мы делаем.
 
-## Summary
+## Итого
 
-- JavaScript was initially created as a browser-only language, but is now used in many other environments as well.
-- Today, JavaScript has a unique position as the most widely-adopted browser language with full integration with HTML/CSS.
-- There are many languages that get "transpiled" to JavaScript and provide certain features. It is recommended to take a look at them, at least briefly, after mastering JavaScript.
+- JavaScript изначально создавался только для браузера, но сейчас используется на многих других платформах.
+- Сегодня JavaScript занимает уникальную позицию в качестве самого распространённого языка для браузера обладающего полной интеграцией с HTML/CSS.
+- Многие языки могут быть "транспилированы" в JavaScript для предоставления дополнительных функций. Рекомендуется хотя бы кратко рассмотреть их после освоения JavaScript.
