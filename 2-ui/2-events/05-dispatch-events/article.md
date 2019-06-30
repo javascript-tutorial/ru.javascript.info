@@ -158,19 +158,19 @@ alert(event.clientX); // undefined, неизвестное свойство пр
 
 ## event.preventDefault()
 
-We can call `event.preventDefault()` on a script-generated event if `cancelable:true` flag is specified.
+На сгенерированном событии обработчик может вызвать метод `event.preventDefault()` если задан флаг `cancelable:true`.
 
-Of course, if the event has a non-standard name, then it's not known to the browser, and there's no "default browser action" for it.
+В случае, если событие придумано нами, имеет нестандартное имя – никакого действия браузера по умолчанию, конечно, нет.
 
-But the event-generating code may plan some actions after `dispatchEvent`.
+Но код, который генерирует событие, может предусматривать какие-то ещё действия после `dispatchEvent`.
 
-The call of `event.preventDefault()` is a way for the handler to send a signal that those actions shouldn't be performed.
+Вызов `event.preventDefault()` является возможностью для обработчика события сообщить в сгенерировавший событие код, что эти действия продолжать не надо.
 
-In that case the call to `elem.dispatchEvent(event)` returns `false`. And the event-generating code knows that the processing shouldn't continue.
+Тогда вызов `elem.dispatchEvent(event)` возвратит `false`. И код сгенерировавший событие узнает, что продолжать не нужно.
 
-For instance, in the example below there's a `hide()` function. It generates the `"hide"` event on the element `#rabbit`, notifying all interested parties that the rabbit is going to hide.
+В примере ниже есть функция `hide()`, которая при вызове генерирует событие `"hide"` на элементе `#rabbit`, уведомляя всех интересующихся, что кролик собирается спрятаться.
 
-A handler set by `rabbit.addEventListener('hide',...)` will learn about that and, if it wants, can prevent that action by calling `event.preventDefault()`. Then the rabbit won't hide:
+Любой обработчик может узнать об этом, подписавшись на событие через `rabbit.addEventListener('hide',...)` и, при желании, отменить действие по умолчанию через `event.preventDefault()`. Тогда кролик не исчезнет:
 
 ```html run refresh
 <pre id="rabbit">
@@ -182,25 +182,25 @@ A handler set by `rabbit.addEventListener('hide',...)` will learn about that and
 </pre>
 
 <script>
-  // hide() will be called automatically in 2 seconds
+  // hide() будет вызван автоматически через 2 секунды
   function hide() {
     let event = new CustomEvent("hide", {
-      cancelable: true // without that flag preventDefault doesn't work
+      cancelable: true // без этого флага preventDefault не сработает
     });
     if (!rabbit.dispatchEvent(event)) {
-      alert('the action was prevented by a handler');
+      alert('действие отменено обработчиком');
     } else {
       rabbit.hidden = true;
     }
   }
 
   rabbit.addEventListener('hide', function(event) {
-    if (confirm("Call preventDefault?")) {
+    if (confirm("Вызвать preventDefault?")) {
       event.preventDefault();
     }
   });
 
-  // hide in 2 seconds
+  // прячемся через 2 секунды
   setTimeout(hide, 2000);
 
 </script>
