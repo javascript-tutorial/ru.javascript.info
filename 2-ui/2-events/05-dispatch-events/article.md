@@ -207,25 +207,25 @@ alert(event.clientX); // undefined, неизвестное свойство пр
 ```
 
 
-## Events-in-events are synchronous
+## События-в-событиях работают синхронно
 
-Usually events are processed asynchronously. That is: if the browser is processing `onclick` and in the process a new event occurs, then it awaits till `onclick` processing is finished.
+Обычно события обрабатываются асинхронно. Это значит, что если браузер обрабатывает `onclick` и где-то по пути произойдет новое событие, то оно ждёт пока закончится обработка `onclick`.
 
-The exception is when one event is initiated from within another one.
+Исключение, когда событие инициировано из обработчика другого события.
 
-Then the control jumps to the nested event handler, and after it goes back.
+Тогда управление переходит во вложенный обработчик, и уже после него возвращается назад.
 
-For instance, here the nested `menu-open` event is processed synchronously, during the `onclick`:
+В примере ниже событие `menu-open` обрабатывается синхронно во время обработки `onclick`:
 
 ```html run
-<button id="menu">Menu (click me)</button>
+<button id="menu">Меню (нажми меня)</button>
 
 <script>
-  // 1 -> nested -> 2
+  // 1 -> вложенный -> 2
   menu.onclick = function() {
     alert(1);
 
-    // alert("nested")
+    // alert("вложенный")
     menu.dispatchEvent(new CustomEvent("menu-open", {
       bubbles: true
     }));
@@ -237,14 +237,14 @@ For instance, here the nested `menu-open` event is processed synchronously, duri
 </script>
 ```    
 
-Please note that the nested event `menu-open` bubbles up and is handled on the `document`. The propagation of the nested event is fully finished before the processing gets back to the outer code (`onclick`).
+Обратите внимание, что вложенное событие `menu-open` всплывает и обрабатывается на `document`. Обработка вложенного события полностью завершается до того, как управление возвращается во внешний код (`onclick`).
 
-That's not only about `dispatchEvent`, there are other cases. JavaScript in an event handler can call methods that lead to other events -- they are too processed synchronously.
+Это справедливо не только для `dispatchEvent`, существуют другие сценарии. JavaScript в обработчике события может вызвать другие методы, которые приведут к другим событиям -- они тоже обрабатываются синхронно.
 
-If we don't like it, we can either put the `dispatchEvent` (or other event-triggering call) at the end of `onclick` or wrap it in zero-delay `setTimeout`:
+Если нам это не подходит, мы можем либо поставить `dispatchEvent` (или любой другой код инициирующий событие) в конец обработчика `onclick`, либо, если это удобно, обернуть его в `setTimeout` с нулевой задержкой:
 
 ```html run
-<button id="menu">Menu (click me)</button>
+<button id="menu">Меню (нажми меня)</button>
 
 <script>
   // Now the result is: 1 -> 2 -> nested
