@@ -46,7 +46,7 @@ alert( document.cookie ); // cookie1=value1; cookie2=value2;...
 
 Например, этот вызов установит куки с именем `user` и значением `John`:
 
-```run js
+```js run
 document.cookie = "user=John"; // обновляем только куки с именем 'user'
 alert(document.cookie); // показываем все куки
 ```
@@ -55,7 +55,7 @@ alert(document.cookie); // показываем все куки
 
 Технически, и имя, и значение куки могут состоять из любых символов, но для сохранения правильного форматирования следует использовать встроенную функцию `encodeURIComponent`:
 
-```run js
+```js run
 // специальные символы, требуется кодировка
 let name = "my name";
 let value = "John Smith"
