@@ -465,54 +465,55 @@ alert( "Widget".endsWith("get") ); // true, "get" — окончание "Widget
 Автор учебника в основном предпочитает использовать `slice`.
 ```
 
-## Comparing strings
+## Сравнение строк
 
-As we know from the chapter <info:comparison>, strings are compared character-by-character in alphabetical order.
+Как мы знаем из главы <info:comparison>, строки сравниваются посимвольно в алфавитном порядке.
 
-Although, there are some oddities.
+Тем не менее, есть некоторые нюансы.
 
-1. A lowercase letter is always greater than the uppercase:
+1. Строчные буквы больше заглавных:
 
     ```js run
     alert( 'a' > 'Z' ); // true
     ```
 
-2. Letters with diacritical marks are "out of order":
+2. Буквы, имеющие диакритические знаки, расположены отдельно от всех обычных букв:
 
     ```js run
     alert( 'Österreich' > 'Zealand' ); // true
     ```
 
-    This may lead to strange results if we sort these country names. Usually people would expect `Zealand` to come after `Österreich` in the list.
+    Это может привести к своеобразным результатам при сортировке названий стран: нормально было бы ожидать, что `Zealand` будет после `Österreich` в списке.
 
-To understand what happens, let's review the internal representation of strings in JavaScript.
+Чтобы разобраться, что происходит, давайте ознакомимся с внутренним представлением строк в JavaScript.
 
-All strings are encoded using [UTF-16](https://en.wikipedia.org/wiki/UTF-16). That is: each character has a corresponding numeric code. There are special methods that allow to get the character for the code and back.
+Строки кодируются в [UTF-16](https://ru.wikipedia.org/wiki/UTF-16). Таким образом, у любого символа есть соответствующий код. Есть специальные методы, позволяющие получить символ по его коду и наоборот.
 
 `str.codePointAt(pos)`
-: Returns the code for the character at position `pos`:
+: Возвращает код для символа, находящегося на позиции `pos`:
 
     ```js run
-    // different case letters have different codes
+    // одна и та же буква в нижнем и верхнем регистре
+    // будет иметь разные коды
     alert( "z".codePointAt(0) ); // 122
     alert( "Z".codePointAt(0) ); // 90
     ```
 
 `String.fromCodePoint(code)`
-: Creates a character by its numeric `code`
+: Создаёт символ по его коду `code`
 
     ```js run
     alert( String.fromCodePoint(90) ); // Z
     ```
 
-    We can also add unicode characters by their codes using `\u` followed by the hex code:
+    Также можно добавлять юникодные символы по их кодам, используя `\u` с шестнадцатеричным кодом символа:
 
     ```js run
-    // 90 is 5a in hexadecimal system
+    // 90 — 5a в шестнадцатеричной системе счисления
     alert( '\u005a' ); // Z
     ```
 
-Now let's see the characters with codes `65..220` (the latin alphabet and a little bit extra) by making a string of them:
+Давайте сделаем строку, содержащую символы с кодами от `65` до `220` — это латиница и ещё некоторые распространённые символы:
 
 ```js run
 let str = '';
@@ -525,39 +526,39 @@ alert( str );
 // ¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜ
 ```
 
-See? Capital characters go first, then a few special ones, then lowercase characters.
+Как видите, сначала идут заглавные буквы, затем несколько спецсимволов, а затем строчные.
 
-Now it becomes obvious why `a > Z`.
+Теперь очевидно, почему `a > Z`.
 
-The characters are compared by their numeric code. The greater code means that the character is greater. The code for `a` (97) is greater than the code for `Z` (90).
+Символы сравниваются по их кодам. Больший код — больший символ. Код `a` (97) больше кода `Z` (90).
 
-- All lowercase letters go after uppercase letters because their codes are greater.
-- Some letters like `Ö` stand apart from the main alphabet. Here, it's code is greater than anything from `a` to `z`.
+- Все строчные буквы идут после заглавных, так как их коды больше.
+- Некоторые буквы, такие как `Ö`, вообще находятся вне основного алфавита. У этой буквы код больше, чем у любой буквы от `a` до `z`.
 
 
-### Correct comparisons
+### Правильное сравнение
 
-The "right" algorithm to do string comparisons is more complex than it may seem, because alphabets are different for different languages. The same-looking letter may be located differently in different alphabets.
+«Правильный» алгоритм сравнения строк сложнее, чем может показаться, так как разные языки используют разные алфавиты. Выглядящая одинаково буква может находиться в разных алфавитах: есть латинская i и кириллическая і, используемая, например, в украинском.
 
-So, the browser needs to know the language to compare.
+Поэтому браузеру нужно знать, какой язык использовать для сравнения.
 
-Luckily, all modern browsers (IE10- requires the additional library [Intl.JS](https://github.com/andyearnshaw/Intl.js/)) support the internationalization standard [ECMA 402](http://www.ecma-international.org/ecma-402/1.0/ECMA-402.pdf).
+К счастью, все современные браузеры (для IE до 10 версии нужна дополнительная библиотека [Intl.JS](https://github.com/andyearnshaw/Intl.js/)) поддерживают стандарт [ECMA 402](http://www.ecma-international.org/ecma-402/1.0/ECMA-402.pdf), обеспечивающий правильное сравние строк на разных языках с учётом их правил.
 
-It provides a special method to compare strings in different languages, following their rules.
+Для этого есть соответствующий метод.
 
-The call [str.localeCompare(str2)](mdn:js/String/localeCompare):
+Вызов [str.localeCompare(str2)](mdn:js/String/localeCompare) возвращает:
 
-- Returns `1` if `str` is greater than `str2` according to the language rules.
-- Returns `-1` if `str` is less than `str2`.
-- Returns `0` if they are equal.
+- `1`, если `str` больше `str2` в соответствии с правилами языка
+- `-1`, если `str` меньше `str2`
+- `0`, если они равны
 
-For instance:
+Например:
 
 ```js run
 alert( 'Österreich'.localeCompare('Zealand') ); // -1
 ```
 
-This method actually has two additional arguments specified in [the documentation](mdn:js/String/localeCompare), which allows it to specify the language (by default taken from the environment) and setup additional rules like case sensitivity or should `"a"` and `"á"` be treated as the same etc.
+У этого метода есть два дополнительных аргумента, которые указаны в [документации](mdn:js/String/localeCompare). Они позволяют указать язык (по умолчанию берётся из окружения) и определить дополнительные правила, такие как чувтсвительность к регистру, а также следует ли считать эквивалентными `"a"` и `"á"`.
 
 ## Internals, Unicode
 
