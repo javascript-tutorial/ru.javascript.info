@@ -47,13 +47,21 @@ alert("my@mail.com @ his@site.com.uk".match(reg)); // my@mail.com, his@site.com.
 
 ## Содержимое скобок  
 
+<<<<<<< HEAD
 Скобочные группы нумеруются слева направо. Поисковой движок запоминает содержимое, которое "поймала" каждая группа, и позволяет ссылаться на него в шаблоне регулярного выражения или строке для замены.
+=======
+Parentheses are numbered from left to right. The search engine remembers the content matched by each of them and allows to reference it in the pattern or in the replacement string.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 Например, мы хотим найти HTML теги `pattern:<.*?>` и обработать их.
 
 Давайте заключим внутреннее содержимое в круглые скобки: `pattern:<(.*?)>`.
 
+<<<<<<< HEAD
 Мы получим как тег целиком, так и его содержимое в виде массива:
+=======
+We'll get both the tag as a whole and its content as an array:
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 ```js run
 let str = '<h1>Hello, world!</h1>';
@@ -62,7 +70,11 @@ let reg = /<(.*?)>/;
 alert( str.match(reg) ); // Array: ["<h1>", "h1"]
 ```
 
+<<<<<<< HEAD
 Вызов [String#match](mdn:js/String/match) возвращает группы, лишь если регулярное выражение ищет только первое совпадение, то есть не имеет флага `pattern:/.../g`.
+=======
+The call to [String#match](mdn:js/String/match) returns groups only if the regexp only looks for the first match, that is: has no `pattern:/.../g` flag.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 Если необходимы все совпадения с их группировкой, то мы можем использовать `.matchAll` или `regexp.exec`, как описано в <info:regexp-methods>:
 
@@ -164,9 +176,15 @@ alert(groups.day); // 30
 
 Как вы можете видеть, группы располагаются в свойстве  `.groups` совпадения.
 
+<<<<<<< HEAD
 Мы также можем использовать их в строке замены как `pattern:$<name>` (аналогично `$1..9`, но имя вместо цифры).
 
 Например, давайте поменяем формат даты в `день.месяц.год`:
+=======
+We can also use them in the replacement string, as `pattern:$<name>` (like `$1..9`, but a name instead of a digit).
+
+For instance, let's reformat the date into `day.month.year`:
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 ```js run
 let dateRegexp = /(?<year>[0-9]{4})-(?<month>[0-9]{2})-(?<day>[0-9]{2})/;
@@ -178,7 +196,11 @@ let rearranged = str.replace(dateRegexp, '$<day>.$<month>.$<year>');
 alert(rearranged); // 30.04.2019
 ```
 
+<<<<<<< HEAD
 Если используем функцию для замены, тогда именованный объект `groups` всегда является последним аргументом:
+=======
+If we use a function for the replacement, then named `groups` object is always the last argument:
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 ```js run
 let dateRegexp = /(?<year>[0-9]{4})-(?<month>[0-9]{2})-(?<day>[0-9]{2})/;
@@ -241,4 +263,16 @@ alert( result[1] ); // John
 
 Часть совпадения, соответствующую скобочной группе, мы также получаем в результатах поиска, отдельным элементом массива (или в `.groups`, если группа именована).
 
+<<<<<<< HEAD
 Можно исключить скобочную группу из запоминания, добавив в её начало `pattern:?:` -- `(?:...)`. Это используется, если необходимо применить квантификатор ко всей группе, но исключить попадание их содержимого в результат.
+=======
+Parentheses group together a part of the regular expression, so that the quantifier applies to it as a whole.
+
+Parentheses groups are numbered left-to-right, and can optionally be named with  `(?<name>...)`.
+
+The content, matched by a group, can be referenced both in the replacement string as `$1`, `$2` etc, or by the name `$name` if named.
+
+So, parentheses groups are called "capturing groups", as they "capture" a part of the match. We get that part separately from the result as a member of the array or in `.groups` if it's named.
+
+We can exclude the group from remembering (make in "non-capturing") by putting `?:` at the start: `(?:...)`, that's used if we'd like to apply a quantifier to the whole group, but don't need it in the result.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd

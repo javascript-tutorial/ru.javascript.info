@@ -33,20 +33,35 @@ let openRequest = indexedDB.open(name, version);
 
 У нас может быть множество баз данных с различными именами, но все они существуют в контексте текущего источника (домен/протокол/порт). Разные сайты не могут получить доступ к базам данных друг друга.
 
+<<<<<<< HEAD
 После этого вызова необходимо назначить обработчик событий для объекта `openRequest`:
 - `success`: база данных готова к работе, готов "объект базы данных" `openRequest.result`, его следует использовать для дальнейших вызовов.
 - `error`: не удалось открыть базу данных.
 - `upgradeneeded`: устарела версия базы данных (смотрите ниже).
+=======
+After the call, we need to listen to events on `openRequest` object:
+- `success`: database is ready, there's the "database object" in `openRequest.result`, that we should use it for further calls.
+- `error`: opening failed.
+- `upgradeneeded`: database is ready, but its version is outdated (see below).
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 **IndexedDB имеет встроенный механизм "версионирования схемы", который отсутствует в серверных базах данных.**
 
+<<<<<<< HEAD
 В отличие от серверных баз данных, IndexedDB работает на стороне клиента, в браузере, и у нас нет прямого доступа к данным. Но когда мы публикуем новую версию нашего приложения, то возможно, что нам необходимо обновить базу данных.
+=======
+Unlike server-side databases, IndexedDB is client-side, the data is stored in the browser, so we, developers, don't have direct access to it. But when we publish a new version of our app, we may need to update the database.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 Если локальная версия базы данных меньше, чем версия, определённая в `open`, то сработает специальное событие `upgradeneeded`, и мы сможем сравнить версии и обновить структуры данных по мере необходимости.
 
 Это событие также сработает, если базы данных ещё не существует, так что в этом обработчике мы можем выполнить инициализацию.
 
+<<<<<<< HEAD
 Например, когда мы впервые публикуем наше приложение, мы открываем базу данных с версией `1` и выполняем инициализацию в обработчике `upgradeneeded`:
+=======
+When we first publish our app, we open it with version `1` and perform the initialization in `upgradeneeded` handler:
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 ```js
 let openRequest = indexedDB.open("store", *!*1*/!*);
@@ -71,10 +86,18 @@ openRequest.onsuccess = function() {
 ```js
 let openRequest = indexedDB.open("store", *!*2*/!*);
 
+<<<<<<< HEAD
 // проверить существование указанной версии базы данных, обновить по мере необходимости:
+=======
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 openRequest.onupgradeneeded = function() {
+  // the existing database version is less than 2 (or it doesn't exist)
   let db = openRequest.result;
+<<<<<<< HEAD
   switch(db.version) { // существующая (старая) версия базы данных
+=======
+  switch(db.version) { // existing db version
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
     case 0:
       // версия 0 подразумевает, что на клиенте нет базы данных
       // выполнить инициализацию
@@ -85,7 +108,13 @@ openRequest.onupgradeneeded = function() {
 };
 ```
 
+<<<<<<< HEAD
 После `openRequest.onsuccess` у нас есть объект базы данных в `openRequest.result`, который мы будем использовать для дальнейших операций.
+=======
+So, in `openRequest.onupgradeneeded` we update the database. Soon we'll see how it's done. And then, only if its handler finishes without errors, `openRequest.onsuccess` triggers.
+
+After `openRequest.onsuccess` we have the database object in `openRequest.result`, that we'll use for further operations.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 Удалить базу данных:
 
@@ -94,10 +123,74 @@ let deleteRequest = indexedDB.deleteDatabase(name)
 // deleteRequest.onsuccess/onerror отслеживает результат
 ```
 
+### Opening an old version
+
+Now what if we try to open a database with a lower version than the current one?
+E.g. the existing DB version is 3, and we try to `open(...2)`. That's simple:  `openRequest.onerror` triggers.
+
+Such thing may happen if the visitor loaded an outdated code, e.g. from a proxy cache. We should check `db.version`, suggest him to reload the page, and also make sure that our caching policy is correct.
+
+### Multi-page update problem
+
+As we're talking about versioning, let's tackle a small related problem.
+
+Let's say, a visitor opened our site in a browser tab, with database version 1.
+
+Then we rolled out an update, and the same visitor opens our site in another tab. So there are two tabs, both with our site, but one has an open connection with DB version 1, while the other one attempts to update it in `upgradeneeded` handler.
+
+The problem is that a database is shared between two tabs, as that's the same site, same origin. And it can't be both version 1 and 2. To perform the update to version 2, all connections to version 1 must be closed.
+
+In order to organize that, there's `versionchange` event on an open database object. We should listen to it, as it lets us know that the version is about to change, so that we should close the database (and probably suggest the visitor to reload the page, to load the updated code).
+
+If we don't close it, then the second connection will be blocked with `blocked` event instead of `success`.
+
+Here's the code to work around it, it has two minor additions:
+
+```js
+let openRequest = indexedDB.open("store", 2);
+
+openRequest.onupgradeneeded = ...;
+openRequest.onerror = ...;
+
+openRequest.onsuccess = function() {
+  let db = openRequest.result;
+
+  *!*
+  db.onversionchange = function() {
+    db.close();
+    alert("Your database is outdated, please reload the page.")
+  };
+  */!*
+
+  // ...the db is ready, use it...
+};
+
+*!*
+openRequest.onblocked = function() {
+  // there's another open connection to same database
+  // and it wasn't closed after db.onversionchange triggered for them
+};
+*/!*
+```
+
+We do two things:
+
+1. Add `db.onversionchange` listener after a successful opening, to close the old database.
+2. Add `openRequest.onblocked` listener to handle the case when an old connection wasn't closed. This doesn't happen if we close it in `db.onversionchange`.
+
+Alternatively, we can take time to close things gracefully in `db.onversionchange`, prompt the visitor to do something. The new connection will be blocked immediatelly after `db.onversionchange` finished without closing, but we can try to reopen it later.
+
+That's up to us, how we handle such version collision, it happens rarely, but we should at least have some handling for it, e.g. `onblocked` handler, so that our script doesn't just die silently.
 
 ## Хранилище объектов
 
+<<<<<<< HEAD
 Хранилище объектов - это основная концепция IndexedDB. В других базах данных это "таблицы" или "коллекции". Здесь хранятся данные. В базе данных может быть множество хранилищ: одно для пользователей, другое для товаров и так далее.
+=======
+To store stomething in IndexedDB, we need an *object store*.
+
+An object store is a core concept of IndexedDB. Counterparts in other databases are called "tables" or "collections". It's where the data is stored. A database may have multiple stores: one for users, another one for goods, etc.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 Несмотря на то, что название -- "хранилище объектов", примитивы тоже могут там храниться.
 
@@ -144,12 +237,16 @@ db.createObjectStore('books', {keyPath: 'id'});
 1. Мы можем реализовать функции обновления по версиям: с 1 на 2, с 2 на 3 и т.д. Потом в `upgradeneeded` сравнить версии (например, была 2, сейчас 4) и запустить операции обновления для каждой промежуточной версии (2 на 3, затем 3 на 4).
 2. Или мы можем взять список существующих хранилищ объектов, используя `db.objectStoreNames`. Этот объект является [DOMStringList](https://html.spec.whatwg.org/multipage/common-dom-interfaces.html#domstringlist), в нём есть метод `contains(name)`, используя который можно проверить существование хранилища. Посмотреть, какие хранилища есть и создать те, которых нет.
 
+<<<<<<< HEAD
 Для простых баз данных второй подход может быть проще и предпочтительнее.
+=======
+For small databases the second variant may be simpler.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 Вот демонстрация второго способа:
 
 ```js
-let openRequest = indexedDB.open("db", 1);
+let openRequest = indexedDB.open("db", 2);
 
 // создаём хранилище объектов для books, если ешё не существует
 openRequest.onupgradeneeded = function() {
@@ -735,6 +832,7 @@ IndexedDB можно рассматривать как "localStorage на сте
 
 Лучшим руководством является спецификация, [текущая версия 2.0](https://w3c.github.io/IndexedDB), но также поддерживаются несколько методов из [3.0](https://w3c.github.io/IndexedDB/) (не так много отличий) версии.
 
+<<<<<<< HEAD
 Использование можно описать в нескольких фразах:
 
 1. Подключить обёртку над промисами, например [idb](https://github.com/jakearchibald/idb).
@@ -747,6 +845,19 @@ IndexedDB можно рассматривать как "localStorage на сте
 4. Затем для поиска по ключу вызываем методы непосредственно у хранилища объектов.
     - Для поиска по любому полю объекта создайте индекс.
 5. Если данные не помещаются в памяти, то используйте курсор.
+=======
+The basic usage can be described with a few phrases:
+
+1. Get a promise wrapper like [idb](https://github.com/jakearchibald/idb).
+2. Open a database: `idb.openDb(name, version, onupgradeneeded)`
+    - Create object storages and indexes in `onupgradeneeded` handler or perform version update if needed.
+3. For requests:
+    - Create transaction `db.transaction('books')` (readwrite if needed).
+    - Get the object store `transaction.objectStore('books')`.
+4. Then, to search by a key, call methods on the object store directly.
+    - To search by an object field, create an index.
+5. If the data does not fit in memory, use a cursor.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 Демо-приложение:
 

@@ -26,16 +26,31 @@
 - если у нас есть ссылка на другой объект `window`, например, на всплывающее окно, созданное с помощью `window.open` или на `window` из `<iframe>` и у этого окна тот же источник, то к нему будет полный доступ.
 - в противном случае, если у него другой источник, мы не сможем обращаться к его переменным, объекту `document` и так далее. Единственное исключение - объект `location`: его можно изменять (таким образом перенаправляя пользователя). Но нельзя читать `location` (нельзя узнать, где находится пользователь, чтобы не было никаких утечек информации).
 
+<<<<<<< HEAD
 Посмотрим на примеры. Сначала посмотрим на страницы с одинаковым источником, при этом разрешён прямой доступ, а затем разберём способ отправки сообщений между окнами, который позволяет обойти эту политику.
+=======
+Now let's see some examples. First, we'll look at pages that come from the same origin and thus allow direct access, and afterwards we'll cover cross-window messaging that allows to work around the "Same Origin" policy.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 ````warn header="Окна на разных поддоменах одного домена"
 По определению, если у двух URL разный домен, то у них не одинаковый источник.
 
+<<<<<<< HEAD
 Однако, здесь есть небольшое исключение.
 
 Если в окнах открыты страницы с поддоменов одного домена 2-го уровня, например `john.site.com`, `peter.site.com` и `site.com` (так что их общий домен `site.com`), то можно заставить браузер игнорировать это отличие. Так что браузер сможет считать их пришедшими с одного источника.
 
 Для этого в каждом окне нужно запустить:
+=======
+````warn header="Windows on different subdomains of the same domain"
+By definition, two URLs with different domains have different origins.
+
+Still, there's a small exclusion here.
+
+If windows share the same second-level domain, for instance `john.site.com`, `peter.site.com` and `site.com` (so that their common second-level domain is `site.com`), we can make the browser ignore that difference, so that they can be treated as coming from the "same origin" for the purposes of cross-window communication.
+
+To make it work, each window (including the one from `site.com`) should run the code:
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 ```js
 document.domain = 'site.com';
@@ -48,14 +63,22 @@ document.domain = 'site.com';
 
 В качестве первого примера давайте рассмотрим ифрейм. С одной стороны, `<iframe>` это обычный тег, как `<script>` или `<img>`, с другой - это окно в окне.
 
+<<<<<<< HEAD
 Находящееся в ифрейме окно имеет свои собственные объекты `document` и `window`.
+=======
+The embedded window in the iframe has a separate `document` and `window` objects.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 Мы можем обращаться к ним, используя свойства:
 
 - `iframe.contentWindow` ссылка на объект `window` внутри `<iframe>`.
 - `iframe.contentDocument` - ссылка на объект `document` внутри `<iframe>`.
 
+<<<<<<< HEAD
 Когда мы обращаемся к встроенному окну, браузер проверяет, имеет ли ифрейм тот же источник. Если это не так, тогда доступ будет запрещён (разрешена лишь запись в `location`, это исключение).
+=======
+When we access an embedded window, the browser checks if the iframe has the same origin. If that's not so then the access is denied (writing to `location` is an exception, it's still permitted).
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 Например, вот `<iframe>` с другим источником:
 
@@ -95,9 +118,15 @@ document.domain = 'site.com';
 - Изменения `location`.
 
 ```smart header="`iframe.onload` vs `iframe.contentWindow.onload`"
+<<<<<<< HEAD
 Событие `iframe.onload` - по сути то же, что и `iframe.contentWindow.onload`. Оно сработает, когда встроенное окно полностью загрузится со всеми ресурсами.
 
 ...Но `iframe.onload` всегда доступно извне ифрейма, в то время как доступ `iframe.contentWindow.onload` разрешён только из окна с тем же источником.
+=======
+The `iframe.onload` event is essentially the same as `iframe.contentWindow.onload`. It triggers when the embedded window fully loads with all resources.
+
+...But `iframe.onload` is always available from outside the iframe, while accessing `iframe.contentWindow.onload` is only permitted from the window with the same origin.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 ```
 
 А теперь пример, когда источник одинаковый. Мы можем делать со встроенным окном всё, что захотим:
@@ -134,6 +163,7 @@ document.domain = 'site.com';
 </script>
 ```
 
+<<<<<<< HEAD
 Это известный "подводный камень". Не следует начинать работать с `document` недогруженного `iframe`, потому что это неправильный `document`. Если добавить к нему обработчик событий, он будет проигнорирован.
 
 ...Мы, разумеется, получим правильный документ, если обратимся к нему после события `onload`. Но оно сработает лишь когда ифрейм загрузится полностью со всеми ресурсами. А что если мы хотим запустить код раньше, например, при событии `DOMContentLoaded` встроенного документа?
@@ -141,6 +171,15 @@ document.domain = 'site.com';
 Если ифрейм - с другого источника, то мы не имеем доступа к его документу, это невозможно.
 
 А если с того же, то можем поймать момент, когда появляется новый документ, и после этого добавить необходимые обработчики:
+=======
+That's a well-known pitfall. We shouldn't work with the document of a not-yet-loaded iframe, because that's the *wrong document*. If we set any event handlers on it, they will be ignored.
+
+...We definitely can access the right document when the `onload` event triggers. But it only triggers when the whole iframe with all resources is loaded. What if we want to act sooner, on `DOMContentLoaded` of the embedded document?
+
+If the iframe comes from another origin, we can't access its document, so it's impossible.
+
+But for the same origin we can setup the event handler. We just need to set it on the right document. For instance, we can try to catch the moment when a new document appears using checks in `setInterval`, and then setup necessary handlers, like this:
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 ```html run
 <iframe src="/" id="iframe"></iframe>
@@ -157,12 +196,21 @@ document.domain = 'site.com';
     let newDoc = iframe.contentDocument;
     if (newDoc == oldDoc) return;
 
+<<<<<<< HEAD
     // документ изменился
     if (newDoc.readyState == 'loading') {
       // пока загружается, дождемся соответствующего события
       newDoc.addEventListener('DOMContentLoaded', onDocumentLoaded);
     } else {
       // DOM готов!
+=======
+    // new document
+    if (newDoc.readyState == 'loading') {
+      // loading yet, wait for the event
+      newDoc.addEventListener('DOMContentLoaded', onDocumentLoaded);
+    } else {
+      // DOM is ready!
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
       onDocumentLoaded();
     }
 
@@ -171,8 +219,11 @@ document.domain = 'site.com';
 </script>
 ```
 
+<<<<<<< HEAD
 Если вы знаете более удачное решение -- напишите об этом в комментариях.
 
+=======
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 ## window.frames
 
 Другой способ получить объект `window` из `<iframe>` -- забрать его из именованной коллекции `window.frames`:
@@ -219,11 +270,19 @@ if (window == top) { // текущий window == window.top?
 
 Атрибут `sandbox` позволяет наложить ограничения на действия внутри `<iframe>`, чтобы предотвратить выполнение ненадежного кода. Атрибут помещает ифрейм в "песочницу", отмечая его как имеющий другой источник и/или накладывая на него дополнительные ограничения.
 
+<<<<<<< HEAD
 Существует список ограничений, которые накладываются на `<iframe sandbox src="...">`. Их можно уменьшить, если указать в атрибуте список исключений (специальными ключевыми словами), которые не нужно применять, например: `<iframe sandbox="allow-forms allow-popups">`.
+=======
+There's a "default set" of restrictions applied for `<iframe sandbox src="...">`. But it can be relaxed if we provide a space-separated list of keywords for restrictions that should not be applied as a value of the attribute, like this: `<iframe sandbox="allow-forms allow-popups">`.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 Другими словами, если у атрибута `"sandbox"` нет значения, то браузер применяет максимум ограничений, но через пробел можно указать те из них, которые мы не хотим применять.
 
+<<<<<<< HEAD
 Вот список ограничений. По умолчанию применяются они все. Каждое можно отменить, если указать соответствующее ключевое слово в атрибуте `sandbox`:
+=======
+Here's a list of limitations. By default, all are applied. We can disable each by specifying the corresponding keyword in the `sandbox` attribute:
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 `allow-same-origin`
 : `"sandbox"` принудительно устанавливает "другой источник" для ифрейма. Другими словами, он заставляет браузер воспринимать `iframe`, как пришедший из другого источника, даже если `src` содержит тот же сайт. Со всеми возможными ограничениями для скрипта. Эта опция отключает это ограничение.
@@ -273,9 +332,15 @@ if (window == top) { // текущий window == window.top?
 `targetOrigin`
 : Определяет источник для окна-получателя, только окно с данного источника имеет право получить сообщение.
 
+<<<<<<< HEAD
 Указание `targetOrigin` является мерой безопасности. Как мы помним, если окно (получатель) происходит из другого источника, мы из окна-отправителя не можем прочитать его `location`. Таким образом, мы не можем быть уверены, какой сайт открыт в заданном окне прямо сейчас: пользователь мог перейти куда-то, окно-отправитель не может это знать.
 
 Если указать `targetOrigin`, то мы можем быть уверены, что окно получит данные только в том случае, если в нём правильный сайт. Особенно это важно, если данные конфиденциальные.
+=======
+The `targetOrigin` is a safety measure. Remember, if the target window comes from another origin, we can't read it's `location` in the sender window. So we can't be sure which site is open in the intended window right now: the user could navigate away, and the sender window has no idea about it.
+
+Specifying `targetOrigin` ensures that the window only receives the data if it's still at the right site. Important when the data is sensitive.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 Например, здесь `win` получит сообщения только в том случае, если в нём открыт документ из источника `http://example.com`:
 
@@ -317,7 +382,11 @@ if (window == top) { // текущий window == window.top?
 : Источник отправителя, например, `http://javascript.info`.
 
 `source`
+<<<<<<< HEAD
 : Ссылка на окно-отправитель. Сразу можно отправить что-то в ответ, вызвав `source.postMessage`.
+=======
+: The reference to the sender window. We can immediately `source.postMessage(...)` back if we want.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 Чтобы добавить обработчик, следует использовать метод `addEventListener`, короткий синтаксис `window.onmessage` не работает.
 
@@ -338,17 +407,28 @@ window.addEventListener("message", function(event) {
 
 [codetabs src="postmessage" height=120]
 
+<<<<<<< HEAD
 ```smart header="Без задержек"
 Между `postMessage` и событием `message` не существует задержки. Событие происходит синхронно, быстрее, чем `setTimeout(...,0)`.
+=======
+```smart header="There's no delay"
+There's totally no delay between `postMessage` and the `message` event. The event triggers synchronously, faster than `setTimeout(...,0)`.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 ```
 
 ## Итого
 
 Чтобы вызвать метод или получить содержимое из другого окна, нам по-первых необходимо иметь ссылку на него.
 
+<<<<<<< HEAD
 Для всплывающих окон доступны ссылки в обе стороны:
 - При открытии окна: `window.open` открывает новое окно и возвращает ссылку на него,
 - Изнутри открытого окна: `window.opener` -- ссылка на открывающее окно.
+=======
+For popups we have these references:
+- From the opener window: `window.open` -- opens a new window and returns a reference to it,
+- From the popup: `window.opener` -- is a reference to the opener window from a popup.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 Для ифреймов мы можем иметь доступ к родителям/потомкам, используя:
 - `window.frames` -- коллекция объектов `window` вложенных ифреймов,
@@ -368,11 +448,20 @@ window.addEventListener("message", function(event) {
 
 Интерфейс `postMessage` позволяет двум окнам общаться с проверками безопасности:
 
+<<<<<<< HEAD
 1. Отправитель вызывает `targetWin.postMessage(data, targetOrigin)`.
 2. Если `targetOrigin` не `'*'`, тогда браузер проверяет имеет ли `targetWin` источник `targetOrigin`.
 3. Если это так, тогда `targetWin` вызывает событие `message` со специальными свойствами:
     - `origin` -- источник окна отправителя (например, `http://my.site.com`)
     - `source` -- ссылка на окно отправитель.
     - `data` -- данные, может быть объектом везде, кроме IE (в IE только строки).
+=======
+1. The sender calls `targetWin.postMessage(data, targetOrigin)`.
+2. If `targetOrigin` is not `'*'`, then the browser checks if window `targetWin` has the origin `targetOrigin`.
+3. If it is so, then `targetWin` triggers the `message` event with special properties:
+    - `origin` -- the origin of the sender window (like `http://my.site.com`)
+    - `source` -- the reference to the sender window.
+    - `data` -- the data, any object in everywhere except IE that supports only strings.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
     В окне-получателе следует добавить обработчик для этого события с помощью метода `addEventListener`.

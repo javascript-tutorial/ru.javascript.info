@@ -219,9 +219,15 @@ typeof alert // "function"  (3)
 
 Последние три строки нуждаются в пояснении:
 
+<<<<<<< HEAD
 1. `Math` - это встроенный объект, который предоставляет математические операции и константы. Мы рассмотрим его подробнее в главе <info:number>. Здесь он служит лишь примером объекта.
 2. Результатом вызова `typeof null` является `"object"`. Это неверно. Это официально признанная ошибка в `typeof`, сохранённая для совместимости. Конечно, `null` не является объектом. Это специальное значение с отдельным типом. Повторимся, это ошибка в языке.
 3. Вызов `typeof alert` возвращает `"function"`, потому что `alert` является функцией. Мы изучим функции в следующих главах, где заодно увидим, что в JavaScript нет специального типа "функция". Функции относятся к объектному типу. Но `typeof` обрабатывает их особым образом, возвращая `"function"`. Формально это неверно, но очень удобно на практике.
+=======
+1. `Math` is a built-in object that provides mathematical operations. We will learn it in the chapter <info:number>. Here, it serves just as an example of an object.
+2. The result of `typeof null` is `"object"`. That's wrong. It is an officially recognized error in `typeof`, kept for compatibility. Of course, `null` is not an object. It is a special value with a separate type of its own. So, again, this is an error in the language.
+3. The result of `typeof alert` is `"function"`, because `alert` is a function. We'll study functions in the next chapters where we'll also see that there's no special "function" type in JavaScript. Functions belong to the object type. But `typeof` treats them differently, returning `"function"`. That's not quite correct, but very convenient in practice.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 
 ## Итого

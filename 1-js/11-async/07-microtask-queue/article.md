@@ -1,5 +1,9 @@
 
+<<<<<<< HEAD
 # Микрозадачи и цикл событий
+=======
+# Microtasks
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 Обработчики промисов `.then`/`.catch`/`.finally` всегда асинхронны.
 
@@ -52,6 +56,7 @@ Promise.resolve()
 
 Теперь порядок стал таким, как было задумано.
 
+<<<<<<< HEAD
 ## Цикл событий
 
 Поток выполнения браузерного JavaScript, как и Node.js, основан на *цикле событий (event loop)*. 
@@ -124,9 +129,13 @@ Promise.resolve()
 
 Поэтому макрозадачи выполняются, только когда промисы дают движку "свободное время". Так, если у нас есть цепочка промисов, которые выполняются один за другим без задержек, то `setTimeout` или обработчик действия пользователя не может попасть в середину между ними.
 
+=======
+## Unhandled rejection
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 ## Необработанные ошибки
 
+<<<<<<< HEAD
 Помните "необработанные ошибки" из главы <info:promise-error-handling>?
 
 Теперь мы можем описать, как именно JavaScript понимает, что ошибка не обработана.
@@ -134,10 +143,21 @@ Promise.resolve()
 **"Необработанная ошибка" возникает в случае, если ошибка промиса не обрабатывается в конце очереди микрозадач.**
 
 Например, рассмотрим этот код:
+=======
+Now we can see exactly how JavaScript finds out that there was an unhandled rejection
+
+**"Unhandled rejection" occurs when a promise error is not handled at the end of the microtask queue.**
+
+Normally, if we expect an error, we add `.catch` to the promise chain to handle it:
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 ```js run
 let promise = Promise.reject(new Error("Promise Failed!"));
+*!*
+promise.catch(err => alert('caught'));
+*/!*
 
+<<<<<<< HEAD
 window.addEventListener('unhandledrejection', event => {
   alert(event.reason); // Промис выполнен с ошибкой!
 });
@@ -158,17 +178,38 @@ window.addEventListener('unhandledrejection', event => alert(event.reason));
 ```
 
 А сейчас попробуем также поймать ошибку, но после `setTimeout`:
+=======
+// no error, all quiet
+window.addEventListener('unhandledrejection', event => alert(event.reason));
+```
+
+...But if we forget to add `.catch`, then, after the microtask queue is empty, the engine triggers the event:
+
+```js run
+let promise = Promise.reject(new Error("Promise Failed!"));
+
+// Promise Failed!
+window.addEventListener('unhandledrejection', event => alert(event.reason));
+```
+
+What if we handle the error later? Like this:
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 ```js run
 let promise = Promise.reject(new Error("Promise Failed!"));
 *!*
+<<<<<<< HEAD
 setTimeout(() => promise.catch(err => alert('поймана')));
+=======
+setTimeout(() => promise.catch(err => alert('caught')), 1000);
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 */!*
 
 // Error: Promise Failed!
 window.addEventListener('unhandledrejection', event => alert(event.reason));
 ```
 
+<<<<<<< HEAD
 Снова появилось событие о необработанной ошибке. Почему? Потому что `unhandledrejection` генерируется, когда очередь микрозадач выполнена. Движок проверяет промисы и, если какой-либо из них в состоянии "rejected", то генерируется это событие.
 
 В примере выше `.catch`, добавленный в `setTimeout`, также срабатывает, но позже, уже после возникновения `unhandledrejection`.
@@ -190,3 +231,22 @@ window.addEventListener('unhandledrejection', event => alert(event.reason));
     Другими словами, они имеют более низкий приоритет.
 
 Таким образом, порядок выполнения следующий: обычный код, потом обработка промисов, потом всё остальное (события и т.д.).
+=======
+Now, if you run it, we'll see `Promise Failed!` message first, and then `caught`.
+
+If we didn't know about microtasks, we could wonder: "Why did `unhandledrejection` happen? We did catch the error!".
+
+But now we do know that `unhandledrejection` is generated when the microtask queue is complete: the engine examines promises and, if any of them is in "rejected" state, then the event triggers.
+
+...By the way, the `.catch` added by `setTimeout` also triggers, of course it does, but later, after `unhandledrejection` has already occurred.
+
+## Summary
+
+Promise handling is always asynchronous, as all promise actions pass through the internal "promise jobs" queue, also called "microtask queue" (v8 term).
+
+So, `.then/catch/finally` handlers are always called after the current code is finished.
+
+If we need to guarantee that a piece of code is executed after `.then/catch/finally`, we can add it into a chained `.then` call.
+
+In most Javascript engines, including browsers and Node.js, the concept of microtasks is closely tied with "event loop" and "macrotasks". As these have no direct relation to promises, they are covered in another part of the tutorial, in the chapter <info:event-loop>.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd

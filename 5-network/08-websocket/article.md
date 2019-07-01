@@ -69,9 +69,15 @@ socket.onerror = function(error) {
 
 ## Открытие websocket
 
+<<<<<<< HEAD
 Когда `new WebSocket(url)` создан, он тут же сам начинает устанавливать соединение.
 
 Браузер, при помощи специальных заголовков, спрашивает сервер: "Ты поддерживаешь Websocket?" и если сервер отвечает "да", они начинают работать по протоколу WebSocket, который уже не является HTTP.
+=======
+When `new WebSocket(url)` is created, it starts connecting immediately.
+
+During the connection the browser (using headers) asks the server: "Do you support Websocket?" And if the server replies "yes", then the talk continues in WebSocket protocol, which is not HTTP at all.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 ![](websocket-handshake.png)
 
@@ -87,11 +93,19 @@ Sec-WebSocket-Key: Iv8io/9s+lYFgZWcXczP8Q==
 Sec-WebSocket-Version: 13
 ```
 
+<<<<<<< HEAD
 - `Origin` -- источник текущей страницы (например `https://javascript.info`). Объект WebSocket по своей природе является кросс-доменным. Нет никаких специальных заголовков или других ограничений. Старые сервера все равно не могут работать с WebSocket, поэтому проблем с совместимостью нет. Но заголовок `Origin` важен, так как он позволяет серверу решать, использовать ли WebSocket с этим сайтом.
 - `Connection: Upgrade` -- сигнализирует, что клиент хотел бы изменить протокол.
 - `Upgrade: websocket` -- запрошен протокол "websocket".
 - `Sec-WebSocket-Key` -- случайный ключ, созданный браузером для обеспечения безопасности.
 - `Sec-WebSocket-Version` -- версия протокола WebSocket, текущая версия 13.
+=======
+- `Origin` -- the origin of the client page, e.g. `https://javascript.info`. WebSocket objects are cross-origin by nature. There are no special headers or other limitations. Old servers are unable to handle WebSocket anyway, so there are no compabitility issues. But `Origin` header is important, as it allows the server to decide whether or not to talk WebSocket with this website.
+- `Connection: Upgrade` -- signals that the client would like to change the protocol.
+- `Upgrade: websocket` -- the requested protocol is "websocket".
+- `Sec-WebSocket-Key` -- a random browser-generated key for security.
+- `Sec-WebSocket-Version` -- WebSocket protocol version, 13 is the current one.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 ```smart header="Запрос WebSocket нельзя эмулировать"
 Мы не можем использовать`XMLHttpRequest` или `fetch` для создания такого HTTP-запроса, потому что JavaScript не позволяет устанавливать такие заголовки.
@@ -118,11 +132,19 @@ Sec-WebSocket-Accept: hsBlbuDTkk24srzEOTBUlZAlC2g=
 
 - `Sec-WebSocket-Extensions: deflate-frame` означает, что браузер поддерживает сжатие данных. Расширение -- это что-то, связанное с передачей данных, а не сами данные.
 
+<<<<<<< HEAD
 - `Sec-WebSocket-Protocol: soap, wamp` означает, что мы будем передавать не только произвольные данные, но и данные в протоколах [SOAP](http://en.wikipedia.org/wiki/SOAP) или WAMP (The WebSocket Application Messaging Protocol" -- "протокол обмена сообщениями WebSocket приложений"). Подпротоколы WebSocket регистрируются в [каталоге IANA](http://www.iana.org/assignments/websocket/websocket.xml).
 
 Заголовок `Sec-WebSocket-Extensions` отправляется браузером автоматически со списком всевозможных расширений, которые он поддерживает.
 
 Заголовок  `Sec-WebSocket-Protocol` зависит от нас: мы решаем, какие данные отправлять. Второй необязательный параметр `new WebSocket` как раз для этого и предназначен -- это массив подпротоколов:
+=======
+- `Sec-WebSocket-Protocol: soap, wamp` means that we'd like to transfer not just any data, but the data in [SOAP](http://en.wikipedia.org/wiki/SOAP) or WAMP ("The WebSocket Application Messaging Protocol") protocols. WebSocket subprotocols are registered in the [IANA catalogue](http://www.iana.org/assignments/websocket/websocket.xml).
+
+`Sec-WebSocket-Extensions` header is sent by the browser automatically, with a list of possible extensions it supports.
+
+`Sec-WebSocket-Protocol` header depends on us: we decide what kind of data we send. The second optional parameter of `new WebSocket` is just for that, it lists subprotocols:
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 ```js
 let socket = new WebSocket("wss://javascript.info/chat", ["soap", "wamp"]);
@@ -158,17 +180,26 @@ Sec-WebSocket-Protocol: soap
 */!*
 ```
 
+<<<<<<< HEAD
 Здесь сервер отвечает, что поддерживает расширение -- deflate-frame и может использовать только протокол SOAP из всего списка запрошенных подпротоколов.
+=======
+Here the server responds that it supports the extension "deflate-frame", and only SOAP of the requested subprotocols.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 ## Данные WebSocket
 
+<<<<<<< HEAD
 Поток данных в WebSocket состоит из "фреймов", фрагментов данных, которые могут быть отправлены любой стороной, и которые могут быть следующих видов:
+=======
+WebSocket communication consists of "frames" -- data fragments, that can be sent from either side, and can be of several kinds:
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 - "текстовые фреймы" -- содержат текстовые данные, которые стороны отправляют друг другу.
 - "бинарные фреймы" -- содержат бинарные данные, которые стороны отправляют друг другу.
 - "пинг-понг фреймы" используется для проверки соединения; отправляется с сервера, браузер реагирует на них автоматически.
 - "фреймы закрытия соединения" и некоторые другие служебные фреймы.
 
+<<<<<<< HEAD
 В браузере мы напрямую работаем только с текстовыми и бинарными фреймами.
 
 **Метод WebSocket `.send()` может отправлять и текстовые и бинарные данные.**
@@ -176,6 +207,15 @@ Sec-WebSocket-Protocol: soap
 Вызов `socket.send(body)` принимает `body` в виде строки или любом бинарном формате включая `Blob`, `ArrayBuffer` и другие. Дополнительных настроек не требуется, просто отправляем.
 
 **При получении данных, текст всегда поступает в виде строки. А для бинарных данных мы можем выбрать один из двух форматов: `Blob` или `ArrayBuffer`.**
+=======
+In the browser, we directly work only with text or binary frames.
+
+**WebSocket `.send()` method can send either text or binary data.**
+
+A call `socket.send(body)` allows `body` in string or a binary format, including `Blob`, `ArrayBuffer`, etc. No settings required: just send it out.
+
+**When we receive the data, text always comes as string. And for binary data, we can choose between `Blob` and `ArrayBuffer` formats.**
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 Значение по умолчанию `socket.bufferType` -- `"blob"`, поэтому бинарные данные поступают в виде `Blob`.
 
@@ -190,16 +230,27 @@ socket.onmessage = (event) => {
 
 ## Ограничение скорости
 
+<<<<<<< HEAD
 Представим, что наше приложение генерирует много данных для отправки. Но у пользователя медленное соединение, возможно, он с мобильного телефона и не из города.
 
 Мы можем вызывать `socket.send(data)` снова и снова. Но данные будут буферизованы (сохранены) в памяти и отправлены лишь с той скоростью, которую позволяет сеть.
+=======
+Imagine, our app is generating a lot of data to send. But the user has a slow network connection, maybe on a mobile, outside of a city.
+
+We can call `socket.send(data)` again and again. But the data will be buffered (stored) in memory and sent out only as fast as network speed allows.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 Свойство `socket.bufferedAmount` хранит количество байт буферизованных данных на текущий момент, ожидающих отправки по сети.
 
 Мы можем изучить его, чтобы увидеть, действительно ли сокет доступен для передачи.
 
 ```js
+<<<<<<< HEAD
 // каждые 100мс проверить сокет и отправить больше данных, только если все текущие отосланы
+=======
+// every 100ms examine the socket and send more data  
+// only if all the existing data was sent out
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 setInterval(() => {
   if (socket.bufferedAmount == 0) {
     socket.send(moreData());
@@ -213,13 +264,18 @@ setInterval(() => {
 
 ## Закрытие подключения
 
+<<<<<<< HEAD
 Обычно, когда сторона хочет закрыть соединение (браузер и сервер имеют равные права), они отправляют "фрейм закрытия соединения" с кодом закрытия и указывают причину в виде текста.
 
 Метод для этого:
+=======
+The method for that is:
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 ```js
 socket.close([code], [reason]);
 ```
 
+<<<<<<< HEAD
 - `code` -- специальный WebSocket-код закрытия (не обязателен).
 - `reason` -- строка с описанием причины закрытия (не обязательна).
 
@@ -230,6 +286,18 @@ socket.close([code], [reason]);
 socket.close(1000, "работа закончена");
 
 // другая сторона:
+=======
+- `code` is a special WebSocket closing code (optional)
+- `reason` is a string that describes the reason of closing (optional)
+
+Then the other party in `close` event handler gets the code and the reason, e.g.:
+
+```js
+// closing party:
+socket.close(1000, "Work complete");
+
+// the other party
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 socket.onclose = event => {
   // event.code === 1000
   // event.reason === "работа закончена"
@@ -237,12 +305,19 @@ socket.onclose = event => {
 };
 ```
 
+<<<<<<< HEAD
 `code` -- это не любое число, а специальный код закрытия WebSocket.
 
 Наиболее распространенные значения:
 
 - `1000` -- по умолчанию, нормальное закрытие,
 - `1006` -- невозможно установить такой код вручную, указывает, что соединение было нарушено (нет фрейма закрытия).
+=======
+Most common code values:
+
+- `1000` -- the default, normal closure (used if no `code` supplied),
+- `1006` -- no way to such code manually, indicates that the connection was lost (no close frame).
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 Есть и другие коды:
 
@@ -319,11 +394,19 @@ socket.onmessage = function(event) {
 
 Тем не менее, и на сервере все обычно достаточно просто. Для нашего примера будем использовать Node.js с модулем для поддержки WebSocket <https://github.com/websockets/ws>.
 
+<<<<<<< HEAD
 Серверный алгоритм действий будет таким:
 1. Создать `clients = new Set()` -- набор сокетов.
 2. Для каждого принятого websocket: `clients.add(socket)` и добавить обработчик события `message` для приёма сообщений.
 3. Когда сообщение получено: перебрать клиентов `clients` и отправить его всем.
 4. Когда подключение закрыто: `clients.delete(socket)`.
+=======
+The server-side algorithm will be:
+1. Create `clients = new Set()` -- a set of sockets.
+2. For each accepted websocket, `clients.add(socket)` and add `message` event listener for its messages.
+3. When a message received: iterate over clients and send it to everyone.
+4. When a connection is closed: `clients.delete(socket)`.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 ```js
 const ws = new require('ws');
@@ -332,8 +415,13 @@ const wss = new ws.Server({noServer: true});
 const clients = new Set();
 
 http.createServer((req, res) => {
+<<<<<<< HEAD
   // в реальном проекте у нас есть дополнительный код для обработки отличных от websoсket запросов
   // здесь мы работаем с каждым запросом как с вебсокетом
+=======
+  // here we only handle websocket connections
+  // in real project we'd have some other code herre to handle non-websocket requests
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
   wss.handleUpgrade(req, req.socket, Buffer.alloc(0), onSocketConnect);
 });
 
@@ -382,8 +470,14 @@ API прост.
 - `error`,
 - `close`.
 
+<<<<<<< HEAD
 WebSocket сам по себе не содержит такие функции, как переподключение при обрыве соединения, аутентификацию пользователей и другие механизмы высокого уровня. Для этого есть клиентские и серверные библиотеки, а также можно реализовать это вручную.
 
 Иногда, чтобы добавить WebSocket к уже существующему проекту, WebSocket-сервер запускают параллельно с основным сервером. Они совместно использует одну базу данных. Запросы к WebSocket отправляются на wss://ws.site.com -- поддомен, который ведёт к WebSocket-серверу, в то время как https://site.com ведёт на основной HTTP-сервер.
+=======
+WebSocket by itself does not include reconnection, authentication and many other high-level mechanisms. So there are client/server libraries for that, and it's also possible to implement these capabilities manually.
+
+Sometimes, to integrate WebSocket into existing project, people run WebSocket server in parallel with the main HTTP-server, and they share a single database. Requests to WebSocket use `wss://ws.site.com`, a subdomain that leads to WebSocket server, while `https://site.com` goes to the main HTTP-server.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 Конечно, возможны и другие пути интеграции. Многие сервера (например, Node.js) поддерживают оба протокола -- HTTP и WebSocket.

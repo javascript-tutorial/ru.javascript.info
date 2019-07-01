@@ -13,8 +13,12 @@ IDE загружает проект (который может состоять 
 Если вы ещё не выбрали себе IDE, присмотритесь к этим:
 
 
+<<<<<<< HEAD:1-js/01-getting-started/2-code-editors/article.md
 - [Visual Studio Code](https://code.visualstudio.com/) (бесплатно).
 - [WebStorm](http://www.jetbrains.com/webstorm/) (платно).
+=======
+For Windows, there's also "Visual Studio", not to be confused with "Visual Studio Code". "Visual Studio" is a paid and mighty Windows-only editor, well-suited for the .NET platform. It's also good at JavaScript. There's also a free version [Visual Studio Community](https://www.visualstudio.com/vs/community/).
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd:1-js/01-getting-started/3-code-editors/article.md
 
 Обе IDE -- кроссплатформенные.
 

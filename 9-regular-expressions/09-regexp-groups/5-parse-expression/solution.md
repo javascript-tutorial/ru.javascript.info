@@ -1,8 +1,16 @@
 Регулярное выражение для числа: `pattern:-?\d+(\.\d+)?`. Мы создали его в предыдущих задачах.
 
+<<<<<<< HEAD
 Регулярное выражение для оператора `pattern:[-+*/]`. Мы вставили тире `pattern:-` в начало выражения, потому что в середине этот символ будет означать диапазон, а нам это не нужно.
 
 Отметим, что косая черта должна быть экранирована внутри регулярного выражения JavaScript `pattern:/.../`.
+=======
+An operator is `pattern:[-+*/]`.
+
+Please note:
+- Here the dash `pattern:-` goes first in the brackets, because in the middle it would mean a character range, while we just want a character `-`.
+- A slash `/` should be escaped inside a JavaScript regexp `pattern:/.../`, we'll do that later.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 Нам необходимо число, оператор и, затем, другие числа. И необязательные символы пробела между ними.
 

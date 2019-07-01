@@ -1,8 +1,12 @@
 # Автоматическое тестирование c использованием фреймворка Mocha
 
+<<<<<<< HEAD
 В последующих заданиях будет использоваться автоматическое тестирование. Также оно часто используется в реальных проектах.
 
 ## Зачем нам нужны тесты?
+=======
+Automated testing will be used in further tasks, and it's also widely used in real projects.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 Обычно, когда мы пишем функцию, мы легко можем представить, что она должна делать и как она будет вести себя в зависимости от переданных параметров.
 
@@ -18,7 +22,13 @@
 
 Это типичная ситуация. Во время разработки мы учитываем множество различных сценариев использования. Но сложно ожидать, что программист станет вручную проверять каждый из них после любого изменения кода. Поэтому легко исправить что-то одно и при этом сломать что-то другое.
 
+<<<<<<< HEAD
 **Автоматическое тестирование означает, что тесты пишутся отдельно, в дополнение к коду. Их можно легко запускать автоматически, и они проверяют все основные варианты использования кода.**
+=======
+That's very typical. When we develop something, we keep a lot of possible use cases in mind. But it's hard to expect a programmer to check all of them manually after every change. So it becomes easy to fix one thing and break another one.
+
+**Automated testing means that tests are written separately, in addition to the code. They can be executed automatically and check all the main use cases.**
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 ## Behavior Driven Development (BDD)
 
@@ -26,7 +36,11 @@
 
 **BDD – это три в одном: и тесты, и документация, и примеры использования.**
 
+<<<<<<< HEAD
 Достаточно слов. Взглянем на пример.
+=======
+Let's see the example.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 ## Разработка функции возведения в степень — "pow": спецификация
 
@@ -53,8 +67,13 @@ describe("pow", function() {
 `describe("заголовок", function() { ... })`
 : Какой функционал мы описываем. Используется для группировки рабочих лошадок -- блоков `it`. В нашем случае мы описываем функцию `pow`.
 
+<<<<<<< HEAD
 `it("описание", function() { ... })`
 : В первом аргументе блока `it` мы *человеческим языком* описываем конкретный способ использования функции, а во втором -- пишем функцию, которая тестирует данный случай.
+=======
+`it("use case description", function() { ... })`
+: In the title of `it` we *in a human-readable way* describe the particular use case, and the second argument is a function that tests it.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 `assert.equal(value1, value2)`
 : Код внутри блока `it`, если функция работает верно, должен выполняться без ошибок.
@@ -75,11 +94,27 @@ describe("pow", function() {
 6. Возвращаемся на шаг 3, дописываем реализацию до тех пор, пока тесты не начнут завершаться без ошибок.
 7. Повторяем шаги 3-6, пока требуемый функционал не будет готов.
 
+<<<<<<< HEAD
 Таким образом, разработка проходит *итеративно*. Мы пишем спецификацию, реализуем её, проверяем, что тесты выполняются без ошибок, пишем ещё тесты, снова проверяем, что они проходят и т.д.
+=======
+1. An initial spec is written, with tests for the most basic functionality.
+2. An initial implementation is created.
+3. To check whether it works, we run the testing framework [Mocha](http://mochajs.org/) (more details soon) that runs the spec. While the functionality is not complete, errors are displayed. We make corrections until everything works.
+4. Now we have a working initial implementation with tests.
+5. We add more use cases to the spec, probably not yet supported by the implementations. Tests start to fail.
+6. Go to 3, update the implementation till tests give no errors.
+7. Repeat steps 3-6 till the functionality is ready.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 Давайте посмотрим этот поток разработки на нашем примере.
 
+<<<<<<< HEAD
 Первый шаг завершён. У нас есть спецификация для функции `pow`. Теперь, перед тем как писать реализацию, давайте подключим библиотеки для пробного запуска тестов, просто чтобы убедиться, что тесты работают (разумеется, они завершатся ошибками).
+=======
+Let's see this development flow in our practical case.
+
+The first step is complete: we have an initial spec for `pow`. Now, before making the implementaton, let's use few JavaScript libraries to run the tests, just to see that they are working (they will all fail).
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 ## Спецификация в действии
 
@@ -111,7 +146,11 @@ describe("pow", function() {
 
 Пока что тест завершается ошибкой. Это логично, потому что у нас пустая функция `pow`, так что `pow(2,3)` возвращает `undefined` вместо `8`.
 
+<<<<<<< HEAD
 На будущее отметим, что существуют более высокоуровневые фреймворки для тестирования, такие как [karma](https://karma-runner.github.io/) и другие. С их помощью легко сделать автозапуск множества тестов.
+=======
+For the future, let's note that there are more high-level test-runners, like [karma](https://karma-runner.github.io/) and others, that make it easy to autorun many different tests.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 ## Начальная реализация
 
@@ -133,7 +172,11 @@ function pow(x, n) {
 
 ...Такая ситуация вполне типична, она случается на практике. Тесты проходят, но функция работает неправильно. Наша спецификация не идеальна. Нужно дополнить её тестами.
 
+<<<<<<< HEAD
 Давайте добавим ещё один тест, чтобы посмотреть, что `pow(3, 4) = 81`.
+=======
+Let's add one more test to check that `pow(3, 4) = 81`.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 У нас есть два пути организации тестов:
 
@@ -297,7 +340,11 @@ describe("тест", function() {
 
 [edit src="beforeafter" title="Открыть пример в песочнице."]
 
+<<<<<<< HEAD
 Обычно `beforeEach/afterEach` и `before/after` используются для инициализации, обнуления счетчиков или чего-нибудь ещё между тестами (или группами тестов).
+=======
+Usually, `beforeEach/afterEach` and `before/after` are used to perform initialization, zero out counters or do something else between the tests (or test groups).
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 ````
 
 ## Расширение спецификации
@@ -389,23 +436,40 @@ function pow(x, n) {
 
 Это особенно важно в больших проектах, когда одна функция может быть использована во множестве мест. Когда мы вносим в такую функцию изменения, у нас нет никакой возможности вручную проверить, что она продолжает работать правильно во всех местах, где её используют.
 
+<<<<<<< HEAD
 Не имея тестов, людям приходится выбирать один их двух путей:
 
 1. Внести изменения, и неважно, что будет. Потом у наших пользователей станут проявляться ошибки, ведь мы наверняка что-то забудем проверить вручную.
 2. Или же, если наказание за ошибки в коде серьёзное, то люди просто побоятся вносить изменения в такие функции. Код будет стареть, зарастать паутиной и никто не захочет в него лезть. Это нехорошо для разработки.
 
 **Автоматическое тестирование кода позволяет избежать этих проблем!**
+=======
+1. To perform the change, no matter what. And then our users meet bugs, as we probably fail to check something manually.
+2. Or, if the punishment for errors is harsh, as there are no tests, people become afraid to modify such functions, and then the code becomes outdated, no one wants to get into it. Not good for development.
+
+**Automatic testing helps to avoid these problems!**
+
+If the project is covered with tests, there's just no such problem. After any changes, we can run tests and see a lot of checks made in a matter of seconds.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 Если проект покрыт тестами, то вышеупомянутые проблемы не возникают. После любых изменений мы можем запустить тесты и увидеть результаты огромного количества проверок, сделанных за секунды.
 
+<<<<<<< HEAD
 **Кроме того, код, хорошо покрытый тестами, как правило, имеет лучшую архитектуру.**
+=======
+Naturally, that's because auto-tested code is easier to modify and improve. But there's also another reason.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 Это естественно, ведь такой код легче менять и улучшать. Но не только по этой причине.
 
 Для написания тестов нужно организовать код таким образом, чтобы у каждой функции была ясно поставленная задача и точно определены её аргументы и возвращаемое значение. А это означает, что мы получаем хорошую архитектуру с самого начала.
 
+<<<<<<< HEAD
 В реальности это не всегда так просто. Иногда сложно написать спецификацию до того, как будет написана реализация, потому что не всегда чётко понятно, как та или иная функция должна себя вести. Но в общем и целом написание тестов делает разработку быстрее, а итоговый продукт более стабильным.
 
 Далее по книге мы встретим много задач с тестами, так что вы увидите много практических примеров.
+=======
+Later in the tutorial you will meet many tasks with tests baked-in. So you'll see more practical examples.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 Написание тестов требует хорошего знания JavaScript. Но мы только начали учить его. Не волнуйтесь. Пока вам не нужно писать тесты, но вы уже умеете их читать и поймете даже более сложные примеры, чем те, что были представлены в этой главе.

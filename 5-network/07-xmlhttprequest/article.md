@@ -14,7 +14,11 @@
 
 Что-то из этого списка звучит знакомо? Если да, тогда вперёд, приятного знакомства с `XMLHttpRequest`. Если же нет, возможно, имеет смысл изучать сразу <info:fetch-basics>.
 
+<<<<<<< HEAD
 ## Основы
+=======
+## The basics
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 XMLHttpRequest имеет два режима работы: синхронный и асинхронный.
 
@@ -22,17 +26,30 @@ XMLHttpRequest имеет два режима работы: синхронный
 
 Чтобы сделать запрос, нам нужно выполнить три шага:
 
+<<<<<<< HEAD
 1. Создать `XMLHttpRequest`.
     ```js
     let xhr = new XMLHttpRequest(); // у конструктора нет аргументов 
     ```
 
 2. Инициализировать его.
+=======
+1. Create `XMLHttpRequest`:
+    ```js
+    let xhr = new XMLHttpRequest(); // the constructor has no arguments
+    ```
+
+2. Initialize it:s
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
     ```js
     xhr.open(method, URL, [async, user, password])
     ```
 
+<<<<<<< HEAD
     Этот метод обычно вызывается сразу после `new XMLHttpRequest`. В него передаются основные параметры запроса:
+=======
+    This method is usually called right after `new XMLHttpRequest`. It specifies the main parameters of the request:
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
     - `method` -- HTTP-метод. Обычно это `"GET"` или `"POST"`.
     - `URL` -- URL, куда отправляется запрос.
@@ -203,7 +220,11 @@ xhr.onreadystatechange = function() {
 };
 ```
 
+<<<<<<< HEAD
 Вы можете наткнуться на обработчики события `readystatechange` в очень старом коде, так уж сложилось исторически, когда-то не было событий `load` и других.
+=======
+You can find `readystatechange` listeners in really old code, it's there for historical reasons, as there was a time when there were no `load` and other events.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 Сегодня из-за существования событий `load/error/progress` можно сказать, что событие `readystatechange` "морально устарело".
 
@@ -257,7 +278,11 @@ try {
     Некоторые заголовки управляются исключительно браузером, например `Referer` или `Host`, а также ряд других.
     Полный список [тут](http://www.w3.org/TR/XMLHttpRequest/#the-setrequestheader-method).
 
+<<<<<<< HEAD
     XMLHttpRequest не разрешено изменять их ради безопасности пользователей и для обеспечения корректности HTTP-запроса.
+=======
+    `XMLHttpRequest` is not allowed to change them, for the sake of user safety and correctness of the request.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
     ```
 
     ````warn header="Поставленный заголовок нельзя снять"
@@ -325,7 +350,11 @@ let formData = new FormData([form]); // создаём объект, по жел
 formData.append(name, value); // добавляем поле
 ```
 
+<<<<<<< HEAD
 Мы создаём объект, по желанию указываем, из какой формы `form`, затем, если нужно, с помощью метода `append` добавляем дополнительные поля, после чего:
+=======
+We create it, optionally from a form, `append` more fields if needed, and then:
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 1. `xhr.open('POST', ...)` – создаём `POST`-запрос.
 2. `xhr.send(formData)` – отсылаем форму серверу.
@@ -373,19 +402,33 @@ xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
 xhr.send(json);
 ```
 
+<<<<<<< HEAD
 Метод `.send(body)` весьма всеяден. Он может отправить практически что угодно, включая объекты типа Blob и BufferSource.
+=======
+The `.send(body)` method is pretty omnivore. It can send almost everything, including `Blob` and `BufferSource` objects.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 ## Прогресс закачки
 
 Событие `progress` работает только на стадии загрузки ответа с сервера.
 
+<<<<<<< HEAD
 А именно: если мы отправляем что-то через `POST`-запрос, `XMLHttpRequest` сперва закачает наши данные (тело запроса) на сервер, а потом загрузит ответ сервера. И событие `progress` будет срабатывать только во вовремя загрузки ответа.
 
 Если мы загружаем что-то большое, то нас однозначно больше интересует прогресс загрузки данных *на* сервер. Но `xhr.onprogress` тут не поможет.
+=======
+That is: if we `POST` something, `XMLHttpRequest` first uploads our data (the request body), then downloads the response.
+
+If we're uploading something big, then we're surely more interested in tracking the upload progress. But `xhr.onprogress` doesn't help here.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 Существует другой объект `xhr.upload`, без методов, только для событий закачки.
 
+<<<<<<< HEAD
 Список событий похож на события `xhr`, но все они относятся к процессу закачки на сервер:
+=======
+The event list is similar to `xhr` events, but `xhr.upload` triggers them on uploading:
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 - `loadstart` -- начало загрузки данных.
 - `progress` -- генерируется переодически во время закачки на сервер.
@@ -459,7 +502,12 @@ xhr.open('POST', 'http://anywhere.com/request');
 ```
 Детали по заголовкам, которые при этом необходимы, смотрите в главе [fetch](info:fetch-crossorigin).
 
+<<<<<<< HEAD
 ## Итого
+=======
+See the chapter <info:fetch-crossorigin> for details about cross-origin headers.
+
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 Типичный код GET-запроса с использованием `XMLHttpRequest`:
 
@@ -468,7 +516,11 @@ let xhr = new XMLHttpRequest();
 
 xhr.open('GET', '/my/url');
 
+<<<<<<< HEAD
 xhr.send();
+=======
+xhr.send(); s
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 xhr.onload = function() {
   if (xhr.status != 200) { // HTTP ошибка?

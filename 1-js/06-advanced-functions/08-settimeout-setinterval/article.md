@@ -75,7 +75,11 @@ setTimeout(() => alert('Привет'), 1000);
 // не правильно!
 setTimeout(sayHi(), 1000);
 ```
+<<<<<<< HEAD
 Это не работает, потому что `setTimeout` ожидает ссылку на функцию. Здесь `sayHi()` запускает выполнение функции и *результат выполнения* отправляется в `setTimeout`. В нашем случае результатом выполнения `sayHi()` является `undefined` (так как функция ничего не возвращает), поэтому ничего не планируется.
+=======
+That doesn't work, because `setTimeout` expects a reference to a function. And here `sayHi()` runs the function, and the *result of its execution* is passed to `setTimeout`. In our case the result of `sayHi()` is `undefined` (the function returns nothing), so nothing is scheduled.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 ````
 
 ### Отмена через clearTimeout
@@ -235,7 +239,7 @@ setTimeout(function() {...}, 100);
 Есть и побочный эффект. Функция ссылается на внешнее лексическое окружение, поэтому пока она существует, внешние переменные существуют тоже. Они могут занимать больше памяти, чем сама функция. Поэтому, если нет регулярный вызов функции больше не нужен, то лучше отменить его, даже если функция очень маленькая.
 ````
 
-## setTimeout(...,0)
+## Zero delay setTimeout
 
 Особый вариант использования: `setTimeout(func, 0)` или просто `setTimeout(func)`.
 
@@ -253,6 +257,7 @@ alert("Привет");
 
 Первая строка "помещает вызов в календарь через 0 мс". Но планировщик "проверит календарь" после того, как текущий код завершится. Поэтому `"Привет"` выводится первым, а `"Мир"` после него.
 
+<<<<<<< HEAD
 ### Разделение ресурсоёмких задач
 
 Рассмотрим вариант разделения ресурсоёмких задача при помощи `setTimeout`.
@@ -361,6 +366,14 @@ count();
 В браузере есть ограничение, как часто внутренние счётчики могут выполняться. В [стандарте HTML5](https://www.w3.org/TR/html5/webappapis.html#timers) говорится: "после пяти вложенных таймеров интервал должен составлять не менее четырёх миллисекунд.".
 
 Продемонстрируем в примере ниже, что это означает. Вызов `setTimeout` повторно вызывает себя через 0 мс. Каждый вызов запоминает реальное время от предыдущего вызова в массиве `times. Какова реальная задержка? Посмотрим:
+=======
+There are also advanced browser-related use cases of zero-delay timeout, that we'll discuss in the chapter <info:event-loop>.
+
+````smart header="Zero delay is in fact not zero (in a browser)"
+In the browser, there's a limitation of how often nested timers can run. The [HTML5 standard](https://html.spec.whatwg.org/multipage/timers-and-user-prompts.html#timers) says: "after five nested timers, the interval is forced to be at least 4 milliseconds.".
+
+Let's demonstrate what it means with the example below. The `setTimeout` call in it re-schedules itself with zero delay. Each call remembers the real time from the previous one in the `times` array. What do the real delays look like? Let's see:
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 ```js run
 let start = Date.now();
@@ -377,10 +390,17 @@ setTimeout(function run() {
 // 1,1,1,1,9,15,20,24,30,35,40,45,50,55,59,64,70,75,80,85,90,95,100
 ```
 
+<<<<<<< HEAD
 Первый таймер запускается сразу (как и указано в спецификации) и затем задержка вступает в игру и мы видим `9, 15, 20, 24...`.
+=======
+First timers run immediately (just as written in the spec), and then we see `9, 15, 20, 24...`. The 4+ ms obligatory delay between invocations comes into play.
+
+The similar thing happens if we use `setInterval` instead of `setTimeout`: `setInterval(f)` runs `f` few times with zero-delay, and afterwards with 4+ ms delay.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 Это ограничение существует давно, многие скрипты полагаются на него, поэтому оно сохраняется по историческим причинам.
 
+<<<<<<< HEAD
 Этого ограничения нет в серверном JavaScript. Там есть и другие способы планирования асинхронных задач. Например, [process.nextTick](https://nodejs.org/api/process.html) и [setImmediate](https://nodejs.org/api/timers.html) для Node.js. Так что это ограничение относится только к браузерам.
 ````
 
@@ -452,6 +472,18 @@ setTimeout(function run() {
 Некоторые случаи использования `setTimeout(func)`:
 - разделить ресурсоёмкие задачи на части, чтобы скрипт не "зависал",
 - позволить браузеру сделать что-то ещё, пока идёт процесс (рисовать полосу прогресса).
+=======
+For server-side JavaScript, that limitation does not exist, and there exist other ways to schedule an immediate asynchronous job, like [setImmediate](https://nodejs.org/api/timers.html) for Node.js. So this note is browser-specific.
+````
+
+## Summary
+
+- Methods `setInterval(func, delay, ...args)` and `setTimeout(func, delay, ...args)` allow to run the `func` regularly/once after `delay` milliseconds.
+- To cancel the execution, we should call `clearInterval/clearTimeout` with the value returned by `setInterval/setTimeout`.
+- Nested `setTimeout` calls is a more flexible alternative to `setInterval`. Also they can guarantee the minimal time *between* the executions.
+- Zero delay scheduling with `setTimeout(func, 0)` (the same as `setTimeout(func)`) is used to schedule the call "as soon as possible, but after the current code is complete".
+- The browsere ensures that for five or more nested call of `setTimeout`, or for zero-delay `setInterval`, the real delay between calls is at least 4ms. That's for historical reasons.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 Обратим внимание, что все методы планирования *не гарантируют* точную задержку. Не стоит полагаться на это в коде.
 
@@ -460,4 +492,8 @@ setTimeout(function run() {
 - Вкладка браузера в фоновом режиме.
 - Работа ноутбука от аккумулятора.
 
+<<<<<<< HEAD
 Все это может увеличивать минимальное временное разрешение (минимальная задержка) до 300 или даже 1000 мс в зависимости от браузера и настроек.
+=======
+All that may increase the minimal timer resolution (the minimal delay) to 300ms or even 1000ms depending on the browser and OS-level performance settings.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd

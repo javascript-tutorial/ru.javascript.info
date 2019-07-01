@@ -38,12 +38,18 @@
 Таким образом, без учёта полосы прокрутки ширина области содержимого будет `300px`, но если предположить, что ширина полосы прокрутки равна `16px` (её точное значение зависит от устройства и браузера), тогда остаётся только `300 - 16 = 284px`, и мы должны это учитывать. Вот почему примеры в этой главе даны с полосой прокрутки. Если её не будет, то вычисления будут немного проще.
 ```
 
+<<<<<<< HEAD
 ```smart header="Область `padding-bottom` (нижний внутренний отступ) может быть заполнена текстом"
 Нижние внутренние отступы `padding-bottom` изображены пустыми на иллюстрациях, но если элемент содержит много текста, то браузеры отображают его перекрывающим `padding-bottom`. Тем не менее, в дальнейших примерах `padding` есть (если не указано противное).
+=======
+```smart header="The `padding-bottom` area may be filled with text"
+Usually paddings are shown empty on illustrations, but if there's a lot of text in the element and it overflows, then browsers show the "overflowing" text at `padding-bottom`, so you can see that in examples. Still, the padding is set in further examples, unless explicitly specified otherwise.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 ```
 
 ## Метрики
 
+<<<<<<< HEAD
 Вот общая картина:
 
 ![](metric-all.png)
@@ -53,6 +59,15 @@
 Существует множество свойств, и довольно трудно уместить их на одном изображении, но их значения просты и понятны.
 
 Давайте начнём исследовать их снаружи элемента.
+=======
+Here's the overall picture:
+
+![](metric-all.png)
+
+Values of these properties are technically numbers, but these numbers are "of pixels", so these are pixel measurements.
+
+They are many properties, it's difficult to fit them all in the single picture, but their values are simple and easy to understand.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 ## Свойства: offsetParent, offsetLeft/Top
 
@@ -60,13 +75,23 @@
 
 В свойстве `offsetParent` находится предок элемента, который используется внутри браузера для вычисления координат при рендеринге.
 
+<<<<<<< HEAD
 Это ближайший родитель, который удовлетворяет следующим условиям:
+=======
+The `offsetParent` is the nearest ancestor, that browser uses for calculating coordinates during rendering.
+
+That's the nearest ancestor, that satisfies following conditions:
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 1. Является CSS-позиционированным (CSS-свойство `position` равно `absolute`, `relative`, `fixed` или `sticky`),
 2. или `<td>`, `<th>`, `<table>`,
 3. или `<body>`.
 
+<<<<<<< HEAD
 В большинстве практических ситуаций `offsetParent` - это ближайший предок, который является CSS-позиционированным. Свойства `offsetLeft/offsetTop` содержат координаты x/y относительно верхнего левого угла родительского элемента.
+=======
+In most practical cases `offsetParent` is exactly the nearest ancestor, that is CSS-positioned. And `offsetLeft/offsetTop` provide x/y coordinates relative to its upper-left corner.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 В примере ниже внутренний `<div>` имеет элемент `<main>` в качестве `offsetParent`, а свойства `offsetLeft/offsetTop` являются сдвигами относительно верхнего левого угла (`180`):
 
@@ -105,12 +130,21 @@
 - `offsetWidth = 390` -- внешняя ширина блока, её можно получить сложением CSS-ширины (`300px`), внутренних отступов (`2 * 20px`) и рамок (`2 * 25px`).
 - `offsetHeight = 290` -- внешняя высота блока.
 
+<<<<<<< HEAD
 ````smart header="Метрики для невидимых элементов равны нулю."
 Координаты и размеры в JavaScript устанавливаются только для видимых элементов.
 
 Если элемент (или любой его родитель) имеет `display:none` или отсутствует в документе, то все его метрики равны нулю (или `null`, если это `offsetParent`).
 
 Например, свойство `offsetParent` равно `null`, а `offsetWidth` и `offsetHeight` равны `0`, когда мы создали элемент, но ещё не вставили его в документ, или если у элемента (или у его родителя) `display:none`.
+=======
+````smart header="Geometry properties for not displayed elements are zero/null"
+Geometry properties are calculated only for displayed elements.
+
+If an element (or any of its ancestors) has `display:none` or is not in the document, then all geometry properties are zero (or `null` if that's `offsetParent`).
+
+For example, `offsetParent` is `null`, and `offsetWidth`, `offsetHeight` are `0` when we created an element, but haven't inserted it into the document yet, or it (or it's ancestor) has `display:none`.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 Мы можем использовать это, чтобы делать проверку на видимость:
 
@@ -136,7 +170,11 @@ function isHidden(elem) {
 
 ![](metric-client-left-top.png)
 
+<<<<<<< HEAD
 ...Но на самом деле эти свойства - вовсе не ширины рамок, а отступы внутренней части элемента от внешней.
+=======
+...But to be precise -- these propeerties are not border width/height, but rather relative coordinates of the inner side from the outer side.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 В чём же разница?
 
@@ -217,11 +255,19 @@ element.style.height = `${element.scrollHeight}px`;
 
 ## Не стоит брать width/height из CSS
 
+<<<<<<< HEAD
 Мы рассмотрели метрики, которые есть у DOM-элементов, и которые можно использовать для получения различных высот, ширин и прочих расстояний.
+=======
+We've just covered geometry properties of DOM elements, that can be used to get widths, heights and calculate distances.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 Но как мы знаем из главы <info:styles-and-classes>, CSS-высоту и ширину можно извлечь, используя `getComputedStyle`.
 
+<<<<<<< HEAD
 Так почему бы не получать, к примеру, ширину элемента при помощи `getComputedStyle`, вот так?
+=======
+So why not to read the width of an element with `getComputedStyle`, like this?
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 ```js run
 let elem = document.body;
@@ -266,6 +312,7 @@ alert( getComputedStyle(elem).width ); // показывает CSS-ширину 
 
 У элементов есть следующие геометрические свойства (метрики):
 
+<<<<<<< HEAD
 - `offsetParent` -- ближайший CSS-позиционированный родитель или ближайший `td`, `th`, `table`, `body`.
 - `offsetLeft/offsetTop` -- позиция в пикселях верхнего левого угла относительно `offsetParent`.
 - `offsetWidth/offsetHeight` -- "внешняя" ширина/высота элемента, включая рамки.
@@ -273,5 +320,14 @@ alert( getComputedStyle(elem).width ); // показывает CSS-ширину 
 - `clientWidth/clientHeight` -- ширина/высота содержимого вместе с внутренними отступами, но без полосы прокрутки.
 - `scrollWidth/scrollHeight` -- ширины/высота содержимого, аналогично `clientWidth/Height`, но учитывают прокрученную, невидимую область элемента.
 - `scrollLeft/scrollTop` -- ширина/высота прокрученной сверху части элемента, считается от верхнего левого угла.
+=======
+- `offsetParent` -- is the nearest positioned ancestor or `td`, `th`, `table`, `body`.
+- `offsetLeft/offsetTop` -- coordinates relative to the upper-left edge of `offsetParent`.
+- `offsetWidth/offsetHeight` -- "outer" width/height of an element including borders.
+- `clientLeft/clientTop` -- the distance from the upper-left outer corner to its upper-left inner corner. For left-to-right OS they are always the widths of left/top borders. For right-to-left OS the vertical scrollbar is on the left so `clientLeft` includes its width too.
+- `clientWidth/clientHeight` -- the width/height of the content including paddings, but without the scrollbar.
+- `scrollWidth/scrollHeight` -- the width/height of the content, just like `clientWidth/clientHeight`, but also include scrolled-out, invisible part of the element.
+- `scrollLeft/scrollTop` -- width/height of the scrolled out upper part of the element, starting from its upper-left corner.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 Все свойства доступны только для чтения, кроме `scrollLeft/scrollTop`. Изменение этих свойств заставляет браузер прокручивать элемент.

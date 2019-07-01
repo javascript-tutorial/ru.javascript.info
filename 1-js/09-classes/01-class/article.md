@@ -88,7 +88,11 @@ alert(typeof User); // function
     - Код функции берется из метода `constructor` (она будет пустой, если такого метода нет).
 2. Хранит все методы, такие как `sayHi`, в `User.prototype`.
 
+<<<<<<< HEAD
 Затем, при вызове метода на новых объектах `new User`, он возьмётся из прототипа, прямо как описано в главе <info:function-prototype>. Таким образом, объект `new User` имеет доступ к методам класса.
+=======
+Afterwards, for new objects, when we call a method, it's taken from the prototype, just as  described in the chapter <info:function-prototype>. So a `new User` object has access to class methods.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 На картинке показан результат объявления `class User`:
 

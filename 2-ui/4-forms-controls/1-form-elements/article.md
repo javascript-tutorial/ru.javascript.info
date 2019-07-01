@@ -2,13 +2,21 @@
 
 Формы и элементы управления, такие как `<input>`, имеют множество специальных свойств и событий.
 
+<<<<<<< HEAD
 Работать с формами станет намного удобнее, когда мы их изучим.
+=======
+Working with forms will be much more convenient when we learn them.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 ## Навигация: формы и элементы
 
 Формы в документе входят в специальную коллекцию `document.forms`.
 
+<<<<<<< HEAD
 Это - так называемая "именованная" коллекция: мы можем использовать для получения формы как её имя, так и порядковый номер в документе.
+=======
+That's a so-called "named collection": it's both named and ordered. We can use both the name or the number in the document to get the form.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 ```js no-beautify
 document.forms.my - форма с именем "my" (name="my")
@@ -152,7 +160,11 @@ alert(ageElems[0].value); // 10, the first input value
 
 ### input и textarea
 
+<<<<<<< HEAD
 К их значению можно получить доступ через свойство `input.value` (строка) или `input.checked` (булево значение) для чекбоксов.
+=======
+We can access their value as `input.value` (string) or `input.checked` (boolean) for checkboxes.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 Вот так:
 
@@ -163,17 +175,28 @@ textarea.value = "Новый текст";
 input.checked = true; // для чекбоксов и переключателей
 ```
 
+<<<<<<< HEAD
 ```warn header="Используйте `textarea.value` вместо `textarea.innerHTML`"
 Обратим внимание: хоть `<textarea>...</textarea>` и хранит значение как вложенный HTML, нам не следует использовать `textarea.innerHTML`. Там хранится только тот HTML, который был изначально на странице, а не текущее значение.
+=======
+```warn header="Use `textarea.value`, not `textarea.innerHTML`"
+Please note that even though `<textarea>...</textarea>` holds its value as nested HTML, we should never use `textarea.innerHTML`. It stores only the HTML that was initially on the page, not the current value.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 ```
 
 ### select и option
 
 Элемент `<select>` имеет 3 важных свойства:
 
+<<<<<<< HEAD
 1. `select.options` -- коллекция из элементов `<option>`,
 2. `select.value` -- значение выбранного в данный момент `<option>`,
 3. `select.selectedIndex` -- номер выбранного `<option>`.
+=======
+1. `select.options` -- the collection of `<option>` elements,
+2. `select.value` -- the value of the currently selected option,
+3. `select.selectedIndex` -- the number of the currently selected option.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 Имеется три способа задать значение для `<select>`:
 
@@ -221,6 +244,7 @@ input.checked = true; // для чекбоксов и переключателе
 </script>
 ```
 
+<<<<<<< HEAD
 Полное описание элемента `<select>` доступно в спецификации <https://html.spec.whatwg.org/multipage/forms.html#the-select-element>.
 
 ### new Option
@@ -228,6 +252,15 @@ input.checked = true; // для чекбоксов и переключателе
 Элемент `<option>` редко используется сам по себе, но и здесь есть кое-что интересное.
 
 В описании [элемента option](https://html.spec.whatwg.org/multipage/forms.html#the-option-element) есть красивый короткий синтаксис для создания элемента <option>:
+=======
+The full specification of the `<select>` element is available in the specification <https://html.spec.whatwg.org/multipage/forms.html#the-select-element>.
+
+### new Option
+
+This is rarely used on its own. But there's still an interesting thing.
+
+In the specification of [the option element](https://html.spec.whatwg.org/multipage/forms.html#the-option-element) there's a nice short syntax to create `<option>` elements:
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 ```js
 option = new Option(text, value, defaultSelected, selected);
@@ -235,10 +268,17 @@ option = new Option(text, value, defaultSelected, selected);
 
 Параметры:
 
+<<<<<<< HEAD
 - `text` -- текст внутри <option>,
 - `value` -- значение,
 - `defaultSelected` -- если `true`, то ставится HTML-атрибут `selected`,
 - `selected` -- если `true`, то <option> будет выбранным.
+=======
+- `text` -- the text inside the option,
+- `value` -- the option value,
+- `defaultSelected` -- if `true`, then `selected` HTML-attribute is created,
+- `selected` -- if `true`, then the option is selected.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 Пример:
 
@@ -281,6 +321,12 @@ let option = new Option("Текст", "value", true, true);
 
 Значения элементов формы доступны через `input.value`, `textarea.value`, `select.value` и т.д. либо  `input.checked` для чекбоксов и переключателей.
 
+<<<<<<< HEAD
 Для элемента `<select>` мы также можем получить индекс выбранного пункта через `select.selectedIndex`, либо используя коллекцию пунктов `select.options`. Полное описание этого и других элементов находится находится в спецификации, по адресу <https://html.spec.whatwg.org/multipage/forms.html>.
 
 Это были основы для начала работы с формами. Далее в учебнике мы встретим ещё много примеров. В следующей главе мы рассмотрим такие события, как `focus` и `blur`, которые могут происходить на любом элементе, но чаще всего обрабатываются в формах.
+=======
+For `<select>` we can also get the value by the index `select.selectedIndex` or through the options collection `select.options`. The full specification of this and other elements is in the specification <https://html.spec.whatwg.org/multipage/forms.html>.
+
+These are the basics to start working with forms. We'll meet many examples further in the tutorial. In the next chapter we'll cover `focus` and `blur` events that may occur on any element, but are mostly handled on forms.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd

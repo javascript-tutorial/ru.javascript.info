@@ -1,5 +1,9 @@
 
+<<<<<<< HEAD
 # Перепишите, используя async/await
+=======
+# Rewrite "rethrow" with async/await
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 Ниже пример из раздела <info:promise-chaining>, перепишите его, используя `async/await` вместо `.then/catch`.
 

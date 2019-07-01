@@ -2,9 +2,17 @@
 
 В JavaScript есть две чаще всего используемые структуры данных - это `Object` и `Array`.
 
+<<<<<<< HEAD
 Объекты позволяют нам создавать одну сущность, которая хранит элементы данных по ключам, а массивы - хранить упорядоченные коллекции данных.
 
 Но когда мы передаём их в функцию, то ей может понадобится не объект/массив целиком, а элементы по отдельности.
+=======
+Objects allow us to create a single entity that stores data items by key, and arrays allow us to gather data items into an ordered collection.
+
+But when we pass those to a function, it may need not an object/array as a whole, but rather individual pieces.
+
+*Destructuring assignment* is a special syntax that allows us to "unpack" arrays or objects into a bunch of variables, as sometimes that's more convenient. Destructuring also works great with complex functions that have a lot of parameters, default values, and so on.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 *Деструктурирующее присваивание* -- это специальный синтаксис, который позволяет нам "распаковать" массивы или объекты в кучу переменных, так как иногда они более удобны. Деструктуризация также прекрасно работает со сложными функциями, которые имеют много параметров, значений по умолчанию, и так далее.
 
@@ -17,8 +25,14 @@
 let arr = ["Ilya", "Kantor"]
 
 *!*
+<<<<<<< HEAD
 // деструктурирующее присваивание
 // записывает firstName=arr[0], surname=arr[1]
+=======
+// destructuring assignment
+// sets firstName = arr[0]
+// and surname = arr[1]
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 let [firstName, surname] = arr;
 */!*
 
@@ -57,7 +71,11 @@ let [firstName, , title] = ["Julius", "Caesar", "Consul", "of the Roman Republic
 alert( title ); // Consul
 ```
 
+<<<<<<< HEAD
 В примере выше второй элемент массива пропускается, а третий присваивается переменной `title`, оставшиеся элементы массива также пропускаются (так как для них нет переменных).
+=======
+In the code above, the second element of the array is skipped, the third one is assigned to `title`, and the rest of the array items is also skipped (as there are no variables for them).
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 ````
 
 ````smart header="Работает с любым перебираемым объектом с правой стороны"
@@ -114,7 +132,7 @@ user.set("name", "John");
 user.set("age", "30");
 
 *!*
-for (let [key, value] of user.entries()) {
+for (let [key, value] of user) {
 */!*
   alert(`${key}:${value}`); // name:John, then age:30
 }
@@ -212,7 +230,11 @@ alert(height); // 200
 Свойства `options.title`, `options.width` и `options.height` присваиваются соответствующим переменным. Порядок не имеет значения. Вот так - тоже работает:
 
 ```js
+<<<<<<< HEAD
 // изменён порядок в let {...}
+=======
+// changed the order in let {...}
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 let {height, width, title} = { title: "Menu", height: 200, width: 100 }
 ```
 
@@ -273,7 +295,11 @@ let {width = prompt("width?"), title = prompt("title?")} = options;
 */!*
 
 alert(title);  // Menu
+<<<<<<< HEAD
 alert(width);  // (результат prompt)
+=======
+alert(width);  // (whatever the result of prompt is)
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 ```
 
 Мы также можем совмещать `:` и `=`:
@@ -292,11 +318,19 @@ alert(w);      // 100
 alert(h);      // 200
 ```
 
+<<<<<<< HEAD
 ### Остаток (rest) "..."
+=======
+### The rest pattern "..."
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 Что если в объекте больше свойств, чем у нас переменных? Можем ли мы взять необходимые нам, а остальные присвоить куда-нибудь?
 
+<<<<<<< HEAD
 Можно использовать троеточие, так же как для массивов. В некоторых старых браузерах (IE) это не поддерживается, используйте Babel для полифила.
+=======
+We can use the rest pattern, just like we did with arrays. It's not supported by some older browsers (IE, use Babel to polyfill it), but works in modern ones.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 Выглядит примерно так:
 
@@ -308,6 +342,8 @@ let options = {
 };
 
 *!*
+// title = property named title
+// rest = object with the rest of properties
 let {title, ...rest} = options;
 */!*
 
@@ -318,8 +354,13 @@ alert(rest.width);   // 100
 
 
 
+<<<<<<< HEAD
 ````smart header="Подводный камень, если не указывать `let`"
 В примерах выше переменные были объявлены в присваивании: `let {…} = {…}`. Конечно, мы могли бы использовать существующие переменные и не указывать `let`, но тут есть подвох.
+=======
+````smart header="Gotcha if there's no `let`"
+In the examples above variables were declared right in the assignment: `let {…} = {…}`. Of course, we could use existing variables too, without `let`. But there's a catch.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 Это не будет работать:
 ```js run
@@ -340,12 +381,20 @@ let title, width, height;
 }
 ```
 
+<<<<<<< HEAD
 Чтобы показать JavaScript, что это не блок кода, мы можем сделать его частью выражения, заключив в скобки `(...)`:
+=======
+To show JavaScript that it's not a code block, we can make it a part of an expression by wrapping in parentheses `(...)`:
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 ```js run
 let title, width, height;
 
+<<<<<<< HEAD
 // сейчас всё работает
+=======
+// okay now
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 *!*(*/!*{title, width, height}*!*)*/!* = {title: "Menu", width: 200, height: 100};
 
 alert( title ); // Menu
@@ -369,7 +418,11 @@ let options = {
   extra: true    // дополнительное свойство, которое мы не будем извлекать
 };
 
+<<<<<<< HEAD
 // деструктуризация разбита на несколько строк для ясности
+=======
+// destructuring assignment split in multiple lines for clarity
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 let {
   size: { // положим size сюда
     width,
@@ -394,7 +447,11 @@ alert(item2);  // Donut
 
 В итоге у нас есть `width`, `height`, `item1`, `item2` и `title` со значением по умолчанию.
 
+<<<<<<< HEAD
 Если у нас есть большой объект с множеством свойств, можно взять только то, что нужно:
+=======
+If we have a complex object with many properties, we can extract only what we need:
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 ```js
 // взять только size, игнорировать остальное
@@ -403,7 +460,11 @@ let { size } = options;
 
 ## Умные параметры функций
 
+<<<<<<< HEAD
 Есть ситуации, когда функция имеет много параметров, большинство из которых не обязательны. Это особенно верно для пользовательских интерфейсов. Представьте себе функцию, которая создаёт меню. Она может иметь ширину, высоту, заголовок, список элементов и так далее.
+=======
+There are times when a function has many parameters, most of which are optional. That's especially true for user interfaces. Imagine a function that creates a menu. It may have a width, a height, a title, items list and so on.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 Это плохой способ писать такие функции:
 
@@ -510,7 +571,13 @@ showMenu(); // Menu 100 200
 
     Свойства, которые не были упомянуты, копируются в объект `rest`.
 
+<<<<<<< HEAD
 - Синтаксис для массива:
+=======
+    Object properties that have no mapping are copied to the `rest` object.
+
+- The array syntax:
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
     ```js
     let [item1 = default, item2, ...rest] = array
