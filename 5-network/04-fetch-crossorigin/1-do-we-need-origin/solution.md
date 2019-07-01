@@ -1,9 +1,9 @@
-We need `Origin`, because sometimes `Referer` is absent. For instance, when we `fetch` HTTP-page from HTTPS (access less secure from more secure), then there's no `Referer`.
+Нам нужен `Origin`, потому что иногда `Referer` отсутствует. Например, когда мы запрашиваем через `fetch` HTTP-страницу с HTTPS (менее безопасный доступ с более безопасного), то `Referer` нет.
 
-The [Content Security Policy](http://en.wikipedia.org/wiki/Content_Security_Policy) may forbid sending a `Referer`.
+[Content Security Policy](http://en.wikipedia.org/wiki/Content_Security_Policy) (политика безопасности содержимого) может запретить отправление `Referer`.
 
-As we'll see, `fetch` also has options that prevent sending the `Referer` and even allow to change it (within the same site).
+Как мы увидим позже, у `fetch` тоже есть опции, которые предотвращают отправку `Referer` и даже позволяют изменять его (в пределах того же сайта).
 
-By specification, `Referer` is an optional HTTP-header.
+Согласно спецификации `Referer` является необязательным HTTP-заголовком.
 
-Exactly because `Referer` is unreliable, `Origin` was invented. The browser guarantees correct `Origin` for cross-origin requests.
+Именно потому что `Referer` ненадёжен, был изобретён `Origin`. Браузер гарантирует наличие правильного `Origin` при кросс-доменных запросах.
