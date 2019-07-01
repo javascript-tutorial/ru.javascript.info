@@ -25,30 +25,30 @@
   <table id="grid">
     <thead>
       <tr>
-        <th data-type="number">Age</th>
-        <th data-type="string">Name</th>
+        <th data-type="number">Возраст</th>
+        <th data-type="string">Имя</th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td>5</td>
-        <td>John</td>
+        <td>Вася</td>
       </tr>
       <tr>
         <td>2</td>
-        <td>Pete</td>
+        <td>Петя</td>
       </tr>
       <tr>
         <td>12</td>
-        <td>Ann</td>
+        <td>Женя</td>
       </tr>
       <tr>
         <td>9</td>
-        <td>Eugene</td>
+        <td>Маша</td>
       </tr>
       <tr>
         <td>1</td>
-        <td>Ilya</td>
+        <td>Илья</td>
       </tr>
     </tbody>
   </table>
@@ -59,10 +59,10 @@
       if (e.target.tagName != 'TH') return;
 
       let th = e.target;
-      // if TH, then sort
-      // cellIndex is the number of th:
-      //   0 for the first column
-      //   1 for the second column, etc
+      // если ячейка TH, тогда сортировать
+      // cellIndex - это номер ячейки th:
+      //   0 для первого столбца
+      //   1 для второго и т.д.
       sortGrid(th.cellIndex, th.dataset.type);
     };
 
@@ -71,7 +71,7 @@
 
       let rowsArray = Array.from(tbody.rows);
 
-      // compare(a, b) compares two rows, need for sorting
+      // compare(a, b) сравнивает две строки, нужен для сортировки
       let compare;
 
       switch (type) {
@@ -87,7 +87,7 @@
           break;
       }
 
-      // sort
+      // сортировка
       rowsArray.sort(compare);
 
       tbody.append(...rowsArray);

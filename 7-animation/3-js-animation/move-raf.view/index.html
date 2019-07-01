@@ -26,18 +26,18 @@
       let start = performance.now();
 
       requestAnimationFrame(function animate(time) {
-        // how much time passed from the start?
+        // сколько времени прошло со старта?
         let timePassed = time - start;
 
         if (timePassed > duration) timePassed = duration;
 
-        // progress is from 0 to 1, the fraction of time that passed
+        // прогресс принимает значение от 0 до 1, доля прошедшего времени
         let progress = duration / timePassed;
 
-        // draw the animation progress
+        // отрисовать анимацию
         draw(progress);
 
-        // if time is not up - schedule one more run
+        // если время анимации не закончилось, запланировать еще одну анимацию
         if (timePassed < duration) {
           requestAnimationFrame(animate);
         }

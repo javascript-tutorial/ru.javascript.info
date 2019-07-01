@@ -1,11 +1,11 @@
-The `onscroll` handler should check which images are visible and show them.
+Обработчик `onscroll` должен проверить, какие изображения видимы, и показать их.
 
-We also may want to run it when the page loads, to detect immediately visible images prior to any scrolling and load them.
+Мы также можем захотеть запустить его при загрузке страницы, чтобы сразу обнаружить видимые изображения перед любой прокруткой и загрузить их.
 
-If we put it at the `<body>` bottom, then it runs when the page content is loaded.
+Если мы поместим его перед закрывающим тегом `</body>`, тогда он запустится при загрузке содержимого страницы.
 
 ```js
-// ...the page content is above...
+// ...содержимое страницы выше...
 
 function isVisible(elem) {
 
@@ -13,7 +13,7 @@ function isVisible(elem) {
 
   let windowHeight = document.documentElement.clientHeight;
 
-  // top elem edge is visible OR bottom elem edge is visible
+  // видны верхний ИЛИ нижний край элемента
   let topVisible = coords.top > 0 && coords.top < windowHeight;
   let bottomVisible = coords.bottom < windowHeight && coords.bottom > 0;
 
@@ -26,6 +26,6 @@ window.onscroll = showVisible;
 */!*
 ```
 
-For visible images we can take `img.dataset.src` and assign it to `img.src` (if not did it yet).
+Для видимых изображений мы можем взять `img.dataset.src` и присвоить это значение `img.src` (если ещё этого не сделали).
 
-P.S. The solution also has a variant of `isVisible` that "pre-loads" images that are within 1 page  above/below (the page height is `document.documentElement.clientHeight`).
+P.S. В решении этой задачи есть также вариант `isVisible`, который предварительно загружает изображения, находящиеся в пределах одной страницы выше/ниже (высота страницы -- `document.documentElement.clientHeight`).

@@ -23,7 +23,7 @@ document.head.append(script);
 ...But how to run the function that is declared inside that script? We need to wait until the script loads, and only then we can call it.
 
 ```smart
-For our own scripts we could use [Javascript modules](info:modules) here, but they are not widely adopted by third-party libraries.
+For our own scripts we could use [JavaScript modules](info:modules) here, but they are not widely adopted by third-party libraries.
 ```
 
 ### script.onload
@@ -92,7 +92,7 @@ img.onload = function() {
 };
 
 img.onerror = function() {
-  alert("Error occured while loading image");
+  alert("Error occurred while loading image");
 };
 ```
 
@@ -155,7 +155,7 @@ Script error.
 , 0:0
 ```
 
-Details may vary depeding on the browser, but the idea is same: any information about the internals of a script is hidden. Exactly because it's from another domain.
+Details may vary depending on the browser, but the idea is same: any information about the internals of a script is hidden. Exactly because it's from another domain.
 
 Why do we need the details?
 

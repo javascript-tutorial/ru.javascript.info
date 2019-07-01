@@ -21,19 +21,19 @@
       xhr.onreadystatechange = function() {
         if (xhr.readyState != 4) return;
 
-        button.innerHTML = 'Complete!';
+        button.innerHTML = 'Готово!';
 
         if (xhr.status != 200) {
-          // handle error
+          // обработка ошибки
           alert(xhr.status + ': ' + xhr.statusText);
         } else {
-          // show result
+          // вывод результата
           alert(xhr.responseText);
         }
 
       }
 
-      button.innerHTML = 'Loading...';
+      button.innerHTML = 'Идёт загрузка...';
       button.disabled = true;
     }
   </script>

@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!-- add mocha css, to show results -->
+  <!-- добавим стили mocha для отображения результатов -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/3.2.0/mocha.css">
-  <!-- add mocha framework code -->
+  <!-- добавляем сам фреймворк mocha -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/3.2.0/mocha.js"></script>
   <script>
-    // enable bdd-style testing
+    // включаем режим тестирования в стиле BDD
     mocha.setup('bdd');
   </script>
-  <!-- add chai -->
+  <!-- добавим chai -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/3.5.0/chai.js"></script>
   <script>
-    // chai has a lot of stuff, let's make assert global
+    // chai предоставляет большое количество функций. Объявим assert глобально
     let assert = chai.assert;
   </script>
 </head>
@@ -31,13 +31,13 @@
     }
   </script>
 
-  <!-- the script with tests (describe, it...) -->
+  <!-- скрипт со спецификацией (describe, it...) -->
   <script src="test.js"></script>
 
-  <!-- the element with id="mocha" will contain test results -->
+  <!-- элемент с id="mocha" будет содержать результаты тестов -->
   <div id="mocha"></div>
 
-  <!-- run tests! -->
+  <!-- запускаем тесты! -->
   <script>
     mocha.run();
   </script>
