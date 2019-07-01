@@ -1,9 +1,9 @@
-The solution, step by step:
+Решение шаг за шагом:
 
 ```html run
 <select id="genres">
-  <option value="rock">Rock</option>
-  <option value="blues" selected>Blues</option>
+  <option value="rock">Рок</option>
+  <option value="blues" selected>Блюз</option>
 </select>
 
 <script>
@@ -12,7 +12,7 @@ The solution, step by step:
   alert( selectedOption.value );
 
   // 2)
-  let newOption = new Option("Classic", "classic");
+  let newOption = new Option("Классика", "classic");
   genres.append(newOption);
 
   // 3)

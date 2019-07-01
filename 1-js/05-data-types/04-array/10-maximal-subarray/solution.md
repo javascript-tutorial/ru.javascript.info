@@ -1,43 +1,43 @@
-# Slow solution
+# Медленное решение
 
-We can calculate all possible subsums.
+Можно посчитать все возможные подсуммы.
 
-The simplest way is to take every element and calculate sums of all subarrays starting from it.
+Самый простой путь - посчитать суммы подмассивов, начиная с каждого элемента по очереди.
 
-For instance, for `[-1, 2, 3, -9, 11]`:
+Например, для `[-1, 2, 3, -9, 11]`:
 
 ```js no-beautify
-// Starting from -1:
+// Начиная с -1:
 -1
 -1 + 2
 -1 + 2 + 3
 -1 + 2 + 3 + (-9)
 -1 + 2 + 3 + (-9) + 11
 
-// Starting from 2:
+// Начиная с 2:
 2
 2 + 3
 2 + 3 + (-9)
 2 + 3 + (-9) + 11
 
-// Starting from 3:
+// Начиная с 3:
 3
 3 + (-9)
 3 + (-9) + 11
 
-// Starting from -9
+// Начиная с -9
 -9
 -9 + 11
 
-// Starting from -11
--11
-```
+// Начиная с 11
+11
+``` 
 
-The code is actually a nested loop: the external loop over array elements, and the internal counts subsums starting with the current element.
+Реализуется с помощью вложенного цикла: внешний цикл проходит по элементам массива, а внутренний считает подсумму, начиная с текущего элемента.
 
 ```js run
 function getMaxSubSum(arr) {
-  let maxSum = 0; // if we take no elements, zero will be returned
+  let maxSum = 0; // если элементов не будет - возвращаем 0
 
   for (let i = 0; i < arr.length; i++) {
     let sumFixedStart = 0;
@@ -57,25 +57,25 @@ alert( getMaxSubSum([1, 2, 3]) ); // 6
 alert( getMaxSubSum([100, -9, 2, -3, 5]) ); // 100
 ```
 
-The solution has a time complexety of [O(n<sup>2</sup>)](https://en.wikipedia.org/wiki/Big_O_notation). In other words, if we increase the array size 2 times, the algorithm will work 4 times longer.
+Это решение имеет [оценку сложности](https://ru.wikipedia.org/wiki/«O»_большое_и_«o»_малое) O(n<sup>2</sup>). Другими словами, если мы увеличим размер массива в 2 раза, время выполнения алгоритма увеличится в 4 раза.
 
-For big arrays (1000, 10000 or more items) such algorithms can lead to a serious sluggishness.
+Для больших массивов(1000, 10000 или больше элементов) такие алгоритмы могут приводить к серьёзным "тормозам".
 
-# Fast solution
+# Быстрое решение
 
-Let's walk the array and keep the current partial sum of elements in the variable `s`. If `s` becomes negative at some point, then assign `s=0`. The maximum of all such `s` will be the answer.
+Идём по массиву и накапливаем текущую частичную сумму элементов в переменной `s`. Если `s` в какой-то момент становится отрицательной  - присваиваем `s=0`. Максимальный из всех `s` и будет ответом. 
 
-If the description is too vague, please see the code, it's short enough:
+Если объяснение недостаточно понятно, посмотрите на код, он вполне лаконичен:
 
 ```js run demo
 function getMaxSubSum(arr) {
   let maxSum = 0;
   let partialSum = 0;
 
-  for (let item of arr) { // for each item of arr
-    partialSum += item; // add it to partialSum
-    maxSum = Math.max(maxSum, partialSum); // remember the maximum
-    if (partialSum < 0) partialSum = 0; // zero if negative
+  for (let item of arr) { // для каждого элемента массива
+    partialSum += item; // добавляем значение элемента к partialSum
+    maxSum = Math.max(maxSum, partialSum); // запоминаем максимум на данный момент
+    if (partialSum < 0) partialSum = 0; // ноль если отрицательное
   }
 
   return maxSum;
@@ -89,6 +89,6 @@ alert( getMaxSubSum([1, 2, 3]) ); // 6
 alert( getMaxSubSum([-1, -2, -3]) ); // 0
 ```
 
-The algorithm requires exactly 1 array pass, so the time complexity is O(n).
+Этот алгоритм требует ровно 1 проход по массиву и его оценка сложности O(n).
 
-You can find more detail information about the algorithm here: [Maximum subarray problem](http://en.wikipedia.org/wiki/Maximum_subarray_problem). If it's still not obvious why that works, then please trace the algorithm on the examples above, see how it works, that's better than any words.
+Больше информации об алгоритме тут: [Задача поиска максимальной суммы подмассива](http://en.wikipedia.org/wiki/Maximum_subarray_problem). Если всё ещё не очевидно как это работает, просмотрите алгоритм в примерах выше, это будет лучше всяких слов.

@@ -1,1 +1,1 @@
-The solution is to assign the handler to the container and track clicks. If a click is on the `<a>` link, then change `src` of `#largeImg` to the `href` of the thumbnail.
+Решение состоит в том, чтобы добавить обработчик на контейнер `#thumbs` и отслеживать клики на ссылках. Если клик происходит по ссылке `<a>`, тогда меняем атрибут `src` элемента `#largeImg` на `href` уменьшенного изображения.

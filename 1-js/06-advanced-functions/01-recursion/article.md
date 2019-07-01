@@ -1,18 +1,18 @@
-# Recursion and stack
+# Рекурсия и стек
 
-Let's return to functions and study them more in-depth.
+Вернёмся к функциям и изучим их более детально.
 
-Our first topic will be *recursion*.
+Наша первая тема будет *рекурсия*.
 
-If you are not new to programming, then it is probably familiar and you could skip this chapter.
+Если вы не новичок в программировании, то, возможно, уже знакомы с рекурсией и можете пропустить эту главу.
 
-Recursion is a programming pattern that is useful in situations when a task can be naturally split into several tasks of the same kind, but simpler. Or when a task can be simplified into an easy action plus a simpler variant of the same task. Or, as we'll see soon, to deal with certain data structures.
+Рекурсия - это приём программирования, полезный в ситуациях, когда задача может быть естественно разделена на несколько аналогичных, но более простых задач. Или когда задача может быть упрощена до несложных действий плюс простой вариант той же задачи. Или, как мы скоро увидим, для работы с определёнными структурами данных.
 
-When a function solves a task, in the process it can call many other functions. A partial case of this is when a function calls *itself*. That's called *recursion*.
+В процессе выполнения задачи в теле функции могут быть вызваны другие функции для выполнения подзадач. Частный случай подвызова – когда функция вызывает *сама себя*. Это называется *рекурсией*.
 
-## Two ways of thinking
+## Два способа мышления
 
-For something simple to start with -- let's write a function `pow(x, n)` that raises `x` to a natural power of `n`. In other words, multiplies `x` by itself `n` times.
+В качестве первого примера напишем функцию `pow(x, n)`, которая возводит `x` в натуральную степень `n`. Иначе говоря, умножает `x` на самого себя `n` раз.
 
 ```js
 pow(2, 2) = 4
@@ -20,15 +20,15 @@ pow(2, 3) = 8
 pow(2, 4) = 16
 ```
 
-There are two ways to implement it.
+Рассмотрим два способа реализовать это.
 
-1. Iterative thinking: the `for` loop:
+1. Итеративный способ: цикл `for`:
 
     ```js run
     function pow(x, n) {
       let result = 1;
 
-      // multiply result by x n times in the loop
+      // умножаем result на x n раз в цикле
       for (let i = 0; i < n; i++) {
         result *= x;
       }
@@ -39,7 +39,7 @@ There are two ways to implement it.
     alert( pow(2, 3) ); // 8
     ```
 
-2. Recursive thinking: simplify the task and call self:
+2. Рекурсивный способ: упрощение задачи и вызов функцией самой себя:
 
     ```js run
     function pow(x, n) {
@@ -53,9 +53,9 @@ There are two ways to implement it.
     alert( pow(2, 3) ); // 8
     ```
 
-Please note how the recursive variant is fundamentally different.
+Обратите внимание, что рекурсивный вариант принципиально отличается.
 
-When `pow(x, n)` is called, the execution splits into two branches:
+Когда функция `pow(x, n)` вызывается, исполнение делится на две ветви:
 
 ```js
               if n==1  = x
@@ -65,27 +65,27 @@ pow(x, n) =
               else     = x * pow(x, n - 1)
 ```
 
-1. If `n == 1`, then everything is trivial. It is called *the base* of recursion, because it immediately produces the obvious result: `pow(x, 1)` equals `x`.
-2. Otherwise, we can represent `pow(x, n)` as `x * pow(x, n - 1)`. In maths, one would write <code>x<sup>n</sup> = x * x<sup>n-1</sup></code>. This is called *a recursive step*: we transform the task into a simpler action (multiplication by `x`) and a simpler call of the same task (`pow` with lower `n`). Next steps simplify it further and further until `n` reaches `1`.
+1. Если `n == 1`, тогда всё просто. Эта ветвь называется *базой* рекурсии, потому что сразу же приводит к очевидному результату: `pow(x, 1)` равно `x`.
+2. Мы можем представить `pow(x, n)` в виде: `x * pow(x, n - 1)`. Что в математике записывается как: <code>x<sup>n</sup> = x * x<sup>n-1</sup></code>. Эта ветвь -  *шаг рекурсии*: мы сводим задачу к более простому действию (умножение на `x`) и более простой аналогичной задаче (`pow` с меньшим `n`). Последующие шаги упрощают задачу всё больше и больше, пока `n` не достигает `1`.
 
-We can also say that `pow` *recursively calls itself* till `n == 1`.
+Говорят, что функция `pow` *рекурсивно вызывает саму себя* до `n == 1`.
 
 ![recursive diagram of pow](recursion-pow.png)
 
 
-For example, to calculate `pow(2, 4)` the recursive variant does these steps:
+Например, рекурсивный вариант вычисления `pow(2, 4)` состоит из шагов:
 
 1. `pow(2, 4) = 2 * pow(2, 3)`
 2. `pow(2, 3) = 2 * pow(2, 2)`
 3. `pow(2, 2) = 2 * pow(2, 1)`
 4. `pow(2, 1) = 2`
 
-So, the recursion reduces a function call to a simpler one, and then -- to even more simpler, and so on, until the result becomes obvious.
+Итак, рекурсию используют, когда вычисление функции можно свести к её более простому вызову, а его – ещё к более простому, и так далее, пока значение не станет очевидно.
 
-````smart header="Recursion is usually shorter"
-A recursive solution is usually shorter than an iterative one.
+````smart header="Рекурсивное решение обычно короче"
+Рекурсивное решение задачи обычно короче чем итеративное.
 
-Here we can rewrite the same using the ternary `?` operator instead of `if` to make `pow(x, n)` more terse and still very readable:
+Используя условный оператор `?` вместо `if`, мы можем переписать `pow(x, n)`, делая код функции более лаконичным, но всё ещё легко читаемым:
 
 ```js run
 function pow(x, n) {
@@ -94,45 +94,45 @@ function pow(x, n) {
 ```
 ````
 
-The maximal number of nested calls (including the first one) is called *recursion depth*. In our case, it will be exactly `n`.
+Общее количество вложенных вызовов (включая первый) называют *глубиной рекурсии*. В нашем случае, она будет равна ровно `n`.
 
-The maximal recursion depth is limited by JavaScript engine. We can make sure about 10000, some engines allow more, but 100000 is probably out of limit for the majority of them. There are automatic optimizations that help alleviate this ("tail calls optimizations"), but they are not yet supported everywhere and work only in simple cases.
+Максимальная глубина рекурсии ограничена движком JavaScript. Точно можно рассчитывать на 10000 вложенных вызовов, некоторые интерпретаторы допускают и больше, но для большинства из них 100000 вызовов -- за пределами возможностей. Существуют автоматические оптимизации, помогающие избежать переполнения стека вызовов ("оптимизация хвостовой рекурсии"), но они ещё не поддерживаются везде и работают только для простых случаев.
 
-That limits the application of recursion, but it still remains very wide. There are many tasks where recursive way of thinking gives simpler code, easier to maintain.
+Это ограничивает применение рекурсии, но она все равно широко распространена: для решения большого числа задач рекурсивный способ решения даёт более простой код, который легче поддерживать.
 
-## The execution stack
+## Контекст выполнения, стек
 
-Now let's examine how recursive calls work. For that we'll look under the hood of functions.
+Теперь мы посмотрим, как работают рекурсивные вызовы. Для этого заглянем "под капот" функций.
 
-The information about a function run is stored in its *execution context*.
+Информация о процессе выполнения запущенной функции хранится в её *контексте выполнения* (execution context).
 
-The [execution context](https://tc39.github.io/ecma262/#sec-execution-contexts) is an internal data structure that contains details about the execution of a function: where the control flow is now, the current variables, the value of `this` (we don't use it here) and few other internal details.
+[Контекст выполнения](https://tc39.github.io/ecma262/#sec-execution-contexts) - специальная внутренняя структура данных, которая содержит информацию о вызове функции. Она включает в себя конкретное место в коде, на котором находится интерпретатор, локальные переменные функции, значение `this` (мы не используем его в данном примере) и прочую служебную информацию.
 
-One function call has exactly one execution context associated with it.
+Один вызов функции имеет ровно один контекст выполнения, связанный с ним.
 
-When a function makes a nested call, the following happens:
+Когда функция производит вложенный вызов, происходит следующее:
 
-- The current function is paused.
-- The execution context associated with it is remembered in a special data structure called *execution context stack*.
-- The nested call executes.
-- After it ends, the old execution context is retrieved from the stack, and the outer function is resumed from where it stopped.
+- Выполнение текущей функции приостанавливается.
+- Контекст выполнения, связанный с ней, запоминается в специальной структуре данных - *стеке контекстов выполнения*.
+- Выполняются вложенные вызовы, для каждого из которых создаётся свой контекст выполнения.
+- После их завершения старый контекст достаётся из стека и выполнение внешней функции возобновляется с того места, где она была остановлена.
 
-Let's see what happens during the `pow(2, 3)` call.
+Разберёмся с контекстами более подробно на примере вызова функции `pow(2, 3)`.
 
 ### pow(2, 3)
 
-In the beginning of the call `pow(2, 3)` the execution context will store variables: `x = 2, n = 3`, the execution flow is at line `1` of the function.
+В начале вызова `pow(2, 3)` контекст выполнения будет хранить переменные: `x = 2, n = 3`, выполнение находится на первой строке функции.
 
-We can sketch it as:
+Можно схематически изобразить это так:
 
 <ul class="function-execution-context-list">
   <li>
-    <span class="function-execution-context">Context: { x: 2, n: 3, at line 1 }</span>
+    <span class="function-execution-context">Контекст: { x: 2, n: 3, строка 1 }</span>
     <span class="function-execution-context-call">pow(2, 3)</span>
   </li>
 </ul>
 
-That's when the function starts to execute. The condition `n == 1` is false, so the flow continues into the second branch of `if`:
+Это только начало выполнения функции. Условие `n == 1` ложно, поэтому выполнение идёт во вторую ветку `if`:
 
 ```js run
 function pow(x, n) {
@@ -149,70 +149,70 @@ alert( pow(2, 3) );
 ```
 
 
-The variables are same, but the line changes, so the context is now:
+Значения переменных те же самые, но выполнение функции перешло к другой строке, актуальный контекст:
 
 <ul class="function-execution-context-list">
   <li>
-    <span class="function-execution-context">Context: { x: 2, n: 3, at line 5 }</span>
+    <span class="function-execution-context">Контекст: { x: 2, n: 3, строка 5 }</span>
     <span class="function-execution-context-call">pow(2, 3)</span>
   </li>
 </ul>
 
-To calculate `x * pow(x, n - 1)`, we need to make a subcall of `pow` with new arguments `pow(2, 2)`.
+Чтобы вычислить выражение `x * pow(x, n - 1)`, требуется произвести запуск `pow` с новыми аргументами `pow(2, 2)`.
 
 ### pow(2, 2)
 
-To do a nested call, JavaScript remembers the current execution context in the *execution context stack*.
+Для выполнения вложенного вызова JavaScript запоминает текущий контекст выполнения в *стеке контекстов выполнения*.
 
-Here we call the same function `pow`, but it absolutely doesn't matter. The process is the same for all functions:
+Здесь мы вызываем ту же функцию `pow`, однако это абсолютно неважно. Для любых функций процесс одинаков:
 
-1. The current context is "remembered" on top of the stack.
-2. The new context is created for the subcall.
-3. When the subcall is finished -- the previous context is popped from the stack, and its execution continues.
+1. Текущий контекст "запоминается" на вершине стека.
+2. Создаётся новый контекст для вложенного вызова.
+3. Когда выполнение вложенного вызова заканчивается -- контекст предыдущего вызова восстанавливается и выполнение соответствующей функции продолжается.
 
-Here's the context stack when we entered the subcall `pow(2, 2)`:
+Вид контекста в начале выполнения вложенного вызова `pow(2, 2)`:
 
 <ul class="function-execution-context-list">
   <li>
-    <span class="function-execution-context">Context: { x: 2, n: 2, at line 1 }</span>
+    <span class="function-execution-context">Контекст: { x: 2, n: 2, строка 1 }</span>
     <span class="function-execution-context-call">pow(2, 2)</span>
   </li>
   <li>
-    <span class="function-execution-context">Context: { x: 2, n: 3, at line 5 }</span>
+    <span class="function-execution-context">Контекст: { x: 2, n: 3, строка 5 }</span>
     <span class="function-execution-context-call">pow(2, 3)</span>
   </li>
 </ul>
 
-The new current execution context is on top (and bold), and previous remembered contexts are below.
+Новый контекст выполнения находится на вершине стека (и выделен жирным), а предыдущие запомненные контексты -- под ним.
 
-When we finish the subcall -- it is easy to resume the previous context, because it keeps both variables and the exact place of the code where it stopped. Here in the picture we use the word "line", but of course it's more precise.
+Когда выполнение подвызова закончится, можно будет легко вернуться назад, потому что контекст сохраняет как переменные, так и точное место кода, в котором он остановился. Слово "строка" на рисунках условно, на самом деле запомнено более точное место в цепочке команд.
 
 ### pow(2, 1)
 
-The process repeats: a new subcall is made at line `5`, now with arguments `x=2`, `n=1`.
+Процесс повторяется: производится новый вызов в строке `5`, теперь с аргументами `x=2`, `n=1`.
 
-A new execution context is created, the previous one is pushed on top of the stack:
+Создаётся новый контекст выполнения, предыдущий контекст добавляется в стек:
 
 <ul class="function-execution-context-list">
   <li>
-    <span class="function-execution-context">Context: { x: 2, n: 1, at line 1 }</span>
+    <span class="function-execution-context">Контекст: { x: 2, n: 1, строка 1 }</span>
     <span class="function-execution-context-call">pow(2, 1)</span>
   </li>
   <li>
-    <span class="function-execution-context">Context: { x: 2, n: 2, at line 5 }</span>
+    <span class="function-execution-context">Контекст: { x: 2, n: 2, строка 5 }</span>
     <span class="function-execution-context-call">pow(2, 2)</span>
   </li>
   <li>
-    <span class="function-execution-context">Context: { x: 2, n: 3, at line 5 }</span>
+    <span class="function-execution-context">Контекст: { x: 2, n: 3, строка 5 }</span>
     <span class="function-execution-context-call">pow(2, 3)</span>
   </li>
 </ul>
 
-There are 2 old contexts now and 1 currently running for `pow(2, 1)`.
+Теперь в стеке два старых контекста и один текущий для `pow(2, 1)`.
 
-### The exit
+### Выход
 
-During the execution of `pow(2, 1)`, unlike before, the condition `n == 1` is truthy, so the first branch of `if` works:
+При выполнении `pow(2, 1)`, в отличие от предыдущих запусков, условие `n == 1` истинно, поэтому выполняется первая ветка условия `if`:
 
 ```js
 function pow(x, n) {
@@ -226,42 +226,42 @@ function pow(x, n) {
 }
 ```
 
-There are no more nested calls, so the function finishes, returning `2`.
+Вложенных вызовов больше нет, поэтому функция завершается, возвращая `2`.
 
-As the function finishes, its execution context is not needed anymore, so it's removed from the memory. The previous one is restored off the top of the stack:
+Когда функция заканчивается, контекст её выполнения больше не нужен, поэтому он удаляется из памяти, а из стека восстанавливается предыдущий:
 
 
 <ul class="function-execution-context-list">
   <li>
-    <span class="function-execution-context">Context: { x: 2, n: 2, at line 5 }</span>
+    <span class="function-execution-context">Контекст: { x: 2, n: 2, строка 5 }</span>
     <span class="function-execution-context-call">pow(2, 2)</span>
   </li>
   <li>
-    <span class="function-execution-context">Context: { x: 2, n: 3, at line 5 }</span>
+    <span class="function-execution-context">Контекст: { x: 2, n: 3, строка 5 }</span>
     <span class="function-execution-context-call">pow(2, 3)</span>
   </li>
 </ul>
 
-The execution of `pow(2, 2)` is resumed. It has the result of the subcall `pow(2, 1)`, so it also can finish the evaluation of `x * pow(x, n - 1)`, returning `4`.
+Возобновляется обработка вызова `pow(2, 2)`. Имея результат `pow(2, 1)`, он может закончить свою работу `x * pow(x, n - 1)`, вернув `4`.
 
-Then the previous context is restored:
+Восстанавливается контекст предыдущего вызова:
 
 <ul class="function-execution-context-list">
   <li>
-    <span class="function-execution-context">Context: { x: 2, n: 3, at line 5 }</span>
+    <span class="function-execution-context">Контекст: { x: 2, n: 3, строка 5 }</span>
     <span class="function-execution-context-call">pow(2, 3)</span>
   </li>
 </ul>
 
-When it finishes, we have a result of `pow(2, 3) = 8`.
+Самый внешний вызов заканчивает свою работу, его результат: `pow(2, 3) = 8`.
 
-The recursion depth in this case was: **3**.
+Глубина рекурсии в данном случае составила **3**.
 
-As we can see from the illustrations above, recursion depth equals the maximal number of context in the stack.
+Как видно из иллюстраций выше, глубина рекурсии равна максимальному числу контекстов, одновременно хранимых в стеке.
 
-Note the memory requirements. Contexts take memory. In our case, raising to the power of `n` actually requires the memory for `n` contexts, for all lower values of `n`.
+Обратим внимание на требования к памяти. Рекурсия приводит к хранению всех данных для неоконченных внешних вызовов в стеке, в данном случае это приводит к тому, что возведение в степень `n` хранит в памяти `n` различных контекстов.
 
-A loop-based algorithm is more memory-saving:
+Реализация возведения в степень через цикл гораздо более экономна:
 
 ```js
 function pow(x, n) {
@@ -275,19 +275,19 @@ function pow(x, n) {
 }
 ```
 
-The iterative `pow` uses a single context changing `i` and `result` in the process. Its memory requirements are small, fixed and do not depend on `n`.
+Итеративный вариант функции `pow` использует один контекст, в котором будут последовательно меняться значения `i` и `result`. При этом объём затрачиваемой памяти небольшой, фиксированный и не зависит от `n`.
 
-**Any recursion can be rewritten as a loop. The loop variant usually can be made more effective.**
+**Любая рекурсия может быть переделана в цикл. Как правило, вариант с циклом будет эффективнее.**
 
-...But sometimes the rewrite is non-trivial, especially when function uses different recursive subcalls depending on conditions and merges their results or when the branching is more intricate. And the optimization may be unneeded and totally not worth the efforts.
+Но переделка рекурсии в цикл может быть нетривиальной, особенно когда в функции в зависимости от условий используются различные рекурсивные подвызовы, результат которых объединяется, или когда ветвление более сложное. Оптимизация может быть ненужной и совершенно не стоит усилий.
 
-Recursion can give a shorter code, easier to understand and support. Optimizations are not required in every place, mostly we need a good code, that's why it's used.
+Часто код с использованием рекурсии более короткий, лёгкий для понимания и поддержки. Оптимизация требуется не везде, как правило нам важен хороший код, поэтому она и используется.
 
-## Recursive traversals
+## Рекурсивные обходы
 
-Another great application of the recursion is a recursive traversal.
+Другим отличным применением рекурсии является рекурсивный обход.
 
-Imagine, we have a company. The staff structure can be presented as an object:
+Представьте, у нас есть компания. Структура персонала может быть представлена как объект:
 
 ```js
 let company = {
@@ -316,34 +316,34 @@ let company = {
 };
 ```
 
-In other words, a company has departments.
+Другими словами, в компании есть отделы.
 
-- A department may have an array of staff. For instance, `sales` department has 2 employees: John and Alice.
-- Or a department may split into subdepartments, like `development` has two branches: `sites` and `internals`. Each of them has the own staff.
-- It is also possible that when a subdepartment grows, it divides into subsubdepartments (or teams).
+- Отдел может состоять из массива работников. Например, в отделе `продаж`  работают 2 сотрудника: Джон и Элис.
+- Или отдел может быть разделён на подотделы, как отдел `разработка` состоит из подотделов: `sites` и `internals`. В каждом подотделе есть свой персонал.
+- Также возможно, что при росте подотдела он делится на подразделения (или команды).
 
-    For instance, the `sites` department in the future may be split into teams for `siteA` and `siteB`. And they, potentially, can split even more. That's not on the picture, just something to have in mind.
+    Например, подотдел `сайты` в будущем может быть разделён на команды `сайтА` и `сайтБ`. И потенциально, они могут быть разделены ещё больше. Этого нет на картинке, просто нужно это иметь в виду.
 
-Now let's say we want a function to get the sum of all salaries. How can we do that?
+Теперь, допустим, нам нужна функция для получения суммы всех зарплат. Как мы можем это сделать?
 
-An iterative approach is not easy, because the structure is not simple. The first idea may be to make a `for` loop over `company` with nested subloop over 1st level departments. But then we need more nested subloops to iterate over the staff in 2nd level departments like `sites`. ...And then another subloop inside those for 3rd level departments that might appear in the future? Should we stop on level 3 or make 4 levels of loops? If we put 3-4 nested subloops in the code to traverse a single object, it becomes rather ugly.
+Итеративный подход не прост, потому что структура довольно сложная. Первая идея заключается в том, чтобы сделать цикл `for` поверх объекта `company` со вложенным циклом над отделами 1-го уровня вложенности. Но затем нам нужно больше вложенных циклов для итераций над сотрудниками отделов второго уровня, таких как `sites`. ...а затем ещё один цикл внутри тех отделов 3-го уровня, которые могут появиться в будущем? Может, остановимся на третьем уровне или сделаем 4 уровня циклов? Если мы поместим в код 3-4 вложенных цикла для обхода одного объекта, то это будет довольно некрасиво.
 
-Let's try recursion.
+Давайте попробуем рекурсию.
 
-As we can see, when our function gets a department to sum, there are two possible cases:
+Как мы видим, когда наша функция получает отдел для подсчёта суммы зарплат, есть два возможных случая:
 
-1. Either it's a "simple" department with an *array of people* -- then we can sum the salaries in a simple loop.
-2. Or it's *an object with `N` subdepartments* -- then we can make `N` recursive calls to get the sum for each of the subdeps and combine the results.
+1. Либо это "простой" отдел с *массивом людей* -- тогда мы сможем суммировать зарплаты в простом цикле.
+2. Или это *объект с `N` подотделами* -- тогда мы можем сделать `N` рекурсивных вызовов, чтобы получить сумму для каждого из подотделов и объединить результаты.
 
-The (1) is the base of recursion, the trivial case.
+Случай (1) является базой рекурсии, тривиальным случаем.
 
-The (2) is the recursive step. A complex task is split into subtasks for smaller departments. They may in turn split again, but sooner or later the split will finish at (1).
+Случай (2) является шагом рекурсии. Сложная задача разделяется на подзадачи для подотделов. Они могут, в свою очередь, снова разделиться на подотделы, но рано или поздно это разделение закончится и решение сведётся к случаю (1).
 
-The algorithm is probably even easier to read from the code:
+Алгоритм даже проще читается в виде кода:
 
 
 ```js run
-let company = { // the same object, compressed for brevity
+let company = { // тот же самый объект, сжатый для краткости
   sales: [{name: 'John', salary: 1000}, {name: 'Alice', salary: 600 }],
   development: {
     sites: [{name: 'Peter', salary: 2000}, {name: 'Alex', salary: 1800 }],
@@ -351,15 +351,15 @@ let company = { // the same object, compressed for brevity
   }
 };
 
-// The function to do the job
+// Функция для подсчёта суммы зарплат
 *!*
 function sumSalaries(department) {
   if (Array.isArray(department)) { // case (1)
-    return department.reduce((prev, current) => prev + current.salary, 0); // sum the array
+    return department.reduce((prev, current) => prev + current.salary, 0); // сумма массива
   } else { // case (2)
     let sum = 0;
     for (let subdep of Object.values(department)) {
-      sum += sumSalaries(subdep); // recursively call for subdepartments, sum the results
+      sum += sumSalaries(subdep); // рекурсивно вызывается для подотделов, суммируя результаты
     }
     return sum;
   }
@@ -369,62 +369,62 @@ function sumSalaries(department) {
 alert(sumSalaries(company)); // 6700
 ```
 
-The code is short and easy to understand (hopefully?). That's the power of recursion. It also works for any level of subdepartment nesting.
+Код краток и прост для понимания (надеюсь?). В этом сила рекурсии. Она работает на любом уровне вложенности отделов.
 
-Here's the diagram of calls:
+Схема вызовов:
 
 ![recursive salaries](recursive-salaries.png)
 
-We can easily see the principle: for an object `{...}` subcalls are made, while arrays `[...]` are the "leaves" of the recursion tree, they give immediate result.
+Принцип прост: для объекта `{...}` используются рекурсивные вызовы, а массивы `[...]`, являются "листьями" дерева рекурсии, они сразу дают результат.
 
-Note that the code uses smart features that we've covered before:
+Обратите внимание, что в коде используются возможности, о которых мы говорили ранее:
 
-- Method `arr.reduce` explained in the chapter <info:array-methods> to get the sum of the array.
-- Loop `for(val of Object.values(obj))` to iterate over object values: `Object.values` returns an array of them.
+- Метод `arr.reduce` из главы <info:array-methods> для получения суммы элементов массива.
+- Цикл `for(val of Object.values(obj))` для итерации по значениям объекта: `Object.values` возвращает массив значений.
 
 
-## Recursive structures
+## Рекурсивные структуры
 
-A recursive (recursively-defined) data structure is a structure that replicates itself in parts.
+Рекурсивная (рекурсивно определяемая) структура данных - это структура, которая повторяет саму себя в своих частях.
 
-We've just seen it in the example of a company structure above.
+Мы только что видели это на примере структуры компании выше.
 
-A company *department* is:
-- Either an array of people.
-- Or an object with *departments*.
+*Отдел* компании - это:
+- Либо массив людей.
+- Либо объект с *отделами*.
 
-For web-developers there are much better-known examples: HTML and XML documents.
+Для веб-разработчиков существуют гораздо более известные примеры: HTML- и XML-документы.
 
-In the HTML document, an *HTML-tag* may contain a list of:
-- Text pieces.
-- HTML-comments.
-- Other *HTML-tags* (that in turn may contain text pieces/comments or other tags etc).
+В HTML-документе *HTML-тег* может содержать:
+- Фрагменты текста.
+- HTML-комментарии.
+- Другие *HTML-теги* (которые, в свою очередь, могут содержать фрагменты текста/комментарии или другие теги и т.д.).
 
-That's once again a recursive definition.
+Это снова рекурсивное определение.
 
-For better understanding, we'll cover one more recursive structure named "Linked list" that might be a better alternative for arrays in some cases.
+Для лучшего понимания мы рассмотрим ещё одну рекурсивную структуру под названием "связанный список", которая в некоторых случаях может использоваться в качестве альтернативы массиву.
 
-### Linked list
+### Связанный список
 
-Imagine, we want to store an ordered list of objects.
+Представьте себе, что мы хотим хранить упорядоченный список объектов.
 
-The natural choice would be an array:
+Естественным выбором будет массив:
 
 ```js
 let arr = [obj1, obj2, obj3];
 ```
 
-...But there's a problem with arrays. The "delete element" and "insert element" operations are expensive. For instance, `arr.unshift(obj)` operation has to renumber all elements to make room for a new `obj`, and if the array is big, it takes time. Same with `arr.shift()`.
+...Но у массивов есть недостатки. Операции "удалить элемент" и "вставить элемент" являются дорогостоящими. Например, операция `arr.unshift(obj)` должна переиндексировать все элементы, чтобы освободить место для нового `obj`, и если массив большой, на это потребуется время. То же самое с `arr.shift()`.
 
-The only structural modifications that do not require mass-renumbering are those that operate with the end of array: `arr.push/pop`. So an array can be quite slow for big queues.
+Единственные структурные изменения, не требующие массовой переиндексации, - это изменения, которые выполняются с конца массива: `arr.push/pop`. Таким образом, массив может быть довольно медленным для больших очередей, когда нам приходится работать с его началом.
 
-Alternatively, if we really need fast insertion/deletion, we can choose another data structure called a [linked list](https://en.wikipedia.org/wiki/Linked_list).
+Или же, если нам действительно нужны быстрые вставка/удаление, мы можем выбрать другую структуру данных, называемую [связанный список](https://ru.wikipedia.org/wiki/Связный_список).
 
-The *linked list element* is recursively defined as an object with:
-- `value`.
-- `next` property referencing the next *linked list element* or `null` if that's the end.
+Элемент *связанного списка* определяется рекурсивно как объект с:
+- `value`,
+- `next` - свойство, ссылающееся на следующий *элемент связанного списка* или `null`, если это последний элемент.
 
-For instance:
+Пример:
 
 ```js
 let list = {
@@ -442,11 +442,11 @@ let list = {
 };
 ```
 
-Graphical representation of the list:
+Графическое представление списка:
 
-![linked list](linked-list.png)
+![связанный список](linked-list.png)
 
-An alternative code for creation:
+Альтернативный код для создания:
 
 ```js no-beautify
 let list = { value: 1 };
@@ -455,26 +455,26 @@ list.next.next = { value: 3 };
 list.next.next.next = { value: 4 };
 ```
 
-Here we can even more clearer see that there are multiple objects, each one has the `value` and `next` pointing to the neighbour. The `list` variable is the first object in the chain, so following `next` pointers from it we can reach any element.
+Здесь мы можем ещё яснее видеть, что есть несколько объектов, каждый из которых имеет `value` и `next`, указывающий на соседа. Переменная `list` является первым объектом в цепочке, поэтому следуя по указателям `next` из неё, мы можем попасть в любой элемент.
 
-The list can be easily split into multiple parts and later joined back:
+Список можно легко разделить на несколько частей и впоследствии объединить обратно:
 
 ```js
 let secondList = list.next.next;
 list.next.next = null;
 ```
 
-![linked list split](linked-list-split.png)
+![разделение связанного списка](linked-list-split.png)
 
-To join:
+Для объединения:
 
 ```js
 list.next.next = secondList;
 ```
 
-And surely we can insert or remove items in any place.
+И, конечно, мы можем вставить или удалить элементы из любого места.
 
-For instance, to prepend a new value, we need to update the head of the list:
+Например, для добавления нового элемента нам нужно обновить первый элемент списка:
 
 ```js
 let list = { value: 1 };
@@ -483,50 +483,53 @@ list.next.next = { value: 3 };
 list.next.next.next = { value: 4 };
 
 *!*
-// prepend the new value to the list
+// добавление нового элемента в список
 list = { value: "new item", next: list };
 */!*
 ```
 
-![linked list](linked-list-0.png)
+![связанный список](linked-list-0.png)
 
-To remove a value from the middle, change `next` of the previous one:
+Чтобы удалить элемент из середины списка, нужно изменить значение `next` предыдущего элемента:
 
 ```js
 list.next = list.next.next;
 ```
 
-![linked list](linked-list-remove-1.png)
+![связанный список](linked-list-remove-1.png)
 
-We made `list.next` jump over `1` to value `2`. The value `1` is now excluded from the chain. If it's not stored anywhere else, it will be automatically removed from the memory.
+`list.next` перепрыгнуло с `1` на значение `2`. Значение `1` теперь исключено из цепочки. Если оно не хранится где-нибудь ещё, оно будет автоматически удалено из памяти.
 
-Unlike arrays, there's no mass-renumbering, we can easily rearrange elements.
+В отличие от массивов, нет перенумерации, элементы легко переставляются.
 
-Naturally, lists are not always better than arrays. Otherwise everyone would use only lists.
+Естественно, списки не всегда лучше массивов. В противном случае все пользовались бы только списками.
 
-The main drawback is that we can't easily access an element by its number. In an array that's easy: `arr[n]` is a direct reference. But in the list we need to start from the first item and go `next` `N` times to get the Nth element.
+Главным недостатком является то, что мы не можем легко получить доступ к элементу по его индексу. В простом массиве: `arr[n]` является прямой ссылкой. Но в списке мы должны начать с первого элемента и перейти в `next` N раз, чтобы получить N-й элемент.
 
-...But we don't always need such operations. For instance, when we need a queue or even a [deque](https://en.wikipedia.org/wiki/Double-ended_queue) -- the ordered structure that must allow very fast adding/removing elements from both ends.
+...Но нам не всегда нужны такие операции. Например, нам может быть нужна очередь или даже [двухсторонняя очередь](https://ru.wikipedia.org/wiki/Двухсторонняя_очередь) -- это упорядоченная структура, которая позволяет очень быстро добавлять/удалять элементы с обоих концов, но там не нужен доступ в середину.
 
-Sometimes it's worth to add another variable named `tail` to track the last element of the list (and update it when adding/removing elements from the end). For large sets of elements the speed difference versus arrays is huge.
+Списки могут быть улучшены:
+- Можно добавить свойство `prev` в дополнение к `next` для ссылки на предыдущий элемент, чтобы легко двигаться по списку назад.
+- Можно также добавить переменную `tail`, которая будет ссылаться на последний элемент списка (и обновлять её при добавлении/удалении элементов с конца).
+- ...Возможны другие изменения: главное, чтобы структура данных соответствовала нашим задачам с точки зрения производительности и удобства.
 
-## Summary
+## Итого
 
-Terms:
-- *Recursion*  is a programming term that means a "self-calling" function. Such functions can be used to solve certain tasks in elegant ways.
+Термины:
+- *Рекурсия*  - это термин в программировании, означающий вызов из функции самой себя. Рекурсивные функции могут быть использованы для элегантного решения определённых задач.
 
-    When a function calls itself, that's called a *recursion step*. The *basis* of recursion is function arguments that make the task so simple that the function does not make further calls.
+    Когда функция вызывает саму себя, это называется *шагом рекурсии*. *База* рекурсии - это такие аргументы функции, которые делают задачу настолько простой, что решение не требует дальнейших вложенных вызовов.
 
-- A [recursively-defined](https://en.wikipedia.org/wiki/Recursive_data_type) data structure is a data structure that can be defined using itself.
+- [Рекурсивно определяемая](https://en.wikipedia.org/wiki/Recursive_data_type) структура данных - это структура данных, которая может быть определена с использованием самой себя.
 
-    For instance, the linked list can be defined as a data structure consisting of an object referencing a list (or null).
+    Например, связанный список может быть определён как структура данных, состоящая из объекта, содержащего ссылку на список (или null).
 
     ```js
     list = { value, next -> list }
     ```
 
-    Trees like HTML elements tree or the department tree from this chapter are also naturally recursive: they branch and every branch can have other branches.
+    Деревья, такие как дерево HTML-элементов или дерево отделов из этой главы, также являются рекурсивными: они разветвляются, и каждая ветвь может содержать другие ветви.
 
-    Recursive functions can be used to walk them as we've seen in the `sumSalary` example.
+    Как мы видели в примере `sumSalary`, рекурсивные функции могут быть использованы для прохода по ним.
 
-Any recursive function can be rewritten into an iterative one. And that's sometimes required to optimize stuff. But for many tasks a recursive solution is fast enough and easier to write and support.
+Любая рекурсивная функция может быть переписана в итеративную. И это иногда требуется для оптимизации работы. Но для многих задач рекурсивное решение достаточно быстрое и простое в написании и поддержке.

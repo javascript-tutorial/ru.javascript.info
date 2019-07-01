@@ -2,16 +2,16 @@ importance: 4
 
 ---
 
-# Create a calendar
+# Создайте календарь в виде таблицы
 
-Write a function `createCalendar(elem, year, month)`.
+Напишите функцию `createCalendar(elem, year, month)`.
 
-The call should create a calendar for the given year/month and put it inside `elem`.
+Вызов функции должен создать календарь для заданного месяца `month` в году `year` и вставить его в `elem`.
 
-The calendar should be a table, where a week is `<tr>`, and a day is `<td>`. The table top should be `<th>` with weekday names: the first day should be Monday, and so on till Sunday.
+Календарь должен быть таблицей, где неделя - это `<tr>`, а день – это `<td>`. У таблицы должен быть заголовок с названиями дней недели, каждый день – `<th>`, первым днём недели должен быть понедельник.
 
-For instance, `createCalendar(cal, 2012, 9)` should generate in element `cal` the following calendar:
+Например, `createCalendar(cal, 2012, 9)` сгенерирует в `cal` следующий календарь:
 
 [iframe height=210 src="solution"]
 
-P.S. For this task it's enough to generate the calendar, should not yet be clickable.
+P.S. В этой задаче достаточно сгенерировать календарь, кликабельным его делать не нужно.

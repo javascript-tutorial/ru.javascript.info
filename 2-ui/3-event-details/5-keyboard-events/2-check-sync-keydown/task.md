@@ -2,15 +2,15 @@ importance: 5
 
 ---
 
-# Extended hotkeys
+# Отследить одновременное нажатие
 
-Create a function `runOnKeys(func, code1, code2, ... code_n)` that runs `func` on simultaneous pressing of keys with codes `code1`, `code2`, ..., `code_n`.
+Создайте функцию `runOnKeys(func, code1, code2, ... code_n)`, которая запускает `func` при одновременном нажатии клавиш со скан-кодами `code1`, `code2`, ..., `code_n`.
 
-For instance, the code below shows `alert` when `"Q"` and `"W"` are pressed together (in any language, with or without CapsLock)
+Например, код ниже выведет `alert`при одновременном нажатии клавиш `"Q"` и `"W"` (в любом регистре, в любой раскладке)
 
 ```js no-beautify
 runOnKeys(
-  () => alert("Hello!"),
+  () => alert("Привет!"),
   "KeyQ",
   "KeyW"
 );

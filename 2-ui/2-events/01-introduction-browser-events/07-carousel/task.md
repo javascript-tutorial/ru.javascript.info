@@ -2,12 +2,12 @@ importance: 4
 
 ---
 
-# Carousel
+# Карусель
 
-Create a "carousel" -- a ribbon of images that can be scrolled by clicking on arrows.
+Создайте «Карусель» –- ленту изображений, которую можно листать влево-вправо нажатием на стрелочки.
 
 [iframe height=200 src="solution"]
 
-Later we can add more features to it: infinite scrolling, dynamic loading etc.
+В дальнейшем к ней можно будет добавить анимацию, динамическую подгрузку и другие возможности.
 
-P.S. For this task HTML/CSS structure is actually 90% of the solution.
+P.S. В этой задаче разработка структуры HTML/CSS составляет 90% решения.
