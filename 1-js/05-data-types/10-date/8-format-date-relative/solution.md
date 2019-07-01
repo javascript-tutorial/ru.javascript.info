@@ -1,26 +1,26 @@
-To get the time from `date` till now -- let's substract the dates.
+Чтобы получить время из `date` по текущий момент, нужно вычесть даты.
 
 ```js run demo
 function formatDate(date) {
-  let diff = new Date() - date; // the difference in milliseconds
+  let diff = new Date() - date; // разница в миллисекундах
 
-  if (diff < 1000) { // less than 1 second
-    return 'right now';
+  if (diff < 1000) { // меньше 1 минуты
+    return 'прямо сейчас';
   }
 
-  let sec = Math.floor(diff / 1000); // convert diff to seconds
+  let sec = Math.floor(diff / 1000); // преобразовать разницу в секунды
 
   if (sec < 60) {
-    return sec + ' sec. ago';
+    return sec + ' сек. назад';
   }
 
-  let min = Math.floor(diff / 60000); // convert diff to minutes
+  let min = Math.floor(diff / 60000); // преобразовать разницу в минуты
   if (min < 60) {
-    return min + ' min. ago';
+    return min + ' мин. назад';
   }
 
-  // format the date
-  // add leading zeroes to single-digit day/month/hours/minutes
+  // отформатировать дату
+  // добавить ведущие нули к единственной цифре дню/месяцу/часам/минутам 
   let d = date;
   d = [
     '0' + d.getDate(),
@@ -28,19 +28,19 @@ function formatDate(date) {
     '' + d.getFullYear(),
     '0' + d.getHours(),
     '0' + d.getMinutes()
-  ].map(component => component.slice(-2)); // take last 2 digits of every component
+  ].map(component => component.slice(-2)); // взять последние 2 цифры из каждой компоненты
 
-  // join the components into date
+  // соединить компоненты в дату
   return d.slice(0, 3).join('.') + ' ' + d.slice(3).join(':');
 }
 
-alert( formatDate(new Date(new Date - 1)) ); // "right now"
+alert( formatDate(new Date(new Date - 1)) ); // "прямо сейчас"
 
-alert( formatDate(new Date(new Date - 30 * 1000)) ); // "30 sec. ago"
+alert( formatDate(new Date(new Date - 30 * 1000)) ); // "30 сек. назад"
 
-alert( formatDate(new Date(new Date - 5 * 60 * 1000)) ); // "5 min. ago"
+alert( formatDate(new Date(new Date - 5 * 60 * 1000)) ); // "5 мин. назад"
 
-// yesterday's date like 31.12.2016, 20:00
+// вчерашняя дата вроде 31.12.2016, 20:00
 alert( formatDate(new Date(new Date - 86400 * 1000)) );
 ```
 
@@ -58,17 +58,17 @@ function formatDate(date) {
   let diffMin = diffSec / 60;
   let diffHour = diffMin / 60;
 
-  // formatting
+  // форматирование
   year = year.toString().slice(-2);
   month = month < 10 ? '0' + month : month;
   dayOfMonth = dayOfMonth < 10 ? '0' + dayOfMonth : dayOfMonth;
 
   if (diffSec < 1) {
-    return 'right now';  
+    return 'прямо сейчас';  
   } else if (diffMin < 1) {
-    return `${diffSec} sec. ago`
+    return `${diffSec} сек. назад`
   } else if (diffHour < 1) {
-    return `${diffMin} min. ago`
+    return `${diffMin} мин. назад`
   } else {
     return `${dayOfMonth}.${month}.${year} ${hour}:${minutes}`
   }
