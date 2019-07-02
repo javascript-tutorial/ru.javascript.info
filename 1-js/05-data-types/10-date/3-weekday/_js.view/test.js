@@ -1,4 +1,4 @@
-describe("getLocalDay возвращает \"европейский\" деньнедели", function() {
+describe("getLocalDay возвращает \"европейский\" день недели", function() {
   it("3 января 2014 года - пятница", function() {
     assert.equal(getLocalDay(new Date(2014, 0, 3)), 5);
   });

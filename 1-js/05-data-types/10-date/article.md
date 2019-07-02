@@ -1,6 +1,6 @@
 # Дата и время
 
-Рассмотрим новый встроенный объект: [Date](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date). Он содержит дату и время, а также располагает методами управления ими.
+Рассмотрим новый встроенный объект: [Date](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date). Он содержит дату и время, а также предоставляет методы управления ими.
 
 Например, его можно использовать для хранения времени создания/изменения, для измерения времени или просто для вывода текущей даты.
 
@@ -88,7 +88,7 @@
 [getHours()](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date/getHours), [getMinutes()](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date/getMinutes), [getSeconds()](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date/getSeconds), [getMilliseconds()](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date/getMilliseconds)
 : Получить, соответственно, часы, минуты, секунды или миллисекунды.
 
-```warn header="Not `getYear()`, but `getFullYear()`"
+```warn header="Никакого `getYear()`. Только `getFullYear()`"
 Многие интерпретаторы JavaScript реализуют нестандартный и устаревший метод `getYear()`, который порой возвращает год в виде двух цифр. Пожалуйста, обходите его стороной. Если нужно значение года, используйте `getFullYear()`.
 ```
 
@@ -99,7 +99,7 @@
 
 **Все вышеперечисленные методы возвращают значения в соответствии с местной временной зоной.**
 
-Однако существуют и их UTC-варианты, возвращающие день, месяц, год для временной зоны UTC+0: [getUTCFullYear()](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date/getUTCFullYear), [getUTCMonth()](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date/getUTCMonth), [getUTCDay()](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date/getUTCDay). Для их использования требуется перед `"get"` подставить `"UTC"`.
+Однако существуют и их UTC-варианты, возвращающие день, месяц, год для временной зоны UTC+0: [getUTCFullYear()](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date/getUTCFullYear), [getUTCMonth()](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date/getUTCMonth), [getUTCDay()](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date/getUTCDay). Для их использования требуется после `"get"` подставить `"UTC"`.
 
 Если ваша местная временная зона смещена относительно UTC, то следующий код покажет разные часы:
 
@@ -129,7 +129,7 @@ alert( date.getUTCHours() );
 
     ```
 
-## Установка компонентов времени
+## Установка компонентов даты
 
 Следующие методы позволяют установить компоненты даты и времени:
 
@@ -144,7 +144,7 @@ alert( date.getUTCHours() );
 
 У всех этих методов, кроме `setTime()`, есть UTC-вариант, например: `setUTCHours()`.
 
-Как видим, некоторые методы могут устанавливать сразу несколько компонентов даты, например: `setHours`. Если какая-то компонента не указана, она не меняется.
+Как мы видим, некоторые методы могут устанавливать сразу несколько компонентов даты, например: `setHours`. Если какая-то компонента не указана, она не меняется.
 
 Пример:
 
