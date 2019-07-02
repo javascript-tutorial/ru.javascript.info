@@ -2,8 +2,8 @@ importance: 5
 
 ---
 
-# Create a date
+# Создайте дату
 
-Create a `Date` object for the date: Feb 20, 2012, 3:12am. The time zone is local.
+Создайте объект `Date` для даты: 20 февраля 2012 года, 3 часа 12 минут. Временная зона -- местная.
 
-Show it using `alert`.
+Для вывода используйте `alert`.
