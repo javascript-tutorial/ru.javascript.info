@@ -8,7 +8,11 @@ importance: 4
 
 К примеру, если сегодня двадцатое число, то `getDateAgo(new Date(), 1)` вернёт девятнадцатое и `getDateAgo(new Date(), 2)` – восемнадцатое.
 
+<<<<<<< HEAD
 Функция должна надёжно работать при значении `days=365` и больших значениях:
+=======
+Should work reliably for `days=365` or more:
+>>>>>>> b300836f00536a5eb9a716ad2cbb6b8fe97c25af
 
 ```js
 let date = new Date(2015, 0, 2);

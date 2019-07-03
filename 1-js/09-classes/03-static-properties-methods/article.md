@@ -17,10 +17,14 @@ class User {
 User.staticMethod(); // true
 ```
 
+<<<<<<< HEAD
 Это фактически то же самое, что присвоить метод как свойство функции:
+=======
+That actually does the same as assigning it as a property:
+>>>>>>> b300836f00536a5eb9a716ad2cbb6b8fe97c25af
 
 ```js
-function User() { }
+class User() { }
 
 User.staticMethod = function() {
   alert(this === User);

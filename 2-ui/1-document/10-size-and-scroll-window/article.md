@@ -16,12 +16,21 @@
 <button onclick="alert(document.documentElement.clientHeight)">alert(document.documentElement.clientHeight)</button>
 ```
 
+<<<<<<< HEAD
 ````warn header="Не `window.innerWidth/Height`"
 Браузеры также поддерживают свойства `window.innerWidth/innerHeight`. Вроде бы, похоже на то, что нам нужно. Почему же не использовать их?
 
 Если есть полоса прокрутки, и она занимает какое-то место, то свойства `clientWidth/clientHeight` указывают на ширину/высоту документа без неё (за её вычетом). Иными словами, они возвращают высоту/ширину видимой части документа, доступной для содержимого.
 
 A `window.innerWidth/innerHeight` игнорирует полосу прокрутки.
+=======
+````warn header="Not `window.innerWidth/Height`"
+Browsers also support properties `window.innerWidth/innerHeight`. They look like what we want. So why not to use them instead?
+
+If there exists a scrollbar, and it occupies some space, `clientWidth/clientHeight` provide the width/height without it (subtract it). In other words, they return width/height of the visible part of the document, available for the content.
+
+...And `window.innerWidth/innerHeight` ignore the scrollbar.
+>>>>>>> b300836f00536a5eb9a716ad2cbb6b8fe97c25af
 
 Если полоса прокрутки занимает некоторое место, то эти две строки выведут разные значения:
 ```js run
@@ -42,10 +51,16 @@ alert( document.documentElement.clientWidth ); // ширина окна за в�
 
 Теоретически, т.к. корневым элементом документа является `documentElement.clientWidth/Height`, и он включает в себя всё содержимое, мы можем измерить его полный размер как `documentElement.scrollWidth/scrollHeight`.
 
+<<<<<<< HEAD
 Эти свойства хорошо подходят для обычных элементов. Но для целой страницы эти свойства работают не так, как предполагалось. В Chrome/Safari/Opera, если нет прокрутки, то `documentElement.scrollHeight` может быть даже меньше, чем
 `documentElement.clientHeight`! С точки зрения элемента это невозможная ситуация.
 
 Чтобы надёжно получить полную высоту документа, нам следует взять максимальное из этих свойств:
+=======
+These properties work well for regular elements. But for the whole page these properties do not work as intended. In Chrome/Safari/Opera if there's no scroll, then `documentElement.scrollHeight` may be even less than  `documentElement.clientHeight`! Sounds like a nonsense, weird, right?
+
+To reliably obtain the full document height, we should take the maximum of these properties:
+>>>>>>> b300836f00536a5eb9a716ad2cbb6b8fe97c25af
 
 ```js run
 let scrollHeight = Math.max(
@@ -62,12 +77,20 @@ alert('Полная высота документа с прокручиваем�
 
 ## Получение текущей прокрутки [#page-scroll]
 
+<<<<<<< HEAD
 Обычные элементы хранят текущее состояние прокрутки в `elem.scrollLeft/scrollTop`.
 
 Что же со страницей?
 В большинстве браузеров мы можем обратиться к `documentElement.scrollLeft/Top`, за исключением основанных на старом WebKit (Safari), где есть ошибки ([5991](https://bugs.webkit.org/show_bug.cgi?id=5991)), и там нужно использовать `document.body` вместо `document.documentElement`.
 
 К счастью, нам совсем не обязательно запоминать эти особенности, потому что текущую прокрутку можно прочитать из свойств `window.pageXOffset/pageYOffset`:
+=======
+DOM elements have their current scroll state in `elem.scrollLeft/scrollTop`.
+
+For document scroll `document.documentElement.scrollLeft/Top` works in most browsers, except oldler WebKit-based ones, like Safari (bug [5991](https://bugs.webkit.org/show_bug.cgi?id=5991)), where we should use  `document.body` instead of `document.documentElement` there.
+
+Luckily, we don't have to remember these peculiarities at all, because the scroll is available in the special properties `window.pageXOffset/pageYOffset`:
+>>>>>>> b300836f00536a5eb9a716ad2cbb6b8fe97c25af
 
 ```js run
 alert('Текущая прокрутка сверху: ' + window.pageYOffset);
@@ -86,11 +109,19 @@ alert('Текущая прокрутка слева: ' + window.pageXOffset);
 
 Обычные элементы можно прокручивать, изменяя `scrollTop/scrollLeft`.
 
+<<<<<<< HEAD
 Мы можем сделать то же самое для страниц, но:
 - В большинстве браузеров используется `document.documentElement.scrollTop/Left`.
 - В основанных на старом WebKit (Safari), как сказано выше, `document.body.scrollTop/Left`.
 
 В этих несовместимостях нет ничего хорошего, но запоминать их вовсе не надо. К счастью есть и более простое, универсальное решение: специальные методы `window.scrollBy(x,y)` и `window.scrollTo(pageX,pageY)`.
+=======
+We can do the same for the page, but as explained above:
+- For most browsers (except older Webkit-based) `document.documentElement.scrollTop/Left` is the right property.
+- Otherwise, `document.body.scrollTop/Left`.
+
+These cross-browser incompatibilities are not good. Fortunately, there's a simpler,  universal solution: special methods  [window.scrollBy(x,y)](mdn:api/Window/scrollBy) and [window.scrollTo(pageX,pageY)](mdn:api/Window/scrollTo).
+>>>>>>> b300836f00536a5eb9a716ad2cbb6b8fe97c25af
 
 - Метод `scrollBy(x,y)` прокручивает страницу относительно её текущего положения. Например, `scrollBy(0,10)` прокручивает страницу на `10px` вниз.
 
@@ -99,8 +130,14 @@ alert('Текущая прокрутка слева: ' + window.pageXOffset);
 
     <button onclick="window.scrollBy(0,10)">window.scrollBy(0,10)</button>
     ```
+<<<<<<< HEAD
 - Метод `scrollTo(pageX,pageY)` прокручивает страницу на абсолютные координаты `(pageX,pageY)`. То есть, чтобы левый-верхний угол видимой части страницы имел данные координаты относительно левого верхнего угла документа. Это всё равно, что поставить `scrollLeft/scrollTop`.
     Для прокрутки в самое начало мы можем использовать `scrollTo(0,0)`.
+=======
+- The method `scrollTo(pageX,pageY)` scrolls the page to absolute coordinates, so that the top-left corner of the visible part has coordinates `(pageX, pageY)` relative to the document's top-left corner. It's like setting `scrollLeft/scrollTop`.
+
+    To scroll to the very beginning, we can use `scrollTo(0,0)`.
+>>>>>>> b300836f00536a5eb9a716ad2cbb6b8fe97c25af
 
     ```online
     <button onclick="window.scrollTo(0,0)">window.scrollTo(0,0)</button>

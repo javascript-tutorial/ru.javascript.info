@@ -111,9 +111,15 @@ let range = {
 
 |       | Итераторы | Асинхронные итераторы |
 |-------|-----------|-----------------|
+<<<<<<< HEAD
 | Метод для создания итерируемого объекта | `Symbol.iterator` | `Symbol.asyncIterator` |
 | `next()` возвращает              | любое значение         | `Promise`  |
 | для цикла используйте                          | `for..of`         | `for await..of` |
+=======
+| Object method to provide iterator | `Symbol.iterator` | `Symbol.asyncIterator` |
+| `next()` return value is              | any value         | `Promise`  |
+| to loop, use                          | `for..of`         | `for await..of` |
+>>>>>>> b300836f00536a5eb9a716ad2cbb6b8fe97c25af
 
 
 ````warn header="Оператор расширения \"...\" не работает асинхронно"
@@ -176,7 +182,11 @@ for(let value of generateSequence(1, 5)) {
 })();
 ```
 
+<<<<<<< HEAD
 Теперь у нас есть асинхронный генератор, который можно перебирать с помощью `for await ... of`.
+=======
+Now we have an the async generator, iterable with `for await...of`.
+>>>>>>> b300836f00536a5eb9a716ad2cbb6b8fe97c25af
 
 Это действительно очень просто. Мы добавляем ключевое слово `async`, и внутри генератора теперь можно использовать `await`, а также промисы и другие асинхронные функции.
 
@@ -344,8 +354,13 @@ async function* fetchCommits(repo) {
 
 |       | Итераторы | Асинхронные итераторы |
 |-------|-----------|-----------------|
+<<<<<<< HEAD
 | Метод для создания | `Symbol.iterator` | `Symbol.asyncIterator` |
 | `next()` возвращает              | любое значение         | `Promise`  |
+=======
+| Object method to provide iterator | `Symbol.iterator` | `Symbol.asyncIterator` |
+| `next()` return value is              | any value         | `Promise`  |
+>>>>>>> b300836f00536a5eb9a716ad2cbb6b8fe97c25af
 
 Синтаксические различия между асинхронными и обычными генераторами:
 
@@ -356,6 +371,10 @@ async function* fetchCommits(repo) {
 
 В веб-разработке мы часто встречаемся с потоками данных, когда они поступают по частям. Например, загрузка или выгрузка большого файла.
 
+<<<<<<< HEAD
 Мы можем использовать асинхронные генераторы для обработки таких данных, но стоит заметить, что есть и другой API, называемый Streams (потоки), который предоставляет специальные интерфейсы для преобразования данных и передачи их из одного потока в другой (например, загрузка из одного источника и сразу отправка в другое место).
+=======
+We can use async generators to process such data, but it's worth to mention that there's also another API called Streams, that provides special interfaces to transform the data and to pass it from one stream to another (e.g. download from one place and immediately send elsewhere).
+>>>>>>> b300836f00536a5eb9a716ad2cbb6b8fe97c25af
 
 Streams API не является частью стандарта языка JavaScript. Потоки и асинхронные генераторы дополняют друг друга, оба являются отличными способами обработки асинхронных потоков данных.

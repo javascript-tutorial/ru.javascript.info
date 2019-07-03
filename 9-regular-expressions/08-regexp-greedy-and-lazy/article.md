@@ -56,7 +56,11 @@ alert( str.match(reg) ); // "witch" and her "broom"
 
 3. Затем точка повторяется из-за квантификатора `pattern:.+`. Движок регулярного выражения строит совпадение, принимая символы один за другим, пока это возможно.
 
+<<<<<<< HEAD
     ...До каких пор? Точке соответствуют любые символы, так что движок остановится только тогда, когда достигнет конца строки: 
+=======
+    ...When does it become impossible? All characters match the dot, so it only stops when it reaches the end of the string:
+>>>>>>> b300836f00536a5eb9a716ad2cbb6b8fe97c25af
 
     ![](witch_greedy3.png)
 

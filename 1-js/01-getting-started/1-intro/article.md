@@ -107,11 +107,20 @@ JavaScript - это единственная браузерная техноло
 
 Примеры таких языков:
 
+<<<<<<< HEAD
 - [CoffeeScript](http://coffeescript.org/) добавляет "синтаксический сахар" для JavaScript. Он вводит более короткий синтаксис, которые позволяет писать чистый и лаконичный код. Обычно такое нравится Ruby-программистам.
 - [TypeScript](http://www.typescriptlang.org/) концентрируется на добавлении "строгой типизации" для упрощения разработки и поддержки больших и сложных систем. Разработан Microsoft.
 - [Dart](https://www.dartlang.org/) стоит особняком, потому что имеет собственный движок работающий вне браузера (например, в мобильных приложениях). Первоначально был предложен Google как замена JavaScript, но на данный момент, необходима его транспиляция для запуска, так же как для языков выше.
 
 Есть и другие. Но даже если мы используем один из этих языков, мы, безусловно, должны знать JavaScript, чтобы действительно понимать, что мы делаем.
+=======
+- [CoffeeScript](http://coffeescript.org/) is a "syntactic sugar" for JavaScript. It introduces shorter syntax, allowing us to write clearer and more precise code. Usually, Ruby devs like it.
+- [TypeScript](http://www.typescriptlang.org/) is concentrated on adding "strict data typing" to simplify the development and support of complex systems. It is developed by Microsoft.
+- [Flow](http://flow.org/) also adds data typing, but in a different way. Developed by Facebook.
+- [Dart](https://www.dartlang.org/) is a standalone language that has its own engine that runs in non-browser environments (like mobile apps), but also can be transpiled to JavaScript. Developed by Google.
+
+There are more. Of course, even if we use one of transpiled languages, we should also know JavaScript to really understand what we're doing.
+>>>>>>> b300836f00536a5eb9a716ad2cbb6b8fe97c25af
 
 ## Итого
 

@@ -42,7 +42,11 @@ alert( str.match(/\d+(?!€)/) ); // 2 (в этот раз была проигн
 - Позитивная ретроспективная проверка: `pattern:(?<=y)x`, выдаёт совпадение на `pattern:x` при условии, что перед ним ЕСТЬ `pattern:y`.
 - Негативная ретроспективная проверка: `pattern:(?<!y)x`, выдаёт совпадение на `pattern:x` при условии, что перед ним НЕТ `pattern:y`.
 
+<<<<<<< HEAD
 Чтобы протестировать ретроспективную проверку, давайте поменяем валюту на доллары США. Знак доллара обычно ставится перед суммой денег, поэтому для того чтобы найти `$30`, мы используем `pattern:(?<=\$)\d+` - число, перед которым идёт `subject:$`:
+=======
+For example, let's change the price to US dollars. The dollar sign is usually before the number, so to look for `$30` we'll use `pattern:(?<=\$)\d+` -- an amount preceded by `subject:$`:
+>>>>>>> b300836f00536a5eb9a716ad2cbb6b8fe97c25af
 
 ```js run
 let str = "1 индейка стоит $30";
@@ -50,7 +54,11 @@ let str = "1 индейка стоит $30";
 alert( str.match(/(?<=\$)\d+/) ); // 30 (одинокое число игнорируется)
 ```
 
+<<<<<<< HEAD
 Если нам необходимо найти количество индеек -- число, перед которым не идёт `subject:$`, мы можем использовать негативную ретроспективную проверку `pattern:(?<!\$)\d+`:
+=======
+And, to find the quantity -- a number, not preceded by `subject:$`, we can use a negative lookbehind `pattern:(?<!\$)\d+`:
+>>>>>>> b300836f00536a5eb9a716ad2cbb6b8fe97c25af
 
 ```js run
 let str = "2 индейки стоят $60";

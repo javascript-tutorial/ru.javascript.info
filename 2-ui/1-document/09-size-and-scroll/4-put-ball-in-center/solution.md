@@ -34,9 +34,13 @@ ball.style.top = Math.round(field.clientHeight / 2 - ball.offsetHeight / 2) + 'p
 
 Если браузеру неизвестны ширина и высота изображения (из атрибута HTML-тега или CSS-свойств), он считает их равными `0` до тех пор, пока изображение не загрузится.
 
+<<<<<<< HEAD
 При первой загрузке браузер обычно кеширует изображения, так что при последующей загрузке оно будет доступно тут же, вместе с размерами.
 
 Но при первой загрузке значение ширины мяча `ball.offsetWidth` равно `0`. Это приводит к вычислению неверных координат.
+=======
+After the first load browser usually caches the image, and on next loads it will have the size immediately. But on the first load the value of `ball.offsetWidth` is `0`. That leads to wrong coordinates.
+>>>>>>> b300836f00536a5eb9a716ad2cbb6b8fe97c25af
 
 Мы можем исправить это, добавив атрибуты `width/height` тегу `<img>`:
 

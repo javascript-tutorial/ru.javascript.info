@@ -40,6 +40,7 @@
     ```js run
     let date = new Date("2017-01-26");
     alert(date);
+<<<<<<< HEAD
     // Время не указано, поэтому оно ставится в полночь по Гринвичу и 
     // меняется в соответствии с временной зоной места выполнения кода
     // Так что в результате можно получить
@@ -55,6 +56,18 @@
     - `month` начинается с `0` (январь) по `11` (декабрь).
     - Параметр `date` здесь представляет собой день месяца. Если параметр не задан, то принимается значение `1`.
     - Если параметры `hours/minutes/seconds/ms` отсутствуют, их значением становится `0`.
+=======
+    // The time is not set, so it's assumed to be midnight GMT and
+    // is adjusted according to the timezone the code is run in
+    // So the result could be
+    // Thu Jan 26 2017 11:00:00 GMT+1100 (Australian Eastern Daylight Time)
+    // or
+    // Wed Jan 25 2017 16:00:00 GMT-0800 (Pacific Standard Time)
+    ```
+
+`new Date(year, month, date, hours, minutes, seconds, ms)`
+: Create the date with the given components in the local time zone. Only the first two arguments are obligatory.
+>>>>>>> b300836f00536a5eb9a716ad2cbb6b8fe97c25af
 
     Например:
 
@@ -72,7 +85,11 @@
 
 ## Получение компонентов даты
 
+<<<<<<< HEAD
 Существуют методы получения года, месяца и т.д. из объекта `Date`:
+=======
+There are methods to access the year, month and so on from the `Date` object:
+>>>>>>> b300836f00536a5eb9a716ad2cbb6b8fe97c25af
 
 [getFullYear()](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date/getFullYear)
 : Получить год (4 цифры)
@@ -215,21 +232,33 @@ alert(+date); // количество миллисекунд, то же само
 Этот приём можно использовать для измерения времени:
 
 ```js run
+<<<<<<< HEAD
 let start = new Date(); // начинаем отсчёт времени
+=======
+let start = new Date(); // start measuring time
+>>>>>>> b300836f00536a5eb9a716ad2cbb6b8fe97c25af
 
 // выполняем некоторые действия
 for (let i = 0; i < 100000; i++) {
   let doSomething = i * i * i;
 }
 
+<<<<<<< HEAD
 let end = new Date(); // заканчиваем отсчёт времени
+=======
+let end = new Date(); // end measuring time
+>>>>>>> b300836f00536a5eb9a716ad2cbb6b8fe97c25af
 
 alert( `Цикл отработал за ${end - start} миллисекунд` );
 ```
 
 ## Date.now()
 
+<<<<<<< HEAD
 Если нужно просто померить время, объект `Date` нам не нужен.
+=======
+If we only want to measure time, we don't need the `Date` object.
+>>>>>>> b300836f00536a5eb9a716ad2cbb6b8fe97c25af
 
 Существует особый метод `Date.now()`, возвращающий текущий таймстамп.
 
@@ -264,6 +293,8 @@ alert( `Цикл отработал за ${end - start} миллисекунд` 
 
 Подобные вычисления, замеряющие производительность, также называют "бенчмарками" (benchmark). 
 
+Such performance measurements are often called "benchmarks".
+
 ```js
 // есть date1 и date2, какая функция быстрее вернёт разницу между ними в миллисекундах?
 function diffSubtract(date1, date2) {
@@ -280,7 +311,11 @@ function diffGetTime(date1, date2) {
 
 Но какая функция быстрее?
 
+<<<<<<< HEAD
 Для начала можно запустить их много раз подряд и засечь разницу. В нашем случае функции очень простые, так что потребуется хотя бы 100000 повторений.
+=======
+The first idea may be to run them many times in a row and measure the time difference. For our case, functions are very simple, so we have to do it at least 100000 times.
+>>>>>>> b300836f00536a5eb9a716ad2cbb6b8fe97c25af
 
 Проведём измерения:
 
@@ -310,7 +345,11 @@ alert( 'Время diffGetTime: ' + bench(diffGetTime) + 'мс' );
 
 Замечательно, это уже что-то. Но до хорошего бенчмарка нам ещё далеко.
 
+<<<<<<< HEAD
 Представьте, что при выполнении `bench(diffSubtract)` процессор параллельно делал что-то ещё, также потребляющее ресурсы. А к началу выполнения `bench(diffGetTime)`, он это уже завершил.
+=======
+Imagine that at the time of running `bench(diffSubtract)` CPU was doing something in parallel, and it was taking resources. And by the time of running `bench(diffGetTime)` that work has finished.
+>>>>>>> b300836f00536a5eb9a716ad2cbb6b8fe97c25af
 
 Достаточно реалистичный сценарий в современных многопроцессорных операционных системах.
 
@@ -367,8 +406,13 @@ for (let i = 0; i < 10; i++) {
 }
 ```
 
+<<<<<<< HEAD
 ```warn header="Внимательно тестируйте производительность"
 Современные интерпретаторы JavaScript выполняют множество оптимизаций. Они могут повлиять на результаты "искусственных тестов" по сравнению с "нормальным использованием", особенно если мы тестируем что-то очень маленькое, например, работу оператора или встроенной функции. Поэтому если хотите серьёзно понять производительность, пожалуйста, изучите, как работают интерпретаторы JavaScript. И тогда вам, вероятно, совершенно не понадобятся микробенчмарки.
+=======
+```warn header="Be careful doing microbenchmarking"
+Modern JavaScript engines perform many optimizations. They may tweak results of "artificial tests" compared to "normal usage", especially when we benchmark something very small, such as how an operator works, or a built-in function. So if you seriously want to understand performance, then please study how the JavaScript engine works. And then you probably won't need microbenchmarks at all.
+>>>>>>> b300836f00536a5eb9a716ad2cbb6b8fe97c25af
 
 Отличный набор статей о V8 можно найти на <http://mrale.ph>.
 ```
@@ -415,7 +459,11 @@ alert(date);
 
 Учтите, что, в отличие от некоторых других систем, в JavaScript таймстамп в миллисекундах, а не в секундах.
 
+<<<<<<< HEAD
 Порой нам нужно измерить время с большей точностью. Собственными средствами JavaScript измерять время в микросекундах (одна миллионная секунды) нельзя, но в большинстве сред такая возможность есть. К примеру, в браузерах есть метод [performance.now()](https://developer.mozilla.org/ru/docs/Web/API/Performance/now), возвращающий количество миллисекунд с начала загрузки страницы с точностью до микросекунд (3 цифры после точки):
+=======
+Sometimes we need more precise time measurements. JavaScript itself does not have a way to measure time in microseconds (1 millionth of a second), but most environments provide it. For instance, browser has [performance.now()](mdn:api/Performance/now) that gives the number of milliseconds from the start of page loading with microsecond precision (3 digits after the point):
+>>>>>>> b300836f00536a5eb9a716ad2cbb6b8fe97c25af
 
 ```js run
 alert(`Загрузка началась ${performance.now()}мс назад`);

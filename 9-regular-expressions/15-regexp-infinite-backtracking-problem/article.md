@@ -112,7 +112,11 @@ alert( '12345678901234567890123456789123456789z'.match(/(\d+)*$/) );
 
 Действительно, это регулярное выражение носит искусственный характер, но, разобравшись с ним, мы поймём и практический пример, данный выше. Причина их медленной работы одинакова.
 
+<<<<<<< HEAD
 Что же происходит во время поиска по паттерну `pattern:(\d+)*$` в строке `subject:123456789z`?
+=======
+What happens during the search of `pattern:(\d+)*$` in the line `subject:123456789z`?
+>>>>>>> b300836f00536a5eb9a716ad2cbb6b8fe97c25af
 
 1. Первым делом, движок регулярных выражений пытается найти `pattern:\d+`. Плюс `pattern:+` является жадным по умолчанию, так что он хватает все цифры, какие может:
 
@@ -262,7 +266,13 @@ alert( '12345678901234567890123456789123456789z'.match(/(\d+?)*$/) );
 - Предпросмотр `pattern:?=` ищет максимальное количество `pattern:a+`, доступных с текущей позиции.
 - А затем они "берутся в результат" обратной ссылкой `pattern:\1` (`pattern:\1` соответствует содержимому вторых скобок, т.е. `pattern:a+`)
 
+<<<<<<< HEAD
 Возврат в этой логике в принципе не предусмотрен, поскольку предпросмотр "откатываться" не умеет. То есть, если предпросмотр нашёл 5 `pattern:a+`, и в результате поиск не удался, то он не будет откатываться на 4 повторения.
+=======
+There will be no backtracking, because lookahead does not backtrack. If, for
+example, it found 5 instances of `pattern:a+` and the further match failed,
+it won't go back to the 4th instance.
+>>>>>>> b300836f00536a5eb9a716ad2cbb6b8fe97c25af
 
 ```smart
 Больше о связи между сверхжадных квантификаторов и предпросмотра вы можете найти в статьях [Regex: Emulate Atomic Grouping (and Possessive Quantifiers) with LookAhead](http://instanceof.me/post/52245507631/regex-emulate-atomic-grouping-with-lookahead) и [Mimicking Atomic Groups](http://blog.stevenlevithan.com/archives/mimic-atomic-groups).

@@ -48,16 +48,28 @@
 
 Это было общее введение.
 
+<<<<<<< HEAD
 В JavaScript есть два типа полей (свойств и методов) объекта:
+=======
+In JavaScript, there are two types of object fields (properties and methods):
+>>>>>>> b300836f00536a5eb9a716ad2cbb6b8fe97c25af
 
 - Публичные: доступны отовсюду. Они составляют внешний интерфейс. До этого момента мы использовали только публичные свойства и методы.
 - Приватные: доступны только внутри класса. Они для внутреннего интерфейса.
 
+<<<<<<< HEAD
 Во многих других языках также существуют «защищённые» поля, доступные только внутри класса или для дочерних классов. Они также полезны для внутреннего интерфейса. В некотором смысле они более распространены, чем приватные, потому что мы обычно хотим, чтобы наследующие классы получали доступ к внутренним полям.
+=======
+In many other languages there also exist "protected" fields: accessible only from inside the class and those extending it. They are also useful for the internal interface. They are in a sense more widespread than private ones, because we usually want inheriting classes to gain access to them.
+>>>>>>> b300836f00536a5eb9a716ad2cbb6b8fe97c25af
 
 Защищённые поля не реализованы в JavaScript на уровне языка, но на практике они очень удобны, поэтому их эмулируют. 
 
+<<<<<<< HEAD
 А теперь давайте сделаем делать кофеварку на JavaScript со всеми этими типами свойств. Кофеварка имеет множество деталей, мы не будем их моделировать для простоты примера (хотя могли бы).
+=======
+Now we'll make a coffee machine in JavaScript with all these types of properties. A coffee machine has a lot of details, we won't model them to stay simple (though we could).
+>>>>>>> b300836f00536a5eb9a716ad2cbb6b8fe97c25af
 
 ## Защищённое свойство "waterAmount"
 
@@ -87,7 +99,11 @@ coffeeMachine.waterAmount = 200;
 
 **Защищённые свойства обычно начинаются с префикса `_`.**
 
+<<<<<<< HEAD
 Это не синтаксис языка: есть хорошо известное соглашение между программистами, что такие свойства и методы не должны быть доступны извне. Большинство программистов следуют этому соглашению.
+=======
+That is not enforced on the language level, but there's a well-known convention between programmers that such properties and methods should not be accessed from the outside.
+>>>>>>> b300836f00536a5eb9a716ad2cbb6b8fe97c25af
 
 Итак, наше свойство будет называться `_waterAmount`:
 
@@ -172,7 +188,13 @@ new CoffeeMachine().setWaterAmount(100);
 ```
 Это выглядит немного длиннее, но функции более гибкие. Они могут принимать несколько аргументов (даже если они нам сейчас не нужны). Итак, на будущее, если нам надо что-то отрефакторить, функции более безопасный выбор.
 
+<<<<<<< HEAD
 Конечно, есть компромисс. С другой стороны, синтаксис get/set короче, поэтому в конечном итоге строгих правил нет и решать вам.
+=======
+That looks a bit longer, but functions are more flexible. They can accept multiple arguments (even if we don't need them right now).
+
+On the other hand, get/set syntax is shorter, so ultimately there's no strict rule, it's up to you to decide.
+>>>>>>> b300836f00536a5eb9a716ad2cbb6b8fe97c25af
 ````
 
 ```smart header="Защищённые поля наследуются"
@@ -189,9 +211,13 @@ new CoffeeMachine().setWaterAmount(100);
 
 Приватные свойства и методы должны начинаться с `#`. Они доступны только внутри класса.
 
+<<<<<<< HEAD
 Например, в классе ниже есть приватное свойство `#waterLimit` и приватный метод `#checkWater` для проверки количества воды:
+=======
+For instance, here's a private `#waterLimit` property and the water-checking private method `#checkWater`:
+>>>>>>> b300836f00536a5eb9a716ad2cbb6b8fe97c25af
 
-```js
+```js run
 class CoffeeMachine {
 *!*
   #waterLimit = 200;
@@ -203,12 +229,20 @@ class CoffeeMachine {
     if (value > this.#waterLimit) throw new Error("Слишком много воды");
   }
 */!*
+<<<<<<< HEAD
+=======
+
+>>>>>>> b300836f00536a5eb9a716ad2cbb6b8fe97c25af
 }
 
 let coffeeMachine = new CoffeeMachine();
 
 *!*
+<<<<<<< HEAD
 // снаружи  нет доступа к приватным методам класса
+=======
+// can't access privates from outside of the class
+>>>>>>> b300836f00536a5eb9a716ad2cbb6b8fe97c25af
 coffeeMachine.#checkWater(); // Error
 coffeeMachine.#waterLimit = 1000; // Error
 */!*
@@ -255,19 +289,28 @@ class MegaCoffeeMachine extends CoffeeMachine() {
 }
 ```
 
+<<<<<<< HEAD
 Во многих случаях такое ограничение слишком жёсткое. Раз уж мы расширяем `CoffeeMachine`, у нас может быть вполне законная причина для доступа к внутренним методам и свойствам. Поэтому защищённые свойства используются чаще, хоть они и не поддерживаются синтаксисом языка.
 
 ````warn
 Приватные поля особенные.
 
 Как мы помним, обычно мы можем получить доступ к полям объекта с помощью this[name]:
+=======
+In many scenarios such limitation is too severe. If we extend a `CoffeeMachine`, we may have legitimate reason to access its internals. That's why protected fields are used more often, even though they are not supported by the language syntax.
+
+````warn header="Private fields are not available as this[name]"
+Private fields are special.
+
+As we know, usually we can access fields using `this[name]`:
+>>>>>>> b300836f00536a5eb9a716ad2cbb6b8fe97c25af
 
 ```js
 class User {
   ...
   sayHi() {
     let fieldName = "name";
-    alert(`Hello, ${this[fieldName]}`);
+    alert(`Hello, ${*!*this[fieldName]*/!*}`);
   }
 }
 ```
@@ -292,11 +335,19 @@ class User {
 Поддерживаемость
 : Ситуация в программировании сложнее, чем с реальной кофеваркой, потому что мы не просто покупаем её один раз. Код постоянно подвергается разработке и улучшению.
 
+<<<<<<< HEAD
     **Если мы чётко отделим внутренний интерфейс, то разработчик класса сможет свободно менять его внутренние свойства и методы, даже не информируя пользователей..**
 
     Если вы разработчик такого класса, то приятно знать, что приватные методы можно безопасно переименовывать, их параметры можно изменять и даже удалять, потому что от них не зависит никакой внешний код.
 
     В новой версии вы можете полностью всё переписать, но пользователю будет легко обновиться, если внешний интерфейс остался такой же.
+=======
+    **If we strictly delimit the internal interface, then the developer of the class can freely change its internal properties and methods, even without informing the users.**
+
+    If you're a developer of such class, it's great to know that private methods can be safely renamed, their parameters can be changed, and even removed, because no external code depends on them. 
+
+    For users, when a new version comes out, it may be a total overhaul internally, but still simple to upgrade if the external interface is the same.
+>>>>>>> b300836f00536a5eb9a716ad2cbb6b8fe97c25af
 
 Сокрытие сложности
 : Люди обожают использовать простые вещи. По крайней мере, снаружи. Что внутри -- это другое дело.
@@ -305,7 +356,11 @@ class User {
 
     **Всегда удобно, когда детали реализации скрыты, и доступен простой, хорошо документированный внешний интерфейс.**
 
+<<<<<<< HEAD
 Для сокрытия внутреннего интерфейса мы используем защищённые или приватные свойства:
+=======
+To hide internal interface we use either protected or private properties:
+>>>>>>> b300836f00536a5eb9a716ad2cbb6b8fe97c25af
 
 - Защищённые поля имеют префикс `_`. Это хорошо известное соглашение, не поддерживаемое на уровне языка. Программисты должны обращаться к полю, начинающемуся с `_`, только из его класса и классов, унаследованных от него.
 - Приватные поля имеют префикс `#`. JavaScript гарантирует, что мы можем получить доступ к таким полям только внутри класса. 

@@ -4,7 +4,11 @@
 
 Иногда это может ограничивать нас. Например, у нас есть класс `StreetSweeper` и класс `Bicycle`, а мы хотим создать `StreetSweepingBicycle`.
 
+<<<<<<< HEAD
 Или, говоря о программировании, у нас есть класс `User`, который реализует пользователей, и класс `EventEmitter`, реализующий события. Мы хотели бы добавить функционал класса `EventEmitter` к `User`, чтобы пользователи могли легко генерировать события.
+=======
+Or, talking about programming, we have a class `User` and a class `EventEmitter` that implements event generation, and we'd like to add the functionality of `EventEmitter` to `User`, so that our users can emit events.
+>>>>>>> b300836f00536a5eb9a716ad2cbb6b8fe97c25af
 
 Для таких случаев существуют "примеси".
 
@@ -47,9 +51,13 @@ Object.assign(User.prototype, sayHiMixin);
 new User("Dude").sayHi(); // Hello Dude!
 ```
 
+<<<<<<< HEAD
 Это не наследование, а просто копирование методов. Таким образом, класс `User` может наследовать от другого класса, но при этом также включать в себя примеси, "подмешивающие" другие методы.
 
 Например:
+=======
+There's no inheritance, but a simple method copying. So `User` may inherit from another class and also include the mixin to "mix-in" the additional methods, like this:
+>>>>>>> b300836f00536a5eb9a716ad2cbb6b8fe97c25af
 
 ```js
 class User extends Person {
@@ -101,12 +109,19 @@ new User("Dude").sayHi(); // Hello Dude!
 
 ![](mixin-inheritance.png)
 
+<<<<<<< HEAD
 Это связано с тем, что методы `sayHi` и `sayBye` были изначально созданы в объекте `sayHiMixin`. Так что их внутреннее свойство `[[HomeObject]]` ссылается на `sayHiMixin`, как показано на картинке выше.
+=======
+That's because methods `sayHi` and `sayBye` were initially created in `sayHiMixin`. So their `[[HomeObject]]` internal property references `sayHiMixin`, as shown on the picture above.
+
+As `super` looks for parent methods in `[[HomeObject]].[[Prototype]]`, that means it searches `sayHiMixin.[[Prototype]]`, not `User.[[Prototype]]`.
+>>>>>>> b300836f00536a5eb9a716ad2cbb6b8fe97c25af
 
 Так как `super` ищет родительские методы в `[[HomeObject]].[[Prototype]]`, это означает `sayHiMixin.[[Prototype]]`, а не `User.[[Prototype]]`.
 
 ## EventMixin
 
+<<<<<<< HEAD
 А сейчас давайте создадим примесь, полезную в реальной жизни.
 
 Многие объекты в браузерной разработке (и не только) обладают важной способностью - они могут генерировать события. События - отличный способ передачи информации всем, кто в ней заинтересован. Давайте создадим примесь, которая позволит легко добавлять функционал по работе с событиями любым классам/объектам.
@@ -120,6 +135,19 @@ new User("Dude").sayHi(); // Hello Dude!
 Или `menu` может генерировать событие `"select"`, когда элемент меню выбран, а другие объекты могут назначать обработчики, чтобы реагировать на это событие, и т.п.
 
 Вот код примеси:
+=======
+The important feature of many browser objects (not only) can generate events. Events is a great way to "broadcast information" to anyone who wants it. So let's make a mixin that allows to easily add event-related functions to any class/object.
+
+- The mixin will provide a method `.trigger(name, [...data])` to "generate an event" when something important happens to it. The `name` argument is a name of the event, optionally followed by additional arguments with event data.
+- Also the method `.on(name, handler)` that adds `handler` function as the listener to events with the given name. It will be called when an event with the given `name` triggers, and get the arguments from `.trigger` call.
+- ...And the method `.off(name, handler)` that removes `handler` listener.
+
+After adding the mixin, an object `user` will become able to generate an event `"login"` when the visitor logs in. And another object, say, `calendar` may want to listen to such events to load the calendar for the logged-in person.
+
+Or, a `menu` can generate the event `"select"` when a menu item is selected, and other objects may assign handlers to react on that event. And so on.
+
+Here's the code:
+>>>>>>> b300836f00536a5eb9a716ad2cbb6b8fe97c25af
 
 ```js run
 let eventMixin = {
@@ -150,8 +178,13 @@ let eventMixin = {
   },
 
   /**
+<<<<<<< HEAD
    * Сгенерировать событие с указанным именем и данными
    * this.trigger('select', data1, data2);
+=======
+   * Generate an event with the given name and data
+   *  this.trigger('select', data1, data2);
+>>>>>>> b300836f00536a5eb9a716ad2cbb6b8fe97c25af
    */
   trigger(eventName, ...args) {
     if (!this._eventHandlers || !this._eventHandlers[eventName]) {
@@ -164,6 +197,7 @@ let eventMixin = {
 };
 ```
 
+<<<<<<< HEAD
 Итак, у нас есть 3 метода:
 
 1. `.on(eventName, handler)` -- назначает функцию `handler`, чтобы обработать событие с заданным именем. Обработчики хранятся в свойстве  `_eventHandlers`, представляющим собой объект, в котором имя события является ключом, а массив обработчиков - значением.
@@ -171,6 +205,12 @@ let eventMixin = {
 2. `.off(eventName, handler)` -- убирает функцию из списка обработчиков.
 
 3. `.trigger(eventName, ...args)` -- генерирует событие: все назначенные обработчики из `_eventHandlers[eventName]` вызываются, и `...args` передаются им в качестве аргументов.
+=======
+
+- `.on(eventName, handler)` -- assigns function `handler` to run when the event with that name happens. Technically, there's `_eventHandlers` property, that stores an array of handlers for each event name. So it just adds it to the list.
+- `.off(eventName, handler)` -- removes the function from the handlers list.
+- `.trigger(eventName, ...args)` -- generates the event: all handlers from `_eventHandlers[eventName]` are called, with a list of arguments `...args`.
+>>>>>>> b300836f00536a5eb9a716ad2cbb6b8fe97c25af
 
 Использование:
 
@@ -181,16 +221,25 @@ class Menu {
     this.trigger("select", value);
   }
 }
+<<<<<<< HEAD
 // Добавим примесь с методами для событий
+=======
+// Add the mixin with event-related methods
+>>>>>>> b300836f00536a5eb9a716ad2cbb6b8fe97c25af
 Object.assign(Menu.prototype, eventMixin);
 
 let menu = new Menu();
 
+<<<<<<< HEAD
 // Добавить обработчик, который будет вызван при событии "select":
+=======
+// add a handler, to be called on selection:
+>>>>>>> b300836f00536a5eb9a716ad2cbb6b8fe97c25af
 *!*
 menu.on("select", value => alert(`Выбранное значение: ${value}`));
 */!*
 
+<<<<<<< HEAD
 // Генерирует событие => обработчик выше запускается и выводит:
 menu.choose("123"); // Выбранное значение: 123
 ```
@@ -198,13 +247,31 @@ menu.choose("123"); // Выбранное значение: 123
 Теперь если у нас есть код, заинтересованный в событии `"select"`, то он может слушать его с помощью `menu.on(...)`.
 
 А `eventMixin` позволяет легко добавить такое поведение в любой класс без вмешательства в цепочку наследования.
+=======
+// triggers the event => the handler above runs and shows:
+// Value selected: 123
+menu.choose("123");
+```
+
+Now if we'd like any code to react on menu selection, we can listen to it with `menu.on(...)`.
+
+And `eventMixin` mixin makes it easy to add such behavior to as many classes as we'd like, without interfering with the inheritance chain.
+>>>>>>> b300836f00536a5eb9a716ad2cbb6b8fe97c25af
 
 ## Итого
 
 *Примесь* -- общий термин в объектно-ориентированном программировании: класс, который содержит в себе методы для других классов.
 
+<<<<<<< HEAD
 В других языках (например, Python) разрешается создавать примеси, используя множественное наследование. JavaScript не поддерживает множественное наследование, но с помощью примесей мы можем реализовать нечто похожее, скопировав методы в прототип.
+=======
+Some other languages like e.g. Python allow to create mixins using multiple inheritance. JavaScript does not support multiple inheritance, but mixins can be implemented by copying methods into prototype.
+>>>>>>> b300836f00536a5eb9a716ad2cbb6b8fe97c25af
 
 Мы можем использовать примеси для расширения функционала классов, например, для обработки событий, как мы сделали это выше.
 
+<<<<<<< HEAD
 С примесями могут возникнуть проблемы, если они перезаписывают существующие методы класса. Стоит помнить об этом и быть внимательнее при выборе имён для методов примеси, чтобы избежать конфликтов.
+=======
+Mixins may become a point of conflict if they occasionally overwrite existing class methods. So generally one should think well about the naming methods of a mixin, to minimize the probability of that.
+>>>>>>> b300836f00536a5eb9a716ad2cbb6b8fe97c25af

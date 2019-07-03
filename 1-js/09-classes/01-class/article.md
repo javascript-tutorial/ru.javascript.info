@@ -88,7 +88,11 @@ alert(typeof User); // function
     - Код функции берется из метода `constructor` (она будет пустой, если такого метода нет).
 2. Хранит все методы, такие как `sayHi`, в `User.prototype`.
 
+<<<<<<< HEAD
 Затем, при вызове метода на новых объектах `new User`, он возьмётся из прототипа, прямо как описано в главе <info:function-prototype>. Таким образом, объект `new User` имеет доступ к методам класса.
+=======
+Afterwards, for new objects, when we call a method, it's taken from the prototype, just as  described in the chapter <info:function-prototype>. So a `new User` object has access to class methods.
+>>>>>>> b300836f00536a5eb9a716ad2cbb6b8fe97c25af
 
 На картинке показан результат объявления `class User`:
 
@@ -117,7 +121,11 @@ alert(Object.getOwnPropertyNames(User.prototype)); // constructor, sayHi
 
 ## Не просто синтаксический сахар
 
+<<<<<<< HEAD
 Иногда говорят, что `class` - это просто "синтаксический сахар" в JavaScript, потому что мы можем сделать все то же самое без конструкции `class`:
+=======
+Sometimes people say that `class` is a "syntax sugar" (syntax that is designed to make things easier to read, but doesn't introduce anything new) in JavaScript, because we could actually declare the same without `class` keyword at all:
+>>>>>>> b300836f00536a5eb9a716ad2cbb6b8fe97c25af
 
 ```js run
 // перепишем класс User на чистых функциях

@@ -127,11 +127,19 @@ alert( +apples + +oranges ); // 5
 
 ## Приоритет операторов
 
+<<<<<<< HEAD
 В том случае, если в выражении есть несколько операторов – порядок их выполнения определяется *приоритетом*, или, другими словами, существует определённый порядок выполнения операторов.
+=======
+If an expression has more than one operator, the execution order is defined by their *precedence*, or, in other words, the default priority order of operators.
+>>>>>>> b300836f00536a5eb9a716ad2cbb6b8fe97c25af
 
 Из школы мы знаем, что умножение в выражении `2 * 2 + 1` выполнится раньше сложения. Это как раз и есть "приоритет". Говорят, что умножение имеет более высокий приоритет, чем сложение.
 
+<<<<<<< HEAD
 Скобки важнее, чем приоритет, так что если мы не удовлетворены порядком по умолчанию, мы можем использовать их, чтобы изменить приоритет. Например, написать `(1 + 2) * 2`.
+=======
+Parentheses override any precedence, so if we're not satisfied with the default order, we can use them to change it. For example, write `(1 + 2) * 2`.
+>>>>>>> b300836f00536a5eb9a716ad2cbb6b8fe97c25af
 
 В JavaScript много операторов. Каждый оператор имеет соответствующий номер приоритета. Тот, у кого это число больше – выполнится раньше. Если приоритет одинаковый, то порядок выполнения – слева направо.
 
@@ -199,9 +207,15 @@ alert( a ); // 3
 alert( c ); // 0
 ```
 
+<<<<<<< HEAD
 В примере выше результатом `(a = b + 1)` будет значение, которое присваивается в `a` (то есть `3`). Потом оно используется для дальнейших вычислений.
 
 Забавное применение присваивания, не так ли? Нам нужно понимать, как это работает, потому что иногда это можно увидеть в JavaScript-библиотеках, но писать самим в таком стиле не рекомендуется. Такие трюки не сделают ваш код более понятным или читабельным.
+=======
+In the example above, the result of expression `(a = b + 1)` is the value which was assigned to `a` (that is `3`). It is then used for further evaluations.
+
+Funny code, isn't it? We should understand how it works, because sometimes we see it in JavaScript libraries, but shouldn't write anything like that ourselves. Such tricks definitely don't make code clearer or readable.
+>>>>>>> b300836f00536a5eb9a716ad2cbb6b8fe97c25af
 ````
 
 ## Остаток от деления %
@@ -427,10 +441,17 @@ alert( a ); // 7 (результат 3 + 4)
 ```smart header="Запятая имеет очень низкий приоритет"
 Пожалуйста, обратите внимание, что оператор запятая имеет очень низкий приоритет, приоритет которого ниже `=`, поэтому скобки важны в приведённом примере выше.
 
+<<<<<<< HEAD
 Без них в `a = 1 + 2, 3 + 4` сначала выполнится `+`, суммируя числа в `a = 3, 7`, затем оператор присваивания `=` присвоит `a = 3`, а то что идёт дальше, будет игнорировано. Всё так же, как в `(a = 1 + 2), 3+4`.
 ```
 
 Зачем нам оператор, который отбрасывает всё, кроме последнего выражения?
+=======
+Without them: `a = 1 + 2, 3 + 4` evaluates `+` first, summing the numbers into `a = 3, 7`, then the assignment operator `=` assigns `a = 3`, and the rest is ignored. It's like `(a = 1 + 2), 3 + 4`.
+```
+
+Why do we need an operator that throws away everything except the last expression?
+>>>>>>> b300836f00536a5eb9a716ad2cbb6b8fe97c25af
 
 Иногда его используют в составе более сложных конструкций, чтобы сделать несколько действий в одной строке.
 
@@ -443,4 +464,8 @@ for (*!*a = 1, b = 3, c = a * b*/!*; a < 10; a++) {
 }
 ```
 
+<<<<<<< HEAD
 Такие трюки используются во многих JavaScript-фреймворках. Вот почему мы упоминаем их. Но обычно они не улучшают читабельность кода, поэтому стоит хорошо подумать, прежде чем их использовать.
+=======
+Such tricks are used in many JavaScript frameworks. That's why we're mentioning them. But usually they don't improve code readability so we should think well before using them.
+>>>>>>> b300836f00536a5eb9a716ad2cbb6b8fe97c25af
