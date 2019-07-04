@@ -86,13 +86,13 @@ Examples with unicode:
 
 ```js run
 alert( "\u00A9" ); // ©
-alert( "\u{20331}" ); // 佫, a rare chinese hieroglyph (long unicode)
+alert( "\u{20331}" ); // 佫, a rare Chinese hieroglyph (long unicode)
 alert( "\u{1F60D}" ); // 😍, a smiling face symbol (another long unicode)
 ```
 
 All special characters start with a backslash character `\`. It is also called an "escape character".
 
-We would also use it if we want to insert a quote into the string.
+We might also use it if we wanted to insert a quote into the string.
 
 For instance:
 
@@ -102,7 +102,7 @@ alert( 'I*!*\'*/!*m the Walrus!' ); // *!*I'm*/!* the Walrus!
 
 As you can see, we have to prepend the inner quote by the backslash `\'`, because otherwise it would indicate the string end.
 
-Of course, that refers only to the quotes that are same as the enclosing ones. So, as a more elegant solution, we could switch to double quotes or backticks instead:
+Of course, that refers only to the quotes that are the same as the enclosing ones. So, as a more elegant solution, we could switch to double quotes or backticks instead:
 
 ```js run
 alert( `I'm the Walrus!` ); // I'm the Walrus!
@@ -305,7 +305,8 @@ if (str.indexOf("Widget") != -1) {
 }
 ```
 
-````smart header="The bitwise NOT trick"
+#### The bitwise NOT trick
+
 One of the old tricks used here is the [bitwise NOT](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators#Bitwise_NOT) `~` operator. It converts the number to a 32-bit integer (removes the decimal part if exists) and then reverses all bits in its binary representation.
 
 For 32-bit integers the call `~n` means exactly the same as `-(n+1)` (due to IEEE-754 format).
@@ -321,9 +322,9 @@ alert( ~-1 ); // 0, the same as -(-1+1)
 */!*
 ```
 
-As we can see, `~n` is zero only if `n == -1`.
+As we can see, `~n` is zero only if `n == -1` (that's for any 32-bit signed integer `n`).
 
-So, the test `if ( ~str.indexOf("...") )` is truthy that the result of `indexOf` is not `-1`. In other words, when there is a match.
+So, the test `if ( ~str.indexOf("...") )` is truthy only if the result of `indexOf` is not `-1`. In other words, when there is a match.
 
 People use it to shorten `indexOf` checks:
 
@@ -338,7 +339,10 @@ if (~str.indexOf("Widget")) {
 It is usually not recommended to use language features in a non-obvious way, but this particular trick is widely used in old code, so we should understand it.
 
 Just remember: `if (~str.indexOf(...))` reads as "if found".
-````
+
+Technically speaking, numbers are truncated to 32 bits by `~` operator, so there exist other big numbers that give `0`, the smallest is `~4294967295=0`. That makes such check is correct only if a string is not that long.
+
+Right now we can see this trick only in the old code, as modern JavaScript provides `.includes` method (see below).
 
 ### includes, startsWith, endsWith
 
@@ -558,7 +562,7 @@ You can skip the section if you don't plan to support them.
 
 ### Surrogate pairs
 
-Most symbols have a 2-byte code. Letters in most european languages, numbers, and even most hieroglyphs, have a 2-byte representation.
+All frequently used characters have 2-byte codes. Letters in most european languages, numbers, and even most hieroglyphs, have a 2-byte representation.
 
 But 2 bytes only allow 65536 combinations and that's not enough for every possible symbol. So rare symbols are encoded with a pair of 2-byte characters called "a surrogate pair".
 
@@ -567,7 +571,7 @@ The length of such symbols is `2`:
 ```js run
 alert( '𝒳'.length ); // 2, MATHEMATICAL SCRIPT CAPITAL X
 alert( '😂'.length ); // 2, FACE WITH TEARS OF JOY
-alert( '𩷶'.length ); // 2, a rare chinese hieroglyph
+alert( '𩷶'.length ); // 2, a rare Chinese hieroglyph
 ```
 
 Note that surrogate pairs did not exist at the time when JavaScript was created, and thus are not correctly processed by the language!
@@ -628,7 +632,7 @@ For instance:
 
 ```js run
 alert( 'S\u0307\u0323' ); // Ṩ, S + dot above + dot below
-alert( 'S\u0323\u0307' ); // Ṩ, S + dot below + dot above
+alert( 'S\u0323\u0307' ); // Ṩ, S + dot below + dot above
 
 alert( 'S\u0307\u0323' == 'S\u0323\u0307' ); // false
 ```
@@ -649,7 +653,7 @@ alert( "S\u0307\u0323".normalize().length ); // 1
 alert( "S\u0307\u0323".normalize() == "\u1e68" ); // true
 ```
 
-In reality, this is not always the case. The reason being that the symbol `Ṩ` is "common enough", so UTF-16 creators included it in the main table and gave it the code.
+In reality, this is not always the case. The reason being that the symbol `Ṩ` is "common enough", so UTF-16 creators included it in the main table and gave it the code.
 
 If you want to learn more about normalization rules and variants -- they are described in the appendix of the Unicode standard: [Unicode Normalization Forms](http://www.unicode.org/reports/tr15/), but for most practical purposes the information from this section is enough.
 
