@@ -1,87 +1,87 @@
 
-# Global object
+# Глобальный объект
 
-The global object provides variables and functions that are available anywhere. Mostly, the ones that are built into the language or the environment.
+Глобальный объект предоставляет переменные и функции, доступные в любом месте программы. В основном те, что встроены в язык или среду исполнения.
 
-In a browser it is named `window`, for Node.js it is `global`, for other environments it may have another name.
+В браузере он называется `window`, в Node.js — `global`, в другой среде исполнения может называться иначе.
 
-Recently, `globalThis` was added to the language, as a standartized name for a global object, that should be supported across all environments. In some browsers, namely non-Chromium Edge, `globalThis` is not yet supported, but can be easily polyfilled.
+Недавно `globalThis` был добавлен в язык как стандартизированное имя для глобального объекта, которое должно поддерживаться в любом окружении. В некоторых браузерах, например Edge не на Chromium, `globalThis` ещё не поддерживается, но легко реализуется с помощью полифила.
 
-All properties of the global object can be accessed directly:
+Ко всем свойствам глобального объекта можно обращаться напрямую:
 
 ```js run
-alert("Hello");
+alert("Привет");
 
-// the same as
-window.alert("Hello");
+// то же самое, что и
+window.alert("Привет");
 ```
 
-In a browser, global variables declared with `var` become the property of the global object:
+В браузере глобальные функции и переменные, объявленные с помощью `var`, становятся свойствами глобального объекта:
 
 ```js run untrusted refresh
 var gVar = 5;
 
-alert(window.gVar); // 5 (became a property of the global object)
+alert(window.gVar); // 5 (становится свойством глобального объекта)
 ```
 
-Please don't rely on that! This behavior exists for compatibility reasons. Modern scripts use JavaScript modules where such thing doesn't happen. We'll cover them later in the chapter  [](info:modules).
+Пожалуйста, не полагайтесь на это. Такое поведение поддерживается для совместимости. В современных проектах, использующих JavaScript-модули, такого не происходит. Мы разберём их позже в главе  [](info:modules).
 
-Also, more modern variable declarations `let` and `const` do not exhibit such behavior at all:
+Кроме того, с более современными объявлениями переменных `let` и `const` такого не происходит:
 
 ```js run untrusted refresh
 let gLet = 5;
 
-alert(window.gLet); // undefined (doesn't become a property of the global object)
+alert(window.gLet); // undefined (не становится свойством глобального объекта)
 ```
 
-If a value is so important that you'd like to make it available globally, write it directly as a property:
+Если свойство настольно важное, что вы хотите сделать его доступным для всей программы, запишите его в глобальный объект напрямую:
 
 ```js run
 *!*
-// make current user information global, to let all scripts access it
+// сделать информацию о текущем пользователе глобальной, для предоставления доступа к ней всем скриптам
 window.currentUser = {
   name: "John"
 };
 */!*
 
-// somewhere else in code
-alert(currentUser.name);  // John
+// где угодно в коде
+alert(currentUser.name); // John
 
-// or, if we have a local variable with the name "value"
-// get it from window explicitly (safe!)
+// или, если у нас есть локальная переменная с именем "currentUser",
+// получим её из window явно (безопасно!)
 alert(window.currentUser.name); // John
 ```
 
-That said, using global variables is generally discouraged. There should be as few global variables as possible. The code design where a function gets "input" variables and produces certain "outcome" is  clearer, less prone to errors and easier to test.
+При этом, обычно не рекомендуется использовать глобальные переменные. Следует применять их как можно реже. Дизайн кода, при котором функция получает входные параметры и выдаёт определённый результат, чище, надёжнее и удобнее для тестирования.
 
-## Using for polyfills
+## Использование полифилов
 
-We can test the global object for support of modern language features.
+Глобальный объект можно использовать, чтобы проверить поддержку современных возможностей языка.
 
-For instance, test if a built-in `Promise` object exists (it doesn't in really old browsers):
-```js run
-if (!window.Promise) {
-  alert("Your browser is really old!");
-}
-```
-
-If there's none (say, we're in an old browser), we can create "polyfills": add functions that are not supported by the environment, but exist in the modern standard.
+Например, проверить наличие встроенного объекта `Promise` (такая поддержка отсутствует в очень старых браузерах):
 
 ```js run
 if (!window.Promise) {
-  window.Promise = ... // custom implementation of the modern language feature
+  alert("Ваш браузер очень старый!");
 }
 ```
 
-## Summary
+Если нет (скажем, используется старый браузер), мы можем создать полифил: добавить функции, которые не поддерживаются окружением, но существуют в современном стандарте.
 
-- The global object holds variables that should be available everywhere.
+```js run
+if (!window.Promise) {
+  window.Promise = ... // собственная реализация современной возможности языка
+}
+```
 
-    That includes JavaScript built-ins, such as `Array` and environment-specific values, such as `window.innerHeight` -- the window height in the browser.
-- The global object has a universal name `globalThis`.
+## Итого
 
-    ...But more often is referred by "old-school" environment-specific names, such as `window` (browser) and `global` (Node.js). As `globalThis` is a recent proposal, it's not supported in non-Chromium Edge (but can be polyfilled).
-- We should store values in the global object only if they're truly global for our project. And keep their number at minimum.
-- In-browser, unless we're using [modules](info:modules), a global variable declared with `var` becomes a property of the global object.
+- Глобальный объект хранит переменные, которые должны быть доступны в любом месте программы.
 
-    To make the code easier to understand and more future-proof, we should operate directly on the properties of the global object: `window.x = ...` instead of `var x = ...`.
+    Это включает в себя как встроенные объекты, например, `Array`, так и характерные для окружения свойства, например, `window.innerHeight` -- высота окна браузера.
+- Глобальный объект имеет универсальное имя -- `globalThis`.
+
+    ...Но чаще на него ссылаются по-старому, используя имя, характерное для данного окружения, такое как `window` (браузер) и `global` (Node.js). Так как `globalThis` появился недавно, он не поддерживается в IE и Edge (не-Chromium версия), но можно использовать полифил.
+- Следует хранить значения в глобальном объекте, только если они действительно глобальны для нашего проекта. И стараться свести их количество к минимуму.
+- В браузерах, если только мы не используем модули, глобальные функции и переменные, объявленные с помощью `var`, становятся свойствами глобального объекта.
+- Для того, чтобы код был проще и в будущем его легче было поддерживать, следует обращаться к свойствам глобального объекта напрямую, как `window.x`.
