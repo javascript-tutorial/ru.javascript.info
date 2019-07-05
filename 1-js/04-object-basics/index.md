@@ -1,1 +1,1 @@
-# Objects: the basics
+# Объекты: основы
