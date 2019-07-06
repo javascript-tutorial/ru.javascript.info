@@ -2,10 +2,10 @@ importance: 5
 
 ---
 
-# What's the scroll from the bottom?
+# Найти размер прокрутки снизу
 
-The `elem.scrollTop` property is the size of the scrolled out part from the top. How to get "`scrollBottom`" -- the size from the bottom?
+Свойство `elem.scrollTop` содержит размер прокрученной области при отсчёте сверху. А как подсчитать "`scrollBottom`" -- размер прокрутки снизу?
 
-Write the code that works for an arbitrary `elem`.
+Напишите соответствующее выражение для произвольного элемента `elem`.
 
-P.S. Please check your code: if there's no scroll or the element is fully scrolled down, then it should return `0`.
+P.S. Проверьте: если прокрутки нет вообще или элемент полностью прокручен – оно должно давать `0`.

@@ -1,11 +1,11 @@
-Answers: **no, yes**.
+Ответы: **нет**, **да**.
 
-- In the script `subject:Java` it doesn't match anything, because `pattern:[^script]` means "any character except given ones". So the regexp looks for `"Java"` followed by one such symbol, but there's a string end, no symbols after it.
+- Нет, т.к. в строке `subject:Java` нет каких-либо совпадений, потому что `pattern:[^script]` означает "любой символ, кроме заданных". Таким образом, регулярное выражение ищет `"Java"`, за которым следует один такой символ, но после конца строки нет символов.
 
     ```js run
     alert( "Java".match(/Java[^script]/) ); // null
     ```
-- Yes, because the regexp is case-insensitive, the `pattern:[^script]` part matches the character `"S"`.
+- Да, потому что регулярное выражение регистрозависимое - `pattern:[^script]` совпадает с символом `"S"`.
 
     ```js run
     alert( "JavaScript".match(/Java[^script]/) ); // "JavaS"

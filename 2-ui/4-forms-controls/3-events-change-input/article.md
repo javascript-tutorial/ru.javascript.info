@@ -1,27 +1,38 @@
-# Events: change, input, cut, copy, paste
+# События: change, input, cut, copy, paste
 
-Let's discuss various events that accompany data updates.
+Давайте рассмотрим различные события, сопутствующие обновлению данных.
 
-## Event: change
+## Событие: change
 
-The [change](http://www.w3.org/TR/html5/forms.html#event-input-change) event triggers when the element has finished changing.
+Событие `change` срабатывает по окончании изменения элемента.
 
-For text inputs that means that the event occurs when it loses focus.
+Для текстовых `<input>` это означает, что событие происходит при потере фокуса.
 
-For instance, while we are typing in the text field below -- there's no event. But when we move the focus somewhere else, for instance, click on a button -- there will be a `change` event:
+Пока мы печатаем в текстовом поле в примере ниже, событие не происходит. Но когда мы перемещаем фокус в другое место, например, нажимая на кнопку, то произойдёт событие `change`:
 
 ```html autorun height=40 run
 <input type="text" onchange="alert(this.value)">
 <input type="button" value="Button">
 ```
 
-For other elements: `select`, `input type=checkbox/radio` it triggers right after the selection changes.
+Для других элементов: `select`, `input type=checkbox/radio` событие запускается сразу после изменения значения:
 
-## Event: input
+```html autorun height=40 run
+<select onchange="alert(this.value)">
+  <option value="">Выберите что-нибудь</option>
+  <option value="1">Вариант 1</option>
+  <option value="2">Вариант 2</option>
+  <option value="3">Вариант 3</option>
+</select>
+```
 
-The `input` event triggers every time a value is modified.
+## Событие: input
 
-For instance:
+Событие `input` срабатывает каждый раз при изменении значения.
+
+В отличие от событий клавиатуры, оно работает при любых изменениях значений, даже если они не связаны с клавиатурными действиями: вставка с помощью мыши или распознавание речи при диктовке текста.
+
+Например:
 
 ```html autorun height=40 run
 <input type="text" id="input"> oninput: <span id="result"></span>
@@ -32,25 +43,25 @@ For instance:
 </script>
 ```
 
-If we want to handle every modification of an `<input>` then this event is the best choice.
+Если мы хотим обрабатывать каждое изменение в `<input>`, то это событие является лучшим выбором.
 
-Unlike keyboard events it works on any value change, even those that does not involve keyboard actions: pasting with a mouse or using speech recognition to dictate the text.
+С другой стороны, событие `input` не происходит при вводе с клавиатуры или иных действиях, если при этом не меняется значение в текстовом поле, т.е. нажатия клавиш `key:⇦`, `key:⇨` и подобных при фокусе на текстовом поле не вызовут это событие.
 
-```smart header="Can't prevent anything in `oninput`"
-The `input` event occurs after the value is modified.
+```smart header="Нельзя ничего предотвратить в `oninput`"
+Событие `input` происходит после изменения значения.
 
-So we can't use `event.preventDefault()` there -- it's just too late, there would be no effect.
+Поэтому мы не можем использовать `event.preventDefault()` там - будет уже слишком поздно, никакого эффекта не будет.
 ```
 
-## Events: cut, copy, paste
+## События: cut, copy, paste
 
-These events occur on cutting/copying/pasting a value.
+Эти события происходят при вырезании/копировании/вставке данных.
 
-They belong to [ClipboardEvent](https://www.w3.org/TR/clipboard-apis/#clipboard-event-interfaces) class and provide access to the data that is copied/pasted.
+Они относятся к классу [ClipboardEvent](https://www.w3.org/TR/clipboard-apis/#clipboard-event-interfaces) и обеспечивают доступ к копируемым/вставляемым данным.
 
-We also can use `event.preventDefault()` to abort the action.
+Мы также можем использовать `event.preventDefault()` для предотвращения действия по умолчанию, и в итоге ничего не скопируется/не вставится.
 
-For instance, the code below prevents all such events and shows what we are trying to cut/copy/paste:
+Например, код, приведённый ниже, предотвращает все подобные события и показывает, что мы пытаемся вырезать/копировать/вставить:
 
 ```html autorun height=40 run
 <input type="text" id="input">
@@ -62,18 +73,20 @@ For instance, the code below prevents all such events and shows what we are tryi
 </script>
 ```
 
-Technically, we can copy/paste everything. For instance, we can copy a file in the OS file manager, and paste it.
+Технически, мы можем скопировать/вставить всё. Например, мы можем скопировать файл из файловой системы и вставить его.
 
-There's a list of methods [in the specification](https://www.w3.org/TR/clipboard-apis/#dfn-datatransfer) to work with different data types, read/write to the clipboard.
+Существует список методов [в спецификации](https://www.w3.org/TR/clipboard-apis/#dfn-datatransfer) для работы с различными типами данных, чтения/записи в буфер обмена.
 
-But please note that clipboard is a "global" OS-level thing. Most browsers allow read/write access to the clipboard only in the scope of certain user actions for the safety. Also it is forbidden to create "custom" clipboard events in all browsers except Firefox.
+Но обратите внимание, что буфер обмена работает глобально, на уровне ОС. Большинство браузеров в целях безопасности разрешают доступ на чтение/запись в буфер обмена только в рамках определённых действий пользователя, к примеру, в обработчиках событий `onclick`.
 
-## Summary
+Также запрещается генерировать "пользовательские" события буфера обмена при помощи `dispatchEvent` во всех браузерах, кроме Firefox.
 
-Data change events:
+## Итого
 
-| Event | Description | Specials |
+События изменения данных:
+
+| Событие | Описание | Особенности |
 |---------|----------|-------------|
-| `change`| A value was changed. | For text inputs triggers on focus loss. |
-| `input` | For text inputs on every change. | Triggers immediately unlike `change`. |
-| `cut/copy/paste` | Cut/copy/paste actions. | The action can be prevented. The `event.clipboardData` property gives read/write access to the clipboard. |
+| `change`| Значение было изменено. | Для текстовых полей срабатывает при потере фокуса. |
+| `input` | Срабатывает при каждом изменении значения. | Запускается немедленно, в отличие от `change`. |
+| `cut/copy/paste` | Действия по вырезанию/копированию/вставке. | Действие можно предотвратить. Свойство `event.clipboardData` предоставляет доступ на чтение/запись в буфер обмена.. |

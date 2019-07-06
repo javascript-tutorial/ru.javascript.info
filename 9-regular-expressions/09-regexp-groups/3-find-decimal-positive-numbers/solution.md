@@ -1,13 +1,13 @@
 
-An non-negative integer number is `pattern:\d+`. We should exclude `0` as the first digit, as we don't need zero, but we can allow it in further digits.
+Регулярное выражение для неотрицательного целого числа `pattern:\d+`. Мы должны исключить `0` в качестве первой цифры, так как нам не нужен ноль, но мы можем разрешить его появление далее.
 
-So that gives us `pattern:[1-9]\d*`.
+Нам позволит сделать это регулярное выражение: `pattern:[1-9]\d*`.
 
-A decimal part is: `pattern:\.\d+`.
+Десятичная часть находится с помощью: `pattern:\.\d+`.
 
-Because the decimal part is optional, let's put it in parentheses with the quantifier `pattern:'?'`.
+Поскольку десятичная часть является необязательной, то давайте заключим ее в скобки с квантификатором `pattern:'?'`.
 
-Finally we have the regexp: `pattern:[1-9]\d*(\.\d+)?`:
+В итоге, мы получаем регулярное выражение: `pattern:[1-9]\d*(\.\d+)?`:
 
 ```js run
 let reg = /[1-9]\d*(\.\d+)?/g;
