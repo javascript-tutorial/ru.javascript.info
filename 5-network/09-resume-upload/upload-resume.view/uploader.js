@@ -4,8 +4,8 @@ class Uploader {
     this.file = file;
     this.onProgress = onProgress;
 
-    // create fileId that uniquely identifies the file
-    // we can also add user session identifier, to make it even more unique
+    // создаём уникальный идентификатор файла
+    // для большей уникальности мы также можем добавить идентификатор пользовательской сессии
     this.fileId = file.name + '-' + file.size + '-' + +file.lastModifiedDate;
   }
 
@@ -31,9 +31,9 @@ class Uploader {
     let xhr = this.xhr = new XMLHttpRequest();
     xhr.open("POST", "upload", true);
 
-    // send file id, so that the server knows which file to resume
+    // отправляем индентификатор файла, так что сервер будет знать, какая из загрузок возобновляется
     xhr.setRequestHeader('X-File-Id', this.fileId);
-    // send the byte we're resuming from, so the server knows we're resuming
+    // отправляем номер байта, с которого следует возобновить загрузку, то есть сервер поймём, что это не новая загрузка
     xhr.setRequestHeader('X-Start-Byte', this.startByte);
 
     xhr.upload.onprogress = (e) => {
@@ -43,10 +43,10 @@ class Uploader {
     console.log("send the file, starting from", this.startByte);
     xhr.send(this.file.slice(this.startByte));
 
-    // return
-    //   true if upload was successful,
-    //   false if aborted
-    // throw in case of an error
+    // возвращаем
+    //   true если загрузка успешно завершилась,
+    //   false если она отменена
+    // выбрасываем исключение в случае ошибки
     return await new Promise((resolve, reject) => {
 
       xhr.onload = xhr.onerror = () => {
@@ -59,7 +59,7 @@ class Uploader {
         }
       };
 
-      // onabort triggers only when xhr.abort() is called
+      // этот обработчик срабатывает, только когда вызывается xhr.abort()
       xhr.onabort = () => resolve(false);
 
     });

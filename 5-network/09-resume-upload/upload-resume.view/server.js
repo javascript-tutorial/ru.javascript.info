@@ -17,14 +17,14 @@ function onUpload(req, res) {
     res.end();
   }
 
-  // we'll files "nowhere"
+  // мы будем сохранять файлы "в никуда"
   let filePath = '/dev/null';
-  // could use a real path instead, e.g.
+  // хотя могли бы использовать реальный путь, например
   // let filePath = path.join('/tmp', fileId);
 
   debug("onUpload fileId: ", fileId);
 
-  // initialize a new upload
+  // инициируем новую загрузку
   if (!uploads[fileId]) uploads[fileId] = {};
   let upload = uploads[fileId];
 
@@ -32,7 +32,7 @@ function onUpload(req, res) {
 
   let fileStream;
 
-  // for byte 0, create a new file, otherwise check the size and append to existing one
+  // для байта номер 0 создаём новый файл, иначе проверяем размер и добавляем присланные данные к уже существующему
   if (startByte == 0) {
     upload.bytesReceived = 0;
     fileStream = fs.createWriteStream(filePath, {
@@ -45,7 +45,7 @@ function onUpload(req, res) {
       res.end(upload.bytesReceived);
       return;
     }
-    // append to existing file
+    // добавить к существующему файлу
     fileStream = fs.createWriteStream(filePath, {
       flags: 'a'
     });
@@ -58,26 +58,26 @@ function onUpload(req, res) {
     upload.bytesReceived += data.length;
   });
 
-  // send request body to file
+  // сохранить тело запроса в файл
   req.pipe(fileStream);
 
-  // when the request is finished, and all its data is written
+  // когда обработка запроса завершена и все данные записаны
   fileStream.on('close', function() {
     if (upload.bytesReceived == req.headers['x-file-size']) {
       debug("Upload finished");
       delete uploads[fileId];
 
-      // can do something else with the uploaded file here
+      // мы можем сделать что-то ещё с загруженным файлом
 
       res.end("Success " + upload.bytesReceived);
     } else {
-      // connection lost, we leave the unfinished file around
+      // соединение потеряно, остаются незавершённые загрузки
       debug("File unfinished, stopped at " + upload.bytesReceived);
       res.end();
     }
   });
 
-  // in case of I/O error - finish the request
+  // в случае ошибки ввода/вывода завершаем обработку запроса
   fileStream.on('error', function(err) {
     debug("fileStream error");
     res.writeHead(500, "File error");
