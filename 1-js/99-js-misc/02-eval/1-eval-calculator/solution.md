@@ -1,11 +1,11 @@
-Let's use `eval` to calculate the maths expression:
+Давайте будем использовать `eval` для вычисления арифметических выражений:
 
 ```js demo run
-let expr = prompt("Type an arithmetic expression?", '2*3+2');
+let expr = prompt("Введите арифметическое выражение:", '2*3+2');
 
 alert( eval(expr) );
 ```
 
-The user can input any text or code though.
+Пользователь может ввести любой текст или код.
 
-To make things safe, and limit it to arithmetics only, we can check the `expr` using a [regular expression](info:regular-expressions), so that it only may contain digits and operators.
+В целях безопасности ограничимся только арифметическими операциями, проверяя переданное `expr` с помощью [регулярного выражения](info:regular-expressions), чтобы удостовериться, что в нём содержатся только цифры и соответствующие операторы.
