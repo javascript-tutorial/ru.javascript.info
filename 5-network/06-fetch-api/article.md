@@ -1,98 +1,97 @@
-
 # Fetch API
 
-So far, we know quite a bit about `fetch`.
+На данный момент мы уже многое знаем про `fetch`.
 
-Now let's see the rest of API, to cover all its abilities.
+Теперь давайте рассмотрим оставшуюся часть API, чтобы охватить все его возможности.
 
-Here's the full list of all possible `fetch` options with their default values (alternatives in comments):
+Нижеследующий список - это все возможные опции для `fetch` с соответствующими значениями по умолчанию (в комментариях указаны альтернативные значения):
 
 ```js
 let promise = fetch(url, {
   method: "GET", // POST, PUT, DELETE, etc.
   headers: {
-    // the content type header value is usually auto-set depending on the request body
+    // значение этого заголовка обычно ставится автоматически, в зависимости от тела запроса
     "Content-Type": "text/plain;charset=UTF-8"
   },
-  body: undefined // string, FormData, Blob, BufferSource, or URLSearchParams
-  referrer: "about:client", // or "" to send no Referer header, or an url from the current origin
+  body: undefined // string, FormData, Blob, BufferSource или URLSearchParams
+  referrer: "about:client", // или "" для того, чтобы не послать заголовок Referer, или URL с текущего источника
   referrerPolicy: "no-referrer-when-downgrade", // no-referrer, origin, same-origin...
   mode: "cors", // same-origin, no-cors
   credentials: "same-origin", // omit, include
-  cache: "default", // no-store, reload, no-cache, force-cache, or only-if-cached
+  cache: "default", // no-store, reload, no-cache, force-cache или only-if-cached
   redirect: "follow", // manual, error
-  integrity: "", // a hash, like "sha256-abcdef1234567890"
+  integrity: "", // контрольная сумма, например "sha256-abcdef1234567890"
   keepalive: false, // true
-  signal: undefined, // AbortController to abort request
+  signal: undefined, // AbortController, чтобы прервать запрос
   window: window // null
 });
 ```
 
-An impressive list, right?
+Довольно-таки внушительный список, не так ли?
 
-We fully covered `method`, `headers` and `body` in the chapter <info:fetch>.
+В главе <info:fetch> мы полностью охватили параметры `method`, `headers` и `body`.
 
-The `signal` option is covered in <info:fetch-abort>.
+Опция `signal` разъяснена в главе в <info:fetch-abort>.
 
-Now let's explore the rest of options.
+Теперь давайте пройдёмся по оставшимся опциям.
 
 ## referrer, referrerPolicy
 
-These options govern how `fetch` sets HTTP `Referer` header.
+Данные опции определяют, как `fetch` устанавливает HTTP-заголовок `Referer`.
 
-That header contains the url of the page that made the request. In most scenarios, it plays a very minor informational role, but sometimes, for security purposes, it makes sense to remove or shorten it.
+В заголовке указывается URL-адрес страницы, с которой пришёл запрос. В большинстве случаев он играет совсем небольшую роль, однако в некоторых случаях, с целью большей безопасности, имеет смысл убрать или укоротить его.
 
-**The `referrer` option allows to set any `Referer` within the current origin) or disable it.**
+**Опция `referrer` позволяет установить любой `Referer` в пределах текущего источника или же отключить его.**
 
-To send no referer, set an empty string:
+Чтобы не отправлять Referer, нужно указать значением пустую строку:
 ```js
 fetch('/page', {
 *!*
-  referrer: "" // no Referer header
+  referrer: "" // отсутствует Referer заголовок
 */!*
 });
 ```
 
-To set another url within the current origin:
+Для того, чтобы установить другой URL-адрес для текущего источника:
 
 ```js
 fetch('/page', {
-  // assuming we're on https://javascript.info
-  // we can set any Referer header, but only within the current origin
+  // предположим, что мы находимся на странице https://javascript.info
+  // мы можем установить любое значение Referer при условии, что оно принадлежит текущему источнику
 *!*
   referrer: "https://javascript.info/anotherpage"
 */!*
 });
 ```
 
-**The `referrerPolicy` option sets general rules for `Referer`.**
+**Опция `referrerPolicy` устанавливает общие правила для `Referer`.**
 
-Possible values are described in the [Referrer Policy specification](https://w3c.github.io/webappsec-referrer-policy/):
+Возможные значения описаны в [спецификации Referrer Policy](https://w3c.github.io/webappsec-referrer-policy/):
 
-- **`"no-referrer-when-downgrade"`** -- default value: `Referer` is sent always, unless we send a request from HTTPS to HTTP (to less secure protocol).
-- **`"no-referrer"`** -- never send `Referer`.
-- **`"origin"`** -- only send the origin in `Referer`, not the full page URL, e.g. `http://site.com` instead of `http://site.com/path`.
-- **`"origin-when-cross-origin"`** -- send full `Referer` to the same origin, but only the origin part for cross-origin requests.
-- **`"same-origin"`** -- send full `Referer` to the same origin, but no referer for for cross-origin requests.
-- **`"strict-origin"`** -- send only origin, don't send `Referer` for HTTPS→HTTP requests.
-- **`"strict-origin-when-cross-origin"`** -- for same-origin send full `Referer`, for cross-origin send only origin, unless it's HTTPS→HTTP request, then send nothing.
-- **`"unsafe-url"`** -- always send full url in `Referer`.
+- **`"no-referrer-when-downgrade"`** -- значение по умолчанию: `Referer` отправляется всегда, если только мы не отправим запрос из HTTPS в HTTP (из более безопасного протокола в менее безопасный).
+- **`"no-referrer"`** -- никогда не отправлять `Referer`.
+- **`"origin"`** -- отправлять в `Referer` только текущий источник, а не полный URL-адрес страницы, например, послать `http://site.com` вместо `http://site.com/path`.
+- **`"origin-when-cross-origin"`** -- отправлять полный Referer для запросов в пределах текущего источника, но для кроссдоменных запросов отправлять только само значение источника
+- **`"same-origin"`** -- отправлять полный Referer для запросов в пределах текущего источника, а для кроссдоменных запросов не отправлять referer вообще.
+- **`"strict-origin"`** -- отправлять только значение источника, не отправлять Referer для HTTPS→HTTP запросов.
+- **`"strict-origin-when-cross-origin"`** -- для запросов в пределах текущего источника отправлять полный Referer, для кроссдоменных запросов отправлять только значение источника, в случае HTTPS→HTTP запросов не отправлять ничего.
+- **`"unsafe-url"`** -- всегда отправлять полный URL-адрес в `Referer`.
 
-Let's say we have an admin zone with URL structure that shouldn't be known from outside of the site.
+Допустим, у нас есть админка со структурой URL, которая не должна стать известной снаружи сайта.
 
-If we send a cross-origin `fetch`, then by default it sends the `Referer` header with the full url of our page (except when we request from HTTPS to HTTP, then no `Referer`).
+Если мы отправляем кроссдоменный запрос `fetch`, то по умолчанию он отправит заголовок `Referer` с полным URL-адресом нашей админки (исключение - это когда мы делаем запрос от HTTPS в HTTP, в таком случае `Referer` не будет отправляться).
 
-E.g. `Referer: https://javascript.info/admin/secret/paths`.
+Например, `Referer: https://javascript.info/admin/secret/paths`.
 
-If we'd like to totally hide the referrer:
+Если же мы хотим полностью скрыть его:
 
 ```js
 fetch('https://another.com/page', {
-  referrerPolicy: "no-referrer" // no Referer, same effect as referrer: ""
+  referrerPolicy: "no-referrer" // не посылать Referer - даёт такой же результат, как и referrer: ""
 });
 ```
 
-Otherwise, if we'd like the remote side to see only the domain where the request comes from, but not the full URL, we can send only the "origin" part of it:
+Или же, если мы хотим, чтобы удалённая сторона знала домен, откуда поступает запрос, но не полный URL, мы можем отправить только источник:
 
 ```js
 fetch('https://another.com/page', {
@@ -102,54 +101,54 @@ fetch('https://another.com/page', {
 
 ## mode
 
-The `mode` option serves as a safe-guard that prevents cross-origin requests:
+Опция `mode` - это надёжная защита от кроссдоменных запросов:
 
-- **`"cors"`** -- the default, cross-origin requests are allowed, as described in <info:fetch-crossorigin>,
-- **`"same-origin"`** -- cross-origin requests are forbidden,
-- **`"no-cors"`** -- only simple cross-origin requests are allowed.
+- **`"cors"`** -- стоит по умолчанию, позволяет делать кроссдоменные запросы так, как описано в <info:fetch-crossorigin>,
+- **`"same-origin"`** -- кроссдоменные запросы запрещены,
+- **`"no-cors"`** -- разрешены только простые кроссдоменные запросы.
 
-That may be useful in contexts when the fetch url comes from 3rd-party, and we want a "power off switch" to limit cross-origin capabilities.
+Это может пригодиться, если URL-адрес для fetch приходит от третьего лица, и нам нужно что-то, чтобы контролировать ограничение кроссдоменных возможностей - эдакий "выключатель".
 
 ## credentials
 
-The `credentials` option specifies whether `fetch` should send cookies and HTTP-Authorization headers with the request.
+Опция `credentials` может указывать, должен ли `fetch` отправлять cookies и аутентификационные заголовки HTTP вместе с запросом.
 
-- **`"same-origin"`** -- the default, don't send for cross-origin requests,
-- **`"include"`** -- always send, requires `Accept-Control-Allow-Credentials` from cross-origin server,
-- **`"omit"`** -- never send, even for same-origin requests.
+- **`"same-origin"`** -- стоит по умолчанию, не отправлять для кроссдоменных запросов,
+- **`"include"`** -- отправлять всегда, но при этом необходимы `Access-Control-Allow-Credentials` заголовки в ответе от кроссдоменного сервера,
+- **`"omit"`** -- не отправлять ни при каких обстоятельствах, даже для запросов, сделанных в пределах текущего источника.
 
-## cache
+## Кеш
 
-By default, `fetch` requests make use of standard HTTP-caching. That is, it honors `Expires`, `Cache-Control` headers, sends `If-Modified-Since`, and so on. Just like regular HTTP-requests do.
+По умолчанию `fetch` делает запросы, используя стандартный HTTP-кешинг. То есть, он учитывает заголовки `Expires`, `Cache-Control`, отправляет `If-Modified-Since` и так далее. Так же, как и обычные HTTP-запросы.
 
-The `cache` options allows to ignore HTTP-cache or fine-tune its usage:
+Опция `cache` позволяет игнорировать HTTP-кеш или же настроить его использование:
 
-- **`"default"`** -- `fetch` uses standard HTTP-cache rules and headers;
-- **`"no-store"`** -- totally ignore HTTP-cache, this mode becomes the default if we set a header `If-Modified-Since`, `If-None-Match`, `If-Unmodified-Since`, `If-Match`, or `If-Range`;
-- **`"reload"`** -- don't take the result from HTTP-cache (if any), but populate cache with the response (if response headers allow);
-- **`"no-cache"`** -- create a conditional request if there is a cached response, and a normal request otherwise. Populate HTTP-cache with the response;
-- **`"force-cache"`** -- use a response from HTTP-cache, even if it's stale. If there's no response in HTTP-cache, make a regular HTTP-request, behave normally;
-- **`"only-if-cached"`** -- use a response from HTTP-cache, even if it's stale. If there's no response in HTTP-cache, then error. Only works when `mode` is `"same-origin"`.
+- **`"default"`** -- `fetch` будет использовать стандартные правила и заголовки HTTP кеширования;
+- **`"no-store"`** -- полностью игнорировать HTTP-кеш, этот режим становится режимом по умолчанию, если присутствуют такие заголовки как `If-Modified-Since`, `If-None-Match`, `If-Unmodified-Since`, `If-Match`, или `If-Range`;
+- **`"reload"`** -- не брать результат из HTTP-кеша (даже при его присутствии), но сохранить ответ в кеше (если это дозволено заголовками ответа);
+- **`"no-cache"`** -- в случае, если существует кешированный ответ - создать условный запрос, в противном же случае - обычный запрос. Сохранить ответ в  HTTP-кеше;
+- **`"force-cache"`** -- использовать ответ из HTTP-кеша, даже если он устаревший. Если же ответ в HTTP-кеше отсутствует, сделать обычный HTTP-запрос, действовать как обычно;
+- **`"only-if-cached"`** -- использовать ответ из HTTP-кеша, даже если он устаревший. Если же ответ в HTTP-кеше отсутствует, тогда выдаётся ошибка. Это работает, только когда `mode` установлен в `"same-origin"`.
 
-## redirect
+## Перенаправление
 
-Normally, `fetch` transparently follows HTTP-redirects, like 301, 302 etc.
+Обычно `fetch` следует таким HTTP-перенаправлениям, как 301, 302 и так далее.
 
-The `redirect` option allows to change that:
+Это можно поменять при помощи опции `redirect`:
 
-- **`"follow"`** -- the default, follow HTTP-redirects,
-- **`"error"`** -- error in case of HTTP-redirect,
-- **`"manual"`** -- don't follow HTTP-redirect, but `response.url` will be the new URL, and `response.redirected` will be `true`, so that we can perform the redirect manually to the new URL (if needed).
+- **`"follow"`** -- стоит по умолчанию, следовать HTTP-перенаправлениям,
+- **`"error"`** -- ошибка в случае HTTP-перенаправления,
+- **`"manual"`** -- не следовать HTTP-перенаправлению, но установить адрес перенаправления в `response.url`, а `response.redirected` будет иметь значение `true`, чтобы мы могли сделать перенаправление на новый адрес вручную.
 
 ## integrity
 
-The `integrity` option allows to check if the response matches the known-ahead checksum.
+Опция `integrity` позволяет проверить, соответствует ли ответ известной заранее контрольной сумме.
 
-As described in the [specification](https://w3c.github.io/webappsec-subresource-integrity/), supported hash-functions are SHA-256, SHA-384, and SHA-512, there might be others depending on a browser.
+Как описано в [спецификации] (https://w3c.github.io/webappsec-subresource-integrity/), поддерживаемыми хеш-функциями являются SHA-256, SHA-384 и SHA-512. В зависимости от браузера, могут быть и другие.
 
-For example, we're downloading a file, and we know that it's SHA-256 checksum is "abc" (a real checksum is longer, of course).
+Например, мы скачиваем файл, и мы точно знаем, что контрольная сумма его SHA-256 равна "abc" (разумеется, настоящая контрольная сумма будет длиннее).
 
-We can put it in the `integrity` option, like this:
+Мы можем добавить это в опцию `integrity` вот так:
 
 ```js
 fetch('http://site.com/file', {
@@ -157,17 +156,17 @@ fetch('http://site.com/file', {
 });
 ```
 
-Then `fetch` will calculate SHA-256 on its own and compare it with our string. In case of a mismatch, an error is triggered.
+Затем `fetch` самостоятельно вычислит SHA-256 и сравнит его с нашей строкой. В случае несоответствия срабатывает ошибка.
 
 ## keepalive
 
-The `keepalive` option indicates that the request may outlive the page.
+Опция `keepalive` указывает на то, что запрос может пережить страницу.
 
-For example, we gather statistics about how the current visitor uses our page (mouse clicks,  page fragments he views), to improve user experience.
+Например, для улучшения опыта взаимодействия мы собираем статистические данные о том, как посетитель ведёт себя на нашей странице (на что он кликает, части страницы, которые он просматривает).
 
-When the visitor leaves our page -- we'd like to save it on our server.
+Когда посетитель покидает нашу страницу - мы хотим сохранить это на нашем сервере.
 
-We can use `window.onunload` for that:
+Для этого мы можем использовать `window.onunload`:
 
 ```js run
 window.onunload = function() {
@@ -181,10 +180,10 @@ window.onunload = function() {
 };
 ```
 
-Normally, when a document is unloaded, all associated network requests are aborted. But `keepalive` option tells the browser to perform the request in background, even after it leaves the page. So it's essential for our request to succeed.
+Обычно, когда документ выгружен, все связанные с ним сетевые запросы прерываются. Но опция `keepalive` указывает браузеру выполнять запрос в фоновом режиме даже после того, как пользователь покидает страницу. Поэтому важно, чтобы наш запрос был успешным.
 
-- We can't send megabytes: the body limit for keepalive requests is 64kb.
-    - If we gather more data, we can send it out regularly, then there won't be a lot for the "onunload" request.
-    - The limit is for all currently ongoing requests. So we cheat it by creating 100 requests, each 64kb.
-- We don't get the server response if the request is made `onunload`, because the document is already unloaded at that time.
-    - Usually, the server sends empty response to such requests, so it's not a problem.
+- Мы не можем посылать мегабайты: лимит тела для запроса с keepalive - 64Кбайт.
+    - Если мы собрали достаточно данных, мы можем отправлять их регулярно, и это не будет большой нагрузкой для запроса при "onunload".
+    - Этот лимит распространяется на все текущие запросы. Однако, мы можем обойти это правило, послав 100 запросов одновременно - каждый по 64Кбайт.
+- Мы не получим ответ от сервера, если запрос сделан при `onunload`: так как в тот момент документ уже выгружен.
+    - Обычно сервер посылает пустой ответ на такие запросы, так что это не является проблемой.
