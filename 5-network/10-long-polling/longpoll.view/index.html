@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <script src="browser.js"></script>
 
-All visitors of this page will see messages of each other.
+Все посетители этой страницы будут видеть сообщения друг друга.
 
 <form name="publish">
   <input type="text" name="message" />
@@ -13,6 +13,6 @@ All visitors of this page will see messages of each other.
 
 <script>
   new PublishForm(document.forms.publish, 'publish');
-  // random url to avoid any caching issues
+  // случайный url, чтобы избежать проблем с кэшированием.
   new SubscribePane(document.getElementById('subscribe'), 'subscribe?random=' + Math.random());
 </script>

@@ -1,62 +1,62 @@
-# Long polling
+# Длительные опросы
 
-Long polling is the simplest way of having persistent connection with server, that doesn't use any specific protocol like WebSocket or Server Side Events.
+Длительный опрос - это самый простой способ получить постоянное соединение с сервером, не используя при этом никаких специфических протоколов (как WebSocket или Server Side Events).
 
-Being very easy to implement, it's also good enough in a lot of cases.
+Даный способ очень прост в реализации и хорошо подходит для многих задач.
 
-## Regular Polling
+## Частые опросы
 
-The simplest way to get new information from the server is polling.
+Опрос (polling) - это самый простой способ получить новую информацию от сервера.
 
-That is, periodical requests to the server: "Hello, I'm here, do you have any information for me?". For example, once in 10 seconds.
+То есть, это периодические запросы на сервер: "Привет, я здесь, у вас есть какая-нибудь информация для меня?". Например, раз в 10 секунд.
 
-In response, the server first takes a notice to itself that the client is online, and second - sends a packet of messages it got till that moment.
+В ответ сервер во-первых помечает у себя, что клиент онлайн, а во-вторых посылает сообщение, в котором в специальном формате содержится весь пакет событий, накопившихся к данному моменту.
 
-That works, but there are downsides:
-1. Messages are passed with a delay up to 10 seconds.
-2. Even if there are no messages, the server is bombed with requests every 10 seconds. That's quite a load to handle for backend, speaking performance-wise.
+Это работает, но есть и недостатки:
+1. Сообщения передаются с задержкой до 10 секунд.
+2. Даже если сообщений нет, сервер атакуют запросы каждые 10 секунд. С точки зрения производительности, это довольно большая нагрузка для бэкэнда.
 
-So, if we're talking about a very small service, the approach may be viable.
+Так что, если речь идет о очень маленьком сервисе, подход может оказаться жизнеспособным.
 
-But generally, it needs an improvement.
+Но в целом, он нуждается в улучшении.
 
-## Long polling
+## Длительные опросы
 
-Long polling -- is a better way to poll the server.
+Длительные опросы - лучший способ взаимодействия с сервером.
 
-It's also very easy to implement, and delivers messages without delays.
+Они также очень просты в реализации и сообщения доставляются без задержек.
 
-The flow:
+Как это происходит:
 
-1. A request is sent to the server.
-2. The server doesn't close the connection until it has a message.
-3. When a message appears - the server responds to the request with the data.
-4. The browser makes a new request immediately.
+1. Запрос отправляется на сервер.
+2. Сервер не закрывает соединение, пока не получит сообщение.
+3. Когда появляется сообщение - сервер отвечает на запрос, посылая данные.
+4. Браузер немедленно делает новый запрос.
 
-The situation when the browser sent a request and has a pending connection with the server, is standard for this method. Only when a message is delivered, the connection is reestablished.
+Для данного метода ситуация, когда браузер отправил запрос и удерживает соединение с сервером, ожидая ответа, является стандартной. Соединение прерывается только доставкой сообщений.
 
 ![](long-polling.png)
 
-Even if the connection is lost, because of, say, a network error, the browser immediately sends a new request.
+Даже если соединение будет потеряно, скажем, из-за сетевой ошибки, браузер немедленно посылает новый запрос.
 
-A sketch of client-side code:
+Примерный код клиентской части:
 
 ```js
 async function subscribe() {
   let response = await fetch("/subscribe");
 
   if (response.status == 502) {
-    // Connection timeout, happens when the connection was pending for too long
-    // let's reconnect
+    // Тайм-аут соединения; происходит, когда соединение ожидало слишком долго.
+    // давайте восстановим связь
     await subscribe();
   } else if (response.status != 200) {
-    // Show Error
+    // Показать ошибку
     showMessage(response.statusText);
-    // Reconnect in one second
+    // Подключиться снова через секунду.
     await new Promise(resolve => setTimeout(resolve, 1000));
     await subscribe();
   } else {
-    // Got message
+    // Получить сообщение
     let message = await response.text();
     showMessage(message);
     await subscribe();
@@ -66,30 +66,30 @@ async function subscribe() {
 subscribe();
 ```
 
-The `subscribe()` function makes a fetch, then waits for the response, handles it and calls itself again.
+Функция `subscribe()` делает запрос, затем ждет ответа, обрабатывает его и снова вызывает сама себя.
 
-```warn header="Server should be ok with many pending connections"
-The server architecture must be able to work with many pending connections.
+```warn header="Сервер должен поддерживать множественные ожидающие подключения."
+Архитектура сервера должна быть способна работать со многими ожидающими подключениями.
 
-Certain server architectures run a process per connect. For many connections there will be as many processes, and each process takes a lot of memory. So many connections just consume it all.
+Некоторые серверные архитектуры запускают отдельный процесс для каждого соединения. Для большого количества соединений будет столько же процессов, и каждый процесс занимает значительный обьём памяти. Так много соединений просто поглотят всю память.
 
-That's often the case for backends written in PHP, Ruby languages, but technically isn't a language, but rather implementation issue.
+Часто такая проблема возникает с бэкендами, написанными на PHP или Ruby, но технически дело не в языке, а скорее в реализации.
 
-Backends written using Node.js usually don't have such problems.
+Бэкенды, написанные с помощью Node.js, обычно не имеют таких проблем.
 ```
 
-## Demo: a chat
+## Демо: чат
 
-Here's a demo:
+Демо:
 
 [codetabs src="longpoll" height=500]
 
-## Area of usage
+## Область применения
 
-Long polling works great in situations when messages are rare.
+Длительные опросы прекрасно работают с редкими сообщениями.
 
-If messages come very often, then the chart of requesting-receiving messages, painted above, becomes saw-like.
+Если сообщения приходят очень часто, то схема приёма-отправки сообщений, приведённая выше, становится "пилой".
 
-Every message is a separate request, supplied with headers, authentication overhead, and so on.
+Каждое сообщение - это отдельный запрос, поставляемый с заголовками, издержками аутентификации и так далее.
 
-So, in this case, another method is preferred, such as [Websocket](info:websocket) or [Server Sent Events](info:server-sent-events).
+Поэтому в данном случае предпочтительнее использовать другой метод, такой как [Websocket](info:websocket) или [Server Sent Events](info:server-sent-events).
