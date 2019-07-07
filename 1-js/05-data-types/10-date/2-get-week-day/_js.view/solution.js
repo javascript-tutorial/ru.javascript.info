@@ -1,5 +1,5 @@
 function getWeekDay(date) {
-  let days = ['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA'];
+  let days = ['ВС', 'ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ'];
 
   return days[date.getDay()];
 }

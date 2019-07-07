@@ -1,6 +1,6 @@
 # Promise API
 
-В классе `Promise` есть 4 статических метода. Давайте познакомимся с ними.
+В классе `Promise` есть 5 статических метода. Давайте познакомимся с ними.
 
 ## Promise.resolve
 
@@ -102,7 +102,7 @@ let urls = [
   'https://api.github.com/users/jeresig'
 ];
 
-// Проходим по каждому элементу массива, запускаем промис (fetch(url)) и добавляем его в массив (requests)
+// Преобразуем каждый URL в промис, возвращённый fetch
 let requests = urls.map(url => fetch(url));
 
 // Promise.all будет ожидать выполнения всех промисов
@@ -112,7 +112,7 @@ Promise.all(requests)
   ));
 ```
 
-Более реальный пример - это получить информацию о пользователях GitHub по их логинам из массива (или мы можем получить массив товаров по их идентификаторам, логика та же):
+Более реальный пример с получением информации о пользователях GitHub по их логинам из массива (мы могли бы получить массив товаров по их идентификаторам, логика та же):
 
 ```js run
 let names = ['iliakan', 'remy', 'jeresig'];
@@ -134,7 +134,7 @@ Promise.all(requests)
   .then(users => users.forEach(user => alert(user.name)));
 ```
 
-Если любой из промисов будет отклонён, то `Promise.all` немедленно вернёт эту ошибку.
+**Если любой из промисов будет отклонён, то промис, возвращённый `Promise.all`, немедленно завершается с этой ошибкой.**
 
 Например:
 
@@ -150,12 +150,16 @@ Promise.all([
 
 Тут второй промис будет отклонён через 2 секунды. Это приведёт к немедленному отклонению всего `Promise.all`, поэтому выполнится `.catch`: ошибка отклонённого промиса становится результатом всего `Promise.all`.
 
-Важный момент - промисы не предоставляют способа "отменить" или "прервать" их выполнение. Таким образом, промисы продолжат выполняться, но все результаты будут игнорироваться.
+```warn header="В случае ошибки, остальные результаты игнорируются"
+Если один промис завершается с ошибкой, то весь `Promise.all` завершается с ней, полностью забывая про остальные промисы в списке. Их результаты игнорируются.
 
-Есть варианты обойти данное ограничение: можно написать дополнительный код для `clearTimeout` (или каким-то другим образом отменить промис) в случае ошибки, либо можно сделать так, чтобы ошибки становились элементами в результирующем массиве (смотрите задачу ниже).
+Например, если сделано несколько вызовов `fetch`, как в примере выше, и один не прошёл, то остальные будут всё ещё выполняться, но `Promise.all` за ними уже не смотрит. Скорее всего, они так или иначе завершатся, но их результаты будут проигнорированы.
 
-````smart header="`Promise.all(...)` разрешает передавать НЕ промисы в `iterable` (итерируемом) объекте"
-Обычно, `Promise.all(...)` принимает итерируемый (чаще всего массив) объект промисов. Но если любой из этих объектов не является промисом, он оборачивается в `Promise.resolve`.
+`Promise.all` ничего не делает для их отмены, так как в промисах вообще нет концепии "отмены". В главе <info:fetch-abort> мы рассмотрим `AbortController`, который помогает с этим, но он не является частью Promise API.
+```
+
+````smart header="`Promise.all(iterable)` разрешает передавать НЕ промисы в `iterable` (итерируемом объекте)"
+Обычно, `Promise.all(...)` принимает итерируемый объект промисов (чаще всего массив). Но если любой из этих объектов не является промисом, он оборачивается в `Promise.resolve`.
 
 Например, здесь результат: `[1, 2, 3]`
 
@@ -169,9 +173,86 @@ Promise.all([
 ]).then(alert); // 1, 2, 3
 ```
 
-Таким образом, мы можем передавать в том числе значения, которые не являются промисами, в `Promise.all`, это бывает удобно.
-
+Таким образом, мы можем передавать уже готовые значения, которые не являются промисами, в `Promise.all`, иногда это бывает удобно.
 ````
+
+## Promise.allSettled
+
+[recent browser="new"]
+
+`Promise.all` rejects as a whole if any promise rejects. That's good in cases, when we need *all* results to go on:
+
+```js
+Promise.all([
+  fetch('/template.html'),
+  fetch('/style.css'),
+  fetch('/data.json')
+]).then(render); // render method needs them all
+```
+
+`Promise.allSettled` waits for all promises to settle: even if one rejects, it waits for the others. The resulting array has:
+
+- `{status:"fulfilled", value:result}` for successful responses,
+- `{status:"rejected", reason:error}` for errors.
+
+For example, we'd like to fetch the information about multiple users. Even if one request fails, we're interested in the others.
+
+Let's use `Promise.allSettled`:
+
+```js run
+let urls = [
+  'https://api.github.com/users/iliakan',
+  'https://api.github.com/users/remy',
+  'https://no-such-url'
+];
+
+Promise.allSettled(urls.map(url => fetch(url)))
+  .then(results => { // (*)
+    results.forEach((result, num) => {
+      if (result.status == "fulfilled") {
+        alert(`${urls[num]}: ${result.value.status}`);
+      }
+      if (result.status == "rejected") {
+        alert(`${urls[num]}: ${result.reason}`);
+      }
+    });
+  });
+```
+
+The `results` in the line `(*)` above will be:
+```js
+[
+  {status: 'fulfilled', value: ...response...},
+  {status: 'fulfilled', value: ...response...},
+  {status: 'rejected', reason: ...error object...}
+]
+```
+
+So, for each promise we get its status and `value/reason`.
+
+### Polyfill
+
+If the browser doesn't support `Promise.allSettled`, it's easy to polyfill:
+
+```js
+if(!Promise.allSettled) {
+  Promise.allSettled = function(promises) {
+    return Promise.all(promises.map(p => Promise.resolve(p).then(v => ({
+      state: 'fulfilled',
+      value: v,
+    }), r => ({
+      state: 'rejected',
+      reason: r,
+    }))));
+  };
+}
+```
+
+In this code, `promises.map` takes input values, turns into promises (just in case a non-promise was passed) with `p => Promise.resolve(p)`, and then adds `.then` handler to it.
+
+That handler turns a successful result `v` into `{state:'fulfilled', value:v}`, and an error `r` into `{state:'rejected', reason:r}`. That's exactly the format of `Promise.allSettled`.
+
+Then we can use `Promise.allSettled` to get the results or *all* given promises, even if some of them reject.
 
 ## Promise.race
 
@@ -197,11 +278,14 @@ Promise.race([
 
 ## Итого
 
-Мы ознакомились с 4 статическими методами класса `Promise`:
+Мы ознакомились с пятью статическими методами класса `Promise`:
 
 1. `Promise.resolve(value)` -- возвращает успешно выполнившийся промис, с указанным значением.
 2. `Promise.reject(error)` -- возвращает промис с указанной ошибкой.
 3. `Promise.all(promises)` -- ожидает выполнения всех промисов и возвращает массив с результатами. Если любой из указанных промисов вернёт ошибку, то результатом работы `Promise.all` будет эта ошибка, результаты остальных промисов будут игнорироваться.
-4. `Promise.race(promises)` -- ожидает первый выполненный промис, результатом будет выполнившийся промис или первая ошибка.
+4. `Promise.allSettled(promises)` (a new method) -- waits for all promises to resolve or reject and returns an array of their results as object with:
+    - `state`: `'fulfilled'` or `'rejected'`
+    - `value` (if fulfilled) or `reason` (if rejected).
+5. `Promise.race(promises)` -- ожидает первый выполненный промис, результатом будет выполнившийся промис или первая ошибка.
 
-Из всех перечисленных методов, самый часто используемый - это `Promise.all`.
+Из всех перечисленных методов, самый часто используемый - это, пожалуй, `Promise.all`.
