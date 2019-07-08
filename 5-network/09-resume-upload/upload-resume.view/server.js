@@ -32,8 +32,8 @@ function onUpload(req, res) {
 
   let fileStream;
 
-  // для байта номер 0 создаём новый файл, иначе проверяем размер и добавляем присланные данные к уже существующему
-  if (startByte == 0) {
+  // если стартовый байт 0 или не указан - создаём новый файл, иначе проверяем размер и добавляем данные к уже существующему файлу
+  if (!startByte) {
     upload.bytesReceived = 0;
     fileStream = fs.createWriteStream(filePath, {
       flags: 'w'
