@@ -83,7 +83,7 @@ fetch('https://api.github.com/repos/javascript-tutorial/en.javascript.info/commi
   .then(commits => alert(commits[0].author.login));
 ```
 
-Для получения текста, используем `await response.text()` вместо `.json()`:
+Для получения текста используем `await response.text()` вместо `.json()`:
 
 ```js run async
 let response = await fetch('https://api.github.com/repos/javascript-tutorial/en.javascript.info/commits');
@@ -144,7 +144,7 @@ for (let [key, value] of response.headers) {
 }
 ```
 
-Для установки заголовка, мы можем использовать опцию `headers`, например:
+Для установки заголовка мы можем использовать опцию `headers`, например:
 
 ```js
 let response = fetch(protectedUrl, {
@@ -181,7 +181,7 @@ let response = fetch(protectedUrl, {
 
 ## POST-запросы
 
-Для отправки `POST` запроса или запроса с другим методом, нам необходимо использовать `fetch` параметры:
+Для отправки `POST`-запроса или запроса с другим методом, нам необходимо использовать `fetch` параметры:
 
 - **`method`** -- HTTP метод, например `POST`,
 - **`body`** -- один из:
@@ -218,7 +218,7 @@ alert(result.message);
 
 Мы можем отправить бинарные данные напрямую, используя `Blob` или `BufferSource`.
 
-Например, у нас есть элемент `<canvas>`, на котором мы можем рисовать движением мыши. При нажатии на кнопку "Отправить", изображение отправляется на сервер:
+Например, у нас есть элемент `<canvas>`, на котором мы можем рисовать движением мыши. При нажатии на кнопку "Отправить" изображение отправляется на сервер:
 
 ```html run autorun height="90"
 <body style="margin:0">
@@ -285,7 +285,7 @@ fetch(url, options)
 - `response.ok` -- `true`, если статус ответа в диапазоне 200-299.
 - `response.headers` -- похожий на `Map` объект с HTTP-заголовками.
 
-Методы для получения тела ответа: 
+Методы для получения тела ответа:
 - **`response.json()`** -- преобразовывает ответ в JSON-объект,
 - **`response.text()`** -- возвращает ответ как обычный текст,
 - **`response.formData()`** -- возвращает ответ как объект FormData (кодировка form/multipart, см. следующую главу),

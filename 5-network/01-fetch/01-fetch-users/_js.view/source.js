@@ -1,4 +1,4 @@
 
 async function getUsers(names) {
-  /* your code */
+  /* ваш код */
 }
