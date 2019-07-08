@@ -31,7 +31,12 @@
 
 Внутри `<iframe>` находится по сути отдельное окно, то у  окно, с собственными объектами `document` и `window`.
 
+<<<<<<< HEAD
 Мы можем обращаться к ним, используя свойства:
+=======
+- `iframe.contentWindow` to get the window inside the `<iframe>`.
+- `iframe.contentDocument` to get the document inside the `<iframe>`, короткий аналог `iframe.contentWindow.document`.
+>>>>>>> 5e9eca374f644ea85c7d548bbe344fd30e5fb89d
 
 - `iframe.contentWindow` ссылка на объект `window` внутри `<iframe>`.
 - `iframe.contentDocument` - ссылка на объект `document` внутри `<iframe>`, a short for `iframe.contentWindow.document`.

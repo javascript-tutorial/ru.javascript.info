@@ -149,13 +149,23 @@ window.addEventListener("unload", function() {
 };
 ```
 
+<<<<<<< HEAD
 - Отсылается POST-запрос.
 - Мы можем послать не только строку, но так же формы и другие форматы, как описано в главе <info:fetch-basics>, но обычно это строковый объект.
 - Размер данных ограничен 64 Кб.
+=======
+- The request is sent as POST.
+- We can send not only a string, but also forms and other formats, as described in the chapter <info:fetch>, but usually it's a stringified object.
+- The data is limited by 64kb.
+>>>>>>> 5e9eca374f644ea85c7d548bbe344fd30e5fb89d
 
 К тому моменту, как `sendBeacon` завершится, браузер наверняка уже покинет страницу, так что возможности обработать ответ сервера не будет (для статистики он обычно пустой).
 
+<<<<<<< HEAD
 Для таких запросов с закрывающейся страницей есть специальный флаг `keepalive` в методе [fetch](info:fetch-basics) для общих сетевых запросов. Вы можете найти больше информации в главе <info:fetch-api>.
+=======
+There's also a `keepalive` flag for doing such "after-page-left" requests in  [fetch](info:fetch) method for generic network requests. You can find more information in the chapter <info:fetch-api>.
+>>>>>>> 5e9eca374f644ea85c7d548bbe344fd30e5fb89d
 
 
 Если мы хотим отменить переход на другую страницу, то здесь мы этого сделать не сможем. Но сможем в другом месте -- в событии `onbeforeunload`.

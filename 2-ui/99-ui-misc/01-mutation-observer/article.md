@@ -130,7 +130,11 @@ let hello = "world";
 
 Пока всё просто, правда? В HTML есть фрагменты кода в `<pre>`, - для них мы включаем подсветку синтаксиса.
 
+<<<<<<< HEAD
 Идём дальше. Представим, что мы собираемся динамически подгружать материалы с сервера. Позже в учебнике мы выучим для этого [способы](info:fetch-basics). На данный момент имеет значение только то, что мы получаем HTML статьи с веб-сервера и показываем её по запросу:
+=======
+Now let's go on. Let's say we're going to dynamically fetch materials from a server. We'll study methods for that [later in the tutorial](info:fetch). For now it only matters that we fetch an HTML article from a webserver and display it on demand:
+>>>>>>> 5e9eca374f644ea85c7d548bbe344fd30e5fb89d
 
 ```js
 let article = /* получить новое содержание с сервера */
