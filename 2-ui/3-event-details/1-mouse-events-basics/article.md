@@ -1,55 +1,55 @@
-# Mouse events basics
+# Основые события мыши
 
-Mouse events come not only from "mouse manipulators", but are also emulated on touch devices, to make them compatible.
+События мыши исходят не только от "манипуляторов мыши", но и эмулируются на сенсорных устройствах, чтобы сделать их совместимыми.
 
-In this chapter we'll get into more details about mouse events and their properties.
+В этой главе мы глубже разберем события мыши и рассмотрим их свойства.
 
-## Mouse event types
+## Типы событий мыши
 
-We can split mouse events into two categories: "simple" and "complex"
+События мыши можно разделить на две категории: "простые" и "комплексные"
 
-### Simple events
+### Простые события
 
-The most used simple events are:
+Наиболее часто используемые простые события:
 
 `mousedown/mouseup`
-: Mouse button is clicked/released over an element.
+: Кнопка мыши нажата/отпущена над элементом.
 
 `mouseover/mouseout`
-: Mouse pointer comes over/out from an element.
+: Указатель мыши появился/ушел с элемента.
 
 `mousemove`
-: Every mouse move over an element triggers that event.
+: Каждое движение мыши над элементом вызывает это событие.
 
-...There are several other event types too, we'll cover them later.
+...Есть еще несколько типов событий, мы рассмотрим их позже.
 
-### Complex events
+### Комплексные события
 
 `click`
-: Triggers after `mousedown` and then `mouseup` over the same element if the left mouse button was used.
+: Вызывается при клике мышью, то есть при `mousedown`, а затем `mouseup` на одном элементе, если была использована левая кнопка мыши.
 
 `contextmenu`
-: Triggers after `mousedown` if the right mouse button was used.
+: Вызывается при `mousedown` правой кнопкой мыши по элементу.
 
 `dblclick`
-: Triggers after a double click over an element.
+: Вызывается при двойном клике по элементу.
 
-Complex events are made of simple ones, so in theory we could live without them. But they exist, and that's good, because they are convenient.
+Комплексные события состоят из простых, так что в теории, мы могли бы обходится и без них. Но они значительно облегчают нашу жизнь.
 
-### Events order
+### Порядок срабатывания событий
 
-An action may trigger multiple events.
+Одно действие может вызывать несолько событий.
 
-For instance, a click first triggers `mousedown`, when the button is pressed, then `mouseup` and `click` when it's released.
+Например, клик мыши сперва вызывает событие `mousedown`, когда кнопка мыши была нажата, потом `mouseup` и `click`, когда кнопка была отпущена.
 
-In cases when a single action initiates multiple events, their order is fixed. That is, the handlers are called in the order `mousedown` -> `mouseup` -> `click`. Events are handled in the same sequence:  `onmouseup` finishes before `onclick` runs.
+В случаях, когда одно действие инициирует несколько событий, их порядок фиксируется. То есть обработчики вызываются в порядке `mousedown` -> `mouseup` -> `click`. События обрабтаываются в той же послежовательности: `onmouseup` завершается до запуска `onclick`.
 
 ```online
-Click the button below and you'll see the events. Try double-click too.
+Кликните по кнопке ниже, чтобы увидеть в каком порядке срабатывают события. Попробуйте также двойной клик.
 
-On the teststand below all mouse events are logged, and if there are more than 1 second delay between them, then they are separated by a horizontal ruler.
+На тест-стенде ниже все события мыши записываются, а если между событиями проходит больше 1 секунды, они разделяются горизонтальной линией.
 
-Also we can see the `which` property that allows to detect the mouse button.
+Так же мы можем видеть свойство `which`, которое показывает какая именно кнопка мыши была использована.
 
 <input onmousedown="return logMouse(event)" onmouseup="return logMouse(event)" onclick="return logMouse(event)" oncontextmenu="return logMouse(event)" ondblclick="return logMouse(event)" value="Click me with the right or the left mouse button" type="button"> <input onclick="logClear('test')" value="Clear" type="button"> <form id="testform" name="testform"> <textarea style="font-size:12px;height:150px;width:360px;"></textarea></form>
 ```
