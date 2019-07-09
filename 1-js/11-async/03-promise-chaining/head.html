@@ -5,7 +5,7 @@ function loadScript(src) {
     script.src = src;
 
     script.onload = () => resolve(script);
-    script.onerror = () => reject(new Error("Script load error: " + src));
+    script.onerror = () => reject(new Error("Ошибка загрузки скрипта: " + src));
 
     document.head.append(script);
   });
