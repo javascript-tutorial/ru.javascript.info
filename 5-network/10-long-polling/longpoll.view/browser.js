@@ -18,7 +18,7 @@ function PublishForm(form, url) {
   };
 }
 
-// Получение сообщений с длительным опросом
+// Получение сообщений путём длинного опроса
 function SubscribePane(elem, url) {
 
   function showMessage(message) {
@@ -31,7 +31,7 @@ function SubscribePane(elem, url) {
     let response = await fetch(url);
 
     if (response.status == 502) {
-      // Тайм-аут подключения
+      // Таймаут подключения
       // случается, когда соединение ждало слишком долго.
       // давайте восстановим связь
       await subscribe();

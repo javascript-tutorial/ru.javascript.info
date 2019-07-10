@@ -48,7 +48,7 @@ function accept(req, res) {
     req.on('data', function(chunk) {
       message += chunk;
     }).on('end', function() {
-      publish(message); // опубликовать его всем
+      publish(message); // опубликовать для всех
       res.end("ok");
     });
 
@@ -75,7 +75,7 @@ if (!module.parent) {
 } else {
   exports.accept = accept;
 
-  if (process.send) { // если запущенный на pm2 имеет это значение.
+  if (process.send) { // если запущено с помощью pm2, то обозначим это
      process.on('message', (msg) => {
        if (msg === 'shutdown') {
          close();
