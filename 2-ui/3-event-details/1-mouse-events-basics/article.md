@@ -70,50 +70,53 @@
 
 Средняя кнопка мыши используется гораздо реже остальных.
 
-## Modifiers: shift, alt, ctrl and meta
+## Модификаторы: shift, alt, ctrl и meta
 
-All mouse events include the information about pressed modifier keys.
-
-The properties are:
+ Во всех событиях мыши присутствует информация о нажатых клавишах-модификаторах.
+ 
+ Соответствующие свойства:
 
 - `shiftKey`
 - `altKey`
 - `ctrlKey`
-- `metaKey` (`key:Cmd` for Mac)
+- `metaKey` (`key:Cmd` для Mac)
 
-For instance, the button below only works on `key:Alt+Shift`+click:
+Например, кнопка ниже сработает только на `key:Alt+Shift`+клик:
 
 ```html autorun height=60
-<button id="button">Alt+Shift+Click on me!</button>
+<button id="button">Alt+Shift+Кликни меня!</button>
 
 <script>
   button.onclick = function(event) {
 *!*
     if (event.altKey && event.shiftKey) {
 */!*
-      alert('Hooray!');
+      alert('Урааа!');
     }
   };
 </script>
 ```
 
-```warn header="Attention: on Mac it's usually `Cmd` instead of `Ctrl`"
-On Windows and Linux there are modifier keys `key:Alt`, `key:Shift` and `key:Ctrl`. On Mac there's one more: `key:Cmd`, it corresponds to the property `metaKey`.
+```warn header="Внимание: на Mac используется `Cmd` вместо `Ctrl`"
 
-In most cases when Windows/Linux uses `key:Ctrl`, on Mac people use `key:Cmd`. So where a Windows user presses `key:Ctrl+Enter` or `key:Ctrl+A`, a Mac user would press `key:Cmd+Enter` or `key:Cmd+A`, and so on, most apps use `key:Cmd` instead of `key:Ctrl`.
+На компьютерах под управлением Windows и Linux есть клавиши `key:Alt`, `key:Shift` и `key:Ctrl`. На Mac есть еще одна клавиша `key:Cmd`, которой соответствует свойство `metaKey`.
 
-So if we want to support combinations like `key:Ctrl`+click, then for Mac it makes sense to use  `key:Cmd`+click. That's more comfortable for Mac users.
+В большинстве случаев там, где под Windows/Linux используется `key:Ctrl`, на Mac используется `key:Cmd`. Там, где пользователь Windows нажимает `key:Ctrl+Enter` или `key:Ctrl+A`, пользователь Mac нажмёт `key:Cmd+Enter` или `key:Cmd+A`, и так далее, почти всегда `key:Cmd` вместо `key:Ctrl`.
 
-Even if we'd like to force Mac users to `key:Ctrl`+click -- that's kind of difficult. The problem is: a left-click with `key:Ctrl` is interpreted as a *right-click* on Mac, and it generates the `contextmenu` event, not `click` like Windows/Linux.
+Поэтому, если мы хотим поддерживать сочетание `key:Ctrl`+click или другие подобные, то под Mac имеет смысл использовать `key:Cmd`+click. Пользователям Mac это будет гораздо комфортнее.
 
-So if we want users of all operational systems to feel comfortable, then together with `ctrlKey` we should use `metaKey`.
+Более того, даже если бы мы хотели бы заставить пользователей Mac использовать именно `key:Ctrl`+click – это было бы затруднительно. Дело в том, что обычный клик с зажатым `key:Ctrl` под Mac работает как *правый клик* и генерирует событие `contextmenu`, а не `click`, как под Windows/Linux.
 
-For JS-code it means that we should check `if (event.ctrlKey || event.metaKey)`.
+Поэтому, если мы хотим, чтобы пользователи всех операционных систем чувствовали себя комфортно, то вместе с `ctrl` мы должны использовать `metaKey`.
+
+В JS-коде это означает, что для удобства пользователей Mac нужно проверять if (event.ctrlKey || event.metaKey).
+
 ```
 
-```warn header="There are also mobile devices"
-Keyboard combinations are good as an addition to the workflow. So that if the visitor has a
- keyboard -- it works. And if your device doesn't have it -- then there's another way to do the same.
+```warn header="Не забывайте про мобильные устройства"
+
+Комбинации клавиш хороши как дополнение к рабочему процессу. Так что если у пользователя есть
+  клавиатура -- это сработает. Но если у вашего устройства нет клавиатуры -- то есть другой способ сделать то же самое.
 ```
 
 ## Coordinates: clientX/Y, pageX/Y
