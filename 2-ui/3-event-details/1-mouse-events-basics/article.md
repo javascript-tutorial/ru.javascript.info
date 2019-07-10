@@ -54,21 +54,21 @@
 <input onmousedown="return logMouse(event)" onmouseup="return logMouse(event)" onclick="return logMouse(event)" oncontextmenu="return logMouse(event)" ondblclick="return logMouse(event)" value="Click me with the right or the left mouse button" type="button"> <input onclick="logClear('test')" value="Clear" type="button"> <form id="testform" name="testform"> <textarea style="font-size:12px;height:150px;width:360px;"></textarea></form>
 ```
 
-## Getting the button: which
+## Получене информации о кнопке: which
 
-Click-related events always have the `which` property, which allows to get the exact mouse button.
+События, связанные с кликом, всегда имеют свойство `which`, которое позволяет получить точную кнопку мыши.
 
-It is not used for `click` and `contextmenu` events, because the former happens only on left-click, and the latter -- only on right-click.
+Это совйство не использутеся для событий `click` и `contextmenu`, потому что первое событие происходит только при нажатии левой кнопки, а второе только при нажатии правой кнопки соответственно.
 
-But if we track `mousedown` and `mouseup`, then we need it, because these events trigger on any button, so `which` allows to distinguish between "right-mousedown" and "left-mousedown".
+Но если мы отслеживаем `mousedown` и `mouseup`, тогда нам нужно это знать, потому что эти события срабатывают на нажатие любой кнопки мыши. В таком случае `which` позволяет нам различать, например, нажатие левой кнопки от правой.
 
-There are the three possible values:
+Возможны следующие значения:
 
-- `event.which == 1` -- the left button
-- `event.which == 2` - the middle button
-- `event.which == 3` - the right button
+- `event.which == 1` -- левая кнопка
+- `event.which == 2` - средняя кнопка
+- `event.which == 3` - правая кнопка
 
-The middle button is somewhat exotic right now and is very rarely used.
+Средняя кнопка мыши используется гораздо реже остальных.
 
 ## Modifiers: shift, alt, ctrl and meta
 
