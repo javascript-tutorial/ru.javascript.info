@@ -1,52 +1,52 @@
 
-# Proxy and Reflect
+# Proxy и Reflect
 
-A *proxy* wraps another object and intercepts operations, like reading/writing properties and others, optionally handling them on its own, or transparently allowing the object to handle them.
+Объект *proxy* служит обёрткой для другого объекта, а также перехватывает и (опционально) обрабатывает разные действия, например чтение/запись свойств и другие, производимые с оригинальным объектом.
 
-Proxies are used in many libraries and some browser frameworks. We'll see many practical applications in this chapter.
+Прокси используются во многих библиотеках и некоторых браузерных фреймворках. В этой главе мы увидим много случаев применения прокси в решении реальных задач.
 
-The syntax:
+Синтаксис:
 
 ```js
 let proxy = new Proxy(target, handler)
 ```
 
-- `target` -- is an object to wrap, can be anything, including functions.
-- `handler` -- an object with "traps": methods that intercept operations., e.g. `get` for reading a property, `set` for writing a property, etc.
+- `target` -- это объект, который обёртывается, может быть чем угодно, включая функции.
+- `handler` -- объект с "ловушками" ("traps"): методами, которые перехватывают разные операции, например `get` при чтении свойства, `set` при записи свойства и так далее.
 
-For operations on `proxy`, if there's a corresponding trap in `handler`, then it runs, and the proxy has a chance to handle it, otherwise the operation is performed on `target`.
+Если в свойстве `handler` объекта `proxy` имеется соответствующая "ловушка", то она срабатывает, и прокси имеет возможность как-то среагировать, иначе же действовать будет уже оригинальный объект из  `target`.
 
-As a starting example, let's create a proxy without any traps:
+В качестве примера давайте для начала создадим прокси без всяких ловушек:
 
 ```js run
 let target = {};
-let proxy = new Proxy(target, {}); // empty handler
+let proxy = new Proxy(target, {}); // пустой handler
 
-proxy.test = 5; // writing to proxy (1)
-alert(target.test); // 5, the property appeared in target!
+proxy.test = 5; // записываем в прокси (1)
+alert(target.test); // 5, свойство появилось в target!
 
-alert(proxy.test); // 5, we can read it from proxy too (2)
+alert(proxy.test); // 5, мы также можем прочитать его из прокси (2)
 
-for(let key in proxy) alert(key); // test, iteration works (3)
+for(let key in proxy) alert(key); // test, итерация работает (3)
 ```
 
-As there are no traps, all operations on `proxy` are forwarded to `target`.
+Так как нет ловушек, то все операции на `proxy` в итоге применяются к `target`.
 
-1. A writing operation `proxy.test=` sets the value on `target`.
-2. A reading operation `proxy.test` returns the value from `target`.
-3. Iteration over `proxy` returns values from `target`.
+1. Запись свойства `proxy.test=` устанавливает значение на `target`.
+2. Чтение свойства `proxy.test` возвращает значение из `target`.
+3. Итерация по `proxy` возвращает значения из `target`.
 
-As we can see, without any traps, `proxy` is a transparent wrapper around `target`.
+Как мы видим, без ловушек `proxy` является прозрачной обёрткой над `target`.
 
 ![](proxy.png)  
 
-The proxy is a special "exotic object". It doesn't have "own" properties. With an empty handler it transparently forwards operations to `target`.
+Прокси -- это особенный объект, у него нет собственных свойств. С пустым handler он просто перенапрвляет все операции на `target`.
 
-If we want any magic, we should add traps.
+Если мы хотим какой-то придать ему какую-то магическую силу, то следует добавить ловушки.
 
-There's a list of internal object operations in the [Proxy specification](https://tc39.es/ecma262/#sec-proxy-object-internal-methods-and-internal-slots). A proxy can intercept any of these, we just need to add a handler method.
+Вот список внутренних методов объектов из [спецификации Proxy](https://tc39.es/ecma262/#sec-proxy-object-internal-methods-and-internal-slots). Прокси может перехватывать вызов любого из них, нужно только добавить соответствующий обработчик.
 
-In the table below:
+В таблице ниже:
 - **Internal Method** is the specification-specific name for the operation. For example, `[[Get]]` is the name of the internal, specification-only method of reading a property. The specification describes how this is done at the very lowest level.
 - **Handler Method** is a method name that we should add to proxy `handler` to trap the operation and perform custom actions.
 
