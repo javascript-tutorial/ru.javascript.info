@@ -75,7 +75,7 @@ if (!module.parent) {
 } else {
   exports.accept = accept;
 
-  if (process.send) { // если запущено с помощью pm2, то обозначим это
+  if (process.send) { // если запущено с помощью pm2 (http://pm2.keymetrics.io/), то обозначим это
      process.on('message', (msg) => {
        if (msg === 'shutdown') {
          close();
