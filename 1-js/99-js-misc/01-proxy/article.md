@@ -14,7 +14,7 @@ let proxy = new Proxy(target, handler)
 - `target` -- это объект, который обёртывается, может быть чем угодно, включая функции.
 - `handler` -- объект с "ловушками" ("traps"): методами, которые перехватывают разные операции, например `get` при чтении свойства, `set` при записи свойства и так далее.
 
-Если в свойстве `handler` объекта `proxy` имеется соответствующая "ловушка", то она срабатывает, и прокси имеет возможность как-то среагировать, иначе же действовать будет уже оригинальный объект из  `target`.
+Если в `handler` объекта `proxy` имеется соответствующая "ловушка", то она срабатывает, и прокси имеет возможность как-то среагировать, иначе же действовать будет уже оригинальный объект из `target`.
 
 В качестве примера давайте для начала создадим прокси без всяких ловушек:
 
@@ -30,7 +30,7 @@ alert(proxy.test); // 5, мы также можем прочитать его и
 for(let key in proxy) alert(key); // test, итерация работает (3)
 ```
 
-Так как нет ловушек, то все операции на `proxy` в итоге применяются к `target`.
+Так как нет ловушек, то все операции на `proxy` в итоге применяются к оригинальному объекту `target`.
 
 1. Запись свойства `proxy.test=` устанавливает значение на `target`.
 2. Чтение свойства `proxy.test` возвращает значение из `target`.
@@ -40,50 +40,50 @@ for(let key in proxy) alert(key); // test, итерация работает (3)
 
 ![](proxy.png)  
 
-Прокси -- это особенный объект, у него нет собственных свойств. С пустым handler он просто перенапрвляет все операции на `target`.
+Прокси -- это особенный объект, у него нет собственных свойств. С пустым `handler` он просто перенаправляет все операции на `target`.
 
-Если мы хотим какой-то придать ему какую-то магическую силу, то следует добавить ловушки.
+Если мы хотим придать ему какую-то магическую силу, то следует добавить ловушки.
 
-Вот список внутренних методов объектов из [спецификации Proxy](https://tc39.es/ecma262/#sec-proxy-object-internal-methods-and-internal-slots). Прокси может перехватывать вызов любого из них, нужно только добавить соответствующий обработчик.
+Вот список внутренних методов объектов из [спецификации Proxy](https://tc39.es/ecma262/#sec-proxy-object-internal-methods-and-internal-slots). Прокси может перехватывать вызов любого из них, нужно только добавить соответствующий обработчик в `handler`.
 
 В таблице ниже:
-- **Internal Method** is the specification-specific name for the operation. For example, `[[Get]]` is the name of the internal, specification-only method of reading a property. The specification describes how this is done at the very lowest level.
-- **Handler Method** is a method name that we should add to proxy `handler` to trap the operation and perform custom actions.
+- **Внутренний метод** -- название операции над объектом, определённое в спецификации. Например, `[[Get]]` -- это имя внутреннего метода для чтения свойства объекта. В спецификации описывается, как это должно быть реализовано, до мельчайших низкоуровневых подробностей.
+- **Ловушка** -- это имя метода, который мы можем добавить в параметр `handler` при создании прокси. Этот метод будет действовать как ловушка, перехватывая операции над объектом и позволяя совершать над ним какие-то дополнительные действия.
 
 
-| Internal Method | Handler Method | Traps... |
+| Внутренний метод | Ловушка | Срабатывает при... |
 |-----------------|----------------|-------------|
-| `[[Get]]` | `get` | reading a property |
-| `[[Set]]` | `set` | writing to a property |
-| `[[HasProperty]]` | `has` | `in` operator |
-| `[[Delete]]` | `deleteProperty` | `delete` operator |
-| `[[Call]]` | `apply` | function call |
-| `[[Construct]]` | `construct` | `new` operator |
-| `[[GetPrototypeOf]]` | `getPrototypeOf` | [Object.getPrototypeOf](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getPrototypeOf) |
-| `[[SetPrototypeOf]]` | `setPrototypeOf` | [Object.setPrototypeOf](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/setPrototypeOf) |
-| `[[IsExtensible]]` | `isExtensible` | [Object.isExtensible](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/isExtensible) |
-| `[[PreventExtensions]]` | `preventExtensions` | [Object.preventExtensions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/preventExtensions) |
-| `[[GetOwnProperty]]` | `getOwnPropertyDescriptor` | [Object.getOwnPropertyDescriptor](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyDescriptor) |
-| `[[DefineOwnProperty]]` | `defineProperty` | [Object.defineProperty](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty), [Object.defineProperties](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperties) |
-| `[[OwnPropertyKeys]]` | `ownKeys` | [Object.keys](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys), [Object.getOwnPropertyNames](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyNames), [Object.getOwnPropertySymbols](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertySymbols), iteration keys |
+| `[[Get]]` | `get` | чтении свойства |
+| `[[Set]]` | `set` | записи свойства |
+| `[[HasProperty]]` | `has` | использовании в операторе `in` |
+| `[[Delete]]` | `deleteProperty` | при использовании оператора `delete` |
+| `[[Call]]` | `apply` | вызове функции |
+| `[[Construct]]` | `construct` | использовании оператора `new` |
+| `[[GetPrototypeOf]]` | `getPrototypeOf` | [Object.getPrototypeOf](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Object/getPrototypeOf) |
+| `[[SetPrototypeOf]]` | `setPrototypeOf` | [Object.setPrototypeOf](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Object/setPrototypeOf) |
+| `[[IsExtensible]]` | `isExtensible` | [Object.isExtensible](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Object/isExtensible) |
+| `[[PreventExtensions]]` | `preventExtensions` | [Object.preventExtensions](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Object/preventExtensions) |
+| `[[GetOwnProperty]]` | `getOwnPropertyDescriptor` | [Object.getOwnPropertyDescriptor](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyDescriptor) |
+| `[[DefineOwnProperty]]` | `defineProperty` | [Object.defineProperty](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty), [Object.defineProperties](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperties) |
+| `[[OwnPropertyKeys]]` | `ownKeys` | [Object.keys](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Object/keys), [Object.getOwnPropertyNames](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyNames), [Object.getOwnPropertySymbols](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertySymbols), итерация по ключам |
 
-```warn header="Invariants"
-JavaScript enforces some invariants -- conditions that must be fulfilled by internal methods and traps.
+```warn header="Инварианты"
+JavaScript предполагает, что при реализации внутренних методов и ловушек в коде будут выполнены определённые условия -- инварианты.
 
-Most of them are for return values:
-- `[[Set]]` must return `true` if the value was written successfully, otherwise `false`.
-- `[[Delete]]` must return `true` if the value was deleted successfully, otherwise `false`.
-- ...and so on, we'll see more in examples below.
+Большинство из них касаются возвращаемых значений:
+- `[[Set]]` должен возвращать `true`, если значение было успешно записано, иначе `false`.
+- `[[Delete]]` должен возвращать `true`, если значение было успешно удалено, иначе `false`.
+- ...и так далее, мы ещё столкнёмся с этим в примерах ниже.
 
-There are some other invariants, like:
-- `[[GetPrototypeOf]]`, applied to the proxy object must return the same value as `[[GetPrototypeOf]]` applied to the proxy object's target object.
+Но есть и другие условия:
+- `[[GetPrototypeOf]]`, применённый к прокси, должен возвращать то же значение, что и метод `[[GetPrototypeOf]]`, применённый к оригинальному объекту.
 
-In other words, reading prototype of a `proxy` must always return the prototype of the target object. The `getPrototypeOf` trap may intercept this operation, but it must follow this rule, not do something crazy.
+Другими словами, чтение прототипа объекта `proxy` всегда должно возвращать прототип оригинального объекта. Ловушка `getPrototypeOf` может перехватывать эту операцию, но в любом случае должна выполнять указанное условие, а не делать что-то сумасшедшее.
 
-Invariants ensure correct and consistent behavior of language features. The full invariants list is in [the specification](https://tc39.es/ecma262/#sec-proxy-object-internal-methods-and-internal-slots), you probably won't violate them, if not doing something weird.
+Инварианты гарантируют корректное и последовательное поведение конструкций и методов языка. Полный список инвариантов можно найти в [спецификации](https://tc39.es/ecma262/#sec-proxy-object-internal-methods-and-internal-slots), хотя скорее всего вы не нарушите эти условия, если только не соберётесь делать что-то совсем уж странное.
 ```
 
-Let's see how that works on practical examples.
+Теперь давайте посмотрим, как это всё работает на реальных примерах.
 
 ## Default value with "get" trap
 
@@ -840,7 +840,7 @@ Using `WeakMap` instead of `Map` here, because it should not block garbage colle
 ## References
 
 - Specification: [Proxy](https://tc39.es/ecma262/#sec-proxy-object-internal-methods-and-internal-slots).
-- MDN: [Proxy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy).
+- MDN: [Proxy](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Proxy).
 
 ## Summary
 
@@ -861,13 +861,13 @@ let proxy = new Proxy(target, {
 We can trap:
 - Reading (`get`), writing (`set`), deleting (`deleteProperty`) a property (even a non-existing one).
 - Calling functions with `new` (`construct` trap) and without `new` (`apply` trap)
-- Many other operations (the full list is at the beginning of the article and in the [docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy)).
+- Many other operations (the full list is at the beginning of the article and in the [docs](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Proxy)).
 
 That allows us to create "virtual" properties and methods, implement default values, observable objects, function decorators and so much more.
 
 We can also wrap an object multiple times in different proxies, decorating it with various aspects of functionality.
 
-The [Reflect](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect) API is designed to complement [Proxy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy). For any `Proxy` trap, there's a `Reflect` call with same arguments. We should use those to forward calls to target objects.
+The [Reflect](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Reflect) API is designed to complement [Proxy](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Proxy). For any `Proxy` trap, there's a `Reflect` call with same arguments. We should use those to forward calls to target objects.
 
 Proxies have some limitations:
 
