@@ -85,23 +85,23 @@ JavaScript налагает некоторые условия - инвариан
 
 Теперь давайте посмотрим, как это всё работает на реальных примерах.
 
-## Default value with "get" trap
+## Значение по умолчанию в ловушке "get"
 
-The most common traps are for reading/writing properties.
+Чаще всего используются ловушки на чтение/запись свойств.
 
-To intercept the reading, the `handler` should have a method `get(target, property, receiver)`.
+Чтобы перехватить операцию чтения, `handler` должен иметь метод  `get(target, property, receiver)`.
 
-It triggers when a property is read:
+Он срабатывает при попытке прочитать свойство объекта:
 
-- `target` -- is the target object, the one passed as the first argument to `new Proxy`,
-- `property` -- property name,
-- `receiver` -- if the property is a getter, then `receiver` is the object that's going to be used as `this` in that code. Usually that's the `proxy` object itself (or an object that inherits from it, if we inherit from proxy).
+- `target` -- это оригинальный объект, который передавался первым аргументом в конструктор `new Proxy`,
+- `property` -- имя свойства,
+- `receiver` -- если свойство на самом деле является геттером, то объект `receiver` будет использован как контекст `this` в том коде. Обычно это сам объект прокси (или наследующий от него объект).
 
-Let's use `get` to implement default values for an object.
+Давайте применим ловушку `get`, чтобы возвращать значения свойств объекта по умолчанию.
 
-For instance, we'd like a numeric array to return `0` for non-existant values instead of `undefined`.
+Например, мы бы хотели, чтобы при чтении несуществующего элемента в массиве чисел возвращался `0` вместо `undefined`.
 
-Let's wrap it into a proxy that traps reading and returns the default value if there's no such property:
+Давайте обернём массив чисел в прокси, который перехватывает операцию чтения элемента массива и возвращает значение по умолчанию, если такого элемента нет:
 
 ```js run
 let numbers = [0, 1, 2];
@@ -111,20 +111,20 @@ numbers = new Proxy(numbers, {
     if (prop in target) {
       return target[prop];
     } else {
-      return 0; // default value
+      return 0; // значение по умолчанию
     }
   }
 });
 
 *!*
 alert( numbers[1] ); // 1
-alert( numbers[123] ); // 0 (no such value)
+alert( numbers[123] ); // 0 (нет такого элемента)
 */!*
 ```
 
-The approach is generic. We can use `Proxy` to implement any logic for "default" values.
+Этот подход достаточно обобщённый. Мы можем использовать `Proxy` для реализации любой логики возврата значений по умолчанию.
 
-Imagine, we have a dictionary with phrases along with translations:
+Представьте, что у нас есть объект-словарь с фразами на английском и их переводом на испанский:
 
 ```js run
 let dictionary = {
@@ -136,9 +136,9 @@ alert( dictionary['Hello'] ); // Hola
 alert( dictionary['Welcome'] ); // undefined
 ```
 
-Right now, if there's no phrase, reading from `dictionary` returns `undefined`. But in practice, leaving a phrase non-translated is usually better than `undefined`. So let's make a non-translated phrase the default value instead of `undefined`.
+Сейчас при отсутствии запрашиваемой фразы в `dictionary` возвращается `undefined`. Но на практике оставлять фразы непереведёнными лучше, чем использовать `undefined`. Поэтому давайте сделаем так, чтобы при отсутствии перевода оригинальная фраза на английском возвращалась бы как значение по умолчанию вместо `undefined`.
 
-To achieve that, we'll wrap `dictionary` in a proxy that intercepts reading operations:
+Чтобы достичь этого, мы обернём `dictionary` в прокси, перехватывающий операцию чтения:
 
 ```js run
 let dictionary = {
@@ -148,34 +148,34 @@ let dictionary = {
 
 dictionary = new Proxy(dictionary, {
 *!*
-  get(target, phrase) { // intercept reading a property from dictionary
+  get(target, phrase) { // перехватываем чтение свойства в dictionary
 */!*
-    if (phrase in target) { // if we have it in the dictionary
-      return target[phrase]; // return the translation
+    if (phrase in target) { // если перевод для фразы есть в словаре
+      return target[phrase]; // возвращаем его
     } else {
-      // otherwise, return the non-translated phrase
+      // иначе возвращаем непереведённую фразу
       return phrase;
     }
   }
 });
 
-// Look up arbitrary phrases in the dictionary!
-// At worst, they are not translated.
+// Запросим перевод какого-нибудь случайного выражения в словаре!
+// В худшем случае мы получим его же обратно.
 alert( dictionary['Hello'] ); // Hola
 *!*
-alert( dictionary['Welcome to Proxy']); // Welcome to Proxy (no translation)
+alert( dictionary['Welcome to Proxy']); // Welcome to Proxy (нет перевода)
 */!*
 ```
 
-````smart header="Proxy should be used instead of `target` everywhere"
-Please note how the proxy overwrites the variable:
+````smart header="Прокси следует использовать везде вместо `target`"
+Пожалуйста, обратите внимание на то, как прокси перезаписывает переменную:
 
 ```js
 dictionary = new Proxy(dictionary, ...);
 numbers = new Proxy(numbers, ...);
 ```
 
-The proxy should totally replace the target object everywhere. No one should ever reference the target object after it got proxied. Otherwise it's easy to mess up.
+Прокси должен заменить собой оригинальный объект повсюду. Никто не должен ссылаться на оригинальный объект после того, как он был проксирован. Иначе очень легко запутаться.
 ````
 
 ## Validation with "set" trap
