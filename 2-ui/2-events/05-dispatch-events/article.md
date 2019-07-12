@@ -247,7 +247,7 @@ alert(event.clientX); // undefined, неизвестное свойство пр
 <button id="menu">Меню (нажми меня)</button>
 
 <script>
-  // Now the result is: 1 -> 2 -> nested
+  // Теперь результат это: 1 -> 2 -> вложенное событие
   menu.onclick = function() {
     alert(1);
 
@@ -263,7 +263,7 @@ alert(event.clientX); // undefined, неизвестное свойство пр
 </script>
 ```    
 
-Now `dispatchEvent` runs asynchronously after the current code execution is finished, including `mouse.onclick`, so event handlers are totally separate.
+Теперь `dispatchEvent` запускается асинхронно после исполнения текущего кода, включая `mouse.onclick`, поэтому обработчики полностью независимы.
 
 ## Итого
 
