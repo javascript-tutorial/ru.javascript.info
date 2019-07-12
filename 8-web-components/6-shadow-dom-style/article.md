@@ -1,8 +1,8 @@
-# Shadow DOM styling
+# Настройка стилей Shadow DOM
 
-Shadow DOM may include both `<style>` and `<link rel="stylesheet" href="…">` tags. In the latter case, stylesheets are HTTP-cached, so they are not redownloaded. There's no overhead in @importing or linking same styles for many components.
+Теневой DOM может содержать теги `<style>` и `<link rel="stylesheet" href="…">`. В последнем случае таблицы стилей кэшируются по протоколу HTTP, поэтому они не будут загружаться повторно. Поэтому нет необходимости в использовании @import или связывании одних и тех же стилей для многих компонентов.
 
-As a general rule, local styles work only inside the shadow tree, and document styles work outside of it. But there are few exceptions.
+Как правило, локальные стили работают только внутри теневого DOM, а стили документа - вне его. Но есть несколько исключений.
 
 ## :host
 
@@ -311,7 +311,7 @@ customElements.define('user-card', class extends HTMLElement {
 
 
 
-## Summary
+## Итого
 
 Shadow DOM can include styles, such as `<style>` or `<link rel="stylesheet">`.
 
