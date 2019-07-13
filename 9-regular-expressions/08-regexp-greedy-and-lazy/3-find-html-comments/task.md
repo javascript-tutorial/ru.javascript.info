@@ -1,9 +1,9 @@
-# Find HTML comments
+# Поиск HTML-комментариев
 
-Find all HTML comments in the text:
+Найти все HTML-комментарии в тексте:
 
 ```js
-let reg = /your regexp/g;
+let reg = /ваше регулярное выражение/g;
 
 let str = `... <!-- My -- comment
  test --> ..  <!----> .. 

@@ -1,12 +1,12 @@
-describe("test", function() {
+describe("тест", function () {
 
-  before(() => alert("Testing started – before all tests"));
-  after(() => alert("Testing finished – after all tests"));
+  before(() => alert("Тестирование началось – перед тестами"));
+  after(() => alert("Тестирование закончилось – после всех тестов"));
 
-  beforeEach(() => alert("Before a test – enter a test"));
-  afterEach(() => alert("After a test – exit a test"));
+  beforeEach(() => alert("Перед тестом – начинаем выполнять тест"));
+  afterEach(() => alert("После теста – заканчиваем выполнение теста"));
 
-  it('test 1', () => alert(1));
-  it('test 2', () => alert(2));
+  it('тест 1', () => alert(1));
+  it('тест 2', () => alert(2));
 
 });

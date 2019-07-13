@@ -1,29 +1,29 @@
 
-You could note the following:
+Вы могли заметить следующие недостатки, сверху вниз:
 
 ```js no-beautify
-function pow(x,n)  // <- no space between arguments
-{  // <- figure bracket on a separate line
-  let result=1;   // <- no spaces before or after =
-  for(let i=0;i<n;i++) {result*=x;}   // <- no spaces
-  // the contents of { ... } should be on a new line
+function pow(x,n)  // <- отсутствует пробел между аргументами
+{  // <- фигурная скобка на отдельной строке
+  let result=1;   // <- нет пробелов вокруг знака =
+  for(let i=0;i<n;i++) {result*=x;}   // <- нет пробелов
+  // содержимое скобок { ... } лучше вынести на отдельную строку
   return result;
 }
 
-let x=prompt("x?",''), n=prompt("n?",'') // <-- technically possible,
-// but better make it 2 lines, also there's no spaces and missing ;
-if (n<0)  // <- no spaces inside (n < 0), and should be extra line above it
-{   // <- figure bracket on a separate line
-  // below - long lines can be split into multiple lines for improved readability
-  alert(`Power ${n} is not supported, please enter an integer number greater than zero`);
+let x=prompt("x?",''), n=prompt("n?",'') // <-- технически допустимо,
+// но лучше написать в 2 строки, также нет пробелов и точки с запятой
+if (n<0)  // <- нет пробелов, стоит добавить отступ в одну строку сверху
+{   // <- фигурная скобка на отдельной строке
+  // ниже - слишком длинная строка, лучше разбить для улучшения читаемости
+  alert(`Степень ${n} не поддерживается, введите целую степень, большую 0`);
 }
-else // <- could write it on a single line like "} else {"
+else // <- можно на одной строке, вместе: "} else {"
 {
-  alert(pow(x,n))  // no spaces and missing ;
+  alert(pow(x,n))  // вложенный вызов функции, нет пробелов и точки с запятой
 }
 ```
 
-The fixed variant:
+Исправленный вариант:
 
 ```js
 function pow(x, n) {
@@ -40,8 +40,8 @@ let x = prompt("x?", "");
 let n = prompt("n?", "");
 
 if (n < 0) {
-  alert(`Power ${n} is not supported,
-    please enter an integer number greater than zero`);
+  alert(`Степень ${n} не поддерживается,
+    введите целую степень, большую 0`);
 } else {
   alert( pow(x, n) );
 }

@@ -1,86 +1,95 @@
-# Popups and window methods
+# Открытие окон и методы window
 
-A popup window is one of the oldest methods to show additional document to user.
+Всплывающее окно ("попап" – от англ. Popup window) – один из древнейших способов показать пользователю ещё один документ.
 
-Basically, you just run:
+Достаточно запустить:
 ```js
-window.open('http://javascript.info/')
+window.open('https://javascript.info/')
 ```
 
-... And it will open a new window with given URL. Most modern browsers are configured to open new tabs instead of separate windows.
+... и откроется новое окно с указанным URL. Большинство современных браузеров по умолчанию будут открывать новую вкладку вместо отдельного окна.
 
-## Popup blocking
+Попапы существуют с доисторических времён. Они были придуманы для отображения нового контента поверх главного окна, оставив главное окно открытым. Но с тех пор появились другие способы сделать это: JavaScript может загрузить содержимое вызовом [fetch](info:fetch) и показать его в тут же созданном `<div>`, так что попапы используются не каждый день.
 
-Popups exist from really ancient times. The initial idea was to show another content without closing the main window. As of now, there are other ways to do that: JavaScript is able to send requests for server, so popups are rarely used. But sometimes they are still handy.
+Кроме того, попапы не очень хороши для мобильных устройств, которые не умеют показывать несколько окан одновременно.
 
-In the past evil sites abused popups a lot. A bad page could open tons of popup windows with ads. So now most browsers try to block popups and protect the user.
+Однако, для некоторых задач попапы ещё используются, например для OAuth-авторизации (вход через Google/Facebook/...), так как:
 
-**Most browsers block popups if they are called outside of user-triggered event handlers like `onclick`.**
+1. Попап - это отдельное окно со своим JavaScript-окружением. Так что открытие попапа со стороннего, не доверенного сайта вполне безопасно
+2. Открыть попап очень просто.
+3. Попап может производить навигацию (менять URL) и отсылать сообщения в основное окно.
 
-If you think about it, that's a bit tricky. If the code is directly in an `onclick` handler, then that's easy. But what is the popup opens in `setTimeout`?
+## Блокировка попапов
 
-Try this code:
+В прошлом злонамеренные сайты заваливали посетителей всплывающими окнами. Такие страницы могли открывать сотни попапов с рекламой. Поэтому теперь большинство браузеров пытаются заблокировать всплывающие окна, чтобы защитить пользователя.
+
+**Всплывающее окно блокируется в том случае, если вызов window.open произошёл не в результате действия посетителя (например, события `onclick`).**
+
+Например:
+```js
+// попап заблокирован
+window.open('https://javascript.info');
+
+// попап будет показан
+button.onclick = () => {
+  window.open('https://javascript.info');
+};
+```
+
+Таким образом браузеры могут защитить пользователя от появления нежелательных попапов, при этом не отключая попапы полностью.
+
+Что, если попап должен открываться в результате `onclick`, но не сразу, а только после выполнения `setTimeout`? Здесь все не так-то просто.
+
+Запустим код:
 
 ```js run
-// open after 3 seconds
+// откроется через 3 секунды
 setTimeout(() => window.open('http://google.com'), 3000);
 ```
 
-The popup opens in Chrome, but gets blocked in Firefox.
+Попап откроется в Chrome, но будет заблокирован в Firefox.
 
-...And this works in Firefox too:
+Но если мы уменьшим тайм-аут до одной секунды, то попап откроется и в Firefox:
 
 ```js run
-// open after 1 seconds
+// откроется через 1 секунду
 setTimeout(() => window.open('http://google.com'), 1000);
 ```
 
-The difference is that Firefox treats a timeout of 2000ms or less are acceptable, but after it -- removes the "trust", assuming that now it's "outside of the user action". So the first one is blocked, and the second one is not.
+Мы получили два разных результата из-за того, что Firefox "допускает" таймаут в 2000 мс или менее, но все, что свыше этого – не вызывает его доверия, т.к. предполагается, что в таком случае открытие окна происходит без ведома пользователя. Именно поэтому попап из первого примера будет заблокирован, а из второго – нет.
 
-## Modern usage
 
-As of now, we have many methods to load and show data on-page with JavaScript. But there are still situations when a popup works best.
+## Полный синтаксис window.open
 
-For instance, many shops use online chats for consulting people. A visitor clicks on the button, it runs `window.open` and opens the popup with the chat.
-
-Why a popup is good here, why not in-page?
-
-1. A popup is a separate window with its own independent JavaScript environment. So a chat service doesn't need to integrate with scripts of the main shop site.
-2. A popup is very simple to attach to a site, little to no overhead. It's only a small button, without additional scripts.
-3. A popup may persist even if the user left the page. For example, a consult advices the user to visit the page of a new "Super-Cooler" goodie. The user goes there in the main window without leaving the chat.
-
-## window.open
-
-The syntax to open a popup is: `window.open(url, name, params)`:
+Синтаксис открытия нового окна: `window.open(url, name, params)`:
 
 url
-: An URL to load into the new window.
+: URL для загрузки в новом окне.
 
 name
-: A name of the new window. Each window has a `window.name`, and here we can specify which window to use for the popup. If there's already a window with such name -- the given URL opens in it, otherwise a new window is opened.
+: Имя нового окна. У каждого окна есть свойство `window.name`, в котором можно задавать, какое окно использовать для попапа. Таким образом, если уже существует окно с заданным именем – указанный в параметрах URL откроется в нем, в противном случае откроется новое окно.
 
 params
-: The configuration string for the new window. It contains settings, delimited by a comma. There must be no spaces in params, for instance: `width:200,height=100`.
+: Строка параметров для нового окна. Содержит настройки, разделённые запятыми. Важно помнить, что в данной строке не должно быть пробелов. Например `width:200,height=100`.
 
-Settings for `params`:
+Параметры в строке `params`:
 
-- Position:
-  - `left/top` (numeric) -- coordinates of the window top-left corner on the screen. There is a limitation: a new window cannot be positioned offscreen.
-  - `width/height` (numeric) -- width and height of a new window. There is a limit on minimal width/height, so it's impossible to create an invisible window.
-- Window features:
-  - `menubar` (yes/no) -- shows or hides the browser menu on the new window.
-  - `toolbar` (yes/no) -- shows or hides the browser navigation bar (back, forward, reload etc) on the new window.
-  - `location` (yes/no) -- shows or hides the URL field in the new window. FF and IE don't allow to hide it by default.
-  - `status` (yes/no) -- shows or hides the status bar. Again, most browsers force it to show.
-  - `resizable` (yes/no) -- allows to disable the resize for the new window. Not recommended.
-  - `scrollbars` (yes/no) -- allows to disable the scrollbars for the new window. Not recommended.
+- Позиция окна:
+  - `left/top` (числа) – координаты верхнего левого угла нового окна на экране. Существует ограничение: новое окно не может быть позиционировано вне видимой области экрана. 
+  - `width/height` (числа) – ширина и высота нового окна. Существуют ограничение на минимальные высоту и ширину, которые делают невозможным создание невидимого окна. 
+- Панели окна:
+  - `menubar` (yes/no) – позволяет отобразить или скрыть меню браузера в новом окне.
+  - `toolbar` (yes/no) – позволяет отобразить или скрыть панель навигации браузера (кнопки вперёд, назад, перезагрузки страницы) нового окна.
+  - `location` (yes/no) – позволяет отобразить или скрыть адресную строку нового окна. Firefox и IE не позволяют скрывать эту панель по умолчанию.
+  - `status` (yes/no) – позволяет отобразить или скрыть строку состояния. Как и с адресной строкой, большинство браузеров будут принудительно показывать её.
+  - `resizable` (yes/no) – позволяет отключить возможность изменения размера нового окна. Не рекомендуется.
+  - `scrollbars` (yes/no) – позволяет отключить полосы прокрутки для нового окна. Не рекомендуется.
 
+Помимо этого существует некоторое количество не кроссбраузерных значений, которые обычно не используются. Найти примеры таких свойств можно <a href="https://developer.mozilla.org/en/DOM/window.open">по ссылке</a>.
 
-There is also a number of less supported browser-specific features, which are usually not used. Check <a href="https://developer.mozilla.org/en/DOM/window.open">window.open in MDN</a> for examples.
+## Пример: минималистичное окно
 
-## Example: a minimalistic window   
-
-Let's open a window with minimal set of features just to see which of them browser allows to disable:
+Давайте откроем окно с минимальным набором настроек, просто чтобы посмотреть, какие из них браузер позволит отключить:
 
 ```js run
 let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
@@ -89,9 +98,9 @@ width=0,height=0,left=-1000,top=-1000`;
 open('/', 'test', params);
 ```
 
-Here most "window features" are disabled and window is positioned offscreen. Run it and see what really happens. Most browsers "fix" odd things like zero `width/height` and offscreen `left/top`. For instance, Chrome open such a window with full width/height, so that it occupies the full screen.
+В этом примере большинство настроек заблокированы и само окно находится за пределами видимой области экрана. Посмотрим, что получится в результате. Большинство браузеров "исправит" странные значения – как, например, нулевые `width/height` и отрицательные `left/top`. Например, Chrome установит высоту и ширину такого окна равными высоте и ширине экрана, так что попап будет занимать весь экран.
 
-Let's add normal positioning options and reasonable `width`, `height`, `left`, `top` coordinates:
+Давайте исправим значения и зададим нормальные координаты (`left` и `top`) и значения размеров окна (`width` и `height`):
 
 ```js run
 let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
@@ -100,92 +109,165 @@ width=600,height=300,left=100,top=100`;
 open('/', 'test', params);
 ```
 
-Most browsers show the example above as required.
+Большинство браузеров выведет окно с заданными нами настройками.
 
-Rules for omitted settings:
+Правила для опущенных параметров:
 
-- If there is no 3rd argument in the `open` call, or it is empty, then the default window parameters are used.
-- If there is a string of params, but some yes/no features are omitted, then the omitted features are disabled, if the browser allows that. So if you specify params, make sure you explicitly set all required features to yes.
-- If there is no `left/top` in params, then the browser tries to open a new window near the last opened window.
-- If there is no `width/height`, then the new window will be the same size as the last opened.
+- Если третий аргумент при вызове `open` отсутствует или он пустой, будут использованы настройки окна по умолчанию.
+- Если строка параметров передана, но некоторые параметры yes/no пропущены, то считается, что указано `no`, так что соответствующие возможности будут отключены, если на это нет ограничений со стороны браузера. Поэтому при задании параметров убедитесь, что вы явно указали все необходимые yes.  
+- Если координаты `left/top` не заданы, браузер попытается открыть новое окно рядом с предыдущим открытым окном.
+- Если не заданы размеры окна `width/height`, браузер откроет новое окно с теми же размерами, что и предыдущее открытое окно. 
 
-## Accessing a popup
+## Доступ к попапу из основного окна
 
-The `open` call returns a reference to the new window. It can be used to manipulate it's properties, change location and even more.
+Вызов `open` возвращает ссылку на новое окно. Эта ссылка может быть использована для управления свойствами окна, например, изменения положения и др.
 
-In the example below, the contents of the new window is modified after loading.
+Например, здесь мы генерируем содержимое попапа из JavaScript:
+
+```js
+let newWin = window.open("about:blank", "hello", "width=200,height=200");
+
+newWin.document.write("Hello, world!");
+```
+
+А здесь содержимое окна модифицируется после загрузки:
 
 ```js run
 let newWindow = open('/', 'example', 'width=300,height=300')
 newWindow.focus();
 
+alert(newWin.location.href); // (*) about:blank, загрузка ещё не началась
+
 newWindow.onload = function() {
-  let html = `<div style="font-size:30px">Welcome!</div>`;
+  let html = `<div style="font-size:30px">Добро пожаловать!</div>`;
 *!*
   newWindow.document.body.insertAdjacentHTML('afterbegin', html);
 */!*
 };
 ```
 
-Please note that external `document` content is only accessible for windows from the same origin (the same protocol://domain:port).
+Обратите внимание: сразу после `window.open` новое окно ещё не загружено. Это демонстрируется в строке `(*)`. Так что нужно ждать `onload`, чтобы его изменить. Или же поставить обработчик `DOMContentLoaded` на `newWin.document`.
 
-For windows with URLs from another sites, we are able to change the location by assigning `newWindow.location=...`, but we can't read the location or access the content. That's for user safety, so that an evil page can't open a popup with `http://gmail.com` and read the data. We'll talk more about it later.
+```warn header="Политика одного источника"
+Окна имеют свободный доступ к содержимому друг другу только если они с одного источника (у них совпадают домен, протокол и порт (protocol://domain:port).
 
-## Accessing the opener window   
+Иначе, например, если основное окно с `site.com`, а попап с `gmail.com`, это невозможно по соображениям пользовательской безопасности. Детали см. в главе  <info:cross-window-communication>.
+```
 
-A popup may access the "opener" window as well. A JavaScript in it may use `window.opener` to access the window that opened it. It is `null` for all windows except popups.
+## Доступ к открывшему окну из попапа
 
-So both the main window and the popup have a reference to each other. They may modify each other freely assuming that they come from the same origin. If that's not so, then there are still means to communicate, to be covered in the next chapter <info:cross-window-communication>.
+Попап также может обратиться к открывшему его окну по ссылке `window.opener`. Она равна `null` для всех окон, кроме попапов.
 
-## Closing a popup
-
-If we don't need a popup any more, we can call `newWindow.close()` on it.
-
-Technically, the `close()` method is available for any `window`, but `window.close()` is ignored by most browsers if `window` is not created with `window.open()`.
-
-The `newWindow.closed` is `true` if the window is closed. That's useful to check if the popup (or the main window) is still open or not. A user could close it, and our code should take that possibility into account.
-
-This code loads and then closes the window:
+Если вы запустите код ниже, то он заменит содержимое открывшего (текущего) окна на "Тест":
 
 ```js run
-let newWindow = open('/', 'example', 'width=300,height=300')
+let newWin = window.open("about:blank", "hello", "width=200,height=200");
+
+newWin.document.write(
+  "<script>window.opener.document.body.innerHTML = 'Тест'<\/script>"
+);
+```
+
+Так что связь между окнами двусторонняя: главное окно и попап имеют ссылки друг на друга.
+
+## Закрытие попапа
+
+Чтобы закрыть окно: `win.close()`
+
+Для проверки, закрыто ли окно: `win.closed`.
+
+Технически метод `close()` доступен для любого окна, но `window.close()` будет игнорироваться большинством браузеров, если `window` не было создано с помощью `window.open()`. Так что он сработает только для попапов.
+
+Если окно закрыто, то его свойство `closed` имеет значение `true`. Таким образом можно легко проверить, закрыт ли попап (или главное окно) или все ещё открыт. Пользователь может закрыть его в любой момент, и наш код должен учитывать эту возможность. 
+
+Этот код откроет и затем закроет окно:
+
+```js run
+let newWindow = open('/', 'example', 'width=300,height=300');
+
 newWindow.onload = function() {
   newWindow.close();
   alert(newWindow.closed); // true
 };
 ```
 
-## Focus/blur on a popup
+## Прокрутка и изменение размеров
 
-Theoretically, there are `window.focus()` and `window.blur()` methods to focus/unfocus on a window.  Also there are `focus/blur` events that allow to focus a window and catch the moment when the visitor switches elsewhere.
+Методы для передвижения и изменения размеров окна:
 
-In the past evil pages abused those. For instance, look at this code:
+`win.moveBy(x,y)`
+: Move the window relative to current position `x` pixels to the right and `y` pixels down. Negative values are allowed (to move left/up).
+
+`win.moveTo(x,y)`
+: Move the window to coordinates `(x,y)` on the screen.
+
+`win.resizeBy(width,height)`
+: Resize the window by given `width/height` relative to the current size. Negative values are allowed.
+
+`win.resizeTo(width,height)`
+: Resize the window to the given size.
+
+There's also `window.onresize` event.
+
+```warn header="Only popups"
+To prevent abuse, the browser usually blocks these methods. They only work reliably on popups that we opened, that have no additional tabs.
+```
+
+```warn header="No minification/maximization"
+JavaScript has no way to minify or maximize a window. These OS-level functions are hidden from Frontend-developers.
+
+Move/resize methods do not work for maximized/minimized windows.
+```
+
+## Scrolling a window
+
+We already talked about scrolling a window in the chapter <info:size-and-scroll-window>.
+
+`win.scrollBy(x,y)`
+: Scroll the window `x` pixels right and `y` down relative the current scroll. Negative values are allowed.
+
+`win.scrollTo(x,y)`
+: Scroll the window to the given coordinates `(x,y)`.
+
+`elem.scrollIntoView(top = true)`
+: Scroll the window to make `elem` show up at the top (the default) or at the bottom for `elem.scrollIntoView(false)`.
+
+There's also `window.onscroll` event.
+
+## Установка и потеря фокуса
+
+Теоретически, установить попап в фокус можно с помощью метода `window.focus()`, а убрать из фокуса – с помощью `window.blur()`. Также существуют события `focus/blur`, которые позволяют отследить, когда фокус переводится на какое-то другое окно. 
+
+Раньше на "плохих" сайтах эти методы могли становиться средством манипуляции. Например:
 
 ```js run
 window.onblur = () => window.focus();
 ```
 
-When a user attempts to switch out of the window (`blur`), it brings it back to focus. The intention is to "lock" the user within the `window`.
+Когда пользователь пытается перевести фокус на другое окно, этот код возвращает фокус назад. Таким образом, фокус как бы "блокируется" в попапе, который не нужен пользователю.
 
-So, there are limitations that forbid the code like that. There are many limitations to protect the user from ads and evils pages. They depend on the browser.
+Из-за этого в браузерах и появились ограничения, которые препятствуют такого рода поведению фокуса. Эти ограничения нужны для защиты пользователя от назойливой рекламы и "плохих" страниц, и их работа различается в зависимости от конкретного браузера.
 
-For instance, a mobile browser usually ignores that call completely. Also focusing doesn't work when a popup opens in a separate tab rather than a new window.
+Например, мобильный браузер обычно полностью игнорирует такие вызовы метода `window.focus()`. Также фокусировка не работает, когда попап открыт в отдельной вкладке (в отличие от открытия в отдельном окне).
 
-Still, there are some things that can be done.
+Но все-таки иногда методы фокусировки бывают полезны. Например:
 
-For instance:
+- Когда мы открываем попап, может быть хорошей идеей запустить для него `newWindow.focus()`. Для некоторых комбинаций браузера и операционной системы это устранит неоднозначность – заметит ли пользователь это новое окно.
+- Если нужно отследить, когда посетитель использует веб-приложение, можно отслеживать `window.onfocus/onblur`. Это позволит ставить на паузу и продолжать выполнение анимаций и других интерактивных действий на странице. При этом важно помнить, что `blur` означает, что окно больше не в фокусе, но пользователь может по-прежнему видеть его.
 
-- When we open a popup, it's might be a good idea to run a `newWindow.focus()` on it. Just in case, for some OS/browser combinations it ensures that the user is in the new window now.
-- If we want to track when a visitor actually uses our web-app, we can track `window.onfocus/onblur`. That allows us to suspend/resume in-page activities, animations etc. But please note that the `blur` event means that the visitor switched out from the window, but they still may observe it. The window is in the background, but still may be visible.
+## Итого   
 
-## Summary   
+Всплывающие окна используются нечасто. Ведь загрузить новую информацию можно динамически, а показать -- в элементе `<div>`, расположенным над страницей (`z-index`). Ещё одна альтернатива -- тег `<iframe>`.
 
-- A popup can be opened by the `open(url, name, params)` call. It returns the reference to the newly opened window.
-- By default, browsers block `open` calls from the code outside of user actions. Usually a notification appears, so that a user may allow them.
-- The popup may access the opener window using the `window.opener` property, so the two are connected.
-- If the main window and the popup come from the same origin, they can freely read and modify each other. Otherwise, they can change location of each other and communicate using messages (to be covered).
-- To close the popup: use `close()` call. Also the user may close them (just like any other windows). The `window.closed` is `true` after that.
-- Methods `focus()` and `blur()` allow to focus/unfocus a window. Sometimes.
-- Events `focus` and `blur` allow to track switching in and out of the window. But please note that a  window may still be visible even in the background state, after `blur`.
+Если мы открываем попап, хорошей практикой будет предупредить пользователя об этом. Иконка открывающегося окошка на ссылке поможет посетителю понять, что происходит и не потерять оба окна из поля зрения. 
 
-Also if we open a popup, a good practice is to notify the user about it. An icon with the opening window can help the visitor to survive the focus shift and keep both windows in mind.
+- Новое окно можно открыть с помощью вызова `open(url, name, params)`. Этот метод возвращает ссылку на это новое окно.
+- По умолчанию браузеры блокируют вызовы `open`, выполненные не в результате действий пользователя. Обычно браузеры показывают предупреждение, так что пользователь все-таки может разрешить вызов этого метода.
+- Вместо попапа открывается вкладка, если в вызове `open` не указаны его размеры.
+- У попапа есть доступ к породившему его окну через свойство `window.opener`.
+- Если основное окно и попап имеют один домен и протокол, то они свободно могут читать и изменять друг друга. В противном случае, они могут только изменять положение друг друга и взаимодействовать [с помощью сообщений](cross-window-communication).
+
+Чтобы закрыть попап: метод `close()`. Также попап может закрыть и пользователь (как и любое другое окно). После закрытия окна свойство `window.closed` имеет значение `true`.  
+
+- Методы `focus()` и `blur()` позволяют установить или убрать фокус с попапа. Но работают не всегда.
+- События `focus` и `blur` позволяют отследить получение и потерю фокуса новым окном. Но пожалуйста, не забывайте, что окно может остаться видимым и после `blur`.

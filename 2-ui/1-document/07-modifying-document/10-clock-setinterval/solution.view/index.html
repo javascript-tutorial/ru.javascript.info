@@ -44,7 +44,7 @@
 
     function clockStart() {
       timerId = setInterval(update, 1000);
-      update(); // <--  start right now, don't wait 1 second till the first setInterval works
+      update(); // <--  начать тут же, не ждать 1 секунду пока setInterval сработает
     }
 
     function clockStop() {
@@ -54,11 +54,11 @@
     clockStart();
   </script>
 
-  <!-- click on this button calls clockStart() -->
-  <input type="button" onclick="clockStart()" value="Start">
+  <!-- клик по этой кнопке вызовет clockStart() -->
+  <input type="button" onclick="clockStart()" value="Старт">
 
-  <!-- click on this button calls clockStop() -->
-  <input type="button" onclick="clockStop()" value="Stop">
+  <!-- клик по этой кнопке вызовет clockStop() -->
+  <input type="button" onclick="clockStop()" value="Стоп">
 
 </body>
 </html>

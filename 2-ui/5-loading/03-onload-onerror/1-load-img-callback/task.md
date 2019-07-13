@@ -2,35 +2,35 @@ importance: 4
 
 ---
 
-# Load images with a callback
+# Загрузите изображения с колбэком
 
-Normally, images are loaded when they are created. So when we add `<img>` to the page, the user does not see the picture immediately. The browser needs to load it first.
+Обычно изображения начинают загружаться в момент их создания. Когда мы добавляем `<img>` на страницу, пользователь не увидит его тут же. Браузер сначала должен его загрузить.
 
-To show an image immediately, we can create it "in advance", like this:
+Чтобы показать изображение сразу, мы можем создать его "заранее":
 
 ```js
 let img = document.createElement('img');
 img.src = 'my.jpg';
 ```
 
-The browser starts loading the image and remembers it in the cache. Later, when the same image appears in the document (no matter how), it shows up immediately.
+Браузер начнёт загружать изображение и положит его в кеш. Позже, когда такое же изображение появится в документе (не важно как), оно будет показано мгновенно.
 
-**Create a function `preloadImages(sources, callback)` that loads all images from the array `sources` and, when ready, runs `callback`.**
+**Создайте функцию `preloadImages(sources, callback)`, которая загружает все изображения из массива `sources` и, когда все они будут загружены, вызывает `callback`.**
 
-For instance, this will show an `alert` after the images are loaded:
+В данном примере будет показан `alert` после загрузки всех изображений.
 
 ```js
 function loaded() {
-  alert("Images loaded")
+  alert("Изображения загружены")
 }
 
 preloadImages(["1.jpg", "2.jpg", "3.jpg"], loaded);
 ```
 
-In case of an error, the function should still assume the picture "loaded".
+В случае ошибки функция должна считать изображение "загруженным".
 
-In other words, the `callback` is executed when all images are either loaded or errored out.
+Другими словами, `callback` выполняется в том случае, когда все изображения либо загружены, либо в процессе их загрузки возникла ошибка.
 
-The function is useful, for instance, when we plan to show a gallery with many scrollable images, and want to be sure that all images are loaded.
+Такая функция полезна, например, когда нам нужно показать галерею с маленькими скролящимися изображениями, и мы хотим быть уверены, что все из них загружены.
 
-In the source document you can find links to test images, and also the code to check whether they are loaded or not. It should output `300`.
+В песочнице подготовлены ссылки к тестовым изображениям, а также код для проверки их загрузки. Код должен выводить `300`.
