@@ -178,29 +178,29 @@ numbers = new Proxy(numbers, ...);
 Прокси должен заменить собой оригинальный объект повсюду. Никто не должен ссылаться на оригинальный объект после того, как он был проксирован. Иначе очень легко запутаться.
 ````
 
-## Validation with "set" trap
+## Валидация с ловушкой "set"
 
-Now let's intercept writing as well.
+Теперь давайте также перехватим запись свойства.
 
-Let's say we want a numeric array. If a value of another type is added, there should be an error.
+Допустим, у нас массив чисел. Если в него добавляется значение иного типа, то это должно приводить к ошибке.
 
-The `set` trap triggers when a property is written: `set(target, property, value, receiver)`
+Ловушка `set` срабатывает, когда происходит запись свойства: `set(target, property, value, receiver)`
 
-- `target` -- is the target object, the one passed as the first argument to `new Proxy`,
-- `property` -- property name,
-- `value` -- property value,
-- `receiver` -- same as in `get` trap, only matters if the property is a setter.
+- `target` -- это оригинальный объект, который передавался первым аргументом в конструктор `new Proxy`,
+- `property` -- имя свойства,
+- `value` -- значение свойства,
+- `receiver` -- то же самое, что в ловушке `get`, приобретает значение, только если записываемое свойство -- сеттер.
 
-The `set` trap should return `true` if setting is successful, and `false` otherwise (leads to `TypeError`).
+Ловушка `set` возвращает `true`, если запись прошла успешно, и `false` в противном случае, что ведёт к `TypeError`.
 
-Let's use it to validate new values:
+Давайте применим наши знания для валидации новых значений:
 
 ```js run
 let numbers = [];
 
 numbers = new Proxy(numbers, { // (*)
 *!*
-  set(target, prop, val) { // to intercept property writing
+  set(target, prop, val) { // для перехвата записи свойства
 */!*
     if (typeof val == 'number') {
       target[prop] = val;
@@ -216,24 +216,24 @@ numbers.push(2);
 alert("Length is: " + numbers.length); // 2
 
 *!*
-numbers.push("test"); // TypeError ('set' on proxy returned false)
+numbers.push("test"); // TypeError (ловушка 'set' на прокси вернула false)
 */!*
 
-alert("This line is never reached (error in the line above)");
+alert("Интерпретатор никогда не доходит до этой строки (из-за ошибки в строке выше)");
 ```
 
-Please note: the built-in functionality of arrays is still working! The `length` property auto-increases when values are added. Our proxy doesn't break anything.
+Обратите внимание, что собственная функциональность массивов по-прежнему в силе! Свойство `length` увеличивается при добавлении значений. Наш прокси ничего не ломает.
 
-Also, we don't have to override value-adding array methods like `push` and `unshift`, and so on! Internally, they use `[[Set]]` operation, that's intercepted by the proxy.
+Также мы не должны перезаписывать методы массива `push` и `unshift`, которые добавляют в него значения! Внутри себя они используют операцию `[[Set]]`, которая перехватывается прокси.
 
-So the code is clean and concise.
+Таким образом, код остаётся чистым и прозрачным.
 
-```warn header="Don't forget to return `true`"
-As said above, there are invariants to be held.
+```warn header="Не забывайте вернуть `true`"
+Как сказано ранее, нужно соблюдать инварианты.
 
-For `set`, it must return `true` for a successful write.
+Для `set` реализация ловушки должна возвращать `true` в случае успешной записи свойства.
 
-If it returns a falsy value (or doesn't return anything), that triggers `TypeError`.
+Если возвращается ложное значение (или вообще ничего), то это вызывает ошибку `TypeError`.
 ```
 
 ## Protected properties with "deleteProperty" and "ownKeys"
