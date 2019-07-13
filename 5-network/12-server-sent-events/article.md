@@ -85,27 +85,27 @@ let source = new EventSource("https://another-site.com/events", {
 Please see the chapter <info:fetch-crossorigin> for more details about cross-domain headers.
 
 
-## Reconnection
+## Переподключение
 
-Upon creation, `new EventSource` connects to the server, and if the connection is broken -- reconnects.
+После создания, `new EventSource` подключается к серверу и, если соединение обрывается, -- переподключается.
 
-That's very convenient, as we don't have to care about it.
+Это очень удобно, так как нам не приходится беспокоиться об этом.
 
 There's a small delay between reconnections, a few seconds by default.
 
-The server can set the recommended delay using `retry:` in response (in milliseconds):
+Сервер может выставить рекомендуемую задержку, указав в ответе `retry:` (в милисекундах):
 
 ```js
 retry: 15000
-data: Hello, I set the reconnection delay to 15 seconds
+data: Привет, я выставил задержку переподключения в 15 секунд
 ```
 
-The `retry:` may come both together with some data, or as a standalone message.
+Поле `retry:` может посылаться как вместе с данными, так и отдельным сообщением.
 
-The browser should wait that much before reconnect. If the network connection is lost, the browser may wait till it's restored, and then retry.
+Браузер должен быть подождать окончания задержки перед попыткой переподключения. Если потеряно подключение к интернету, бразуер может дождаться его востанновления и затем попытаться переподключиться.
 
-- If the server wants the browser to stop reconnecting, it should respond with HTTP status 204.
-- If the browser wants to close the connection, it should call `eventSource.close()`:
+- Если сервер хочет остановить попытки переподключения, он должен ответить со статусом 204.
+- Если браузер хочет прекратить соединение, он может вызвать `eventSource.close()`:
 
 ```js
 let eventSource = new EventSource(...);
@@ -113,10 +113,10 @@ let eventSource = new EventSource(...);
 eventSource.close();
 ```
 
-Also, there will be no reconnection if the response has an incorrect `Content-Type` or its HTTP status differs from 301, 307, 200 and 204. The connection the `"error"` event is emitted, and the browser won't reconnect.
+Также переподключение не произойдет, если в ответе указан неверный `Content-Type` или его статус отличается от 301, 307, 200 и 204. The connection the `"error"` event is emitted, and the browser won't reconnect. [???]
 
 ```smart
-There's no way to "reopen" a closed connection. If we'd like to connect again, just create a new `EventSource`.
+Переоткрыть закрытое соединение невозможно. Если необходимо снова подключиться, объявите новый `EventSource`.
 ```
 
 ## Message id
