@@ -1,24 +1,24 @@
-# Server Sent Events
+# Посылаемые сервером события
 
-The [Server-Sent Events](https://html.spec.whatwg.org/multipage/comms.html#the-eventsource-interface) specification describes a built-in class `EventSource`, that keeps connection with the server and allows to receive events from it.
+Спецификация [Server-Sent Events](https://html.spec.whatwg.org/multipage/comms.html#the-eventsource-interface) описывает встроенный класс `EventSource`, который позволяет поддерживать соединение с сервером и получать от него события.
 
-Similar to `WebSocket`, the connection is persistent.
+Как и в случае с `WebSocket`, соединение постоянно.
 
-But there are several important differences:
+Но есть несколько важных различий:
 
 | `WebSocket` | `EventSource` |
 |-------------|---------------|
-| Bi-directional: both client and server can exchange messages | One-directional: only server sends data |
-| Binary and text data | Only text |
-| WebSocket protocol | Regular HTTP |
+| Двунаправленность: и сервер, и клиент могут обмениваться сообщениями | Однонаправленность: данные посылает только сервер |
+| Бинарные и текстовые данные | Только текст |
+| Протокол WebSocket | Обычный HTTP |
 
-`EventSource` is a less-powerful way of communicating with the server than `WebSocket`.
+`EventSource` не настолько мощный способ коммуникации с сервером, как `WebSocket`.
 
-Why should one ever use it?
+Зачем нам его использовать?
 
-The main reason: it's simpler. In many applications, the power of `WebSocket` is a little bit too much.
+Основная причина: он проще. Многим приложениям не требуется вся мощь `WebSocket`.
 
-We need to receive a stream of data from server: maybe chat messages or market prices, or whatever. That's what `EventSource` is good at. Also it supports auto-reconnect, something  we need to implement manually with `WebSocket`. Besides, it's a plain old HTTP, not a new protocol.
+Если нам нужно получать поток данных с сервера: неважно, сообщения в чате или же цены для магазина - вот в чем хорош `EventSource`. К тому же, он поддерживает автоматическое переподключение, которое, используя `WebSocket`, нам бы пришлось поддерживать самим. Кроме того, мы используем старый добрый HTTP, а не новый протокол.
 
 ## Getting messages
 
