@@ -20,45 +20,45 @@
 
 Если нам нужно получать поток данных с сервера: неважно, сообщения в чате или же цены для магазина - вот в чем хорош `EventSource`. К тому же, он поддерживает автоматическое переподключение, которое, используя `WebSocket`, нам бы пришлось поддерживать самим. Кроме того, мы используем старый добрый HTTP, а не новый протокол.
 
-## Getting messages
+## Получение сообщений
 
-To start receiving messages, we just need to create `new EventSource(url)`.
+Чтобы начать получать данные, нам нужно просто создать `new EventSource(url)`.
 
-The browser will connect to `url` and keep the connection open, waiting for events.
+Браузер установит соединение с `url` и будет поддерживать его открытым, ожидая события.
 
-The server should respond with status 200 and the header `Content-Type: text/event-stream`, then keep the connection and write messages into it in the special format, like this:
+Сервер должен ответить со статусом 200 и заголовком `Content-Type: text/event-stream`, затем он должен поддерживать соединение открытым и отправлять сообщения в особом формате:
 
 ```
-data: Message 1
+data: Сообщение 1
 
-data: Message 2
+data: Сообщение 2
 
-data: Message 3
-data: of two lines
+data: Сообщение 3
+data: в две строки
 ```
 
-- A message text goes after `data:`, the space after the semicolon is optional.
-- Messages are delimited with double line breaks `\n\n`.
-- To send a line break `\n`, we can immediately one more `data:` (3rd message above).
+- Текст сообщения указывается после `data:`, пробел после двоеточия необязателен.
+- Сообщения разделяются двойным переносом строки `\n\n`.
+- Чтобы разделить сообщение на несколько строк, мы можем отправить несколько `data:` подряд (третее сообщение).
 
-In practice, complex messages are usually sent JSON-encoded, so line-breaks are encoded within them.
+На практике, сложные сообщения обычно отправляются в формате JSON, указывая переносы строк внутри.
 
-For instance:
+Например:
 
 ```js
-data: {"user":"John","message":"First line*!*\n*/!* Second line"}
+data: {"user":"Джон","message":"Первая строка*!*\n*/!* Вторая строка"}
 ```
 
-...So we can assume that one `data:` holds exactly one message.
+...Так что можно считать, что в каждом `data:` указано ровно одно сообщение.
 
-For each such message, the `message` event is generated:
+Для каждого сообщения генериуется событие `message`:
 
 ```js
 let eventSource = new EventSource("/events/subscribe");
 
 eventSource.onmessage = function(event) {
-  console.log("New message", event.data);
-  // will log 3 times for the data stream above
+  console.log("Новое сообщение", event.data);
+  // этот код вывет в консоль 3 сообщения для данных, описанных выше
 };
 
 // or eventSource.addEventListener('message', ...)
