@@ -236,11 +236,11 @@ alert("Интерпретатор никогда не доходит до это
 Если возвращается ложное значение (или вообще ничего), то это вызывает ошибку `TypeError`.
 ```
 
-## Protected properties with "deleteProperty" and "ownKeys"
+## Защищённые свойства с ловушками "deleteProperty" и "ownKeys"
 
-There's a widespread convention that properties and methods prefixed by an underscore `_` are internal. They shouldn't be accessible from outside the object.
+Существует широко распространённое соглашение о том, что свойства и методы, название которых начинается с символа подчёркивания `_`, следует считать внутренними. Они не должны быть доступными снаружи объекта.
 
-Technically, that's possible though:
+Однако технически это всё равно возможно:
 
 ```js run
 let user = {
@@ -251,15 +251,15 @@ let user = {
 alert(user._password); // secret  
 ```
 
-Let's use proxies to prevent any access to properties starting with `_`.
+Давайте применим прокси, чтобы защитить свойства, начинающиеся на `_`, от доступа извне.
 
-We'll need the traps:
-- `get` to throw an error when reading,
-- `set` to throw an error when writing,
-- `deleteProperty` to throw an error when deleting,
-- `ownKeys` to skip properties starting with `_` when iterating over an object or using `Object.keys()`
+Нам будут нужны следующие ловушки:
+- `get` для того, чтобы кинуть ошибку при чтении,
+- `set` для того, чтобы кинуть ошибку при записи,
+- `deleteProperty` для того, чтобы кинуть ошибку при удалении,
+- `ownKeys` для того, чтобы исключить свойства, начинающиеся на `_`, из итерации или чтобы они не были видны функции `Object.keys()`
 
-Here's the code:
+Вот соответствующий код:
 
 ```js run
 let user = {
@@ -272,57 +272,57 @@ user = new Proxy(user, {
   get(target, prop) {
 */!*
     if (prop.startsWith('_')) {
-      throw new Error("Access denied");
+      throw new Error("Отказано в доступе");
     }
     let value = target[prop];
     return (typeof value === 'function') ? value.bind(target) : value; // (*)
   },
 *!*
-  set(target, prop, val) { // to intercept property writing
+  set(target, prop, val) { // перехватываем запись свойства
 */!*
     if (prop.startsWith('_')) {
-      throw new Error("Access denied");
+      throw new Error("Отказано в доступе");
     } else {
       target[prop] = val;
     }
   },
 *!*
-  deleteProperty(target, prop) { // to intercept property deletion
+  deleteProperty(target, prop) { // перехватываем удаление свойства
 */!*  
     if (prop.startsWith('_')) {
-      throw new Error("Access denied");
+      throw new Error("Отказано в доступе");
     } else {
       delete target[prop];
       return true;
     }
   },
 *!*
-  ownKeys(target) { // to intercept property list
+  ownKeys(target) { // перехватываем попытку итерации
 */!*
     return Object.keys(target).filter(key => !key.startsWith('_'));
   }
 });
 
-// "get" doesn't allow to read _password
+// "get" не позволяет прочитать _password
 try {
-  alert(user._password); // Error: Access denied
+  alert(user._password); // Error: Отказано в доступе
 } catch(e) { alert(e.message); }
 
-// "set" doesn't allow to write _password
+// "set" не позволяет записать _password
 try {
-  user._password = "test"; // Error: Access denied
+  user._password = "test"; // Error: Отказано в доступе
 } catch(e) { alert(e.message); }
 
-// "deleteProperty" doesn't allow to delete _password
+// "deleteProperty" не позволяет удалить _password
 try {
-  delete user._password; // Error: Access denied
+  delete user._password; // Error: Отказано в доступе
 } catch(e) { alert(e.message); }
 
-// "ownKeys" filters out _password
+// "ownKeys" исключает _password из списка видимых для итерации свойств
 for(let key in user) alert(key); // name
 ```
 
-Please note the important detail in `get` trap, in the line `(*)`:
+Обратите внимание на важную деталь в ловушке `get` на строке `(*)`:
 
 ```js
 get(target, prop) {
@@ -334,36 +334,36 @@ get(target, prop) {
 }
 ```
 
-If an object method is called, such as `user.checkPassword()`, it must be able to access `_password`:
+Если произошёл вызов метода того же объекта, например `user.checkPassword()`, то ему должен предоставляться доступ к свойству `_password`:
 
 ```js
 user = {
   // ...
   checkPassword(value) {
-    // object method must be able to read _password
+    // метод объекта должен иметь доступ на чтение _password
     return value === this._password;
   }
 }
 ```
 
-Normally, `user.checkPassword()` call gets proxied `user` as `this` (the object before dot becomes `this`), so when it tries to access `this._password`, the property protection kicks in and throws an error. So we bind it to `target` in the line `(*)`. Then all operations from that function directly reference the object, without any property protection.
+Обычно вызов `user.checkPassword()` получает проксированный объект `user` в качестве `this` (объект перед точкой становится `this`), так что когда такой вызов обращается к `this._password`, защитный механизм вступает в действие, и выбрасывается ошибка. Мы привязываем функции в качестве контекста оригинальный объект `target` в строке `(*)`. Тогда все операции, осуществляемые этой функцией, будут использовать напрямую изначальный объект, то есть без всяких ловушек.
 
-That solution is not ideal, as the method may pass the unproxied object somewhere else, and then we'll get messed up: where's the original object, and where's the proxied one.
+Такое решение не является идеальным, поскольку метод может вызываться с оригинальным контекстом где-то ещё, и возможна путаница: где метод получает изначальный объект, а где - проксированный.
 
-As an object may be proxied multiple times (multiple proxies may add different "tweaks" to the object), weird bugs may follow.
+Так как объект может проксироваться несколько раз (для добавления различных возможностей), то могут появляться странные баги.
 
-So, for complex objects with methods such proxy shouldn't be used.
+Не стоит использовать прокси таким образом для сложных объектов.
 
-```smart header="Private properties of a class"
-Modern JavaScript engines natively support private properties in classes, prefixed with `#`. They are described in the chapter <info:private-protected-properties-methods>. No proxies required.
+```smart header="Приватные свойства в классах"
+Современные интерпретаторы JavaScript поддерживают приватные свойства в классах. Названия таких свойств должны начинаться с символа `#`. Они подробно описаны в главе <info:private-protected-properties-methods>. В таком случае не нужны никакие прокси вообще.
 
-Such properties have their own issues though. In particular, they are not inherited.
+Однако приватные свойства имеют свои недостатки. В частности, они не наследуются.
 ```
 
 
-## "In range" with "has" trap
+## "В диапазоне" с ловушкой "has"
 
-Let's say we have a range object:
+Предположим, у нас есть объект, описывающий диапазон:
 
 ```js
 let range = {
@@ -372,14 +372,14 @@ let range = {
 };
 ```
 
-We'd like to use "in" operator to check that a number is in `range`.
+Мы бы хотели использовать оператор "in", чтобы проверить, что некоторое число находится в указанном диапазоне.
 
-The "has" trap intercepts "in" calls: `has(target, property)`
+Ловушка "has" перехватывает вызовы "in": `has(target, property)`
 
-- `target` -- is the target object, passed as the first argument to `new Proxy`,
-- `property` -- property name
+- `target` -- это оригинальный объект, который передавался первым аргументом в конструктор `new Proxy`,
+- `property` -- имя свойства
 
-Here's the demo:
+Вот демо:
 
 ```js run
 let range = {
@@ -401,28 +401,28 @@ alert(50 in range); // false
 */!*
 ```
 
-A nice syntactic sugar, isn't it?
+Отлично выглядит, не правда ли?
 
-## Wrapping functions: "apply"
+## Оборачиваем функции: "apply"
 
-We can wrap a proxy around a function as well.
+Мы можем оборачивать в прокси и функции.
 
-The `apply(target, thisArg, args)` trap handles calling a proxy as function:
+Ловушка `apply(target, thisArg, args)` вступает в действие при вызове прокси как функции:
 
-- `target` is the target object,
-- `thisArg` is the value of `this`.
-- `args` is a list of arguments.
+- `target` -- это начальный объект,
+- `thisArg` -- это контекст `this`.
+- `args` -- список аргументов.
 
-For example, let's recall `delay(f, ms)` decorator, that we did in the chapter <info:call-apply-decorators>.
+Например, давайте вспомним декоратор `delay(f, ms)`, созданный нами в главе <info:call-apply-decorators>.
 
-In that chapter we did it without proxies. A call to `delay(f, ms)` would return a function that forwards all calls to `f` after `ms` milliseconds.
+Тогда мы обошлись без создания прокси. Вызов `delay(f, ms)` возвращал функцию, которая вызывала переданную ей первым аргументом функцию через `ms` миллисекунд.
 
-Here's the function-based implementation:
+Вот реализация на основе функции:
 
 ```js run
-// no proxies, just a function wrapper
+// без проксирования, просто функция-обёртка
 function delay(f, ms) {
-  // return a wrapper that passes the call to f after the timeout
+  // возвращает обёртку, которая вызывает функцию f через таймаут
   return function() { // (*)
     setTimeout(() => f.apply(this, arguments), ms);
   };
@@ -432,15 +432,15 @@ function sayHi(user) {
   alert(`Hello, ${user}!`);
 }
 
-// now calls to sayHi will be delayed for 3 seconds
+// сейчас вызов sayHi сработает с задержкой в 3 секунды
 sayHi = delay(sayHi, 3000);
 
-sayHi("John"); // Hello, John! (after 3 seconds)
+sayHi("John"); // Hello, John! (через 3 секунды)
 ```
 
-As you can see, that mostly works. The wrapper function `(*)` performs the call after the timeout.
+Как вы видите, это в целом работает. Функция-обёртка в строке `(*)` вызывает нужную функцию с указанной задержкой.
 
-But a wrapper function does not forward property read/write operations or anything else. So if we have a property on the original function, we can't access it after wrapping:
+Но наша функция-обёртка не перенаправляет операции чтения/записи и т.д. Если бы у оригинальной функции было бы какое-то свойство, то мы бы не смогли получить к нему доступ после обёртывания:
 
 ```js run
 function delay(f, ms) {
@@ -454,20 +454,20 @@ function sayHi(user) {
 }
 
 *!*
-alert(sayHi.length); // 1 (function length is the arguments count)
+alert(sayHi.length); // 1 (в данном случае length - это число аргументов функции)
 */!*
 
 sayHi = delay(sayHi, 3000);
 
 *!*
-alert(sayHi.length); // 0 (wrapper has no arguments)
+alert(sayHi.length); // 0 (обёртка не принимает аргументов)
 */!*
 ```
 
 
-`Proxy` is much more powerful, as it forwards everything to the target object.
+Прокси куда более мощные в этом смысле, поскольку они перенаправляют всё к оригинальному объекту.
 
-Let's use `Proxy` instead of a wrapping function:
+Давайте использовать прокси вместо функции-обёртки:
 
 ```js run
 function delay(f, ms) {
@@ -485,17 +485,17 @@ function sayHi(user) {
 sayHi = delay(sayHi, 3000);
 
 *!*
-alert(sayHi.length); // 1 (*) proxy forwards "get length" operation to the target
+alert(sayHi.length); // 1 (*) прокси перенаправляет операцию чтения свойства length к оригинальному объекту
 */!*
 
-sayHi("John"); // Hello, John! (after 3 seconds)
+sayHi("John"); // Hello, John! (через 3 секунды)
 ```
 
-The result is the same, but now not only calls, but all operations on the proxy are forwarded to the original function. So `sayHi.length` is returned correctly after the wrapping in the line `(*)`.
+Результат такой же, но сейчас не только вызовы, но и другие операции на прокси перенаправляются к оригинальной функции (тут уместно напомнить, что в JavaScript функции - это тоже объекты). Таким образом, операция чтения свойства `sayHi.length` возвращает корректное значение в строке `(*)` после проксирования.
 
-We've got a "richer" wrapper.
+Мы получили более функциональную обёртку.
 
-There exist other traps, but probably you've already got the idea.
+Существуют и другие ловушки, но вы, возможно, уже поняли, как они работают и для чего нужны.
 
 ## Reflect
 
