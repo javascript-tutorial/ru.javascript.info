@@ -160,41 +160,41 @@ When an object is created, or the connection is down, it's always `EventSource.C
 
 We can query this property to know the state of `EventSource`.
 
-## Event types
+## Типы событий
 
-By default `EventSource` object generates three events:
+По умолчанию объект `EventSource` генерирует 3 события:
 
-- `message` -- a message received, available as `event.data`.
-- `open` -- the connection is open.
-- `error` -- the connection could not be established, e.g. the server returned HTTP 500 status.
+- `message` -- получено сообщение, записанное в `event.data`.
+- `open` -- соединение открыто.
+- `error` -- не удалось установить соединение, например, сервер вернул статус 500.
 
-The server may specify another type of event with `event: ...` at the event start.
+Сервер может указать другой тип события с помощью `event: ...` в начале сообщения.
 
-For example:
+Например:
 
 ```
 event: join
-data: Bob
+data: Боб
 
-data: Hello
+data: Привет
 
 event: leave
-data: Bob
+data: Боб
 ```
 
-To handle custom events, we must use `addEventListener`, not `onmessage`:
+Чтобы начать слушать пользователькие события, нужно использовать `addEventListener`, а не `onmessage`:
 
 ```js
 eventSource.addEventListener('join', event => {
-  alert(`Joined ${event.data}`);
+  alert(`${event.data} зашел`);
 });
 
 eventSource.addEventListener('message', event => {
-  alert(`Said: ${event.data}`);
+  alert(`Сказал: ${event.data}`);
 });
 
 eventSource.addEventListener('leave', event => {
-  alert(`Left ${event.data}`);
+  alert(`${event.data} вышел`);
 });
 ```
 
