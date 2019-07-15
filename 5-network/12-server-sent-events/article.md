@@ -198,11 +198,11 @@ eventSource.addEventListener('leave', event => {
 });
 ```
 
-## Full example
+## Пример
 
-Here's the server that sends messages with `1`, `2`, `3`, then `bye` and breaks the connection.
+В этом примере сервер посылает сообщения `1`, `2`, `3`, затем `пока-пока` и разрывает соединение.
 
-Then the browser automatically reconnects.
+После этого браузер автоматически восстанавливает соединение.
 
 [codetabs src="eventsource"]
 

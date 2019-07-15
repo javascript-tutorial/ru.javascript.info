@@ -17,7 +17,7 @@ function onDigits(req, res) {
     i++;
 
     if (i == 4) {
-      res.write('event: bye\ndata: bye-bye\n\n');
+      res.write('event: bye\ndata: пока-пока\n\n');
       clearInterval(timer);
       res.end();
       return;
