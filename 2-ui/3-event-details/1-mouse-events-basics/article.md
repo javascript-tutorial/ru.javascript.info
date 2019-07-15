@@ -1,8 +1,8 @@
 # Основые события мыши
 
-События мыши исходят не только от "манипуляторов мыши", но и эмулируются на сенсорных устройствах, чтобы сделать их совместимыми.
+События мыши вызывают не только "манипуляторы мыши". Они также эмулируются на сенсорных устройствах, для того чтобы сделать их совместимыми.
 
-В этой главе мы глубже разберем события мыши и рассмотрим их свойства.
+В этой главе мы более детально разберем события мыши и рассмотрим их свойства.
 
 ## Типы событий мыши
 
@@ -42,7 +42,7 @@
 
 Например, клик мыши сперва вызывает событие `mousedown`, когда кнопка мыши была нажата, потом `mouseup` и `click`, когда кнопка была отпущена.
 
-В случаях, когда одно действие инициирует несколько событий, их порядок фиксируется. То есть обработчики вызываются в порядке `mousedown` -> `mouseup` -> `click`. События обрабтаываются в той же послежовательности: `onmouseup` завершается до запуска `onclick`.
+В случаях, когда одно действие инициирует несколько событий, их порядок фиксируется. То есть обработчики вызываются в порядке `mousedown` -> `mouseup` -> `click`. События обрабатываются в той же последовательности: `onmouseup` завершается до запуска `onclick`.
 
 ```online
 Кликните по кнопке ниже, чтобы увидеть в каком порядке срабатывают события. Попробуйте также двойной клик.
@@ -54,19 +54,19 @@
 <input onmousedown="return logMouse(event)" onmouseup="return logMouse(event)" onclick="return logMouse(event)" oncontextmenu="return logMouse(event)" ondblclick="return logMouse(event)" value="Click me with the right or the left mouse button" type="button"> <input onclick="logClear('test')" value="Clear" type="button"> <form id="testform" name="testform"> <textarea style="font-size:12px;height:150px;width:360px;"></textarea></form>
 ```
 
-## Получене информации о кнопке: which
+## Получение информации о кнопке: which
 
-События, связанные с кликом, всегда имеют свойство `which`, которое позволяет получить точную кнопку мыши.
+События, связанные с кликом, всегда имеют свойство `which`, которое позволяет определить точную кнопку мыши.
 
-Это совйство не использутеся для событий `click` и `contextmenu`, потому что первое событие происходит только при нажатии левой кнопки, а второе только при нажатии правой кнопки соответственно.
+Это свойство не используется для событий `click` и `contextmenu`, потому что первое событие происходит только при нажатии левой кнопки, а второе соответственно только при нажатии правой.
 
-Но если мы отслеживаем `mousedown` и `mouseup`, тогда нам нужно это знать, потому что эти события срабатывают на нажатие любой кнопки мыши. В таком случае `which` позволяет нам различать, например, нажатие левой кнопки от правой.
+Но если мы отслеживаем `mousedown` и `mouseup`, тогда нам нужно это знать, потому что эти события срабатывают на нажатие любой кнопки мыши. В таком случае `which`, например, позволяет нам отличать нажатие левой кнопки от правой.
 
 Возможны следующие значения:
 
 - `event.which == 1` -- левая кнопка
-- `event.which == 2` - средняя кнопка
-- `event.which == 3` - правая кнопка
+- `event.which == 2` -- средняя кнопка
+- `event.which == 3` -- правая кнопка
 
 Средняя кнопка мыши используется гораздо реже остальных.
 
@@ -101,11 +101,11 @@
 
 На компьютерах под управлением Windows и Linux есть клавиши `key:Alt`, `key:Shift` и `key:Ctrl`. На Mac есть еще одна клавиша `key:Cmd`, которой соответствует свойство `metaKey`.
 
-В большинстве случаев там, где под Windows/Linux используется `key:Ctrl`, на Mac используется `key:Cmd`. Там, где пользователь Windows нажимает `key:Ctrl+Enter` или `key:Ctrl+A`, пользователь Mac нажмёт `key:Cmd+Enter` или `key:Cmd+A`, и так далее, почти всегда `key:Cmd` вместо `key:Ctrl`.
+В большинстве случаев там, где на Windows/Linux используется `key:Ctrl`, на Mac используется `key:Cmd`. Там, где пользователь Windows нажимает `key:Ctrl+Enter` или `key:Ctrl+A`, пользователь Mac нажмёт `key:Cmd+Enter` или `key:Cmd+A`, и так далее, почти всегда `key:Cmd` вместо `key:Ctrl`.
 
-Поэтому, если мы хотим поддерживать сочетание `key:Ctrl`+click или другие подобные, то под Mac имеет смысл использовать `key:Cmd`+click. Пользователям Mac это будет гораздо комфортнее.
+Поэтому, если мы хотим поддерживать сочетание `key:Ctrl`+click или другие подобные, то на Mac имеет смысл использовать `key:Cmd`+click. Пользователям Mac это будет гораздо комфортнее.
 
-Более того, даже если бы мы хотели бы заставить пользователей Mac использовать именно `key:Ctrl`+click – это было бы затруднительно. Дело в том, что обычный клик с зажатым `key:Ctrl` под Mac работает как *правый клик* и генерирует событие `contextmenu`, а не `click`, как под Windows/Linux.
+Более того, даже если бы мы хотели бы заставить пользователей Mac использовать именно `key:Ctrl`+click – это было бы затруднительно. Дело в том, что обычный клик с зажатым `key:Ctrl` на Mac работает как *правый клик* и генерирует событие `contextmenu`, а не `click`, как на Windows/Linux.
 
 Поэтому, если мы хотим, чтобы пользователи всех операционных систем чувствовали себя комфортно, то вместе с `ctrl` мы должны использовать `metaKey`.
 
@@ -119,43 +119,44 @@
   клавиатура -- это сработает. Но если у вашего устройства нет клавиатуры -- то есть другой способ сделать то же самое.
 ```
 
-## Coordinates: clientX/Y, pageX/Y
+## Координаты: clientX/Y, pageX/Y
 
-All mouse events have coordinates in two flavours:
+Все события мыши предоставляют доступ к текущим координатам курсора в двух видах:
 
-1. Window-relative: `clientX` and `clientY`.
-2. Document-relative: `pageX` and `pageY`.
+1. Относительно окна: `clientX` и `clientY`.
+2. Относительно документа: `pageX` and `pageY`.
 
-For instance, if we have a window of the size 500x500, and the mouse is in the left-upper corner, then `clientX` and `clientY` are `0`. And if the mouse is in the center, then `clientX` and `clientY` are `250`, no matter what place in the document it is. They are similar to `position:fixed`.
+Например, если окно размером 500x500, а курсор мыши находится в левом верхнем углу - `clientX` и `clientY` будут равны `0`, а если курсор мыши находится в центре, тогда `clientX` и `clientY` будут равны `250`. Прокрутка страницы или положение элемента в документе никак не повлияют на эти координаты, потому что они рассчитываются относительно окна, так же как и `position:fixed`.
+
 
 ````online
-Move the mouse over the input field to see `clientX/clientY` (it's in the `iframe`, so coordinates are relative to that `iframe`):
+Проведите курсором мыши над полем ввода ниже, чтобы увидеть значения `clientX/clientY` (это поле ввода находится внутри `iframe`, поэтому и координаты рассчитываются относительно окна `iframe`)
 
 ```html autorun height=50
-<input onmousemove="this.value=event.clientX+':'+event.clientY" value="Mouse over me">
+<input onmousemove="this.value=event.clientX+':'+event.clientY" value="Наведи на меня">
 ```
 ````
 
-Document-relative coordinates are counted from the left-upper corner of the document, not the window.
-Coordinates `pageX`, `pageY` are similar to `position:absolute` on the document level.
+Координаты курсора мыши относительно документа рассчитываются от левого верхнего угла документа, поэтому при рассчете учитывается текущая прокрутка и положение элемента.
+Координаты `pageX` и `pageY` аналогичны `position:absolute` на уровне документа.  
 
-You can read more about coordinates in the chapter <info:coordinates>.
+Подбронее о коордитанатах вы можете прочитать в главе <info:coordinates>.
 
-## No selection on mousedown
+## Отмена выделения на событие mousedown
 
-Mouse clicks have a side-effect that may be disturbing. A double click selects the text.
+Клики мыши могут иметь неприятные побочные эффекты. Например, двойной клик может выделять текст.
 
-If we want to handle click events ourselves, then the "extra" selection doesn't look good.
+Если нам нужно обрабатывать событие клика, то "дополнительное" выделение текста выглядит не очень хорошо.
 
-For instance, a double-click on the text below selects it in addition to our handler:
+Например, двойной клик по элементу ниже выделит текст внутри:
 
 ```html autorun height=50
-<b ondblclick="alert('dblclick')">Double-click me</b>
+<b ondblclick="alert('dblclick')">Кликни два раза!</b>
 ```
 
-There's a CSS way to stop the selection: the `user-select` property from [CSS UI Draft](https://www.w3.org/TR/css-ui-4/).
+Есть способ отменить выделение текста при помощи CSS свойства `user-select`. Подробнее об этом свойстве можно прочитать здесь [CSS UI Draft](https://www.w3.org/TR/css-ui-4/).
 
-Most browsers support it with prefixes:
+Большинство браузеров поддерживают его с префиксами:
 
 ```html autorun height=50
 <style>
@@ -167,80 +168,82 @@ Most browsers support it with prefixes:
   }
 </style>
 
-Before...
+До...
 <b ondblclick="alert('Test')">
-  Unselectable
+  Невыделяемый
 </b>
-...After
+...После
 ```
 
-Now if you double-click on "Unselectable", it doesn't get selected. Seems to work.
+Теперь двойной клик по слову "Невыделяемый" не будет выделять текст. Кажется, работет. 
 
-...But there is a potential problem! The text became truly unselectable. Even if a user starts the selection from "Before" and ends with "After", the selection skips "Unselectable" part. Do we really want to make our text unselectable?
+...Но есть проблема! Текст теперь невозможно выделить полностью. Если пользователь начнет выделять текст со слова "До" и закончит на слове "После", часть со словом "Невыделяемый" будет пропущена. Действительно ли нам нужно это нужно?
 
-Most of time, we don't. A user may have valid reasons to select the text, for copying or other needs. That may be inconvenient if we don't allow them to do it. So this solution is not that good.
+В большинстве случаев нам это не нужно. Пользователю может понадобиться выделить текст для копирования или других нужд, поэтому это решение нам не очень подходит.
 
-What we want is to prevent the selection on double-click, that's it.
+Нам необходимо только предотвратить выделение текста при двойном клике.
 
-A text selection is the default browser action on `mousedown` event. So the alternative solution would be to handle `mousedown` and prevent it, like this:
+Выделение текста -- это действие браузера по-умолчанию на событие `mousedown`. Таким образом, мы можем обрабатывать событие `mousedown` и предовращать его, вот так:
 
 ```html autorun height=50
-Before...
-<b ondblclick="alert('Click!')" *!*onmousedown="return false"*/!*>
-  Double-click me
+До...
+<b ondblclick="alert('Клик!')" *!*onmousedown="return false"*/!*>
+  Кликни два раза
 </b>
-...After
+...После
 ```
 
-Now the bold element is not selected on double clicks.
+Теперь жирный текст не выделяется при двойном клике. 
 
-The text inside it is still selectable. However, the selection should start not on the text itself, but before or after it. Usually that's fine though.
+Но текст внутри можно выделить. Однако выделение должно начинаться не с самого текста, а до или после него. Обычно это нормально, хотя.
 
 ````smart header="Canceling the selection"
-Instead of *preventing* the selection, we can cancel it "post-factum" in the event handler.
+Вместо того чтобы *предотвращать* выделение, мы можем отменять отменить его "постфактум" в обработчике событий.
 
-Here's how:
+Вот так:
 
 ```html autorun height=50
-Before...
+До...
 <b ondblclick="*!*getSelection().removeAllRanges()*/!*">
-  Double-click me
+  Кликни два раза
 </b>
-...After
+...После
 ```
 
-If you double-click on the bold element, then the selection appears and then is immediately removed. That doesn't look nice though.
+Если дважды кликнуть по элементу, выделенному жирным, выделение сначала появится, а потом будет отменено. Это выглядит не очень хорошо.
 ````
 
-````smart header="Preventing copying"
-If we want to disable selection to protect our content from copy-pasting, then we can use another event: `oncopy`.
+````smart header="Предовращение копирования"
+Если мы хотим отменить выделение, что бы защищить наш котнтент от копирования, то нам нужно использовать событие `oncopy`.
 
 ```html autorun height=80 no-beautify
-<div *!*oncopy="alert('Copying forbidden!');return false"*/!*>
-  Dear user,
-  The copying is forbidden for you.
-  If you know JS or HTML, then you can get everything from the page source though.
+<div *!*oncopy="alert('Копирование запрещено!');return false"*/!*>
+  Уважаемый пользователь,
+  Копирование запрещено для вас
+  Если вы знаете JS или HTML, вы можете найти всю нужную вам информацию в исходном коде страницы.
 </div>
 ```
-If you try to copy a piece of text in the `<div>`, that won't work, because the default action `oncopy` is prevented.
+Если вы попытаетесь скопировать текст внутри `<div>`, у вас это не получится, потому что событие `oncopy` запрещено.
 
-Surely that can't stop the user from opening HTML-source, but not everyone knows how to do it.
+Конечно, это не остановит пользователей, которые могут открыть исходный HTML код, но не все пользователи знаю как это сделать
 ````
 
-## Summary
+## Итого
 
-Mouse events have the following properties:
+Сообытия мыши имею следующие свойства:
 
-- Button: `which`.
-- Modifier keys (`true` if pressed): `altKey`, `ctrlKey`, `shiftKey` and `metaKey` (Mac).
-  - If you want to handle `key:Ctrl`, then don't forget Mac users, they use `key:Cmd`, so it's better to check `if (e.metaKey || e.ctrlKey)`.
+- Кнопка мыши: `which`.
+- Клавиши-модификаторы (`true` если нажаты): `altKey`, `ctrlKey`, `shiftKey` и `metaKey` (Mac).
+  - Если вам нужно обрабатывать `key:Ctrl`, то не забудьте, что пользователи Mac используют `key:Cmd`, поэтому лучше проверить `if (e.metaKey || e.ctrlKey)`.
 
-- Window-relative coordinates: `clientX/clientY`.
-- Document-relative coordinates: `pageX/pageY`.
+- Координаты относительно окна: `clientX/clientY`.
+- Координаты относительно документа: `pageX/pageY`.
 
 It's also important to deal with text selection as an unwanted side-effect of clicks.
 
-There are several ways to do this, for instance:
-1. The CSS-property `user-select:none` (with browser prefixes) completely disables text-selection.
-2. Cancel the selection post-factum using `getSelection().removeAllRanges()`.
-3. Handle `mousedown` and prevent the default action (usually the best).
+Так же важно позаботиться о выделении текста, как о нежелательном побочном эффекте от клика.
+
+Есть несколько способов сделать это, например:
+1. CSS свойство `user-select:none` (с префиксами браузеров) полностью отключает выделение текста.
+2. Отмена выделения постфактум при помощи `getSelection().removeAllRanges()`.
+3. Обработка события `mousedown` и предовращение действия по-умолчанию (зачастую это лучший способ).
