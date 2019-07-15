@@ -207,64 +207,64 @@ Then the browser automatically reconnects.
 [codetabs src="eventsource"]
 
 
-## Summary
+## Итоги
 
-The `EventSource` object communicates with the server. It establishes a persistent connection and allows the server to send messages over it.
+Объект `EventSource` "общается" с сервером. Он устанавливает постоянное соединение и позволяет серверу отправлять через него сообщения.
 
-It offers:
-- Automatic reconnect, with tunable `retry` timeout.
-- Message ids to resume events, the last identifier is sent in `Last-Event-ID` header.
-- The current state is in the `readyState` property.
+Он предоставляет:
+- Автоматическое переподключение после истечения настраиваемой с помощью `retry` задержки.
+- Идентификаторы сообщений для восстановления "общения" с сервером, последний идентификатор посылается в заголовке `Last-Event-ID`.
+- Текущее состояние, записанное в свойстве `readyState`.
 
-That makes `EventSource` a viable alternative to `WebSocket`, as it's more low-level and lacks these features.
+Это делает `EventSource` достойной альтернативой протоколу `WebSocket`, который не имеет этих функций.
 
-In many real-life applications, the power of `EventSource` is just enough.
+Для многих приложений возможностей `EventSource` вполне достаточно.
 
-Supported in all modern browsers (not IE).
+Поддерживается во всех современных браузерах (кроме Internet Explorer).
 
-The syntax is:
+Синтаксис:
 
 ```js
 let source = new EventSource(url, [credentials]);
 ```
 
-The second argument has only one possible option: `{ withCredentials: true }`, it allows sending cross-domain credentials.
+Второй аргумент - объект с одним свойством: `{ withCredentials: true }`, позволяет передавать вместе с запросом авторизирующие заголовки.
 
-Overall cross-domain security is same as for `fetch` and other network methods.
+В целом, кросс-доменная безопасность на таком же уровне, как у `fetch` и других методов работы с сетью.
 
-### Properties of an `EventSource` object
+### Свойства объекта `EventSource`
 
 `readyState`
-: The current connection state: either `EventSource.CONNECTING (=0)`, `EventSource.OPEN (=1)` or `EventSource.CLOSED (=2)`.
+: Текущее состояние подключения: `EventSource.CONNECTING (=0)`, `EventSource.OPEN (=1)` или `EventSource.CLOSED (=2)`.
 
 `lastEventId`
-: The last received `id`. Upon reconnection the browser sends it in the header `Last-Event-ID`.
+: `id` последнего полученного сообщения. При переподключении браузер посылает его в заголовке `Last-Event-ID`.
 
-### Methods
+### Методы
 
 `close()`
-: Closes the connection соединение.
+: Закрывает соединение.
 
-### Events
+### События
 
 `message`
-: Message received, the data is in `event.data`.
+: Сообщение получено, переданные данные записаны в `event.data`.
 
 `open`
-: The connection is established.
+: Соединение установлено.
 
 `error`
-: In case of an error, including both lost connection (will auto-reconnect) and fatal errors. We can check `readyState` to see if the reconnection is being attempted.
+: Потеряно соединение (произойдет переподключение) или произошла фатальная ошибка. Мы можем обратиться к свойству `readyState`, чтобы проверить происходит ли переподключение.
 
-The server may set a custom event name in `event:`. Such events should be handled using `addEventListener`, not `on<event>`.
+Сервер может выставить собственное событие с помощью `event:`. Такие события должны быть обработаны с помощью `addEventListener`, а не `on<event>`.
 
-### Server response format
+### Формат ответа сервера
 
-The server sends messages, delimited by `\n\n`.
+Сервер посылает сообщения, разделенные двойным переносом строки `\n\n`.
 
-Message parts may start with:
+Часть сообщения может начинаться с:
 
-- `data:` -- message body, a sequence of multiple `data` is interpreted as a single message, with `\n` between the parts.
-- `id:` -- renews `lastEventId`, sent in `Last-Event-ID` on reconnect.
-- `retry:` -- recommends a retry delay for reconnections in ms. There's no way to set it from JavaScript.
-- `event:` -- even name, must precede `data:`.
+- `data:` -- тело сообщения, несколько `data` подряд интерпретируются как одно сообщение, разделенные переносами строк `\n`.
+- `id:` -- обновляет свойство `lastEventId`, отправляемое в `Last-Event-ID` при переподключении.
+- `retry:` -- рекомендованная задержка перед переподключением в миллисекундах. Не может быть установлена с помощью JavaScript.
+- `event:` -- пользовательское имя события, должно быть указано перед `data:`.
