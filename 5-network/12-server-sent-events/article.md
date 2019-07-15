@@ -119,31 +119,31 @@ eventSource.close();
 Переоткрыть закрытое соединение невозможно. Если необходимо снова подключиться, объявите новый `EventSource`.
 ```
 
-## Message id
+## Идентификатор сообщения
 
-When a connection breaks due to network problems, either side can't be sure which messages were received, and which weren't.
+Когда соединение прерывается из-за проблем с сетью, ни сервер, ни клиент не могут быть уверены в том, какие сообщения были доставлены, а какие - нет.
 
-To correctly resume the connection, each message should have an `id` field, like this:
+Чтобы правильно возобновить подключение, каждое сообщение должно иметь поле `id`:
 
 ```
-data: Message 1
+data: Сообщение 1
 id: 1
 
-data: Message 2
+data: Сообщение 2
 id: 2
 
-data: Message 3
-data: of two lines
+data: Сообщение 3
+data: в две строки
 id: 3
 ```
 
-When a message with `id:` is received, the browser:
+Получая сообщение с указанным `id:`, браузер:
 
-- Sets the property `eventSource.lastEventId` to its value.
-- Upon reconnection sends the header `Last-Event-ID` with that `id`, so that the server may re-send following messages.
+- Установит его значение свойству `eventSource.lastEventId`.
+- При переподключении отправит заголовок `Last-Event-ID` с этим `id`, чтобы сервер мог переслать последующие сообщения.
 
-```smart header="Put `id:` after `data:`"
-Please note: the `id:` is appended below the message data, to ensure that `lastEventId` is updated after the message data is received.
+```smart header="Указывайте `id:` после `data:`"
+Обратите внимание: `id` указывается после текста сообщения, чтобы обновление `lastEventId` произошло после того, как данные сообщения были получены.
 ```
 
 ## Connection status: readyState
