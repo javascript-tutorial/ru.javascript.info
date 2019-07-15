@@ -64,17 +64,17 @@ eventSource.onmessage = function(event) {
 // или eventSource.addEventListener('message', ...)
 ```
 
-### Cross-domain requests
+### Кросс-доменные запросы
 
-`EventSource` supports cross-origin requests, like `fetch` any other networking methods. We can use any URL:
+`EventSource`, как и `fetch`, поддерживает кросс-доменные запросы. Мы можем использовать такой URL:
 
 ```js
 let source = new EventSource("https://another-site.com/events");
 ```
 
-The remote server will get the `Origin` header and must respond with `Access-Control-Allow-Origin` to proceed.
+Сервер получит заголовок `Origin` и должен будет ответить с заголовком `Access-Control-Allow-Origin`.
 
-To pass credentials, we should set the additional option `withCredentials`, like this:
+Чтобы передать авторизирующие заголовки, нужно передать дополнительный аргумент `withCredentials`:
 
 ```js
 let source = new EventSource("https://another-site.com/events", {
@@ -82,7 +82,7 @@ let source = new EventSource("https://another-site.com/events", {
 });
 ```
 
-Please see the chapter <info:fetch-crossorigin> for more details about cross-domain headers.
+Более подробное описание кросс-доменных заголовков можете прочитать в главе <info:fetch-crossorigin>.
 
 
 ## Переподключение
