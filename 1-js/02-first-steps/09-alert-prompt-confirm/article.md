@@ -31,7 +31,11 @@ alert("Hello");
 result = prompt(title, [default]);
 ```
 
+<<<<<<< HEAD
 Этот код отобразит модальное окно с текстом, полем для ввода текста и кнопками OK/CANCEL.
+=======
+It shows a modal window with a text message, an input field for the visitor, and the buttons OK/Cancel.
+>>>>>>> be342e50e3a3140014b508437afd940cd0439ab7
 
 `title`
 : Текст для отображения в окне.
@@ -39,7 +43,11 @@ result = prompt(title, [default]);
 `default`
 : Необязательный второй параметр, который устанавливает начальное значение в поле для текста в окне.
 
+<<<<<<< HEAD
 Пользователь может напечатать что-либо в поле ввода и нажать OK. Или отменить ввод нажатием на кнопку CANCEL или нажав клавишу `key:Esc`.
+=======
+The visitor may type something in the prompt input field and press OK. Or they can cancel the input by pressing Cancel or hitting the `key:Esc` key.
+>>>>>>> be342e50e3a3140014b508437afd940cd0439ab7
 
 Вызов `prompt` вернёт текст, указанный в поле для ввода, или `null` если ввод отменён пользователем.
 
@@ -75,7 +83,11 @@ let test = prompt("Test", ''); // <-- для IE
 result = confirm(question);
 ```
 
+<<<<<<< HEAD
 Функция `confirm` отображает модальное окно с текстом вопроса `question` и двумя кнопками: OK и CANCEL.
+=======
+The function `confirm` shows a modal window with a `question` and two buttons: OK and Cancel.
+>>>>>>> be342e50e3a3140014b508437afd940cd0439ab7
 
 Результат `true`, если нажата кнопка OK. В других случаях `false`.
 
@@ -95,10 +107,17 @@ alert( isBoss ); // true если нажата OK
 : показывает сообщение.
 
 `prompt`
+<<<<<<< HEAD
 : показывает сообщение и запрашивает ввод текста от пользователя. Возвращает напечатанный текст в поле ввода или `null`, если были нажаты кнопки CANCEL или `key:Esc` с клавиатуры.
 
 `confirm`
 : показывает сообщение и ждёт, пока пользователь нажмёт OK или CANCEL. Возвращает `true`, если нажата OK и `false`, если нажаты кнопки CANCEL или `key:Esc` с клавиатуры.
+=======
+: shows a message asking the user to input text. It returns the text or, if Cancel button or `key:Esc` is clicked, `null`.
+
+`confirm`
+: shows a message and waits for the user to press "OK" or "Cancel". It returns `true` for OK and `false` for Cancel/`key:Esc`.
+>>>>>>> be342e50e3a3140014b508437afd940cd0439ab7
 
 Все эти методы являются модальными: останавливают выполнение скриптов и не позволяют пользователю взаимодействовать с остальной частью страницы до тех пор, пока окно не будет закрыто.
 

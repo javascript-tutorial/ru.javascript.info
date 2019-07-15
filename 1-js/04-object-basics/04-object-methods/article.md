@@ -258,9 +258,15 @@ user.hi(); // Джон (простой вызов метода работает 
 */!*
 ```
 
+<<<<<<< HEAD
 В последней строчке кода используется условный оператор `?`, который определяет, какой будет вызван метод (`user.hi` или `user.bye`) в зависимости от выполнения условия. В данном случае будет выбран `user.hi`.
 
 Затем метод тут же вызывается с помощью скобок `()`. Но вызов не работает как положено!
+=======
+On the last line there is a conditional operator that chooses either `user.hi` or `user.bye`. In this case the result is `user.hi`.
+
+Then the method is immediately called with parentheses `()`. But it doesn't work correctly!
+>>>>>>> be342e50e3a3140014b508437afd940cd0439ab7
 
 Вы можете видеть, что при вызове будет ошибка, потому что значением `"this"` внутри функции становится `undefined` (полагаем, что у нас строгий режим).
 

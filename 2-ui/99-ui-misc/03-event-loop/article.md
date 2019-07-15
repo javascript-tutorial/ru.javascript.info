@@ -41,10 +41,15 @@
 Отметим две детали:
 1.  Рендеринг (отрисовка страницы) никогда не происходит во время выполнения задачи движком.
 
+<<<<<<< HEAD
     Не имеет значение сколь долго выполняется задача. Изменения в DOM отрисовываются только после того, как задача выполнена.
 2.  Если задача выполняется очень долго, то браузер не может выполнять другие задачи, обрабатывать пользовательские события, поэтому спустя некоторое время браузер предлагает "убить" долго выполняющуюся задачу.
 
     Обычно вся страница "умирает" вместе с задачей.
+=======
+    Doesn't matter if the task takes a long time. Changes to DOM are painted only after the task is complete.
+2. If a task takes too long, the browser can't do other tasks, process user events, so after a time it raises an alert like "Page Unresponsive" and suggesting to kill the task with the whole page.
+>>>>>>> be342e50e3a3140014b508437afd940cd0439ab7
 
 Теперь давайте взглянем, как можно применить эти знания.
 
@@ -52,7 +57,11 @@
 
 Допустим, у нас есть задача, требующая значительных ресурсов процессора.
 
+<<<<<<< HEAD
 Например, подсветка синтаксиса (используется для выделения цветом участков кода на этой странице) -- довольно процессороёмкая задача. Для подсветки кода надо выполнить синтаксический анализ, создать много элементов для цветового выделения, добавить их в документ -- для большого текста это требует значительных ресурсов.
+=======
+For example, syntax-highlighting (used to colorize code examples on this page) is quite CPU-heavy. To highlight the code, it performs the analysis, creates many colored elements, adds them to the document -- for a big text that takes a lot of time.
+>>>>>>> be342e50e3a3140014b508437afd940cd0439ab7
 
 Пока движок занят подсветкой синтаксиса, он не может делать ничего, связанного с DOM, не может обрабатывать пользовательские события и т.д. Возможно, браузер даже "зависнет", что совершенно неприемлемо.
 
@@ -117,7 +126,11 @@ count();
     
 Теперь если новая сторонняя задача (например, событие `onclick`) появляется, пока движок занят выполнением 1-й части, то она становится в очередь, и затем выполняется, когда 1-я часть завершена, перед следующей частью. Периодические возвраты в событийный цикл между запусками `count` дают движку достаточно "воздуха", чтобы сделать что-то ещё, отреагировать на действия пользователя.
 
+<<<<<<< HEAD
 Отметим, что оба варианта -- с разбиением задачи с помощью `setTimeout` и без -- сопоставимы по скорости выполнения. Нет большой разницы в общем времени счёта.
+=======
+Now, if a new side task (e.g. `onclick` event) appears while the engine is busy executing part 1, it gets queued and then executes when part 1 finished, before the next part. Periodic returns to event loop between `count` executions provide just enough "air" for the JavaScript engine to do something else, to react on other user actions.
+>>>>>>> be342e50e3a3140014b508437afd940cd0439ab7
 
 Чтобы сократить разницу ещё сильнее, давайте немного улучшим наш код.
 
@@ -154,11 +167,19 @@ count();
 
 Почему?
 
+<<<<<<< HEAD
 Всё просто: как вы помните, в браузере есть минимальная задержка в 4 миллисекунды при множестве вложенных вызовов `setTimeout`. Даже если мы указываем задержку `0`, на самом деле она будет равна `4 мс` (или чуть больше). Поэтому чем раньше мы запланируем выполнение - тем быстрее выполнится код.
 
 ## Пример: индикация прогресса
 
 Ещё одно преимущество разделения на части крупной задачи в браузерных скриптах - это возможность показывать индикатор выполнения.
+=======
+That's simple: as you remember, there's the in-browser minimal delay of 4ms for many nested `setTimeout` calls. Even if we set `0`, it's `4ms` (or a bit more). So the earlier we schedule it - the faster it runs.
+
+## Use case: progress indication
+
+Another benefit of splitting heavy tasks for browser scripts is that we can show progress indication.
+>>>>>>> be342e50e3a3140014b508437afd940cd0439ab7
 
 Обычно браузер отрисовывает содержимое страницы после того, как заканчивается выполнение текущего кода. Не имеет значения насколько долго выполняется задача. Изменения в DOM отображаются только после её завершения.
 
@@ -185,9 +206,15 @@ count();
 
 ...Но, возможно, мы хотим что-нибудь показать во время выполнения задачи, например, индикатор выполнения.
 
+<<<<<<< HEAD
 Если мы разобьём тяжёлую задачу на части, используя `setTimeout`, то изменения индикатора будут отрисованы в промежутках между частями.
 
 Так будет красивее:
+=======
+If we split the heavy task into pieces using `setTimeout`, then changes are painted out in-between them.
+
+This looks prettier:
+>>>>>>> be342e50e3a3140014b508437afd940cd0439ab7
 
 ```html run
 <div id="progress"></div>

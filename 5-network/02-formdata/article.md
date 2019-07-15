@@ -8,11 +8,17 @@
 let formData = new FormData([form]);
 ```
 
+<<<<<<< HEAD
 Если передать в конструктор элемент HTML-формы `form`, то создаваемый объект автоматически прочитает из неё поля. Как вы, наверно, уже догадались, `FormData` - объект для хранения и отправки данных формы.
 
 Его особенность заключается в том, что методы для работы с сетью, например `fetch`, позволяют указать объект `FormData` в свойстве `body` запроса. Он будет соответствующим образом закодирован и отправлен с заголовком `Content-Type: form/multipart`.
 
 Таким образом, со стороны сервера это выглядит как обычная отправка формы.
+=======
+If HTML `form` element is provided, it automatically captures its fields. As you may have already guessed, `FormData` is  an object to store and send form data.
+
+The special thing about `FormData` is that network methods, such as `fetch`, can accept a `FormData` object as a body. It's encoded and sent out with `Content-Type: form/multipart`. So, from the server point of view, that looks like a usual form submission.
+>>>>>>> be342e50e3a3140014b508437afd940cd0439ab7
 
 ## Отправка простой формы
 
@@ -80,7 +86,11 @@ for(let [name, value] of formData) {
 
 ## Отправка формы с файлом
 
+<<<<<<< HEAD
 Объекты `FormData` всегда отсылаются с заголовком `Content-Type: form/multipart`, этот способ кодировки позволяет отсылать файлы. Таким образом, поля `<input type="file">` тоже отправляются, как это и происходит в случае обычной формы.
+=======
+The form is always sent as `Content-Type: form/multipart`, this encoding allows to send files. So, `<input type="file">` fields are sent also, similar to a usual form submission.
+>>>>>>> be342e50e3a3140014b508437afd940cd0439ab7
 
 Пример такой формы:
 
@@ -109,11 +119,19 @@ for(let [name, value] of formData) {
 </script>
 ```
 
+<<<<<<< HEAD
 ## Отправка формы с Blob-данными
 
 Ранее в главе <info:fetch> мы видели, что отправить динамически сгенерированные бинарные данные `Blob`, например картинку, достаточно легко. Мы можем явно передать её в параметр `body` запроса `fetch`.
 
 Но на практике бывает удобнее отправлять изображение не отдельно, а в составе формы, добавив дополнительные поля для имени "name" и другие метаданные.
+=======
+## Sending a form with Blob data
+
+As we've seen in the chapter <info:fetch>, sending a dynamically generated `Blob`, e.g. an image, is easy. We can supply it directly as `fetch` parameter `body`.
+
+In practice though, it's often convenient to send an image not separately, but as a part of the form, with additional fields, such as "name" and other metadata.
+>>>>>>> be342e50e3a3140014b508437afd940cd0439ab7
 
 Кроме того, серверы часто настроены на приём именно форм, а не просто бинарных данных.
 
@@ -159,11 +177,19 @@ for(let [name, value] of formData) {
 formData.append("image", imageBlob, "image.png");
 ```
 
+<<<<<<< HEAD
 Это как если бы в форме был элемент `<input type="file" name="image">` и пользователь прикрепил бы файл `image.png` (3й аргумент) из своей файловой системы.
+=======
+That's same as if there were `<input type="file" name="image">` in the form, and the visitor submitted a file named `image.png` (3rd argument) from their filesystem.
+>>>>>>> be342e50e3a3140014b508437afd940cd0439ab7
 
 ## Итого
 
+<<<<<<< HEAD
 Объекты [FormData](https://xhr.spec.whatwg.org/#interface-formdata) используются, чтобы прочитать данные HTML-формы и отправить их с помощью `fetch` или другого метода для работы с сетью.
+=======
+[FormData](https://xhr.spec.whatwg.org/#interface-formdata) objects are used to capture HTML form and submit it using `fetch` or another network method.
+>>>>>>> be342e50e3a3140014b508437afd940cd0439ab7
 
 Мы можем создать такой объект уже с данными, передав в конструктор HTML-форму -- `new FormData(form)`, или же можно создать пустой объект и затем добавить к нему поля с помощью методов:
 

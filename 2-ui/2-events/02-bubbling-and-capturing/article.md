@@ -130,7 +130,11 @@
 
 ![](eventflow.png)
 
+<<<<<<< HEAD
 То есть при клике на `<td>` событие путешествует по цепочке родителей сначала вниз к элементу (погружается), затем оно достигает целевой элемент, а потом всплывает наверх, вызывая по пути обработчики.
+=======
+That is: for a click on `<td>` the event first goes through the ancestors chain down to the element (capturing phase), then it reaches the target and triggers there (target phase), and then it goes up (bubbling phase), calling handlers on its way.
+>>>>>>> be342e50e3a3140014b508437afd940cd0439ab7
 
 **Ранее мы говорили только о всплытии, потому что другие стадии, как правило, не используются и проходят незаметно для нас.**
 
@@ -149,7 +153,12 @@ elem.addEventListener(..., true)
 - Если аргумент `false` (по умолчанию), то событие будет поймано при всплытии.
 - Если аргумент `true`, то событие будет перехвачено при погружении.
 
+<<<<<<< HEAD
 Обратите внимание, что хоть и формально существует 3 фазы, 2-ую фазу ("фазу цели": событие достигло элемента) нельзя обработать отдельно, при её достижении вызываются все обработчики: и на всплытие, и на погружение.
+=======
+
+Note that while formally there are 3 phases, the 2nd phase ("target phase": the event reached the element) is not handled separately: handlers on both capturing and bubbling phases trigger at that phase.
+>>>>>>> be342e50e3a3140014b508437afd940cd0439ab7
 
 Давайте посмотрим и всплытие и погружение в действии:
 
@@ -179,10 +188,16 @@ elem.addEventListener(..., true)
 
 Если вы кликните по `<p>`, то последовательность следующая:
 
+<<<<<<< HEAD
 1. `HTML` -> `BODY` -> `FORM` -> `DIV` -> `P` (фаза погружения, первый обработчик), а потом:
 2. `P` -> `DIV` -> `FORM` -> `BODY` -> `HTML` (фаза всплытия, второй обработчик).
 
 Обратите внимание, что `P` появляется два раза: в конце погружения и в начале всплытия.
+=======
+1. `HTML` -> `BODY` -> `FORM` -> `DIV` (capturing phase, the first listener):
+2. `P` (target phrase, triggers two times, as we've set two listeners: capturing and bubbling)
+3. `DIV` -> `FORM` -> `BODY` -> `HTML` (bubbling phase, the second listener).
+>>>>>>> be342e50e3a3140014b508437afd940cd0439ab7
 
 Существует свойство `event.eventPhase`, содержащее номер фазы, на которой событие было поймано. Но оно используется редко, ведь мы обычно знаем об этом в обработчике.
 
@@ -190,6 +205,7 @@ elem.addEventListener(..., true)
 Если мы добавили обработчик вот так `addEventListener(..., true)`, то мы должны передать то же значение аргумента `capture` в `removeEventListener(..., true)`, когда снимаем обработчик.
 ```
 
+<<<<<<< HEAD
 ## Итого
 
 Алгоритм:
@@ -197,12 +213,37 @@ elem.addEventListener(..., true)
 - При наступлении события -- элемент, на котором оно произошло, помечается как "целевой" (`event.target`).
 - Далее событие сначала двигается вниз от корня документа к `event.target`, по пути вызывая обработчики, поставленные через `addEventListener(...., true), где `true` -- это сокращение для `{capture: true}`.
 - Далее событие двигается от `event.target` вверх к корню документа, по пути вызывая обработчики, поставленные через `on<event>` и `addEventListener` без третьего аргумента или с третьим аргументом равным `false`.
+=======
+````smart header="Listeners on same element and same phase run in their set order"
+If we have multiple event handlers on the same phase, assigned to the same element with `addEventListener`, they run in the same order as they are created:
+
+```js
+elem.addEventListener("click", e => alert(1)); // guaranteed to trigger first
+elem.addEventListener("click", e => alert(2));
+```
+````
+
+
+## Summary
+
+When an event happens -- the most nested element where it happens gets labeled as the "target element" (`event.target`).
+
+- Then the event moves down from the document root to `event.target`, calling handlers assigned with `addEventListener(...., true)` on the way (`true` is a shorthand for `{capture: true}`).
+- Then handlers are called on the target element itself.
+- Then the event bubbles up from `event.target` up to the root, calling handlers assigned using `on<event>` and `addEventListener` without the 3rd argument or with the 3rd argument `false/{capture:false}`.
+>>>>>>> be342e50e3a3140014b508437afd940cd0439ab7
 
 Каждый обработчик имеет доступ к свойствам события `event`:
 
+<<<<<<< HEAD
 - `event.target` -- самый глубокий элемент, на котором произошло событие.
 - `event.currentTarget` (=`this`) -- элемент, на котором в данный момент сработал обработчик (тот, на котором "висит" конкретный обработчик)
 - `event.eventPhase` -- на какой фазе он сработал (погружение=1, всплытие=3).
+=======
+- `event.target` -- the deepest element that originated the event.
+- `event.currentTarget` (=`this`) -- the current element that handles the event (the one that has the handler on it)
+- `event.eventPhase` -- the current phase (capturing=1, target=2, bubbling=3).
+>>>>>>> be342e50e3a3140014b508437afd940cd0439ab7
 
 Любой обработчик может остановить событие вызовом `event.stopPropagation()`, но делать это не рекомендуется, так как в дальнейшем это событие может понадобиться, иногда для самых неожиданных вещей.
 

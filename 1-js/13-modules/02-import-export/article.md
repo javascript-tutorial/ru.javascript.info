@@ -209,17 +209,33 @@ new User('John');
 export default class { // у класса нет имени
   constructor() { ... }
 }
+```
 
+<<<<<<< HEAD
 export default function(user) { // у функции нет имени
+=======
+```js
+export default function(user) { // no function name
+>>>>>>> be342e50e3a3140014b508437afd940cd0439ab7
   alert(`Hello, ${user}!`);
 }
+```
 
+<<<<<<< HEAD
 // экспортируем значение, не создавая переменную 
 export default ['Jan', 'Feb', 'Mar','Apr', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 ```
 
 Это нормально, потому что может быть только один `export default` на файл, так что `import` всегда знает, что импортировать.
  В противоположность этому, отсутствие имени у именованных импортов приведёт к ошибке:
+=======
+```js
+// export a single value, without making a variable
+export default ['Jan', 'Feb', 'Mar','Apr', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+```
+
+Not giving a name is fine, because `export default` is only one per file. Contrary to that, omitting a name for named imports would be an error:
+>>>>>>> be342e50e3a3140014b508437afd940cd0439ab7
 
 ```js
 export class { // Ошибка! (необходимо имя, если это не экспорт по умолчанию)

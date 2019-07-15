@@ -146,7 +146,11 @@ new Promise(function(resolve, reject) {
 
 ## Пример: loadScript
 
+<<<<<<< HEAD
 Давайте используем эту возможность вместе с промисифицированной функцией `loadScript`, созданной нами в [предыдущей главе](info:promise-basics#loadscript), чтобы загружать скрипты по очереди, последовательно:
+=======
+Let's use this feature with the promisified `loadScript`, defined in the [previous chapter](info:promise-basics#loadscript), to load scripts one by one, in sequence:
+>>>>>>> be342e50e3a3140014b508437afd940cd0439ab7
 
 ```js run
 loadScript("/article/promise-chaining/one.js")
@@ -206,10 +210,15 @@ loadScript("/article/promise-chaining/one.js").then(script1 => {
 Иногда всё же приемлемо добавлять `.then` напрямую, чтобы вложенная в него функция имела доступ к внешней области видимости. В примере выше самая глубоко вложенная функция обратного вызова имеет доступ ко всем переменным `script1`, `script2`, `script3`. Но это скорее исключение, чем правило.
 
 
+<<<<<<< HEAD
 ````smart header="Thenable"
 Если быть более точными, `.then` может возвращать любой объект, содержащий метод `.then`, такие объекты называют "thenable", и этот объект будет обработан как промис.
 
 Смысл в том, что сторонние библиотеки могут создавать свои собственные совместимые с промисами объекты. Они могут иметь свои наборы методов и при этом быть совместимыми со встроенными промисами, так как реализуют метод `.then`.
+=======
+````smart header="Thenables"
+To be precise, `.then` may return a so-called "thenable" object - an arbitrary object that has method `.then`, and it will be treated the same way as a promise.
+>>>>>>> be342e50e3a3140014b508437afd940cd0439ab7
 
 Вот пример такого объекта:
 
@@ -242,7 +251,11 @@ JavaScript проверяет объект, возвращаемый из обр
 
 Во фронтенд-разработке промисы часто используются, чтобы делать запросы по сети. Давайте рассмотрим один такой пример.
 
+<<<<<<< HEAD
 Мы будем использовать метод [fetch](info:fetch), чтобы подгрузить информацию о пользователях с удалённого сервера. Этот метод имеет много опциональных параметров, разобранных в соответствующем разделе, но базовый синтаксис весьма прост:
+=======
+We'll use the [fetch](info:fetch) method to load the information about the user from the remote server. It has a lot of optional parameters covered in separate chapters, but the basic syntax is quite simple:
+>>>>>>> be342e50e3a3140014b508437afd940cd0439ab7
 
 ```js
 let promise = fetch(url);

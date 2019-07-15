@@ -20,8 +20,13 @@ alert( str.match(/^\d+/gm) ); // 1, 2, 33
 */!*
 ```
 
+<<<<<<< HEAD
 Обратим внимание -- без флага  `pattern:/.../m` было бы найдено только первое число:
+=======
+The regexp engine moves along the text and looks for a line start `pattern:^`, when finds -- continues to match the rest of the pattern `pattern:\d+`.
+>>>>>>> be342e50e3a3140014b508437afd940cd0439ab7
 
+Without the flag  `pattern:/.../m` only the first number is matched:
 
 ```js run
 let str = `1е место: Винни
@@ -33,9 +38,13 @@ alert( str.match(/^\d+/g) ); // 1
 */!*
 ```
 
+<<<<<<< HEAD
 Так происходит, потому что в обычном режиме каретка `pattern:^` -- это только начало текста, а в многострочном -- начало любой строки.
 
 Движок регулярных выражений двигается по тексту в поисках строки, начинающейся с `pattern:^`, и как находит -- продолжает искать в ней `pattern:\d+`.
+=======
+That's because by default a caret `pattern:^` only matches at the beginning of the text, and in the multiline mode -- at the start of any line.
+>>>>>>> be342e50e3a3140014b508437afd940cd0439ab7
 
 ## Конец строки $
 

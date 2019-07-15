@@ -59,7 +59,11 @@ blob.slice([byteStart], [byteEnd], [contentType]);
 
 Blob может быть использован как URL для `<a>`, `<img>` или других тегов, для показа содержимого.
 
+<<<<<<< HEAD
 Давайте начнём с простого примера. При клике на ссылку мы загружаем динамически генерируемый Blob с `hello world` содержимым как файл:
+=======
+Let's start with a simple example. By clicking on a link you download a dynamically-generated blob with `hello world` contents as a file:
+>>>>>>> be342e50e3a3140014b508437afd940cd0439ab7
 
 ```html run
 <!-- download атрибут указывает браузеру делать загрузку вместо навигации -->
@@ -117,7 +121,11 @@ blob:https://javascript.info/1e67e00e-860d-40a5-89ae-6ab0cbee6273
 
 Эта кодировка представляет двоичные данные в виде строки с безопасными для чтения символами в ASCII-кодах от 0 до 64. И что более важно -- мы можем использовать эту кодировку для "data-urls".
 
+<<<<<<< HEAD
 [data url](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs) имеет форму `data:[<mediatype>][;base64],<data>`. Мы можем использовать такой url где угодно, в паре с "обычным" url.
+=======
+A [data url](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs) has the form `data:[<mediatype>][;base64],<data>`. We can use such urls everywhere, on a par with "regular" urls.
+>>>>>>> be342e50e3a3140014b508437afd940cd0439ab7
 
 Например, смайлик:
 
@@ -233,7 +241,11 @@ fileReader.onload = function(event) {
 
 Методы, которые выполняют веб-запросы, такие как [XMLHttpRequest](info:xmlhttprequest), [fetch](info:fetch-basics) и подобные, могут работать с `Blob` изначально, также как с другими двоичными типами.
 
+<<<<<<< HEAD
 Мы можем легко конвертировать `Blob` в низкоуровневые бинарные типы данных и обратно:
+=======
+Methods that perform web-requests, such as [XMLHttpRequest](info:xmlhttprequest), [fetch](info:fetch) and so on, can work with `Blob` natively, as well as with other binary types.
+>>>>>>> be342e50e3a3140014b508437afd940cd0439ab7
 
 - Мы можем создать Blob из типового массива, используя конструктор `new Blob(...)`.
 - Мы можем обратно создать `ArrayBuffer` из Blob, используя `FileReader`, а затем создать его представления для низкоуровневых операций.

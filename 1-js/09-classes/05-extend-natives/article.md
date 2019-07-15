@@ -35,7 +35,11 @@ arr.constructor === PowerArray
 
 При помощи специального статического геттера `Symbol.species` можно вернуть конструктор, который JavaScript будет использовать в `filter`, `map` и других методах для создания новых объектов.
 
+<<<<<<< HEAD
 Если бы мы хотели, чтобы методы `map`, `filter` и т. д. возвращали обычные массивы, мы можем вернуть `Array` в `Symbol.species`, вот так:
+=======
+If we'd like built-in methods like `map` or `filter` to return regular arrays, we can return `Array` in `Symbol.species`, like here:
+>>>>>>> be342e50e3a3140014b508437afd940cd0439ab7
 
 ```js run
 class PowerArray extends Array {
@@ -76,7 +80,20 @@ alert(filteredArr.isEmpty()); // Error: filteredArr.isEmpty is not a function
 
 Другими словами, прототип встроенного конструктора `Array` не содержит указателя на `Object`. Таким образом, `Array` и `Date` не содержат `Array.keys` или `Date.keys`. И это выглядит естественно.
 
+<<<<<<< HEAD
 Ниже вы видите структуру `Date` и `Object`:
+=======
+1. `Rabbit.methods` are callable for `Animal.methods`, because `Rabbit.[[Prototype]] = Animal`.
+2. `new Rabbit().methods` are also available, because `Rabbit.prototype.[[Prototype]] = Animal.prototype`.
+
+That's thoroughly explained in the chapter [](info:static-properties-methods#statics-and-inheritance).
+
+But built-in classes are an exception. They don't inherit statics from each other.
+
+For example, both `Array` and `Date` inherit from `Object`, so their instances have methods from `Object.prototype`. But  `Array.[[Prototype]]` does not point to `Object`. So there's `Object.keys()`, but not `Array.keys()` and `Date.keys()`.
+
+Here's the picture structure for `Date` and `Object`:
+>>>>>>> be342e50e3a3140014b508437afd940cd0439ab7
 
 ![](object-date-inheritance.png)
 

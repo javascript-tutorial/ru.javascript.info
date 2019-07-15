@@ -296,7 +296,11 @@ sayHi(); // Ready to serve, *!*Pete*/!*!
     <script type="module" src="my.js"></script>
     ```
 
+<<<<<<< HEAD
 2. Внешний скрипт, который загружается с другого домена, требует указания заголовков [CORS](mdn:Web/HTTP/CORS). Другими словами, если модульный скрипт загружается с другого домена, то удалённый сервер должен установить заголовок `Access-Control-Allow-Origin: *` (можно использовать имя домена, вместо `*`), что будет означать, что загрузка скрипта разрешена.
+=======
+2. External scripts that are fetched from another origin (e.g. another site) require [CORS](mdn:Web/HTTP/CORS) headers, as described in the chapter <info:fetch-crossorigin>. In other words, if a module script is fetched from another origin, the remote server must supply a header `Access-Control-Allow-Origin: *` (may use site domain instead of `*`) to indicate that the fetch is allowed.
+>>>>>>> be342e50e3a3140014b508437afd940cd0439ab7
     ```html
     <!-- another-site.com должен указать заголовок Access-Control-Allow-Origin -->
     <!-- иначе, скрипт не выполнится -->

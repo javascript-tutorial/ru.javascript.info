@@ -597,7 +597,11 @@ function f() {
 }
 
 let g = f(); // while g is alive
+<<<<<<< HEAD
 // соответствующее лексическое окружение существует
+=======
+// their corresponding Lexical Environment lives
+>>>>>>> be342e50e3a3140014b508437afd940cd0439ab7
 
 g = null; // ...а теперь память очищается
 ```

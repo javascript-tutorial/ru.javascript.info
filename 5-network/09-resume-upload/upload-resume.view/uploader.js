@@ -4,8 +4,13 @@ class Uploader {
     this.file = file;
     this.onProgress = onProgress;
 
+<<<<<<< HEAD
     // создаём уникальный идентификатор файла
     // для большей уникальности мы также могли бы добавить идентификатор пользовательской сессии (если она есть)
+=======
+    // create fileId that uniquely identifies the file
+    // we could also add user session identifier (if had one), to make it even more unique
+>>>>>>> be342e50e3a3140014b508437afd940cd0439ab7
     this.fileId = file.name + '-' + file.size + '-' + +file.lastModifiedDate;
   }
 

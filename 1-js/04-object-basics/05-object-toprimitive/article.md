@@ -3,7 +3,11 @@
 
 Что произойдёт, если сложить два объекта `obj1 + obj2`, вычесть один из другого `obj1 - obj2` или вывести их на экран, воспользовавшись `alert(obj)`?
 
+<<<<<<< HEAD
 В этом случае, объекты сначала автоматически преобразуются в примитивы, а затем выполняется операция.
+=======
+In that case, objects are auto-converted to primitives, and then the operation is carried out.
+>>>>>>> be342e50e3a3140014b508437afd940cd0439ab7
 
 В главе <info:type-conversions> мы видели правила для численных, строковых и логических преобразований. Но обделили вниманием объекты. Теперь, поскольку мы уже знаем о методах объектов и символах, можно исправить это.
 
@@ -138,7 +142,11 @@ alert(+user); // valueOf -> 1000
 alert(user + 500); // valueOf -> 1500
 ```
 
+<<<<<<< HEAD
 Довольно часто мы хотим описать одно "универсальное" преобразование объекта к примитиву, для всех ситуаций. Метод  `toString` - хорошее место для этого:
+=======
+Often we want a single "catch-all" place to handle all primitive conversions. In this case, we can implement `toString` only, like this:
+>>>>>>> be342e50e3a3140014b508437afd940cd0439ab7
 
 ```js run
 let user = {

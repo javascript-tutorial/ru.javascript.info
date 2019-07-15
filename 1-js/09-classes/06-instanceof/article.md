@@ -46,7 +46,11 @@ alert( arr instanceof Object ); // true
 
 Пожалуйста, обратите внимание, что `arr` также принадлежит классу `Object`, потому что `Array` наследуется от `Object`.
 
+<<<<<<< HEAD
 Оператор `instanceof` просматривает цепочку прототипов для проверки, и может быть настроен при помощи статического метода `Symbol.hasInstance`.
+=======
+The `instanceof` operator examines the prototype chain for the check, but we can set a custom logic in the static method `Symbol.hasInstance`.
+>>>>>>> be342e50e3a3140014b508437afd940cd0439ab7
 
 Алгоритм работы `obj instanceof Class` работает примерно так:
 
@@ -64,7 +68,11 @@ alert( arr instanceof Object ); // true
     alert(obj instanceof Animal); // true: вызван Animal[Symbol.hasInstance](obj)
     ```
 
+<<<<<<< HEAD
 2. Большая часть классов не имеет метода `Symbol.hasInstance`. В этом случае проверяется, равен ли `Class.prototype` одному из прототипов в прототипной цепочке `obj`.
+=======
+2. Most classes do not have `Symbol.hasInstance`. In that case, the standard logic is used: `obj instanceOf Class` checks whether `Class.prototype` equals to one of prototypes in the `obj` prototype chain.
+>>>>>>> be342e50e3a3140014b508437afd940cd0439ab7
 
     Другими словами, сравнивается:
     ```js
