@@ -146,19 +146,19 @@ id: 3
 Обратите внимание: `id` указывается после текста сообщения, чтобы обновление `lastEventId` произошло после того, как данные сообщения были получены.
 ```
 
-## Connection status: readyState
+## Статус подключения: readyState
 
-The `EventSource` object has `readyState` property, that has one of three values:
+У объект `EventSource` есть свойство `readyState`, устанавливаемое в одно из трех значений:
 
 ```js no-beautify
-EventSource.CONNECTING = 0; // connecting or reconnecting
-EventSource.OPEN = 1;       // connected
-EventSource.CLOSED = 2;     // connection closed
+EventSource.CONNECTING = 0; // подключение или переподключение
+EventSource.OPEN = 1;       // подключено
+EventSource.CLOSED = 2;     // подключение закрыто
 ```
 
-When an object is created, or the connection is down, it's always `EventSource.CONNECTING` (equals `0`).
+При создании объекта и разрыве соединения, оно автоматически устанавливается в значение `EventSource.CONNECTING` (равно `0`).
 
-We can query this property to know the state of `EventSource`.
+Мы можем обратится к этому свойству, чтобы узнать текущее состояние `EventSource`.
 
 ## Типы событий
 
