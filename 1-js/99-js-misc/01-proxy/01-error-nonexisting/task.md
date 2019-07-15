@@ -1,13 +1,13 @@
 
-# Error on reading non-existant property
+# Ошибка при чтении несуществующего свойства
 
-Create a proxy that throws an error for an attempt to read of a non-existant property.
+Создайте прокси, который бросает ошибку при попытке прочитать несуществующее свойство.
 
-That can help to detect programming mistakes early.
+Это может помочь обнаружить ошибки программиста как можно раньше.
 
-Write a function `wrap(target)` that takes an object `target` and return a proxy instead with that functionality.
+Напишите функцию `wrap(target)`, которая берёт объект `target` и возвращает прокси с описанной функциональностью.
 
-That's how it should work:
+Вот как это должно работать:
 
 ```js
 let user = {
@@ -17,7 +17,7 @@ let user = {
 function wrap(target) {
   return new Proxy(target, {
 *!*
-      /* your code */
+      /* ваш код */
 */!*
   });
 }
@@ -26,6 +26,6 @@ user = wrap(user);
 
 alert(user.name); // John
 *!*
-alert(user.age); // Error: Property doesn't exist
+alert(user.age); // Ошибка: такого свойства не существует
 */!*
 ```

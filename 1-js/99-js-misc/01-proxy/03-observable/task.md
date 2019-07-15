@@ -1,13 +1,13 @@
 
 # Observable
 
-Create a function `makeObservable(target)` that "makes the object observable" by returning a proxy.
+Создайте функцию `makeObservable(target)`, которая делает объект "наблюдаемым", возвращая прокси.
 
-Here's how it should work:
+Вот как это должно работать:
 
 ```js run
 function makeObservable(target) {
-  /* your code */
+  /* ваш код */
 }
 
 let user = {};
@@ -17,13 +17,13 @@ user.observe((key, value) => {
   alert(`SET ${key}=${value}`);
 });
 
-user.name = "John"; // alerts: SET name=John
+user.name = "John"; // выводит: SET name=John
 ```
 
-In other words, an object returned by `makeObservable` has the method `observe(handler)`.
+Другими словами, возвращаемый `makeObservable` объект имеет метод `observe(handler)`.
 
-Whenever a property changes, `handler(key, value)` is called with the name and value o the property.
+При изменении любого свойства вызывается `handler(key, value)` с именем и значением свойства.
 
 
-P.S. In this task, please handle only writing to a property. Other operations can be implemented in a similar way.
-P.P.S. You might want to introduce a global variable or a global structure to store handlers. That's fine here. In real life, such function lives in a module, that has its own global scope. 
+P.S. В этой задаче ограничьтесь, пожалуйста, только записью свойства. Остальные операции могут быть реализованы похожим образом.
+P.P.S. Возможно, вы захотите использовать глобальную переменную или глобальную структуру данных для хранения обработчиков. Это нормально для решения этой задачки, но в реальности обычно такая функция находится внутри какого-то модуля в отдельной области видимости. 
