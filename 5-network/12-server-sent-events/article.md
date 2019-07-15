@@ -1,4 +1,4 @@
-# Посылаемые сервером события
+# Server Sent Events
 
 Спецификация [Server-Sent Events](https://html.spec.whatwg.org/multipage/comms.html#the-eventsource-interface) описывает встроенный класс `EventSource`, который позволяет поддерживать соединение с сервером и получать от него события.
 
@@ -61,7 +61,7 @@ eventSource.onmessage = function(event) {
   // этот код вывет в консоль 3 сообщения для данных, описанных выше
 };
 
-// or eventSource.addEventListener('message', ...)
+// или eventSource.addEventListener('message', ...)
 ```
 
 ### Cross-domain requests
