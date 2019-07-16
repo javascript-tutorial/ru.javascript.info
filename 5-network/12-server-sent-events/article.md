@@ -58,7 +58,7 @@ let eventSource = new EventSource("/events/subscribe");
 
 eventSource.onmessage = function(event) {
   console.log("Новое сообщение", event.data);
-  // этот код вывет в консоль 3 сообщения, описанных выше
+  // этот код выведет в консоль 3 сообщения, описанных выше
 };
 
 // или eventSource.addEventListener('message', ...)
