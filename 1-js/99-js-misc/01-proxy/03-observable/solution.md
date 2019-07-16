@@ -1,26 +1,26 @@
-The solution consists of two parts:
+Решение состоит из двух частей:
 
-1. Whenever `.observe(handler)` is called, we need to remember the handler somewhere, to be able to call it later. We can store it right in the object, using our symbol as the key.
-2. We need a proxy with `set` trap to call handlers in case of any change.
+1. При вызове `.observe(handler)` нам нужно где-то сохранить обработчик, чтобы вызвать его позже. Можно хранить обработчики прямо в объекте, создав в нём для этого свой символьный ключ.
+2. Нам нужен прокси с ловушкой `set`, чтобы вызывать обратчики при изменении свойств.
 
 ```js run
 let handlers = Symbol('handlers');
 
 function makeObservable(target) {
-  // 1. Initialize handlers store
+  // 1. Создадим хранилище обработчиков
   target[handlers] = [];
 
-  // Store the handler function in array for future calls
+  // положим туда функции-обработчики для вызовов в будущем
   target.observe = function(handler) {
     this[handlers].push(handler);
   };
 
-  // 2. Create a proxy to handle changes
+  // 2. Создадим прокси для реакции на изменения
   return new Proxy(target, {
     set(target, property, value, receiver) {
-      let success = Reflect.set(...arguments); // forward the operation to object
-      if (success) { // if there were no error while setting the property
-        // call all handlers
+      let success = Reflect.set(...arguments); // перенаправим операцию к оригинальному объекту
+      if (success) { // если не произошло ошибки при записи свойства
+        // вызовем обработчики
         target[handlers].forEach(handler => handler(property, value));
       }
       return success;
