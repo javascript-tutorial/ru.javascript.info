@@ -1,3 +1,3 @@
-# Object properties configuration
+# Свойства объекта, их конфигурация
 
-In this section we return to objects and study their properties even more in-depth.
+В этой секции мы вернёмся к объектам и изучим их свойства более глубоко.

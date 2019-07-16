@@ -9,7 +9,7 @@ let router = new Router();
 
 router.post('/user', async (ctx) => {
   ctx.body = {
-    message: "User saved."
+    message: "Пользователь сохранён."
   };
 });
 
@@ -18,7 +18,7 @@ router.post('/image-form', async (ctx) => {
   let files = [];
   const { fields } = await busboy(ctx.req, {
     onFile(fieldname, file, filename, encoding, mimetype) {
-      // read all file stream to continue
+      // для продолжения прочитаем весь файловый поток
       let length = 0;
       file.on('data', function(data) {
         length += data.length;
@@ -44,7 +44,7 @@ router.post('/user-avatar', async (ctx) => {
   let files = [];
   const { fields } = await busboy(ctx.req, {
     onFile(fieldname, file, filename, encoding, mimetype) {
-      // read all file stream to continue
+      // для продолжения прочитаем весь файловый поток
       let length = 0;
       file.on('data', function(data) {
         length += data.length;

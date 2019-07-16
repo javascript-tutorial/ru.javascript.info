@@ -26,7 +26,7 @@ showPrompt("Введите что-нибудь<br>...умное :)", function(va
 });
 ```
 
-Демо в фрейме:
+Демо во фрейме:
 
 [iframe src="solution" height=160 border=1]
 
