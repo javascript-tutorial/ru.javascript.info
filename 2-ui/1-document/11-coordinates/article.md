@@ -151,42 +151,42 @@ setTimeout(() => message.remove(), 5000);
 
 Чтобы изменить это, нам нужно использовать другую систему координат, где сообщение позиционировалось бы относительно документа, и свойство `position:absolute`.
 
-## Координаты в контексте документа
+## Координаты относительно документа
 
-Document-relative coordinates start from the upper-left corner of the document, not the window.
+В такой системе координат отсчёт ведётся от левого верхнего угла документа, не окна.
 
-In CSS, window coordinates correspond to `position:fixed`, while document coordinates are similar to `position:absolute` on top.
+В CSS координаты относительно окна браузера соответствуют свойству `position:fixed`, а координаты относительно документа -- свойству `position:absolute` на самом верхнем уровне вложенности.
 
-We can use `position:absolute` and `top/left` to put something at a certain place of the document, so that it remains there during a page scroll. But we need the right coordinates first.
+Мы можем воспользоваться свойствами `position:absolute` и `top/left`, чтобы привязать что-нибудь к конкретному месту в документе. При этом прокрутка страницы не имеет значения. Но сначала нужно получить верные координаты.
 
-For clarity we'll call window coordinates `(clientX,clientY)` and document coordinates `(pageX,pageY)`.
+Для ясности обозначим координаты в контексте окна как `(clientX,clientY)` и в контексте документа как `(pageX,pageY)`.
 
-When the page is not scrolled, then window coordinate and document coordinates are actually the same. Their zero points match too:
+Если страница не прокручена, то координаты в обеих системах совпадают, равно как и точка отсчёта:
 
 ![](document-window-coordinates-zero.png)
 
-And if we scroll it, then `(clientX,clientY)` change, because they are relative to the window, but `(pageX,pageY)` remain the same.
+Но при прокрутке значения `(clientX,clientY)` меняются, потому что они привязаны к окну браузера, а `(pageX,pageY)` остаются такими же.
 
-Here's the same page after the vertical scroll:
+Вот та же самая страница после вертикальной прокрутки:
 
 ![](document-window-coordinates-scroll.png)
 
-- `clientY` of the header `"From today's featured article"` became `0`, because the element is now on window top.
-- `clientX` didn't change, as we didn't scroll horizontally.
-- `pageX` and `pageY` coordinates of the element are still the same, because they are relative to the document.
+- значение `clientY` заголовка `"From today's featured article"` стало равным `0`, потому что верхний край элемента достиг верхней границы окна.
+- значение `clientX` не поменялось, так как не было горизонтальной прокрутки.
+- значения координат `pageX` и `pageY` тоже не изменились, потому что они берутся относительно документа.
 
-## Getting document coordinates [#getCoords]
+## Получаем координаты в контексте документа [#getCoords]
 
-There's no standard method to get the document coordinates of an element. But it's easy to write it.
+Не существует стандартного метода, который возвращал бы координаты элемента относительно документа, но мы можем написать его сами.
 
-The two coordinate systems are connected by the formula:
-- `pageY` = `clientY` + height of the scrolled-out vertical part of the document.
-- `pageX` = `clientX` + width of the scrolled-out horizontal part of the document.
+Две системы координат связаны следующими формулами:
+- `pageY` = `clientY` + высота вертикально прокрученной части документа.
+- `pageX` = `clientX` + ширина горизонтально прокрученной части документа.
 
-The function `getCoords(elem)` will take window coordinates from `elem.getBoundingClientRect()` and add the current scroll to them:
+Функция `getCoords(elem)` берёт коордианты в контексте окна с помощью `elem.getBoundingClientRect()` и добавляет к ним значение соответствующей прокрутки:
 
 ```js
-// get document coordinates of the element
+// получаем координаты элемента в контексте документа
 function getCoords(elem) {
   let box = elem.getBoundingClientRect();
 
