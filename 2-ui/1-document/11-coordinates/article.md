@@ -60,15 +60,15 @@ function showRect(elem) {
 
 ## elementFromPoint(x, y) [#elementFromPoint]
 
-The call to `document.elementFromPoint(x, y)` returns the most nested element at window coordinates `(x, y)`.
+Вызов `document.elementFromPoint(x, y)` возвращает самый глубоко вложенный элемент в окне, находящийся по координатам `(x, y)`.
 
-The syntax is:
+Синтаксис:
 
 ```js
 let elem = document.elementFromPoint(x, y);
 ```
 
-For instance, the code below highlights and outputs the tag of the element that is now in the middle of the window:
+Например, код ниже выделяет с помощью стилей и выводит имя тега элемента, который сейчас в центре окна браузера:
 
 ```js run
 let centerX = document.documentElement.clientWidth / 2;
@@ -80,45 +80,45 @@ elem.style.background = "red";
 alert(elem.tagName);
 ```
 
-As it uses window coordinates, the element may be different depending on the current scroll position.
+Поскольку используются координаты в контексте окна, то элемент может быть и другим в зависимости от того, имела ли место прокрутка.
 
-````warn header="For out-of-window coordinates the `elementFromPoint` returns `null`"
-The method `document.elementFromPoint(x,y)` only works if `(x,y)` are inside the visible area.
+````warn header="Для координат за пределами окна метод `elementFromPoint` возвращает `null`"
+Метод `document.elementFromPoint(x,y)` работает, только если координаты `(x,y)` относятся к видимой части содержимого окна.
 
-If any of the coordinates is negative or exceeds the window width/height, then it returns `null`.
+Если любая из координат представляет собой отрицательное число или превышает размеры окна, то возвращается `null`.
 
-In most cases such behavior is not a problem, but we should keep that in mind.
+В большинстве случаев это не проблема, но всё же стоит держать сказанное в уме.
 
-Here's a typical error that may occur if we don't check for it:
+Вот типичная ошибка, которая может произойти, если в коде нет соответствующей проверки:
 
 ```js
 let elem = document.elementFromPoint(x, y);
-// if the coordinates happen to be out of the window, then elem = null
+// если координаты ведут за пределы окна, то elem = null
 *!*
-elem.style.background = ''; // Error!
+elem.style.background = ''; // Ошибка!
 */!*
 ```
 ````
 
-## Using for position:fixed
+## Координаты для position:fixed
 
-Most of time we need coordinates to position something. In CSS, to position an element relative to the viewport we use `position:fixed` together with `left/top` (or `right/bottom`).
+Чаще всего нам нужны координаты для позиционирования чего-либо. В CSS для позиционирования элемента относительно окна браузера используется свойство `position:fixed` вместе со свойствами `left/top` (или `right/bottom`).
 
-We can use `getBoundingClientRect` to get coordinates of an element, and then to show something near it.
+Мы можем вызвать `getBoundingClientRect`, чтобы получить координаты элемента, а затем показать что-то около него.
 
-For instance, the function `createMessageUnder(elem, html)` below shows the message under `elem`:
+Например, функция `createMessageUnder(elem, html)` ниже показывает сообщение под элементом `elem`:
 
 ```js
 let elem = document.getElementById("coords-show-mark");
 
 function createMessageUnder(elem, html) {
-  // create message element
+  // создаём элемент, который будет содержать сообщение
   let message = document.createElement('div');
-  // better to use a css class for the style here
+  // для стилей лучше было бы использовать css-класс здесь
   message.style.cssText = "position:fixed; color: red";
 
 *!*
-  // assign coordinates, don't forget "px"!
+  // устанавливаем координаты элементу, не забываем про "px"!
   let coords = elem.getBoundingClientRect();
 
   message.style.left = coords.left + "px";
@@ -130,28 +130,28 @@ function createMessageUnder(elem, html) {
   return message;
 }
 
-// Usage:
-// add it for 5 seconds in the document
+// Использование:
+// добавим сообщение на страницу на 5 секунд
 let message = createMessageUnder(elem, 'Hello, world!');
 document.body.append(message);
 setTimeout(() => message.remove(), 5000);
 ```
 
 ```online
-Click the button to run it:
+Кликните кнопку, чтобы увидеть пример в действии:
 
-<button id="coords-show-mark">Button with id="coords-show-mark", the message will appear under it</button>
+<button id="coords-show-mark">Кнопка с id="coords-show-mark", сообщение появится под ней</button>
 ```
 
-The code can be modified to show the message at the left, right, below, apply CSS animations to "fade it in" and so on. That's easy, as we have all the coordinates and sizes of the element.
+Код может быть изменён, чтобы показывать сообщение слева, справа, снизу, применять к нему CSS-анимации и так далее. Это просто, так как в нашем распоряжении имеются все координаты и размеры элемента.
 
-But note the important detail: when the page is scrolled, the message flows away from the button.
+Но обратите внимание на одну важную деталь: при прокрутке страницы сообщение уплывает от кнопки.
 
-The reason is obvious: the message element relies on `position:fixed`, so it remains at the same place of the window while the page scrolls away.
+Причина весьма очевидна: сообщение позиционируется с помощью `position:fixed`, поэтому оно остаётся всегда на том же самом месте в окне при прокрутке страницы.
 
-To change that, we need to use document-based coordinates and `position:absolute`.
+Чтобы изменить это, нам нужно использовать другую систему координат, где сообщение позиционировалось бы относительно документа, и свойство `position:absolute`.
 
-## Document coordinates
+## Координаты в контексте документа
 
 Document-relative coordinates start from the upper-left corner of the document, not the window.
 
