@@ -65,7 +65,6 @@ let {hi, bye} = await import('./say.js');
 
 hi();
 bye();
-
 ```
 
 Или, если в `say.js` указан экспорт по умолчанию:
