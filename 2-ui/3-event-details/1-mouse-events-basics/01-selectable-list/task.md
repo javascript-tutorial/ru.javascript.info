@@ -2,16 +2,16 @@ importance: 5
 
 ---
 
-# Selectable list
+# Выделяемый список
 
-Create a list where elements are selectable, like in file-managers.
+Создайте список, в котором элементы могут быть выделены, как в файловых менеджерах.
 
-- A click on a list element selects only that element (adds the class `.selected`), deselects all others.
-- If a click is made with `key:Ctrl` (`key:Cmd` for Mac), then the selection is toggled on the element, but other elements are not modified.
+- При клике на элемент списка выделяется только этот элемент (добавляется класс `.selected`), отменяется выделение остальных элементов.
+- Если клик сделан вместе с `key:Ctrl` (`key:Cmd` для Mac), то выделение переключается на элементе, но остальные элементы при этом не изменяются.
 
-The demo:
+Демонстрация:
 
 [iframe border="1" src="solution" height=180]
 
-P.S. For this task we can assume that list items are text-only. No nested tags.
-P.P.S. Prevent the native browser selection of the text on clicks.
+P.S. В этом задании все элементы списка содержат только текст. Без вложенных тегов.
+P.P.S. Предотвратите стандартное для браузера выделение текста при кликах.
