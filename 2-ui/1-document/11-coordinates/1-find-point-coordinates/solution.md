@@ -1,8 +1,8 @@
-# Outer corners
+# Внешние углы
 
-Outer corners are basically what we get from  [elem.getBoundingClientRect()](https://developer.mozilla.org/en-US/docs/DOM/element.getBoundingClientRect).
+Координаты внешних углов -- это как раз то, что возвращает функция [elem.getBoundingClientRect()](https://developer.mozilla.org/ru/docs/DOM/element.getBoundingClientRect).
 
-Coordinates of the upper-left corner `answer1` and the bottom-right corner `answer2`:
+Координаты верхнего левого внешнего угла будут в переменной `answer1` и нижнего правого -- в `answer2`:
 
 ```js
 let coords = elem.getBoundingClientRect();
@@ -11,19 +11,19 @@ let answer1 = [coords.left, coords.top];
 let answer2 = [coords.right, coords.bottom];
 ```
 
-# Left-upper inner corner
+# Верхний левый внутренний угол
 
-That differs from the outer corner by the border width. A reliable way to get the distance is `clientLeft/clientTop`:
+Тут значения отличаются на ширину рамки. Надёжный способ получить интересующее значение -- это использовать `clientLeft/clientTop`:
 
 ```js
 let answer3 = [coords.left + field.clientLeft, coords.top + field.clientTop];
 ```
 
-# Right-bottom inner corner
+# Нижний правый внутренний угол
 
-In our case we need to substract the border size from the outer coordinates.
+В нашем случае нужно вычесть размеры рамки из внешних координат.
 
-We could use CSS way:
+Это может быть сделано с помощью CSS:
 
 ```js
 let answer4 = [
@@ -32,7 +32,7 @@ let answer4 = [
 ];
 ```
 
-An alternative way would be to add `clientWidth/clientHeight` to coordinates of the left-upper corner. That's probably even better:
+Другим вариантом решения было бы добавление `clientWidth/clientHeight` к координатам верхнего левого угла. Так даже было бы лучше.
 
 ```js
 let answer4 = [
