@@ -20,7 +20,7 @@ User.staticMethod(); // true
 Это фактически то же самое, что присвоить метод как свойство функции:
 
 ```js
-function User() { }
+class User() { }
 
 User.staticMethod = function() {
   alert(this === User);

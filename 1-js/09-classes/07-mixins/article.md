@@ -1,26 +1,26 @@
-# Mixins
+# Примеси
 
-In JavaScript we can only inherit from a single object. There can be only one `[[Prototype]]` for an object. And a class may extend only one other class.
+В JavaScript можно наследовать только от одного объекта. Объект имеет единственный `[[Prototype]]`. И класс может расширить только один другой класс.
 
-But sometimes that feels limiting. For instance, I have a class `StreetSweeper` and a class `Bicycle`, and want to make a `StreetSweepingBicycle`.
+Иногда это может ограничивать нас. Например, у нас есть класс `StreetSweeper` и класс `Bicycle`, а мы хотим создать `StreetSweepingBicycle`.
 
-Or, talking about programming, we have a class `Renderer` that implements templating and a class `EventEmitter` that implements event handling, and want to merge these functionalities together with a class `Page`, to make a page that can use templates and emit events.
+Или, говоря о программировании, у нас есть класс `User`, который реализует пользователей, и класс `EventEmitter`, реализующий события. Мы хотели бы добавить функционал класса `EventEmitter` к `User`, чтобы пользователи могли легко генерировать события.
 
-There's a concept that can help here, called "mixins".
+Для таких случаев существуют "примеси".
 
-As defined in Wikipedia, a [mixin](https://en.wikipedia.org/wiki/Mixin) is a class that contains methods for use by other classes without having to be the parent class of those other classes.
+По определению из Википедии, [примесь](https://ru.wikipedia.org/wiki/%D0%9F%D1%80%D0%B8%D0%BC%D0%B5%D1%81%D1%8C_(%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5)) - это класс, методы которого предназначены для использования в других классах, причём без наследования от примеси.
 
-In other words, a *mixin* provides methods that implement a certain behavior, but we do not use it alone, we use it to add the behavior to other classes.
+Другими словами, *примесь* определяет методы, которые реализуют определённое поведение. Мы не используем примесь саму по себе, она нужна, чтобы добавить другим классам больше функционала.
 
-## A mixin example
+## Пример примеси
 
-The simplest way to make a mixin in JavaScript is to make an object with useful methods, so that we can easily merge them into a prototype of any class.
+Простейший способ сделать примесь в JavaScript - это создать объект с полезными методами, которые затем могут быть легко добавлены в прототип любого класса.
 
-For instance here the mixin `sayHiMixin` is used to add some "speech" for `User`:
+В примере ниже примесь `sayHiMixin` имеет методы для придания объектам класса `User` возможности вести разговор:
 
 ```js run
 *!*
-// mixin
+// примесь
 */!*
 let sayHiMixin = {
   sayHi() {
@@ -32,7 +32,7 @@ let sayHiMixin = {
 };
 
 *!*
-// usage:
+// использование:
 */!*
 class User {
   constructor(name) {
@@ -40,26 +40,26 @@ class User {
   }
 }
 
-// copy the methods
+// копируем методы
 Object.assign(User.prototype, sayHiMixin);
 
-// now User can say hi
+// сейчас User может сказать Hello
 new User("Dude").sayHi(); // Hello Dude!
 ```
 
-There's no inheritance, but a simple method copying. So `User` may extend some other class and also include the mixin to "mix-in" the additional methods, like this:
+Это не наследование, а просто копирование методов. Таким образом, класс `User` может наследовать от другого класса, но при этом также включать в себя примеси, "подмешивающие" другие методы, например:
 
 ```js
 class User extends Person {
-  // ...
+// ...
 }
 
 Object.assign(User.prototype, sayHiMixin);
 ```
 
-Mixins can make use of inheritance inside themselves.
+Примеси могут наследовать друг другу.
 
-For instance, here `sayHiMixin` inherits from `sayMixin`:
+В примере ниже `sayHiMixin` наследует от `sayMixin`:
 
 ```js run
 let sayMixin = {
@@ -69,11 +69,11 @@ let sayMixin = {
 };
 
 let sayHiMixin = {
-  __proto__: sayMixin, // (or we could use Object.create to set the prototype here)
+  __proto__: sayMixin, // (или мы можем использовать Object.create для задания прототипа)
 
   sayHi() {
     *!*
-    // call parent method
+    // вызываем метод родителя
     */!*
     super.say(`Hello ${this.name}`);
   },
@@ -88,41 +88,41 @@ class User {
   }
 }
 
-// copy the methods
+// копируем методы
 Object.assign(User.prototype, sayHiMixin);
 
-// now User can say hi
+// сейчас User может сказать Hello
 new User("Dude").sayHi(); // Hello Dude!
 ```
 
-Please note that the call to the parent method `super.say()` from `sayHiMixin` looks for the method in the prototype of that mixin, not the class.
+Обратим внимание, что при вызове родительского метода `super.say()` из `sayHiMixin` этот метод ищется в прототипе самой примеси, а не класса.
 
 ![](mixin-inheritance.png)
 
-That's because methods from `sayHiMixin` have `[[HomeObject]]` set to it. So `super` actually means `sayHiMixin.__proto__`, not `User.__proto__`.
+Это связано с тем, что методы `sayHi` и `sayBye` были изначально созданы в объекте `sayHiMixin`. Так что их внутреннее свойство `[[HomeObject]]` ссылается на `sayHiMixin`, как показано на картинке выше.
+
+Так как `super` ищет родительские методы в `[[HomeObject]].[[Prototype]]`, это означает `sayHiMixin.[[Prototype]]`, а не `User.[[Prototype]]`.
 
 ## EventMixin
 
-Now let's make a mixin for real life.
+Многие объекты в браузерной разработке (и не только) обладают важной способностью - они могут генерировать события. События - отличный способ передачи информации всем, кто в ней заинтересован. Давайте создадим примесь, которая позволит легко добавлять функционал по работе с событиями любым классам/объектам.
 
-The important feature of many objects is working with events.
+- Примесь добавит метод `.trigger(name, [data])` для генерации события. Аргумент `name` - это имя события, за которым могут следовать другие аргументы с данными для события.
+- Также будет добавлен метод `.on(name, handler)`, который назначает обработчик для события с заданным именем. Обработчик будет вызван, когда произойдёт событие с указанным именем `name`, и получит данные из `.trigger`.
+- ...и метод `.off(name, handler)`, который удаляет обработчик указанного события.
 
-That is: an object should have a method to "generate an event" when something important happens to it, and other objects should be able to "listen" to such events.
+После того, как все методы примеси будут добавлены, объект `user` сможет сгенерировать событие `"login"` после входа пользователя в личный кабинет. А другой объект, к примеру, `calendar` сможет использовать это событие, чтобы показывать зашедшему пользователю актуальный для него календарь.
 
-An event must have a name and, optionally, bundle some additional data.
+Или `menu` может генерировать событие `"select"`, когда элемент меню выбран, а другие объекты могут назначать обработчики, чтобы реагировать на это событие, и т.п.
 
-For instance, an object `user` can generate an event `"login"` when the visitor logs in. And another object `calendar` may want to receive such events to load the calendar for the logged-in person.
-
-Or, a `menu` can generate the event `"select"` when a menu item is selected, and other objects may want to get that information and react on that event.
-
-Events is a way to "share information" with anyone who wants it. They can be useful in any class, so let's make a mixin for them:
+Вот код примеси:
 
 ```js run
 let eventMixin = {
   /**
-   * Subscribe to event, usage:
-   *  menu.on('select', function(item) { ... }
-  */
+   * Подписаться на событие, использование:
+   * menu.on('select', function(item) { ... }
+   */
   on(eventName, handler) {
     if (!this._eventHandlers) this._eventHandlers = {};
     if (!this._eventHandlers[eventName]) {
@@ -132,8 +132,8 @@ let eventMixin = {
   },
 
   /**
-   * Cancel the subscription, usage:
-   *  menu.off('select', handler)
+   * Отменить подписку, использование:
+   * menu.off('select', handler)
    */
   off(eventName, handler) {
     let handlers = this._eventHandlers && this._eventHandlers[eventName];
@@ -146,60 +146,61 @@ let eventMixin = {
   },
 
   /**
-   * Generate the event and attach the data to it
-   *  this.trigger('select', data1, data2);
+   * Сгенерировать событие с указанным именем и данными
+   * this.trigger('select', data1, data2);
    */
   trigger(eventName, ...args) {
     if (!this._eventHandlers || !this._eventHandlers[eventName]) {
-      return; // no handlers for that event name
+      return; // обработчиков для этого события нет
     }
 
-    // call the handlers
+    // вызовем обработчики
     this._eventHandlers[eventName].forEach(handler => handler.apply(this, args));
   }
 };
 ```
 
-There are 3 methods here:
+Итак, у нас есть 3 метода:
 
-1. `.on(eventName, handler)` -- assigns function `handler` to run when the event with that name happens. The handlers are stored in the `_eventHandlers` property.
-2. `.off(eventName, handler)` -- removes the function from the handlers list.
-3. `.trigger(eventName, ...args)` -- generates the event: all assigned handlers are called and `args` are passed as arguments to them.
+1. `.on(eventName, handler)` -- назначает функцию `handler`, чтобы обработать событие с заданным именем. Обработчики хранятся в свойстве  `_eventHandlers`, представляющим собой объект, в котором имя события является ключом, а массив обработчиков - значением.
 
+2. `.off(eventName, handler)` -- убирает функцию из списка обработчиков.
 
-Usage:
+3. `.trigger(eventName, ...args)` -- генерирует событие: все назначенные обработчики из `_eventHandlers[eventName]` вызываются, и `...args` передаются им в качестве аргументов.
+
+Использование:
 
 ```js run
-// Make a class
+// Создадим класс
 class Menu {
   choose(value) {
     this.trigger("select", value);
   }
 }
-// Add the mixin
+// Добавим примесь с методами для событий
 Object.assign(Menu.prototype, eventMixin);
 
 let menu = new Menu();
 
-// call the handler on selection:
+// Добавить обработчик, который будет вызван при событии "select":
 *!*
-menu.on("select", value => alert(`Value selected: ${value}`));
+menu.on("select", value => alert(`Выбранное значение: ${value}`));
 */!*
 
-// triggers the event => shows Value selected: 123
-menu.choose("123"); // value selected
+// Генерирует событие => обработчик выше запускается и выводит:
+menu.choose("123"); // Выбранное значение: 123
 ```
 
-Now if we have the code interested to react on user selection, we can bind it with `menu.on(...)`.
+Теперь если у нас есть код, заинтересованный в событии `"select"`, то он может слушать его с помощью `menu.on(...)`.
 
-And the `eventMixin` can add such behavior to as many classes as we'd like, without interfering with the inheritance chain.
+А `eventMixin` позволяет легко добавить такое поведение в любой класс без вмешательства в цепочку наследования.
 
-## Summary
+## Итого
 
-*Mixin* -- is a generic object-oriented programming term: a class that contains methods for other classes.
+*Примесь* -- общий термин в объектно-ориентированном программировании: класс, который содержит в себе методы для других классов.
 
-Some other languages like e.g. python allow to create mixins using multiple inheritance. JavaScript does not support multiple inheritance, but mixins can be implemented by copying them into the prototype.
+В других языках (например, Python) разрешается создавать примеси, используя множественное наследование. JavaScript не поддерживает множественное наследование, но с помощью примесей мы можем реализовать нечто похожее, скопировав методы в прототип.
 
-We can use mixins as a way to augment a class by multiple behaviors, like event-handling as we have seen above.
+Мы можем использовать примеси для расширения функционала классов, например, для обработки событий, как мы сделали это выше.
 
-Mixins may become a point of conflict if they occasionally overwrite native class methods. So generally one should think well about the naming for a mixin, to minimize such possibility.
+С примесями могут возникнуть проблемы, если они перезаписывают существующие методы класса. Стоит помнить об этом и быть внимательнее при выборе имён для методов примеси, чтобы избежать конфликтов.

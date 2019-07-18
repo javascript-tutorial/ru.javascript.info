@@ -1,29 +1,29 @@
 
-# Pseudo-random generator
+# Псевдослучайный генератор
 
-There are many areas where we need random data.
+Есть много областей, где нам нужны случайные данные.
 
-One of them is testing. We may need random data: text, numbers etc, to test things out well.
+Одной из них является тестирование. Нам могут понадобиться случайные данные: текст, числа и т. д., чтобы хорошо всё проверить.
 
-In JavaScript, we could use `Math.random()`. But if something goes wrong, we'd like to be able to repeat the test, using exactly the same data.
+В Javascript мы можем использовать `Math.random()`. Но если что-то пойдёт не так, то нам нужно будет перезапустить тест, используя те же самые данные.
 
-For that, so called "seeded pseudo-random generators" are used. They take a "seed", the first value, and then generate next ones using a formula. So that the same seed yields the same sequence, and hence the whole flow is easily reproducible. We only need to remember the seed to repeat it.
+Для этого используются так называемые "сеяные псевдослучайные генераторы". Они получают "зерно", как первое значение, и затем генерируют следующее, используя формулу. Так что одно и то же зерно даёт одинаковую последовательность, и, следовательно, весь поток легко воспроизводим. Нам нужно только запомнить зерно, чтобы воспроизвести последовательность.
 
-An example of such formula, that generates somewhat uniformly distributed values:
+Пример такой формулы, которая генерирует более-менее равномерно распределённые значения:
 
 ```
 next = previous * 16807 % 2147483647
 ```
 
-If we use `1` as the seed, the values will be:
+Если мы используем `1` как зерно, то значения будут:
 1. `16807`
 2. `282475249`
 3. `1622650073`
-4. ...and so on...
+4. ...и так далее...
 
-The task is to create a generator function `pseudoRandom(seed)` that takes `seed` and creates the generator with this formula.
+Задачей является создать функцию-генератор `pseudoRandom(seed)`, которая получает `seed` и создаёт генератор с указанной формулой.
 
-Usage example:
+Пример использования:
 
 ```js
 let generator = pseudoRandom(1);

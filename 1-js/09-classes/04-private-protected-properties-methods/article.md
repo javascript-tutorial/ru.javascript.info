@@ -1,102 +1,102 @@
 
-# Private and protected properties and methods
+# Приватные и защищённые методы и свойства
 
-One of the most important principles of object oriented programming -- delimiting internal interface from the external one.
+Один из важнейших принципов объектно-ориентированного программирования -- разделение внутреннего и внешнего интерфейсов.
 
-That is "a must" practice in developing anything more complex than a "hello world" app.
+Это обязательная практика в разработке чего-либо сложнее, чем "hello world".
 
-To understand this, let's break away from development and turn our eyes into the real world.
+Чтобы понять этот принцип, давайте на секунду забудем о программировании и обратим взгляд на реальный мир.
 
-Usually, devices that we're using are quite complex. But delimiting the internal interface from the external one allows to use them without problems.
+Устройства, которыми мы пользуемся, обычно довольно сложно устроены. Но разделение внутреннего и внешнего интерфейсов позволяет нам пользоваться ими без каких-либо проблем.
 
-## A real-life example
+## Пример из реальной жизни
 
-For instance, a coffee machine. Simple from outside: a button, a display, a few holes...And, surely, the result -- great coffee! :)
+Например, кофеварка. Простая снаружи: кнопка, экран, несколько отверстий... И, конечно, как результат -- прекрасный кофе ! :)
 
 ![](coffee.jpg)
 
-But inside... (a picture from the repair manual)
+Но внутри... (картинка из инструкции по ремонту)
 
 ![](coffee-inside.jpg)
 
-A lot of details. But we can use it without knowing anything.
+Множество деталей. Но мы можем пользоваться ею, ничего об этом не зная.
 
-Coffee machines are quite reliable, aren't they? We can use one for years, and only if something goes wrong -- bring it for repairs.
+Кофеварки довольно надежны, не так ли? Мы можем пользоваться ими годами, и если что-то пойдёт не так - отнесём в ремонт.
 
-The secret of reliability and simplicity of a coffee machine -- all details are well-tuned and *hidden* inside.
+Секрет надёжности и простоты кофеварки -- все детали хорошо отлажены и *спрятаны* внутри.
 
-If we remove the protective cover from the coffee machine, then using it will be much more complex (where to press?), and dangerous (it can electrocute).
+Если мы снимем защитный кожух с кофеварки, то пользоваться ею будет гораздо сложнее (куда нажимать?) и опаснее (может привести к поражению электрическим током).
 
-As we'll see, in programming objects are like coffee machines.
+Как мы увидим, в программировании объекты похожи на кофеварки.
 
-But in order to hide inner details, we'll use not a protective cover, but rather special syntax of the language and conventions.
+Но, чтобы скрыть внутренние детали, мы будем использовать не защитный кожух, а специальный синтаксис языка и соглашения.
 
-## Internal and external interface
+## Внутренный и внешнией интерфейсы
 
-In object-oriented programming, properties and methods are split into two groups:
+В объектно-ориентированном программировании свойства и методы разделены на 2 группы:
 
-- *Internal interface* -- methods and properties, accessible from other methods of the class, but not from the outside.
-- *External interface* -- methods and properties, accessible also from outside the class.
+- *Внутренний интерфейс* -- методы и свойства доступны из других методов класса, но не доступны снаружи класса.
+- *Внешний интерфейс* -- методы и свойства доступны снаружи класса.
 
-If we continue the analogy with the coffee machine -- what's hidden inside: a boiler tube, heating element, and so on -- is its internal interface.
+Если мы продолжаем аналогию с кофеваркой -- то, что скрыто внутри: трубка кипятильника, нагревательный элемент и т.д. -- это внутренний интерфейс.
 
-An internal interface is used for the object to work, its details use each other. For instance, a boiler tube is attached to the heating element.
+Внутренний интерфейс используется для работы объекта, его детали используют друг друга. Например, трубка кипятильника прикреплена к нагревательному элементу.
 
-But from the outside a coffee machine is closed by the protective cover, so that no one can reach those. Details are hidden and inaccessible. We can use its features via the external interface.
+Но снаружи кофеварка закрыта защитным кожухом, так что никто не может добраться до сложных частей. Детали скрыты и недоступны. Мы можем использовать их функции через внешний интерфейс. 
 
-So, all we need to use an object is to know its external interface. We may be completely unaware how it works inside, and that's great.
+Итак, всё, что нам нужно для использования объекта, это знать его внешний интерфейс. Мы можем совершенно не знать, как это работает внутри, и это здорово.
 
-That was a general introduction.
+Это было общее введение.
 
-In JavaScript, there are three types of properties and members:
+В JavaScript есть два типа полей (свойств и методов) объекта:
 
-- Public: accessible from anywhere. They comprise the external interface. Till now we were only using public properties and methods.
-- Private: accessible only from inside the class. These are for the internal interface.
+- Публичные: доступны отовсюду. Они составляют внешний интерфейс. До этого момента мы использовали только публичные свойства и методы.
+- Приватные: доступны только внутри класса. Они для внутреннего интерфейса.
 
-In many other languages there also exist "protected" fields: accessible only from inside the class and those extending it. They are also useful for the internal interface. They are in a sense more widespread than private ones, because we usually want inheriting classes to gain access to properly do the extension.
+Во многих других языках также существуют "защищённые" поля, доступные только внутри класса или для дочерних классов. Они также полезны для внутреннего интерфейса. В некотором смысле они более распространены, чем приватные, потому что мы обычно хотим, чтобы наследующие классы получали доступ к внутренним полям.
 
-Protected fields are not implemented in JavaScript on the language level, but in practice they are very convenient, so they are emulated.
+Защищённые поля не реализованы в JavaScript на уровне языка, но на практике они очень удобны, поэтому их эмулируют. 
 
-In the next step we'll make a coffee machine in JavaScript with all these types of properties. A coffee machine has a lot of details, we won't model them to stay simple (though we could).
+А теперь давайте сделаем делать кофеварку на JavaScript со всеми этими типами свойств. Кофеварка имеет множество деталей, мы не будем их моделировать для простоты примера (хотя могли бы).
 
-## Protecting "waterAmount"
+## Защищённое свойство "waterAmount"
 
-Let's make a simple coffee machine class first:
+Давайте для начала создадим простой класс для описания кофеварки:
 
 ```js run
 class CoffeeMachine {
-  waterAmount = 0; // the amount of water inside
+  waterAmount = 0; // количество воды внутри
 
   constructor(power) {
     this.power = power;
-    alert( `Created a coffee-machine, power: ${power}` );
+    alert( `Создана кофеварка, мощность: ${power}` );
   }
 
 }
 
-// create the coffee machine
+// создаём кофеварку
 let coffeeMachine = new CoffeeMachine(100);
 
-// add water
+// добавляем воды
 coffeeMachine.waterAmount = 200;
 ```
 
-Right now the properties `waterAmount` and `power` are public. We can easily get/set them from the outside to any value.
+Прямо сейчас свойства `waterAmount` и `power` публичные. Мы можем легко получать и устанавливать им любое значение извне.
 
-Let's change `waterAmount` property to protected to have more control over it. For instance, we don't want anyone to set it below zero.
+Давайте изменим свойство `waterAmount` на защищённое, чтобы иметь больше контроля над ним. Например, мы не хотим, чтобы кто-либо устанавливал его ниже нуля.
 
-**Protected properties are usually prefixed with an underscore `_`.**
+**Защищённые свойства обычно начинаются с префикса `_`.**
 
-That is not enforced on the language level, but there's a convention that such properties and methods should not be accessed from the outside. Most programmers follow it.
+Это не синтаксис языка: есть хорошо известное соглашение между программистами, что такие свойства и методы не должны быть доступны извне. Большинство программистов следуют этому соглашению.
 
-So our property will be called `_waterAmount`:
+Итак, наше свойство будет называться `_waterAmount`:
 
 ```js run
 class CoffeeMachine {
   _waterAmount = 0;
 
   set waterAmount(value) {
-    if (value < 0) throw new Error("Negative water");
+    if (value < 0) throw new Error("Отрицательное количество воды");
     this._waterAmount = value;
   }
 
@@ -110,22 +110,22 @@ class CoffeeMachine {
 
 }
 
-// create the coffee machine
+// создаём новую кофеварку
 let coffeeMachine = new CoffeeMachine(100);
 
-// add water
-coffeeMachine.waterAmount = -10; // Error: Negative water
+// устанавливаем количество воды
+coffeeMachine.waterAmount = -10; // Error: Отрицательное количество воды
 ```
 
-Now the access is under control, so setting the water below zero fails.
+Теперь доступ под контролем, поэтому указать воду ниже нуля не удалось. 
 
-## Read-only "power"
+## Свойство только для чтения "power"
 
-For `power` property, let's make it read-only. It sometimes happens that a property must be set at creation time only, and then never modified.
+Давайте сделаем свойство `power` доступным только для чтения. Иногда нужно, чтобы свойство устанавливалось только при создании объекта и после этого никогда не изменялось.
 
-That's exactly the case for a coffee machine: power never changes.
+Это как раз требуется для кофеварки: мощность никогда не меняется.
 
-To do so, we only need to make getter, but not the setter:
+Для этого нам нужно создать только геттер, а сеттер не создавать:
 
 ```js run
 class CoffeeMachine {
@@ -141,25 +141,25 @@ class CoffeeMachine {
 
 }
 
-// create the coffee machine
+// создаём кофеварку
 let coffeeMachine = new CoffeeMachine(100);
 
-alert(`Power is: ${coffeeMachine.power}W`); // Power is: 100W
+alert(`Мощность: ${coffeeMachine.power}W`); // Мощность: 100W
 
 coffeeMachine.power = 25; // Error (no setter)
 ```
 
-````smart header="Getter/setter functions"
-Here we used getter/setter syntax.
+````smart header="Геттеры/сеттеры"
+Здесь мы использовали синтаксис геттеров/сеттеров.
 
-But most of the time `get.../set...` functions are preferred, like this:
+Но в большинстве случаев использование функций `get.../set...` предпочтительнее:
 
 ```js
 class CoffeeMachine {
   _waterAmount = 0;
 
   *!*setWaterAmount(value)*/!* {
-    if (value < 0) throw new Error("Negative water");
+    if (value < 0) throw new Error("Отрицательное количество воды");
     this._waterAmount = value;
   }
 
@@ -170,29 +170,28 @@ class CoffeeMachine {
 
 new CoffeeMachine().setWaterAmount(100);
 ```
+Это выглядит немного длиннее, но функции более гибкие. Они могут принимать несколько аргументов (даже если они нам сейчас не нужны). Итак, на будущее, если нам надо что-то отрефакторить, функции более безопасный выбор.
 
-That looks a bit longer, but functions are more flexible. They can accept multiple arguments (even if we don't need them right now). So, for the future, just in case we need to refactor something, functions are a safer choice.
-
-Surely, there's a tradeoff. On the other hand, get/set syntax is shorter, so ultimately there's no strict rule, it's up to you to decide.
+С другой стороны, синтаксис get/set короче, решать вам.
 ````
 
-```smart header="Protected fields are inherited"
-If we inherit `class MegaMachine extends CoffeeMachine`, then nothing prevents us from accessing `this._waterAmount` or `this._power` from the methods of the new class.
+```smart header="Защищённые поля наследуются"
+Если мы унаследуем `class MegaMachine extends CoffeeMachine`, ничто не помешает нам обращаться к `this._waterAmount` или `this._power` из методов нового класса.
 
-So protected fields are naturally inheritable. Unlike private ones that we'll see below.
+Таким образом защищённые методы, конечно же, наследуются. В отличие от приватных полей, в чём мы убедимся ниже.
 ```
 
-## Private "#waterLimit"
+## Приватное свойство "#waterLimit"
 
 [recent browser=none]
 
-There's a finished JavaScript proposal, almost in the standard, that provides language-level support for private properties and methods.
+Есть новшество в языке JavaScript, которое почти добавлено в стандарт: оно добавляет поддержку приватных свойств и методов. 
 
-Privates should start with `#`. They are only accessible from inside the class.
+Приватные свойства и методы должны начинаться с `#`. Они доступны только внутри класса.
 
-For instance, here we add a private `#waterLimit` property and extract the water-checking logic into a separate method:
+Например, в классе ниже есть приватное свойство `#waterLimit` и приватный метод `#checkWater` для проверки количества воды:
 
-```js
+```js run
 class CoffeeMachine {
 *!*
   #waterLimit = 200;
@@ -200,41 +199,26 @@ class CoffeeMachine {
 
 *!*
   #checkWater(value) {
-    if (value < 0) throw new Error("Negative water");
-    if (value > this.#waterLimit) throw new Error("Too much water");
+    if (value < 0) throw new Error("Отрицательный уровень воды");
+    if (value > this.#waterLimit) throw new Error("Слишком много воды");
   }
 */!*
-
-  _waterAmount = 0;
-
-  set waterAmount(value) {
-*!*
-    this.#checkWater(value);
-*/!*
-    this._waterAmount = value;
-  }
-
-  get waterAmount() {
-    return this._waterAmount;
-  }
-
 }
 
 let coffeeMachine = new CoffeeMachine();
 
 *!*
+// снаружи  нет доступа к приватным методам класса
 coffeeMachine.#checkWater(); // Error
 coffeeMachine.#waterLimit = 1000; // Error
 */!*
-
-coffeeMachine.waterAmount = 100; // Works
 ```
 
-On the language level, `#` is a special sign that the field is private. We can't access it from outside or from inheriting classes.
+На уровне языка `#` является специальным символом, который означает, что поле приватное. Мы не можем получить к нему доступ извне или из наследуемых классов.
 
-Private fields do not conflict with public ones. We can have both private `#waterAmount` and public `waterAmount` fields at the same time.
+Приватные поля не конфкликтуют с публичными. У нас может быть два поля одновременно -- приватное `#waterAmount` и публичное `waterAmount`.
 
-For instance, let's make `waterAmount` an accessor for `#waterAmount`:
+Например, давайте сделаем аксессор `waterAmount` для `#waterAmount`:
 
 ```js run
 class CoffeeMachine {
@@ -246,7 +230,7 @@ class CoffeeMachine {
   }
 
   set waterAmount(value) {
-    if (value < 0) throw new Error("Negative water");
+    if (value < 0) throw new Error("Отрицательный уровень воды");
     this.#waterAmount = value;
   }
 }
@@ -257,9 +241,9 @@ machine.waterAmount = 100;
 alert(machine.#waterAmount); // Error
 ```
 
-Unlike protected ones, private fields are enforced by the language itself. That's a good thing.
+В отличие от защищённых, функционал приватных полей обеспечивается самим языком. Это хорошо.
 
-But if we inherit from `CoffeeMachine`, then we'll have no direct access to `#waterAmount`. We'll need to rely on `waterAmount` getter/setter:
+Но если мы наследуем от `CoffeeMachine`, то мы не получим прямого доступа к `#waterAmount`. Мы будем вынуждены полагаться на геттер/сеттер `waterAmount`:
 
 ```js
 class MegaCoffeeMachine extends CoffeeMachine() {
@@ -271,60 +255,59 @@ class MegaCoffeeMachine extends CoffeeMachine() {
 }
 ```
 
-In many scenarios such limitation is too severe. If we extend a `CoffeeMachine`, we may have legitimate reason to access its internals. That's why protected fields are used most of the time, even though they are not supported by the language syntax.
+Во многих случаях такое ограничение слишком жёсткое. Раз уж мы расширяем `CoffeeMachine`, у нас может быть вполне законная причина для доступа к внутренним методам и свойствам. Поэтому защищённые свойства используются чаще, хоть они и не поддерживаются синтаксисом языка.
 
 ````warn
-Private fields are special.
+Приватные поля особенные.
 
-Remember, usually we can access fields by this[name]:
+Как мы помним, обычно мы можем получить доступ к полям объекта с помощью this[name]:
 
 ```js
 class User {
   ...
   sayHi() {
     let fieldName = "name";
-    alert(`Hello, ${this[fieldName]}`);
+    alert(`Hello, ${*!*this[fieldName]*/!*}`);
   }
 }
 ```
-
-With private fields that's impossible: `this['#name']` doesn't work. That's a syntax limitation to ensure privacy.
+С приватными свойствами такое невозможно: `this['#name']` не работает. Это ограничение синтаксиса сделано для обеспечения приватности.
 ````
 
-## Summary
+## Итого
 
-In terms of OOP, delimiting of the internal interface from the external one is called [encapsulation]("https://en.wikipedia.org/wiki/Encapsulation_(computer_programming)").
+В терминах ООП отделение внутреннего интерфейса от внешнего называется [инкапсуляция](https://ru.wikipedia.org/wiki/%D0%98%D0%BD%D0%BA%D0%B0%D0%BF%D1%81%D1%83%D0%BB%D1%8F%D1%86%D0%B8%D1%8F_(%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5).
 
-It gives the following benefits:
+Это даёт следующие выгоды:
 
-Protection for users, so that they don't shoot themselves in the feet
-: Imagine, there's a team of developers using a coffee machine. It was made by the "Best CoffeeMachine" company, and works fine, but a protective cover was removed. So the internal interface is exposed.
+Защита для пользователей, чтобы они не выстрелили себе в ногу
+: Представьте себе, что есть команда разработчиков, использующая кофеварку. Она была изготовлена компанией "Лучшие Кофеварки" и работает нормально, но защитный кожух был снят. Внутренний интерфейс стал доступен извне.
 
-    All developers are civilized -- they use the coffee machine as intended. But one of them, John, decided that he's the smartest one, and made some tweaks in the coffee machine internals. So the coffee machine failed two days later.
+    Все разработчики культурны -- они используют кофеварку по назначению. Но один из них, Джон, решил, что он самый умный, и сделал некоторые изменения во внутренностях кофеварки. После чего кофеварка вышла из строя через два дня.
 
-    That's surely not John's fault, but rather the person who removed the protective cover and let John do his manipulations.
+    Это, конечно, не вина Джона, а скорее человека, который снял защитный кожух и позволил Джону делать свои манипуляции.
 
-    The same in programming. If a user of a class will change things not intended to be changed from the outside -- the consequences are unpredictable.
+    То же самое в программировании. Если пользователь класса изменит вещи, не предназначенные для изменения извне -- последствия непредсказуемы.
 
-Supportable
-: The situation in programming is more complex than with a real-life coffee machine, because we don't just buy it once. The code constantly undergoes development and improvement.
+Поддерживаемость
+: Ситуация в программировании сложнее, чем с реальной кофеваркой, потому что мы не просто покупаем её один раз. Код постоянно подвергается разработке и улучшению.
 
-    **If we strictly delimit the internal interface, then the developer of the class can freely change its internal properties and methods, even without informing the users..**
+    **Если мы чётко отделим внутренний интерфейс, то разработчик класса сможет свободно менять его внутренние свойства и методы, даже не информируя пользователей..**
 
-    It's much easier to develop, if you know that certain methods can be renamed, their parameters can be changed, and even removed, because no external code depends on them.
+    Если вы разработчик такого класса, то приятно знать, что приватные методы можно безопасно переименовывать, их параметры можно изменять и даже удалять, потому что от них не зависит никакой внешний код.
 
-    For users, when a new version comes out, it may be a total overhaul, but still simple to upgrade if the external interface is the same.
+    В новой версии вы можете полностью всё переписать, но пользователю будет легко обновиться, если внешний интерфейс остался такой же.
 
-Hiding complexity
-: People adore to use things that are simple. At least from outside. What's inside is a different thing.
+Сокрытие сложности
+: Люди обожают использовать простые вещи. По крайней мере, снаружи. Что внутри -- это другое дело.
 
-    Programmers are not an exception.
+    Программисты не являются исключением.
 
-    **It's always convenient when implementation details are hidden, and a simple, well-documented external interface is available.**
+    **Всегда удобно, когда детали реализации скрыты, и доступен простой, хорошо документированный внешний интерфейс.**
 
-To hide internal interface we use either protected or public properties:
+Для сокрытия внутреннего интерфейса мы используем защищённые или приватные свойства:
 
-- Protected fields start with `_`. That's a well-known convention, not enforced at the language level. Programmers should only access a field starting with `_` from its class and classes inheriting from it.
-- Private fields start with `#`. JavaScript makes sure we only can access those from inside the class.
+- Защищённые поля имеют префикс `_`. Это хорошо известное соглашение, не поддерживаемое на уровне языка. Программисты должны обращаться к полю, начинающемуся с `_`, только из его класса и классов, унаследованных от него.
+- Приватные поля имеют префикс `#`. JavaScript гарантирует, что мы можем получить доступ к таким полям только внутри класса. 
 
-Right now, private fields are not well-supported among browsers, but can be polyfilled.
+В настоящее время приватные поля не очень хорошо поддерживаются в браузерах, но можно использовать полифил.

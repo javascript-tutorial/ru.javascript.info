@@ -2,18 +2,18 @@ importance: 2
 
 ---
 
-# Syntax check
+# Проверка синтаксиса
 
-What is the result of this code?
+Каким будет результат выполнения этого кода?
 
 
 ```js no-beautify
 let user = {
-  name: "John",
+  name: "Джон",
   go: function() { alert(this.name) }
 }
 
 (user.go)()
 ```
 
-P.S. There's a pitfall :)
+P.S. Здесь есть подвох :)
