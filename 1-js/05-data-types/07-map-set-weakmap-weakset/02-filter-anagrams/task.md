@@ -16,7 +16,7 @@ cheaters - hectares - teachers
 
 Напишите функцию `aclean(arr)`, которая возвращает массив слов, очищенный от анаграмм.
 
-For instance:
+Например:
 
 ```js
 let arr = ["nap", "teachers", "cheaters", "PAN", "ear", "era", "hectares"];
