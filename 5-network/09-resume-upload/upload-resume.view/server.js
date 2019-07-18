@@ -40,6 +40,7 @@ function onUpload(req, res) {
     });
     debug("New file created: " + filePath);
   } else {
+    // we can check on-disk file size as well to be sure
     if (upload.bytesReceived != startByte) {
       res.writeHead(400, "Wrong start byte");
       res.end(upload.bytesReceived);

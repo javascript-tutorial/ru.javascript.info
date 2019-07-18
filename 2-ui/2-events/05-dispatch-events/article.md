@@ -66,6 +66,9 @@ let event = new Event(type[, options]);
   // ...запуск события на элементе!
   let event = new Event("hello", {bubbles: true}); // (2)
   elem.dispatchEvent(event);
+
+  // the handler on document will activate and display the message.
+
 </script>
 ```
 
