@@ -64,7 +64,7 @@ alert( arr instanceof Object ); // true
     alert(obj instanceof Animal); // true: вызван Animal[Symbol.hasInstance](obj)
     ```
 
-2. Большая часть классов не имеет метода `Symbol.hasInstance`. В этом случае проверяется, равен ли `Class.prototype` одному из прототипов в прототипной цепочке `obj`.
+2. Большая часть классов не имеет метода `Symbol.hasInstance`. В этом случае используется стандартная логика: проверяется, равен ли `Class.prototype` одному из прототипов в прототипной цепочке `obj`.
 
     Другими словами, сравнивается:
     ```js

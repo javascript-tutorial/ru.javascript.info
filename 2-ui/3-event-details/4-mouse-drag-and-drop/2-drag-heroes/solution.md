@@ -1,5 +1,5 @@
-To drag the element we can use `position:fixed`, it makes coordinates easier to manage. At the end we should switch it back to `position:absolute`.
+Чтобы перетащить элемент, мы можем использовать `position:fixed`, это делает управление координатами проще. В конце следует переключиться обратно на `position:absolute`.
 
-Then, when coordinates are at window top/bottom, we use `window.scrollTo` to scroll it.
+Затем, когда координаты находятся в верхней/нижней части окна, мы используем его `window.scrollTo` для прокрутки.
 
-More details in the code, in comments.
+Детали решения расписаны в комментариях в исходном коде.
