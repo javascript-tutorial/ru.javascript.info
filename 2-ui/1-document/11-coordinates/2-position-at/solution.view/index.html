@@ -24,13 +24,13 @@
 
   <script>
     /**
-     * Positions elem relative to anchor as said in position.
+     * Позиционирует элемент elem относительно элемента anchor в соответствии со значением position.
      *
-     * @param {Node} anchor     Anchor element for positioning
-     * @param {string} position One of: top/right/bottom
-     * @param {Node} elem       Element to position
+     * @param {Node} anchor     элемент, около которого позиционируется другой элемент
+     * @param {string} position одно из: top/right/bottom
+     * @param {Node} elem       элемент, который позиционируется
      *
-     * Both elements: elem and anchor must be in the document
+     * Оба элемента elem и anchor должны присутствовать в документе
      */
     function positionAt(anchor, position, elem) {
 
@@ -56,8 +56,8 @@
     }
 
     /**
-     * Shows a note with the given html at the given position
-     * relative to the anchor element.
+     * Показывает заметку с заданным содержимым на заданной позиции
+     * относительно элемента anchor.
      */
     function showNote(anchor, position, html) {
 
@@ -69,7 +69,7 @@
       positionAt(anchor, position, note);
     }
 
-    // test it
+    // проверка
     let blockquote = document.querySelector('blockquote');
 
     showNote(blockquote, "top", "note above");
