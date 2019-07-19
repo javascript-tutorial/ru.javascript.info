@@ -2,17 +2,17 @@ importance: 5
 
 ---
 
-# Filter unique array members
+# Фильтрация уникальных элементов массива
 
-Let `arr` be an array.
+Допустим, у нас есть массив `arr`.
 
-Create a function `unique(arr)` that should return an array with unique items of `arr`.
+Создайте функцию `unique(arr)`, которая вернёт массив уникальных, не повторяющихся значений массива `arr`.
 
-For instance:
+Например:
 
 ```js
 function unique(arr) {
-  /* your code */
+  /* ваш код */
 }
 
 let values = ["Hare", "Krishna", "Hare", "Krishna",
@@ -22,6 +22,6 @@ let values = ["Hare", "Krishna", "Hare", "Krishna",
 alert( unique(values) ); // Hare, Krishna, :-O
 ```
 
-P.S. Here strings are used, but can be values of any type.
+P.S. Здесь мы используем строки, но значения могут быть любого типа.
 
-P.P.S. Use `Set` to store unique values.
+P.P.S. Используйте `Set` для хранения уникальных значений.

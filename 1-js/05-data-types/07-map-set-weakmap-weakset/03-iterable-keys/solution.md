@@ -1,8 +1,7 @@
 
-That's because `map.keys()` returns an iterable, but not an array.
+Это потому что `map.keys()` возвращает итерируемый объект, а не массив.
 
-We can convert it into an array using `Array.from`:
-
+Мы можем конвертировать его в массив с помощью `Array.from`:
 
 ```js run
 let map = new Map();

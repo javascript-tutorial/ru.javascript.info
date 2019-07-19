@@ -1,6 +1,6 @@
-To find all anagrams, let's split every word to letters and sort them. When letter-sorted, all anagrams are same.
+Чтобы найти все анаграммы, давайте разобьём каждое слово на буквы и отсортируем их, а потом объединим получившийся массив снова в строку. После этого все анаграммы будут одинаковы.
 
-For instance:
+Например:
 
 ```
 nap, pan -> anp
@@ -9,16 +9,16 @@ cheaters, hectares, teachers -> aceehrst
 ...
 ```
 
-We'll use the letter-sorted variants as map keys to store only one value per each key:
+Мы будем использовать отсортированные строки как ключи в коллекции Map, для того чтобы сопоставить каждому ключу только одно значение:
 
 ```js run
 function aclean(arr) {
   let map = new Map();
 
   for (let word of arr) {
-    // split the word by letters, sort them and join back
+    // разбиваем слово на буквы, сортируем и объединяем снова в строку
 *!*
-    let sorted = word.toLowerCase().split('').sort().join(''); // (*)
+    let sorted = word.toLowerCase().split("").sort().join(""); // (*)
 */!*
     map.set(sorted, word);
   }
@@ -31,33 +31,33 @@ let arr = ["nap", "teachers", "cheaters", "PAN", "ear", "era", "hectares"];
 alert( aclean(arr) );
 ```
 
-Letter-sorting is done by the chain of calls in the line `(*)`.
+Строка с отсортированными буквами получается в результате цепочки вызовов в строке `(*)`.
 
-For convenience let's split it into multiple lines:
+Для удобства, давайте разделим это на несколько строк:
 
 ```js
 let sorted = arr[i] // PAN
   .toLowerCase() // pan
-  .split('') // ['p','a','n']
-  .sort() // ['a','n','p']
-  .join(''); // anp
+  .split("") // ["p","a","n"]
+  .sort() // ["a","n","p"]
+  .join(""); // anp
 ```
 
-Two different words `'PAN'` and `'nap'` receive the same letter-sorted form `'anp'`.
+Два разных слова `'PAN'` и `'nap'` принимают ту же самую форму после сортировки букв -- `'anp'`.
 
-The next line put the word into the map:
+Следующая линия помещает слово в объект Map:
 
 ```js
 map.set(sorted, word);
 ```
 
-If we ever meet a word the same letter-sorted form again, then it would overwrite the previous value with the same key in the map. So we'll always have at maximum one word per letter-form.
+Если мы когда-либо ещё встретим слово в той же отсортированной форме, тогда это слово перезапишет значение с тем же ключом в объекте. Таким образом, нескольким словам у нас будет всегда соответствовать одна отсортированная форма.
 
-At the end `Array.from(map.values())` takes an iterable over map values (we don't need keys in the result) and returns an array of them.
+В конце `Array.from(map.values())` принимает итерируемый объект значений объекта Map (в данном случае нам не нужны ключи) и возвращает их в виде массива.
 
-Here we could also use a plain object instead of the `Map`, because keys are strings.
+Также в этом случае вместо `Map` мы можем использовать простой объект, потому что ключи являются строками.
 
-That's how the solution can look:
+В этом случае решение может выглядеть так:
 
 ```js run demo
 function aclean(arr) {

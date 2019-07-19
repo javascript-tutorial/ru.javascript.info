@@ -2,18 +2,18 @@ importance: 5
 
 ---
 
-# Store read dates
+# Хранение времени прочтения
 
-There's an array of messages as in the [previous task](info:task/recipients-read). The situation is similar.
+Есть массив сообщений такой же, как и в [предыдущем задании](info:task/recipients-read).
 
 ```js
 let messages = [
-    {text: "Hello", from: "John"},
-    {text: "How goes?", from: "John"},
-    {text: "See you soon", from: "Alice"}
+  { text: "Hello", from: "John" },
+  { text: "How goes?", from: "John" },
+  { text: "See you soon", from: "Alice" }
 ];
 ```
 
-The question now is: which data structure you'd suggest to store the information: "when the message was read?".
+Теперь вопрос стоит так: какую структуру данных вы бы предложили использовать для хранения информации о том, когда сообщение было прочитано?
 
-In the previous task we only needed to store the "yes/no" fact. Now we need to store the date and it, once again, should disappear if the message is gone.
+В предыдущем задании нам нужно было сохранить только факт прочтения "да или нет". Теперь же нам нужно сохранить дату, и она, опять же, должна исчезнуть, если сообщение было удалено.
