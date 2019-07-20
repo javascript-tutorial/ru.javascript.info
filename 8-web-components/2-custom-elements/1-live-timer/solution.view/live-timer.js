@@ -24,7 +24,7 @@ class LiveTimer extends HTMLElement {
   }
 
   disconnectedCallback() {
-    clearInterval(this.timer); // важно позволить элементу быть собранным сборщиком мусора
+    clearInterval(this.timer); // важно, чтобы элемент мог быть собранным сборщиком мусора
   }
 
 }
