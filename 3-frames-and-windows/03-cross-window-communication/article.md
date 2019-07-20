@@ -34,7 +34,7 @@
 Мы можем обращаться к ним, используя свойства:
 
 - `iframe.contentWindow` ссылка на объект `window` внутри `<iframe>`.
-- `iframe.contentDocument` - ссылка на объект `document` внутри `<iframe>`, a short for `iframe.contentWindow.document`.
+- `iframe.contentDocument` - ссылка на объект `document` внутри `<iframe>`, короткая запись для `iframe.contentWindow.document`.
 
 Когда мы обращаемся к встроенному в ифрейм окну, браузер проверяет, имеет ли ифрейм тот же источник. Если это не так, тогда доступ будет запрещён (разрешена лишь запись в `location`, это исключение).
 

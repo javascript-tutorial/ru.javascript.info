@@ -456,5 +456,4 @@ alert( formatter.format(1234.5) ); // 1 234,50 £
 
 ## Старые IE
 
-В IE10- рекомендуется использовать полифилл, например библиотеку <https://github.com/andyearnshaw/Intl.js>.
-
+В IE10- рекомендуется использовать полифил, например библиотеку <https://github.com/andyearnshaw/Intl.js>.

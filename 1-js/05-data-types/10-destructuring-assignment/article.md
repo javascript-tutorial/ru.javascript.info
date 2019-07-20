@@ -348,7 +348,7 @@ let title, width, height;
 let title, width, height;
 
 // сейчас всё работает
-*!*(*/!*{title, width, height}*!*)*/!* = {title: "Menu", width: 200, height: 100};
+*!*(*/!*{title, width, height} = {title: "Menu", width: 200, height: 100}*!*)*/!*;
 
 alert( title ); // Menu
 ```

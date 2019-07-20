@@ -10,7 +10,7 @@ function wrap(target) {
       if (prop in target) {
         return Reflect.get(target, prop, receiver);
       } else {
-        throw new ReferenceError(`Property doesn't exist: "${prop}"`)
+        throw new ReferenceError(`Свойство не существует: "${prop}"`)
       }
     }
   });
@@ -19,5 +19,5 @@ function wrap(target) {
 user = wrap(user);
 
 alert(user.name); // John
-alert(user.age); // Error: Property doesn't exist
+alert(user.age); // Ошибка: Свойство не существует
 ```
