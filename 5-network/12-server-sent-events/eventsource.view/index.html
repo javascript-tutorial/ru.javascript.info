@@ -2,40 +2,40 @@
 <script>
 let eventSource;
 
-function start() { // when "Start" button pressed
+function start() { // когда нажата кнопка "Старт"
   if (!window.EventSource) {
-    // IE or an old browser
-    alert("The browser doesn't support EventSource.");
+    // Internet Explorer или устаревшие браузеры
+    alert("Ваш браузер не поддерживает EventSource.");
     return;
   }
 
   eventSource = new EventSource('digits');
 
   eventSource.onopen = function(e) {
-    log("Event: open");
+    log("Событие: open");
   };
 
   eventSource.onerror = function(e) {
-    log("Event: error");
+    log("Событие: error");
     if (this.readyState == EventSource.CONNECTING) {
-      log(`Reconnecting (readyState=${this.readyState})...`);
+      log(`Переподключение (readyState=${this.readyState})...`);
     } else {
-      log("Error has occured.");
+      log("Произошла ошибка.");
     }
   };
 
   eventSource.addEventListener('bye', function(e) {
-    log("Event: bye, data: " + e.data);
+    log("Событие: bye, данные: " + e.data);
   });
 
   eventSource.onmessage = function(e) {
-    log("Event: message, data: " + e.data);
+    log("Событие: message, данные: " + e.data);
   };
 }
 
-function stop() { // when "Stop" button pressed
+function stop() { // когда нажата кнопка "Стоп"
   eventSource.close();
-  log("eventSource.close()");
+  log("Соединение закрыто");
 }
 
 function log(msg) {
@@ -44,7 +44,7 @@ function log(msg) {
 }
 </script>
 
-<button onclick="start()">Start</button> Press the "Start" to begin.
+<button onclick="start()">Старт</button> Нажмите кнопку "Старт" для начала
 <div id="logElem" style="margin: 6px 0"></div>
 
-<button onclick="stop()">Stop</button> "Stop" to finish.
+<button onclick="stop()">Стоп</button> Чтобы закончить, нажмите "Стоп".
