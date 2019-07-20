@@ -170,20 +170,20 @@ function countUser(user) {
 
 Сейчас мы не должны самостоятельно очищать `visitsCountMap`. После удаления объекта `john` из памяти вся ассоциированная с ним дополнительная информация будет также удалена из `WeakMap`.
 
-## Применение в кешировании
+## Применение для кеширования
 
-Another common example is caching: when a function result should be remembered ("cached"), so that future calls on the same object reuse it.
+Другая частая сфера применения -- это кеширование, когда результат вызова функции должен где-то запоминаться ("кешироваться") для того, чтобы дальнейшие её вызовы на том же объекте могли просто брать уже готовый результат, повторно используя его.
 
-We can use `Map` for it, like this:
+Для решения данной задачи мы можем использовать `Map`, вот так:
 
 ```js run
 // 📁 cache.js
 let cache = new Map();
 
-// calculate and remember the result
+// вычисляем и запоминаем результат
 function process(obj) {
   if (!cache.has(obj)) {
-    let result = /* calculate the result for */ obj;
+    let result = /* вычисляем результат для объекта */ obj;
 
     cache.set(obj, result);
   }
@@ -192,25 +192,25 @@ function process(obj) {
 }
 
 *!*
-// Usage in another file:
+// Используем в другом файле:
 */!*
 // 📁 main.js
-let obj = {/* some object */};
+let obj = {/* какой-то объект */};
 
-let result1 = process(obj); // calculated
+let result1 = process(obj); // вычислен результат
 
-// ...later, from another place of the code...
-let result2 = process(obj); // taken from cache
+// ...позже, из другого места в коде...
+let result2 = process(obj); // берём из кеша
 
-// ...later, when the object is not needed any more:
+// ...позже, когда объект больше не нужен:
 obj = null;
 
-alert(cache.size); // 1 (Ouch! It's still in cache, taking memory!)
+alert(cache.size); // 1 (Упс! Кеш до сих пор занимает память!)
 ```
 
-Now for multiple calls of `process(obj)` with the same object, it only calculates the result the first time, and then just takes it from `cache`. The downside is that we need to clean `cache` when the object is not needed any more.
+Сейчас многократные вызовы `process(obj)` с тем же самым объектом в качестве аргумента ведут к тому, что результат вычисляется только в первый раз, а затем последующие вызовы берут его из кеша. Недостатком является то, что необходимо вручную очищать `cache` от ставших ненужными объектов.
 
-If we replace `Map` with `WeakMap`, then the cached result will be removed from memory automatically after the object gets garbage collected:
+Но если мы будем использовать `WeakMap` вместо `Map`, то закешированные результаты будут автоматически удалены из памяти сборщиком мусора:
 
 ```js run
 // 📁 cache.js
@@ -218,10 +218,10 @@ If we replace `Map` with `WeakMap`, then the cached result will be removed from 
 let cache = new WeakMap();
 */!*
 
-// calculate and remember the result
+// вычисляем и запоминаем результат
 function process(obj) {
   if (!cache.has(obj)) {
-    let result = /* calculate the result for */ obj;
+    let result = /* вычисляем результат для объекта */ obj;
 
     cache.set(obj, result);
   }
@@ -230,16 +230,16 @@ function process(obj) {
 }
 
 // 📁 main.js
-let obj = {/* some object */};
+let obj = {/* какой-то объект */};
 
 let result1 = process(obj);
 let result2 = process(obj);
 
-// ...later, when the object is not needed any more:
+// ...позже, когда объект больше не нужен:
 obj = null;
 
-// Can't get cache.size, as it's a WeakMap, but it's 0 or soon be 0
-// When obj gets garbage collected, cached data will be removed as well
+// Нет возможности получить cache.size, так как это `WeakMap`, но он равен 0 или скоро будет равен 0
+// Когда сборщик мусора удаляет obj, связанные с ним данные из кеша тоже удаляются
 ```
 
 ## WeakSet
@@ -251,9 +251,9 @@ obj = null;
 - Как и `Set`, он поддерживает `add`, `has` и `delete`, но не `size`, `keys()` и не является перебираемым.
 
 
-Being "weak", it also serves as an additional storage. But not for an arbitrary data, but rather for "yes/no" facts. A membership in `WeakSet` may mean something about the object.
+Будучи "слабой" версией оригинальной структуры данных, он тоже служит в качестве дополнительного хранилища. Но не для произвольных данных, а скорее для значений типа "да/нет". Присутствие во множестве `WeakSet` может что-то рассказать нам об объекте.
 
-For instance, we can use `WeakSet` to keep track of users that visited our site:
+Например, мы можем использовать `WeakSet` для учёта посетителей сайта:
 
 ```js run
 let visitedSet = new WeakSet();
@@ -262,32 +262,32 @@ let john = { name: "John" };
 let pete = { name: "Pete" };
 let mary = { name: "Mary" };
 
-visitedSet.add(john); // John visited us
-visitedSet.add(pete); // Then Pete
-visitedSet.add(john); // John again
+visitedSet.add(john); // John заходил к нам
+visitedSet.add(pete); // потом Pete
+visitedSet.add(john); // John снова
 
-// visitedSet has 2 users now
+// visitedSet сейчас содержит двух пользователей
 
-// check if John visited?
+// проверим, заходил ли John?
 alert(visitedSet.has(john)); // true
 
-// check if Mary visited?
+// проверим, заходила ли Mary?
 alert(visitedSet.has(mary)); // false
 
-// John object is not needed any more
+// Объект John больше не нужен
 john = null;
 
-// visitedSet will be cleaned automatically
+// структура данных visitedSet будет очищена автоматически
 ```
 
-The most notable limitation of `WeakMap` and `WeakSet` is the absence of iterations, and inability to get all current content. That may appear inconvenient, but does not prevent `WeakMap/WeakSet` from doing their main job -- be an "additional" storage of data for objects which are stored/managed at another place.
+Наиболее значительным ограничением множеств `WeakMap` и `WeakSet` является то, что к ним нельзя применить итерацию, а также нельзя взять всё их содержимое на текущий момент. Это может доставлять неудобства, но не мешает `WeakMap/WeakSet` выполнять их главную задачу -- быть дополнительным хранилищем данных для объектов, управляемых из каких-то других мест в коде.
 
 ## Итого
 
-`WeakMap` is `Map`-like collection that allows only objects as keys and removes them once they become inaccessible by other means.
+`WeakMap` -- это `Map`-подобная коллекция, позволяющая использовать в качестве ключей только объекты, которые могут быть удалены сборщиком мусора, как только они становятся недостижимыми иными путями.
 
-`WeakSet` is `Set`-like collection that only stores objects and removes them once they become inaccessible by other means.
+`WeakSet` -- это `Set`-подобная коллекция, которая только хранит объекты и удаляет их, как только они становятся недостижимыми иными путями.
 
-Both of them do not support methods and properties that refer to all keys or their count. Only individial get/has/set/remove operations with a given key are allowed.
+Обе этих структуры данных не поддерживают методы и свойства, работающие со всем содержимым сразу или возвращающие информацию о размере коллекции. Возможны только операции `get/has/set/remove` на отдельном элементе коллекции с заданным ключом.
 
-`WeakMap` and `WeakSet` are used as "secondary" data structures in addition to the "main" object storage. Once the object is removed from the main storage, if it is only found as the key of `WeakMap` or in a `WeakSet`, it will be cleaned up automatically.
+`WeakMap` и `WeakSet` используются как вспомогательные структуры данных в дополнение к основным хранилищам объектов. Как только объект удаляется из основного хранилища и при этом нигде не используется, кроме как в качестве ключа в `WeakMap` или в `WeakSet`, то он будет удалён автоматически.
