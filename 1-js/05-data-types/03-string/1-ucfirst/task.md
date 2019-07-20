@@ -2,11 +2,10 @@ importance: 5
 
 ---
 
-# Uppercase the first character
+# Сделать первый символ заглавным
 
-Write a function `ucFirst(str)` that returns the string `str` with the uppercased first character, for instance:
+Напишите функцию `ucFirst(str)`, возвращающую строку `str` с заглавным первым символом. Например:
 
 ```js
-ucFirst("john") == "John";
+ucFirst("вася") == "Вася";
 ```
-
