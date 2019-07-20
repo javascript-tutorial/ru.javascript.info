@@ -110,67 +110,67 @@ john = null; // перезаписываем ссылку на объект
 ## Пример: дополнительные данные
 
 
-The main area of application for `WeakMap` is an *additional data storage*.
+В основном `WeakMap` используется в качестве *дополнительного хранилища данных*.
 
-There are objects managed elsewhere in the code, maybe they come from a third-party code, and in our code we need to keep additional information that is only relevant while the object is in memory.
+В коде могут быть объекты, управляемые из других мест. Они, возможно, относятся к каким-то сторонним библиотекам, и нам нужно хранить о них некоторую информацию, которая актуальна только в период нахождения таких объектов в оперативной памяти.
 
-And when the object is garbage collected, that data should automatically disappear as well.
+И когда сборщик мусора удаляет эти объекты из памяти, то ассоциированные с ними данные тоже должны автоматически исчезнуть.
 
 ```js
 weakMap.set(john, "secret documents");
-// if john dies, secret documents will be destroyed automatically
+// если объект john удаляется сборщиком мусора, то "secret documents" тоже автоматически очистится
 ```
 
-Let's look at an example.
+Давайте рассмотрим один пример.
 
-For instance, we have code that keeps a visit count for each user. The information is stored in a map: a user object is the key and the visit count is the value. When a user leaves (its object gets garbage collected), we don't want to store their visit count anymore.
+Предположим, у нас есть код, в котором для каждого пользователя ведётся счётчик посещений. Эти данные хранятся во множестве: объект, представляющий пользователя, является ключом, а количество визитов -- значением. Когда пользователь покидает страницу, то его объект удаляется сборщиком мусора, и больше нет смысла хранить соответствующий счётчик посещений.
 
-Here's an example of a counting function with `Map`:
+Вот пример реализации счётчика посещений с использованием `Map`:
 
 ```js
 // 📁 visitsCount.js
-let visitsCountMap = new Map(); // map: user => visits count
+let visitsCountMap = new Map(); // map: пользователь => число визитов
 
-// increase the visits count
+// увеличиваем счётчик
 function countUser(user) {
   let count = visitsCountMap.get(user) || 0;
   visitsCountMap.set(count + 1);
 }
 ```
 
-Let's imagine another part of the code using it:
+Давайте представим, как мы используем эту функцию в коде:
 
 ```js
 // 📁 main.js
 let john = { name: "John" };
 
-countUser(john); // count his visits
+countUser(john); //ведёт подсчет посещений
 countUser(john);
 
-// later john leaves us
+// пользователь покинул нас
 john = null;
 ```
 
-Now, we have a problem: `john` object should be garbage collected, but remains is memory, as it's a key in `visitsCountMap`.
+И сейчас появилась проблема: объект `john` должен быть удалён сборщиком мусора, но он продолжает оставаться в памяти, как и его счётчик посещений в `visitsCountMap`.
 
-We need to clean up `visitsCountMap` when we remove users, otherwise it will grow in memory indefinitely. Such cleaning can become a tedious task in complex architectures.
+Нам нужно очищать `visitsCountMap` при удалении объекта пользователя, иначе объём занимаемой памяти будет бесконечно увеличиваться. Такая зачистка может стать весьма утомительной задачей в сложных приложениях.
 
-We can avoid it by switching to `WeakMap` instead:
+Проблемы можно избежать, если использовать `WeakMap`:
 
 ```js
 // 📁 visitsCount.js
-let visitsCountMap = new WeakMap(); // map: user => visits count
+let visitsCountMap = new WeakMap(); // map: пользователь => число визитов
 
-// increase the visits count
+// увеличиваем счётчик
 function countUser(user) {
   let count = visitsCountMap.get(user) || 0;
   visitsCountMap.set(count + 1);
 }
 ```
 
-Now we don't have to clean `visitsCountMap`. After `john` is removed from memory, the additionally stored information from `WeakMap` will be removed as well.
+Сейчас мы не должны самостоятельно очищать `visitsCountMap`. После удаления объекта `john` из памяти вся ассоциированная с ним дополнительная информация будет также удалена из `WeakMap`.
 
-## Use case: caching
+## Применение в кешировании
 
 Another common example is caching: when a function result should be remembered ("cached"), so that future calls on the same object reuse it.
 
@@ -282,7 +282,7 @@ john = null;
 
 The most notable limitation of `WeakMap` and `WeakSet` is the absence of iterations, and inability to get all current content. That may appear inconvenient, but does not prevent `WeakMap/WeakSet` from doing their main job -- be an "additional" storage of data for objects which are stored/managed at another place.
 
-## Summary
+## Итого
 
 `WeakMap` is `Map`-like collection that allows only objects as keys and removes them once they become inaccessible by other means.
 
