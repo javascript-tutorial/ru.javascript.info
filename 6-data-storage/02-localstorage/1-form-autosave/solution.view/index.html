@@ -1,7 +1,7 @@
 <!doctype html>
-<textarea style="width:200px; height: 60px;" id="area" placeholder="Write here"></textarea>
+<textarea style="width:200px; height: 60px;" id="area" placeholder="Напишите сообщение здесь"></textarea>
 <br>
-<button onclick="localStorage.removeItem('area');area.value=''">Clear</button>
+<button onclick="localStorage.removeItem('area');area.value=''">Очистить</button>
 <script>
     area.value = localStorage.getItem('area');
     area.oninput = () => {

@@ -2,10 +2,10 @@ importance: 5
 
 ---
 
-# Show a note near the element (absolute)
+# Покажите заметку около элемента (абсолютное позиционирование)
 
-Modify the solution of the [previous task](info:task/position-at) so that the note uses `position:absolute` instead of `position:fixed`.
+Измените код решения [предыдущего задания](info:task/position-at) так, чтобы элемент заметки использовал свойство `position:absolute` вместо `position:fixed`.
 
-That will prevent its "runaway" from the element when the page scrolls.
+Это предотвратит расхождение элементов при прокрутке страницы.
 
-Take the solution of that task as a starting point. To test the scroll, add the style `<body style="height: 2000px">`.
+Используйте решение предыдущего задания для начала. Чтобы проверить решение в условиях с прокруткой, добавьте стиль элементу `<body style="height: 2000px">`.

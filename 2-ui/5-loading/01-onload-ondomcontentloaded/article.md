@@ -157,7 +157,6 @@ window.addEventListener("unload", function() {
 
 Для таких запросов с закрывающейся страницей есть специальный флаг `keepalive` в методе [fetch](info:fetch-basics) для общих сетевых запросов. Вы можете найти больше информации в главе <info:fetch-api>.
 
-
 Если мы хотим отменить переход на другую страницу, то здесь мы этого сделать не сможем. Но сможем в другом месте -- в событии `onbeforeunload`.
 
 ## window.onbeforeunload [#window.onbeforeunload]
