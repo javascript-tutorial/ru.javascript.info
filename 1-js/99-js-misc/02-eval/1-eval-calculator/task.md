@@ -2,10 +2,10 @@ importance: 4
 
 ---
 
-# Eval-calculator
+# Eval-калькулятор
 
-Create a calculator that prompts for an arithmetic expression and returns its result.
+Создайте калькулятор, который запрашивает ввод какого-нибудь арифметического выражения и возвращает результат его вычисления.
 
-There's no need to check the expression for correctness in this task.
+В этой задаче нет необходимости проверять полученное выражение на корректность.
 
 [demo]

@@ -1,74 +1,119 @@
-# Coordinates
+# Координаты
 
-To move elements around we should be familiar with coordinates.
+Чтобы передвигать элементы по экрану, нам следует познакомиться с системами координат.
 
-Most JavaScript methods deal with one of two coordinate systems:
+Большинство соответствующих методов JavaScript работают в одной из двух указанных ниже систем координат:
 
-1. Relative to the window(or another viewport) top/left.
-2. Relative to the document top/left.
+1. **Относительно окна браузера** - похоже на `position:fixed`, отсчёт идёт от верхнего левого угла окна браузера.
+    - мы будем обозначать эти координаты как `clientX/clientY`, причина выбора таких имён будет ясна позже, когда мы изучим свойства событий.
+2. **Относительно документа** - похоже на `position:absolute` на уровне документа, отсчёт идёт от верхнего левого угла документа.
+    - мы будем обозначать эти координаты как `pageX/pageY`.
 
-It's important to understand the difference and which type is where.
+Когда страница полностью прокручена наверх, то верхний левый угол окна совпадает с левым верхним углом документа, из чего следует, что обе системы координат тоже совпадают. Но если происходит прокрутка вниз, то координаты элементов в контексте окна меняются, так как они двигаются, но в то же время их координаты относительно документа остаются такими же.
 
-## Window coordinates: getBoundingClientRect
+На приведённой картинке слева показана ситуация до прокрутки страницы, а справа - после:
 
-Window coordinates start at the upper-left corner of the window.
+![](document-and-window-coordinates-scrolled.png)
 
-The method `elem.getBoundingClientRect()` returns window coordinates for `elem` as an object with properties:
+Поскольку документ сдвинулся вверх, то:
+- `pageY` - координата произвольной точки относительно документа осталась без изменений, так как отсчёт по-прежнему ведётся от верхней границы документа (сейчас она прокручена наверх).
+- `clientY` - координата точки относительно окна изменилась (стрелка на рисунке стала короче), так как точка стала ближе к верхней границе окна.
 
-- `top` -- Y-coordinate for the top element edge,
-- `left` -- X-coordinate for the left element edge,
-- `right` -- X-coordinate for the right element edge,
-- `bottom` -- Y-coordinate for the bottom element edge.
+В этой главе мы увидим и другие примеры координат элементов относительно окна и документа.
 
-Like this:
+## Координаты относительно окна: getBoundingClientRect
 
-![](coords.png)
+Метод `elem.getBoundingClientRect()` возвращает координаты в контексте окна для минимального по размеру прямоугольника, который заключает в себе элемент `elem`, в виде объекта встроенного класса [DOMRect](https://www.w3.org/TR/geometry-1/#domrect).
 
+Основные свойства объекта типа `DOMRect`:
 
-Window coordinates do not take the scrolled out part of the document into account, they are calculated from the window's upper-left corner.
+- `x/y` -- X/Y-координаты начала прямоугольника относительно окна,
+- `width/height` -- ширина/высота прямоугольника (могут быть отрицательными).
 
-In other words, when we scroll the page, the element goes up or down, *its window coordinates change*. That's very important.
+Дополнительные, "зависимые", свойства:
+
+- `top/bottom` -- Y-координата верхней/нижней границы прямоугольника,
+- `left/right` -- X-координата левой/правой границы прямоугольника.
 
 ```online
-Click the button to see its window coordinates:
+Кликните на кнопку, чтобы увидеть её координаты относительно окна:
 
-<input id="brTest" type="button" value="Show button.getBoundingClientRect() for this button" onclick='showRect(this)'/>
+<input id="brTest" type="button" value="Показать результат вызова button.getBoundingClientRect() для этой кнопки" onclick='showRect(this)'/>
 
 <script>
 function showRect(elem) {
   let r = elem.getBoundingClientRect();
-  alert("{top:"+r.top+", left:"+r.left+", right:"+r.right+", bottom:"+ r.bottom + "}");
+  alert(`x:${r.x}
+y:${r.y}
+width:${r.width}
+height:${r.height}
+top:${r.top}
+bottom:${r.bottom}
+left:${r.left}
+right:${r.right}
+`);
 }
 </script>
 
-If you scroll the page, the button position changes, and window coordinates as well.
+Если вы прокрутите страницу, то расположение кнопки в окне поменяется, и, соответсвенно, её координаты в контексте окна тоже (при вертикальной прокрутке - `y/top/bottom`).
 ```
 
-Also:
+Вот картинка с результатами вызова `elem.getBoundingClientRect()`:
 
-- Coordinates may be decimal fractions. That's normal, internally browser uses them for calculations. We don't have to round them when setting to `style.position.left/top`, the browser is fine with fractions.
-- Coordinates may be negative. For instance, if the page is scrolled down and the top `elem` is now above the window. Then, `elem.getBoundingClientRect().top` is negative.
-- Some browsers (like Chrome) provide additional properties, `width` and `height` of the element that invoked the method to `getBoundingClientRect` as the result. We can also get them by subtraction: `height=bottom-top`, `width=right-left`.
+![](coordinates.png)
 
-```warn header="Coordinates right/bottom are different from CSS properties"
-If we compare window coordinates versus CSS positioning, then there are obvious similarities to `position:fixed`. The positioning of an element is also relative to the viewport.
+Как вы видите, `x/y` и `width/height` полностью описывают прямоугольник. Остальные свойства могут быть легко вычислены на их основе:
+- `left = x`
+- `top = y`
+- `right = x + width`
+- `bottom = y + height`
 
-But in CSS, the `right` property means the distance from the right edge, and the `bottom` property means the distance from the bottom edge.
+Также:
 
-If we just look at the picture above, we can see that in JavaScript it is not so. All window coordinates are counted from the upper-left corner, including these ones.
+- Координаты могут считаться с десятичной частью, например `10.5`. Это нормально, ведь браузер использует дроби в своих внутренних вычислениях. Мы не обязаны округлять значения при установке `style.position.left/top`.
+- Координаты могут быть отрицательными. Например, если страница прокручена так, что элемент `elem` ушёл вверх за пределы окна, то вызов `elem.getBoundingClientRect().top` вернёт отрицательное значение.
+
+```smart header="Зачем вообще нужны зависимые свойства? Для чего существуют `top/left`, если есть `x/y`?"
+С математической точки зрения, прямоугольник однозначно задаётся начальной точкной `(x,y)` и вектором направления `(width,height)`.
+
+Так что дополнительные зависимые свойства существуют лишь для удобства.
+
+Технически, значения `width/height` могут быть отрицательными, это удобно, чтобы задавать "направленные" прямоугольники, например, для выделения мышью с отмеченным началом и концом.
+
+Вот прямоугольник с отрицательными `width` и `height` (например, `width=-200`, `height=-100`):
+
+![](coordinates-negative.png)
+
+Он начинается в своём правом-нижнем углу, и затем "разворачивается" влево-вверх, так как отрицательные width/height ведут его назад по координатам.
+
+Как вы видите, свойства `left/top` здесь не равны `x/y`. То есть они не дублируют друг друга. Формулы выше могут быть исправлены с учётом возможных отрицательных значений `width/height`. Это достаточно просто сделать, но редко требуется, так как результат вызова `elem.getBoundingClientRect()` всегда возвращает положительные значения для ширины/высоты.
+```
+
+```warn header="Internet Explorer и Edge: не поддерживают `x/y`"
+Internet Explorer и Edge не поддерживают свойства `x/y` по историческим причинам.
+
+Таким образом, мы можем либо сделать полифил (добавив соответствующие геттеры в `DomRect.prototype`), либо использовать `top/left`, так как это всегда то же, что и `x/y`, в результате `elem.getBoundingClientRect()`.
+```
+
+```warn header="Координаты right/bottom отличаются от одноимённых CSS-свойств"
+Есть очевидное сходство между координатами относительно окна и CSS `position:fixed`. Ведь такое CSS-позиционирование тоже происходит относительно окна браузера (или его видимой части).
+
+Но в CSS свойство `right` означает расстояние от правого края, и свойство `bottom` означает расстояние от нижнего края окна браузера.
+
+Если взглянуть на картинку выше, то видно, что в JavaScript это не так. Все координаты в контексте окна считаются от верхнего левого угла, включая `right/bottom`.
 ```
 
 ## elementFromPoint(x, y) [#elementFromPoint]
 
-The call to `document.elementFromPoint(x, y)` returns the most nested element at window coordinates `(x, y)`.
+Вызов `document.elementFromPoint(x, y)` возвращает самый глубоко вложенный элемент в окне, находящийся по координатам `(x, y)`.
 
-The syntax is:
+Синтаксис:
 
 ```js
 let elem = document.elementFromPoint(x, y);
 ```
 
-For instance, the code below highlights and outputs the tag of the element that is now in the middle of the window:
+Например, код ниже выделяет с помощью стилей и выводит имя тега элемента, который сейчас в центре окна браузера:
 
 ```js run
 let centerX = document.documentElement.clientWidth / 2;
@@ -80,45 +125,43 @@ elem.style.background = "red";
 alert(elem.tagName);
 ```
 
-As it uses window coordinates, the element may be different depending on the current scroll position.
+Поскольку используются координаты в контексте окна, то элемент может быть разным, в зависимости от того, какая сейчас прокрутка.
 
-````warn header="For out-of-window coordinates the `elementFromPoint` returns `null`"
-The method `document.elementFromPoint(x,y)` only works if `(x,y)` are inside the visible area.
+````warn header="Для координат за пределами окна метод `elementFromPoint` возвращает `null`"
+Метод `document.elementFromPoint(x,y)` работает, только если координаты `(x,y)` относятся к видимой части содержимого окна.
 
-If any of the coordinates is negative or exceeds the window width/height, then it returns `null`.
+Если любая из координат представляет собой отрицательное число или превышает размеры окна, то возвращается `null`.
 
-In most cases such behavior is not a problem, but we should keep that in mind.
-
-Here's a typical error that may occur if we don't check for it:
+Вот типичная ошибка, которая может произойти, если в коде нет соответствующей проверки:
 
 ```js
 let elem = document.elementFromPoint(x, y);
-// if the coordinates happen to be out of the window, then elem = null
+// если координаты ведут за пределы окна, то elem = null
 *!*
-elem.style.background = ''; // Error!
+elem.style.background = ''; // Ошибка!
 */!*
 ```
 ````
 
-## Using for position:fixed
+## Применение для fixed позиционирования
 
-Most of time we need coordinates to position something. In CSS, to position an element relative to the viewport we use `position:fixed` together with `left/top` (or `right/bottom`).
+Чаще всего нам нужны координаты для позиционирования чего-либо. В CSS для позиционирования элемента относительно окна браузера используется свойство `position:fixed` вместе со свойствами `left/top` (или `right/bottom`).
 
-We can use `getBoundingClientRect` to get coordinates of an element, and then to show something near it.
+Мы можем вызвать `getBoundingClientRect`, чтобы получить координаты элемента, а затем показать что-то около него.
 
-For instance, the function `createMessageUnder(elem, html)` below shows the message under `elem`:
+Например, функция `createMessageUnder(elem, html)` ниже показывает сообщение под элементом `elem`:
 
 ```js
 let elem = document.getElementById("coords-show-mark");
 
 function createMessageUnder(elem, html) {
-  // create message element
+  // создаём элемент, который будет содержать сообщение
   let message = document.createElement('div');
-  // better to use a css class for the style here
+  // для стилей лучше было бы использовать css-класс здесь
   message.style.cssText = "position:fixed; color: red";
 
 *!*
-  // assign coordinates, don't forget "px"!
+  // устанавливаем координаты элементу, не забываем про "px"!
   let coords = elem.getBoundingClientRect();
 
   message.style.left = coords.left + "px";
@@ -130,63 +173,45 @@ function createMessageUnder(elem, html) {
   return message;
 }
 
-// Usage:
-// add it for 5 seconds in the document
+// Использование:
+// добавим сообщение на страницу на 5 секунд
 let message = createMessageUnder(elem, 'Hello, world!');
 document.body.append(message);
 setTimeout(() => message.remove(), 5000);
 ```
 
 ```online
-Click the button to run it:
+Кликните кнопку, чтобы увидеть пример в действии:
 
-<button id="coords-show-mark">Button with id="coords-show-mark", the message will appear under it</button>
+<button id="coords-show-mark">Кнопка с id="coords-show-mark", сообщение появится под ней</button>
 ```
 
-The code can be modified to show the message at the left, right, below, apply CSS animations to "fade it in" and so on. That's easy, as we have all the coordinates and sizes of the element.
+Код можно изменить, чтобы показывать сообщение слева, справа, снизу, применять к нему CSS-анимации и так далее. Это просто, так как в нашем распоряжении имеются все координаты и размеры элемента.
 
-But note the important detail: when the page is scrolled, the message flows away from the button.
+Но обратите внимание на одну важную деталь: при прокрутке страницы сообщение уплывает от кнопки.
 
-The reason is obvious: the message element relies on `position:fixed`, so it remains at the same place of the window while the page scrolls away.
+Причина весьма очевидна: сообщение позиционируется с помощью `position:fixed`, поэтому оно остаётся всегда на том же самом месте в окне при прокрутке страницы.
 
-To change that, we need to use document-based coordinates and `position:absolute`.
+Чтобы изменить это, нам нужно использовать другую систему координат, где сообщение позиционировалось бы относительно документа, и свойство `position:absolute`.
 
-## Document coordinates
+## Координаты относительно документа [#getCoords]
 
-Document-relative coordinates start from the upper-left corner of the document, not the window.
+В такой системе координат отсчёт ведётся от левого верхнего угла документа, не окна.
 
-In CSS, window coordinates correspond to `position:fixed`, while document coordinates are similar to `position:absolute` on top.
+В CSS координаты относительно окна браузера соответствуют свойству `position:fixed`, а координаты относительно документа -- свойству `position:absolute` на самом верхнем уровне вложенности.
 
-We can use `position:absolute` and `top/left` to put something at a certain place of the document, so that it remains there during a page scroll. But we need the right coordinates first.
+Мы можем воспользоваться свойствами `position:absolute` и `top/left`, чтобы привязать что-нибудь к конкретному месту в документе. При этом прокрутка страницы не имеет значения. Но сначала нужно получить верные координаты.
 
-For clarity we'll call window coordinates `(clientX,clientY)` and document coordinates `(pageX,pageY)`.
+Не существует стандартного метода, который возвращал бы координаты элемента относительно документа, но мы можем написать его сами.
 
-When the page is not scrolled, then window coordinate and document coordinates are actually the same. Their zero points match too:
+Две системы координат связаны следующими формулами:
+- `pageY` = `clientY` + высота вертикально прокрученной части документа.
+- `pageX` = `clientX` + ширина горизонтально прокрученной части документа.
 
-![](document-window-coordinates-zero.png)
-
-And if we scroll it, then `(clientX,clientY)` change, because they are relative to the window, but `(pageX,pageY)` remain the same.
-
-Here's the same page after the vertical scroll:
-
-![](document-window-coordinates-scroll.png)
-
-- `clientY` of the header `"From today's featured article"` became `0`, because the element is now on window top.
-- `clientX` didn't change, as we didn't scroll horizontally.
-- `pageX` and `pageY` coordinates of the element are still the same, because they are relative to the document.
-
-## Getting document coordinates [#getCoords]
-
-There's no standard method to get the document coordinates of an element. But it's easy to write it.
-
-The two coordinate systems are connected by the formula:
-- `pageY` = `clientY` + height of the scrolled-out vertical part of the document.
-- `pageX` = `clientX` + width of the scrolled-out horizontal part of the document.
-
-The function `getCoords(elem)` will take window coordinates from `elem.getBoundingClientRect()` and add the current scroll to them:
+Функция `getCoords(elem)` берёт координаты в контексте окна с помощью `elem.getBoundingClientRect()` и добавляет к ним значение соответствующей прокрутки:
 
 ```js
-// get document coordinates of the element
+// получаем координаты элемента в контексте документа
 function getCoords(elem) {
   let box = elem.getBoundingClientRect();
 
@@ -197,13 +222,13 @@ function getCoords(elem) {
 }
 ```
 
-## Summary
+## Итого
 
-Any point on the page has coordinates:
+Любая точка на странице имеет координаты:
 
-1. Relative to the window -- `elem.getBoundingClientRect()`.
-2. Relative to the document -- `elem.getBoundingClientRect()` plus the current page scroll.
+1. Относительно окна браузера -- `elem.getBoundingClientRect()`.
+2. Относительно документа -- `elem.getBoundingClientRect()` плюс текущая прокрутка страницы.
 
-Window coordinates are great to use with `position:fixed`, and document coordinates do well with `position:absolute`.
+Координаты в контексте окна подходят для использования с `position:fixed`, а координаты относительно документа -- для использования с `position:absolute`.
 
-Both coordinate systems have their "pro" and "contra", there are times we need one or the other one, just like CSS `position` `absolute` and `fixed`.
+Каждая из систем координат имеет свои преимущества и недостатки. Иногда будет лучше применить одну, а иногда -- другую, как это и происходит с позиционированием в CSS, где мы выбираем между `absolute` и `fixed`.

@@ -1,34 +1,34 @@
-# Resumable file upload
+# Возобновляемая загрузка файлов
 
-With `fetch` method it's fairly easy to upload a file.
+С помощью метода `fetch` можно достаточно просто загрузить файл на сервер.
 
-How to resume the upload after lost connection? There's no built-in option for that, but we have the pieces to implement it.
+Но как возобновить загрузку, если соединение прервалось? Для этого не предусмотрено какого-то встроенного способа, но у нас есть все средства, чтобы решить эту задачу самостоятельно.
 
-Resumable uploads should come with upload progress indication, as we expect big files (if we may need to resume). So, as `fetch` doesn't allow to track upload progress, we'll use [XMLHttpRequest](info:xmlhttprequest).
+Возобновляемая загрузка должна сопровождаться индикацией прогресса, так как мы ожидаем, что могут загружаться большие по весу файлы. Поскольку `fetch` не позволяет отслеживать прогресс загрузки, то мы будем использовать [XMLHttpRequest](info:xmlhttprequest).
 
-## Not-so-useful progress event
+## Не очень полезное событие progress
 
-To resume upload, we need to know how much was uploaded till the connection was lost.
+Чтобы возобновить загрузку, нам нужно знать, какая часть файла была успешно передана до того, как соединение прервалось.
 
-There's `xhr.upload.onprogress` to track upload progress.
+Можно установить обработчик `xhr.upload.onprogress`, чтобы отслеживать процесс загрузки.
 
-Unfortunately, it's useless here, as it triggers when the data is *sent*, but was it received by the server? The browser doesn't know.
+К сожалению, это бесполезно, так как этот обработчик вызывается, только когда данные *отправляются*, но были ли они получены сервером? Браузер этого не знает.
 
-Maybe it was buffered by a local network proxy, or maybe the remote server process just died and couldn't process them, or it was just lost in the middle when the connection broke, and didn't reach the receiver.
+Возможно, отправленные данные оказались в буфере прокси-сервера локальной сети или удалённый сервер просто отключился и не смог принять их, или данные потерялись где-то по пути при разрыве соединения и так и не достигли пункта назначения.
 
-So, this event is only useful to show a nice progress bar.
+Таким образом, событие `progress` подходит только для того, чтобы показывать красивый индикатор загрузки, не более.
 
-To resume upload, we need to know exactly the number of bytes received by the server. And only the server can tell that.
+Для возобновления же загрузки нужно точно знать, сколько байт было получено сервером. И только сам сервер может поделиться с нами этой информацией.
 
-## Algorithm
+## Алгоритм
 
-1. First, we create a file id, to uniquely identify the file we're uploading, e.g.
+1. Во-первых, давайте присвоим загружаемому файлу уникальный идентификатор
     ```js
     let fileId = file.name + '-' + file.size + '-' + +file.lastModifiedDate;
     ```
-    That's needed for resume upload, to tell the server what we're resuming.
+    Это нужно, чтобы при возобновлении загрузки серверу было понятно, какой файл мы продолжаем загружать.
 
-2. Send a request to the server, asking how many bytes it already has, like this:
+2. Далее, посылаем запрос к серверу с просьбой указать количество уже полученных байтов:
     ```js
     let response = await fetch('status', {
       headers: {
@@ -36,40 +36,40 @@ To resume upload, we need to know exactly the number of bytes received by the se
       }
     });
 
-    // The server has that many bytes
+    // сервер получил столько-то байтов
     let startByte = +await response.text();
     ```
 
-    This assumes that the server tracks file uploads by `X-File-Id` header. Should be implemented at server-side.
+    Предполагается, что сервер учитывает загружаемые файлы с помощью заранее настроенного заголовка `X-File-Id`.
 
-3. Then, we can use `Blob` method `slice` to send the file from `startByte`:
+3. Затем мы можем использовать метод `slice` объекта `Blob`, чтобы отправить данные, начиная со `startByte` байта:
     ```js
     xhr.open("POST", "upload", true);
 
-    // send file id, so that the server knows which file to resume
+    // отправка идентификатора файла, чтобы сервер знал, загрузку чего мы потом возобновим
     xhr.setRequestHeader('X-File-Id', fileId);
-    // send the byte we're resuming from, so the server knows we're resuming
+    // отправка номера байта, начиная с которого мы будем отправлять данные. Таким образом, сервер поймёт, что мы возобновляем загрузку
     xhr.setRequestHeader('X-Start-Byte', startByte);
 
     xhr.upload.onprogress = (e) => {
       console.log(`Uploaded ${startByte + e.loaded} of ${startByte + e.total}`);
     };
 
-    // file can be from input.files[0] or another source
+    // файл может быть взят из input.files[0] или другого источника
     xhr.send(file.slice(startByte));
     ```
 
-    Here we send the server both file id as `X-File-Id`, so it knows which file we're uploading, and the starting byte as `X-Start-Byte`, so it knows we're not uploading it initially, but resuming.
+    Здесь мы посылаем серверу и идентификатор файла в заголовке `X-File-Id`, чтобы он знал, что мы загружаем, и номер стартового байта в заголовке `X-Start-Byte`, чтобы он понял, что мы продолжаем закачку, а не начинаем её с нуля.
 
-    The server should check its records, and if there was an upload of that file, and the current uploaded size is exactly `X-Start-Byte`, then append the data to it.
+    Сервер должен проверить информацию на своей стороне, и если обнаружится, что такой файл уже когда-то загружался, и его текущий размер равен значению из заголовка `X-Start-Byte`, то вновь принимаемые данные добавлять в этот файл.
 
 
-Here's the demo with both client and server code, written on Node.js.
+Ниже представлен демо-код как для сервера (Node.js), так и для клиента.
 
-It works only partially on this site, as Node.js is behind another server named Nginx, that buffers uploads, passing them to Node.js when fully complete.
+Пример работает только частично на этом сайте, так как Node.js здесь располагается за другим веб-сервером Nginx, который сохраняет в своём буфере все загружаемые файлы и передаёт их дальше в Node.js только после завершения загрузки.
 
-But you can download it and run locally for the full demonstration:
+Но вы можете скачать код и запустить его локально, чтобы увидеть полный пример в действии:
 
 [codetabs src="upload-resume" height=200]
 
-As you can see, modern networking methods are close to file managers in their capabilities -- control over headers, progress indicator, sending file parts, etc.
+Как вы видите, современные методы работы с сетью очень близки по своим возможностям к файловым менеджерам -- контроль заголовков, индикация прогресса загрузки, отправка данных по частям и так далее.

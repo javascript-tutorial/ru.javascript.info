@@ -1,33 +1,33 @@
 
-# Accessing array[-1]
+# Получение элемента массива с отрицательной позиции
 
-In some languages, we can access array elements using negative indexes, counted from the end.
+В некоторых языках программирования возможно получать элементы массива, используя отрицательные индексы, отсчитываемые с конца.
 
-Like this:
+Вот так:
 
 ```js
 let array = [1, 2, 3];
 
-array[-1]; // 3, the last element
-array[-2]; // 2, one step from the end
-array[-3]; // 1, two steps from the end
+array[-1]; // 3, последний элемент
+array[-2]; // 2, предпоследний элемент
+array[-3]; // 1, за два элемента до последнего
 ```
 
-In other words, `array[-N]` is the same as `array[array.length - N]`.
+Другими словами, `array[-N]` -- это то же, что и `array[array.length - N]`.
 
-Create a proxy to implement that behavior.
+Создайте прокси, который реализовывал бы такое поведение.
 
-That's how it should work:
+Вот как это должно работать:
 
 ```js
 let array = [1, 2, 3];
 
 array = new Proxy(array, {
-  /* your code */
+  /* ваш код */
 });
 
 alert( array[-1] ); // 3
 alert( array[-2] ); // 2
 
-// Other array functionality should be kept "as is"
+// весь остальной функционал массивов доджен остаться без изменений
 ```

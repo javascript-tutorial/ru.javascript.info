@@ -34,28 +34,28 @@ function publish(message) {
 function accept(req, res) {
   let urlParsed = url.parse(req.url, true);
 
-  // new client wants messages
+  // новый клиент хочет получать сообщения
   if (urlParsed.pathname == '/subscribe') {
     onSubscribe(req, res);
     return;
   }
 
-  // sending a message
+  // отправка сообщения
   if (urlParsed.pathname == '/publish' && req.method == 'POST') {
-    // accept POST
+    // принять POST
     req.setEncoding('utf8');
     let message = '';
     req.on('data', function(chunk) {
       message += chunk;
     }).on('end', function() {
-      publish(message); // publish it to everyone
+      publish(message); // опубликовать для всех
       res.end("ok");
     });
 
     return;
   }
 
-  // the rest is static
+  // остальное - статика
   fileServer.serve(req, res);
 
 }
@@ -75,7 +75,7 @@ if (!module.parent) {
 } else {
   exports.accept = accept;
 
-  if (process.send) { // if run by pm2 have this defined
+  if (process.send) {
      process.on('message', (msg) => {
        if (msg === 'shutdown') {
          close();

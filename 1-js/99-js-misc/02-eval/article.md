@@ -1,29 +1,29 @@
-# Eval: run a code string
+# Eval: выполнение строки кода
 
-The built-in `eval` function allows to execute a string of `code`.;
+Встроенная функция `eval` позволяет выполнять строку `code`.
 
-The syntax is:
+Синтаксис:
 
 ```js
 let result = eval(code);
 ```
 
-For example:
+Например:
 
 ```js run
-let code = 'alert("Hello")';
-eval(code); // Hello
+let code = 'alert("Привет")';
+eval(code); // Привет
 ```
 
-A call to `eval` returns the result of the last statement.
+Вызов `eval` возвращает результат выполнения последней инструкции.
 
-For example:
+Например:
 ```js run
 let value = eval('1+1');
 alert(value); // 2
 ```
 
-The code is executed in the current lexical environment, so it can see outer variables:
+Код выполняется в текущем лексическом окружении, поэтому ему доступны внешние переменные:
 
 ```js run no-beautify
 let a = 1;
@@ -39,56 +39,56 @@ function f() {
 f();
 ```
 
-It can change outer variables as well:
+Значения внешних переменных можно изменять:
 
 ```js untrusted refresh run
 let x = 5;
 eval("x = 10");
-alert(x); // 10, value modified
+alert(x); // 10, значение изменено
 ```
 
-In strict mode, `eval` has its own lexical environment. So functions and variables, declared inside eval, are not visible outside:
+В строгом режиме у `eval` имеется своё лексическое окружение. Таким образом, функции и переменные, объявленные внутри `eval`, нельзя увидеть снаружи:
 
 ```js untrusted refresh run
-// reminder: 'use strict' is enabled in runnable examples by default
+// напоминание: режим 'use strict' включён по умолчанию во всех исполняемых примерах
 
 eval("let x = 5; function f() {}");
 
-alert(typeof x); // undefined (no such variable)
-// function f is also not visible
+alert(typeof x); // undefined (нет такой переменной)
+// функция f тоже невидима
 ```
 
-Without `use strict`, `eval` doesn't have its own lexical environment, so we would see `x` and `f` outside.
+Без `use strict` у `eval` не будет отдельного лексического окружения, поэтому `x` и `f` будут видны из внешнего кода.
 
-## Using "eval"
+## Использование "eval"
 
-In modern programming `eval` is used very sparingly. It's often said that "eval is evil".
+В современной разработке на JavaScript `eval` используется весьма редко. Есть даже известное выражение -- "eval is evil" ("eval -- это зло").
 
-The reason is simple: long, long time ago JavaScript was a much weaker language, many things could only be done with `eval`. But that time passed a decade ago.
+Причина такого отношения достаточно проста: давным-давно JavaScript был не очень развитым языком, и многие вещи можно было сделать только с помощью `eval`. Но та эпоха закончилась лет 10 назад.
 
-Right now, there's almost no reason to use `eval`. If someone is using it, there's a good chance they can replace it with a modern language construct or a [JavaScript Module](info:modules).
+На данный момент нет никаких причин, чтобы продолжать использовать `eval`. Если кто-то всё ещё делает это, то очень вероятно, что они легко смогут заменить `eval` более современными конструкциями или [JavaScript-модулями](info:modules).
 
-Still, if you're sure you need to dynamically `eval` a string of code, please note that its ability to access outer variables has side-effects.
+Тем не менее, если вы уверены, что вам действительно нужно динамически выполнять строки кода с помощью `eval`, то, пожалуйста, имейте в виду, что код в `eval` способен получать доступ к внешним переменным, и это может иметь побочные эффекты.
 
-Code minifiers (tools used before JS gets to production, to compress it) replace local variables with shorter ones for brewity. That's usually safe, but not if `eval` is used, as it may reference them. So minifiers don't replace all local variables that might be visible from `eval`. That negatively affects code compression ratio.
+Минификаторы кода (инструменты, используемые для сжатия JS-кода перед тем, как отправить его конечным пользователям) заменяют локальные переменные на другие с более короткими именами. Обычно это безопасная манипуляция, но не тогда, когда в коде используется `eval`, так как код из `eval` может изменять значения локальных переменных. Поэтому минификаторы не трогают имена переменных, которые могут быть доступны из `eval`. Это ухудшает степень сжатия кода.
 
-Using outer local variables inside `eval` is a bad programming practice, as it makes maintaining the code more difficult.
+Использование внутри `eval` локальных переменных из внешнего кода считается плохим решением, так как это усложняет задачу по поддержке такого кода.
 
-There are two ways how to evade any eval-related problems.
+Существует два пути, как избежать проблем, связанных с `eval`.
 
-**If eval'ed code doesn't use outer variables, please call `eval` as `window.eval(...)`:**
+**Если код внутри `eval` не использует внешние переменные, то вызывайте его так -- `window.eval(...)`:**
 
-This way the code is executed in the global scope:
+В этом случае код выполняется в глобальной области видимости:
 
 ```js untrusted refresh run
 let x = 1;
 {
   let x = 5;
-  window.eval('alert(x)'); // 1 (global variable)
+  window.eval('alert(x)'); // 1 (глобальная переменная)
 }
 ```
 
-**If your code needs local variables, execute it with `new Function` and pass them as arguments:**
+**Если код внутри `eval` должен иметь доступ к локальным переменным, то лучше используйте `new Function` и передавайте в неё необходимые данные как аргументы:**
 
 ```js run
 let f = new Function('a', 'alert(a)');
@@ -96,12 +96,12 @@ let f = new Function('a', 'alert(a)');
 f(5); // 5
 ```
 
-The `new Function` construct is explained in the chapter <info:new-function>. It creates a function from a string, also in the global scope. So it can't see local variables. But it's so much clearer to pass them explicitly as arguments, like in the example above.
+Конструкция `new Function` объясняется в главе <info:new-function>. Она создаёт функцию из строки в глобальной области видимости. То есть локальные переменные остаются для неё невидимыми, но всегда можно передать их внутрь как аргументы. Получается очень аккуратный код, как в примере выше.
 
-## Summary
+## Итого
 
-A call to `eval(code)` runs the string of code and returns the result of the last statement.
-- Rarely used in modern JavaScript, as there's usually no need.
-- Can access outer local variables. That's considered bad practice.
-- Instead, to `eval` the code in the global scope, use `window.eval(code)`.
-- Or, if your code needs some data from the outer scope, use `new Function` and pass it as arguments.
+Вызов `eval(code)` выполняет строку кода и возвращает результат последней инструкции.
+- Это редко используется в современном JavaScript, так как в этом обычно нет необходимости.
+- Возможен доступ к внешним локальным переменным. Это считается плохим решением.
+- Чтобы выполнить строку кода с помощью `eval` в глобальной области видимости, используйте `window.eval(code)`.
+- Или же, если ваш код нуждается в каких-то данных из внешней области видимости, то используйте `new Function`, передав в неё эти данные в качестве аргументов.

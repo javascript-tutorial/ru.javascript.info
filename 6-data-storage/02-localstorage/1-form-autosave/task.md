@@ -1,10 +1,10 @@
 
-# Autosave a form field
+# Автосохранение поля формы
 
-Create a `textarea` field that "autosaves" its value on every change.
+Создайте поле `textarea`, значение которого будет автоматически сохраняться при каждом его изменении.
 
-So, if the user occasionally closes the page, and opens it again, he'll find his unfinished input at place.
+Когда пользователь закроет страницу и потом откроет ее заново он должен увидеть последнее введенное значение.
 
-Like this:
+Вот пример:
 
 [iframe src="solution" height=120]
