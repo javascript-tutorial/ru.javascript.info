@@ -274,7 +274,6 @@ alert(visitedSet.has(john)); // true
 // проверим, заходила ли Mary?
 alert(visitedSet.has(mary)); // false
 
-// Объект John больше не нужен
 john = null;
 
 // структура данных visitedSet будет очищена автоматически
