@@ -1,33 +1,33 @@
-# Shadow DOM slots, composition
+# Слоты теневого DOM, композиция
 
-Many types of components, such as tabs, menus, image galleries, and so on, need the content to render.
+Многие типы компонентов, такие как вкладки, меню, галереи изображений и другие, требуют отображения контента.
 
-Just like built-in browser `<select>` expects `<option>` items, our `<custom-tabs>` may expect the actual tab content to be passed. And a `<custom-menu>` may expect menu items.
+Также как встроенный в браузер `<select>` ожидает получить контент пунктов `<option>`, компонент `<custom-tabs>` может ожидать, что будет передано фактическое содержимое вкладок, а `<custom-menu>` --  пунктов меню.
 
-The code that makes use of `<custom-menu>` can look like this:
+Код, использующий меню `<custom-menu>`, может выглядеть так:
 
 ```html
 <custom-menu>
-  <title>Candy menu</title>
-  <item>Lollipop</item>
-  <item>Fruit Toast</item>
-  <item>Cup Cake</item>
+  <title>Сладости</title>
+  <item>Леденцы</item>
+  <item>Фруктовые тосты</item>
+  <item>Кексы</item>
 </custom-menu>
 ```
 
-...Then our component should render it properly, as a nice menu with given title and items, handle menu events, etc.
+...Затем компонент должен правильно его отобразить -- как обычное меню с заданным названием и пунктами, обработать события меню и т.д.
 
-How to implement it?
+Как это реализовать?
 
-We could try to analyze the element content and dynamically copy-rearrange DOM nodes. That's possible, but if we're moving elements to shadow DOM, then CSS styles from the document do not apply in there, so the visual styling may be lost. Also that requires some coding.
+Можно попробовать проанализировать элемент и динамически скопировать и переставить DOM-узлы. Это возможно, но если мы будем перемещать элементы в теневой DOM, CSS-стили документа не будут применяться, и мы потеряем визуальное оформление. Кроме того, нужно будет писать дополнительный код.
 
-Luckily, we don't have to. Shadow DOM supports `<slot>` elements, that are automatically filled by the content from light DOM.
+К счастью, нам этого делать не нужно. Теневая модель документа поддерживает элементы `<slot>`, которые автоматически наполняются контентом из основного DOM-дерева.
 
-## Named slots
+## Именованные слоты
 
-Let's see how slots work on a simple example.
+Давайте рассмотрим работу слотов на простом примере.
 
-Here, `<user-card>` shadow DOM provides two slots, filled from light DOM:
+Теневой DOM `<user-card>` имеет два слота, заполненных из основного DOM:
 
 ```html run autorun="no-epub" untrusted height=80
 <script>
@@ -35,12 +35,12 @@ customElements.define('user-card', class extends HTMLElement {
   connectedCallback() {
     this.attachShadow({mode: 'open'});
     this.shadowRoot.innerHTML = `
-      <div>Name:
+      <div>Имя:
 *!*
         <slot name="username"></slot>
 */!*
       </div>
-      <div>Birthday:
+      <div>Дата рождения:
 *!*
         <slot name="birthday"></slot>
 */!*
@@ -51,49 +51,49 @@ customElements.define('user-card', class extends HTMLElement {
 </script>
 
 <user-card>
-  <span *!*slot="username"*/!*>John Smith</span>
+  <span *!*slot="username"*/!*>Иван Иванов</span>
   <span *!*slot="birthday"*/!*>01.01.2001</span>
 </user-card>
 ```
 
-In the shadow DOM, `<slot name="X">` defines an "insertion point", a place where elements with `slot="X"` are rendered.
+В теневом DOM `<slot name="X">` определяет "точку вставки" -- место, где отображаются элементы с `slot="X"`.
 
-Then the browser performs "composition": it takes elements from the light DOM and renders them in corresponding slots of the shadow DOM. At the end, we have exactly what we want -- a generic component that can be filled with data.
+Затем браузер выполняет "композицию": берёт элементы из основного  DOM-дерева и отображает их в соответствующих слотах теневого DOM-дерева. В результате мы получаем именно то, что хотели -- обобщённый компонент, который можно наполнить данными.
 
-Here's the DOM structure after the script, not taking composition into account:
+После выполнения скрипта структура DOM выглядит следующим образом (без учёта композиции):
 
 ```html
 <user-card>
   #shadow-root
-    <div>Name:
+    <div>Имя:
       <slot name="username"></slot>
     </div>
-    <div>Birthday:
+    <div>Дата рождения:
       <slot name="birthday"></slot>
     </div>
-  <span slot="username">John Smith</span>
+  <span slot="username">Иван Иванов</span>
   <span slot="birthday">01.01.2001</span>
 </user-card>
 ```
 
-There's nothing odd here. We created the shadow DOM, so here it is. Now the element has both light and shadow DOM.
+В этом нет ничего странного. Мы создали теневую модель документа, и вот она здесь. Теперь у элемента есть два DOM-дерева: основное и теневое.
 
-For rendering purposes, for each `<slot name="...">` in shadow DOM, the browser looks for `slot="..."` with the same name in the light DOM. These elements are rendered inside the slots:
+Чтобы отобразить содержимое, для каждого `<slot name="...">` в теневом DOM браузер ищет `slot="..."` с таким же именем в основном DOM. Эти элементы отображаются внутри слотов:
 
 ![](shadow-dom-user-card.png)
 
-The result is called "flattened" DOM:
+В результате выстраивается так называемое "плоское" DOM-дерево:
 
 ```html
 <user-card>
   #shadow-root
-    <div>Name:
+    <div>Имя:
       <slot name="username">
-        <!-- slotted element is inserted into the slot as a whole -->
-        <span slot="username">John Smith</span>
+        <!-- элемент слота вставляется в слот как одно целое -->
+        <span slot="username">Иван Иванов</span>
       </slot>
     </div>
-    <div>Birthday:
+    <div>Дата рождения:
       <slot name="birthday">
         <span slot="birthday">01.01.2001</span>
       </slot>
@@ -101,24 +101,24 @@ The result is called "flattened" DOM:
 </user-card>
 ```
 
-...But the "flattened" DOM is only created for rendering and event-handling purposes. That's how things are shown. The nodes are actually not moved around!
+...Но "плоское" DOM-дерево создаётся только для отображения контента и обработки событий. Это то, что мы видим на экране. Фактически расположение узлов не меняется.
 
-That can be easily checked if we run `querySelector`: nodes are still at their places.
+Это можно легко проверить, запустив `querySelector`: все узлы находятся на своих местах.
 
 ```js
-// light DOM <span> nodes are still at the same place, under `<user-card>`
+// узлы <span> основного DOM находятся в том же месте, в `<user-card>`
 alert( document.querySelector('user-card span').length ); // 2
 ```
 
-It may look bizarre, but for shadow DOM with slots we have one more "DOM level", the "flattened" DOM -- result of slot insertion. The browser renders it and uses for style inheritance, event propagation. But JavaScript still sees the document "as is", before flattening.
+Это может показаться странным, но у теневого DOM-дерева со слотами  есть ещё один "уровень DOM" -- "плоский" DOM -- результат вставки слотов. Браузер его отображает и использует для наследования стилей и распространения событий. Но JavaScript всё равно видит документ "как есть" -- таким, какой он был до построения "плоского" DOM-дерева.
 
-````warn header="Only top-level children may have slot=\"...\" attribute"
-The `slot="..."` attribute is only valid for direct children of the shadow host (in our example, `<user-card>` element). For nested elements it's ignored.
+````warn header="Атрибут slot=\"...\" могут иметь только потомки верхнего уровня"
+Атрибут `slot="..."` применяется только для прямых потомков ведущего элемента теневого дерева (в нашем примере это элемент `<user-card>`). Для вложенных элементов он игнорируется.
 
-For example, the second `<span>` here is ignored (as it's not a top-level child of `<user-card>`):
+Например, здесь второй `<span>` игнорируется (так как он не является потомком верхнего уровня элемента `<user-card>`):
 ```html
 <user-card>
-  <span slot="username">John Smith</span>
+  <span slot="username">Иван Иванов</span>
   <div>
     <!-- bad slot, not top-level: -->
     <span slot="birthday">01.01.2001</span>
@@ -126,26 +126,26 @@ For example, the second `<span>` here is ignored (as it's not a top-level child 
 </user-card>
 ```
 
-In practice, there's no sense in slotting a deeply nested element, so this limitation just ensures the correct DOM structure.
+На практике нет смысла добавлять в слот глубоко вложенный элемент, поэтому это ограничение просто служит для правильного построения структуры DOM.
 ````
 
-## Slot fallback content
+## Резервный контент слота
 
-If we put something inside a `<slot>`, it becomes the fallback content. The browser shows it if there's no corresponding filler in light DOM.
+Если мы добавляем данные в `<slot>`, они становятся резервным контентом. Браузер отображает его, если в основном DOM-дереве отсутствуют данные.
 
-For example, in this piece of shadow DOM, `Anonymous` renders if there's no `slot="username"` in light DOM.
+Например, в этой части теневого дерева текст `Аноним` отображается, если в основном дереве нет значения `slot="username"`.
 
 ```html
-<div>Name:
-  <slot name="username">Anonymous</slot>
+<div>Имя:
+  <slot name="username">Аноним</slot>
 </div>
 ```
 
-## Default slot
+## Слот по умолчанию
 
-The first `<slot>` in shadow DOM that doesn't have a name is a "default" slot. It gets all nodes from the light DOM that aren't slotted elsewhere.
+Первый неименованный `<slot>` в теневом дереве является слотом по умолчанию. Он собирает данные со всех узлов основного дерева, не добавленные в другие слоты.
 
-For example, let's add the default slot to our `<user-card>` that collects any unslotted information about the user:
+Например, давайте добавим слот по умолчанию в наш элемент `<user-card>`; он будет собирать всю информацию о пользователе, не занесённую в другие слоты:
 
 ```html run autorun="no-epub" untrusted height=140
 <script>
@@ -153,14 +153,14 @@ customElements.define('user-card', class extends HTMLElement {
   connectedCallback() {
     this.attachShadow({mode: 'open'});
     this.shadowRoot.innerHTML = `
-    <div>Name:
+    <div>Имя:
       <slot name="username"></slot>
     </div>
-    <div>Birthday:
+    <div>Дата рождения:
       <slot name="birthday"></slot>
     </div>
     <fieldset>
-      <legend>Other information</legend>
+      <legend>Другая информация</legend>
 *!*
       <slot></slot>
 */!*
@@ -172,69 +172,69 @@ customElements.define('user-card', class extends HTMLElement {
 
 <user-card>
 *!*
-  <div>I like to swim.</div>
+  <div>Я люблю плавать.</div>
 */!*
-  <span slot="username">John Smith</span>
+  <span slot="username">Иван Иванов</span>
   <span slot="birthday">01.01.2001</span>
 *!*
-  <div>...And play volleyball too!</div>
+  <div>...И играть в волейбол!</div>
 */!*
 </user-card>
 ```
 
-All the unslotted light DOM content gets into the "Other information" fieldset.
+Весь контент основного дерева, не добавленный в слоты, попадает в группу полей "Другая информация".
 
-Elements are appended to a slot one after another, so both unslotted pieces of information are in the default slot together.
+Элементы добавляются в слот по очереди, один за другим, поэтому оба элемента данных, которые не были добавлены в слоты, попадают в слот по умолчанию.
 
-The flattened DOM looks like this:
+Плоское DOM-дерево выглядит так:
 
 ```html
 <user-card>
   #shadow-root
-    <div>Name:
+    <div>Имя:
       <slot name="username">
-        <span slot="username">John Smith</span>
+        <span slot="username">Иван Иванов</span>
       </slot>
     </div>
-    <div>Birthday:
+    <div>Дата рождения:
       <slot name="birthday">
         <span slot="birthday">01.01.2001</span>
       </slot>
     </div>
     <fieldset>
-      <legend>About me</legend>
+      <legend>Обо мне</legend>
 *!*
       <slot>
-        <div>Hello</div>
-        <div>I am John!</div>
+        <div>Привет!</div>
+        <div>Я Иван!</div>
       </slot>
 */!*
     </fieldset>
 </user-card>
 ```
 
-## Menu example
+## Пример меню
 
-Now let's back to `<custom-menu>`, mentioned at the beginning of the chapter.
+Давайте вернёмся к меню `<custom-menu>`, упомянутому в начале главы.
 
-We can use slots to distribute elements.
+Мы можем использовать слоты для распределения элементов.
 
-Here's the markup for `<custom-menu>`:
+Вот разметка для меню `<custom-menu>`:
 
 ```html
 <custom-menu>
-  <span slot="title">Candy menu</span>
-  <li slot="item">Lollipop</li>
-  <li slot="item">Fruit Toast</li>
-  <li slot="item">Cup Cake</li>
+  <span slot="title">Сладости</span>
+  <li slot="item">Леденцы</li>
+  <li slot="item">Фруктовые тосты</li>
+  <li slot="item">Кексы</li>
 </custom-menu>
 ```
 
-The shadow DOM template with proper slots:
+Шаблон теневого DOM-дерева с правильными слотами:
 
 ```html
 <template id="tmpl">
-  <style> /* menu styles */ </style>
+  <style> /* стили меню */ </style>
   <div class="menu">
     <slot name="title"></slot>
     <ul><slot name="item"></slot></ul>
@@ -242,72 +242,72 @@ The shadow DOM template with proper slots:
 </template>
 ```
 
-1. `<span slot="title">` goes into `<slot name="title">`.
-2. There are many `<li slot="item">` in the template, but only one `<slot name="item">` in the template. That's perfectly normal. All elements with `slot="item"` get appended to `<slot name="item">` one after another, thus forming the list.
+1. `<span slot="title">` попадает в `<slot name="title">`.
+2. В шаблоне много элементов `<li slot="item">`, но только один `<slot name="item">`. Это совершенно нормально. Все элементы из `slot="item"` добавляются в `<slot name="item">` один за другим, формируя список.
 
-The flattened DOM becomes:
+Плоское DOM-дерево становится таким:
 
 ```html
 <custom-menu>
   #shadow-root
-    <style> /* menu styles */ </style>
+    <style> /* стили меню */ </style>
     <div class="menu">
       <slot name="title">
-        <span slot="title">Candy menu</span>
+        <span slot="title">Сладости</span>
       </slot>
       <ul>
         <slot name="item">
-          <li slot="item">Lollipop</li>
-          <li slot="item">Fruit Toast</li>
-          <li slot="item">Cup Cake</li>
+          <li slot="item">Леденцы</li>
+          <li slot="item">Фруктовые тосты</li>
+          <li slot="item">Кексы</li>
         </slot>
       </ul>
     </div>
 </custom-menu>
 ```
 
-One might notice that, in a valid DOM, `<li>` must be a direct child of `<ul>`. But that's flattened DOM, it describes how the component is rendered, such thing happens naturally here.
+Кто-то может сказать, что в валидном DOM-дереве тег `<li>` должен быть прямым потомком тега `<ul>`. Но так как это плоский DOM, который описывает то, как компонент отображается, то такая ситуация вполне закономерна.
 
-We just need to add a `click` handler to open/close the list, and the `<custom-menu>` is ready:
+Осталось только добавить обработчик `click` для открытия и закрытия списка, и меню `<custom-menu>` готово:
 
 ```js
 customElements.define('custom-menu', class extends HTMLElement {
   connectedCallback() {
     this.attachShadow({mode: 'open'});
 
-    // tmpl is the shadow DOM template (above)
+    // tmpl -- шаблон теневого DOM-дерева (выше)
     this.shadowRoot.append( tmpl.content.cloneNode(true) );
 
-    // we can't select light DOM nodes, so let's handle clicks on the slot
+    // мы не можем выбрать узлы основного DOM, поэтому обработаем клики в слоте
     this.shadowRoot.querySelector('slot[name="title"]').onclick = () => {
-      // open/close the menu
+      // открыть/закрыть меню
       this.shadowRoot.querySelector('.menu').classList.toggle('closed');
     };
   }
 });
 ```
 
-Here's the full demo:
+Вот полное демо:
 
 [iframe src="menu" height=140 edit]
 
-Of course, we can add more functionality to it: events, methods and so on.
+Конечно, мы можем добавить к меню другие функции: события, методы и т.д.
 
-## Monitoring slots
+## Мониторинг слотов
 
-What if the outer code wants to add/remove menu items dynamically?
+Что если внешний код хочет динамически добавить или удалить пункты меню?
 
-**The browser monitors slots and updates the rendering if slotted elements are added/removed.**
+**Браузер выполняет мониторинг слотов и обновляет отображение при добавлении и удалении элементов в слотах.**
 
-Also, as light DOM nodes are not copied, but just rendered in slots, the changes inside them immediately become visible.
+Также, так как узлы основного DOM-дерева не копируются, а только отображаются в слотах, изменения внутри них сразу же становятся видны.
 
-So we don't have to do anything to update rendering. But if the component wants to know about slot changes, then `slotchange` event is available.
+Таким образом, нам ничего не нужно делать для обновления отображения. Но если компонент хочет узнать об изменениях в слотах, можно использовать событие `slotchange`.
 
-For example, here the menu item is inserted dynamically after 1 second, and the title changes after 2 seconds:
+Например, здесь пункт меню вставляется динамически через 1 секунду, и заголовок меняется через 2 секунды:
 
 ```html run untrusted height=80
 <custom-menu id="menu">
-  <span slot="title">Candy menu</span>
+  <span slot="title">Сладости</span>
 </custom-menu>
 
 <script>
@@ -319,7 +319,7 @@ customElements.define('custom-menu', class extends HTMLElement {
       <ul><slot name="item"></slot></ul>
     </div>`;
 
-    // shadowRoot can't have event handlers, so using the first child
+    // shadowRoot не может иметь обработчиков событий, поэтому используется первый потомок
     this.shadowRoot.firstElementChild.addEventListener('slotchange',
       e => alert("slotchange: " + e.target.name)
     );
@@ -327,49 +327,49 @@ customElements.define('custom-menu', class extends HTMLElement {
 });
 
 setTimeout(() => {
-  menu.insertAdjacentHTML('beforeEnd', '<li slot="item">Lollipop</li>')
+  menu.insertAdjacentHTML('beforeEnd', '<li slot="item">Леденцы</li>')
 }, 1000);
 
 setTimeout(() => {
-  menu.querySelector('[slot="title"]').innerHTML = "New menu";
+  menu.querySelector('[slot="title"]').innerHTML = "Новое меню";
 }, 2000);
 </script>
 ```
 
-The menu rendering updates each time without our intervention.
+Отображение меню обновляется каждый раз без нашего вмешательства.
 
-There are two `slotchange` events here:
+Здесь есть два события `slotchange`:
 
-1. At initialization:
+1. При инициализации:
 
-    `slotchange: title` triggers immediately, as the `slot="title"` from the light DOM gets into the corresponding slot.
-2. After 1 second:
+    `slotchange: title` запускается сразу же, как только `slot="title"` из основного дерева попадает в соответствующий слот.
+2. Через 1 секунду:
 
-    `slotchange: item` triggers, when a new `<li slot="item">` is added.
+    `slotchange: item` запускается, когда добавляется новый элемент `<li slot="item">`.
 
-Please note: there's no `slotchange` event after 2 seconds, when the content of `slot="title"` is modified. That's because there's no slot change. We modify the content inside the slotted element, that's another thing.
+Обратите внимание, что событие `slotchange` не запускается через 2 секунды, когда меняется контент `slot="title"`. Это происходит потому, что сам слот не меняется. Мы изменяем только контент элемента, который находится в слоте, а это совсем другое.
 
-If we'd like to track internal modifications of light DOM from JavaScript, that's also possible using a more generic mechanism: [MutationObserver](info:mutation-observer).
+Если мы хотим отслеживать внутренние изменения основного DOM-дерева из JavaScript, можно также использовать более обобщённый механизм: [MutationObserver](info:mutation-observer).
 
-## Slot API
+## API слотов
 
-Finally, let's mention the slot-related JavaScript methods.
+Наконец, давайте поговорим о методах JavaScript, связанных со слотами.
 
-As we've seen before, JavaScript looks at the "real" DOM, without flattening. But, if the shadow tree has `{mode: 'open'}`, then we can figure out which elements assigned to a slot and, vise-versa, the slot by the element inside it:
+Как мы видели раньше, JavaScript смотрит на "реальный", а не на плоский DOM. Но если у теневого дерева есть `{mode: 'open'}`, мы можем выяснить, какие элементы находятся в слоте, и наоборот, определить слот по элементу, который в нём находится:
 
-- `node.assignedSlot` -- returns the `<slot>` element that the `node` is assigned to.
-- `slot.assignedNodes({flatten: true/false})` -- DOM nodes, assigned to the slot. The `flatten` option is `false` by default. If explicitly set to `true`, then it looks more deeply into the flattened DOM, returning nested slots in case of nested components and the fallback content if no node assigned.
-- `slot.assignedElements({flatten: true/false})` -- DOM elements, assigned to the slot (same as above, but only element nodes).
+- `node.assignedSlot` -- возвращает элемент `<slot>`, в котором находится `node`.
+- `slot.assignedNodes({flatten: true/false})` -- DOM-узлы, которые находятся в слоте. Опция `flatten` имеет значение по умолчанию `false`. Если явно изменить значение на `true`, она просматривает плоский DOM глубже и возращает вложенные слоты, если есть вложенные компоненты, и резервный контент, если в слоте нет узлов.
+- `slot.assignedElements({flatten: true/false})` -- DOM-элементы, которые находятся в слоте (так же, как описано выше, но только по отношению к узлам элементов).
 
-These methods are useful when we need not just show the slotted content, but also track it in JavaScript.
+Эти методы можно использовать не только для отображения контента, который находится в слотах, но и для его отслеживания в JavaScript.
 
-For example, if `<custom-menu>` component wants to know, what it shows, then it could track `slotchange` and get the items from `slot.assignedElements`:
+Например, если компонент `<custom-menu>` хочет знать, что он показывает, он должен отследить событие `slotchange` и получить пункты меню из `slot.assignedElements`:
 
 ```html run untrusted height=120
 <custom-menu id="menu">
-  <span slot="title">Candy menu</span>
-  <li slot="item">Lollipop</li>
-  <li slot="item">Fruit Toast</li>
+  <span slot="title">Сладости</span>
+  <li slot="item">Леденцы</li>
+  <li slot="item">Фруктовые тосты</li>
 </custom-menu>
 
 <script>
@@ -383,7 +383,7 @@ customElements.define('custom-menu', class extends HTMLElement {
       <ul><slot name="item"></slot></ul>
     </div>`;
 
-    // slottable is added/removed/replaced
+    // контент слота добавляется/удаляется/заменяется
 *!*
     this.shadowRoot.firstElementChild.addEventListener('slotchange', e => {
       let slot = e.target;
@@ -398,35 +398,35 @@ customElements.define('custom-menu', class extends HTMLElement {
 
 // items update after 1 second
 setTimeout(() => {
-  menu.insertAdjacentHTML('beforeEnd', '<li slot="item">Cup Cake</li>')
+  menu.insertAdjacentHTML('beforeEnd', '<li slot="item">Кексы</li>')
 }, 1000);
 </script>
 ```
 
 
-## Summary
+## Итого
 
-Slots allow to show light DOM children in shadow DOM.
+С помощью слотов можно отображать потомков основного DOM-дерева в теневом DOM.
 
-There are two kinds of slots:
+Существует два вида слотов:
 
-- Named slots: `<slot name="X">...</slot>` -- gets light children with `slot="X"`.
-- Default slot: the first `<slot>` without a name (subsequent unnamed slots are ignored) -- gets unslotted light children.
-- If there are many elements for the same slot -- they are appended one after another.
-- The content of `<slot>` element is used as a fallback. It's shown if there are no light children for the slot.
+- Именованные слоты: `<slot name="X">...</slot>` -- получают контент потомков с `slot="X"`.
+- Слот по умолчанию: первый `<slot>` без имени (последующие неименованные слоты игнорируются) -- получает контент потомков основного дерева, которые не находятся в слотах.
+- Если одному слоту назначено несколько элементов, они добавляются один за другим.
+- Содержимое элемента `<slot>` используется как резервный контент. Он отображается, если в слоте нет потомков основного дерева.
 
-The process of rendering slotted elements inside their slots is called "composition". The result is called a "flattened DOM".
+Процесс отображения элементов внутри слота называется "композицией". В результате композиции строится "плоский DOM".
 
-Composition does not really move nodes, from JavaScript point of view the DOM is still same.
+При композиции не происходит перемещения узлов -- с точки зрения JavaScript, DOM остаётся прежним.
 
-JavaScript can access slots using methods:
-- `slot.assignedNodes/Elements()` -- returns nodes/elements inside the `slot`.
-- `node.assignedSlot` -- the reverse meethod, returns slot by a node.
+JavaScript может получить доступ к слотам с помощью следующих методов:
+- `slot.assignedNodes/Elements()` -- возвращает узлы/элементы, которые находятся внутри `slot`.
+- `node.assignedSlot` -- обратный метод, возвращает слот по узлу.
 
-If we'd like to know what we're showing, we can track slot contents using:
-- `slotchange` event -- triggers the first time a slot is filled, and on any add/remove/replace operation of the slotted element, but not its children. The slot is `event.target`.
-- [MutationObserver](info:mutation-observer) to go deeper into slot content, watch changes inside it.
+Если мы хотим знать, что показываем, мы можем отследить контент слота следующими способами:
+- событие `slotchange` -- запускается, когда слот наполняется контентом в первый раз, и при каждой операции добавления/удаления/замещения элемента в слоте, за исключением его потомков. Слот -- это `event.target`.
+- [MutationObserver](info:mutation-observer) для более глубокого просмотра контента и отслеживания его изменений.
 
-Now, as we have elements from light DOM in the shadow DOM, let's see how to style them properly. The basic rule is that shadow elements are styled inside, and light elements -- outside, but there are notable exceptions.
+Теперь, когда элементы из основного DOM находятся в теневом DOM, давайте посмотрим, как их правильно стилизовать. Основное правило звучит так: теневые элементы стилизуются внутри, а основные элементы -- снаружи; однако есть заметные исключения.
 
-We'll see the details in the next chapter.
+Мы рассмотрим их подробно в следующей главе.
