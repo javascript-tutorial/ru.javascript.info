@@ -2,14 +2,18 @@ importance: 5
 
 ---
 
-# Show a note near the element
+# Покажите заметку рядом с элементом
 
-Create a function `positionAt(anchor, position, elem)` that positions `elem`, depending on  `position` either at the top (`"top"`), right (`"right"`) or bottom (`"bottom"`) of the element `anchor`.
+Создайте функцию `positionAt(anchor, position, elem)`, которая позиционирует элемент `elem` в зависимости от значения свойства `position` рядом с элементом `anchor`.
 
-Call it inside the function `showNote(anchor, position, html)` that shows an element with the class `"note"` and the text `html` at the given position near the anchor.
+Аргумент `position` - строка с одним из 3 значений:
+- `"top"` - расположить `elem` прямо над `anchor`
+- `"right"` - расположить `elem` непосредственно справа от `anchor`
+- `"bottom"` - расположить `elem` прямо под `anchor`
 
-Show the notes like here:
+Она используется внутри функции `showNote(anchor, position, html)`, которая уже есть в исходном коде задачи. Она создаёт и показывает элемент-"заметку" с текстом `html` на заданной позиции `position` рядом с элементом `anchor`.
+
+Демо заметки:
+
 
 [iframe src="solution" height="350" border="1" link]
-
-P.S. The note should have `position:fixed` for this task.

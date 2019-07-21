@@ -1,3 +1,3 @@
-# UI Events
+# Интерфейсные события
 
-Here we cover most important user interface events and how to work with them.
+Здесь мы изучим основные события пользовательсского интерфейса и как с ними работать.

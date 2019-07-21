@@ -2,11 +2,11 @@ importance: 4
 
 ---
 
-# Keyboard-driven mouse
+# Мышь, управляемая клавиатурой
 
-Focus on the mouse. Then use arrow keys to move it:
+Установите фокус на мышь. Затем используйте клавиши со стрелками, чтобы её двигать:
 
 [demo src="solution"]
 
-P.S. Don't put event handlers anywhere except the `#mouse` element.
-P.P.S. Don't modify HTML/CSS, the approach should be generic and work with any element.
+P.S. Не добавляйте обработчики никуда, кроме элемента `#mouse`.
+P.P.S. Не изменяйте HTML/CSS, подход должен быть общим и работать с любым элементом.

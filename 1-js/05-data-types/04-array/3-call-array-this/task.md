@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# Calling in an array context
+# Вызов в контексте массива
 
-What is the result? Why?
+Каков результат? Почему?
 
 ```js
 let arr = ["a", "b"];

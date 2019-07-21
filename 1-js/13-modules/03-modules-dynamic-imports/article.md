@@ -1,54 +1,102 @@
 
-# Dynamic imports
+# Динамические импорты
 
-Export and import statements that we covered in previous chaters are called "static".
+Инструкции экспорта и импорта, которые мы рассматривали в предыдущей главе, называются "статическими".
 
-That's because they are indeed static. The syntax is very strict.
+Это потому, что они на самом деле статические. Синтаксис у них весьма строг.
 
-First, we can't dynamicaly generate any parameters of `import`.
+Во-первых, мы не можем динамически задавать никакие из параметров `import`.
 
-The module path must be a primitive string, can't be a function call. This won't work:
+Путь к модулю должен быть строковым примитивом и не может быть вызовом функции. Вот так работать не будет:
 
 ```js
-import ... from *!*getModuleName()*/!*; // Error, only from "string" is allowed
+import ... from *!*getModuleName()*/!*; // Ошибка, должна быть строка
 ```
 
-Second, we can't import conditionally or at run-time:
+Во-вторых, мы не можем делать импорт в зависимости от условий или в процессе выполнения.
 
 ```js
 if(...) {
-  import ...; // Error, not allowed!
+  import ...; // Ошибка, запрещено
 }
 
 {
-  import ...; // Error, we can't put import in any block
+  import ...; // Ошибка, мы не можем ставить импорт в блок
 }
 ```
 
-That's because, import/export aim to provide a backbone for the code structure. That's a good thing, as code structure can be analyzed, modules can be gathered and bundled together, unused exports can be removed (tree-shaken). That's possible only because everything is fixed.
+Всё это следствие того, что цель импорта/экспорта -- создать костяк структуры кода. Благодаря чему она может быть проанализирована, модули могут быть собраны и связаны друг с другом, а неиспользуемые экспорты удалены. Это возможно только благодаря тому, что всё статично.
 
-But how do we import a module dynamically, on-demand?
+Но как мы можем импортировать модуль динамически, по запросу?
 
-## The import() function
+## Функция import()
 
-The `import(module)` function can be called from anywhere. It returns a promise that resolves into a module object.
+Функция `import(module)` может быть вызвана из любого места. Она вернёт промис, а он в свою очередь -- объект модуля.
 
-The usage pattern looks like this:
+Использовать её мы можем, например, вот так:
 
 ```js run
-let modulePath = prompt("Module path?");
+let modulePath = prompt("Путь к модулю?");
 
 import(modulePath)
-  .then(obj => <module object>)
-  .catch(err => <loading error, no such module?>)
+  .then(obj => <объект модуля>)
+  .catch(err => <ошибка загрузки, нет такого модуля?>)
 ```
 
-Or, we could use `let module = await import(modulePath)` if inside an async function.
+Или если внутри асинхронной функции, то можно вот так: `let module = await import(modulePath)`.
 
-Like this:
+Например, если у нас следующий `say.js`:
+
+```js
+// 📁 say.js
+export function hi() {
+  alert(`Привет`);
+}
+
+export function bye() {
+  alert(`Пока`);
+}
+```
+
+...То динамический импорт может выглядеть так:
+
+```js
+let {hi, bye} = await import('./say.js');
+
+hi();
+bye();
+```
+
+Или, если в `say.js` указан экспорт по умолчанию:
+
+```js
+// 📁 say.js
+export default function() {
+  alert("Module loaded (export default)!");
+}
+```
+
+...То для доступа к нему нам следует взять свойство `default` объекта модуля, как объяснено в [предыдущей главе](info:import-export).
+
+Так что динамический импорт будет таким:
+
+```js
+let {default: say} = await import('./say.js'); // сохранить свойство .default в переменной say 
+
+say();
+```
+
+Вот полный пример:
 
 [codetabs src="say" current="index.html"]
 
-So, dynamic imports are very simple to use.
+```smart
+Динамический импорт работает в обычных скриптах, он не требует указания `script type="module"`.
+```
 
-Also, dynamic imports work in regular scripts, they don't require `script type="module"`.
+```smart
+Хотя `import()` и выглядит похоже на вызов функции, на самом деле это специальный синтаксис, так же, как, например, `super()`.
+
+Так что мы не можем копировать `import` в другую переменную или вызвать при помощи `.call/apply`.
+```
+

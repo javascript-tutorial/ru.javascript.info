@@ -8,9 +8,9 @@
 
 <body style="height:3000px">
 
-  <h2>Click the button below</h2>
+  <h2>Кликните на кнопку ниже</h2>
 
-  <input type="button" value="Click to show the form" id="show-button">
+  <input type="button" value="Кликните, чтобы увидеть форму" id="show-button">
 
 
   <div id="prompt-form-container">
@@ -18,18 +18,18 @@
       <div id="prompt-message"></div>
       <input name="text" type="text">
       <input type="submit" value="Ok">
-      <input type="button" name="cancel" value="Cancel">
+      <input type="button" name="cancel" value="Отмена">
     </form>
   </div>
 
   <script>
-    // Show a half-transparent DIV to "shadow" the page
-    // (the form is not inside, but near it, because it shouldn't be half-transparent)
+    // Показать полупрозрачный DIV, чтобы затенить страницу
+    // (форма располагается не внутри него, а рядом, потому что она не должна быть полупрозрачной)
     function showCover() {
       let coverDiv = document.createElement('div');
       coverDiv.id = 'cover-div';
 
-      // make the page unscrollable while the modal form is open
+      // убираем возможность прокрутки страницы во время показа модального окна с формой
       document.body.style.overflowY = 'hidden';
 
       document.body.append(coverDiv);
@@ -56,7 +56,7 @@
 
       form.onsubmit = function() {
         let value = form.text.value;
-        if (value == '') return false; // ignore empty submit
+        if (value == '') return false; // игнорируем отправку пустой формы
 
         complete(value);
         return false;
@@ -94,8 +94,8 @@
     }
 
     document.getElementById('show-button').onclick = function() {
-      showPrompt("Enter something<br>...smart :)", function(value) {
-        alert("You entered: " + value);
+      showPrompt("Введите что-нибудь<br>...умное :)", function(value) {
+        alert("Вы ввели: " + value);
       });
     };
   </script>

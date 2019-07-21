@@ -1,121 +1,114 @@
-# Browser environment, specs
+# Браузерное окружение, спецификации
 
-The JavaScript language was initially created for web browsers. Since then, it has evolved and become a language with many uses and platforms.
+Язык JavaScript изначально был создан для веб-браузеров. Но с тех пор он значительно эволюционировал и превратился в кроссплатформенный язык программирования для решения широкого круга задач.
 
-A platform may be a browser, or a web-server, or a washing machine, or another *host*. Each of them provides platform-specific functionality. The JavaScript specification calls that a *host environment*.
+Сегодня JavaScript может использоваться в браузере, на веб-сервере, в стиральной машинке или в какой-то другой среде. Каждая среда предоставляет свой специфический функционал. Спецификация JavaScript называет это *окружением*.
 
-A host environment provides platform-specific objects and functions additional to the language core. Web browsers give a means to control web pages. Node.JS provides server-side features, and so on.
+Окружение предоставляет специфические для себя объекты и дополнительные функции. Браузеры, например, дают средства для управления веб-страницами. Node.js делает доступными какие-то серверные возможности и так далее.
 
-Here's a bird's-eye view of what we have when JavaScript runs in a web-browser:
+На картинке ниже в общих чертах показано, что доступно для JavaScript в браузерном окружении:
 
 ![](windowObjects.png)
 
-There's a "root" object called `window`. It has two roles:
+Как мы видим, имеется корневой объект `window`, который выступает в 2 ролях:
 
-1. First, it is a global object for JavaScript code, as described in the chapter <info:global-object>.
-2. Second, it represents the "browser window" and provides methods to control it.
+1. Во-первых, это глобальный объект для JavaScript-кода, об этом более подробно говорится в главе <info:global-object>.
+2. Во-вторых, он также представляет собой окно браузера и располагает методами для управления им.
 
-For instance, here we use it as a global object:
+Например, здесь мы используем `window` как глобальный объект:
 
 ```js run
 function sayHi() {
   alert("Hello");
 }
 
-// global functions are accessible as properties of window
+// глобальные функции доступны как методы глобального объекта:
 window.sayHi();
 ```
 
-And here we use it as a browser window, to see the window height:
+А здесь мы используем `window` как объект окна браузера, чтобы узнать его высоту:
 
 ```js run
-alert(window.innerHeight); // inner window height
+alert(window.innerHeight); // внутренняя высота окна браузера
 ```
 
-There are more window-specific methods and properties, we'll cover them later.
+Существует гораздо больше свойств и методов для управления окном браузера. Мы рассмотрим их позднее.
 
-## Document Object Model (DOM)
+## DOM (Document Object Model)
 
-The `document` object gives access to the page content. We can change or create anything on the page using it.
+Document Object Model, сокращенно DOM - объектная модель документа, которая представляет все содержимое страницы в виде объектов, которые можно менять.
 
-For instance:
+Объект `document` предоставляет доступ к содержимому страницы. С его помощью мы можем что-то создавать или менять на странице.
+
+Например:
 ```js run
-// change the background color to red
+// заменим цвет фона на красный,
 document.body.style.background = "red";
 
-// change it back after 1 second
+// а через секунду вернём как было
 setTimeout(() => document.body.style.background = "", 1000);
 ```
 
-Here we used `document.body.style`, but there's much, much more. Properties and methods are described in the specification. There happen to be two working groups who develop it:
+Мы использовали в примере только `document.body.style`, но на самом деле возможности по управлению страницей намного шире. Различные свойства и методы описаны в спецификации:
 
-1. [W3C](https://en.wikipedia.org/wiki/World_Wide_Web_Consortium) -- the documentation is at <https://www.w3.org/TR/dom>.
-2. [WhatWG](https://en.wikipedia.org/wiki/WHATWG), publishing at <https://dom.spec.whatwg.org>.
+- **DOM Living Standard** at <https://dom.spec.whatwg.org>
 
-As it happens, the two groups don't always agree, so it's like we have two sets of standards. But they are very similar and eventually things merge. The documentation that you can find on the given resources is very similar, with about a 99% match. There are very minor differences that you probably won't notice.
+```smart header="DOM не только для браузеров"
+Спецификация DOM объясняет структуру документа и предоставляет объекты для манипуляций со страницей. Существует и другое, отличное от браузеров, программное обеспечение, которое тоже использует эту спецификацию.
 
-Personally, I find <https://dom.spec.whatwg.org> more pleasant to use.
-
-In the ancient past, there was no standard at all -- each browser implemented however it wanted. Different browsers had different sets, methods, and properties for the same thing, and developers had to write different code for each of them. Dark, messy times.
-
-Even now we can sometimes meet old code that uses browser-specific properties and works around incompatibilities. But, in this tutorial we'll use modern stuff: there's no need to learn old things until you really need to (chances are high that you won't).
-
-Then the DOM standard appeared, in an attempt to bring everyone to an agreement. The first version was "DOM Level 1", then it was extended by DOM Level 2, then DOM Level 3, and now it's reached DOM Level 4. People from WhatWG group got tired of version numbers and are calling it just "DOM", without a number. So we'll do the same.
-
-```smart header="DOM is not only for browsers"
-The DOM specification explains the structure of a document and provides objects to manipulate it. There are non-browser instruments that use it too.
-
-For instance, server-side tools that download HTML pages and process them use the DOM. They may support only a part of the specification though.
+Например, серверные средства, которые загружают и обрабатывают HTML-страницы, тоже используют DOM. При этом они могут поддерживать спецификацию не полностью.
 ```
 
-```smart header="CSSOM for styling"
-CSS rules and stylesheets are not structured like HTML. There's a separate specification [CSSOM](https://www.w3.org/TR/cssom-1/) that explains how they are represented as objects, and how to read and write them.
+```smart header="CSSOM для стилей"
+Правила стилей CSS не структурированы подобно HTML. Для них есть отдельная спецификация [CSSOM](https://www.w3.org/TR/cssom-1/), которая объясняет, как стили должны представляться в виде объектов, как их читать и писать.
 
-CSSOM is used together with DOM when we modify style rules for the document. In practice though, CSSOM is rarely required, because usually CSS rules are static. We rarely need to add/remove CSS rules from JavaScript, so we won't cover it right now.
+CSSOM используется вместе с DOM при изменении стилей документа. В реальности CSSOM требуется редко, потому что правила стилей CSS статичны. Мы редко добавляем/удаляем стили из JavaScript, поэтому не будем сейчас рассматривать этот вопрос.
 ```
 
-## BOM (part of HTML spec)
+## BOM (Browser Object Model)
 
-Browser Object Model (BOM) are additional objects provided by the browser (host environment) to work with everything except the document.
+Объектная модель браузера (Browser Object Model, BOM) представляет собой дополнительные объекты, предоставляемые браузером (окружением), чтобы работать со всем, кроме содержимого страницы.
 
-For instance:
+Например:
 
-- The [navigator](mdn:api/Window/navigator) object provides background information about the browser and the operating system. There are many properties, but the two most widely known are: `navigator.userAgent` -- about the current browser, and `navigator.platform` -- about the platform (can help to differ between Windows/Linux/Mac etc).
-- The [location](mdn:api/Window/location) object allows us to read the current URL and can redirect the browser to a new one.
+- Объект [navigator](mdn:api/Window/navigator) даёт информацию о самом браузере и операционной системе. Среди множества его свойств самыми известными являются: `navigator.userAgent` -- информация о текущем браузере, и `navigator.platform` -- информация о платформе (может помочь в понимании того, в какой ОС открыт браузер -- Windows/Linux/Mac и так далее).
+- Объект [location](mdn:api/Window/location) позволяет получить текущий URL и перенаправить браузер по новому адресу.
 
-Here's how we can use the `location` object:
+Вот как мы можем использовать объект `location`:
 
 ```js run
-alert(location.href); // shows current URL
+alert(location.href); // показывает текущий URL
 if (confirm("Go to wikipedia?")) {
-  location.href = "https://wikipedia.org"; // redirect the browser to another URL
+  location.href = "https://wikipedia.org"; // перенаправляет браузер на другой URL
 }
 ```
 
-Functions `alert/confirm/prompt` are also a part of BOM: they are directly not related to the document, but represent pure browser methods of communicating with the user.
+Функции `alert/confirm/prompt` тоже являются частью BOM: они не относятся непосредственно к странице, но представляют собой методы объекта окна браузера для коммуникации с пользователем.
 
+```smart header="Спецификация HTML"
+BOM является частью общей [спецификации HTML](https://html.spec.whatwg.org).
 
-```smart header="HTML specification"
-BOM is the part of the general [HTML specification](https://html.spec.whatwg.org).
+Да, вы всё верно услышали. Спецификация HTML по адресу <https://html.spec.whatwg.org> не только про "язык HTML" (теги, атрибуты), она также покрывает целое множество объектов, методов и специфичных для каждого браузера расширений DOM. Это всё "HTML в широком смысле". Для некоторых вещей есть отдельные спецификации, перечисленные на <https://spec.whatwg.org>.
 
-Yes, you heard that right. The HTML spec at <https://html.spec.whatwg.org> is not only about the "HTML language" (tags, attributes), but also covers a bunch of objects, methods and browser-specific DOM extensions. That's "HTML in broad terms".
-```
+## Итого
 
-## Summary
+Говоря о стандартах, у нас есть:
 
-Talking about standards, we have:
+спецификация DOM
+: описывает структуру документа, манипуляции с контентом и события, подробнее на <https://dom.spec.whatwg.org>.
 
-DOM specification
-: Describes the document structure, manipulations and events, see <https://dom.spec.whatwg.org>.
+спецификация CSSOM
+: Описывает файлы стилей, правила написания стилей и манипуляций с ними, а также то, как это всё связано со страницей, подробнее на <https://www.w3.org/TR/cssom-1/>.
 
-CSSOM specification
-: Describes stylesheets and style rules, manipulations with them and their binding to documents, see <https://www.w3.org/TR/cssom-1/>.
+спецификация HTML
+: Описывает язык HTML (например, теги) и BOM (объектную модель браузера) -- разные функции браузера: `setTimeout`, `alert`, `location` и так далее, подробнее на <https://html.spec.whatwg.org>. Тут берётся за основу спецификация DOM и расширяется дополнительными свойствами и методами.
 
-HTML specification
-: Describes the HTML language (e.g. tags) and also the BOM (browser object model) -- various browser functions: `setTimeout`, `alert`, `location` and so on, see <https://html.spec.whatwg.org>. It takes the DOM specification and extends it with many additional properties and methods.
+Кроме того, некоторые классы описаны отдельно на <https://spec.whatwg.org/>.
 
-Now we'll get down to learning DOM, because the document plays the central role in the UI.
+Пожалуйста, сохраните ссылки, указанные выше, так как по ним содержится очень много информации, которую невозможно изучить полностью и держать в уме.
 
-Please note the links above, as there's so much stuff to learn it's impossible to cover and remember everything.
+Когда вам нужно будет прочитать о каком-то свойстве или методе, справочник на сайте Mozilla <https://developer.mozilla.org/ru/search> тоже очень хороший ресурс, хотя ничто не сравнится с чтением спецификации: она сложная и объёмная, но сделает ваши знания более чёткими и полными.
 
-When you'd like to read about a property or a method, the Mozilla manual at <https://developer.mozilla.org/en-US/search> is a nice resource, but reading the corresponding spec may be better: it's more complex and longer to read, but will make your fundamental knowledge sound and complete.
+Для поиска чего-либо обычно удобно использовать интернет-поиск со словами "WHATWG [термин]" или "MDN [термин]", например <https://google.com?q=whatwg+localstorage>, <https://google.com?q=mdn+localstorage>.
+
+А теперь давайте перейдем к изучению DOM, так как страница - это основа всего.
