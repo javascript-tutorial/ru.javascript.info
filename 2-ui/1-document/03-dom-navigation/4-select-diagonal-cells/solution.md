@@ -1,1 +1,1 @@
-We'll be using `rows` and `cells` properties to access diagonal table cells.
+Для получения доступа к диагональным ячейкам таблицы используем свойства `rows` и `cells`.

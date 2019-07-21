@@ -1,15 +1,15 @@
-# Regexp for HTML colors
+# Регулярное выражение для HTML-цветов
 
-Create a regexp to search HTML-colors written as `#ABCDEF`: first `#` and then 6 hexadimal characters.
+Напишите регулярное выражение, которое ищет HTML-цвета в формате `#ABCDEF`: первым идёт символ `#`, и потом - 6 шестнадцатеричных символов.
 
-An example of use:
+Пример использования:
 
 ```js
-let reg = /...your regexp.../
+let reg = /...ваше выражение.../
 
 let str = "color:#121212; background-color:#AA00ef bad-colors:f#fddee #fd2 #12345678";
 
 alert( str.match(reg) )  // #121212,#AA00ef
 ```
 
-P.S. In this task we do not need other color formats like `#123` or `rgb(1,2,3)` etc.
+P.S. В рамках этого задания не нужно искать цвета, записанные в иных форматах типа `#123` или `rgb(1,2,3)`.

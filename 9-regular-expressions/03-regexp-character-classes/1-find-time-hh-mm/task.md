@@ -1,8 +1,8 @@
-# Find the time
+# Найдите время
 
-The time has a format: `hours:minutes`. Both hours and minutes has two digits, like `09:00`.
+Время имеет формат: `часы:минуты`. И часы, и минуты имеют две цифры, например, `09:00`.
 
-Make a regexp to find time in the string: `subject:Breakfast at 09:00 in the room 123:456.`
+Введите регулярное выражение, чтобы найти время в строке: `subject:Завтрак в 09:00 в комнате 123:456.`
 
-P.S. In this task there's no need to check time correctness yet, so `25:99` can also be a valid result.
-P.P.S. The regexp shouldn't match `123:456`.
+P.S. В этой задаче пока нет необходимости проверять правильность времени, поэтому `25:99` также может быть верным результатом.
+P.P.S. Регулярное выражение не должно находить `123:456`.

@@ -1,3 +1,3 @@
-# Introduction into Events
+# Введение в события
 
-An introduction to browser events, event properties and handling patterns.
+Введение в браузерные события, их свойства и обработку.

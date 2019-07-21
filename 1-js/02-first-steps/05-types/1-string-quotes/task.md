@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# String quotes
+# Шаблонные строки
 
-What is the output of the script?
+Что выведет этот скрипт?
 
 ```js
 let name = "Ilya";

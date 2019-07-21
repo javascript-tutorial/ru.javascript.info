@@ -2,23 +2,23 @@ importance: 5
 
 ---
 
-# Find window coordinates of the field
+# Найдите координаты точек относительно окна браузера
 
-In the iframe below you can see a document with the green "field".
+В ифрейме ниже располагается документ с зелёным "полем".
 
-Use JavaScript to find window coordinates of corners pointed by with arrows.
+Используйте JavaScript, чтобы найти координаты углов, обозначенных стрелками.
 
-There's a small feature implemented in the document for convenience. A click at any place shows coordinates there.
+В документе уже реализован функционал, когда при клике на любом месте показываются соответствующие координаты.
 
 [iframe border=1 height=360 src="source" link edit]
 
-Your code should use DOM to get window coordinates of:
+Ваш код должен при помощи DOM получить четыре пары координат:
 
-1. Upper-left, outer corner (that's simple).
-2. Bottom-right, outer corner (simple too).
-3. Upper-left, inner corner (a bit harder).
-4. Bottom-right, inner corner (there are several ways, choose one).
+1. верхний левый, внешний угол (это просто).
+2. нижний правый, внешний угол (тоже просто).
+3. верхний левый, внутренний угол (чуть сложнее).
+4. нижний правый, внутренний угол (есть несколько способов, выберите один).
 
-The coordinates that you calculate should be the same as those returned by the mouse click.
+Координаты, вычисленные вами, должны совпадать с теми, которые возвращаются по клику мыши.
 
-P.S. The code should also work if the element has another size or border, not bound to any fixed values.
+P.S. Код должен работать, если у элемента другие размеры или есть рамка, без привязки к конкретным числам.
