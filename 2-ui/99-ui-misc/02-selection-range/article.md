@@ -502,9 +502,9 @@ From <input id="start" type="number" value=1> – To <input id="end" type="numbe
 ```
 
 
-## Невыделяемость
+## Сделать что-то невыделяемым
 
-Чтобы сделать что-то невыделяемым, существуют три способа:
+Существуют три способа сделать что-то невыделяемым:
 
 1. Используйте CSS свойство `user-select: none`.
 
@@ -514,56 +514,56 @@ From <input id="start" type="number" value=1> – To <input id="end" type="numbe
       user-select: none;
     }
     </style>
-    <div>Selectable <div id="elem">Unselectable</div> Selectable</div>
+    <div>Можно выделить <div id="elem">Нельзя выделить</div> Можно выделить</div>
     ```
 
-    Это не позволяет выборке начаться с `elem`. Но пользователь может начать выборку с другого места и включить `elem` в выборку.
+    Это свойство не позволяет начать выделение с `elem`, но пользователь может начать выделять с другого места и включить `elem`.
 
-    Затем `elem` станет частью `document.getSelection()`, так что на самом деле выборка происходит, но её содержимое обычно игнорируется при копировании/вставке.
+    После этого `elem` станет частью `document.getSelection()`, так что на самом деле выделение происходит, но его содержимое обычно игнорируется при копировании и вставке.
 
 
 2. Предотвратить действие по умолчанию в событии `onselectstart` или `mousedown`.
 
     ```html run
-    <div>Selectable <div id="elem">Unselectable</div> Selectable</div>
+    <div>Можно выделить <div id="elem">Нельзя выделить</div> Можно выделить</div>
 
     <script>
       elem.onselectstart = () => false;
     </script>
     ```
 
-    Это предотвращает выборку от старта с `elem`, но посетитель может начать с другого элемента, а затем расширить выборку до `elem`.
+    Этот способ так же не дает начать выделение с `elem`, но пользователь может начать с другого элемента, а затем расширить выборку до `elem`.
 
-    Это удобно когда есть another другой обработчик события на том же событии, которое запускает выборку. Так что мы отключаем выборку во избежание конфликта.
+    Это удобно когда есть другой обработчик события на том же событии, которое запускает выделение. Так что мы отключаем выделение, чтобы избежать конфликта.
 
-    И содержимое `elem` все еще может быть скопировано.
+    Содержимое `elem` все еще может быть скопировано.
 
-3. Мы также можем очистить выборку 'пост-фактум' после срабатывания `document.getSelection().empty()`. Это используется редко, так как это порождает нежелаемое моргание при появлении/исчезании выборки.
+3. Мы также можем очистить выборку после срабатывания с помощью `document.getSelection().empty()`. Этот способ используется редко, так как он вызывает нежелаемое моргание при появлении и исчезании выделения.
 
 ## Ссылки
 
-- [DOM spec: Range](https://dom.spec.whatwg.org/#ranges)
-- [Selection API](https://www.w3.org/TR/selection-api/#dom-globaleventhandlers-onselectstart)
-- [HTML spec: APIs for the text control selections](https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#textFieldSelection)
+- [Специикация DOM: Range](https://dom.spec.whatwg.org/#ranges)
+- [API выделения](https://www.w3.org/TR/selection-api/#dom-globaleventhandlers-onselectstart)
+- [Специикация HTML: API для выделения в элементах управления текстом](https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#textFieldSelection)
 
 
 ## Итого
 
-Мы подробно рассмотрели два разных API для выборок:
+Мы подробно рассмотрели два разных API для выделения:
 
 1. Для документа: объекты `Selection` и `Range`.
 2. Для `input`, `textarea`: дополнительные методы и свойства.
 
 Второе API очень простое, так как работает с текстом.
 
-Вероятнее всего самые используемые готовые решения (рецепты):
+Самые используемые готовые решения:
 
-1. Получить выборку:
+1. Получить выделение:
     ```js run
     let selection = document.getSelection();
 
     // затем применяем методы Range к selection.getRangeAt(0)
-    // или же ко всем диапазонам если множественная выборка поддерживается
+    // или же ко всем диапазонам если поддерживается множественное выделение
     for (let i = 0; i < selection; i++) {
       cloned.append(selection.getRangeAt(i).cloneContents());
     }
@@ -572,7 +572,7 @@ From <input id="start" type="number" value=1> – To <input id="end" type="numbe
     ```js run
     let selection = document.getSelection();
 
-    // непосредственно:
+    // напрямую:
     selection.setBaseAndExtent(...from...to...);
 
     // или создадим диапазон и:
@@ -580,6 +580,6 @@ From <input id="start" type="number" value=1> – To <input id="end" type="numbe
     selection.addRange(range);
     ```
 
-Еще одна важная деталь о выборке: позиция курсора в изменяемых элементах, таких как `<textarea>` всегда стоит в начале или конце выборки.
+Еще одна важная деталь о выделении: позиция курсора в изменяемых элементах, таких как `<textarea>` всегда стоит в начале или конце выделения.
 
-Мы можем использовать это чтобы и получить позицию курсора, и переместить курсор путем установки `elem.selectionStart` и `elem.selectionEnd`.
+Мы можем использовать это чтобы получить позицию курсора илии переместить курсор, установив `elem.selectionStart` и `elem.selectionEnd`.
