@@ -134,7 +134,11 @@ let key = "likes birds";
 user[key] = true;
 ```
 
+<<<<<<< HEAD
 Здесь переменная `key` может быть вычислена во время выполнения кода или зависеть от пользовательского ввода. После этого мы используем её для доступа к свойству. Это даёт нам большую гибкость.
+=======
+Here, the variable `key` may be calculated at run-time or depend on the user input. And then we use it to access the property. That gives us a great deal of flexibility.
+>>>>>>> 4a8d8987dfc3256045e6b4a3bd8810ad3b25d1b3
 
 Пример:
 
@@ -150,7 +154,11 @@ let key = prompt("Что вы хотите узнать о пользовате�
 alert( user[key] ); // John (если ввели "name")
 ```
 
+<<<<<<< HEAD
 Запись "через точку" такого не позволяет:
+=======
+The dot notation cannot be used in a similar way:
+>>>>>>> 4a8d8987dfc3256045e6b4a3bd8810ad3b25d1b3
 
 ```js run
 let user = {
@@ -238,9 +246,15 @@ alert(obj.__proto__); // [object Object], работает не так, как �
 
 Посетитель может указать `__proto__` в качестве ключа, и логика присваивания будет нарушена (как показано выше).
 
+<<<<<<< HEAD
 Есть способ заставить объекты обрабатывать `__proto__` как обычное свойство. Мы поговорим о нём позже, а пока нам нужно узнать больше об объектах.
 
 Также существует другая структура данных [Map](info:map-set-weakmap-weakset), которая поддерживает произвольные ключи. Мы изучим её в главе <info:map-set-weakmap-weakset>.
+=======
+There is a way to make objects treat `__proto__` as a regular property, which we'll cover later, but first we need to know more about objects.
+
+There's also another data structure [Map](info:map-set-weakmap-weakset), that we'll learn in the chapter <info:map-set-weakmap-weakset>, which supports arbitrary keys.
+>>>>>>> 4a8d8987dfc3256045e6b4a3bd8810ad3b25d1b3
 ````
 
 

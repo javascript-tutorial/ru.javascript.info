@@ -11,10 +11,17 @@
 
 Существует два вида пользовательских элементов:
 
+<<<<<<< HEAD
 1. **Автономные пользовательские элементы** -- "полностью новые" элементы, расширяющие абстрактный класс `HTMLElement`.
 2. **Пользовательские встроенные элементы** -- элементы, расширяющие встроенные, например кнопку `HTMLButtonElement` и т.п.
 
 Сначала мы разберёмся с автономными элементами, а затем перейдём к пользовательским встроенным.
+=======
+1. **Autonomous custom elements** -- "all-new" elements, extending the abstract `HTMLElement` class.
+2. **Customized built-in elements** -- extending built-in elements, like a customized button, based on `HTMLButtonElement` etc.
+
+First we'll cover autonomous elements, and then move to customized built-in ones.
+>>>>>>> 4a8d8987dfc3256045e6b4a3bd8810ad3b25d1b3
 
 Чтобы создать пользовательский элемент, нам нужно сообщить браузеру ряд деталей о нём: как его показать, что делать, когда элемент добавляется или удаляется со страницы и т.д.
 
@@ -30,6 +37,7 @@ class MyElement extends HTMLElement {
   }
 
   connectedCallback() {
+<<<<<<< HEAD
     // браузер вызывает этот метод при добавлении элемента в документ
     // (может вызываться много раз, если элемент многократно добавляется/удаляется)
   }
@@ -37,6 +45,15 @@ class MyElement extends HTMLElement {
   disconnectedCallback() {
     // браузер вызывает этот метод при удалении элемента из документа
     // (может вызываться много раз, если элемент многократно добавляется/удаляется)
+=======
+    // browser calls this method when the element is added to the document
+    // (can be called many times if an element is repeatedly added/removed)
+  }
+
+  disconnectedCallback() {
+    // browser calls this method when the element is removed from the document
+    // (can be called many times if an element is repeatedly added/removed)
+>>>>>>> 4a8d8987dfc3256045e6b4a3bd8810ad3b25d1b3
   }
 
   static get observedAttributes() {
@@ -136,7 +153,11 @@ customElements.define("time-formatted", TimeFormatted); // (2)
 
 Почему не в `constructor`?
 
+<<<<<<< HEAD
 Причина проста: когда вызывается `constructor`, делать это слишком рано. Экземпляр элемента создан, но на этом этапе браузер ещё не обработал/назначил атрибуты: вызовы `getAttribute` вернули бы `null`. Так что мы не можем рендерить здесь.
+=======
+The reason is simple: when `constructor` is called, it's yet too early. The element is created, but the browser did not yet process/assign attributes at this stage: calls to `getAttribute` would return `null`. So we can't really render there.
+>>>>>>> 4a8d8987dfc3256045e6b4a3bd8810ad3b25d1b3
 
 Кроме того, если подумать, это лучше с точки зрения производительности -- отложить работу до тех пор, пока она действительно не понадобится.
 
@@ -240,7 +261,11 @@ customElements.define('user-info', class extends HTMLElement {
 
 Если вы запустите это, `alert` будет пуст.
 
+<<<<<<< HEAD
 Это происходит именно потому, что на этой стадии ещё не существуют дочерние элементы, DOM не завершён. HTML-парсер подключил пользовательский элемент `<user-info>` и теперь собирается перейти к его дочерним элементам, но пока не сделал этого.
+=======
+That's exactly because there are no children on that stage, the DOM is unfinished. HTML parser connected the custom element `<user-info>`, and is going to proceed to its children, but just didn't yet.
+>>>>>>> 4a8d8987dfc3256045e6b4a3bd8810ad3b25d1b3
 
 Если мы хотим передать информацию в пользовательский элемент, мы можем использовать атрибуты. Они доступны сразу.
 
@@ -298,9 +323,15 @@ customElements.define('user-info', class extends HTMLElement {
 3. outer initialized.
 4. inner initialized.
 
+<<<<<<< HEAD
 Мы ясно видим, что внешний элемент `outer` завершает инициализацию `(3)` до внутреннего `inner` `(4)`.
 
 Нет встроенного колбэка, который срабатывает после того, как вложенные элементы готовы. Если нужно, мы можем реализовать подобное самостоятельно. Например, внутренние элементы могут отправлять события наподобие `initialized`, а внешние могут слушать и реагировать на них.
+=======
+We can clearly see that the outer element finishes initialization `(3)` before the inner one `(4)`.
+
+There's no built-in callback that triggers after nested elements are ready. If needed, we can implement such thing on our own. For instance, inner elements can dispatch events like `initialized`, and outer ones can listen and react on them.
+>>>>>>> 4a8d8987dfc3256045e6b4a3bd8810ad3b25d1b3
 
 ## Модифицированные встроенные элементы
 
@@ -308,7 +339,11 @@ customElements.define('user-info', class extends HTMLElement {
 
 Но такие вещи могут быть важны. Например, поисковой системе было бы интересно узнать, что мы показываем именно время. А если мы делаем специальный вид кнопки, почему не использовать существующую функциональность `<button>`?
 
+<<<<<<< HEAD
 Мы можем расширять и модифицировать встроенные HTML-элементы, наследуя их классы.
+=======
+We can extend and customize built-in HTML elements by inheriting from their classes.
+>>>>>>> 4a8d8987dfc3256045e6b4a3bd8810ad3b25d1b3
 
 Например, кнопки `<button>` являются экземплярами класса `HTMLButtonElement`, давайте построим элемент на его основе.
 
@@ -322,7 +357,12 @@ customElements.define('user-info', class extends HTMLElement {
     ```js
     customElements.define('hello-button', HelloButton, *!*{extends: 'button'}*/!*);
     ```    
+<<<<<<< HEAD
     Бывает, что разные теги имеют одинаковый DOM-класс, поэтому указание тега необходимо.
+=======
+
+    There may be different tags that share the same DOM-class, that's why specifying `extends` is needed.
+>>>>>>> 4a8d8987dfc3256045e6b4a3bd8810ad3b25d1b3
 
 3. В конце, чтобы использовать наш пользовательский элемент, вставим обычный тег `<button>`, но добавим к нему `is="hello-button"`:
     ```html

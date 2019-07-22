@@ -73,6 +73,7 @@ right:${r.right}
 - Координаты могут считаться с десятичной частью, например `10.5`. Это нормально, ведь браузер использует дроби в своих внутренних вычислениях. Мы не обязаны округлять значения при установке `style.position.left/top`.
 - Координаты могут быть отрицательными. Например, если страница прокручена так, что элемент `elem` ушёл вверх за пределы окна, то вызов `elem.getBoundingClientRect().top` вернёт отрицательное значение.
 
+<<<<<<< HEAD
 ```smart header="Зачем вообще нужны зависимые свойства? Для чего существуют `top/left`, если есть `x/y`?"
 С математической точки зрения, прямоугольник однозначно задаётся начальной точкной `(x,y)` и вектором направления `(width,height)`.
 
@@ -87,16 +88,38 @@ right:${r.right}
 Он начинается в своём правом-нижнем углу, и затем "разворачивается" влево-вверх, так как отрицательные width/height ведут его назад по координатам.
 
 Как вы видите, свойства `left/top` здесь не равны `x/y`. То есть они не дублируют друг друга. Формулы выше могут быть исправлены с учётом возможных отрицательных значений `width/height`. Это достаточно просто сделать, но редко требуется, так как результат вызова `elem.getBoundingClientRect()` всегда возвращает положительные значения для ширины/высоты.
+=======
+```smart header="Why derived properties are needed? Why does `top/left` exist if there's `x/y`?"
+Mathematically, a rectangle is uniquely defined with its starting point `(x,y)` and the direction vector `(width,height)`. So the additional derived properties are for convenience.
+
+Technically it's possible for `width/height` to be negative, that's useful for  "directed" rectangles, e.g. to represent mouse selection with properly marked start and end.
+
+Here's a rectangle with negative `width` and `height` (e.g. `width=-200`, `height=-100`):
+
+![](coordinates-negative.png)
+
+The rectangle starts at its bottom-right corner and then spans left/up, as negative `width/height` lead it backwards by coordinates.
+
+As you can see, `left/top` are not `x/y` here. So these are actually not duplicates. Their formula can be adjusted to cover negative `width/height`, that's simple enough, but rarely needed, as the result of `elem.getBoundingClientRect()` always has positive width/height.
+>>>>>>> 4a8d8987dfc3256045e6b4a3bd8810ad3b25d1b3
 ```
 
 ```warn header="Internet Explorer и Edge: не поддерживают `x/y`"
 Internet Explorer и Edge не поддерживают свойства `x/y` по историческим причинам.
 
+<<<<<<< HEAD
 Таким образом, мы можем либо сделать полифил (добавив соответствующие геттеры в `DomRect.prototype`), либо использовать `top/left`, так как это всегда то же, что и `x/y`, в результате `elem.getBoundingClientRect()`.
 ```
 
 ```warn header="Координаты right/bottom отличаются от одноимённых CSS-свойств"
 Есть очевидное сходство между координатами относительно окна и CSS `position:fixed`. Ведь такое CSS-позиционирование тоже происходит относительно окна браузера (или его видимой части).
+=======
+So we can either make a polywill (add getters in `DomRect.prototype`) or just use `top/left`, as they are always the same as `x/y` for `elem.getBoundingClientRect()`.
+```
+
+```warn header="Coordinates right/bottom are different from CSS position properties"
+There are obvious similarities between window-relative coordinates and CSS `position:fixed`.
+>>>>>>> 4a8d8987dfc3256045e6b4a3bd8810ad3b25d1b3
 
 Но в CSS свойство `right` означает расстояние от правого края, и свойство `bottom` означает расстояние от нижнего края окна браузера.
 
@@ -130,9 +153,13 @@ alert(elem.tagName);
 ````warn header="Для координат за пределами окна метод `elementFromPoint` возвращает `null`"
 Метод `document.elementFromPoint(x,y)` работает, только если координаты `(x,y)` относятся к видимой части содержимого окна.
 
+<<<<<<< HEAD
 Если любая из координат представляет собой отрицательное число или превышает размеры окна, то возвращается `null`.
 
 Вот типичная ошибка, которая может произойти, если в коде нет соответствующей проверки:
+=======
+Here's a typical error that may occur if we don't check for it:
+>>>>>>> 4a8d8987dfc3256045e6b4a3bd8810ad3b25d1b3
 
 ```js
 let elem = document.elementFromPoint(x, y);
@@ -143,7 +170,11 @@ elem.style.background = ''; // Ошибка!
 ```
 ````
 
+<<<<<<< HEAD
 ## Применение для fixed позиционирования
+=======
+## Using for "fixed" positioning
+>>>>>>> 4a8d8987dfc3256045e6b4a3bd8810ad3b25d1b3
 
 Чаще всего нам нужны координаты для позиционирования чего-либо. В CSS для позиционирования элемента относительно окна браузера используется свойство `position:fixed` вместе со свойствами `left/top` (или `right/bottom`).
 
@@ -186,6 +217,7 @@ setTimeout(() => message.remove(), 5000);
 <button id="coords-show-mark">Кнопка с id="coords-show-mark", сообщение появится под ней</button>
 ```
 
+<<<<<<< HEAD
 Код можно изменить, чтобы показывать сообщение слева, справа, снизу, применять к нему CSS-анимации и так далее. Это просто, так как в нашем распоряжении имеются все координаты и размеры элемента.
 
 Но обратите внимание на одну важную деталь: при прокрутке страницы сообщение уплывает от кнопки.
@@ -203,6 +235,25 @@ setTimeout(() => message.remove(), 5000);
 Мы можем воспользоваться свойствами `position:absolute` и `top/left`, чтобы привязать что-нибудь к конкретному месту в документе. При этом прокрутка страницы не имеет значения. Но сначала нужно получить верные координаты.
 
 Не существует стандартного метода, который возвращал бы координаты элемента относительно документа, но мы можем написать его сами.
+=======
+The code can be modified to show the message at the left, right, below, apply CSS animations to "fade it in" and so on. That's easy, as we have all the coordinates and sizes of the element.
+
+But note the important detail: when the page is scrolled, the message flows away from the button.
+
+The reason is obvious: the message element relies on `position:fixed`, so it remains at the same place of the window while the page scrolls away.
+
+To change that, we need to use document-based coordinates and `position:absolute`.
+
+## Document coordinates [#getCoords]
+
+Document-relative coordinates start from the upper-left corner of the document, not the window.
+
+In CSS, window coordinates correspond to `position:fixed`, while document coordinates are similar to `position:absolute` on top.
+
+We can use `position:absolute` and `top/left` to put something at a certain place of the document, so that it remains there during a page scroll. But we need the right coordinates first.
+
+There's no standard method to get the document coordinates of an element. But it's easy to write it.
+>>>>>>> 4a8d8987dfc3256045e6b4a3bd8810ad3b25d1b3
 
 Две системы координат связаны следующими формулами:
 - `pageY` = `clientY` + высота вертикально прокрученной части документа.
@@ -222,7 +273,33 @@ function getCoords(elem) {
 }
 ```
 
+<<<<<<< HEAD
 ## Итого
+=======
+If in the example above we use it with `position:absolute`, that would work right.
+
+The modified `createMessageUnder` function:
+
+```js
+function createMessageUnder(elem, html) {
+  let message = document.createElement('div');
+  message.style.cssText = "*!*position:absolute*/!*; color: red";
+
+  let coords = *!*getCoords(elem);*/!*
+
+  message.style.left = coords.left + "px";
+  message.style.top = coords.bottom + "px";
+
+  message.innerHTML = html;
+
+  return message;
+}
+```
+
+You'll find other examples in the task.
+
+## Summary
+>>>>>>> 4a8d8987dfc3256045e6b4a3bd8810ad3b25d1b3
 
 Любая точка на странице имеет координаты:
 
