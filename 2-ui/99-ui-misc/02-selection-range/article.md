@@ -153,7 +153,7 @@ From <input id="start" type="number" value=1> – To <input id="end" type="numbe
 </script>
 ```
 
-Объект диапазона [Range] имеет следующие свойства:
+Объект диапазона Range имеет следующие свойства:
 
 ![](range-example-p-2-b-3-range.png)
 
@@ -302,7 +302,7 @@ From <input id="start" type="number" value=1> – To <input id="end" type="numbe
 
 ![](selection-direction-backward.png)
 
-Это отличается от объектов `Range`, которые всегда направлены вперед: начало диапазона не может стоять после его конца.
+Это отличается от объектов `Range`, которые всегда направлены вперёд: начало диапазона не может стоять после его конца.
 ````
 
 ## События Selection
@@ -353,7 +353,7 @@ From <input id="start" type="number" value=1> – To <input id="end" type="numbe
 
     cloned.innerHTML = astext.innerHTML = "";
 
-    // Клонируем DOM-элеменьы из диапазонов (здесь мы поддерживаем множественное выделение в Firefox)
+    // Клонируем DOM-элеменьы из диапазонов (здесь мы поддерживаем множественное выделение)
     for (let i = 0; i < selection; i++) {
       cloned.append(selection.getRangeAt(i).cloneContents());
     }
@@ -545,7 +545,7 @@ From <input id="start" type="number" value=1> – To <input id="end" type="numbe
 
 - [Спецификация DOM: Range](https://dom.spec.whatwg.org/#ranges)
 - [Selection API](https://www.w3.org/TR/selection-api/#dom-globaleventhandlers-onselectstart)
-- [Специикация HTML: API для выделения в элементах управления текстом](https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#textFieldSelection)
+- [Спецификация HTML: API для выделения в элементах управления текстом](https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#textFieldSelection)
 
 
 ## Итого
@@ -583,4 +583,4 @@ From <input id="start" type="number" value=1> – To <input id="end" type="numbe
 
 Ещё одна важная деталь о выделении: позиция курсора в редактируемых элементах, таких как `<textarea>`, всегда стоит в начале или конце выделения.
 
-Мы можем использовать это чтобы получить позицию курсора и переместить его, установив `elem.selectionStart` и `elem.selectionEnd`.
+Мы можем использовать это, чтобы получить позицию курсора и переместить его, установив `elem.selectionStart` и `elem.selectionEnd`.
