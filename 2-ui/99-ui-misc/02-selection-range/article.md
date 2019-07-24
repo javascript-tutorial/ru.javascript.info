@@ -419,33 +419,43 @@ From <input id="start" type="number" value=1> – To <input id="end" type="numbe
 Исключением являются некоторые методы выделения, которые заменяют существующее выделение, например, `setBaseAndExtent`.
 ```
 
-## Selection в элементах управления форм
+## Selection in form controls
 
 Элементы формы, такие как `input` и `textarea`, предоставляют [API для выделения в их значениях](https://html.spec.whatwg.org/#textFieldSelection).
 
-Так как их значения - это не HTML, а просто текст, эти методы не используют объекты `Selection` и `Range`, они намного проще.
+Properties:
+- `input.selectionStart` -- position of selection start (writeable),
+- `input.selectionEnd` -- position of selection start (writeable),
+- `input.selectionDirection` -- selection direction, one of: "forward", "backward" or "none" (if e.g. selected with a double mouse click),
 
-- `input.select()` -- выделяет всё содержимое `input`,
-- `input.selectionStart` -- позиция начала выделения (доступен для записи),
-- `input.selectionEnd` -- позиция конца выборки (доступен для записи),
-- `input.selectionDirection` -- одно из направлений: "forward", "backward" или "none" (если, к примеру, выделено с помощью двойного клика мыши),
-- `input.setSelectionRange(start, end, [direction])` -- изменить диапазон выделения, начиная со `start`, заканчивая `end`, в данном направлении (необязательный параметр).
+Events:
+- `input.onselect` -- triggers when something is selected.
 
-Для изменения содержимого выделения:
+Methods:
 
-- `input.setRangeText(replacement, [start], [end], [selectionMode])` -- заменяет выделенный текст в диапазоне новым. Если аргументы `start` и `end` не предоставлены, полагается, что диапазон - всё выделение.
+- `input.select()` -- selects everything in the text control (can be `textarea` instead of `input`),
+- `input.setSelectionRange(start, end, [direction])` -- change the selection to span from position `start` till `end`, in the given direction (optional).
+- `input.setRangeText(replacement, [start], [end], [selectionMode])` -- replace a range of text with the new text.
 
-Последний аргумент, `selectionMode`, определяет, как будет вести себя выделение после замены текста. Возможные значения:
+    Optional arguments `start` and `end`, if provided, set the range start and end, otherwise user selection is used.
 
-- `"select"` -- только что вставленный текст будет выделен.
-- `"start"` -- диапазон выделения схлопнется прямо перед вставленным текстом.
-- `"end"` -- диапазон выделения схлопнется прямо после вставленного текста.
-- `"preserve"` -- пытается сохранить выделение. Значение по умолчанию.
+    The last argument, `selectionMode`, determines how the selection will be set after the text has been replaced. The possible values are:
 
-К примеру, этот код использует событие `onselect`, чтобы отслеживать выборку:
+    - `"select"` -- the newly inserted text will be selected.
+    - `"start"` -- the selection range collapses just before the inserted text.
+    - `"end"` -- the selection range collapses just after the inserted text.
+    - `"preserve"` -- attempts to preserve the selection. This is the default.
 
-```html run
-<textarea id="area" style="width:80%;height:60px">Выделите этот текст</textarea>
+Now let's see these methods in action.
+
+### Example: tracking selection
+
+For example, this code uses `onselect` event to track selection:
+
+```html run autorun
+<textarea id="area" style="width:80%;height:60px">
+Selecting in this text updates values below.
+</textarea>
 <br>
 От <input id="from" disabled> – До <input id="to" disabled>
 
@@ -457,23 +467,29 @@ From <input id="start" type="number" value=1> – To <input id="end" type="numbe
 </script>
 ```
 
-Событие `document.onselectionchange` не должно срабатывать для выделения внутри элемента формы в соответствии со [спецификацией](https://w3c.github.io/selection-api/#dfn-selectionchange), так как событие не относится к выделению и диапазонам объекта `document`. Тем не менее, некоторые браузеры генерируют это событие.
+Please note:
+- `onselect` triggers when something is selected, but not when the selection is removed.
+- `document.onselectionchange` event should not trigger for selections inside a form control, according to the [spec](https://w3c.github.io/selection-api/#dfn-selectionchange), as it's not related to `document` selection and ranges. Some browsers generate it, but we shouldn't rely on it.
 
-**Когда ничего не выбрано, `selectionStart` и `selectionEnd` равны позиции курсора.**
 
-Иными словами, когда ничего не выбрано, выборка схлопнута на позиции курсора.
+### Example: moving cursor
 
-Мы можем использовать это, чтобы передвигать курсор:
+We can change `selectionStart` and `selectionEnd`, that sets the selection.
 
-```html run
+An important edge case is when `selectionStart` and `selectionEnd` equal each other. Then it's exactly the cursor position. Or, to rephrase, when nothing is selected, the selection is collapsed at the cursor position.
+
+So, by setting `selectionStart` and `selectionEnd` to the same value, we move the cursor.
+
+For example:
+
+```html run autorun
 <textarea id="area" style="width:80%;height:60px">
 Переведите фокус на меня, курсор окажется на 10-й позиции
 </textarea>
 
 <script>
   area.onfocus = () => {
-    // нулевая задержка setTimeout нужна
-    // чтобы это сработало после получения фокуса элементом формы
+    // нулевая задержка setTimeout нужна, чтобы это сработало после получения фокуса элементом формы
     setTimeout(() => {
       // мы можем задать любое выделение
       // если начало и конец совпадают, курсор устанавливается на этом месте
@@ -483,23 +499,67 @@ From <input id="start" type="number" value=1> – To <input id="end" type="numbe
 </script>
 ```
 
-...Или вставить что-то в том месте, где курсор установлен, используя `setRangeText`.
+### Example: modifying selection
 
-Ниже представлена кнопка, которая заменяет выделенный текст на `"TEXT"` и устанавливает курсор сразу после вставленного текста. Если ничего не выделено, текст будет вставлен на позиции курсора:
+To modify the content of the selection, we can use `input.setRangeText`. Of course, we can read `selectionStart/End` and can just change `value`, but `setRangeText` is more powerful.
 
-```html run
-<textarea id="area" style="width:80%;height:60px">Выделите что-нибудь</textarea>
-<br>
+That's a somewhat complex method. In its simplest one-argument form it replaces the user selected range and removes the selection.
 
-<button id="button">Вставить!</button>
+For example, here the user selection will be wrapped by `*...*`:
+
+```html run autorun
+<input id="input" style="width:200px" value="Select here and click the button">
+<button id="button">Wrap selection in stars *...*</button>
+
+<script>
+button.onclick = () => {
+  if (input.selectionStart == input.selectionEnd) {
+    return; // nothing is selected
+  }
+
+  let selected = input.value.slice(input.selectionStart, input.selectionEnd);
+  input.setRangeText(`*${selected}*`);
+};
+</script>
+```
+
+With more arguments, we can set range `start` and `end`.
+
+In this example we find `"THIS"` in the input text, replace it and keep the replacement selected:
+
+```html run autorun
+<input id="input" style="width:200px" value="Replace THIS in text">
+<button id="button">Replace THIS</button>
+
+<script>
+button.onclick = () => {
+  let pos = input.value.indexOf("THIS");
+  if (pos >= 0) {
+    input.setRangeText("*THIS*", pos, pos + 4, "select");
+    input.focus(); // focus to make selection visible
+  }
+};
+</script>
+```
+
+### Example: insert at cursor
+
+If nothing is selected, or we use equal `start` and `end` in `setRangeText`, then the new text is just inserted, nothing is removed.
+
+We can also insert something "at the cursor" using `setRangeText`.
+
+Here's an button that inserts `"HELLO"` at the cursor position and puts the cursor immediately after it. If the selection is not empty, then it gets replaced (we can do detect in by comparing `selectionStart=selectionEnd` and do something else instead):
+
+```html run autorun
+<input id="input" style="width:200px" value="Text Text Text Text Text">
+<button id="button">Insert "HELLO" at cursor</button>
 
 <script>
   button.onclick = () => {
-    // заменить диапазон на "TEXT" и схлопнуть выделение к концу
-    area.setRangeText("TEXT", area.selectionStart, area.selectionEnd, "end");
+    input.setRangeText("HELLO", input.selectionStart, input.selectionEnd, "end");
+    input.focus();
   };    
 </script>
-</body>
 ```
 
 
