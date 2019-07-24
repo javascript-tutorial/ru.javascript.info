@@ -200,7 +200,7 @@ From <input id="start" type="number" value=1> – To <input id="end" type="numbe
 - `insertNode(node)` -- вставить `node` в документ в начале диапазона
 - `surroundContents(node)` -- обернуть `node` вокруг содержимого диапазона. Чтобы этот метод сработал, диапазон должен содержать как открывающие, так и закрывающие теги для всех элементов внутри себя: не допускаются частичные диапазоны по типу `<i>abc`.
 
-Используя эти методы, мы можем делать с выбранными узлами что угодно.
+Используя эти методы, мы можем делать с выделенными узлами что угодно.
 
 Проверим описанные методы в действии:
 
@@ -268,7 +268,7 @@ From <input id="start" type="number" value=1> – To <input id="end" type="numbe
 
 Выделение в документе представлено объектом `Selection`, который может быть получен как `window.getSelection()` или `document.getSelection()`.
 
-Выделение может включать ноль или более диапазонов. По крайней мере, так утверждается в [Спецификации Selection API](https://www.w3.org/TR/selection-api/). На практике же выбрать несколько диапазонов в документе можно только в Firefox, используя `key:Ctrl+click` (`key:Cmd+click` для Mac).
+Выделение может включать ноль или более диапазонов. По крайней мере, так утверждается в [Спецификации Selection API](https://www.w3.org/TR/selection-api/). На практике же выделить несколько диапазонов в документе можно только в Firefox, используя `key:Ctrl+click` (`key:Cmd+click` для Mac).
 
 Ниже представлен скриншот выделения с 3 диапазонами, сделанный в Firefox:
 
@@ -290,7 +290,7 @@ From <input id="start" type="number" value=1> – To <input id="end" type="numbe
 - `rangeCount` -- количество диапазонов в выделении, максимум `1` во всех браузерах, кроме Firefox.
 
 ````smart header="Конец выделения может быть в документе до его начала"
-Существует несколько методов выбрать содержимое, в зависимости от устройства пользователя: мышь, горячие клавиши, нажатия пальцем и другие.
+Существует несколько методов выделить содержимое, в зависимости от устройства пользователя: мышь, горячие клавиши, нажатия пальцем и другие.
 
 Некоторые из них, такие как мышь, позволяют создавать выделение в обоих направлениях: слева направо и справа налево.
 
@@ -316,7 +316,7 @@ From <input id="start" type="number" value=1> – To <input id="end" type="numbe
 - `document.onselectionchange` -- когда выделение изменено.
     - Заметьте: этот обработчик можно поставить только на `document`.
 
-### Демо отслеживания Selection
+### Демо отслеживания выделения
 
 Ниже представлено небольшое демо.
 В нём границы выделения выводятся динамически по мере того, как оно меняется:
@@ -379,7 +379,7 @@ From <input id="start" type="number" value=1> – To <input id="end" type="numbe
 
 Также существуют методы управления диапазонами выделения напрямую, без обращения к Range:
 
-- `collapse(node, offset)` -- заменить выбранный диапазон новым, который начинается и заканчивается на `node`, на позиции `offset`.
+- `collapse(node, offset)` -- заменить выделенный диапазон новым, который начинается и заканчивается на `node`, на позиции `offset`.
 - `setPosition(node, offset)` -- то же самое, что `collapse` (дублирующий метод-псевдоним).
 - `collapseToStart()` - схлопнуть (заменить на пустой диапазон) к началу выделения,
 - `collapseToEnd()` - схлопнуть диапазон к концу выделения,
@@ -426,43 +426,38 @@ From <input id="start" type="number" value=1> – To <input id="end" type="numbe
 
 Элементы форм, такие как `input` и `textarea`, предоставляют [отдельное API для выделения](https://html.spec.whatwg.org/#textFieldSelection).
 
-Properties:
-- `input.selectionStart` -- position of selection start (writeable),
-- `input.selectionEnd` -- position of selection start (writeable),
-- `input.selectionDirection` -- selection direction, one of: "forward", "backward" or "none" (if e.g. selected with a double mouse click),
-
-Events:
-- `input.onselect` -- triggers when something is selected.
-- `input.select()` -- выделяет всё содержимое `input` (может быть textarea вместо input),
+Свойства:
 - `input.selectionStart` -- позиция начала выделения (это свойство можно изменять),
-- `input.selectionEnd` -- позиция конца выборки (это свойство можно изменять),
-- `input.selectionDirection` -- направление выделения, одно из: "forward" (вперёд), "backward" (назад) или "none" (без направления, если, к примеру, выделено с помощью двойного клика мыши),
+- `input.selectionEnd` -- позиция конца выделения (это свойство можно изменять),
+- `input.selectionDirection` -- направление выделения, одно из: "forward" (вперёд), "backward" (назад) или "none" (без направления, если, к примеру, выделено с помощью двойного клика мыши).
+
+События:
+- `input.onselect` -- срабатывает, когда начинается выделение.
+
+Методы:
+
+- `input.select()` -- выделяет всё содержимое `input` (может быть textarea вместо input),
 - `input.setSelectionRange(start, end, [direction])` -- изменить выделение, чтобы начиналось с позиции `start`, и заканчивалось `end`, в данном направлении `direction` (необязательный параметр).
+- `input.setRangeText(replacement, [start], [end], [selectionMode])` -- заменяет выделенный текст в диапазоне новым. 
 
-Methods:
+    Если аргументы `start` и `end` не предоставлены, полагается, что диапазон - всё выделение.
 
-- `input.select()` -- selects everything in the text control (can be `textarea` instead of `input`),
-- `input.setSelectionRange(start, end, [direction])` -- change the selection to span from position `start` till `end`, in the given direction (optional).
-- `input.setRangeText(replacement, [start], [end], [selectionMode])` -- replace a range of text with the new text.
+    Последний аргумент, `selectionMode`, определяет, как будет вести себя выделение после замены текста. Возможные значения:
 
-    Optional arguments `start` and `end`, if provided, set the range start and end, otherwise user selection is used.
+    - `"select"` -- только что вставленный текст будет выделен.
+    - `"start"` -- диапазон выделения схлопнется прямо перед вставленным текстом.
+    - `"end"` -- диапазон выделения схлопнется прямо после вставленного текста.
+    - `"preserve"` -- пытается сохранить выделение. Значение по умолчанию.
 
-    The last argument, `selectionMode`, determines how the selection will be set after the text has been replaced. The possible values are:
+Давайте посмотрим на эти методы в действии.
 
-    - `"select"` -- the newly inserted text will be selected.
-    - `"start"` -- the selection range collapses just before the inserted text.
-    - `"end"` -- the selection range collapses just after the inserted text.
-    - `"preserve"` -- attempts to preserve the selection. This is the default.
+### Пример: отслеживание выделения
 
-Now let's see these methods in action.
-
-### Example: tracking selection
-
-For example, this code uses `onselect` event to track selection:
+К примеру, этот код использует событие `onselect`, чтобы отслеживать выделение:
 
 ```html run autorun
 <textarea id="area" style="width:80%;height:60px">
-Selecting in this text updates values below.
+Выделите что-нибудь в этом тексте, чтобы обновить значения ниже.
 </textarea>
 <br>
 От <input id="from" disabled> – До <input id="to" disabled>
@@ -475,20 +470,20 @@ Selecting in this text updates values below.
 </script>
 ```
 
-Please note:
-- `onselect` triggers when something is selected, but not when the selection is removed.
-- `document.onselectionchange` event should not trigger for selections inside a form control, according to the [spec](https://w3c.github.io/selection-api/#dfn-selectionchange), as it's not related to `document` selection and ranges. Some browsers generate it, but we shouldn't rely on it.
+Заметьте:
+- `onselect` срабатывает при выделении чего-либо, но не при снятии выделения.
+- `document.onselectionchange` не должно срабатывать для выделения внутри элемента формы в соответствии со [спецификацией](https://w3c.github.io/selection-api/#dfn-selectionchange), так как событие не относится к выделению и диапазонам объекта `document`. Хотя некоторые браузеры генерируют это событие, полагаться на это не стоит.
 
 
-### Example: moving cursor
+### Пример: изменение позиции курсора
 
-We can change `selectionStart` and `selectionEnd`, that sets the selection.
+Мы можем изменять `selectionStart` и `selectionEnd`, устанавливая выделение.
 
-An important edge case is when `selectionStart` and `selectionEnd` equal each other. Then it's exactly the cursor position. Or, to rephrase, when nothing is selected, the selection is collapsed at the cursor position.
+ Важный граничный случай - когда `selectionStart` и `selectionEnd` равны друг другу. В этом случае, они равны позиции курсора. Иными словами, когда ничего не выбрано, выделение схлопнуто на позиции курсора.
 
-So, by setting `selectionStart` and `selectionEnd` to the same value, we move the cursor.
+Таким образом, задавая `selectionStart` и `selectionEnd` одно и тоже значение, мы можем передвигать курсор.
 
-For example:
+Например:
 
 ```html run autorun
 <textarea id="area" style="width:80%;height:60px">
@@ -507,22 +502,22 @@ For example:
 </script>
 ```
 
-### Example: modifying selection
+### Пример: изменение выделения
 
-To modify the content of the selection, we can use `input.setRangeText`. Of course, we can read `selectionStart/End` and can just change `value`, but `setRangeText` is more powerful.
+Чтобы изменять содержимое выделения, мы можем использовать `input.setRangeText`. Конечно, мы можем читать `selectionStart/End` и затем просто изменять `value`, но `setRangeText` намного мощнее.
 
-That's a somewhat complex method. In its simplest one-argument form it replaces the user selected range and removes the selection.
+Это довольно сложный метод. В простейшем случае он принимает один аргумент, заменяет содержание выделенной области и снимает выделение.
 
-For example, here the user selection will be wrapped by `*...*`:
+В этом примере выделенный текст будет обернут в `*...*`:
 
 ```html run autorun
 <input id="input" style="width:200px" value="Select here and click the button">
-<button id="button">Wrap selection in stars *...*</button>
+<button id="button">Обернуть выделение звездочками  *...*</button>
 
 <script>
 button.onclick = () => {
   if (input.selectionStart == input.selectionEnd) {
-    return; // nothing is selected
+    return; // ничего не выделено
   }
 
   let selected = input.value.slice(input.selectionStart, input.selectionEnd);
@@ -531,40 +526,40 @@ button.onclick = () => {
 </script>
 ```
 
-With more arguments, we can set range `start` and `end`.
+Передавая больше параметров, мы можем устанавливать `start` и `end`.
 
-In this example we find `"THIS"` in the input text, replace it and keep the replacement selected:
+В этом примере мы найдем `"ЭТО"` в поле ввода, заменим его и оставим замененный текст выделенным:
 
 ```html run autorun
-<input id="input" style="width:200px" value="Replace THIS in text">
-<button id="button">Replace THIS</button>
+<input id="input" style="width:200px" value="Замените ЭТО в тексте">
+<button id="button">Заменить ЭТО</button>
 
 <script>
 button.onclick = () => {
-  let pos = input.value.indexOf("THIS");
+  let pos = input.value.indexOf("ЭТО");
   if (pos >= 0) {
-    input.setRangeText("*THIS*", pos, pos + 4, "select");
-    input.focus(); // focus to make selection visible
+    input.setRangeText("*ЭТО*", pos, pos + 4, "select");
+    input.focus(); // ставим фокус, чтобы выделение было видно
   }
 };
 </script>
 ```
 
-### Example: insert at cursor
+### Пример: вставка на месте курсора
 
-If nothing is selected, or we use equal `start` and `end` in `setRangeText`, then the new text is just inserted, nothing is removed.
+Если ничего не выделено, или мы указали одинаковые `start` и `end` в методе `setRangeText`, то текст просто вставляется, ничего не удаляя.
 
-We can also insert something "at the cursor" using `setRangeText`.
+Мы также можем вставить что-нибудь на месте курсора, используя `setRangeText`.
 
-Here's an button that inserts `"HELLO"` at the cursor position and puts the cursor immediately after it. If the selection is not empty, then it gets replaced (we can do detect in by comparing `selectionStart=selectionEnd` and do something else instead):
+Кнопка в примере вставляет `"ПРИВЕТ"` на месте курсора и устанавливает его после вставленного текста. Если какой-то текст был выделен, он будет заменен (мы можем отследить это, проверив `selectionStart=selectionEnd` и, если это не так, сделать что-то другое):
 
 ```html run autorun
-<input id="input" style="width:200px" value="Text Text Text Text Text">
-<button id="button">Insert "HELLO" at cursor</button>
+<input id="input" style="width:200px" value="Текст Текст Текст Текст Текст">
+<button id="button">Вставить "ПРИВЕТ" на месте курсора</button>
 
 <script>
   button.onclick = () => {
-    input.setRangeText("HELLO", input.selectionStart, input.selectionEnd, "end");
+    input.setRangeText("ПРИВЕТ", input.selectionStart, input.selectionEnd, "end");
     input.focus();
   };    
 </script>
@@ -601,13 +596,13 @@ Here's an button that inserts `"HELLO"` at the cursor position and puts the curs
     </script>
     ```
 
-    Этот способ также не даёт начать выделение с `elem`, но пользователь может начать с другого элемента, а затем расширить выборку до `elem`.
+    Этот способ также не даёт начать выделение с `elem`, но пользователь может начать с другого элемента, а затем расширить выделение до `elem`.
 
     Это удобно, когда есть другой обработчик события на том же событии, которое запускает выделение. Так что мы отключаем выделение, чтобы избежать конфликта.
 
     Содержимое `elem` всё ещё может быть скопировано.
 
-3. Мы также можем очистить выборку после срабатывания с помощью `document.getSelection().empty()`. Этот способ используется редко, так как он вызывает нежелаемое мерцание при появлении и исчезновении выделения.
+3. Мы также можем очистить выделение после срабатывания с помощью `document.getSelection().empty()`. Этот способ используется редко, так как он вызывает нежелаемое мерцание при появлении и исчезновении выделения.
 
 ## Ссылки
 
@@ -637,7 +632,7 @@ Here's an button that inserts `"HELLO"` at the cursor position and puts the curs
       cloned.append(selection.getRangeAt(i).cloneContents());
     }
     ```
-2. Установить выборку:
+2. Установить выделение:
     ```js run
     let selection = document.getSelection();
 
