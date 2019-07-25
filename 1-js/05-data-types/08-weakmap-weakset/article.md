@@ -134,7 +134,7 @@ let visitsCountMap = new Map(); // map: пользователь => число �
 // увеличиваем счётчик
 function countUser(user) {
   let count = visitsCountMap.get(user) || 0;
-  visitsCountMap.set(count + 1);
+  visitsCountMap.set(user, count + 1);
 }
 ```
 
@@ -164,7 +164,7 @@ let visitsCountMap = new WeakMap(); // map: пользователь => числ
 // увеличиваем счётчик
 function countUser(user) {
   let count = visitsCountMap.get(user) || 0;
-  visitsCountMap.set(count + 1);
+  visitsCountMap.set(user, count + 1);
 }
 ```
 
