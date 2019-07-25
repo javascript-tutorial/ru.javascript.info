@@ -424,7 +424,7 @@ From <input id="start" type="number" value=1> – To <input id="end" type="numbe
 
 ## Выделение в элементах форм
 
-Элементы форм, такие как `input` и `textarea`, предоставляют [отдельное API для выделения](https://html.spec.whatwg.org/#textFieldSelection).
+Элементы форм, такие как `input` и `textarea`, предоставляют [отдельное API для выделения](https://html.spec.whatwg.org/#textFieldSelection).  Так как значения полей представляют собой простой текст, а не HTML, и нам не нужны такие сложные объекты, как `Range` и `Selection`.
 
 Свойства:
 - `input.selectionStart` -- позиция начала выделения (это свойство можно изменять),
