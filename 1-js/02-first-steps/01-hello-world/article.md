@@ -105,7 +105,7 @@
 
 ```html
 <script *!*src*/!*="file.js">
-  alert(1); // the content is ignored, because src is set
+  alert(1); // контент игнорируется, так как установлен атрибут src
 </script>
 ```
 
