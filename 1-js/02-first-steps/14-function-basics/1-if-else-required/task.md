@@ -15,7 +15,7 @@ function checkAge(age) {
 *!*
   } else {
     // ...
-    return confirm('Did parents allow you?');
+    return confirm('Родители разрешили?');
   }
 */!*
 }
@@ -30,7 +30,7 @@ function checkAge(age) {
   }
 *!*
   // ...
-  return confirm('Did parents allow you?');
+  return confirm('Родители разрешили?');
 */!*
 }
 ```
