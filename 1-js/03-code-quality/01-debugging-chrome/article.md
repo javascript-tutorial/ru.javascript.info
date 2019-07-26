@@ -161,7 +161,7 @@ function hello(name) {
 ```js run
 // чтобы увидеть результат, сначала откройте консоль
 for (let i = 0; i < 5; i++) {
-  console.log("value", i);
+  console.log("значение", i);
 }
 ```
 
