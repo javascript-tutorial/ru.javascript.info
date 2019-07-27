@@ -16,7 +16,7 @@
 
 При первом запуске получаем следующее:
 
-![](chrome-open-sources.png)
+![](chrome-open-sources.svg)
 
 Кнопка-переключатель <span class="devtools" style="background-position:-168px -76px"></span> откроет вкладку со списком файлов.
 
