@@ -51,13 +51,13 @@
                 <use fill-opacity="1" xlink:href="#text-5"></use>
             </g>
             <text id="jump-to-the-outer-fu" font-family="OpenSans-Bold, Open Sans" font-size="18" font-weight="bold" fill="#EE6B47">
-                <tspan x="187" y="190">jump to the outer function</tspan>
+                <tspan x="223.17999999999998" y="190">выпрыгнуть во внешнюю функцию</tspan>
             </text>
             <text id="watch-expressions" font-family="OpenSans-Bold, Open Sans" font-size="18" font-weight="bold" fill="#EE6B47">
-                <tspan x="262" y="99">watch expressions</tspan>
+                <tspan x="313.12" y="99">смотреть за выражениями</tspan>
             </text>
             <text id="current-variables" font-family="OpenSans-Bold, Open Sans" font-size="18" font-weight="bold" fill="#EE6B47">
-                <tspan x="273" y="227">current variables</tspan>
+                <tspan x="295.14" y="227">текущие переменные</tspan>
             </text>
             <path id="Line-2" d="M476,94.5 L435.5,94.5 L435.5,91.5 L476,91.5 L476,83.5 L495,93 L476,102.5 L476,94.5 Z" fill="#EE6B47" fill-rule="nonzero"></path>
             <path id="Line-2-Copy" d="M476,185.5 L435.5,185.5 L435.5,182.5 L476,182.5 L476,174.5 L495,184 L476,193.5 L476,185.5 Z" fill="#EE6B47" fill-rule="nonzero"></path>
