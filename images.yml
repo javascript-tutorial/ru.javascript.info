@@ -1,88 +1,88 @@
 code-style.svg:
   "No space":
     text: "Без пробелов"
-    center: true
+    position: "center"
   "between the function name and parentheses":
-    center: true
+    position: "center"
     text: "между именем функции и скобками"
   "between the parentheses and the parameter":
-    center: true
+    position: "center"
     text: "между скобками и параметрами"
   "Indentation":
-    center: true
+    position: "center"
     text: "Отступ"
   "2 spaces":
-    center: true
+    position: "center"
     text: "2 пробела"
   "A space ":
-    center: true
+    position: "center"
     text: "Пробел"
   "after for/if/while…":
-    center: true
+    position: "center"
     text: "после for/if/while…"
   "} else { without a line break": "} else { без перевода строки"
   "Spaces around a nested call":
-    center: true
+    position: "center"
     text: "Пробелы вокруг вложенного вызова"
   "An empty line":
-    center: true
+    position: "center"
     text: "Пустая строка"
   "between logical blocks":
-    center: true
+    position: "center"
     text: "Между логическими блоками"
   "Lines are not very long": "Строки не очень длинные"
   "A semicolon ;": "Точка с запятой ;"
   "is mandatory": "обязательна"
   "Spaces":
-    center: true
+    position: "center"
     text: "Пробелы"
   "around operators":
-    center: true
+    position: "center"
     text: "вокруг операторов"
   "Curly brace {":
-    center: true
+    position: "center"
     text: "Фигурная скобка {"
   "on the same line, after a space":
-    center: true
+    position: "center"
     text: "на той же строке, после пробела"
   "A space":
-    center: true
+    position: "center"
     text: "Пробел"
   "between":
-    center: true
+    position: "center"
     text: "между"
   "parameters":
-    center: true
+    position: "center"
     text: "параметрами"
   "A space between parameters":
-    center: true
+    position: "center"
     text: "Пробел между параметрами"
 
 try-catch-flow.svg:
   "Begin":
     text: "Начало"
-    center: true
+    position: "center"
   "No Errors":
     text: "Нет ошибок"
-    center: true
+    position: "center"
   "An error occured in the code":
     text: "В коде произошла ошибка"
-    center: true
+    position: "center"
   "// code...": "// код..."
   "Ignore catch block":
     text: "Игнорировать блок catch"
-    center: true
+    position: "center"
   "Ignore the rest of try":
     text: "Игнорировать остаток try"
-    center: true
+    position: "center"
   "Execute catch block":
     text: "Выполнить блок catch"
-    center: true
+    position: "center"
 
 recursion-pow.svg:
   "Yes":
     text: "Да"
-    center: true
+    position: "center"
   "No":
     text: "Нет"
   "recursive call until n==1": "рекурсивный вызов до n==1"
@@ -95,41 +95,64 @@ hello-world-render.svg:
 ifelse_task2.svg:
   "Begin":
     text: "Начало"
-    center: true
+    position: "center"
   "Other":
     text: "Другое"
-    center: true
+    position: "center"
   "You don't know?":
     text: "Не знаете?"
-    center: true
+    position: "center"
   "Right!":
     text: "Правильно!"
-    center: true
+    position: "center"
   "What's the ":
     text: "Каково"
-    center: true
-  "“official” name of ":
+    position: "center"
+  "“official” name of":
     text: "\"официальное название\""
-    center: true
+    position: "center"
   "Иначе": ""
 
 ifelse_task.svg:
   "Begin": "Начало"
   "Canceled":
-    center: true
+    position: "center"
     text: "Отменено"
   "Welcome!":
     text: "Здравствуйте!"
-    center: true
+    position: "center"
   "I don't know you": "Я вас не знаю"
   "Wrong password":
-    center: true
+    position: "center"
     text: "Неверный пароль"
   "Who's there?":
-    center: true
+    position: "center"
     text: "Кто там?"
   "Password?": "Пароль?"
   "Cancel": "Отмена"
   "Admin": "Админ"
   "TheMaster": "Я Главный"
   "Other": "Другое"
+
+chrome-sources-breakpoint.svg:
+  "here's the list":
+    text: "вот список"
+    position: "right"
+  "breakpoints":
+    text: "точки останова"
+
+chrome-sources-debugger-pause.svg:
+  "jump to the outer function":
+    text: "выпрыгнуть во внешнюю функцию"
+    position: "right"
+  "watch expressions":
+    text: "смотреть за выражениями"
+    position: "right"
+  "current variables":
+    text: "текущие переменные"
+    position: "right"
+
+chrome-sources-debugger-trace-1.svg:
+  "nested calls":
+    text: "вложенные вызовы"
+    position: "right"
