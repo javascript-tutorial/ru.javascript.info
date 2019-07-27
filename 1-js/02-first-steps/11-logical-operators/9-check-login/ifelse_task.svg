@@ -16,19 +16,19 @@
             <g id="Rectangle-1-+-Корень-Copy-2" transform="translate(0.000000, 243.000000)">
                 <rect id="Rectangle-1" stroke="#E8C48E" stroke-width="2" fill="#FFF9EB" x="1" y="1" width="131" height="49" rx="24.5"></rect>
                 <text id="Canceled" font-family="OpenSans-Regular, Open Sans" font-size="14" font-weight="normal" fill="#8A704D">
-                    <tspan x="37.3474609" y="29">Отменено</tspan>
+                    <tspan x="32.6474609" y="29">Отменено</tspan>
                 </text>
             </g>
             <g id="Rectangle-1-+-Корень-Copy-5" transform="translate(150.000000, 438.000000)">
                 <rect id="Rectangle-1" stroke="#E8C48E" stroke-width="2" fill="#FFF9EB" x="1" y="1" width="131" height="49" rx="24.5"></rect>
                 <text id="Canceled" font-family="OpenSans-Regular, Open Sans" font-size="14" font-weight="normal" fill="#8A704D">
-                    <tspan x="37.3474609" y="29">Отменено</tspan>
+                    <tspan x="32.6474609" y="29">Отменено</tspan>
                 </text>
             </g>
             <g id="Rectangle-1-+-Корень-Copy-6" transform="translate(458.000000, 438.000000)">
                 <rect id="Rectangle-1" stroke="#E8C48E" stroke-width="2" fill="#FFF9EB" x="1" y="1" width="131" height="49" rx="24.5"></rect>
                 <text id="Welcome!" font-family="OpenSans-Regular, Open Sans" font-size="14" font-weight="normal" fill="#8A704D">
-                    <tspan x="21.583261699999994" y="29">Здравствуйте!</tspan>
+                    <tspan x="18.5932617" y="29">Здравствуйте!</tspan>
                 </text>
             </g>
             <g id="Rectangle-1-+-Корень-Copy-4" transform="translate(154.000000, 243.000000)">
@@ -40,7 +40,7 @@
             <g id="Rectangle-1-+-Корень-Copy-7" transform="translate(296.000000, 438.000000)">
                 <rect id="Rectangle-1" stroke="#E8C48E" stroke-width="2" fill="#FFF9EB" x="1" y="1" width="147" height="49" rx="24.5"></rect>
                 <text id="Wrong-password" font-family="OpenSans-Regular, Open Sans" font-size="14" font-weight="normal" fill="#8A704D">
-                    <tspan x="20.601855499999996" y="29">Неверный пароль</tspan>
+                    <tspan x="11.6518555" y="29">Неверный пароль</tspan>
                 </text>
             </g>
             <path id="Line" d="M219,58.0499687 L219,35 L222,35 L222,58.0499687 L230,58.0499687 L220.5,77.0499687 L211,58.0499687 L219,58.0499687 Z" fill="#EE6B47" fill-rule="nonzero"></path>
@@ -49,7 +49,7 @@
             <g id="Rectangle-354-+-Каково-“официальное”" transform="translate(127.000000, 81.000000)">
                 <path d="M2.05929887,52 L93.6102814,102.856071 L185.161264,52 L93.6102814,1.14392927 L2.05929887,52 Z" id="Rectangle-354" stroke="#E8C48E" stroke-width="2" fill="#FFF9EB"></path>
                 <text id="Who's-there?" font-family="OpenSans-Regular, Open Sans" font-size="14" font-weight="normal" fill="#8A704D">
-                    <tspan x="67.19216800000001" y="55">Кто там?</tspan>
+                    <tspan x="65.22216800000001" y="55">Кто там?</tspan>
                 </text>
             </g>
             <g id="Rectangle-354-+-Каково-“официальное”-Copy" transform="translate(277.000000, 276.000000)">

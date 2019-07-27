@@ -33,7 +33,7 @@
                 </text>
             </g>
             <text id="Yes" font-family="OpenSans-Regular, Open Sans" font-size="14" font-weight="normal" fill="#8A704D">
-                <tspan x="43.92" y="156">Да</tspan>
+                <tspan x="42.5" y="156">Да</tspan>
             </text>
             <text id="No" font-family="PTSans-Regular, PT Sans" font-size="14" font-weight="normal" fill="#8A704D">
                 <tspan x="299" y="123">Нет</tspan>
