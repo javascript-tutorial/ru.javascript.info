@@ -8,6 +8,6 @@ importance: 2
 
 Если пользователь вводит "ECMAScript", то показать: "Верно!", в противном случае -- отобразить: "Не знаете? ECMAScript!"
 
-![](ifelse_task2.png)
+![](ifelse_task2.svg)
 
 [demo src="ifelse_task2"]

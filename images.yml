@@ -1,0 +1,135 @@
+code-style.svg:
+  "No space":
+    text: "Без пробелов"
+    center: true
+  "between the function name and parentheses":
+    center: true
+    text: "между именем функции и скобками"
+  "between the parentheses and the parameter":
+    center: true
+    text: "между скобками и параметрами"
+  "Indentation":
+    center: true
+    text: "Отступ"
+  "2 spaces":
+    center: true
+    text: "2 пробела"
+  "A space ":
+    center: true
+    text: "Пробел"
+  "after for/if/while…":
+    center: true
+    text: "после for/if/while…"
+  "} else { without a line break": "} else { без перевода строки"
+  "Spaces around a nested call":
+    center: true
+    text: "Пробелы вокруг вложенного вызова"
+  "An empty line":
+    center: true
+    text: "Пустая строка"
+  "between logical blocks":
+    center: true
+    text: "Между логическими блоками"
+  "Lines are not very long": "Строки не очень длинные"
+  "A semicolon ;": "Точка с запятой ;"
+  "is mandatory": "обязательна"
+  "Spaces":
+    center: true
+    text: "Пробелы"
+  "around operators":
+    center: true
+    text: "вокруг операторов"
+  "Curly brace {":
+    center: true
+    text: "Фигурная скобка {"
+  "on the same line, after a space":
+    center: true
+    text: "на той же строке, после пробела"
+  "A space":
+    center: true
+    text: "Пробел"
+  "between":
+    center: true
+    text: "между"
+  "parameters":
+    center: true
+    text: "параметрами"
+  "A space between parameters":
+    center: true
+    text: "Пробел между параметрами"
+
+try-catch-flow.svg:
+  "Begin":
+    text: "Начало"
+    center: true
+  "No Errors":
+    text: "Нет ошибок"
+    center: true
+  "An error occured in the code":
+    text: "В коде произошла ошибка"
+    center: true
+  "// code...": "// код..."
+  "Ignore catch block":
+    text: "Игнорировать блок catch"
+    center: true
+  "Ignore the rest of try":
+    text: "Игнорировать остаток try"
+    center: true
+  "Execute catch block":
+    text: "Выполнить блок catch"
+    center: true
+
+recursion-pow.svg:
+  "Yes":
+    text: "Да"
+    center: true
+  "No":
+    text: "Нет"
+  "recursive call until n==1": "рекурсивный вызов до n==1"
+
+hello-world-render.svg:
+  "1. The browser shows this part": "1. Браузер показывает эту часть"
+  "2. Then runs the script": "2. Затем запускает скрипт"
+  "3. Then shows the rest": "3. Затем показывает остальное"
+
+ifelse_task2.svg:
+  "Begin":
+    text: "Начало"
+    center: true
+  "Other":
+    text: "Другое"
+    center: true
+  "You don't know?":
+    text: "Не знаете?"
+    center: true
+  "Right!":
+    text: "Правильно!"
+    center: true
+  "What's the ":
+    text: "Каково"
+    center: true
+  "“official” name of ":
+    text: "\"официальное название\""
+    center: true
+  "Иначе": ""
+
+ifelse_task.svg:
+  "Begin": "Начало"
+  "Canceled":
+    center: true
+    text: "Отменено"
+  "Welcome!":
+    text: "Здравствуйте!"
+    center: true
+  "I don't know you": "Я вас не знаю"
+  "Wrong password":
+    center: true
+    text: "Неверный пароль"
+  "Who's there?":
+    center: true
+    text: "Кто там?"
+  "Password?": "Пароль?"
+  "Cancel": "Отмена"
+  "Admin": "Админ"
+  "TheMaster": "Я Главный"
+  "Other": "Другое"
