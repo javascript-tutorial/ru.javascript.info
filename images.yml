@@ -156,3 +156,6 @@ chrome-sources-debugger-trace-1.svg:
   "nested calls":
     text: "вложенные вызовы"
     position: "right"
+
+chrome-open-sources.svg:
+  open sources: 'открыть исходные файлы'
