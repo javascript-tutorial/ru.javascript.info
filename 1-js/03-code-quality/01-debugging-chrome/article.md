@@ -22,7 +22,7 @@
 
 Кликните на неё и выберите `hello.js`. Вот что появится:
 
-![](chrome-tabs.png)
+![](chrome-tabs.svg)
 
 Интерфейс состоит из трёх зон:
 
@@ -40,7 +40,7 @@
 
 Например, результатом `1+2` будет `3`, а инструкция `hello("debugger")` ничего не возвращает, так что получаем `undefined`:
 
-![](chrome-sources-console.png)
+![](chrome-sources-console.svg)
 
 ## Точки останова (breakpoints)
 

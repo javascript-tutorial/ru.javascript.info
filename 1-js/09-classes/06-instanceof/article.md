@@ -92,7 +92,7 @@ alert( arr instanceof Object ); // true
 
 Вот иллюстрация того как `rabbit instanceof Animal` сравнивается с `Animal.prototype`:
 
-![](instanceof.png)
+![](instanceof.svg)
 
 Кстати, есть метод [objA.isPrototypeOf(objB)], которые возвращает `true`, если объект `objA` есть где-то в прототипной цепочке объекта `objB`. Так что `obj instanceof Class` можно перефразировать как `Class.prototype.isPrototypeOf(obj)`.
 

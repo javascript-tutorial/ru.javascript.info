@@ -66,7 +66,7 @@ alert( "Я люблю HTML5!".match(/\s\w\w\w\w\d/) ); // ' HTML5'
 
 Соответствие (каждому символьному классу соответствует один символ результата):
 
-![](love-html5-classes.png)
+![](love-html5-classes.svg)
 
 ## Граница слова: \b
 
@@ -95,7 +95,7 @@ alert( "Привет, JavaScript!".match(/\bJava\b/) ); // null
 
 Например, в строке `subject:Hello, Java!` Следующие позиции соответствуют `\b`:
 
-![](hello-java-boundaries.png)
+![](hello-java-boundaries.svg)
 
 Так что это соответствует `pattern:\bHello\b`, потому что:
 

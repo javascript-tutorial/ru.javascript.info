@@ -79,6 +79,6 @@ alert(filteredArr.isEmpty()); // Error: filteredArr.isEmpty is not a function
 
 Ниже вы видите структуру `Date` и `Object`:
 
-![](object-date-inheritance.png)
+![](object-date-inheritance.svg)
 
 Как видите, нет связи между `Date` и `Object`. Они независимы, только `Date.prototype` наследует от `Object.prototype`.

@@ -29,7 +29,7 @@ fib(4) = fib(3) + fib(2)
 
 Полное дерево рекурсии:
 
-![fibonacci recursion tree](fibonacci-recursion-tree.png)
+![fibonacci recursion tree](fibonacci-recursion-tree.svg)
 
 Можно заметить, что `fib(3)` вычисляется дважды, а `fib(2)` - трижды. Общее количество вычислений растёт намного быстрее, чем `n`, что делает его огромным даже для `n=77`.
 

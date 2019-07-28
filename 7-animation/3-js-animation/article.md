@@ -160,7 +160,7 @@ function animate({timing, draw, duration}) {
     ```
 
     График функции:
-    ![](linear.png)
+    ![](linear.svg)
 
     Это как если бы в `transition-timing-function` передать значение `linear`. Ниже будут представлены более интересные примеры.
 
@@ -221,7 +221,7 @@ function quad(timeFraction) {
 
 График:
 
-![](quad.png)
+![](quad.svg)
 
 Посмотрим в действии (нажмите для активации):
 
@@ -231,7 +231,7 @@ function quad(timeFraction) {
 
 Вот график для функции `progress` в степени `5`:
 
-![](quint.png)
+![](quint.svg)
 
 В действии:
 
@@ -249,7 +249,7 @@ function circ(timeFraction) {
 
 График:
 
-![](circ.png)
+![](circ.svg)
 
 [iframe height=40 src="circ" link]
 
@@ -269,7 +269,7 @@ function back(x, timeFraction) {
 
 **График для `x = 1.5`:**
 
-![](back.png)
+![](back.svg)
 
 Для анимации мы используем `x` с определённым значением. Пример для `x` со значением `1.5`:
 
@@ -306,7 +306,7 @@ function elastic(x, timeFraction) {
 ```
 
 **График для `x=1.5`:**
-![](elastic.png)
+![](elastic.svg)
 
 В действии со значением `x=1.5`:
 
@@ -348,7 +348,7 @@ let bounceEaseOut = makeEaseOut(bounce);
 
 Ниже мы можем увидеть, как трансформации изменяют поведение функции:
 
-![](bounce-inout.png)
+![](bounce-inout.svg)
 
 Если раньше анимационный эффект, такой как отскоки, был в начале, то после трансформации он будет показан в конце.
 
@@ -394,7 +394,7 @@ bounceEaseInOut = makeEaseInOut(bounce);
 
 Разница хорошо заметна, если сравнивать графики `easeIn`, `easeOut` и `easeInOut` для функции `circ`:
 
-![](circ-ease.png)
+![](circ-ease.svg)
 
 - <span style="color:#EE6B47">Красный</span> обычный вариант `circ` (`easeIn`).
 - <span style="color:#8DB173">Зелёный</span> -- `easeOut`.

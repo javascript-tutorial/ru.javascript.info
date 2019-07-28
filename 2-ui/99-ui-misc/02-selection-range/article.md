@@ -74,7 +74,7 @@ drawHtmlTree(selectPDomtree, 'div.select-p-domtree', 690, 320);
 
 Выделим `"Example: <i>italic</i>"`. Это первые два дочерних узла тега `<p>` (учитывая текстовые узлы):
 
-![](range-example-p-0-1.png)
+![](range-example-p-0-1.svg)
 
 ```html run
 <p id="p">Example: <i>italic</i> and <b>bold</b></p>
@@ -123,7 +123,7 @@ From <input id="start" type="number" value=1> – To <input id="end" type="numbe
 
 К примеру, выделение с `1` до `4` возвращает следующий диапазон `<i>italic</i> and <b>bold</b>`.
 
-![](range-example-p-1-3.png)
+![](range-example-p-1-3.svg)
 
 Не обязательно использовать один и тот же элемент в `setStart` и `setEnd`. Диапазон может охватывать множество не связанных между собой элементов. Важно лишь чтобы конец шёл после начала.
 
@@ -131,7 +131,7 @@ From <input id="start" type="number" value=1> – To <input id="end" type="numbe
 
 Давайте выделим текст частично, как показано ниже:
 
-![](range-example-p-2-b-3.png)
+![](range-example-p-2-b-3.svg)
 
 Это также возможно, нужно просто установить начало и конец как относительное смещение в текстовых узлах.
 
@@ -157,7 +157,7 @@ From <input id="start" type="number" value=1> – To <input id="end" type="numbe
 
 Объект диапазона Range имеет следующие свойства:
 
-![](range-example-p-2-b-3-range.png)
+![](range-example-p-2-b-3-range.svg)
 
 - `startContainer`, `startOffset` -- узел и начальное смещение,
   - в примере выше: первый текстовый узел внутри тега `<p>` и `2`.
@@ -272,7 +272,7 @@ From <input id="start" type="number" value=1> – To <input id="end" type="numbe
 
 Ниже представлен скриншот выделения с 3 диапазонами, сделанный в Firefox:
 
-![](selection-firefox.png)
+![](selection-firefox.svg)
 
 Остальные браузеры поддерживают максимум 1 диапазон. Как мы увидим далее, некоторые методы `Selection` подразумевают, что может быть несколько диапазонов, но, как было сказано ранее, во всех браузерах, кроме Firefox, может быть не более одного диапазона.
 
@@ -298,11 +298,11 @@ From <input id="start" type="number" value=1> – To <input id="end" type="numbe
 
 К примеру, если пользователь начинает выделение с помощью мыши в направлении от "Example" до "italic":
 
-![](selection-direction-forward.png)
+![](selection-direction-forward.svg)
 
 Иначе, если выделение идёт от "italic" до "Example", выделение идёт в "обратном" направлении, его фокус будет перед якорем:
 
-![](selection-direction-backward.png)
+![](selection-direction-backward.svg)
 
 Это отличается от объектов `Range`, которые всегда направлены вперёд: начало диапазона не может стоять после его конца.
 ````

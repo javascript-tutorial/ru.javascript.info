@@ -47,7 +47,7 @@ alert(url.pathname); // /url
 
 Вот шпаргалка:
 
-![](url-object.png)
+![](url-object.svg)
 
 - `href` это полный URL-адрес, то же самое, что `url.toString()`
 - `protocol` - протокол, заканчивается символом двоеточия `:`

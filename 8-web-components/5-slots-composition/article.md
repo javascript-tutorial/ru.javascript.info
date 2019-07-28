@@ -80,7 +80,7 @@ customElements.define('user-card', class extends HTMLElement {
 
 Чтобы отобразить содержимое, для каждого `<slot name="...">` в теневом DOM браузер ищет `slot="..."` с таким же именем в обычном DOM. Эти элементы отображаются внутри слотов:
 
-![](shadow-dom-user-card.png)
+![](shadow-dom-user-card.svg)
 
 В результате выстраивается так называемое "развёрнутое" (flattened) DOM-дерево:
 

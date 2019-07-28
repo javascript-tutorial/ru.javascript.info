@@ -92,7 +92,7 @@ alert(typeof User); // function
 
 На картинке показан результат объявления `class User`:
 
-![](class-user.png)
+![](class-user.svg)
 
 Можно посмотреть разные детали и при помощи кода:
 

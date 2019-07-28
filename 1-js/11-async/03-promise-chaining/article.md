@@ -42,7 +42,7 @@ new Promise(function(resolve, reject) {
 
 В итоге результат передаётся по цепочке обработчиков, и мы видим несколько `alert` подряд, которые выводят: `1` -> `2` -> `4`.
 
-![](promise-then-chain.png)
+![](promise-then-chain.svg)
 
 Всё это работает, потому что вызов `promise.then` тоже возвращает промис, так что мы можем вызвать на нём следующий `.then`.
 
@@ -94,7 +94,7 @@ promise.then(function(result) {
 
 Вот картина происходящего (сравните это с изображением цепочки промисов выше):
 
-![](promise-then-many.png)
+![](promise-then-many.svg)
 
 Все обработчики `.then` на одном и том же промисе получают одно и то же значение -- результат выполнения того же самого промиса. Таким образом, в коде выше все `alert` показывают одно и то же: `1`.
 
@@ -382,4 +382,4 @@ loadJson('/article/promise-chaining/user.json')
 
 Вот полная картина происходящего:
 
-![](promise-handler-variants.png)
+![](promise-handler-variants.svg)

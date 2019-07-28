@@ -97,7 +97,7 @@ new User("Dude").sayHi(); // Hello Dude!
 
 Обратим внимание, что при вызове родительского метода `super.say()` из `sayHiMixin` этот метод ищется в прототипе самой примеси, а не класса.
 
-![](mixin-inheritance.png)
+![](mixin-inheritance.svg)
 
 Это связано с тем, что методы `sayHi` и `sayBye` были изначально созданы в объекте `sayHiMixin`. Так что их внутреннее свойство `[[HomeObject]]` ссылается на `sayHiMixin`, как показано на картинке выше.
 

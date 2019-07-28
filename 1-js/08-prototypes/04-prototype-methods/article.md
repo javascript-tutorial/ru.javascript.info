@@ -121,7 +121,7 @@ alert(obj[key]); // [object Object], не "some value"!
 
 Свойство `__proto__` -- не обычное, а аксессор, заданный в `Object.prototype`:
 
-![](object-prototype-2.png)
+![](object-prototype-2.svg)
 
 Так что при чтении или установке `obj.__proto__` вызывается соответствующий геттер/сеттер из прототипа `obj`, и именно он устанавливает/получает свойство `[[Prototype]]`.
 
@@ -142,7 +142,7 @@ alert(obj[key]); // "some value"
 
 `Object.create(null)` создаёт пустой объект без прототипа (`[[Prototype]]` будет `null`):
 
-![](object-prototype-null.png)
+![](object-prototype-null.svg)
 
 Таким образом не будет унаследованного геттера/сеттера для `__proto__`. Теперь это свойство обрабатывается как обычное свойство, и приведённый выше пример работает правильно.
 

@@ -23,7 +23,7 @@ class Animal {
 let animal = new Animal("My animal");
 ```
 
-![](rabbit-animal-independent-animal.png)
+![](rabbit-animal-independent-animal.svg)
 
 
 ...И `Rabbit`:
@@ -41,7 +41,7 @@ class Rabbit {
 let rabbit = new Rabbit("My rabbit");
 ```
 
-![](rabbit-animal-independent-rabbit.png)
+![](rabbit-animal-independent-rabbit.svg)
 
 Сейчас они полностью независимы.
 
@@ -85,7 +85,7 @@ rabbit.hide(); // White Rabbit hides!
 
 На самом деле ключевое слово `extends` добавляет ссылку на `[[Prototype]]` из `Rabbit.prototype` в `Animal.prototype`:
 
-![](animal-rabbit-extends.png)
+![](animal-rabbit-extends.svg)
 
 Если метод не найден в `Rabbit.prototype`, JavaScript возьмёт его из `Animal.prototype`.
 
@@ -377,7 +377,7 @@ longEar.eat(); // Error: Maximum call stack size exceeded
 
 Картина того, что происходит:
 
-![](this-super-loop.png)
+![](this-super-loop.svg)
 
 1. Внутри `longEar.eat()` строка `(**)` вызывает `rabbit.eat` со значением `this=longEar`.
     ```js
@@ -495,7 +495,7 @@ tree.sayHi();  // Я животное (?!?)
 - Так что его `[[HomeObject]]` - это `rabbit`, ведь он был создан в `rabbit`. Свойство `[[HomeObject]]` никогда не меняется.
 - В коде `tree.sayHi()` есть вызов `super.sayHi()`. Он идёт вверх от `rabbit` и берёт метод из `animal`.
 
-![](super-homeobject-wrong.png)
+![](super-homeobject-wrong.svg)
 
 
 ### Методы, а не свойства-функции

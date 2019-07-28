@@ -199,7 +199,7 @@ setTimeout(function run() {
 
 Для `setInterval` внутренний планировщик выполнит `func(i)` каждые 100 мс:
 
-![](setinterval-interval.png)
+![](setinterval-interval.svg)
 
 Обратили внимание?
 
@@ -215,7 +215,7 @@ setTimeout(function run() {
 
 Ниже представлено изображение, показывающее процесс работы рекурсивного `setTimeout`:
 
-![](settimeout-interval.png)
+![](settimeout-interval.svg)
 
 **Рекурсивный`setTimeout` гарантирует фиксированную задержку (здесь 100 мс).**
 

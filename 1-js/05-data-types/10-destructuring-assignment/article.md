@@ -392,7 +392,7 @@ alert(item2);  // Donut
 
 Обратите внимание, что `size` и `items` не деструктурированы.
 
-![](destructuring-complex.png)
+![](destructuring-complex.svg)
 
 В итоге у нас есть `width`, `height`, `item1`, `item2` и `title` со значением по умолчанию.
 

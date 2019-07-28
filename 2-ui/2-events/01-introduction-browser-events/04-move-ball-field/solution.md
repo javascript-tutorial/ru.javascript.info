@@ -26,7 +26,7 @@
 
 Картинка:
 
-![](move-ball-coords.png)
+![](move-ball-coords.svg)
 
 У нас есть значения `event.clientX/clientY` -- координаты нажатия мышки относительно окна браузера;
 

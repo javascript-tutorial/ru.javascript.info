@@ -372,7 +372,7 @@ alert(sumSalaries(company)); // 6700
 
 Схема вызовов:
 
-![recursive salaries](recursive-salaries.png)
+![recursive salaries](recursive-salaries.svg)
 
 Принцип прост: для объекта `{...}` используются рекурсивные вызовы, а массивы `[...]`, являются "листьями" дерева рекурсии, они сразу дают результат.
 
@@ -443,7 +443,7 @@ let list = {
 
 Графическое представление списка:
 
-![связанный список](linked-list.png)
+![связанный список](linked-list.svg)
 
 Альтернативный код для создания:
 
@@ -463,7 +463,7 @@ let secondList = list.next.next;
 list.next.next = null;
 ```
 
-![разделение связанного списка](linked-list-split.png)
+![разделение связанного списка](linked-list-split.svg)
 
 Для объединения:
 
@@ -487,7 +487,7 @@ list = { value: "new item", next: list };
 */!*
 ```
 
-![связанный список](linked-list-0.png)
+![связанный список](linked-list-0.svg)
 
 Чтобы удалить элемент из середины списка, нужно изменить значение `next` предыдущего элемента:
 
@@ -495,7 +495,7 @@ list = { value: "new item", next: list };
 list.next = list.next.next;
 ```
 
-![связанный список](linked-list-remove-1.png)
+![связанный список](linked-list-remove-1.svg)
 
 `list.next` перепрыгнуло с `1` на значение `2`. Значение `1` теперь исключено из цепочки. Если оно не хранится где-нибудь ещё, оно будет автоматически удалено из памяти.
 

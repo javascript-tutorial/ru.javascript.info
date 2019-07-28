@@ -8,7 +8,7 @@
 
 Свойства `clientWidth/clientHeight` из `document.documentElement` -- это именно то, что нам нужно:
 
-![](document-client-width-height.png)
+![](document-client-width-height.svg)
 
 ```online
 Например, эта кнопка показывает высоту вашего окна:

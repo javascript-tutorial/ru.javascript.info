@@ -28,7 +28,7 @@
 
 Результат выглядит так:
 
-![](metric-css.png)
+![](metric-css.svg)
 
 Вы можете [открыть этот пример в песочнице](sandbox:metric).
 
@@ -48,7 +48,7 @@
 
 Вот общая картина:
 
-![](metric-all.png)
+![](metric-all.svg)
 
 Значениями свойств являются числа, подразумевается, что они в пикселях.
 
@@ -87,7 +87,7 @@
 </script>
 ```
 
-![](metric-offset-parent.png)
+![](metric-offset-parent.svg)
 
 
 Существует несколько ситуаций, когда `offsetParent` равно `null`:
@@ -102,7 +102,7 @@
 
 Эти два свойства – самые простые. Они содержат "внешнюю" ширину/высоту элемента, то есть его полный размер, включая рамки.
 
-![](metric-offset-width-height.png)
+![](metric-offset-width-height.svg)
 
 Для нашего элемента:
 
@@ -138,7 +138,7 @@ function isHidden(elem) {
 - `clientLeft = 25` -- ширина левой рамки
 - `clientTop = 25` -- ширина верхней рамки
 
-![](metric-client-left-top.png)
+![](metric-client-left-top.svg)
 
 ...Но на самом деле эти свойства - вовсе не ширины рамок, а отступы внутренней части элемента от внешней.
 
@@ -148,7 +148,7 @@ function isHidden(elem) {
 
 В этом случае `clientLeft` будет равно `25`, но с прокруткой -- `25 + 16 = 41`:
 
-![](metric-client-left-top-rtl.png)
+![](metric-client-left-top-rtl.svg)
 
 ## Свойства: clientWidth/Height
 
@@ -156,7 +156,7 @@ function isHidden(elem) {
 
 Они включают в себя ширину области содержимого вместе с внутренними отступами `padding`, но без прокрутки:
 
-![](metric-client-width-height.png)
+![](metric-client-width-height.svg)
 
 На рисунке выше посмотрим вначале на высоту `clientHeight`: её посчитать проще всего. Горизонтальной прокрутки нет, так что это в точности то, что внутри рамок: CSS-высота `200px` плюс верхние и нижние внутренние отступы (`2 * 20px`), итого `240px`.
 
@@ -164,7 +164,7 @@ function isHidden(elem) {
 
 **Если нет внутренних отступов `padding`, то `clientWidth/Height` в точности равны размеру области содержимого внутри рамок и полосы прокрутки (если она есть).**
 
-![](metric-client-width-nopadding.png)
+![](metric-client-width-nopadding.svg)
 
 Поэтому в тех случаях, когда мы точно знаем, что отступов нет, можно использовать `clientWidth/clientHeight` для получения размеров внутренней области содержимого.
 
@@ -173,7 +173,7 @@ function isHidden(elem) {
 - Свойства `clientWidth/clientHeight` относятся только к видимой области элемента.
 - Свойства `scrollWidth/scrollHeight` добавляют к ней прокрученную (которую не видно) по горизонтали/вертикали:
 
-![](metric-scroll-width-height.png)
+![](metric-scroll-width-height.svg)
 
 На рисунке выше:
 
@@ -203,7 +203,7 @@ element.style.height = `${element.scrollHeight}px`;
 
 Следующая иллюстрация показывает значения `scrollHeight` и `scrollTop` для блока с вертикальной прокруткой.
 
-![](metric-scroll-top.png)
+![](metric-scroll-top.svg)
 
 Другими словами, свойство `scrollTop` -- это "сколько уже прокручено вверх".
 

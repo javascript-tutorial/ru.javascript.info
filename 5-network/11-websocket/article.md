@@ -73,7 +73,7 @@ socket.onerror = function(error) {
 
 Браузер, при помощи специальных заголовков, спрашивает сервер: "Ты поддерживаешь Websocket?" и если сервер отвечает "да", они начинают работать по протоколу WebSocket, который уже не является HTTP.
 
-![](websocket-handshake.png)
+![](websocket-handshake.svg)
 
 Вот пример запроса браузера для `new WebSocket("wss://javascript.info/chat")`.
 

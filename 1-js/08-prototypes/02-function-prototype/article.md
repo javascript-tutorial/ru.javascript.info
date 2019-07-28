@@ -36,7 +36,7 @@ alert( rabbit.eats ); // true
 
 Результат будет выглядеть так:
 
-![](proto-constructor-animal-rabbit.png)
+![](proto-constructor-animal-rabbit.svg)
 
 На изображении: `"prototype"` - горизонтальная стрелка, обозначающая обычное свойство для `"F"`, а `[[Prototype]]` -- вертикальная, обозначающая наследование `rabbit` от `animal`.
 
@@ -62,7 +62,7 @@ Rabbit.prototype = { constructor: Rabbit };
 */
 ```
 
-![](function-prototype-constructor.png)
+![](function-prototype-constructor.svg)
 
 Проверим это:
 
@@ -86,7 +86,7 @@ let rabbit = new Rabbit(); // наследует от {constructor: Rabbit}
 alert(rabbit.constructor == Rabbit); // true (свойство получено из прототипа)
 ```
 
-![](rabbit-prototype-constructor.png)
+![](rabbit-prototype-constructor.svg)
 
 Мы можем использовать свойство `constructor` существующего объекта для создания нового.
 

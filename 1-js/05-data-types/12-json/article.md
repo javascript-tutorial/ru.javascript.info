@@ -169,7 +169,7 @@ JSON.stringify(meetup); // Ошибка: Преобразование цикли
 
 Здесь преобразование завершается неудачно из-за циклической ссылки: `room.occupiedBy` ссылается на `meetup`, и `meetup.place` ссылается на `room`:
 
-![](json-meetup.png)
+![](json-meetup.svg)
 
 
 ## Исключение и преобразование: replacer

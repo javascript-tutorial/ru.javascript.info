@@ -19,11 +19,11 @@ alert( obj ); // "[object Object]" ?
 
 Вот что происходит:
 
-![](object-prototype.png)
+![](object-prototype.svg)
 
 Когда вызывается `new Object()` (или создаётся объект с помощью литерала `{...}`), свойство `[[Prototype]]` этого объекта устанавливается как `Object.prototype` по правилам, который мы обсуждали в предыдущей статье:
 
-![](object-prototype-1.png)
+![](object-prototype-1.svg)
 
 Таким образом, когда вызывается `obj.toString()` метод берётся из `Object.prototype`.
 
@@ -52,7 +52,7 @@ alert(Object.prototype.__proto__); // null
 
 Вот более полная картина (для 3 встроенных объектов):
 
-![](native-prototypes-classes.png)
+![](native-prototypes-classes.svg)
 
 Давайте проверим прототипы:
 
@@ -79,7 +79,7 @@ alert(arr); // 1,2,3 <-- результат Array.prototype.toString
 Как мы видели раньше, у `Object.prototype` есть свой метод `toString`, но так как `Array.prototype` ближе в цепочке прототипов, то берётся именно вариант для массивов:
 
 
-![](native-prototypes-array-tostring.png)
+![](native-prototypes-array-tostring.svg)
 
 
 В браузерных инструментах, таких как консоль разработчика в Chrome, можно посмотреть цепочку наследования (возможно, потребуется использовать `console.dir` для встроенных объектов):
