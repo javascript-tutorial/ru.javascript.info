@@ -1,3 +1,3 @@
 function getMessage() {
-  return "Hello, world!";
+  return "Привет, мир!";
 }

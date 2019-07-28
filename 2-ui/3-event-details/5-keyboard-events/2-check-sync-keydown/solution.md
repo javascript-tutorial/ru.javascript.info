@@ -1,6 +1,6 @@
 
-We should use two handlers: `document.onkeydown` and `document.onkeyup`.
+Необходимо использовать два обработчика событий: `document.onkeydown` и `document.onkeyup`.
 
-The set `pressed` should keep currently pressed keys.
+Создадим набор (Set) `pressed`, в который будем записывать клавиши, нажатые в данный момент.
 
-The first handler adds to it, while the second one removes from it. Every time on `keydown` we check if we have enough keys pressed, and run the function if it is so.
+В первом обработчике будем добавлять в него значения, а во втором удалять. Каждый раз, как отрабатывает `keydown`, будем проверять -- все ли нужные клавиши нажаты, и, если да -- выводить сообщение.

@@ -2,13 +2,13 @@ importance: 5
 
 ---
 
-# Ask losing this
+# Исправьте функцию, теряющую "this"
 
-The call to `askPassword()` in the code below should check the password and then call `user.loginOk/loginFail` depending on the answer.
+Вызов `askPassword()` в приведенном ниже коде должен проверить пароль и затем вызвать `user.loginOk/loginFail` в зависимости от ответа.
 
-But it leads to an error. Why?
+Однако, его вызов приводит к ошибке. Почему?
 
-Fix the highlighted line for everything to start working right (other lines are not to be changed).
+Исправьте выделенную строку, чтобы всё работало (других строк изменять не надо).
 
 ```js run
 function askPassword(ok, fail) {
@@ -18,7 +18,7 @@ function askPassword(ok, fail) {
 }
 
 let user = {
-  name: 'John',
+  name: 'Вася',
 
   loginOk() {
     alert(`${this.name} logged in`);
@@ -34,5 +34,3 @@ let user = {
 askPassword(user.loginOk, user.loginFail);
 */!*
 ```
-
-

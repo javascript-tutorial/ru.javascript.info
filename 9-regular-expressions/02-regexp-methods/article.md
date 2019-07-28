@@ -1,168 +1,168 @@
-# Methods of RegExp and String
+# Методы RegExp и String
 
-There are two sets of methods to deal with regular expressions.
+Существует два набора методов для работы с регулярными выражениями.
 
-1. First, regular expressions are objects of the built-in [RegExp](mdn:js/RegExp) class, it provides many methods.
-2. Besides that, there are methods in regular strings can work with regexps.
+1. Во-первых, регулярные выражения являются объектами встроенного класса [RegExp](mdn:js/RegExp), он предоставляет много методов.
+2. Кроме того, в обычных строках есть методы, которые могут работать с регулярными выражениями.
 
 
-## Recipes
+## Рекомендации
 
-Which method to use depends on what we'd like to do.
+Какой метод использовать, зависит от того, что мы хотели бы сделать.
 
-Methods become much easier to understand if we separate them by their use in real-life tasks:
+Методы станет намного легче понять, если мы разобьём их по задачам:
 
-**To search for all matches:**
+**Для поиска всех совпадений:**
 
-Use regexp `g` flag and:
-- Get a flat array of matches -- `str.match(reg)`
-- Get an array or matches with details -- `str.matchAll(reg)`.
+Используйте флаг `g` и:
+- Получить плоский массив совпадений -- `str.match(reg)`
+- Получить детализированный набор всех совпадений с возможностью перебора -- `str.matchAll(reg)`.
 
-**To search for the first match only:**
-- Get the full first match -- `str.match(reg)` (without `g` flag).
-- Get the string position of the first match -- `str.search(reg)`.
-- Check if there's a match -- `regexp.test(str)`.
-- Find the match from the given position -- `regexp.exec(str)` (set `regexp.lastIndex` to position).
+**Для поиска только первого совпадения:**
+- Получить детализированное первое совпадение -- `str.match(reg)` (без флага `g`).
+- Получить позицию строки первого совпадения -- `str.search(reg)`.
+- Проверить, есть ли совпадение -- `regexp.test(str)`.
+- Найти совпадение с заданной позиции -- `regexp.exec(str)` (`regexp.lastIndex` устанавливает начало поиска в нужную позицию).
 
-**To replace all matches:**
-- Replace with another string or a function result -- `str.replace(reg, str|func)`
+**Для замены всех совпадений:**
+- Заменить на другую строку или результат функции -- `str.replace(reg, str|func)`
 
-**To split the string by a separator:**
+**Чтобы разбить строку по разделителю:**
 - `str.split(str|reg)`
 
-Now you get the details about every method in this chapter... But if you're reading for the first time, and want to know more about regexps - go ahead!
+Теперь вы можете продолжить чтение этой главы, чтобы получить подробную информацию о каждом методе... Но если вы читаете в первый раз, то, возможно, вы захотите узнать больше о регулярных выражениях. Таким образом, вы можете перейти к следующей главе, а затем вернуться сюда, если о каком-то методе что-то неясно.
 
-You may want to skip methods for now, move on to the next chapter, and then return here if something about a method is unclear.
+
 
 ## str.search(reg)
 
-We've seen this method already. It returns the position of the first match or `-1` if none found:
+Мы уже видели этот метод. Он возвращает позицию первого совпадения или `-1`, если ничего не найдено:
 
 ```js run
-let str = "A drop of ink may make a million think";
+let str = "Люблю регэкспы я, но странною любовью";
 
-alert( str.search( *!*/a/i*/!* ) ); // 0 (the first position)
+alert( str.search( *!*/лю/i*/!* ) ); // 0 (первое совпадение на позиции 0)
 ```
 
-**The important limitation: `search` only finds  the first match.**
+**Важное ограничение метода `search` – он всегда ищет только первое совпадение.**
 
-We can't find next positions using `search`, there's just no syntax for that. But there are other methods that can.
+Мы не можем найти следующие совпадения с помощью `search`, для этого просто нет синтаксиса. Но есть и другие методы, которые могут.
 
-## str.match(reg), no "g" flag
+## str.match(reg), без флага "g"
 
-The behavior of `str.match` varies depending on whether `reg` has `g` flag or not.
+Поведение `str.match` изменяется в зависимости от того, имеет ли `reg` флаг `g` или нет.
 
-First, if there's no `g` flag, then `str.match(reg)` looks for the first match only.
+Во-первых, если флаг `g` отсутствует, то `str.match (reg)` ищет только первое совпадение.
 
-The result is an array with that match and additional properties:
+В результате получается массив с этим соответствием и дополнительными свойствами:
 
-- `index` -- the position of the match inside the string,
-- `input` -- the subject string.
+- `index` - позиция совпадения внутри строки,
+- `input` - строка, в которой был произведён поиск.
 
-For instance:
+Например:
 
 ```js run
-let str = "Fame is the thirst of youth";
+let str = "Слава - это жажда молодости";
 
-let result = str.match( *!*/fame/i*/!* );
+let result = str.match( *!*/слава/i*/!* );
 
-alert( result[0] );    // Fame (the match)
-alert( result.index ); // 0 (at the zero position)
-alert( result.input ); // "Fame is the thirst of youth" (the string)
+alert( result[0] ); // Слава  (совпадение)
+alert( result.index ); // 0 (позиция)
+alert( result.input ); // Слава - это жажда молодости (вся поисковая строка)
 ```
 
-A match result may have more than one element.
+У массива совпадений не всегда только один элемент.
 
-**If a part of the pattern is delimited by parentheses `(...)`, then it becomes a separate element in the array.**
+**Если часть шаблона выделяется скобками `(...)`, то результат добавляется отдельным элементом в массиве.**
 
-If parentheses have a name, designated by `(?<name>...)` at their start, then `result.groups[name]` has the content. We'll see that later in the chapter [about groups](info:regexp-groups).
+Если скобки имеют наименование, обозначаемое как `(?<name>...)`, то в `result.groups[name]` есть содержимое. Мы увидим это позже в главе [о группах](info:regexp-groups).
 
-For instance:
+Например:
 
 ```js run
-let str = "JavaScript is a programming language";
+let str = "JavaScript - это такой язык";
 
 let result = str.match( *!*/JAVA(SCRIPT)/i*/!* );
 
-alert( result[0] ); // JavaScript (the whole match)
-alert( result[1] ); // script (the part of the match that corresponds to the parentheses)
+alert( result[0] ); // JavaScript (всё совпадение полностью)
+alert( result[1] ); // Script (часть совпадения, соответствующая скобкам)
 alert( result.index ); // 0
-alert( result.input ); // JavaScript is a programming language
+alert( result.input ); // JavaScript - это такой язык
 ```
 
-Due to the `i` flag the search is case-insensitive, so it finds `match:JavaScript`. The part of the match that corresponds to `pattern:SCRIPT` becomes a separate array item.
+Из-за флага `i` поиск не чувствителен к регистру, поэтому он находит строку `match:JavaScript`. Часть соответствия, которая соответствует `pattern:SCRIPT`, становится отдельным элементом массива.
 
-So, this method is used to find one full match with all details.
+Таким образом, этот метод используется, чтобы найти одно полное соответствие со всеми деталями.
 
 
-## str.match(reg) with "g" flag
+## str.match(reg) с флагом "g"
 
-When there's a `"g"` flag, then `str.match` returns an array of all matches. There are no additional properties in that array, and parentheses do not create any elements.
+Когда есть флаг `"g"`, тогда `str.match` возвращает массив всех совпадений. В этом массиве нет дополнительных свойств, а круглые скобки не создают никаких элементов.
 
-For instance:
+Например:
 
 ```js run
-let str = "HO-Ho-ho!";
+let str = "ОЙ-Ой-ой";
 
-let result = str.match( *!*/ho/ig*/!* );
+let result = str.match( /ой/ig );
 
-alert( result ); // HO, Ho, ho (array of 3 matches, case-insensitive)
+alert( result ); // ОЙ, Ой, ой (массив из 3 совпадений, без учёта регистра)
 ```
 
-Parentheses do not change anything, here we go:
+Скобки ничего не меняют, поехали:
 
 ```js run
-let str = "HO-Ho-ho!";
+let str = "ОЙ-Ой-ой";
 
-let result = str.match( *!*/h(o)/ig*/!* );
+let result = str.match( /о(й)/ig );
 
-alert( result ); // HO, Ho, ho
+alert( result ); // ОЙ, Ой, ой
 ```
 
-**So, with `g` flag `str.match` returns a simple array of all matches, without details.**
+**Итак, с флагом `g` `str.match` возвращает простой массив всех совпадений без подробностей.**
 
-If we want to get information about match positions and contents of parentheses then we should use `matchAll`  method that we'll cover below.
+Если мы хотим получить информацию о позициях совпадений и содержании скобок, мы должны использовать метод `matchAll`, который мы рассмотрим ниже.
 
-````warn header="If there are no matches, `str.match` returns `null`"
-Please note, that's important. If there are no matches, the result is not an empty array, but `null`.
+````warn header="Если совпадений нет, `str.match` возвращает `null`"
+Пожалуйста, обратите внимание, это важно. Если совпадений нет, результатом является не пустой массив, а `null`.
 
-Keep that in mind to evade pitfalls like this:
+Имейте это в виду, чтобы избежать ловушек, как это:
 
 ```js run
-let str = "Hey-hey-hey!";
+let str = "Ой-йой-йой";
 
-alert( str.match(/Z/g).length ); // Error: Cannot read property 'length' of null
+alert(str.match(/лю/gi).length) // Ошибка! Нет свойства 'length' у null
 ```
 
-Here `str.match(/Z/g)` is `null`, it has no `length` property.
+Здесь `str.match(/лю/gi)` равно `null`, у него нет свойства` length`.
 ````
 
 ## str.matchAll(regexp)
 
-The method `str.matchAll(regexp)` is used to find all matches with all details.
+Метод `str.matchAll(regexp)` используется для поиска всех совпадений со всеми деталями.
 
-For instance:
+Например:
 
 ```js run
-let str = "Javascript or JavaScript? Should we uppercase 'S'?";
+let str = "Javascript или JavaScript? Нужны ли прописные буквы 'S'?";
 
 let result = str.matchAll( *!*/java(script)/ig*/!* );
 
 let [match1, match2] = result;
 
-alert( match1[0] ); // Javascript (the whole match)
-alert( match1[1] ); // script (the part of the match that corresponds to the parentheses)
+alert( match1[0] ); // Javascript (Полное совпадение)
+alert( match1[1] ); // script (Часть совпадения, которая соответсвует круглым скобкам)
 alert( match1.index ); // 0
-alert( match1.input ); // = str (the whole original string)
+alert( match1.input ); // = str (Оригинальная строка целиком)
 
-alert( match2[0] ); // JavaScript (the whole match)
-alert( match2[1] ); // Script (the part of the match that corresponds to the parentheses)
-alert( match2.index ); // 14
-alert( match2.input ); // = str (the whole original string)
+alert( match2[0] ); // JavaScript (Полное совпадение)
+alert( match2[1] ); // Script (Часть совпадения, которая соответсвует круглым скобкам)
+alert( match2.index ); // 15
+alert( match2.input ); // = str (Оригинальная строка целиком)
 ```
 
-````warn header="`matchAll` returns an iterable, not array"
-For instance, if we try to get the first match by index, it won't work:
+````warn header="`matchAll` возвращает итератор, а не массив"
+Например, если мы попытаемся получить первое совпадение по индексу, оно не будет работать:
 
 ```js run
 let str = "Javascript or JavaScript??";
@@ -170,15 +170,15 @@ let str = "Javascript or JavaScript??";
 let result = str.matchAll( /javascript/ig );
 
 *!*
-alert(result[0]); // undefined (?! there must be a match)
+alert(result[0]); // undefined (?! должно быть совпадение)
 */!*
 ```
 
-The reason is that the iterator is not an array. We need to run `Array.from(result)` on it, or use `for..of` loop to get matches.
+Причина в том, что итератор не является массивом. Нам нужно запустить на нем `Array.from (result)` или использовать цикл `for..of` для получения совпадений.
 
-In practice, if we need all matches, then `for..of` works, so it's not a problem.
+На практике, если нам нужны все совпадения, то `for..of` работает, так что это не проблема.
 
-And, to get only few matches, we can use destructuring:
+А, чтобы получить только несколько совпадений, мы можем использовать деструктуризацию:
 
 ```js run
 let str = "Javascript or JavaScript??";
@@ -191,191 +191,191 @@ alert(firstMatch); // Javascript
 ```
 ````
 
-```warn header="`matchAll` is supernew, may need a polyfill"
-The method may not work in old browsers. A polyfill might be needed (this site uses core-js).
+```warn header="`matchAll` является новым, может потребоваться полифил"
+Метод может не работать в старых браузерах. Может потребоваться полифил (этот сайт использует core-js).
 
-Or you could make a loop with `regexp.exec`, explained below.
+Или вы можете сделать цикл с помощью `regexp.exec`, как описано ниже.
 ```
 
 ## str.split(regexp|substr, limit)
 
-Splits the string using the regexp (or a substring) as a delimiter.
+Разбивает строку в массив по разделителю – регулярному выражению regexp или подстроке substr.
 
-We already used `split` with strings, like this:
+Обычно мы используем метод `split` со строками, вот так:
 
 ```js run
-alert('12-34-56'.split('-')) // array of [12, 34, 56]
+alert('12-34-56'.split('-')) // массив [12, 34, 56]
 ```
 
-But we can split by a regular expression, the same way:
+Но мы можем разделить по регулярному выражению, таким же образом:
 
 ```js run
-alert('12-34-56'.split(/-/)) // array of [12, 34, 56]
+alert('12-34-56'.split(/-/)) // массив [12, 34, 56]
 ```
 
 ## str.replace(str|reg, str|func)
 
-That's actually a great method, one of most useful ones. The swiss army knife for searching and replacing.
+Это универсальный метод поиска-и-замены, один из самых полезных. Этакий швейцарский армейский нож для поиска и замены.
 
-The simplest use -- searching and replacing a substring, like this:
+Мы можем использовать его и без регулярных выражений, для поиска-и-замены подстроки:
 
 ```js run
-// replace a dash by a colon
+// заменить тире двоеточием
 alert('12-34-56'.replace("-", ":")) // 12:34-56
 ```
 
-There's a pitfall though.
+Хотя есть подводный камень.
 
-**When the first argument of `replace` is a string, it only looks for the first match.**
+**Когда первый аргумент `replace` является строкой, он ищет только первое совпадение.**
 
-You can see that in the example above: only the first `"-"` is replaced by `":"`.
+Вы можете видеть это в приведённом выше примере: только первый `"-"` заменяется на `":"`.
 
-To find all dashes, we need to use not the string `"-"`, but a regexp `pattern:/-/g`, with an obligatory `g` flag:
+Чтобы найти все тире, нам нужно использовать не строку `"-"`, а регулярное выражение `/-/g` с обязательным флагом `g`:
 
 ```js run
-// replace all dashes by a colon
-alert( '12-34-56'.replace( *!*/-/g*/!*, ":" ) )  // 12:34:56
+// заменить все тире двоеточием
+alert( '12-34-56'.replace( *!*/-/g*/!*, ":" ))  // 12:34:56
 ```
 
-The second argument is a replacement string. We can use special characters in it:
+Второй аргумент - строка замены. Мы можем использовать специальные символы в нем:
 
-| Symbol | Inserts |
+| Спецсимволы | Действие в строке замены |
 |--------|--------|
-|`$$`|`"$"` |
-|`$&`|the whole match|
-|<code>$&#096;</code>|a part of the string before the match|
-|`$'`|a part of the string after the match|
-|`$n`|if `n` is a 1-2 digit number, then it means the contents of n-th parentheses counting from left to right, otherwise it means a parentheses with the given name |
+|`$$`|вставляет `"$"` |
+|`$&`|вставляет всё найденное совпадение|
+|<code>$&#096;</code>|вставляет часть строки до совпадения|
+|`$'`|вставляет часть строки после совпадения|
+|`$n`|если `n` это 1-2 значное число, то это означает, что содержимое n-й скобки считается слева направо, в противном случае это означает круглую скобку с указанным именем|
 
 
-For instance if we use `$&` in the replacement string, that means "put the whole match here".
+Например, если мы используем `$&` в строке замены, это означает "поместить все совпадение здесь".
 
-Let's use it to prepend all entries of `"John"` with `"Mr."`:
+Давайте используем его для добавления ко всем записям `"John"` строки `"Mr."`:
 
 ```js run
 let str = "John Doe, John Smith and John Bull";
 
-// for each John - replace it with Mr. and then John
+// для каждого John - заменить его на Mr., а затем добавить John
 alert(str.replace(/John/g, 'Mr.$&'));  // Mr.John Doe, Mr.John Smith and Mr.John Bull
 ```
 
-Quite often we'd like to reuse parts of the source string, recombine them in the replacement or wrap into something.
+Довольно часто мы хотим повторно использовать части исходной строки, рекомбинировать их в замене или обернуть во что-нибудь.
 
-To do so, we should:
-1. First, mark the parts by parentheses in regexp.
-2. Use `$1`, `$2` (and so on) in the replacement string to get the content matched by parentheses.
+Для этого мы должны:
+1. Отметить нужные части скобками в регулярном выражении.
+2. Использовать `$1`, `$2` (и т.д.) в строке замены, чтобы получить содержимое, соответствующее 1-м, 2-м и так далее скобкам.
 
-For instance:
+Например:
 
 ```js run
-let str = "John Smith";
+let str = "Афанасий Фет";
 
-// swap first and last name
-alert(str.replace(/(john) (smith)/i, '$2, $1')) // Smith, John
+// поменять местами имя и фамилию
+alert(str.replace(/(фет) (афанасий)/i, '$2, $1')) // Фет, Афанасий
 ```
 
-**For situations that require "smart" replacements, the second argument can be a function.**
+**Для ситуаций, которые требуют "умных" замен, вторым аргументом может быть функция.**
 
-It will be called for each match, and its result will be inserted as a replacement.
+Он будет вызываться для каждого совпадения, и его результат будет вставлен в качестве замены.
 
-For instance:
+Например:
 
 ```js run
 let i = 0;
 
-// replace each "ho" by the result of the function
-alert("HO-Ho-ho".replace(/ho/gi, function() {
+// заменить каждое "хо" на результат функции
+alert("Хо-Хо-хо".replace(/хо/gi, function() {
   return ++i;
 })); // 1-2-3
 ```
 
-In the example above the function just returns the next number every time, but usually the result is based on the match.
+В приведённом выше примере функция просто возвращает следующий номер каждый раз, но обычно результат основан на совпадении.
 
-The function is called with arguments `func(str, p1, p2, ..., pn, offset, input, groups)`:
+Функция вызывается с аргументами `func(str, p1, p2, ..., pn, offset, input, groups)`:
 
-1. `str` -- the match,
-2. `p1, p2, ..., pn` -- contents of parentheses (if there are any),
-3. `offset` -- position of the match,
-4. `input` -- the source string,
-5. `groups` -- an object with named groups (see chapter [](info:regexp-groups)).
+1. `str` -- найденное совпадение,
+2. `p1, p2, ..., pn` -- содержимое скобок (если есть),
+3. `offset` -- позиция, на которой найдено совпадение,
+4. `input` -- исходная строка,
+5. `groups` -- объект с именованными группами (см. главу [](info:regexp-groups)).
 
-If there are no parentheses in the regexp, then there are only 3 arguments: `func(str, offset, input)`.
+Если в регулярном выражении нет скобок, то есть только 3 аргумента: `func(str, offset, input)`.
 
-Let's use it to show full information about matches:
+Давайте используем его, чтобы показать полную информацию о совпадениях:
 
 ```js run
-// show and replace all matches
+// вывести и заменить все совпадения
 function replacer(str, offset, input) {
-  alert(`Found ${str} at position ${offset} in string ${input}`);
+  alert(`Найдено: ${str} на позиции: ${offset} в строке: ${input}`);
   return str.toLowerCase();
 }
 
-let result = "HO-Ho-ho".replace(/ho/gi, replacer);
-alert( 'Result: ' + result ); // Result: ho-ho-ho
+let result = "ОЙ-Ой-ой".replace(/ой/gi, replacer);
+alert( 'Результат: ' + result ); // Результат: ой-ой-ой
 
-// shows each match:
-// Found HO at position 0 in string HO-Ho-ho
-// Found Ho at position 3 in string HO-Ho-ho
-// Found ho at position 6 in string HO-Ho-ho
+// показывает каждое совпадение:
+// Найдено: ОЙ на позиции: 0 в строке: ОЙ-Ой-ой
+// Найдено: Ой на позиции: 3 в строке: ОЙ-Ой-ой
+// Найдено: ой на позиции: 6 в строке: ОЙ-Ой-ой
 ```
 
-In the example below there are two parentheses, so `replacer` is called with 5 arguments: `str` is the full match, then parentheses, and then `offset` and `input`:
+В приведённом ниже примере есть две скобки, поэтому `replacer` вызывается с 5 аргументами: `str` - полное совпадение, затем круглые скобки, а затем `offset` и` input`:
 
 ```js run
 function replacer(str, name, surname, offset, input) {
-  // name is the first parentheses, surname is the second one
+  // name - первые скобки, surname - второе
   return surname + ", " + name;
 }
 
-let str = "John Smith";
+let str = "Афанасий Фет";
 
-alert(str.replace(/(John) (Smith)/, replacer)) // Smith, John
+alert(str.replace(/(Афанасий) (Фет)/, replacer)) // Фет, Афанасий
 ```
 
-Using a function gives us the ultimate replacement power, because it gets all the information about the match, has access to outer variables and can do everything.
+Использование функции даёт нам  максимальные возможности по замене, потому что функция получает всю информацию о совпадении, имеет доступ к внешним переменным и может делать все что угодно.
 
 ## regexp.exec(str)
 
-We've already seen these searching methods:
+Мы уже видели эти методы поиска:
 
-- `search` -- looks for the position of the match,
-- `match` -- if there's no `g` flag, returns the first match with parentheses and all details,
-- `match` -- if there's a `g` flag -- returns all matches, without details parentheses,
-- `matchAll` -- returns all matches with details.
+- `search` -- ищет позицию совпадения,
+- `match` -- если флаг `g` отсутствует, возвращает первое совпадение с круглыми скобками и всеми деталями,
+- `match` -- если есть флаг `g` - возвращает все совпадения без подробных скобок,
+- `matchAll` -- возвращает все совпадения с деталями.
 
-The `regexp.exec` method is the most flexible searching method of all. Unlike previous methods, `exec` should be called on a regexp, rather than on a string.
+Метод `regexp.exec` является наиболее гибким методом поиска из всех. В отличие от предыдущих методов, `exec` должен вызываться на регулярном выражении, а не на строке.
 
-It behaves differently depending on whether the regexp has the `g` flag.
+Он ведёт себя по-разному в зависимости от того, имеет ли регулярное выражение флаг `g`.
 
-If there's no `g`, then `regexp.exec(str)` returns the first match, exactly as `str.match(reg)`. Such behavior does not give us anything new.
+Если нет `g`, то `regexp.exec(str)` возвращает первое совпадение в точности как `str.match(reg)`. Такое поведение не даёт нам ничего нового.
 
-But if there's `g`, then:
-- `regexp.exec(str)` returns the first match and *remembers* the position after it in `regexp.lastIndex` property.
-- The next call starts to search from `regexp.lastIndex` and returns the next match.
-- If there are no more matches then `regexp.exec` returns `null` and `regexp.lastIndex` is set to `0`.
+Но если есть `g`, то:
+- `regexp.exec(str)` возвращает первое совпадение и *запоминает* позицию после него в свойстве `regexp.lastIndex`.
+- Следующий вызов начинает поиск от `regexp.lastIndex` и возвращает следующее совпадение.
+- Если совпадений больше нет, то `regexp.exec` возвращает `null`, а для `regexp.lastIndex` устанавливается значение `0`.
 
-We could use it to get all matches with their positions and parentheses groups in a loop, instead of `matchAll`:
+Мы могли бы использовать его, чтобы получить все совпадения с их позициями и группами скобок в цикле, вместо `matchAll`:
 
 ```js run
-let str = 'A lot about JavaScript at https://javascript.info';
+let str = 'Больше о JavaScript на https://javascript.info';
 
 let regexp = /javascript/ig;
 
 let result;
 
 while (result = regexp.exec(str)) {
-  alert( `Found ${result[0]} at ${result.index}` );
-  // shows: Found JavaScript at 12, then:
-  // shows: Found javascript at 34
+  alert( `Найдено ${result[0]} на позиции ${result.index}` );
+  // показывает: Найдено JavaScript на позиции 0, затем
+  // показывает: Найдено javascript на позиции 15
 }
 ```
 
-Surely, `matchAll` does the same, at least for modern browsers. But what `matchAll` can't do -- is to search from a given position.
+Конечно, `matchAll` делает то же самое, по крайней мере, для современных браузеров. Но то, что `matchAll` не может сделать - это поиск с заданной позиции.
 
-Let's search from position `13`. What we need is to assign `regexp.lastIndex=13` and call `regexp.exec`:
+Давайте искать с позиции `13`. Нам нужно присвоить `regexp.lastIndex=13` и вызвать` regexp.exec`:
 
 ```js run
-let str = "A lot about JavaScript at https://javascript.info";
+let str = 'Больше о JavaScript на https://javascript.info';
 
 let regexp = /javascript/ig;
 *!*
@@ -385,74 +385,74 @@ regexp.lastIndex = 13;
 let result;
 
 while (result = regexp.exec(str)) {
-  alert( `Found ${result[0]} at ${result.index}` );
-  // shows: Found javascript at 34
+  alert( `Найдено ${result[0]} на позиции ${result.index}` );
+  // показывает: Found javascript at 31
 }
 ```
 
-Now, starting from the given position `13`, there's only one match.
+Итак, начиная с заданной позиции `13`, есть только одино совпадение.
 
 
 ## regexp.test(str)
 
-The method `regexp.test(str)` looks for a match and returns `true/false` whether it finds it.
+Метод `regexp.test(str)` ищет совпадение и возвращает `true/false`, в зависимости от того, находит ли он его.
 
-For instance:
+Например:
 
 ```js run
-let str = "I love JavaScript";
+let str = "Я люблю JavaScript";
 
-// these two tests do the same
-alert( *!*/love/i*/!*.test(str) ); // true
-alert( str.search(*!*/love/i*/!*) != -1 ); // true
+// эти два теста делают одно и же
+alert( *!*/люблю/i*/!*.test(str) ); // true
+alert( str.search(*!*/люблю/i*/!*) != -1 ); // true
 ```
 
-An example with the negative answer:
+Пример с отрицательным ответом:
 
 ```js run
-let str = "Bla-bla-bla";
+let str = "Ля-ля-ля";
 
-alert( *!*/love/i*/!*.test(str) ); // false
-alert( str.search(*!*/love/i*/!*) != -1 ); // false
+alert( *!*/люблю/i*/!*.test(str) ); // false
+alert( str.search(*!*/люблю/i*/!*) != -1 ); // false
 ```
 
-If the regexp has `'g'` flag, then `regexp.test` advances `regexp.lastIndex` property, just like `regexp.exec`.
+Если регулярное выражение имеет флаг `'g'`, то `regexp.test` расширяется свойством `regexp.lastIndex`, точно так же, как` regexp.exec`.
 
-So we can use it to search from a given position:
+Таким образом, мы можем использовать его для поиска с заданной позиции:
 
 ```js run
-let regexp = /love/gi;
+let regexp = /люблю/gi;
 
-let str = "I love JavaScript";
+let str = "Я люблю JavaScript";
 
-// start the search from position 10:
+// начать поиск с 10 позиции:
 regexp.lastIndex = 10
-alert( regexp.test(str) ); // false (no match)
+alert( regexp.test(str) ); // false (совпадений нет)
 ```
 
 
 
-````warn header="Same global regexp tested repeatedly may fail to match"
-If we apply the same global regexp to different inputs, it may lead to wrong result, because `regexp.test` call advances `regexp.lastIndex` property, so next matches start from non-zero position.
+````warn header="Одно и то же глобальное регулярное выражение, использованное повторно, может иметь другой результат"
+Если мы применяем одно и то же глобальное регулярное выражение последовательно к разным строкам, это может привести к неверному результату, поскольку вызов `regexp.test` обновляет свойство `regexp.lastIndex`, поэтому поиск в новой строке может начаться с ненулевой позиции.
 
-For instance, here we call `regexp.test` twice on the same text, and the second time fails:
+Например, здесь мы дважды вызываем `regexp.test` для одного и того же текста, и второй раз поиск завершается уже неудачно:
 
 ```js run
-let regexp = /javascript/g;  // (regexp just created: regexp.lastIndex=0)
+let regexp = /javascript/g;  // (regexp только что создан: regexp.lastIndex=0)
 
-alert( regexp.test("javascript") ); // true (regexp.lastIndex=10 now)
+alert( regexp.test("javascript") ); // true (а теперь regexp.lastIndex=10)
 alert( regexp.test("javascript") ); // false
 ```
 
-That's exactly because `regexp.lastIndex` is non-zero on the second test.
+Это именно потому, что во втором тесте `regexp.lastIndex` не равен нулю.
 
-To work around that, one could use non-global regexps or re-adjust `regexp.lastIndex=0` before a new search.
+Чтобы обойти это, можно использовать неглобальные регулярные выражения или переприсвоить `regexp.lastIndex = 0` перед новым поиском.
 ````
 
-## Summary
+## Заключение
 
-There's a variety of many methods on both regexps and strings.
+Существует множество методов как для регулярных выражений, так и для строк.
 
-Their abilities and methods overlap quite a bit, we can do the same by different calls. Sometimes that may cause confusion when starting to learn the language.
+Их возможности и методы частично совпадают, мы можем делать то же самое с помощью разных вызовов. Иногда это может вызвать путаницу, когда вы только начинаете изучать язык.
 
-Then please refer to the recipes at the beginning of this chapter, as they provide solutions for the majority of regexp-related tasks.
+Поэтому, пожалуйста, обратитесь к советам в начале этой главы, поскольку они предоставляют решения для большинства задач, связанных с регулярными выражениями.

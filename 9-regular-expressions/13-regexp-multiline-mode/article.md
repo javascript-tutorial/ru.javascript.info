@@ -1,76 +1,75 @@
-# Multiline mode, flag "m"
+# Многострочный режим, флаг "m"
 
-The multiline mode is enabled by the flag `pattern:/.../m`.
+Многострочный режим включается флагом `pattern:/.../m`.
 
-It only affects the behavior of `pattern:^` and `pattern:$`.
+В этом случае изменяется поведение `pattern:^` и `pattern:$`.
 
-In the multiline mode they match not only at the beginning and end of the string, but also at start/end of line.
+В многострочном режиме они означают не только начало/конец текста, но и начало/конец строки.
 
-## Line start ^
+## Начало строки ^
 
-In the example below the text has multiple lines. The pattern `pattern:/^\d+/gm` takes a number from the beginning of each one:
+В примере ниже текст состоит из нескольких строк. Паттерн `pattern:/^\d+/gm` берёт число с начала каждой строки:
 
 ```js run
-let str = `1st place: Winnie
-2nd place: Piglet
-33rd place: Eeyore`;
+let str = `1е место: Винни
+2е место: Пятачок
+33е место: Слонопотам`;
 
 *!*
 alert( str.match(/^\d+/gm) ); // 1, 2, 33
 */!*
 ```
 
-Without the flag  `pattern:/.../m` only the first number is matched:
-
+Обратим внимание -- без флага  `pattern:/.../m` было бы найдено только первое число:
 
 ```js run
-let str = `1st place: Winnie
-2nd place: Piglet
-33rd place: Eeyore`;
+let str = `1е место: Винни
+2е место: Пятачок
+33е место: Слонопотам`;
 
 *!*
 alert( str.match(/^\d+/g) ); // 1
 */!*
 ```
 
-That's because by default a caret `pattern:^` only matches at the beginning of the text, and in the multiline mode -- at the start of a line.
+Так происходит, потому что в обычном режиме каретка `pattern:^` -- это только начало текста, а в многострочном -- начало любой строки.
 
-The regular expression engine moves along the text and looks for a string start `pattern:^`, when finds -- continues to match the rest of the pattern `pattern:\d+`.
+Движок регулярных выражений двигается по тексту в поисках строки, начинающейся с `pattern:^`, и как находит -- продолжает искать в ней `pattern:\d+`.
 
-## Line end $
+## Конец строки $
 
-The dollar sign `pattern:$` behaves similarly.
+Символ доллара `pattern:$` ведёт себя аналогично.
 
-The regular expression `pattern:\w+$` finds the last word in every line
-
-```js run
-let str = `1st place: Winnie
-2nd place: Piglet
-33rd place: Eeyore`;
-
-alert( str.match(/\w+$/gim) ); // Winnie,Piglet,Eeyore
-```
-
-Without the `pattern:/.../m` flag the dollar `pattern:$` would only match the end of the whole string, so only the very last word would be found.
-
-## Anchors ^$ versus \n
-
-To find a newline, we can use not only `pattern:^` and `pattern:$`, but also the newline character `\n`.
-
-The first difference is that unlike anchors, the character `\n` "consumes" the newline character and adds it to the result.
-
-For instance, here we use it instead of `pattern:$`:
+Регулярное выражение `pattern:\w+$` ищет последнее слово в каждой строке
 
 ```js run
-let str = `1st place: Winnie
-2nd place: Piglet
-33rd place: Eeyore`;
+let str = `1е место: Винни
+2е место: Пятачок
+33е место: Слонопотам`;
 
-alert( str.match(/\w+\n/gim) ); // Winnie\n,Piglet\n
+alert( str.match(/\w+$/gim) ); // Винни,Пятачок,Слонопотам
 ```
 
-Here every match is a word plus a newline character.
+Без флага `pattern:/.../m` якорь `pattern:$` обозначал бы конец всей строки, и было бы найдено только последнее слово.
 
-And one more difference -- the newline `\n` does not match at the string end. That's why `Eeyore` is not found in the example above.
+## Якорь ^$ против \n
 
-So, anchors are usually better, they are closer to what we want to get.
+Для того, чтобы найти конец строки, можно использовать не только `pattern:^` и `pattern:$`, но и символ перевода строки `\n`.
+
+Но, в отличие от `pattern:$`, движок регулярных выражений берёт символ `\n` в результат.
+
+Используем его в нашем примере вместо `pattern:$`:
+
+```js run
+let str = `1е место: Винни
+2е место: Пятачок
+33е место: Слонопотам`;
+
+alert( str.match(/\w+\n/gim) ); // Винни\n,Пятачок\n
+```
+
+Здесь каждое совпадение -- это слово плюс символ перевода строки.
+
+Ещё одно отличие -- символ перевода строки `\n` не обязательно является концом строки. Вот почему слово `Слонопотам` не вывелось в примере выше.
+
+Таким образом, использование якорей обычно лучше и точнее соответствуют тому, что мы хотим получить в результате.

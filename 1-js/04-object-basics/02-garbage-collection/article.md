@@ -1,63 +1,63 @@
-# Garbage collection
+# Сборка мусора
 
-Memory management in JavaScript is performed automatically and invisibly to us. We create primitives, objects, functions... All that takes memory.
+Управление памятью в JavaScript выполняется автоматически и незаметно. Мы создаём примитивы, объекты, функции... Всё это занимает память.
 
-What happens when something is not needed any more? How does the JavaScript engine discover it and clean it up?
+Но что происходит, когда что-то больше не нужно? Как JavaScript понимает, что пора очищать память?
 
-## Reachability
+## Достижимость
 
-The main concept of memory management in JavaScript is *reachability*.
+Основной концепцией управления памятью в JavaScript является принцип *достижимости*.
 
-Simply put, "reachable" values are those that are accessible or usable somehow. They are guaranteed to be stored in memory.
+Если упростить, то "достижимые" значения - это те, которые доступны или используются. Они гарантированно находятся в памяти.
 
-1. There's a base set of inherently reachable values, that cannot be deleted for obvious reasons.
+1. Существует базовое множество достижимых значений, которые не могут быть удалены.
 
-    For instance:
+    Например:
 
-    - Local variables and parameters of the current function.
-    - Variables and parameters for other functions on the current chain of nested calls.
-    - Global variables.
-    - (there are some other, internal ones as well)
+    - Локальные переменные и параметры текущей функции.
+    - Переменные и параметры других функций в текущей цепочке вложенных вызовов.
+    - Глобальные переменные.
+    - (некоторые другие внутренние значения)
 
-    These values are called *roots*.
+    Эти значения мы будем называть *корнями*.
 
-2. Any other value is considered reachable if it's reachable from a root by a reference or by a chain of references.
+2. Любое другое значение считается достижимым, если оно доступно из корня по ссылке или по цепочке ссылок.
 
-    For instance, if there's an object in a local variable, and that object has a property referencing another object, that object is considered reachable. And those that it references are also reachable. Detailed examples to follow.
+    Например, если в локальной переменной есть объект, и он имеет свойство, в котором хранится ссылка на другой объект, то этот объект считается достижимым. И те, на которые он ссылается, тоже достижимы. Детальные примеры на эту тему скоро последуют.
 
-There's a background process in the JavaScript engine that is called [garbage collector](https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)). It monitors all objects and removes those that have become unreachable.
+В интерпретаторе JavaScript есть фоновый процесс, который называется [сборщик мусора](https://ru.wikipedia.org/wiki/Сборка_мусора). Он следит за всеми объектами и удаляет те, которые стали недостижимы.
 
-## A simple example
+## Простой пример
 
-Here's the simplest example:
+Вот самый простой пример:
 
 ```js
-// user has a reference to the object
+// в user находится ссылка на объект
 let user = {
   name: "John"
 };
 ```
 
-![](memory-user-john.png)
+![](memory-user-john.svg)
 
-Here the arrow depicts an object reference. The global variable `"user"` references the object `{name: "John"}` (we'll call it John for brevity). The `"name"` property of John stores a primitive, so it's painted inside the object.
+Здесь стрелочка обозначает ссылку на объект. Глобальная переменная `user` ссылается на объект `{name: "John"}` (мы будем называть его просто "John"). В свойстве `"name"` объекта John хранится примитив, поэтому оно нарисовано внутри объекта.
 
-If the value of `user` is overwritten, the reference is lost:
+Если перезаписать значение `user`, то ссылка потеряется:
 
 ```js
 user = null;
 ```
 
-![](memory-user-john-lost.png)
+![](memory-user-john-lost.svg)
 
-Now John becomes unreachable. There's no way to access it, no references to it. Garbage collector will junk the data and free the memory.
+Теперь объект John становится недостижимым. К нему нет доступа, на него нет ссылок. Сборщик мусора удалит эти данные и освободит память.
 
-## Two references
+## Две ссылки
 
-Now let's imagine we copied the reference from `user` to `admin`:
+Представим, что мы скопировали ссылку из `user` в `admin`:
 
 ```js
-// user has a reference to the object
+// в user находится ссылка на объект
 let user = {
   name: "John"
 };
@@ -67,18 +67,18 @@ let admin = user;
 */!*
 ```
 
-![](memory-user-john-admin.png)
+![](memory-user-john-admin.svg)
 
-Now if we do the same:
+Теперь, если мы сделаем то же самое:
 ```js
 user = null;
 ```
 
-...Then the object is still reachable via `admin` global variable, so it's in memory. If we overwrite `admin` too, then it can be removed.
+...то объект John всё ещё достижим через глобальную переменную `admin`, поэтому он находится в памяти. Если бы мы также перезаписали `admin`, то John был бы удалён.
 
-## Interlinked objects
+## Взаимосвязанные объекты
 
-Now a more complex example. The family:
+Теперь более сложный пример. Семья:
 
 ```js
 function marry(man, woman) {
@@ -98,115 +98,115 @@ let family = marry({
 });
 ```
 
-Function `marry` "marries" two objects by giving them references to each other and returns a new object that contains them both.
+Функция `marry` "женит" два объекта, давая им ссылки друг на друга, и возвращает новый объект, содержащий ссылки на два предыдущих.
 
-The resulting memory structure:
+В результате получаем такую структуру памяти:
 
-![](family.png)
+![](family.svg)
 
-As of now, all objects are reachable.
+На данный момент все объекты достижимы.
 
-Now let's remove two references:
+Теперь удалим две ссылки:
 
 ```js
 delete family.father;
 delete family.mother.husband;
 ```
 
-![](family-delete-refs.png)
+![](family-delete-refs.svg)
 
-It's not enough to delete only one of these two references, because all objects would still be reachable.
+Недостаточно удалить только одну из этих ссылок, потому что все объекты останутся достижимыми.
 
-But if we delete both, then we can see that John has no incoming reference any more:
+Но если мы удалим обе, то увидим, что у объекта John больше нет входящих ссылок:
 
-![](family-no-father.png)
+![](family-no-father.svg)
 
-Outgoing references do not matter. Only incoming ones can make an object reachable. So, John is now unreachable and will be removed from the memory with all its data that also became unaccessible.
+Исходящие ссылки не имеют значения. Только входящие ссылки могут сделать объект достижимым. Объект John теперь недостижим и будет удалён из памяти со всеми своими данными, которые также стали недоступны.
 
-After garbage collection:
+После сборки мусора:
 
-![](family-no-father-2.png)
+![](family-no-father-2.svg)
 
-## Unreachable island
+## Недостижимый "остров"
 
-It is possible that the whole island of interlinked objects becomes unreachable and is removed from the memory.
+Вполне возможна ситуация, при которой целый "остров" связанных объектов может стать недостижимым и удалится из памяти.
 
-The source object is the same as above. Then:
+Возьмём объект `family` из примера выше. А затем:
 
 ```js
 family = null;
 ```
 
-The in-memory picture becomes:
+Структура в памяти теперь станет такой:
 
-![](family-no-family.png)
+![](family-no-family.svg)
 
-This example demonstrates how important the concept of reachability is.
+Этот пример демонстрирует, насколько важна концепция достижимости.
 
-It's obvious that John and Ann are still linked, both have incoming references. But that's not enough.
+Объекты John и Ann всё ещё связаны, оба имеют входящие ссылки, но этого недостаточно.
 
-The former `"family"` object has been unlinked from the root, there's no reference to it any more, so the whole island becomes unreachable and will be removed.
+У объекта `family` больше нет ссылки от корня, поэтому весь "остров" становится недостижимым и будет удалён.
 
-## Internal algorithms
+## Внутренние алгоритмы
 
-The basic garbage collection algorithm is called "mark-and-sweep".
+Основной алгоритм сборки мусора - "алгоритм пометок" (англ. "mark-and-sweep").
 
-The following "garbage collection" steps are regularly performed:
+Согласно этому алгоритму, сборщик мусора регулярно выполняет следующие шаги:
 
-- The garbage collector takes roots and "marks" (remembers) them.
-- Then it visits and "marks" all references from them.
-- Then it visits marked objects and marks *their* references. All visited objects are remembered, so as not to visit the same object twice in the future.
-- ...And so on until there are unvisited references (reachable from the roots).
-- All objects except marked ones are removed.
+- Сборщик мусора "помечает" (запоминает) все корневые объекты.
+- Затем он идёт по их ссылкам и помечает все найденные объекты.
+- Затем он идёт по ссылкам помеченных объектов и помечает объекты, на которые есть ссылка от них. Все объекты запоминаются, чтобы в будущем не посещать один и тот же объект дважды.
+- ...И так далее, пока не будут посещены все ссылки (достижимые от корней).
+- Все непомеченные объекты удаляются.
 
-For instance, let our object structure look like this:
+Например, пусть наша структура объектов выглядит так:
 
-![](garbage-collection-1.png)
+![](garbage-collection-1.svg)
 
-We can clearly see an "unreachable island" to the right side. Now let's see how "mark-and-sweep" garbage collector deals with it.
+Явно виден "недостижимый остров" справа. Теперь посмотрим, как будет работать "алгоритм пометок" сборщика мусора.
 
-The first step marks the roots:
+На первом шаге помечаются корни:
 
-![](garbage-collection-2.png)
+![](garbage-collection-2.svg)
 
-Then their references are marked:
+Затем помечаются объекты по их ссылкам:
 
-![](garbage-collection-3.png)
+![](garbage-collection-3.svg)
 
-...And their references, while possible:
+...а затем объекты по их ссылкам и так далее, пока это вообще возможно:
 
-![](garbage-collection-4.png)
+![](garbage-collection-4.svg)
 
-Now the objects that could not be visited in the process are considered unreachable and will be removed:
+Теперь объекты, до которых не удалось дойти от корней, считаются недостижимыми и будут удалены:
 
-![](garbage-collection-5.png)
+![](garbage-collection-5.svg)
 
-That's the concept of how garbage collection works.
+Это и есть принцип работы сборки мусора.
 
-JavaScript engines apply many optimizations to make it run faster and not affect the execution.
+Интерпретаторы JavaScript применяют множество оптимизаций, чтобы сборка мусора работала быстрее и не влияла на производительность.
 
-Some of the optimizations:
+Вот некоторые из оптимизаций:
 
-- **Generational collection** -- objects are split into two sets: "new ones" and "old ones". Many  objects appear, do their job and die fast, they can be cleaned up aggressively. Those that survive for long enough, become "old" and are examined less often.
-- **Incremental collection** -- if there are many objects, and we try to walk and mark the whole object set at once, it may take some time and introduce visible delays in the execution. So the engine tries to split the garbage collection into pieces. Then the pieces are executed one by one, separately. That requires some extra bookkeeping between them to track changes, but we have many tiny delays instead of a big one.
-- **Idle-time collection** -- the garbage collector tries to run only while the CPU is idle, to reduce the possible effect on the execution.
+- **Сборка по поколениям (Generational collection)** - объекты делятся на "новые" и "старые". Многие объекты появляются, выполняют свою задачу и быстро умирают, их можно удалять более агрессивно. Те, которые живут достаточно долго, становятся "старыми" и проверяются реже.
+- **Инкрементальная сборка (Incremental collection)** - если объектов много, то обход всех ссылок и пометка достижимых объектов может занять значительное время и привести к видимым задержкам выполнения скрипта. Поэтому интерпретатор пытается организовать сборку мусора поэтапно. Этапы выполняются по отдельности один за другим. Это требует дополнительного учёта для отслеживания изменений между этапами, но зато теперь у нас есть много крошечных задержек вместо одной большой.
+- **Сборка в свободное время (Idle-time collection)** - чтобы уменьшить возможное влияние на производительность, сборщик мусора старается работать только во время простоя процессора.
 
-There are other optimizations and flavours of garbage collection algorithms. As much as I'd like to describe them here, I have to hold off, because different engines implement different tweaks and techniques. And, what's even more important, things change as engines develop, so going deeper "in advance", without a real need is probably not worth that. Unless, of course, it is a matter of pure interest, then there will be some links for you below.
+Существуют и другие способы оптимизации и разновидности алгоритмов сборки мусора. Но как бы мне ни хотелось описать их здесь, я должен воздержаться от этого, потому что разные интерпретаторы JavaScript применяют разные приёмы и хитрости. И, что более важно, всё меняется по мере развития интерпретаторов, поэтому углубляться в эту тему заранее, без реальной необходимости, вероятно, не стоит. Если, конечно, это не вопрос чистого интереса, тогда для вас будут некоторые ссылки ниже.
 
-## Summary
+## Итого
 
-The main things to know:
+Главное из того, что мы узнали:
 
-- Garbage collection is performed automatically. We cannot force or prevent it.
-- Objects are retained in memory while they are reachable.
-- Being referenced is not the same as being reachable (from a root): a pack of interlinked objects can become unreachable as a whole.
+- Сборка мусора выполняется автоматически. Мы не можем ускорить или предотвратить её.
+- Объекты сохраняются в памяти, пока они достижимы.
+- Наличие ссылки не гарантирует, что объект достижим (от корня): несколько взаимосвязанных объектов могут стать недостижимыми как единое целое.
 
-Modern engines implement advanced algorithms of garbage collection.
+Современные интерпретаторы реализуют передовые алгоритмы сборки мусора.
 
-A general book "The Garbage Collection Handbook: The Art of Automatic Memory Management" (R. Jones et al) covers some of them.
+Некоторые из них освещены в книге "The Garbage Collection Handbook: The Art of Automatic Memory Management" (R. Jones и др.).
 
-If you are familiar with low-level programming, the more detailed information about V8 garbage collector is in the article [A tour of V8: Garbage Collection](http://jayconrod.com/posts/55/a-tour-of-v8-garbage-collection).
+Если вы знакомы с низкоуровневым программированием, то более подробная информация о сборщике мусора интерпретатора V8 находится в статье [A tour of V8: Garbage Collection](http://jayconrod.com/posts/55/a-tour-of-v8-garbage-collection).
 
-[V8 blog](http://v8project.blogspot.com/) also publishes articles about changes in memory management from time to time. Naturally, to learn the garbage collection, you'd better prepare by learning about V8 internals in general and read the blog of [Vyacheslav Egorov](http://mrale.ph) who worked as one of V8 engineers. I'm saying: "V8", because it is best covered with articles in the internet. For other engines, many approaches are similar, but garbage collection differs in many aspects.
+Также в [блоге интерпретатора V8](https://v8.dev/) время от времени публикуются статьи об изменениях в управлении памятью. Разумеется, чтобы изучить сборку мусора, вам необходимо понимать, как в целом устроен внутри интерпретатор V8. Об этом вы можете почитать в блоге [Вячеслава Егорова](http://mrale.ph), одного из инженеров, разрабатывавших V8. Я говорю про "V8", потому что он лучше всего освещён статьями в интернете. В других интерпретаторах многие подходы схожи, но сборка мусора во многих аспектах отличается.
 
-In-depth knowledge of engines is good when you need low-level optimizations. It would be wise to plan that as the next step after you're familiar with the language.  
+Глубокое понимание работы интерпретаторов необходимо, когда вам нужны низкоуровневые оптимизации. Было бы разумно запланировать их изучение как следующий шаг после освоения языка.

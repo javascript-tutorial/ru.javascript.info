@@ -2,25 +2,24 @@ importance: 5
 
 ---
 
-# Rewrite the "switch" into an "if"
+# Напишите "if", аналогичный "switch"
 
-Write the code using `if..else` which would correspond to the following `switch`:
+Напишите `if..else`, соответствующий следующему `switch`:
 
 ```js
 switch (browser) {
   case 'Edge':
-    alert( "You've got the Edge!" );
+    alert( "У вас браузер Edge!" );
     break;
 
   case 'Chrome':
   case 'Firefox':
   case 'Safari':
   case 'Opera':
-    alert( 'Okay we support these browsers too' );
+    alert( 'Мы поддерживаем и эти браузеры' );
     break;
 
   default:
-    alert( 'We hope that this page looks ok!' );
+    alert( 'Надеемся, что эта страница выглядит хорошо!' );
 }
 ```
-

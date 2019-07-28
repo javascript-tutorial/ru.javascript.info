@@ -1,0 +1,161 @@
+code-style.svg:
+  "No space":
+    text: "Без пробелов"
+    position: "center"
+  "between the function name and parentheses":
+    position: "center"
+    text: "между именем функции и скобками"
+  "between the parentheses and the parameter":
+    position: "center"
+    text: "между скобками и параметрами"
+  "Indentation":
+    position: "center"
+    text: "Отступ"
+  "2 spaces":
+    position: "center"
+    text: "2 пробела"
+  "A space ":
+    position: "center"
+    text: "Пробел"
+  "after for/if/while…":
+    position: "center"
+    text: "после for/if/while…"
+  "} else { without a line break": "} else { без перевода строки"
+  "Spaces around a nested call":
+    position: "center"
+    text: "Пробелы вокруг вложенного вызова"
+  "An empty line":
+    position: "center"
+    text: "Пустая строка"
+  "between logical blocks":
+    position: "center"
+    text: "Между логическими блоками"
+  "Lines are not very long": "Строки не очень длинные"
+  "A semicolon ;": "Точка с запятой ;"
+  "is mandatory": "обязательна"
+  "Spaces":
+    position: "center"
+    text: "Пробелы"
+  "around operators":
+    position: "center"
+    text: "вокруг операторов"
+  "Curly brace {":
+    position: "center"
+    text: "Фигурная скобка {"
+  "on the same line, after a space":
+    position: "center"
+    text: "на той же строке, после пробела"
+  "A space":
+    position: "center"
+    text: "Пробел"
+  "between":
+    position: "center"
+    text: "между"
+  "parameters":
+    position: "center"
+    text: "параметрами"
+  "A space between parameters":
+    position: "center"
+    text: "Пробел между параметрами"
+
+try-catch-flow.svg:
+  "Begin":
+    text: "Начало"
+    position: "center"
+  "No Errors":
+    text: "Нет ошибок"
+    position: "center"
+  "An error occured in the code":
+    text: "В коде произошла ошибка"
+    position: "center"
+  "// code...": "// код..."
+  "Ignore catch block":
+    text: "Игнорировать блок catch"
+    position: "center"
+  "Ignore the rest of try":
+    text: "Игнорировать остаток try"
+    position: "center"
+  "Execute catch block":
+    text: "Выполнить блок catch"
+    position: "center"
+
+recursion-pow.svg:
+  "Yes":
+    text: "Да"
+    position: "center"
+  "No":
+    text: "Нет"
+  "recursive call until n==1": "рекурсивный вызов до n==1"
+
+hello-world-render.svg:
+  "1. The browser shows this part": "1. Браузер показывает эту часть"
+  "2. Then runs the script": "2. Затем запускает скрипт"
+  "3. Then shows the rest": "3. Затем показывает остальное"
+
+ifelse_task2.svg:
+  "Begin":
+    text: "Начало"
+    position: "center"
+  "Other":
+    text: "Другое"
+    position: "center"
+  "You don't know?":
+    text: "Не знаете?"
+    position: "center"
+  "Right!":
+    text: "Правильно!"
+    position: "center"
+  "What's the ":
+    text: "Каково"
+    position: "center"
+  "“official” name of":
+    text: "\"официальное название\""
+    position: "center"
+  "Иначе": ""
+
+ifelse_task.svg:
+  "Begin": "Начало"
+  "Canceled":
+    position: "center"
+    text: "Отменено"
+  "Welcome!":
+    text: "Здравствуйте!"
+    position: "center"
+  "I don't know you": "Я вас не знаю"
+  "Wrong password":
+    position: "center"
+    text: "Неверный пароль"
+  "Who's there?":
+    position: "center"
+    text: "Кто там?"
+  "Password?": "Пароль?"
+  "Cancel": "Отмена"
+  "Admin": "Админ"
+  "TheMaster": "Я Главный"
+  "Other": "Другое"
+
+chrome-sources-breakpoint.svg:
+  "here's the list":
+    text: "вот список"
+    position: "right"
+  "breakpoints":
+    text: "точки останова"
+
+chrome-sources-debugger-pause.svg:
+  "jump to the outer function":
+    text: "выпрыгнуть во внешнюю функцию"
+    position: "right"
+  "watch expressions":
+    text: "смотреть за выражениями"
+    position: "right"
+  "current variables":
+    text: "текущие переменные"
+    position: "right"
+
+chrome-sources-debugger-trace-1.svg:
+  "nested calls":
+    text: "вложенные вызовы"
+    position: "right"
+
+chrome-open-sources.svg:
+  open sources: 'открыть исходные файлы'

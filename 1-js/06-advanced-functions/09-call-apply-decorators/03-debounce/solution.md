@@ -16,13 +16,12 @@ function debounce(f, ms) {
 }
 ```
 
-A call to `debounce` returns a wrapper. There may be two states:
+Вызов `debounce` возвращает обёртку. Возможны два состояния:
+- `isCooldown = false` -- готова к выполнению.
+- `isCooldown = true` -- ожидание окончания тайм-аута.
 
-- `isCooldown = false` -- ready to run.
-- `isCooldown = true` -- waiting for the timeout.
+В первом вызове `isCoolDown = false`, поэтому вызов продолжается, и состояние изменяется на `true`.
 
-In the first call `isCooldown` is falsy, so the call proceeds, and the state changes to `true`.
+Пока `isCoolDown` имеет значение `true`, все остальные вызовы игнорируются.
 
-While `isCooldown` is true, all other calls are ignored.
-
-Then `setTimeout` reverts it to `false` after the given delay.
+Затем `setTimeout` устанавливает его в `false` после заданной задержки.

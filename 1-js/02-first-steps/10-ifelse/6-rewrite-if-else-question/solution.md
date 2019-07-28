@@ -1,9 +1,8 @@
 
 
 ```js
-let message = (login == 'Employee') ? 'Hello' :
-  (login == 'Director') ? 'Greetings' :
-  (login == '') ? 'No login' :
+let message = (login == 'Сотрудник') ? 'Привет' :
+  (login == 'Директор') ? 'Здравствуйте' :
+  (login == '') ? 'Нет логина' :
   '';
 ```
-

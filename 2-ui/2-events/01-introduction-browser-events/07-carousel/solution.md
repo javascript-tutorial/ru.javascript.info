@@ -1,17 +1,17 @@
-The images ribbon can be represented as `ul/li` list of images `<img>`.
+Лента изображений в разметке должна быть представлена как список `ul/li` с картинками `<img>`.
 
-Normally, such a ribbon is wide, but we put a fixed-size `<div>` around to "cut" it, so that only a part of the ribbon is visibble:
+Нужно расположить ленту внутри `<div>` фиксированного размера, так чтобы в один момент была видна только нужная часть списка:
 
-![](carousel1.png)
+![](carousel1.svg)
 
-To make the list show horizontally we need to apply correct CSS properties for `<li>`, like `display: inline-block`.
+Чтобы список сделать горизонтальным, нам нужно применить CSS-свойство `display: inline-block` для `<li>`.
 
-For `<img>` we should also adjust `display`, because by default it's `inline`. There's extra space reserved under `inline` elements for "letter tails", so we can use `display:block` to remove it.
+Для тега `<img>` мы также должны настроить `display`, поскольку по умолчанию он `inline`. Во всех элементах типа `inline` резервируется дополнительное место под "хвосты" символов. И чтобы его убрать, нам нужно прописать `display:block`.
 
-To do the scrolling, we can shift `<ul>`. There are many ways to do it, for instance by changing `margin-left` or (better performance) use `transform: translateX()`:
+Для «прокрутки» будем сдвигать `<ul>`. Это можно делать по-разному, например, назначением CSS-свойства `transform: translateX()` (лучше для производительности) или `margin-left`: 
 
-![](carousel2.png)
+![](carousel2.svg)
 
-The outer `<div>` has a fixed width, so "extra" images are cut.
+У внешнего `<div>` фиксированная ширина, поэтому «лишние» изображения обрезаются.
 
-The whole carousel is a self-contained "graphical component" on the page, so we'd better wrap it into a single `<div class="carousel">` and style things inside it.
+Вся карусель -- это самостоятельный "графический компонент" на странице, таким образом нам лучше его "обернуть" в отдельный `<div class="carousel">` и уже модифицировать стили внутри него.
