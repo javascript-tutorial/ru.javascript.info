@@ -159,3 +159,13 @@ chrome-sources-debugger-trace-1.svg:
 
 chrome-open-sources.svg:
   open sources: 'открыть исходные файлы'
+
+object-user-empty.svg:
+  empty:
+    text: пусто
+    position: "center"
+
+garbage-collection-5.svg:
+  unreachables:
+    text: недостижимые
+    
