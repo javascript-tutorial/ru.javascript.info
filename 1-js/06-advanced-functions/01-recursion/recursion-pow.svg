@@ -33,16 +33,16 @@
                 </text>
             </g>
             <text id="Yes" font-family="OpenSans-Regular, Open Sans" font-size="14" font-weight="normal" fill="#8A704D">
-                <tspan x="42.5" y="156">Да</tspan>
+                <tspan x="40" y="156">Yes</tspan>
             </text>
             <text id="No" font-family="PTSans-Regular, PT Sans" font-size="14" font-weight="normal" fill="#8A704D">
-                <tspan x="299" y="123">Нет</tspan>
+                <tspan x="299" y="123">No</tspan>
             </text>
             <path id="Line" d="M324,135 L286,135 L286,132 L324,132 L324,124 L343,133.5 L324,143 L324,135 Z" fill="#EE6B47" fill-rule="nonzero"></path>
             <polygon id="Line-decoration-1" stroke="#EE6B47" stroke-width="3" fill="#EE6B47" transform="translate(224.400000, 59.000000) scale(-1, 1) translate(-224.400000, -59.000000) " points="229.8 59 219 56 219 62"></polygon>
             <path d="M420.5,111.5 L420.5,58.5" id="Line" stroke="#EE6B47" stroke-width="3" stroke-linecap="square" stroke-dasharray="5,5"></path>
             <text id="recursive-call-until" font-family="OpenSans-Regular, Open Sans" font-size="14" font-weight="normal" fill="#8A704D">
-                <tspan x="233.5" y="49">рекурсивный вызов до n==1</tspan>
+                <tspan x="233.5" y="49">recursive call until n==1</tspan>
             </text>
             <path d="M232.5,58.5 L421.5,58.5" id="Line-Copy" stroke="#EE6B47" stroke-width="3" stroke-linecap="square" stroke-dasharray="5,5"></path>
         </g>

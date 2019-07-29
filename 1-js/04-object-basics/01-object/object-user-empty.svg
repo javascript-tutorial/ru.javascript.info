@@ -10,7 +10,7 @@
             <rect id="Rectangle-4" stroke="#BCA68E" stroke-width="4" fill="#FFF9EB" x="105" y="26" width="135" height="50"></rect>
             <rect id="Rectangle-8" stroke="#BCA68E" stroke-width="3" x="160.5" y="46.5" width="25" height="10"></rect>
             <text id="empty" font-family="OpenSans-Regular, Open Sans" font-size="14" font-weight="normal" fill="#9B9B9B">
-                <tspan x="153" y="22">пусто</tspan>
+                <tspan x="151" y="22">empty</tspan>
             </text>
             <text id="user" font-family="OpenSans-Bold, Open Sans" font-size="14" font-weight="bold" fill="#EE6B47">
                 <tspan x="4" y="56">user</tspan>
