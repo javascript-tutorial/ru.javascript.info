@@ -679,7 +679,11 @@ request.onsuccess = function() {
 
 Но мы также можем создать курсор для индексов. Как мы помним, индексы позволяют искать по полю объекта. Курсоры для индексов работают так же, как для хранилищ объектов -- они позволяют экнономить память, возвращая одно значение в единицу времени.
 
+<<<<<<< HEAD
 Для курсоров по индексам `cursor.key` является ключом индекса (например price), нам следует использовать свойство `cursor.primaryKey` как ключ объекта:
+=======
+For cursors over indexes, `cursor.key` is the index key (e.g. price), and we should use `cursor.primaryKey` property for the object key:
+>>>>>>> f72405a263e1d1adbc8d17179ee46af70842bb55
 
 ```js
 let request = priceIdx.openCursor(IDBKeyRange.upperBound(5));

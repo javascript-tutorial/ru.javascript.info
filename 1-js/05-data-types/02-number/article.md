@@ -2,7 +2,11 @@
 
 Все числа в JavaScript хранятся в 64-битном формате [IEEE-754](http://en.wikipedia.org/wiki/IEEE_754-1985), который также называют "числа с плавающей точкой двойной точности" (double precision floating point numbers).
 
+<<<<<<< HEAD
 Давайте глубже изучим, как работать с числами в JavaScript.
+=======
+Let's expand upon what we currently know about them.
+>>>>>>> f72405a263e1d1adbc8d17179ee46af70842bb55
 
 ## Способы записи числа
 
@@ -213,7 +217,11 @@ alert( 0.1 + 0.2 ); // 0.30000000000000004
 
 В JavaScript нет возможности для хранения точных значений 0.1 или 0.2, используя двоичную систему, точно также, как нет возможности хранить одну третью в десятичной системе счисления.
 
+<<<<<<< HEAD
 Числовой формат IEEE-754 решает эту проблему путём округления до ближайшего возможного числа. Правила округления обычно не позволяют нам увидеть эту "крошечную потерю точности", но она существует.
+=======
+The numeric format IEEE-754 solves this by rounding to the nearest possible number. These rounding rules normally don't allow us to see that "tiny precision loss", but it exists.
+>>>>>>> f72405a263e1d1adbc8d17179ee46af70842bb55
 
 Пример:
 ```js run

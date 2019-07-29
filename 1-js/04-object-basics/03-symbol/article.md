@@ -191,9 +191,15 @@ alert( obj[0] ); // Тест (то же свойство)
 ```
 ````
 
+<<<<<<< HEAD
 ## Глобальные символы
 
 Итак, как мы видели, обычно все символы уникальны, даже если их имена совпадают. Но иногда мы наоборот хотим, чтобы символы с одинаковыми именами были одной сущностью. Например, разные части нашего приложения хотят получить доступ к символу `"id"`, подразумевая именно одно и то же свойство.
+=======
+## Global symbols
+
+As we've seen, usually all symbols are different, even if they have the same name. But sometimes we want same-named symbols to be same entities. For instance, different parts of our application want to access symbol `"id"` meaning exactly the same property.
+>>>>>>> f72405a263e1d1adbc8d17179ee46af70842bb55
 
 Для этого существует *глобальный реестр символов*. Мы можем создавать в нём символы и обращаться к ним позже, и при каждом обращении нам гарантированно будет возвращаться один и тот же символ.
 
@@ -229,27 +235,46 @@ alert( id === idAgain ); // true
 К примеру:
 
 ```js run
+<<<<<<< HEAD
 // получаем символ по имени
 let sym = Symbol.for("name");
 let sym2 = Symbol.for("id");
 
 // получим имя по символу
+=======
+// get symbol by name
+let sym = Symbol.for("name");
+let sym2 = Symbol.for("id");
+
+// get name by symbol
+>>>>>>> f72405a263e1d1adbc8d17179ee46af70842bb55
 alert( Symbol.keyFor(sym) ); // name
 alert( Symbol.keyFor(sym2) ); // id
 ```
 
 Внутри метода `Symbol.keyFor` используется глобальный реестр символов для нахождения имени символа. Так что этот метод не будет работать для неглобальных символов. Если символ неглобальный, метод не сможет его найти и вернёт `undefined`.
 
+<<<<<<< HEAD
 Впрочем, для любых символов доступно свойство `description`.
 
 Например:
+=======
+That said, any symbols have `description` property.
+
+For instance:
+>>>>>>> f72405a263e1d1adbc8d17179ee46af70842bb55
 
 ```js run
 let globalSymbol = Symbol.for("name");
 let localSymbol = Symbol("name");
 
+<<<<<<< HEAD
 alert( Symbol.keyFor(globalSymbol) ); // name, глобальный символ
 alert( Symbol.keyFor(localSymbol) ); // undefined для неглобального символа
+=======
+alert( Symbol.keyFor(globalSymbol) ); // name, global symbol
+alert( Symbol.keyFor(localSymbol) ); // undefined, not global
+>>>>>>> f72405a263e1d1adbc8d17179ee46af70842bb55
 
 alert( localSymbol.description ); // name
 ```
@@ -287,4 +312,8 @@ alert( localSymbol.description ); // name
 
 2. Существует множество системных символов, используемых внутри JavaScript, доступных как `Symbol.*`. Мы можем использовать их, чтобы изменять ряд встроенных поведений объектов. Например, в дальнейших главах мы будем использовать `Symbol.iterator` для [итераторов](info:iterable), `Symbol.toPrimitive` для настройки [преобразования объектов в примитивы](info:object-toprimitive) и так далее.
 
+<<<<<<< HEAD
 Технически, символы не на 100% скрыты. Существует встроенный метод [Object.getOwnPropertySymbols(obj)](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertySymbols)  -- с его помощью можно получить все свойства объекта с ключом-символом. Также существует метод [Reflect.ownKeys(obj)](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Reflect/ownKeys), который возвращает *все* ключи объекта, включая символьные. Так что, они не совсем спрятаны. Но большинство библиотек, встроенных методов и синтаксических конструкций эти методы не используют. 
+=======
+Technically, symbols are not 100% hidden. There is a built-in method [Object.getOwnPropertySymbols(obj)](mdn:js/Object/getOwnPropertySymbols) that allows us to get all symbols. Also there is a method named [Reflect.ownKeys(obj)](mdn:js/Reflect/ownKeys) that returns *all* keys of an object including symbolic ones. So they are not really hidden. But most libraries, built-in functions and syntax constructs don't use these methods.
+>>>>>>> f72405a263e1d1adbc8d17179ee46af70842bb55

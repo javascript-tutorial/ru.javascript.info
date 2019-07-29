@@ -4,14 +4,14 @@
 
 ```js no-beautify
 if(browser == 'Edge') {
-  alert("У вас браузер Edge!");
+  alert("You've got the Edge!");
 } else if (browser == 'Chrome'
  || browser == 'Firefox'
  || browser == 'Safari'
  || browser == 'Opera') {
-  alert( 'Мы поддерживаем и эти браузерыo' );
+  alert( 'Okay we support these browsers too' );
 } else {
-  alert( 'Надеемся, что эта страница выглядит хорошо!' );
+  alert( 'We hope that this page looks ok!' );
 }
 ```
 

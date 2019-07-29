@@ -1,8 +1,12 @@
 # Методы у примитивов
 
+<<<<<<< HEAD
 JavaScript позволяет нам работать с примитивными типами данных  - строками, числами, и т.д., так, как если бы они были объектами. У них есть и методы. Мы изучим их позже, а сначала разберём, как это все работает, потому что, конечно, примитивы - не объекты.
 
 Давайте взглянем на ключевые различия между примитивами и объектами.
+=======
+JavaScript allows us to work with primitives (strings, numbers, etc.) as if they were objects. They also provide methods to call as such. We will study those soon, but first we'll see how it works because, of course, primitives are not objects (and here we will make it even clearer).
+>>>>>>> f72405a263e1d1adbc8d17179ee46af70842bb55
 
 Примитив
 
@@ -33,7 +37,11 @@ roma.sayHi(); // Привет, дружище!
 
 Однако у этих возможностей есть обратная сторона!
 
+<<<<<<< HEAD
 Объекты «тяжелее» примитивов. Они нуждаются в дополнительных ресурсах для поддержания внутренней структуры.
+=======
+Objects are "heavier" than primitives. They require additional resources to support the internal machinery.
+>>>>>>> f72405a263e1d1adbc8d17179ee46af70842bb55
 
 ## Примитив как объект
 
@@ -81,8 +89,13 @@ alert( n.toFixed(2) ); // 1.23
 Более подробно с различными свойствами и методами мы познакомимся в главах <info:number> и <info:string>.
 
 
+<<<<<<< HEAD
 ````warn header="Конструкторы `String/Number/Boolean` предназначены только для внутреннего пользования"
 Некоторые языки, такие как Java позволяют явное создание "объектов-обёрток" для примитивов при помощи такого синтаксиса как `new Number(1)` или `new Boolean(false)`.
+=======
+````warn header="Constructors `String/Number/Boolean` are for internal use only"
+Some languages like Java allow us to explicitly create "wrapper objects" for primitives using a syntax like `new Number(1)` or `new Boolean(false)`.
+>>>>>>> f72405a263e1d1adbc8d17179ee46af70842bb55
 
 В JavaScript, это тоже возможно по историческим причинам, но очень **не рекомендуется**. В некоторых местах последствия могут быть катастрофическими.
 

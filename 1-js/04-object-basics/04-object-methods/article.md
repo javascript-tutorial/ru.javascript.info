@@ -112,7 +112,11 @@ let user = {
 
   sayHi() {
 *!*
+<<<<<<< HEAD
     // this - это "текущий объект"
+=======
+    // "this" is the "current object"
+>>>>>>> f72405a263e1d1adbc8d17179ee46af70842bb55
     alert(this.name);
 */!*
   }
@@ -178,7 +182,11 @@ function sayHi() {
 }
 ```
 
+<<<<<<< HEAD
 Значение `this` вычисляется во время выполнения кода и зависит от контекста.
+=======
+The value of `this` is evaluated during the run-time, depending on the context.
+>>>>>>> f72405a263e1d1adbc8d17179ee46af70842bb55
 
 Например, здесь одна и та же функция назначена двум разным объектам и имеет различное значение "this" при вызовах:
 
