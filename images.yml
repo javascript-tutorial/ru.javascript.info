@@ -168,4 +168,16 @@ object-user-empty.svg:
 garbage-collection-5.svg:
   unreachables:
     text: недостижимые
-    
+
+array-shift.svg:
+  clear:
+    text: очистить
+    position: "center"
+  move: передвинуть
+  elements: элементы
+  to the left: влево
+
+array-pop.svg:
+  clear:
+    text: очистить
+    position: "center"
