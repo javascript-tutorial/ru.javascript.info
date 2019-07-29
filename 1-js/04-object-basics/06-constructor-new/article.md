@@ -213,7 +213,13 @@ vasya = {
 */
 ```
 
+<<<<<<< HEAD
 Для создания сложных объектов есть и более "продвинутый" синтаксис - [классы](info:classes), который мы разберём позже.
+=======
+To create complex objects, there's a more advanced syntax, [classes](info:classes), that we'll cover later.
+
+## Summary
+>>>>>>> 34e9cdca3642882bd36c6733433a503a40c6da74
 
 ## Итого
 

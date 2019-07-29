@@ -325,8 +325,13 @@ let key = "age";
 alert( *!*key*/!* in user ); // true, имя свойства было взято из переменной key
 ```
 
+<<<<<<< HEAD
 ````smart header="Оператор \"in\" для свойств со значением *'undefined'*"
 Обычно строгого сравнения `"=== undefined"` достаточно для проверки наличия свойства. Но есть особый случай, когда оно не подходит, и нужно использовать `"in"`.
+=======
+````smart header="Using \"in\" for properties that store `undefined`"
+Usually, the strict comparison `"=== undefined"` check the property existance just fine. But there's a special case when it fails, but `"in"` works correctly.
+>>>>>>> 34e9cdca3642882bd36c6733433a503a40c6da74
 
 Это когда свойство существует, но содержит значение `undefined`:
 
@@ -581,7 +586,11 @@ user.age = 25; // (*)
 alert(user.age); // 25
 ```
 
+<<<<<<< HEAD
 Может показаться, что строка `(*)` должна вызвать ошибку, но нет, здесь всё в порядке. Дело в том, что объявление `const` защищает от изменений только само значение `user`. А в нашем случае значение `user` - это ссылка на объект, и это значение мы не меняем. В строке `(*)` мы действуем *внутри* объекта, мы не переназначаем `user`.
+=======
+It might seem that the line `(*)` would cause an error, but no, there's totally no problem. That's because `const` fixes only value of `user` itself. And here `user` stores the reference to the same object all the time. The line `(*)` goes *inside* the object, it doesn't reassign `user`.
+>>>>>>> 34e9cdca3642882bd36c6733433a503a40c6da74
 
 Если же мы попытаемся присвоить `user` другое значение, то `const` выдаст ошибку:
 
