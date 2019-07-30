@@ -181,3 +181,71 @@ array-pop.svg:
   clear:
     text: очистить
     position: "center"
+
+decorator-makecaching-wrapper.svg:
+  wrapper: 'обёртка'
+  around the function: 'вокруг функции'
+
+xhr-another-domain.svg:
+  _defaults:
+    position: "center"
+  Browser: 'Браузер'
+  Server: 'Сервер'
+  HTTP-request: 'HTTP-запрос'
+  HTTP-response: 'HTTP-ответ'
+  '* OR https://javascript.info': '* ИЛИ https://javascript.info'
+  'if the header allows, success,': 'если заголовок разрешает, успех'
+  otherwise fail: 'иначе ошибка'
+
+xhr-preflight.svg:
+  _defaults:
+    position: "center"
+  Browser: 'Браузер'
+  Server: 'Сервер'
+  Main HTTP-response: 'Основной HTTP-ответ'
+  otherwise error: 'иначе ошибка'
+  'if allowed: success,': 'если разрешено, успех,'
+  Main HTTP-request: 'Основной HTTP-запрос'
+  preflight: 'предзапрос'
+  if allowed: 'если разрешено'
+
+cors-gmail-messages.svg:
+  _defaults:
+    position: "center"
+  got the cookie?: 'есть куки?'
+  okay!: 'ок!'
+
+websocket-handshake.svg:
+  _defaults:
+    position: "center"
+  Browser: 'Браузер'
+  Server: 'Сервер'
+  HTTP-request: 'HTTP-запрос'
+  '"Hey, server, let''s talk WebSocket?"': '"Сервер, давай поговорим на WebSocket?"'
+  HTTP-response: 'HTTP-ответ'
+  '"Okay!"': 'Давай!'
+  WebSocket protocol: 'Протокол WebSocket'
+
+long-polling.svg:
+  _defaults:
+    position: "center"
+  Browser: 'Браузер'
+  Server: 'Сервер'
+  request: 'запрос'
+  connection: 'соединение'
+  hangs: 'висит'
+  connection breaks: 'соединение разорвано'
+  end of request: 'конец запроса'
+  data: 'данные'
+
+genYield2-2.svg:
+  _defaults:
+    position: "center"
+  Generator: 'Генератор'
+  Calling code: 'Вызывающий код'
+
+genYield2.svg:
+  _defaults:
+    position: "center"
+  Generator: 'Генератор'
+  Calling code: 'Вызывающий код'
