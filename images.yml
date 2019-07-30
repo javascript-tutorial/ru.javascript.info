@@ -249,3 +249,91 @@ genYield2.svg:
     position: "center"
   Generator: 'Генератор'
   Calling code: 'Вызывающий код'
+
+promise-handler-variants.svg:
+  _defaults:
+    position: "center"
+  ...with the result: '...с результатом'
+  of the new promise...: 'нового промиса...'
+  'the call of .then(handler) always returns a promise:': 'вызов .then(handler) всегда возвращает промис:'
+  if handler ends with…: 'если handler заканчивается…'
+  return value: 'возвратом значения'
+  return promise: 'возвратом промиса'
+  throw error: 'ошибкой'
+  'that promise settles with:': 'этот промис завершается с:'
+
+promiseQueue.svg:
+  '"code finished"': '"код завершён"'
+  handler enqueued: 'handler в очереди'
+  queued handler runs: 'запускается handler из очереди'
+  script execution finished: 'выполнение скрипта завершено'
+
+eventLoop-full.svg:
+  script: 'скрипт'
+  event:
+    text: 'событийный'
+    position: 'center'
+  loop:
+    text: 'цикл'
+    position: 'center'
+  microtasks: 'микрозадачи'
+  render: 'рендеринг'
+
+eventLoop.svg:
+  script: 'скрипт'
+  event:
+    text: 'событийный'
+    position: 'center'
+  loop:
+    text: 'цикл'
+    position: 'center'
+  macrotask:
+    text: 'очередь'
+    position: 'center'
+  queue:
+    text: 'макрозадач'
+    position: 'center'
+
+cookie-xsrf.svg:
+  _defaults:
+    position: "center"
+  got the cookie?: 'есть куки?'
+  okay!: 'отлично!'
+
+lexical-environment-global-3.svg:
+  execution start: 'начало выполнения'
+
+lexical-environment-global-2.svg:
+  execution start: 'начало выполнения'
+
+lexenv-makearmy.svg:
+  for block: 'для блока'
+
+lexical-environment-simple.svg:
+  'the new function LexicalEnvironment: 'LexicalEnvironment новой функции'
+
+lexenv-nested-makecounter-2.svg:
+  global LexicalEnvironment: 'глобальное LexicalEnvironment'
+
+lexenv-nested-makecounter-6.svg:
+  modified here: 'изменено здесь'
+
+proxy-inherit.svg:
+  _defaults:
+    position: "center"
+  '_name: "Guest"': '_name: "Гость"'
+  '_name: "Admin"': '_name: "Админ"'
+  user (proxied): 'user (прокси)'
+  original user: 'исходный user'
+
+selection-firefox.svg:
+  selection: 'выделение'
+
+
+selection-direction-backward.svg:
+  focus: 'фокус'
+  anchor: 'якорь'
+
+selection-direction-forward.svg:
+  focus: 'фокус'
+  anchor: 'якорь'

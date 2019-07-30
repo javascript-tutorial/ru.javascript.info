@@ -9,13 +9,13 @@
             <path id="Line-Copy-3" d="M332,216 L332,188 L335,188 L335,216 L343,216 L333.5,235 L324,216 L332,216 Z" fill="#EE6B47" fill-rule="nonzero"></path>
             <path id="Line-Copy-2" d="M173.21489,217.99393 L212.768627,187.395757 L214.604243,189.768627 L175.050507,220.3668 L179.945484,226.694454 L159.104522,230.805936 L168.319913,211.666277 L173.21489,217.99393 Z" fill="#EE6B47" fill-rule="nonzero"></path>
             <text id="return-value" font-family="PTMono-Regular, PT Mono" font-size="13" font-weight="normal" fill="#8A704D">
-                <tspan x="128" y="173">return value</tspan>
+                <tspan x="104" y="173">возвратом значения</tspan>
             </text>
             <text id="return-promise" font-family="PTMono-Regular, PT Mono" font-size="13" font-weight="normal" fill="#8A704D">
-                <tspan x="447" y="173">return promise</tspan>
+                <tspan x="435" y="173">возвратом промиса</tspan>
             </text>
             <text id="throw-error" font-family="PTMono-Regular, PT Mono" font-size="13" font-weight="normal" fill="#8A704D">
-                <tspan x="284" y="173">throw error</tspan>
+                <tspan x="300" y="173">ошибкой</tspan>
             </text>
             <rect id="Rectangle-1-Copy" stroke="#7ED321" stroke-width="2" fill="#FFF9EB" x="20" y="264" width="178" height="64"></rect>
             <text id="state:-&quot;fulfilled&quot;-r" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" line-spacing="20" fill="#417505">
@@ -33,8 +33,8 @@
                 <path d="M10.4924516,18.3909862 C10.6017016,18.496424 10.706129,18.6253825 10.8003548,18.7758341 C10.9669194,19.041659 11.1077016,19.3608111 11.2227016,19.7134194 C11.3466048,20.0927926 11.465129,20.5291429 11.5035242,20.9752258 C11.5419194,20.5291429 11.6604435,20.0927926 11.7843468,19.7134194 C11.8993468,19.3610138 12.0403145,19.041659 12.2066935,18.7758341 C12.3011048,18.6253825 12.4053468,18.496424 12.5145968,18.3909862 C12.6529677,18.2575668 12.8013548,18.1683502 12.9465887,18.0689954 C13.0831048,17.9757235 13.2207339,17.8889401 13.3581774,17.8013456 C13.638629,17.6227097 13.915371,17.4292719 14.1869194,17.2048111 C14.455871,16.9823779 14.7224113,16.7443318 14.9798629,16.4764793 C15.2280403,16.2183594 15.4673145,15.9275945 15.6887823,15.5908018 C15.9126613,15.2501567 16.1133548,14.8614562 16.3084839,14.4611982 C16.3509597,14.3738065 16.392879,14.286212 16.4340565,14.1959816 C16.4811694,14.0923687 16.5271694,13.9867281 16.5715,13.8792627 C16.6234355,13.7549677 16.6707339,13.6223594 16.70375,13.4759631 C16.70375,11.8637788 14.3768548,10.5569585 11.5066774,10.5569585 C8.63631452,10.5569585 6.30941935,11.8637788 6.30941935,13.4759631 L6.3031129,13.4759631 C6.33612903,13.6225622 6.38342742,13.7549677 6.43517742,13.8792627 C6.47950806,13.9869309 6.52569355,14.0923687 6.57262097,14.1959816 C6.61379839,14.2860092 6.65571774,14.3736037 6.69837903,14.4611982 C6.89332258,14.8614562 7.09401613,15.2503594 7.31789516,15.5908018 C7.5393629,15.9275945 7.7786371,16.2183594 8.02681452,16.4764793 C8.2846371,16.7445346 8.55080645,16.9825806 8.81975806,17.2048111 C9.09112097,17.4292719 9.36804839,17.6227097 9.6485,17.8013456 C9.78612903,17.8889401 9.9233871,17.9757235 10.0599032,18.0689954 C10.2056935,18.1683502 10.3540806,18.2573641 10.4924516,18.3909862 L10.4924516,18.3909862 Z" id="Shape"></path>
             </g>
             <text id="...with-the-result-o" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" fill="#8A704D">
-                <tspan x="494" y="323">...with the result</tspan>
-                <tspan x="494" y="338">of the new promise...</tspan>
+                <tspan x="502" y="323">...с результатом</tspan>
+                <tspan x="510" y="338">нового промиса...</tspan>
             </text>
             <rect id="Rectangle-1-Copy-2" stroke="#E8C48E" stroke-width="2" fill="#FFF9EB" x="241" y="25" width="191" height="64"></rect>
             <text id="state:-&quot;pending&quot;-res" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" line-spacing="20" fill="#8A704D">
@@ -42,16 +42,13 @@
                 <tspan x="271" y="69">result: undefined</tspan>
             </text>
             <text id="the-call-of-.then(ha" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" fill="#8A704D">
-                <tspan x="136" y="15">the call of .then(handler) always returns a promise:</tspan>
-            </text>
-            <text id="that-promise-is-sett" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" fill="#EE6B47">
-                <tspan x="206" y="119">that promise is settled by handler</tspan>
+                <tspan x="160" y="15">вызов .then(handler) всегда возвращает промис:</tspan>
             </text>
             <text id="if-handler-ends-with" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" fill="#EE6B47">
-                <tspan x="256" y="139">if handler ends with…</tspan>
+                <tspan x="232" y="133">если handler заканчивается…</tspan>
             </text>
-            <text id="the-promise-settles" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" fill="#EE6B47">
-                <tspan x="12" y="253">the promise settles with:</tspan>
+            <text id="that-promise-settles" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" fill="#EE6B47">
+                <tspan x="12" y="253">этот промис завершается с:</tspan>
             </text>
         </g>
     </g>
