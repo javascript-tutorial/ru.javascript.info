@@ -85,7 +85,7 @@
                 <tspan x="403" y="79">LexicalEnvironment</tspan>
             </text>
             <text id="for-block-LexicalEnv" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" fill="#8A704D">
-                <tspan x="278" y="14">для блока</tspan>
+                <tspan x="278" y="14">блочный</tspan>
                 <tspan x="278" y="29">LexicalEnvironment</tspan>
             </text>
         </g>
