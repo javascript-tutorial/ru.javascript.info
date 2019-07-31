@@ -8,7 +8,7 @@
             <g id="Rectangle-1-+-Корень" transform="translate(207.000000, 4.000000)">
                 <rect id="Rectangle-1" stroke="#E8C48E" stroke-width="2" fill="#FFF9EB" x="1" y="1" width="78" height="28" rx="14"></rect>
                 <text id="Begin" font-family="OpenSans-Regular, Open Sans" font-size="14" font-weight="normal" fill="#8A704D">
-                    <tspan x="21" y="20">Begin</tspan>
+                    <tspan x="14.5" y="20">Начало</tspan>
                 </text>
             </g>
             <g id="Rectangle-1-+-Корень-Copy-2" transform="translate(313.000000, 262.000000)"></g>
@@ -22,26 +22,26 @@
             <g id="Rectangle-356-+-Отмена" transform="translate(59.000000, 177.000000)">
                 <rect id="Rectangle-356" fill="#FFFFFF" x="0" y="2" width="60" height="20"></rect>
                 <text id="No-Errors" font-family="OpenSans-Regular, Open Sans" font-size="14" font-weight="normal" fill="#8A704D">
-                    <tspan x="7.5" y="15">No Errors</tspan>
+                    <tspan x="-1" y="15">Нет ошибок</tspan>
                 </text>
             </g>
             <g id="Rectangle-356-Copy-+-“Админ”" transform="translate(303.000000, 176.000000)">
                 <rect id="Rectangle-356-Copy" fill="#FFFFFF" x="65" y="2" width="60" height="20"></rect>
                 <text id="An-error-occured-in" font-family="OpenSans-Regular, Open Sans" font-size="14" font-weight="normal" fill="#8A704D">
-                    <tspan x="0.932128906" y="15">An error occured in the code</tspan>
+                    <tspan x="6.432128906" y="15">В коде произошла ошибка</tspan>
                 </text>
             </g>
             <rect id="Rectangle-1-Copy-2" stroke="#E8C48E" stroke-width="2" fill="#FFF9EB" x="292" y="349" width="214" height="49" rx="24.5"></rect>
             <rect id="Rectangle-1" stroke="#E8C48E" stroke-width="2" fill="#FFF9EB" x="1" y="244" width="195" height="49" rx="24.5"></rect>
             <rect id="Rectangle-1-Copy" stroke="#E8C48E" stroke-width="2" fill="#FFF9EB" x="290" y="244" width="216" height="49" rx="24.5"></rect>
             <text id="Ignore-catch-block" font-family="OpenSans-Regular, Open Sans" font-size="14" font-weight="normal" fill="#8A704D">
-                <tspan x="39" y="272">Ignore catch block</tspan>
+                <tspan x="12.5" y="272">Игнорировать блок catch</tspan>
             </text>
             <text id="Ignore-the-rest-of-t" font-family="OpenSans-Regular, Open Sans" font-size="14" font-weight="normal" fill="#8A704D">
-                <tspan x="332" y="272">Ignore the rest of try</tspan>
+                <tspan x="312" y="272">Игнорировать остаток try</tspan>
             </text>
             <text id="Execute-catch-block" font-family="OpenSans-Regular, Open Sans" font-size="14" font-weight="normal" fill="#8A704D">
-                <tspan x="333" y="379">Execute catch block</tspan>
+                <tspan x="322" y="379">Выполнить блок catch</tspan>
             </text>
             <text id="try-{-}" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" line-spacing="10" fill="#8A704D">
                 <tspan x="218" y="117">try {</tspan>
@@ -51,7 +51,7 @@
                 <tspan x="218" y="157">}</tspan>
             </text>
             <text id="//-code..." font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" line-spacing="10" fill="#8A704D">
-                <tspan x="232" y="138">// code...</tspan>
+                <tspan x="232" y="138">// код...</tspan>
             </text>
         </g>
     </g>

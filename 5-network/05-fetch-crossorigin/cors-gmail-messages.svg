@@ -32,8 +32,8 @@
             </text>
             <rect id="Rectangle-1-Copy" stroke="#E8C48E" stroke-width="2" fill="#FFF9EB" x="494" y="48" width="140" height="199"></rect>
             <text id="got-the-cookie?-okay" font-family="OpenSans-Regular, Open Sans" font-size="16" font-weight="normal" fill="#8A704D">
-                <tspan x="508.464844" y="133">got the cookie?</tspan>
-                <tspan x="544.851562" y="155">okay!</tspan>
+                <tspan x="526.4648440000001" y="133">есть куки?</tspan>
+                <tspan x="553.351562" y="155">ок!</tspan>
             </text>
             <text id="gmail.com" font-family="OpenSans-Bold, Open Sans" font-size="16" font-weight="bold" fill="#8A704D">
                 <tspan x="528" y="36">gmail.com</tspan>

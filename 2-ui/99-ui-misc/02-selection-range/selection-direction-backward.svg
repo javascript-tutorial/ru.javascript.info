@@ -28,10 +28,10 @@
             </text>
             <path id="Line-Copy-3" d="M308.675044,49.162478 L308.675044,49.5 L308,49.5 L296,55.5 L296,49.5 L47,49.5 L47,47.5 L296,47.5 L296,41.5 L308,47.5 L308.675044,47.5 L308.675044,47.837522 L310,48.5 L308.675044,49.162478 Z" fill="#EE6B47" fill-rule="nonzero"></path>
             <text id="focus" font-family="PTMono-Regular, PT Mono" font-size="16" font-weight="normal" fill="#000000">
-                <tspan x="25" y="32">focus</tspan>
+                <tspan x="25" y="32">фокус</tspan>
             </text>
             <text id="anchor" font-family="PTMono-Regular, PT Mono" font-size="16" font-weight="normal" fill="#000000">
-                <tspan x="277.2" y="32">anchor</tspan>
+                <tspan x="277.2" y="32">якорь</tspan>
             </text>
             <use id="Rectangle" stroke="#0000FF" mask="url(#mask-2)" stroke-width="2" fill-opacity="0.1" fill="#0000FF" stroke-dasharray="5,2" xlink:href="#path-1"></use>
             <rect id="Rectangle" fill="url(#linearGradient-3)" opacity="0.200000003" transform="translate(184.000000, 102.000000) scale(-1, 1) translate(-184.000000, -102.000000) " x="53" y="94" width="262" height="16"></rect>

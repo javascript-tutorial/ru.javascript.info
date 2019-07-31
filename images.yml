@@ -305,12 +305,13 @@ lexical-environment-global-3.svg:
 
 lexical-environment-global-2.svg:
   execution start: 'начало выполнения'
-
+  '&lt;empty&gt;': '&lt;пусто&gt;'
+  
 lexenv-makearmy.svg:
   for block: 'для блока'
 
 lexical-environment-simple.svg:
-  'the new function LexicalEnvironment: 'LexicalEnvironment новой функции'
+  'the new function LexicalEnvironment': 'LexicalEnvironment новой функции'
 
 lexenv-nested-makecounter-2.svg:
   global LexicalEnvironment: 'глобальное LexicalEnvironment'

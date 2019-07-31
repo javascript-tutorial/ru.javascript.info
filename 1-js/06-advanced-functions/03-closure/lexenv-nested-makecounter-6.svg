@@ -78,7 +78,7 @@
             <path id="Line" d="M337.5,70.5 L323.5,70.5 L323.5,68.5 L337.5,68.5 L337.5,62.5 L351.5,69.5 L337.5,76.5 L337.5,70.5 Z" fill="#EE6B47" fill-rule="nonzero"></path>
             <polyline id="Rectangle-1-Copy-3" fill="#EC6B4E" points="0 212 0 199 9 205.5"></polyline>
             <text id="modified-here" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" fill="#EC6B4E">
-                <tspan x="360" y="36">modified here</tspan>
+                <tspan x="360" y="36">изменено здесь</tspan>
             </text>
         </g>
     </g>

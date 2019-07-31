@@ -16,8 +16,8 @@
             </text>
             <rect id="Rectangle-1-Copy" stroke="#E8C48E" stroke-width="2" fill="#FFF9EB" x="505" y="48" width="140" height="88"></rect>
             <text id="got-the-cookie?-okay" font-family="OpenSans-Regular, Open Sans" font-size="14" font-weight="normal" fill="#8A704D">
-                <tspan x="526.469238" y="108">got the cookie?</tspan>
-                <tspan x="558.307617" y="127">okay!</tspan>
+                <tspan x="540.969238" y="108">есть куки?</tspan>
+                <tspan x="544.307617" y="127">отлично!</tspan>
             </text>
             <text id="bank.com" font-family="OpenSans-Bold, Open Sans" font-size="14" font-weight="bold" fill="#8A704D">
                 <tspan x="543" y="36">bank.com</tspan>

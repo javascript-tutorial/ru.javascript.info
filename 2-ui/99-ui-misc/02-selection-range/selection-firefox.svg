@@ -16,7 +16,7 @@
             <path id="Line-Copy" d="M347.951013,190.753585 L347.496507,60.8785057 L349.496494,60.8715066 L349.951,190.746586 L355.950964,190.725589 L349,204.75 L341.951049,190.774583 L347.951013,190.753585 Z" fill="#EE6B47" fill-rule="nonzero"></path>
             <path id="Line-Copy-2" d="M420.437748,191.726498 L384.776704,57.5403896 L386.70961,57.026704 L422.370655,191.212812 L428.169374,189.671756 L425,205 L414.639029,193.267554 L420.437748,191.726498 Z" fill="#EE6B47" fill-rule="nonzero"></path>
             <text id="selection" font-family="PTMono-Regular, PT Mono" font-size="20" font-weight="normal" fill="#000000">
-                <tspan x="295" y="44">selection</tspan>
+                <tspan x="295" y="44">выделение</tspan>
             </text>
         </g>
     </g>

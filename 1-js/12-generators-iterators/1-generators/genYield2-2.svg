@@ -59,10 +59,10 @@
                 <tspan x="409.8" y="200" fill="#878787">)</tspan>
             </text>
             <text id="Generator" font-family="OpenSans-Regular, Open Sans" font-size="14" font-weight="normal" fill="#000000">
-                <tspan x="95" y="15">Generator</tspan>
+                <tspan x="92.5" y="15">Генератор</tspan>
             </text>
             <text id="Calling-code" font-family="OpenSans-Regular, Open Sans" font-size="14" font-weight="normal" fill="#000000">
-                <tspan x="345" y="15">Calling code</tspan>
+                <tspan x="324" y="15">Вызывающий код</tspan>
             </text>
         </g>
     </g>

@@ -52,13 +52,13 @@
             </text>
             <polygon id="Shape" fill="#EE6B47" transform="translate(195.000000, 112.473154) rotate(-90.000000) translate(-195.000000, -112.473154) " points="195 141.973154 204 125.366988 198 125.366988 198 82.973154 192 82.973154 192 125.366988 186 125.366988"></polygon>
             <text id="clear" font-family="OpenSans-Regular, Open Sans" font-size="14" font-weight="normal" fill="#EE6B47">
-                <tspan x="176" y="101">clear</tspan>
+                <tspan x="160.5" y="101">очистить</tspan>
             </text>
             <text id="move" font-family="OpenSans-Regular, Open Sans" font-size="14" font-weight="normal" fill="#EE6B47">
-                <tspan x="393" y="98.973154">move</tspan>
+                <tspan x="393" y="98.973154">передвинуть</tspan>
                 <tspan x="393" y="117.973154"></tspan>
-                <tspan x="393" y="136.973154">elements</tspan>
-                <tspan x="393" y="155.973154">to the left</tspan>
+                <tspan x="393" y="136.973154">элементы</tspan>
+                <tspan x="393" y="155.973154">влево</tspan>
             </text>
             <rect id="Rectangle-1" stroke="#E8C48E" stroke-width="2" fill="#FFF9EB" x="12" y="87" width="35" height="52"></rect>
             <rect id="Rectangle-2" stroke="#E8C48E" stroke-width="2" fill="#FFF9EB" x="48" y="86.973154" width="35" height="52"></rect>

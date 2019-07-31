@@ -53,10 +53,10 @@
                 <path d="M0.5,0.620689655 C0.5,0.620689655 46.8847656,0.620689655 46.8847656,72 C46.8847656,143.37931 0.5,143.37931 0.5,143.37931" id="Line-Copy-5"></path>
             </g>
             <text id="wrapper" font-family="Consolas" font-size="14" font-weight="normal" fill="#8A704D">
-                <tspan x="265" y="75">wrapper</tspan>
+                <tspan x="265" y="75">обёртка</tspan>
             </text>
             <text id="around-the-function" font-family="Consolas" font-size="14" font-weight="normal" fill="#8A704D">
-                <tspan x="282" y="160">around the function</tspan>
+                <tspan x="282" y="160">вокруг функции</tspan>
             </text>
             <path id="Line" d="M229,155 L262,155 L262,158 L229,158 L229,166 L210,156.5 L229,147 L229,155 Z" fill="#EE6B47" fill-rule="nonzero"></path>
         </g>

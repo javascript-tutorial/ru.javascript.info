@@ -28,10 +28,10 @@
             <path id="Line" d="M333.5,87.5 L301.5,87.5 L301.5,85.5 L333.5,85.5 L333.5,79.5 L347.5,86.5 L333.5,93.5 L333.5,87.5 Z" fill="#EE6B47" fill-rule="nonzero"></path>
             <path id="Line" d="M121.828522,111.575413 L121.828522,124.5 L347.370547,124.5 L347.370547,126.5 L346.370547,126.5 L120.828522,126.5 L119.828522,126.5 L119.828522,111.575413 L113.828522,111.575413 L120.828522,97.5754129 L127.828522,111.575413 L121.828522,111.575413 Z" fill="#EE6B47" fill-rule="nonzero"></path>
             <text id="Generator" font-family="OpenSans-Regular, Open Sans" font-size="14" font-weight="normal" fill="#000000">
-                <tspan x="122" y="22">Generator</tspan>
+                <tspan x="119.5" y="22">Генератор</tspan>
             </text>
             <text id="Calling-code" font-family="OpenSans-Regular, Open Sans" font-size="14" font-weight="normal" fill="#000000">
-                <tspan x="376" y="22">Calling code</tspan>
+                <tspan x="355" y="22">Вызывающий код</tspan>
             </text>
             <text id=".next(4)" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" fill="#000000">
                 <tspan x="360" y="127">.next(4)</tspan>
