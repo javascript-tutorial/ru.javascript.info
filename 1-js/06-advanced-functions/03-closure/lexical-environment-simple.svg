@@ -59,7 +59,7 @@
             </g>
             <polyline id="Rectangle-1-Copy" fill="#EC6B4E" points="0 83.7741935 0 71 9 77.3870968"></polyline>
             <text id="LexicalEnvironment-f" font-family="OpenSans-Regular, Open Sans" font-size="12" font-weight="normal" fill="#666666">
-                <tspan x="267" y="25">LexicalEnvironment for the call</tspan>
+                <tspan x="267" y="25">LexicalEnvironment вызова</tspan>
             </text>
             <path id="Line" d="M353,48 L353,31 L354,31 L354,48 L358,48 L353.5,57 L349,48 L353,48 Z" fill="#666666" fill-rule="nonzero" opacity="0.502774004"></path>
         </g>

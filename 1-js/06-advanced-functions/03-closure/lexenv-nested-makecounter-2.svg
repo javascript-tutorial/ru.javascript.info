@@ -58,11 +58,11 @@
             </text>
             <polyline id="Rectangle-1-Copy" fill="#EC6B4E" points="3 39.7741935 3 27 12 33.3870968"></polyline>
             <text id="global-LexicalEnviro" font-family="PTMono-Regular, PT Mono" font-size="12" font-weight="normal" fill="#8A704D">
-                <tspan x="440" y="15">global LexicalEnvironment</tspan>
+                <tspan x="440" y="15">глобальное LexicalEnvironment</tspan>
             </text>
             <text id="LexicalEnvironment-o" font-family="PTMono-Regular, PT Mono" font-size="12" font-weight="normal" fill="#8A704D">
                 <tspan x="275" y="15">LexicalEnvironment</tspan>
-                <tspan x="275" y="29">of makeCounter() call</tspan>
+                <tspan x="275" y="29">вызова makeCounter()</tspan>
             </text>
         </g>
     </g>

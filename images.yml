@@ -303,18 +303,24 @@ cookie-xsrf.svg:
 lexical-environment-global-3.svg:
   execution start: 'начало выполнения'
 
+lexenv-nested-makecounter-5.svg:
+  '&lt;empty&gt;':
+    text: '&lt;пусто&gt;'
+    position: 'center'
+
 lexical-environment-global-2.svg:
   execution start: 'начало выполнения'
   '&lt;empty&gt;': '&lt;пусто&gt;'
-  
+
 lexenv-makearmy.svg:
-  for block: 'для блока'
+  for block: 'блочный'
 
 lexical-environment-simple.svg:
-  'the new function LexicalEnvironment': 'LexicalEnvironment новой функции'
+  'LexicalEnvironment for the call': 'LexicalEnvironment вызова'
 
 lexenv-nested-makecounter-2.svg:
   global LexicalEnvironment: 'глобальное LexicalEnvironment'
+  'of makeCounter() call': 'вызова makeCounter()'
 
 lexenv-nested-makecounter-6.svg:
   modified here: 'изменено здесь'
