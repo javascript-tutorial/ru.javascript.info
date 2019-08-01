@@ -82,7 +82,7 @@ for (let value of Object.values(user)) {
 Например, у нас есть объект с ценами, и мы хотели бы их удвоить:
 
 ```js run
-let users = {
+let prices = {
   banana: 1,
   orange: 2,
   meat: 4,

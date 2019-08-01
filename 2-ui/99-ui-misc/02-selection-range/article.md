@@ -357,7 +357,7 @@ From <input id="start" type="number" value=1> – To <input id="end" type="numbe
     cloned.innerHTML = astext.innerHTML = "";
 
     // Клонируем DOM-элементы из диапазонов (здесь мы поддерживаем множественное выделение)
-    for (let i = 0; i < selection; i++) {
+    for (let i = 0; i < selection.rangeCount; i++) {
       cloned.append(selection.getRangeAt(i).cloneContents());
     }
 
@@ -630,7 +630,7 @@ button.onclick = () => {
 
     // затем применяем методы Range к selection.getRangeAt(0)
     // или, как здесь, ко всем диапазонам, чтобы поддерживать множественное выделение
-    for (let i = 0; i < selection; i++) {
+    for (let i = 0; i < selection.rangeCount; i++) {
       cloned.append(selection.getRangeAt(i).cloneContents());
     }
     ```
