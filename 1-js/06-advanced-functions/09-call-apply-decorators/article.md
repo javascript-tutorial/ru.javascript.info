@@ -265,7 +265,7 @@ function cachingDecorator(func, hash) {
     }
 
 *!*
-    let result = func.apply(this, arguments); // (**)
+    let result = func.call(this, ...arguments); // (**)
 */!*
 
     cache.set(key, result);
@@ -413,7 +413,7 @@ hash(1, 2);
 ```js
 let wrapper = function(original, arguments) {
   return original.apply(this, arguments);
-}
+};
 ```
 
 Мы также рассмотрели пример *заимствования метода*, когда мы вызываем метод у объекта в контексте другого объекта. Весьма распространено заимствовать методы массива и применять их к `arguments`. В качестве альтернативы можно использовать объект с остаточными параметрами `...args`, который является реальным массивом.
