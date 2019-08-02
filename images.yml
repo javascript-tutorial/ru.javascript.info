@@ -344,3 +344,6 @@ selection-direction-backward.svg:
 selection-direction-forward.svg:
   focus: 'фокус'
   anchor: 'якорь'
+
+object-prototype-empty.svg:
+  'prototype object': 'прототип object'

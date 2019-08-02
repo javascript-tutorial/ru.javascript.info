@@ -7,7 +7,7 @@
         <g id="object-prototype-empty.svg">
             <rect id="Rectangle-1" stroke="#E8C48E" stroke-width="2" fill="#FFF9EB" x="14" y="23" width="118" height="28"></rect>
             <text id="prototype-object" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" fill="#8A704D">
-                <tspan x="12" y="15">prototype object</tspan>
+                <tspan x="12" y="15">прототип object</tspan>
             </text>
             <rect id="Rectangle-1" stroke="#E8C48E" stroke-width="2" fill="#FFF9EB" x="14" y="111" width="118" height="28"></rect>
             <text id="object" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" fill="#8A704D">
