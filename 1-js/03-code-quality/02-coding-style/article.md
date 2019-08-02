@@ -119,7 +119,7 @@ if (
 
     ```js no-beautify
     show(parameters,
-         aligned, // 5 пробелов слева  
+         aligned, // 5 пробелов слева
          one,
          after,
          another
@@ -197,7 +197,7 @@ function pow(x, n) {
     }
 
     return result;
-  }  
+  }
 }
 ```
 

@@ -1,7 +1,7 @@
 describe("army", function() {
 
   let army;
-  
+
   before(function() {
     army = makeArmy();
     window.alert = sinon.stub(window, "alert");

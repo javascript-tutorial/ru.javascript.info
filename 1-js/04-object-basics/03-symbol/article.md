@@ -12,7 +12,7 @@
 Создаются новые символы с помощью функции `Symbol()`:
 
 ```js
-// Создаём новый символ - id  
+// Создаём новый символ - id
 let id = Symbol();
 ```
 
@@ -287,4 +287,4 @@ alert( localSymbol.description ); // name
 
 2. Существует множество системных символов, используемых внутри JavaScript, доступных как `Symbol.*`. Мы можем использовать их, чтобы изменять ряд встроенных поведений объектов. Например, в дальнейших главах мы будем использовать `Symbol.iterator` для [итераторов](info:iterable), `Symbol.toPrimitive` для настройки [преобразования объектов в примитивы](info:object-toprimitive) и так далее.
 
-Технически, символы не на 100% скрыты. Существует встроенный метод [Object.getOwnPropertySymbols(obj)](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertySymbols)  -- с его помощью можно получить все свойства объекта с ключом-символом. Также существует метод [Reflect.ownKeys(obj)](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Reflect/ownKeys), который возвращает *все* ключи объекта, включая символьные. Так что, они не совсем спрятаны. Но большинство библиотек, встроенных методов и синтаксических конструкций эти методы не используют. 
+Технически, символы не на 100% скрыты. Существует встроенный метод [Object.getOwnPropertySymbols(obj)](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertySymbols)  -- с его помощью можно получить все свойства объекта с ключом-символом. Также существует метод [Reflect.ownKeys(obj)](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Reflect/ownKeys), который возвращает *все* ключи объекта, включая символьные. Так что, они не совсем спрятаны. Но большинство библиотек, встроенных методов и синтаксических конструкций эти методы не используют.

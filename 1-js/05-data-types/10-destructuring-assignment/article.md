@@ -382,7 +382,7 @@ let options = {
     height: 200
   },
   items: ["Cake", "Donut"],
-  extra: true    
+  extra: true
 };
 
 // деструктуризация разбита на несколько строк для ясности

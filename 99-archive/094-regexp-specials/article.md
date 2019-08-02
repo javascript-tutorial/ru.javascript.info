@@ -99,7 +99,7 @@ alert(text)
 
 ```js run
 var text = ' [b]a [u]b[/u] c [/b] ';
-    
+
 var reg = /\[([bus])\](.*?)\[\/\1\] /;
 text = text.replace(reg, '<$1>$2</$1>');  // <b>a [u]b[/u] c </b>
 alert(text);

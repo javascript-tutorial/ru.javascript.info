@@ -94,11 +94,11 @@ url.searchParams.set('q', 'test me!'); // добавим параметр, со�
 
 alert(url); // https://google.com/search?q=test+me%21
 
-url.searchParams.set('tbs', 'qdr:y'); // этот параметр задаёт диапазон дат для Google-поиска 
+url.searchParams.set('tbs', 'qdr:y'); // этот параметр задаёт диапазон дат для Google-поиска
 
 alert(url); // https://google.com/search?query=test+me%21&tbs=qdr%3Ay
 
-// перебрать параметры поиска 
+// перебрать параметры поиска
 for(let [name, value] of url.searchParams) {
   alert(`${name}=${value}`); // q=test me!, далее tbs=qdr:y
 }

@@ -107,7 +107,7 @@ let boundFunc = func.bind(context);
 
 Например, здесь `funcUser` передает вызов в `func`, фиксируя `this=user`:
 
-```js run  
+```js run
 let user = {
   firstName: "Вася"
 };
@@ -118,7 +118,7 @@ function func() {
 
 *!*
 let funcUser = func.bind(user);
-funcUser(); // Вася  
+funcUser(); // Вася
 */!*
 ```
 
@@ -126,7 +126,7 @@ funcUser(); // Вася
 
 Все аргументы передаются исходному методу `func` "как есть", например:
 
-```js run  
+```js run
 let user = {
   firstName: "Вася"
 };

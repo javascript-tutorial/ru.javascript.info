@@ -60,7 +60,7 @@ customElements.define('show-hello', class extends HTMLElement {
     shadow.innerHTML = `<p>
       Hello, ${this.getAttribute('name')}
     </p>`;
-  }  
+  }
 });
 </script>
 
@@ -80,7 +80,7 @@ customElements.define('show-hello', class extends HTMLElement {
 Свойство `mode` задаёт уровень инкапсуляции. У него может быть только два значения:
 - `"open"` -- корень теневого дерева ("shadow root") доступен как `elem.shadowRoot`.
 
-    Любой код может получить теневое дерево `elem`.   
+    Любой код может получить теневое дерево `elem`.
 - `"closed"` -- `elem.shadowRoot` всегда возвращает `null`.
 
     До теневого DOM в таком случае мы сможем добраться только по ссылке, которую возвращает `attachShadow` (и, скорее всего, она будет спрятана внутри класса). Встроенные браузерные теневые деревья, такие как у `<input type="range">`, закрыты. До них не добраться.
@@ -128,7 +128,7 @@ alert(elem.shadowRoot.host === elem); // true
 */!*
   alert(document.querySelectorAll('p').length); // 0
   alert(elem.shadowRoot.querySelectorAll('p').length); // 1
-</script>  
+</script>
 ```
 
 1. Стили главного документа не влияют на теневое дерево.

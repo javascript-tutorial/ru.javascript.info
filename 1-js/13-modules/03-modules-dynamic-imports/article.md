@@ -81,7 +81,7 @@ export default function() {
 Так что динамический импорт будет таким:
 
 ```js
-let {default: say} = await import('./say.js'); // сохранить свойство .default в переменной say 
+let {default: say} = await import('./say.js'); // сохранить свойство .default в переменной say
 
 say();
 ```

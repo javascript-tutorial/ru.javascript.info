@@ -47,7 +47,7 @@ range[Symbol.iterator] = function() {
   // 2. Далее, for..of работает только с этим итератором, запрашивая у него новые значения
   return {
     current: this.from,
-    last: this.to,      
+    last: this.to,
 
     // 3. next() вызывается на каждой итерации цикла for..of
     next() {
@@ -267,7 +267,7 @@ for (let char of str) {
 alert(chars);
 ```
 
-...Но гораздо короче.    
+...Но гораздо короче.
 
 Мы можем даже создать `slice`, который поддерживает суррогатные пары:
 

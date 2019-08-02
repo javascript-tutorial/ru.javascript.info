@@ -1,15 +1,15 @@
 
 let ladder = {
   step: 0,
-  up: function() { 
+  up: function() {
     this.step++;
     return this;
   },
-  down: function() { 
+  down: function() {
     this.step--;
     return this;
   },
-  showStep: function() { 
+  showStep: function() {
     alert(this.step);
   }
 };

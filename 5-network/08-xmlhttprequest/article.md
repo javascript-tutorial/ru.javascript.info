@@ -24,7 +24,7 @@ XMLHttpRequest имеет два режима работы: синхронный
 
 1. Создать `XMLHttpRequest`.
     ```js
-    let xhr = new XMLHttpRequest(); // у конструктора нет аргументов 
+    let xhr = new XMLHttpRequest(); // у конструктора нет аргументов
     ```
 
 2. Инициализировать его.
@@ -428,7 +428,7 @@ xhr.upload.onerror = function() {
 ```
 
 Пример из реальной жизни: загрузка файла на сервер с индикацией прогресса:
- 
+
 ```html run
 <input type="file" onchange="upload(this.files[0])">
 

@@ -70,7 +70,7 @@ promise.catch(err => alert('поймана!'));
 
 // не запустится, ошибка обработана
 window.addEventListener('unhandledrejection', event => {
-  alert(event.reason); 
+  alert(event.reason);
 });
 ```
 

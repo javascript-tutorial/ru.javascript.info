@@ -139,7 +139,7 @@ for(let [name, value] of formData) {
       let formData = new FormData();
       formData.append("firstName", "John");
       formData.append("image", imageBlob, "image.png");
-*/!*    
+*/!*
 
       let response = await fetch('/article/formdata/post/image-form', {
         method: 'POST',

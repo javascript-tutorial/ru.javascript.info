@@ -3,7 +3,7 @@ describe('Лестница', function() {
   before(function() {
     window.alert = sinon.stub(window, "alert");
   });
-  
+
   beforeEach(function() {
     ladder.step = 0;
   });
@@ -32,7 +32,7 @@ describe('Лестница', function() {
   it('down().up().up().up() ', function() {
     assert.equal(ladder.down().up().up().up().step, 2);
   });
-  
+
   after(function() {
     ladder.step = 0;
     alert.restore();

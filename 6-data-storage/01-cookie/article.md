@@ -163,7 +163,7 @@ document.cookie = "user=John; max-age=3600";
 
 // удалим куки (срок действия истекает прямо сейчас)
 document.cookie = "user=John; max-age=0";
-```  
+```
 
 ## secure
 
@@ -181,7 +181,7 @@ document.cookie = "user=John; max-age=0";
 // предполагается, что сейчас мы на https://
 // установим опцию secure для куки (куки доступно только через HTTPS)
 document.cookie = "user=John; secure";
-```  
+```
 
 ## samesite
 

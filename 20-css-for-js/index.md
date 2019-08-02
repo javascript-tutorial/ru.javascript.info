@@ -1,2 +1,2 @@
-# CSS для JavaScript-разработчика 
+# CSS для JavaScript-разработчика
 

@@ -12,7 +12,7 @@ class Animal {
 }
 
 class Rabbit extends Animal {
-  constructor(name) {  
+  constructor(name) {
     *!*
     super(name);
     */!*

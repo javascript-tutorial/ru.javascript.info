@@ -50,6 +50,6 @@ function finishTdEdit(td, isOk) {
   } else {
     td.innerHTML = editingTd.data;
   }
-  td.classList.remove('edit-td'); 
+  td.classList.remove('edit-td');
   editingTd = null;
 }

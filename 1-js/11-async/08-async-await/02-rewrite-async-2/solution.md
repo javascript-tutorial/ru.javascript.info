@@ -37,7 +37,7 @@ async function demoGithubUser() {
         // неизвестная ошибка, пробрасываем её
         throw err;
       }
-    }      
+    }
   }
 
 

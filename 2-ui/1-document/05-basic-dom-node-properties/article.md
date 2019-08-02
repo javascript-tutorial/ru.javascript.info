@@ -128,7 +128,7 @@ interface HTMLInputElement: HTMLElement {
 
 ```html run
 <body>
-  <script>  
+  <script>
   let elem = document.body;
 
   // посмотрим что это?

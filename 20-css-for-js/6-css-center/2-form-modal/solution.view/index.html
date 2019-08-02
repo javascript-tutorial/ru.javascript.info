@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <style>
     /* внешний DIV перекрывает всё окно */
-    
+
     #box {
       position: fixed;
       left: 0;
@@ -15,7 +15,7 @@
       z-index: 999;
     }
     /* в нём находится полупрозрачный экран, на 20px меньше */
-    
+
     #box-inner {
       position: absolute;
       left: 20px;
@@ -27,7 +27,7 @@
       filter: alpha(opacity=30);
     }
     /* форма находится не в экране, а рядом с ним, чтобы не быть полупрозрачной */
-    
+
     #box form {
       position: absolute;
       top: 0;
@@ -35,10 +35,10 @@
       right: 0;
       left: 0;
       /* центрирование */
-      
+
       margin: auto;
       /* центрирование */
-      
+
       height: 120px;
       width: 300px;
       border: 1px solid black;

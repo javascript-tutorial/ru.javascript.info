@@ -7,7 +7,7 @@ document.addEventListener('mousedown', function(event) {
   if (!dragElement) return;
 
   event.preventDefault();
-  
+
   dragElement.ondragstart = function() {
       return false;
   };
@@ -19,7 +19,7 @@ document.addEventListener('mousedown', function(event) {
   function onMouseUp(event) {
     finishDrag();
   };
-  
+
   function onMouseMove(event) {
     moveAt(event.clientX, event.clientY);
   }
@@ -31,9 +31,9 @@ document.addEventListener('mousedown', function(event) {
     if(isDragging) {
       return;
     }
-    
+
     isDragging = true;
-    
+
     document.addEventListener('mousemove', onMouseMove);
     element.addEventListener('mouseup', onMouseUp);
 
@@ -50,7 +50,7 @@ document.addEventListener('mousedown', function(event) {
     if(!isDragging) {
       return;
     }
-    
+
     isDragging = false;
 
     dragElement.style.top = parseInt(dragElement.style.top) + pageYOffset + 'px';

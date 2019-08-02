@@ -27,7 +27,7 @@
 
 
   <script>
-    // тестовая функция для селекторов 
+    // тестовая функция для селекторов
     // проверяет, чтобы элементов по селектору selector было ровно count
     function test(selector, count) {
       var elems = document.querySelectorAll(selector);
@@ -56,7 +56,7 @@
     // Найти все элементы с data-action, содержащим delete в списке (через пробел)
     test('[data-action~="delete"]', 2);
 
-    // Найти все элементы, у которых ЕСТЬ атрибут data-action, 
+    // Найти все элементы, у которых ЕСТЬ атрибут data-action,
     // но он НЕ содержащит delete в списке (через пробел)
     test('[data-action]:not([data-action~="delete"])', 1);
 

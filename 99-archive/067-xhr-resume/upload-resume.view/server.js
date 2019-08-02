@@ -19,7 +19,7 @@ function onUpload(req, res) {
   // файлы будем записывать "в никуда"
   var filePath = '/dev/null';
   // можно положить файл и в реальное место
-  // var filePath = path.join('/tmp', fileId); 
+  // var filePath = path.join('/tmp', fileId);
 
   console.log("onUpload fileId: ", fileId);
 

@@ -1,7 +1,7 @@
 
 
 describe("калькулятор", function() {
-  
+
   context("Когда 2 и 3 введены", function() {
     beforeEach(function() {
       sinon.stub(window, "prompt");

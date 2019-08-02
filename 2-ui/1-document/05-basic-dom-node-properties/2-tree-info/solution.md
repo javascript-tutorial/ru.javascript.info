@@ -12,7 +12,7 @@ for (let li of document.querySelectorAll('li')) {
 for (let li of document.querySelectorAll('li')) {
   let title = li.firstChild.data;
 
-  // переменная title содержит текст элемента <li> 
+  // переменная title содержит текст элемента <li>
 }
 ```
 

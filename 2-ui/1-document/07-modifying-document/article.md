@@ -179,7 +179,7 @@ div.innerHTML = "<strong>Всем привет!</strong> Вы прочитали
 
   let prepend = document.createElement('li');
   prepend.innerHTML = 'prepend';
-  ol.prepend(prepend);  
+  ol.prepend(prepend);
 
   let append = document.createElement('li');
   append.innerHTML = 'append';
@@ -516,7 +516,7 @@ ul.append(...getListContent()); // append + оператор "..." = друзь�
 
 - `document.createElement(tag)` -- создаёт элемент с заданным тегом,
 - `document.createTextNode(value)` -- создаёт текстовый узел (редко используется),
-- `elem.cloneNode(deep)` -- клонирует элемент, если `deep==true`, то со всеми дочерними элементами.  
+- `elem.cloneNode(deep)` -- клонирует элемент, если `deep==true`, то со всеми дочерними элементами.
 
 Вставка и удаление узлов:
 

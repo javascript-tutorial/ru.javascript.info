@@ -253,7 +253,7 @@ alert(result.message);
 
 ```js
 function submit() {
-  canvasElem.toBlob(function(blob) {        
+  canvasElem.toBlob(function(blob) {
     fetch('/article/fetch/post/image', {
       method: 'POST',
       body: blob

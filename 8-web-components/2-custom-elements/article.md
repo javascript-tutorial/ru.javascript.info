@@ -321,7 +321,7 @@ customElements.define('user-info', class extends HTMLElement {
 2. Предоставим третий аргумент в `customElements.define`, указывающий тег:
     ```js
     customElements.define('hello-button', HelloButton, *!*{extends: 'button'}*/!*);
-    ```    
+    ```
     Бывает, что разные теги имеют одинаковый DOM-класс, поэтому указание тега необходимо.
 
 3. В конце, чтобы использовать наш пользовательский элемент, вставим обычный тег `<button>`, но добавим к нему `is="hello-button"`:

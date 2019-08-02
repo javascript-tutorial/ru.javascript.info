@@ -31,7 +31,7 @@ function createActiveXFrame(name, src) {
     htmlfile.parentWindow.CallbackRegistry = CallbackRegistry;
   }
 
-  src = src || 'javascript:false'; // пустой src  
+  src = src || 'javascript:false'; // пустой src
   htmlfile.body.insertAdjacentHTML('beforeEnd', "<iframe name='" + name + "' src='" + src + "'></iframe>");
   return htmlfile.body.lastChild; // window in .document.parentWindow
 }

@@ -290,7 +290,7 @@ if (age < 18) {
 
 } else {
 
-  function welcome() {     
+  function welcome() {
     alert("Здравствуйте!");
   }
 }

@@ -151,7 +151,7 @@ sayHi();
 
 ```js run
 function sayHi() {
-  alert(phrase);  
+  alert(phrase);
 
 *!*
   var phrase = "Привет";

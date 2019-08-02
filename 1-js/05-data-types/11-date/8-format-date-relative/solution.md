@@ -64,7 +64,7 @@ function formatDate(date) {
   dayOfMonth = dayOfMonth < 10 ? '0' + dayOfMonth : dayOfMonth;
 
   if (diffSec < 1) {
-    return 'прямо сейчас';  
+    return 'прямо сейчас';
   } else if (diffMin < 1) {
     return `${diffSec} сек. назад`
   } else if (diffHour < 1) {

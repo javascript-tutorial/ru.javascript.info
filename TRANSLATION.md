@@ -78,7 +78,7 @@ document.querySelector('.hello').innerHTML = text;
 | Arrow function         | Стрелочная функция                                                             |
 | Backtick               | Обратная кавычка                                                              |
 | Bitwise operator       | Побитовый оператор                                              |
-| Breakpoint             | Точка останова     |                                              
+| Breakpoint             | Точка останова     |
 | Character class        | Символьный класс  |
 | Comparison             | Операция сравнения                                     |
 | Construct              | Конструкция                                     |

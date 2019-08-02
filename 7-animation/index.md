@@ -1,3 +1,3 @@
 # Анимация
 
-Анимации на CSS и JavaScript. 
+Анимации на CSS и JavaScript.

@@ -51,7 +51,7 @@ function showFile(input) {
 ```js
 let reader = new FileReader(); // без аргументов
 ```
-    
+
 Основные методы:
 
 - **`readAsArrayBuffer(blob)`** -- считать данные как `ArrayBuffer`

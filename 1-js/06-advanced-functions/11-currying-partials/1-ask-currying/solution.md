@@ -2,8 +2,8 @@
 
 1. Либо для краткости используйте стрелочную функцию-обёртку:
 
-    ```js 
-    askPassword(() => user.login(true), () => user.login(false)); 
+    ```js
+    askPassword(() => user.login(true), () => user.login(false));
     ```
 
     Теперь `user` берётся из внешних переменных, и всё выполняется правильно.
@@ -11,6 +11,6 @@
 2. Либо сделайте из `user.login` функцию частичного применения, которая использует `user` как контекст, и которой передан корректный первый аргумент:
 
 
-    ```js 
-    askPassword(user.login.bind(user, true), user.login.bind(user, false)); 
+    ```js
+    askPassword(user.login.bind(user, true), user.login.bind(user, false));
     ```

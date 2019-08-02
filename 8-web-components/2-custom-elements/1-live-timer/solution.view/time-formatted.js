@@ -25,7 +25,7 @@ class TimeFormatted extends HTMLElement {
     return ['datetime', 'year', 'month', 'day', 'hour', 'minute', 'second', 'time-zone-name'];
   }
 
-  attributeChangedCallback(name, oldValue, newValue) { 
+  attributeChangedCallback(name, oldValue, newValue) {
     this.render();
   }
 

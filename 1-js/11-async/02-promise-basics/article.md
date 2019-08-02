@@ -254,7 +254,7 @@ new Promise((resolve, reject) => {
     })
       .finally(() => alert("Promise ready"))
       .catch(err => alert(err));  // <-- .catch обработает объект ошибки
-    ```  
+    ```
 
     Это очень удобно, потому что `finaly` не предназначен для обработки результата промиса. Он просто пропускает его через себя.
 
@@ -299,7 +299,7 @@ function loadScript(src, callback) {
 Новой функции `loadScript` будет не нужен аргумент `callback`. Вместо этого она будет создавать и возвращать объект `Promise`, который будет переходить в состояние "успешно завершён", когда загрузка закончится. Внешний код может добавлять обработчики ("подписчиков"), используя `.then`:
 
 ```js run
-function loadScript(src) {  
+function loadScript(src) {
   return new Promise(function(resolve, reject) {
     let script = document.createElement('script');
     script.src = src;

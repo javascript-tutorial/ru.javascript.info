@@ -278,7 +278,7 @@ function User(name, birthday) {
         return yearDelta;
       }
 
-      return yearDelta - 1;      
+      return yearDelta - 1;
     }
   });
 */!*

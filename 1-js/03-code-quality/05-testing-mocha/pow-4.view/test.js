@@ -11,5 +11,5 @@ describe("pow", function() {
       makeTest(x);
     }
   });
-  // ... другие тесты. Можно писать и describe, и it блоки. 
+  // ... другие тесты. Можно писать и describe, и it блоки.
 });

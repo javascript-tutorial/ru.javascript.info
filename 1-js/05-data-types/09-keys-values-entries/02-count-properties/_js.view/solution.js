@@ -1,4 +1,4 @@
-function count(obj) { 
+function count(obj) {
   return Object.keys(obj).length;
 }
 

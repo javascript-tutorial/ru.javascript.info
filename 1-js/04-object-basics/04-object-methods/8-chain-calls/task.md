@@ -9,10 +9,10 @@ importance: 2
 ```js
 let ladder = {
   step: 0,
-  up() { 
+  up() {
     this.step++;
   },
-  down() { 
+  down() {
     this.step--;
   },
   showStep: function() { // показывает текущую ступеньку
@@ -36,4 +36,4 @@ ladder.showStep(); // 1
 ladder.up().up().down().showStep(); // 1
 ```
 
-Такой подход широко используется в библиотеках JavaScript. 
+Такой подход широко используется в библиотеках JavaScript.

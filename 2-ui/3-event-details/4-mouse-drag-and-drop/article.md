@@ -30,7 +30,7 @@ ball.onmousedown = function(event) { // (1) отследить нажатие
   ball.style.position = 'absolute';
   ball.style.zIndex = 1000;
   // переместим в body, чтобы мяч был точно не внутри position:relative
-  document.body.append(ball);  
+  document.body.append(ball);
   // и установим абсолютно спозиционированный мяч под курсор
 
   moveAt(event.pageX, event.pageY);

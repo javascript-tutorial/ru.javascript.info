@@ -246,8 +246,8 @@ From <input id="start" type="number" value=1> – To <input id="end" type="numbe
       range.setStart(p.firstChild, 2);
       range.setEnd(p.querySelector('b').firstChild, 3);
 
-      window.getSelection().removeAllRanges();  
-      window.getSelection().addRange(range);  
+      window.getSelection().removeAllRanges();
+      window.getSelection().addRange(range);
     }
   };
 
@@ -561,7 +561,7 @@ button.onclick = () => {
   button.onclick = () => {
     input.setRangeText("ПРИВЕТ", input.selectionStart, input.selectionEnd, "end");
     input.focus();
-  };    
+  };
 </script>
 ```
 

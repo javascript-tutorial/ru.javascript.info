@@ -38,7 +38,7 @@ for(let key in proxy) alert(key); // test, итерация работает (3)
 
 Как мы видим, без ловушек `proxy` является прозрачной обёрткой над `target`.
 
-![](proxy.svg)  
+![](proxy.svg)
 
 Прокси -- это особенный объект, у него нет собственных свойств. С пустым `handler` он просто перенаправляет все операции на `target`.
 
@@ -248,7 +248,7 @@ let user = {
   _password: "secret"
 };
 
-alert(user._password); // secret  
+alert(user._password); // secret
 ```
 
 Давайте применим прокси, чтобы защитить свойства, начинающиеся на `_`, от доступа извне.
@@ -288,7 +288,7 @@ user = new Proxy(user, {
   },
 *!*
   deleteProperty(target, prop) { // перехватываем удаление свойства
-*/!*  
+*/!*
     if (prop.startsWith('_')) {
       throw new Error("Отказано в доступе");
     } else {

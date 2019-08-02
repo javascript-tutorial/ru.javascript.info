@@ -75,7 +75,7 @@ var IframeComet = new function() {
       htmlfile.parentWindow.IframeComet = self;
     }
 
-    src = src || 'javascript:false'; // пустой src  
+    src = src || 'javascript:false'; // пустой src
     htmlfile.body.insertAdjacentHTML('beforeEnd', "<iframe src='" + src + "'></iframe>");
     iframe = htmlfile.body.lastChild; // window in .document.parentWindow
   }

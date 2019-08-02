@@ -87,7 +87,7 @@ alert(ageElems[0].value); // 10, the first input value
 ````
 
 ````warn header="Сокращённая форма записи: `form.name`"
-Есть более короткая запись: мы можем получить доступ к элементу через `form[index/name]`. 
+Есть более короткая запись: мы можем получить доступ к элементу через `form[index/name]`.
 
 Вместо `form.elements.login` мы можем написать `form.login`.
 
@@ -273,7 +273,7 @@ let option = new Option("Текст", "value", true, true);
 `document.forms`
 : Форма доступна через `document.forms[name/index]`.
 
-`form.elements`  
+`form.elements`
 : Элементы формы доступны через `form.elements[name/index]`, или можно просто использовать `form[name/index]`. Свойство `elements` также работает для `<fieldset>`.
 
 `element.form`

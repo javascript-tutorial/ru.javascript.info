@@ -6,7 +6,7 @@
 let reg = /ваше регулярное выражение/g;
 
 let str = `... <!-- My -- comment
- test --> ..  <!----> .. 
+ test --> ..  <!----> ..
 `;
 
 alert( str.match(reg) ); // '<!-- My -- comment \n test -->', '<!---->'

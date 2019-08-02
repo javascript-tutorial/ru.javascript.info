@@ -4,11 +4,11 @@ function formatDate(date) {
     date = new Date(date * 1000);
   } else if (typeof date == 'string') {
     // строка в стандартном формате автоматически будет разобрана в дату
-    date = new Date(date); 
-  } else if (Array.isArray(date)) { 
+    date = new Date(date);
+  } else if (Array.isArray(date)) {
     date = new Date(date[0], date[1], date[2]);
   }
-  // преобразования для поддержки полиморфизма завершены, 
+  // преобразования для поддержки полиморфизма завершены,
   // теперь мы работаем с датой (форматируем её)
 
   return date.toLocaleString("ru", {day: '2-digit', month: '2-digit', year: '2-digit'});
@@ -26,7 +26,7 @@ function formatDate(date) {
   if (year < 10) year = '0' + year;
 
   var formattedDate = day + '.' + month + '.' + year;
-  
+
   return formattedDate;
   */
 }

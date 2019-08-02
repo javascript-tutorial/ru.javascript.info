@@ -206,7 +206,7 @@ CSS для анимации:
 | <code>ease</code><sup>*</sup> | <code>ease-in</code> | <code>ease-out</code> | <code>ease-in-out</code> |
 |-------------------------------|----------------------|-----------------------|--------------------------|
 | <code>(0.25, 0.1, 0.25, 1.0)</code> | <code>(0.42, 0, 1.0, 1.0)</code> | <code>(0, 0, 0.58, 1.0)</code> | <code>(0.42, 0, 0.58, 1.0)</code> |
-| ![ease, figure](ease.png) | ![ease-in, figure](ease-in.png) | ![ease-out, figure](ease-out.png) | ![ease-in-out, figure](ease-in-out.png) | 
+| ![ease, figure](ease.png) | ![ease-in, figure](ease-in.png) | ![ease-out, figure](ease-out.png) | ![ease-in-out, figure](ease-in-out.png) |
 
 `*` -- По умолчанию, если никакой временной функции не указано, используется `ease`.
 

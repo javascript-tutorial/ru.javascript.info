@@ -3,7 +3,7 @@
 describe("hoverIntent", function() {
 
   function mouse(eventType, x, y, options) {
-    let eventOptions = Object.assign({ 
+    let eventOptions = Object.assign({
       bubbles: true,
       clientX: x,
       clientY: y,
@@ -11,15 +11,15 @@ describe("hoverIntent", function() {
       pageY: y,
       target: elem
     }, options || {});
-    
+
     elem.dispatchEvent(new MouseEvent(eventType, eventOptions));
   }
 
 
   let isOver;
   let hoverIntent;
-  
-  
+
+
   before(function() {
     this.clock = sinon.useFakeTimers();
   });
@@ -27,11 +27,11 @@ describe("hoverIntent", function() {
   after(function() {
     this.clock.restore();
   });
-  
-  
+
+
   beforeEach(function() {
     isOver = false;
-    
+
     hoverIntent = new HoverIntent({
       elem: elem,
       over: function() {
@@ -53,7 +53,7 @@ describe("hoverIntent", function() {
     mouse('mouseover', 10, 10);
     assert.isFalse(isOver);
   });
-  
+
   it("mouseover -> pause shows tooltip", function() {
     mouse('mouseover', 10, 10);
     this.clock.tick(100);
@@ -94,5 +94,5 @@ describe("hoverIntent", function() {
     this.clock.tick(200);
     assert.isFalse(isOver);
   });
-  
+
 });

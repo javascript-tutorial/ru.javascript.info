@@ -17,7 +17,7 @@ alert( JSON.stringify(meetup, function replacer(key, value) {
   return (key != "" && value == meetup) ? undefined : value;
 }));
 
-/* 
+/*
 {
   "title":"Совещание",
   "occupiedBy":[{"name":"Иванов"},{"name":"Петров"}],
