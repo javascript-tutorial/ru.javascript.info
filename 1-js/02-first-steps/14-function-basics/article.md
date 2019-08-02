@@ -306,7 +306,7 @@ function showMovie(age) {
 
 В коде выше, если `checkAge(age)` вернёт `false`, `showMovie` не выполнит `alert`.
 
-````smart header="Результат функции с пустым `return` или него - `undefined`"
+````smart header="Результат функции с пустым `return` или без него - `undefined`"
 Если функция не возвращает значения, это всё равно, как если бы она возвращала `undefined`:
 
 ```js run
