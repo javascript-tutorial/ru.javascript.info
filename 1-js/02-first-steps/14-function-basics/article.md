@@ -340,9 +340,15 @@ return*!*;*/!*
  (some + long + expression + or + whatever * f(a) + f(b))
 ```
 
+<<<<<<< HEAD
 Таким образом, это фактически стало пустым `return`.
 
 Если мы хотим, чтобы возвращаемое выражение занимало несколько строк, нужно начать его на той же строке, что и `return`. Или, хотя бы, поставить там открывающую скобку, вот так:
+=======
+So, it effectively becomes an empty return.
+
+If we want the returned expression to wrap across multiple lines, we should start it at the same line as `return`. Or at least put the opening parentheses there as follows:
+>>>>>>> e50185af4b4df7dbe1870215e382a206241c8515
 
 ```js
 return (
@@ -351,7 +357,11 @@ return (
   whatever * f(a) + f(b)
   )
 ```
+<<<<<<< HEAD
 И тогда всё сработает как задумано.
+=======
+And it will work just as we expect it to.
+>>>>>>> e50185af4b4df7dbe1870215e382a206241c8515
 ````
 
 ## Выбор имени функции [#function-naming]
