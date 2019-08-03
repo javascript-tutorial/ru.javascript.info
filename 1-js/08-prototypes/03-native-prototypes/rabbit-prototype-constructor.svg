@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="449px" height="157px" viewBox="0 0 449 157" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="460px" height="157px" viewBox="0 0 460 157" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: sketchtool 55.2 (78181) - https://sketchapp.com -->
     <title>rabbit-prototype-constructor.svg</title>
     <desc>Created with sketchtool.</desc>
@@ -12,7 +12,7 @@
             </g>
             <path d="M248,23 L248,51 L406,51 L406,23 L248,23 Z" id="Rectangle-1" stroke="#E8C48E" stroke-width="2" fill="#FFF9EB"></path>
             <text id="default-&quot;prototype&quot;" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" fill="#8A704D">
-                <tspan x="248.2" y="15">default "prototype"</tspan>
+                <tspan x="248.2" y="15">"prototype" по умолчанию</tspan>
             </text>
             <rect id="Rectangle-1-Copy" stroke="#E8C48E" stroke-width="2" fill="#FFF9EB" x="248" y="121" width="158" height="28"></rect>
             <rect id="Rectangle-1-Copy-2" stroke="#E8C48E" stroke-width="2" fill="#FFF9EB" x="10" y="23" width="99" height="28"></rect>

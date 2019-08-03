@@ -347,3 +347,9 @@ selection-direction-forward.svg:
 
 object-prototype-empty.svg:
   'prototype object': 'прототип object'
+
+rabbit-prototype-constructor.svg:
+  'default "prototype"': '"prototype" по умолчанию'
+
+function-prototype-constructor.svg:
+  'default "prototype"': '"prototype" по умолчанию'
