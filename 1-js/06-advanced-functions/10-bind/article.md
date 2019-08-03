@@ -194,7 +194,6 @@ for (let key in user) {
 Некоторые JS-библиотеки предоставляют встроенные функции для удобной массовой привязки контекста, например [_.bindAll(obj)](http://lodash.com/docs#bindAll) в lodash.
 ````
 
-<<<<<<< HEAD
 ## Частичное применение
 
 До сих пор мы говорили только о привязывании `this`. Давайте шагнём дальше.
@@ -202,29 +201,13 @@ for (let key in user) {
 Мы можем привязать не только `this`, но и аргументы. Это делается редко, но иногда может быть полезно.
 
 Полный синтаксис `bind`:
-=======
-## Partial functions
-
-Until now we have only been talking about binding `this`. Let's take it a step further.
-
-We can bind not only `this`, but also arguments. That's rarely done, but sometimes can be handy.
-
-The full syntax of `bind`:
->>>>>>> e50185af4b4df7dbe1870215e382a206241c8515
 
 ```js
 let bound = func.bind(context, [arg1], [arg2], ...);
 ```
-<<<<<<< HEAD
 Это позволяет привязать контекст `this` и начальные аргументы функции.
 
 Например, у нас есть функция умножения `mul(a, b)`:
-=======
-
-It allows to bind context as `this` and starting arguments of the function.
-
-For instance, we have a multiplication function `mul(a, b)`:
->>>>>>> e50185af4b4df7dbe1870215e382a206241c8515
 
 ```js
 function mul(a, b) {
@@ -232,11 +215,7 @@ function mul(a, b) {
 }
 ```
 
-<<<<<<< HEAD
 Давайте воспользуемся `bind`, чтобы создать функцию `double` на её основе:
-=======
-Let's use `bind` to create a function `double` on its base:
->>>>>>> e50185af4b4df7dbe1870215e382a206241c8515
 
 ```js run
 function mul(a, b) {
@@ -252,7 +231,6 @@ alert( double(4) ); // = mul(2, 4) = 8
 alert( double(5) ); // = mul(2, 5) = 10
 ```
 
-<<<<<<< HEAD
 Вызов `mul.bind(null, 2)` создаёт новую функцию `double`, которая передаёт вызов `mul`, фиксируя `null` как контекст и `2` -- как первый аргумент. Следующие аргументы передаются "как есть".
 
 Это называется [частичное применение](https://ru.wikipedia.org/wiki/Частичное_применение) -- мы создаём новую функцию, фиксируя некоторые из существующих параметров.
@@ -260,15 +238,6 @@ alert( double(5) ); // = mul(2, 5) = 10
 Обратите внимание, что в данном случае мы на самом деле не используем `this`. Но для `bind` это обязательный параметр, так что мы должны передать туда что-нибудь вроде `null`.
 
 В следующем коде функция `triple` умножает значение на три:
-=======
-The call to `mul.bind(null, 2)` creates a new function `double` that passes calls to `mul`, fixing `null` as the context and `2` as the first argument. Further arguments are passed "as is".
-
-That's called [partial function application](https://en.wikipedia.org/wiki/Partial_application) -- we create a new function by fixing some parameters of the existing one.
-
-Please note that here we actually don't use `this` here. But `bind` requires it, so we must put in something like `null`.
-
-The function `triple` in the code below triples the value:
->>>>>>> e50185af4b4df7dbe1870215e382a206241c8515
 
 ```js run
 function mul(a, b) {
@@ -284,7 +253,6 @@ alert( triple(4) ); // = mul(3, 4) = 12
 alert( triple(5) ); // = mul(3, 5) = 15
 ```
 
-<<<<<<< HEAD
 Для чего мы обычно создаём частично применённую функцию?
 
 Польза от этого в том, что возможно создать независимую функцию с понятным названием (`double`, `triple`). Мы можем использовать её и не передавать каждый раз первый аргумент, т.к. он зафиксирован с помощью `bind`.
@@ -302,25 +270,6 @@ alert( triple(5) ); // = mul(3, 5) = 15
 К счастью, лекго создать вспомогательную функцию `partial`, которая привязывает только аргументы.
 
 Вот так:
-=======
-Why do we usually make a partial function?
-
-The benefit is that we can create an independent function with a readable name (`double`, `triple`). We can use it and not provide first argument of every time as it's fixed with `bind`.
-
-In other cases, partial application is useful when we have a very generic function and want a less universal variant of it for convenience.
-
-For instance, we have a function `send(from, to, text)`. Then, inside a `user` object we may want to use a partial variant of it: `sendTo(to, text)` that sends from the current user.
-
-## Going partial without context
-
-What if we'd like to fix some arguments, but not the context `this`? For example, for an object method.
-
-The native `bind` does not allow that. We can't just omit the context and jump to arguments.
-
-Fortunately, a helper function `partial` for binding only arguments can be easily implemented.
-
-Like this:
->>>>>>> e50185af4b4df7dbe1870215e382a206241c8515
 
 ```js run
 *!*
@@ -331,11 +280,7 @@ function partial(func, ...argsBound) {
 }
 */!*
 
-<<<<<<< HEAD
 // использование:
-=======
-// Usage:
->>>>>>> e50185af4b4df7dbe1870215e382a206241c8515
 let user = {
   firstName: "John",
   say(time, phrase) {
@@ -343,7 +288,6 @@ let user = {
   }
 };
 
-<<<<<<< HEAD
 // добавляем частично применённый метод с фиксированным временем
 user.sayNow = partial(user.say, new Date().getHours() + ':' + new Date().getMinutes());
 
@@ -366,35 +310,7 @@ user.sayNow("Hello");
 Метод `bind` возвращает "привязанный вариант" функции `func`, фиксируя контекст `this` и первые аргументы `arg1`, `arg2`..., если они заданы.
 
 Обычно `bind` применяется для фиксации `this` в методе объекта, чтобы передать его в качестве колбэка. Например, для `setTimeout`.
-=======
-// add a partial method with fixed time
-user.sayNow = partial(user.say, new Date().getHours() + ':' + new Date().getMinutes());
-
-user.sayNow("Hello");
-// Something like:
-// [10:00] John: Hello!
-```
-
-The result of `partial(func[, arg1, arg2...])` call is a wrapper `(*)` that calls `func` with:
-- Same `this` as it gets (for `user.sayNow` call it's `user`)
-- Then gives it `...argsBound` -- arguments from the `partial` call (`"10:00"`)
-- Then gives it `...args` -- arguments given to the wrapper (`"Hello"`)
-
-So easy to do it with the spread operator, right?
-
-Also there's a ready [_.partial](https://lodash.com/docs#partial) implementation from lodash library.
-
-## Summary
->>>>>>> e50185af4b4df7dbe1870215e382a206241c8515
 
 Когда мы привязываем аргументы, такая функция называется "частично применённой" или "частичной".
 
-<<<<<<< HEAD
 Частичное применение удобно, когда мы не хотим повторять один и тот же аргумент много раз. Например, когда у нас есть функция `send(from, to)`, и `from` всё время будет одинаков для нашей задачи, мы можем создать частично применённую функцию и дальше работать с ней.
-=======
-Usually we apply `bind` to fix `this` for an object method, so that we can pass it somewhere. For example, to `setTimeout`.
-
-When we fix some arguments of an existing function, the resulting (less universal) function is called *partially applied* or *partial*.
-
-Partials are convenient when we don't want to repeat the same argument over and over again. Like if we have a `send(from, to)` function, and `from` should always be the same for our task, we can get a partial and go on with it.
->>>>>>> e50185af4b4df7dbe1870215e382a206241c8515

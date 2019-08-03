@@ -63,11 +63,7 @@ Object.defineProperty(obj, propertyName, descriptor)
 ```
 
 `obj`, `propertyName`
-<<<<<<< HEAD
 : Объект и его свойство, для которого нужно применить дескриптор.
-=======
-: The object and its property to apply the descriptor.
->>>>>>> e50185af4b4df7dbe1870215e382a206241c8515
 
 `descriptor`
 : Применяемый дескриптор.
@@ -120,11 +116,7 @@ Object.defineProperty(user, "name", {
 });
 
 *!*
-<<<<<<< HEAD
 user.name = "Pete"; // Ошибка: Невозможно изменить доступное только для чтения свойство 'name'
-=======
-user.name = "Pete"; // Error: Cannot assign to read only property 'name'
->>>>>>> e50185af4b4df7dbe1870215e382a206241c8515
 */!*
 ```
 
@@ -134,11 +126,7 @@ user.name = "Pete"; // Error: Cannot assign to read only property 'name'
 В нестрогом режиме, без `use strict`, мы не увидим никаких ошибок при записи в свойства "только для чтения" и т.п. Но эти операции всё равно не будут выполнены успешно. Действия, нарушающие ограничения флагов, в нестрогом режиме просто молча игнорируются.
 ```
 
-<<<<<<< HEAD
 Вот тот же пример, но свойство создано "с нуля":
-=======
-Here's the same example, but the property is created from scratch:
->>>>>>> e50185af4b4df7dbe1870215e382a206241c8515
 
 ```js run
 let user = { };
@@ -146,32 +134,19 @@ let user = { };
 Object.defineProperty(user, "name", {
 *!*
   value: "John",
-<<<<<<< HEAD
   // для нового свойства необходимо явно указывать все флаги, для которых значение true
-=======
-  // for new properties need to explicitly list what's true
->>>>>>> e50185af4b4df7dbe1870215e382a206241c8515
   enumerable: true,
   configurable: true
 */!*
 });
 
 alert(user.name); // John
-<<<<<<< HEAD
 user.name = "Pete"; // Ошибка
 ```
 
 ## Неперечислимое свойство
 
 Теперь добавим собственный метод `toString` к объекту `user`.
-=======
-user.name = "Pete"; // Error
-```
-
-## Non-enumerable
-
-Now let's add a custom `toString` to `user`.
->>>>>>> e50185af4b4df7dbe1870215e382a206241c8515
 
 Встроенный метод `toString` в объектах - неперечислимый, его не видно в цикле `for..in`. Но если мы напишем свой собственный метод `toString`, цикл `for..in` будет выводить его по умолчанию:
 
