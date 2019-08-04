@@ -26,7 +26,7 @@
             <path id="Line" d="M71.5,392.5 L71.5,420.5 L69.5,420.5 L69.5,392.5 L63.5,392.5 L70.5,378.5 L77.5,392.5 L71.5,392.5 Z" fill="#EE6B47" fill-rule="nonzero"></path>
             <path id="Line-2" d="M71.5,284.5 L71.5,312.5 L69.5,312.5 L69.5,284.5 L63.5,284.5 L70.5,270.5 L77.5,284.5 L71.5,284.5 Z" fill="#EE6B47" fill-rule="nonzero"></path>
             <text id="name:-&quot;White-Rabbit&quot;" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" fill="#8A704D">
-                <tspan x="18" y="451">name: "White Rabbit"</tspan>
+                <tspan x="18" y="451">name: "Белый кролик"</tspan>
             </text>
             <text id="[[Prototype]]" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" fill="#EC6B4E">
                 <tspan x="83" y="303">[[Prototype]]</tspan>

@@ -353,3 +353,26 @@ rabbit-prototype-constructor.svg:
 
 function-prototype-constructor.svg:
   'default "prototype"': '"prototype" по умолчанию'
+
+rabbit-animal-independent-animal.svg:
+  'name: "My animal"': 'name: "Мой питомец"'
+
+rabbit-animal-independent-rabbit.svg:
+  'name: "My rabbit"': 'name: "Мой кролик"'
+
+animal-rabbit-extends.svg:
+  'name: "White Rabbit"': 'name: "Белый кролик"'
+
+animal-rabbit-static.svg:
+  'name: "White Rabbit"': 'name: "Белый кролик"'
+
+class-inheritance-rabbit-animal.svg:
+  'methods of Animal': 'методы Animal'
+  'methods of Rabbit': 'методы Rabbit'
+  'properties of rabbit': 'свойства rabbit'
+
+proto-animal-rabbit-walk-3.svg:
+  'name: "White Rabbit"': 'name: "Белый кролик"'
+
+class-inheritance-rabbit-animal-2.svg:
+  'name: "White Rabbit"': 'name: "Белый кролик"'

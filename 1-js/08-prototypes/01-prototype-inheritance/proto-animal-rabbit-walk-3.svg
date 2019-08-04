@@ -22,7 +22,7 @@
             </text>
             <rect id="Rectangle-1-Copy" stroke="#E8C48E" stroke-width="2" fill="#FFF9EB" x="7" y="138" width="190" height="48"></rect>
             <text id="name:-&quot;White-Rabbit&quot;" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal">
-                <tspan x="20" y="157" fill="#8A704D">name: "White Rabbit"</tspan>
+                <tspan x="20" y="157" fill="#8A704D">name: "Белый кролик"</tspan>
                 <tspan x="20" y="172" font-family="PTMono-Bold, PT Mono" font-weight="bold" fill="#EC6B4E">isSleeping: true</tspan>
             </text>
         </g>

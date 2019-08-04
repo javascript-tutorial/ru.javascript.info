@@ -7,7 +7,7 @@
         <g id="class-inheritance-rabbit-animal.svg">
             <rect id="Rectangle-1" stroke="#E8C48E" stroke-width="2" fill="#FFF9EB" x="11" y="128" width="179" height="28"></rect>
             <text id="methods-of-Rabbit" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" fill="#8A704D">
-                <tspan x="19" y="146">methods of Rabbit</tspan>
+                <tspan x="19" y="146">методы Rabbit</tspan>
             </text>
             <text id="Rabbit.prototype" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" fill="#8A704D">
                 <tspan x="10" y="120">Rabbit.prototype</tspan>
@@ -17,7 +17,7 @@
             </text>
             <rect id="Rectangle-1" stroke="#E8C48E" stroke-width="2" fill="#FFF9EB" x="11" y="21" width="179" height="28"></rect>
             <text id="methods-of-Animal" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" fill="#8A704D">
-                <tspan x="19" y="38">methods of Animal</tspan>
+                <tspan x="19" y="38">методы Animal</tspan>
             </text>
             <text id="Animal.prototype" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" fill="#8A704D">
                 <tspan x="10" y="13">Animal.prototype</tspan>
@@ -32,7 +32,7 @@
                 <tspan x="80" y="190">[[Prototype]]</tspan>
             </text>
             <text id="properties-of-rabbit" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" fill="#8A704D">
-                <tspan x="19" y="239">properties of rabbit</tspan>
+                <tspan x="19" y="239">свойства rabbit</tspan>
             </text>
         </g>
     </g>
