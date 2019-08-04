@@ -35,4 +35,6 @@ alert(HTMLDocument.prototype.__proto__.constructor.name); // Document
 alert(HTMLDocument.prototype.__proto__.__proto__.constructor.name); // Node
 ```
 
+Вот и иерархия.
+
 Мы также можем исследовать объект с помощью `console.dir(document)` и увидеть имена функций-конструкторов, открыв `__proto__`. Браузерная консоль берёт их как раз из свойства `constructor`.
