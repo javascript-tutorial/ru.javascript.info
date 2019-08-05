@@ -28,4 +28,4 @@ delete animal.jumps;
 alert( rabbit.jumps ); // ? (3)
 ```
 
-Задача имеет три ответа.
+Должно быть 3 ответа.
