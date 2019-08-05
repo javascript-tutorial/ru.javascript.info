@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Why two hamsters are full?
+# Почему наедаются оба хомяка?
 
-We have two hamsters: `speedy` and `lazy` inheriting from the general `hamster` object. 
+У нас есть два хомяка: шустрый (`speedy`) и ленивый (`lazy`); оба наследуют от общего объекта `hamster`.
 
-When we feed one of them, the other one is also full. Why? How to fix it?
+Когда мы кормим одного хомяка, второй тоже наедается. Почему? Как это исправить?
 
 ```js run
 let hamster = {
@@ -25,11 +25,11 @@ let lazy = {
   __proto__: hamster
 };
 
-// This one found the food
+// Этот хомяк нашёл еду
 speedy.eat("apple");
-alert( speedy.stomach ); // apple
+alert( speedy.stomach ); // яблоко
 
-// This one also has it, why? fix please.
-alert( lazy.stomach ); // apple
+// У этого хомяка тоже есть еда. Почему? Исправьте
+alert( lazy.stomach ); // яблоко
 ```
 

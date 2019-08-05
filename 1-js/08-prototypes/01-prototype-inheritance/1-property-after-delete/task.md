@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Working with prototype
+# Работа с прототипами
 
-Here's the code that creates a pair of objects, then modifies them.
+В приведённом ниже коде создаются и изменяются два объекта.
 
-Which values are shown in the process?
+Какие значения показаны в процессе выполнения кода?
 
 ```js
 let animal = {
@@ -28,4 +28,4 @@ delete animal.jumps;
 alert( rabbit.jumps ); // ? (3)
 ```
 
-There should be 3 answers.
+Задача имеет три ответа.

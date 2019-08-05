@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Where it writes?
+# Где выполняется запись?
 
-We have `rabbit` inheriting from `animal`.
+Объект `rabbit` наследует от объекта `animal`.
 
-If we call `rabbit.eat()`, which object receives the `full` property: `animal` or `rabbit`? 
+Какой объект получит свойство `full` при вызове `rabbit.eat()`: `animal` или `rabbit`? 
 
 ```js
 let animal = {
