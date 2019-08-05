@@ -9,8 +9,9 @@ function accept(req, res) {
     res.end();
     return;
   }
-  // может быть подключён: keep-alive, Upgrade
-  if (req.headers.connection.match(/\bupgrade\b/i)) {
+
+  // может быть заголовок Connection: keep-alive, Upgrade
+  if (!req.headers.connection.match(/\bupgrade\b/i)) {
     res.end();
     return;
   }
@@ -19,9 +20,9 @@ function accept(req, res) {
 }
 
 function onConnect(ws) {
-  ws.on('сообщение', function (message) {
-    let name = message.match(/\w+$/) || "Гость";
-    ws.send(`Привет, ${name}!`);
+  ws.on('message', function (message) {
+    let name = message.match(/([\p{Alpha}\p{M}\p{Nd}\p{Pc}\p{Join_C}]+)$/gu) || "Гость";
+    ws.send(`Привет с сервера, ${name}!`);
 
     setTimeout(() => ws.close(1000, "Пока!"), 5000);
   });

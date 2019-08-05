@@ -1,0 +1,14 @@
+<script>
+
+window.$selection = {
+	getText : function() {
+		var txt = '';
+		if (txt = window.getSelection) {
+			txt = window.getSelection().toString();
+		} else {
+			txt = document.selection.createRange().text;
+		}
+		return txt;
+	}
+}
+</script>

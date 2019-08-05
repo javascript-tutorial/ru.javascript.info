@@ -2,15 +2,14 @@ importance: 4
 
 ---
 
-# Extract the money
+# Выделить число
 
-We have a cost in the form `"$120"`. That is: the dollar sign goes first, and then the number.
+Есть стоимость в виде строки `"$120"`. То есть сначала идёт знак валюты, а затем – число.
 
-Create a function `extractCurrencyValue(str)` that would extract the numeric value from such string and return it. 
+Создайте функцию `extractCurrencyValue(str)`, которая будет из такой строки выделять числовое значение и возвращать его.
 
-The example:
+Например:
 
 ```js
 alert( extractCurrencyValue('$120') === 120 ); // true
 ```
-

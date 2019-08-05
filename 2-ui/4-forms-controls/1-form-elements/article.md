@@ -126,7 +126,7 @@ alert(ageElems[0].value); // 10, the first input value
 
 Вот иллюстрация:
 
-![](form-navigation.png)
+![](form-navigation.svg)
 
 Пример:
 

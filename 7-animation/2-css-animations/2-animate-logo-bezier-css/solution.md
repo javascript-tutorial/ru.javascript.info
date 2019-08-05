@@ -4,4 +4,4 @@
 
 График кривой Безье:
 
-![](bezier-up.png)
+![](bezier-up.svg)

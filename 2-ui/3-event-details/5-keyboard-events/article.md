@@ -93,9 +93,9 @@ document.addEventListener('keydown', function(event) {
 
 Например, вот схема стандартной (US) раскладки ("QWERTY") и под ней немецкой ("QWERTZ") раскладки (предоставлены Википедией):
 
-![](us-layout.png)
+![](us-layout.svg)
 
-![](german-layout.png)
+![](german-layout.svg)
 
 Для одной и той же клавиши в американской раскладке значение `event.code` равно "Z", в то время как в немецкой "Y".
 

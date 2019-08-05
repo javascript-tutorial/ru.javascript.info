@@ -103,7 +103,7 @@ alert(result); // <span class="my">, span class="my", span, class="my"
 
 Вот так выглядят скобочные группы:
 
-![](regexp-nested-groups.png)
+![](regexp-nested-groups.svg)
 
 По нулевому индексу в `result` всегда идёт полное совпадение.
 

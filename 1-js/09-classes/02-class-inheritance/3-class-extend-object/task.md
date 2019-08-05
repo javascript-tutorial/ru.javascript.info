@@ -4,7 +4,7 @@ importance: 5
 
 # Класс расширяет объект?
 
-Как мы уже знаем, все объекты наследуются от `Object.prototype` и имеют доступ к "общим" методам объекта, например `hasOwnProperty`.
+Как мы уже знаем, все объекты наследуют от `Object.prototype` и имеют доступ к "общим" методам объекта, например `hasOwnProperty`.
 
 Пример:
 
@@ -28,7 +28,7 @@ alert( rabbit.hasOwnProperty('name') ); // true
 
 В чем разница?
 
-Ниже пример кода с таким наследованием (почему он не работает?исправьте его):
+Ниже пример кода с таким наследованием (почему он не работает? исправьте его):
 
 ```js
 class Rabbit extends Object {
@@ -37,7 +37,7 @@ class Rabbit extends Object {
   }
 }
 
-let rabbit = new Rabbit("Rab");
+let rabbit = new Rabbit("Кроль");
 
 alert( rabbit.hasOwnProperty('name') ); // true
 ```

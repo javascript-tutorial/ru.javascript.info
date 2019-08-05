@@ -1,4 +1,4 @@
-To make the search case-insensitive, let's bring the string to lower case and then search:
+Для поиска без учёта регистра символов переведём всю строку в нижний регистр, а потом проверим, есть ли в ней искомые подстроки:
 
 ```js run demo
 function checkSpam(str) {
@@ -11,4 +11,3 @@ alert( checkSpam('buy ViAgRA now') );
 alert( checkSpam('free xxxxx') );
 alert( checkSpam("innocent rabbit") );
 ```
-

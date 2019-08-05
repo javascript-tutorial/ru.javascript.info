@@ -73,11 +73,10 @@ document.addEventListener("DOMContentLoaded", ready);
 
 В примере выше мы сначала увидим "Библиотека загружена...", а затем "DOM готов!" (все скрипты выполнены).
 
-```warn header="Скрипты с  `async`, `defer` или `type=\"module\"` не блокируют DOMContentLoaded"
-
-Атрибуты скрипта `async` и `defer`, которые мы рассмотрим [немного позже](info:script-async-defer), не блокируют DOMContentLoaded. [JavaScript модули](info:modules) ведут себя так же, как `defer` - тоже его не блокируют.
-
-Так что здесь мы говорим об "обычных" скриптах, таких как `<script>...</script>` или `<script src="..."></script>`.
+```warn header="Скрипты, которые не блокируют DOMContentLoaded"
+Есть два исключения из этого правила:
+1. Скрипты с атрибутом `async`, который мы рассмотрим [немного позже](info:script-async-defer), не блокируют DOMContentLoaded. 
+2. Скрипты, сгенерированные динамически при помощи `document.createElement('script')` и затем добавленные на страницу, также не блокируют это событие.
 ```
 
 ### DOMContentLoaded и стили

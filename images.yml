@@ -1,0 +1,378 @@
+code-style.svg:
+  "No space":
+    text: "Без пробелов"
+    position: "center"
+  "between the function name and parentheses":
+    position: "center"
+    text: "между именем функции и скобками"
+  "between the parentheses and the parameter":
+    position: "center"
+    text: "между скобками и параметрами"
+  "Indentation":
+    position: "center"
+    text: "Отступ"
+  "2 spaces":
+    position: "center"
+    text: "2 пробела"
+  "A space ":
+    position: "center"
+    text: "Пробел"
+  "after for/if/while…":
+    position: "center"
+    text: "после for/if/while…"
+  "} else { without a line break": "} else { без перевода строки"
+  "Spaces around a nested call":
+    position: "center"
+    text: "Пробелы вокруг вложенного вызова"
+  "An empty line":
+    position: "center"
+    text: "Пустая строка"
+  "between logical blocks":
+    position: "center"
+    text: "Между логическими блоками"
+  "Lines are not very long": "Строки не очень длинные"
+  "A semicolon ;": "Точка с запятой ;"
+  "is mandatory": "обязательна"
+  "Spaces":
+    position: "center"
+    text: "Пробелы"
+  "around operators":
+    position: "center"
+    text: "вокруг операторов"
+  "Curly brace {":
+    position: "center"
+    text: "Фигурная скобка {"
+  "on the same line, after a space":
+    position: "center"
+    text: "на той же строке, после пробела"
+  "A space":
+    position: "center"
+    text: "Пробел"
+  "between":
+    position: "center"
+    text: "между"
+  "parameters":
+    position: "center"
+    text: "параметрами"
+  "A space between parameters":
+    position: "center"
+    text: "Пробел между параметрами"
+
+try-catch-flow.svg:
+  "Begin":
+    text: "Начало"
+    position: "center"
+  "No Errors":
+    text: "Нет ошибок"
+    position: "center"
+  "An error occured in the code":
+    text: "В коде произошла ошибка"
+    position: "center"
+  "// code...": "// код..."
+  "Ignore catch block":
+    text: "Игнорировать блок catch"
+    position: "center"
+  "Ignore the rest of try":
+    text: "Игнорировать остаток try"
+    position: "center"
+  "Execute catch block":
+    text: "Выполнить блок catch"
+    position: "center"
+
+recursion-pow.svg:
+  "Yes":
+    text: "Да"
+    position: "center"
+  "No":
+    text: "Нет"
+  "recursive call until n==1": "рекурсивный вызов до n==1"
+
+hello-world-render.svg:
+  "1. The browser shows this part": "1. Браузер показывает эту часть"
+  "2. Then runs the script": "2. Затем запускает скрипт"
+  "3. Then shows the rest": "3. Затем показывает остальное"
+
+ifelse_task2.svg:
+  "Begin":
+    text: "Начало"
+    position: "center"
+  "Other":
+    text: "Другое"
+    position: "center"
+  "You don't know?":
+    text: "Не знаете?"
+    position: "center"
+  "Right!":
+    text: "Правильно!"
+    position: "center"
+  "What's the ":
+    text: "Каково"
+    position: "center"
+  "“official” name of":
+    text: "\"официальное название\""
+    position: "center"
+  "Иначе": ""
+
+ifelse_task.svg:
+  "Begin": "Начало"
+  "Canceled":
+    position: "center"
+    text: "Отменено"
+  "Welcome!":
+    text: "Здравствуйте!"
+    position: "center"
+  "I don't know you": "Я вас не знаю"
+  "Wrong password":
+    position: "center"
+    text: "Неверный пароль"
+  "Who's there?":
+    position: "center"
+    text: "Кто там?"
+  "Password?": "Пароль?"
+  "Cancel": "Отмена"
+  "Admin": "Админ"
+  "TheMaster": "Я Главный"
+  "Other": "Другое"
+
+chrome-sources-breakpoint.svg:
+  "here's the list":
+    text: "вот список"
+    position: "right"
+  "breakpoints":
+    text: "точки останова"
+
+chrome-sources-debugger-pause.svg:
+  "jump to the outer function":
+    text: "выпрыгнуть во внешнюю функцию"
+    position: "right"
+  "watch expressions":
+    text: "смотреть за выражениями"
+    position: "right"
+  "current variables":
+    text: "текущие переменные"
+    position: "right"
+
+chrome-sources-debugger-trace-1.svg:
+  "nested calls":
+    text: "вложенные вызовы"
+    position: "right"
+
+chrome-open-sources.svg:
+  open sources: 'открыть исходные файлы'
+
+object-user-empty.svg:
+  empty:
+    text: пусто
+    position: "center"
+
+garbage-collection-5.svg:
+  unreachables:
+    text: недостижимые
+
+array-shift.svg:
+  clear:
+    text: очистить
+    position: "center"
+  move: передвинуть
+  elements: элементы
+  to the left: влево
+
+array-pop.svg:
+  clear:
+    text: очистить
+    position: "center"
+
+decorator-makecaching-wrapper.svg:
+  wrapper: 'обёртка'
+  around the function: 'вокруг функции'
+
+xhr-another-domain.svg:
+  _defaults:
+    position: "center"
+  Browser: 'Браузер'
+  Server: 'Сервер'
+  HTTP-request: 'HTTP-запрос'
+  HTTP-response: 'HTTP-ответ'
+  '* OR https://javascript.info': '* ИЛИ https://javascript.info'
+  'if the header allows, success,': 'если заголовок разрешает, успех'
+  otherwise fail: 'иначе ошибка'
+
+xhr-preflight.svg:
+  _defaults:
+    position: "center"
+  Browser: 'Браузер'
+  Server: 'Сервер'
+  Main HTTP-response: 'Основной HTTP-ответ'
+  otherwise error: 'иначе ошибка'
+  'if allowed: success,': 'если разрешено, успех,'
+  Main HTTP-request: 'Основной HTTP-запрос'
+  preflight: 'предзапрос'
+  if allowed: 'если разрешено'
+
+cors-gmail-messages.svg:
+  _defaults:
+    position: "center"
+  got the cookie?: 'есть куки?'
+  okay!: 'ок!'
+
+websocket-handshake.svg:
+  _defaults:
+    position: "center"
+  Browser: 'Браузер'
+  Server: 'Сервер'
+  HTTP-request: 'HTTP-запрос'
+  '"Hey, server, let''s talk WebSocket?"': '"Сервер, давай поговорим на WebSocket?"'
+  HTTP-response: 'HTTP-ответ'
+  '"Okay!"': 'Давай!'
+  WebSocket protocol: 'Протокол WebSocket'
+
+long-polling.svg:
+  _defaults:
+    position: "center"
+  Browser: 'Браузер'
+  Server: 'Сервер'
+  request: 'запрос'
+  connection: 'соединение'
+  hangs: 'висит'
+  connection breaks: 'соединение разорвано'
+  end of request: 'конец запроса'
+  data: 'данные'
+
+genYield2-2.svg:
+  _defaults:
+    position: "center"
+  Generator: 'Генератор'
+  Calling code: 'Вызывающий код'
+
+genYield2.svg:
+  _defaults:
+    position: "center"
+  Generator: 'Генератор'
+  Calling code: 'Вызывающий код'
+
+promise-handler-variants.svg:
+  _defaults:
+    position: "center"
+  ...with the result: '...с результатом'
+  of the new promise...: 'нового промиса...'
+  'the call of .then(handler) always returns a promise:': 'вызов .then(handler) всегда возвращает промис:'
+  if handler ends with…: 'если handler заканчивается…'
+  return value: 'возвратом значения'
+  return promise: 'возвратом промиса'
+  throw error: 'ошибкой'
+  'that promise settles with:': 'этот промис завершается с:'
+
+promiseQueue.svg:
+  '"code finished"': '"код завершён"'
+  handler enqueued: 'handler в очереди'
+  queued handler runs: 'запускается handler из очереди'
+  script execution finished: 'выполнение скрипта завершено'
+
+eventLoop-full.svg:
+  script: 'скрипт'
+  event:
+    text: 'событийный'
+    position: 'center'
+  loop:
+    text: 'цикл'
+    position: 'center'
+  microtasks: 'микрозадачи'
+  render: 'рендеринг'
+
+eventLoop.svg:
+  script: 'скрипт'
+  event:
+    text: 'событийный'
+    position: 'center'
+  loop:
+    text: 'цикл'
+    position: 'center'
+  macrotask:
+    text: 'очередь'
+    position: 'center'
+  queue:
+    text: 'макрозадач'
+    position: 'center'
+
+cookie-xsrf.svg:
+  _defaults:
+    position: "center"
+  got the cookie?: 'есть куки?'
+  okay!: 'отлично!'
+
+lexical-environment-global-3.svg:
+  execution start: 'начало выполнения'
+
+lexenv-nested-makecounter-5.svg:
+  '&lt;empty&gt;':
+    text: '&lt;пусто&gt;'
+    position: 'center'
+
+lexical-environment-global-2.svg:
+  execution start: 'начало выполнения'
+  '&lt;empty&gt;': '&lt;пусто&gt;'
+
+lexenv-makearmy.svg:
+  for block: 'блочный'
+
+lexical-environment-simple.svg:
+  'LexicalEnvironment for the call': 'LexicalEnvironment вызова'
+
+lexenv-nested-makecounter-2.svg:
+  global LexicalEnvironment: 'глобальное LexicalEnvironment'
+  'of makeCounter() call': 'вызова makeCounter()'
+
+lexenv-nested-makecounter-6.svg:
+  modified here: 'изменено здесь'
+
+proxy-inherit.svg:
+  _defaults:
+    position: "center"
+  '_name: "Guest"': '_name: "Гость"'
+  '_name: "Admin"': '_name: "Админ"'
+  user (proxied): 'user (прокси)'
+  original user: 'исходный user'
+
+selection-firefox.svg:
+  selection: 'выделение'
+
+
+selection-direction-backward.svg:
+  focus: 'фокус'
+  anchor: 'якорь'
+
+selection-direction-forward.svg:
+  focus: 'фокус'
+  anchor: 'якорь'
+
+object-prototype-empty.svg:
+  'prototype object': 'прототип object'
+
+rabbit-prototype-constructor.svg:
+  'default "prototype"': '"prototype" по умолчанию'
+
+function-prototype-constructor.svg:
+  'default "prototype"': '"prototype" по умолчанию'
+
+rabbit-animal-independent-animal.svg:
+  'name: "My animal"': 'name: "Мой питомец"'
+
+rabbit-animal-independent-rabbit.svg:
+  'name: "My rabbit"': 'name: "Мой кролик"'
+
+animal-rabbit-extends.svg:
+  'name: "White Rabbit"': 'name: "Белый кролик"'
+
+animal-rabbit-static.svg:
+  'name: "White Rabbit"': 'name: "Белый кролик"'
+
+class-inheritance-rabbit-animal.svg:
+  'methods of Animal': 'методы Animal'
+  'methods of Rabbit': 'методы Rabbit'
+  'properties of rabbit': 'свойства rabbit'
+
+proto-animal-rabbit-walk-3.svg:
+  'name: "White Rabbit"': 'name: "Белый кролик"'
+
+class-inheritance-rabbit-animal-2.svg:
+  'name: "White Rabbit"': 'name: "Белый кролик"'

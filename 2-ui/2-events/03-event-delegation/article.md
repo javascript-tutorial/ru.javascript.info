@@ -81,7 +81,7 @@ function highlight(td) {
 
 Естественно, если клик произойдёт на элементе `<strong>`, то он станет значением `event.target`.
 
-![](bagua-bubble.png)
+![](bagua-bubble.svg)
 
 Внутри обработчика `table.onclick` мы должны по `event.target` разобраться, был клик внутри `<td>` или нет.
 

@@ -12,19 +12,18 @@ class Animal {
   }
   run(speed) {
     this.speed += speed;
-    alert(`${this.name} runs with speed ${this.speed}.`);
+    alert(`${this.name} бежит со скоростью ${this.speed}.`);
   }
   stop() {
     this.speed = 0;
-    alert(`${this.name} stopped.`);
+    alert(`${this.name} стоит.`);
   }
 }
 
-let animal = new Animal("My animal");
+let animal = new Animal("Мой питомец");
 ```
 
-![](rabbit-animal-independent-animal.png)
-
+![](rabbit-animal-independent-animal.svg)
 
 ...И `Rabbit`:
 
@@ -34,14 +33,14 @@ class Rabbit {
     this.name = name;
   }
   hide() {
-    alert(`${this.name} hides!`);
+    alert(`${this.name} прячется!`);
   }
 }
 
-let rabbit = new Rabbit("My rabbit");
+let rabbit = new Rabbit("Мой кролик");
 ```
 
-![](rabbit-animal-independent-rabbit.png)
+![](rabbit-animal-independent-rabbit.svg)
 
 Сейчас они полностью независимы.
 
@@ -59,11 +58,11 @@ class Animal {
   }
   run(speed) {
     this.speed += speed;
-    alert(`${this.name} runs with speed ${this.speed}.`);
+    alert(`${this.name} бежит со скоростью ${this.speed}.`);
   }
   stop() {
     this.speed = 0;
-    alert(`${this.name} stopped.`);
+    alert(`${this.name} стоит.`);
   }
 }
 
@@ -72,28 +71,27 @@ class Animal {
 class Rabbit extends Animal {
 */!*
   hide() {
-    alert(`${this.name} hides!`);
+    alert(`${this.name} прячется!`);
   }
 }
 
-let rabbit = new Rabbit("White Rabbit");
+let rabbit = new Rabbit("Белый кролик");
 
-rabbit.run(5); // White Rabbit runs with speed 5.
-rabbit.hide(); // White Rabbit hides!
+rabbit.run(5); // Белый кролик бежит со скоростью 5.
+rabbit.hide(); // Белый кролик прячется!
 ```
 Теперь код `Rabbit` стал короче, так как используется конструктор класса `Animal` по умолчанию и кролик может использовать метод `run` как и все животные.
 
 На самом деле ключевое слово `extends` добавляет ссылку на `[[Prototype]]` из `Rabbit.prototype` в `Animal.prototype`:
 
-![](animal-rabbit-extends.png)
+![](animal-rabbit-extends.svg)
 
 Если метод не найден в `Rabbit.prototype`, JavaScript возьмёт его из `Animal.prototype`.
 
-Как мы помним из главы <info:native-prototypes>, в JavaScript используется одно и то же наследование на прототипах для встроенных объектов. Например `Date.prototype.[[Prototype]]` это `Object.prototype`, поэтому у дат есть универсальные методы объекта.
+Как мы помним из главы <info:native-prototypes>, в JavaScript используется наследование на прототипах для встроенных объектов. Например `Date.prototype.[[Prototype]]` это `Object.prototype`, поэтому у дат есть универсальные методы объекта.
 
 ````smart header="После `extends` разрешены любые выражения"
-Синтаксис создания класса допускает указывать после `extends` не только класс, но любое выражение. 
-
+Синтаксис создания класса допускает указывать после `extends` не только класс, но любое выражение.
 
 Пример вызова функции, которая генерирует родительский класс:
 
@@ -119,7 +117,7 @@ new User().sayHi(); // Привет
 
 Давайте пойдём дальше и переопределим метод. Сейчас `Rabbit` наследует от `Animal` метод `stop`, который устанавливает `this.speed = 0`.
 
-Мы определим свой метод `stop` в классе `Rabbit`, который будет использоваться взамен родительского:
+Если мы определим свой метод `stop` в классе `Rabbit`, то он будет использоваться взамен родительского:
 
 ```js
 class Rabbit extends Animal {
@@ -129,7 +127,7 @@ class Rabbit extends Animal {
 }
 ```
 
-...Но обычно мы не хотим полностью заменить родительский метод, а скорее хотим сделать новый на его основе, изменяя или расширяя его функциональность. Мы делаем что-то в нашем методе и вызываем родительский метод до/после или в процессе.
+...Впрочем, обычно мы не хотим полностью заменить родительский метод, а скорее хотим сделать новый на его основе, изменяя или расширяя его функциональность. Мы делаем что-то в нашем методе и вызываем родительский метод до/после или в процессе.
 
 У классов есть ключевое слово `"super"` для таких случаев.
 - `super.method(...)` вызывает родительский метод.
@@ -147,19 +145,19 @@ class Animal {
 
   run(speed) {
     this.speed += speed;
-    alert(`${this.name} runs with speed ${this.speed}.`);
+    alert(`${this.name} бежит со скоростью ${this.speed}.`);
   }
 
   stop() {
     this.speed = 0;
-    alert(`${this.name} stopped.`);
+    alert(`${this.name} стоит.`);
   }
 
 }
 
 class Rabbit extends Animal {
   hide() {
-    alert(`${this.name} hides!`);
+    alert(`${this.name} прячется!`);
   }
 
 *!*
@@ -170,10 +168,10 @@ class Rabbit extends Animal {
 */!*
 }
 
-let rabbit = new Rabbit("White Rabbit");
+let rabbit = new Rabbit("Белый кролик");
 
-rabbit.run(5); // White Rabbit runs with speed 5.
-rabbit.stop(); // White Rabbit stopped. White rabbit hides!
+rabbit.run(5); // Белый кролик бежит со скоростью 5.
+rabbit.stop(); // Белый кролик стоит. Белый кролик прячется!
 ```
 
 Теперь у класса `Rabbit` есть метод `stop`, который вызывает родительский `super.stop()` в процессе выполнения.
@@ -245,7 +243,7 @@ class Rabbit extends Animal {
 
 *!*
 // Не работает!
-let rabbit = new Rabbit("White Rabbit", 10); // Error: this is not defined.
+let rabbit = new Rabbit("Белый кролик", 10); // Error: this is not defined.
 */!*
 ```
 
@@ -261,12 +259,12 @@ let rabbit = new Rabbit("White Rabbit", 10); // Error: this is not defined.
 
 Разница в следующем:
 
-- Когда выполняется обычный конструктор, он создаёт пустой объект и продолжает работать с ним как с `this` .
+- Когда выполняется обычный конструктор, он создаёт пустой объект и присваивает его `this` .
 - Когда запускается конструктор унаследованного класса, он этого не делает. Вместо этого он ждёт, что это сделает конструктор родительского класса.
 
-Поэтому, если мы создаём собственный конструктор, мы должны вызвать `super`, в противном случае объект со ссылкой на `this` не будет создан, и мы получим ошибку.
+Поэтому, если мы создаём собственный конструктор, мы должны вызвать `super`, в противном случае объект для `this` не будет создан, и мы получим ошибку.
 
-Для `Rabbit` мы должны вызвать `super()` до того, как используем `this`, чтобы не было ошибки:
+Чтобы конструктор `Rabbit` работал, он должен вызвать `super()` до того, как использовать `this`, чтобы не было ошибки:
 
 ```js run
 class Animal {
@@ -293,36 +291,44 @@ class Rabbit extends Animal {
 
 *!*
 // теперь работает
-let rabbit = new Rabbit("White Rabbit", 10);
-alert(rabbit.name); // White Rabbit
+let rabbit = new Rabbit("Белый кролик", 10);
+alert(rabbit.name); // Белый кролик
 alert(rabbit.earLength); // 10
 */!*
 ```
 
 ## Устройство super, [[HomeObject]]
 
+```warn header="Продвинутая информация"
+Если вы читаете учебник первый раз - эту секцию можно пропустить.
+
+Она рассказывает о внутреннем устройстве наследования и вызов `super`.
+```
+
 Давайте заглянем "под капот" `super`. Здесь есть некоторые интересные моменты.
 
-Вообще, исходя из наших знаний до этого момента, `super` вообще "не может" работать. 
+Вообще, исходя из наших знаний до этого момента, `super` вообще не может работать!
 
-Давайте попробуем прикинуть, как технически это может работать. Когда метод объекта выполняется, он получает текущий объект как `this`. Если мы вызываем `super.method()`, то ему необходимо плучить `method` из прототипа текущего объекта.
+Ну правда, давайте спросим себя - как он должен работать, чисто технически? Когда метод объекта выполняется, он получает текущий объект как `this`. Если мы вызываем `super.method()`, то движку необходимо плучить `method` из прототипа текущего объекта. И как ему это сделать?
 
-Задача может показаться простой, но это не так. Движок может попытаться получить родительский метод как `this.__proto__.method`. Однако, увы, такой "наивный" путь не работает.
+Задача может показаться простой, но это не так. Движок знает текущий `this` и могу бы попытаться получить родительский метод как `this.__proto__.method`. Однако, увы, такой "наивный" путь не работает.
 
 Продемонстрируем проблему. Без классов, используя простые объекты для наглядности.
+
+Вы можете пропустить эту часть и перейти ниже к подсекции `[[HomeObject]]`, если не хотите знать детали. Вреда не будет. Или читайте далее, если хотите разобраться.
 
 В примере ниже `rabbit.__proto__ = animal`. Попробуем в `rabbit.eat()` вызвать `animal.eat()`, используя `this.__proto__`:
 ```js run
 let animal = {
   name: "Animal",
   eat() {
-    alert(`${this.name} eats.`);
+    alert(`${this.name} ест.`);
   }
 };
 
 let rabbit = {
   __proto__: animal,
-  name: "Rabbit",
+  name: "Кролик",
   eat() {
 *!*
     // вот как предположительно может работать super.eat()
@@ -331,20 +337,20 @@ let rabbit = {
   }
 };
 
-rabbit.eat(); // Rabbit eats.
+rabbit.eat(); // Кролик ест.
 ```
 
 В строке `(*)` мы берём `eat` из прототипа (`animal`) и вызываем его в контексте текущего объекта. Обратите внимание, что `.call(this)` здесь неспроста: простой вызов `this.__proto__.eat()` будет выполнять родительский `eat` в контексте прототипа, а не текущего объекта.
 
 Приведённый выше код работает так, как задумано: выполняется нужный `alert`.
 
-Теперь давайте добавим ещё один объект в цепочку наследования и увидим, как все сломается: 
+Теперь давайте добавим ещё один объект в цепочку наследования и увидим, как все сломается:
 
 ```js run
 let animal = {
-  name: "Animal",
+  name: "Животное",
   eat() {
-    alert(`${this.name} eats.`);
+    alert(`${this.name} ест.`);
   }
 };
 
@@ -377,7 +383,7 @@ longEar.eat(); // Error: Maximum call stack size exceeded
 
 Картина того, что происходит:
 
-![](this-super-loop.png)
+![](this-super-loop.svg)
 
 1. Внутри `longEar.eat()` строка `(**)` вызывает `rabbit.eat` со значением `this=longEar`.
     ```js
@@ -388,7 +394,7 @@ longEar.eat(); // Error: Maximum call stack size exceeded
     // то же что и
     rabbit.eat.call(this);
     ```
-2. В строке `(*)` в `rabbit.eat` мы хотим передать вызов выше по цепочке, но `this=longEar`, поэтому `this.__proto__.eat` снова равен `rabbit.eat`! 
+2. В строке `(*)` в `rabbit.eat` мы хотим передать вызов выше по цепочке, но `this=longEar`, поэтому `this.__proto__.eat` снова равен `rabbit.eat`!
 
     ```js
     // внутри rabbit.eat() у нас также this = longEar
@@ -399,7 +405,7 @@ longEar.eat(); // Error: Maximum call stack size exceeded
     rabbit.eat.call(this);
     ```
 
-3. ... `rabbit.eat` вызывает себя в бесконечном цикле, потому что не может подняться дальше по цепочке.
+3. ...`rabbit.eat` вызывает себя в бесконечном цикле, потому что не может подняться дальше по цепочке.
 
 Проблема не может быть решена с помощью одного только `this`.
 
@@ -411,12 +417,12 @@ longEar.eat(); // Error: Maximum call stack size exceeded
 
 Затем `super` использует его, чтобы получить прототип родителя и его методы.
 
-Давайте посмотрим, как это работает для `super` - опять же, используя простые объекты:
+Давайте посмотрим, как это работает - опять же, используя простые объекты:
 
 
 ```js run
 let animal = {
-  name: "Animal",
+  name: "Животное",
   eat() {         // animal.eat.[[HomeObject]] == animal
     alert(`${this.name} eats.`);
   }
@@ -424,7 +430,7 @@ let animal = {
 
 let rabbit = {
   __proto__: animal,
-  name: "Rabbit",
+  name: "Кролик",
   eat() {         // rabbit.eat.[[HomeObject]] == rabbit
     super.eat();
   }
@@ -432,15 +438,15 @@ let rabbit = {
 
 let longEar = {
   __proto__: rabbit,
-  name: "Long Ear",
+  name: "Длинноух",
   eat() {         // longEar.eat.[[HomeObject]] == longEar
     super.eat();
   }
 };
 
 *!*
-// works correctly
-longEar.eat();  // Long Ear eats.
+// работает верно
+longEar.eat();  // Длинноух ест.
 */!*
 ```
 
@@ -452,9 +458,9 @@ longEar.eat();  // Long Ear eats.
 
 Но само существование `[[HomeObject]]` нарушает этот принцип, так как методы запоминают свои объекты. `[[HomeObject]]` нельзя изменить, эта связь - навсегда.
 
-Единственное место в языке, где используется `[[HomeObject]]` - это `super`. Поэтому если метод не использует `super`, то мы все ещё можем считать его свободным и копировать между объектами. А вот если `super` в коде есть, то уже нет.
+Единственное место в языке, где используется `[[HomeObject]]` - это `super`. Поэтому если метод не использует `super`, то мы все ещё можем считать его свободным и копировать между объектами. А вот если `super` в коде есть, то возможны побочные эффекты.
 
-Вот пример неверного вызова `super`:
+Вот пример неверного результата `super` после копирования:
 
 ```js run
 let animal = {
@@ -463,6 +469,7 @@ let animal = {
   }
 };
 
+// rabbit наследует от animal
 let rabbit = {
   __proto__: animal,
   sayHi() {
@@ -476,6 +483,7 @@ let plant = {
   }
 };
 
+// tree наследует от plant
 let tree = {
   __proto__: plant,
 *!*
@@ -492,15 +500,17 @@ tree.sayHi();  // Я животное (?!?)
 
 Причина проста:
 - В строке `(*)`, метод `tree.sayHi` скопирован из `rabbit`. Возможно, мы хотели избежать дублирования кода?
-- Так что его `[[HomeObject]]` - это `rabbit`, ведь он был создан в `rabbit`. Свойство `[[HomeObject]]` никогда не меняется.
+- Его `[[HomeObject]]` - это `rabbit`, ведь он был создан в `rabbit`. Свойство `[[HomeObject]]` никогда не меняется.
 - В коде `tree.sayHi()` есть вызов `super.sayHi()`. Он идёт вверх от `rabbit` и берёт метод из `animal`.
 
-![](super-homeobject-wrong.png)
+Вот диаграмма происходящего:
+
+![](super-homeobject-wrong.svg)
 
 
 ### Методы, а не свойства-функции
 
-Свойство `[[HomeObject]]` определено для методов как классов, так и обычных объектов. Но для объектов метоыд должны быть объявлены именно как `method()`, а не `"method: function()"`.
+Свойство `[[HomeObject]]` определено для методов как классов, так и обычных объектов. Но для объектов методы должны быть объявлены именно как `method()`, а не `"method: function()"`.
 
 Для нас различий нет, но они есть для JavaScript.
 

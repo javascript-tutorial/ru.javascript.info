@@ -38,7 +38,7 @@ let promise = new Promise(function(resolve, reject) {
     - устанавливает `state` в значение `"rejected"`,
     - устанавливает `result` в значение `error`.
 
-![](promise-resolve-reject.png)
+![](promise-resolve-reject.svg)
 
 Позже мы рассмотрим, как "фанаты" узнают об этих изменениях.
 
@@ -60,7 +60,7 @@ let promise = new Promise(function(resolve, reject) {
 
 Спустя одну секунду "обработки" исполнитель вызовет `resolve("done")`, чтобы передать результат:
 
-![](promise-resolve-1.png)
+![](promise-resolve-1.svg)
 
 Это был пример успешно выполненной задачи, в результате мы получили "успешно выполненный" промис.
 
@@ -73,7 +73,7 @@ let promise = new Promise(function(resolve, reject) {
 });
 ```
 
-![](promise-reject-1.png)
+![](promise-reject-1.svg)
 
 Подведём промежуточные итоги: исполнитель выполняет задачу (что-то, что обычно требует времени), затем вызывает `resolve` или `reject`, чтобы изменить состояние соответствующего `Promise`.
 

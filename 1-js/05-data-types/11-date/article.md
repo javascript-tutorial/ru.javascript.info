@@ -29,17 +29,17 @@
     alert( Jan02_1970 );
     ```
 
-    Количество миллисекунд, прошедших с начала 1970 года, называется *таймстамп* (англ. timestamp).
+    Целое число, представляющее собой количество миллисекунд, прошедших с начала 1970 года, называется *таймстамп* (англ. timestamp).
 
     Это легковесное численное представление даты. Из таймстампа всегда можно получить дату с помощью `new Date(timestamp)` и преобразовать существующий объект `Date` в таймстамп, используя метод `date.getTime()` (см. ниже).
 
 `new Date(datestring)`
-: Если аргумент всего один, и это строка, то её разбор производится по алгоритму `Date.parse` (см. ниже).
+: Если аргумент всего один, и это строка, то из неё "прочитывается" дата. Алгоритм разбора - такой же, как в `Date.parse`, который мы рассмотрим позже.
 
     ```js run
     let date = new Date("2017-01-26");
     alert(date);
-    // Время не указано, поэтому оно ставится в полночь по Гринвичу и 
+    // Время не указано, поэтому оно ставится в полночь по Гринвичу и
     // меняется в соответствии с временной зоной места выполнения кода
     // Так что в результате можно получить
     // Thu Jan 26 2017 11:00:00 GMT+1100 (восточноавстралийское время)
@@ -130,12 +130,12 @@ alert( date.getUTCHours() );
 
 Следующие методы позволяют установить компоненты даты и времени:
 
-- [`setFullYear(year [, month, date])`](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date/setFullYear)
-- [`setMonth(month [, date])`](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date/setMonth)
+- [`setFullYear(year, [month], [date])`](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date/setFullYear)
+- [`setMonth(month, [date])`](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date/setMonth)
 - [`setDate(date)`](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date/setDate)
-- [`setHours(hour [, min, sec, ms])`](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date/setHours)
-- [`setMinutes(min [, sec, ms])`](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date/setMinutes)
-- [`setSeconds(sec [, ms])`](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date/setSeconds)
+- [`setHours(hour, [min], [sec], [ms])`](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date/setHours)
+- [`setMinutes(min, [sec], [ms])`](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date/setMinutes)
+- [`setSeconds(sec, [ms])`](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date/setSeconds)
 - [`setMilliseconds(ms)`](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date/setMilliseconds)
 - [`setTime(milliseconds)`](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date/setTime) (устанавливает дату в виде целого количества миллисекунд, прошедших с 01.01.1970 UTC)
 
@@ -261,9 +261,7 @@ alert( `Цикл отработал за ${end - start} миллисекунд` 
 
 Например, сравним две функции, вычисляющие разницу между двумя датами: какая сработает быстрее?
 
-Подобные вычисления, замеряющие производительность, также называют "бенчмарками" (benchmark). 
-
-Such performance measurements are often called "benchmarks".
+Подобные вычисления, замеряющие производительность, также называют "бенчмарками" (benchmark).
 
 ```js
 // есть date1 и date2, какая функция быстрее вернёт разницу между ними в миллисекундах?
@@ -319,7 +317,7 @@ alert( 'Время diffGetTime: ' + bench(diffGetTime) + 'мс' );
 
 **Для получения наиболее достоверных результатов тестирования производительности весь набор бенчмарков нужно запускать по несколько раз.**
 
-Рассмотрим пример:
+Например, так:
 
 ```js run
 function diffSubtract(date1, date2) {
@@ -425,4 +423,4 @@ alert(`Загрузка началась ${performance.now()}мс назад`);
 // корректными являются только первые три цифры после точки, а остальные -- это ошибка точности
 ```
 
-В Node.js для этого предусмотрен модуль `microtime` и ряд других способов. Технически, любое устройство или среда позволяет добиться большей точности, просто её нет в объекте `Date`.
+В Node.js для этого предусмотрен модуль `microtime` и ряд других способов. Технически, почти любое устройство или среда позволяет добиться большей точности, просто её нет в объекте `Date`.

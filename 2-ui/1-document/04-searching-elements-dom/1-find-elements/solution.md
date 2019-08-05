@@ -1,36 +1,35 @@
-There are many ways to do it.
+Есть много путей как это сделать.
 
-Here are some of them:
+Вот некоторые:
 
 ```js
-// 1. The table with `id="age-table"`.
+// 1. Таблица с `id="age-table"`.
 let table = document.getElementById('age-table')
 
-// 2. All label elements inside that table
+// 2. Все label в этой таблице
 table.getElementsByTagName('label')
-// or
+// или
 document.querySelectorAll('#age-table label')
 
-// 3. The first td in that table (with the word "Age").
+// 3. Первый td в этой таблице
 table.rows[0].cells[0]
-// or
+// или
 table.getElementsByTagName('td')[0]
-// or
+// или
 table.querySelector('td')
 
-// 4. The form with the name "search".
-// assuming there's only one element with name="search"
+// 4. Форма с name="search"
+// предполагаем, что есть только один элемент с таким name в документе
 let form = document.getElementsByName('search')[0]
-// or, form specifically
+// или, именно форма:
 document.querySelector('form[name="search"]')
 
-// 5. The first input in that form.
+// 5. Первый input в этой форме
 form.getElementsByTagName('input')[0]
-// or
+// или
 form.querySelector('input')
 
-// 6. The last input in that form.
-// there's no direct query for that
-let inputs = form.querySelectorAll('input') // search all
-inputs[inputs.length-1] // take last
+// 6. Последний input в этой форме
+let inputs = form.querySelectorAll('input') // найти все input
+inputs[inputs.length-1] // взять последний
 ```

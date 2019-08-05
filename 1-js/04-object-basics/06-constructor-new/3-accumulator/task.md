@@ -4,9 +4,9 @@ importance: 5
 
 # Создаём Accumulator
 
-Создайте функцию-конструктор `Accumulator(startingValue)`.
+Напишите функцию-конструктор `Accumulator(startingValue)`.
 
-Созданный объект должен уметь следующее:
+Объект, который она создаёт, должен уметь следующее:
 
 - Хранить "текущее значение" в свойстве `value`. Начальное значение устанавливается в аргументе конструктора `startingValue`.
 - Метод `read()` использует `prompt` для получения числа и прибавляет его к свойству `value`.
@@ -17,9 +17,11 @@ importance: 5
 
 ```js
 let accumulator = new Accumulator(1); // начальное значение 1
+
 accumulator.read(); // прибавит ввод prompt к текущему значению
 accumulator.read(); // прибавит ввод prompt к текущему значению
-alert(accumulator.value); // выведет текущее значение
+
+alert(accumulator.value); // выведет сумму этих значений
 ```
 
 [demo]
