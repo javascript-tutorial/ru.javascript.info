@@ -20,7 +20,7 @@ let hamster = {
 
   eat(food) {
 *!*
-    // задать для this.stomach, а не для this.stomach.push
+    // присвоение значения this.stomach вместо вызова this.stomach.push
     this.stomach = [food];
 */!*
   }
@@ -36,7 +36,7 @@ let lazy = {
 
 // Шустрый хомяк нашёл еду
 speedy.eat("apple");
-alert( speedy.stomach ); // яблоко
+alert( speedy.stomach ); // apple
 
 // Живот ленивого хомяка пуст
 alert( lazy.stomach ); // <ничего>
@@ -71,7 +71,7 @@ let lazy = {
 
 // Шустрый хомяк нашёл еду
 speedy.eat("apple");
-alert( speedy.stomach ); // яблоко
+alert( speedy.stomach ); // apple
 
 // Живот ленивого хомяка пуст
 alert( lazy.stomach ); // <ничего>

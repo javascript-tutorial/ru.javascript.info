@@ -27,9 +27,9 @@ let lazy = {
 
 // Этот хомяк нашёл еду
 speedy.eat("apple");
-alert( speedy.stomach ); // яблоко
+alert( speedy.stomach ); // apple
 
 // У этого хомяка тоже есть еда. Почему? Исправьте
-alert( lazy.stomach ); // яблоко
+alert( lazy.stomach ); // apple
 ```
 
