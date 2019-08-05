@@ -8,14 +8,33 @@ libs:
 
 Основой HTML-документа являются теги.
 
+<<<<<<< HEAD
 В соответствии с объектной моделью документа ("Document Object Mode", коротко DOM), каждый HTML-тег является объектом. Вложенные теги являются "детьми" родительского элемента. Текст, который находится внутри тега, также является объектом.
 
 Все эти объекты доступны при помощи JavaScript, мы можем использовать их для изменения страницы.
 
 Например, `document.body` - объект для тега `<body>`.
+=======
+According to Document Object Model (DOM), every HTML-tag is an object. Nested tags are  "children" of the enclosing one. The text inside a tag it is an object as well.
+
+All these objects are accessible using JavaScript, we can use them to modify the page.
+
+For example, `document.body` is the object representing `<body>` tag.
+
+Running this code will make the `<body>` red for 3 seconds:
+
+```js run
+document.body.style.background = 'red'; // make the background red
+
+setTimeout(() => document.body.style.background = '', 3000); // return back
+```
+
+That was just a glimpse of DOM power. Soon we'll learn more ways to manipulate DOM, but first we need to know about its structure.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 Если запустить этот код, то `<body>` станет красным на 3 секунды:
 
+<<<<<<< HEAD
 ```js run
 document.body.style.background = 'red'; // сделать фон красным
 
@@ -27,6 +46,9 @@ setTimeout(() => document.body.style.background = '', 3000); // вернуть �
 ## Пример DOM
 
 Начнём с такого, простого, документа:
+=======
+Let's start with the following simple docment:
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 ```html run no-beautify
 <!DOCTYPE HTML>
@@ -54,9 +76,15 @@ drawHtmlTree(node1, 'div.domtree', 690, 320);
 На рисунке выше, узлы-элементы можно кликать, и их дети будут скрываться и раскрываться.
 ```
 
+<<<<<<< HEAD
 Каждый узел этого дерева - это объект.
 
 Теги являются *узлами-элементами* (или просто элементами). Они образуют структуру дерева: `<html>` -- это корневой узел, `<head>` и `<body>` его дочерние узлы, и т.д.
+=======
+Every tree node is an object.
+
+Tags are *element nodes* (or just elements), they form the tree structure: `<html>` is at the root, then `<head>` and `<body>` are its children, etc.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 Текст внутри элементов образует *текстовые узлы*, обозначенные как `#text`. Текстовый узел содержит в себе только строку текста. У него не может быть потомков, т.е. он находится всегда на самом нижнем уровне.
 
@@ -67,7 +95,11 @@ drawHtmlTree(node1, 'div.domtree', 690, 320);
 - перевод строки: `↵` (в JavaScript он обозначается как `\n`)
 - пробел: `␣`
 
+<<<<<<< HEAD
 Пробелы и переводы строки -- это полноправные символы, как буквы и цифры. Они образуют текстовые узлы и становятся частью дерева DOM. Так, в примере выше в теге `<head>` есть несколько пробелов перед `<title>`, которые образуют текстовый узел `#text` (он содержит в себе только перенос строки и несколько пробелов).
+=======
+Spaces and newlines -- are totally valid characters, like letters and digits. They form text nodes and become a part of the DOM. So, for instance, in the example above the `<head>` tag contains some spaces before `<title>`, and that text becomes a `#text` node (it contains a newline and some spaces only).
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 Существует всего два исключения из этого правила:
 1. По историческим причинам пробелы и перевод строки перед тегом `<head>` игнорируются
@@ -90,6 +122,7 @@ let node2 = {"name":"HTML","nodeType":1,"children":[{"name":"HEAD","nodeType":1,
 drawHtmlTree(node2, 'div.domtree', 690, 210);
 </script>
 
+<<<<<<< HEAD
 ```smart header="Пробелы по краям строк и пробельные текстовые узлы скрыты в инструментах разработки"
 Когда мы работаем с деревом DOM, используя инструменты разработчика в браузере (которые мы рассмотрим позже), пробелы в начале/конце текста и пустые текстовые узлы (переносы строк) между тегами обычно не отображаются.
 
@@ -101,6 +134,17 @@ drawHtmlTree(node2, 'div.domtree', 690, 210);
 ## Автоисправление
 
 Если браузер сталкивается с некорректно написанным HTML-кодом, он автоматически корректирует его при построении DOM.
+=======
+```smart header="Spaces at string start/end and space-only text nodes are usually hidden in tools"
+Browser tools (to be covered soon) that work with DOM usually do not show spaces at the start/end of the text and empty text nodes (line-breaks) between tags.
+
+Developer tools save screen space this way.
+
+On further DOM pictures we'll sometimes omit them when they are irrelevant. Such spaces usually do not affect how the document is displayed.
+```
+
+## Autocorrection
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 Например, в начале документа всегда должен быть тег `<html>`. Даже если его нет в документе -- он будет в дереве DOM, браузер его создаст. То же самое касается и тега `<body>`.
 
@@ -161,7 +205,13 @@ drawHtmlTree(node5,  'div.domtree', 600, 200);
 
 Есть и некоторые другие типы узлов, кроме элементов и текстовых узлов.
 
+<<<<<<< HEAD
 Например, узел-комментарий:
+=======
+There are some other node types besides elements and text nodes.
+
+For example, comments:
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 ```html
 <!DOCTYPE HTML>
@@ -187,7 +237,13 @@ let node6 = {"name":"HTML","nodeType":1,"children":[{"name":"HEAD","nodeType":1,
 drawHtmlTree(node6, 'div.domtree', 690, 500);
 </script>
 
+<<<<<<< HEAD
 Здесь мы видим новый узел нового типа -- *комментарий*, обозначенный как `#comment`, между двумя текстовыми узлами.
+=======
+We can see here a new tree node type -- *comment node*, labeled as `#comment`, between two text nodes.
+
+We may think -- why is a comment added to the DOM? It doesn't affect the visual representation in any way. But there's a rule -- if something's in HTML, then it also must be in the DOM tree.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 Казалось бы -- зачем комментарий в DOM? Он никак не влияет на визуальное отображение. Но есть важное правило: если что-то есть в HTML, то оно должно быть в DOM-дереве.
 
@@ -206,9 +262,13 @@ drawHtmlTree(node6, 'div.domtree', 690, 500);
 
 ## Поэкспериментируйте сами
 
+<<<<<<< HEAD
 Чтобы посмотреть структуру DOM реальном времени, попробуйте [Live DOM Viewer](http://software.hixie.ch/utilities/js/live-dom-viewer/). Просто введите что-нибудь в поле, и ниже увидите, как меняется DOM.
 
 Другой способ исследовать DOM - это использовать инструменты разработчика браузера. Это то, что мы каждый день делаем при разработке.
+=======
+Another way to explore the DOM is to use the browser developer tools. Actually, that's what we use when developing.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 Для этого откройте страницу [elks.html](elks.html), включите инструменты разработчика и перейдите на вкладку Elements.
 
@@ -236,9 +296,18 @@ drawHtmlTree(node6, 'div.domtree', 690, 500);
 
 ## Взаимодействие с консолью
 
+<<<<<<< HEAD
 При работе с DOM, нам часто требуется применить к нему JavaScript. Например: получить узел и запустить какой-нибудь код для его изменения, чтобы посмотреть результат. Вот несколько подсказок по тому, как перемещаться между вкладками Elements и Console.
 
 Для начала:
+=======
+As we work the DOM, we also may want to apply JavaScript to it. Like: get a node and run some code to modify it, to see the result. Here are few tips to travel between the Elements tab and the console.
+
+For the start:
+
+1. Select the first `<li>` in the Elements tab.
+2. Press `key:Esc` -- it will open console right below the Elements tab.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 1. На вкладке Elements выберите первый элемент `<li>`.
 2. Нажмите `key:Esc` -- прямо под вкладкой Elements откроется Console.
@@ -249,11 +318,19 @@ drawHtmlTree(node6, 'div.domtree', 690, 500);
 
 ![](domconsole0.png)
 
+<<<<<<< HEAD
 Это мы посмотрели как получить узел из Elements в Console.
 
 Есть и обратный путь: если есть переменная `node`, ссылающаяся на DOM-узел, можно использовать в консоли команду `inspect(node)`, чтобы увидеть этот элемент во вкладке Elements.
 
 Или мы можем просто вывести DOM-узел в консоль и  исследовать "на месте", как `document.body` ниже:
+=======
+That's how to get a node from Elements in Console.
+
+There's also a road back. If there's a variable referencing a DOM node, then we can use the command `inspect(node)` in Console to see it in the Elements pane.
+
+Or we can just output DOM-node in the console and explore "at-place", like `document.body` below:
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 ![](domconsole1.png)
 

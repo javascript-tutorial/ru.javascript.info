@@ -3,21 +3,21 @@ libs:
 
 ---
 
-# Каррирование
+# Currying
 
-[Каррирование](https://ru.wikipedia.org/wiki/%D0%9A%D0%B0%D1%80%D1%80%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5) - продвинутая техника для работы с функциями. Она используется не только в JavaScript, но и в других языках.
+[Currying](https://en.wikipedia.org/wiki/Currying) is an advanced technique of working with functions. It's used not only in JavaScript, but in other languages as well.
 
-Каррирование - это трансформация функций таким образом, чтобы они принимали  аргументы не как `f(a, b, c)`, а как `f(a)(b)(c)`.
+Currying is a transformation of functions that translates a function from callable as `f(a, b, c)` into callable as `f(a)(b)(c)`.
 
-Каррирование не вызывает функцию. Оно просто трансформирует её.
+Currying doesn't call a function. It just transforms it.
 
-Давайте сначала посмотрим на пример, чтобы лучше понять, о чём речь, а потом на практическое применение каррирования.
+Let's see an example first, to better understand what we're talking about, and then practical applications.
 
-Создадим вспомогательную функцию `curry(f)`, которая выполняет каррирование функции `f` с двумя аргументами. Другими словами, `curry(f)` для функции `f(a, b)` трансформирует её в `f(a)(b)`.
+We'll create a helper function `curry(f)` that performs currying for a two-argument `f`. In other words, `curry(f)` for two-argument `f(a, b)` translates it into a function that runs as `f(a)(b)`:
 
 ```js run
 *!*
-function curry(f) { // curry(f) выполняет каррирование
+function curry(f) { // curry(f) does the currying transform
   return function(a) {
     return function(b) {
       return f(a, b);
@@ -26,7 +26,7 @@ function curry(f) { // curry(f) выполняет каррирование
 }
 */!*
 
-// использование
+// usage
 function sum(a, b) {
   return a + b;
 }
@@ -36,30 +36,30 @@ let carriedSum = curry(sum);
 alert( carriedSum(1)(2) ); // 3
 ```
 
-Как вы видите, реализация довольна проста: это две обёртки.
+As you can see, the implementation is straightforward: it's just two wrappers.
 
-- Результат `curry(func)` -- обёртка `function(a)`.
-- Когда она вызывается как `sum(1)`, аргумент сохраняется в лексическом окружении и возвращается новая обёртка `function(b)`.
-- После чего `sum(1)(2)`, наконец, вызывает `function(b)`, предоставляя `2` и передаёт вызов к оригинальной мультиарной функции `sum`.
+- The result of `curry(func)` is a wrapper `function(a)`.
+- When it is called like `sum(1)`, the argument is saved in the Lexical Environment, and a new wrapper is returned `function(b)`.
+- Then `sum(1)(2)` finally calls `function(b)` providing `2`, and it passes the call to the original multi-argument `sum`.
 
-Более продвинутые реализации каррирования, как например [_.curry](https://lodash.com/docs#curry) из библиотеки lodash, возвращают обёртку, которая позволяет запустить функцию как обычным образом, так и частично.
+More advanced implementations of currying, such as [_.curry](https://lodash.com/docs#curry) from lodash library, return a wrapper that allows a function to be called both normally and partially:
 
 ```js run
 function sum(a, b) {
   return a + b;
 }
 
-let carriedSum = _.curry(sum); // используем _.carry из lodash
+let carriedSum = _.curry(sum); // using _.carry from lodash library
 
-alert( carriedSum(1, 2) ); // 3, можно вызывать как обычно
-alert( carriedSum(1)(2) ); // 3, а можно частично
+alert( carriedSum(1, 2) ); // 3, still callable normally
+alert( carriedSum(1)(2) ); // 3, called partially
 ```
 
-## Каррирование? Зачем?
+## Currying? What for?
 
-Чтобы понять пользу от каррирования, нам определенно нужен пример из реальной жизни.
+To understand the benefits we need a worthy real-life example.
 
-Например, у нас есть функция логирования `log(date, importance, message)`, которая форматирует и выводит информацию. В реальных проектах у таких функций есть много полезных возможностей, например, посылать логи по сети, здесь для простоты используем `alert`:
+For instance, we have the logging function `log(date, importance, message)` that formats and outputs the information. In real projects such functions have many useful features like sending logs over the network, here we'll just use `alert`:
 
 ```js
 function log(date, importance, message) {
@@ -67,38 +67,32 @@ function log(date, importance, message) {
 }
 ```
 
-А теперь давайте применим к ней каррирование!
+Let's curry it!
 
 ```js
 log = _.curry(log);
 ```
 
-После этого `log` продолжает работать нормально:
-
-```js
-log(new Date(), "DEBUG", "some debug");
-```
-
-...Но также работает вариант с каррированием:
+After that `log` work both the normal way and in the curried form:
 
 ```js
 log(new Date(), "DEBUG", "some debug"); // log(a,b,c)
 log(new Date())("DEBUG")("some debug"); // log(a)(b)(c)
 ```
 
-Давайте сделаем удобную функцию для логов с текущим временем:
+Now we can easily make a convenience function for current logs:
 
 ```js
-// logNow будет частичным применением функции log с фиксированным первым аргументом
+// logNow will be the partial of log with fixed first argument
 let logNow = log(new Date());
 
-// используем её
+// use it
 logNow("INFO", "message"); // [HH:mm] INFO message
 ```
 
-Теперь `logNow` - это `log` с фиксированным первым аргументом, иначе говоря, "частично применённая" или "частичная" функция.
+Now `logNow` is `log` with fixed first argument, in other words "partially applied function" or "partial" for short.
 
-Мы можем пойти дальше и сделать удобнуя функция для именно отладочных логов с текущим временем:
+We can go further and make a convenience function for current debug logs:
 
 ```js
 let debugNow = logNow("DEBUG");
@@ -106,15 +100,15 @@ let debugNow = logNow("DEBUG");
 debugNow("message"); // [HH:mm] DEBUG message
 ```
 
-Итак:
-1. Мы ничего не потеряли после каррирования: `log` всё так же можно вызывать нормально.
-2. Мы смогли создать частично применённые функции, как сделали для логов с текущим временем.
+So:
+1. We didn't lose anything after currying: `log` is still callable normally.
+2. We were able to generate partial functions such as for today's logs.
 
-## Продвинутая реализация каррирования
+## Advanced curry implementation
 
-В случае, если вам интересны детали, вот "продвинутая" реализация каррирования, которую мы могли бы использовать выше.
+In case you'd like to get in details, here's the "advanced" curry implementation that we could use above.
 
-Она очень короткая:
+It's pretty short:
 
 ```js
 function curry(func) {
@@ -132,7 +126,7 @@ function curry(func) {
 }
 ```
 
-Примеры использования:
+Usage examples:
 
 ```js
 function sum(a, b, c) {
@@ -141,17 +135,17 @@ function sum(a, b, c) {
 
 let curriedSum = curry(sum);
 
-alert( curriedSum(1, 2, 3) ); // 6, всё ещё можно вызывать нормально
-alert( curriedSum(1)(2,3) ); // 6, каррирование первого аргумента
-alert( curriedSum(1)(2)(3) ); // 6, каррирование всех аргументов
+alert( curriedSum(1, 2, 3) ); // 6, still callable normally
+alert( curriedSum(1)(2,3) ); // 6, currying of 1st arg
+alert( curriedSum(1)(2)(3) ); // 6, full currying
 ```
 
-Новое `curry` выглядит сложновато, но на самом деле его легко понять.
+The new `curry` may look complicated, but it's actually easy to understand.
 
-Результат `curry(func)` -- это обёртка `curried`, которая выглядит так:
+The result of `curry(func)` is the wrapper `curried` that looks like this:
 
 ```js
-// func -- функция, которую мы трансформируем
+// func is the function to transform
 function curried(...args) {
   if (args.length >= func.length) { // (1)
     return func.apply(this, args);
@@ -163,33 +157,33 @@ function curried(...args) {
 };
 ```
 
-Когда мы запускаем её, есть две ветви выполнения:
+When we run it, there are two execution branches:
 
-1. Вызвать сейчас: если количество переданных аргументов `args` совпадает с количеством аргументов при объявлении функции (`func.length`) или больше, тогда вызов просто переходит к ней.
-2. Частичное применение: в противном случае `func` не вызывается сразу. Вместо этого, возвращается другая обёртка `pass`, которая снова применит `curried`, передав предыдущие аргументы вместе с новыми. Затем при новом вызове мы опять получим либо новое частичное применение (если аргументов недостаточно) либо, наконец, результат.
+1. Call now: if passed `args` count is the same as the original function has in its definition (`func.length`) or longer, then just pass the call to it.
+2. Get a partial: otherwise, `func` is not called yet. Instead, another wrapper `pass` is returned, that will re-apply `curried` providing previous arguments together with the new ones. Then on a new call, again, we'll get either a new partial (if not enough arguments) or, finally, the result.
 
-Например, давайте посмотрим, что произойдёт в случае `sum(a, b, c)`. У неё три аргумента, так что `sum.length = 3`.
+For instance, let's see what happens in the case of `sum(a, b, c)`. Three arguments, so `sum.length = 3`.
 
-Для вызова `curried(1)(2)(3)`:
+For the call `curried(1)(2)(3)`:
 
-1. Первый вызов `curried(1)` запоминает `1` в своём лексическом окружении и возвращает обёртку `pass`.
-2. Обёртка `pass` вызывается с `(2)`: она берёт предыдущие аргументы (`1`), объединяет их с тем, что получила сама `(2)` и вызывает `curried(1, 2)` со всеми ними. Так как число аргументов всё ещё меньше 3-х, `curry` возвращает `pass`.
-3. Обёртка `pass` вызывается снова с `(3)`. Для следующего вызова `pass(3)` берёт предыдущие аргументы (`1`, `2`) и добавляет к ним `3`, делая вызов `curried(1, 2, 3)` -- наконец 3 аргумента, и они передаются оригинальной функции.
+1. The first call `curried(1)` remembers `1` in its Lexical Environment, and returns a wrapper `pass`.
+2. The wrapper `pass` is called with `(2)`: it takes previous args (`1`), concatenates them with what it got `(2)` and calls `curried(1, 2)` with them together. As the argument count is still less than 3, `curry` returns `pass`.
+3. The wrapper `pass` is called again with `(3)`,  for the next call `pass(3)` takes previous args (`1`, `2`) and adds `3` to them, making the call `curried(1, 2, 3)` -- there are `3` arguments at last, they are given to the original function.
 
-Если всё ещё не понятно, просто распишите последовательность вызовов на бумаге.
+If that's still not obvious, just trace the calls sequence in your mind or on the paper.
 
-```smart header="Только функции с фиксированным количеством аргументов"
-Для каррирования необходима функция с известным фиксированным количеством аргументов.
+```smart header="Fixed-length functions only"
+The currying requires the function to have a known fixed number of arguments.
 ```
 
-```smart header="Немного больше, чем каррирование"
-По определению, каррирование должно превращать `sum(a, b, c)` в `sum(a)(b)(c)`.
+```smart header="A little more than currying"
+By definition, currying should convert `sum(a, b, c)` into `sum(a)(b)(c)`.
 
-Но, как было описано, большинство реализаций каррирования в JavaScript более продвинуты: они также оставляют вариант вызова функции с несколькими аргументами.
+But most implementations of currying in JavaScript are advanced, as described: they also keep the function callable in the multi-argument variant.
 ```
 
-## Итого
+## Summary
 
-*Каррирование* -- это трансформация, которая превращает вызов `f(a, b, c)` в `f(a)(b)(c)`. В JavaScript реализация обычно позволяет вызывать функцию обоими вариантами: либо нормально, либо возвращает частично применённую функцию, если количество аргументов недостаточно.
+*Currying* is a transform that makes `f(a,b,c)` callable as `f(a)(b)(c)`. JavaScript implementations usually both keep the function callable normally and return the partial if arguments count is not enough.
 
-Каррирование позволяет легко получить частичную функцию. Как мы видели в примерах с логами: универсальная функция `log(date, importance, message)` после каррирования возвращает нам частично применённую функцию, когда вызывается с одним аргументом, как `log(date)` или двумя аргументами, как `log(date, importance)`.
+Currying allows to easily get partials. As we've seen in the logging example: the universal function `log(date, importance, message)` after currying gives us partials when called with one argument like `log(date)` or two arguments `log(date, importance)`.  

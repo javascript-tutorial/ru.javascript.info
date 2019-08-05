@@ -16,7 +16,11 @@ class Animal {
   }
   stop() {
     this.speed = 0;
+<<<<<<< HEAD
     alert(`${this.name} стоит.`);
+=======
+    alert(`${this.name} stands still.`);
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
   }
 }
 
@@ -62,7 +66,11 @@ class Animal {
   }
   stop() {
     this.speed = 0;
+<<<<<<< HEAD
     alert(`${this.name} стоит.`);
+=======
+    alert(`${this.name} stands still.`);
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
   }
 }
 
@@ -88,7 +96,11 @@ rabbit.hide(); // Белый кролик прячется!
 
 Если метод не найден в `Rabbit.prototype`, JavaScript возьмёт его из `Animal.prototype`.
 
+<<<<<<< HEAD
 Как мы помним из главы <info:native-prototypes>, в JavaScript используется наследование на прототипах для встроенных объектов. Например `Date.prototype.[[Prototype]]` это `Object.prototype`, поэтому у дат есть универсальные методы объекта.
+=======
+As we can recall from the chapter <info:native-prototypes>, JavaScript uses prototypal inheritance for build-in objects. E.g. `Date.prototype.[[Prototype]]` is `Object.prototype`, so dates have generic object methods.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 ````smart header="После `extends` разрешены любые выражения"
 Синтаксис создания класса допускает указывать после `extends` не только класс, но любое выражение.
@@ -127,11 +139,17 @@ class Rabbit extends Animal {
 }
 ```
 
+<<<<<<< HEAD
 ...Впрочем, обычно мы не хотим полностью заменить родительский метод, а скорее хотим сделать новый на его основе, изменяя или расширяя его функциональность. Мы делаем что-то в нашем методе и вызываем родительский метод до/после или в процессе.
 
 У классов есть ключевое слово `"super"` для таких случаев.
 - `super.method(...)` вызывает родительский метод.
 - `super(...)` вызывает родительский конструктор (работает только внутри нашего конструктора).
+=======
+...But usually we don't want to totally replace a parent method, but rather to build on top of it, tweak or extend its functionality. We do something in our method, but call the parent method before/after it or in the process.
+
+Classes provide `"super"` keyword for that.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 Пусть наш кролик автоматически прячется при остановке:
 
@@ -150,7 +168,11 @@ class Animal {
 
   stop() {
     this.speed = 0;
+<<<<<<< HEAD
     alert(`${this.name} стоит.`);
+=======
+    alert(`${this.name} stands still.`);
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
   }
 
 }
@@ -170,8 +192,13 @@ class Rabbit extends Animal {
 
 let rabbit = new Rabbit("Белый кролик");
 
+<<<<<<< HEAD
 rabbit.run(5); // Белый кролик бежит со скоростью 5.
 rabbit.stop(); // Белый кролик стоит. Белый кролик прячется!
+=======
+rabbit.run(5); // White Rabbit runs with speed 5.
+rabbit.stop(); // White Rabbit stands still. White rabbit hides!
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 ```
 
 Теперь у класса `Rabbit` есть метод `stop`, который вызывает родительский `super.stop()` в процессе выполнения.
@@ -259,12 +286,21 @@ let rabbit = new Rabbit("Белый кролик", 10); // Error: this is not de
 
 Разница в следующем:
 
+<<<<<<< HEAD
 - Когда выполняется обычный конструктор, он создаёт пустой объект и присваивает его `this` .
 - Когда запускается конструктор унаследованного класса, он этого не делает. Вместо этого он ждёт, что это сделает конструктор родительского класса.
 
 Поэтому, если мы создаём собственный конструктор, мы должны вызвать `super`, в противном случае объект для `this` не будет создан, и мы получим ошибку.
 
 Чтобы конструктор `Rabbit` работал, он должен вызвать `super()` до того, как использовать `this`, чтобы не было ошибки:
+=======
+- When a normal constructor runs, it creates an empty object and assigns it to `this`.
+- But when a derived constructor runs, it doesn't do this. It expects the parent constructor to do this job.
+
+So if we're making a constructor of our own, then we must call `super`, because otherwise the object for `this` won't be created. And we'll get an error.
+
+For `Rabbit` constructor to work, it needs to call `super()` before using `this`, like here:
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 ```js run
 class Animal {
@@ -305,17 +341,37 @@ alert(rabbit.earLength); // 10
 Она рассказывает о внутреннем устройстве наследования и вызов `super`.
 ```
 
+<<<<<<< HEAD
 Давайте заглянем "под капот" `super`. Здесь есть некоторые интересные моменты.
+=======
+```warn header="Advanced information"
+If you're reading the tutorial for the first time - this section may be skipped.
+
+It's about the internal mechanisms behind inheritance and `super`.
+```
+
+Let's get a little deeper under the hood of `super`. We'll see some interesting things by the way.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 Вообще, исходя из наших знаний до этого момента, `super` вообще не может работать!
 
+<<<<<<< HEAD
 Ну правда, давайте спросим себя - как он должен работать, чисто технически? Когда метод объекта выполняется, он получает текущий объект как `this`. Если мы вызываем `super.method()`, то движку необходимо плучить `method` из прототипа текущего объекта. И как ему это сделать?
+=======
+Yeah, indeed, let's ask ourselves, how it should technically work? When an object method runs, it gets the current object as `this`. If we call `super.method()` then, the engine needs to get the `method` from the prototype of the current object. But how?
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 Задача может показаться простой, но это не так. Движок знает текущий `this` и могу бы попытаться получить родительский метод как `this.__proto__.method`. Однако, увы, такой "наивный" путь не работает.
 
 Продемонстрируем проблему. Без классов, используя простые объекты для наглядности.
 
+<<<<<<< HEAD
 Вы можете пропустить эту часть и перейти ниже к подсекции `[[HomeObject]]`, если не хотите знать детали. Вреда не будет. Или читайте далее, если хотите разобраться.
+=======
+You may skip this part and go below to the `[[HomeObject]]` subsection if you don't want to know the details. That won't harm. Or read on if you're interested in understanding things in-depth.
+
+In the example below, `rabbit.__proto__ = animal`. Now let's try: in `rabbit.eat()` we'll call `animal.eat()`, using `this.__proto__`:
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 В примере ниже `rabbit.__proto__ = animal`. Попробуем в `rabbit.eat()` вызвать `animal.eat()`, используя `this.__proto__`:
 ```js run
@@ -460,7 +516,11 @@ longEar.eat();  // Длинноух ест.
 
 Единственное место в языке, где используется `[[HomeObject]]` - это `super`. Поэтому если метод не использует `super`, то мы все ещё можем считать его свободным и копировать между объектами. А вот если `super` в коде есть, то возможны побочные эффекты.
 
+<<<<<<< HEAD
 Вот пример неверного результата `super` после копирования:
+=======
+Here's the demo of a wrong `super` result after copying:
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 ```js run
 let animal = {
@@ -469,7 +529,11 @@ let animal = {
   }
 };
 
+<<<<<<< HEAD
 // rabbit наследует от animal
+=======
+// rabbit inherits from animal
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 let rabbit = {
   __proto__: animal,
   sayHi() {
@@ -483,7 +547,11 @@ let plant = {
   }
 };
 
+<<<<<<< HEAD
 // tree наследует от plant
+=======
+// tree inherits from plant
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 let tree = {
   __proto__: plant,
 *!*
@@ -503,7 +571,16 @@ tree.sayHi();  // Я животное (?!?)
 - Его `[[HomeObject]]` - это `rabbit`, ведь он был создан в `rabbit`. Свойство `[[HomeObject]]` никогда не меняется.
 - В коде `tree.sayHi()` есть вызов `super.sayHi()`. Он идёт вверх от `rabbit` и берёт метод из `animal`.
 
+<<<<<<< HEAD
 Вот диаграмма происходящего:
+=======
+The reason is simple:
+- In the line `(*)`, the method `tree.sayHi` was copied from `rabbit`. Maybe we just wanted to avoid code duplication?
+- Its `[[HomeObject]]` is `rabbit`, as it was created in `rabbit`. There's no way to change `[[HomeObject]]`.
+- The code of `tree.sayHi()` has `super.sayHi()` inside. It goes up from `rabbit` and takes the method from `animal`.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
+
+Here's the diagram of what happens:
 
 ![](super-homeobject-wrong.svg)
 

@@ -2,9 +2,15 @@
 
 В JavaScript можно наследовать только от одного объекта. Объект имеет единственный `[[Prototype]]`. И класс может расширить только один другой класс.
 
+<<<<<<< HEAD
 Иногда это может ограничивать нас. Например, у нас есть класс `StreetSweeper` и класс `Bicycle`, а мы хотим создать их смесь: `StreetSweepingBicycle`.
 
 Или у нас есть класс `User`, который реализует пользователей, и класс `EventEmitter`, реализующий события. Мы хотели бы добавить функционал класса `EventEmitter` к `User`, чтобы пользователи могли легко генерировать события.
+=======
+But sometimes that feels limiting. For instance, I have a class `StreetSweeper` and a class `Bicycle`, and want to make their mix: a `StreetSweepingBicycle`.
+
+Or we have a class `User` and a class `EventEmitter` that implements event generation, and we'd like to add the functionality of `EventEmitter` to `User`, so that our users can emit events.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 Для таких случаев существуют "примеси".
 
@@ -14,7 +20,11 @@
 
 ## Пример примеси
 
+<<<<<<< HEAD
 Простейший способ реализовать примесь в JavaScript - это создать объект с полезными методами, которые затем могут быть легко добавлены в прототип любого класса.
+=======
+The simplest way to implement a mixin in JavaScript is to make an object with useful methods, so that we can easily merge them into a prototype of any class.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 В примере ниже примесь `sayHiMixin` имеет методы для придания объектам класса `User` возможности вести разговор:
 
@@ -75,10 +85,17 @@ let sayHiMixin = {
     *!*
     // вызываем метод родителя
     */!*
+<<<<<<< HEAD
     super.say(`Привет, ${this.name}`); // (*)
   },
   sayBye() {
     super.say(`Пока, ${this.name}`); // (*)
+=======
+    super.say(`Hello ${this.name}`); // (*)
+  },
+  sayBye() {
+    super.say(`Bye ${this.name}`); // (*)
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
   }
 };
 
@@ -95,6 +112,7 @@ Object.assign(User.prototype, sayHiMixin);
 new User("Вася").sayHi(); // Привет, Вася!
 ```
 
+<<<<<<< HEAD
 Обратим внимание, что при вызове родительского метода `super.say()` из `sayHiMixin` (строки, помеченные `(*)`) этот метод ищется в прототипе самой примеси, а не класса.
 
 Вот диаграмма (см правую часть):
@@ -102,6 +120,15 @@ new User("Вася").sayHi(); // Привет, Вася!
 ![](mixin-inheritance.svg)
 
 Это связано с тем, что методы `sayHi` и `sayBye` были изначально созданы в объекте `sayHiMixin`. Несмотря на то, что они скопированы, их внутреннее свойство `[[HomeObject]]` ссылается на `sayHiMixin`, как показано на картинке выше.
+=======
+Please note that the call to the parent method `super.say()` from `sayHiMixin` (at lines labelled with `(*)`) looks for the method in the prototype of that mixin, not the class.
+
+Here's the diagram (see the right part):
+
+![](mixin-inheritance.svg)
+
+That's because methods `sayHi` and `sayBye` were initially created in `sayHiMixin`. So even though they got copied, their `[[HomeObject]]` internal property references `sayHiMixin`, as shown on the picture above.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 Так как `super` ищет родительские методы в `[[HomeObject]].[[Prototype]]`, это означает `sayHiMixin.[[Prototype]]`, а не `User.[[Prototype]]`.
 
@@ -201,7 +228,11 @@ menu.choose("123"); // Выбранное значение: 123
 
 *Примесь* -- общий термин в объектно-ориентированном программировании: класс, который содержит в себе методы для других классов.
 
+<<<<<<< HEAD
 Некоторые другие языки допускают множественное наследование. JavaScript не поддерживает множественное наследование, но с помощью примесей мы можем реализовать нечто похожее, скопировав методы в прототип.
+=======
+Some other languages like allow multiple inheritance. JavaScript does not support multiple inheritance, but mixins can be implemented by copying methods into prototype.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 Мы можем использовать примеси для расширения функционала классов, например, для обработки событий, как мы сделали это выше.
 

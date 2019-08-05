@@ -9,7 +9,11 @@ libs:
 
 DOM позволяет нам делать что угодно с элементами и их содержимым, но для начала нужно получить соответствующий DOM-объект.
 
+<<<<<<< HEAD
 Все операции с DOM начинаются с объекта `document`. Это главная "точка входа" в DOM. Из него мы можем получить доступ к любому узлу.
+=======
+All operations on the DOM start with the `document` object. That's the main "entry point" to DOM. From it we can access any node.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 Так выглядят основные ссылки, по которым можно переходить между узлами DOM:
 
@@ -86,9 +90,15 @@ DOM позволяет нам делать что угодно с элемент
 </html>
 ```
 
+<<<<<<< HEAD
 ...А потомки `<body>`-- это и прямые дети `<div>`, `<ul>` и вложенные в них: `<li>` (потомок `<ul>`) и `<b>` (потомок `<li>`) - в общем, все элементы поддерева.
 
 **Коллекция `childNodes` содержит список всех детей, включая текстовые узлы.**
+=======
+...And descendants of `<body>` are not only direct children `<div>`, `<ul>` but also more deeply nested elements, such as `<li>` (a child of `<ul>`) and `<b>` (a child of `<li>`) -- the entire subtree.
+
+**The `childNodes` collection lists all child nodes, including text nodes.**
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 Пример ниже последовательно выведет детей `document.body`:
 
@@ -182,10 +192,23 @@ DOM-коллекции, и даже более -- *все* навигацион�
 
 ## Соседи и родитель
 
+<<<<<<< HEAD
 *Соседи* -- это узлы, у которых один и тот же родитель.
+=======
+*Siblings* are nodes that are children of the same parent.
+
+For instance, here `<head>` and `<body>` are siblings:
+
+```html
+<html>
+  <head>...</head><body>...</body>
+</html>
+```
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 Например, здесь `<head>` и `<body>` соседи:
 
+<<<<<<< HEAD
 ```html
 <html>
   <head>...</head><body>...</body>
@@ -209,6 +232,22 @@ alert( document.body.parentNode === document.documentElement ); // выведе�
 alert( document.head.nextSibling ); // HTMLBodyElement
 
 // перед <body> находится <head>
+=======
+The next sibling is is `nextSibling`, and the previous one is `previousSibling`.
+
+The parent is available as `parentNode`.
+
+So all these tests are truthy:
+
+```js
+// parent of <body> is <html>
+alert( document.body.parentNode === document.documentElement ); // true
+
+// after <head> goes <body>
+alert( document.head.nextSibling ); // HTMLBodyElement
+
+// before <body> goes <head>
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 alert( document.body.previousSibling ); // HTMLHeadElement
 ```
 
@@ -239,11 +278,19 @@ alert( document.documentElement.parentNode ); // выведет document
 alert( document.documentElement.parentElement ); // выведет null
 ```
 
+<<<<<<< HEAD
 Причина в том, что родителем корневого узла `document.documentElement` (`<html>`) является `document`. Но `document` -- это не узел-элемент, так что `parentNode` вернет его, а `parentElement` нет.
 
 Эта деталь может быть полезна, если мы хотим пройти вверх по цепочке родителей от произвольного элемента `elem` к `<html>`, но не до `document`:
 ```js
 while(elem = elem.parentElement) { // идти наверх до <html>
+=======
+The reason is that root node `document.documentElement` (`<html>`) has `document` as its parent. But `document` is not an element node, so `parentNode` returns it and `parentElement` does not.
+
+This detail may be useful when we want to travel up from an arbitrary element `elem` to `<html>`, but not to the `document`:
+```js
+while(elem = elem.parentElement) { // go up till <html>
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
   alert( elem );
 }
 ```

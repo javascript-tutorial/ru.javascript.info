@@ -11,7 +11,11 @@
 obj instanceof Class
 ```
 
+<<<<<<< HEAD
 Оператор вернёт `true`, если `obj` принадлежит классу `Class` или наследующему от него.
+=======
+It returns `true` if `obj` belongs to the `Class` or a class inheriting from it.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 Например:
 
@@ -46,10 +50,15 @@ alert( arr instanceof Object ); // true
 
 Пожалуйста, обратите внимание, что `arr` также принадлежит классу `Object`, потому что `Array` наследует от `Object`.
 
+<<<<<<< HEAD
 Обычно оператор `instanceof` просматривает для проверки цепочку прототипов. Но это поведение может быть изменено при помощи статического метода `Symbol.hasInstance`.
+=======
+Normally, `instanceof` operator examines the prototype chain for the check. We can also set a custom logic in the static method `Symbol.hasInstance`.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 Алгоритм работы `obj instanceof Class` работает примерно так:
 
+<<<<<<< HEAD
 1. Если имеется статический метод `Symbol.hasInstance`, тогда вызвать его: `Class[Symbol.hasInstance](obj)`. Он должен вернуть либо `true`, либо `false`, и это конец. Это как раз и есть возможность ручной настройки `instanceof`.
 
     Пример:
@@ -57,6 +66,15 @@ alert( arr instanceof Object ); // true
     ```js run
     // проверка instanceof будет полагать,
     // что всё со свойством canEat - животное Animal
+=======
+1. If there's a static method `Symbol.hasInstance`, then just call it: `Class[Symbol.hasInstance](obj)`. It should return either `true` or `false`, and we're done. That's how we can customize the behavior of `instanceof`.
+
+    For example:
+
+    ```js run
+    // setup instanceOf check that assumes that
+    // anything with canEat property is an animal
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
     class Animal {
       static [Symbol.hasInstance](obj) {
         if (obj.canEat) return true;
@@ -69,12 +87,17 @@ alert( arr instanceof Object ); // true
 
 2. Большая часть классов не имеет метода `Symbol.hasInstance`. В этом случае используется стандартная логика: проверяется, равен ли `Class.prototype` одному из прототипов в прототипной цепочке `obj`.
 
+<<<<<<< HEAD
     Другими словами, сравнивается:
+=======
+    In other words, compare one after another:
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
     ```js
     obj.__proto__ === Class.prototype?
     obj.__proto__.__proto__ === Class.prototype?
     obj.__proto__.__proto__.__proto__ === Class.prototype?
     ...
+<<<<<<< HEAD
     // если какой-то из ответов true - возвратить true
     // если дошли до конца цепочки - false
     ```
@@ -82,6 +105,15 @@ alert( arr instanceof Object ); // true
     В примере выше `rabbit.__proto__ === Rabbit.prototype`, так что результат будет получен немедленно.
 
     В случае с наследованием, совпадение будет на втором шаге:
+=======
+    // if any answer is true, return true
+    // otherwise, if we reached the end of the chain, return false
+    ```
+
+    In the example above `rabbit.__proto__ === Rabbit.prototype`, so that gives the answer immediately.
+
+    In the case of an inheritance, the match will be at the second step:
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
     ```js run
     class Animal {}
@@ -94,7 +126,11 @@ alert( arr instanceof Object ); // true
 
     // rabbit.__proto__ === Rabbit.prototype
     *!*
+<<<<<<< HEAD
     // rabbit.__proto__.__proto__ === Animal.prototype (совпадение!)
+=======
+    // rabbit.__proto__.__proto__ === Animal.prototype (match!)
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
     */!*
     ```
 
@@ -106,7 +142,11 @@ alert( arr instanceof Object ); // true
 
 Забавно, но сам конструктор `Class` не участвует в процессе проверки! Важна только цепочка прототипов `Class.prototype`.
 
+<<<<<<< HEAD
 Это может приводить к интересным последствиям при изменении свойства `prototype` после создания объекта.
+=======
+That can lead to interesting consequences when `prototype` property is changed after the object is created.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 Как, например, тут:
 
@@ -123,7 +163,11 @@ alert( rabbit instanceof Rabbit ); // false
 */!*
 ```
 
+<<<<<<< HEAD
 ## Бонус: Object.prototype.toString возвращает тип
+=======
+## Bonus: Object.prototype.toString for the type
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 Мы уже знаем, что обычные объекты преобразуется к строке как `[object Object]`:
 
@@ -200,11 +244,19 @@ alert( {}.toString.call(new XMLHttpRequest()) ); // [object XMLHttpRequest]
 
 В итоге мы получили "typeof на стероидах", который не только работает с примитивными типами данных, но также и со встроенными объектами, и даже может быть настроен.
 
+<<<<<<< HEAD
 Можно использовать `{}.toString.call` вместо `instanceof` для встроенных объектов, когда мы хотим получить тип в виде строки, а не просто сделать проверку.
+=======
+We can use `{}.toString.call` instead of `instanceof` for built-in objects when we want to get the type as a string rather than just to check.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 ## Итого
 
+<<<<<<< HEAD
 Давайте обобщим, какие методы для проверки типа мы знаем:
+=======
+Let's summarize the type-checking methods that we know:
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 |               | работает для   |  возвращает      |
 |---------------|----------------|------------------|
