@@ -14,7 +14,7 @@ function loadScript(src, callback) {
   script.src = src;
 
   script.onload = () => callback(null, script);
-  script.onerror = () => callback(new Error(`Script load error for ${src}`));
+  script.onerror = () => callback(new Error(`Ошибка загрузки скрипта ${src}`));
 
   document.head.append(script);
 }
