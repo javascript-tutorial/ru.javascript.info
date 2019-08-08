@@ -176,7 +176,7 @@ let range = {
       current: this.from,
       last: this.to,
 
-      // next() вызывается при каждой итерации циклом for..of
+      // next() вызывается при каждой итерации цикла for..of
       next() {
         // нужно вернуть значение как объект {done:.., value :...}
         if (this.current <= this.last) {
