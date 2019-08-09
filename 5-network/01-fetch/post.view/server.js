@@ -8,7 +8,7 @@ let router = new Router();
 
 router.post('/user', async (ctx) => {
   ctx.body = {
-    message: "User saved."
+    message: "Пользователь сохранён."
   };
 });
 
@@ -17,7 +17,7 @@ router.post('/image', async (ctx) => {
     limit: '1mb'
   });
   ctx.body = {
-    message: `Image saved, size:${body.length}.`
+    message: `Изображение сохранено, размер:${body.length}.`
   };
 });
 
