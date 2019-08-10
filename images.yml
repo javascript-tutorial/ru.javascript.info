@@ -206,8 +206,12 @@ xhr-preflight.svg:
   otherwise error: 'иначе ошибка'
   'if allowed: success,': 'если разрешено, успех,'
   Main HTTP-request: 'Основной HTTP-запрос'
-  preflight: 'предзапрос'
-  if allowed: 'если разрешено'
+  preflight:
+    text: 'предзапрос'
+    position: 'right'
+  if allowed:
+    text: 'если разрешено'
+    position: 'right'
 
 cors-gmail-messages.svg:
   _defaults:
