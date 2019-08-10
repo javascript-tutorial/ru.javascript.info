@@ -204,7 +204,7 @@ xhr-preflight.svg:
   Server: 'Сервер'
   Main HTTP-response: 'Основной HTTP-ответ'
   otherwise error: 'иначе ошибка'
-  'if allowed: success,': 'если разрешено, успех,'
+  'if allowed: success,': 'если разрешено, то успех,'
   Main HTTP-request: 'Основной HTTP-запрос'
   preflight:
     text: 'предзапрос'
