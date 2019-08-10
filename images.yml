@@ -194,7 +194,7 @@ xhr-another-domain.svg:
   HTTP-request: 'HTTP-запрос'
   HTTP-response: 'HTTP-ответ'
   '* OR https://javascript.info': '* ИЛИ https://javascript.info'
-  'if the header allows, success,': 'если заголовок разрешает, успех'
+  'if the header allows, then success,': 'если заголовок разрешает, то успех'
   otherwise fail: 'иначе ошибка'
 
 xhr-preflight.svg:
