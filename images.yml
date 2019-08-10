@@ -376,3 +376,9 @@ proto-animal-rabbit-walk-3.svg:
 
 class-inheritance-rabbit-animal-2.svg:
   'name: "White Rabbit"': 'name: "Белый кролик"'
+
+event-order-bubbling.svg:
+  _defaults:
+    position: "center"
+  'Most deeply': 'Самый глубоко'
+  'nested element': 'вложенный элемент'
