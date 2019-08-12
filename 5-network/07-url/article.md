@@ -7,22 +7,37 @@
 
 ## Создание URL
 
+<<<<<<< HEAD
 Синтаксис создания нового объекта `URL`:
+=======
+The syntax to create a new `URL` object:
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 ```js
 new URL(url, [base])
 ```
 
+<<<<<<< HEAD
 - **`url`** -- полный URL-адрес или только путь, если указан второй параметр,
 - **`base`** -- необязательный "базовый" URL: если указан и аргумент `url` содержит только путь, то адрес будет создан относительно него (пример ниже).
 
 Например:
+=======
+- **`url`** -- the full URL or only path (if base is set, see below),
+- **`base`** -- an optional base URL: if set and `url` argument has only path, then the URL is generated relative to `base`.
+
+For example:
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 ```js
 let url = new URL('https://javascript.info/profile/admin');
 ```
 
+<<<<<<< HEAD
 Эти два URL одинаковы:
+=======
+These two URLs are same:
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 ```js run
 let url1 = new URL('https://javascript.info/profile/admin');
@@ -32,7 +47,11 @@ alert(url1); // https://javascript.info/profile/admin
 alert(url2); // https://javascript.info/profile/admin
 ```
 
+<<<<<<< HEAD
 Можно легко создать новый URL по пути относительно существующего URL-адреса:
+=======
+We can easily create a new URL based on the path relative to an existing URL:
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 ```js run
 let url = new URL('https://javascript.info/profile/admin');
@@ -41,7 +60,11 @@ let newUrl = new URL('tester', url);
 alert(newUrl); // https://javascript.info/profile/tester
 ```
 
+<<<<<<< HEAD
 Объект `URL` даёт доступ к компонентам URL, поэтому это отличный способ "разобрать" URL-адрес, например:
+=======
+The `URL` object immediately allows us to access its components, so it's a nice way to parse the url, e.g.:
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 ```js run
 let url = new URL('https://javascript.info/url');
@@ -51,7 +74,11 @@ alert(url.host);     // javascript.info
 alert(url.pathname); // /url
 ```
 
+<<<<<<< HEAD
 Вот шпаргалка по компонентам URL:
+=======
+Here's the cheatsheet for URL components:
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 ![](url-object.svg)
 
@@ -64,7 +91,14 @@ alert(url.pathname); // /url
 ```smart header="Можно передавать объекты `URL` в сетевые методы (и большинство других) вместо строк"
 Мы можем использовать объект `URL` в методах `fetch` или `XMLHttpRequest` и почти во всех других, где ожидается URL-строка.
 
+<<<<<<< HEAD
 Вообще, объект `URL` можно передавать почти куда угодно вместо строки, так как большинство методов сконвертируют объект в строку, при этом он станет строкой с полным URL-адресом.
+=======
+```smart header="We can pass `URL` objects to networking (and most other) methods instead of a string"
+We can use an `URL` object in `fetch` or `XMLHttpRequest`, almost everywhere where an URL-string is expected.
+
+Generally, `URL` object can be passed to any method instead of a string, as most method will perform the string conversion, that turns an `URL` object into a string with full URL.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 ```
 
 ## SearchParams "?..."
@@ -83,6 +117,7 @@ new URL('https://google.com/search?query=JavaScript')
 
 Он предоставляет удобные методы для работы с параметрами:
 
+<<<<<<< HEAD
 - **`append(name, value)`** -- добавить параметр по имени,
 - **`delete(name)`** -- удалить параметр по имени,
 - **`get(name)`** -- получить параметр по имени,
@@ -104,6 +139,30 @@ url.searchParams.set('tbs', 'qdr:y'); // параметр с двоеточие�
 
 // параметры автоматически кодируются
 alert(url); // https://google.com/search?query=test+me%21&tbs=qdr%3Ay
+=======
+- **`append(name, value)`** -- add the parameter by `name`,
+- **`delete(name)`** -- remove the parameter by `name`,
+- **`get(name)`** -- get the parameter by `name`,
+- **`getAll(name)`** -- get all parameters with the same `name` (that's possible, e.g. `?user=John&user=Pete`),
+- **`has(name)`** -- check for the existance of the parameter by `name`,
+- **`set(name, value)`** -- set/replace the parameter,
+- **`sort()`** -- sort parameters by name, rarely needed,
+- ...and it's also iterable, similar to `Map`.
+
+An example with parameters that contain spaces and punctuation marks:
+
+```js run
+let url = new URL('https://google.com/search');
+
+url.searchParams.set('q', 'test me!'); // added parameter with a space and !
+
+alert(url); // https://google.com/search?q=test+me%21
+
+url.searchParams.set('tbs', 'qdr:y'); // added parameter with a colon :
+
+// parameters are automatically encoded
+alert(url); // https://google.com/search?q=test+me%21&tbs=qdr%3Ay
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 // перебрать параметры (в исходном виде)
 for(let [name, value] of url.searchParams) {

@@ -77,6 +77,7 @@ alert(str1 == str2); // true
 
 | Символ | Описание |
 |-----------|-------------|
+<<<<<<< HEAD
 |`\n`|Перевод строки|
 |`\r`|Возврат каретки: самостоятельно не используется. В текстовых файлах Windows для перевода строки используется комбинация символов `\r\n`. |
 |`\'`, `\"`|Кавычки|
@@ -86,6 +87,17 @@ alert(str1 == str2); // true
 |`\xXX`|Символ с шестнадцатеричным юникодным кодом `XX`, например, `'\x7A'` — то же самое, что `'z'`.|
 |`\uXXXX`|Символ в кодировке UTF-16 с шестнадцатеричным кодом `XXXX`, например, `\u00A9` — юникодное представление знака копирайта, `©`. Код должен состоять ровно из 4 шестнадцатеричных цифр. |
 |`\u{X…XXXXXX}` (от 1 до 6 шестнадцатеричных цифр)|Символ в кодировке UTF-32 с шестнадцатеричным кодом от U+0000 до U+10FFFF. Некоторые редкие символы кодируются двумя 16-битными словами и занимают 4 байта. Так можно вставлять символы с длинным кодом. |
+=======
+|`\n`|New line|
+|`\r`|Carriage return: not used alone. Windows text files use a combination of two characters `\r\n` to represent a line break. |
+|`\'`, `\"`|Quotes|
+|`\\`|Backslash|
+|`\t`|Tab|
+|`\b`, `\f`, `\v`| Backspace, Form Feed, Vertical Tab -- kept for compatibility, not used nowadays. |
+|`\xXX`|Unicode character with the given hexadecimal unicode `XX`, e.g. `'\x7A'` is the same as `'z'`.|
+|`\uXXXX`|A unicode symbol with the hex code `XXXX` in UTF-16 encoding, for instance `\u00A9` -- is a unicode for the copyright symbol `©`. It must be exactly 4 hex digits. |
+|`\u{X…XXXXXX}` (1 to 6 hex characters)|A unicode symbol with the given UTF-32 encoding. Some rare characters are encoded with two unicode symbols, taking 4 bytes. This way we can insert long codes. |
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Примеры с Юникодом:
 
@@ -544,11 +556,19 @@ alert( str );
 
 Для этого есть соответствующий метод.
 
+<<<<<<< HEAD
 Вызов [str.localeCompare(str2)](mdn:js/String/localeCompare) возвращает число, которое показывает, какая строка больше в соответствии с правилами языка:
 
 - Отрицательное число, если `str` меньше `str2`.
 - Положительное число, если `str` больше `str2`.
 - `0`, если строки равны.
+=======
+The call [str.localeCompare(str2)](mdn:js/String/localeCompare) returns an integer indicating whether `str` is less, equal or greater than `str2` according to the language rules:
+
+- Returns a negative number if `str` is less than `str2`.
+- Returns a positive number if `str` is greater than `str2`.
+- Returns `0` if they are equivalent.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Например:
 

@@ -32,10 +32,17 @@
 Полная база Юникод-символов в текстовом формате  (вместе со всеми свойствами), находится здесь <https://www.unicode.org/Public/UCD/latest/ucd/>.
 ```
 
+<<<<<<< HEAD
 Есть и другие категории -- производные, например:
 - `Alphabetic` (`Alpha`), включающая в себя `L`, плюс "буквенные цифры", обозначаемые буквами `Nl` (например римские цифры: Ⅻ), и некоторые другие символы `Other_Alphabetic` (`OAltpa`).
 - `Hex_Digit` включает символы для шестнадцатеричных чисел: `0-9`, `a-f`.
 ...Юникод поддерживает и много других свойств.
+=======
+There are also other derived categories, like:
+- `Alphabetic` (`Alpha`), includes Letters `L`, plus letter numbers `Nl` (e.g. roman numbers Ⅻ), plus some other symbols `Other_Alphabetic` (`OAltpa`).
+- `Hex_Digit` includes hexadecimal digits: `0-9`, `a-f`.
+- ...Unicode is a big beast, it includes a lot of properties.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Например, давайте поищем шестизначные шестнадцатеричные числа:
 

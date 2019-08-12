@@ -1,9 +1,17 @@
 
+<<<<<<< HEAD
 Чтобы получить сведения о пользователе, нам нужно вызвать `fetch('https://api.github.com/users/USERNAME')`.
 
 Если ответ приходит cо статусом `200`, то вызываем метод `.json()`, чтобы прочитать JS-объект.
 
 А если запрос завершается ошибкой или код статуса в ответе отличен от 200, то мы просто возвращаем `null` в массиве результатов.
+=======
+To fetch a user we need: `fetch('https://api.github.com/users/USERNAME')`.
+
+If the response has status `200`, call `.json()` to read the JS object.
+
+Otherwise, if a `fetch` fails, or the response has non-200 status, we just return `null` in the resulting arrray.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Вот код:
 
@@ -37,4 +45,8 @@ async function getUsers(names) {
 
 Если бы мы использовали `await Promise.all(names.map(name => fetch(...)))` и вызывали бы `.json()` на результатах запросов, то пришлось бы ждать, пока завершатся все из них. Вызывая `.json()` сразу после каждого `fetch`, мы добились того, что считывание присланных по каждому запросу данных происходит независимо от других запросов.
 
+<<<<<<< HEAD
 Это пример того, как относительно низкоуровневое Promise API может быть полезным, даже если мы в основном используем `async/await` в коде.
+=======
+That's an example of how low-level Promise API can still be useful even if we mainly use `async/await`.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca

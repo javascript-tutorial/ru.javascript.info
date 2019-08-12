@@ -2,11 +2,19 @@
 
 Как узнать ширину и высоту окна браузера? Как получить полную ширину и высоту документа, включая прокрученную часть? Как прокрутить страницу с помощью JavaScript?
 
+<<<<<<< HEAD
 Для большинства таких запросов мы можем использовать корневой элемент документа `document.documentElement`, который соответствует тегу `<html>`. Однако есть дополнительные методы и особенности, которые необходимо учитывать.
+=======
+For most such requests, we can use the root document element `document.documentElement`, that corresponds to `<html>` tag. But there are additional methods and peculiarities important enough to consider.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 ## Ширина/высота окна
 
+<<<<<<< HEAD
 Чтобы получить ширину/высоту окна, можно взять свойства `clientWidth/clientHeight` из `document.documentElement`:
+=======
+To get window width and height we can use `clientWidth/clientHeight` of `document.documentElement`:
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 ![](document-client-width-height.svg)
 
@@ -21,7 +29,11 @@
 
 Если есть полоса прокрутки, и она занимает какое-то место, то свойства `clientWidth/clientHeight` указывают на ширину/высоту документа без неё (за её вычетом). Иными словами, они возвращают высоту/ширину видимой части документа, доступной для содержимого.
 
+<<<<<<< HEAD
 A `window.innerWidth/innerHeight` включают в себя полосу прокрутки.
+=======
+...And `window.innerWidth/innerHeight` include the scrollbar.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Если полоса прокрутки занимает некоторое место, то эти две строки выведут разные значения:
 ```js run
@@ -35,14 +47,24 @@ alert( document.documentElement.clientWidth ); // ширина окна за в�
 ```warn header="`DOCTYPE` -- это важно"
 Обратите внимание, что геометрические свойства верхнего уровня могут работать немного иначе, если в HTML нет `<!DOCTYPE HTML>`. Возможны странности.
 
+<<<<<<< HEAD
 В современном HTML мы всегда должны указывать `DOCTYPE`.  
+=======
+In modern HTML we should always write `DOCTYPE`.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 ```
 
 ## Ширина/высота документа
 
+<<<<<<< HEAD
 Теоретически, т.к. корневым элементом документа является `documentElement.clientWidth/Height`, и он включает в себя всё содержимое, мы можем получить полный размер документа как `documentElement.scrollWidth/scrollHeight`.
 
 Но именно на этом элементе, для страницы в целом, эти свойства работают не так, как предполагается. В Chrome/Safari/Opera, если нет прокрутки, то `documentElement.scrollHeight` может быть даже меньше, чем `documentElement.clientHeight`! С точки зрения элемента это невозможная ситуация.
+=======
+Theoretically, as the root document element is `documentElement.clientWidth/Height`, and it encloses all the content, we could measure document full size as `documentElement.scrollWidth/scrollHeight`.
+
+But on that element, for the whole page, these properties do not work as intended. In Chrome/Safari/Opera if there's no scroll, then `documentElement.scrollHeight` may be even less than  `documentElement.clientHeight`! Sounds like a nonsense, weird, right?
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Чтобы надёжно получить полную высоту документа, нам следует взять максимальное из этих свойств:
 
@@ -63,8 +85,12 @@ alert('Полная высота документа с прокручиваем�
 
 Обычные элементы хранят текущее состояние прокрутки в `elem.scrollLeft/scrollTop`.
 
+<<<<<<< HEAD
 Что же со страницей?
 В большинстве браузеров мы можем обратиться к `documentElement.scrollLeft/Top`, за исключением основанных на старом WebKit (Safari), где есть ошибка ([5991](https://bugs.webkit.org/show_bug.cgi?id=5991)), и там нужно использовать `document.body` вместо `document.documentElement`.
+=======
+For document scroll `document.documentElement.scrollLeft/Top` works in most browsers, except oldler WebKit-based ones, like Safari (bug [5991](https://bugs.webkit.org/show_bug.cgi?id=5991)), where we should use `document.body` instead of `document.documentElement`.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 К счастью, нам совсем не обязательно запоминать эти особенности, потому что текущую прокрутку можно прочитать из свойств `window.pageXOffset/pageYOffset`:
 
@@ -85,19 +111,33 @@ alert('Текущая прокрутка слева: ' + window.pageXOffset);
 
 Обычные элементы можно прокручивать, изменяя `scrollTop/scrollLeft`.
 
+<<<<<<< HEAD
 Мы можем сделать то же самое для страницы в целом, используя  `document.documentElement.scrollTop/Left` (кроме основанных на старом WebKit (Safari), где, как сказано выше, `document.body.scrollTop/Left`).
 
 Есть и другие способы, в которых подобных несовместимостей нет: специальные методы `window.scrollBy(x,y)` и `window.scrollTo(pageX,pageY)`.
 
 - Метод `scrollBy(x,y)` прокручивает страницу *относительно её текущего положения*. Например, `scrollBy(0,10)` прокручивает страницу на `10px` вниз.
+=======
+We can do the same for the page using `document.documentElement.scrollTop/Left` (except Safari, where `document.body.scrollTop/Left` should be used instead).
+
+Alternatively, there's a simpler, universal solution: special methods  [window.scrollBy(x,y)](mdn:api/Window/scrollBy) and [window.scrollTo(pageX,pageY)](mdn:api/Window/scrollTo).
+
+- The method `scrollBy(x,y)` scrolls the page *relative to its current position*. For instance, `scrollBy(0,10)` scrolls the page `10px` down.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
     ```online
     Кнопка ниже демонстрирует это:
 
     <button onclick="window.scrollBy(0,10)">window.scrollBy(0,10)</button>
     ```
+<<<<<<< HEAD
 - Метод `scrollTo(pageX,pageY)` прокручивает страницу *на абсолютные координаты* `(pageX,pageY)`. То есть, чтобы левый-верхний угол видимой части страницы имел данные координаты относительно левого верхнего угла документа. Это всё равно, что поставить `scrollLeft/scrollTop`.
     Для прокрутки в самое начало мы можем использовать `scrollTo(0,0)`.
+=======
+- The method `scrollTo(pageX,pageY)` scrolls the page *to absolute coordinates*, so that the top-left corner of the visible part has coordinates `(pageX, pageY)` relative to the document's top-left corner. It's like setting `scrollLeft/scrollTop`.
+
+    To scroll to the very beginning, we can use `scrollTo(0,0)`.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
     ```online
     <button onclick="window.scrollTo(0,0)">window.scrollTo(0,0)</button>

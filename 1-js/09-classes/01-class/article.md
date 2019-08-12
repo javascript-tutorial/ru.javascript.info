@@ -25,7 +25,11 @@ class MyClass {
 }
 ```
 
+<<<<<<< HEAD
 Затем используйте вызов `new MyClass()` для создания нового объекта со всеми перечисленными методами.
+=======
+Then use `new MyClass()` to create a new object with all the listed methods.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 При этом автоматически вызывается метод `constructor()`, в нём мы можем инициализировать объект.   
 
@@ -54,6 +58,10 @@ user.sayHi();
 
 ...Затем можно вызывать на объекте методы, такие как `user.sayHi()`.
 
+<<<<<<< HEAD
+=======
+...Then we can call object methods, such as `user.sayHi()`.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 ```warn header="Методы в классе не разделяются запятой"
 Частая ошибка начинающих разработчиков - ставить запятую между методами класса, что приводит к синтаксической ошибке.
@@ -188,7 +196,11 @@ let User = class {
 };
 ```
 
+<<<<<<< HEAD
 Как и Named Function Expressions, классы-выражения могут иметь имя.
+=======
+Similar to Named Function Expressions, class expressions may have a name.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Если у Class Expression есть имя, то оно видно только внутри класса:
 
@@ -197,13 +209,21 @@ let User = class {
 // (в спецификации нет такого термина, но происходящее похоже на Named Function Expression)
 let User = class *!*MyClass*/!* {
   sayHi() {
+<<<<<<< HEAD
     alert(MyClass); // имя MyClass видно только внутри класса
+=======
+    alert(MyClass); // MyClass name is visible only inside the class
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
   }
 };
 
 new User().sayHi(); // работает, выводит определение MyClass
 
+<<<<<<< HEAD
 alert(MyClass); // ошибка, имя MyClass не видно за пределами класса
+=======
+alert(MyClass); // error, MyClass name isn't visible outside of the class
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 ```
 
 Мы даже можем динамически создавать классы "по запросу":
@@ -278,13 +298,24 @@ Object.defineProperties(User.prototype, {
 });
 ```
 
+<<<<<<< HEAD
 Пример с вычисляемым свойством в скобках `[...]`:
+=======
+Here's an example with a computed property in brackets `[...]`:
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 ```js run
 class User {
 
+<<<<<<< HEAD
   ['say' + 'Hi']() {
     alert("Привет");
+=======
+*!*
+  ['say' + 'Hi']() {
+*/!*
+    alert("Hello");
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
   }
 
 }
@@ -304,7 +335,11 @@ new User().sayHi();
 ```js run
 class User {
 *!*
+<<<<<<< HEAD
   name = "Аноним";
+=======
+  name = "Anonymous";
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 */!*
 
   sayHi() {
@@ -315,14 +350,19 @@ class User {
 new User().sayHi();
 ```
 
+<<<<<<< HEAD
 Свойство `name` не устанавливается в `User.prototype`. Вместо этого оно создаётся оператором `new` перед запуском конструктора, это именно свойство объекта.
 
 ## Итого
+=======
+The property `name` is not placed into `User.prototype`. Instead, it is created by `new` before calling constructor, it's the property of the object itself.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Базовый синтаксис для классов выглядит так:
 
 ```js
 class MyClass {
+<<<<<<< HEAD
   prop = value; // свойство
   constructor(...) { // конструктор
     // ...
@@ -331,6 +371,20 @@ class MyClass {
   get something(...) {} // геттер
   set something(...) {} // сеттер
   [Symbol.iterator]() {} // метод с вычисляемым именем (здесь - символом)
+=======
+  prop = value; // property
+
+  constructor(...) { // constructor
+    // ...
+  }
+
+  method(...) {} // method
+
+  get something(...) {} // getter method
+  set something(...) {} // setter method
+
+  [Symbol.iterator]() {} // method with computed name (symbol here)
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
   // ...
 }
 ```

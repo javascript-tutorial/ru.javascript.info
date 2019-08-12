@@ -105,6 +105,7 @@ table.onclick = function(event) {
 3. Если таблицы вложенные, `event.target` может содержать элемент `<td>`, находящийся вне текущей таблицы. В таких случаях мы должны проверить действительно ли это `<td>` *нашей таблицы*.
 4. И если это так, то подсвечиваем его.
 
+<<<<<<< HEAD
 В итоге мы получили короткий код подсветки, быстрый и эффективный, которому совершенно не важно, сколько всего в таблице `<td>`.
 
 ## Применение делегирования: действия в разметке
@@ -112,6 +113,15 @@ table.onclick = function(event) {
 Есть и другие применения делегирования.
 
 Например, нам нужно сделать меню с разными кнопками: "Сохранить (save)", "Загрузить (load)", "Поиск (search)" и т.д. И есть объект с соответствующими методами `save`, `load`, `search`... Как их состыковать?
+=======
+As the result, we have a fast, efficient highlighting code, that doesn't care about the total number of `<td>` in the table.
+
+## Delegation example: actions in markup
+
+There are other uses for event delegation.
+
+Let's say, we want to make a menu with buttons "Save", "Load", "Search" and so on. And there's an object with methods `save`, `load`, `search`... How to match them?
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Первое, что может прийти в голову – это найти каждую кнопку и назначить ей свой обработчик среди методов объекта. Но существует более элегантное решение. Мы можем добавить один обработчик для всего меню и атрибуты `data-action` для каждой кнопки в соответствии с методами, которые они вызывают:
 
@@ -161,7 +171,11 @@ table.onclick = function(event) {
 </script>
 ```
 
+<<<<<<< HEAD
 Обратите внимание, что метод `this.onClick` в строке, отмеченной звёздочкой `(*)`, привязывается к контексту текущего объекта `this`. Это важно, т.к. иначе `this` внутри него будет ссылаться на DOM-элемент (`elem`), а не на объект `Menu`, и `this[action]` будет не тем, что нам нужно.
+=======
+Please note that `this.onClick` is bound to `this` in `(*)`. That's important, because otherwise `this` inside it would reference the DOM element (`elem`), not the `Menu` object, and `this[action]` would not be what we need.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Так что же даёт нам здесь делегирование?
 
@@ -176,11 +190,19 @@ table.onclick = function(event) {
 
 Делегирование событий можно использовать для добавления элементам "поведения" (behavior), *декларативно* задавая хитрые обработчики установкой специальных HTML-атрибутов и классов.
 
+<<<<<<< HEAD
 Приём проектирования "поведение" состоит из двух частей:
 1. Элементу ставится пользовательский атрибут, описывающий его поведение.
 2. При помощи делегирования ставится обработчик на документ, который ловит все клики (или другие события) и, если элемент имеет нужный атрибут -- производит соответствующее действие.
 
 ### Поведение: "Счётчик"
+=======
+The pattern has two parts:
+1. We add a custom attribute to an element that describes its behavior.
+2. A document-wide handler tracks events, and if an event happens on an attributed element -- performs the action.
+
+### Behavior: Counter
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Например, здесь HTML-атрибут `data-counter` добавляет кнопкам поведение: "увеличить значение при клике":
 
@@ -203,15 +225,26 @@ table.onclick = function(event) {
 
 Элементов с атрибутом `data-counter` может быть сколько угодно. Новые могут добавляться в HTML-код в любой момент. При помощи делегирования мы, фактически, добавили новый "псевдостандартный" атрибут в HTML, который добавляет элементу новую возможность ("поведение").
 
+<<<<<<< HEAD
 ```warn header="Всегда используйте метод `addEventListener` для обработчиков на уровне документа"
 Когда мы устанавливаем обработчик событий на объект `document`, мы всегда должны использоваать метод `addEventListener`, а не `document.on<событие>`, т.к. в случае последнего могут возникать конфликты: новые обработчики будут перезаписывать уже существующие.
+=======
+```warn header="For document-level handlers -- always `addEventListener`"
+When we assign an event handler to the `document` object, we should always use `addEventListener`, not `document.on<event>`, because the latter will cause conflicts: new handlers overwrite old ones.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Для реального проекта совершенно нормально иметь много обработчиков на элементе `document`, установленных из разных частей кода.
 ```
 
+<<<<<<< HEAD
 ### Поведение: "Переключатель" (Toggler)
 
 Ещё один пример поведения. Сделаем так, что при клике на элемент с атрибутом `data-toggle-id` будет скрываться/показываться элемент с заданным `id`:
+=======
+### Behavior: Toggler
+
+One more example of behavior. A click on an element with the attribute `data-toggle-id` will show/hide the element with the given `id`:
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 ```html autorun run height=60
 <button *!*data-toggle-id="subscribe-mail"*/!*>

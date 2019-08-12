@@ -24,15 +24,25 @@ try {
 
 Работает она так:
 
+<<<<<<< HEAD
 1. Сначала выполняется код внутри блока `try {...}`.
 2. Если в нём нет ошибок, то блок `catch(err)` игнорируется: выполнение доходит до конца `try` и потом далее, полностью пропуская `catch`.
 3. Если же в нём возникает ошибка, то выполнение `try` прерывается, и поток управления переходит в начало `catch(err)`. Переменная `err` (можно использовать любое имя) содержит объект ошибки с подробной информацией о произошедшем.
+=======
+1. First, the code in `try {...}` is executed.
+2. If there were no errors, then `catch(err)` is ignored: the execution reaches the end of `try` and goes on skipping `catch`.
+3. If an error occurs, then `try` execution is stopped, and the control flows to the beginning of `catch(err)`. The `err` variable (can use any name for it) contains an error object with details about what's happened.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 ![](try-catch-flow.svg)
 
 Таким образом, при ошибке в блоке `try {…}` скрипт не "падает", и мы получаем возможность обработать ошибку внутри `catch`.
 
+<<<<<<< HEAD
 Давайте рассмотрим примеры.
+=======
+Let's see examples.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 - Пример без ошибок: выведет  `alert` `(1)` и `(2)`:
 
@@ -130,10 +140,17 @@ try {
 }
 ```
 
+<<<<<<< HEAD
 Для всех встроенных ошибок этот объект имеет два основных свойства:
 
 `name`
 : Имя ошибки. Например, для неопределённой переменной это `"ReferenceError"`.
+=======
+For all built-in errors, the error object has two main properties:
+
+`name`
+: Error name. For instance, for an undefined variable that's `"ReferenceError"`.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 `message`
 : Текстовое сообщение о деталях ошибки.
@@ -153,7 +170,11 @@ try {
 } catch(err) {
   alert(err.name); // ReferenceError
   alert(err.message); // lalala is not defined
+<<<<<<< HEAD
   alert(err.stack); // ReferenceError: lalala is not defined at (...стек вызовов)
+=======
+  alert(err.stack); // ReferenceError: lalala is not defined at (...call stack)
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
   // Можем также просто вывести ошибку целиком
   // Ошибка приводится к строке вида "name: message"
@@ -170,7 +191,11 @@ try {
 ```js
 try {
   // ...
+<<<<<<< HEAD
 } catch { //  <-- без (err)
+=======
+} catch { // <-- without (err)
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
   // ...
 }
 ```
@@ -183,7 +208,11 @@ try {
 
 Обычно он используется для декодирования данных, полученных по сети, от сервера или из другого источника.
 
+<<<<<<< HEAD
 Мы получаем их и вызываем `JSON.parse` вот так:
+=======
+We receive it and call `JSON.parse` like this:
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 ```js run
 let json = '{"name":"John", "age": 30}'; // данные с сервера
@@ -304,7 +333,11 @@ try {
 
 Как мы видим, это `SyntaxError`.
 
+<<<<<<< HEAD
 В нашем случае отсутствие свойства `name` - это ошибка, ведь пользователи должны иметь имена.
+=======
+And in our case, the absence of `name` is an error, as users must have a `name`.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Сгенерируем её:
 
@@ -530,7 +563,11 @@ alert( `Выполнение заняло ${diff}ms` );
 ```smart header="Переменные внутри `try..catch..finally` локальны"
 Обратите внимание, что переменные `result` и `diff` в коде выше объявлены *до* `try..catch`.
 
+<<<<<<< HEAD
 Если переменную объявить в блоке, например, в `try`, то она не будет доступна после него.
+=======
+Otherwise, if we declared `let` in `try` block, it would only be visible inside of it.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 ```
 
 ````smart header="`finally` и `return`"
@@ -561,7 +598,11 @@ alert( func() ); // сначала срабатывает alert из finally, а
 
 ````smart header="`try..finally`"
 
+<<<<<<< HEAD
 Конструкция `try..finally` без секции `catch` также полезна. Мы применяем её, когда не хотим здесь обрабатывать ошибки (пусть выпадут), но хотим быть уверены, что начатые процессы завершились.
+=======
+The `try..finally` construct, without `catch` clause, is also useful. We apply it when we don't want to handle errors here (let them fall through), but want to be sure that processes that we started are finalized.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 ```js
 function func() {
@@ -573,7 +614,11 @@ function func() {
   }
 }
 ```
+<<<<<<< HEAD
 В приведённом выше коде ошибка всегда выпадает наружу, потому что тут нет блока `catch`. Но `finally` отрабатывает до того, как поток управления выйдет из функции.
+=======
+In the code above, an error inside `try` always falls out, because there's no `catch`. But `finally` works before the execution flow leaves the function.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 ````
 
 ## Глобальный catch
@@ -586,7 +631,11 @@ function func() {
 
 Существует ли способ отреагировать на такие ситуации? Мы можем захотеть залогировать ошибку, показать что-то пользователю (обычно они не видят сообщение об ошибке) и т.д.
 
+<<<<<<< HEAD
 Такого способа нет в спецификации, но обычно окружения предоставляют его, потому что это весьма полезно. Например, в Node.js для этого есть [`process.on("uncaughtException")`](https://nodejs.org/api/process.html#process_event_uncaughtexception). А в браузере мы можем присвоить функцию специальному свойству [window.onerror](mdn:api/GlobalEventHandlers/onerror), которая будет вызвана в случае необработанной ошибки.
+=======
+There is none in the specification, but environments usually provide it, because it's really useful. For instance, Node.js has [`process.on("uncaughtException")`](https://nodejs.org/api/process.html#process_event_uncaughtexception) for that. And in the browser we can assign a function to special [window.onerror](mdn:api/GlobalEventHandlers/onerror) property, that will run in case of an uncaught error.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Синтаксис:
 
@@ -632,10 +681,17 @@ window.onerror = function(message, url, line, col, error) {
 
 Они работают так:
 
+<<<<<<< HEAD
 1. Мы регистрируемся в сервисе и получаем небольшой JS-скрипт (или URL скрипта) от них для вставки на страницы.
 2. Этот JS-скрипт ставит свою функцию `window.onerror`.
 3. Когда возникает ошибка, она выполняется и отправляет сетевой запрос с информацией о ней в сервис.
 4. Мы можем войти в веб-интерфейс сервиса и увидеть ошибки.
+=======
+1. We register at the service and get a piece of JS (or a script URL) from them to insert on pages.
+2. That JS script sets a custom `window.onerror` function.
+3. When an error occurs, it sends a network request about it to the service.
+4. We can log in to the service web interface and see errors.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 ## Итого
 
@@ -654,18 +710,32 @@ try {
 }
 ```
 
+<<<<<<< HEAD
 Секций `catch` или `finally` может не быть, то есть более короткие конструкции `try..catch` и `try..finally` также корректны.
+=======
+There may be no `catch` section or no `finally`, so shorter constructs `try..catch` and `try..finally` are also valid.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Объекты ошибок содержат следующие свойства:
 
+<<<<<<< HEAD
 - `message` -- понятное человеку сообщение.
 - `name` -- строка с именем ошибки (имя конструктора ошибки).
 - `stack` (нестандартное, но хорошо поддерживается) -- стек на момент ошибки.
+=======
+- `message` -- the human-readable error message.
+- `name` -- the string with error name (error constructor name).
+- `stack` (non-standard, but well-supported) -- the stack at the moment of error creation.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Если объект ошибки не нужен, мы можем пропустить его, используя `catch {` вместо `catch(err) {`.
 
 Мы можем также генерировать собственные ошибки, используя оператор `throw`. Аргументом `throw` может быть что угодно, но обычно это объект ошибки, наследуемый от встроенного класса `Error`. Подробнее о расширении ошибок см. в следующей главе.  
 
+<<<<<<< HEAD
 *Проброс исключения* -- это очень важный приём обработки ошибок: блок `catch` обычно ожидает и знает, как обработать определённый тип ошибок, поэтому он должен пробрасывать дальше ошибки, о которых он не знает.
+=======
+*Rethrowing* is a very important pattern of error handling: a `catch` block usually expects and knows how to handle the particular error type, so it should rethrow errors it doesn't know.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Даже если у нас нет `try..catch`, большинство сред позволяют настроить "глобальный" обработчик ошибок, чтобы ловить ошибки, которые "выпадают наружу". В браузере это `window.onerror`.

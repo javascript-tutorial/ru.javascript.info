@@ -108,9 +108,15 @@
 
 Например:
 
+<<<<<<< HEAD
 1. Мы делаем вложенное меню.  Каждое подменю обрабатывает клики на своих элементах и делает для них `stopPropagation`, чтобы не срабатывало внешнее меню.
 2. Позже мы решили отслеживать все клики в окне для какой-то своей функциональности, к примеру, для статистики – где вообще у нас кликают люди. Некоторые системы аналитики так делают. Обычно используют `document.addEventListener('click'…)`, чтобы отлавливать все клики.
 3. Наша аналитика не будет работать над областью, где клики прекращаются `stopPropagation`. Увы, получилась "мёртвая зона".
+=======
+1. We create a nested menu. Each submenu handles clicks on its elements and calls `stopPropagation` so that the outer menu won't trigger.
+2. Later we decide to catch clicks on the whole window, to track users' behavior (where people click). Some analytic systems do that. Usually the code uses `document.addEventListener('click'…)` to catch all clicks.
+3. Our analytic won't work over the area where clicks are stopped by `stopPropagation`. Sadly, we've got a "dead zone".
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Зачастую нет никакой необходимости прекращать всплытие. Задача, которая, казалось бы, требует этого, может быть решена иначе. Например, с помощью создания своего уникального события, о том, как это делать, мы поговорим позже. Также мы можем записывать какую-то служебную информацию в объект `event` в одном обработчике, а читать в другом, таким образом мы можем сообщить обработчикам на родительских элементах информацию о том, что событие уже было как-то обработано.
 ```
@@ -134,7 +140,11 @@
 
 **Ранее мы говорили только о всплытии, потому что другие стадии, как правило, не используются и проходят незаметно для нас.**
 
+<<<<<<< HEAD
 Обработчики, добавленные через `on<event>`-свойство или через HTML-атрибуты, или через `addEventListener(event, handler)` с двумя аргументами, ничего не знают о фазе погружения, а работают только на 2-ой и 3-ей фазах.
+=======
+Handlers added using `on<event>`-property or using HTML attributes or using two-argument `addEventListener(event, handler)` don't know anything about capturing, they only run on the 2nd and 3rd phases.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Чтобы поймать событие на стадии погружения, нужно использовать третий аргумент `capture` вот так:
 

@@ -44,4 +44,8 @@ function f() {
 f(); // очистка!
 ```
 
+<<<<<<< HEAD
 Именно `finally` гарантирует очистку. Если мы просто поместим код в конце `f`, то он не выполнится в описанных ситуациях.
+=======
+It's `finally` that guarantees the cleanup here. If we just put the code at the end of `f`, it wouldn't run in these situations.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca

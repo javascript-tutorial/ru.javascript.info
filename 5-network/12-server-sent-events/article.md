@@ -64,7 +64,11 @@ eventSource.onmessage = function(event) {
 // или eventSource.addEventListener('message', ...)
 ```
 
+<<<<<<< HEAD
 ### Кросс-доменные запросы
+=======
+### Cross-origin requests
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 `EventSource`, как и `fetch`, поддерживает кросс-доменные запросы. Мы можем использовать любой URL:
 
@@ -82,7 +86,11 @@ let source = new EventSource("https://another-site.com/events", {
 });
 ```
 
+<<<<<<< HEAD
 Более подробное описание кросс-доменных заголовков вы можете прочитать в главе <info:fetch-crossorigin>.
+=======
+Please see the chapter <info:fetch-crossorigin> for more details about cross-origin headers.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 
 ## Переподключение
@@ -228,9 +236,15 @@ eventSource.addEventListener('leave', event => {
 let source = new EventSource(url, [credentials]);
 ```
 
+<<<<<<< HEAD
 Второй аргумент - необязательный объект с одним свойством: `{ withCredentials: true }`. Он позволяет отправлять авторизационные данные на другие домены.
 
 В целом, кросс-доменная безопасность реализована так же как в `fetch` и других методов работы с сетью.
+=======
+The second argument has only one possible option: `{ withCredentials: true }`, it allows sending cross-origin credentials.
+
+Overall cross-origin security is same as for `fetch` and other network methods.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 ### Свойства объекта `EventSource`
 

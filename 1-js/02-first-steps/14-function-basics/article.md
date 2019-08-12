@@ -208,10 +208,17 @@ function showMessage(from, text = anotherFunction()) {
 }
 ```
 
+<<<<<<< HEAD
 ```smart header="Вычисление параметров по умолчанию"
 В JavaScript параметры по умолчанию вычисляются каждый раз, когда функция вызывается без соответствующего параметра.
 
 В примере выше `anotherFunction()` будет вызываться каждый раз, когда `showMessage()` вызывается без параметра `text`.
+=======
+```smart header="Evaluation of default parameters"
+In JavaScript, a default parameter is evaluated every time the function is called without the respective parameter.
+
+In the example above, `anotherFunction()` is called every time `showMessage()` is called without the `text` parameter.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 ```
 
 ````smart header="Использование параметров по умолчанию в ранних версиях JavaScript"

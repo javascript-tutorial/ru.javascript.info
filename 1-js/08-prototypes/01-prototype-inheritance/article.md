@@ -315,7 +315,11 @@ for(let prop in rabbit) {
 ```smart header="Почти все остальные методы получения ключей/значений игнорируют унаследованные свойства"
 Почти все остальные методы, получающие ключи/значения, такие как `Object.keys`, `Object.values` и другие - игнорируют унаследованные свойства.
 
+<<<<<<< HEAD
 Они учитывают только свойства самого объекта, не его прототипа.
+=======
+They only operate on the object itself. Properties from the prototype are *not* taken into account.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 ```
 
 ## Итого

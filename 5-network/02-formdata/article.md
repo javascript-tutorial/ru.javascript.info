@@ -1,16 +1,30 @@
 
 # FormData
 
+<<<<<<< HEAD
 В этой главе речь пойдёт об отправке HTML-форм: с файлами и без, с дополнительными полями и так далее. Объекты [FormData](https://xhr.spec.whatwg.org/#interface-formdata) помогут нам с этим. Как вы, наверняка, догадались по его названию, это объект, представляющий данные HTML формы.
+=======
+This chapter is about sending HTML forms: with or without files, with additional fields and so on.
+
+[FormData](https://xhr.spec.whatwg.org/#interface-formdata) objects can help with that. As you might have guessed, it's the object to represent HTML form data.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Конструктор:
 ```js
 let formData = new FormData([form]);
 ```
 
+<<<<<<< HEAD
 Если передать в конструктор элемент HTML-формы `form`, то создаваемый объект автоматически прочитает из неё поля.
 
 Его особенность заключается в том, что методы для работы с сетью, например `fetch`, позволяют указать объект `FormData` в свойстве тела запроса `body`.
+=======
+If HTML `form` element is provided, it automatically captures its fields.
+
+The special thing about `FormData` is that network methods, such as `fetch`, can accept a `FormData` object as a body. It's encoded and sent out with `Content-Type: form/multipart`.
+
+From the server point of view, that looks like a usual form submission.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Он будет соответствующим образом закодирован и отправлен с заголовком `Content-Type: form/multipart`.
 
@@ -47,7 +61,11 @@ let formData = new FormData([form]);
 </script>
 ```
 
+<<<<<<< HEAD
 В этом примере серверный код не представлен, он за рамками этой статьи, он принимает POST-запрос с данными формы и отвечает сообщением "Пользователь сохранён".
+=======
+In this example, the server code is not presented, as it's beyound our scope. The server accepts the POST request and replies "User saved".
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 ## Методы объекта FormData
 
@@ -61,12 +79,20 @@ let formData = new FormData([form]);
 
 Технически форма может иметь много полей с одним и тем же именем `name`, поэтому несколько вызовов `append` добавят несколько полей с одинаковыми именами.
 
+<<<<<<< HEAD
 Ещё существует метод `set`, его синтаксис такой же, как у `append`. Разница в том, что `.set` удаляет все уже имеющиеся поля с именем `name` и только затем добавляет новое. То есть этот метод гарантирует, что будет существовать только одно поле с именем `name`, в остальном он аналогичен `.append`:
+=======
+There's also method `set`, with the same syntax as `append`. The difference is that `.set` removes all fields with the given `name`, and then appends a new field. So it makes sure there's only field with such `name`, the rest is just like `append`:
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 - `formData.set(name, value)`,
 - `formData.set(name, blob, fileName)`.
 
+<<<<<<< HEAD
 Поля объекта `formData` можно перебирать, используя цикл `for..of`:
+=======
+Also we can iterate over formData fields using `for..of` loop:
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 ```js run
 let formData = new FormData();
@@ -112,13 +138,21 @@ for(let [name, value] of formData) {
 
 ## Отправка формы с Blob-данными
 
+<<<<<<< HEAD
 Ранее в главе <info:fetch> мы видели, что очень легко отправить динамически сгенерированные бинарные данные в формате `Blob`. Мы можем явно передать её в параметр `body` запроса `fetch`.
+=======
+As we've seen in the chapter <info:fetch>, it's easy to send dynamically generated binary data e.g. an image, as `Blob`. We can supply it directly as `fetch` parameter `body`.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Но на практике бывает удобнее отправлять изображение не отдельно, а в составе формы, добавив дополнительные поля для имени и другие метаданные.
 
 Кроме того, серверы часто настроены на приём именно форм, а не просто бинарных данных.
 
+<<<<<<< HEAD
 В примере ниже в отсылается изображение из `<canvas>` и ещё несколько полей, как форма, используя `FormData`:
+=======
+This example submits an image from `<canvas>`, along with some other fields, as a form, using `FormData`:
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 ```html run autorun height="90"
 <body style="margin:0">
@@ -160,25 +194,42 @@ for(let [name, value] of formData) {
 formData.append("image", imageBlob, "image.png");
 ```
 
+<<<<<<< HEAD
 Это как если бы в форме был элемент `<input type="file" name="image">` и пользователь прикрепил бы файл с именем `"image.png"` (3й аргумент) и данными `imageBlob` (2й аргумент) из своей файловой системы.
+=======
+That's same as if there were `<input type="file" name="image">` in the form, and the visitor submitted a file named `"image.png"` (3rd argument) with the data `imageBlob` (2nd argument) from their filesystem.
+
+The server reads form data and the file, as if it were a regular form submission.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Сервер прочитает и данные и файл, точно так же, как если бы это была обычная отправка формы.
 
 ## Итого
 
+<<<<<<< HEAD
 Объекты [FormData](https://xhr.spec.whatwg.org/#interface-formdata) используются, чтобы взять данные из HTML-формы и отправить их с помощью `fetch` или другого метода для работы с сетью.
 
 Мы можем создать такой объект уже с данными, передав в конструктор HTML-форму -- `new FormData(form)`, или же можно создать объект вообще без формы и затем добавить к нему поля с помощью методов:
+=======
+We can either create `new FormData(form)` from an HTML form, or create a object without a form at all, and then append fields with methods:
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 - `formData.append(name, value)`
 - `formData.append(name, blob, fileName)`
 - `formData.set(name, value)`
 - `formData.set(name, blob, fileName)`
 
+<<<<<<< HEAD
 Отметим две особенности:
 
 1. Метод `set` удаляет предыдущие поля с таким же именем, а `append` -- нет. В этом их единственное отличие.
 2. Чтобы послать файл, нужно использовать синтаксис с тремя аргументами, в качестве третьего как раз указывается имя файла, которое обычно, при `<input type="file">`, берётся из файловой системы.
+=======
+Let's note two peculiarities here:
+
+1. The `set` method removes fields with the same name, `append` doesn't. That's the only difference between them.
+2. To send a file, 3-argument syntax is needed, the last argument is a file name, that normally is taken from user filesystem for `<input type="file">`.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Другие методы:
 

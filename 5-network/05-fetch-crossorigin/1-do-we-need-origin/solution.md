@@ -2,7 +2,11 @@
 
 [Content Security Policy](http://en.wikipedia.org/wiki/Content_Security_Policy) (политика безопасности содержимого) может запретить отправление `Referer`.
 
+<<<<<<< HEAD
 Как мы увидим позже, у `fetch` есть опции, которые предотвращают отправку `Referer` и даже позволяют изменять его (в пределах того же сайта).
+=======
+As we'll see, `fetch` has options that prevent sending the `Referer` and even allow to change it (within the same site).
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Согласно спецификации, `Referer` является необязательным HTTP-заголовком.
 

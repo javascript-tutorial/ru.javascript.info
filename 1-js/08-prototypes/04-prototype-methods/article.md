@@ -79,8 +79,13 @@ let clone = Object.create(Object.getPrototypeOf(obj), Object.getOwnPropertyDescr
 
 Почему же `__proto__` был заменён на функции `getPrototypeOf/setPrototypeOf`? Читайте далее, чтобы узнать ответ.
 
+<<<<<<< HEAD
 ```warn header="Не меняйте `[[Prototype]]` существующих объектов, если важна скорость"
 Технически, мы можем установить/получить `[[Prototype]]` в любое время. Но обычно мы устанавливаем прототип только раз во время создания объекта, а после не меняем: `rabbit` наследует от `animal`, и это не изменится.
+=======
+```warn header="Don't change `[[Prototype]]` on existing objects if speed matters"
+Technically, we can get/set `[[Prototype]]` at any time. But usually we only set it once at the object creation time, and then do not modify: `rabbit` inherits from `animal`, and that is not going to change.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 И JavaScript движки хорошо оптимизированы для этого. Изменение прототипа "на лету" с помощью `Object.setPrototypeOf` или `obj.__proto__=` - очень медленная операция, которая ломает внутренние оптимизации для операций доступа к свойствам объекта. Так что лучше избегайте этого, кроме тех случаев, когда вы знаете, что делаете, либо скорость JavaScript для вас не имеет никакого значения.
 ```
@@ -112,7 +117,11 @@ alert(obj[key]); // [object Object], не "some value"!
 
 Что хуже всего -- разработчики не задумываются о такой возможности совсем. Это делает такие ошибки сложным для отлавливания или даже превращает их в уязвимости, особенно когда JavaScript используется на сервере.
 
+<<<<<<< HEAD
 Неожиданные вещи могут случаться также при присвоении свойства `toString`, которое по умолчанию функция, и к другим встроенным методам.
+=======
+Unexpected things also may happen when assigning to `toString` -- that's a function by default, and other built-in methods.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Как же избежать проблемы?
 
@@ -161,7 +170,11 @@ alert(obj); // Error (no toString)
 
 ...Но обычно это нормально для ассоциативных массивов.
 
+<<<<<<< HEAD
 Обратите внимание, что большая часть методов, связанных с объектами, имеют вид `Object.something(...)`. К примеру `Object.keys(obj)` не находятся в прототипе, так что они продолжат работать для таких объектов:
+=======
+Note that most object-related methods are `Object.something(...)`, like `Object.keys(obj)` -- they are not in the prototype, so they will keep working on such objects:
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 
 ```js run

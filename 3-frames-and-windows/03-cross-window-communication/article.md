@@ -31,7 +31,12 @@
 
 Внутри `<iframe>` находится по сути отдельное окно, то у  окно, с собственными объектами `document` и `window`.
 
+<<<<<<< HEAD
 Мы можем обращаться к ним, используя свойства:
+=======
+- `iframe.contentWindow` to get the window inside the `<iframe>`.
+- `iframe.contentDocument` to get the document inside the `<iframe>`, shorthand for `iframe.contentWindow.document`.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 - `iframe.contentWindow` ссылка на объект `window` внутри `<iframe>`.
 - `iframe.contentDocument` - ссылка на объект `document` внутри `<iframe>`, короткая запись для `iframe.contentWindow.document`.
@@ -118,7 +123,11 @@ document.domain = 'site.com';
 
 ### Ифрейм: подождите документ
 
+<<<<<<< HEAD
 Когда ифрейм - с того же источника, мы имеем доступ к документу в нём. Но есть подвох. Не связанный с кросс-доменными особенностями, но достаточно важный, чтобы о нём знать.
+=======
+When an iframe comes from the same origin, and we may access its  `document`, there's a pitfall. It's not related to cross-origin things, but important to know.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Когда ифрейм создан, в нём сразу есть документ. Но этот документ - другой, не тот, который в него будет загружен!
 
@@ -323,7 +332,7 @@ window.addEventListener("message", function(event) {
   }
 
   alert( "received: " + event.data );
-  
+
   // can message back using event.source.postMessage(...)
 });
 ```

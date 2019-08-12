@@ -53,7 +53,11 @@ for(;;) {
 ...
 ```
 
+<<<<<<< HEAD
 Эту директиву следует размещать в первой строке скрипта или в начале тела функции.
+=======
+The directive must be at the top of a script or at the beginning of a function body.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Без `"use strict"` код также запустится, но некоторые возможности будут работать в "режиме совместимости" со старыми версиями языка JavaScript. Нам же предпочтительнее современное поведение.
 
@@ -248,7 +252,11 @@ switch (age) {
     };
     ```
 
+<<<<<<< HEAD
 3. Стрелочные функции:
+=======
+3. Arrow functions:
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
     ```js
     // выражение в правой части
@@ -268,11 +276,19 @@ switch (age) {
     ```
 
 
+<<<<<<< HEAD
 - У функций могут быть локальные переменные: т.е. объявленные в теле функции. Такие переменные видимы только внутри функции.
 - У параметров могут быть значения по умолчанию: `function sum(a = 1, b = 2) {...}`.
 - Функции всегда что-нибудь возвращают. Если нет оператора `return`, результатом будет `undefined`.
 
 Подробности: <info:function-basics>, <info:function-expressions-arrows>.
+=======
+- Functions may have local variables: those declared inside its body. Such variables are only visible inside the function.
+- Parameters can have default values: `function sum(a = 1, b = 2) {...}`.
+- Functions always return something. If there's no `return` statement, then the result is `undefined`.
+
+Details: see <info:function-basics>, <info:function-expressions-arrows>.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 ## Далее мы изучим больше
 

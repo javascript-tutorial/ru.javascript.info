@@ -11,6 +11,7 @@
 
 Идея *событийного цикла* очень проста. Есть бесконечный цикл, в котором движок JavaScript ожидает задачи, исполняет их и снова ожидает появления новых.
 
+<<<<<<< HEAD
 Общий алгоритм движка:
 
 1. Пока есть задачи:
@@ -18,6 +19,17 @@
 2. Бездействовать до появления новой задачи, а затем перейти к пункту 1
 
 Это формализация того, что мы наблюдаем, просматривая веб-страницу. Движок JavaScript большую часть времени ничего не делает и работает, только если требуется исполнить скрипт/обработчик или обработать событие.
+=======
+The general algorithm of the engine:
+
+1. While there are tasks:
+    - execute them, starting with the oldest task.
+2. Sleep until a task appears, then go to 1.
+
+That's a formalization for what we see when browsing a page. JavaScript engine does nothing most of the time, only runs if a script/handler/event activates.
+
+Examples of tasks:
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Примеры задач:
 
@@ -34,10 +46,15 @@
 
 ![](eventLoop.svg)
 
+<<<<<<< HEAD
 Например, когда движок занят выполнением скрипта, пользователь может передвинуть мышь, тем самым вызвав появление события `mousemove`, или может истечь таймер, установленный `setTimeout`, и т.п. Эти задачи формируют очередь, как показано на иллюстрации выше.
+=======
+Tasks from the queue are processed on "first come – first served" basis. When the engine browser is done with the `script`, it handles `mousemove` event, then `setTimeout` handler, and so on.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Задачи из очереди исполняются по правилу "первым пришёл - первым ушёл". Когда браузер заканчивает выполнение скрипта, он обрабатывает событие `mousemove`, затем выполняет обработчик, заданный `setTimeout`, и так далее.
 
+<<<<<<< HEAD
 Пока что всё просто, не правда ли?
 
 Отметим две детали:
@@ -47,14 +64,29 @@
 Это была теория. Теперь давайте взглянем, как можно применить эти знания.
 
 ## Пример 1: разбиение "тяжёлой" задачи.
+=======
+Two more details:
+1. Rendering never happens while the engine executes a task. Doesn't matter if the task takes a long time. Changes to DOM are painted only after the task is complete.
+2. If a task takes too long, the browser can't do other tasks, process user events, so after a time it raises an alert like "Page Unresponsive" suggesting to kill the task with the whole page. That happens when there are a lot of complex calculations or a programming error leading to infinite loop.
+
+That was a theory. Now let's see how we can apply that knowledge.
+
+## Use-case 1: splitting CPU-hungry tasks
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Допустим, у нас есть задача, требующая значительных ресурсов процессора.
 
 Например, подсветка синтаксиса (используется для выделения цветом участков кода на этой странице) -- довольно процессороёмкая задача. Для подсветки кода надо выполнить синтаксический анализ, создать много элементов для цветового выделения, добавить их в документ -- для большого текста это требует значительных ресурсов.
 
+<<<<<<< HEAD
 Пока движок занят подсветкой синтаксиса, он не может делать ничего, связанного с DOM, не может обрабатывать пользовательские события и т.д. Возможно даже "подвисание" браузера, что совершенно неприемлемо.
 
 Мы можем избежать этого, разбив задачу на части. Сделать подсветку для первых 100 строк, затем запланировать `setTimeout` (с нулевой задержкой) для разметки следующих 100 строк и т.д.
+=======
+While the engine is busy with syntax highlighting, it can't do other DOM-related stuff, process user events, etc. It may even cause the browser to "hiccup" or even "hang" for a bit, which is unacceptable.
+
+We can evade problems by splitting the big task into pieces. Highlight first 100 lines, then schedule `setTimeout` (with zero-delay) another 100 lines, and so on.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Чтобы продемонстрировать такой подход, давайте будем использовать для простоты функцию, которая считает от `1` до `1000000000`.
 
@@ -78,7 +110,11 @@ function count() {
 count();
 ```
 
+<<<<<<< HEAD
 Браузер может даже показать сообщение "скрипт выполняется слишком долго".
+=======
+The browser may even show "the script takes too long" warning.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Давайте разобьём задачу на части, воспользовавшись вложенным `setTimeout`:
 
@@ -156,7 +192,13 @@ count();
 
 Итак, мы разбили ресурсоёмкую задачу на части - теперь она не блокирует пользовательский интерфейс, причём почти без потерь в общем времени выполнения.
 
+<<<<<<< HEAD
 ## Пример 2: индикация прогресса
+=======
+Finally, we've split a CPU-hungry task into parts - now it doesn't block the user interface. And its overall execution time isn't much longer.
+
+## Use case 2: progress indication
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Ещё одно преимущество разделения на части крупной задачи в браузерных скриптах - это возможность показывать индикатор выполнения.
 
@@ -216,11 +258,19 @@ count();
 Теперь `<div>` показывает растущее значение `i` - это своего рода индикатор выполнения.
 
 
+<<<<<<< HEAD
 ## Пример 3: делаем что-нибудь после события
+=======
+## Use case 3: doing something after the event
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 В обработчике события мы можем решить отложить некоторые действия, пока событие не "всплывёт" и не будет обработано на всех уровнях. Мы можем добиться этого, обернув код в `setTimeout` с нулевой задержкой.
 
+<<<<<<< HEAD
 В главе <info:dispatch-events> мы видели пример: наше событие `menu-open` генерируется через `setTimeout`, чтобы оно возникло после того, как полностью обработано событие "click".
+=======
+In the chapter <info:dispatch-events> we saw an example: custom event `menu-open` is dispatched in `setTimeout`, so that it happens after the "click" event is fully handled.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 ```js
 menu.onclick = function() {
@@ -236,17 +286,31 @@ menu.onclick = function() {
 };
 ```
 
+<<<<<<< HEAD
 ## Макрозадачи и Микрозадачи
 
 Помимо *макрозадач*, описанных в этой части, существуют *микрозадачи*, упомянутые в главе <info:microtask-queue>.
+=======
+## Macrotasks and Microtasks
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Микрозадачи приходят только из кода. Обычно они создаются промисами: выполнение обработчика `.then/catch/finally` становится микрозадачей. Микрозадачи также используются "под капотом" `await`, т.к. это форма обработки промиса.
 
+<<<<<<< HEAD
 Также есть специальная функция `queueMicrotask(func)`, которая помещает `func` в очередь микрозадач.
 
 **Сразу после каждой *макрозадачи* движок исполняет все задачи из очереди *микрозадач* перед тем, как выполнить следующую макрозадачу или отобразить изменения на странице, или сделать что-то ещё.**
 
 Например:
+=======
+Microtasks come solely from our code. They are usually created by promises: an execution of `.then/catch/finally` handler becomes a microtask. Microtasks are used "under the cover" of `await` as well, as it's another form of promise handling.
+
+There's also a special function `queueMicrotask(func)` that queues `func` for execution in the microtask queue.
+
+**Immediately after every *macrotask*, the engine executes all tasks from *microtask* queue, prior to running any other macrotasks or rendering or anything else.**
+
+For instance, take a look:
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 ```js run
 setTimeout(() => alert("timeout"));
@@ -257,12 +321,17 @@ Promise.resolve()
 alert("code");
 ```
 
+<<<<<<< HEAD
 Какой здесь будет порядок?
+=======
+What's going to be the order here?
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 1.  `code` появляется первым, т.к. это обычный синхронный вызов.
 2.  `promise` появляется вторым, потому что `.then` проходит через очередь микрозадач и выполняется после текущего синхронного кода.
 3.  `timeout` появляется последним, потому что это макрозадача.
 
+<<<<<<< HEAD
 Более подробное изображение событийного цикла выглядит так:
 
 ![](eventLoop-full.svg)
@@ -274,6 +343,19 @@ alert("code");
 Если мы хотим запустить функцию асинхронно (после текущего кода), но до отображения изменений и до новых событий, то можем запланировать это через `queueMicrotask`.
 
 Вот пример с индикатором выполнения, похожий на предыдущий, но в этот раз использована функция `queueMicrotask` вместо `setTimeout`. Обратите внимание - отрисовка страницы происходит только в самом конце. Как и в случае обычного синхронного кода.
+=======
+The richer event loop picture looks like this:
+
+![](eventLoop-full.svg)
+
+**All microtasks are completed before any other event handling or rendering or any other macrotask takes place.**
+
+That's important, as it guarantees that the application environment is basically the same (no mouse coordinate changes, no new network data, etc) between microtasks.
+
+If we'd like to execute a function asynchronously (after the current code), but before changes are rendered or new events handled, we can schedule it with `queueMicrotask`.
+
+Here's an example with "counting progress bar", similar to the one shown previously, but `queueMicrotask` is used instead of `setTimeout`. You can see that it renders at the very end. Just like the synchronous code:
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 ```html run
 <div id="progress"></div>
@@ -301,6 +383,7 @@ alert("code");
 </script>
 ```
 
+<<<<<<< HEAD
 ## Итого
 
 Более подробный алгоритм событийного цикла (хоть и упрощенный в сравнении со [спецификацией](https://html.spec.whatwg.org/multipage/webappapis.html#event-loop-processing-model)):
@@ -315,18 +398,44 @@ alert("code");
 
 Чтобы добавить в очередь новую *макрозадачу*:
 - Используйте `setTimeout(f)` с нулевой задержкой.
+=======
+## Summary
+
+The more detailed algorithm of the event loop (though still simplified compare to the [specification](https://html.spec.whatwg.org/multipage/webappapis.html#event-loop-processing-model)):
+
+1. Dequeue and run the oldest task from the *macrotask* queue (e.g. "script").
+2. Execute all *microtasks*:
+    - While the microtask queue is not empty:
+        - Dequeue and run the oldest microtask.
+3. Render changes if any.
+4. If the macrotask queue is empty, wait till a macrotask appears.
+5. Go to step 1.
+
+To schedule a new *macrotask*:
+- Use zero delayed `setTimeout(f)`.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Этот способ можно использовать для разбиения больших вычислительных задач на части, чтобы браузер мог реагировать на пользовательские события и показывать прогресс выполнения этих частей.
 
 Также это используется в обработчиках событий для отложенного выполнения действия после того, как событие полностью обработано (всплытие завершено).
 
+<<<<<<< HEAD
 Для добавления в очередь новой *микрозадачи*:
 - Используйте `queueMicrotask(f)`.
 - Также обработчики промисов выполняются в рамках очереди микрозадач.
+=======
+To schedule a new *microtask*
+- Use `queueMicrotask(f)`.
+- Also promise handlers go through the microtask queue.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 События пользовательского интерфейса и сетевые события в промежутках между микрозадачами не обрабатываются: микрозадачи исполняются непрерывно одна за другой.
 
+<<<<<<< HEAD
 Поэтому `queueMicrotask` можно использовать для асинхронного выполнения функции в том же состоянии окружения.
+=======
+So one may want to `queueMicrotask` to execute a function asynchronously, but within the environment state.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 ```smart header="Web Workers"
 Для длительных тяжёлых вычислений, которые не должны блокировать событийный цикл, мы можем использовать [Web Workers](https://html.spec.whatwg.org/multipage/workers.html).

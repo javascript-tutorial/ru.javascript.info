@@ -19,7 +19,11 @@
 ...
 ```
 
+<<<<<<< HEAD
 Позже мы изучим функции (способ группировки команд). Забегая вперёд, заметим, что `"use strict"` можно поставить в начале большинства видов функций, вместо всего скрипта. Это позволяет включить строгий режим только в этой функции. Но обычно, люди используют его для всего файла.
+=======
+We will learn functions (a way to group commands) soon. Looking ahead, let's note that `"use strict"` can be put at the beginning of the function body instead of the whole script. Doing that enables strict mode in that function only. But usually, people use it for the whole script.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 
 ````warn header="Убедитесь, что \"use strict\" находится в начале"

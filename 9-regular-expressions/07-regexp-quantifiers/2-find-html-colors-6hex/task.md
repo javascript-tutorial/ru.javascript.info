@@ -1,6 +1,10 @@
 # Регулярное выражение для HTML-цветов
 
+<<<<<<< HEAD
 Напишите регулярное выражение, которое ищет HTML-цвета в формате `#ABCDEF`: первым идёт символ `#`, и потом - 6 шестнадцатеричных символов.
+=======
+Create a regexp to search HTML-colors written as `#ABCDEF`: first `#` and then 6 hexadecimal characters.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Пример использования:
 

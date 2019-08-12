@@ -2,7 +2,11 @@
 
 Представьте, что вы известный певец, которого фанаты постоянно донимают распросами о предстоящем сингле.
 
+<<<<<<< HEAD
 Чтобы получить передышку, вы обещаете разослать им сингл, когда он будет выпущен. Вы даете фанатам список, в который они могут записаться. Они могут оставить там свой e-mail, чтобы получить песню, как только она выйдет. И даже больше: если что-то пойдёт не так, например, в студии будет пожар и песню выпустить не выйдет, они также получат уведомление об этом.
+=======
+To get some relief, you promise to send it to them when it's published. You give your fans a list. They can fill in their email addresses, so that when the song becomes available, all subscribed parties instantly receive it. And even if something goes very wrong, say, fire in the studio, so that you can't publish the song, they will still be notified.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Все счастливы! Вы счастливы, потому что вас больше не донимают фанаты, а фанаты могут больше не беспокоится, что пропустят новый сингл.
 
@@ -23,6 +27,7 @@ let promise = new Promise(function(resolve, reject) {
 });
 ```
 
+<<<<<<< HEAD
 Функция, переданная в конструкцию `new Promise`, называется *исполнитель* (executor). Когда `Promise` создаётся, она запускается автоматически. Она должна содержать "создающий" код, который когда-нибудь создаст результат. В терминах нашей аналогии: *исполнитель* - это "певец".
 
 Её аргументы `resolve` и `reject` - это колбэки, которые предоставляет сам JavaScript. Наш код - только внутри исполнителя.
@@ -46,6 +51,31 @@ let promise = new Promise(function(resolve, reject) {
 Позже мы рассмотрим, как "фанаты" узнают об этих изменениях.
 
 Ниже пример конструктора `Promise` и простого исполнителя с кодом, дающим результат с задержкой (через `setTimeout`):
+=======
+The function passed to `new Promise` is called the *executor*. When the promise is created, it runs automatically. It contains the producing code, that should eventually produce a result. In terms of the analogy above: the executor is the "singer".
+
+Its arguments `resolve` and `reject` are callbacks provided by JavaScript itself. Our code is only inside executor.
+
+When the executor obtains the result, be it soon or late - doesn't matter, it should call one of these callbacks:
+
+- `resolve(value)` — if the job finished successfully, with result `value`.
+- `reject(error)` — if an error occurred, `error` is the error object.
+
+So to summarize: the executor runs automatically, it should do a job and then call either `resolve` or `reject`.
+
+The `promise` object returned by `new Promise` constructor has internal properties:
+
+- `state` — initially `"pending"`, then changes to either `"fulfilled"` when `resolve` is called or `"rejected"` when `reject` is called.
+- `result` — initially `undefined`, then changes to `value` when `resolve(value)` called or `error` when `reject(error)` is called.
+
+So the executor moves `promise` to one of these states:
+
+![](promise-resolve-reject.svg)
+
+Later we'll see how "fans" can subscribe to these changes.
+
+Here's an example of a Promise constructor and a simple executor function with delayed "producing code" (via `setTimeout`):
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 ```js run
 let promise = new Promise(function(resolve, reject) {
@@ -103,8 +133,13 @@ let promise = new Promise(function(resolve, reject) {
 Также заметим, что функция `resolve`/`reject` ожидает только один аргумент (или ни одного). Все дополнительные аргументы будут проигнорированы.
 ````
 
+<<<<<<< HEAD
 ```smart header="Вызывайте `reject` с объектом `Error`"
 В случае, если что-то пошло не так, мы должны вызвать `reject`. Это можно сделать с аргументом любого типа (как и `resolve`), но рекомендуется использовать объект `Error` (или унаследованный от него). Почему так? Скоро нам станет понятно.
+=======
+```smart header="Reject with `Error` objects"
+In case something goes wrong, we must call `reject`. That can be done with any type of argument (just like `resolve`). But it is recommended to use `Error` objects (or objects that inherit from `Error`). The reasoning for that will soon become apparent.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 ```
 
 ````smart header="Вызов `resolve`/`reject` сразу"
@@ -117,13 +152,22 @@ let promise = new Promise(function(resolve, reject) {
 });
 ```
 
+<<<<<<< HEAD
 Это может случиться, например, когда мы начали выполнять какую-то задачу, но тут же увидели, что ранее ее уже выполняли, и результат закеширован.
+=======
+For instance, this might happen when we start to do a job but then see that everything has already been completed and cached.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Такая ситуация нормальна. Мы сразу получим успешно завершенный `Promise`.
 ````
 
+<<<<<<< HEAD
 ```smart header="Свойства `state` и `result` - внутренние"
 Свойства `state` и `result` - это внутренние свойства объекта `Promise` и мы не имеем к ним прямого доступа. Для обработки результата следует использовать методы `.then`/`.catch`/`.finally`, про них речь пойдет дальше.
+=======
+```smart header="The `state` and `result` are internal"
+The properties `state` and `result` of the Promise object are internal. We can't directly access them. We can use the methods `.then`/`.catch`/`.finally` for that. They are described below.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 ```
 
 ## Потребители: then, catch, finally
@@ -143,11 +187,19 @@ promise.then(
 );
 ```
 
+<<<<<<< HEAD
 Первый аргумент метода `.then` - функция, которая выполняется, когда промис переходит в состояние "выполнен успешно", и получает результат.
 
 Второй аргумент `.then`  - функция, которая выполняется, когда промис переходит в состояние "выполнен с ошибкой", и получает ошибку.
 
 Например, вот реакция на успешно выполненный промис:
+=======
+The first argument of `.then` is a function that runs when the promise is resolved, and receives the result.
+
+The second argument of `.then` is a function that runs when the promise is rejected, and receives the error.
+
+For instance, here's a reaction to a successfully resolved promise:
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 ```js run
 let promise = new Promise(function(resolve, reject) {
@@ -214,7 +266,11 @@ promise.catch(alert); // выведет "Error: Ошибка!" спустя од
 
 По аналогии с блоком `finally` из обычного `try {...} catch {...}`, у промисов также есть метод `finally`.
 
+<<<<<<< HEAD
 Вызов `.finally(f)` похож на `.then(f, f)`, в том смысле, что `f` выполнится в любом случае, когда промис завершится: успешно или с ошибкой.
+=======
+The call `.finally(f)` is similar to `.then(f, f)` in the sense that `f` always runs when the promise is settled: be it resolve or reject.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 `finally` хорошо подходит для очистки, например остановки индикатора загрузки, его ведь нужно остановить вне зависимости от результата.
 
@@ -261,8 +317,13 @@ new Promise((resolve, reject) => {
 
 3. Последнее, но не менее значимое: вызов `.finally(f)` удобнее, чем.`then(f, f)` - не надо дублировать функции f.
 
+<<<<<<< HEAD
 ````smart header="На завершенных промисах обработчики запускаются сразу"
 Если промис в состоянии ожидания, обработчики в `.then/catch/finally` будут ждать его. Однако, если промис уже завершён, то обработчики выполнятся сразу:
+=======
+````smart header="On settled promises handlers runs immediately"
+If a promise is pending, `.then/catch/finally` handlers wait for it. Otherwise, if a promise has already settled, they execute immediately:
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 ```js run
 // мгновенный перевод промиса в состояние "успешно завершён"
@@ -320,7 +381,11 @@ promise.then(
   error => alert(`Ошибка: ${error.message}`)
 );
 
+<<<<<<< HEAD
 promise.then(script => alert('Ещё один обработчик...'));
+=======
+promise.then(script => alert('Another handler...'));
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 ```
 
 Сразу заметно несколько преимуществ перед подходом с использованием колбэков:
@@ -331,4 +396,8 @@ promise.then(script => alert('Ещё один обработчик...'));
 | Промисы позволяют делать вещи в естественном порядке. Сперва мы запускаем `loadScript(script)`, и затем (`.then`) мы пишем, что делать с результатом. | У нас должна быть функция`callback` на момент вызова `loadScript(script, callback)`. Другими словами, нам нужно знать что делать с результатом *до того*, как вызовется `loadScript`. |
 | Мы можем вызывать `.then` у `Promise` столько раз, сколько захотим. Каждый раз мы добавляем нового "фаната", новую функцию-подписчика в "список подписок". Больше об этом в следующей главе: [](info:promise-chaining). | Колбэк может быть только один. |
 
+<<<<<<< HEAD
 Таким образом, промисы позволяют улучшить порядок кода и дают нам гибкость. Но это далеко не всё. Мы узнаем ещё много полезного в последующих главах.
+=======
+So promises give us better code flow and flexibility. But there's more. We'll see that in the next chapters.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca

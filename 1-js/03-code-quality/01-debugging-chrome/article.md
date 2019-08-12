@@ -2,17 +2,31 @@
 
 Давайте отвлечёмся от написания кода и поговорим о его отладке.
 
+<<<<<<< HEAD
 [Отладка](https://ru.wikipedia.org/wiki/%D0%9E%D1%82%D0%BB%D0%B0%D0%B4%D0%BA%D0%B0_%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D1%8B) - это процесс поиска и исправления ошибок в скрипте. Все современные браузеры и большинство других сред разработки поддерживают инструменты для отладки - специальный графический интерфейс, который сильно упрощает отладку. Он также позволяет по шагам отследить, что именно происходит в нашем коде.
+=======
+[Debugging](https://en.wikipedia.org/wiki/Debugging) is the process of finding and fixing errors within a script. All modern browsers and most other environments support debugging tools -- a special UI in developer tools that enable debugging much easier. It also allows to trace the code step by step to see what exactly is going on.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Мы будем использовать браузер Chrome, так как у него достаточно возможностей, в большинстве других браузеров процесс будет схожим.
 
+<<<<<<< HEAD
 ## Панель "Исходный код" ("Sources")
+=======
+## The "Sources" panel
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Версия Chrome, установленная у вас, может выглядеть немного иначе, однако принципиальных отличий не будет.
 
+<<<<<<< HEAD
 - Работая в Chrome, откройте [тестовую страницу](debugging/index.html).
 - Включите инструменты разработчика, нажав `key:F12` (Mac: `key:Cmd+Opt+I`).
 - Щёлкните по панели `sources` ("исходный код").
+=======
+- Open the [example page](debugging/index.html) in Chrome.
+- Turn on developer tools with `key:F12` (Mac: `key:Cmd+Opt+I`).
+- Select the `Sources` panel.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 При первом запуске получаем следующее:
 
@@ -56,11 +70,19 @@
 
 Пока исполнение поставлено "на паузу", мы можем просмотреть текущие значения переменных, выполнить команды в консоли, одним словом, мы выполняем отладку кода.
 
+<<<<<<< HEAD
 В правой части графического интерфейса мы видим список точек останова. А когда таких точек выставлено много, да ещё и в разных файлах, этот список поможет эффективно ими управлять:
 - Быстро переместиться к любой точке останова в коде – нужно щёлкнуть по точке в правой части экрана.
 - Временно деактивировать точку – в общем списке снимите галочку напротив ненужной в данный момент точки.
 - Удалить точку – щёлкните по ней правой кнопкой мыши и выберите Remove (Удалить).
 - ...и так далее.
+=======
+We can always find a list of breakpoints in the right panel. That's useful when we have many breakpoints in various files. It allows us to:
+- Quickly jump to the breakpoint in the code (by clicking on it in the right panel).
+- Temporarily disable the breakpoint by unchecking it.
+- Remove the breakpoint by right-clicking and selecting Remove.
+- ...And so on.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 ```smart header="Условные точки останова"
 Можно задать и так называемую *условную* точку останова – щёлкните правой кнопкой мыши по номеру строки в коде. Если задать выражение, то именно при его истинности выполнение кода будет приостановлено.
@@ -120,7 +142,11 @@ function hello(name) {
 
 А теперь давайте *пошагаем* по нашему коду.
 
+<<<<<<< HEAD
 В правой части панели для этого есть несколько кнопок. Рассмотрим их.
+=======
+There are buttons for it at the top of the right panel. Let's engage them.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 <span class="devtools" style="background-position:-7px -76px"></span> – продолжить выполнение. Быстрая клавиша – `key:F8`.
 : Возобновляет выполнение кода. Если больше нет точек останова, отладчик прекращает работу и позволяет приложению работать дальше.
@@ -129,7 +155,11 @@ function hello(name) {
 
     ![](chrome-sources-debugger-trace-1.svg)
 
+<<<<<<< HEAD
     Выполнение кода возобновилось, дошло до другой точке останова внутри `say()`, и отладчик снова приостановил выполнение. Обратите внимание на пункт "Call stack" справа: в списке появился ещё один вызов. Мы теперь внутри функции `say()`.
+=======
+    The execution has resumed, reached another breakpoint inside `say()` and paused there. Take a look at the "Call Stack" at the right. It has increased by one more call. We're inside `say()` now.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 <span class="devtools" style="background-position:-137px -76px"></span> – сделать шаг (выполнить следующую команду), *не заходя в функцию*. Быстрая клавиша – `key:F10`.
 : Если мы нажмём на неё - будет вызван `alert`. Важно: на месте `alert` может быть любая другая функция, выполнение просто *перешагнёт через неё*, полностью игнорируя её содержимое.
@@ -161,13 +191,17 @@ function hello(name) {
 ```js run
 // чтобы увидеть результат, сначала откройте консоль
 for (let i = 0; i < 5; i++) {
-  console.log("значение", i);
+  console.log("value,", i);
 }
 ```
 
+<<<<<<< HEAD
 Обычный пользователь сайта не увидит такой вывод, так как он в консоли. Напомним, что консоль можно открыть через инструменты разработчика – выберите вкладку "Консоль" или нажмите `key:Esc`, находясь в другой вкладке – консоль откроется в нижней части интерфейса.
 
 Если правильно выстроить логирование в приложении, то можно и без отладчика разобраться, что происходит в коде.
+=======
+Regular users don't see that output, it is in the console. To see it, either open the Console panel of developer tools or press `key:Esc` while in another panel: that opens the console at the bottom.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 ## Итого
 

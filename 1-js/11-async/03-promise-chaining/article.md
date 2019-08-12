@@ -48,9 +48,15 @@ new Promise(function(resolve, reject) {
 
 Когда обработчик возвращает какое-то значение, то оно становится результатом выполнения соответствующего промиса и передаётся в следующий `.then`.
 
+<<<<<<< HEAD
 **Классическая ошибка новичков: технически возможно добавить много обработчиков `.then` к единственному промису. Но это не цепочка.**
 
 Например:
+=======
+**A classic newbie error: technically we can also add many `.then` to a single promise. This is not chaining.**
+
+For example:
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 ```js run
 let promise = new Promise(function(resolve, reject) {
   setTimeout(() => resolve(1), 1000);
@@ -84,9 +90,15 @@ promise.then(function(result) {
 
 ## Возвращаем промисы
 
+<<<<<<< HEAD
 Обработчик `handler`, переданный в `.then(handler)`, может вернуть промис.
 
 В этом случае дальнейшие обработчики ожидают, пока оно выполнится, и затем получают его результат.
+=======
+A handler, used in `.then(handler)` may create and return a promise.
+
+In that case further handlers wait till it settles, and then get its result.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Например:
 
@@ -120,9 +132,15 @@ new Promise(function(resolve, reject) {
 });
 ```
 
+<<<<<<< HEAD
 Здесь первый `.then` показывает `1` и возвращает новый промис `new Promise(…)` в строке `(*)`. Через одну секунду этот промис успешно выполняется, и его результат (аргумент в `resolve`, то есть `result * 2`) передаётся обработчику во следующем `.then`. Он находится в строке `(**)`, показывает`2` и делает то же самое.
 
 Таким образом, как и в предыдущем примере, выводятся 1 -> 2 -> 4, но сейчас между вызовами `alert` существует пауза в 1 секунду.
+=======
+Here the first `.then` shows `1` and returns `new Promise(…)` in the line `(*)`. After one second it resolves, and the result (the argument of `resolve`, here it's `result * 2`) is passed on to handler of the second `.then`. That handler is in the line `(**)`, it shows `2` and does the same thing.
+
+So the output is the same as in the previous example: 1 -> 2 -> 4, but now with 1 second delay between `alert` calls.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Возвращая промисы, мы можем строить цепочки из асинхронных действий.
 
@@ -166,7 +184,11 @@ loadScript("/article/promise-chaining/one.js")
 
 Мы можем добавить и другие асинхронные действия в цепочку. Обратите внимание, что наш код всё ещё "плоский", он "растёт" вниз, а не вправо. Нет никаких признаков "адской пирамиды вызовов".
 
+<<<<<<< HEAD
 Технически мы бы могли добавлять `.then` напрямую к каждому вызову `loadScript`, вот так:
+=======
+Technically, we could add `.then` directly to each `loadScript`, like this:
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 ```js run
 loadScript("/article/promise-chaining/one.js").then(script1 => {
@@ -188,8 +210,13 @@ loadScript("/article/promise-chaining/one.js").then(script1 => {
 Иногда всё же приемлемо добавлять `.then` напрямую, чтобы вложенная в него функция имела доступ к внешней области видимости. В примере выше самая глубоко вложенная функция обратного вызова имеет доступ ко всем переменным `script1`, `script2`, `script3`. Но это скорее исключение, чем правило.
 
 
+<<<<<<< HEAD
 ````smart header="Thenable"
 Если быть более точными, обработчик может возвращать не именно промис, а любой объект, содержащий метод `.then`, такие объекты называют "thenable", и этот объект будет обработан как промис.
+=======
+````smart header="Thenables"
+To be precise, a handler may return not exactly a promise, but a so-called "thenable" object - an arbitrary object that has method `.then`, and it will be treated the same way as a promise.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Смысл в том, что сторонние библиотеки могут создавать свои собственные совместимые с промисами объекты. Они могут иметь свои наборы методов и при этом быть совместимыми со встроенными промисами, так как реализуют метод `.then`.
 
@@ -226,7 +253,11 @@ JavaScript проверяет объект, возвращаемый из обр
 
 Во фронтенд-разработке промисы часто используются, чтобы делать запросы по сети. Давайте рассмотрим один такой пример.
 
+<<<<<<< HEAD
 Мы будем использовать метод [fetch](info:fetch), чтобы подгрузить информацию о пользователях с удалённого сервера. Этот метод имеет много опциональных параметров, разобранных в [соответствующих разделах](info:fetch), но базовый синтаксис весьма прост:
+=======
+We'll use the [fetch](info:fetch) method to load the information about the user from the remote server. It has a lot of optional parameters covered in [separate chapters](info:fetch), but the basic syntax is quite simple:
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 ```js
 let promise = fetch(url);
@@ -242,9 +273,14 @@ let promise = fetch(url);
 fetch('/article/promise-chaining/user.json')
   // .then в коде ниже выполняется, когда удалённый сервер отвечает
   .then(function(response) {
+<<<<<<< HEAD
     // response.text() возвращает новый промис,
     // который выполняется и возвращает полный ответ сервера,
     // когда он загрузится
+=======
+    // response.text() returns a new promise that resolves with the full response text
+    // when it loads
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
     return response.text();
   })
   .then(function(text) {
@@ -261,7 +297,11 @@ fetch('/article/promise-chaining/user.json')
 // то же самое, что и раньше, только теперь response.json() читает данные в формате JSON
 fetch('/article/promise-chaining/user.json')
   .then(response => response.json())
+<<<<<<< HEAD
   .then(user => alert(user.name)); // iliakan, получили имя пользователя
+=======
+  .then(user => alert(user.name)); // iliakan, got user name
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 ```
 
 Теперь давайте что-нибудь сделаем с полученными данными о пользователе.
@@ -320,11 +360,19 @@ fetch('/article/promise-chaining/user.json')
   .then(githubUser => alert(`Закончили показ ${githubUser.name}`));
 ```
 
+<<<<<<< HEAD
 То есть, обработчик `.then` в строке `(*)` будет возращать `new Promise`, который перейдёт в состояние "выполнен" только после того, как в `setTimeout` `(**)` будет вызвана `resolve(githubUser)`.
 
 Соответственно, следующий по цепочке `.then` будет ждать этого.
 
 Как правило, все асинхронные действия должны возвращать промис.
+=======
+That is, `.then` handler in the line `(*)` now returns `new Promise`, that becomes settled only after the call of `resolve(githubUser)` in `setTimeout` `(**)`.
+
+The next `.then` in chain will wait for that.
+
+As a good rule, an asynchronous action should always return a promise.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Это позволяет планировать после него какие-то дополнительные действия. Даже если эта возможность не нужна прямо сейчас, она может понадобиться в будущем.
 

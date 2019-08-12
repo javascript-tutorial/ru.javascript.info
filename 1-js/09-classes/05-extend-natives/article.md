@@ -21,14 +21,22 @@ alert(filteredArr); // 10, 50
 alert(filteredArr.isEmpty()); // false
 ```
 
+<<<<<<< HEAD
 Обратите внимание на интересный момент: встроенные методы, такие как `filter`, `map` и другие возвращают новые объекты унаследованного класса `PowerArray`. Их внутренняя реализация такова, что для этого они используют свойство объекта `constructor`.
+=======
+Please note a very interesting thing. Built-in methods like `filter`, `map` and others -- return new objects of exactly the inherited type `PowerArray`. Their internal implementation uses object `constructor` property for that.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 В примере выше,
 ```js
 arr.constructor === PowerArray
 ```
 
+<<<<<<< HEAD
 Поэтому при вызове метода `arr.filter()` он внутри создаёт массив результатов, именно используя `arr.constructor`, а не обычный массив. Это замечательно, поскольку можно продолжать использовать методы `PowerArray` далее на результатах.
+=======
+When `arr.filter()` is called, it internally creates the new array of results using exactly `arr.constructor`, not basic `Array`. That's actually very cool, because we can keep using `PowerArray` methods further on the result.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Более того, мы можем настроить это поведение.
 
@@ -64,11 +72,19 @@ alert(filteredArr.isEmpty()); // Error: filteredArr.isEmpty is not a function
 
 Как вы видите, теперь `.filter` возвращает `Array`. Расширенная функциональность не будет передаваться далее.
 
+<<<<<<< HEAD
 ```smart header="Аналогично работают другие коллекции"
 Другие коллекции, такие как `Map`, `Set`, работают аналогично. Они также исполуют `Symbol.species`.
 ```
 
 ## Отсутствие статического наследования встроенных классов
+=======
+```smart header="Other collections work similarly"
+Other collections, such as `Map` and `Set`, work alike. They also use `Symbol.species`.
+```
+
+## No static inheritance in built-ins
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 У встроенных объектов есть собственные статические методы, например `Object.keys`, `Array.isArray` и т. д.
 
@@ -84,6 +100,12 @@ alert(filteredArr.isEmpty()); // Error: filteredArr.isEmpty is not a function
 
 ![](object-date-inheritance.svg)
 
+<<<<<<< HEAD
 Как видите, нет связи между `Date` и `Object`. Они независимы, только `Date.prototype` наследует от `Object.prototype`.
 
 В этом важное отличие наследования встроенных объектов от того, что мы получаем с использованием `extends`.
+=======
+As you can see, there's no link between `Date` and `Object`. They are independent, only `Date.prototype` inherits from `Object.prototype`.
+
+That's an important difference of inheritance between built-in objects compared to what we get with `extends`.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca

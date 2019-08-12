@@ -124,7 +124,11 @@ document.body.sayHi(); // Hello, I'm BODY
 
     elem.setAttribute('Test', 123); // (2), запись
 
+<<<<<<< HEAD
     alert( elem.outerHTML ); // (3), посмотрим, есть ли атрибут в HTML (да)
+=======
+    alert( elem.outerHTML ); // (3), see if the attribute is in HTML (yes)
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
     for (let attr of elem.attributes) { // (4) весь список
       alert( `${attr.name} = ${attr.value}` );
@@ -259,7 +263,11 @@ DOM-свойства не всегда являются строками. Нап
   for(let div of document.querySelectorAll('[show-info]')) {
     // вставить соответствующую информацию в поле
     let field = div.getAttribute('show-info');
+<<<<<<< HEAD
     div.innerHTML = user[field]; // сначала Pete в name, потом 25 в age
+=======
+    div.innerHTML = user[field]; // first Pete into "name", then 25 into "age"
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
   }
 </script>
 ```

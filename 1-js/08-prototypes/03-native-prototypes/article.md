@@ -2,7 +2,11 @@
 
 Свойство `"prototype"` широко используется в внутри самого языка JavaScript. Все встроенные функции-конструкторы используют его.
 
+<<<<<<< HEAD
 Сначала мы посмотрим на детали, а затем используем для добавления встроенным объектам нового функционала.
+=======
+First we'll see at the details, and then how to use it for adding new capabilities to built-in objects.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 ## Object.prototype
 
@@ -36,7 +40,11 @@ alert(obj.__proto__ === Object.prototype); // true
 // obj.toString === obj.__proto__.toString == Object.prototype.toString
 ```
 
+<<<<<<< HEAD
 Обратим внимание, что выше `Object.prototype` по цепочке прототипов больше нет   `[[Prototype]]`:
+=======
+Please note that there is no more `[[Prototype]]` in the chain above `Object.prototype`:
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 ```js run
 alert(Object.prototype.__proto__); // null
@@ -46,9 +54,15 @@ alert(Object.prototype.__proto__); // null
 
 Другие встроенные объекты, такие как `Array`, `Date`, `Function` и другие, также хранят свои методы в прототипах.
 
+<<<<<<< HEAD
 Например, при создании массива `[1, 2, 3]` внутренне используется конструктор массива `Array`. Поэтому прототипом массива становится `Array.prototype`, предоставляя ему свои методы. Это позволяет эффективно использовать память.
 
 Согласно спецификации, наверху иерархии встроенных прототипов находится `Object.prototype`. Поэтому иногда говорят, что "всё наследует от объектов".
+=======
+For instance, when we create an array `[1, 2, 3]`, the default `new Array()` constructor is used internally. So `Array.prototype` becomes its prototype and provides methods. That's very memory-efficient.
+
+By specification, all of the built-in prototypes have `Object.prototype` on the top. That's why some people say that "everything inherits from objects".
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Вот более полная картина (для 3 встроенных объектов):
 
@@ -122,7 +136,11 @@ String.prototype.show = function() {
 В течение процесса разработки у нас могут возникнуть идеи о новых встроенных методах, которые нам хотелось бы иметь, и искушение добавить их во встроенные прототипы. Это плохая идея.
 
 ```warn
+<<<<<<< HEAD
 Прототипы глобальны, поэтому очень легко могут возникнуть конфликты. Если две библиотеки добавляют метод `String.prototype.show`, то одна из них перепишет метод другой.
+=======
+Prototypes are global, so it's easy to get a conflict. If two libraries add a method `String.prototype.show`, then one of them will be overwriting the method of the other.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Так что, в общем, изменение встроенных прототипов считается плохой идей.
 ```
@@ -142,9 +160,15 @@ if (!String.prototype.repeat) { // Если такого метода нет
   String.prototype.repeat = function(n) {
     // повторить строку n раз
 
+<<<<<<< HEAD
     // на самом деле код должен быть немного более сложным
     // (полный алгоритм можно найти в спецификации)
     // но даже неполный полифил зачастую достаточно хорош для использования
+=======
+    // actually, the code should be a little bit more complex than that
+    // (the full algorithm is in the specification)
+    // but even an imperfect polyfill is often considered good enough for use
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
     return new Array(n + 1).join(this);
   };
 }
@@ -161,7 +185,11 @@ alert( "La".repeat(3) ); // LaLaLa
 
 Некоторые методы встроенных прототипов часто одалживают.
 
+<<<<<<< HEAD
 Например, если мы создаём объект, похожий на массив (псевдомассив), мы можем скопировать некоторые методы из `Array` в этот объект.
+=======
+For instance, if we're making an array-like object, we may want to copy some `Array` methods to it.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Пример:
 

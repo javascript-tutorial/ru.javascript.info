@@ -25,6 +25,7 @@ loadScript('/my/script.js');
 
 Такие функции называют "асинхронными", потому что действие (загрузка скрипта) будет завершено не сейчас, а потом.
 
+<<<<<<< HEAD
 Если после вызова `loadScript(…)` есть какой-то код, то он не будет ждать, пока скрипт загрузится.
 
 ```js
@@ -35,6 +36,18 @@ loadScript('/my/script.js');
 ```
 
 Мы хотели бы использовать новый скрипт, как только он будет загружен. Скажем, он объявляет новую функцию, которую мы хотим выполнить.
+=======
+If there's a code below `loadScript(…)`, it doesn't wait until the loading finishes.
+
+```js
+loadScript('/my/script.js');
+// the code below loadScript
+// doesn't wait for the script loading to finish
+// ...
+```
+
+We'd like to use the new script as soon as it loads. It declares new functions, and we want to run them.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Но если мы просто вызовем эту функцию после `loadScript(…)`, у нас ничего не выйдет:
 
@@ -46,7 +59,11 @@ newFunction(); // такой функции не существует!
 */!*
 ```
 
+<<<<<<< HEAD
 Действительно, ведь у браузера не было времени загрузить скрипт. Сейчас функция `loadScript` никак не позволяет отследить момент загрузки. Скрипт загружается, а потом выполняется. Но нам нужно точно знать, когда это произойдет, чтобы использовать функции и переменные из этого скрипта.
+=======
+Naturally, the browser probably didn't have time to load the script. As of now, the `loadScript` function doesn't provide a way to track the load completion. The script loads and eventually runs, that's all. But we'd like to know when it happens, to use new functions and variables from that script.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Давайте передадим функцию `callback` вторым аргументом в `loadScript`, чтобы вызвать ее, когда скрипт загрузится:
 

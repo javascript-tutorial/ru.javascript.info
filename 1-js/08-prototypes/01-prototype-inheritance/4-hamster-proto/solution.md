@@ -10,7 +10,11 @@
 
 Получается, что у хомяков один живот на двоих!
 
+<<<<<<< HEAD
 И при `lazy.stomach.push(...)` и при `speedy.stomach.push()`, свойство `stomach` берётся из прототипа (так как его нет в самом объекте), затем в него добавляются данные.
+=======
+Both for `lazy.stomach.push(...)` and `speedy.stomach.push()`, the property `stomach` is found in the prototype (as it's not in the object itself), then the new data is pushed into it.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Обратите внимание, что этого не происходит при простом присваивании `this.stomach=`:
 
@@ -77,4 +81,8 @@ alert( speedy.stomach ); // apple
 alert( lazy.stomach ); // <ничего>
 ```
 
+<<<<<<< HEAD
 Все свойства, описывающие состояние объекта (как свойство `stomach` в примере выше), рекомендуется записывать в сам этот объект. Это позволяет избежать подобных проблем.
+=======
+As a common solution, all properties that describe the state of a particular object, like `stomach` above, should be written into that object. That prevents such problems.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca

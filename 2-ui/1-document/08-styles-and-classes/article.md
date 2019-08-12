@@ -7,6 +7,7 @@
 1. Создать класс в CSS и использовать его: `<div class="...">`
 2. Писать стили непосредственно в атрибуте `style`: `<div style="...">`.
 
+<<<<<<< HEAD
 JavaScript может менять и классы и свойство `style`.
 
 Классы - всегда предпочтительный вариант по сравнению со `style`. Мы должны манипулировать свойством `style` только в том случае, если классы "не могут справиться".
@@ -22,6 +23,23 @@ elem.style.top = top; // например, '456px'
 ```
 
 В других случаях, например, чтобы сделать текст красным, добавить значок фона -- описываем это в CSS и добавляем класс (JavaScript может это сделать). Это более гибкое и легкое в поддержке решение.
+=======
+JavaScript can modify both classes and `style` properties.
+
+We should always prefer CSS classes to `style`. The latter should only be used if classes "can't handle it".
+
+For example, `style` is acceptable if we calculate coordinates of an element dynamically and want to set them from JavaScript, like this:
+
+```js
+let top = /* complex calculations */;
+let left = /* complex calculations */;
+
+elem.style.left = left; // e.g '123px', calculated at run-time
+elem.style.top = top; // e.g '456px'
+```
+
+For other cases, like making the text red, adding a background icon -- describe that in CSS and then add the class (JavaScript can do that). That's more flexible and easier to support.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 ## className и classList
 
@@ -45,7 +63,11 @@ elem.style.top = top; // например, '456px'
 
 Для этого есть другое свойство: `elem.classList`.
 
+<<<<<<< HEAD
 `elem.classList` -- это специальный объект с методами для добавления/удаления одного класса.
+=======
+The `elem.classList` is a special object with methods to `add/remove/toggle` a single class.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Например:
 
@@ -66,9 +88,15 @@ elem.style.top = top; // например, '456px'
 
 Методы `classList`:
 
+<<<<<<< HEAD
 - `elem.classList.add/remove("class")` -- добавить/удалить класса.
 - `elem.classList.toggle("class")` -- добавить класс, если его нет, иначе удалить.
 - `elem.classList.contains("class")` -- проверка наличия класса, возвращает `true/false`.
+=======
+- `elem.classList.add/remove("class")` -- adds/removes the class.
+- `elem.classList.toggle("class")` -- adds the class if it doesn't exist, otherwise removes it.
+- `elem.classList.contains("class")` -- checks for the given class, returns `true/false`.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Кроме того, `classList` является перебираемым, поэтому можно перечислить все классы при помощи `for..of`:
 
@@ -84,7 +112,11 @@ elem.style.top = top; // например, '456px'
 
 ## Element style
 
+<<<<<<< HEAD
 Свойство `elem.style` - это объект, который соответствует тому, что написано в атрибуте `"style"`. Установка стиля `elem.style.width="100px"` работает так же, как наличие в атрибуте `style` строки `width:100px`.
+=======
+The property `elem.style` is an object that corresponds to what's written in the `"style"` attribute. Setting `elem.style.width="100px"` works the same as if we had in the attribute `style` a string `width:100px`.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Для свойства из нескольких слов используется camelCase:
 
@@ -100,10 +132,17 @@ border-left-width => elem.style.borderLeftWidth
 document.body.style.backgroundColor = prompt('background color?', 'green');
 ```
 
+<<<<<<< HEAD
 ````smart header="Свойства с префиксом"
 Стили с браузерным префиксом, например, `-moz-border-radius`, `-webkit-border-radius`  преобразуются по тому же принципу: дефис означает прописную букву.
 
 Например:
+=======
+````smart header="Prefixed properties"
+Browser-prefixed properties like `-moz-border-radius`, `-webkit-border-radius` also follow the same rule: a dash means upper case.
+
+For instance:
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 ```js
 button.style.MozBorderRadius = '5px';
@@ -120,13 +159,22 @@ button.style.WebkitBorderRadius = '5px';
 Затем мы можем удалить свойство `style.display`, чтобы вернуться к первоначальному состоянию. Вместо `delete elem.style.display` мы должны присвоить ему пустую строку: `elem.style.display = ""`.
 
 ```js run
+<<<<<<< HEAD
 // если мы запустим этот код, <body> "мигнёт"
 document.body.style.display = "none"; // скрыть
+=======
+// if we run this code, the <body> will blink
+document.body.style.display = "none"; // hide
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 setTimeout(() => document.body.style.display = "", 1000); // возврат к нормальному состоянию
 ```
 
+<<<<<<< HEAD
 Если мы установим в `style.display` пустую строку, то браузер применит CSS-классы и встроенные стили, как если бы такого свойства `style.display` вообще не было.
+=======
+If we set `style.display` to an empty string, then the browser applies CSS classes and its built-in styles normally, as if there were no such `style.display` property at all.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 ````smart header="Полная перезапись `style.cssText`"
 Обычно мы используем `style.*` для присвоения индивидуальных свойств стиля. Нельзя установить список стилей как, например, `div.style="color: red; width: 100px"`, потому что `div.style` -- это объект, и он доступен только для чтения.
@@ -155,7 +203,11 @@ setTimeout(() => document.body.style.display = "", 1000); // возврат к �
 
 ## Следите за единицами измерения
 
+<<<<<<< HEAD
 Не забудьте добавить к значениям единицы измерения.
+=======
+Don't forget to add CSS units to values.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Например, мы должны устанавливать `10px`, а не просто `10` в свойство `elem.style.top`. Иначе это не сработает:
 
@@ -178,11 +230,19 @@ setTimeout(() => document.body.style.display = "", 1000); // возврат к �
 </body>
 ```
 
+<<<<<<< HEAD
 Пожалуйста, обратите внимание, браузер "распаковывает" свойство `style.margin` в последних строках и выводит `style.marginLeft` и `style.marginTop` из него.
+=======
+Please note: the browser "unpacks" the property `style.margin` in the last lines and infers `style.marginLeft` and `style.marginTop` from it.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 ## Вычисленные стили: getComputedStyle
 
+<<<<<<< HEAD
 Итак, изменить стиль очень просто. Но как его *прочитать*?
+=======
+So, modifying a style is easy. But how to *read* it?
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Например, мы хотим знать размер, отступы, цвет элемента. Как это сделать?
 
@@ -208,7 +268,11 @@ setTimeout(() => document.body.style.display = "", 1000); // возврат к �
 </body>
 ```
 
+<<<<<<< HEAD
 ...Но что, если нам нужно, скажем, увеличить отступ на `20px`? Для начала нужно его текущее значение получить.
+=======
+...But what if we need, say, to increase the margin by `20px`? We would want the current value of it.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Для этого есть метод: `getComputedStyle`.
 
@@ -224,7 +288,11 @@ element
 pseudo
 : Указывается, если нужен стиль псевдоэлемента, например `::before`. Пустая строка или отсутствие аргумента означают сам элемент.
 
+<<<<<<< HEAD
 Результат вызова - объект со стилями, похожий на `elem.style`, но с учётом всех CSS-классов.
+=======
+The result is an object with styles, like `elem.style`, but now with respect to all CSS classes.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Например:
 
@@ -254,7 +322,11 @@ pseudo
 
 Давным-давно `getComputedStyle` был создан для получения вычисленных значений, но оказалось, что окончательные значения гораздо удобнее, и стандарт изменился.
 
+<<<<<<< HEAD
 Так что, в настоящее время `getComputedStyle` фактически возвращает окончательное значение свойства, для геометрии оно обычно в пискселях.
+=======
+So nowadays `getComputedStyle` actually returns the resolved value of the property, usually in `px` for geometry.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 ```
 
 ````warn header="`getComputedStyle` требует полное свойство!"
@@ -277,8 +349,13 @@ pseudo
 ```
 ````
 
+<<<<<<< HEAD
 ```smart header="Стили, примяемые к посещённым `:visited` ссылкам, скрываются!"
 Посещенные ссылки могут быть окрашены с помощью псевдокласса `:visited`.
+=======
+```smart header="Styles applied to `:visited` links are hidden!"
+Visited links may be colored using `:visited` CSS pseudoclass.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Но `getComputedStyle` не дает доступ к этой информации, чтобы произвольная страница не могла определить, посещал ли пользователь ту или иную ссылку, проверив стили.
 
@@ -300,4 +377,8 @@ JavaScript не видит стили, применяемые с помощью 
 
 Для чтения окончательных стилей (с учётом всех классов, после применения CSS и вычисления окончательных значений) используется:
 
+<<<<<<< HEAD
 - Метод `getComputedStyle(elem, [pseudo])` возвращает объект, похожий по формату на `style`. Только для чтения.
+=======
+- The `getComputedStyle(elem, [pseudo])` returns the style-like object with them. Read-only.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca

@@ -104,7 +104,11 @@
 
 Метод `elem.querySelector(css)` возвращает первый элемент, соответствующий данному CSS-селектору.
 
+<<<<<<< HEAD
 Иначе говоря, результат такой же, как при вызове `elem.querySelectorAll(css)[0]`, но он сначала найдёт *все* элементы, а потом возьмёт первый, в то время как `elem.querySelector` найдёт только первый и остановится. Это быстрее, кроме того, его короче писать.
+=======
+In other words, the result is the same as `elem.querySelectorAll(css)[0]`, but the latter is looking for *all* elements and picking one, while `elem.querySelector` just looks for one. So it's faster and also shorter to write.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 ## matches
 Предыдущие методы искали по DOM.

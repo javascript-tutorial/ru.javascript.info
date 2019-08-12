@@ -460,7 +460,11 @@ function upload(file) {
 
 ## Запросы на другой источник
 
+<<<<<<< HEAD
 `XMLHttpRequest` может выполнять кросс-доменные запросы, используя ту же политику в отношении CORS, что и [fetch](info:fetch-crossorigin).
+=======
+`XMLHttpRequest` can make cross-origin requests, using the same CORS policy as [fetch](info:fetch-crossorigin).
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Точно так же, как и при работе с `fetch`, не отсылаются куки и не происходит HTTP-авторизация по умолчанию на другом домене. Чтобы это изменить, установите `true` для свойства`xhr.withCredentials`:
 

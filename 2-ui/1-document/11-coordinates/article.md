@@ -9,6 +9,7 @@
 2. **Относительно документа** - как `position:absolute` на уровне документа, отсчёт идёт от верхнего левого угла документа.
     - мы будем обозначать эти координаты как `pageX/pageY`.
 
+<<<<<<< HEAD
 Когда страница полностью прокручена в самое начало, то верхний левый угол окна совпадает с левым верхним углом документа, при этом обе этих системы координат тоже совпадают. Но если происходит прокрутка, то координаты элементов в контексте окна меняются, так как они двигаются, но в то же время их координаты относительно документа остаются такими же.
 
 На приведённой картинке взята точка в документе и показаны её координат до прокрутки (слева) и после (справа):
@@ -22,6 +23,19 @@
 ## Координаты относительно окна: getBoundingClientRect
 
 Метод `elem.getBoundingClientRect()` возвращает координаты в контексте окна для минимального по размеру прямоугольника, который заключает в себе элемент `elem`, в виде объекта встроенного класса [DOMRect](https://www.w3.org/TR/geometry-1/#domrect).
+=======
+When the page is scrolled to the very beginning, so that the top/left corner of the window is exactly the document top/left corner, these coordinates equal each other. But after the document shifts, window-relative coordinates of elements change, as elements move across the window, while document-relative coordinates remain the same.
+
+On this picture we take a point in the document and demonstrate its coordinates before the scroll (left) and after it (right):
+
+![](document-and-window-coordinates-scrolled.svg)
+
+When the document scrolled:
+- `pageY` - document-relative coordinate stayed the same, it's counted from the document top (now scrolled out).
+- `clientY` - window-relative coordinate did change (the arrow became shorter), as the same point became closer to window top.
+
+## Element coordinates: getBoundingClientRect
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Основные свойства объекта типа `DOMRect`:
 
@@ -60,23 +74,36 @@ right:${r.right}
 
 ![](coordinates.svg)
 
+<<<<<<< HEAD
 Как вы видите, `x/y` и `width/height` уже точно задают прямоугольник. Остальные свойства могут быть легко вычислены на их основе:
+=======
+As you can see, `x/y` and `width/height` fully describe the rectangle. Derived properties can be easily calculated from them:
+
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 - `left = x`
 - `top = y`
 - `right = x + width`
 - `bottom = y + height`
 
+<<<<<<< HEAD
 Заметим:
 
 - Координаты могут считаться с десятичной частью, например `10.5`. Это нормально, ведь браузер использует дроби в своих внутренних вычислениях. Мы не обязаны округлять значения при установке `style.position.left/top`.
 - Координаты могут быть отрицательными. Например, если страница прокручена так, что элемент `elem` ушёл вверх за пределы окна, то вызов `elem.getBoundingClientRect().top` вернёт отрицательное значение.
+=======
+Please note:
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 ```smart header="Зачем вообще нужны зависимые свойства? Для чего существуют `top/left`, если есть `x/y`?"
 С математической точки зрения, прямоугольник однозначно задаётся начальной точкной `(x,y)` и вектором направления `(width,height)`.
 
 Так что дополнительные зависимые свойства существуют лишь для удобства.
 
+<<<<<<< HEAD
 Технически, значения `width/height` могут быть отрицательными, это позволяет задать "направленный" прямоугольник, например, для выделения мышью с отмеченным началом и концом.
+=======
+Technically it's possible for `width/height` to be negative, that allows for  "directed" rectangle, e.g. to represent mouse selection with properly marked start and end.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Вот прямоугольник с отрицательными `width` и `height` (например, `width=-200`, `height=-100`):
 
@@ -84,15 +111,25 @@ right:${r.right}
 
 Он начинается в своём правом-нижнем углу, и затем "растёт" влево-вверх, так как отрицательные `width/height` ведут его назад по координатам.
 
+<<<<<<< HEAD
 Как вы видите, свойства `left/top` здесь не равны `x/y`. То есть они не дублируют друг друга. Формулы выше могут быть исправлены с учётом возможных отрицательных значений `width/height`. Это достаточно просто сделать, но редко требуется, так как результат вызова `elem.getBoundingClientRect()` всегда возвращает положительные значения для ширины/высоты.
 
 Здесь мы упомянули отрицательные `width/height` лишь для того, чтобы вы поняли, почему эти с виду дублирующие свойства на самом деле не являются дубликатами.
+=======
+As you can see, `left/top` are not `x/y` here. So these are actually not duplicates. Their formula can be adjusted to cover negative `width/height`, that's simple enough, but rarely needed, as the result of `elem.getBoundingClientRect()` always has positive width/height.
+
+Here we mention negative `width/height` only for you to understand why these seemingly duplicate properties are not actually duplicates.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 ```
 
 ```warn header="Internet Explorer и Edge: не поддерживают `x/y`"
 Internet Explorer и Edge не поддерживают свойства `x/y` по историческим причинам.
 
+<<<<<<< HEAD
 Таким образом, мы можем либо сделать полифил (добавив соответствующие геттеры в `DomRect.prototype`), либо использовать `top/left`, так как это всегда одно и то же при положительных `width/height`, в частности - в результате вызова `elem.getBoundingClientRect()`.
+=======
+So we can either make a polywill (add getters in `DomRect.prototype`) or just use `top/left`, as they are always the same as `x/y` for positive `width/height`, in particular in the result of `elem.getBoundingClientRect()`.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 ```
 
 ```warn header="Координаты right/bottom отличаются от одноимённых CSS-свойств"
@@ -145,9 +182,15 @@ elem.style.background = ''; // Ошибка!
 
 ## Применение для fixed позиционирования
 
+<<<<<<< HEAD
 Чаще всего нам нужны координаты для позиционирования чего-либо.
 
 Чтобы показать что-то около нужного элемента, мы можем вызвать `getBoundingClientRect`, чтобы получить его координаты элемента, а затем использовать CSS-свойство `position` вместе с `left/top` (или `right/bottom`).
+=======
+Most of time we need coordinates in order to position something.
+
+To show something near an element, we can use `getBoundingClientRect` to get its coordinates, and then CSS `position` together with `left/top` (or `right/bottom`).
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Например, функция `createMessageUnder(elem, html)` ниже показывает сообщение под элементом `elem`:
 
@@ -222,7 +265,11 @@ function getCoords(elem) {
 }
 ```
 
+<<<<<<< HEAD
 Если бы в примере выше мы использовали её вместе с `position:absolute`, то при прокрутке сообщение оставалось бы рядом с элементом.
+=======
+If in the example above we used it with `position:absolute`, then the message would stay near the element on scroll.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Модифицированная функция `createMessageUnder`:
 
@@ -242,7 +289,11 @@ function createMessageUnder(elem, html) {
 }
 ```
 
+<<<<<<< HEAD
 ## Итого
+=======
+## Summary
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Любая точка на странице имеет координаты:
 

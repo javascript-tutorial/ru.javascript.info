@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 Нам нужно найти символ `#`, за которым следуют 6 шестнадцатеричных символов.
 
 Шестнадцатеричный символ может быть описан с помощью регулярного выражения как `pattern:[0-9a-fA-F]`. Или же как `pattern:[0-9a-f]`, если мы используем модификатор `i`.
+=======
+We need to look for `#` followed by 6 hexadecimal characters.
+
+A hexadecimal character can be described as `pattern:[0-9a-fA-F]`. Or if we use the `i` flag, then just  `pattern:[0-9a-f]`.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Затем мы можем добавить квантификатор `pattern:{6}`, так как нам нужно 6 таких символов.
 

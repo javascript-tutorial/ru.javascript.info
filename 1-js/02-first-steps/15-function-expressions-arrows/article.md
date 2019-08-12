@@ -22,9 +22,15 @@ let sayHi = function() {
 
 В коде выше функция создаётся и явно присваивается переменной, как любое другое значение. По сути без разницы, как мы определили функцию, это просто значение, хранимое в переменной `sayHi`.
 
+<<<<<<< HEAD
 Смысл обоих примеров кода одинаков: "создать функцию и поместить её значение в переменную `sayHi`".
 
 Мы можем даже вывести это значение с помощью `alert`:
+=======
+The meaning of these code samples is the same: "create a function and put it into the variable `sayHi`".
+
+We can even print out that value using `alert`:
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 ```js run
 function sayHi() {
@@ -67,14 +73,23 @@ sayHi(); // Привет   //     прежняя тоже работает (по
 
 ```js
 let sayHi = function() {
+<<<<<<< HEAD
   alert( "Привет" );
+=======
+  alert( "Hello" );
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 };
 
 let func = sayHi;
 // ...
 ```
 
+<<<<<<< HEAD
 Результат был бы таким же.
+=======
+Everything would work the same.
+
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 ````smart header="Зачем нужна точка с запятой в конце?"
 У вас мог возникнуть вопрос: Почему в Function Expression ставится точка с запятой `;` на конце, а в Function Declaration нет:
@@ -131,11 +146,19 @@ function showCancel() {
 ask("Вы согласны?", showOk, showCancel);
 ```
 
+<<<<<<< HEAD
 На практике подобные функции очень полезны. Основное отличие "реальной" функции `ask` от примера выше будет в том, что она использует более сложные способы взаимодействия с пользователем, чем простой вызов `confirm`. В браузерах такие функции обычно отображают красивые диалоговые окна. Но это уже другая история.
+=======
+In practice, such functions are quite useful. The major difference between a real-life `ask` and the example above is that real-life functions use more complex ways to interact with the user than a simple `confirm`. In the browser, such function usually draws a nice-looking question window. But that's another story.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 **Аргументы функции `ask` ещё называют *функциями-колбэками* или просто *колбэками*.**
 
+<<<<<<< HEAD
 Ключевая идея в том, что мы передаём функцию и ожидаем, что она вызовется обратно (от англ. "call back" - обратный вызов) когда-нибудь позже, если это будет необходимо. В нашем случае, `showOk` становится *колбэком*' для ответа "yes", а `showCancel` -- для ответа "no".
+=======
+The idea is that we pass a function and expect it to be "called back" later if necessary. In our case, `showOk` becomes the callback for "yes" answer, and `showCancel` for "no" answer.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Мы можем переписать этот пример значительно короче, используя Function Expression:
 
@@ -154,12 +177,21 @@ ask(
 */!*
 ```
 
+<<<<<<< HEAD
 
 Здесь функции объявляются прямо внутри вызова `ask(...)`. У них нет имён, поэтому они называются *анонимными*. Такие функции недоступны снаружи `ask` (потому что они не присвоены переменным), но это как раз то, что нам нужно.
+=======
+Here, functions are declared right inside the `ask(...)` call. They have no name, and so are called *anonymous*. Such functions are not accessible outside of `ask` (because they are not assigned to variables), but that's just what we want here.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Подобный код, появившийся в нашем скрипте выглядит очень естественно, в духе JavaScript.
 
+<<<<<<< HEAD
 
+=======
+```smart header="A function is a value representing an \"action\""
+Regular values like strings or numbers represent the *data*.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 ```smart header="Функция - это значение, представляющее \"действие\""
 Обычные значения, такие как строки или числа представляют собой *данные*.
@@ -454,11 +486,16 @@ alert( sum(1, 2) ); // 3
 ```smart header="Кое-что ещё"
 Здесь мы рассмотрели функции-стрелки как способ писать меньше букв. Но это далеко не всё! Стрелочные функции обладают другими интересными особенностями. Мы вернёмся к ним позже в главе <info:arrow-functions>.
 
+<<<<<<< HEAD
 А пока мы можем использовать их для простых однострочных действий и колбэков.
+=======
+For now, we can already use arrow functions for one-line actions and callbacks.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 ```
 
 ## Итого
 
+<<<<<<< HEAD
 - Функции - это значения. Они могут быть присвоены, скопированы или объявлены в другом месте кода.
 - Если функция объявлена как отдельная инструкция в основном потоке кода, то это Function Declaration.
 - Если функция была создана как часть выражения, то считается, что эта функция объявленна при помощи Function Expression.
@@ -466,6 +503,9 @@ alert( sum(1, 2) ); // 3
 - Функции, объявленные при помощи Function Expression, создаются, только когда поток выполнения достигает их.
 
 В большинстве случаев, когда нам нужно создать фукнцию, предпочтительно использовать Function Declaration, т.к. функция будет видима до своего объявления в коде. Это позволяет более гибко организовывать код, и улучшает его читаемость.
+=======
+In most cases when we need to declare a function, a Function Declaration is preferable, because it is visible prior to the declaration itself. That gives us more flexibility in code organization, and is usually more readable.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Таким образом, мы должны прибегать к объявлению функций при помощи Function Expression в случае, когда синтаксис Function Declaration не подходит для нашей задачи. Мы рассмотрели несколько таких примеров в этой главе, и рассмотрим их ещё больше в будущем.
 
