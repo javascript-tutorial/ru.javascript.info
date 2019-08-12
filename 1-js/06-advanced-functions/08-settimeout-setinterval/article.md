@@ -106,7 +106,7 @@ alert(timerId); // тот же идентификатор (не принимае
 
 ## setInterval
 
-Метод `setInterval` имеет какой же синтаксис как `setTimeout`:
+Метод `setInterval` имеет такой же синтаксис как `setTimeout`:
 
 ```js
 let timerId = setInterval(func|code, [delay], [arg1], [arg2], ...)
