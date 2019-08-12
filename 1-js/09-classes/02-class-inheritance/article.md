@@ -424,7 +424,7 @@ longEar.eat(); // Error: Maximum call stack size exceeded
 let animal = {
   name: "Животное",
   eat() {         // animal.eat.[[HomeObject]] == animal
-    alert(`${this.name} eats.`);
+    alert(`${this.name} ест.`);
   }
 };
 
