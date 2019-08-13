@@ -505,6 +505,8 @@ tree.sayHi();  // Я животное (?!?)
 
 Вот диаграмма происходящего:
 
+Here's the diagram of what happens:
+
 ![](super-homeobject-wrong.svg)
 
 
