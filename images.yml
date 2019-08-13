@@ -330,16 +330,28 @@ lexenv-nested-makecounter-6.svg:
   modified here: 'изменено здесь'
 
 proxy-inherit.svg:
-  _defaults:
+  '_name: &quot;Guest&quot;': '_name: "Гость"'
+  user (proxied):
+    text: 'user (прокси)'
     position: "center"
-  '_name: "Guest"': '_name: "Гость"'
-  '_name: "Admin"': '_name: "Админ"'
-  user (proxied): 'user (прокси)'
-  original user: 'исходный user'
+  original user:
+    text: 'исходный user'
+    position: "center"
+
+
+proxy-inherit-admin.svg:
+  '_name: &quot;Guest&quot;': '_name: "Гость"'
+  '_name: &quot;Admin&quot;': '_name: "Админ"'
+  user (proxied):
+    text: 'user (прокси)'
+    position: "center"
+  original user:
+    text: 'исходный user'
+    position: "center"
+
 
 selection-firefox.svg:
   selection: 'выделение'
-
 
 selection-direction-backward.svg:
   focus: 'фокус'
