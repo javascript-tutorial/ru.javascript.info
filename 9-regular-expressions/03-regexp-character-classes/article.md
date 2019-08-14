@@ -61,7 +61,7 @@ alert( str.match(reg) ); // CSS4
 Также мы можем использовать несколько символьных классов одновременно:
 
 ```js run
-alert( "Я люблю HTML5!".match(/\s\w\w\w\w\d/) ); // ' HTML5'
+alert( "I love HTML5!".match(/\s\w\w\w\w\d/) ); // ' HTML5'
 ```
 
 Соответствие (каждому символьному классу соответствует один символ результата):
@@ -74,11 +74,11 @@ alert( "Я люблю HTML5!".match(/\s\w\w\w\w\d/) ); // ' HTML5'
 
 Он обозначает не какой-то конкретный символ, а границу между символами.
 
-Например, `pattern:\bJava\b` соответствует` match:Java` в строке `subject:Привет, Java!`, но не в скрипте `subject: Привет, JavaScript!`.
+Например, `pattern:\bJava\b` соответствует` match:Java` в строке `subject:Hello, Java!`, но не в скрипте `subject: Hello, JavaScript!`.
 
 ```js run
-alert( "Привет, Java!".match(/\bJava\b/) ); // Java
-alert( "Привет, JavaScript!".match(/\bJava\b/) ); // null
+alert( "Hello, Java!".match(/\bJava\b/) ); // Java
+alert( "Hello, JavaScript!".match(/\bJava\b/) ); // null
 ```
 
 Граница имеет "нулевую ширину" в том смысле, что обычно символьный класс означает символ в результате (например, букву или цифру), но не в этом случае.
