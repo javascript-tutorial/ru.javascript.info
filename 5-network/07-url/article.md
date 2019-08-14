@@ -111,60 +111,64 @@ for(let [name, value] of url.searchParams) {
 }
 ```
 
+## Кодирование
 
-## Encoding
+Существует стандарт [RFC3986](https://tools.ietf.org/html/rfc3986), который определяет список разрешённых и запрещённых символов в URL.
 
-There's a standard [RFC3986](https://tools.ietf.org/html/rfc3986) that defines which characters are allowed and which are not.
+Запрещённые символы, например, нелатинские буквы и пробелы, должны быть закодированы -- заменены соответствующими кодами UTF-8 с префиксом `%`, например: `%20` (исторически сложилось так, что пробел в URL-адресе можно также кодировать симоволом `+`, но это исключение).
 
-Those that are not allowed, must be encoded, for instance non-latin letters and spaces - replaced with their UTF-8 codes, prefixed by `%`, such as `%20` (a space can be encoded by `+`, for historical reasons that's allowed in URL too).
-
-The good news is that `URL` objects handle all that automatically. We just supply all parameters unencoded, and then convert the URL to the string:
+К счастью, объекты `URL` делают всё это автоматически. Мы просто указываем параметры в обычном, незакодированном, виде, а затем конвертируем `URL` в строку:
 
 ```js run
-// using some cyrillic characters for this example
-
 let url = new URL('https://ru.wikipedia.org/wiki/Тест');
 
 url.searchParams.set('key', 'ъ');
 alert(url); //https://ru.wikipedia.org/wiki/%D0%A2%D0%B5%D1%81%D1%82?key=%D1%8A
 ```
-As you can see, both `Тест` in the url path and `ъ` in the parameter are encoded.
 
-### Encoding strings
+Как видно, слово `Тест` в пути URL-адреса и буква `ъ` в параметре закодированы.
 
-If we're using strings instead of URL objects, then we can encode manually using built-in functions:
+URL стал длиннее, так как каждая кириллическая буква представляется двумя байтами в кодировке UTF-8.
 
-- [encodeURI](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURI) - encode URL as a whole.
-- [decodeURI](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/decodeURI) - decode it back.
-- [encodeURIComponent](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent) - encode URL components, such as search parameters, or a hash, or a pathname.
-- [decodeURIComponent](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/decodeURIComponent) - decodes it back.
+### Кодирование в строках
 
-What's the difference between `encodeURIComponent` and `encodeURI`?
+Раньше, до того как появились объекты `URL`, люди использовали для URL-адресов обычные строки.
 
-That's easy to understand if we look at the URL, that's split into components in the picture above:
+Сейчас `URL` часто удобнее, но строки всё ещё можно использовать. Во многих случаях код с ними короче.
+
+Однако, если мы используем строку, то надо самим позаботиться о кодировании специальных символов.
+
+Для этого есть встроенные функции:
+
+- [encodeURI](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURI) - кодирует URL-адрес целиком.
+- [decodeURI](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/decodeURI) - декодирует URL-адрес целиком.
+- [encodeURIComponent](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent) - кодирует компонент URL, например, параметр, хеш, имя пути и т.п.
+- [decodeURIComponent](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/decodeURIComponent) - декодирует компонент URL.
+
+Возникает естественный вопрос: "Какая разница между `encodeURIComponent` и `encodeURI`? Когда использовать одну и другую функцию?"
+
+Это легко понять, если мы посмотрим на URL-адрес, разбитый на компоненты на рисунке выше:
 
 ```
 http://site.com:8080/path/page?p1=v1&p2=v2#hash
 ```
 
-As we can see, characters such as `:`, `?`, `=`, `&`, `#` are allowed in URL. Some others, including non-latin letters and spaces, must be encoded.
+Как мы видим, в URL-адресе разрешены символы `:`, `?`, `=`, `&`, `#`.
 
-That's what `encodeURI` does:
+...С другой стороны, если взглянуть на один компонент, например, URL-параметр, то в нём такие символы должны быть закодированы, чтобы не поломать форматирование.
+
+- `encodeURI` кодирует только символы, полностью запрещённые в URL.
+- `encodeURIComponent` кодирует эти же символы плюс, в дополнение к ним, символы  `#`, `$`, `&`, `+`, `,`, `/`, `:`, `;`, `=`, `?` и `@`.
+
+Так что для URL целиком можно использовать `encodeURI`:
 
 ```js run
-// using cyrcillic characters in url path
 let url = encodeURI('http://site.com/привет');
 
-// each cyrillic character is encoded with two %xx
-// together they form UTF-8 code for the character
 alert(url); // http://site.com/%D0%BF%D1%80%D0%B8%D0%B2%D0%B5%D1%82
 ```
 
-...On the other hand, if we look at a single URL component, such as a search parameter, we should encode more characters, e.g. `?`, `=` and `&` are used for formatting.
-
-That's what `encodeURIComponent` does. It encodes same characters as `encodeURI`, plus a lot of others, to make the resulting value safe to use in any URL component.
-
-For example:
+...А для параметров лучше будет взять `encodeURIComponent`:
 
 ```js run
 let music = encodeURIComponent('Rock&Roll');
@@ -173,7 +177,7 @@ let url = `https://google.com/search?q=${music}`;
 alert(url); // https://google.com/search?q=Rock%26Roll
 ```
 
-Compare with `encodeURI`:
+Сравните с `encodeURI`:
 
 ```js run
 let music = encodeURI('Rock&Roll');
@@ -182,30 +186,26 @@ let url = `https://google.com/search?q=${music}`;
 alert(url); // https://google.com/search?q=Rock&Roll
 ```
 
-As we can see, `encodeURI` does not encode `&`, as this is a legit character in URL as a whole.
+Как видим, функция `encodeURI` не закодировала символ `&`, который является разрешённым в составе полного URL-адреса.
 
-But we should encode `&` inside a search parameter, otherwise, we get `q=Rock&Roll` - that is actually `q=Rock` plus some obscure parameter `Roll`. Not as intended.
+Но внутри параметра поиска символ `&` должен быть закодирован, в противном случае мы получим `q=Rock&Roll`, что значит `q=Rock` плюс непонятный параметр `Roll`. Не то, что предполагалось.
 
-So we should use only `encodeURIComponent` for each search parameter, to correctly insert it in the URL string. The safest is to encode both name and value, unless we're absolutely sure that either has only allowed characters.
+Чтобы правильно вставить параметр поиска в строку URL, мы должны использовать для него только `encodeURIComponent`. Наиболее безопасно кодировать и имя, и значение, за исключением случаев, когда мы абсолютно уверены в том, что они содержат только разрешённые символы.
 
-### Why URL?
+````smart header="Разница в кодировании с `URL`"
+Классы [URL](https://url.spec.whatwg.org/#url-class) и [URLSearchParams](https://url.spec.whatwg.org/#interface-urlsearchparams) базируются на последней спецификации URI, описывающей устройство адресов: [RFC3986](https://tools.ietf.org/html/rfc3986), в то время как функции `encode*` -- на устаревшей версии стандарта [RFC2396](https://www.ietf.org/rfc/rfc2396.txt).
 
-Lots of old code uses these functions, these are sometimes convenient, and by no means not dead.
-
-But in modern code, it's recommended to use classes [URL](https://url.spec.whatwg.org/#url-class) and [URLSearchParams](https://url.spec.whatwg.org/#interface-urlsearchparams).
-
-One of the reason is: they are based on the recent URI spec: [RFC3986](https://tools.ietf.org/html/rfc3986), while `encode*` functions are based on the obsolete version [RFC2396](https://www.ietf.org/rfc/rfc2396.txt).
-
-For example, IPv6 addresses are treated differently:
+Различий мало, но они есть, например, по-разному кодируются адреса IPv6:
 
 ```js run
-// valid url with IPv6 address
+// допустимый URL-адрес IPv6
 let url = 'http://[2607:f8b0:4005:802::1007]/';
 
 alert(encodeURI(url)); // http://%5B2607:f8b0:4005:802::1007%5D/
 alert(new URL(url)); // http://[2607:f8b0:4005:802::1007]/
 ```
 
-As we can see, `encodeURI` replaced square brackets `[...]`, that's not correct, the reason is: IPv6 urls did not exist at the time of RFC2396 (August 1998).
+Как мы видим, функция `encodeURI` заменила квадратные скобки `[...]`, сделав адрес некорректным. Причина: URL-адреса IPv6 не существовали в момент создания стандарта RFC2396 (август 1998).
 
-Such cases are rare, `encode*` functions work well most of the time, it's just one of the reason to prefer new APIs.
+Тем не менее, такие случаи редки. По большей части функции `encode*` работают хорошо.
+````

@@ -66,7 +66,7 @@ elem.style.top = top; // например, '456px'
 
 Методы `classList`:
 
-- `elem.classList.add/remove("class")` -- добавить/удалить класса.
+- `elem.classList.add/remove("class")` -- добавить/удалить класс.
 - `elem.classList.toggle("class")` -- добавить класс, если его нет, иначе удалить.
 - `elem.classList.contains("class")` -- проверка наличия класса, возвращает `true/false`.
 
