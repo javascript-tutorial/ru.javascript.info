@@ -39,7 +39,7 @@ let promise = new Promise(function(resolve, reject) {
 - `state` ("состояние") — вначале `"pending"` ("ожидание"), потом меняется на  `"fulfilled"` ("выполнено успешно") при вызове `resolve` или на `"rejected"` ("выполнено с ошибкой") при вызове `reject`.
 - `result` ("результат") — вначале `undefined`, далее изменяется на `value` при вызове `resolve(value)` или на `error` при вызове `reject(error)`.
 
-Так что исполнитель по итогу переводит `promise` одно из двух состояний:
+Так что исполнитель по итогу переводит `promise` в одно из двух состояний:
 
 ![](promise-resolve-reject.svg)
 
