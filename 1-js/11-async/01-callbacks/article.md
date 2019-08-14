@@ -223,6 +223,30 @@ loadScript('1.js', function(error, script) {
 
 Иногда это называют «адом колбэков» или «адской пирамидой колбэков».
 
+<!--
+loadScript('1.js', function(error, script) {
+  if (error) {
+    handleError(error);
+  } else {
+    // ...
+    loadScript('2.js', function(error, script) {
+      if (error) {
+        handleError(error);
+      } else {
+        // ...
+        loadScript('3.js', function(error, script) {
+          if (error) {
+            handleError(error);
+          } else {
+            // ...
+          }
+        });
+      }
+    })
+  }
+});
+-->
+
 ![](callback-hell.svg)
 
 Пирамида вложенных вызовов растет вправо с каждым асинхронным действием. В итоге вы сами будете путаться, где что есть.
