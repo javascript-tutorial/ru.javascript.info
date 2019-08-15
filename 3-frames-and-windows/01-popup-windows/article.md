@@ -136,7 +136,7 @@ newWin.document.write("Hello, world!");
 let newWindow = open('/', 'example', 'width=300,height=300')
 newWindow.focus();
 
-alert(newWin.location.href); // (*) about:blank, загрузка ещё не началась
+alert(newWindow.location.href); // (*) about:blank, загрузка ещё не началась
 
 newWindow.onload = function() {
   let html = `<div style="font-size:30px">Добро пожаловать!</div>`;
