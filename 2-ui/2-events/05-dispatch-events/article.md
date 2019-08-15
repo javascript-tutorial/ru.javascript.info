@@ -206,7 +206,7 @@ alert(event.clientX); // undefined, неизвестное свойство пр
 </script>
 ```
 
-Please note: the event must have `cancelable: true` flag. Otherwise, `event.preventDefault()` is silently ignored.
+Обратите внимание: событие должно содержать флаг `cancelable: true`. Иначе, `event.preventDefault()` будет проигнорирован.
 
 ## Вложенные события обрабатываются синхронно
 
