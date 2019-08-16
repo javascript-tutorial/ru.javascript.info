@@ -380,7 +380,7 @@ alert( "Widget".endsWith("get") ); // true, "get" — окончание "Widget
 
 В JavaScript есть 3 метода для получения подстроки: `substring`, `substr` и `slice`.
 
-`str.slice(start [, end])`
+`str.slice(start, end)`
 : Возвращает часть строки от `start` до (не включая) `end`.
 
     Например:
@@ -409,7 +409,7 @@ alert( "Widget".endsWith("get") ); // true, "get" — окончание "Widget
     alert( str.slice(-4, -1) ); // gif
     ```
 
-`str.substring(start [, end])`
+`str.substring(start, end)`
 : Возвращает часть строки *между* `start` и `end`.
 
     Это — почти то же, что и `slice`, но можно задавать `start` больше `end`.
@@ -431,7 +431,7 @@ alert( "Widget".endsWith("get") ); // true, "get" — окончание "Widget
 
     Отрицательные значения `substring`, в отличие от `slice`, не поддерживает, они интерпретируются как `0`.
 
-`str.substr(start [, length])`
+`str.substr(start, length)`
 : Возвращает часть строки от `start` длины `length`.
 
     В противоположность предыдущим методам, этот позволяет указать длину вместо конечной позиции:
