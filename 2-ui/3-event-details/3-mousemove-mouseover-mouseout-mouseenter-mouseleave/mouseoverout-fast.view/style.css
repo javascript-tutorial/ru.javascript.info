@@ -1,23 +1,22 @@
-#green {
-  height: 50px;
-  width: 160px;
+#parent {
   background: green;
+  width: 160px;
+  height: 120px;
+  position: relative;
 }
 
-#red {
-  height: 20px;
-  width: 110px;
+#child {
   background: red;
-  color: white;
-  font-weight: bold;
-  padding: 5px;
-  text-align: center;
-  margin: 20px;
+  width: 50%;
+  height: 50%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
-#text {
-  font-size: 12px;
-  height: 200px;
-  width: 360px;
+textarea {
+  height: 140px;
+  width: 300px;
   display: block;
 }
