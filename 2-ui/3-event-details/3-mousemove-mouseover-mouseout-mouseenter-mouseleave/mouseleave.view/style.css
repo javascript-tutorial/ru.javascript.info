@@ -1,12 +1,12 @@
 #parent {
-  background: green;
+  background: #D8D8D8;
   width: 160px;
   height: 120px;
   position: relative;
 }
 
 #child {
-  background: red;
+  background: #CFCE95;
   width: 50%;
   height: 50%;
   position: absolute;
