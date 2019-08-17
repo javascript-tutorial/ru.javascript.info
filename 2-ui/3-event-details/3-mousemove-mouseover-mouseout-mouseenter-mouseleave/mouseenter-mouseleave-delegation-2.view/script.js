@@ -28,17 +28,15 @@ table.onmouseout = function(event) {
   // например с <tr> на другой <tr>
   if (!currentElem) return;
 
-  // мы покидаем элемент -- но куда? Возможно, на потомка?
+  // мы покидаем элемент – но куда? Возможно, на потомка?
   let relatedTarget = event.relatedTarget;
 
-  if (relatedTarget) { // возможно: relatedTarget = null
-    while (relatedTarget) {
-      // поднимаемся по дереву элементов и проверяем -- внутри ли мы currentElem или нет
-      // если да, то это переход внутри элемента -- игнорируем
-      if (relatedTarget == currentElem) return;
-      
-      relatedTarget = relatedTarget.parentNode;
-    }
+  while (relatedTarget) {
+    // поднимаемся по дереву элементов и проверяем – внутри ли мы currentElem или нет
+    // если да, то это переход внутри элемента – игнорируем
+    if (relatedTarget == currentElem) return;
+
+    relatedTarget = relatedTarget.parentNode;
   }
 
   // мы действительно покинули элемент
