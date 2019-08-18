@@ -441,7 +441,7 @@ function showMessage(message) {
 ```js
 var WebSocketServer = new require('ws');
 
-// подключенные клиенты
+// подключённые клиенты
 var clients = {};
 
 // WebSocket-сервер на порту 8081
