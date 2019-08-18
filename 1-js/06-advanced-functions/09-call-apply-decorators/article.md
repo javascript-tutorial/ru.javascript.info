@@ -69,7 +69,7 @@ alert( "Again: " + slow(2) ); // возвращаем кеш
 Например, в приведённом ниже коде `worker.slow()` перестаёт работать после применения декоратора:
 
 ```js run
-// зделаем worker.slow кеширующим
+// сделаем worker.slow кеширующим
 let worker = {
   someMethod() {
     return 1;
