@@ -368,7 +368,7 @@ function pow(x, n) {
 }
 ```
 
-Теперь работат, все тесты проходят:
+Теперь работает, все тесты проходят:
 
 [iframe height=300 src="pow-full" edit border="1"]
 
