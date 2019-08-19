@@ -159,7 +159,11 @@ let user = {
 };
 
 let key = "name";
+<<<<<<< HEAD
 alert( user.key ); // undefined
+=======
+alert( user.key ) // undefined
+>>>>>>> 852ee189170d9022f67ab6d387aeae76810b5923
 ```
 
 ### Вычисляемые свойства

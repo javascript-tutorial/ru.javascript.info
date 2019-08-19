@@ -309,8 +309,12 @@ for (let i = 0; i < 3; i++) {
 
     let input = prompt(`Значение на координатах (${i},${j})`, '');
 
+<<<<<<< HEAD
     // Что если мы захотим перейти к Готово (ниже) прямо отсюда?
 
+=======
+    // what if we want to exit from here to Done (below)?
+>>>>>>> 852ee189170d9022f67ab6d387aeae76810b5923
   }
 }
 

@@ -2,13 +2,21 @@
 
 В JavaScript можно наследовать только от одного объекта. Объект имеет единственный `[[Prototype]]`. И класс может расширить только один другой класс.
 
+<<<<<<< HEAD
 Иногда это может ограничивать нас. Например, у нас есть класс `StreetSweeper` и класс `Bicycle`, а мы хотим создать их смесь: `StreetSweepingBicycle`.
+=======
+But sometimes that feels limiting. For instance, we have a class `StreetSweeper` and a class `Bicycle`, and want to make their mix: a `StreetSweepingBicycle`.
+>>>>>>> 852ee189170d9022f67ab6d387aeae76810b5923
 
 Или у нас есть класс `User`, который реализует пользователей, и класс `EventEmitter`, реализующий события. Мы хотели бы добавить функционал класса `EventEmitter` к `User`, чтобы пользователи могли легко генерировать события.
 
 Для таких случаев существуют "примеси".
 
+<<<<<<< HEAD
 По определению из Википедии, [примесь](https://ru.wikipedia.org/wiki/%D0%9F%D1%80%D0%B8%D0%BC%D0%B5%D1%81%D1%8C_(%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5)) - это класс, методы которого предназначены для использования в других классах, причём без наследования от примеси.
+=======
+As defined in Wikipedia, a [mixin](https://en.wikipedia.org/wiki/Mixin) is a class containing methods that can be used by other classes without a need to inherit from it.
+>>>>>>> 852ee189170d9022f67ab6d387aeae76810b5923
 
 Другими словами, *примесь* определяет методы, которые реализуют определённое поведение. Мы не используем примесь саму по себе, а используем, чтобы добавить функционал другим классам.
 

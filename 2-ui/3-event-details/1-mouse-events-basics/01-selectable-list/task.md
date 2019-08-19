@@ -13,6 +13,12 @@ importance: 5
 
 [iframe border="1" src="solution" height=180]
 
+<<<<<<< HEAD
 P.S. В этом задании все элементы списка содержат только текст. Без вложенных тегов.
 
 P.P.S. Предотвратите стандартное для браузера выделение текста при кликах.
+=======
+P.S. For this task we can assume that list items are text-only. No nested tags.
+
+P.P.S. Prevent the native browser selection of the text on clicks.
+>>>>>>> 852ee189170d9022f67ab6d387aeae76810b5923

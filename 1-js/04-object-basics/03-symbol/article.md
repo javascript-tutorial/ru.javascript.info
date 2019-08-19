@@ -3,11 +3,19 @@
 
 По спецификации, в качестве ключей для свойств объекта могут использоваться только строки либо символы. Ни числа, ни логические значения не подходят, разрешены только эти два типа данных.
 
+<<<<<<< HEAD
 До сих пор мы видели только строки. Теперь давайте разберём символы, увидим, что хорошего они нам дают.
+=======
+Till now we've been using only strings. Now let's see the benefits that symbols can give us.
+>>>>>>> 852ee189170d9022f67ab6d387aeae76810b5923
 
 ## Символы
 
+<<<<<<< HEAD
 "Символ" представляет собой уникальный идентификатор.
+=======
+A "symbol" represents a unique identifier.
+>>>>>>> 852ee189170d9022f67ab6d387aeae76810b5923
 
 Создаются новые символы с помощью функции `Symbol()`:
 
@@ -52,7 +60,11 @@ alert(id); // TypeError: Cannot convert a Symbol value to a string
 
 Это -- языковая "защита" от путаницы, ведь строки и символы -- принципиально разные типы данных и не должны неконтролируемо преобразовываться друг в друга.
 
+<<<<<<< HEAD
 Если же мы действительно хотим вывести символ с помощью `alert`, то необходимо явно преобразовать его с помощью метода `.toString()`, вот так:
+=======
+If we really want to show a symbol, we need to explicitly call `.toString()` on it, like here:
+>>>>>>> 852ee189170d9022f67ab6d387aeae76810b5923
 ```js run
 let id = Symbol("id");
 *!*
@@ -60,7 +72,11 @@ alert(id.toString()); // Symbol(id), теперь работает
 */!*
 ```
 
+<<<<<<< HEAD
 Или мы можем обратиться к свойству `symbol.description`, чтобы вывести только описание:
+=======
+Or get `symbol.description` property to show the description only:
+>>>>>>> 852ee189170d9022f67ab6d387aeae76810b5923
 ```js run
 let id = Symbol("id");
 *!*
@@ -74,20 +90,33 @@ alert(id.description); // id
 
 Символы позволяют создавать "скрытые" свойства объектов, к которым нельзя нечаянно обратиться и перезаписать их из других частей программы.
 
+<<<<<<< HEAD
 Например, мы работаем с объектами `user`, которые принадлежат стороннему коду. Мы хотим добавить к ним идентификаторы.
+=======
+For instance, if we're working with `user` objects, that belong to a third-party code. We'd like to add identifiers to them.
+>>>>>>> 852ee189170d9022f67ab6d387aeae76810b5923
 
 Используем для этого символьный ключ:
 
 ```js run
+<<<<<<< HEAD
 let user = {
   name: "Вася"
+=======
+let user = { // belongs to another code
+  name: "John"
+>>>>>>> 852ee189170d9022f67ab6d387aeae76810b5923
 };
 
 let id = Symbol("id");
 
 user[id] = 1;
 
+<<<<<<< HEAD
 alert( user[id] ); // мы можем получить доступ к данным по ключу-символу
+=======
+alert( user[id] ); // we can access the data using the symbol as the key
+>>>>>>> 852ee189170d9022f67ab6d387aeae76810b5923
 ```
 
 Почему же лучше использовать `Symbol("id")`, а не строку `"id"`?
@@ -112,6 +141,7 @@ user[id] = "Их идентификатор";
 ```js run
 let user = { name: "Вася" };
 
+<<<<<<< HEAD
 // Объявляем в нашем скрипте свойство "id"
 user.id = "Наш идентификатор";
 
@@ -119,6 +149,15 @@ user.id = "Наш идентификатор";
 
 user.id = "Их идентификатор"
 // Ой! Свойство перезаписано сторонней библиотекой!
+=======
+// Our script uses "id" property
+user.id = "Our id value";
+
+// ...Another script also wants "id" for its purposes...
+
+user.id = "Their id value"
+// Boom! overwritten by another script!
+>>>>>>> 852ee189170d9022f67ab6d387aeae76810b5923
 ```
 
 ### Символы в литеральном объекте
@@ -133,7 +172,11 @@ let id = Symbol("id");
 let user = {
   name: "Вася",
 *!*
+<<<<<<< HEAD
   [id]: 123 // просто "id: 123" не сработает
+=======
+  [id]: 123 // not "id: 123"
+>>>>>>> 852ee189170d9022f67ab6d387aeae76810b5923
 */!*
 };
 ```

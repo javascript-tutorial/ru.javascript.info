@@ -16,11 +16,21 @@
 
 В общем, событие `progress` подходит только для того, чтобы показывать красивый индикатор загрузки, не более.
 
+<<<<<<< HEAD
 Для возобновления же загрузки нужно *точно* знать, сколько байт было получено сервером. И только сам сервер может это сказать, поэтому будем делать для этого отдельный запрос.
 
 ## Алгоритм
 
 1. Во-первых, создадим уникальный идентификатор для файла, который собираемся загружать:
+=======
+That's why this event is only useful to show a nice progress bar.
+
+To resume upload, we need to know *exactly* the number of bytes received by the server. And only the server can tell that, so we'll make an additional request.
+
+## Algorithm
+
+1. First, create a file id, to uniquely identify the file we're going to upload:
+>>>>>>> 852ee189170d9022f67ab6d387aeae76810b5923
     ```js
     let fileId = file.name + '-' + file.size + '-' + +file.lastModifiedDate;
     ```
@@ -28,7 +38,13 @@
 
     Если имя или размер или дата модификация файла изменятся, то у него уже будет другой `fileId`.
 
+<<<<<<< HEAD
 2. Далее, посылаем запрос к серверу с просьбой указать количество уже полученных байтов:
+=======
+    If the name or the size or the last modification date changes, then there'll be another `fileId`.
+
+2. Send a request to the server, asking how many bytes it already has, like this:
+>>>>>>> 852ee189170d9022f67ab6d387aeae76810b5923
     ```js
     let response = await fetch('status', {
       headers: {
@@ -44,6 +60,7 @@
 
     Если файл серверу неизвестен, то он должен ответить `0`.
 
+<<<<<<< HEAD
 3. Затем мы можем использовать метод `slice` объекта `Blob`, чтобы отправить данные, начиная со `startByte` байта:
     ```js
     xhr.open("POST", "upload", true);
@@ -53,10 +70,22 @@
 
     // Номер байта, начиная с которого мы будем отправлять данные.
     // Таким образом, сервер поймёт, с какого момента мы возобновляем загрузку
+=======
+    If the file don't yet exist at the server, then the server response should be `0`
+
+3. Then, we can use `Blob` method `slice` to send the file from `startByte`:
+    ```js
+    xhr.open("POST", "upload", true);
+
+    // File id, so that the server knows which file we upload
+    xhr.setRequestHeader('X-File-Id', fileId);
+
+    // The byte we're resuming from, so the server knows we're resuming
+>>>>>>> 852ee189170d9022f67ab6d387aeae76810b5923
     xhr.setRequestHeader('X-Start-Byte', startByte);
 
     xhr.upload.onprogress = (e) => {
-      console.log(`Uploaded ${startByte + e.loaded} of ${startByte + e.total}`);
+      console.log(`Отправлено ${startByte + e.loaded} из ${startByte + e.total}`);
     };
 
     // файл file может быть взят из input.files[0] или другого источника
@@ -76,6 +105,12 @@
 
 [codetabs src="upload-resume" height=200]
 
+<<<<<<< HEAD
 Как видим, современные методы работы с сетью очень близки по своим возможностям к файловым менеджерам -- контроль заголовков, индикация прогресса загрузки, отправка данных по частям и так далее.
 
 Можно реализовать и возобновляемую отправку и многое другое.
+=======
+As we can see, modern networking methods are close to file managers in their capabilities -- control over headers, progress indicator, sending file parts, etc.
+
+We can implement resumable upload and much more.
+>>>>>>> 852ee189170d9022f67ab6d387aeae76810b5923
