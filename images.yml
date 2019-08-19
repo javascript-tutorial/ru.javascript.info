@@ -194,7 +194,7 @@ xhr-another-domain.svg:
   HTTP-request: 'HTTP-запрос'
   HTTP-response: 'HTTP-ответ'
   '* OR https://javascript.info': '* ИЛИ https://javascript.info'
-  'if the header allows, success,': 'если заголовок разрешает, успех'
+  'if the header allows, then success,': 'если заголовок разрешает, то успех'
   otherwise fail: 'иначе ошибка'
 
 xhr-preflight.svg:
@@ -204,10 +204,14 @@ xhr-preflight.svg:
   Server: 'Сервер'
   Main HTTP-response: 'Основной HTTP-ответ'
   otherwise error: 'иначе ошибка'
-  'if allowed: success,': 'если разрешено, успех,'
+  'if allowed: success,': 'если разрешено, то успех,'
   Main HTTP-request: 'Основной HTTP-запрос'
-  preflight: 'предзапрос'
-  if allowed: 'если разрешено'
+  preflight:
+    text: 'предзапрос'
+    position: 'right'
+  if allowed:
+    text: 'если разрешено'
+    position: 'right'
 
 cors-gmail-messages.svg:
   _defaults:
@@ -326,16 +330,28 @@ lexenv-nested-makecounter-6.svg:
   modified here: 'изменено здесь'
 
 proxy-inherit.svg:
-  _defaults:
+  '_name: &quot;Guest&quot;': '_name: "Гость"'
+  user (proxied):
+    text: 'user (прокси)'
     position: "center"
-  '_name: "Guest"': '_name: "Гость"'
-  '_name: "Admin"': '_name: "Админ"'
-  user (proxied): 'user (прокси)'
-  original user: 'исходный user'
+  original user:
+    text: 'исходный user'
+    position: "center"
+
+
+proxy-inherit-admin.svg:
+  '_name: &quot;Guest&quot;': '_name: "Гость"'
+  '_name: &quot;Admin&quot;': '_name: "Админ"'
+  user (proxied):
+    text: 'user (прокси)'
+    position: "center"
+  original user:
+    text: 'исходный user'
+    position: "center"
+
 
 selection-firefox.svg:
   selection: 'выделение'
-
 
 selection-direction-backward.svg:
   focus: 'фокус'

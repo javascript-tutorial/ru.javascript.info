@@ -1,4 +1,4 @@
-Пройдем циклом по всем элементам `<li>`:
+Пройдём циклом по всем элементам `<li>`:
 
 ```js
 for (let li of document.querySelectorAll('li')) {

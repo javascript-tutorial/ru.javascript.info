@@ -22,6 +22,6 @@ document.body.children[1]
 Второй `<li>` (с именем Пит):
 
 ```js
-// получаем <ul>, и его последнего ребенка
+// получаем <ul>, и его последнего ребёнка
 document.body.lastElementChild.lastElementChild
 ```

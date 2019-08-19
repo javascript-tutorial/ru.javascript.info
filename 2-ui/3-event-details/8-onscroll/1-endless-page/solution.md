@@ -8,12 +8,12 @@
 
 Документ представлен тегом `<html>` (и содержится в нём же), который доступен как `document.documentElement`.
 
-Мы можем получить координаты относительно окна как `document.documentElement.getBoundingClientRect()`. И свойство `bottom` будет координатой конца документа (относительно окна).
+Так что мы можем получить его координаты относительно окна как `document.documentElement.getBoundingClientRect()`, свойство `bottom` будет координатой нижней границы документа относительно окна.
 
-Например, если высота всего HTML-документа 2000px, тогда:
+Например, если высота всего HTML-документа `2000px`, тогда:
 
 ```js
-// Когда мы находимся вверху страницы
+// когда мы находимся вверху страницы
 // координата top относительно окна равна 0
 document.documentElement.getBoundingClientRect().top = 0
 
@@ -41,26 +41,25 @@ document.documentElement.getBoundingClientRect().top = -1400
 document.documentElement.getBoundingClientRect().bottom = 600
 ```
 
-Пожалуйста, обратите внимание, что bottom не может быть 0, потому что низ документа никогда не достигнет верха окна. Нижним пределом координаты bottom является высота окна, больше прокручивать вверх нельзя.
+Пожалуйста, обратите внимание, что `bottom` не может быть `0`, потому что низ документа никогда не достигнет верха окна. Нижним пределом координаты `bottom` является высота окна (выше мы предположили, что это `600`), больше прокручивать вверх нельзя.
 
-А высота окна -- `document.documentElement.clientHeight`.
+Получить высоту окна можно как `document.documentElement.clientHeight`.
 
-Мы хотим, чтобы до нижней границы документа оставалось не более `100px`.
+Для нашей задачи мы хотим знать, когда нижняя граница документа находится не более чем в  `100px` от неё (т.е. `600-700px`, если высота `600`).
 
 Итак, вот функция:
 
 ```js
 function populate() {
   while(true) {
-    // низ документа
+    // нижняя граница документа
     let windowRelativeBottom = document.documentElement.getBoundingClientRect().bottom;
 
-    // если он больше, чем высота окна + 100px, тогда мы не в конце страницы
-    // (смотрите примеры выше, большое значение bottom означает, что нужно прокрутить ещё)
-    if (windowRelativeBottom > document.documentElement.clientHeight + 100) break;
-
-    // иначе, добавим больше данных
-    document.body.insertAdjacentHTML("beforeend", `<p>Date: ${new Date()}</p>`);
+    // если пользователь прокрутил достаточно далеко (< 100px до конца)
+    if (windowRelativeBottom < document.documentElement.clientHeight + 100) {
+      // добавим больше данных
+      document.body.insertAdjacentHTML("beforeend", `<p>Дата: ${new Date()}</p>`);
+    }
   }
 }
 ```

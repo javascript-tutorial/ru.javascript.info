@@ -235,7 +235,7 @@ option = new Option(text, value, defaultSelected, selected);
 
 Параметры:
 
-- `text` -- текст внутри <option>,
+- `text` -- текст внутри `<option>`,
 - `value` -- значение,
 - `defaultSelected` -- если `true`, то ставится HTML-атрибут `selected`,
 - `selected` -- если `true`, то <option> будет выбранным.

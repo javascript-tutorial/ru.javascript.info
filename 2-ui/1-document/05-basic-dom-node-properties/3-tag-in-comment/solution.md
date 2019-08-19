@@ -1,4 +1,4 @@
-The answer: **`BODY`**.
+Ответ: **`BODY`**.
 
 ```html run
 <script>
