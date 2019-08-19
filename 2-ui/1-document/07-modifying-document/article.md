@@ -92,7 +92,7 @@ div.innerHTML = "<strong>Всем привет!</strong> Вы прочитали
 
 Вот методы для различных вариантов вставки:
 
-- `node.append(...узлы или строки)` -- добавляет узлы или строки в конец `node`,
+- `node.append(...nodes or strings)` -- добавляет узлы или строки в конец `node`,
 - `node.prepend(...nodes or strings)` -- вставляет узлы или строки в начало `node`,
 - `node.before(...nodes or strings)` –- вставляет узлы или строки до `node`,
 - `node.after(...nodes or strings)` –- вставляет узлы или строки после `node`,

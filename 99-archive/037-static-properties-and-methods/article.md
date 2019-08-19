@@ -147,7 +147,7 @@ alert( *!*Journal.formatDate(new Date)*/!* );
 
 **"Фабричный статический метод" -- удобная альтернатива такому конструктору. Так называется статический метод, который служит для создания новых объектов (поэтому и называется "фабричным").**
 
-Пример встроенного фабричного метода -- [String.fromCharCode(code)](http://javascript.ru/String.fromCharCode). Этот метод создает строку из кода символа:
+Пример встроенного фабричного метода -- [String.fromCharCode(code)](http://javascript.ru/String.fromCharCode). Этот метод создаёт строку из кода символа:
 
 ```js run
 var str = String.fromCharCode(65);

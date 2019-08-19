@@ -1,4 +1,4 @@
- green.onmouseover = green.onmouseout = green.onmousemove = handler;
+ parent.onmouseover = parent.onmouseout = parent.onmousemove = handler;
 
  function handler(event) {
    let type = event.type;

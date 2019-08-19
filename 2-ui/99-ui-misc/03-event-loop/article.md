@@ -89,7 +89,7 @@ let start = Date.now();
 
 function count() {
 
-  // делаем часть тяжелой работы (*)
+  // делаем часть тяжёлой работы (*)
   do {
     i++;
   } while (i % 1e6 != 0);
@@ -303,7 +303,7 @@ alert("code");
 
 ## Итого
 
-Более подробный алгоритм событийного цикла (хоть и упрощенный в сравнении со [спецификацией](https://html.spec.whatwg.org/multipage/webappapis.html#event-loop-processing-model)):
+Более подробный алгоритм событийного цикла (хоть и упрощённый в сравнении со [спецификацией](https://html.spec.whatwg.org/multipage/webappapis.html#event-loop-processing-model)):
 
 1. Выбрать и исполнить старейшую задачу из очереди *макрозадач* (например, "script").
 2. Исполнить все *микрозадачи*:

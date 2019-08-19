@@ -2,13 +2,13 @@ importance: 5
 
 ---
 
-# Partial application for login
+# Использование частично применённой функции для логина
 
-The task is a little more complex variant of <info:task/question-use-bind>. 
+Это задание является немного усложнённым вариантом одного из предыдущих -- <info:task/question-use-bind>.
 
-The `user` object was modified. Now instead of two functions `loginOk/loginFail`, it has a single function `user.login(true/false)`.
+Объект `user` был изменён. Теперь вместо двух функций `loginOk/loginFail` у него есть только одна -- `user.login(true/false)`.
 
-What to pass `askPassword` in the code below, so that it calls `user.login(true)` as `ok` and `user.login(false)` as `fail`?
+Что нужно передать в вызов функции `askPassword` в коде ниже, чтобы она могла вызывать функцию `user.login(true)` как `ok` и функцию `user.login(false)` как `fail`?
 
 ```js
 function askPassword(ok, fail) {
@@ -30,5 +30,4 @@ askPassword(?, ?); // ?
 */!*
 ```
 
-Your changes should only modify the highlighted fragment.
-
+Ваши изменения должны затрагивать только выделенный фрагмент кода.
