@@ -95,7 +95,7 @@ let user = {
 };
 
 // демонстрация результатов преобразований:
-alert(user); // hint: string -> {name: "John"}
+alert(`${user}`); // hint: string -> {name: "John"}
 alert(+user); // hint: number -> 1000
 alert(user + 500); // hint: default -> 1500
 ```
