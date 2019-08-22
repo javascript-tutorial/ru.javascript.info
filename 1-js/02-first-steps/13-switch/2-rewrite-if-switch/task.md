@@ -7,16 +7,16 @@ importance: 4
 Перепишите код с использованием одной конструкции `switch`:
 
 ```js run
-let a = +prompt('a?', '');
+const number = +prompt('Number between 0 and 3', '');
 
-if (a == 0) {
+if (number == 0) {
   alert( 0 );
 }
-if (a == 1) {
+if (number == 1) {
   alert( 1 );
 }
 
-if (a == 2 || a == 3) {
+if (number == 2 || number == 3) {
   alert( '2,3' );
 }
 ```
