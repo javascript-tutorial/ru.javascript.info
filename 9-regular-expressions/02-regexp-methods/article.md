@@ -365,8 +365,8 @@ let result;
 
 while (result = regexp.exec(str)) {
   alert( `Найдено ${result[0]} на позиции ${result.index}` );
-  // показывает: Найдено JavaScript на позиции 0, затем
-  // показывает: Найдено javascript на позиции 15
+  // показывает: Найдено JavaScript на позиции 9, затем
+  // показывает: Найдено javascript на позиции 31
 }
 ```
 
