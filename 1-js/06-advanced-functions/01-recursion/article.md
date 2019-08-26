@@ -336,7 +336,11 @@ let company = {
 
 Случай (1), когда мы получили массив, является базой рекурсии, тривиальным случаем.
 
+<<<<<<< HEAD
 Случай (2), при получении объекта, является шагом рекурсии. Сложная задача разделяется на подзадачи для подотделов. Они могут, в свою очередь, снова разделиться на подотделы, но рано или поздно это разделение закончится и решение сведётся к случаю (1).
+=======
+The 2nd case when we get an object is the recursive step. A complex task is split into subtasks for smaller departments. They may in turn split again, but sooner or later the split will finish at (1).
+>>>>>>> 8c30654f694fe8682f5631809980be931ee4ed72
 
 Алгоритм даже проще читается в виде кода:
 

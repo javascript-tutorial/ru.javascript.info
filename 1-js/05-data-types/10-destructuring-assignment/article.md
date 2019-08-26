@@ -427,7 +427,11 @@ function showMenu(title = "Untitled", width = 200, height = 100, items = []) {
 Разве что вот так?
 
 ```js
+<<<<<<< HEAD
 // undefined там, где подходят значения по умолчанию
+=======
+// undefined where default values are fine
+>>>>>>> 8c30654f694fe8682f5631809980be931ee4ed72
 showMenu("My Menu", undefined, undefined, ["Item1", "Item2"])
 ```
 

@@ -57,7 +57,11 @@ blob.slice([byteStart], [byteEnd], [contentType]);
 
 ## Blob как URL
 
+<<<<<<< HEAD
 Blob может быть использован как URL для `<a>`, `<img>` или других тегов, для показа содержимого.
+=======
+Thanks to `type`, we can also download/upload blobs, and it naturally becomes `Content-Type` in network requests.
+>>>>>>> 8c30654f694fe8682f5631809980be931ee4ed72
 
 Давайте начнём с простого примера. При клике на ссылку мы загружаем динамически генерируемый Blob с `hello world` содержимым как файл:
 

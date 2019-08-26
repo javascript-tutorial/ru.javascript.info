@@ -2,8 +2,13 @@
 
 Существует два набора методов для работы с регулярными выражениями.
 
+<<<<<<< HEAD
 1. Во-первых, регулярные выражения являются объектами встроенного класса [RegExp](mdn:js/RegExp), он предоставляет много методов.
 2. Кроме того, в обычных строках есть методы, которые могут работать с регулярными выражениями.
+=======
+1. First, regular expressions are objects of the built-in [RegExp](mdn:js/RegExp) class, which provides many methods.
+2. Additionally, there are methods in regular strings that can work with regexps.
+>>>>>>> 8c30654f694fe8682f5631809980be931ee4ed72
 
 
 ## Рекомендации

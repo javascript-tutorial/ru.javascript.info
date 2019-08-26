@@ -13,9 +13,19 @@ JavaScript может отправлять сетевые запросы на с
 
 Есть несколько способов делать сетевые запросы и получать информацию с сервера.
 
+<<<<<<< HEAD
 Метод `fetch()` — современный и очень мощный, поэтому начнём с него. Он не поддерживается старыми (можно использовать полифил), но поддерживается всеми современными браузерами.
 
 Базовый синтаксис:
+=======
+There's an umbrella term "AJAX" (abbreviated <b>A</b>synchronous <b>J</b>avaScript <b>A</b>nd <b>X</b>ML) for network requests from JavaScript. We don't have to use XML though: the term comes from old times, that's why that word is there. You may have heard that term already.
+
+There are multiple ways to send a network request and get information from the server.
+
+The `fetch()` method is modern and versatile, so we'll start with it. It's not supported by old browsers (can be polyfilled), but very well supported among the modern ones.
+
+The basic syntax is:
+>>>>>>> 8c30654f694fe8682f5631809980be931ee4ed72
 
 ```js
 let promise = fetch(url, [options])
@@ -26,11 +36,21 @@ let promise = fetch(url, [options])
 
 Без `options` это простой GET-запрос, скачивающий содержимое по адресу `url`.
 
+<<<<<<< HEAD
 Браузер сразу же начинает запрос и возвращает промис, который внешний код использует для получения результата.
+=======
+Without `options`, that is a simple GET request, downloading the contents of the `url`.
+
+The browser starts the request right away and returns a promise that the calling code should use to get the result.
+>>>>>>> 8c30654f694fe8682f5631809980be931ee4ed72
 
 Процесс получения ответа обычно происходит в два этапа.
 
+<<<<<<< HEAD
 **Во-первых, `promise` выполняется с объектом встроенного класса [Response](https://fetch.spec.whatwg.org/#response-class) в качестве результата, как только сервер пришлёт заголовки ответа.**
+=======
+**First, the `promise`, returned by `fetch`, resolves with an object of the built-in [Response](https://fetch.spec.whatwg.org/#response-class) class as soon as the server responds with headers.**
+>>>>>>> 8c30654f694fe8682f5631809980be931ee4ed72
 
 На этом этапе мы можем проверить статус HTTP-запроса и определить, выполнился ли он успешно, а также посмотреть заголовки, но пока без тела ответа.
 

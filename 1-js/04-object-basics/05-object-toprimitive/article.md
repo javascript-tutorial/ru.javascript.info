@@ -198,7 +198,11 @@ alert(user + 500); // toString -> John500
       }
     };
 
+<<<<<<< HEAD
     alert(obj + 2); // 22 (преобразование к примитиву вернуло строку => конкатенация)
+=======
+    alert(obj + 2); // 22 (conversion to primitive returned a string => concatenation)
+>>>>>>> 8c30654f694fe8682f5631809980be931ee4ed72
     ```
 
 ## Итого

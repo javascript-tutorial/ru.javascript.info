@@ -1,9 +1,20 @@
 # Паттерны и флаги
 
+<<<<<<< HEAD
 Регулярные выражения – мощное средство поиска и замены в строке.
+=======
+Regular expressions is a powerful way to search and replace in text.
+
+In JavaScript, they are available as `RegExp` object, and also integrated in methods of strings.
+
+## Regular Expressions
+
+A regular expression (also "regexp", or just "reg") consists of a *pattern* and optional *flags*.
+>>>>>>> 8c30654f694fe8682f5631809980be931ee4ed72
 
 В JavaScript регулярные выражения реализованы отдельным объектом `RegExp` и интегрированы в методы строк.
 
+<<<<<<< HEAD
 ## Регулярные выражения
 
 Регулярное выражение (оно же "регэксп", "регулярка" или просто "рег"), состоит из *паттерна* (он же "шаблон") и необязательных *флагов*.
@@ -11,6 +22,9 @@
 Существует два синтаксиса создания объекта регулярного выражения.
 
 "Длинный" синтаксис:
+=======
+The "long" syntax:
+>>>>>>> 8c30654f694fe8682f5631809980be931ee4ed72
 
 ```js
 regexp = new RegExp("шаблон", "флаги");

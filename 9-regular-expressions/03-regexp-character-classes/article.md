@@ -89,9 +89,17 @@ alert( "Hello, JavaScript!".match(/\bJava\b/) ); // null
 
 Когда шаблон содержит `pattern:\b`, он проверяет, что позиция в строке является границей слова, то есть одним из трёх вариантов:
 
+<<<<<<< HEAD
 - Внутри текста, если с одной стороны `\w`, а с другой – не `\w`.
 - Начало текста, если первый символ `\w`.
 - Конец текста, если последний символ `\w`.
+=======
+There are three different positions that qualify as word boundaries:
+
+- At string start, if the first string character is a word character `\w`.
+- Between two characters in the string, where one is a word character `\w` and the other is not.
+- At string end, if the last string character is a word character `\w`.
+>>>>>>> 8c30654f694fe8682f5631809980be931ee4ed72
 
 Например, в строке `subject:Hello, Java!` Следующие позиции соответствуют `\b`:
 
@@ -99,12 +107,17 @@ alert( "Hello, JavaScript!".match(/\bJava\b/) ); // null
 
 Так что это соответствует `pattern:\bHello\b`, потому что:
 
+<<<<<<< HEAD
 1. В начале строки совпадает первый тест `\b`.
 2. Далее слово `Hello` совпадает.
 3. Далее `\b` снова совпадает, так как мы находимся между `o` и пробелом.
+=======
+1. At the beginning of the string the first `\b` test matches.
+2. Then the word `Hello` matches.
+3. Then `\b` matches, as we're between `o` (a word character) and a space (not a word character).
+>>>>>>> 8c30654f694fe8682f5631809980be931ee4ed72
 
 Pattern `pattern:\bJava\b` также совпадает. Но не `pattern:\bHell\b` (потому что после `l` нет границы слова), и не `Java!\b` (потому что восклицательный знак не является словесным символом, поэтому после него нет границы слова).
-
 
 ```js run
 alert( "Hello, Java!".match(/\bHello\b/) ); // Hello

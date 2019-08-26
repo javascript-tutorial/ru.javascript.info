@@ -52,12 +52,21 @@ let form = document.forms[0];
 let ageElems = form.elements.age;
 
 *!*
+<<<<<<< HEAD
 alert(ageElems[0].value); // 10, значение первого input с name="age"
+=======
+alert(ageElems[0].value); // 10, the value of the first input name="age"
+>>>>>>> 8c30654f694fe8682f5631809980be931ee4ed72
 */!*
 </script>
 ```
 
+<<<<<<< HEAD
 Эти навигационные свойства не зависят от структуры тегов внутри формы. Все элементы управления формы, как бы глубоко они ни находились в форме, доступны в коллекции `form.elements`.
+=======
+These navigation properties do not depend on the tag structure. All control elements, no matter how deep they are in the form, are available in `form.elements`.
+
+>>>>>>> 8c30654f694fe8682f5631809980be931ee4ed72
 
 ````smart header="`<fieldset>` формы как \"подформа\""
 Форма может содержать один или несколько элементов `<fieldset>` внутри себя. Они также поддерживают свойство `elements`.

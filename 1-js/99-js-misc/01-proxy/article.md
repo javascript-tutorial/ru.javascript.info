@@ -44,9 +44,15 @@ for(let key in proxy) alert(key); // test, итерация работает (3)
 
 Чтобы активировать другие его возможности, добавим ловушки.
 
+<<<<<<< HEAD
 Что именно мы можем ими перехватить?
 
 Для большинства действий с объектами в спецификации JavaScript есть так называемый "внутренний метод", который на самом низком уровне описывает, как его выполнять. Например, `[[Get]]` - внутренний метод для чтения свойства, `[[Set]]` -- для записи свойства, и так далее. Эти методы используются только в спецификации, мы не можем обратиться напрямую к ним по имени.
+=======
+What can we intercept with them?
+
+For most operations on objects, there's a so-called "internal method" in JavaScript specificaiton, that describes on the lowest level, how it works. For instance, `[[Get]]` - the internal method to read a property, `[[Set]]` -- the internal method to write a property, and so on. These methods are only used in the specification, we can't call them directly by name.
+>>>>>>> 8c30654f694fe8682f5631809980be931ee4ed72
 
 Ловушки как раз перехватывают вызовы этих внутренних методов. Полный список методов, которые можно перехватывать, перечислен в [спецификации Proxy](https://tc39.es/ecma262/#sec-proxy-object-internal-methods-and-internal-slots), а также в таблице ниже.
 
@@ -100,7 +106,11 @@ JavaScript налагает некоторые условия - инвариан
 
 Давайте применим ловушку `get`, чтобы реализовать "значения по умолчанию" для свойств объекта.
 
+<<<<<<< HEAD
 Например, сделаем числовой массив, так чтобы при чтении из него несуществующего элемента возвращался `0`.
+=======
+We'll make a numeric array that returns `0` for non-existant values.
+>>>>>>> 8c30654f694fe8682f5631809980be931ee4ed72
 
 Обычно при чтении из массива несуществующего свойства возвращается `undefined`, но мы обернём обычный массив в прокси, который перехватывает операцию чтения свойства из массива и возвращает `0`, если такого элемента нет:
 

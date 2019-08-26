@@ -35,7 +35,11 @@ john.smith@site.com.uk
 
 Это выражение не идеальное, но достаточно хорошее для исправления ошибок и опечаток.
 
+<<<<<<< HEAD
 Например, мы можем найти все электронные адреса в строке:
+=======
+For instance, we can find all emails in the string:
+>>>>>>> 8c30654f694fe8682f5631809980be931ee4ed72
 
 ```js run
 let reg = /[-.\w]+@([\w-]+\.)+[\w-]{2,20}/g;
@@ -43,7 +47,11 @@ let reg = /[-.\w]+@([\w-]+\.)+[\w-]{2,20}/g;
 alert("my@mail.com @ his@site.com.uk".match(reg)); // my@mail.com, his@site.com.uk
 ```
 
+<<<<<<< HEAD
 В этом примере скобки были использованы для создания повторяющейся группы `pattern:(...)+`. Но есть и другие применения. Посмотрим на них.
+=======
+In this example parentheses were used to make a group for repetitions `pattern:([\w-]+\.)+`. But there are other uses too, let's see them.
+>>>>>>> 8c30654f694fe8682f5631809980be931ee4ed72
 
 ## Содержимое скобок  
 
@@ -53,7 +61,11 @@ alert("my@mail.com @ his@site.com.uk".match(reg)); // my@mail.com, his@site.com.
 
 Давайте заключим внутреннее содержимое в круглые скобки: `pattern:<(.*?)>`.
 
+<<<<<<< HEAD
 Мы получим как тег целиком, так и его содержимое в виде массива:
+=======
+Then we'll get both the tag as a whole and its content:
+>>>>>>> 8c30654f694fe8682f5631809980be931ee4ed72
 
 ```js run
 let str = '<h1>Hello, world!</h1>';
@@ -111,7 +123,11 @@ alert(result); // <span class="my">, span class="my", span, class="my"
 
 Затем в `result[2]` идёт группа, образованная второй открывающей скобкой `pattern:(` до следующей закрывающей скобки `pattern:)` -- имя тега, далее в `result[3]` мы группируем не пробелы, а атрибуты.
 
+<<<<<<< HEAD
 **Даже если скобочная группа необязательна и не входит в совпадение, соответствующий элемент массива `result` существует (и равен `undefined`).**
+=======
+**Even if a group is optional and doesn't exist in the match, the corresponding `result` array item is present (and equals `undefined`).**
+>>>>>>> 8c30654f694fe8682f5631809980be931ee4ed72
 
 Например, рассмотрим регулярное выражение `pattern:a(z)?(c)?`. Оно ищет букву `"a"`, за которой опционально идёт буква `"z"`, за которой, в свою очередь, опционально идёт буква `"c"`.
 
@@ -210,7 +226,11 @@ let rearranged = str.replace(dateRegexp, (str, ...args) => {
 
 ## Исключение из запоминания через ?:
 
+<<<<<<< HEAD
 Бывает так, что скобки нужны, чтобы квантификатор правильно применился, но мы не хотим, чтобы их содержимое попало в результат.
+=======
+Sometimes we need parentheses to correctly apply a quantifier, but we don't want their contents in results.
+>>>>>>> 8c30654f694fe8682f5631809980be931ee4ed72
 
 Скобочную группу можно исключить из запоминаемых и нумеруемых, добавив в её начало `pattern:?:`.
 

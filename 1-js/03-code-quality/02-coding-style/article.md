@@ -25,8 +25,13 @@ let x = prompt("x?", "");
 let n = prompt("n?", "");
 
 if (n < 0) {
+<<<<<<< HEAD
   alert(`Степень ${n} не поддерживается,
    введите целую степень, большую 0`);
+=======
+  alert(`Power ${n} is not supported,
+    please enter a non-negative integer number`);
+>>>>>>> 8c30654f694fe8682f5631809980be931ee4ed72
 } else {
   alert( pow(x, n) );
 }
