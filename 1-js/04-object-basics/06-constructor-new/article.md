@@ -145,10 +145,10 @@ function BigUser() {
 
   this.name = "Вася";
 
-  return { name: "Godzilla" };  // <-- возвращает объект
+  return { name: "Godzilla" };  // <-- возвращает этот объект
 }
 
-alert( new BigUser().name );  // Godzilla, получили этот объект ^^
+alert( new BigUser().name );  // Godzilla, получили этот объект
 ```
 
 А вот пример с пустым `return` (или мы могли бы поставить примитив после `return`, неважно)
@@ -158,10 +158,7 @@ function SmallUser() {
 
   this.name = "Вася";
 
-  return; // завершает выполнение, возвращает this
-
-  // ...
-
+  return; // <-- возвращает this
 }
 
 alert( new SmallUser().name );  // Вася
