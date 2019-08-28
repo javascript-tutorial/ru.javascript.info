@@ -41,7 +41,7 @@ function User(name) {
   // this = {};  (неявно)
 */!*
 
-  // add properties to this
+  // добавляет свойства к this
   this.name = name;
   this.isAdmin = false;
 
