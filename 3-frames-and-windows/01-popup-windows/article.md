@@ -9,7 +9,7 @@ window.open('https://javascript.info/')
 
 ... и откроется новое окно с указанным URL. Большинство современных браузеров по умолчанию будут открывать новую вкладку вместо отдельного окна.
 
-Попапы существуют с доисторических времён. Они были придуманы для отображения нового контента поверх главного окна, оставив главное окно открытым. Но с тех пор появились другие способы сделать это: JavaScript может загрузить содержимое вызовом [fetch](info:fetch) и показать его в тут же созданном `<div>`, так что попапы используются не каждый день.
+Попапы существуют с доисторических времён. Они были придуманы для отображения нового контента поверх открытого главного окна. Но с тех пор появились другие способы сделать это: JavaScript может загрузить содержимое вызовом [fetch](info:fetch) и показать его в тут же созданном `<div>`, так что попапы используются не каждый день.
 
 Кроме того, попапы не очень хороши для мобильных устройств, которые не умеют показывать несколько окон одновременно.
 
@@ -76,7 +76,7 @@ params
 
 - Позиция окна:
   - `left/top` (числа) – координаты верхнего левого угла нового окна на экране. Существует ограничение: новое окно не может быть позиционировано вне видимой области экрана. 
-  - `width/height` (числа) – ширина и высота нового окна. Существуют ограничение на минимальные высоту и ширину, которые делают невозможным создание невидимого окна. 
+  - `width/height` (числа) – ширина и высота нового окна. Существуют ограничения на минимальную высоту и ширину, которые делают невозможным создание невидимого окна. 
 - Панели окна:
   - `menubar` (yes/no) – позволяет отобразить или скрыть меню браузера в новом окне.
   - `toolbar` (yes/no) – позволяет отобразить или скрыть панель навигации браузера (кнопки вперёд, назад, перезагрузки страницы) нового окна.
@@ -196,43 +196,43 @@ newWindow.onload = function() {
 Методы для передвижения и изменения размеров окна:
 
 `win.moveBy(x,y)`
-: Move the window relative to current position `x` pixels to the right and `y` pixels down. Negative values are allowed (to move left/up).
+: Переместить окно относительно текущей позиции на `x` пикселей вправо и `y` пикселей вниз. Допустимы отрицательные значения (для перемещения окна влево и вверх).
 
 `win.moveTo(x,y)`
-: Move the window to coordinates `(x,y)` on the screen.
+: Переместить окно на координаты экрана `(x,y)`.
 
 `win.resizeBy(width,height)`
-: Resize the window by given `width/height` relative to the current size. Negative values are allowed.
+: Изменить размер окна на указанные значения `width/height` относительно текущего размера. Допустимы отрицательные значения.
 
 `win.resizeTo(width,height)`
-: Resize the window to the given size.
+: Изменить размер окна до указанных значений.
 
-There's also `window.onresize` event.
+Также существует событие `window.onresize`.
 
-```warn header="Only popups"
-To prevent abuse, the browser usually blocks these methods. They only work reliably on popups that we opened, that have no additional tabs.
+```warn header="Только попапы"
+Чтобы предотвратить возможные злоупотребления, браузер обычно блокирует эти методы. Они гарантированно работают только с попапами, которые мы открыли сами и у которых нет дополнительных вкладок.
 ```
 
-```warn header="No minification/maximization"
-JavaScript has no way to minify or maximize a window. These OS-level functions are hidden from Frontend-developers.
+```warn header="Нельзя свернуть/развернуть окно"
+Методами JavaScript нельзя свернуть или развернуть ("максимизировать") окно на весь экран. За это отвечают функции уровня операционной системы, и они скрыты от фронтенд-разработчиков.
 
-Move/resize methods do not work for maximized/minimized windows.
+Методы перемещения и изменения размера окна не работают для свернутых и развёрнутых на весь экран окон.
 ```
 
-## Scrolling a window
+## Прокрутка окна
 
-We already talked about scrolling a window in the chapter <info:size-and-scroll-window>.
+Мы уже говорили о прокрутке окна в главе <info:size-and-scroll-window>.
 
 `win.scrollBy(x,y)`
-: Scroll the window `x` pixels right and `y` down relative the current scroll. Negative values are allowed.
+: Прокрутить окно на `x` пикселей вправо и `y` пикселей вниз относительно текущей прокрутки. Допустимы отрицательные значения.
 
 `win.scrollTo(x,y)`
-: Scroll the window to the given coordinates `(x,y)`.
+: Прокрутить окно до заданных координат `(x,y)`.
 
 `elem.scrollIntoView(top = true)`
-: Scroll the window to make `elem` show up at the top (the default) or at the bottom for `elem.scrollIntoView(false)`.
+: Прокрутить окно так, чтобы `elem` для `elem.scrollIntoView(false)` появился вверху (по умолчанию) или внизу.
 
-There's also `window.onscroll` event.
+Также существует событие `window.onscroll`.
 
 ## Установка и потеря фокуса
 
