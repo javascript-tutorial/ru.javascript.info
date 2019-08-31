@@ -273,7 +273,7 @@ alert(Object.keys(rabbit)); // jumps
 
 *!*
 // for..in проходит и по своим и по унаследованным ключам
-for(let prop in rabbit) alert(prop); // jumps, then eats
+for(let prop in rabbit) alert(prop); // jumps, затем eats
 */!*
 ```
 
