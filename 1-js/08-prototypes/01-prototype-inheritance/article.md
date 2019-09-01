@@ -64,7 +64,7 @@ alert( rabbit.jumps ); // true
 
 Здесь строка `(*)` устанавливает `animal` как прототип для `rabbit`.
 
-Затем, когда `alert` пытается прочитать свойство `rabbit.eats` `(**)`, его нет в `rabbit`, поэтому JavaScript следует по ссылке `[[Prototype]]` и находит её в `animal` (смотрите снизу вверх):
+Затем, когда `alert` пытается прочитать свойство `rabbit.eats` `(**)`, его нет в `rabbit`, поэтому JavaScript следует по ссылке `[[Prototype]]` и находит его в `animal` (смотрите снизу вверх):
 
 ![](proto-animal-rabbit.svg)
 
