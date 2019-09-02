@@ -76,9 +76,9 @@ alert(filteredArr.isEmpty()); // Error: filteredArr.isEmpty is not a function
 
 Обычно, когда один класс наследует другому, то наследуются и статические методы. Это было подробно разъяснено в главе [](info:static-properties-methods#statics-and-inheritance).
 
-Но встроенные классы - исключение. Они не наследуют статические методы друг друуга.
+Но встроенные классы - исключение. Они не наследуют статические методы друг друга.
 
-Например, и `Array` и `Date` наследуют от `Object`, так что в их экземплярах доступны методы из `Object.prototype`. Но `Array.[[Prototype]]` не ссылается на `Object`, поэтому нет методов `Array.keys()` или `Date.keys()`.
+Например, и `Array`, и `Date` наследуют от `Object`, так что в их экземплярах доступны методы из `Object.prototype`. Но `Array.[[Prototype]]` не ссылается на `Object`, поэтому нет методов `Array.keys()` или `Date.keys()`.
 
 Ниже вы видите структуру `Date` и `Object`:
 
