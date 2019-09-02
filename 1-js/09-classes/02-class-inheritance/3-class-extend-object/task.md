@@ -24,7 +24,7 @@ alert( rabbit.hasOwnProperty('name') ); // true
 */!*
 ```
 
-Но что если мы явно напишем явно `"class Rabbit extends Object"` - тогда результат будет отличаться от обычного `"class Rabbit"`?
+Но что если мы явно напишем `"class Rabbit extends Object"` - тогда результат будет отличаться от обычного `"class Rabbit"`?
 
 В чем разница?
 
