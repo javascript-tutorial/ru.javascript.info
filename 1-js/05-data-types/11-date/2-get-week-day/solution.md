@@ -4,7 +4,7 @@
 
 ```js run demo
 function getWeekDay(date) {
-  let days = ['ВС', 'ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'ВС'];
+  let days = ['ВС', 'ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ'];
 
   return days[date.getDay()];
 }
