@@ -270,7 +270,7 @@ function readUser(json) {
   } catch (err) {
 *!*
     if (err instanceof ValidationError) {
-      throw new ReadError("Ошибка валидация", err);
+      throw new ReadError("Ошибка валидации", err);
     } else {
       throw err;
     }
