@@ -26,7 +26,11 @@
     alert( y - x ); // 2, бинарный минус
     ```
 
+<<<<<<< HEAD
     Формально мы говорим о двух разных операторах: унарное отрицание (один операнд: меняет знак) и бинарное вычитание (два операнда: вычитает).
+=======
+    Formally, in the examples above we have two different operators that share the same symbol: the negation operator, a unary operator that reverses the sign, and the subtraction operator, a binary operator that subtracts one number from another.
+>>>>>>> c4d1987ebc470b30c234dbde6fac6e77b7509927
 
 ## Сложение строк, бинарный +
 

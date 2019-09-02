@@ -24,5 +24,10 @@ Referer: http://javascript.info/some/url
 
 Вопросы:
 
+<<<<<<< HEAD
 1. Почему нужен `Origin`, если `Referer` содержит даже больше информации?
 2. Возможно ли отсутствие `Referer` или `Origin`, или это неправильно?
+=======
+1. Why `Origin` is needed, if `Referer` has even more information?
+2. Is it possible that there's no `Referer` or `Origin`, or is it incorrect?
+>>>>>>> c4d1987ebc470b30c234dbde6fac6e77b7509927

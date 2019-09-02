@@ -12,7 +12,11 @@ JavaScript-приложению обычно нужно работать с ин
 
 Для создания переменной в JavaScript, используйте ключевое слово `let`.
 
+<<<<<<< HEAD
 Приведённая ниже инструкция создаёт (другими словами: *объявляет* или *определяет*) переменную с именем "message":
+=======
+The statement below creates (in other words: *declares*) a variable with the name "message":
+>>>>>>> c4d1987ebc470b30c234dbde6fac6e77b7509927
 
 ```js
 let message;

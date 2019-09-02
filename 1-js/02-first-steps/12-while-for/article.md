@@ -106,10 +106,17 @@ for (let i = 0; i < 3; i++) { // выведет 0, затем 1, затем 2
 
 | часть  |          |                                                                            |
 |-------|----------|----------------------------------------------------------------------------|
+<<<<<<< HEAD
 | *начало* | `i = 0`    | Выполняется один раз при входе в цикл                                      |
 | *условие* | `i < 3`| Проверяется *перед* каждой итерацией цикла. Если оно вычислится в `false`, цикл остановится.              |
 | *шаг* | `i++`      | Выполняется *после* тела цикла на каждой итерации *перед* проверкой условия. |
 | *тело* | `alert(i)`| Выполняется снова и снова, пока условие вычисляется в `true`.                         |
+=======
+| begin | `i = 0`    | Executes once upon entering the loop.                                      |
+| condition | `i < 3`| Checked before every loop iteration. If false, the loop stops.              |
+| body | `alert(i)`| Runs again and again while the condition is truthy.                         |
+| step| `i++`      | Executes after the body on each iteration. |
+>>>>>>> c4d1987ebc470b30c234dbde6fac6e77b7509927
 
 В целом, алгоритм работы цикла выглядит следующим образом:
 
@@ -300,7 +307,11 @@ if (i > 5) {
 
 Бывает, нужно выйти одновременно из нескольких уровней цикла сразу.
 
+<<<<<<< HEAD
 Например, в коде ниже мы проходимся циклами по `i` и `j`, запрашивая с помощью `prompt` координаты `(i, j)` с `(0,0)` до `(2,2)`:
+=======
+For example, in the code below we loop over `i` and `j`, prompting for the coordinates `(i, j)` from `(0,0)` to `(2,2)`:
+>>>>>>> c4d1987ebc470b30c234dbde6fac6e77b7509927
 
 ```js run no-beautify
 for (let i = 0; i < 3; i++) {
@@ -309,8 +320,12 @@ for (let i = 0; i < 3; i++) {
 
     let input = prompt(`Значение на координатах (${i},${j})`, '');
 
+<<<<<<< HEAD
     // Что если мы захотим перейти к Готово (ниже) прямо отсюда?
 
+=======
+    // what if we want to exit from here to Done (below)?
+>>>>>>> c4d1987ebc470b30c234dbde6fac6e77b7509927
   }
 }
 

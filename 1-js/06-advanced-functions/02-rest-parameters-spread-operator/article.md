@@ -25,7 +25,11 @@ alert( sum(1, 2, 3, 4, 5) );
 
 Лишние аргументы не вызовут ошибку. Но, конечно, посчитаются только первые два.
 
+<<<<<<< HEAD
 *Остаточные параметры* могут быть обозначены через три точки `...`. Буквально это значит: "собери оставшиеся параметры и положи их в массив".
+=======
+The rest of the parameters can be included in the function definition by using three dots `...` followed by the name of the array that will contain them. The dots literally mean "gather the remaining parameters into an array".
+>>>>>>> c4d1987ebc470b30c234dbde6fac6e77b7509927
 
 Например, соберём все аргументы в массив `args`:
 

@@ -136,7 +136,11 @@ newWin.document.write("Hello, world!");
 let newWindow = open('/', 'example', 'width=300,height=300')
 newWindow.focus();
 
+<<<<<<< HEAD
 alert(newWindow.location.href); // (*) about:blank, загрузка ещё не началась
+=======
+alert(newWindow.location.href); // (*) about:blank, loading hasn't started yet
+>>>>>>> c4d1987ebc470b30c234dbde6fac6e77b7509927
 
 newWindow.onload = function() {
   let html = `<div style="font-size:30px">Добро пожаловать!</div>`;
@@ -172,7 +176,11 @@ newWin.document.write(
 
 ## Закрытие попапа
 
+<<<<<<< HEAD
 Чтобы закрыть окно: `win.close()`
+=======
+To close a window: `win.close()`.
+>>>>>>> c4d1987ebc470b30c234dbde6fac6e77b7509927
 
 Для проверки, закрыто ли окно: `win.closed`.
 
@@ -267,7 +275,12 @@ window.onblur = () => window.focus();
 - У попапа есть доступ к породившему его окну через свойство `window.opener`.
 - Если основное окно и попап имеют один домен и протокол, то они свободно могут читать и изменять друг друга. В противном случае, они могут только изменять положение друг друга и взаимодействовать [с помощью сообщений](cross-window-communication).
 
+<<<<<<< HEAD
 Чтобы закрыть попап: метод `close()`. Также попап может закрыть и пользователь (как и любое другое окно). После закрытия окна свойство `window.closed` имеет значение `true`.  
 
 - Методы `focus()` и `blur()` позволяют установить или убрать фокус с попапа. Но работают не всегда.
 - События `focus` и `blur` позволяют отследить получение и потерю фокуса новым окном. Но пожалуйста, не забывайте, что окно может остаться видимым и после `blur`.
+=======
+- Methods `focus()` and `blur()` allow to focus/unfocus a window. But they don't work all the time.
+- Events `focus` and `blur` allow to track switching in and out of the window. But please note that a  window may still be visible even in the background state, after `blur`.
+>>>>>>> c4d1987ebc470b30c234dbde6fac6e77b7509927

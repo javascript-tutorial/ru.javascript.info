@@ -72,7 +72,11 @@ alert( '𝒳'.match(/[𝒳𝒴]/u) ); // 𝒳
 
 Давайте рассмотрим ещё один пример.
 
+<<<<<<< HEAD
 Если в коде ниже мы забудем поставить флаг `u`, а в строке будут суррогатные пары, то мы получим ошибку:
+=======
+If we forget the `u` flag and accidentally use surrogate pairs, then we can get an error:
+>>>>>>> c4d1987ebc470b30c234dbde6fac6e77b7509927
 
 ```js run
 '𝒳'.match(/[𝒳-𝒴]/); // SyntaxError: invalid range in character class

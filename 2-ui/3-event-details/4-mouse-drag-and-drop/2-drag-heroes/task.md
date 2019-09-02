@@ -10,10 +10,17 @@ importance: 5
 
 Требования к реализации:
 
+<<<<<<< HEAD
 - Используйте делегирование событий для отслеживания начала перетаскивания: только один обработчик событий `mousedown` на документе.
 - Если элементы подносят к верхней/нижней границе окна – оно должно прокручиваться вверх/вниз, чтобы позволить дальнейшее перетаскивание.
 - Горизонтальная прокрутка отсутствует (чуть-чуть упрощает задачу, её просто добавить).
 - Элемент при переносе, даже при резких движениях мышкой, не должен даже частично попасть вне окна.
+=======
+- Use event delegation to track drag start: a single event handler on `document` for `mousedown`.
+- If elements are dragged to top/bottom window edges -- the page scrolls up/down to allow further dragging.
+- There is no horizontal scroll (this makes the task a bit simpler, adding it is easy).
+- Draggable elements or their parts should never leave the window, even after swift mouse moves.
+>>>>>>> c4d1987ebc470b30c234dbde6fac6e77b7509927
 
 Демо слишком велико для размещения здесь, перейдите по ссылке ниже.
 

@@ -3,11 +3,19 @@
 
 По спецификации, в качестве ключей для свойств объекта могут использоваться только строки или символы. Ни числа, ни логические значения не подходят, разрешены только эти два типа данных.
 
+<<<<<<< HEAD
 До сих пор мы видели только строки. Теперь давайте разберём символы, увидим, что хорошего они нам дают.
+=======
+Till now we've been using only strings. Now let's see the benefits that symbols can give us.
+>>>>>>> c4d1987ebc470b30c234dbde6fac6e77b7509927
 
 ## Символы
 
+<<<<<<< HEAD
 "Символ" представляет собой уникальный идентификатор.
+=======
+A "symbol" represents a unique identifier.
+>>>>>>> c4d1987ebc470b30c234dbde6fac6e77b7509927
 
 Создаются новые символы с помощью функции `Symbol()`:
 
@@ -50,9 +58,15 @@ alert(id); // TypeError: Cannot convert a Symbol value to a string
 */!*
 ```
 
+<<<<<<< HEAD
 Это -- языковая "защита" от путаницы, ведь строки и символы -- принципиально разные типы данных и не должны неконтролируемо преобразовываться друг в друга.
 
 Если же мы действительно хотим вывести символ с помощью `alert`, то необходимо явно преобразовать его с помощью метода `.toString()`, вот так:
+=======
+That's a "language guard" against messing up, because strings and symbols are fundamentally different and should not accidentally convert one into another.
+
+If we really want to show a symbol, we need to explicitly call `.toString()` on it, like here:
+>>>>>>> c4d1987ebc470b30c234dbde6fac6e77b7509927
 ```js run
 let id = Symbol("id");
 *!*
@@ -60,7 +74,11 @@ alert(id.toString()); // Symbol(id), теперь работает
 */!*
 ```
 
+<<<<<<< HEAD
 Или мы можем обратиться к свойству `symbol.description`, чтобы вывести только описание:
+=======
+Or get `symbol.description` property to show the description only:
+>>>>>>> c4d1987ebc470b30c234dbde6fac6e77b7509927
 ```js run
 let id = Symbol("id");
 *!*
@@ -72,27 +90,46 @@ alert(id.description); // id
 
 ## "Скрытые" свойства
 
+<<<<<<< HEAD
 Символы позволяют создавать "скрытые" свойства объектов, к которым нельзя нечаянно обратиться и перезаписать их из других частей программы.
 
 Например, мы работаем с объектами `user`, которые принадлежат стороннему коду. Мы хотим добавить к ним идентификаторы.
+=======
+Symbols allow us to create "hidden" properties of an object, that no other part of code can accidentally access or overwrite.
+
+For instance, if we're working with `user` objects, that belong to a third-party code. We'd like to add identifiers to them.
+>>>>>>> c4d1987ebc470b30c234dbde6fac6e77b7509927
 
 Используем для этого символьный ключ:
 
 ```js run
+<<<<<<< HEAD
 let user = {
   name: "Вася"
+=======
+let user = { // belongs to another code
+  name: "John"
+>>>>>>> c4d1987ebc470b30c234dbde6fac6e77b7509927
 };
 
 let id = Symbol("id");
 
 user[id] = 1;
 
+<<<<<<< HEAD
 alert( user[id] ); // мы можем получить доступ к данным по ключу-символу
+=======
+alert( user[id] ); // we can access the data using the symbol as the key
+>>>>>>> c4d1987ebc470b30c234dbde6fac6e77b7509927
 ```
 
 Почему же лучше использовать `Symbol("id")`, а не строку `"id"`?
 
+<<<<<<< HEAD
 Так как объект `user` принадлежит стороннему коду, и этот код также работает с ним, то нам не следует добавлять к нему какие-либо поля. Это небезопасно. Но к символу сложно нечаянно обратиться, сторонний код вряд ли его вообще увидит, и, скорее всего, добавление поля к объекту не вызовет никаких проблем.
+=======
+As `user` objects belongs to another code, and that code also works with them, we shouldn't just add any fields to it. That's unsafe. But a symbol cannot be accessed accidentally, the third-party code probably won't even see it, so it's probably all right to do.
+>>>>>>> c4d1987ebc470b30c234dbde6fac6e77b7509927
 
 Кроме того, предположим, что другой скрипт для каких-то своих целей хочет записать собственный идентификатор в объект `user`. Этот скрипт может быть какой-то JavaScript-библиотекой, абсолютно не связанной с нашим скриптом.
 
@@ -112,6 +149,7 @@ user[id] = "Их идентификатор";
 ```js run
 let user = { name: "Вася" };
 
+<<<<<<< HEAD
 // Объявляем в нашем скрипте свойство "id"
 user.id = "Наш идентификатор";
 
@@ -119,6 +157,15 @@ user.id = "Наш идентификатор";
 
 user.id = "Их идентификатор"
 // Ой! Свойство перезаписано сторонней библиотекой!
+=======
+// Our script uses "id" property
+user.id = "Our id value";
+
+// ...Another script also wants "id" for its purposes...
+
+user.id = "Their id value"
+// Boom! overwritten by another script!
+>>>>>>> c4d1987ebc470b30c234dbde6fac6e77b7509927
 ```
 
 ### Символы в литеральном объекте
@@ -133,7 +180,11 @@ let id = Symbol("id");
 let user = {
   name: "Вася",
 *!*
+<<<<<<< HEAD
   [id]: 123 // просто "id: 123" не сработает
+=======
+  [id]: 123 // not "id: 123"
+>>>>>>> c4d1987ebc470b30c234dbde6fac6e77b7509927
 */!*
 };
 ```
@@ -284,8 +335,13 @@ alert( localSymbol.description ); // name
 
 Символы имеют два основных варианта использования:
 
+<<<<<<< HEAD
 1. "Скрытые" свойства объектов.
     Если мы хотим добавить свойство в объект, который "принадлежит" другому скрипту или библиотеке, мы можем создать символ и использовать его в качестве ключа. Символьное свойство не появится в `for..in`, так что оно не будет нечаянно обработано вместе с другими. Также оно не будет модифицировано прямым обращением, так как другой скрипт не знает о нашем символе. Таким образом, свойство будет защищено от случайной перезаписи или использования.
+=======
+1. "Hidden" object properties.
+    If we want to add a property into an object that "belongs" to another script or a library, we can create a symbol and use it as a property key. A symbolic property does not appear in `for..in`, so it won't be accidentally processed together with other properties. Also it won't be accessed directly, because another script does not have our symbol. So the property will be protected from accidental use or overwrite.
+>>>>>>> c4d1987ebc470b30c234dbde6fac6e77b7509927
 
     Так что, используя символьные свойства, мы можем спрятать что-то нужное нам, но что другие видеть не должны.
 

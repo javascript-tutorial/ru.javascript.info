@@ -145,10 +145,17 @@ function BigUser() {
 
   this.name = "Вася";
 
+<<<<<<< HEAD
   return { name: "Godzilla" };  // <-- возвращает объект
 }
 
 alert( new BigUser().name );  // Godzilla, получили этот объект ^^
+=======
+  return { name: "Godzilla" };  // <-- returns this object
+}
+
+alert( new BigUser().name );  // Godzilla, got that object
+>>>>>>> c4d1987ebc470b30c234dbde6fac6e77b7509927
 ```
 
 А вот пример с пустым `return` (или мы могли бы поставить примитив после `return`, неважно)
@@ -158,10 +165,14 @@ function SmallUser() {
 
   this.name = "Вася";
 
+<<<<<<< HEAD
   return; // завершает выполнение, возвращает this
 
   // ...
 
+=======
+  return; // <-- returns this
+>>>>>>> c4d1987ebc470b30c234dbde6fac6e77b7509927
 }
 
 alert( new SmallUser().name );  // Вася

@@ -346,6 +346,11 @@ welcome(); // Hello, Guest (вложенный вызов работает)
 
 Также функции могут содержать дополнительные свойства. Многие известные JavaScript-библиотеки искусно используют эту возможность.
 
+<<<<<<< HEAD
 Они создают "основную" функцию и добавляют множество "вспомогательных" функций внутрь первой. Например, библиотека [jQuery](https://jquery.com) создаёт функцию с именем `$`. Библиотека [lodash](https://lodash.com) создаёт функцию `_`, а потом добавляет в неё  `_.clone`, `_.keyBy` и другие свойства (чтобы узнать о ней побольше см. [документацию](https://lodash.com/docs)). Они делают это, чтобы уменьшить засорение глобального пространства имён посредством того, что одна библиотека предоставляет только одну глобальную переменную, уменьшая вероятность конфликта имён.
+=======
+They create a "main" function and attach many other "helper" functions to it. For instance, the [jQuery](https://jquery.com) library creates a function named `$`. The [lodash](https://lodash.com) library creates a function `_`, and then adds `_.clone`, `_.keyBy` and other properties to it (see the [docs](https://lodash.com/docs) when you want learn more about them). Actually, they do it to lessen their pollution of the global space, so that a single library gives only one global variable. That reduces the possibility of naming conflicts.
+
+>>>>>>> c4d1987ebc470b30c234dbde6fac6e77b7509927
 
 Таким образом, функция может не только делать что-то сама по себе, но также и предоставлять полезный функционал через свои свойства.

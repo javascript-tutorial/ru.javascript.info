@@ -124,7 +124,11 @@ arr.slice([start], [end])
 
 Он возвращает новый массив, в который копирует элементы, начиная с индекса `start` и до `end` (не включая `end`). Оба индекса `start` и `end` могут быть отрицательными. В таком случае отсчёт будет осуществляться с конца массива.
 
+<<<<<<< HEAD
 Это похоже на строковый метод `str.slice`, но вместо подстрок возвращает подмассивы.
+=======
+It's similar to a string method `str.slice`, but instead of substrings it makes subarrays.
+>>>>>>> c4d1987ebc470b30c234dbde6fac6e77b7509927
 
 Например:
 
@@ -136,7 +140,11 @@ alert( arr.slice(1, 3) ); // e,s (копирует с 1 по 3)
 alert( arr.slice(-2) ); // s,t (копирует с -2 до конца)
 ```
 
+<<<<<<< HEAD
 Можно вызвать `slice` и вообще без аргументов: `arr.slice()` создаёт копию массива `arr`. Это часто используют, чтобы создать копию массива для дальнейших преобразований, которые не должны менять исходный массив.
+=======
+We can also call it without arguments: `arr.slice()` creates a copy of `arr`. That's often used to obtain a copy for further transformations that should not affect the original array.
+>>>>>>> c4d1987ebc470b30c234dbde6fac6e77b7509927
 
 ### concat
 

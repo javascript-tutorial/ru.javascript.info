@@ -57,9 +57,15 @@ alert( "Again: " + slow(2) ); // возвращаем кеш
 
 Подводя итог, можно выделить несколько преимуществ использования отдельной `cachingDecorator` вместо изменения кода самой `slow`:
 
+<<<<<<< HEAD
 - Функцию `cachingDecorator` можно использовать повторно. Мы можем применить её к другой функции.
 - Логика кеширования является отдельной, она не увеличивает сложность самой `slow` (если таковая была).
 - При необходимости мы можем объединить несколько декораторов (речь о них пойдёт позже).
+=======
+- The `cachingDecorator` is reusable. We can apply it to another function.
+- The caching logic is separate, it did not increase the complexity of `slow` itself (if there was any).
+- We can combine multiple decorators if needed (other decorators will follow).
+>>>>>>> c4d1987ebc470b30c234dbde6fac6e77b7509927
 
 
 ## Применение "func.call" для передачи контекста.

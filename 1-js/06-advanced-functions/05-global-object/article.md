@@ -5,7 +5,11 @@
 
 В браузере он называется `window`, в Node.js — `global`, в другой среде исполнения может называться иначе.
 
+<<<<<<< HEAD
 Недавно `globalThis` был добавлен в язык как стандартизированное имя для глобального объекта, которое должно поддерживаться в любом окружении. В некоторых браузерах, например Edge не на Chromium, `globalThis` ещё не поддерживается, но легко реализуется с помощью полифила.
+=======
+Recently, `globalThis` was added to the language, as a standardized name for a global object, that should be supported across all environments. In some browsers, namely non-Chromium Edge, `globalThis` is not yet supported, but can be easily polyfilled.
+>>>>>>> c4d1987ebc470b30c234dbde6fac6e77b7509927
 
 Далее мы будем использовать `window`, полагая, что наша среда - браузер. Если скрипт может выполняться и в другом окружении, лучше будет `globalThis`.
 

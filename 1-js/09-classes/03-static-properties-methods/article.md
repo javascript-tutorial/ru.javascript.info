@@ -90,7 +90,11 @@ class Article {
 
 let article = Article.createTodays();
 
+<<<<<<< HEAD
 alert( article.title ); // Сегодняшний дайджест
+=======
+alert( article.title ); // Today's digest
+>>>>>>> c4d1987ebc470b30c234dbde6fac6e77b7509927
 ```
 
 Теперь каждый раз, когда нам нужно создать сегодняшний дайджест, нужно вызывать `Article.createTodays()`. Ещё раз, это не метод одной статьи, а метод всего класса.

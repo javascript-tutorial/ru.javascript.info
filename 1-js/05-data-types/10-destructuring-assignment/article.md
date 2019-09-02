@@ -355,7 +355,11 @@ let title, width, height;
 }
 ```
 
+<<<<<<< HEAD
 Так что здесь JavaScript считает, что видит блок кода, отсюда и ошибка. На самом-то деле у нас деструктуризация.
+=======
+So here JavaScript assumes that we have a code block, that's why there's an error. We have destructuring instead.
+>>>>>>> c4d1987ebc470b30c234dbde6fac6e77b7509927
 
 Чтобы показать JavaScript, что это не блок кода, мы можем заключить выражение в скобки `(...)`:
 
@@ -427,7 +431,11 @@ function showMenu(title = "Untitled", width = 200, height = 100, items = []) {
 Разве что вот так?
 
 ```js
+<<<<<<< HEAD
 // undefined там, где подходят значения по умолчанию
+=======
+// undefined where default values are fine
+>>>>>>> c4d1987ebc470b30c234dbde6fac6e77b7509927
 showMenu("My Menu", undefined, undefined, ["Item1", "Item2"])
 ```
 

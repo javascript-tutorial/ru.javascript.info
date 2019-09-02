@@ -4,13 +4,23 @@ importance: 5
 
 # Улучшенная подсказка
 
+<<<<<<< HEAD
 Напишите JavaScript код, который показывает подсказку над элементом с атрибутом `data-tooltip`. Значение атрибута должно становиться текстом подсказки.
+=======
+Write JavaScript that shows a tooltip over an element with the attribute `data-tooltip`. The value of this attribute should become the tooltip text.
+>>>>>>> c4d1987ebc470b30c234dbde6fac6e77b7509927
 
 Это похоже на задачу <info:task/behavior-tooltip>, но здесь элементы с подсказками могут быть вложены друг в друга. Показываться должна подсказка на самом глубоко вложенном элементе.
 
+<<<<<<< HEAD
 Только одна подсказка может быть показана в любой момент времени.
 
 Например:
+=======
+Only one tooltip may show up at the same time.
+
+For instance:
+>>>>>>> c4d1987ebc470b30c234dbde6fac6e77b7509927
 
 ```html
 <div data-tooltip="Здесь - домашний интерьер" id="house">

@@ -31,6 +31,12 @@ importance: 5
     alert( result ); // 8
     ```
 
+<<<<<<< HEAD
 - Для этой задачи не нужны скобки или сложные выражения.
 - Числа и оператор разделены ровно одним пробелом.
 - Не лишним будет добавить обработку ошибок.
+=======
+- No parentheses or complex expressions in this task.
+- The numbers and the operator are delimited with exactly one space.
+- There may be error handling if you'd like to add it.
+>>>>>>> c4d1987ebc470b30c234dbde6fac6e77b7509927

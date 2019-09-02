@@ -285,6 +285,7 @@ number:       23
 Идея состоит в том, чтобы дать как можно больше возможностей `replacer` - у него есть возможность проанализировать и заменить/пропустить даже весь объект целиком, если это необходимо.
 
 
+<<<<<<< HEAD
 ## Форматирование: space
 
 Третий аргумент в `JSON.stringify(value, replacer, space)` - это количество пробелов, используемых для удобного форматирования.
@@ -292,6 +293,15 @@ number:       23
 Ранее все JSON-форматированные объекты не имели отступов и лишних пробелов. Это нормально, если мы хотим отправить объект по сети. Аргумент `space` используется исключительно для вывода в удобочитаемом виде.
 
 Ниже `space = 2` указывает JavaScript отображать вложенные объекты в несколько строк с отступом в 2 пробела внутри объекта:
+=======
+## Formatting: space
+
+The third argument of `JSON.stringify(value, replacer, space)` is the number of spaces to use for pretty formatting.
+
+Previously, all stringified objects had no indents and extra spaces. That's fine if we want to send an object over a network. The `space` argument is used exclusively for a nice output.
+
+Here `space = 2` tells JavaScript to show nested objects on multiple lines, with indentation of 2 spaces inside an object:
+>>>>>>> c4d1987ebc470b30c234dbde6fac6e77b7509927
 
 ```js run
 let user = {
@@ -327,7 +337,11 @@ alert(JSON.stringify(user, null, 2));
 */
 ```
 
+<<<<<<< HEAD
 Параметр `space` применяется для логирования и красивого вывода.
+=======
+The `space` parameter is used solely for logging and nice-output purposes.
+>>>>>>> c4d1987ebc470b30c234dbde6fac6e77b7509927
 
 ## Пользовательский "toJSON"
 
@@ -392,7 +406,11 @@ alert( JSON.stringify(meetup) );
 */
 ```
 
+<<<<<<< HEAD
 Как видите, `toJSON` используется как при прямом вызове `JSON.stringify(room)`, так и когда `room` вложен в другой сериализуемый объект.
+=======
+As we can see, `toJSON` is used both for the direct call `JSON.stringify(room)` and when `room` is nested in another encoded object.
+>>>>>>> c4d1987ebc470b30c234dbde6fac6e77b7509927
 
 
 ## JSON.parse

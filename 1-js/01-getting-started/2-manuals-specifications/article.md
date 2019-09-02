@@ -5,7 +5,11 @@
 
 ## Спецификация
 
+<<<<<<< HEAD
 **Спецификация ECMA-262** содержит самую глубокую, детальную и формализованную информацию о JavaScript. Она определяет сам язык.
+=======
+[The ECMA-262 specification](https://www.ecma-international.org/publications/standards/Ecma-262.htm) contains the most in-depth, detailed and formalized information about JavaScript. It defines the language.
+>>>>>>> c4d1987ebc470b30c234dbde6fac6e77b7509927
 
 Вначале спецификация может показаться тяжеловатой для понимания из-за слишком формального стиля изложения. Если вы ищете источник самой достоверной информации, то это правильное место, но она не для ежедневного использования.
 

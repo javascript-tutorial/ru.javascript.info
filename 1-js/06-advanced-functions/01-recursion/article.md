@@ -95,7 +95,11 @@ function pow(x, n) {
 
 Общее количество вложенных вызовов (включая первый) называют *глубиной рекурсии*. В нашем случае она будет равна ровно `n`.
 
+<<<<<<< HEAD
 Максимальная глубина рекурсии ограничена движком JavaScript. Точно можно рассчитывать на 10000 вложенных вызовов, некоторые интерпретаторы допускают и больше, но для большинства из них 100000 вызовов -- за пределами возможностей. Существуют автоматические оптимизации, помогающие избежать переполнения стека вызовов ("оптимизация хвостовой рекурсии"), но они ещё не поддерживаются везде и работают только для простых случаев.
+=======
+The maximal recursion depth is limited by JavaScript engine. We can rely on it being 10000, some engines allow more, but 100000 is probably out of limit for the majority of them. There are automatic optimizations that help alleviate this ("tail calls optimizations"), but they are not yet supported everywhere and work only in simple cases.
+>>>>>>> c4d1987ebc470b30c234dbde6fac6e77b7509927
 
 Это ограничивает применение рекурсии, но она всё равно широко распространена: для решения большого числа задач рекурсивный способ решения даёт более простой код, который легче поддерживать.
 
@@ -336,7 +340,11 @@ let company = {
 
 Случай (1), когда мы получили массив, является базой рекурсии, тривиальным случаем.
 
+<<<<<<< HEAD
 Случай (2), при получении объекта, является шагом рекурсии. Сложная задача разделяется на подзадачи для подотделов. Они могут, в свою очередь, снова разделиться на подотделы, но рано или поздно это разделение закончится, и решение сведётся к случаю (1).
+=======
+The 2nd case when we get an object is the recursive step. A complex task is split into subtasks for smaller departments. They may in turn split again, but sooner or later the split will finish at (1).
+>>>>>>> c4d1987ebc470b30c234dbde6fac6e77b7509927
 
 Алгоритм даже проще читается в виде кода:
 

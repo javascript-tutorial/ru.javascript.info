@@ -38,9 +38,15 @@ alert( carriedSum(1)(2) ); // 3
 
 Как вы видите, реализация довольна проста: это две обёртки.
 
+<<<<<<< HEAD
 - Результат `curry(func)` -- обёртка `function(a)`.
 - Когда она вызывается как `sum(1)`, аргумент сохраняется в лексическом окружении и возвращается новая обёртка `function(b)`.
 - Далее уже эта обёртка вызывается с аргументом `2` и передаёт вызов к оригинальной функции `sum`.
+=======
+- The result of `curry(func)` is a wrapper `function(a)`.
+- When it is called like `sum(1)`, the argument is saved in the Lexical Environment, and a new wrapper is returned `function(b)`.
+- Then this wrapper is called with `2` as an argument, and it passes the call to the original `sum`.
+>>>>>>> c4d1987ebc470b30c234dbde6fac6e77b7509927
 
 Более продвинутые реализации каррирования, как например [_.curry](https://lodash.com/docs#curry) из библиотеки lodash, возвращают обёртку, которая позволяет запустить функцию как обычным образом, так и частично.
 
@@ -73,13 +79,21 @@ function log(date, importance, message) {
 log = _.curry(log);
 ```
 
+<<<<<<< HEAD
 После этого `log` продолжает работать нормально:
+=======
+After that `log` work normally:
+>>>>>>> c4d1987ebc470b30c234dbde6fac6e77b7509927
 
 ```js
 log(new Date(), "DEBUG", "some debug"); // log(a, b, c)
 ```
 
+<<<<<<< HEAD
 ...Но также работает вариант с каррированием:
+=======
+...But also works in the curried form:
+>>>>>>> c4d1987ebc470b30c234dbde6fac6e77b7509927
 
 ```js
 log(new Date())("DEBUG")("some debug"); // log(a)(b)(c)
@@ -105,13 +119,23 @@ let debugNow = logNow("DEBUG");
 debugNow("message"); // [HH:mm] DEBUG message
 ```
 
+<<<<<<< HEAD
 Итак:
 1. Мы ничего не потеряли после каррирования: `log` всё так же можно вызывать нормально.
 2. Мы можем легко создавать частично применённые функции, как сделали для логов с текущим временем.
+=======
+So:
+1. We didn't lose anything after currying: `log` is still callable normally.
+2. We can easily generate partial functions such as for today's logs.
+>>>>>>> c4d1987ebc470b30c234dbde6fac6e77b7509927
 
 ## Продвинутая реализация каррирования
 
+<<<<<<< HEAD
 В случае, если вам интересны детали, вот "продвинутая" реализация каррирования для функций с множеством аргументов, которую мы могли бы использовать выше.
+=======
+In case you'd like to get in details, here's the "advanced" curry implementation for multi-argument functions that we could use above.
+>>>>>>> c4d1987ebc470b30c234dbde6fac6e77b7509927
 
 Она очень короткая:
 
@@ -147,7 +171,11 @@ alert( curriedSum(1)(2)(3) ); // 6, каррирование всех аргум
 
 Новое `curry` выглядит сложновато, но на самом деле его легко понять.
 
+<<<<<<< HEAD
 Результат вызова `curry(func)` -- это обёртка `curried`, которая выглядит так:
+=======
+The result of `curry(func)` call is the wrapper `curried` that looks like this:
+>>>>>>> c4d1987ebc470b30c234dbde6fac6e77b7509927
 
 ```js
 // func -- функция, которую мы трансформируем
@@ -162,10 +190,14 @@ function curried(...args) {
 };
 ```
 
+<<<<<<< HEAD
 Когда мы запускаем её, есть две ветви выполнения `if`:
 
 1. Вызвать сейчас: если количество переданных аргументов `args` совпадает с количеством аргументов при объявлении функции (`func.length`) или больше, тогда вызов просто переходит к ней.
 2. Частичное применение: в противном случае `func` не вызывается сразу. Вместо этого, возвращается другая обёртка `pass`, которая снова применит `curried`, передав предыдущие аргументы вместе с новыми. Затем при новом вызове мы опять получим либо новое частичное применение (если аргументов недостаточно) либо, наконец, результат.
+=======
+When we run it, there are two `if` execution branches:
+>>>>>>> c4d1987ebc470b30c234dbde6fac6e77b7509927
 
 Например, давайте посмотрим, что произойдёт в случае `sum(a, b, c)`. У неё три аргумента, так что `sum.length = 3`.
 
@@ -180,7 +212,14 @@ function curried(...args) {
 ```smart header="Только функции с фиксированным количеством аргументов"
 Для каррирования необходима функция с фиксированным количеством аргументов.
 
+<<<<<<< HEAD
 Функцию, которая использует остаточные параметры, типа `f(...args)`, так каррировать не получится.
+=======
+```smart header="Fixed-length functions only"
+The currying requires the function to have a fixed number of arguments.
+
+A function that uses rest parameters, such as `f(...args)`, can't be curried this way.
+>>>>>>> c4d1987ebc470b30c234dbde6fac6e77b7509927
 ```
 
 ```smart header="Немного больше, чем каррирование"
