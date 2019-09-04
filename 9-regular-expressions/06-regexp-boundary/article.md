@@ -1,15 +1,6 @@
 # Граница слова: \b
 
-Граница слова `pattern:\b` - проверка, как и `pattern:^`, и `pattern:$`.
-
-Она обозначает не символ, а границу между символами.
-
-Например, регулярное выражение `pattern:\bJava\b` будет найдено в строке `subject:Hello, Java!`, где `subject:Java` - отдельное слово, но не будет найдено в строке `subject:Hello, JavaScript!`.
-
-```js run
-alert( "Hello, Java!".match(/\bJava\b/) ); // Java
-alert( "Hello, JavaScript!".match(/\bJava\b/) ); // null
-```
+Граница слова `pattern:\b` - проверка, как `pattern:^` и `pattern:$`.
 
 Когда движок регулярных выражений (программный модуль, реализующий поиск по регулярным выражениям) видит `pattern:\b`, он проверяет, что позиция в строке является границей слова.
 
@@ -19,15 +10,22 @@ alert( "Hello, JavaScript!".match(/\bJava\b/) ); // null
 - Позиция внутри текста, если слева находится `pattern:\w`, а справа – не `pattern:\w`, или наоборот.
 - Конец текста, если его последний символ `pattern:\w`.
 
-Например, в строке `subject:Hello, Java!` следующие позиции соответствуют `pattern:\b`:
+Например, регулярное выражение `pattern:\bJava\b` будет найдено в строке `subject:Hello, Java!`, где `subject:Java` - отдельное слово, но не будет найдено в строке `subject:Hello, JavaScript!`.
+
+```js run
+alert( "Hello, Java!".match(/\bJava\b/) ); // Java
+alert( "Hello, JavaScript!".match(/\bJava\b/) ); // null
+```
+
+В строке `subject:Hello, Java!` следующие позиции соответствуют `pattern:\b`:
 
 ![](hello-java-boundaries.svg)
 
 Так что она соответствует регулярному выражению `pattern:\bHello\b`, потому что:
 
-1. В начале строки совпадает первый тест `pattern:\b`.
+1. В начале строки совпадает первая проверка `pattern:\b`.
 2. Далее слово `pattern:Hello` совпадает.
-3. Далее `pattern:\b` снова совпадает, так как мы находимся между `subject:o` и пробелом.
+3. Далее проверка `pattern:\b` - снова совпадает, так как мы находимся между `subject:o` и пробелом.
 
 Шаблон `pattern:\bJava\b` также совпадёт. Но не `pattern:\bHell\b` (потому что после `subject:l` нет границы слова), и не `pattern:Java!\b` (восклицательный знак не является "символом слова" `pattern:\w`, поэтому после него нет границы слова).
 
