@@ -401,7 +401,7 @@ try {
   if (e.name == "SyntaxError") {
     alert( "JSON Error: " + e.message );
   } else {
-    throw e; // rethrow (*)
+    throw e; // проброс (*)
   }
 */!*
 
