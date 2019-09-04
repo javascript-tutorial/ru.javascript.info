@@ -520,14 +520,14 @@ Here's the diagram of what happens:
 
 ```js run
 let animal = {
-  eat: function() { // должен быть короткий синтаксис: eat() {...}
-    // ...
+  eat: function() { // не используется `super`, можно оставить свойство-функцию
+    console.log("Ест");
   }
 };
 
 let rabbit = {
   __proto__: animal,
-  eat: function() {
+  eat: function() { // должен быть короткий синтаксис: eat() {...}
     super.eat();
   }
 };
