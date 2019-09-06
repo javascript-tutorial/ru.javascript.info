@@ -520,7 +520,7 @@ Here's the diagram of what happens:
 
 ```js run
 let animal = {
-  eat: function() { // должен быть короткий синтаксис: eat() {...}
+  eat: function() { // намеренно не пишем так, а не eat() { ...
     // ...
   }
 };
