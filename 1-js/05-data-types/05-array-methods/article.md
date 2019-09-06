@@ -662,7 +662,7 @@ arr.map(func, thisArg);
 Например, вот тут мы используем метод объекта как фильтр, и `thisArg` с этим поможет:
 
 ```js run
-let user = {
+let john = {
   age: 18,
   younger(otherUser) {
     return otherUser.age < this.age;
@@ -676,14 +676,14 @@ let users = [
 ];
 
 *!*
-// найти число пользователей моложе, чем заданный
-let youngerUsers = users.filter(user.younger, user);
+// найти пользователей моложе, чем john
+let youngerUsers = users.filter(john.younger, john);
 */!*
 
 alert(youngerUsers.length); // 2
 ```
 
-В вышеприведённом вызове мы используем `user.younger` как фильтр, а также отдаём `user` в качестве контекста для него. Если бы мы не предоставляли контекст, `users.filter(user.younger)` вызвал бы `user.younger` как ни к чему не привязанную функцию с `this=undefined`. Это означало бы мгновенную ошибку.
+В вышеприведённом вызове мы используем `john.younger` как фильтр, а также отдаём `john` в качестве контекста для него. Если бы мы не предоставляли контекст, `users.filter(john.younger)` вызвал бы `john.younger` как ни к чему не привязанную функцию с `this=undefined`. Это означало бы мгновенную ошибку.
 
 ## Итого
 
