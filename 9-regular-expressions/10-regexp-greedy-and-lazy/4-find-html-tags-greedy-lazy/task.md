@@ -5,11 +5,11 @@
 Пример использования:
 
 ```js run
-let reg = /ваше регулярное выражение/g;
+let regexp = /ваше регулярное выражение/g;
 
 let str = '<> <a href="/"> <input type="radio" checked> <b>';
 
-alert( str.match(reg) ); // '<a href="/">', '<input type="radio" checked>', '<b>'
+alert( str.match(regexp) ); // '<a href="/">', '<input type="radio" checked>', '<b>'
 ```
 
 В этой задаче мы предполагаем, что теги выглядят как `<...что угодно...>`, и внутри тегов не может быть символов `<` и `>` (первый встреченный `>` закрывает тег).

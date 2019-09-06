@@ -9,13 +9,13 @@
 Итог:
 
 ```js run
-let reg = /^[0-9a-fA-F]{2}(:[0-9a-fA-F]{2}){5}$/i;
+let regexp = /^[0-9a-fA-F]{2}(:[0-9a-fA-F]{2}){5}$/i;
 
-alert( reg.test('01:32:54:67:89:AB') ); // true
+alert( regexp.test('01:32:54:67:89:AB') ); // true
 
-alert( reg.test('0132546789AB') ); // false (нет двоеточий)
+alert( regexp.test('0132546789AB') ); // false (нет двоеточий)
 
-alert( reg.test('01:32:54:67:89') ); // false (5 чисел, должно быть 6)
+alert( regexp.test('01:32:54:67:89') ); // false (5 чисел, должно быть 6)
 
-alert( reg.test('01:32:54:67:89:ZZ') ) // false (ZZ в конце строки)
+alert( regexp.test('01:32:54:67:89:ZZ') ) // false (ZZ в конце строки)
 ```

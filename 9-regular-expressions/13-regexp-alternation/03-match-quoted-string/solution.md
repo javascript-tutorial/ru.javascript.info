@@ -10,8 +10,8 @@
 В действии:
 
 ```js run
-let reg = /"(\\.|[^"\\])*"/g;
+let regexp = /"(\\.|[^"\\])*"/g;
 let str = ' .. "test me" .. "Скажи \\"Привет\\"!" .. "\\\\ \\"" .. ';
 
-alert( str.match(reg) ); // "test me","Скажи \"Привет\"!","\\ \""
+alert( str.match(regexp) ); // "test me","Скажи \"Привет\"!","\\ \""
 ```

@@ -17,11 +17,11 @@
 Давайте это проверим:
 
 ```js run
-let reg = /".+"/g;
+let regexp = /".+"/g;
 
 let str = 'a "witch" and her "broom" is one';
 
-alert( str.match(reg) ); // "witch" and her "broom"
+alert( str.match(regexp) ); // "witch" and her "broom"
 ```
 
 ...Как мы видим, регулярное выражение работает не как задумано!
@@ -105,11 +105,11 @@ alert( str.match(reg) ); // "witch" and her "broom"
 Регулярное выражение `pattern:/".+?"/g` работает как задумано, оно находит `match:"witch"` и `match:"broom"`:
 
 ```js run
-let reg = /".+?"/g;
+let regexp = /".+?"/g;
 
 let str = 'a "witch" and her "broom" is one';
 
-alert( str.match(reg) ); // witch, broom
+alert( str.match(regexp) ); // witch, broom
 ```
 
 Чтобы лучше понять, что поменялось, давайте рассмотрим процесс поиска шаг за шагом.
@@ -175,11 +175,11 @@ alert( "123 456".match(/\d+ \d+?/) ); // 123 4
 В нашем случаем мы можем найти кавычки без использования ленивого режима с помощью регулярного выражения `pattern:"[^"]+"`:
 
 ```js run
-let reg = /"[^"]+"/g;
+let regexp = /"[^"]+"/g;
 
 let str = 'a "witch" and her "broom" is one';
 
-alert( str.match(reg) ); // witch, broom
+alert( str.match(regexp) ); // witch, broom
 ```
 
 Регулярное выражение `pattern:"[^"]+"` получит нужный результат, потому что оно ищет кавычку `pattern:'"'`, за которой следует один или несколько символов "не-кавычек" `pattern:[^"]`, а затем -- закрывающая кавычка.
@@ -201,20 +201,20 @@ alert( str.match(reg) ); // witch, broom
 Давайте проверим:
 ```js run
 let str = '...<a href="link" class="doc">...';
-let reg = /<a href=".*" class="doc">/g;
+let regexp = /<a href=".*" class="doc">/g;
 
 // Работает!
-alert( str.match(reg) ); // <a href="link" class="doc">
+alert( str.match(regexp) ); // <a href="link" class="doc">
 ```
 
 Регулярное выражение работает. Но давайте посмотрим, что произойдёт, если в тексте будет много ссылок?
 
 ```js run
 let str = '...<a href="link1" class="doc">... <a href="link2" class="doc">...';
-let reg = /<a href=".*" class="doc">/g;
+let regexp = /<a href=".*" class="doc">/g;
 
 // Упс! Две ссылки в одном совпадении!
-alert( str.match(reg) ); // <a href="link1" class="doc">... <a href="link2" class="doc">
+alert( str.match(regexp) ); // <a href="link1" class="doc">... <a href="link2" class="doc">
 ```
 
 В данном случае мы получили неправильный результат по той же причине, что в примере с "witches". Квантификатор `pattern:.*` забирает слишком много символов.
@@ -230,10 +230,10 @@ alert( str.match(reg) ); // <a href="link1" class="doc">... <a href="link2" clas
 
 ```js run
 let str = '...<a href="link1" class="doc">... <a href="link2" class="doc">...';
-let reg = /<a href=".*?" class="doc">/g;
+let regexp = /<a href=".*?" class="doc">/g;
 
 // Работает!
-alert( str.match(reg) ); // <a href="link1" class="doc">, <a href="link2" class="doc">
+alert( str.match(regexp) ); // <a href="link1" class="doc">, <a href="link2" class="doc">
 ```
 
 Теперь кажется, что всё работает правильно. У нас есть два совпадения:
@@ -247,10 +247,10 @@ alert( str.match(reg) ); // <a href="link1" class="doc">, <a href="link2" class=
 
 ```js run
 let str = '...<a href="link1" class="wrong">... <p style="" class="doc">...';
-let reg = /<a href=".*?" class="doc">/g;
+let regexp = /<a href=".*?" class="doc">/g;
 
 // Неправильное совпадение!
-alert( str.match(reg) ); // <a href="link1" class="wrong">... <p style="" class="doc">
+alert( str.match(regexp) ); // <a href="link1" class="wrong">... <p style="" class="doc">
 ```
 
 Ну вот, ленивый квантификатор нас подвёл. В совпадении находится не только ссылка, но и текст после неё, включая `<p...>`.
@@ -281,11 +281,11 @@ alert( str.match(reg) ); // <a href="link1" class="wrong">... <p style="" class=
 ```js run
 let str1 = '...<a href="link1" class="wrong">... <p style="" class="doc">...';
 let str2 = '...<a href="link1" class="doc">... <a href="link2" class="doc">...';
-let reg = /<a href="[^"]*" class="doc">/g;
+let regexp = /<a href="[^"]*" class="doc">/g;
 
 // Работает!
-alert( str1.match(reg) ); // совпадений нет, всё правильно
-alert( str2.match(reg) ); // <a href="link1" class="doc">, <a href="link2" class="doc">
+alert( str1.match(regexp) ); // совпадений нет, всё правильно
+alert( str2.match(regexp) ); // <a href="link1" class="doc">, <a href="link2" class="doc">
 ```
 
 ## Итого

@@ -19,10 +19,10 @@
 Проверим, чтобы убедиться, что оно работает:
 
 ```js run
-let reg = /^(\w+\s?)*$/;
+let regexp = /^(\w+\s?)*$/;
 
-alert( reg.test("A good string") ); // true
-alert( reg.test("Bad characters: $@#") ); // false
+alert( regexp.test("A good string") ); // true
+alert( regexp.test("Bad characters: $@#") ); // false
 ```
 
 Результат верный. Однако, на некоторых строках оно выполняется очень долго. Так долго, что интерпретатор JavaScript "зависает" с потреблением 100% процессора.
@@ -30,11 +30,11 @@ alert( reg.test("Bad characters: $@#") ); // false
 Если вы запустите пример ниже, то, скорее всего, ничего не увидите, так как JavaScript "подвиснет". В браузере он перестанет реагировать на другие события и, скорее всего, понадобится перезагрузить страницу, так что осторожно с этим:
 
 ```js run
-let reg = /^(\w+\s?)*$/;
+let regexp = /^(\w+\s?)*$/;
 let str = "An input string that takes a long time or even makes this regexp to hang!";
 
 // этот поиск будет выполняться очень, очень долго
-alert( reg.test(str) );
+alert( regexp.test(str) );
 ```
 
 Некоторые движки регулярных выражений могут справиться с таким поиском, но большинство из них -- нет.
@@ -50,12 +50,12 @@ alert( reg.test(str) );
 <!-- let str = `AnInputStringThatMakesItHang!`; -->
 
 ```js run
-let reg = /^(\d+)*$/;
+let regexp = /^(\d+)*$/;
 
 let str = "012345678901234567890123456789!";
 
 // этот поиск будет выполняться очень, очень долго
-alert( reg.test(str) );
+alert( regexp.test(str) );
 ```
 
 В чём же дело, что не так с регулярным выражением?
@@ -188,10 +188,10 @@ alert( reg.test(str) );
 Это регулярное выражение эквивалентно предыдущему (ищет то же самое), и на этот раз всё работает:
 
 ```js run
-let reg = /^(\w+\s)*\w*$/;
+let regexp = /^(\w+\s)*\w*$/;
 let str = "An input string that takes a long time or even makes this regex to hang!";
 
-alert( reg.test(str) ); // false
+alert( regexp.test(str) ); // false
 ```
 
 Почему же проблема исчезла?
@@ -271,26 +271,26 @@ alert( "JavaScript".match(/(?=(\w+))\1Script/)); // null
 Перепишем исходный пример, используя опережающую проверку для запрета возврата:
 
 ```js run
-let reg = /^((?=(\w+))\2\s?)*$/;
+let regexp = /^((?=(\w+))\2\s?)*$/;
 
-alert( reg.test("A good string") ); // true
+alert( regexp.test("A good string") ); // true
 
 let str = "An input string that takes a long time or even makes this regex to hang!";
 
-alert( reg.test(str) ); // false, работает и быстро
+alert( regexp.test(str) ); // false, работает и быстро
 ```
 
 Здесь внутри скобок стоит `pattern:\2` вместо `pattern:\1`, так как есть ещё внешние скобки. Чтобы избежать путаницы с номерами скобок, можно дать скобкам имя, например `pattern:(?<word>\w+)`.
 
 ```js run
 // скобки названы ?<word>, ссылка на них \k<word>
-let reg = /^((?=(?<word>\w+))\k<word>\s?)*$/;
+let regexp = /^((?=(?<word>\w+))\k<word>\s?)*$/;
 
 let str = "An input string that takes a long time or even makes this regex to hang!";
 
-alert( reg.test(str) ); // false
+alert( regexp.test(str) ); // false
 
-alert( reg.test("A correct string") ); // true
+alert( regexp.test("A correct string") ); // true
 ```
 
 Проблему, которой была посвящена эта глава, называют "катастрофический возврат" (catastrophic backtracking).

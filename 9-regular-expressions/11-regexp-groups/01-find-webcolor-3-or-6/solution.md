@@ -9,19 +9,19 @@
 В действии:
 
 ```js run
-let reg = /#([a-f0-9]{3}){1,2}/gi;
+let regexp = /#([a-f0-9]{3}){1,2}/gi;
 
 let str = "color: #3f3; background-color: #AA00ef; and: #abcd";
 
-alert( str.match(reg) ); // #3f3 #AA00ef #abc
+alert( str.match(regexp) ); // #3f3 #AA00ef #abc
 ```
 
 Здесь есть небольшая проблема: шаблон находит `match:#abc` в `subject:#abcd`. Чтобы предотвратить это, мы можем добавить `pattern:\b` в конец:
 
 ```js run
-let reg = /#([a-f0-9]{3}){1,2}\b/gi;
+let regexp = /#([a-f0-9]{3}){1,2}\b/gi;
 
 let str = "color: #3f3; background-color: #AA00ef; and: #abcd";
 
-alert( str.match(reg) ); // #3f3 #AA00ef
+alert( str.match(regexp) ); // #3f3 #AA00ef
 ```

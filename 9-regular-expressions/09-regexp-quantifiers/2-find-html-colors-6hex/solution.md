@@ -7,11 +7,11 @@
 В результате наше регулярное выражение получилось таким: `pattern:/#[a-f0-9]{6}/gi`.
 
 ```js run
-let reg = /#[a-f0-9]{6}/gi;
+let regexp = /#[a-f0-9]{6}/gi;
 
 let str = "color:#121212; background-color:#AA00ef bad-colors:f#fddee #fd2"
 
-alert( str.match(reg) );  // #121212,#AA00ef
+alert( str.match(regexp) );  // #121212,#AA00ef
 ```
 
 Проблема в том, что находятся также совпадения, принадлежащие более длинным последовательностям символов:

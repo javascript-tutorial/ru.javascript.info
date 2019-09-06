@@ -114,9 +114,9 @@ alert( str.match(/\p{L}/g) ); // null (ничего не нашло, так ка
 Шестнадцатеричная цифра может быть обозначена как `pattern:\p{Hex_Digit}`:
 
 ```js run
-let reg = /x\p{Hex_Digit}\p{Hex_Digit}/u;
+let regexp = /x\p{Hex_Digit}\p{Hex_Digit}/u;
 
-alert("число: xAF".match(reg)); // xAF
+alert("число: xAF".match(regexp)); // xAF
 ```
 
 ### Пример: китайские иероглифы

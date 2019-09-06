@@ -4,11 +4,11 @@
 Но это не сработает, как надо:
 
 ```js run
-let reg = /Java|JavaScript|PHP|C|C\+\+/g;
+let regexp = /Java|JavaScript|PHP|C|C\+\+/g;
 
 let str = "Java, JavaScript, PHP, C, C++";
 
-alert( str.match(reg) ); // Java,Java,PHP,C,C
+alert( str.match(regexp) ); // Java,Java,PHP,C,C
 ```
 
 Движок регулярных выражений ищет альтернации в порядке их перечисления. То есть, он сначала смотрит, есть ли  `match:Java`, а если нет -- ищет  `match:JavaScript` и так далее.
@@ -25,9 +25,9 @@ alert( str.match(reg) ); // Java,Java,PHP,C,C
 В действии:
 
 ```js run
-let reg = /Java(Script)?|C(\+\+)?|PHP/g;
+let regexp = /Java(Script)?|C(\+\+)?|PHP/g;
 
 let str = "Java, JavaScript, PHP, C, C++";
 
-alert( str.match(reg) ); // Java,JavaScript,PHP,C,C++
+alert( str.match(regexp) ); // Java,JavaScript,PHP,C,C++
 ```

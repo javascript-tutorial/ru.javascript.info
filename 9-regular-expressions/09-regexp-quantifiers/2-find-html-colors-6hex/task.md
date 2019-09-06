@@ -5,11 +5,11 @@
 Пример использования:
 
 ```js
-let reg = /...ваше выражение.../
+let regexp = /...ваше выражение.../
 
 let str = "color:#121212; background-color:#AA00ef bad-colors:f#fddee #fd2 #12345678";
 
-alert( str.match(reg) )  // #121212,#AA00ef
+alert( str.match(regexp) )  // #121212,#AA00ef
 ```
 
 P.S. В рамках этого задания не нужно искать цвета, записанные в иных форматах типа `#123` или `rgb(1,2,3)`.

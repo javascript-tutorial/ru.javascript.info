@@ -8,7 +8,7 @@
 В действии:
 
 ```js run
-let reg = /[(b|url|quote)].*?[/\1]/gs;
+let regexp = /[(b|url|quote)].*?[/\1]/gs;
 
 let str = `
   [b]привет![/b]
@@ -17,7 +17,7 @@ let str = `
   [/quote]
 `;
 
-alert( str.match(reg) ); // [b]привет![/b],[quote][url]http://ya.ru[/url][/quote]
+alert( str.match(regexp) ); // [b]привет![/b],[quote][url]http://ya.ru[/url][/quote]
 ```
 
 Обратите внимание, что необходимо экранировать слеш `pattern:[/\1]`, потому что обычно слеш завершает паттерн.

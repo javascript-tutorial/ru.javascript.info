@@ -11,11 +11,11 @@
 Пример использования:
 
 ```js run
-let reg = /html|css|java(script)?/gi;
+let regexp = /html|css|java(script)?/gi;
 
 let str = "Сначала появился язык Java, затем HTML, потом JavaScript";
 
-alert( str.match(reg) ); // Java,HTML,JavaScript
+alert( str.match(regexp) ); // Java,HTML,JavaScript
 ```
 
 Мы уже видели нечто подобное - квадратные скобки. Они позволяют выбирать между несколькими символами, например  `pattern:gr[ae]y` найдёт `match:gray`, либо `match:grey`.
@@ -64,7 +64,7 @@ alert( str.match(reg) ); // Java,HTML,JavaScript
 Пример работы:
 
 ```js run
-let reg = /([01]\d|2[0-3]):[0-5]\d/g;
+let regexp = /([01]\d|2[0-3]):[0-5]\d/g;
 
-alert("00:00 10:10 23:59 25:99 1:2".match(reg)); // 00:00,10:10,23:59
+alert("00:00 10:10 23:59 25:99 1:2".match(regexp)); // 00:00,10:10,23:59
 ```

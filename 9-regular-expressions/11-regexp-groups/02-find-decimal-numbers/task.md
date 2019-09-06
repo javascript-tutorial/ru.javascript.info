@@ -5,9 +5,9 @@
 Пример использования:
 
 ```js
-let reg = /ваш шаблон/g;
+let regexp = /ваш шаблон/g;
 
 let str = "-1.5 0 2 -123.4.";
 
-alert( str.match(reg) ); // -1.5, 0, 2, -123.4
+alert( str.match(regexp) ); // -1.5, 0, 2, -123.4
 ```

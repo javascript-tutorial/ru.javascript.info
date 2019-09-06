@@ -7,7 +7,7 @@
 Например:
 
 ```js
-let reg = /ваше регулярное выражение/g;
+let regexp = /ваше регулярное выражение/g;
 
-alert( '<style> <styler> <style test="...">'.match(reg) ); // <style>, <style test="...">
+alert( '<style> <styler> <style test="...">'.match(regexp) ); // <style>, <style test="...">
 ```

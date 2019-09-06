@@ -17,10 +17,10 @@
 ```js run
 let str = `He said: "She's the one!".`;
 
-let reg = /['"](.*?)['"]/g;
+let regexp = /['"](.*?)['"]/g;
 
 // Результат - не тот, который хотелось бы
-alert( str.match(reg) ); // "She'
+alert( str.match(regexp) ); // "She'
 ```
 
 Как видно, шаблон нашёл открывающую кавычку `match:"`, а после нашёл текст вплоть до следующей кавычки `match:'`, после чего поиск завершился.
@@ -33,10 +33,10 @@ alert( str.match(reg) ); // "She'
 let str = `He said: "She's the one!".`;
 
 *!*
-let reg = /(['"])(.*?)\1/g;
+let regexp = /(['"])(.*?)\1/g;
 */!*
 
-alert( str.match(reg) ); // "She's the one!"
+alert( str.match(regexp) ); // "She's the one!"
 ```
 
 Теперь работает! Движок регулярных выражений находит первую кавычку из шаблона `pattern:(['"])` и запоминает её содержимое. Это первая скобочная группа.
@@ -64,7 +64,7 @@ alert( str.match(reg) ); // "She's the one!"
 ```js run
 let str = `He said: "She's the one!".`;
 
-let reg = /(?<quote>['"])(.*?)\k<quote>/g;
+let regexp = /(?<quote>['"])(.*?)\k<quote>/g;
 
-alert( str.match(reg) ); // "She's the one!"
+alert( str.match(regexp) ); // "She's the one!"
 ```

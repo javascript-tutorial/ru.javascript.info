@@ -56,9 +56,9 @@ alert( "site.com my.site.com".match(regexp) ); // site.com,my.site.com
 Итоговый шаблон:
 
 ```js run
-let reg = /[-.\w]+@([\w-]+\.)+[\w-]+/g;
+let regexp = /[-.\w]+@([\w-]+\.)+[\w-]+/g;
 
-alert("my@mail.com @ his@site.com.uk".match(reg)); // my@mail.com, his@site.com.uk
+alert("my@mail.com @ his@site.com.uk".match(regexp)); // my@mail.com, his@site.com.uk
 ```
 
 Это регулярное выражение не идеальное, но, как правило, работает и помогает исправлять опечатки. Окончательную проверку правильности email, в любом случае, можно осуществить, лишь послав на него письмо.
@@ -110,9 +110,9 @@ alert( tag[1] ); // h1
 ```js run
 let str = '<span class="my">';
 
-let reg = /<(([a-z]+)\s*([^>]*))>/;
+let regexp = /<(([a-z]+)\s*([^>]*))>/;
 
-let result = str.match(reg);
+let result = str.match(regexp);
 alert(result[0]); // <span class="my">
 alert(result[1]); // span class="my"
 alert(result[2]); // span
@@ -336,10 +336,10 @@ let str = "Gogogo John!";
 
 *!*
 // ?: исключает go из запоминания
-let reg = /(?:go)+ (\w+)/i;
+let regexp = /(?:go)+ (\w+)/i;
 */!*
 
-let result = str.match(reg);
+let result = str.match(regexp);
 
 alert( result[0] ); // Gogogo John (полное совпадение)
 alert( result[1] ); // John

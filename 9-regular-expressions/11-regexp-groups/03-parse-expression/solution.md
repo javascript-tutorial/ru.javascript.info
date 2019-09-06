@@ -18,9 +18,9 @@
 В действии:
 
 ```js run
-let reg = /(-?\d+(\.\d+)?)\s*([-+*\/])\s*(-?\d+(\.\d+)?)/;
+let regexp = /(-?\d+(\.\d+)?)\s*([-+*\/])\s*(-?\d+(\.\d+)?)/;
 
-alert( "1.2 + 12".match(reg) );
+alert( "1.2 + 12".match(regexp) );
 ```
 
 Результат `result` включает в себя:
@@ -42,9 +42,9 @@ alert( "1.2 + 12".match(reg) );
 
 ```js run
 function parse(expr) {
-  let reg = /(-?\d+(?:\.\d+)?)\s*([-+*\/])\s*(-?\d+(?:\.\d+)?)/;
+  let regexp = /(-?\d+(?:\.\d+)?)\s*([-+*\/])\s*(-?\d+(?:\.\d+)?)/;
 
-  let result = expr.match(reg);
+  let result = expr.match(regexp);
 
   if (!result) return [];
   result.shift();

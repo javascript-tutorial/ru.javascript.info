@@ -13,9 +13,9 @@
 ```js run
 let str = "+7(903)-123-45-67";
 
-let reg = /\d/;
+let regexp = /\d/;
 
-alert( str.match(reg) ); // 7
+alert( str.match(regexp) ); // 7
 ```
 
 Без флага `pattern:g` регулярное выражение ищет только первое совпадение, то есть первую цифру `pattern:\d`.
@@ -25,12 +25,12 @@ alert( str.match(reg) ); // 7
 ```js run
 let str = "+7(903)-123-45-67";
 
-let reg = /\d/g;
+let regexp = /\d/g;
 
-alert( str.match(reg) ); // массив совпадений: 7,9,0,3,1,2,3,4,5,6,7
+alert( str.match(regexp) ); // массив совпадений: 7,9,0,3,1,2,3,4,5,6,7
 
 // и можно сделать из них уже чисто цифровой номер телефона
-alert( str.match(reg).join('') ); // 79035419441
+alert( str.match(regexp).join('') ); // 79035419441
 ```
 
 Это был символьный класс для цифр. Есть и другие символьные классы.
@@ -54,9 +54,9 @@ alert( str.match(reg).join('') ); // 79035419441
 
 ```js run
 let str = "Есть ли стандарт CSS4?";
-let reg = /CSS\d/
+let regexp = /CSS\d/
 
-alert( str.match(reg) ); // CSS4
+alert( str.match(regexp) ); // CSS4
 ```
 
 Также мы можем использовать несколько символьных классов:
@@ -114,11 +114,11 @@ alert( "Ю".match(/./) ); // Ю
 Или в середине регулярного выражения:
 
 ```js run
-let reg = /CS.4/;
+let regexp = /CS.4/;
 
-alert( "CSS4".match(reg) ); // CSS4
-alert( "CS-4".match(reg) ); // CS-4
-alert( "CS 4".match(reg) ); // CS 4 (пробел тоже является символом)
+alert( "CSS4".match(regexp) ); // CSS4
+alert( "CS-4".match(regexp) ); // CS-4
+alert( "CS 4".match(regexp) ); // CS 4 (пробел тоже является символом)
 ```
 
 Обратите внимание, что точка означает "любой символ", но не "отсутствие символа". Там должен быть какой-либо символ, чтобы соответствовать условию поиска:

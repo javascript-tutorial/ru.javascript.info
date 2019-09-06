@@ -55,9 +55,9 @@ alert( "/".match(new RegExp("/")) ); // находит /
 Например, такой поиск не работает:
 
 ```js run
-let reg = new RegExp("\d\.\d");
+let regexp = new RegExp("\d\.\d");
 
-alert( "Глава 5.1".match(reg) ); // null
+alert( "Глава 5.1".match(regexp) ); // null
 ```
 
 Аналогичный поиск в примере выше с `pattern:/\d\.\d/` вполне работал, почему же не работает `new RegExp("\d\.\d")`?
@@ -86,9 +86,9 @@ let regStr = "\\d\\.\\d";
 */!*
 alert(regStr); // \d\.\d (теперь правильно)
 
-let reg = new RegExp(regStr);
+let regexp = new RegExp(regStr);
 
-alert( "Глава 5.1".match(reg) ); // 5.1
+alert( "Глава 5.1".match(regexp) ); // 5.1
 ```
 
 ## Итого
