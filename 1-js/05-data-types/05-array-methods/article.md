@@ -687,9 +687,9 @@ alert(soldiers[0].age); // 20
 alert(soldiers[1].age); // 23
 ```
 
-Если бы мы в примере выше использовали просто `users.filter(army.canJoin)`, то вызов `army.canJoin` был бы с `this=undefined`. Это тут же привело бы к ошибке.
+Если бы мы в примере выше использовали просто `users.filter(army.canJoin)`, то вызов `army.canJoin` был бы в режиме отдельной функции, с `this=undefined`. Это тут же привело бы к ошибке.
 
-Впрочем, тот же результат дал бы вызов `users.filter(user => army.canJoin(user))`, и он более нагляден, поэтому так пишут чаще.
+Впрочем, правильный `this` также гарантирует вызов `users.filter(user => army.canJoin(user))`, и он более нагляден, поэтому так пишут чаще.
 
 ## Итого
 
