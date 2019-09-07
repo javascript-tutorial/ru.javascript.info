@@ -659,31 +659,35 @@ arr.map(func, thisArg);
 
 Значение параметра `thisArg` становится `this` для `func`.
 
-Например, вот тут мы используем метод объекта как фильтр, и `thisArg` с этим поможет:
+Например, вот тут мы используем метод объекта `army` как фильтр, и `thisArg` передаёт ему контекст:
 
 ```js run
-let john = {
-  age: 18,
-  younger(otherUser) {
-    return otherUser.age < this.age;
+let army = {
+  minAge: 18,
+  maxAge: 27,
+  canJoin(user) {
+    return user.age >= this.minAge && user.age < this.maxAge;
   }
 };
 
 let users = [
-  {age: 12},
   {age: 16},
-  {age: 32}
+  {age: 20},
+  {age: 23},
+  {age: 30}
 ];
 
 *!*
-// найти пользователей моложе, чем john
-let youngerUsers = users.filter(john.younger, john);
+// найти пользователей, для которых army.canJoin возвращает true
+let soldiers = users.filter(army.canJoin, army);
 */!*
 
-alert(youngerUsers.length); // 2
+alert(soldiers.length); // 2
+alert(soldiers[0].age); // 20
+alert(soldiers[1].age); // 23
 ```
 
-В вышеприведённом вызове мы используем `john.younger` как фильтр, а также отдаём `john` в качестве контекста для него. Если бы мы не предоставляли контекст, `users.filter(john.younger)` вызвал бы `john.younger` как ни к чему не привязанную функцию с `this=undefined`. Это означало бы мгновенную ошибку.
+Если бы мы в примере выше не использовали просто `users.filter(army.canJoin)`, то вызов `army.canJoin` был бы с `this=undefined`. Это тут же привело бы к ошибке.
 
 ## Итого
 
