@@ -76,7 +76,7 @@ alert( "Exception 0xAF".match(/x[0-9A-F][0-9A-F]/g) ); // xAF
 - `Alphabetic` (`Alpha`) - для букв,
 - `Mark` (`M`) - для акцентов,
 - `Decimal_Number` (`Nd`) - для цифр,
-- `Connector_Punctuation` (`Pc`) - для символа подёркивания `'_'` и подобных ему,
+- `Connector_Punctuation` (`Pc`) - для символа подчёркивания `'_'` и подобных ему,
 - `Join_Control` (`Join_C`) - два специальных кода `200c` и `200d`, используемые в лигатурах, например, арабских.
 
 Пример использования:

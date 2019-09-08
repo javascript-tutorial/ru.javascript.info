@@ -50,7 +50,7 @@ roma.sayHi(); // Привет, дружище!
 
 Каждый примитив имеет свой собственный "объект-обёртку", которые называются: `String`, `Number`, `Boolean` и `Symbol`. Таким образом, они имеют разный набор методов.
 
-К примеру, существует метод [str.toUpperCase()](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/String/toUpperCase), который возвращает cтроку в верхнем регистре.
+К примеру, существует метод [str.toUpperCase()](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/String/toUpperCase), который возвращает строку в верхнем регистре.
 
 Вот, как он работает:
 
