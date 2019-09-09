@@ -659,7 +659,11 @@ arr.map(func, thisArg);
 
 Значение параметра `thisArg` становится `this` для `func`.
 
+<<<<<<< HEAD
 Например, вот тут мы используем метод объекта `army` как фильтр, и `thisArg` передаёт ему контекст:
+=======
+For example, here we use a method of `army` object as a filter, and `thisArg` passes the context:
+>>>>>>> 3dd8ca09c1a7ed7a7b04eefc69898559902478e1
 
 ```js run
 let army = {
@@ -678,7 +682,11 @@ let users = [
 ];
 
 *!*
+<<<<<<< HEAD
 // найти пользователей, для которых army.canJoin возвращает true
+=======
+// find users, for who army.canJoin returns true
+>>>>>>> 3dd8ca09c1a7ed7a7b04eefc69898559902478e1
 let soldiers = users.filter(army.canJoin, army);
 */!*
 
@@ -687,9 +695,15 @@ alert(soldiers[0].age); // 20
 alert(soldiers[1].age); // 23
 ```
 
+<<<<<<< HEAD
 Если бы мы в примере выше использовали просто `users.filter(army.canJoin)`, то вызов `army.canJoin` был бы в режиме отдельной функции, с `this=undefined`. Это тут же привело бы к ошибке.
 
 Вызов `users.filter(army.canJoin, army)` можно заменить на `users.filter(user => army.canJoin(user))`, который делает то же самое. Последняя запись используется даже чаще, так как функция-стрелка более наглядна.
+=======
+If in the example above we used `users.filter(army.canJoin)`, then `army.canJoin` would be called as a standalone function, with `this=undefined`, thus leading to an instant error.
+
+A call to `users.filter(army.canJoin, army)` can be replaced with `users.filter(user => army.canJoin(user))`, that does the same. The former is used more often, as it's a bit easier to understand for most people.
+>>>>>>> 3dd8ca09c1a7ed7a7b04eefc69898559902478e1
 
 ## Итого
 

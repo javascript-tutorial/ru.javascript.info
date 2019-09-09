@@ -20,4 +20,8 @@ let str = `
 alert( str.match(regexp) ); // [b]привет![/b],[quote][url]http://ya.ru[/url][/quote]
 ```
 
+<<<<<<< HEAD
 Обратите внимание, что кроме экранирования `pattern:[` и `pattern:]` нам необходимо экранировать слеш в закрывающем теге `pattern:[\/\1]`, потому что обычно слеш завершает паттерн.
+=======
+Please note that besides escaping `pattern:[` and `pattern:]`, we had to escape a slash for the closing tag `pattern:[\/\1]`, because normally the slash closes the pattern.
+>>>>>>> 3dd8ca09c1a7ed7a7b04eefc69898559902478e1

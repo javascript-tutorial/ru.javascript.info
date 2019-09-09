@@ -94,9 +94,15 @@ JavaScript налагает некоторые условия - инвариан
 
 Он срабатывает при попытке прочитать свойство объекта, с аргументами:
 
+<<<<<<< HEAD
 - `target` -- это оригинальный объект, который передавался первым аргументом в конструктор `new Proxy`,
 - `property` -- имя свойства,
 - `receiver` -- если свойство объекта является геттером, то `receiver` - это объект, который будет использован как `this` при его вызове. Обычно это сам объект прокси (или наследующий от него объект). Прямо сейчас нам не понадобится этот аргумент, подробнее разберём его позже.
+=======
+- `target` -- is the target object, the one passed as the first argument to `new Proxy`,
+- `property` -- property name,
+- `receiver` -- if the target property is a getter, then `receiver` is the object that's going to be used as `this` in its call. Usually that's the `proxy` object itself (or an object that inherits from it, if we inherit from proxy). Right now we don't need this argument, will be explained in more details later.
+>>>>>>> 3dd8ca09c1a7ed7a7b04eefc69898559902478e1
 
 Давайте применим ловушку `get`, чтобы реализовать "значения по умолчанию" для свойств объекта.
 
