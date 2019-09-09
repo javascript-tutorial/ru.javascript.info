@@ -62,7 +62,7 @@ let arr = [1, 2, 3];
 // наследует ли от Array.prototype?
 alert( arr.__proto__ === Array.prototype ); // true
 
-// затем от Object.prototype?
+// затем наследует ли от Object.prototype?
 alert( arr.__proto__.__proto__ === Object.prototype ); // true
 
 // и null на вершине иерархии
