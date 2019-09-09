@@ -36,3 +36,8 @@
 # Перевод с английского
 
 При переводе статей ознакомьтесь с [рекомендациями по переводу](https://github.com/javascript-tutorial/ru.javascript.info/blob/master/TRANSLATION.md)!**
+
+---
+♥  
+Илья Кантор @iliakan
+
