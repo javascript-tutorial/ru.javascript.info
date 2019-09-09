@@ -67,7 +67,7 @@ try {
     signal: controller.signal
   });
 } catch(err) {
-  if (err.name == 'AbortError') { // обработь ошибку от вызова abort()
+  if (err.name == 'AbortError') { // обработать ошибку от вызова abort()
     alert("Прервано!");
   } else {
     throw err;
