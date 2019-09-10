@@ -460,7 +460,7 @@ list.next.next.next = { value: 4 };
 
 ```js
 let secondList = list.next.next;
-list.next.next = null;
+secondList.next.next = null;
 ```
 
 ![разделение связанного списка](linked-list-split.svg)
