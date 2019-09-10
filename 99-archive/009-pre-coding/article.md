@@ -45,7 +45,7 @@ archive:
 
 ### Спецификация ECMAScript
 
-Спецификация (формальное описание синтаксиса, базовых объектов и алгоритмов) языка Javascript называется [ECMAScript](http://www.ecma-international.org/publications/standards/Ecma-262.htm).
+Спецификация (формальное описание синтаксиса, базовых объектов и алгоритмов) языка JavaScript называется [ECMAScript](http://www.ecma-international.org/publications/standards/Ecma-262.htm).
 
 ```smart header="Почему не просто &quot;JavaScript&quot; ?"
 Вы можете спросить: "Почему спецификация для JavaScript не называется просто *"JavaScript"*, зачем существует какое-то отдельное название?"
