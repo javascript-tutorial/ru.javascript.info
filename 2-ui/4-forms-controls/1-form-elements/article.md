@@ -62,7 +62,14 @@ alert(ageElems[0]); // [object HTMLInputElement]
 ````smart header="`<fieldset>` как \"подформа\""
 Форма может содержать один или несколько элементов `<fieldset>` внутри себя. Они также поддерживают свойство `elements`, в котором находятся элементы управления внутри них.
 
+<<<<<<< HEAD
 Например:
+=======
+````smart header="Fieldsets as \"subforms\""
+A form may have one or many `<fieldset>` elements inside it. They also have `elements` property that lists form controls inside them.
+
+For instance:
+>>>>>>> 646989dd470395510e1006c220e05e85a06eb78a
 
 ```html run height=80
 <body>
@@ -80,7 +87,11 @@ alert(ageElems[0]); // [object HTMLInputElement]
     let fieldset = form.elements.userFields;
     alert(fieldset); // HTMLFieldSetElement
 
+<<<<<<< HEAD
     // мы можем достать элемент по имени как из формы, так и из fieldset с ним
+=======
+    // we can get the input by name both from the form and from the fieldset
+>>>>>>> 646989dd470395510e1006c220e05e85a06eb78a
     alert(fieldset.elements.login == form.elements.login); // true
 */!*
   </script>
@@ -91,7 +102,11 @@ alert(ageElems[0]); // [object HTMLInputElement]
 ````warn header="Сокращённая форма записи: `form.name`"
 Есть более короткая запись: мы можем получить доступ к элементу через `form[index/name]`.
 
+<<<<<<< HEAD
 Другими словами, вместо `form.elements.login` мы можем написать `form.login`.
+=======
+In other words, instead of `form.elements.login` we can write `form.login`.
+>>>>>>> 646989dd470395510e1006c220e05e85a06eb78a
 
 Это также работает, но есть небольшая проблема: если мы получаем элемент, а затем меняем его свойство `name`, то он всё ещё будет доступен под старым именем (также, как и под новым).
 
@@ -112,7 +127,11 @@ alert(ageElems[0]); // [object HTMLInputElement]
   alert(form.elements.username); // input
 
 *!*
+<<<<<<< HEAD
   // а в form мы можем использовать оба имени: новое и старое
+=======
+  // form allows both names: the new one and the old one
+>>>>>>> 646989dd470395510e1006c220e05e85a06eb78a
   alert(form.username == form.login); // true
 */!*
 </script>
@@ -150,7 +169,11 @@ alert(ageElems[0]); // [object HTMLInputElement]
 
 ## Элементы формы
 
+<<<<<<< HEAD
 Рассмотрим элементы управления, используемые в формах.
+=======
+Let's talk about form controls.
+>>>>>>> 646989dd470395510e1006c220e05e85a06eb78a
 
 ### input и textarea
 
@@ -165,16 +188,24 @@ textarea.value = "Новый текст";
 input.checked = true; // для чекбоксов и переключателей
 ```
 
+<<<<<<< HEAD
 ```warn header="Используйте `textarea.value` вместо `textarea.innerHTML`"
 Обратим внимание: хоть элемент `<textarea>...</textarea>` и хранит своё значение как вложенный HTML, нам не следует использовать `textarea.innerHTML` для доступа к нему.
 
 Там хранится только тот HTML, который был изначально на странице, а не текущее значение.
+=======
+```warn header="Use `textarea.value`, not `textarea.innerHTML`"
+Please note that even though `<textarea>...</textarea>` holds its value as nested HTML, we should never use `textarea.innerHTML` to access it.
+
+It stores only the HTML that was initially on the page, not the current value.
+>>>>>>> 646989dd470395510e1006c220e05e85a06eb78a
 ```
 
 ### select и option
 
 Элемент `<select>` имеет 3 важных свойства:
 
+<<<<<<< HEAD
 1. `select.options` -- коллекция из подэлементов `<option>`,
 2. `select.value` -- значение выбранного в данный момент `<option>`,
 3. `select.selectedIndex` -- номер выбранного `<option>`.
@@ -184,6 +215,17 @@ input.checked = true; // для чекбоксов и переключателе
 1. Найти соответствующий элемент `<option>` и установить в `option.selected` значение `true`.
 2. Установить в `select.value` значение нужного `<option>`.
 3. Установить в `select.selectedIndex` номер нужного `<option>`.
+=======
+1. `select.options` -- the collection of `<option>` subelements,
+2. `select.value` -- the value of the currently selected `<option>`,
+3. `select.selectedIndex` -- the number of the currently selected `<option>`.
+
+So we have three ways to set the value of a `<select>`, that do the same:
+
+1. Find the corresponding `<option>` element and set `option.selected` to `true`.
+2. Set `select.value` to the value.
+3. Set `select.selectedIndex` to the number of the option.
+>>>>>>> 646989dd470395510e1006c220e05e85a06eb78a
 
 Первый способ наиболее понятный, но `(2)` и `(3)` являются более удобными при работе.
 
@@ -204,9 +246,15 @@ input.checked = true; // для чекбоксов и переключателе
 </script>
 ```
 
+<<<<<<< HEAD
 В отличие от большинства других элементов управления, `<select>` позволяет нам выбрать несколько вариантов одновременно, если у него стоит атрибут `multiple`. Эту возможность используют редко, но в этом случае для работы со значениями необходимо использовать первый способ, то есть ставить или удалять свойство `selected` у подэлементов `<option>`.
 
 Их коллекцию можно получить как `select.options`, например:
+=======
+Unlike most other controls, `<select>` allows to select multiple options at once if it has `multiple` attribute. That's feature is rarely used. In that case we need to use the first ways: add/remove the `selected` property from `<option>` subelements.
+
+We can get their collection as `select.options`, for instance:
+>>>>>>> 646989dd470395510e1006c220e05e85a06eb78a
 
 ```html run
 <select id="select" *!*multiple*/!*>
@@ -231,7 +279,11 @@ input.checked = true; // для чекбоксов и переключателе
 
 Элемент `<option>` редко используется сам по себе, но и здесь есть кое-что интересное.
 
+<<<<<<< HEAD
 В [спецификации](https://html.spec.whatwg.org/multipage/forms.html#the-option-element) есть красивый короткий синтаксис для создания элемента `<option>`:
+=======
+In the [specification](https://html.spec.whatwg.org/multipage/forms.html#the-option-element) there's a nice short syntax to create `<option>` elements:
+>>>>>>> 646989dd470395510e1006c220e05e85a06eb78a
 
 ```js
 option = new Option(text, value, defaultSelected, selected);
@@ -244,9 +296,15 @@ option = new Option(text, value, defaultSelected, selected);
 - `defaultSelected` -- если `true`, то ставится HTML-атрибут `selected`,
 - `selected` -- если `true`, то элемент `<option>` будет выбранным.
 
+<<<<<<< HEAD
 Тут может быть небольшая путаница с `defaultSelected` и `selected`. Всё просто: `defaultSelected` задаёт HTML-атрибут, его можно получить как  `option.getAttribute('selected')`, а `selected` - выбрано значение или нет, именно его важно поставить правильно. Впрочем, обычно ставят оба этих значения в `true` или не ставят вовсе (т.е. `false`).
 
 Пример:
+=======
+There may be a small confusion about `defaultSelected` and `selected`. That's simple: `defaultSelected` sets HTML-attribute, that we can get using `option.getAttribute('selected')`. And `selected` - whether the option is selected or not, that's more important. Usually both values are either set to `true` or not set (same as `false`).
+
+For instance:
+>>>>>>> 646989dd470395510e1006c220e05e85a06eb78a
 
 ```js
 let option = new Option("Текст", "value");
@@ -259,6 +317,7 @@ let option = new Option("Текст", "value");
 let option = new Option("Текст", "value", true, true);
 ```
 
+<<<<<<< HEAD
 Элементы `<option>` имеют свойства:
 
 `option.selected`
@@ -269,6 +328,22 @@ let option = new Option("Текст", "value", true, true);
 
 `option.text`
 : Содержимое опции (то, что видит посетитель).
+=======
+Option elements have properties:
+
+`option.selected`
+: Is the option selected.
+
+`option.index`
+: The number of the option among the others in its `<select>`.
+
+`option.text`
+: Text content of the option (seen by the visitor).
+
+## References
+
+- Specification: <https://html.spec.whatwg.org/multipage/forms.html>.
+>>>>>>> 646989dd470395510e1006c220e05e85a06eb78a
 
 ## Ссылки
 
@@ -291,6 +366,14 @@ let option = new Option("Текст", "value", true, true);
 
 Для элемента `<select>` мы также можем получить индекс выбранного пункта через `select.selectedIndex`, либо используя коллекцию пунктов `select.options`.
 
+<<<<<<< HEAD
 Это были основы для начала работы с формами. Далее в учебнике мы встретим ещё много примеров.
 
 В следующей главе мы рассмотрим такие события, как `focus` и `blur`, которые могут происходить на любом элементе, но чаще всего обрабатываются в формах.
+=======
+For `<select>` we can also get the value by the index `select.selectedIndex` or through the options collection `select.options`.
+
+These are the basics to start working with forms. We'll meet many examples further in the tutorial.
+
+In the next chapter we'll cover `focus` and `blur` events that may occur on any element, but are mostly handled on forms.
+>>>>>>> 646989dd470395510e1006c220e05e85a06eb78a

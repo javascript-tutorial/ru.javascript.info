@@ -307,9 +307,15 @@ for (let key in user) {
 : Запрещает добавлять/удалять свойства. Устанавливает `configurable: false` для всех существующих свойств.
 
 [Object.freeze(obj)](mdn:js/Object/freeze)
+<<<<<<< HEAD
 : Запрещает добавлять/удалять/изменять свойства. Устанавливает `configurable: false, writable: false` для всех существующих свойств.
 
 А также есть методы для их проверки:
+=======
+: Forbids adding/removing/changing of properties. Sets `configurable: false, writable: false` for all existing properties.
+
+And also there are tests for them:
+>>>>>>> 646989dd470395510e1006c220e05e85a06eb78a
 
 [Object.isExtensible(obj)](mdn:js/Object/isExtensible)
 : Возвращает `false`, если добавление свойств запрещено, иначе `true`.

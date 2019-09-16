@@ -6,9 +6,15 @@
 
 Один из наиболее частых случаев использования куки -- это аутентификация:
 
+<<<<<<< HEAD
 1. При входе на сайт сервер отсылает в ответ HTTP-заголовок `Set-Cookie` для того, чтобы установить куки со специальным уникальным идентификатором сессии ("session identifier").
 2. Во время следующего запроса к этому же домену браузер посылает на сервер HTTP-заголовок `Cookie`.
 3. Таким образом, сервер понимает, кто сделал запрос.
+=======
+1. Upon sign in, the server uses `Set-Cookie` HTTP-header in the response to set a cookie with a unique "session identifier".
+2. Next time when the request is set to the same domain, the browser sends the cookie over the net using `Cookie` HTTP-header.
+3. So the server knows who made the request.
+>>>>>>> 646989dd470395510e1006c220e05e85a06eb78a
 
 Мы также можем получить доступ к куки непосредственно из браузера, используя свойство `document.cookie`.
 
