@@ -236,7 +236,7 @@ class User {
 
   constructor(name) {
     // вызывает сеттер
-    this.name = name;
+    this._name = name;
   }
 
 *!*
