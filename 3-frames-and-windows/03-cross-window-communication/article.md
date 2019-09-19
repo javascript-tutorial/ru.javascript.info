@@ -91,7 +91,8 @@
 
 <script>
   iframe.onload = function() {
-    // делаем с ним что угодно    iframe.contentDocument.body.prepend("Привет, мир!");
+    // делаем с ним что угодно    
+    iframe.contentDocument.body.prepend("Привет, мир!");
   };
 </script>
 ```
