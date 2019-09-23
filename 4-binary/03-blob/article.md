@@ -30,8 +30,13 @@ let blob = new Blob(["<html>…</html>"], {type: 'text/html'});
 ```
 
 ```js
+<<<<<<< HEAD
 // создадим Blob из типизированного массива и строк
 let hello = new Uint8Array([72, 101, 108, 108, 111]); // "hello" в бинарной форме
+=======
+// create Blob from a typed array and strings
+let hello = new Uint8Array([72, 101, 108, 108, 111]); // "Hello" in binary form
+>>>>>>> 4d654318ccb6d37d6cefc9b859cf111ff3c96b27
 
 let blob = new Blob([hello, ' ', 'world'], {type: 'text/plain'});
 ```

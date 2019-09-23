@@ -327,8 +327,13 @@ welcome(); // Hello, Guest (вложенный вызов работает)
 
 Внешний код все ещё содержит переменные `sayHi` и `welcome`, но теперь `func` -- это "внутреннее имя функции", таким образом она может вызвать себя изнутри.
 
+<<<<<<< HEAD
 ```smart header="Это не работает с Function Declaration"
 Трюк с "внутренним" именем, описанный выше, работает только для Function Expression и *не* работает для Function Declaration. Для Function Declaration синтаксис не предусматривает возможность объявить дополнительное "внутреннее" имя.
+=======
+```smart header="There's no such thing for Function Declaration"
+The "internal name" feature described here is only available for Function Expressions, not for Function Declarations. For Function Declarations, there is no syntax for adding an "internal" name.
+>>>>>>> 4d654318ccb6d37d6cefc9b859cf111ff3c96b27
 
 Зачастую, когда нам нужно надёжное "внутреннее" имя, стоит переписать Function Declaration на Named Function Expression.
 ```

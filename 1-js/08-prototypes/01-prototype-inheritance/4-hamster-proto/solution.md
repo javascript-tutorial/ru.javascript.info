@@ -44,7 +44,11 @@ alert( lazy.stomach ); // <ничего>
 
 Теперь всё работает правильно, потому что `this.stomach=` не ищет свойство `stomach`. Значение записывается непосредственно в объект `this`.
 
+<<<<<<< HEAD
 Также мы можем полностью избежать проблемы, если у каждого хомяка будет собственный живот:
+=======
+Also we can totally avoid the problem by making sure that each hamster has their own stomach:
+>>>>>>> 4d654318ccb6d37d6cefc9b859cf111ff3c96b27
 
 ```js run
 let hamster = {

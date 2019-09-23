@@ -131,7 +131,12 @@ alert(vasya.name); // Вася
 
 Обычно конструкторы ничего не возвращают явно. Их задача - записать все необходимое в `this`, который в итоге станет результатом.
 
+<<<<<<< HEAD
 Но если `return` всё же есть, то применяется простое правило:
+=======
+- If `return` is called with an object, then the object is returned instead of `this`.
+- If `return` is called with a primitive, it's ignored.
+>>>>>>> 4d654318ccb6d37d6cefc9b859cf111ff3c96b27
 
 - При вызове `return` с объектом, будет возвращён объект, а не `this`.
 - При вызове `return` с примитивным значением, примитивное значение будет отброшено.

@@ -1,6 +1,10 @@
 # Обработка ошибок, "try..catch"
 
+<<<<<<< HEAD
 Неважно, насколько мы хороши в программировании, иногда наши скрипты содержат ошибки. Они могут возникать из-за наших промахов, неожиданного ввода пользователя, неправильного ответа сервера и по тысяче других причин.
+=======
+No matter how great we are at programming, sometimes our scripts have errors. They may occur because of our mistakes, an unexpected user input, an erroneous server response and for a thousand other reasons.
+>>>>>>> 4d654318ccb6d37d6cefc9b859cf111ff3c96b27
 
 Обычно скрипт в случае ошибки "падает" (сразу же останавливается), с выводом ошибки в консоль.
 

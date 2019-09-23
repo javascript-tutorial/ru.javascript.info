@@ -11,7 +11,11 @@ let user = {
 (user.go)() // ошибка!
 ```
 
+<<<<<<< HEAD
 Сообщение об ошибке в большинстве браузеров не даёт понимания, что же пошло не так.
+=======
+The error message in most browsers does not give us much of a clue about what went wrong.
+>>>>>>> 4d654318ccb6d37d6cefc9b859cf111ff3c96b27
 
 **Ошибка появляется, потому что точка с запятой пропущена после `user = {...}`.**
 

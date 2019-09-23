@@ -27,7 +27,7 @@ let obj = {
 
 Например, у нас есть объект `user` со свойствами `name` и `surname`:
 
-```js run
+```js
 let user = {
   name: "John",
   surname: "Smith"
@@ -99,11 +99,17 @@ alert(user.surname); // Cooper
 ```
 
 
+<<<<<<< HEAD
 ## Дескрипторы свойств доступа
 
 Дескрипторы свойств-аксессоров отличаются от "обычных" свойств-данных.
 
 Свойства-аксессоры не имеют `value` и `writable`, но взамен предлагают функции `get` и `set`.
+=======
+Descriptors for accessor properties are different from those for data properties.
+
+For accessor properties, there is no `value` or `writable`, but instead there are `get` and `set` functions.
+>>>>>>> 4d654318ccb6d37d6cefc9b859cf111ff3c96b27
 
 То есть, дескриптор аксессора может иметь:
 

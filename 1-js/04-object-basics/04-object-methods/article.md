@@ -61,8 +61,13 @@ user.sayHi = sayHi;
 user.sayHi(); // Привет!
 ```
 
+<<<<<<< HEAD
 ```smart header="Объектно-ориентированное программирование"
 Когда мы пишем наш код, используя объекты для представления сущностей реального мира, - это называется [объектно-ориентированное программирование](https://ru.wikipedia.org/wiki/%D0%9E%D0%B1%D1%8A%D0%B5%D0%BA%D1%82%D0%BD%D0%BE-%D0%BE%D1%80%D0%B8%D0%B5%D0%BD%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%BD%D0%BE%D0%B5_%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5) или сокращённо: "ООП".
+=======
+```smart header="Object-oriented programming"
+When we write our code using objects to represent entities, that's called [object-oriented programming](https://en.wikipedia.org/wiki/Object-oriented_programming), in short: "OOP".
+>>>>>>> 4d654318ccb6d37d6cefc9b859cf111ff3c96b27
 
 ООП является большой предметной областью и интересной наукой само по себе. Как выбрать правильные сущности? Как организовать взаимодействие между ними? Это -- создание архитектуры, и есть хорошие книги по этой теме, такие как "Приёмы объектно-ориентированного проектирования. Паттерны проектирования" авторов Эрих Гамма, Ричард Хелм, Ральф Джонсон, Джон Влиссидес или "Объектно-ориентированный анализ и проектирование с примерами приложений" Гради Буча, а также ещё множество других книг.
 ```
@@ -99,7 +104,11 @@ user = {
 
 Например, коду внутри `user.sayHi()` может понадобиться имя пользователя, которое хранится в объекте `user`.
 
+<<<<<<< HEAD
 **Для доступа к информации внутри объекта метод может использовать ключевое слово `this`.**
+=======
+**To access the object, a method can use `this` keyword.**
+>>>>>>> 4d654318ccb6d37d6cefc9b859cf111ff3c96b27
 
 Значение `this` - это объект "перед точкой", который использовался для вызова метода.
 
@@ -168,9 +177,15 @@ admin.sayHi(); // Ошибка! Внутри sayHi() используется us
 
 ## "this" не является фиксированным
 
+<<<<<<< HEAD
 В JavaScript ключевое слово "this" ведёт себя иначе, чем в большинстве других языков программирования. Оно может использоваться в любой функции.
 
 В этом коде нет синтаксической ошибки:
+=======
+In JavaScript, keyword `this` behaves unlike most other programming languages. It can be used in any function.
+
+There's no syntax error in the following example:
+>>>>>>> 4d654318ccb6d37d6cefc9b859cf111ff3c96b27
 
 ```js
 function sayHi() {
@@ -227,11 +242,19 @@ sayHi(); // undefined
 ```smart header="Последствия свободного `this`"
 Если вы до этого изучали другие языки программирования, тогда вы, скорее всего, привыкли к идее "фиксированного `this`" - когда методы, определённые внутри объекта, всегда сохраняют в качестве значения `this` ссылку на свой объект (в котором был определён метод).
 
+<<<<<<< HEAD
 В JavaScript `this` является "свободным", его значение вычисляется в момент вызова метода и не зависит от того, где этот метод был объявлен, а зависит от того, какой объект вызывает метод (какой объект стоит "перед точкой").
 
 Эта идея вычисления `this` в момент исполнения имеет как свои плюсы, так и минусы. С одной стороны, функция может быть повторно использована в качестве метода у различных объектов (что повышает гибкость). С другой стороны, большая гибкость увеличивает вероятность ошибок.
 
 Здесь мы не будем судить о том, является ли это решение в языке хорошим или плохим. Мы должны понимать, как с этим работать, чтобы получать выгоды и избегать проблем.
+=======
+In JavaScript `this` is "free", its value is evaluated at call-time and does not depend on where the method was declared, but rather on what object is "before the dot".
+
+The concept of run-time evaluated `this` has both pluses and minuses. On the one hand, a function can be reused for different objects. On the other hand, the greater flexibility creates more possibilities for mistakes.
+
+Here our position is not to judge whether this language design decision is good or bad. We'll understand how to work with it, how to get benefits and avoid problems.
+>>>>>>> 4d654318ccb6d37d6cefc9b859cf111ff3c96b27
 ```
 
 ## Внутренняя реализация: Ссылочный тип
