@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # Blob 
+=======
+# Blob
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 `ArrayBuffer` и бинарные массивы являются частью ECMA-стандарта и, соответственно, частью JavaScript.
 
@@ -30,8 +34,13 @@ let blob = new Blob(["<html>…</html>"], {type: 'text/html'});
 ```
 
 ```js
+<<<<<<< HEAD
 // создадим Blob из типизированного массива и строк
 let hello = new Uint8Array([72, 101, 108, 108, 111]); // "hello" в бинарной форме
+=======
+// create Blob from a typed array and strings
+let hello = new Uint8Array([72, 101, 108, 108, 111]); // "Hello" in binary form
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 let blob = new Blob([hello, ' ', 'world'], {type: 'text/plain'});
 ```
@@ -89,7 +98,11 @@ link.click();
 URL.revokeObjectURL(link.href);
 ```
 
+<<<<<<< HEAD
 **`URL.createObjectURL` берёт Blob и создаёт уникальный URL для него в формате `blob:<origin>/<uuid>`.**
+=======
+`URL.createObjectURL` takes a `Blob` and creates a unique URL for it, in the form `blob:<origin>/<uuid>`.
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 Вот как выглядит сгенерированный URL:
 
@@ -101,11 +114,19 @@ blob:https://javascript.info/1e67e00e-860d-40a5-89ae-6ab0cbee6273
 
 Сгенерированный url действителен, только пока текущий документ открыт. Это позволяет ссылаться на сгенерированный в нём Blob в `<img>`, `<a>` или в любом другом объекте, где ожидается url в качестве одного из параметров.
 
+<<<<<<< HEAD
 В данном случае возможен побочный эффект. Пока в карте соответствия существует ссылка на Blob, он находится в памяти. Браузер не может освободить память, занятую Blob-объектом.
 
 Ссылка в карте соответствия автоматически удаляется при выгрузке документа, после этого также освобождается память. Но если приложение имеет длительный жизненный цикл, это может произойти не скоро. Таким образом, если мы создадим URL для Blob, он будет висеть в памяти, даже если в нём нет больше необходимости.
 
 **`URL.revokeObjectURL(url)` удаляет внутреннюю ссылку на объект, что позволяет удалить его (если нет другой ссылки) сборщику мусора, и память будет освобождена.**
+=======
+There's a side-effect though. While there's a mapping for a `Blob`, the `Blob` itself resides in the memory. The browser can't free it.
+
+The mapping is automatically cleared on document unload, so `Blob` objects are freed then. But if an app is long-living, then that doesn't happen soon.
+
+**So if we create a URL, that `Blob` will hang in memory, even if not needed any more.**
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 В последнем примере мы использовали Blob только единожды, для мгновенной загрузки, после мы сразу же вызвали `URL.revokeObjectURL(link.href)`.
 
@@ -117,7 +138,11 @@ blob:https://javascript.info/1e67e00e-860d-40a5-89ae-6ab0cbee6273
 
 Эта кодировка представляет двоичные данные в виде строки с безопасными для чтения символами в ASCII-кодах от 0 до 64. И что более важно -- мы можем использовать эту кодировку для "data-urls".
 
+<<<<<<< HEAD
 [data url](https://developer.mozilla.org/ru/docs/Web/HTTP/Basics_of_HTTP/Data_URIs) имеет форму `data:[<mediatype>][;base64],<data>`. Мы можем использовать такой url где угодно наряду с "обычным" url.
+=======
+A [data url](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs) has the form `data:[<mediatype>][;base64],<data>`. We can use such urls everywhere, on par with "regular" urls.
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 Например, смайлик:
 

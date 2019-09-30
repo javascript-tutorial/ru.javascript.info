@@ -129,7 +129,11 @@ String.prototype.show = function() {
 
 **В современном программировании есть только один случай, в котором одобряется изменение встроенных прототипов. Это создание полифилов.**
 
+<<<<<<< HEAD
 Полифил - это термин, который означает эмуляцию метода, который существует в спецификации JavaScript, но ещё не поддерживается текущим движком JavaScript.
+=======
+Polyfilling is a term for making a substitute for a method that exists in JavaScript specification, but is not yet supported by current JavaScript engine.
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 Тогда мы можем реализовать его сами и добавить во встроенный прототип.
 

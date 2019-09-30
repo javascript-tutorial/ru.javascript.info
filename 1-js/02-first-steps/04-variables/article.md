@@ -242,7 +242,11 @@ num = 5; // error: num is not defined
 const myBirthday = '18.04.1982';
 ```
 
+<<<<<<< HEAD
 Переменные объявленные с помощью `const`, называются "константами". Их нельзя изменить. Попытка сделать это приведёт к ошибке:
+=======
+Variables declared using `const` are called "constants". They cannot be reassigned. An attempt to do so would cause an error:
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 ```js run
 const myBirthday = '18.04.1982';
@@ -294,7 +298,11 @@ const pageLoadTime = /* время, потраченное на загрузку
 
 В разговоре о переменных необходимо упомянуть, что есть ещё одна чрезвычайно важная вещь.
 
+<<<<<<< HEAD
 Название переменной должно иметь ясный и понятный смысл, говорить о том, какие данные в ней хранятся.
+=======
+A variable name should have a clean, obvious meaning, describing the data that it stores.
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 Именование переменных -- это один из самых важных и сложных навыков в программировании. Быстрый взгляд на имена переменных может показать, какой код был написан новичком, а какой -- опытным разработчиком.
 

@@ -253,9 +253,15 @@ let rabbit = new Rabbit("Белый кролик", 10); // Error: this is not de
 
 ...Но почему? Что происходит? Это требование кажется довольно странным.
 
+<<<<<<< HEAD
 Конечно, всему есть объяснение. Давайте углубимся в детали, чтобы вы действительно поняли, что происходит.
 
 В JavaScript существует различие между "функцией-конструктором наследующего класса" и всеми остальными. В наследующем классе соответствующая функция-конструктор помечена специальным внутренним свойством `[[ConstructorKind]]:"derived"`.
+=======
+Of course, there's an explanation. Let's get into details, so you'll really understand what's going on.
+
+In JavaScript, there's a distinction between a "constructor function of an inheriting class" and all others. In an inheriting class, the corresponding constructor function is labeled with a special internal property `[[ConstructorKind]]:"derived"`.
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 Разница в следующем:
 
@@ -305,7 +311,11 @@ alert(rabbit.earLength); // 10
 Она рассказывает о внутреннем устройстве наследования и вызов `super`.
 ```
 
+<<<<<<< HEAD
 Давайте заглянем "под капот" `super`. Здесь есть некоторые интересные моменты.
+=======
+Let's get a little deeper under the hood of `super`. We'll see some interesting things along the way.
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 Вообще, исходя из наших знаний до этого момента, `super` вообще не может работать!
 

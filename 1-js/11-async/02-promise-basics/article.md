@@ -265,8 +265,13 @@ new Promise((resolve, reject) => {
 Если промис в состоянии ожидания, обработчики в `.then/catch/finally` будут ждать его. Однако, если промис уже завершён, то обработчики выполнятся сразу:
 
 ```js run
+<<<<<<< HEAD
 // при создании промиса он сразу переводится в состояние "успешно завершён"
 let promise = new Promise(resolve => resolve("готово!"));
+=======
+// the promise becomes resolved immediately upon creation
+let promise = new Promise(resolve => resolve("done!"));
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 promise.then(alert); // готово! (выведется сразу)
 ```

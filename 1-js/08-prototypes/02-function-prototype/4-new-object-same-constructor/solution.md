@@ -15,7 +15,11 @@ alert( user2.name ); // Pete (сработало!)
 
 Всё получилось, потому что `User.prototype.constructor == User`.
 
+<<<<<<< HEAD
 ...Но если кто-то перезапишет `User.prototype` и забудет заново назначить свойство `"constructor"`, то ничего не выйдет.
+=======
+..But if someone, so to speak, overwrites `User.prototype` and forgets to recreate `"constructor"`, then it would fail.
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 Например:
 

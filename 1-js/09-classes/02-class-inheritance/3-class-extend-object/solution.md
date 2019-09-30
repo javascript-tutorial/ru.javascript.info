@@ -25,8 +25,13 @@ alert( rabbit.hasOwnProperty('name') ); // true
 
 Как мы знаем, синтаксис "extends" устанавливает 2 прототипа:
 
+<<<<<<< HEAD
 1. Между `"prototype"` функций-конструкторов (для методов)
 2. Между самими функциями-конструкторами (для статических методов).
+=======
+1. Between `"prototype"` of the constructor functions (for methods).
+2. Between the constructor functions themselves (for static methods).
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 В нашем случае, для `class Rabbit extends Object` это значит:
 

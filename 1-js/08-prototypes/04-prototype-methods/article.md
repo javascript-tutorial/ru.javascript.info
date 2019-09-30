@@ -71,9 +71,15 @@ let clone = Object.create(Object.getPrototypeOf(obj), Object.getOwnPropertyDescr
 
 В силу исторических причин.
 
+<<<<<<< HEAD
 - Свойство `"prototype"` функции-конструктора существует с совсем давних времён.
 - Позднее, в 2012 году, в стандарте появился метод `Object.create`. Это давало возможность создавать объекты с указанным прототипом, но не позволяло устанавливать/получать его. Тогда браузеры реализовали нестандартный аксессор `__proto__`, который позволил устанавливать/получать прототип в любое время.
 - Позднее, в 2015 году, в стандарт были добавлены `Object.setPrototypeOf` и `Object.getPrototypeOf,` заменяющие собой аксессор `__proto__`, который упоминается в Приложении Б стандарта, которое не обязательно к поддержке в небраузерных окружениях. При этом де-факто `__proto__` всё ещё поддерживается везде.
+=======
+- The `"prototype"` property of a constructor function works since very ancient times.
+- Later, in the year 2012: `Object.create` appeared in the standard. It gave the ability to create objects with a given prototype, but did not provide the ability to get/set it. So browsers implemented the non-standard `__proto__` accessor that allowed the user to get/set a prototype at any time.
+- Later, in the year 2015: `Object.setPrototypeOf` and `Object.getPrototypeOf` were added to the standard, to perform the same functionality as `__proto__`. As `__proto__` was de-facto implemented everywhere, it was kind-of deprecated and made its way to the Annex B of the standard, that is: optional for non-browser environments.
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 В итоге сейчас у нас есть все эти способы для работы с прототипом.
 
@@ -82,7 +88,11 @@ let clone = Object.create(Object.getPrototypeOf(obj), Object.getOwnPropertyDescr
 ```warn header="Не меняйте `[[Prototype]]` существующих объектов, если важна скорость"
 Технически мы можем установить/получить `[[Prototype]]` в любое время. Но обычно мы устанавливаем прототип только раз во время создания объекта, а после не меняем: `rabbit` наследует от `animal`, и это не изменится.
 
+<<<<<<< HEAD
 И JavaScript движки хорошо оптимизированы для этого. Изменение прототипа "на лету" с помощью `Object.setPrototypeOf` или `obj.__proto__=` - очень медленная операция, которая ломает внутренние оптимизации для операций доступа к свойствам объекта. Так что лучше избегайте этого кроме тех случаев, когда вы знаете, что делаете, или же когда скорость JavaScript для вас не имеет никакого значения.
+=======
+And JavaScript engines are highly optimized for this. Changing a prototype "on-the-fly" with `Object.setPrototypeOf` or `obj.__proto__=` is a very slow operation, it breaks internal optimizations for object property access operations. So avoid it unless you know what you're doing, or JavaScript speed totally doesn't matter for you.
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 ```
 
 ## "Простейший" объект [#very-plain]
@@ -108,6 +118,7 @@ alert(obj[key]); // [object Object], не "some value"!
 
 Но мы не *намеревались* реализовывать такое поведение, не так ли? Мы хотим хранить пары ключ/значение, и ключ с именем `"__proto__"` не был сохранён надлежащим образом. Так что это ошибка!
 
+<<<<<<< HEAD
 Конкретно в этом примере последствия не так ужасны, но если мы присваиваем объектные значения, то прототип и в самом деле может быть изменён. В результате дальнейшее выполнение пойдёт совершенно непредсказуемым образом.
 
 Что хуже всего -- разработчики не задумываются о такой возможности совсем. Это делает такие ошибки сложным для отлавливания или даже превращает их в уязвимости, особенно когда JavaScript используется на сервере.
@@ -115,10 +126,23 @@ alert(obj[key]); // [object Object], не "some value"!
 Неожиданные вещи могут случаться также при присвоении свойства `toString`, которое по умолчанию функция, и других свойств, которые тоже на самом деле являются встроенными методами.
 
 Как же избежать проблемы?
+=======
+Here the consequences are not terrible. But in other cases we may be assigning object values, and then the prototype may indeed be changed. As the result, the execution will go wrong in totally unexpected ways.
+
+What's worse -- usually developers do not think about such possibility at all. That makes such bugs hard to notice and even turn them into vulnerabilities, especially when JavaScript is used on server-side.
+
+Unexpected things also may happen when assigning to `toString`, which is a function by default, and to other built-in methods.
+
+How to avoid the problem?
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 Во-первых, мы можем переключиться на использование коллекции `Map`, и тогда всё будет в порядке.
 
+<<<<<<< HEAD
 Но и `Object` может также хорошо подойти, потому что создатели языка уже давно продумали решение проблемы.
+=======
+But `Object` also can serve us well here, because language creators gave thought to that problem long ago.
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 Свойство `__proto__` -- не обычное, а аксессор, заданный в `Object.prototype`:
 
@@ -190,7 +214,11 @@ alert(Object.keys(chineseDictionary)); // hello,bye
 let clone = Object.create(Object.getPrototypeOf(obj), Object.getOwnPropertyDescriptors(obj));
 ```
 
+<<<<<<< HEAD
 Мы также ясно увидели, что  `__proto__` -- это геттер/сеттер для свойства `[[Prototype]]`, и находится он в `Object.prototype`, как и другие методы.
+=======
+We also made it clear that `__proto__` is a getter/setter for `[[Prototype]]` and resides in `Object.prototype`, just like other methods.
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 Мы можем создавать объекты без прототипов с помощью `Object.create(null)`. Такие объекты можно использовать как "чистые словари", у них нет проблем с использованием строки `"__proto__"` в качестве ключа.
 

@@ -1,6 +1,10 @@
 # Обработка ошибок, "try..catch"
 
+<<<<<<< HEAD
 Неважно, насколько мы хороши в программировании, иногда наши скрипты содержат ошибки. Они могут возникать из-за наших промахов, неожиданного ввода пользователя, неправильного ответа сервера и по тысяче других причин.
+=======
+No matter how great we are at programming, sometimes our scripts have errors. They may occur because of our mistakes, an unexpected user input, an erroneous server response and for a thousand other reasons.
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 Обычно скрипт в случае ошибки "падает" (сразу же останавливается), с выводом ошибки в консоль.
 
@@ -85,7 +89,11 @@ try {
 }
 ```
 
+<<<<<<< HEAD
 JavaScript-движок сначала читает код, а затем исполняет его. Ошибки, которые возникают во время фазы чтения, называются ошибками парсинга. Их нельзя обработать (изнутри этого кода), потому что движок не понимает код.
+=======
+The JavaScript engine first reads the code, and then runs it. The errors that occur on the reading phase are called "parse-time" errors and are unrecoverable (from inside that code). That's because the engine can't understand the code.
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 Таким образом, `try..catch` может обрабатывать только ошибки, которые возникают в корректном коде. Такие ошибки называют "ошибками во время выполнения", а иногда "исключениями".
 ````
@@ -522,7 +530,11 @@ alert(result || "возникла ошибка");
 alert( `Выполнение заняло ${diff}ms` );
 ```
 
+<<<<<<< HEAD
 Вы можете это проверить, запустив этот код и введя `35` в `prompt` -- код завершится нормально, `finally` выполнится после `try`. А затем введите `-1` -- незамедлительно произойдёт ошибка, выполнение займёт `0ms`. Оба измерения выполняются корректно.
+=======
+You can check by running the code with entering `35` into `prompt` -- it executes normally, `finally` after `try`. And then enter `-1` -- there will be an immediate error, and the execution will take `0ms`. Both measurements are done correctly.
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 Другими словами, неважно как завершилась функция: через `return` или `throw`. Секция `finally` срабатывает в обоих случаях.
 

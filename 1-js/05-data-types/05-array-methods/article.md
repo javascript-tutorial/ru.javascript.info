@@ -169,7 +169,11 @@ alert( arr.concat([3, 4], [5, 6])); // 1,2,3,4,5,6
 alert( arr.concat([3, 4], 5, 6)); // 1,2,3,4,5,6
 ```
 
+<<<<<<< HEAD
 Обычно он просто копирует элементы из массивов. Другие объекты, даже если они выглядят как массивы, добавляются как есть:
+=======
+Normally, it only copies elements from arrays. Other objects, even if they look like arrays, are added as a whole:
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 ```js run
 let arr = [1, 2];
@@ -183,9 +187,13 @@ alert( arr.concat(arrayLike) ); // 1,2,[object Object]
 //[1, 2, arrayLike]
 ```
 
+<<<<<<< HEAD
 ...Но если объект имеет специальное свойство `Symbol.isConcatSpreadable`, то он обрабатывается `concat` как массив: вместо него добавляются его числовые свойства.
 
 Для корректной обработки в объекте должны быть числовые свойства и `length`:
+=======
+...But if an array-like object has a special `Symbol.isConcatSpreadable` property, then it's treated as an array by `concat`: its elements are added instead:
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 ```js run
 let arr = [1, 2];
@@ -659,7 +667,11 @@ arr.map(func, thisArg);
 
 Значение параметра `thisArg` становится `this` для `func`.
 
+<<<<<<< HEAD
 Например, вот тут мы используем метод объекта `army` как фильтр, и `thisArg` передаёт ему контекст:
+=======
+For example, here we use a method of `army` object as a filter, and `thisArg` passes the context:
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 ```js run
 let army = {
@@ -678,7 +690,11 @@ let users = [
 ];
 
 *!*
+<<<<<<< HEAD
 // найти пользователей, для которых army.canJoin возвращает true
+=======
+// find users, for who army.canJoin returns true
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 let soldiers = users.filter(army.canJoin, army);
 */!*
 
@@ -687,9 +703,15 @@ alert(soldiers[0].age); // 20
 alert(soldiers[1].age); // 23
 ```
 
+<<<<<<< HEAD
 Если бы мы в примере выше использовали просто `users.filter(army.canJoin)`, то вызов `army.canJoin` был бы в режиме отдельной функции, с `this=undefined`. Это тут же привело бы к ошибке.
 
 Вызов `users.filter(army.canJoin, army)` можно заменить на `users.filter(user => army.canJoin(user))`, который делает то же самое. Последняя запись используется даже чаще, так как функция-стрелка более наглядна.
+=======
+If in the example above we used `users.filter(army.canJoin)`, then `army.canJoin` would be called as a standalone function, with `this=undefined`, thus leading to an instant error.
+
+A call to `users.filter(army.canJoin, army)` can be replaced with `users.filter(user => army.canJoin(user))`, that does the same. The former is used more often, as it's a bit easier to understand for most people.
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 ## Итого
 

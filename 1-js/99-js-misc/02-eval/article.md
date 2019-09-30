@@ -77,9 +77,15 @@ alert(typeof x); // undefined (нет такой переменной)
 
 Пожалуйста, имейте в виду, что код в `eval` способен получать доступ к внешним переменным, и это может иметь побочные эффекты.
 
+<<<<<<< HEAD
 Минификаторы кода (инструменты, используемые для сжатия JS-кода перед тем, как отправить его конечным пользователям) заменяют локальные переменные на другие с более короткими именами для оптимизации. Обычно это безопасная манипуляция, но не тогда, когда в коде используется `eval`, так как код из `eval` может изменять значения локальных переменных. Поэтому минификаторы не трогают имена переменных, которые могут быть доступны из `eval`. Это ухудшает степень сжатия кода.
 
 Использование внутри `eval` локальных переменных из внешнего кода считается плохим решением, так как это усложняет задачу по поддержке такого кода.
+=======
+Code minifiers (tools used before JS gets to production, to compress it) rename local variables into shorter ones (like `a`, `b` etc) to make the code smaller. That's usually safe, but not if `eval` is used, as local variables may be accessed from eval'ed code string. So minifiers don't do that renaming for all variables potentially visible from `eval`. That negatively affects code compression ratio.
+
+Using outer local variables inside `eval` is also considered a bad programming practice, as it makes maintaining the code more difficult.
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 Существует два пути, как гарантированно избежать подобных проблем.
 

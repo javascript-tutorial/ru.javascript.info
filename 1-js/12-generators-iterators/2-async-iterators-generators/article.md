@@ -19,8 +19,14 @@ let range = {
 *!*
   [Symbol.iterator]() {
 */!*
+<<<<<<< HEAD
     // ...возвращает объект-итератор:
     // далее for..of работает только с этим объектом, запрашивая следующее значение вызовом next()
+=======
+    // ...it returns the iterator object:
+    // onward, for..of works only with that object,
+    // asking it for next values using next()
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
     return {
       current: this.from,
       last: this.to,
@@ -344,18 +350,34 @@ async function* fetchCommits(repo) {
 
 Синтаксические различия между асинхронными и обычными итераторами:
 
+<<<<<<< HEAD
 |       | Перебираемый объект | Асинхронно перебираемый |
 |-------|-----------|-----------------|
 | Метод для получения итератора | `Symbol.iterator` | `Symbol.asyncIterator` |
 | `next()` возвращает              | `{value:…, done: true/false}`         | промис, который завершается с `{value:…, done: true/false}`  |
+=======
+|       | Iterable | Async Iterable |
+|-------|-----------|-----------------|
+| Method to provide iterator | `Symbol.iterator` | `Symbol.asyncIterator` |
+| `next()` return value is          | `{value:…, done: true/false}`         | `Promise` that resolves to `{value:…, done: true/false}`  |
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 Синтаксические различия между асинхронными и обычными генераторами:
 
 |       | Генераторы | Асинхронные генераторы |
 |-------|-----------|-----------------|
+<<<<<<< HEAD
 | Объявление | `function*` | `async function*` |
 | `generator.next()` возвращает              | `{value:…, done: true/false}`         | промис, который завершается с `{value:…, done: true/false}`  |
 
 В веб-разработке мы часто встречаемся с потоками данных, когда они поступают по частям. Например, загрузка или выгрузка большого файла.
 
 Мы можем использовать асинхронные генераторы для обработки таких данных. Также заметим, что в некоторых окружениях, например, браузерах, есть и другое API, называемое Streams (потоки), который предоставляет специальные интерфейсы для работы с такими потоками данных, их преобразования и передачи из одного потока в другой (например, загрузка из одного источника и сразу отправка в другое место).
+=======
+| Declaration | `function*` | `async function*` |
+| `next()` return value is          | `{value:…, done: true/false}`         | `Promise` that resolves to `{value:…, done: true/false}`  |
+
+In web-development we often meet streams of data, when it flows chunk-by-chunk. For instance, downloading or uploading a big file.
+
+We can use async generators to process such data. It's also noteworthy that in some environments, such as browsers, there's also another API called Streams, that provides special interfaces to work with such streams, to transform the data and to pass it from one stream to another (e.g. download from one place and immediately send elsewhere).
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea

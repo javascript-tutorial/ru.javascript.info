@@ -44,7 +44,11 @@ alert( arr instanceof Array ); // true
 alert( arr instanceof Object ); // true
 ```
 
+<<<<<<< HEAD
 Пожалуйста, обратите внимание, что `arr` также принадлежит классу `Object`, потому что `Array` наследует от `Object`.
+=======
+Please note that `arr` also belongs to the `Object` class. That's because `Array` prototypically inherits from `Object`.
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 Обычно оператор `instanceof` просматривает для проверки цепочку прототипов. Но это поведение может быть изменено при помощи статического метода `Symbol.hasInstance`.
 

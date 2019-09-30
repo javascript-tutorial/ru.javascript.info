@@ -227,7 +227,11 @@ new User().sayHi(); // Привет
 
 ## Геттеры/сеттеры, другие сокращения
 
+<<<<<<< HEAD
 Как и в литеральных объектах, в классах можно объявлять вычисляемые свойства, геттеры/сеттеры и т.д.
+=======
+Just like literal objects, classes may include getters/setters, computed properties etc.
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 Вот пример `user.name`, реализованного с использованием `get/set`:
 
@@ -292,10 +296,17 @@ class User {
 new User().sayHi();
 ```
 
+<<<<<<< HEAD
 ## Свойства классов
 
 ```warn header="Старым браузерам может понадобиться полифил"
 Свойства классов добавлены в язык недавно.
+=======
+## Class properties
+
+```warn header="Old browsers may need a polyfill"
+Class-level properties are a recent addition to the language.
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 ```
 В приведённом выше примере у класса `User` были только методы. Давайте добавим свойство:
 
@@ -313,7 +324,11 @@ class User {
 new User().sayHi();
 ```
 
+<<<<<<< HEAD
 Свойство `name` не устанавливается в `User.prototype`. Вместо этого оно создаётся оператором `new` перед запуском конструктора, это именно свойство объекта.
+=======
+The property `name` is not placed into `User.prototype`. Instead, it is created by `new` before calling the constructor, it's a property of the object itself.
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 ## Итого
 

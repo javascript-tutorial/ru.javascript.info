@@ -30,7 +30,15 @@ IDE загружает проект (который может состоять 
 
 Главное отличие между "лёгким" редактором и IDE состоит в том, что IDE работает на уровне целого проекта, поэтому она загружает больше данных при запуске, анализирует структуру проекта, если это необходимо, и так далее. Если вы работаете только с одним файлом, то гораздо быстрее открыть его в "лёгком" редакторе.
 
+<<<<<<< HEAD
 На практике "лёгкие" редакторы могут иметь множество плагинов, включая автодополнение и анализаторы синтаксиса на уровне директории, поэтому границы между IDE и "лёгкими" редакторами размыты.
+=======
+- [Atom](https://atom.io/) (cross-platform, free).
+- [Visual Studio Code](https://code.visualstudio.com/) (cross-platform, free).
+- [Sublime Text](http://www.sublimetext.com) (cross-platform, shareware).
+- [Notepad++](https://notepad-plus-plus.org/) (Windows, free).
+- [Vim](http://www.vim.org/) and [Emacs](https://www.gnu.org/software/emacs/) are also cool if you know how to use them.
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 Следующие варианты заслуживают вашего внимания:
 

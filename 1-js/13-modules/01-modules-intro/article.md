@@ -266,7 +266,11 @@ sayHi(); // Ready to serve, *!*Pete*/!*!
 
 Пожалуйста, обратите внимание: второй скрипт выполнится раньше, чем первый! Поэтому мы увидим сначала `undefined`, а потом `object`.
 
+<<<<<<< HEAD
 Это потому, что модули начинают выполняться после полной загрузки страницы. Обычные скрипты запускаются сразу же, поэтому сообщение из обычного скрипта мы видим первым.
+=======
+That's because modules are deferred, so we wait for the document to be processed. The regular scripts runs immediately, so we saw its output first.
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 При использовании модулей нам стоит иметь в виду, что HTML-страница будет показана браузером до того, как выполнятся модули и JavaScript-приложение будет готово к работе. Некоторые функции могут ещё не работать. Нам следует разместить "индикатор загрузки" или что-то ещё, чтобы не смутить этим посетителя.
 
@@ -347,6 +351,7 @@ import {sayHi} from 'sayHi'; // Ошибка, "голый" модуль
 
 Сборщик делает следующее:
 
+<<<<<<< HEAD
 1. Берёт "основной" модуль, который мы собираемся поместить в `<script type="module">` в HTML.
 2. Анализирует зависимости (импорты, импорты импортов и так далее)
 3. Собирает один файл со всеми модулями (или несколько файлов, это можно настроить), перезаписывает встроенный `import` функцией импорта от сборщика, чтобы всё работало. "Специальные" типы модулей, такие как HTML/CSS тоже поддерживаются.
@@ -356,6 +361,17 @@ import {sayHi} from 'sayHi'; // Ошибка, "голый" модуль
     - Специфические операторы для разработки, такие как `console` и `debugger`, удаляются.
     - Современный синтаксис JavaScript также может быть трансформирован в предыдущий стандарт, с похожей функциональностью, например, с помощью [Babel](https://babeljs.io/).
     - Полученный файл можно минимизировать (удалить пробелы, заменить названия переменных на более короткие и т.д.).
+=======
+1. Take a "main" module, the one intended to be put in `<script type="module">` in HTML.
+2. Analyze its dependencies: imports and then imports of imports etc.
+3. Build a single file with all modules (or multiple files, that's tunable), replacing native `import` calls with bundler functions, so that it works. "Special" module types like HTML/CSS modules are also supported.
+4. In the process, other transforms and optimizations may be applied:
+    - Unreachable code removed.
+    - Unused exports removed ("tree-shaking").
+    - Development-specific statements like `console` and `debugger` removed.
+    - Modern, bleeding-edge JavaScript syntax may be transformed to older one with similar functionality using [Babel](https://babeljs.io/).
+    - The resulting file is minified (spaces removed, variables replaced with shorter names, etc).
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 Если мы используем инструменты сборки, то они объединяют модули вместе в один или несколько файлов, и заменяют `import/export` на свои вызовы. Поэтому итоговую сборку можно подключать и без атрибута `type="module"`, как обычный скрипт:
 

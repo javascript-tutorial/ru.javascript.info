@@ -255,7 +255,11 @@ alert( triple(5) ); // = mul(3, 5) = 15
 
 Для чего мы обычно создаём частично применённую функцию?
 
+<<<<<<< HEAD
 Польза от этого в том, что возможно создать независимую функцию с понятным названием (`double`, `triple`). Мы можем использовать её и не передавать каждый раз первый аргумент, т.к. он зафиксирован с помощью `bind`.
+=======
+The benefit is that we can create an independent function with a readable name (`double`, `triple`). We can use it and not provide the first argument every time as it's fixed with `bind`.
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 В других случаях частичное применение полезно, когда у нас есть очень общая функция и для удобства мы хотим создать её более специализированный вариант.
 

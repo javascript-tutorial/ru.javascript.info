@@ -151,7 +151,11 @@ say.*!*hi*/!*('John'); // Hello, John!
 say.*!*bye*/!*('John'); // Bye, John!
 ```
 
+<<<<<<< HEAD
 ## Экспорт по умолчанию
+=======
+## Export default
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 На практике модули встречаются в основном одного из двух типов:
 
@@ -275,7 +279,11 @@ let User = user.default; // экспорт по умолчанию
 new User('John');
 ```
 
+<<<<<<< HEAD
 ### Довод против экспортов по умолчанию
+=======
+### A word against default exports
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 Именованные экспорты "включают в себя" своё имя. Эта информация является частью модуля, говорит нам, что именно экспортируется.
 
@@ -305,7 +313,11 @@ import func from '/path/to/func.js';
 ...
 ```
 
+<<<<<<< HEAD
 Тем не менее, в некоторых командах это считают серьёзным доводом против экспортов по умолчанию и предпочитают использовать именованные экспорты везде. Даже если экспортируется только одна вещь, она всё равно экспортируется с именем, без использования `default`.
+=======
+Still, some teams consider it a serious drawback of default exports. So they prefer to always use named exports. Even if only a single thing is exported, it's still exported under a name, without `default`.
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 Это также немного упрощает реэкспорт (смотрите ниже).
 

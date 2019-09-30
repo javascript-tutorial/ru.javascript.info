@@ -11,8 +11,13 @@
 let proxy = new Proxy(target, handler)
 ```
 
+<<<<<<< HEAD
 - `target` -- это объект, для которого нужно сделать прокси, может быть чем угодно, включая функции.
 - `handler` -- конфигурация прокси: объект с "ловушками" ("traps"): методами, которые перехватывают разные операции, например, ловушка `get` - для чтения свойства из `target`, ловушка `set` - для записи свойства в `target` и так далее.
+=======
+- `target` -- is an object to wrap, can be anything, including functions.
+- `handler` -- proxy configuration: an object with "traps", methods that intercept operations. - e.g. `get` trap for reading a property of `target`, `set` trap for writing a property into `target`, and so on.
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 При операциях над `proxy`, если в `handler` имеется соответствующая "ловушка", то она срабатывает, и прокси имеет возможность по-своему обработать её, иначе операция будет совершена над оригинальным объектом `target`.
 
@@ -46,14 +51,23 @@ for(let key in proxy) alert(key); // test, итерация работает (3)
 
 Что именно мы можем ими перехватить?
 
+<<<<<<< HEAD
 Для большинства действий с объектами в спецификации JavaScript есть так называемый "внутренний метод", который на самом низком уровне описывает, как его выполнять. Например, `[[Get]]` - внутренний метод для чтения свойства, `[[Set]]` -- для записи свойства, и так далее. Эти методы используются только в спецификации, мы не можем обратиться напрямую к ним по имени.
 
 Ловушки как раз перехватывают вызовы этих внутренних методов. Полный список методов, которые можно перехватывать, перечислен в [спецификации Proxy](https://tc39.es/ecma262/#sec-proxy-object-internal-methods-and-internal-slots), а также в таблице ниже.
 
 Для каждого внутреннего метода в этой таблице указана ловушка, то есть имя метода, который мы можем добавить в параметр `handler` при создании `new Proxy`, чтобы перехватывать данную операцию:
+=======
+For most operations on objects, there's a so-called "internal method" in the JavaScript specification that describes how it works at the lowest level. For instance `[[Get]]`, the internal method to read a property, `[[Set]]`, the internal method to write a property, and so on. These methods are only used in the specification, we can't call them directly by name.
+
+Proxy traps intercept invocations of these methods. They are listed in the [Proxy specification](https://tc39.es/ecma262/#sec-proxy-object-internal-methods-and-internal-slots) and in the table below.
+
+For every internal method, there's a trap in this table: the name of the method that we can add to the `handler` parameter of `new Proxy` to intercept the operation:
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 | Внутренний метод | Ловушка | Что вызывает |
 |-----------------|----------------|-------------|
+<<<<<<< HEAD
 | `[[Get]]` | `get` | чтение свойства |
 | `[[Set]]` | `set` | запись свойства |
 | `[[HasProperty]]` | `has` | оператор `in` |
@@ -85,24 +99,73 @@ JavaScript налагает некоторые условия - инвариан
 ```
 
 Теперь давайте посмотрим, как это всё работает, на реальных примерах.
+=======
+| `[[Get]]` | `get` | reading a property |
+| `[[Set]]` | `set` | writing to a property |
+| `[[HasProperty]]` | `has` | `in` operator |
+| `[[Delete]]` | `deleteProperty` | `delete` operator |
+| `[[Call]]` | `apply` | function call |
+| `[[Construct]]` | `construct` | `new` operator |
+| `[[GetPrototypeOf]]` | `getPrototypeOf` | [Object.getPrototypeOf](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getPrototypeOf) |
+| `[[SetPrototypeOf]]` | `setPrototypeOf` | [Object.setPrototypeOf](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/setPrototypeOf) |
+| `[[IsExtensible]]` | `isExtensible` | [Object.isExtensible](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/isExtensible) |
+| `[[PreventExtensions]]` | `preventExtensions` | [Object.preventExtensions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/preventExtensions) |
+| `[[DefineOwnProperty]]` | `defineProperty` | [Object.defineProperty](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty), [Object.defineProperties](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperties) |
+| `[[GetOwnProperty]]` | `getOwnPropertyDescriptor` | [Object.getOwnPropertyDescriptor](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyDescriptor), `for..in`, `Object.keys/values/entries` |
+| `[[OwnPropertyKeys]]` | `ownKeys` | [Object.getOwnPropertyNames](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyNames), [Object.getOwnPropertySymbols](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertySymbols), `for..in`, `Object/keys/values/entries` |
+
+```warn header="Invariants"
+JavaScript enforces some invariants -- conditions that must be fulfilled by internal methods and traps.
+
+Most of them are for return values:
+- `[[Set]]` must return `true` if the value was written successfully, otherwise `false`.
+- `[[Delete]]` must return `true` if the value was deleted successfully, otherwise `false`.
+- ...and so on, we'll see more in examples below.
+
+There are some other invariants, like:
+- `[[GetPrototypeOf]]`, applied to the proxy object must return the same value as `[[GetPrototypeOf]]` applied to the proxy object's target object. In other words, reading prototype of a proxy must always return the prototype of the target object.
+
+Traps can intercept these operations, but they must follow these rules.
+
+Invariants ensure correct and consistent behavior of language features. The full invariants list is in [the specification](https://tc39.es/ecma262/#sec-proxy-object-internal-methods-and-internal-slots). You probably won't violate them if you're not doing something weird.
+```
+
+Let's see how that works in practical examples.
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 ## Значение по умолчанию с ловушкой "get"
 
 Чаще всего используются ловушки на чтение/запись свойств.
 
+<<<<<<< HEAD
 Чтобы перехватить операцию чтения, `handler` должен иметь метод  `get(target, property, receiver)`.
+=======
+To intercept reading, the `handler` should have a method `get(target, property, receiver)`.
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 Он срабатывает при попытке прочитать свойство объекта, с аргументами:
 
+<<<<<<< HEAD
 - `target` -- это оригинальный объект, который передавался первым аргументом в конструктор `new Proxy`,
 - `property` -- имя свойства,
 - `receiver` -- если свойство объекта является геттером, то `receiver` - это объект, который будет использован как `this` при его вызове. Обычно это сам объект прокси (или наследующий от него объект). Прямо сейчас нам не понадобится этот аргумент, подробнее разберём его позже.
+=======
+- `target` -- is the target object, the one passed as the first argument to `new Proxy`,
+- `property` -- property name,
+- `receiver` -- if the target property is a getter, then `receiver` is the object that's going to be used as `this` in its call. Usually that's the `proxy` object itself (or an object that inherits from it, if we inherit from proxy). Right now we don't need this argument, so it will be explained in more detail later.
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 Давайте применим ловушку `get`, чтобы реализовать "значения по умолчанию" для свойств объекта.
 
+<<<<<<< HEAD
 Например, сделаем числовой массив, так чтобы при чтении из него несуществующего элемента возвращался `0`.
 
 Обычно при чтении из массива несуществующего свойства возвращается `undefined`, но мы обернём обычный массив в прокси, который перехватывает операцию чтения свойства из массива и возвращает `0`, если такого элемента нет:
+=======
+We'll make a numeric array that returns `0` for nonexistent values.
+
+Usually when one tries to get a non-existing array item, they get `undefined`, but we'll wrap a regular array into the proxy that traps reading and returns `0` if there's no such property:
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 ```js run
 let numbers = [0, 1, 2];
@@ -123,11 +186,19 @@ alert( numbers[123] ); // 0 (нет такого элемента)
 */!*
 ```
 
+<<<<<<< HEAD
 Как видно, это очень легко сделать при помощи ловушки `get`.
+=======
+As we can see, it's quite easy to do with a `get` trap.
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 Мы можем использовать `Proxy` для реализации любой логики возврата значений по умолчанию.
 
+<<<<<<< HEAD
 Представим, что у нас есть объект-словарь с фразами на английском и их переводом на испанский:
+=======
+Imagine we have a dictionary, with phrases and their translations:
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 ```js run
 let dictionary = {
@@ -139,7 +210,11 @@ alert( dictionary['Hello'] ); // Hola
 alert( dictionary['Welcome'] ); // undefined
 ```
 
+<<<<<<< HEAD
 Сейчас, если фразы в `dictionary` нет, при чтении возвращается `undefined`. Но на практике оставлять фразы непереведёнными лучше, чем использовать `undefined`. Поэтому давайте сделаем так, чтобы при отсутствии перевода возвращалась оригинальная фраза на английском вместо `undefined`.
+=======
+Right now, if there's no phrase, reading from `dictionary` returns `undefined`. But in practice, leaving a phrase untranslated is usually better than `undefined`. So let's make it return an untranslated phrase in that case instead of `undefined`.
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 Чтобы достичь этого, обернём `dictionary` в прокси, перехватывающий операцию чтения:
 
@@ -162,8 +237,13 @@ dictionary = new Proxy(dictionary, {
   }
 });
 
+<<<<<<< HEAD
 // Запросим перевод произвольного выражения в словаре!
 // В худшем случае оно не будет переведено
+=======
+// Look up arbitrary phrases in the dictionary!
+// At worst, they're not translated.
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 alert( dictionary['Hello'] ); // Hola
 *!*
 alert( dictionary['Welcome to Proxy']); // Welcome to Proxy (нет перевода)
@@ -226,7 +306,11 @@ alert("Интерпретатор никогда не доходит до это
 
 Обратите внимание, что встроенный функционал массива по-прежнему работает! Значения добавляются методом `push`. Свойство `length` при этом увеличивается. Наш прокси ничего не ломает.
 
+<<<<<<< HEAD
 Нам не нужно переопределять методы массива `push` и `unshift` и другие, чтобы добавлять туда проверку на тип, так как внутри себя они используют операцию `[[Set]]`, которая перехватывается прокси.
+=======
+We don't have to override value-adding array methods like `push` and `unshift`, and so on, to add checks in there, because internally they use the `[[Set]]` operation that's intercepted by the proxy.
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 Таким образом, код остаётся чистым и прозрачным.
 
@@ -295,11 +379,19 @@ alert( Object.keys(user) ); // <пусто>
 */!*
 ```
 
+<<<<<<< HEAD
 Почему? Причина проста: `Object.keys` возвращает только свойства с флагом `enumerable`. Для того, чтобы определить, есть ли этот флаг, он для каждого свойства вызывает внутренний метод `[[GetOwnProperty]]`, который получает [его дескриптор](info:property-descriptors). А в данном случае свойство отсутствует, его дескриптор пуст, флага `enumerable` нет, поэтому оно пропускается.
 
 Чтобы `Object.keys` возвращал свойство, нужно либо чтобы свойство в объекте физически было, причём с флагом `enumerable`, либо перехватить вызовы `[[GetOwnProperty]]` (это делает ловушка `getOwnPropertyDescriptor`), и там вернуть дескриптор с `enumerable: true`.
 
 Вот так будет работать:
+=======
+Why? The reason is simple: `Object.keys` returns only properties with the `enumerable` flag. To check for it, it calls the internal method `[[GetOwnProperty]]` for every property to get [its descriptor](info:property-descriptors). And here, as there's no property, its descriptor is empty, no `enumerable` flag, so it's skipped.
+
+For `Object.keys` to return a property, we need it to either exist in the object, with the `enumerable` flag, or we can intercept calls to `[[GetOwnProperty]]` (the trap `getOwnPropertyDescriptor` does it), and return a descriptor with `enumerable: true`.
+
+Here's an example of that:
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 ```js run
 let user = { };
@@ -328,7 +420,11 @@ alert( Object.keys(user) ); // a, b, c
 
 Существует широко распространённое соглашение о том, что свойства и методы, название которых начинается с символа подчёркивания `_`, следует считать внутренними. К ним не следует обращаться снаружи объекта.
 
+<<<<<<< HEAD
 Однако технически это всё равно возможно:
+=======
+Technically that's possible though:
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 ```js run
 let user = {
@@ -411,7 +507,11 @@ try {
 for(let key in user) alert(key); // name
 ```
 
+<<<<<<< HEAD
 Обратите внимание на важную деталь в ловушке `get` на строке `(*)`:
+=======
+Please note the important detail in the `get` trap, in the line `(*)`:
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 ```js
 get(target, prop) {
@@ -423,7 +523,11 @@ get(target, prop) {
 }
 ```
 
+<<<<<<< HEAD
 Зачем для функции вызывать `value.bind(target)`?
+=======
+Why do we need a function to call `value.bind(target)`?
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 Всё дело в том, что метод самого объекта, например `user.checkPassword()`, должен иметь доступ к свойству `_password`:
 
@@ -443,12 +547,20 @@ user = {
 
 Такое решение обычно работает, но не является идеальным, поскольку метод может передать оригинальный объект куда-то ещё, и возможна путаница: где изначальный объект, а где - проксированный.
 
+<<<<<<< HEAD
 К тому же, объект может проксироваться несколько раз (для добавления различных возможностей), и если передавать методу исходный, то могут быть неожиданности.
+=======
+That solution usually works, but isn't ideal, as a method may pass the unproxied object somewhere else, and then we'll get messed up: where's the original object, and where's the proxied one?
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 Так что везде использовать такой прокси не стоит.
 
+<<<<<<< HEAD
 ```smart header="Приватные свойства в классах"
 Современные интерпретаторы JavaScript поддерживают приватные свойства в классах. Названия таких свойств должны начинаться с символа `#`. Они подробно описаны в главе <info:private-protected-properties-methods>. Для них не нужны подобные прокси.
+=======
+So, such a proxy shouldn't be used everywhere.
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 Впрочем, приватные свойства имеют свои недостатки. В частности, они не наследуются.
 ```
@@ -467,7 +579,11 @@ let range = {
 };
 ```
 
+<<<<<<< HEAD
 Мы бы хотели использовать оператор `in`, чтобы проверить, что некоторое число находится в указанном диапазоне.
+=======
+We'd like to use the `in` operator to check that a number is in `range`.
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 Ловушка `has` перехватывает вызовы `in`.
 
@@ -498,7 +614,11 @@ alert(50 in range); // false
 */!*
 ```
 
+<<<<<<< HEAD
 Отлично выглядит, не правда ли? И очень просто в реализации.
+=======
+Nice syntactic sugar, isn't it? And very simple to implement.
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 ## Оборачиваем функции: "apply"
 
@@ -593,7 +713,11 @@ sayHi("Вася"); // Привет, Вася! (через 3 секунды)
 
 Мы получили лучшую обёртку.
 
+<<<<<<< HEAD
 Существуют и другие ловушки: полный список есть в начале этой главы. Использовать их можно по аналогии с вышеописанными.
+=======
+Other traps exist: the full list is in the beginning of this chapter. Their usage pattern is similar to the above.
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 ## Reflect
 
@@ -601,7 +725,11 @@ sayHi("Вася"); // Привет, Вася! (через 3 секунды)
 
 Ранее мы говорили о том, что внутренние методы, такие как `[[Get]]`, `[[Set]]` и другие, существуют только в спецификации, что к ним нельзя обратиться напрямую.
 
+<<<<<<< HEAD
 Объект `Reflect` делает это возможным. Его методы - минимальные обёртки вокруг внутренних методов.
+=======
+The `Reflect` object makes that somewhat possible. Its methods are minimal wrappers around the internal methods.
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 Вот примеры операций и вызовы `Reflect`, которые делают то же самое:
 
@@ -623,13 +751,21 @@ Reflect.set(user, 'name', 'Вася');
 alert(user.name); // Вася
 ```
 
+<<<<<<< HEAD
 В частности, `Reflect` позволяет вызвать операторы (`new`, `delete`...) как функции (`Reflect.construct`, `Reflect.deleteProperty`, ...). Это интересная возможность, но здесь нам важно другое.
+=======
+In particular, `Reflect` allows us to call operators (`new`, `delete`...) as functions (`Reflect.construct`, `Reflect.deleteProperty`, ...). That's an interesting capability, but here another thing is important.
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 **Для каждого внутреннего метода, перехватываемого `Proxy`, есть соответствующий метод в `Reflect`, который имеет такое же имя и те же аргументы, что и у ловушки `Proxy`.**
 
 Поэтому мы можем использовать `Reflect`, чтобы перенаправить операцию на исходный объект.
 
+<<<<<<< HEAD
 В этом примере обе ловушки `get` и `set` прозрачно (как будто их нет) перенаправляют операции чтения и записи на объект, при этом выводя сообщение:
+=======
+In this example, both traps `get` and `set` transparently (as if they didn't exist) forward reading/writing operations to the object, showing a message:
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 ```js run
 let user = {
@@ -795,9 +931,15 @@ get(target, prop, receiver) {
 
 Это как свойства, но только для внутреннего использования в самой спецификациии. Например, `Map` хранит элементы во внутреннем слоте `[[MapData]]`. Встроенные методы обращаются к слотам напрямую, не через `[[Get]]/[[Set]]`. Таким образом, прокси не может перехватить их.
 
+<<<<<<< HEAD
 Почему это имеет значение? Они же всё равно внутренние!
 
 Есть один нюанс. Если встроенный объект проксируется, то в прокси не будет этих "внутренних слотов", так что попытка вызвать на таком прокси встроенный метод приведёт к ошибке.
+=======
+Why care? They're internal anyway!
+
+Well, here's the issue. After a built-in object like that gets proxied, the proxy doesn't have these internal slots, so built-in methods will fail.
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 Пример:
 
@@ -811,7 +953,11 @@ proxy.set('test', 1); // будет ошибка
 */!*
 ```
 
+<<<<<<< HEAD
 Внутри себя объект типа `Map` хранит все данные во внутреннем слоте `[[MapData]]`. Прокси не имеет такого слота. [Встроенный метод `Map.prototype.set`](https://tc39.es/ecma262/#sec-map.prototype.set) пытается получить доступ к своему внутреннему свойству `this.[[MapData]]`, но так как `this=proxy`, то не может его найти и завершается с ошибкой.
+=======
+Internally, a `Map` stores all data in its `[[MapData]]` internal slot. The proxy doesn't have such a slot. The [built-in method `Map.prototype.set`](https://tc39.es/ecma262/#sec-map.prototype.set) method tries to access the internal property `this.[[MapData]]`, but because `this=proxy`, can't find it in `proxy` and just fails.
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 К счастью, есть способ исправить это:
 
@@ -890,11 +1036,19 @@ user = new Proxy(user, {
 alert(user.getName()); // Гость
 ```
 
+<<<<<<< HEAD
 Однако, такое решение имеет ряд недостатков, о которых уже говорилось: методу передаётся оригинальный объект, который может быть передан куда-то ещё, и это может поломать весь функционал проксирования.
+=======
+That said, the solution has drawbacks, as explained previously: it exposes the original object to the method, potentially allowing it to be passed further and breaking other proxied functionality.
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 ### Прокси != оригинальный объект
 
+<<<<<<< HEAD
 Прокси и объект, который проксируется, являются двумя разными объектами. Это естественно, не правда ли?
+=======
+The proxy and the original object are different objects. That's natural, right?
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 Если мы используем оригинальный объект как ключ, а затем проксируем его, то прокси не будет найден:
 
@@ -936,7 +1090,11 @@ alert(allUsers.has(user)); // false
 
 Допустим, у нас есть какой-то ресурс, и мы бы хотели иметь возможность закрыть к нему доступ в любой момент.
 
+<<<<<<< HEAD
 Для того, чтобы решить поставленную задачу, мы можем использовать отключаемый прокси, без ловушек. Такой прокси будет передавать все операции на проксируемый объект, и у нас будет возможность в любой момент отключить это.
+=======
+What we can do is to wrap it into a revocable proxy, without any traps. Such a proxy will forward operations to object, and we can disable it at any moment.
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 Синтаксис:
 
@@ -989,9 +1147,15 @@ revoke();
 alert(proxy.data); // Ошибка (прокси отключён)
 ```
 
+<<<<<<< HEAD
 Преимущество такого подхода в том, что мы не должны таскать функцию `revoke` повсюду. Мы получаем её при необходимости из `revokes` по объекту прокси.
 
 Мы использовали `WeakMap` вместо `Map`, чтобы не блокировать сборку мусора. Если прокси объект становится недостижимым (то есть на него больше нет ссылок), то `WeakMap` позволяет сборщику мусора удалить его из памяти вместе с соответствующей функцией `revoke`, которая в этом случае больше не нужна.
+=======
+The benefit of such an approach is that we don't have to carry `revoke` around. We can get it from the map by `proxy` when needed.
+
+We use `WeakMap` instead of `Map` here because it won't block garbage collection. If a proxy object becomes "unreachable" (e.g. no variable references it any more), `WeakMap` allows it to be wiped from memory together with its `revoke` that we won't need any more.
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 ## Ссылки
 

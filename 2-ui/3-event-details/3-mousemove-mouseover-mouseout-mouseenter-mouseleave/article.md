@@ -46,9 +46,15 @@
 
 ![](mouseover-mouseout-over-elems.svg)
 
+<<<<<<< HEAD
 Если курсор мыши передвинуть очень быстро с элемента `#FROM` на элемент `#TO`, как это показано выше, то лежащие между ними элементы `<div>` (или некоторые из них) могут быть пропущены. Событие `mouseout` может запуститься на элементе `#FROM` и затем сразу же сгенерируется `mouseover` на элементе `#TO`.
 
 Это хорошо с точки зрения производительности, потому что если промежуточных элементов много, вряд ли мы действительно хотим обрабатывать вход и выход для каждого.
+=======
+If the mouse moves very fast from `#FROM` to `#TO` elements as painted above, then intermediate `<div>` elements (or some of them) may be skipped. The `mouseout` event may trigger on `#FROM` and then immediately `mouseover` on `#TO`.
+
+That's good for performance, because there may be many intermediate elements. We don't really want to process in and out of each one.
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 С другой стороны, мы должны иметь в виду, что указатель мыши не "посещает" все элементы на своём пути. Он может и "прыгать".
 
@@ -66,14 +72,20 @@
 [codetabs height=360 src="mouseoverout-fast"]
 ```
 
+<<<<<<< HEAD
 ```smart header="Если был `mouseover`, то будет и `mouseout`"
 Несмотря на то, что при быстрых переходах промежуточные элементы могут игнорироваться, в одном мы можем быть уверены: элемент может быть пропущен только целиком.
 
 Если указатель "официально" зашёл на элемент, то есть было событие `mouseover`, то при выходе с него обязательно будет `mouseout`.
+=======
+```smart header="If `mouseover` triggered, there must be `mouseout`"
+In case of fast mouse movements, intermediate elements may be ignored, but one thing we know for sure: if the pointer "officially" entered an element (`mouseover` event generated), then upon leaving it we always get `mouseout`.
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 ```
 
 ## Событие mouseout при переходе на потомка
 
+<<<<<<< HEAD
 Важная особенность события `mouseout` - оно генерируется в том числе, когда указатель переходит с элемента на его потомка.
 
 То есть, визуально указатель всё ещё на элементе, но мы получим `mouseout`!
@@ -81,26 +93,59 @@
 ![](mouseover-to-child.svg)
 
 Это выглядит странно, но легко объясняется.
+=======
+An important feature of `mouseout` -- it triggers, when the pointer moves from an element to its descendant, e.g. from `#parent` to `#child` in this HTML:
+
+```html
+<div id="parent">
+  <div id="child">...</div>
+</div>
+```
+
+If we're on `#parent` and then move the pointer deeper into `#child`, but we get `mouseout` on `#parent`!
+
+![](mouseover-to-child.svg)
+
+That may seem strange, but can be easily explained.
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 **По логике браузера, курсор мыши может быть только над одним элементом в любой момент времени - над самым глубоко вложенным и верхним по z-index.**
 
 Таким образом, если курсор переходит на другой элемент (пусть даже дочерний), то он покидает предыдущий.
 
+<<<<<<< HEAD
 Обратите внимание на важную деталь.
 
 Событие `mouseover`, происходящее на потомке, всплывает. Поэтому если на родительском элементе есть такой обработчик, то оно его вызовет.
+=======
+Please note another important detail of event processing.
+
+The `mouseover` event on a descendant bubbles up. So, if `#parent` has `mouseover` handler, it triggers:
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 ![](mouseover-bubble-nested.svg)
 
 ```online
+<<<<<<< HEAD
 Вы можете наглядно увидеть это в примере ниже: `<div id="child">` находится внутри `<div id="parent">`. На родителе определены обработчики событий `mouseover/out`, которые выводят информацию о них в текстовое поле.
 
 При переходе мышью с внешнего элемента на внутренний, вы увидите сразу два события: `mouseout [target: parent]` (ушли с родителя) и `mouseover [target: child]` (перешли на потомка, событие всплыло).
+=======
+You can see that very well in the example below: `<div id="child">` is inside the `<div id="parent">`. There are `mouseover/out` handlers on `#parent` element that output event details.
+
+If you move the mouse from `#parent` to `#child`, you see two events on `#parent`:
+1. `mouseout [target: parent]` (left the parent), then
+2. `mouseover [target: child]` (came to the child, bubbled).
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 [codetabs height=360 src="mouseoverout-child"]
 ```
 
+<<<<<<< HEAD
 При переходе с родителя элемента на потомка - на родителе сработают два обработчика: и `mouseout` и `mouseover`:
+=======
+As shown, when the pointer moves from `#parent` element to `#child`, two handlers trigger on the parent element: `mouseout` and `mouseover`:
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 ```js
 parent.onmouseout = function(event) {
@@ -111,11 +156,21 @@ parent.onmouseover = function(event) {
 };
 ```
 
+<<<<<<< HEAD
 Если код внутри обработчиков не смотрит на `target`, то он подумает, что мышь ушла с элемента `parent` и вернулась на него обратно. Но это не так! Мышь никуда не уходила, она просто перешла на потомка.
 
 Если при уходе с элемента что-то происходит, например, запускается анимация, то такая интерпретация происходящего может давать нежелательные побочные эффекты.
 
 Чтобы этого избежать, можно смотреть на `relatedTarget` и, если мышь всё ещё внутри элемента, то игнорировать такие события.
+=======
+**If we don't examine `event.target` inside the handlers, then it may seem that the mouse pointer left `#parent` element, and then immediately came back over it.**
+
+But that's not the case! The pointer is still over the parent, it just moved deeper into the child element.
+
+If there are some actions upon leaving the parent element, e.g. an animation runs in `parent.onmouseout`, we usually don't want it when the pointer just goes deeper into `#parent`.
+
+To avoid it, we can check `relatedTarget` in the handler and, if the mouse is still inside the element, then ignore such event.
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 Или же можно использовать другие события: `mouseenter` и `mouseleave`, которые мы сейчас изучим, с ними такая проблема не возникает.
 

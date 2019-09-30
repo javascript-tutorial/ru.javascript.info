@@ -414,9 +414,15 @@ alert( parseInt('2n9c', 36) ); // 123456
 
 Для других систем счисления:
 
+<<<<<<< HEAD
 - Можно записывать числа сразу в шестнадцатеричной (`0x`), восьмеричной (`0o`) и бинарной (`0b`) системах счисления
 - `parseInt(str, base)` преобразует строку в целое число в соответствии с указанной системой счисления: `2 ≤ base ≤ 36`.
 - `num.toString(base)` представляет число в строковом виде в указанной системе счисления `base`.
+=======
+- Can write numbers directly in hex (`0x`), octal (`0o`) and binary (`0b`) systems
+- `parseInt(str, base)` parses the string `str` into an integer in numeral system with given `base`, `2 ≤ base ≤ 36`.
+- `num.toString(base)` converts a number to a string in the numeral system with the given `base`.
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 Для преобразования значений типа `12pt` и `100px` в число:
 

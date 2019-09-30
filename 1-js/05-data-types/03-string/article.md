@@ -48,7 +48,11 @@ let guestList = "Guests: // Error: Unexpected token ILLEGAL
 
 Одинарные и двойные кавычки в языке с незапамятных времён: тогда потребность в многострочных строках не учитывалась. Что касается обратных кавычек, они появились существенно позже, и поэтому они гибче.
 
+<<<<<<< HEAD
 Обратные кавычки также позволяют задавать "шаблонную функцию" перед первой обратной кавычкой. Используемый синтаксис: <code>func&#96;string&#96;</code>. Автоматически вызываемая функция `func` получает строку и встроенные в неё выражения и может их обработать. Подробнее об этом можно прочитать в [документации](mdn:/JavaScript/Reference/Template_literals#Tagged_templates). Если перед строкой есть выражение, то шаблонная строка называется "теговым шаблоном". Это позволяет использовать свою шаблонизацию для строк, но на практике теговые шаблоны применяются редко.
+=======
+Backticks also allow us to specify a "template function" before the first backtick. The syntax is: <code>func&#96;string&#96;</code>. The function `func` is called automatically, receives the string and embedded expressions and can process them. This is called "tagged templates". This feature makes it easier to implement custom templating, but is rarely used in practice. You can read more about it in the [manual](mdn:/JavaScript/Reference/Template_literals#Tagged_templates). 
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 ## Спецсимволы
 

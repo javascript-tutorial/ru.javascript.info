@@ -6,9 +6,14 @@
 
 ## document.getElementById или просто id
 
+<<<<<<< HEAD
 Если у элемента есть атрибут `id`, то мы можем получить его вызовом `document.getElementbyId(id)`, где бы он ни находился.
 
 Например:
+=======
+If an element has the `id` attribute, we can get the element using the method `document.getElementById(id)`, no matter where it is.
+
+For instance:
 
 ```html run
 <div id="elem">
@@ -16,6 +21,26 @@
 </div>
 
 <script>
+  // get the element
+*!*
+  let elem = document.getElementById('elem');
+*/!*
+
+  // make its background red
+  elem.style.background = 'red';
+</script>
+```
+
+Also, there's a global variable named by `id` that references the element:
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
+
+```html run
+<div id="elem">
+  <div id="elem-content">Element</div>
+</div>
+
+<script>
+<<<<<<< HEAD
   // получить элемент
 *!*
   let elem = document.getElementById('elem');
@@ -43,17 +68,33 @@
 ```
 
 ...Но это только если мы не объявили в JavaScript переменную с таким же именем, иначе она будет иметь приоритет:
+=======
+  // elem is a reference to DOM-element with id="elem"
+  elem.style.background = 'red';
+
+  // id="elem-content" has a hyphen inside, so it can't be a variable name
+  // ...but we can access it using square brackets: window['elem-content']
+</script>
+```
+
+...That's unless we declare a JavaScript variable with the same name, then it takes precedence:
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 ```html run untrusted height=0
 <div id="elem"></div>
 
 <script>
+<<<<<<< HEAD
   let elem = 5; // теперь elem равен 5, а не <div id="elem">
+=======
+  let elem = 5; // now elem is 5, not a reference to <div id="elem">
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
   alert(elem); // 5
 </script>
 ```
 
+<<<<<<< HEAD
 ```warn header="Пожалуйста, не используйте такие глобальные переменные для доступа к элементам"
 Это поведение соответствует [стандарту](http://www.whatwg.org/specs/web-apps/current-work/#dom-window-nameditem), но поддерживается в основном для совместимости, как осколок далёкого прошлого.
 
@@ -72,6 +113,26 @@
 
 ```warn header="Только `document.getElementById`, а не `anyElem.getElementById`"
 Метод `getElementById` можно вызвать только для объекта `document`. Он осуществляет поиск по `id` по всему документу.
+=======
+```warn header="Please don't use id-named global variables to access elements"
+This behavior is described [in the specification](http://www.whatwg.org/specs/web-apps/current-work/#dom-window-nameditem), so it's kind of standard. But it is supported mainly for compatibility.
+
+The browser tries to help us by mixing namespaces of JS and DOM. That's fine for simple scripts, inlined into HTML, but generally isn't a good thing. There may be naming conflicts. Also, when one reads JS code and doesn't have HTML in view, it's not obvious where the variable comes from.
+
+Here in the tutorial we use `id` to directly reference an element for brevity, when it's obvious where the element comes from.
+
+In real life `document.getElementById` is the preferred method.
+```
+
+```smart header="The `id` must be unique"
+The `id` must be unique. There can be only one element in the document with the given `id`.
+
+If there are multiple elements with the same `id`, then the behavior of methods that use it is unpredictable, e.g. `document.getElementById` may return any of such elements at random. So please stick to the rule and keep `id` unique.
+```
+
+```warn header="Only `document.getElementById`, not `anyElem.getElementById`"
+The method `getElementById` that can be called only on `document` object. It looks for the given `id` in the whole document.
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 ```
 
 ## querySelectorAll [#querySelectorAll]
