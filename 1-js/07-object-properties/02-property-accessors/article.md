@@ -27,7 +27,7 @@ let obj = {
 
 Например, у нас есть объект `user` со свойствами `name` и `surname`:
 
-```js run
+```js
 let user = {
   name: "John",
   surname: "Smith"
