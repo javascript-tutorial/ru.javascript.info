@@ -361,9 +361,10 @@ user = new Proxy(user, {
 */!*
     if (prop.startsWith('_')) {
       throw new Error("Отказано в доступе");
+    } else {
+      let value = target[prop];
+      return (typeof value === 'function') ? value.bind(target) : value; // (*)
     }
-    let value = target[prop];
-    return (typeof value === 'function') ? value.bind(target) : value; // (*)
   },
 *!*
   set(target, prop, val) { // перехватываем запись свойства
