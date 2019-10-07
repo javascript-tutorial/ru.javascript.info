@@ -43,7 +43,7 @@ rabbit.__proto__ = animal;
 
 Например:
 
-```js run
+```js
 let animal = {
   eats: true
 };

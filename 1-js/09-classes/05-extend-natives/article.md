@@ -21,7 +21,11 @@ alert(filteredArr); // 10, 50
 alert(filteredArr.isEmpty()); // false
 ```
 
+<<<<<<< HEAD
 Обратите внимание на интересный момент: встроенные методы, такие как `filter`, `map` и другие возвращают новые объекты унаследованного класса `PowerArray`. Их внутренняя реализация такова, что для этого они используют свойство объекта `constructor`.
+=======
+Please note a very interesting thing. Built-in methods like `filter`, `map` and others -- return new objects of exactly the inherited type `PowerArray`. Their internal implementation uses the object's `constructor` property for that.
+>>>>>>> 71ff8f81b05e2438a3c56507888e06c528a71182
 
 В примере выше,
 ```js
@@ -74,7 +78,11 @@ alert(filteredArr.isEmpty()); // Error: filteredArr.isEmpty is not a function
 
 Как мы уже знаем, встроенные классы расширяют друг друга.
 
+<<<<<<< HEAD
 Обычно, когда один класс наследует другому, то наследуются и статические методы. Это было подробно разъяснено в главе [](info:static-properties-methods#statics-and-inheritance).
+=======
+Normally, when one class extends another, both static and non-static methods are inherited. That was thoroughly explained in the article [](info:static-properties-methods#statics-and-inheritance).
+>>>>>>> 71ff8f81b05e2438a3c56507888e06c528a71182
 
 Но встроенные классы - исключение. Они не наследуют статические методы друг друга.
 

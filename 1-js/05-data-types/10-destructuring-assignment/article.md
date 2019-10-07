@@ -355,7 +355,11 @@ let title, width, height;
 }
 ```
 
+<<<<<<< HEAD
 Так что здесь JavaScript считает, что видит блок кода, отсюда и ошибка. На самом-то деле у нас деструктуризация.
+=======
+So here JavaScript assumes that we have a code block, that's why there's an error. We want destructuring instead.
+>>>>>>> 71ff8f81b05e2438a3c56507888e06c528a71182
 
 Чтобы показать JavaScript, что это не блок кода, мы можем заключить выражение в скобки `(...)`:
 

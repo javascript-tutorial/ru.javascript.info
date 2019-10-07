@@ -127,7 +127,11 @@ class Rabbit extends Animal {
 }
 ```
 
+<<<<<<< HEAD
 ...Впрочем, обычно мы не хотим полностью заменить родительский метод, а скорее хотим сделать новый на его основе, изменяя или расширяя его функциональность. Мы делаем что-то в нашем методе и вызываем родительский метод до/после или в процессе.
+=======
+...But usually we don't want to totally replace a parent method, but rather to build on top of it to tweak or extend its functionality. We do something in our method, but call the parent method before/after it or in the process.
+>>>>>>> 71ff8f81b05e2438a3c56507888e06c528a71182
 
 У классов есть ключевое слово `"super"` для таких случаев.
 - `super.method(...)` вызывает родительский метод.

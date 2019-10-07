@@ -22,7 +22,11 @@ try {
 
 ## Зачем нужен CORS? Экскурс в историю
 
+<<<<<<< HEAD
 CORS существует для защиты интернет от злых хакеров.
+=======
+CORS exists to protect the internet from evil hackers.
+>>>>>>> 71ff8f81b05e2438a3c56507888e06c528a71182
 
 Серьёзно. Давайте сделаем краткое историческое отступление.
 
@@ -148,9 +152,15 @@ Origin: https://javascript.info
 
 Сервер может проверить `Origin` и, если он согласен принять такой запрос, добавить особый заголовок `Access-Control-Allow-Origin` к ответу. Этот заголовок должен содержать разрешённый источник (в нашем случае `https://javascript.info`) или звёздочку `*`. Тогда ответ успешен, в противном случае возникает ошибка.
 
+<<<<<<< HEAD
 Здесь браузер играет роль доверенного посредника:
 1. Он гарантирует, что к запросу на другой источник добавляется правильный заголовок `Origin`.
 2. Он проверяет наличие разрешающего заголовка `Access-Control-Allow-Origin` в ответе и, если всё хорошо, то JavaScript получает доступ к ответу сервера, в противном случае - доступ запрещается c ошибкой.
+=======
+The browser plays the role of a trusted mediator here:
+1. It ensures that the correct `Origin` is sent with a cross-origin request.
+2. It checks for permitting `Access-Control-Allow-Origin` in the response, if it exists, then JavaScript is allowed to access the response, otherwise it fails with an error.
+>>>>>>> 71ff8f81b05e2438a3c56507888e06c528a71182
 
 ![](xhr-another-domain.svg)
 
@@ -203,14 +213,23 @@ Access-Control-Expose-Headers: Content-Length,API-Key
 
 Мы можем использовать любой HTTP-метод: не только `GET/POST`, но и `PATCH`, `DELETE` и другие.
 
+<<<<<<< HEAD
 Некоторое время назад никто не мог даже предположить, что веб-страница способна делать такие запросы. Так что могут существовать веб-сервисы, которые рассматривают нестандартный метод как сигнал: "Это не браузер". Они могут учитывать это при проверке прав доступа.
+=======
+Some time ago no one could even imagine that a webpage could make such requests. So there may still exist webservices that treat a non-standard method as a signal: "That's not a browser". They can take it into account when checking access rights.
+>>>>>>> 71ff8f81b05e2438a3c56507888e06c528a71182
 
 Поэтому, чтобы избежать недопониманий, браузер не делает "непростые" запросы (которые нельзя было сделать в прошлом) сразу. Перед этим он посылает предварительный запрос, спрашивая разрешения.
 
 Предварительный запрос использует метод `OPTIONS`, у него нет тела, но есть два заголовка:
 
+<<<<<<< HEAD
 - `Access-Control-Request-Method` содержит HTTP-метод "непростого" запроса.
 - `Access-Control-Request-Headers` предоставляет разделённый запятыми список его "непростых" HTTP-заголовков.
+=======
+- `Access-Control-Request-Method` header has the method of the non-simple request.
+- `Access-Control-Request-Headers` header provides a comma-separated list of its non-simple HTTP-headers.
+>>>>>>> 71ff8f81b05e2438a3c56507888e06c528a71182
 
 Если сервер согласен принимать такие запросы, то он должен ответить без тела,  со статусом 200 и с заголовками:
 
@@ -273,7 +292,11 @@ Access-Control-Allow-Headers: API-Key,Content-Type,If-Modified-Since,Cache-Contr
 Access-Control-Max-Age: 86400
 ```
 
+<<<<<<< HEAD
 Теперь, когда браузер видит, что `PATCH` есть в `Access-Control-Allow-Methods`, а `Content-Type,API-Key` - в списке `Access-Control-Allow-Headers`, он посылает наш основной запрос.
+=======
+Now the browser can see that `PATCH` is in `Access-Control-Allow-Methods` and `Content-Type,API-Key` are in the list `Access-Control-Allow-Headers`, so it sends out the main request.
+>>>>>>> 71ff8f81b05e2438a3c56507888e06c528a71182
 
 Кроме того, ответ на предзапрос кешируется на время, указанное в заголовке `Access-Control-Max-Age` (86400 секунд, один день), так что последующие запросы не вызовут предзапрос. Они будут отосланы сразу при условии, что соответствуют закешированным разрешениям.
 
