@@ -181,7 +181,7 @@ if (hour == 12 && minute == 30) {
 
 ```js run
 if (1 && 0) { // вычисляется как true && false
-  alert( "won't work, because the result is falsy" );
+  alert( "не сработает, так как результат ложный" );
 }
 ```
 
