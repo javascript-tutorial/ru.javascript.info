@@ -197,6 +197,8 @@ alert(admin.fullName); // John Smith (*)
 
 // срабатывает сеттер!
 admin.fullName = "Alice Cooper"; // (**)
+alert(admin.name); // Alice
+alert(admin.surname); // Cooper
 ```
 
 Здесь в строке `(*)` свойство `admin.fullName` имеет геттер в прототипе `user`, поэтому вызывается он. В строке `(**)` свойство также имеет сеттер в прототипе, который и будет вызван.
