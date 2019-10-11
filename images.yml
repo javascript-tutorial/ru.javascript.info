@@ -142,8 +142,8 @@ chrome-sources-breakpoint.svg:
     text: "точки останова"
 
 chrome-sources-debugger-pause.svg:
-  "jump to the outer function":
-    text: "выпрыгнуть во внешнюю функцию"
+  "see the outer call details":
+    text: "посмотреть детали внешнего вызова"
     position: "right"
   "watch expressions":
     text: "смотреть за выражениями"
