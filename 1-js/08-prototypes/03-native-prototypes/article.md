@@ -189,8 +189,16 @@ alert( obj.join(',') ); // Hello,world!
 
 ## Итого
 
+<<<<<<< HEAD
 - Все встроенные объекты следуют одному шаблону:
     - Методы хранятся в прототипах (`Array.prototype`, `Object.prototype`, `Date.prototype` и т.д.).
     - Сами объекты хранят только данные (элементы массивов, свойства объектов, даты).
 - Примитивы также хранят свои методы в прототипах объектов-обёрток: `Number.prototype`, `String.prototype`, `Boolean.prototype`. Только у значений `undefined` и `null` нет объектов-обёрток.
 - Встроенные прототипы могут быть изменены или дополнены новыми методами. Но не рекомендуется менять их. Единственная допустимая причина -- это добавление нового метода из стандарта, который ещё не поддерживается движком JavaScript.
+=======
+- All built-in objects follow the same pattern:
+    - The methods are stored in the prototype (`Array.prototype`, `Object.prototype`, `Date.prototype` etc).
+    - The object itself stores only the data (array items, object properties, the date).
+- Primitives also store methods in prototypes of wrapper objects: `Number.prototype`, `String.prototype`, `Boolean.prototype`. Only `undefined` and `null` do not have wrapper objects.
+- Built-in prototypes can be modified or populated with new methods. But it's not recommended to change them. Probably the only allowable case is when we add-in a new standard, but not yet supported by the engine JavaScript method.
+>>>>>>> a0bfa924a17cad8e7fee213904b27dbf57c2dbac

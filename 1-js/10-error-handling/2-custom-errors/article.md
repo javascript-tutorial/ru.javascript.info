@@ -23,9 +23,13 @@ let json = `{ "name": "John", "age": 30 }`;
 
 Назовём её ошибкой валидации `ValidationError` и создадим для неё класс. Ошибка этого вида должна содержать информацию о поле, которое является источником ошибки.
 
+<<<<<<< HEAD
 Наш класс `ValidationError` должен наследовать от встроенного класса `Error`.
 
 Класс `Error` встроенный, вот его примерный код, просто чтобы мы понимали, что расширяем:
+=======
+That class is built-in, but here's its approximate code so we can understand what we're extending:
+>>>>>>> a0bfa924a17cad8e7fee213904b27dbf57c2dbac
 
 ```js
 // "Псевдокод" встроенного класса Error, определённого самим JavaScript
@@ -220,9 +224,15 @@ alert( new PropertyRequiredError("field").name ); // PropertyRequiredError
 
 Код, который вызывает `readUser`, должен обрабатывать эти ошибки.
 
+<<<<<<< HEAD
 Сейчас в нём используются проверки `if` в блоке `catch`, которые проверяют класс и обрабатывают известные ошибки и пробрасывают дальше неизвестные. Но если функция `readUser` генерирует несколько видов ошибок, то мы должны спросить себя: действительно ли мы хотим проверять все типы ошибок поодиночке во всех местах в коде, где вызывается `readUser`?
 
 Часто ответ "Нет": внешний код хочет быть на один уровень выше всего этого.  Он хочет иметь какую-то обобщённую ошибку чтения данных.  Почему именно это произошло -- часто не имеет значения (об этом говорится в сообщении об ошибке).  Или даже лучше, если есть способ получить подробности об ошибке, но только если нам это нужно.
+=======
+The code which calls `readUser` should handle these errors. Right now it uses multiple `if`s in the `catch` block, that check the class and handle known errors and rethrow the unknown ones. But if the `readUser` function generates several kinds of errors, then we should ask ourselves: do we really want to check for all error types one-by-one in every code that calls `readUser`?
+
+Often the answer is "No": the outer code wants to be "one level above all that", it just wants to have some kind of "data reading error" -- why exactly it happened is often irrelevant (the error message describes it). Or, even better, it could have a way to get the error details, but only if we need to.
+>>>>>>> a0bfa924a17cad8e7fee213904b27dbf57c2dbac
 
 Итак, давайте создадим новый класс `ReadError` для представления таких ошибок.  Если ошибка возникает внутри `readUser`, мы её перехватим и сгенерируем `ReadError`.  Мы также сохраним ссылку на исходную ошибку в свойстве `cause`.  Тогда внешний код должен будет только проверить наличие `ReadError`.
 

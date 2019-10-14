@@ -18,7 +18,11 @@
 
 ![](chrome-open-sources.svg)
 
+<<<<<<< HEAD
 Кнопка-переключатель <span class="devtools" style="background-position:-168px -76px"></span> откроет вкладку со списком файлов.
+=======
+The toggler button <span class="devtools" style="background-position:-172px -98px"></span> opens the tab with files.
+>>>>>>> a0bfa924a17cad8e7fee213904b27dbf57c2dbac
 
 Кликните на неё и выберите `hello.js`. Вот что появится:
 
@@ -30,7 +34,11 @@
 2. Зона **Source** показывает исходный код.
 3. Наконец, зона **Information and control** (Сведения и контроль) отведена для отладки, вскоре мы к ней вернёмся.
 
+<<<<<<< HEAD
 Чтобы скрыть список ресурсов и освободить экранное место для исходного кода, щёлкните по тому же переключателю <span class="devtools" style="background-position:-200px -76px"></span>.
+=======
+Now you could click the same toggler <span class="devtools" style="background-position:-172px -122px"></span> again to hide the resources list and give the code some space.
+>>>>>>> a0bfa924a17cad8e7fee213904b27dbf57c2dbac
 
 ## Консоль
 
@@ -120,10 +128,17 @@ function hello(name) {
 
 А теперь давайте *пошагаем* по нашему коду.
 
+<<<<<<< HEAD
 В правой части панели для этого есть несколько кнопок. Рассмотрим их.
 
 <span class="devtools" style="background-position:-7px -76px"></span> – продолжить выполнение. Быстрая клавиша – `key:F8`.
 : Возобновляет выполнение кода. Если больше нет точек останова, отладчик прекращает работу и позволяет приложению работать дальше.
+=======
+There are buttons for it at the top of the right panel. Let's engage them.
+<!-- https://github.com/ChromeDevTools/devtools-frontend/blob/master/front_end/Images/src/largeIcons.svg -->
+<span class="devtools" style="background-position:-146px -168px"></span> -- "Resume": continue the execution, hotkey `key:F8`.
+: Resumes the execution. If there are no additional breakpoints, then the execution just continues and the debugger loses control.
+>>>>>>> a0bfa924a17cad8e7fee213904b27dbf57c2dbac
 
     Вот, что мы увидим, кликнув на неё:
 
@@ -131,6 +146,7 @@ function hello(name) {
 
     Выполнение кода возобновилось, дошло до другой точки останова внутри `say()`, и отладчик снова приостановил выполнение. Обратите внимание на пункт "Call stack" справа: в списке появился ещё один вызов. Мы теперь внутри функции `say()`.
 
+<<<<<<< HEAD
 <span class="devtools" style="background-position:-137px -76px"></span> – сделать шаг (выполнить следующую команду), *не заходя в функцию*. Быстрая клавиша – `key:F10`.
 : Если мы нажмём на неё - будет вызван `alert`. Важно: на месте `alert` может быть любая другая функция, выполнение просто *перешагнёт через неё*, полностью игнорируя её содержимое.
 
@@ -145,6 +161,35 @@ function hello(name) {
 
 <span class="devtools" style="background-position:-264px -4px"></span> – разрешить/запретить остановку выполнения в случае возникновения ошибки.
 : Если опция включена и инструменты разработчика открыты, любая ошибка в скрипте приостанавливает выполнение кода, что позволяет его проанализировать. Поэтому если скрипт завершается с ошибкой, открываем отладчик, включаем эту опцию, перезагружаем страницу и локализуем проблему.
+=======
+<span class="devtools" style="background-position:-200px -190px"></span> -- "Step": run the next command, hotkey `key:F9`.
+: Run the next statement. If we click it now, `alert` will be shown.
+
+    Clicking this again and again will step through all script statements one by one.
+
+<span class="devtools" style="background-position:-62px -192px"></span> -- "Step over": run the next command, but *don't go into a function*, hotkey `key:F10`.
+: Similar to the previous the "Step" command, but behaves differently if the next statement is a function call. That is: not a built-in, like `alert`, but a function of our own.
+
+    The "Step" command goes into it and and pauses the execution at its first line, while "Step over" executes the nested function call invisibly, skipping the function internals.
+
+    The execution is then paused immediately after that function.
+
+    That's good if we're not interested to see what happens inside the function call.
+
+<span class="devtools" style="background-position:-4px -194px"></span> -- "Step into", hotkey `key:F11`.
+: That's similar to "Step", but behaves differently in case of asynchronous function calls. If you're only starting to learn JavaScript, then you can ignore the difference, as we don't have asynchronous calls yet.
+
+    For the future, just note that "Step" command ignores async actions, such as `setTimeout` (scheduled function call), that execute later. The "Step into" goes into their code, waiting for them if necessary. See [DevTools manual](https://developers.google.com/web/updates/2018/01/devtools#async) for more details.
+
+<span class="devtools" style="background-position:-32px -194px"></span> -- "Step out": continue the execution till the end of the current function, hotkey `key:Shift+F11`.
+: Continue the execution and stop it at the very last line of the current function. That's handy when we accidentally entered a nested call using <span class="devtools" style="background-position:-200px -190px"></span>, but it does not interest us, and we want to continue to its end as soon as possible.
+
+<span class="devtools" style="background-position:-61px -74px"></span> -- enable/disable all breakpoints.
+: That button does not move the execution. Just a mass on/off for breakpoints.
+
+<span class="devtools" style="background-position:-90px -146px"></span> -- enable/disable automatic pause in case of an error.
+: When enabled, and the developer tools is open, a script error automatically pauses the execution. Then we can analyze variables to see what went wrong. So if our script dies with an error, we can open debugger, enable this option and reload the page to see where it dies and what's the context at that moment.
+>>>>>>> a0bfa924a17cad8e7fee213904b27dbf57c2dbac
 
 ```smart header="Continue to here"
 Если щёлкнуть правой кнопкой мыши по строчке кода, в контекстном меню можно выбрать опцию "Continue to here" ("продолжить до этого места").
@@ -173,9 +218,16 @@ for (let i = 0; i < 5; i++) {
 
 Приостановить выполнение скрипта можно тремя способами:
 
+<<<<<<< HEAD
 1. Точками останова.
 2. Использованием в коде команды `debugger`.
 3. При ошибке (если инструменты разработчика открыты и опция <span class="devtools" style="background-position:-264px -4px"></span> включена).
+=======
+As we can see, there are three main ways to pause a script:
+1. A breakpoint.
+2. The `debugger` statements.
+3. An error (if dev tools are open and the button <span class="devtools" style="background-position:-90px -146px"></span> is "on").
+>>>>>>> a0bfa924a17cad8e7fee213904b27dbf57c2dbac
 
 При остановке мы можем отлаживать - проанализировать переменные и пошагово пройти по процессу, что поможет отыскать проблему.
 

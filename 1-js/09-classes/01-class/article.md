@@ -88,7 +88,11 @@ alert(typeof User); // function
 1. Создаёт функцию с именем `User`, которая становится результатом объявления класса. Код функции берётся из метода `constructor` (она будет пустой, если такого метода нет).
 2. Сохраняет все методы, такие как `sayHi`, в `User.prototype`.
 
+<<<<<<< HEAD
 При вызове метода объекта `new User` он будет взят из прототипа, как описано в главе <info:function-prototype>. Таким образом, объекты `new User` имеют доступ к методам класса.
+=======
+After `new User` object is created, when we call its method, it's taken from the prototype, just as described in the chapter <info:function-prototype>. So the object has access to class methods.
+>>>>>>> a0bfa924a17cad8e7fee213904b27dbf57c2dbac
 
 На картинке показан результат объявления `class User`:
 
@@ -140,11 +144,21 @@ user.sayHi();
 ```
 Результат этого кода очень похож. Поэтому, действительно, есть причины, по которым `class` можно считать синтаксическим сахаром для определения конструктора вместе с методами прототипа.
 
+<<<<<<< HEAD
 Однако есть важные отличия:
+=======
+The result of this definition is about the same. So, there are indeed reasons why `class` can be considered a syntax sugar to define a constructor together with its prototype methods.
+
+Still, there are important differences.
+>>>>>>> a0bfa924a17cad8e7fee213904b27dbf57c2dbac
 
 1. Во-первых, функция, созданная с помощью `class`, помечена специальным внутренним свойством `[[FunctionKind]]:"classConstructor"`. Поэтому это не совсем то же самое, что создавать её вручную.
 
+<<<<<<< HEAD
     В отличие от обычных функций, конструктор класса не может быть вызван без `new`:
+=======
+    And unlike a regular function, a class constructor must be called with `new`:
+>>>>>>> a0bfa924a17cad8e7fee213904b27dbf57c2dbac
 
     ```js run
     class User {

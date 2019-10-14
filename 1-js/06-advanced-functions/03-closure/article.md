@@ -362,7 +362,11 @@ alert( counter2() ); // 0 (независимо)
 
     ![](lexenv-nested-makecounter-5.svg)
 
+<<<<<<< HEAD
     Теперь, когда вызов ищет переменную `count`, он сначала ищет в собственном лексическом окружении (пустое), а затем в лексическом окружении предшествующего вызова `makeCounter()`, где и находит её.
+=======
+    Now when the call looks for `count` variable, it first searches its own Lexical Environment (empty), then the Lexical Environment of the outer `makeCounter()` call, where it finds it.
+>>>>>>> a0bfa924a17cad8e7fee213904b27dbf57c2dbac
 
     Пожалуйста, обратите внимание, как здесь работает управление памятью. Хотя `makeCounter()` закончил выполнение некоторое время назад, его лексическое окружение остаётся в памяти, потому что есть вложенная функция с `[[Environment]]`, который ссылается на него.
 

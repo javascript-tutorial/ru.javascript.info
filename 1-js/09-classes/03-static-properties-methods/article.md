@@ -191,8 +191,13 @@ class Rabbit extends Animal {}
 // для статики
 alert(Rabbit.__proto__ === Animal); // true
 
+<<<<<<< HEAD
 // для обычных методов
 alert(Rabbit.prototype.__proto__ === Animal.prototype);
+=======
+// for regular methods
+alert(Rabbit.prototype.__proto__ === Animal.prototype); // true
+>>>>>>> a0bfa924a17cad8e7fee213904b27dbf57c2dbac
 ```
 
 ## Итого

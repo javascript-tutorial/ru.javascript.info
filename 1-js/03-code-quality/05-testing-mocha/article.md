@@ -79,7 +79,11 @@ describe("pow", function() {
 
 Давайте посмотрим этот поток разработки на нашем примере.
 
+<<<<<<< HEAD
 Первый шаг уже завершён. У нас есть спецификация для функции `pow`. Теперь, перед тем, как писать реализацию, давайте подключим библиотеки для пробного запуска тестов, просто чтобы убедиться, что тесты работают (разумеется, они завершатся ошибками).
+=======
+The first step is already complete: we have an initial spec for `pow`. Now, before making the implementation, let's use few JavaScript libraries to run the tests, just to see that they are working (they will all fail).
+>>>>>>> a0bfa924a17cad8e7fee213904b27dbf57c2dbac
 
 ## Спецификация в действии
 

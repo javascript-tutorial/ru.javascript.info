@@ -104,7 +104,11 @@ alert( arr instanceof Object ); // true
 
 Кстати, есть метод [objA.isPrototypeOf(objB)](mdn:js/object/isPrototypeOf), которые возвращает `true`, если объект `objA` есть где-то в прототипной цепочке объекта `objB`. Так что `obj instanceof Class` можно перефразировать как `Class.prototype.isPrototypeOf(obj)`.
 
+<<<<<<< HEAD
 Забавно, но сам конструктор `Class` не участвует в процессе проверки! Важна только цепочка прототипов `Class.prototype`.
+=======
+It's funny, but the `Class` constructor itself does not participate in the check! Only the chain of prototypes and `Class.prototype` matters.
+>>>>>>> a0bfa924a17cad8e7fee213904b27dbf57c2dbac
 
 Это может приводить к интересным последствиям при изменении свойства `prototype` после создания объекта.
 

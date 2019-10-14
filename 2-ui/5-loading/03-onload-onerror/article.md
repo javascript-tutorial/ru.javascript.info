@@ -159,7 +159,11 @@ Script error.
 
 Зачем нам могут быть нужны детали ошибки?
 
+<<<<<<< HEAD
 Существует много сервисов (и мы можем сделать наш собственный), которые обрабатывают глобальные ошибки при помощи `window.onerror`, сохраняют отчёт о них и предоставляют доступ к этому отчёту для анализа. Это здорово, потому что мы можем увидеть реальные ошибки, которые случились у наших пользователей. Но если скрипт - с другого домена, то информации об ошибках в нём почти нет, как мы только что видели.
+=======
+There are many services (and we can build our own) that listen for global errors using `window.onerror`, save errors and provide an interface to access and analyze them. That's great, as we can see real errors, triggered by our users. But if a script comes from another origin, then there's no much information about errors in it, as we've just seen.
+>>>>>>> a0bfa924a17cad8e7fee213904b27dbf57c2dbac
 
 Похожая кросс-доменная политика (CORS) внедрена и в отношении других ресурсов.
 
