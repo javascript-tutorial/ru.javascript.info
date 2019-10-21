@@ -610,7 +610,7 @@ sayHi("Вася"); // Привет, Вася! (через 3 секунды)
 |-----------------|----------------|-------------|
 | `obj[prop]` | `Reflect.get(obj, prop)` | `[[Get]]` |
 | `obj[prop] = value` | `Reflect.set(obj, prop, value)` | `[[Set]]` |
-| `delete obj[prop]` | `Reflect.deleteProperty(obj, prop)` | `[[HasProperty]]` |
+| `delete obj[prop]` | `Reflect.deleteProperty(obj, prop)` | `[[Delete]]` |
 | `new F(value)` | `Reflect.construct(F, value)` | `[[Construct]]` |
 | ... | ... | ... |
 
