@@ -28,7 +28,11 @@ let rabbit = Object.create(animal);
 alert(rabbit.eats); // true
 
 *!*
+<<<<<<< HEAD
 alert(Object.getPrototypeOf(rabbit) === animal); // получаем прототип объекта rabbit
+=======
+alert(Object.getPrototypeOf(rabbit) === animal); // true
+>>>>>>> 30e3fa723721909ee25115562e676db2452cf8d1
 */!*
 
 *!*
@@ -71,9 +75,15 @@ let clone = Object.create(Object.getPrototypeOf(obj), Object.getOwnPropertyDescr
 
 В силу исторических причин.
 
+<<<<<<< HEAD
 - Свойство `"prototype"` функции-конструктора существует с совсем давних времён.
 - Позднее, в 2012 году, в стандарте появился метод `Object.create`. Это давало возможность создавать объекты с указанным прототипом, но не позволяло устанавливать/получать его. Тогда браузеры реализовали нестандартный аксессор `__proto__`, который позволил устанавливать/получать прототип в любое время.
 - Позднее, в 2015 году, в стандарт были добавлены `Object.setPrototypeOf` и `Object.getPrototypeOf,` заменяющие собой аксессор `__proto__`, который упоминается в Приложении Б стандарта, которое не обязательно к поддержке в небраузерных окружениях. При этом де-факто `__proto__` всё ещё поддерживается везде.
+=======
+- The `"prototype"` property of a constructor function has worked since very ancient times.
+- Later, in the year 2012, `Object.create` appeared in the standard. It gave the ability to create objects with a given prototype, but did not provide the ability to get/set it. So browsers implemented the non-standard `__proto__` accessor that allowed the user to get/set a prototype at any time.
+- Later, in the year 2015, `Object.setPrototypeOf` and `Object.getPrototypeOf` were added to the standard, to perform the same functionality as `__proto__`. As `__proto__` was de-facto implemented everywhere, it was kind-of deprecated and made its way to the Annex B of the standard, that is: optional for non-browser environments.
+>>>>>>> 30e3fa723721909ee25115562e676db2452cf8d1
 
 В итоге сейчас у нас есть все эти способы для работы с прототипом.
 

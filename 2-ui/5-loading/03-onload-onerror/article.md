@@ -1,6 +1,10 @@
 # Загрузка ресурсов: onload и onerror
 
+<<<<<<< HEAD
 Браузер позволяет отслеживать загрузку сторонних ресурсов: скриптов, ифреймов, изображений и др.
+=======
+The browser allows us to track the loading of external resources -- scripts, iframes, pictures and so on.
+>>>>>>> 30e3fa723721909ee25115562e676db2452cf8d1
 
 Для этого существуют два события:
 
@@ -49,11 +53,19 @@ script.onload = function() {
 
 Таким образом, в обработчике `onload` мы можем использовать переменные, вызывать функции и т.д., которые предоставляет нам сторонний скрипт.
 
+<<<<<<< HEAD
 ...А что если во время загрузки произошла ошибка? Например, такого скрипта нет (ошибка 404), или сервер был недоступен.
 
 ### script.onerror
 
 Ошибки, которые возникают во время загрузки скрипта, могут быть отслежены с помощью события `error`.
+=======
+...And what if the loading failed? For instance, there's no such script (error 404) or the server is down (unavailable).
+
+### script.onerror
+
+Errors that occur during the loading of the script can be tracked in an `error` event.
+>>>>>>> 30e3fa723721909ee25115562e676db2452cf8d1
 
 Например, давайте запросим скрипт, которого не существует:
 
@@ -69,12 +81,20 @@ script.onerror = function() {
 */!*
 ```
 
+<<<<<<< HEAD
 Обратите внимание, что мы не можем получить описание HTTP-ошибки. Мы не знаем, была ли это ошибка 404 или 500, или какая-то другая. Знаем только, что во время загрузки произошла ошибка.
+=======
+Please note that we can't get HTTP error details here. We don't know if it was an error 404 or 500 or something else. Just that the loading failed.
+>>>>>>> 30e3fa723721909ee25115562e676db2452cf8d1
 
 ```warn
 Обработчики `onload`/`onerror` отслеживают только сам процесс загрузки.
 
+<<<<<<< HEAD
 Ошибки обработки и выполнения загруженного скрипта ими не отслеживаются. Чтобы "поймать" ошибки в скрипте, нужно воспользоваться глобальным обработчиком `window.onerror`.
+=======
+Errors that may occur during script processing and execution are out of scope for these events. That is: if a script loaded successfully, then `onload` triggers, even if it has programming errors in it. To track script errors, one can use `window.onerror` global handler.
+>>>>>>> 30e3fa723721909ee25115562e676db2452cf8d1
 ```
 
 ## Другие ресурсы
@@ -98,8 +118,13 @@ img.onerror = function() {
 
 Однако есть некоторые особенности:
 
+<<<<<<< HEAD
 - Большинство ресурсов начинают загружаться после их добавления в документ. За исключением тега `<img>`. Изображения начинают загружаться, когда получают `src (*)`.
 - Для `<iframe>` событие `load` срабатывает по окончании загрузки как в случае успеха, так и в случае ошибки.
+=======
+- Most resources start loading when they are added to the document. But `<img>` is an exception. It starts loading when it gets a src `(*)`.
+- For `<iframe>`, the `iframe.onload` event triggers when the iframe loading finished, both for successful load and in case of an error.
+>>>>>>> 30e3fa723721909ee25115562e676db2452cf8d1
 
 Такое поведение сложилось по историческим причинам.
 
@@ -155,15 +180,27 @@ Script error.
 , 0:0
 ```
 
+<<<<<<< HEAD
 Детали отчёта могут варьироваться в зависимости от браузера, но основная идея остаётся неизменной: любая информация о внутреннем устройстве скрипта, включая стек ошибки, спрятана. Именно потому, что скрипт загружен с другого домена.
+=======
+Details may vary depending on the browser, but the idea is the same: any information about the internals of a script, including error stack traces, is hidden. Exactly because it's from another domain.
+>>>>>>> 30e3fa723721909ee25115562e676db2452cf8d1
 
 Зачем нам могут быть нужны детали ошибки?
 
+<<<<<<< HEAD
 Существует много сервисов (и мы можем сделать наш собственный), которые обрабатывают глобальные ошибки при помощи `window.onerror`, сохраняют отчёт о них и предоставляют доступ к этому отчёту для анализа. Это здорово, потому что мы можем увидеть реальные ошибки, которые случились у наших пользователей. Но если скрипт - с другого домена, то информации об ошибках в нём почти нет, как мы только что видели.
+=======
+There are many services (and we can build our own) that listen for global errors using `window.onerror`, save errors and provide an interface to access and analyze them. That's great, as we can see real errors, triggered by our users. But if a script comes from another origin, then there's no much information about errors in it, as we've just seen.
+>>>>>>> 30e3fa723721909ee25115562e676db2452cf8d1
 
 Похожая кросс-доменная политика (CORS) внедрена и в отношении других ресурсов.
 
+<<<<<<< HEAD
 **Чтобы разрешить кросс-доменный доступ, нам нужно поставить тегу `<script>` атрибут `crossorigin`, и, кроме того, удалённый сервер должен поставить специальные заголовки.**
+=======
+**To allow cross-origin access, the `<script>` tag needs to have the `crossorigin` attribute, plus the remote server must provide special headers.**
+>>>>>>> 30e3fa723721909ee25115562e676db2452cf8d1
 
 Существует три уровня кросс-доменного доступа:
 
@@ -172,7 +209,11 @@ Script error.
 3. **`crossorigin="use-credentials"`** -- доступ разрешён, если сервер отвечает с заголовками `Access-Control-Allow-Origin` со значением наш домен и `Access-Control-Allow-Credentials: true`. Браузер отправляет авторизационную информацию и куки на удалённый сервер.
 
 ```smart
+<<<<<<< HEAD
 Почитать больше о кросс-доменных доступах вы можете в главе <info:fetch-crossorigin>. Там описан метод `fetch` для сетевых запросов, но политика там точно такая же.
+=======
+You can read more about cross-origin access in the chapter <info:fetch-crossorigin>. It describes the `fetch` method for network requests, but the policy is exactly the same.
+>>>>>>> 30e3fa723721909ee25115562e676db2452cf8d1
 
 Такое понятие как "куки" (cookies) не рассматривается в текущей главе, но вы можете почитать о них в главе <info:cookie>.
 ```
@@ -181,7 +222,11 @@ Script error.
 
 Мы можем выбрать `"anonymous"` (куки не отправляются, требуется один серверный заголовок) или `"use-credentials"` (куки отправляются, требуются два серверных заголовка) в качестве значения атрибута.
 
+<<<<<<< HEAD
 Если куки нас не волнуют, тогда смело выбираем `"anonymous"`:
+=======
+If we don't care about cookies, then `"anonymous"` is the way to go:
+>>>>>>> 30e3fa723721909ee25115562e676db2452cf8d1
 
 ```html run height=0
 <script>
@@ -192,7 +237,11 @@ window.onerror = function(message, url, line, col, errorObj) {
 <script *!*crossorigin="anonymous"*/!* src="https://cors.javascript.info/article/onload-onerror/crossorigin/error.js"></script>
 ```
 
+<<<<<<< HEAD
 Теперь при условии, что сервер предоставил заголовок `Access-Control-Allow-Origin`, всё хорошо. У нас есть полный отчёт по ошибкам.
+=======
+Now, assuming that the server provides an `Access-Control-Allow-Origin` header, everything's fine. We have the full error report.
+>>>>>>> 30e3fa723721909ee25115562e676db2452cf8d1
 
 ## Итого
 

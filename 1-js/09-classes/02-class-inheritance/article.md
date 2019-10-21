@@ -1,8 +1,18 @@
 # Наследование классов
 
+<<<<<<< HEAD
 Допустим, у нас есть два класса.
+=======
+# Class inheritance
 
-`Animal`:
+Class inheritance is a way for one class to extend another class.
+>>>>>>> 30e3fa723721909ee25115562e676db2452cf8d1
+
+So we can create new functionality on top of the existing.
+
+## The "extends" keyword
+
+Let's say with have class `Animal`:
 
 ```js
 class Animal {
@@ -23,6 +33,7 @@ class Animal {
 let animal = new Animal("Мой питомец");
 ```
 
+<<<<<<< HEAD
 ![](rabbit-animal-independent-animal.svg)
 
 ...И `Rabbit`:
@@ -67,6 +78,21 @@ class Animal {
 }
 
 // Наследуем от Animal указывая "extends Animal"
+=======
+Here's how we can represent `animal` object and `Animal` class graphically:
+
+![](rabbit-animal-independent-animal.svg)
+
+...And we would like to create another `class Rabbit`.
+
+As rabbits are animals, `Rabbit` class should be based on `Animal`, have access to animal methods, so that rabbits can do what "generic" animals can do.
+
+The syntax to extend another class is: `class Child extends Parent`.
+
+Let's create `class Rabbit` that inherits from `Animal`:
+
+```js
+>>>>>>> 30e3fa723721909ee25115562e676db2452cf8d1
 *!*
 class Rabbit extends Animal {
 */!*
@@ -82,6 +108,7 @@ rabbit.hide(); // Белый кролик прячется!
 ```
 Теперь код `Rabbit` стал короче, так как используется конструктор класса `Animal` по умолчанию и кролик может использовать метод `run` как и все животные.
 
+<<<<<<< HEAD
 На самом деле ключевое слово `extends` добавляет ссылку на `[[Prototype]]` из `Rabbit.prototype` в `Animal.prototype`:
 
 ![](animal-rabbit-extends.svg)
@@ -89,6 +116,20 @@ rabbit.hide(); // Белый кролик прячется!
 Если метод не найден в `Rabbit.prototype`, JavaScript возьмёт его из `Animal.prototype`.
 
 Как мы помним из главы <info:native-prototypes>, в JavaScript используется наследование на прототипах для встроенных объектов. Например `Date.prototype.[[Prototype]]` это `Object.prototype`, поэтому у дат есть универсальные методы объекта.
+=======
+Object of `Rabbit` class have access to both `Rabbit` methods, such as `rabbit.hide()`, and also to `Animal` methods, such as `rabbit.run()`.
+
+Internally, `extends` keyword works using the good old prototype mechanics. It sets `Rabbit.prototype.[[Prototype]]` to `Animal.prototype`. So, if a method is not found in `Rabbit.prototype`, JavaScript takes it from `Animal.prototype`.
+
+![](animal-rabbit-extends.svg)
+
+For instance, to find `rabbit.run` method, the engine checks (bottom-up on the picture):
+1. The `rabbit` object (has no `run`).
+2. Its prototype, that is `Rabbit.prototype` (has `hide`, but not `run`).
+3. Its prototype, that is (due to `extends`) `Animal.prototype`, that finally has the `run` method.
+
+As we can recall from the chapter <info:native-prototypes>, JavaScript itself uses prototypal inheritance for build-in objects. E.g. `Date.prototype.[[Prototype]]` is `Object.prototype`. That's why dates have access to generic object methods.
+>>>>>>> 30e3fa723721909ee25115562e676db2452cf8d1
 
 ````smart header="После `extends` разрешены любые выражения"
 Синтаксис создания класса допускает указывать после `extends` не только класс, но любое выражение.
@@ -115,19 +156,34 @@ new User().sayHi(); // Привет
 
 ## Переопределение методов
 
+<<<<<<< HEAD
 Давайте пойдём дальше и переопределим метод. Сейчас `Rabbit` наследует от `Animal` метод `stop`, который устанавливает `this.speed = 0`.
 
 Если мы определим свой метод `stop` в классе `Rabbit`, то он будет использоваться взамен родительского:
+=======
+Now let's move forward and override a method. By default, all methods that are not specified in `class Rabbit` are taken directly "as is" from `class Animal`.
+
+But if we specify our own method in `Rabbit`, such as `stop()` then it will be used instead:
+>>>>>>> 30e3fa723721909ee25115562e676db2452cf8d1
 
 ```js
 class Rabbit extends Animal {
   stop() {
+<<<<<<< HEAD
     // ...будет использован для rabbit.stop()
+=======
+    // ...now this will be used for rabbit.stop()
+    // instead of stop() from class Animal
+>>>>>>> 30e3fa723721909ee25115562e676db2452cf8d1
   }
 }
 ```
 
+<<<<<<< HEAD
 ...Впрочем, обычно мы не хотим полностью заменить родительский метод, а скорее хотим сделать новый на его основе, изменяя или расширяя его функциональность. Мы делаем что-то в нашем методе и вызываем родительский метод до/после или в процессе.
+=======
+Usually we don't want to totally replace a parent method, but rather to build on top of it to tweak or extend its functionality. We do something in our method, but call the parent method before/after it or in the process.
+>>>>>>> 30e3fa723721909ee25115562e676db2452cf8d1
 
 У классов есть ключевое слово `"super"` для таких случаев.
 - `super.method(...)` вызывает родительский метод.

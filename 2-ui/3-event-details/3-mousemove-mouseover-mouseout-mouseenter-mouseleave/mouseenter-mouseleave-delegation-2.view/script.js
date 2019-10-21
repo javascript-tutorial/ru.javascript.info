@@ -18,7 +18,7 @@ table.onmouseover = function(event) {
 
   // ура, мы зашли на новый <td>
   currentElem = target;
-  target.style.background = 'pink';
+  onEnter(currentElem);
 };
 
 
@@ -39,7 +39,29 @@ table.onmouseout = function(event) {
     relatedTarget = relatedTarget.parentNode;
   }
 
+<<<<<<< HEAD
   // мы действительно покинули элемент
   currentElem.style.background = '';
+=======
+  // we left the <td>. really.
+  onLeave(currentElem);
+>>>>>>> 30e3fa723721909ee25115562e676db2452cf8d1
   currentElem = null;
 };
+
+// any functions to handle entering/leaving an element
+function onEnter(elem) {
+  elem.style.background = 'pink';
+
+  // show that in textarea
+  text.value += `over -> ${currentElem.tagName}.${currentElem.className}\n`;
+  text.scrollTop = 1e6;
+}
+
+function onLeave(elem) {
+  elem.style.background = '';
+
+  // show that in textarea
+  text.value += `out <- ${elem.tagName}.${elem.className}\n`;
+  text.scrollTop = 1e6;
+}

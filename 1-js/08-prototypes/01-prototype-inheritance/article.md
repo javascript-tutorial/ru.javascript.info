@@ -43,7 +43,7 @@ rabbit.__proto__ = animal;
 
 Например:
 
-```js run
+```js
 let animal = {
   eats: true
 };
@@ -213,7 +213,11 @@ alert(admin.surname); // Cooper
 
 Таким образом, вызов сеттера `admin.fullName=` в качестве `this` использует `admin`, а не `user`.
 
+<<<<<<< HEAD
 Это на самом деле очень важная деталь, потому что у нас может быть большой объект со множеством методов, от которого можно наследовать. Затем наследующие объекты могут вызывать его методы, но они будут изменять своё состояние, а не состояние объекта-родителя.
+=======
+That is actually a super-important thing, because we may have a big object with many methods, and have objects that inherit from it. And when the inheriting objects run the inherited methods, they will modify only their own states, not the state of the big object.
+>>>>>>> 30e3fa723721909ee25115562e676db2452cf8d1
 
 Например, здесь `animal` представляет собой "хранилище методов", и `rabbit` использует его.
 

@@ -2,7 +2,11 @@
 
 Можно не только назначать обработчики, но и генерировать события из JavaScript-кода.
 
+<<<<<<< HEAD
 Пользовательские события могут быть использованы при создании графических компонентов. Например, корневой элемент нашего меню, реализованного при помощи JavaScript, может генерировать события, относящиеся к этому меню: `open` (меню раскрыто), `select` (выбран пункт меню) и т.п. А другой код может слушать эти события и узнавать, что происходит с меню.
+=======
+Custom events can be used to create "graphical components". For instance, a root element of our own JS-based menu may trigger events telling what happens with the menu: `open` (menu open), `select` (an item is selected) and so on. Another code may listen for the events and observe what's happening with the menu.
+>>>>>>> 30e3fa723721909ee25115562e676db2452cf8d1
 
 Можно генерировать не только совершенно новые, придуманные нами события, но и встроенные, такие как `click`, `mousedown` и другие. Это бывает полезно для автоматического тестирования.
 
@@ -173,7 +177,11 @@ alert(event.clientX); // undefined, неизвестное свойство пр
 
 Ниже вы можете видеть кролика `#rabbit` и функцию `hide()`, которая при вызове генерирует на нём событие `"hide"`, уведомляя всех интересующихся, что кролик собирается спрятаться.
 
+<<<<<<< HEAD
 Любой обработчик может узнать об этом, подписавшись на событие `hide` через `rabbit.addEventListener('hide',...)` и, при желании, отменить действие по умолчанию через `event.preventDefault()`. Тогда кролик не исчезнет:
+=======
+Any handler can listen for that event with `rabbit.addEventListener('hide',...)` and, if needed, cancel the action using `event.preventDefault()`. Then the rabbit won't disappear:
+>>>>>>> 30e3fa723721909ee25115562e676db2452cf8d1
 
 ```html run refresh autorun
 <pre id="rabbit">

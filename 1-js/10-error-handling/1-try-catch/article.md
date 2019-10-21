@@ -1,6 +1,10 @@
 # Обработка ошибок, "try..catch"
 
+<<<<<<< HEAD
 Неважно, насколько мы хороши в программировании, иногда наши скрипты содержат ошибки. Они могут возникать из-за наших промахов, неожиданного ввода пользователя, неправильного ответа сервера и по тысяче других причин.
+=======
+No matter how great we are at programming, sometimes our scripts have errors. They may occur because of our mistakes, an unexpected user input, an erroneous server response, and for a thousand other reasons.
+>>>>>>> 30e3fa723721909ee25115562e676db2452cf8d1
 
 Обычно скрипт в случае ошибки "падает" (сразу же останавливается), с выводом ошибки в консоль.
 
@@ -24,9 +28,15 @@ try {
 
 Работает она так:
 
+<<<<<<< HEAD
 1. Сначала выполняется код внутри блока `try {...}`.
 2. Если в нём нет ошибок, то блок `catch(err)` игнорируется: выполнение доходит до конца `try` и потом далее, полностью пропуская `catch`.
 3. Если же в нём возникает ошибка, то выполнение `try` прерывается, и поток управления переходит в начало `catch(err)`. Переменная `err` (можно использовать любое имя) содержит объект ошибки с подробной информацией о произошедшем.
+=======
+1. First, the code in `try {...}` is executed.
+2. If there were no errors, then `catch(err)` is ignored: the execution reaches the end of `try` and goes on, skipping `catch`.
+3. If an error occurs, then `try` execution is stopped, and the control flows to the beginning of `catch(err)`. The `err` variable (can use any name for it) will contain an error object with details about what happened.
+>>>>>>> 30e3fa723721909ee25115562e676db2452cf8d1
 
 ![](try-catch-flow.svg)
 
@@ -668,4 +678,8 @@ try {
 
 *Проброс исключения* -- это очень важный приём обработки ошибок: блок `catch` обычно ожидает и знает, как обработать определённый тип ошибок, поэтому он должен пробрасывать дальше ошибки, о которых он не знает.
 
+<<<<<<< HEAD
 Даже если у нас нет `try..catch`, большинство сред позволяют настроить "глобальный" обработчик ошибок, чтобы ловить ошибки, которые "выпадают наружу". В браузере это `window.onerror`.
+=======
+Even if we don't have `try..catch`, most environments allow us to setup a "global" error handler to catch errors that "fall out". In-browser, that's `window.onerror`.
+>>>>>>> 30e3fa723721909ee25115562e676db2452cf8d1

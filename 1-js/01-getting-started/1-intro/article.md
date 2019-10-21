@@ -12,8 +12,13 @@
 
 Это отличает JavaScript от другого языка - [Java](https://ru.wikipedia.org/wiki/Java).
 
+<<<<<<< HEAD
 ```smart header="Почему <u>Java</u>Script?"
 Когда JavaScript создавался, у него было другое имя - "LiveScript". Однако, Java была очень популярная в то время и было решено, что позиционирование языка как  "младшего брата" Java будет полезно.
+=======
+```smart header="Why is it called <u>Java</u>Script?"
+When JavaScript was created, it initially had another name: "LiveScript". But Java was very popular at that time, so it was decided that positioning a new language as a "younger brother" of Java would help.
+>>>>>>> 30e3fa723721909ee25115562e676db2452cf8d1
 
 Со временем JavaScript стал полностью независимым языком со своей собственной спецификацией, называющейся [ECMAScript](http://ru.wikipedia.org/wiki/ECMAScript), и сейчас не имеет никакого отношения к Java.
 ```

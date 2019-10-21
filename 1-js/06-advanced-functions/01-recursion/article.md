@@ -184,7 +184,17 @@ alert( pow(2, 3) );
 
 Новый контекст выполнения находится на вершине стека (и выделен жирным), а предыдущие запомненные контексты -- под ним.
 
+<<<<<<< HEAD
 Когда выполнение подвызова закончится, можно будет легко вернуться назад, потому что контекст сохраняет как переменные, так и точное место кода, в котором он остановился. Слово "строка" на рисунках условно, на самом деле запоминается более точное место в цепочке команд.
+=======
+When we finish the subcall -- it is easy to resume the previous context, because it keeps both variables and the exact place of the code where it stopped.
+
+```smart
+Here in the picture we use the word "line", as our example there's only one subcall in line, but generally a single line of code may contain multiple subcalls, like `pow(…) + pow(…) + somethingElse(…)`.
+
+So it would be more precise to say that the execution resumes "immediately after the subcall".
+```
+>>>>>>> 30e3fa723721909ee25115562e676db2452cf8d1
 
 ### pow(2, 1)
 

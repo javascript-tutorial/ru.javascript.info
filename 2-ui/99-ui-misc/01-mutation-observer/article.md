@@ -5,7 +5,11 @@
 
 Сначала мы познакомимся с синтаксисом, а затем разберём примеры использования.
 
+<<<<<<< HEAD
 ## Синтаксис
+=======
+We'll first take a look at the syntax, and then explore a real-world use case.
+>>>>>>> 30e3fa723721909ee25115562e676db2452cf8d1
 
 `MutationObserver` очень прост в использовании.
 
@@ -46,7 +50,11 @@ observer.observe(node, config);
 - `attributeName/attributeNamespace` -- имя/пространство имён (для XML) изменённого атрибута,
 - `oldValue` -- предыдущее значение, только для изменений атрибута или текста, если включена соответствующая опция `attributeOldValue`/`characterDataOldValue`.
 
+<<<<<<< HEAD
 Для примера возьмём `<div>` с атрибутом `contentEditable`. Этот атрибут позволяет нам сфокусироваться на элементе, например, кликнув, и отредактировать содержимое.
+=======
+For example, here's a `<div>` with a `contentEditable` attribute. That attribute allows us to focus on it and edit.
+>>>>>>> 30e3fa723721909ee25115562e676db2452cf8d1
 
 ```html run
 <div contentEditable id="elem">Отредактируй <b>меня</b>, пожалуйста</div>
@@ -115,7 +123,11 @@ mutationRecords = [{
 
 Есть и ситуации, когда `MutationObserver` хорошо подходит с архитектурной точки зрения.
 
+<<<<<<< HEAD
 Представим, что мы создаём сайт о программировании. Естественно, статьи на нём и другие материалы могут содержать фрагменты с исходным кодом.
+=======
+Such snippet in an HTML markup looks like this:
+>>>>>>> 30e3fa723721909ee25115562e676db2452cf8d1
 
 Такой фрагмент в HTML-разметке выглядит так:
 ```html
@@ -129,7 +141,11 @@ mutationRecords = [{
 
 Также на нашем сайте мы будем использовать JavaScript-библиотеку для подсветки синтаксиса, например [Prism.js](https://prismjs.com/). Вызов метода `Prism.highlightElem(pre)` ищет такие элементы `pre` и добавляет в них стили и теги, которые в итоге дают цветную подсветку синтаксиса, подобно той, которую вы видите в примерах здесь, на этой странице.
 
+<<<<<<< HEAD
 Когда конкретно нам вызвать этот метод подсветки? Можно по событию `DOMContentLoaded` или просто внизу страницы написать код, который будет искать все `pre[class*="language"]` и вызывать `Prism.highlightElem` для них:
+=======
+When exactly to run that highlighting method? We can do it on `DOMContentLoaded` event, or at the bottom of the page. At that moment we have our DOM ready, can search for elements `pre[class*="language"]` and call `Prism.highlightElem` on them:
+>>>>>>> 30e3fa723721909ee25115562e676db2452cf8d1
 
 ```js
 // выделить все примеры кода на странице
@@ -206,12 +222,21 @@ let demoElem = document.getElementById('highlight-demo');
 observer.observe(demoElem, {childList: true, subtree: true});
 ```
 
+<<<<<<< HEAD
 Ниже находится HTML-элемент и JavaScript, который его динамически заполнит примером кода через `innerHTML`.
+=======
+Here, below, there's an HTML-element and JavaScript that dynamically fills it using `innerHTML`.
+>>>>>>> 30e3fa723721909ee25115562e676db2452cf8d1
 
 Пожалуйста, запустите предыдущий код (он наблюдает за этим элементом), а затем код, расположенный ниже. Вы увидите как `MutationObserver` обнаружит и подсветит фрагменты кода.
 
-<p id="highlight-demo" style="border: 1px solid #ddd">Демо-элемент с <code>id="highlight-demo"</code>, за которым следит код примера выше.</p>
+<p id="highlight-demo" style="border: 1px solid #ddd">A demo-element with <code>id="highlight-demo"</code>, run the code above to observe it.</p>
 
+<<<<<<< HEAD
+=======
+The following code populates its `innerHTML`. Please run the code above first, it will watch and highlight the new content:
+
+>>>>>>> 30e3fa723721909ee25115562e676db2452cf8d1
 ```js run
 let demoElem = document.getElementById('highlight-demo');
 

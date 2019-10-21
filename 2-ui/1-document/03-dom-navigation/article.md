@@ -149,7 +149,11 @@ elem.childNodes[elem.childNodes.length - 1] === elem.lastChild
 Первый пункт - это хорошо для нас. Второй - бывает неудобен, но можно пережить. Если нам хочется использовать именно методы массива, то мы можем создать настоящий массив из коллекции, используя `Array.from`:
 
   ```js run
+<<<<<<< HEAD
   alert( Array.from(document.body.childNodes).filter ); // сделали массив
+=======
+  alert( Array.from(document.body.childNodes).filter ); // function
+>>>>>>> 30e3fa723721909ee25115562e676db2452cf8d1
   ```
 
 ```warn header="DOM-коллекции -- только для чтения"
@@ -280,7 +284,11 @@ while(elem = elem.parentElement) { // идти наверх до <html>
 
 Некоторые типы DOM-элементов предоставляют для удобства дополнительные свойства, специфичные для их типа.
 
+<<<<<<< HEAD
 Таблицы -- отличный пример таких элементов.
+=======
+Tables are a great example of that, and a particularly important case.
+>>>>>>> 30e3fa723721909ee25115562e676db2452cf8d1
 
 **Элемент `<table>`**, в дополнение к свойствам, о которых речь шла выше, поддерживает следующие:
 - `table.rows` -- коллекция строк `<tr>` таблицы.
@@ -311,8 +319,14 @@ while(elem = elem.parentElement) { // идти наверх до <html>
 </table>
 
 <script>
+<<<<<<< HEAD
   // выводит содержимое первой строки, второй ячейки
   alert( table.*!*rows[0].cells[1]*/!*.innerHTML ) // "два"
+=======
+  // get td with "two" (first row, second column)
+  let td = table.*!*rows[0].cells[1]*/!*;
+  td.style.backgroundColor = "red"; // highlight it
+>>>>>>> 30e3fa723721909ee25115562e676db2452cf8d1
 </script>
 ```
 
@@ -320,7 +334,11 @@ while(elem = elem.parentElement) { // идти наверх до <html>
 
 Существуют также дополнительные навигационные ссылки для HTML-форм. Мы рассмотрим их позже, когда начнём работать с формами.
 
+<<<<<<< HEAD
 ## Итого
+=======
+## Summary
+>>>>>>> 30e3fa723721909ee25115562e676db2452cf8d1
 
 Получив DOM-узел, мы можем перейти к его ближайшим соседям используя навигационные ссылки.
 

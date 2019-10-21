@@ -119,7 +119,13 @@
 
 Этот метод удобен, когда мы перебираем элементы (например, в массиве или в чём-то подобном) и пытаемся выбрать те из них, которые нас интересуют.
 
+<<<<<<< HEAD
 Например:
+=======
+The method comes in handy when we are iterating over elements (like in an array or something) and trying to filter out those that interest us.
+
+For instance:
+>>>>>>> 30e3fa723721909ee25115562e676db2452cf8d1
 
 ```html run
 <a href="http://example.com/file.zip">...</a>
