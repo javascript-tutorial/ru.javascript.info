@@ -2,9 +2,25 @@
 
 # Введение: колбэки
 
+<<<<<<< HEAD
 Многие действия в JavaScript *асинхронные*.
 
 Например, рассмотрим функцию `loadScript(src)`:
+=======
+```warn header="We use browser methods here"
+To demonstrate the use of callbacks, promises and other abstract concepts, we'll be using some browser methods; specifically, loading scripts and performing simple document manipulations.
+
+If you're not familiar with these methods, and their usage in the examples is confusing, or if you would just like to understand them better, you may want to read a few chapters from the [next part](/document) of the tutorial.
+```
+
+Many actions in JavaScript are *asynchronous*. In other words, we initiate them now, but they finish later.
+
+For instance, we can schedule such actions using `setTimeout`.
+
+There are other real-world examples of asynchronous actions, e.g. loading scripts and modules (we'll cover them in later chapters).
+
+Take a look at the function `loadScript(src)`, that loads a script with the given `src`:
+>>>>>>> 70ca842bef2390bc26d13dea2b856838aa890fe0
 
 ```js
 function loadScript(src) {
@@ -14,6 +30,7 @@ function loadScript(src) {
 }
 ```
 
+<<<<<<< HEAD
 Эта функция загружает на страницу новый скрипт. Когда в тело документа добавится конструкция `<script src="…">`, браузер загрузит скрипт и выполнит его.
 
 Вот пример использования этой функции:
@@ -26,6 +43,20 @@ loadScript('/my/script.js');
 Такие функции называют "асинхронными", потому что действие (загрузка скрипта) будет завершено не сейчас, а потом.
 
 Если после вызова `loadScript(…)` есть какой-то код, то он не будет ждать, пока скрипт загрузится.
+=======
+It appends to the document the new, dynamically created, tag `<script src="…">`, the browser loads and executes it.
+
+We can use this function like this:
+
+```js
+// load and execute the script at the given path
+loadScript('/my/script.js');
+```
+
+The script is executed "asynchronously", as it starts loading starts now, but runs later, when the function has already finished.
+
+If there's a code below `loadScript(…)`, it doesn't wait until the script loading finishes.
+>>>>>>> 70ca842bef2390bc26d13dea2b856838aa890fe0
 
 ```js
 loadScript('/my/script.js');
@@ -34,7 +65,11 @@ loadScript('/my/script.js');
 // ...
 ```
 
+<<<<<<< HEAD
 Мы хотели бы использовать новый скрипт, как только он будет загружен. Скажем, он объявляет новую функцию, которую мы хотим выполнить.
+=======
+Let's say we need to use the new script as soon as it loads. It declares new functions, and we want to run them.
+>>>>>>> 70ca842bef2390bc26d13dea2b856838aa890fe0
 
 Но если мы просто вызовем эту функцию после `loadScript(…)`, у нас ничего не выйдет:
 

@@ -97,7 +97,11 @@ user = { sayHi() { alert("Другой пользователь в 'setTimeout'!
 Базовый синтаксис `bind`:
 
 ```js
+<<<<<<< HEAD
 // полный синтаксис будет представлен немного позже
+=======
+// more complex syntax will come a little later
+>>>>>>> 70ca842bef2390bc26d13dea2b856838aa890fe0
 let boundFunc = func.bind(context);
 ```
 

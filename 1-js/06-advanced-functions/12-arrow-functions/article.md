@@ -119,9 +119,18 @@ function defer(f, ms) {
 
 Стрелочные функции:
 
+<<<<<<< HEAD
 - Не имеют `this`.
 - Не имеют `arguments`.
 - Не могут быть вызваны с `new`.
 - (У них также нет `super`, но мы про это не говорили. Про это будет в главе <info:class-inheritance>).
 
 Всё это потому, что они предназначены для небольшого кода, который не имеет своего "контекста", выполняясь в текущем. И они отлично справляются с этой задачей!
+=======
+- Do not have `this`
+- Do not have `arguments`
+- Can't be called with `new`
+- They also don't have `super`, but we didn't study it yet. We will on the chapter <info:class-inheritance>
+
+That's because they are meant for short pieces of code that do not have their own "context", but rather work in the current one. And they really shine in that use case.
+>>>>>>> 70ca842bef2390bc26d13dea2b856838aa890fe0

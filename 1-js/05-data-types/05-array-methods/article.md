@@ -159,6 +159,7 @@ arr.concat(arg1, arg2...)
 ```js run
 let arr = [1, 2];
 
+<<<<<<< HEAD
 // создать массив из: arr и [3,4]
 alert( arr.concat([3, 4]) ); // 1,2,3,4
 
@@ -166,6 +167,15 @@ alert( arr.concat([3, 4]) ); // 1,2,3,4
 alert( arr.concat([3, 4], [5, 6]) ); // 1,2,3,4,5,6
 
 // создать массив из: arr и [3,4], потом добавить значения 5 и 6
+=======
+// create an array from: arr and [3,4]
+alert( arr.concat([3, 4]) ); // 1,2,3,4
+
+// create an array from: arr and [3,4] and [5,6]
+alert( arr.concat([3, 4], [5, 6]) ); // 1,2,3,4,5,6
+
+// create an array from: arr and [3,4], then add values 5 and 6
+>>>>>>> 70ca842bef2390bc26d13dea2b856838aa890fe0
 alert( arr.concat([3, 4], 5, 6) ); // 1,2,3,4,5,6
 ```
 
