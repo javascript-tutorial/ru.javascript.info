@@ -36,7 +36,11 @@ alert( arr.length ); // 3
 
 Поэтому для этого нужно использовать специальные методы.
 
+<<<<<<< HEAD
 Метод [arr.splice(str)](mdn:js/Array/splice) – это универсальный "швейцарский нож" для работы с массивами. Умеет всё: добавлять, удалять и заменять элементы.
+=======
+The [arr.splice(start)](mdn:js/Array/splice) method is a swiss army knife for arrays. It can do everything: insert, remove and replace elements.
+>>>>>>> ec21af8aef6930388c06ee4cd8f8f6769f9d305b
 
 Его синтаксис:
 
@@ -159,6 +163,7 @@ arr.concat(arg1, arg2...)
 ```js run
 let arr = [1, 2];
 
+<<<<<<< HEAD
 // создать массив из: arr и [3,4]
 alert( arr.concat([3, 4]) ); // 1,2,3,4
 
@@ -166,6 +171,15 @@ alert( arr.concat([3, 4]) ); // 1,2,3,4
 alert( arr.concat([3, 4], [5, 6]) ); // 1,2,3,4,5,6
 
 // создать массив из: arr и [3,4], потом добавить значения 5 и 6
+=======
+// create an array from: arr and [3,4]
+alert( arr.concat([3, 4]) ); // 1,2,3,4
+
+// create an array from: arr and [3,4] and [5,6]
+alert( arr.concat([3, 4], [5, 6]) ); // 1,2,3,4,5,6
+
+// create an array from: arr and [3,4], then add values 5 and 6
+>>>>>>> ec21af8aef6930388c06ee4cd8f8f6769f9d305b
 alert( arr.concat([3, 4], 5, 6) ); // 1,2,3,4,5,6
 ```
 
@@ -270,7 +284,11 @@ alert( arr.includes(NaN) );// true (верно)
 
 Представьте, что у нас есть массив объектов. Как нам найти объект с определённым условием?
 
+<<<<<<< HEAD
 Здесь пригодится метод [arr.find](mdn:js/Array/find).
+=======
+Here the [arr.find(fn)](mdn:js/Array/find) method comes in handy.
+>>>>>>> ec21af8aef6930388c06ee4cd8f8f6769f9d305b
 
 Его синтаксис таков:
 ```js
@@ -577,7 +595,7 @@ alert(result); // 15
 
 В виде таблицы, где каждая строка –- вызов функции на очередном элементе массива:
 
-|   |`sum`|`current`|`result`|
+|   |`sum`|`current`|result|
 |---|-----|---------|---------|
 |первый вызов|`0`|`1`|`1`|
 |второй вызов|`1`|`2`|`3`|

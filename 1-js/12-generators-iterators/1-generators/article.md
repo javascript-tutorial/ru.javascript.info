@@ -238,10 +238,17 @@ function* generateSequence(start, end) {
 }
 ```
 
+<<<<<<< HEAD
 Мы хотели бы использовать её при генерации более сложной последовательности:
 - сначала цифры `0..9` (с кодами символов 48..57)
 - за которыми следуют буквы в верхнем регистре `A..Z` (коды символов 65..90)
 - за которыми следуют буквы алфавита `a..z` (коды символов 97..122)
+=======
+Now we'd like to reuse it for generation of a more complex sequence:
+- first, digits `0..9` (with character codes 48..57),
+- followed by uppercase alphabet letters `A..Z` (character codes 65..90)
+- followed by lowercase alphabet letters `a..z` (character codes 97..122)
+>>>>>>> ec21af8aef6930388c06ee4cd8f8f6769f9d305b
 
 Мы можем использовать такую последовательность для генерации паролей, выбирать символы из неё (может быть, ещё добавить символы пунктуации), но сначала её нужно сгенерировать.
 

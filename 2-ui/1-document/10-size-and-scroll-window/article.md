@@ -134,9 +134,9 @@ alert('Текущая прокрутка слева: ' + window.pageXOffset);
 ```online
 Попробуйте сами:
 
-<button onclick="document.body.style.overflow = 'hidden'">`document.body.style.overflow = 'hidden'`</button>
+<button onclick="document.body.style.overflow = 'hidden'">document.body.style.overflow = 'hidden'</button>
 
-<button onclick="document.body.style.overflow = ''">`document.body.style.overflow = ''`</button>
+<button onclick="document.body.style.overflow = ''">document.body.style.overflow = ''</button>
 
 Первая кнопка останавливает прокрутку, вторая возобновляет её.
 ```

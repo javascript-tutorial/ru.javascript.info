@@ -352,7 +352,11 @@ welcome(); // теперь всё в порядке
 ```smart header="Когда использовать Function Declaration, а когда Function Expression?"
 Как правило, если нам понадобилась функция, в первую очередь нужно рассматривать синтаксис Function Declaration, который мы использовали до этого. Он даёт нам больше свободы в том, как мы можем организовывать код. Функции, объявленные таким образом, можно вызывать до их объявления.
 
+<<<<<<< HEAD
 Также функции вида `function f(…) {…}` чуть более заметны в коде, чем `let f = function(…) {…}`. Function Declaration легче "ловятся глазами".
+=======
+That's also better for readability, as it's easier to look up `function f(…) {…}` in the code than `let f = function(…) {…};`. Function Declarations are more "eye-catching".
+>>>>>>> ec21af8aef6930388c06ee4cd8f8f6769f9d305b
 
 ...Но если Function Declaration нам не подходит по какой-то причине (мы рассмотрели это в примере выше), то можно использовать объявление при помощи Function Expression.
 ```

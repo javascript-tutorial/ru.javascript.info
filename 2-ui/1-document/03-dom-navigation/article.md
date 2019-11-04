@@ -149,7 +149,11 @@ elem.childNodes[elem.childNodes.length - 1] === elem.lastChild
 Первый пункт - это хорошо для нас. Второй - бывает неудобен, но можно пережить. Если нам хочется использовать именно методы массива, то мы можем создать настоящий массив из коллекции, используя `Array.from`:
 
   ```js run
+<<<<<<< HEAD
   alert( Array.from(document.body.childNodes).filter ); // сделали массив
+=======
+  alert( Array.from(document.body.childNodes).filter ); // function
+>>>>>>> ec21af8aef6930388c06ee4cd8f8f6769f9d305b
   ```
 
 ```warn header="DOM-коллекции -- только для чтения"
@@ -224,10 +228,17 @@ alert( document.body.previousSibling ); // HTMLHeadElement
 
 Эти ссылки похожи на те, что раньше, только в ряде мест стоит слово `Element`:
 
+<<<<<<< HEAD
 - `children` -- коллекция детей, которые являются элементами.
 - `firstElementChild`, `lastElementChild` -- первый и последний дочерний элемент.
 - `previousElementSibling`, `nextElementSibling` -- соседи-элементы.
 - `parentElement` -- родитель-элемент.
+=======
+- `children` -- only those children that are element nodes.
+- `firstElementChild`, `lastElementChild` -- first and last element children.
+- `previousElementSibling`, `nextElementSibling` -- neighbor elements.
+- `parentElement` -- parent element.
+>>>>>>> ec21af8aef6930388c06ee4cd8f8f6769f9d305b
 
 ````smart header="Зачем нужен `parentElement`? Разве может родитель быть *не* элементом?"
 Свойство `parentElement` возвращает родитель-элемент, а `parentNode` возвращает "любого родителя". Обычно эти свойства одинаковы: они оба получают родителя.
@@ -280,7 +291,11 @@ while(elem = elem.parentElement) { // идти наверх до <html>
 
 Некоторые типы DOM-элементов предоставляют для удобства дополнительные свойства, специфичные для их типа.
 
+<<<<<<< HEAD
 Таблицы -- отличный пример таких элементов.
+=======
+Tables are a great example of that, and a particularly important case.
+>>>>>>> ec21af8aef6930388c06ee4cd8f8f6769f9d305b
 
 **Элемент `<table>`**, в дополнение к свойствам, о которых речь шла выше, поддерживает следующие:
 - `table.rows` -- коллекция строк `<tr>` таблицы.
@@ -311,8 +326,14 @@ while(elem = elem.parentElement) { // идти наверх до <html>
 </table>
 
 <script>
+<<<<<<< HEAD
   // выводит содержимое первой строки, второй ячейки
   alert( table.*!*rows[0].cells[1]*/!*.innerHTML ) // "два"
+=======
+  // get td with "two" (first row, second column)
+  let td = table.*!*rows[0].cells[1]*/!*;
+  td.style.backgroundColor = "red"; // highlight it
+>>>>>>> ec21af8aef6930388c06ee4cd8f8f6769f9d305b
 </script>
 ```
 
@@ -320,9 +341,15 @@ while(elem = elem.parentElement) { // идти наверх до <html>
 
 Существуют также дополнительные навигационные ссылки для HTML-форм. Мы рассмотрим их позже, когда начнём работать с формами.
 
+<<<<<<< HEAD
 ## Итого
 
 Получив DOM-узел, мы можем перейти к его ближайшим соседям используя навигационные ссылки.
+=======
+## Summary
+
+Given a DOM node, we can go to its immediate neighbors using navigation properties.
+>>>>>>> ec21af8aef6930388c06ee4cd8f8f6769f9d305b
 
 Есть два основных набора ссылок:
 

@@ -56,7 +56,17 @@ alert( str.match(/\d$/gm) ); // 1,2,3
 
 Без флага `pattern:m` якорь `pattern:$` обозначал бы конец всей строки, и была бы найдена только последняя цифра.
 
+<<<<<<< HEAD
 ## Ищем \n вместо ^ $
+=======
+```smart
+"End of a line" formally means "immediately before a line break": the test  `pattern:$` in multiline mode matches at all positions succeeded by a newline character `\n`.
+
+And at the text end.
+```
+
+## Searching for \n instead of ^ $
+>>>>>>> ec21af8aef6930388c06ee4cd8f8f6769f9d305b
 
 Для того, чтобы найти конец строки, можно использовать не только якоря `pattern:^` и `pattern:$`, но и символ перевода строки `\n`.
 

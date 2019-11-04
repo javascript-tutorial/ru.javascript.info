@@ -141,7 +141,11 @@ for (let char of str) {
 
 Чтобы понять устройство итераторов чуть глубже, давайте посмотрим, как их использовать явно.
 
+<<<<<<< HEAD
 Мы будем перебирать строку точно так же, как цикл `for..of`, но вручную, прямыми вызовами. Нижеприведённый код получает строковый итератор и берёт из него значения:
+=======
+We'll iterate over a string in exactly the same way as `for..of`, but with direct calls. This code creates a string iterator and gets values from it "manually":
+>>>>>>> ec21af8aef6930388c06ee4cd8f8f6769f9d305b
 
 ```js run
 let str = "Hello";
@@ -149,7 +153,9 @@ let str = "Hello";
 // делает то же самое, что и
 // for (let char of str) alert(char);
 
+*!*
 let iterator = str[Symbol.iterator]();
+*/!*
 
 while (true) {
   let result = iterator.next();
@@ -267,7 +273,11 @@ for (let char of str) {
 alert(chars);
 ```
 
+<<<<<<< HEAD
 ...Но гораздо короче.    
+=======
+...But it is shorter.    
+>>>>>>> ec21af8aef6930388c06ee4cd8f8f6769f9d305b
 
 Мы можем даже создать `slice`, который поддерживает суррогатные пары:
 

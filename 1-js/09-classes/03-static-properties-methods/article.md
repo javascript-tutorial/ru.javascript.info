@@ -169,7 +169,11 @@ rabbits.sort(Rabbit.compare);
 rabbits[0].run(); // Чёрный кролик бежит со скоростью 5.
 ```
 
+<<<<<<< HEAD
 Мы можем вызвать `Rabbit.compare`, при этом будет вызван унаследованный `Animal.compare`.
+=======
+Now when we call `Rabbit.compare`, the inherited `Animal.compare` will be called.
+>>>>>>> ec21af8aef6930388c06ee4cd8f8f6769f9d305b
 
 Как это работает? Снова с использованием прототипов. Как вы уже могли предположить, `extends` даёт `Rabbit` ссылку `[[Prototype]]` на `Animal`.
 
@@ -180,7 +184,11 @@ rabbits[0].run(); // Чёрный кролик бежит со скорость�
 1. Функция `Rabbit` прототипно наследует от `Animal` function.
 2. `Rabbit.prototype` прототипно наследует от `Animal.prototype`.
 
+<<<<<<< HEAD
 В результате наследование работает как для обычных, так и для статических методов.
+=======
+As a result, inheritance works both for regular and static methods.
+>>>>>>> ec21af8aef6930388c06ee4cd8f8f6769f9d305b
 
 Давайте это проверим кодом:
 
@@ -191,13 +199,22 @@ class Rabbit extends Animal {}
 // для статики
 alert(Rabbit.__proto__ === Animal); // true
 
+<<<<<<< HEAD
 // для обычных методов
 alert(Rabbit.prototype.__proto__ === Animal.prototype);
+=======
+// for regular methods
+alert(Rabbit.prototype.__proto__ === Animal.prototype); // true
+>>>>>>> ec21af8aef6930388c06ee4cd8f8f6769f9d305b
 ```
 
 ## Итого
 
+<<<<<<< HEAD
 Статические методы используются для функциональности, принадлежат классу "в целом", а не относятся к конкретному объекту класса.
+=======
+Static methods are used for the functionality that belongs to the class "as a whole". It doesn't relate to a concrete class instance.
+>>>>>>> ec21af8aef6930388c06ee4cd8f8f6769f9d305b
 
 Например, метод для сравнения двух статей `Article.compare(article1, article2)` или фабричный метод `Article.createTodays()`.
 
