@@ -127,14 +127,6 @@ Sec-WebSocket-Accept: hsBlbuDTkk24srzEOTBUlZAlC2g=
     let socket = new WebSocket("wss://javascript.info/chat", ["soap", "wamp"]);
     ```
 
-    Этот заголовок ставим мы сами,
-
-
-А заголовок `Sec-WebSocket-Protocol` уже описывает, какого вида данные мы хотим отправлять и посылать, он зависит от нас. Второй необязательный параметр `new WebSocket` как раз для этого и предназначен -- это массив подпротоколов, например для данных в форматах SOAP и WAMP:
-
-```js
-let socket = new WebSocket("wss://javascript.info/chat", ["soap", "wamp"]);
-```
 Сервер должен ответить перечнем протоколов и расширений, которые он может использовать.
 
 Например, запрос:
