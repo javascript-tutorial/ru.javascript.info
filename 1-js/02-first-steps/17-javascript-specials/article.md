@@ -272,7 +272,7 @@ switch (age) {
 - У параметров могут быть значения по умолчанию: `function sum(a = 1, b = 2) {...}`.
 - Функции всегда что-нибудь возвращают. Если нет оператора `return`, результатом будет `undefined`.
 
-Подробности: <info:function-basics>, <info:function-expressions-arrows>.
+Подробности: <info:function-basics>, <info:arrow-functions-basics>.
 
 ## Далее мы изучим больше
 
