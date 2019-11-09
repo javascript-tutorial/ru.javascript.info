@@ -1,21 +1,20 @@
+function isInteger(x) {
+    return parseInt(x, 10) == x;
+}
 
-```js run demo
+function isPositive(x) {
+    return parseInt(x, 10) > 0;
+}
+
 function pow(x, n) {
-  let result = x;
-
-  for (let i = 1; i < n; i++) {
-    result *= x;
-  }
-
-  return result;
+    return isInteger(n) && isPositive(n) && (x ** n);
 }
 
-let x = prompt("x?", '');
-let n = prompt("n?", '');
-
-if (n < 1) {
-  alert(`Степень ${n} не поддерживается, используйте натуральное число`);
+let x = prompt("Введите X: ", "");
+let n = prompt("Введите N: ", "");
+let xn = pow(x, n);
+if (xn == false) {
+    alert("Минимум одно из введенных вами значений не было числом, либо было дробным или отрицательным числом!");
 } else {
-  alert( pow(x, n) );
+    alert("X в степени N = " + xn);
 }
-```
