@@ -21,9 +21,15 @@
     <th colspan="3">Квадрат <em>Bagua</em>: Направление, Элемент, Цвет, Значение</th>
   </tr>
   <tr>
+<<<<<<< HEAD
     <td>...<strong>Северо-Запад</strong>...</td>
     <td>...</td>
     <td>...</td>
+=======
+    <td class="nw"><strong>Northwest</strong><br>Metal<br>Silver<br>Elders</td>
+    <td class="n">...</td>
+    <td class="ne">...</td>
+>>>>>>> 2b5ac971c1bd8abe7b17cdcf724afd84799b6cbd
   </tr>
   <tr>...ещё 2 строки такого же вида...</tr>
   <tr>...ещё 2 строки такого же вида...</tr>

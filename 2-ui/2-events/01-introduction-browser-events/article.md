@@ -148,7 +148,11 @@ elem.onclick = sayThanks;
 
 ## Частые ошибки
 
+<<<<<<< HEAD
 Если вы только начинаете работать с событиями, обратите внимание на следующие моменты.
+=======
+If you're starting to work with events -- please note some subtleties.
+>>>>>>> 2b5ac971c1bd8abe7b17cdcf724afd84799b6cbd
 
 **Функция должна быть присвоена как `sayThanks`, а не `sayThanks()`.**
 
@@ -181,7 +185,11 @@ button.onclick = function() {
 
 **Используйте именно функции, а не строки.**
 
+<<<<<<< HEAD
 Назначение обработчика строкой `elem.onclick = "alert(1)"` также сработает. Это сделано из соображений совместимости, но делать так не рекомендуется.
+=======
+The assignment `elem.onclick = "alert(1)"` would work too. It works for compatibility reasons, but is strongly not recommended.
+>>>>>>> 2b5ac971c1bd8abe7b17cdcf724afd84799b6cbd
 
 **Не используйте `setAttribute` для обработчиков.**
 

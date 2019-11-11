@@ -58,8 +58,13 @@ let promise = new Promise(function(resolve, reject) {
 
 Мы можем наблюдать две вещи, запустив код выше:
 
+<<<<<<< HEAD
 1. Функция-исполнитель запускается сразу же при вызове `new Promise`.
 2. Исполнитель получает два аргумента: `resolve` и `reject` — это функции, встроенные в JavaScript, поэтому нам не нужно их писать. Нам нужно лишь позаботиться, чтобы исполнитель вызвал одну из них по готовности.
+=======
+1. The executor is called automatically and immediately (by `new Promise`).
+2. The executor receives two arguments: `resolve` and `reject` — these functions are pre-defined by the JavaScript engine. So we don't need to create them. We should only call one of them when ready.
+>>>>>>> 2b5ac971c1bd8abe7b17cdcf724afd84799b6cbd
 
 Спустя одну секунду "обработки" исполнитель вызовет `resolve("done")`, чтобы передать результат:
 
@@ -80,7 +85,11 @@ let promise = new Promise(function(resolve, reject) {
 
 Подведём промежуточные итоги: исполнитель выполняет задачу (что-то, что обычно требует времени), затем вызывает `resolve` или `reject`, чтобы изменить состояние соответствующего `Promise`.
 
+<<<<<<< HEAD
 Промис - и успешный, и отклонённый будем называть "завершённым", в отличие от изначального промиса "в ожидании".
+=======
+A promise that is either resolved or rejected is called "settled", as opposed to an initially "pending" promise.
+>>>>>>> 2b5ac971c1bd8abe7b17cdcf724afd84799b6cbd
 
 ````smart header="Может быть что-то одно: либо результат, либо ошибка"
 Исполнитель должен вызвать что-то одно: `resolve` или `reject`. Состояние промиса может быть изменено только один раз.
@@ -261,8 +270,13 @@ new Promise((resolve, reject) => {
 
 3. Последнее, но не менее значимое: вызов `.finally(f)` удобнее, чем `.then(f, f)` - не надо дублировать функции f.
 
+<<<<<<< HEAD
 ````smart header="На завершённых промисах обработчики запускаются сразу"
 Если промис в состоянии ожидания, обработчики в `.then/catch/finally` будут ждать его. Однако, если промис уже завершён, то обработчики выполнятся сразу:
+=======
+````smart header="On settled promises handlers run immediately"
+If a promise is pending, `.then/catch/finally` handlers wait for it. Otherwise, if a promise has already settled, they execute immediately:
+>>>>>>> 2b5ac971c1bd8abe7b17cdcf724afd84799b6cbd
 
 ```js run
 // при создании промиса он сразу переводится в состояние "успешно завершён"
@@ -272,7 +286,11 @@ promise.then(alert); // готово! (выведется сразу)
 ```
 ````
 
+<<<<<<< HEAD
 Теперь рассмотрим несколько практических примеров того, как промисы могут облегчить нам написание асинхронного кода.
+=======
+Next, let's see more practical examples of how promises can help us write asynchronous code.
+>>>>>>> 2b5ac971c1bd8abe7b17cdcf724afd84799b6cbd
 
 ## Пример: loadScript [#loadscript]
 

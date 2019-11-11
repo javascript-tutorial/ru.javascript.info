@@ -5,7 +5,11 @@
     ```js run
     alert( "Java".match(/Java[^script]/) ); // null
     ```
+<<<<<<< HEAD
 - Да, потому что регулярное выражение регистрозависимое - `pattern:[^script]` совпадает с символом `"S"`.
+=======
+- Yes, because the part `pattern:[^script]` part matches the character `"S"`. It's not one of `pattern:script`. As the regexp is case-sensitive (no `pattern:i` flag), it treats `"S"` as a different character from `"s"`.
+>>>>>>> 2b5ac971c1bd8abe7b17cdcf724afd84799b6cbd
 
     ```js run
     alert( "JavaScript".match(/Java[^script]/) ); // "JavaS"

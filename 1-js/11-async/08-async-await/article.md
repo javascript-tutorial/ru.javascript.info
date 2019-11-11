@@ -57,7 +57,11 @@ async function f() {
   });
 
 *!*
+<<<<<<< HEAD
   let result = await promise; // будет ждать, пока промис не выполнится (*)
+=======
+  let result = await promise; // wait until the promise resolves (*)
+>>>>>>> 2b5ac971c1bd8abe7b17cdcf724afd84799b6cbd
 */!*
 
   alert(result); // "готово!"
@@ -133,7 +137,7 @@ let user = await response.json();
 
 Можно обернуть этот код в анонимную `async`–функцию, тогда всё заработает:
 
-```js run
+```js
 (async () => {
   let response = await fetch('/article/promise-chaining/user.json');
   let user = await response.json();
@@ -170,7 +174,11 @@ async function f() {
 f();
 ```
 
+<<<<<<< HEAD
 Когда `await` получает объект с `.then`, не являющийся промисом, JavaScript автоматически запускает этот метод, передавая ему аргументы – встроенные функции `resolve` и `reject`. Затем `await` приостановит дальнейшее выполнение кода, пока любая из этих функций не будет вызвана (в примере это строка `(*)`). После чего выполнение кода продолжится с результатом `resolve` или `reject` соответственно.
+=======
+If `await` gets a non-promise object with `.then`, it calls that method providing built-in functions `resolve`, `reject` as arguments (just as it does for a regular `Promise` executor). Then `await` waits until one of them is called (in the example above it happens in the line `(*)`) and then proceeds with the result.
+>>>>>>> 2b5ac971c1bd8abe7b17cdcf724afd84799b6cbd
 ````
 
 ````smart header="Асинхронные методы классов"
