@@ -101,7 +101,7 @@ document.body.style.backgroundColor = prompt('background color?', 'green');
 ```
 
 ````smart header="Свойства с префиксом"
-Стили с браузерным префиксом, например, `-moz-border-radius`, `-webkit-border-radius`  преобразуются по тому же принципу: дефис означает прописную букву.
+Стили с браузерным префиксом, например, `-moz-border-radius`, `-webkit-border-radius`  преобразуются по тому же принципу: дефис означает заглавную букву.
 
 Например:
 
