@@ -165,7 +165,7 @@ function createMessageUnder(elem, html) {
   let coords = elem.getBoundingClientRect();
 
   message.style.left = coords.left + "px";
-  message.style.top = coords.bottom + "px";
+  message.style.top = coords.top + "px";
 */!*
 
   message.innerHTML = html;
@@ -234,7 +234,7 @@ function createMessageUnder(elem, html) {
   let coords = *!*getCoords(elem);*/!*
 
   message.style.left = coords.left + "px";
-  message.style.top = coords.bottom + "px";
+  message.style.top = coords.top + "px";
 
   message.innerHTML = html;
 
