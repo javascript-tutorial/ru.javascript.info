@@ -82,10 +82,19 @@ let user = {
 
 setTimeout(() => user.sayHi(), 1000);
 
+<<<<<<< HEAD
 // ...в течение 1 секунды
 user = { sayHi() { alert("Другой пользователь в 'setTimeout'!"); } };
 
 // Другой пользователь в 'setTimeout'!
+=======
+// ...the value of user changes within 1 second
+user = {
+  sayHi() { alert("Another user in setTimeout!"); }
+};
+
+// Another user in setTimeout!
+>>>>>>> e515f80a9f076115a6e3fef8a30cd73e6db20054
 ```
 
 Следующее решение гарантирует, что такого не случится.
@@ -97,7 +106,11 @@ user = { sayHi() { alert("Другой пользователь в 'setTimeout'!
 Базовый синтаксис `bind`:
 
 ```js
+<<<<<<< HEAD
 // полный синтаксис будет представлен немного позже
+=======
+// more complex syntax will come a little later
+>>>>>>> e515f80a9f076115a6e3fef8a30cd73e6db20054
 let boundFunc = func.bind(context);
 ```
 
@@ -157,9 +170,22 @@ let user = {
 let sayHi = user.sayHi.bind(user); // (*)
 */!*
 
+<<<<<<< HEAD
 sayHi(); // Привет, Вася!
 
 setTimeout(sayHi, 1000); // Привет, Вася!
+=======
+// can run it without an object
+sayHi(); // Hello, John!
+
+setTimeout(sayHi, 1000); // Hello, John!
+
+// even if the value of user changes within 1 second
+// sayHi uses the pre-bound value
+user = {
+  sayHi() { alert("Another user in setTimeout!"); }
+};
+>>>>>>> e515f80a9f076115a6e3fef8a30cd73e6db20054
 ```
 
 В строке `(*)` мы берём метод `user.sayHi` и привязываем его к `user`. Теперь `sayHi` - это "связанная" функция, которая может быть вызвана отдельно или передана в `setTimeout` (контекст всегда будет правильным).

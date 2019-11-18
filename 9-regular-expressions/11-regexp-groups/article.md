@@ -69,10 +69,17 @@ alert("my@mail.com @ his@site.com.uk".match(regexp)); // my@mail.com, his@site.c
 
 Метод `str.match(regexp)`, если у регулярного выражения `regexp` нет флага `g`, ищет первое совпадение и возвращает его в виде массива:
 
+<<<<<<< HEAD
 1. На позиции `0` будет всё совпадение целиком.
 2. На позиции `1` - содержимое первой скобочной группы.
 3. На позиции `2` - содержимое второй скобочной группы.
 4. ...и так далее...
+=======
+1. At index `0`: the full match.
+2. At index `1`: the contents of the first parentheses.
+3. At index `2`: the contents of the second parentheses.
+4. ...and so on...
+>>>>>>> e515f80a9f076115a6e3fef8a30cd73e6db20054
 
 Например, мы хотим найти HTML теги `pattern:<.*?>` и обработать их. Было бы удобно иметь содержимое тега (то, что внутри уголков) в отдельной переменной.
 

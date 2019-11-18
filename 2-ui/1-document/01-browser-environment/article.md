@@ -1,6 +1,10 @@
 # Браузерное окружение, спецификации
 
+<<<<<<< HEAD
 Язык JavaScript изначально был создан для веб-браузеров. Но с тех пор он значительно эволюционировал и превратился в кроссплатформенный язык программирования для решения широкого круга задач.
+=======
+The JavaScript language was initially created for web browsers. Since then it has evolved and become a language with many uses and platforms.
+>>>>>>> e515f80a9f076115a6e3fef8a30cd73e6db20054
 
 Сегодня JavaScript может использоваться в браузере, на веб-сервере или в какой-то другой среде, даже в кофеварке. Каждая среда предоставляет свой функционал, который спецификация JavaScript называет *окружением*.
 
@@ -59,15 +63,24 @@ setTimeout(() => document.body.style.background = "", 1000);
 Например, серверные скрипты, которые загружают и обрабатывают HTML-страницы, также могут использовать DOM. При этом они могут поддерживать спецификацию не полностью.
 ```
 
+<<<<<<< HEAD
 ```smart header="CSSOM для стилей"
 Правила стилей CSS структурированы иначе чем HTML. Для них есть отдельная спецификация [CSSOM](https://www.w3.org/TR/cssom-1/), которая объясняет, как стили должны представляться в виде объектов, как их читать и писать.
+=======
+```smart header="CSSOM for styling"
+CSS rules and stylesheets are structured in a different way than HTML. There's a separate specification, [CSS Object Model (CSSOM)](https://www.w3.org/TR/cssom-1/), that explains how they are represented as objects, and how to read and write them.
+>>>>>>> e515f80a9f076115a6e3fef8a30cd73e6db20054
 
 CSSOM используется вместе с DOM при изменении стилей документа. В реальности CSSOM требуется редко, обычно правила CSS статичны. Мы редко добавляем/удаляем стили из JavaScript, но и это возможно.
 ```
 
 ## BOM (Browser Object Model)
 
+<<<<<<< HEAD
 Объектная модель браузера (Browser Object Model, BOM) - это дополнительные объекты, предоставляемые браузером (окружением), чтобы работать со всем, кроме документа.
+=======
+The Browser Object Model (BOM) represents additional objects provided by the browser (host environment) for working with everything except the document.
+>>>>>>> e515f80a9f076115a6e3fef8a30cd73e6db20054
 
 Например:
 

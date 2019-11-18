@@ -86,7 +86,11 @@ fetch('https://api.github.com/repos/javascript-tutorial/en.javascript.info/commi
   .then(commits => alert(commits[0].author.login));
 ```
 
+<<<<<<< HEAD
 Для получения ответа в виде текста используем `await response.text()` вместо `.json()`:
+=======
+To get the response text, `await response.text()` instead of `.json()`:
+>>>>>>> e515f80a9f076115a6e3fef8a30cd73e6db20054
 
 ```js run async
 let response = await fetch('https://api.github.com/repos/javascript-tutorial/en.javascript.info/commits');
