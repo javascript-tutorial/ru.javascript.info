@@ -1,8 +1,14 @@
 # Размеры и прокрутка окна
 
+<<<<<<< HEAD
 Как узнать ширину и высоту окна браузера? Как получить полную ширину и высоту документа, включая прокрученную часть? Как прокрутить страницу с помощью JavaScript?
 
 Для большинства таких запросов мы можем использовать корневой элемент документа `document.documentElement`, который соответствует тегу `<html>`. Однако есть дополнительные методы и особенности, которые необходимо учитывать.
+=======
+How do we find the width and height of the browser window? How do we get the full width and height of the document, including the scrolled out part? How do we scroll the page using JavaScript?
+
+For most such requests, we can use the root document element `document.documentElement`, that corresponds to the `<html>` tag. But there are additional methods and peculiarities important enough to consider.
+>>>>>>> 79417c6e73645d37f184f0cc7e4bc3353e85224f
 
 ## Ширина/высота окна
 
@@ -134,9 +140,9 @@ alert('Текущая прокрутка слева: ' + window.pageXOffset);
 ```online
 Попробуйте сами:
 
-<button onclick="document.body.style.overflow = 'hidden'">`document.body.style.overflow = 'hidden'`</button>
+<button onclick="document.body.style.overflow = 'hidden'">document.body.style.overflow = 'hidden'</button>
 
-<button onclick="document.body.style.overflow = ''">`document.body.style.overflow = ''`</button>
+<button onclick="document.body.style.overflow = ''">document.body.style.overflow = ''</button>
 
 Первая кнопка останавливает прокрутку, вторая возобновляет её.
 ```

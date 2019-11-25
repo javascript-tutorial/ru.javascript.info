@@ -71,8 +71,13 @@ right:${r.right}
 - Координаты могут считаться с десятичной частью, например `10.5`. Это нормально, ведь браузер использует дроби в своих внутренних вычислениях. Мы не обязаны округлять значения при установке `style.left/top`.
 - Координаты могут быть отрицательными. Например, если страница прокручена так, что элемент `elem` ушёл вверх за пределы окна, то вызов `elem.getBoundingClientRect().top` вернёт отрицательное значение.
 
+<<<<<<< HEAD
 ```smart header="Зачем вообще нужны зависимые свойства? Для чего существуют `top/left`, если есть `x/y`?"
 С математической точки зрения, прямоугольник однозначно задаётся начальной точкой `(x,y)` и вектором направления `(width,height)`.
+=======
+- Coordinates may be decimal fractions, such as `10.5`. That's normal, internally browser uses fractions in calculations. We don't have to round them when setting to `style.left/top`.
+- Coordinates may be negative. For instance, if the page is scrolled so that `elem` is now above the window, then `elem.getBoundingClientRect().top` is negative.
+>>>>>>> 79417c6e73645d37f184f0cc7e4bc3353e85224f
 
 Так что дополнительные зависимые свойства существуют лишь для удобства.
 
@@ -251,4 +256,8 @@ function createMessageUnder(elem, html) {
 
 Координаты в контексте окна подходят для использования с `position:fixed`, а координаты относительно документа -- для использования с `position:absolute`.
 
+<<<<<<< HEAD
 Каждая из систем координат имеет свои преимущества и недостатки. Иногда будет лучше применить одну, а иногда -- другую, как это и происходит с позиционированием в CSS, где мы выбираем между `absolute` и `fixed`.
+=======
+Both coordinate systems have their pros and cons; there are times we need one or the other one, just like CSS `position` `absolute` and `fixed`.
+>>>>>>> 79417c6e73645d37f184f0cc7e4bc3353e85224f

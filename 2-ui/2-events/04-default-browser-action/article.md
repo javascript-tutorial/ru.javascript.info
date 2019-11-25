@@ -1,23 +1,42 @@
 # Действия браузера по умолчанию
 
+<<<<<<< HEAD
 Многие события автоматически влекут за собой действие браузера.
+=======
+Many events automatically lead to certain actions performed by the browser.
+>>>>>>> 79417c6e73645d37f184f0cc7e4bc3353e85224f
 
 Например:
 
+<<<<<<< HEAD
 - Клик по ссылке инициирует переход на новый URL.
 - Нажатие на кнопку "отправить" в форме – отсылку её на сервер.
 - Зажатие кнопки мыши над текстом и её движение в таком состоянии – инициирует его выделение.
 
 Если мы обрабатываем событие в JavaScript, то зачастую такое действие браузера нам не нужно. К счастью, его можно отменить.
+=======
+- A click on a link - initiates navigation to its URL.
+- A click on a form submit button - initiates its submission to the server.
+- Pressing a mouse button over a text and moving it - selects the text.
+
+If we handle an event in JavaScript, we may not want the corresponding browser action to happen, to implement another behavior instead.
+>>>>>>> 79417c6e73645d37f184f0cc7e4bc3353e85224f
 
 ## Отмена действия браузера
 
 Есть два способа отменить действие браузера:
 
+<<<<<<< HEAD
 - Основной способ – это воспользоваться объектом `event`. Для отмены действия браузера существует стандартный метод `event.preventDefault()`.
 - Если же обработчик назначен через `on<событие>` (не через `addEventListener`), то также можно вернуть `false` из обработчика.
 
 В следующем примере при клике по ссылке переход не произойдёт:
+=======
+- The main way is to use the `event` object. There's a method `event.preventDefault()`.
+- If the handler is assigned using `on<event>` (not by `addEventListener`), then returning `false` also works the same.
+
+In this HTML a click on a link doesn't lead to navigation, browser doesn't do anything:
+>>>>>>> 79417c6e73645d37f184f0cc7e4bc3353e85224f
 
 ```html autorun height=60 no-beautify
 <a href="/" onclick="return false">Нажми здесь</a>
@@ -25,12 +44,23 @@
 <a href="/" onclick="event.preventDefault()">здесь</a>
 ```
 
+<<<<<<< HEAD
 ```warn header="Возвращать `true` не нужно"
 Обычно значение, которое возвращает обработчик события, игнорируется.
 
 Единственное исключение – это `return false` из обработчика, назначенного через `on<событие>`.
 
 В других случаях `return` не нужен, он никак не обрабатываются.
+=======
+In the next example we'll use this technique to create a JavaScript-powered menu.
+
+```warn header="Returning `false` from a handler is an exception"
+The value returned by an event handler is usually ignored.
+
+The only exception is `return false` from a handler assigned using `on<event>`.
+
+In all other cases, `return` value is ignored. In particular, there's no sense in returning `true`.
+>>>>>>> 79417c6e73645d37f184f0cc7e4bc3353e85224f
 ```
 
 ### Пример: меню
@@ -49,7 +79,11 @@
 
 [iframe height=70 src="menu" link edit]
 
+<<<<<<< HEAD
 В HTML-разметке все элементы меню являются не кнопками, а ссылками, то есть тегами `<a>`. В этом подходе есть некоторые преимущества, например:
+=======
+Menu items are implemented as HTML-links `<a>`, not buttons `<button>`. There are several reasons to do so, for instance:
+>>>>>>> 79417c6e73645d37f184f0cc7e4bc3353e85224f
 
 - Некоторые посетители очень любят сочетание "правый клик – открыть в новом окне". Если мы будем использовать `<button>` или `<span>`, то данное сочетание работать не будет.
 - Поисковые движки переходят по ссылкам `<a href="...">` при индексации.

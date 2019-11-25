@@ -1,14 +1,24 @@
 # Введение: шаблоны и флаги
 
+<<<<<<< HEAD
 Регулярные выражения – мощное средство поиска и замены в строке.
 
 В JavaScript регулярные выражения реализованы отдельным объектом [RegExp](mdn:js/RegExp) и интегрированы в методы строк.
+=======
+Regular expressions are patterns that provide a powerful way to search and replace in text.
+
+In JavaScript, they are available via the [RegExp](mdn:js/RegExp) object, as well as being integrated in methods of strings.
+>>>>>>> 79417c6e73645d37f184f0cc7e4bc3353e85224f
 
 ## Регулярные выражения
 
 Регулярное выражение (оно же "регэксп", "регулярка" или просто "рег"), состоит из *шаблона* (также говорят "паттерн") и необязательных *флагов*.
 
+<<<<<<< HEAD
 Существует два синтаксиса для создания регулярного выражения.
+=======
+There are two syntaxes that can be used to create a regular expression object.
+>>>>>>> 79417c6e73645d37f184f0cc7e4bc3353e85224f
 
 "Длинный" синтаксис:
 
@@ -16,7 +26,11 @@
 regexp = new RegExp("шаблон", "флаги");
 ```
 
+<<<<<<< HEAD
 ...И короткий синтаксис, использующий слеши `"/"`:
+=======
+And the "short" one, using slashes `"/"`:
+>>>>>>> 79417c6e73645d37f184f0cc7e4bc3353e85224f
 
 ```js
 regexp = /шаблон/; // без флагов
@@ -25,11 +39,19 @@ regexp = /шаблон/gmi; // с флагами gmi (будут описаны 
 
 Слеши `pattern:/.../` говорят JavaScript о том, что это регулярное выражение. Они играют здесь ту же роль, что и кавычки для обозначения строк.
 
+<<<<<<< HEAD
 Регулярное выражение `regexp` в обоих случаях является объектом встроенного класса `RegExp`.
 
 Основная разница между этими двумя способами создания заключается в том, что слеши `pattern:/.../` не допускают никаких вставок переменных (наподобие возможных в строках через `${...}`). Они полностью статичны.
 
 Слеши используются, когда мы на момент написания кода точно знаем, каким будет регулярное выражение - и это большинство ситуаций. А `new RegExp` - когда мы хотим создать регулярное выражение "на лету" из динамически сгенерированной строки, например:
+=======
+In both cases `regexp` becomes an instance of the built-in `RegExp` class.
+
+The main difference between these two syntaxes is that pattern using slashes `/.../` does not allow for expressions to be inserted (like string template literals with `${...}`). They are fully static.
+
+Slashes are used when we know the regular expression at the code writing time -- and that's the most common situation. While `new RegExp`, is more often used when we need to create a regexp "on the fly" from a dynamically generated string. For instance:
+>>>>>>> 79417c6e73645d37f184f0cc7e4bc3353e85224f
 
 ```js
 let tag = prompt("Какой тег вы хотите найти?", "h2");
@@ -47,7 +69,11 @@ let regexp = new RegExp(`<${tag}>`); // то же, что /<h2>/  при отв�
 : С этим флагом поиск не зависит от регистра: нет разницы между `A` и `a` (см. пример ниже).
 
 `pattern:g`
+<<<<<<< HEAD
 : С этим флагом поиск ищет все совпадения, без него - только первое.
+=======
+: With this flag the search looks for all matches, without it -- only the first match is returned.
+>>>>>>> 79417c6e73645d37f184f0cc7e4bc3353e85224f
 
 `pattern:m`
 : Многострочный режим (рассматривается в главе <info:regexp-multiline-mode>).
@@ -71,7 +97,11 @@ let regexp = new RegExp(`<${tag}>`); // то же, что /<h2>/  при отв�
 
 ## Поиск: str.match
 
+<<<<<<< HEAD
 Как уже говорилось, использование регулярных выражений интегрировано в методы строк.
+=======
+As mentioned previously, regular expressions are integrated with string methods.
+>>>>>>> 79417c6e73645d37f184f0cc7e4bc3353e85224f
 
 Метод `str.match(regexp)` для строки `str` возвращает совпадения с регулярным выражением `regexp`.
 
@@ -102,7 +132,11 @@ let regexp = new RegExp(`<${tag}>`); // то же, что /<h2>/  при отв�
 
 3. И, наконец, если совпадений нет, то, вне зависимости от наличия флага `pattern:g`, возвращается `null`.
 
+<<<<<<< HEAD
     Это очень важный нюанс. При отсутствии совпадений возвращается не пустой массив, а именно `null`. Если об этом забыть, можно легко допустить ошибку, например:
+=======
+    This a very important nuance. If there are no matches, we don't receive an empty array, but instead receive `null`. Forgetting about that may lead to errors, e.g.:
+>>>>>>> 79417c6e73645d37f184f0cc7e4bc3353e85224f
 
     ```js run
     let matches = "JavaScript".match(/HTML/); // = null
@@ -112,7 +146,11 @@ let regexp = new RegExp(`<${tag}>`); // то же, что /<h2>/  при отв�
     }
     ```
 
+<<<<<<< HEAD
     Если хочется, чтобы результатом всегда был массив, можно написать так:
+=======
+    If we'd like the result to always be an array, we can write it this way:
+>>>>>>> 79417c6e73645d37f184f0cc7e4bc3353e85224f
 
     ```js run
     let matches = "JavaScript".match(/HTML/)*!* || []*/!*;
@@ -124,7 +162,11 @@ let regexp = new RegExp(`<${tag}>`); // то же, что /<h2>/  при отв�
 
 ## Замена: str.replace
 
+<<<<<<< HEAD
 Метод `str.replace(regexp, replacement)` заменяет совпадения с `regexp` в строке `str` на `replacement` (все, если есть флаг `pattern:g`, иначе только первое).
+=======
+The method `str.replace(regexp, replacement)` replaces matches found using `regexp` in string `str` with `replacement` (all matches if there's flag `pattern:g`, otherwise, only the first one).
+>>>>>>> 79417c6e73645d37f184f0cc7e4bc3353e85224f
 
 Например:
 
@@ -164,14 +206,26 @@ let regexp = /люблю/i;
 alert( regexp.test(str) ); // true
 ```
 
+<<<<<<< HEAD
 Далее в этом разделе мы будем изучать регулярные выражения, увидим ещё много примеров их использования, а также познакомимся с другими методами.
+=======
+Later in this chapter we'll study more regular expressions, walk through more examples, and also meet other methods.
+>>>>>>> 79417c6e73645d37f184f0cc7e4bc3353e85224f
 
 Полная информация о различных методах дана в главе <info:regexp-methods>.
 
 ## Итого
 
+<<<<<<< HEAD
 - Регулярное выражение состоит из шаблона и необязательных флагов: `pattern:g`, `pattern:i`, `pattern:m`, `pattern:u`, `pattern:s`, `pattern:y`.
 - Без флагов и специальных символов, которые мы изучим позже, поиск по регулярному выражению аналогичен поиску подстроки.
 - Метод `str.match(regexp)` ищет совпадения: все, если есть флаг `pattern:g`, иначе только первое.
 - Метод `str.replace(regexp, replacement)` заменяет совпадения с `regexp` на `replacement`: все, если у регулярного выражения есть флаг `pattern:g`, иначе только первое.
 - Метод `regexp.test(str)` возвращает `true`, если есть хоть одно совпадение, иначе `false`.
+=======
+- A regular expression consists of a pattern and optional flags: `pattern:g`, `pattern:i`, `pattern:m`, `pattern:u`, `pattern:s`, `pattern:y`.
+- Without flags and special symbols  (that we'll study later), the search by a regexp is the same as a substring search.
+- The method `str.match(regexp)` looks for matches: all of them if there's `pattern:g` flag, otherwise, only the first one.
+- The method `str.replace(regexp, replacement)` replaces matches found using `regexp` with `replacement`: all of them if there's `pattern:g` flag, otherwise only the first one.
+- The method `regexp.test(str)` returns `true` if there's at least one match, otherwise, it returns `false`.
+>>>>>>> 79417c6e73645d37f184f0cc7e4bc3353e85224f

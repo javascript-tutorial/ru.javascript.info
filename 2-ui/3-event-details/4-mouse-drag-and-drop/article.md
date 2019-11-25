@@ -6,9 +6,15 @@ Drag'n'Drop - отличный способ улучшить интерфейс.
 
 Они интересны тем, что позволяют легко решать простые задачи. Например, можно перетащить файл в браузер, так что JS получит доступ к его содержимому.
 
+<<<<<<< HEAD
 Но у них есть и ограничения. Например, нельзя организовать перенос "только по горизонтали" или "только по вертикали". Также нельзя ограничить перенос внутри заданной зоны. Есть и другие интерфейсные задачи, которые такими встроенными событиями не реализуемы.
 
 Здесь мы будем рассматривать Drag'n'Drop при помощи событий мыши.
+=======
+But native Drag Events also have limitations. For instance, we can't limit dragging by a certain area. Also we can't make it "horizontal" or "vertical" only. There are other drag'n'drop tasks that can't be done using that API. Besides, mobile devices support for such events is almost non-existant.
+
+So here we'll see how to implement Drag'n'Drop using mouse events.
+>>>>>>> 79417c6e73645d37f184f0cc7e4bc3353e85224f
 
 ## Алгоритм Drag'n'Drop
 

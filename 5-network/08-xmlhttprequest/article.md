@@ -24,15 +24,28 @@ XMLHttpRequest имеет два режима работы: синхронный
 
 1. Создать `XMLHttpRequest`.
     ```js
+<<<<<<< HEAD
     let xhr = new XMLHttpRequest(); // у конструктора нет аргументов
+=======
+    let xhr = new XMLHttpRequest();
+>>>>>>> 79417c6e73645d37f184f0cc7e4bc3353e85224f
     ```
+    The constructor has no arguments.
 
+<<<<<<< HEAD
 2. Инициализировать его.
+=======
+2. Initialize it, usually right after `new XMLHttpRequest`:
+>>>>>>> 79417c6e73645d37f184f0cc7e4bc3353e85224f
     ```js
     xhr.open(method, URL, [async, user, password])
     ```
 
+<<<<<<< HEAD
     Этот метод обычно вызывается сразу после `new XMLHttpRequest`. В него передаются основные параметры запроса:
+=======
+    This method specifies the main parameters of the request:
+>>>>>>> 79417c6e73645d37f184f0cc7e4bc3353e85224f
 
     - `method` -- HTTP-метод. Обычно это `"GET"` или `"POST"`.
     - `URL` -- URL, куда отправляется запрос: строка, может быть и объект [URL](info:url).
@@ -49,14 +62,25 @@ XMLHttpRequest имеет два режима работы: синхронный
 
     Этот метод устанавливает соединение и отсылает запрос к серверу. Необязательный параметр `body` содержит тело запроса.
 
+<<<<<<< HEAD
     Некоторые типы запросов, такие как `GET`, не имеют тела. А некоторые, как, например, `POST`, используют `body`, чтобы отправлять данные на сервер. Мы позже увидим примеры.
+=======
+    Some request methods like `GET` do not have a body. And some of them like `POST` use `body` to send the data to the server. We'll see examples of that later.
+>>>>>>> 79417c6e73645d37f184f0cc7e4bc3353e85224f
 
 4. Слушать события на `xhr`, чтобы получить ответ.
 
+<<<<<<< HEAD
     Три наиболее используемых события:
     - `load` -- происходит, когда получен какой-либо ответ, включая ответы с HTTP-ошибкой, например 404.
     - `error` -- когда запрос не может быть выполнен, например, нет соединения или невалидный URL.
     - `progress` -- происходит периодически во время загрузки ответа, сообщает о прогрессе.
+=======
+    These three events are the most widely used:
+    - `load` -- when the request is complete (even if HTTP status is like 400 or 500), and the response is fully downloaded.
+    - `error` -- when the request couldn't be made, e.g. network down or invalid URL.
+    - `progress` -- triggers periodically while the response is being downloaded, reports how much has been downloaded.
+>>>>>>> 79417c6e73645d37f184f0cc7e4bc3353e85224f
 
     ```js
     xhr.onload = function() {

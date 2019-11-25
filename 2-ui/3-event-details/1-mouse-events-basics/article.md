@@ -22,15 +22,24 @@
 : Каждое движение мыши над элементом генерирует это событие.
 
 `contextmenu`
+<<<<<<< HEAD
 : Вызывается при попытке открытия контекстного меню, как правило, нажатием правой кнопки мыши. Но, заметим, это не совсем событие мыши, оно может вызываться и специальной клавишей клавиатуры.
+=======
+: Triggers when opening a context menu is attempted. In the most common case, that happens when the right mouse button is pressed. Although, there are other ways to open a context menu, e.g. using a special keyboard key, so it's not exactly the mouse event.
+
+...There are several other event types too, we'll cover them later.
+>>>>>>> 79417c6e73645d37f184f0cc7e4bc3353e85224f
 
 ...Есть также несколько иных типов событий, которые мы рассмотрим позже.
 
 ### Комплексные события
 
+<<<<<<< HEAD
 `click`
 : Вызывается при `mousedown` , а затем `mouseup`  над одним и тем же элементом, если использовалась левая кнопка мыши.
 
+=======
+>>>>>>> 79417c6e73645d37f184f0cc7e4bc3353e85224f
 `dblclick`
 : Вызывается двойным кликом на элементе.
 

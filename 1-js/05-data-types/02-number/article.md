@@ -201,7 +201,11 @@ alert( 0.1 + 0.2 == 0.3 ); // *!*false*/!*
 alert( 0.1 + 0.2 ); // 0.30000000000000004
 ```
 
+<<<<<<< HEAD
 Ой! Здесь гораздо больше последствий, чем просто некорректное сравнение. Представьте, вы делаете интернет-магазин и посетители формируют заказ из 2-х позиций за `$0.10` и `$0.20`. Итоговый заказ будет `$0.30000000000000004`. Это будет сюрпризом для всех.
+=======
+Ouch! There are more consequences than an incorrect comparison here. Imagine you're making an e-shopping site and the visitor puts `$0.10` and `$0.20` goods into their cart. The order total will be `$0.30000000000000004`. That would surprise anyone.
+>>>>>>> 79417c6e73645d37f184f0cc7e4bc3353e85224f
 
 Но почему это происходит?
 
