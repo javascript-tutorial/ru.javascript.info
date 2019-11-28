@@ -119,22 +119,14 @@ Sec-WebSocket-Accept: hsBlbuDTkk24srzEOTBUlZAlC2g=
 
 - `Sec-WebSocket-Extensions: deflate-frame` означает, что браузер поддерживает сжатие данных. Расширение -- это что-то, связанное с передачей данных, расширяющее сам протокол WebSocket. Заголовок `Sec-WebSocket-Extensions` отправляется браузером автоматически со списком всевозможных расширений, которые он поддерживает.
 
-- `Sec-WebSocket-Protocol: soap, wamp` означает, что мы будем передавать не только произвольные данные, но и данные в протоколах [SOAP](http://en.wikipedia.org/wiki/SOAP) или WAMP (The WebSocket Application Messaging Protocol" -- "протокол обмена сообщениями WebSocket приложений"). Подпротоколы WebSocket регистрируются в [каталоге IANA](http://www.iana.org/assignments/websocket/websocket.xml).
+- `Sec-WebSocket-Protocol: soap, wamp` означает, что мы будем передавать не только произвольные данные, но и данные в протоколах [SOAP](http://en.wikipedia.org/wiki/SOAP) или WAMP (The WebSocket Application Messaging Protocol" -- "протокол обмена сообщениями WebSocket приложений"). То есть, этот заголовок описывает не передачу, а формат данных, который мы собираемся использовать. Официальные подпротоколы WebSocket регистрируются в [каталоге IANA](http://www.iana.org/assignments/websocket/websocket.xml).
 
-    Этот необязательный заголовок ставим мы сами, чтобы сказать серверу, какие подпротоколы поддерживает наш код, при помощи второго (необязательного) параметра  `new WebSocket`. Он содержит массив подпротоколов, например если мы хотим использовать SOAP или WAMP:
+    Этот необязательный заголовок ставим мы сами, передавая массив подпротоколов вторым параметром `new WebSocket`, вот так:
 
     ```js
     let socket = new WebSocket("wss://javascript.info/chat", ["soap", "wamp"]);
     ```
 
-    Этот заголовок ставим мы сами,
-
-
-А заголовок `Sec-WebSocket-Protocol` уже описывает, какого вида данные мы хотим отправлять и посылать, он зависит от нас. Второй необязательный параметр `new WebSocket` как раз для этого и предназначен -- это массив подпротоколов, например для данных в форматах SOAP и WAMP:
-
-```js
-let socket = new WebSocket("wss://javascript.info/chat", ["soap", "wamp"]);
-```
 Сервер должен ответить перечнем протоколов и расширений, которые он может использовать.
 
 Например, запрос:

@@ -151,8 +151,8 @@ let user = { name: "John" };
 let admin = { name: "Admin" };
 
 // используем 'call' для передачи различных объектов в качестве 'this'
-sayHi.call( user ); // this = John
-sayHi.call( admin ); // this = Admin
+sayHi.call( user ); // John
+sayHi.call( admin ); // Admin
 ```
 
 Здесь мы используем `call` для вызова `say` с заданным контекстом и фразой:
