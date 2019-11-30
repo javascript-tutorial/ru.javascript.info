@@ -1,5 +1,5 @@
 archive:
-  ref: function-expressions-arrows
+  ref: function-expressions
 
 ---
 
