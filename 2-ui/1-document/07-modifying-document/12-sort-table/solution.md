@@ -14,6 +14,10 @@ table.tBodies[0].append(...sortedRows);
 3. Затем отсортируем их по содержимому в первом `<td>` (по имени).
 4. Теперь вставим узлы в правильном порядке `.append(...sortedRows)`.
 
+<<<<<<< HEAD
     Таблицы всегда имеют неявный элемент <tbody>, поэтому нам нужно получить его и вставить в него: простой `table.append(...)` потерпит неудачу.
+=======
+    Tables always have an implicit `<tbody>` element, so we need to take it and insert into it: a simple `table.append(...)` would fail.
+>>>>>>> 47d186598add3a0ea759615596a12e277ce8fb5a
 
     Обратите внимание: нам не нужно их удалять, просто "вставляем их заново", они автоматически покинут старое место.

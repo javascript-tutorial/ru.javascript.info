@@ -76,7 +76,11 @@ let worker = {
   },
 
   slow(x) {
+<<<<<<< HEAD
     // здесь может быть страшно тяжёлая задача для процессора  
+=======
+    // scary CPU-heavy task here  
+>>>>>>> 47d186598add3a0ea759615596a12e277ce8fb5a
     alert("Called with " + x);
     return x * this.someMethod(); // (*)
   }
@@ -150,7 +154,11 @@ function sayHi() {
 let user = { name: "John" };
 let admin = { name: "Admin" };
 
+<<<<<<< HEAD
 // используем 'call' для передачи различных объектов в качестве 'this'
+=======
+// use call to pass different objects as "this"
+>>>>>>> 47d186598add3a0ea759615596a12e277ce8fb5a
 sayHi.call( user ); // John
 sayHi.call( admin ); // Admin
 ```
@@ -376,7 +384,13 @@ function hash() {
 hash(1, 2);
 ```
 
+<<<<<<< HEAD
 Этот трюк называется *заимствование метода*.
+=======
+The trick is called *method borrowing*.
+
+We take (borrow) a join method from a regular array (`[].join`) and use `[].join.call` to run it in the context of `arguments`.
+>>>>>>> 47d186598add3a0ea759615596a12e277ce8fb5a
 
 Мы берём (заимствуем) метод `join` из обычного массива `[].join`. И используем `[].join.call`, чтобы выполнить его в контексте `arguments`.
 

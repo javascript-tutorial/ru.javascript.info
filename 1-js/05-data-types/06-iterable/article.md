@@ -141,7 +141,11 @@ for (let char of str) {
 
 Чтобы понять устройство итераторов чуть глубже, давайте посмотрим, как их использовать явно.
 
+<<<<<<< HEAD
 Мы будем перебирать строку точно так же, как цикл `for..of`, но вручную, прямыми вызовами. Нижеприведённый код получает строковый итератор и берёт из него значения:
+=======
+We'll iterate over a string in exactly the same way as `for..of`, but with direct calls. This code creates a string iterator and gets values from it "manually":
+>>>>>>> 47d186598add3a0ea759615596a12e277ce8fb5a
 
 ```js run
 let str = "Hello";
@@ -149,7 +153,9 @@ let str = "Hello";
 // делает то же самое, что и
 // for (let char of str) alert(char);
 
+*!*
 let iterator = str[Symbol.iterator]();
+*/!*
 
 while (true) {
   let result = iterator.next();
@@ -211,7 +217,11 @@ let arr = Array.from(arrayLike); // (*)
 alert(arr.pop()); // World (метод работает)
 ```
 
+<<<<<<< HEAD
 `Array.from` в строке `(*)` принимает объект, проверяет, является ли он итерируемым объектом или псевдомассивом, затем создаёт новый массив и копирует туда все элементы.
+=======
+`Array.from` at the line `(*)` takes the object, examines it for being an iterable or array-like, then makes a new array and copies all items to it.
+>>>>>>> 47d186598add3a0ea759615596a12e277ce8fb5a
 
 То же самое происходит с итерируемым объектом:
 
@@ -267,7 +277,11 @@ for (let char of str) {
 alert(chars);
 ```
 
+<<<<<<< HEAD
 ...Но гораздо короче.    
+=======
+...But it is shorter.    
+>>>>>>> 47d186598add3a0ea759615596a12e277ce8fb5a
 
 Мы можем даже создать `slice`, который поддерживает суррогатные пары:
 

@@ -1,5 +1,6 @@
 # Drag'n'Drop с событиями мыши
 
+<<<<<<< HEAD
 Drag'n'Drop - отличный способ улучшить интерфейс. Захват элемента мышкой и его перенос визуально упростят что угодно: от копирования и перемещения документов (как в файловых менеджерах) до оформления заказа ("положить в корзину").
 
 В современном стандарте HTML5 есть [раздел о Drag and Drop](https://html.spec.whatwg.org/multipage/interaction.html#dnd) - и там есть специальные события именно для Drag'n'Drop переноса, такие как `dragstart`, `dragend` и так далее.
@@ -9,6 +10,17 @@ Drag'n'Drop - отличный способ улучшить интерфейс.
 Но у них есть и ограничения. Например, нельзя организовать перенос "только по горизонтали" или "только по вертикали". Также нельзя ограничить перенос внутри заданной зоны. Есть и другие интерфейсные задачи, которые такими встроенными событиями не реализуемы. Кроме того, мобильные устройства плохо их поддерживают.
 
 Здесь мы будем рассматривать Drag'n'Drop при помощи событий мыши.
+=======
+Drag'n'Drop is a great interface solution. Taking something and dragging and dropping it is a clear and simple way to do many things, from copying and moving documents (as in file managers) to ordering (dropping items into a cart).
+
+In the modern HTML standard there's a [section about Drag and Drop](https://html.spec.whatwg.org/multipage/interaction.html#dnd) with special events such as `dragstart`, `dragend`, and so on.
+
+These events are useful in that they allow us to solve simple tasks easily. For instance, they allow us to handle the drag'n'drop of "external" files into the browser, so we can take a file in the OS file-manager and drop it into the browser window, thereby giving JavaScript access to its contents.
+
+But native Drag Events also have limitations. For instance, we can't limit dragging by a certain area. Also we can't make it "horizontal" or "vertical" only. And there are other drag'n'drop tasks that can't be done using that API. Also, mobile device support for such events is almost non-existant.
+
+So here we'll see how to implement Drag'n'Drop using mouse events.
+>>>>>>> 47d186598add3a0ea759615596a12e277ce8fb5a
 
 ## Алгоритм Drag'n'Drop
 

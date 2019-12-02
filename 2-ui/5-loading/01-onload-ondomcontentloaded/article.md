@@ -49,7 +49,11 @@ document.addEventListener("DOMContentLoaded", ready);
 
 Но он не дожидается, пока загрузится изображение. Поэтому `alert` покажет нулевой размер.
 
+<<<<<<< HEAD
 На первый взгляд событие `DOMContentLoaded` очень простое. DOM-дерево готово -- получаем событие. Хотя тут есть несколько особенностей.
+=======
+At first sight, the `DOMContentLoaded` event is very simple. The DOM tree is ready -- here's the event. There are few peculiarities though.
+>>>>>>> 47d186598add3a0ea759615596a12e277ce8fb5a
 
 ### DOMContentLoaded и скрипты
 
@@ -73,10 +77,17 @@ document.addEventListener("DOMContentLoaded", ready);
 
 В примере выше мы сначала увидим "Библиотека загружена...", а затем "DOM готов!" (все скрипты выполнены).
 
+<<<<<<< HEAD
 ```warn header="Скрипты, которые не блокируют DOMContentLoaded"
 Есть два исключения из этого правила:
 1. Скрипты с атрибутом `async`, который мы рассмотрим [немного позже](info:script-async-defer), не блокируют DOMContentLoaded. 
 2. Скрипты, сгенерированные динамически при помощи `document.createElement('script')` и затем добавленные на страницу, также не блокируют это событие.
+=======
+```warn header="Scripts that don't block DOMContentLoaded"
+There are two exceptions from this rule:
+1. Scripts with the `async` attribute, that we'll cover [a bit later](info:script-async-defer), don't block `DOMContentLoaded`.
+2. Scripts that are generated dynamically with `document.createElement('script')` and then added to the webpage also don't block this event.
+>>>>>>> 47d186598add3a0ea759615596a12e277ce8fb5a
 ```
 
 ### DOMContentLoaded и стили
@@ -93,7 +104,11 @@ document.addEventListener("DOMContentLoaded", ready);
 </script>
 ```
 
+<<<<<<< HEAD
 Причина в том, что скрипту может понадобиться получить координаты или другие свойства элементов, зависящих от стилей, как в примере выше. Естественно, он должен дождаться, пока стили загрузятся.
+=======
+The reason for this is that the script may want to get coordinates and other style-dependent properties of elements, like in the example above. Naturally, it has to wait for styles to load.
+>>>>>>> 47d186598add3a0ea759615596a12e277ce8fb5a
 
 Так как `DOMContentLoaded` дожидается скриптов, то теперь он так же дожидается и стилей перед ними.
 
@@ -216,7 +231,11 @@ if (document.readyState == 'loading') {
 }
 ```
 
+<<<<<<< HEAD
 Также есть событие `readystatechange`, которое генерируется при изменении состояния, так что мы можем вывести все эти состояния таким образом:
+=======
+There's also the `readystatechange` event that triggers when the state changes, so we can print all these states like this:
+>>>>>>> 47d186598add3a0ea759615596a12e277ce8fb5a
 
 ```js run
 // текущее состояние
@@ -271,6 +290,7 @@ document.addEventListener('readystatechange', () => console.log(document.readySt
 
 События загрузки страницы:
 
+<<<<<<< HEAD
 - `DOMContentLoaded` генерируется на `document`, когда DOM готов. Мы можем применить JavaScript к элементам на данном этапе.
   - Скрипты, вроде `<script>...</script>` или `<script src="..."></script>` блокируют DOMContentLoaded, браузер ждёт, пока они выполнятся.
   - Изображения и другие ресурсы тоже всё ещё могут продолжать загружаться.
@@ -281,3 +301,15 @@ document.addEventListener('readystatechange', () => console.log(document.readySt
   - `loading` -- документ грузится.
   - `interactive` -- документ прочитан, происходит примерно в то же время, что и `DOMContentLoaded`, но до него.
   - `complete` -- документ и ресурсы загружены, происходит примерно в то же время, что и `window.onload`, но до него.
+=======
+- The `DOMContentLoaded` event triggers on `document` when the DOM is ready. We can apply JavaScript to elements at this stage.
+  - Script such as `<script>...</script>` or `<script src="..."></script>` block DOMContentLoaded, the browser waits for them to execute.
+  - Images and other resources may also still continue loading.
+- The `load` event on `window` triggers when the page and all resources are loaded. We rarely use it, because there's usually no need to wait for so long.
+- The `beforeunload` event on `window` triggers when the user wants to leave the page. If we cancel the event, browser asks whether the user really wants to leave (e.g we have unsaved changes).
+- `The unload` event on `window` triggers when the user is finally leaving, in the handler we can only do simple things that do not involve delays or asking a user. Because of that limitation, it's rarely used. We can send out a network request with `navigator.sendBeacon`.
+- `document.readyState` is the current state of the document, changes can be tracked in the `readystatechange` event:
+  - `loading` -- the document is loading.
+  - `interactive` -- the document is parsed, happens at about the same time as `DOMContentLoaded`, but before it.
+  - `complete` -- the document and resources are loaded, happens at about the same time as `window.onload`, but before it.
+>>>>>>> 47d186598add3a0ea759615596a12e277ce8fb5a
