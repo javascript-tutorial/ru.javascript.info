@@ -137,7 +137,11 @@ parent.onmouseover = function(event) {
 ```online
 Вот тот же пример, что и выше, но на этот раз на верхнем элементе стоят обработчики `mouseenter/mouseleave` вместо `mouseover/mouseout`.
 
+<<<<<<< HEAD
 Как вы сами можете увидеть, генерируются только события, связанные с движением курсора относительно верхнего `<div>`. Ничего не произойдёт при переходе на внутренний `<div>` и обратно. Переходы на потомки игнорируются.
+=======
+As you can see, the only generated events are the ones related to moving the pointer in and out of the top element. Nothing happens when the pointer goes to the child and back. Transitions between descendants are ignored
+>>>>>>> 5b195795da511709faf79a4d35f9c5623b6dbdbd
 
 [codetabs height=340 src="mouseleave"]
 ```
@@ -187,10 +191,14 @@ table.onmouseout = function(event) {
 
 [js src="mouseenter-mouseleave-delegation-2/script.js"]
 
+Once again, the important features are:
+1. It uses event delegation to handle entering/leaving of any `<td>` inside the table. So it relies on `mouseover/out` instead of `mouseenter/leave` that don't bubble and hence allow no delegation.
+2. Extra events, such as moving between descendants of `<td>` are filtered out, so that `onEnter/Leave` runs only if the pointer leaves or enters `<td>` as a whole.
+
 ```online
 Полный пример со всеми деталями:
 
-[codetabs height=380 src="mouseenter-mouseleave-delegation-2"]
+[codetabs height=460 src="mouseenter-mouseleave-delegation-2"]
 
 Попробуйте подвигать курсор между ячейками и внутри них. Быстро или медленно - без разницы. В отличие от предыдущего примера выделяется только сама ячейка `<td>`.
 ```

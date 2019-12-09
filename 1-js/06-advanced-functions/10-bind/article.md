@@ -82,10 +82,19 @@ let user = {
 
 setTimeout(() => user.sayHi(), 1000);
 
+<<<<<<< HEAD
 // ...в течение 1 секунды
 user = { sayHi() { alert("Другой пользователь в 'setTimeout'!"); } };
 
 // Другой пользователь в 'setTimeout'!
+=======
+// ...the value of user changes within 1 second
+user = {
+  sayHi() { alert("Another user in setTimeout!"); }
+};
+
+// Another user in setTimeout!
+>>>>>>> 5b195795da511709faf79a4d35f9c5623b6dbdbd
 ```
 
 Следующее решение гарантирует, что такого не случится.
@@ -97,7 +106,11 @@ user = { sayHi() { alert("Другой пользователь в 'setTimeout'!
 Базовый синтаксис `bind`:
 
 ```js
+<<<<<<< HEAD
 // полный синтаксис будет представлен немного позже
+=======
+// more complex syntax will come a little later
+>>>>>>> 5b195795da511709faf79a4d35f9c5623b6dbdbd
 let boundFunc = func.bind(context);
 ```
 
@@ -157,9 +170,22 @@ let user = {
 let sayHi = user.sayHi.bind(user); // (*)
 */!*
 
+<<<<<<< HEAD
 sayHi(); // Привет, Вася!
 
 setTimeout(sayHi, 1000); // Привет, Вася!
+=======
+// can run it without an object
+sayHi(); // Hello, John!
+
+setTimeout(sayHi, 1000); // Hello, John!
+
+// even if the value of user changes within 1 second
+// sayHi uses the pre-bound value
+user = {
+  sayHi() { alert("Another user in setTimeout!"); }
+};
+>>>>>>> 5b195795da511709faf79a4d35f9c5623b6dbdbd
 ```
 
 В строке `(*)` мы берём метод `user.sayHi` и привязываем его к `user`. Теперь `sayHi` - это "связанная" функция, которая может быть вызвана отдельно или передана в `setTimeout` (контекст всегда будет правильным).
@@ -267,7 +293,11 @@ alert( triple(5) ); // = mul(3, 5) = 15
 
 Встроенный `bind` не позволяет этого. Мы не можем просто опустить контекст и перейти к аргументам.
 
+<<<<<<< HEAD
 К счастью, легко создать вспомогательную функцию `partial`, которая привязывает только аргументы.
+=======
+Fortunately, a function `partial` for binding only arguments can be easily implemented.
+>>>>>>> 5b195795da511709faf79a4d35f9c5623b6dbdbd
 
 Вот так:
 

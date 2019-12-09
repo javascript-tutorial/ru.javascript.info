@@ -282,7 +282,11 @@ pseudo
 
 Но `getComputedStyle` не даёт доступ к этой информации, чтобы произвольная страница не могла определить, посещал ли пользователь ту или иную ссылку, проверив стили.
 
+<<<<<<< HEAD
 JavaScript не видит стили, применяемые с помощью `:visited`. Кроме того, в CSS есть ограничение, которое запрещает в целях безопасности применять к `:visited` CSS-стили, изменяющие геометрию элемента. Это гарантирует, что нет обходного пути для "злой" страницы проверить, была ли ссылка посещена и, следовательно, нарушить конфиденциальность.
+=======
+JavaScript may not see the styles applied by `:visited`. And also, there's a limitation in CSS that forbids applying geometry-changing styles in `:visited`. That's to guarantee that there's no side way for an evil page to test if a link was visited and hence to break the privacy.
+>>>>>>> 5b195795da511709faf79a4d35f9c5623b6dbdbd
 ```
 
 ## Итого

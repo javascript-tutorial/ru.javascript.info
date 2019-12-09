@@ -67,7 +67,11 @@ user.sayHi();
 
 Давайте развеем всю магию и посмотрим, что такое класс на самом деле. Это поможет в понимании многих сложных аспектов.
 
+<<<<<<< HEAD
 В JavaScript класс - это разновидность функции.
+=======
+In JavaScript, a class is a kind of function.
+>>>>>>> 5b195795da511709faf79a4d35f9c5623b6dbdbd
 
 Взгляните:
 
@@ -88,7 +92,11 @@ alert(typeof User); // function
 1. Создаёт функцию с именем `User`, которая становится результатом объявления класса. Код функции берётся из метода `constructor` (она будет пустой, если такого метода нет).
 2. Сохраняет все методы, такие как `sayHi`, в `User.prototype`.
 
+<<<<<<< HEAD
 При вызове метода объекта `new User` он будет взят из прототипа, как описано в главе <info:function-prototype>. Таким образом, объекты `new User` имеют доступ к методам класса.
+=======
+After `new User` object is created, when we call its method, it's taken from the prototype, just as described in the chapter <info:function-prototype>. So the object has access to class methods.
+>>>>>>> 5b195795da511709faf79a4d35f9c5623b6dbdbd
 
 На картинке показан результат объявления `class User`:
 
@@ -115,9 +123,15 @@ alert(User.prototype.sayHi); // alert(this.name);
 alert(Object.getOwnPropertyNames(User.prototype)); // constructor, sayHi
 ```
 
+<<<<<<< HEAD
 ## Не просто синтаксический сахар
 
 Иногда говорят, что `class` - это просто "синтаксический сахар" в JavaScript (синтаксис для улучшения читаемости кода, но не делающий ничего принципиально нового), потому что мы можем сделать всё то же самое без конструкции `class`:
+=======
+## Not just a syntactic sugar
+
+Sometimes people say that `class` is a "syntactic sugar" (syntax that is designed to make things easier to read, but doesn't introduce anything new), because we could actually declare the same without `class` keyword at all:
+>>>>>>> 5b195795da511709faf79a4d35f9c5623b6dbdbd
 
 ```js run
 // перепишем класс User на чистых функциях
@@ -140,11 +154,21 @@ user.sayHi();
 ```
 Результат этого кода очень похож. Поэтому, действительно, есть причины, по которым `class` можно считать синтаксическим сахаром для определения конструктора вместе с методами прототипа.
 
+<<<<<<< HEAD
 Однако есть важные отличия:
+=======
+The result of this definition is about the same. So, there are indeed reasons why `class` can be considered a syntactic sugar to define a constructor together with its prototype methods.
+
+Still, there are important differences.
+>>>>>>> 5b195795da511709faf79a4d35f9c5623b6dbdbd
 
 1. Во-первых, функция, созданная с помощью `class`, помечена специальным внутренним свойством `[[FunctionKind]]:"classConstructor"`. Поэтому это не совсем то же самое, что создавать её вручную.
 
+<<<<<<< HEAD
     В отличие от обычных функций, конструктор класса не может быть вызван без `new`:
+=======
+    And unlike a regular function, a class constructor must be called with `new`:
+>>>>>>> 5b195795da511709faf79a4d35f9c5623b6dbdbd
 
     ```js run
     class User {
@@ -176,7 +200,11 @@ user.sayHi();
 
 ## Class Expression
 
+<<<<<<< HEAD
 Как и функции, классы можно определять внутри другого выражения, передавать, возвращать, присваивать и т.д.
+=======
+Just like functions, classes can be defined inside another expression, passed around, returned, assigned, etc.
+>>>>>>> 5b195795da511709faf79a4d35f9c5623b6dbdbd
 
 Пример Class Expression (по аналогии с Function Expression):
 
@@ -278,7 +306,11 @@ Object.defineProperties(User.prototype, {
 });
 ```
 
+<<<<<<< HEAD
 Пример с вычисляемым свойством в скобках `[...]`:
+=======
+Here's an example with a computed property name in brackets `[...]`:
+>>>>>>> 5b195795da511709faf79a4d35f9c5623b6dbdbd
 
 ```js run
 class User {
@@ -311,6 +343,9 @@ class User {
 }
 
 new User().sayHi();
+
+alert(User.prototype.sayHi); // placed in User.prototype
+alert(User.prototype.name); // undefined, not placed in User.prototype
 ```
 
 Свойство `name` не устанавливается в `User.prototype`. Вместо этого оно создаётся оператором `new` перед запуском конструктора, это именно свойство объекта.
@@ -333,6 +368,10 @@ class MyClass {
 }
 ```
 
+<<<<<<< HEAD
 `MyClass` технически является функцией (той, которую мы определяем как `constructor`), в то время как методы, геттеры и сеттеры записываются в `MyClass.prototype`.
+=======
+`MyClass` is technically a function (the one that we provide as `constructor`), while methods, getters and setters are written to `MyClass.prototype`.
+>>>>>>> 5b195795da511709faf79a4d35f9c5623b6dbdbd
 
 В следующих главах мы узнаем больше о классах, включая наследование и другие возможности.
