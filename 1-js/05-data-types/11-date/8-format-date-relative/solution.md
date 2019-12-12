@@ -4,7 +4,7 @@
 function formatDate(date) {
   let diff = new Date() - date; // разница в миллисекундах
 
-  if (diff < 1000) { // меньше 1 минуты
+  if (diff < 1000) { // меньше 1 секунды
     return 'прямо сейчас';
   }
 
