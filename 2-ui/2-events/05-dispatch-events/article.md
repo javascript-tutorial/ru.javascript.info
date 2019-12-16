@@ -2,7 +2,11 @@
 
 Можно не только назначать обработчики, но и генерировать события из JavaScript-кода.
 
+<<<<<<< HEAD
 Пользовательские события могут быть использованы при создании графических компонентов. Например, корневой элемент нашего меню, реализованного при помощи JavaScript, может генерировать события, относящиеся к этому меню: `open` (меню раскрыто), `select` (выбран пункт меню) и т.п. А другой код может слушать эти события и узнавать, что происходит с меню.
+=======
+Custom events can be used to create "graphical components". For instance, a root element of our own JS-based menu may trigger events telling what happens with the menu: `open` (menu open), `select` (an item is selected) and so on. Another code may listen for the events and observe what's happening with the menu.
+>>>>>>> 524d59884650be539544c34f71d821432b7280fd
 
 Можно генерировать не только совершенно новые, придуманные нами события, но и встроенные, такие как `click`, `mousedown` и другие. Это бывает полезно для автоматического тестирования.
 
@@ -173,7 +177,11 @@ alert(event.clientX); // undefined, неизвестное свойство пр
 
 Ниже вы можете видеть кролика `#rabbit` и функцию `hide()`, которая при вызове генерирует на нём событие `"hide"`, уведомляя всех интересующихся, что кролик собирается спрятаться.
 
+<<<<<<< HEAD
 Любой обработчик может узнать об этом, подписавшись на событие `hide` через `rabbit.addEventListener('hide',...)` и, при желании, отменить действие по умолчанию через `event.preventDefault()`. Тогда кролик не исчезнет:
+=======
+Any handler can listen for that event with `rabbit.addEventListener('hide',...)` and, if needed, cancel the action using `event.preventDefault()`. Then the rabbit won't disappear:
+>>>>>>> 524d59884650be539544c34f71d821432b7280fd
 
 ```html run refresh autorun
 <pre id="rabbit">
@@ -206,11 +214,19 @@ alert(event.clientX); // undefined, неизвестное свойство пр
 </script>
 ```
 
+<<<<<<< HEAD
 Обратите внимание: событие должно содержать флаг `cancelable: true`. Иначе, вызов `event.preventDefault()` будет проигнорирован.
+=======
+Please note: the event must have the flag `cancelable: true`, otherwise the call `event.preventDefault()` is ignored.
+>>>>>>> 524d59884650be539544c34f71d821432b7280fd
 
 ## Вложенные события обрабатываются синхронно
 
+<<<<<<< HEAD
 Обычно события обрабатываются асинхронно. То есть, если браузер обрабатывает `onclick` и в процессе этого произойдёт новое событие, то оно ждёт, пока закончится обработка `onclick`.
+=======
+Usually events are processed asynchronously. That is: if the browser is processing `onclick` and in the process a new event occurs, then it waits until the `onclick` processing is finished.
+>>>>>>> 524d59884650be539544c34f71d821432b7280fd
 
 Исключением является ситуация, когда событие инициировано из обработчика другого события.
 

@@ -119,9 +119,15 @@ Sec-WebSocket-Accept: hsBlbuDTkk24srzEOTBUlZAlC2g=
 
 - `Sec-WebSocket-Extensions: deflate-frame` означает, что браузер поддерживает сжатие данных. Расширение -- это что-то, связанное с передачей данных, расширяющее сам протокол WebSocket. Заголовок `Sec-WebSocket-Extensions` отправляется браузером автоматически со списком всевозможных расширений, которые он поддерживает.
 
+<<<<<<< HEAD
 - `Sec-WebSocket-Protocol: soap, wamp` означает, что мы будем передавать не только произвольные данные, но и данные в протоколах [SOAP](http://en.wikipedia.org/wiki/SOAP) или WAMP (The WebSocket Application Messaging Protocol" -- "протокол обмена сообщениями WebSocket приложений"). То есть, этот заголовок описывает не передачу, а формат данных, который мы собираемся использовать. Официальные подпротоколы WebSocket регистрируются в [каталоге IANA](http://www.iana.org/assignments/websocket/websocket.xml).
 
     Этот необязательный заголовок ставим мы сами, передавая массив подпротоколов вторым параметром `new WebSocket`, вот так:
+=======
+- `Sec-WebSocket-Protocol: soap, wamp` means that we'd like to transfer not just any data, but the data in [SOAP](http://en.wikipedia.org/wiki/SOAP) or WAMP ("The WebSocket Application Messaging Protocol") protocols. WebSocket subprotocols are registered in the [IANA catalogue](http://www.iana.org/assignments/websocket/websocket.xml). So, this header describes data formats that we're going to use.
+
+    This optional header is set using the second parameter of `new WebSocket`. That's the array of subprotocols, e.g. if we'd like to use SOAP or WAMP:
+>>>>>>> 524d59884650be539544c34f71d821432b7280fd
 
     ```js
     let socket = new WebSocket("wss://javascript.info/chat", ["soap", "wamp"]);

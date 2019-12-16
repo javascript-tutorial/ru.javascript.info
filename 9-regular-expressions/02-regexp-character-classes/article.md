@@ -101,7 +101,11 @@ let str = "+7(903)-123-45-67";
 alert( str.replace(/\D/g, "") ); // 79031234567
 ```
 
+<<<<<<< HEAD
 ## Точка - это любой символ
+=======
+## A dot is "any character"
+>>>>>>> 524d59884650be539544c34f71d821432b7280fd
 
 Точка `pattern:.` - это специальный символьный класс, который соответствует "любому символу, кроме новой строки".
 
@@ -129,7 +133,11 @@ alert( "CS4".match(/CS.4/) ); // null, нет совпадений потому 
 
 ### Точка как буквально любой символ, с флагом "s"
 
+<<<<<<< HEAD
 Обычно точка не соответствует символу новой строки `\n`.
+=======
+By default, a dot doesn't match the newline character `\n`.
+>>>>>>> 524d59884650be539544c34f71d821432b7280fd
 
 То есть, регулярное выражение `pattern:A.B` будет искать символ `match:A` и затем `match:B`, с любым символом между ними, кроме перевода строки `\n`:
 
@@ -145,8 +153,27 @@ alert( "A\nB".match(/A.B/) ); // null (нет совпадения)
 alert( "A\nB".match(/A.B/s) ); // A\nB (совпадение!)
 ```
 
+<<<<<<< HEAD
 ````warn header="Внимание, пробелы!"
 Обычно мы уделяем мало внимания пробелам. Для нас строки `subject:1-5` и `subject: 1 - 5` практически идентичны.
+=======
+````warn header="Not supported in Firefox, IE, Edge"
+Check <https://caniuse.com/#search=dotall> for the most recent state of support. At the time of writing it doesn't include Firefox, IE, Edge.
+
+Luckily, there's an alternative, that works everywhere. We can use a regexp like `pattern:[\s\S]` to match "any character".
+
+```js run
+alert( "A\nB".match(/A[\s\S]B/) ); // A\nB (match!)
+```
+
+The pattern `pattern:[\s\S]` literally says: "a space character OR not a space character". In other words, "anything". We could use another pair of complementary classes, such as `pattern:[\d\D]`, that doesn't matter.
+
+This trick works everywhere. Also we can use it if we don't want to set `pattern:s` flag, in cases when we want a regular "no-newline" dot too in the pattern.
+````
+
+````warn header="Pay attention to spaces"
+Usually we pay little attention to spaces. For us strings `subject:1-5` and `subject:1 - 5` are nearly identical.
+>>>>>>> 524d59884650be539544c34f71d821432b7280fd
 
 Но если регулярное выражение не учитывает пробелы, оно может не сработать.
 

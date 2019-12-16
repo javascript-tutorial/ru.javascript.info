@@ -3,12 +3,21 @@
 
 В современных сайтах скрипты обычно  "тяжелее", чем HTML: они весят больше, дольше обрабатываются.
 
+<<<<<<< HEAD
 Когда браузер загружает HTML и доходит до тега `<script>...</script>`, он не может продолжать строить DOM. Он должен сначала выполнить скрипт. То же самое происходит и с внешними скриптами `<script src="..."></script>`: браузер должен подождать, пока загрузится скрипт, выполнить его, и только затем обработать остальную страницу.
+=======
+When the browser loads HTML and comes across a `<script>...</script>` tag, it can't continue building the DOM. It must execute the script right now. The same happens for external scripts `<script src="..."></script>`: the browser must wait until the script downloads, execute it, and only after process the rest of the page.
+>>>>>>> 524d59884650be539544c34f71d821432b7280fd
 
 Это ведёт к двум важным проблемам:
 
+<<<<<<< HEAD
 1. Скрипты не видят DOM-элементы ниже себя, поэтому к ним нельзя добавить обработчики и т.д. 
 2. Если вверху страницы объёмный скрипт, он "блокирует" страницу. Пользователи не видят содержимое страницы, пока он не загрузится и не запустится:
+=======
+1. Scripts can't see DOM elements below them, so they can't add handlers etc.
+2. If there's a bulky script at the top of the page, it "blocks the page". Users can't see the page content till it downloads and runs:
+>>>>>>> 524d59884650be539544c34f71d821432b7280fd
 
 ```html run height=100
 <p>...содержимое перед скриптом...</p>
@@ -31,7 +40,11 @@
 
 Но это решение далеко от идеального. Например, браузер замечает скрипт (и может начать загружать его) только после того, как он полностью загрузил HTML-документ. В случае с длинными HTML-страницами это может создать заметную задержку.
 
+<<<<<<< HEAD
 Такие вещи незаметны людям, у кого очень быстрое соединение, но много кто в мире имеет медленное подключение к интернету или использует не такой хороший мобильный интернет. 
+=======
+Such things are invisible for people using very fast connections, but many people in the world still have slow internet speeds and use a far-from-perfect mobile internet connection.
+>>>>>>> 524d59884650be539544c34f71d821432b7280fd
 
 К счастью, есть два атрибута тега `<script>`, которые решают нашу проблему: `defer` и `async`.
 
@@ -67,8 +80,13 @@
 <p>...содержимое после скрипта...</p>
 ```
 
+<<<<<<< HEAD
 1. Содержимое страницы отобразится мгновенно.
 2. Событие `DOMContentLoaded` подождёт отложенный скрипт. Оно будет сгенерировано, только когда скрипт `(2)` будет загружен и выполнен.
+=======
+1. The page content shows up immediately.
+2. `DOMContentLoaded` waits for the deferred script. It only triggers when the script `(2)` is downloaded and executed.
+>>>>>>> 524d59884650be539544c34f71d821432b7280fd
 
 Отложенные с помощью `defer` скрипты сохраняют порядок относительно друг друга, как и обычные скрипты.
 
@@ -94,11 +112,19 @@
 
 Атрибут `async` означает, что скрипт абсолютно независим:
 
+<<<<<<< HEAD
 - Страница не ждёт асинхронных скриптов, содержимое обрабатывается и отображается.
 - Событие `DOMContentLoaded` и асинхронные скрипты не ждут друг друга:
     - `DOMContentLoaded` может произойти как до асинхронного скрипта (если асинхронный скрипт завершит загрузку после того, как страница будет готова),
     - ...так и после асинхронного скрипта (если он короткий или уже содержится в HTTP-кеше)
 - Остальные скрипты не ждут `async`, и скрипты c`async` не ждут другие скрипты.
+=======
+- The page doesn't wait for async scripts, the contents are processed and displayed.
+- `DOMContentLoaded` and async scripts don't wait for each other:
+    - `DOMContentLoaded` may happen both before an async script (if an async script finishes loading after the page is complete)
+    - ...or after an async script (if an async script is short or was in HTTP-cache)
+- Other scripts don't wait for `async` scripts, and `async` scripts don't wait for them.
+>>>>>>> 524d59884650be539544c34f71d821432b7280fd
 
 
 Так что если у нас есть несколько скриптов с `async`, они могут выполняться в любом порядке. То, что первое загрузится -- запустится в первую очередь:
@@ -146,7 +172,10 @@ document.body.append(script); // (*)
 - Они никого не ждут, и их никто не ждёт.
 - Скрипт, который загружается первым -- запускается первым (в порядке загрузки).
 
+<<<<<<< HEAD
 Мы можем изменить относительный порядок скриптов с "первый загрузился - первый выполнился" на порядок, в котором они идут в документе (как в обычных скриптах) с помощью явной установки свойства  `async` в `false`:
+=======
+>>>>>>> 524d59884650be539544c34f71d821432b7280fd
 
 ```js run
 let script = document.createElement('script');
@@ -192,7 +221,11 @@ loadScript("/article/script-async-defer/small.js");
 
 Пользователь может знакомиться с содержимым страницы, читать её, но графические компоненты пока отключены.
 
+<<<<<<< HEAD
 Поэтому обязательно должна быть индикация загрузки, нерабочие кнопки - отключены с помощью CSS или другим образом. Чтобы пользователь явно видел, что уже готово, а что пока нет.
+=======
+There should be "loading" indications in the proper places, and disabled buttons should show as such, so the user can clearly see what's ready and what's not.
+>>>>>>> 524d59884650be539544c34f71d821432b7280fd
 ```
 
 На практике `defer` используется для скриптов, которым требуется доступ ко всему DOM и/или важен их относительный порядок выполнения.
