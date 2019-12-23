@@ -1,8 +1,18 @@
 # Наследование классов
 
+<<<<<<< HEAD
 Допустим, у нас есть два класса.
+=======
+# Class inheritance
 
-`Animal`:
+Class inheritance is a way for one class to extend another class.
+>>>>>>> e92bb83e995dfea982dcdc5065036646bfca13f0
+
+So we can create new functionality on top of the existing.
+
+## The "extends" keyword
+
+Let's say we have class `Animal`:
 
 ```js
 class Animal {
@@ -23,6 +33,7 @@ class Animal {
 let animal = new Animal("Мой питомец");
 ```
 
+<<<<<<< HEAD
 ![](rabbit-animal-independent-animal.svg)
 
 ...И `Rabbit`:
@@ -67,6 +78,21 @@ class Animal {
 }
 
 // Наследуем от Animal указывая "extends Animal"
+=======
+Here's how we can represent `animal` object and `Animal` class graphically:
+
+![](rabbit-animal-independent-animal.svg)
+
+...And we would like to create another `class Rabbit`.
+
+As rabbits are animals, `Rabbit` class should be based on `Animal`, have access to animal methods, so that rabbits can do what "generic" animals can do.
+
+The syntax to extend another class is: `class Child extends Parent`.
+
+Let's create `class Rabbit` that inherits from `Animal`:
+
+```js
+>>>>>>> e92bb83e995dfea982dcdc5065036646bfca13f0
 *!*
 class Rabbit extends Animal {
 */!*
@@ -82,6 +108,7 @@ rabbit.hide(); // Белый кролик прячется!
 ```
 Теперь код `Rabbit` стал короче, так как используется конструктор класса `Animal` по умолчанию и кролик может использовать метод `run` как и все животные.
 
+<<<<<<< HEAD
 На самом деле ключевое слово `extends` добавляет ссылку на `[[Prototype]]` из `Rabbit.prototype` в `Animal.prototype`:
 
 ![](animal-rabbit-extends.svg)
@@ -89,6 +116,20 @@ rabbit.hide(); // Белый кролик прячется!
 Если метод не найден в `Rabbit.prototype`, JavaScript возьмёт его из `Animal.prototype`.
 
 Как мы помним из главы <info:native-prototypes>, в JavaScript используется наследование на прототипах для встроенных объектов. Например `Date.prototype.[[Prototype]]` это `Object.prototype`, поэтому у дат есть универсальные методы объекта.
+=======
+Object of `Rabbit` class have access to both `Rabbit` methods, such as `rabbit.hide()`, and also to `Animal` methods, such as `rabbit.run()`.
+
+Internally, `extends` keyword works using the good old prototype mechanics. It sets `Rabbit.prototype.[[Prototype]]` to `Animal.prototype`. So, if a method is not found in `Rabbit.prototype`, JavaScript takes it from `Animal.prototype`.
+
+![](animal-rabbit-extends.svg)
+
+For instance, to find `rabbit.run` method, the engine checks (bottom-up on the picture):
+1. The `rabbit` object (has no `run`).
+2. Its prototype, that is `Rabbit.prototype` (has `hide`, but not `run`).
+3. Its prototype, that is (due to `extends`) `Animal.prototype`, that finally has the `run` method.
+
+As we can recall from the chapter <info:native-prototypes>, JavaScript itself uses prototypal inheritance for built-in objects. E.g. `Date.prototype.[[Prototype]]` is `Object.prototype`. That's why dates have access to generic object methods.
+>>>>>>> e92bb83e995dfea982dcdc5065036646bfca13f0
 
 ````smart header="После `extends` разрешены любые выражения"
 Синтаксис создания класса допускает указывать после `extends` не только класс, но любое выражение.
@@ -115,19 +156,34 @@ new User().sayHi(); // Привет
 
 ## Переопределение методов
 
+<<<<<<< HEAD
 Давайте пойдём дальше и переопределим метод. Сейчас `Rabbit` наследует от `Animal` метод `stop`, который устанавливает `this.speed = 0`.
 
 Если мы определим свой метод `stop` в классе `Rabbit`, то он будет использоваться взамен родительского:
+=======
+Now let's move forward and override a method. By default, all methods that are not specified in `class Rabbit` are taken directly "as is" from `class Animal`.
+
+But if we specify our own method in `Rabbit`, such as `stop()` then it will be used instead:
+>>>>>>> e92bb83e995dfea982dcdc5065036646bfca13f0
 
 ```js
 class Rabbit extends Animal {
   stop() {
+<<<<<<< HEAD
     // ...будет использован для rabbit.stop()
+=======
+    // ...now this will be used for rabbit.stop()
+    // instead of stop() from class Animal
+>>>>>>> e92bb83e995dfea982dcdc5065036646bfca13f0
   }
 }
 ```
 
+<<<<<<< HEAD
 ...Впрочем, обычно мы не хотим полностью заменить родительский метод, а скорее хотим сделать новый на его основе, изменяя или расширяя его функциональность. Мы делаем что-то в нашем методе и вызываем родительский метод до/после или в процессе.
+=======
+Usually we don't want to totally replace a parent method, but rather to build on top of it to tweak or extend its functionality. We do something in our method, but call the parent method before/after it or in the process.
+>>>>>>> e92bb83e995dfea982dcdc5065036646bfca13f0
 
 У классов есть ключевое слово `"super"` для таких случаев.
 - `super.method(...)` вызывает родительский метод.
@@ -200,7 +256,11 @@ setTimeout(function() { super.stop() }, 1000);
 
 С конструкторами немного сложнее.
 
+<<<<<<< HEAD
 До сих пор у `Rabbit` не было своего конструктора.
+=======
+Until now, `Rabbit` did not have its own `constructor`.
+>>>>>>> e92bb83e995dfea982dcdc5065036646bfca13f0
 
 Согласно [спецификации](https://tc39.github.io/ecma262/#sec-runtime-semantics-classdefinitionevaluation), если класс расширяет другой класс и не имеет конструктора, то автоматически создаётся такой "пустой" конструктор:
 
@@ -255,6 +315,7 @@ let rabbit = new Rabbit("Белый кролик", 10); // Error: this is not de
 
 Конечно, всему есть объяснение. Давайте углубимся в детали, чтобы вы действительно поняли, что происходит.
 
+<<<<<<< HEAD
 В JavaScript существует различие между "функцией-конструктором наследующего класса" и всеми остальными. В наследующем классе соответствующая функция-конструктор помечена специальным внутренним свойством `[[ConstructorKind]]:"derived"`.
 
 Разница в следующем:
@@ -265,6 +326,18 @@ let rabbit = new Rabbit("Белый кролик", 10); // Error: this is not de
 Поэтому, если мы создаём собственный конструктор, мы должны вызвать `super`, в противном случае объект для `this` не будет создан, и мы получим ошибку.
 
 Чтобы конструктор `Rabbit` работал, он должен вызвать `super()` до того, как использовать `this`, чтобы не было ошибки:
+=======
+In JavaScript, there's a distinction between a constructor function of an inheriting class (so-called "derived constructor") and other functions. A derived constructor has a special internal property `[[ConstructorKind]]:"derived"`. That's a special internal label.
+
+That label affects its behavior with `new`.
+
+- When a regular function is executed with `new`, it creates an empty object and assigns it to `this`.
+- But when a derived constructor runs, it doesn't do this. It expects the parent constructor to do this job.
+
+So a derived constructor must call `super` in order to execute its parent (non-derived) constructor, otherwise the object for `this` won't be created. And we'll get an error.
+
+For the `Rabbit` constructor to work, it needs to call `super()` before using `this`, like here:
+>>>>>>> e92bb83e995dfea982dcdc5065036646bfca13f0
 
 ```js run
 class Animal {
@@ -518,7 +591,11 @@ tree.sayHi();  // Я животное (?!?)
 
 ```js run
 let animal = {
+<<<<<<< HEAD
   eat: function() { // намеренно не пишем так, а не eat() { ...
+=======
+  eat: function() { // intentionally writing like this instead of eat() {...
+>>>>>>> e92bb83e995dfea982dcdc5065036646bfca13f0
     // ...
   }
 };
@@ -548,5 +625,10 @@ rabbit.eat();  // Ошибка вызова super (потому что нет [[
     - Методы запоминают свой объект во внутреннем свойстве `[[HomeObject]]`. Благодаря этому работает `super`, он в его прототипе ищет родительские методы.
     - Поэтому копировать метод, использующий `super`, между разными объектами небезопасно.
 
+<<<<<<< HEAD
 Также:
 - У функций-стрелок нет своего `this` и `super`, поэтому они "прозрачно" встраиваются во внешний контекст.
+=======
+Also:
+- Arrow functions don't have their own `this` or `super`, so they transparently fit into the surrounding context.
+>>>>>>> e92bb83e995dfea982dcdc5065036646bfca13f0

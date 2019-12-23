@@ -2,18 +2,39 @@
 
 # Введение: колбэки
 
+<<<<<<< HEAD
 Многие действия в JavaScript *асинхронные*.
 
 Например, рассмотрим функцию `loadScript(src)`:
+=======
+```warn header="We use browser methods in examples here"
+To demonstrate the use of callbacks, promises and other abstract concepts, we'll be using some browser methods: specifically, loading scripts and performing simple document manipulations.
+
+If you're not familiar with these methods, and their usage in the examples is confusing, you may want to read a few chapters from the [next part](/document) of the tutorial.
+
+Although, we'll try to make things clear anyway. There won't be anything really complex browser-wise.
+```
+
+Many actions in JavaScript are *asynchronous*. In other words, we initiate them now, but they finish later.
+
+For instance, we can schedule such actions using `setTimeout`.
+
+There are other real-world examples of asynchronous actions, e.g. loading scripts and modules (we'll cover them in later chapters).
+
+Take a look at the function `loadScript(src)`, that loads a script with the given `src`:
+>>>>>>> e92bb83e995dfea982dcdc5065036646bfca13f0
 
 ```js
 function loadScript(src) {
+  // creates a <script> tag and append it to the page
+  // this causes the script with given src to start loading and run when complete
   let script = document.createElement('script');
   script.src = src;
   document.head.append(script);
 }
 ```
 
+<<<<<<< HEAD
 Эта функция загружает на страницу новый скрипт. Когда в тело документа добавится конструкция `<script src="…">`, браузер загрузит скрипт и выполнит его.
 
 Вот пример использования этой функции:
@@ -26,6 +47,20 @@ loadScript('/my/script.js');
 Такие функции называют "асинхронными", потому что действие (загрузка скрипта) будет завершено не сейчас, а потом.
 
 Если после вызова `loadScript(…)` есть какой-то код, то он не будет ждать, пока скрипт загрузится.
+=======
+It appends to the document the new, dynamically created, tag `<script src="…">` with given `src`. The browser automatically starts loading it and executes when complete.
+
+We can use this function like this:
+
+```js
+// load and execute the script at the given path
+loadScript('/my/script.js');
+```
+
+The script is executed "asynchronously", as it starts loading now, but runs later, when the function has already finished.
+
+If there's any code below `loadScript(…)`, it doesn't wait until the script loading finishes.
+>>>>>>> e92bb83e995dfea982dcdc5065036646bfca13f0
 
 ```js
 loadScript('/my/script.js');
@@ -34,7 +69,11 @@ loadScript('/my/script.js');
 // ...
 ```
 
+<<<<<<< HEAD
 Мы хотели бы использовать новый скрипт, как только он будет загружен. Скажем, он объявляет новую функцию, которую мы хотим выполнить.
+=======
+Let's say we need to use the new script as soon as it loads. It declares new functions, and we want to run them.
+>>>>>>> e92bb83e995dfea982dcdc5065036646bfca13f0
 
 Но если мы просто вызовем эту функцию после `loadScript(…)`, у нас ничего не выйдет:
 
@@ -87,8 +126,13 @@ function loadScript(src, callback) {
 
 *!*
 loadScript('https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.2.0/lodash.js', script => {
+<<<<<<< HEAD
   alert(`Здорово, скрипт ${script.src} загрузился`);
   alert( _ ); // функция, объявленная в загруженном скрипте
+=======
+  alert(`Cool, the script ${script.src} is loaded`);
+  alert( _ ); // function declared in the loaded script
+>>>>>>> e92bb83e995dfea982dcdc5065036646bfca13f0
 });
 */!*
 ```
@@ -145,7 +189,7 @@ loadScript('/my/script.js', function(script) {
 
 Ниже улучшенная версия `loadScript`, которая умеет отслеживать ошибки загрузки:
 
-```js run
+```js
 function loadScript(src, callback) {
   let script = document.createElement('script');
   script.src = src;
@@ -219,7 +263,11 @@ loadScript('1.js', function(error, script) {
 2. Мы загружаем `2.js`. Продолжаем, если нет ошибок.
 3. Мы загружаем `3.js`. Продолжаем, если нет ошибок. И так далее `(*)`.
 
+<<<<<<< HEAD
 Чем больше вложенных вызовов, тем наш код будет иметь всё большую вложенность, которую сложно поддерживать, особенно если вместо `...` у нас код, содержащий другие цепочки вызовов, условия и т.д.
+=======
+As calls become more nested, the code becomes deeper and increasingly more difficult to manage, especially if we have real code instead of `...` that may include more loops, conditional statements and so on.
+>>>>>>> e92bb83e995dfea982dcdc5065036646bfca13f0
 
 Иногда это называют «адом колбэков» или «адской пирамидой колбэков».
 
@@ -289,7 +337,11 @@ function step3(error, script) {
 
 Код абсолютно рабочий, но кажется разорванным на куски. Его трудно читать, вы наверняка заметили это. Приходится прыгать глазами между кусками кода, когда пытаешься его прочесть. Это неудобно, особенно, если читатель не знаком с кодом и не знает, что за чем следует.
 
+<<<<<<< HEAD
 Кроме того, все функции `step*` одноразовые, и созданы лишь только, чтобы избавиться от «адской пирамиды вызовов». Никто не будет их переиспользовать где-либо ещё. Таким образом, мы, кроме всего прочего, засоряем пространство имён.
+=======
+Also, the functions named `step*` are all of single use, they are created only to avoid the "pyramid of doom." No one is going to reuse them outside of the action chain. So there's a bit of namespace cluttering here.
+>>>>>>> e92bb83e995dfea982dcdc5065036646bfca13f0
 
 Нужно найти способ получше.
 

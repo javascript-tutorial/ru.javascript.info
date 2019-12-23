@@ -25,8 +25,13 @@
 }
 ```
 
+<<<<<<< HEAD
 ````smart header="Не ставится точка с запятой после экспорта класса/функции"
 Обратите внимание, что `export` перед классом или функцией не делает их [функциональным выражением](info:function-expressions). Это всё также объявление функции, хотя и экспортируемое.
+=======
+````smart header="No semicolons after export class/function"
+Please note that `export` before a class or a function does not make it a [function expression](info:function-expressions). It's still a function declaration, albeit exported.
+>>>>>>> e92bb83e995dfea982dcdc5065036646bfca13f0
 
 Большинство руководств по стилю кода в JavaScript не рекомендуют ставить точку с запятой после объявлений функций или классов.
 
@@ -155,14 +160,25 @@ say.*!*bye*/!*('John'); // Bye, John!
 
 На практике модули встречаются в основном одного из двух типов:
 
+<<<<<<< HEAD
 1. Модуль, содержащий библиотеку или набор функций, как `say.js` выше.
 2. Модуль, который объявляет что-то одно, например модуль `user.js` экспортирует только `class User`.
+=======
+1. Modules that contain a library, pack of functions, like `say.js` above.
+2. Modules that declare a single entity, e.g. a module `user.js` exports only `class User`.
+>>>>>>> e92bb83e995dfea982dcdc5065036646bfca13f0
 
 По большей части, удобнее второй подход, когда каждая "вещь" находится в своём собственном модуле.
 
+<<<<<<< HEAD
 Естественно, требуется много файлов, если для всего делать отдельный модуль, но это не проблема. Так даже удобнее: навигация по проекту становится проще, особенно, если у файлов хорошие имена, и они структурированы по папкам.
 
 Модули предоставляют специальный синтаксис `export default` ("эспорт по умолчанию") для второго подхода.
+=======
+Naturally, that requires a lot of files, as everything wants its own module, but that's not a problem at all. Actually, code navigation becomes easier if files are well-named and structured into folders.
+
+Modules provide special `export default` ("the default export") syntax to make the "one thing per module" way look better.
+>>>>>>> e92bb83e995dfea982dcdc5065036646bfca13f0
 
 Ставим `export default` перед тем, что нужно экспортировать:
 
@@ -289,9 +305,15 @@ import {User} from './user.js';
 ...В то время как для экспорта по умолчанию мы выбираем любое имя при импорте:
 
 ```js
+<<<<<<< HEAD
 import User from './user.js'; // сработает
 import MyUser from './user.js'; // тоже сработает
 // можно импортировать с любым именем, и это будет работать
+=======
+import User from './user.js'; // works
+import MyUser from './user.js'; // works too
+// could be import Anything... and it'll still work
+>>>>>>> e92bb83e995dfea982dcdc5065036646bfca13f0
 ```
 
 Так что члены команды могут использовать разные имена для импорта одной и той же вещи, и это не очень хорошо.
@@ -319,7 +341,11 @@ export {sayHi} from './say.js'; // реэкспортировать sayHi
 export {default as User} from './user.js'; // реэкспортировать default
 ```
 
+<<<<<<< HEAD
 Зачем это нужно? Рассмотрим практический пример использования.
+=======
+Why would that be needed? Let's see a practical use case.
+>>>>>>> e92bb83e995dfea982dcdc5065036646bfca13f0
 
 Представим, что мы пишем "пакет": папку со множеством модулей, из которой часть функционала экспортируется наружу (инструменты вроде NPM позволяют нам публиковать и распространять такие пакеты), а многие модули - просто вспомогательные, для внутреннего использования в других модулях пакета.
 
@@ -390,9 +416,15 @@ export default class User {
 
 1. `export User from './user.js'` не будет работать. Казалось бы, что такого? Но возникнет синтаксическая ошибка!
 
+<<<<<<< HEAD
     Чтобы реэкспортировать экспорт по умолчанию, мы должны написать `export {default as User}`, как в примере выше. Такая вот особенность синтаксиса.
 
 2. `export * from './user.js'` реэкспортирует только именованные экспорты, исключая экспорт по умолчанию.
+=======
+    To re-export the default export, we have to write `export {default as User}`, as in the example above.    
+
+2. `export * from './user.js'` re-exports only named exports, but ignores the default one.
+>>>>>>> e92bb83e995dfea982dcdc5065036646bfca13f0
 
     Если мы хотим реэкспортировать и именованные экспорты и экспорт по умолчанию, то понадобятся две инструкции:
     ```js
@@ -400,7 +432,11 @@ export default class User {
     export {default} from './user.js'; // для реэкспорта по умолчанию
     ```
 
+<<<<<<< HEAD
 Такое особое поведение реэкспорта с экспортом по умолчанию - одна из причин того, почему некоторые разработчики их не любят.
+=======
+Such oddities of re-exporting the default export are one of the reasons why some developers don't like them.
+>>>>>>> e92bb83e995dfea982dcdc5065036646bfca13f0
 
 ## Итого
 

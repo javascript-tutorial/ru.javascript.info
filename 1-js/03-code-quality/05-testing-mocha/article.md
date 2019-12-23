@@ -79,7 +79,11 @@ describe("pow", function() {
 
 Давайте посмотрим этот поток разработки на нашем примере.
 
+<<<<<<< HEAD
 Первый шаг уже завершён. У нас есть спецификация для функции `pow`. Теперь, перед тем, как писать реализацию, давайте подключим библиотеки для пробного запуска тестов, просто чтобы убедиться, что тесты работают (разумеется, они завершатся ошибками).
+=======
+The first step is already complete: we have an initial spec for `pow`. Now, before making the implementation, let's use few JavaScript libraries to run the tests, just to see that they are working (they will all fail).
+>>>>>>> e92bb83e995dfea982dcdc5065036646bfca13f0
 
 ## Спецификация в действии
 
@@ -160,7 +164,11 @@ function pow(x, n) {
         assert.equal(pow(2, 3), 8);
       });
 
+<<<<<<< HEAD
       it("3 в степени 4 будет 81", function() {
+=======
+      it("3 raised to power 4 is 81", function() {
+>>>>>>> e92bb83e995dfea982dcdc5065036646bfca13f0
         assert.equal(pow(3, 4), 81);
       });
 
@@ -183,7 +191,11 @@ function pow(x, n) {
 
 [iframe height=250 src="pow-2" edit border="1"]
 
+<<<<<<< HEAD
 Как мы и ожидали, второй тест провалился. Естественно, наша функция всегда возвращает `8`, в то время как `assert` ожидает `81`.
+=======
+As we could expect, the second test failed. Sure, our function always returns `8`, while the `assert` expects `81`.
+>>>>>>> e92bb83e995dfea982dcdc5065036646bfca13f0
 
 ## Улучшаем реализацию
 
