@@ -12,6 +12,10 @@ importance: 5
 
 **Например, мы хотим отслеживать движения мыши.**
 
+<<<<<<< HEAD
+=======
+In a browser we can setup a function to run at every mouse movement and get the pointer location as it moves. During an active mouse usage, this function usually runs very frequently, can be something like 100 times per second (every 10 ms).
+>>>>>>> 28ed5a3f7df9e015cf81c126423c76c9408d7117
 
 В браузере мы можем объявить функцию, которая будет запускаться при каждом движении указателя и получать его местоположение. Во время активного использования мыши эта функция запускается очень часто, это может происходить около 100 раз в секунду (каждые 10 мс).
 
@@ -32,7 +36,11 @@ importance: 5
 
 ```js
 function f(a) {
+<<<<<<< HEAD
   console.log(a)
+=======
+  console.log(a);
+>>>>>>> 28ed5a3f7df9e015cf81c126423c76c9408d7117
 }
 
 // f1000 передаёт вызовы f максимум раз в 1000 мс
