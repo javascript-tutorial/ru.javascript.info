@@ -2,11 +2,19 @@
 
 Когда что-то разрабатываем, то нам часто необходимы собственные классы ошибок для разных вещей, которые могут пойти не так в наших задачах. Для ошибок при работе с сетью может понадобиться `HttpError`, для операций с базой данных `DbError`, для поиска - `NotFoundError` и т.д.
 
+<<<<<<< HEAD
 Наши ошибки должны поддерживать базовые свойства, такие как `message`, `name` и, желательно, `stack`. Но также они могут иметь свои собственные свойства. Например, объекты `HttpError` могут иметь свойство `statusCode` со значениями `404`, `403` или `500`.
+=======
+Our errors should support basic error properties like `message`, `name` and, preferably, `stack`. But they also may have other properties of their own, e.g. `HttpError` objects may have a `statusCode` property with a value like `404` or `403` or `500`.
+>>>>>>> 14e4e9f96bcc2bddc507f409eb4716ced897f91a
 
 JavaScript позволяет вызывать `throw` с любыми аргументами, то есть технически наши классы ошибок не нуждаются в наследовании от `Error`. Но если использовать наследование, то появляется возможность идентификации объектов ошибок посредством `obj instanceof Error`. Так что лучше применять наследование.
 
+<<<<<<< HEAD
 По мере роста приложения, наши собственные ошибки образуют иерархию, например, `HttpTimeoutError` может наследовать от ` HttpError` и так далее.
+=======
+As the application grows, our own errors naturally form a hierarchy. For instance, `HttpTimeoutError` may inherit from `HttpError`, and so on.
+>>>>>>> 14e4e9f96bcc2bddc507f409eb4716ced897f91a
 
 ## Расширение Error
 
@@ -23,9 +31,13 @@ let json = `{ "name": "John", "age": 30 }`;
 
 Назовём её ошибкой валидации `ValidationError` и создадим для неё класс. Ошибка этого вида должна содержать информацию о поле, которое является источником ошибки.
 
+<<<<<<< HEAD
 Наш класс `ValidationError` должен наследовать от встроенного класса `Error`.
 
 Класс `Error` встроенный, вот его примерный код, просто чтобы мы понимали, что расширяем:
+=======
+That class is built-in, but here's its approximate code so we can understand what we're extending:
+>>>>>>> 14e4e9f96bcc2bddc507f409eb4716ced897f91a
 
 ```js
 // "Псевдокод" встроенного класса Error, определённого самим JavaScript
@@ -182,7 +194,11 @@ try {
 
 Новый класс `PropertyRequiredError` очень просто использовать: необходимо указать только имя свойства `new PropertyRequiredError(property)`. Сообщение для пользователя `message` генерируется конструктором.
 
+<<<<<<< HEAD
 Обратите внимание, что свойство `this.name` в конструкторе `PropertyRequiredError` снова присвоено вручную. Правда, немного утомительно -- присваивать `this.name = <class name>` в каждом классе пользовательской ошибки. Можно этого избежать, если сделать наш собственный  "базовый" класс ошибки, который будет ставить `this.name = this.constructor.name`. И затем наследовать все ошибки уже от него.
+=======
+Please note that `this.name` in `PropertyRequiredError` constructor is again assigned manually. That may become a bit tedious -- to assign `this.name = <class name>` in every custom error class. We can avoid it by making our own "basic error" class that assigns `this.name = this.constructor.name`. And then inherit all our custom errors from it.
+>>>>>>> 14e4e9f96bcc2bddc507f409eb4716ced897f91a
 
 Давайте назовём его `MyError`.
 
@@ -220,9 +236,15 @@ alert( new PropertyRequiredError("field").name ); // PropertyRequiredError
 
 Код, который вызывает `readUser`, должен обрабатывать эти ошибки.
 
+<<<<<<< HEAD
 Сейчас в нём используются проверки `if` в блоке `catch`, которые проверяют класс и обрабатывают известные ошибки и пробрасывают дальше неизвестные. Но если функция `readUser` генерирует несколько видов ошибок, то мы должны спросить себя: действительно ли мы хотим проверять все типы ошибок поодиночке во всех местах в коде, где вызывается `readUser`?
 
 Часто ответ "Нет": внешний код хочет быть на один уровень выше всего этого.  Он хочет иметь какую-то обобщённую ошибку чтения данных.  Почему именно это произошло -- часто не имеет значения (об этом говорится в сообщении об ошибке).  Или даже лучше, если есть способ получить подробности об ошибке, но только если нам это нужно.
+=======
+The code which calls `readUser` should handle these errors. Right now it uses multiple `if`s in the `catch` block, that check the class and handle known errors and rethrow the unknown ones. But if the `readUser` function generates several kinds of errors, then we should ask ourselves: do we really want to check for all error types one-by-one in every code that calls `readUser`?
+
+Often the answer is "No": the outer code wants to be "one level above all that", it just wants to have some kind of "data reading error" -- why exactly it happened is often irrelevant (the error message describes it). Or, even better, it could have a way to get the error details, but only if we need to.
+>>>>>>> 14e4e9f96bcc2bddc507f409eb4716ced897f91a
 
 Итак, давайте создадим новый класс `ReadError` для представления таких ошибок.  Если ошибка возникает внутри `readUser`, мы её перехватим и сгенерируем `ReadError`.  Мы также сохраним ссылку на исходную ошибку в свойстве `cause`.  Тогда внешний код должен будет только проверить наличие `ReadError`.
 
@@ -296,12 +318,22 @@ try {
 
 В приведённом выше коде `readUser` работает так, как описано - функция распознаёт синтаксические ошибки и ошибки валидации и выдаёт вместо них ошибки `ReadError` (неизвестные ошибки, как обычно, пробрасываются).
 
+<<<<<<< HEAD
 Внешний код проверяет только `instanceof ReadError`.  Не нужно перечислять все возможные типы ошибок
+=======
+So the outer code checks `instanceof ReadError` and that's it. No need to list all possible error types.
+>>>>>>> 14e4e9f96bcc2bddc507f409eb4716ced897f91a
 
 Этот подход называется "обёртывание исключений", потому что мы берём "исключения низкого уровня" и "оборачиваем" их в `ReadError`, который является более абстрактным и более удобным для использования в вызывающем коде.  Такой подход широко используется в объектно-ориентированном программировании.
 
 ## Итого
 
+<<<<<<< HEAD
 - Мы можем наследовать свои классы ошибок от  `Error` и других встроенных классов ошибок, но нужно позаботиться о свойстве `name` и не забыть вызвать `super`.
 - Мы можем использовать `instanceof` для проверки типа ошибок. Это также работает с наследованием. Но иногда у нас объект ошибки, возникшей в сторонней библиотеке, и нет простого способа получить класс. Тогда для проверки типа ошибки можно использовать свойство `name`.
 - Обёртывание исключений является распространённой техникой: функция ловит низкоуровневые исключения и создаёт одно "высокоуровневое" исключение вместо разных низкоуровневых. Иногда низкоуровневые исключения становятся свойствами этого объекта, как `err.cause` в примерах выше, но это не обязательно.
+=======
+- We can inherit from `Error` and other built-in error classes normally. We just need to take care of the `name` property and don't forget to call `super`.
+- We can use `instanceof` to check for particular errors. It also works with inheritance. But sometimes we have an error object coming from a 3rd-party library and there's no easy way to get its class. Then `name` property can be used for such checks.
+- Wrapping exceptions is a widespread technique: a function handles low-level exceptions and creates higher-level errors instead of various low-level ones. Low-level exceptions sometimes become properties of that object like `err.cause` in the examples above, but that's not strictly required.
+>>>>>>> 14e4e9f96bcc2bddc507f409eb4716ced897f91a

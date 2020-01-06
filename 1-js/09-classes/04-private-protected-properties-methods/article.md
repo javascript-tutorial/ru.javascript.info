@@ -50,8 +50,13 @@
 
 В JavaScript есть два типа полей (свойств и методов) объекта:
 
+<<<<<<< HEAD
 - Публичные: доступны отовсюду. Они составляют внешний интерфейс. До этого момента мы использовали только публичные свойства и методы.
 - Приватные: доступны только внутри класса. Они для внутреннего интерфейса.
+=======
+- Public: accessible from anywhere. They comprise the external interface. Until now we were only using public properties and methods.
+- Private: accessible only from inside the class. These are for the internal interface.
+>>>>>>> 14e4e9f96bcc2bddc507f409eb4716ced897f91a
 
 Во многих других языках также существуют "защищённые" поля, доступные только внутри класса или для дочерних классов (то есть, как приватные, но разрешён доступ для наследующих классов) и также полезны для внутреннего интерфейса. В некотором смысле они более распространены, чем приватные, потому что мы обычно хотим, чтобы наследующие классы получали доступ к внутренним полям.
 
@@ -255,7 +260,11 @@ class MegaCoffeeMachine extends CoffeeMachine {
 }
 ```
 
+<<<<<<< HEAD
 Во многих случаях такое ограничение слишком жёсткое. Раз уж мы расширяем `CoffeeMachine`, у нас может быть вполне законная причина для доступа к внутренним методам и свойствам. Поэтому защищённые свойства используются чаще, хоть они и не поддерживаются синтаксисом языка.
+=======
+In many scenarios such limitation is too severe. If we extend a `CoffeeMachine`, we may have legitimate reasons to access its internals. That's why protected fields are used more often, even though they are not supported by the language syntax.
+>>>>>>> 14e4e9f96bcc2bddc507f409eb4716ced897f91a
 
 ````warn
 Приватные поля особенные.
@@ -276,12 +285,21 @@ class User {
 
 ## Итого
 
+<<<<<<< HEAD
 В терминах ООП отделение внутреннего интерфейса от внешнего называется [инкапсуляция](https://ru.wikipedia.org/wiki/%D0%98%D0%BD%D0%BA%D0%B0%D0%BF%D1%81%D1%83%D0%BB%D1%8F%D1%86%D0%B8%D1%8F_(%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5)).
+=======
+In terms of OOP, delimiting of the internal interface from the external one is called [encapsulation](https://en.wikipedia.org/wiki/Encapsulation_(computer_programming)).
+>>>>>>> 14e4e9f96bcc2bddc507f409eb4716ced897f91a
 
 Это даёт следующие выгоды:
 
+<<<<<<< HEAD
 Защита для пользователей, чтобы они не выстрелили себе в ногу
 : Представьте себе, что есть команда разработчиков, использующая кофеварку. Она была изготовлена компанией "Лучшие Кофеварки" и работает нормально, но защитный кожух был снят. Внутренний интерфейс стал доступен извне.
+=======
+Protection for users, so that they don't shoot themselves in the foot
+: Imagine, there's a team of developers using a coffee machine. It was made by the "Best CoffeeMachine" company, and works fine, but a protective cover was removed. So the internal interface is exposed.
+>>>>>>> 14e4e9f96bcc2bddc507f409eb4716ced897f91a
 
     Все разработчики культурны -- они используют кофеварку по назначению. Но один из них, Джон, решил, что он самый умный, и сделал некоторые изменения во внутренностях кофеварки. После чего кофеварка вышла из строя через два дня.
 
@@ -305,9 +323,16 @@ class User {
 
     **Всегда удобно, когда детали реализации скрыты, и доступен простой, хорошо документированный внешний интерфейс.**
 
+<<<<<<< HEAD
 Для сокрытия внутреннего интерфейса мы используем защищённые или приватные свойства:
 
 - Защищённые поля имеют префикс `_`. Это хорошо известное соглашение, не поддерживаемое на уровне языка. Программисты должны обращаться к полю, начинающемуся с `_`, только из его класса и классов, унаследованных от него.
 - Приватные поля имеют префикс `#`. JavaScript гарантирует, что мы можем получить доступ к таким полям только внутри класса.
+=======
+To hide an internal interface we use either protected or private properties:
+
+- Protected fields start with `_`. That's a well-known convention, not enforced at the language level. Programmers should only access a field starting with `_` from its class and classes inheriting from it.
+- Private fields start with `#`. JavaScript makes sure we can only access those from inside the class.
+>>>>>>> 14e4e9f96bcc2bddc507f409eb4716ced897f91a
 
 В настоящее время приватные поля не очень хорошо поддерживаются в браузерах, но можно использовать полифил.

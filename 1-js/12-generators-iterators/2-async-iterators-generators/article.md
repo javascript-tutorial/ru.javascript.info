@@ -8,7 +8,13 @@
 
 Асинхронные итераторы похожи на обычные итераторы, но имеют некоторые синтаксические отличия.
 
+<<<<<<< HEAD
 "Обычный" перебираемый объект, как подробно рассказано в главе <info:iterable>, выглядит примерно так:
+=======
+Asynchronous iterators are similar to regular iterators, with a few syntactic differences.
+
+A "regular" iterable object, as described in the chapter <info:iterable>, looks like this:
+>>>>>>> 14e4e9f96bcc2bddc507f409eb4716ced897f91a
 
 ```js run
 let range = {
@@ -70,15 +76,25 @@ let range = {
       current: this.from,
       last: this.to,
 
+<<<<<<< HEAD
       // next() вызывается на каждой итерации цикла for await..of
+=======
+      // next() is called on each iteration by the for await..of loop
+>>>>>>> 14e4e9f96bcc2bddc507f409eb4716ced897f91a
 *!*
       async next() { // (2)
         // должен возвращать значение как объект {done:.., value :...}
         // (автоматически оборачивается в промис с помощью async)
 */!*
 
+<<<<<<< HEAD
         // можно использовать await внутри для асинхронности:
+=======
+*!*
+        // can use await inside, do async stuff:
+>>>>>>> 14e4e9f96bcc2bddc507f409eb4716ced897f91a
         await new Promise(resolve => setTimeout(resolve, 1000)); // (3)
+*/!*
 
         if (this.current <= this.last) {
           return { done: false, value: this.current++ };
@@ -116,11 +132,18 @@ let range = {
 | `next()` возвращает              | любое значение         | промис  |
 | для цикла используйте                          | `for..of`         | `for await..of` |
 
+<<<<<<< HEAD
 
 ````warn header="Оператор расширения `...` не работает асинхронно"
 Функции, которые требуют обычных синхронных итераторов, не работают с асинхронными.
 
 Например, оператор расширения (три точки `...`) не будет работать:
+=======
+````warn header="The spread syntax `...` doesn't work asynchronously"
+Features that require regular, synchronous iterators, don't work with asynchronous ones.
+
+For instance, a spread syntax won't work:
+>>>>>>> 14e4e9f96bcc2bddc507f409eb4716ced897f91a
 ```js
 alert( [...range] ); // Ошибка, нет Symbol.iterator
 ```
@@ -181,7 +204,11 @@ for(let value of generateSequence(1, 5)) {
 
 Это действительно очень просто. Мы добавляем ключевое слово `async`, и внутри генератора теперь можно использовать `await`, а также промисы и другие асинхронные функции.
 
+<<<<<<< HEAD
 С технической точки зрения, ещё одно отличие асинхронного генератора заключается в том, что его метод `generator.next()` теперь тоже асинхронный и возвращает промисы.
+=======
+Technically, another difference of an async generator is that its `generator.next()` method is now asynchronous also, it returns promises.
+>>>>>>> 14e4e9f96bcc2bddc507f409eb4716ced897f91a
 
 Из обычного генератора мы можем получить значения при помощи `result = generator.next()`. Для асинхронного нужно добавить `await`, вот так:
 
@@ -264,15 +291,25 @@ let range = {
 
 До сих пор мы видели простые примеры, чтобы просто получить базовое представление. Теперь давайте рассмотрим реальную ситуацию.
 
+<<<<<<< HEAD
 Есть много онлайн-сервисов, которые предоставляют данные постранично. Например, когда нам нужен список пользователей, запрос возвращает предопределённое количество (например, 100) пользователей - "одну страницу", и URL следующей страницы.
 
 Этот подход очень распространён, и речь не только о пользователях, а о чём угодно. Например, GitHub позволяет получать коммиты таким образом, с разбивкой по страницам:
+=======
+There are many online services that deliver paginated data. For instance, when we need a list of users, a request returns a pre-defined count (e.g. 100 users) - "one page", and provides a URL to the next page.
+
+This pattern is very common. It's not about users, but just about anything. For instance, GitHub allows to retrieve commits in the same, paginated fashion:
+>>>>>>> 14e4e9f96bcc2bddc507f409eb4716ced897f91a
 
 - Нужно сделать запрос на URL в виде `https://api.github.com/repos/<repo>/commits`.
 - В ответ придёт JSON с 30 коммитами, а также со ссылкой на следующую страницу в заголовке `Link`.
 - Затем можно использовать эту ссылку для следующего запроса, чтобы получить дополнительную порцию коммитов, и так далее.
 
+<<<<<<< HEAD
 Но нам бы, конечно же, хотелось вместо этого сложного взаимодействия иметь просто объект с коммитами, которые можно перебирать, вот так:
+=======
+But we'd like to have a simpler API: an iterable object with commits, so that we could go over them like this:
+>>>>>>> 14e4e9f96bcc2bddc507f409eb4716ced897f91a
 
 ```js
 let repo = 'javascript-tutorial/en.javascript.info'; // репозиторий на GitHub, откуда брать коммиты
@@ -282,7 +319,11 @@ for await (let commit of fetchCommits(repo)) {
 }
 ```
 
+<<<<<<< HEAD
 Мы бы хотели сделать функцию `fetchCommits(repo)`, которая будет получать коммиты, делая запросы всякий раз, когда это необходимо. И пусть она сама разбирается со всем, что касается нумерации страниц, для нас это будет просто `for await..of`.
+=======
+We'd like to make a function `fetchCommits(repo)` that gets commits for us, making requests whenever needed. And let it care about all pagination stuff. For us it'll be a simple `for await..of`.
+>>>>>>> 14e4e9f96bcc2bddc507f409eb4716ced897f91a
 
 С асинхронными генераторами это довольно легко реализовать:
 

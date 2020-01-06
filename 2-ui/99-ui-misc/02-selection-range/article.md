@@ -426,10 +426,17 @@ From <input id="start" type="number" value=1> – To <input id="end" type="numbe
 
 Элементы форм, такие как `input` и `textarea`, предоставляют [отдельное API для выделения](https://html.spec.whatwg.org/#textFieldSelection). Так как значения полей представляют собой простой текст, а не HTML, и нам не нужны такие сложные объекты, как `Range` и `Selection`.
 
+<<<<<<< HEAD
 Свойства:
 - `input.selectionStart` -- позиция начала выделения (это свойство можно изменять),
 - `input.selectionEnd` -- позиция конца выделения (это свойство можно изменять),
 - `input.selectionDirection` -- направление выделения, одно из: "forward" (вперёд), "backward" (назад) или "none" (без направления, если, к примеру, выделено с помощью двойного клика мыши).
+=======
+Properties:
+- `input.selectionStart` -- position of selection start (writeable),
+- `input.selectionEnd` -- position of selection end (writeable),
+- `input.selectionDirection` -- selection direction, one of: "forward", "backward" or "none" (if e.g. selected with a double mouse click),
+>>>>>>> 14e4e9f96bcc2bddc507f409eb4716ced897f91a
 
 События:
 - `input.onselect` -- срабатывает, когда начинается выделение.
