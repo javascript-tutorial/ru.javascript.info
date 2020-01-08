@@ -1,7 +1,7 @@
 
 # Перепишите с использованием функции-стрелки
 
-Замените код Function Expression стрелочной функцией:
+Замените код Function Declaration стрелочной функцией:
 
 ```js run
 function ask(question, yes, no) {
