@@ -20,7 +20,11 @@ alert( rabbit.eats ); // true
 ```
 
 
+<<<<<<< HEAD
 1. Добавим одну строчку (выделенную в коде ниже). Что вызов `alert` покажет нам сейчас?
+=======
+1. We added one more string (emphasized). What will `alert` show now?
+>>>>>>> a4a84083a7656f2b25de8b766b2457d3aae17874
 
     ```js
     function Rabbit() {}
@@ -54,7 +58,11 @@ alert( rabbit.eats ); // true
     alert( rabbit.eats ); // ?
     ```
 
+<<<<<<< HEAD
 3. Или такой (заменили одну строчку)?
+=======
+3. And like this (replaced one line)?
+>>>>>>> a4a84083a7656f2b25de8b766b2457d3aae17874
 
     ```js
     function Rabbit() {}

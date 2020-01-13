@@ -187,8 +187,13 @@ alert( document.body.tagName ); // BODY
 
 Если мы имеем дело только с элементами, то можно использовать `tagName` или `nodeName`, нет разницы.
 
+<<<<<<< HEAD
 ```smart header="Имена тегов (кроме XHTML) всегда пишутся в верхнем регистре"
 В браузере существуют два режима обработки документа: HTML и XML. HTML-режим обычно используется для веб-страниц. XML-режим включается, если браузер получает XML-документ с заголовком: `Content-Type: application/xml+xhtml`.
+=======
+```smart header="The tag name is always uppercase except in XML mode"
+The browser has two modes of processing documents: HTML and XML. Usually the HTML-mode is used for webpages. XML-mode is enabled when the browser receives an XML-document with the header: `Content-Type: application/xml+xhtml`.
+>>>>>>> a4a84083a7656f2b25de8b766b2457d3aae17874
 
 В HTML-режиме значения `tagName/nodeName` всегда записаны в верхнем регистре. Будет выведено `BODY` вне зависимости от того, как записан тег в HTML `<body>` или `<BoDy>`.
 
@@ -285,7 +290,11 @@ elem.innerHTML = elem.innerHTML + "..."
 </script>
 ```
 
+<<<<<<< HEAD
 **Будьте осторожны: в отличие от `innerHTML`, запись в `outerHTML` не изменяет элемент. Вместо этого элемент заменяется целиком во внешнем контексте.**
+=======
+**Beware: unlike `innerHTML`, writing to `outerHTML` does not change the element. Instead, it replaces it in the DOM.**
+>>>>>>> a4a84083a7656f2b25de8b766b2457d3aae17874
 
 Да, звучит странно, и это действительно необычно, поэтому здесь мы и отмечаем это особо.
 
@@ -303,7 +312,11 @@ elem.innerHTML = elem.innerHTML + "..."
   div.outerHTML = '<p>Новый элемент</p>'; // (*)
 
 *!*
+<<<<<<< HEAD
   // Содержимое div осталось тем же!
+=======
+  // Wow! 'div' is still the same!
+>>>>>>> a4a84083a7656f2b25de8b766b2457d3aae17874
 */!*
   alert(div.outerHTML); // <div>Привет, мир!</div> (**)
 </script>
@@ -311,6 +324,7 @@ elem.innerHTML = elem.innerHTML + "..."
 
 Какая-то магия, да?
 
+<<<<<<< HEAD
 В строке `(*)` мы заменили `div` на `<p>Новый элемент</p>`. Во внешнем документе мы видим новое содержимое вместо `<div>`. Но, как видно в строке (`**`), старая переменная `div` осталась прежней!
 
 Это потому, что использование `outerHTML` не изменяет DOM-элемент, а удаляет его из внешнего контекста и вставляет вместо него новый HTML-код.
@@ -319,10 +333,24 @@ elem.innerHTML = elem.innerHTML + "..."
 - `div` был удалён из документа.
 - Вместо него был вставлен другой HTML `<p>Новый элемент</p>`.
 - В `div` осталось старое значение. Новый HTML не сохранён ни в какой переменной.
+=======
+In the line `(*)` we replaced `div` with `<p>A new element</p>`. In the outer document (the DOM) we can see the new content instead of the `<div>`. But, as we can see in line `(**)`, the value of the old `div` variable hasn't changed!
+
+The `outerHTML` assignment does not modify the DOM element (the object referenced by, in this case, the variable 'div'), but removes it from the DOM and inserts the new HTML in its place.
+
+So what happened in `div.outerHTML=...` is:
+- `div` was removed from the document.
+- Another piece of HTML `<p>A new element</p>` was inserted in its place.
+- `div` still has its old value. The new HTML wasn't saved to any variable.
+>>>>>>> a4a84083a7656f2b25de8b766b2457d3aae17874
 
 Здесь легко сделать ошибку: заменить `div.outerHTML`, а потом продолжить работать с `div`, как будто там новое содержимое. Но это не так. Подобное верно для `innerHTML`, но не для `outerHTML`.
 
+<<<<<<< HEAD
 Мы можем писать в `elem.outerHTML`, но надо иметь в виду, что это не меняет элемент, в который мы пишем. Вместо этого создаётся новый HTML на его месте. Мы можем получить ссылки на новые элементы, обратившись к DOM.
+=======
+We can write to `elem.outerHTML`, but should keep in mind that it doesn't change the element we're writing to ('elem'). It puts the new HTML in its place instead. We can get references to the new elements by querying the DOM.
+>>>>>>> a4a84083a7656f2b25de8b766b2457d3aae17874
 
 ## nodeValue/data: содержимое текстового узла
 
@@ -475,7 +503,11 @@ elem.innerHTML = elem.innerHTML + "..."
 Главные свойства DOM-узла:
 
 `nodeType`
+<<<<<<< HEAD
 : Свойство `nodeType` позволяет узнать тип DOM-узла. Его значение - числовое: `1` для элементов,`3` для текстовых узлов, и т.д. Только для чтения.
+=======
+: We can use it to see if a node is a text or an element node. It has a numeric value: `1` for elements,`3` for text nodes, and a few others for other node types. Read-only.
+>>>>>>> a4a84083a7656f2b25de8b766b2457d3aae17874
 
 `nodeName/tagName`
 : Для элементов это свойство возвращает название тега (записывается в верхнем регистре, за исключением XML-режима). Для узлов-неэлементов `nodeName` описывает, что это за узел. Только для чтения.
@@ -497,4 +529,8 @@ elem.innerHTML = elem.innerHTML + "..."
 
 В зависимости от своего класса DOM-узлы имеют и другие свойства. Например у элементов `<input>` (`HTMLInputElement`) есть свойства `value`, `type`, у элементов `<a> (`HTMLAnchorElement`) есть `href` и т.д. Большинство стандартных HTML-атрибутов имеют соответствующие свойства DOM.
 
+<<<<<<< HEAD
 Впрочем, HTML-атрибуты и свойства DOM не всегда одинаковы, мы увидим это в следующей главе.
+=======
+However, HTML attributes and DOM properties are not always the same, as we'll see in the next chapter.
+>>>>>>> a4a84083a7656f2b25de8b766b2457d3aae17874

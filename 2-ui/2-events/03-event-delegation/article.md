@@ -21,9 +21,15 @@
     <th colspan="3">Квадрат <em>Bagua</em>: Направление, Элемент, Цвет, Значение</th>
   </tr>
   <tr>
+<<<<<<< HEAD
     <td>...<strong>Северо-Запад</strong>...</td>
     <td>...</td>
     <td>...</td>
+=======
+    <td class="nw"><strong>Northwest</strong><br>Metal<br>Silver<br>Elders</td>
+    <td class="n">...</td>
+    <td class="ne">...</td>
+>>>>>>> a4a84083a7656f2b25de8b766b2457d3aae17874
   </tr>
   <tr>...ещё 2 строки такого же вида...</tr>
   <tr>...ещё 2 строки такого же вида...</tr>
@@ -163,7 +169,11 @@ table.onclick = function(event) {
 
 Обратите внимание, что метод `this.onClick` в строке, отмеченной звёздочкой `(*)`, привязывается к контексту текущего объекта `this`. Это важно, т.к. иначе `this` внутри него будет ссылаться на DOM-элемент (`elem`), а не на объект `Menu`, и `this[action]` будет не тем, что нам нужно.
 
+<<<<<<< HEAD
 Так что же даёт нам здесь делегирование?
+=======
+So, what advantages does delegation give us here?
+>>>>>>> a4a84083a7656f2b25de8b766b2457d3aae17874
 
 ```compare
 + Не нужно писать код, чтобы присвоить обработчик каждой кнопке. Достаточно просто создать один метод и поместить его в разметку.
@@ -242,13 +252,21 @@ table.onclick = function(event) {
 
 Мы можем комбинировать несколько вариантов поведения на одном элементе.
 
+<<<<<<< HEAD
 Шаблон "поведение" может служить альтернативой для фрагментов JS-кода в вёрстке.
+=======
+The "behavior" pattern can be an alternative to mini-fragments of JavaScript.
+>>>>>>> a4a84083a7656f2b25de8b766b2457d3aae17874
 
 ## Итого
 
 Делегирование событий -- это здорово! Пожалуй, это один из самых полезных приёмов для работы с DOM.
 
+<<<<<<< HEAD
 Он часто используется, если есть много элементов, обработка которых очень схожа, но не только для этого.
+=======
+It's often used to add the same handling for many similar elements, but not only for that.
+>>>>>>> a4a84083a7656f2b25de8b766b2457d3aae17874
 
 Алгоритм:
 
@@ -259,14 +277,25 @@ table.onclick = function(event) {
 Зачем использовать:
 
 ```compare
+<<<<<<< HEAD
 + Упрощает процесс инициализации и экономит память: не нужно вешать много обработчиков.
 + Меньше кода: при добавлении и удалении элементов не нужно ставить или снимать обработчики.
 + Удобство изменений DOM: можно массово добавлять или удалять элементы путём изменения `innerHTML` и ему подобных.
+=======
++ Simplifies initialization and saves memory: no need to add many handlers.
++ Less code: when adding or removing elements, no need to add/remove handlers.
++ DOM modifications: we can mass add/remove elements with `innerHTML` and the like.
+>>>>>>> a4a84083a7656f2b25de8b766b2457d3aae17874
 ```
 
 Конечно, у делегирования событий есть свои ограничения:
 
 ```compare
+<<<<<<< HEAD
 - Во-первых, событие должно всплывать. Некоторые события этого не делают. Также, низкоуровневые обработчики не должны вызывать `event.stopPropagation()`.
 - Во-вторых, делегирование создаёт дополнительную нагрузку на браузер, ведь обработчик запускается, когда событие происходит в любом месте контейнера, не обязательно на элементах, которые нам интересны. Но обычно эта нагрузка настолько пустяковая, что её даже не стоит принимать во внимание.
+=======
+- First, the event must be bubbling. Some events do not bubble. Also, low-level handlers should not use `event.stopPropagation()`.
+- Second, the delegation may add CPU load, because the container-level handler reacts on events in any place of the container, no matter whether they interest us or not. But usually the load is negligible, so we don't take it into account.
+>>>>>>> a4a84083a7656f2b25de8b766b2457d3aae17874
 ```

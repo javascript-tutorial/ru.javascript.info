@@ -8,9 +8,15 @@
 
 Это аналогия из реальной жизни для ситуаций, с которыми мы часто сталкиваемся в программировании:
 
+<<<<<<< HEAD
 1. Есть "создающий" код, который делает что-то, что занимает время. Например, загружает данные по сети. В нашей аналогии это - "певец".
 2. Есть "потребляющий" код, который хочет получить результат "создающего" кода, когда он будет готов. Он может быть необходим более чем одной функции. Это - "фанаты".
 3. `Promise` (по англ. `promise`, будем называть такой объект "промис") - это специальный объект в JavaScript, который связывает "создающий" и "потребляющий" коды вместе. В терминах нашей аналогии - это "список для подписки". "Создающий" код может выполняться сколько потребуется, чтобы получить результат, а *промис* делает результат доступным для кода, который подписан на него, когда результат готов.
+=======
+1. A "producing code" that does something and takes time. For instance, some code that loads the data over a network. That's a "singer".
+2. A "consuming code" that wants the result of the "producing code" once it's ready. Many functions  may need that result. These are the "fans".
+3. A *promise* is a special JavaScript object that links the "producing code" and the "consuming code" together. In terms of our analogy: this is the "subscription list". The "producing code" takes whatever time it needs to produce the promised result, and the "promise" makes that result available to all of the subscribed code when it's ready.
+>>>>>>> a4a84083a7656f2b25de8b766b2457d3aae17874
 
 Аналогия не совсем точна, потому что объект `Promise` в JavaScript гораздо сложнее простого списка подписок: он обладает дополнительными возможностями и ограничениями. Но для начала и такая аналогия хороша.
 
@@ -23,7 +29,11 @@ let promise = new Promise(function(resolve, reject) {
 });
 ```
 
+<<<<<<< HEAD
 Функция, переданная в конструкцию `new Promise`, называется *исполнитель* (executor). Когда `Promise` создаётся, она запускается автоматически. Она должна содержать "создающий" код, который когда-нибудь создаст результат. В терминах нашей аналогии: *исполнитель* - это "певец".
+=======
+The function passed to `new Promise` is called the *executor*. When `new Promise` is created, the executor runs automatically. It contains the producing code which should eventually produce the result. In terms of the analogy above: the executor is the "singer".
+>>>>>>> a4a84083a7656f2b25de8b766b2457d3aae17874
 
 Её аргументы `resolve` и `reject` - это колбэки, которые предоставляет сам JavaScript. Наш код - только внутри исполнителя.
 
@@ -32,7 +42,11 @@ let promise = new Promise(function(resolve, reject) {
 - `resolve(value)` — если работа завершилась успешно, с результатом `value`.
 - `reject(error)` — если произошла ошибка, `error` - объект ошибки.
 
+<<<<<<< HEAD
 Итак, исполнитель запускается автоматически, он должен выполнить работу, а затем вызвать `resolve` или `reject`.
+=======
+So to summarize: the executor runs automatically, it should do a job, and then call either `resolve` or `reject`.
+>>>>>>> a4a84083a7656f2b25de8b766b2457d3aae17874
 
 У объекта `promise`, возвращаемого конструктором `new Promise`, есть внутренние свойства:
 
@@ -58,8 +72,13 @@ let promise = new Promise(function(resolve, reject) {
 
 Мы можем наблюдать две вещи, запустив код выше:
 
+<<<<<<< HEAD
 1. Функция-исполнитель запускается сразу же при вызове `new Promise`.
 2. Исполнитель получает два аргумента: `resolve` и `reject` — это функции, встроенные в JavaScript, поэтому нам не нужно их писать. Нам нужно лишь позаботиться, чтобы исполнитель вызвал одну из них по готовности.
+=======
+1. The executor is called automatically and immediately (by `new Promise`).
+2. The executor receives two arguments: `resolve` and `reject` — these functions are pre-defined by the JavaScript engine. So we don't need to create them. We should only call one of them when ready.
+>>>>>>> a4a84083a7656f2b25de8b766b2457d3aae17874
 
 Спустя одну секунду "обработки" исполнитель вызовет `resolve("done")`, чтобы передать результат:
 
@@ -80,7 +99,11 @@ let promise = new Promise(function(resolve, reject) {
 
 Подведём промежуточные итоги: исполнитель выполняет задачу (что-то, что обычно требует времени), затем вызывает `resolve` или `reject`, чтобы изменить состояние соответствующего `Promise`.
 
+<<<<<<< HEAD
 Промис - и успешный, и отклонённый будем называть "завершённым", в отличие от изначального промиса "в ожидании".
+=======
+A promise that is either resolved or rejected is called "settled", as opposed to an initially "pending" promise.
+>>>>>>> a4a84083a7656f2b25de8b766b2457d3aae17874
 
 ````smart header="Может быть что-то одно: либо результат, либо ошибка"
 Исполнитель должен вызвать что-то одно: `resolve` или `reject`. Состояние промиса может быть изменено только один раз.
@@ -203,8 +226,13 @@ let promise = new Promise((resolve, reject) => {
 });
 
 *!*
+<<<<<<< HEAD
 // .catch(f) это тоже самое, что promise.then(null, f)
 promise.catch(alert); // выведет "Error: Ошибка!" спустя одну секунду
+=======
+// .catch(f) is the same as .then(null, f)
+promise.catch(alert); // shows "Error: Whoops!" after 1 second
+>>>>>>> a4a84083a7656f2b25de8b766b2457d3aae17874
 */!*
 ```
 
@@ -261,8 +289,13 @@ new Promise((resolve, reject) => {
 
 3. Последнее, но не менее значимое: вызов `.finally(f)` удобнее, чем `.then(f, f)` - не надо дублировать функции f.
 
+<<<<<<< HEAD
 ````smart header="На завершённых промисах обработчики запускаются сразу"
 Если промис в состоянии ожидания, обработчики в `.then/catch/finally` будут ждать его. Однако, если промис уже завершён, то обработчики выполнятся сразу:
+=======
+````smart header="On settled promises handlers run immediately"
+If a promise is pending, `.then/catch/finally` handlers wait for it. Otherwise, if a promise has already settled, they execute immediately:
+>>>>>>> a4a84083a7656f2b25de8b766b2457d3aae17874
 
 ```js run
 // при создании промиса он сразу переводится в состояние "успешно завершён"
@@ -270,9 +303,17 @@ let promise = new Promise(resolve => resolve("готово!"));
 
 promise.then(alert); // готово! (выведется сразу)
 ```
+
+Note that this is different, and more powerful than the real life "subscription list" scenario. If the singer has already released their song and then a person signs up on the subscription list, they probably won't receive that song. Subscriptions in real life must be done prior to the event.
+
+Promises are more flexible. We can add handlers any time: if the result is already there, our handlers get it immediately.
 ````
 
+<<<<<<< HEAD
 Теперь рассмотрим несколько практических примеров того, как промисы могут облегчить нам написание асинхронного кода.
+=======
+Next, let's see more practical examples of how promises can help us write asynchronous code.
+>>>>>>> a4a84083a7656f2b25de8b766b2457d3aae17874
 
 ## Пример: loadScript [#loadscript]
 

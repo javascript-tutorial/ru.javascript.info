@@ -10,9 +10,15 @@ message = 123456;
 
 Языки программирования, в которых такое возможно, называются "динамически типизированными". Это значит, что типы данных есть, но переменные не привязаны ни к одному из них.
 
+<<<<<<< HEAD
 Есть семь основных типов данных в JavaScript. В этой главе мы рассмотрим их в общем, а в следующих главах поговорим подробнее о каждом.
 
 ## Число
+=======
+There are eight basic data types in JavaScript. Here, we'll cover them in general and in the next chapters we'll talk about each of them in detail.
+
+## Number
+>>>>>>> a4a84083a7656f2b25de8b766b2457d3aae17874
 
 ```js
 let n = 123;
@@ -62,14 +68,43 @@ n = 12.345;
 
 Подробнее о работе с числами мы поговорим в главе  <info:number>.
 
+<<<<<<< HEAD
 ## Строка
+=======
+## BigInt
+
+In JavaScript, the "number" type cannot represent integer values larger than <code>2<sup>53</sup></code> (or less than <code>-2<sup>53</sup></code> for negatives), that's a technical limitation caused by their internal representation. That's about 16 decimal digits, so for most purposes the limitation isn't a problem, but sometimes we need really big numbers, e.g. for cryptography or microsecond-precision timestamps.
+
+`BigInt` type was recently added to the language to represent integers of arbitrary length.
+
+A `BigInt` is created by appending `n` to the end of an integer literal:
+
+```js
+// the "n" at the end means it's a BigInt
+const bigInt = 1234567890123456789012345678901234567890n;
+```
+
+As `BigInt` numbers are rarely needed, we devoted them a separate chapter <info:bigint>.
+
+```smart header="Compatability issues"
+Right now `BigInt` is supported in Firefox and Chrome, but not in Safari/IE/Edge.
+```
+
+## String
+>>>>>>> a4a84083a7656f2b25de8b766b2457d3aae17874
 
 Строка (`string`) в JavaScript должна быть заключена в кавычки.
 
 ```js
+<<<<<<< HEAD
 let str = "Привет";
 let str2 = 'Одинарные кавычки тоже подойдут';
 let phrase = `Обратные кавычки позволяют встраивать переменные ${str}`;
+=======
+let str = "Hello";
+let str2 = 'Single quotes are ok too';
+let phrase = `can embed another ${str}`;
+>>>>>>> a4a84083a7656f2b25de8b766b2457d3aae17874
 ```
 
 В JavaScript существует три типа кавычек.
@@ -78,7 +113,11 @@ let phrase = `Обратные кавычки позволяют встраив�
 2. Одинарные кавычки: `'Привет'`.
 3. Обратные кавычки: <code>&#96;Привет&#96;</code>.
 
+<<<<<<< HEAD
 Двойные или одинарные кавычки являются "простыми", между ними нет разницы в JavaScript.
+=======
+Double and single quotes are "simple" quotes. There's practically no difference between them in JavaScript.
+>>>>>>> a4a84083a7656f2b25de8b766b2457d3aae17874
 
 Обратные кавычки же имеют "расширенный функционал". Они позволяют нам встраивать выражения в строку, заключая их в `${…}`. Например:
 
@@ -101,13 +140,22 @@ alert( "результат: ${1 + 2}" ); // результат: ${1 + 2} (дво
 
 Мы рассмотрим строки более подробно в главе <info:string>.
 
+<<<<<<< HEAD
 ```smart header="Нет отдельного типа данных для одного символа."
 В некоторых языках, например C и Java, для хранения одного символа, например `"a"` или `"%"`, существует отдельный тип. В языках C и Java это `char`.
+=======
+```smart header="There is no *character* type."
+In some languages, there is a special "character" type for a single character. For example, in the C language and in Java it is called "char".
+>>>>>>> a4a84083a7656f2b25de8b766b2457d3aae17874
 
 В JavaScript подобного типа нет, есть только тип `string`. Строка может содержать один символ или множество.
 ```
 
+<<<<<<< HEAD
 ## Булевый (логический) тип
+=======
+## Boolean (logical type)
+>>>>>>> a4a84083a7656f2b25de8b766b2457d3aae17874
 
 Булевый тип (`boolean`) может принимать только два значения: `true` (истина) и `false` (ложь).
 
@@ -198,6 +246,8 @@ typeof undefined // "undefined"
 
 typeof 0 // "number"
 
+typeof 10n // "bigint"
+
 typeof true // "boolean"
 
 typeof "foo" // "string"
@@ -223,6 +273,7 @@ typeof alert // "function"  (3)
 2. Результатом вызова `typeof null` является `"object"`. Это неверно. Это официально признанная ошибка в `typeof`, сохранённая для совместимости. Конечно, `null` не является объектом. Это специальное значение с отдельным типом. Повторимся, это ошибка в языке.
 3. Вызов `typeof alert` возвращает `"function"`, потому что `alert` является функцией. Мы изучим функции в следующих главах, где заодно увидим, что в JavaScript нет специального типа "функция". Функции относятся к объектному типу. Но `typeof` обрабатывает их особым образом, возвращая `"function"`. Формально это неверно, но очень удобно на практике.
 
+<<<<<<< HEAD
 
 ## Итого
 
@@ -235,6 +286,20 @@ typeof alert // "function"  (3)
 - `undefined` для неприсвоенных значений -- отдельный тип, имеющий одно значение `undefined`.
 - `object` для более сложных структур данных.
 - `symbol` для уникальных идентификаторов.
+=======
+## Summary
+
+There are 8 basic data types in JavaScript.
+
+- `number` for numbers of any kind: integer or floating-point, integers are limited by ±2<sup>53</sup>.
+- `bigint` is for integer numbers of arbitrary length.
+- `string` for strings. A string may have one or more characters, there's no separate single-character type.
+- `boolean` for `true`/`false`.
+- `null` for unknown values -- a standalone type that has a single value `null`.
+- `undefined` for unassigned values -- a standalone type that has a single value `undefined`.
+- `object` for more complex data structures.
+- `symbol` for unique identifiers.
+>>>>>>> a4a84083a7656f2b25de8b766b2457d3aae17874
 
 Оператор `typeof` позволяет нам увидеть, какой тип данных сохранён в переменной.
 

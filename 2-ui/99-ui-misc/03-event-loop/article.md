@@ -335,5 +335,9 @@ alert("code");
 
 Web Workers могут обмениваться сообщениями с основным процессом, но они имеют свои переменные и свой событийный цикл.
 
+<<<<<<< HEAD
 Web Workers не имеют доступа к DOM, поэтому основное их применение - вычисления. Они позволяют задействовать несколько ядер процессора одновременно.
+=======
+Web Workers do not have access to DOM, so they are useful, mainly, for calculations, to use multiple CPU cores simultaneously.
+>>>>>>> a4a84083a7656f2b25de8b766b2457d3aae17874
 ```
