@@ -493,7 +493,7 @@ books.get('js')
 // получить все книги с 'css' < id < 'html'
 books.getAll(IDBKeyRange.bound('css', 'html'))
 
-// получить книги с 'html' <= id
+// получить книги с 'html' >= id
 books.getAll(IDBKeyRange.lowerBound('html', true))
 
 // получить все книги
