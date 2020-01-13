@@ -258,7 +258,7 @@ When PRs are merged, make sure to mark that page as completed!
 * [ ] Lookahead and lookbehind
 * [ ] Infinite backtracking problem
 * [ ] Unicode: flag "u"
-* [ ] Unicode character properies \p
+* [ ] Unicode character properties \p
 * [ ] Sticky flag "y", searching at position
 
 ## Miscellaneous

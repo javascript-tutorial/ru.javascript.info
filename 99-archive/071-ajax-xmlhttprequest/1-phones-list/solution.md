@@ -46,7 +46,7 @@ function showPhones(phones) {
 */!*
 ```
 
-Полное решение с возможнотью скачать:
+Полное решение с возможностью скачать:
 
 [codetabs src="phones-list" height="100"]
 

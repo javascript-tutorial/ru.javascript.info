@@ -182,7 +182,7 @@ event: leave
 data: Боб
 ```
 
-Чтобы начать слушать пользователькие события, нужно использовать `addEventListener`, а не `onmessage`:
+Чтобы начать слушать пользовательские события, нужно использовать `addEventListener`, а не `onmessage`:
 
 ```js
 eventSource.addEventListener('join', event => {
