@@ -49,7 +49,7 @@
    var elemToMove = avatarInfo.dragZoneElem.parentNode; // <LI>
    var title = avatarInfo.dragZoneElem.innerHTML; // переносимый заголовок
 
-   // получить контейнер для узлов дерева, соответствующий точке преземления
+   // получить контейнер для узлов дерева, соответствующий точке приземления
    var ul = this._targetElem.parentNode.getElementsByTagName('UL')[0];
    if (!ul) { // нет детей, создадим контейнер
      ul = document.createElement('UL');
