@@ -8,6 +8,15 @@ describe("filterRange", function() {
 
     assert.deepEqual(filtered, [3, 1]);
   });
+  
+  it("returns the reverse filtered values", function() {
+
+    let arr = [5, 3, 8, 1];
+
+    let filtered = filterRange(arr, 4, 1); 
+
+    assert.deepEqual(filtered, [3, 1]);
+  });
 
   it("doesn't change the array", function() {
 
