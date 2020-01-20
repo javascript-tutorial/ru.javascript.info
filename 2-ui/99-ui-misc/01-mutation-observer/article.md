@@ -5,7 +5,11 @@
 
 Сначала мы познакомимся с синтаксисом, а затем разберём примеры использования.
 
+<<<<<<< HEAD
 ## Синтаксис
+=======
+We'll first take a look at the syntax, and then explore a real-world use case, to see where such thing may be useful.
+>>>>>>> db3b3f8e7a08c153ad8fa0ae50633cdf95fa8912
 
 `MutationObserver` очень прост в использовании.
 
@@ -46,7 +50,11 @@ observer.observe(node, config);
 - `attributeName/attributeNamespace` -- имя/пространство имён (для XML) изменённого атрибута,
 - `oldValue` -- предыдущее значение, только для изменений атрибута или текста, если включена соответствующая опция `attributeOldValue`/`characterDataOldValue`.
 
+<<<<<<< HEAD
 Для примера возьмём `<div>` с атрибутом `contentEditable`. Этот атрибут позволяет нам сфокусироваться на элементе, например, кликнув, и отредактировать содержимое.
+=======
+For example, here's a `<div>` with a `contentEditable` attribute. That attribute allows us to focus on it and edit.
+>>>>>>> db3b3f8e7a08c153ad8fa0ae50633cdf95fa8912
 
 ```html run
 <div contentEditable id="elem">Отредактируй <b>меня</b>, пожалуйста</div>
@@ -65,7 +73,11 @@ observer.observe(elem, {
 </script>
 ```
 
+<<<<<<< HEAD
 Теперь, если мы изменим текст внутри `<b>меня</b>`, мы получим единичное изменение:
+=======
+If we run this code in the browser, then focus on the given `<div>` and change the text inside `<b>edit</b>`, `console.log` will show one mutation:
+>>>>>>> db3b3f8e7a08c153ad8fa0ae50633cdf95fa8912
 
 ```js
 mutationRecords = [{
@@ -76,7 +88,11 @@ mutationRecords = [{
 }];
 ```
 
+<<<<<<< HEAD
 Если мы выберем или удалим `<b>меня</b>` полностью, мы получим сразу несколько изменений:
+=======
+If we make more complex editing operations, e.g. remove the `<b>edit</b>`, the mutation event may contain multiple mutation records:
+>>>>>>> db3b3f8e7a08c153ad8fa0ae50633cdf95fa8912
 
 ```js
 mutationRecords = [{
@@ -99,15 +115,27 @@ mutationRecords = [{
 
 ## Использование для интеграции
 
+<<<<<<< HEAD
 Когда это может быть нужно?
+=======
+Imagine the situation when you need to add a third-party script that contains useful functionality, but also does something unwanted, e.g. shows ads `<div class="ads">Unwanted ads</div>`.
+>>>>>>> db3b3f8e7a08c153ad8fa0ae50633cdf95fa8912
 
 Представим ситуацию, когда вы подключаете сторонний скрипт, который добавляет какую-то полезную функциональность на страницу, но при этом делает что-то лишнее, например, показывает рекламу `<div class="ads">Ненужная реклама</div>`.
 
+<<<<<<< HEAD
 Разумеется, сторонний скрипт не даёт каких-то механизмов её убрать.
+=======
+Using `MutationObserver`, we can detect when the unwanted element appears in our DOM and remove it.
+>>>>>>> db3b3f8e7a08c153ad8fa0ae50633cdf95fa8912
 
 Используя `MutationObserver`, мы можем отследить, когда в нашем DOM появится такой элемент и удалить его. А полезный функционал оставить. Хотя, конечно, создатели стороннего скрипта вряд ли обрадуются, что вы их полезный скрипт взяли, а рекламу удалили.
 
+<<<<<<< HEAD
 Есть и другие ситуации, когда сторонний скрипт добавляет что-то в наш документ, и мы хотели бы отследить, когда это происходит, чтобы адаптировать нашу страницу, динамически поменять какие-то размеры и т.п.
+=======
+`MutationObserver` allows to implement this.
+>>>>>>> db3b3f8e7a08c153ad8fa0ae50633cdf95fa8912
 
 `MutationObserver` для этого как раз отлично подходит.
 
@@ -115,7 +143,11 @@ mutationRecords = [{
 
 Есть и ситуации, когда `MutationObserver` хорошо подходит с архитектурной точки зрения.
 
+<<<<<<< HEAD
 Представим, что мы создаём сайт о программировании. Естественно, статьи на нём и другие материалы могут содержать фрагменты с исходным кодом.
+=======
+Such snippet in an HTML markup looks like this:
+>>>>>>> db3b3f8e7a08c153ad8fa0ae50633cdf95fa8912
 
 Такой фрагмент в HTML-разметке выглядит так:
 ```html
@@ -129,7 +161,11 @@ mutationRecords = [{
 
 Также на нашем сайте мы будем использовать JavaScript-библиотеку для подсветки синтаксиса, например [Prism.js](https://prismjs.com/). Вызов метода `Prism.highlightElem(pre)` ищет такие элементы `pre` и добавляет в них стили и теги, которые в итоге дают цветную подсветку синтаксиса, подобно той, которую вы видите в примерах здесь, на этой странице.
 
+<<<<<<< HEAD
 Когда конкретно нам вызвать этот метод подсветки? Можно по событию `DOMContentLoaded` или просто внизу страницы написать код, который будет искать все `pre[class*="language"]` и вызывать `Prism.highlightElem` для них:
+=======
+When exactly to run that highlighting method? We can do it on `DOMContentLoaded` event, or at the bottom of the page. At that moment we have our DOM ready, can search for elements `pre[class*="language"]` and call `Prism.highlightElem` on them:
+>>>>>>> db3b3f8e7a08c153ad8fa0ae50633cdf95fa8912
 
 ```js
 // выделить все примеры кода на странице
@@ -206,12 +242,21 @@ let demoElem = document.getElementById('highlight-demo');
 observer.observe(demoElem, {childList: true, subtree: true});
 ```
 
+<<<<<<< HEAD
 Ниже находится HTML-элемент и JavaScript, который его динамически заполнит примером кода через `innerHTML`.
+=======
+Here, below, there's an HTML-element and JavaScript that dynamically fills it using `innerHTML`.
+>>>>>>> db3b3f8e7a08c153ad8fa0ae50633cdf95fa8912
 
 Пожалуйста, запустите предыдущий код (он наблюдает за этим элементом), а затем код, расположенный ниже. Вы увидите как `MutationObserver` обнаружит и подсветит фрагменты кода.
 
-<p id="highlight-demo" style="border: 1px solid #ddd">Демо-элемент с <code>id="highlight-demo"</code>, за которым следит код примера выше.</p>
+<p id="highlight-demo" style="border: 1px solid #ddd">A demo-element with <code>id="highlight-demo"</code>, run the code above to observe it.</p>
 
+<<<<<<< HEAD
+=======
+The following code populates its `innerHTML`, that causes the `MutationObserver` to react and highlight its contents:
+
+>>>>>>> db3b3f8e7a08c153ad8fa0ae50633cdf95fa8912
 ```js run
 let demoElem = document.getElementById('highlight-demo');
 
@@ -233,14 +278,23 @@ demoElem.innerHTML = `Фрагмент кода ниже:
 
 - `observer.disconnect()` -- останавливает наблюдение.
 
+<<<<<<< HEAD
 Вместе с ним используют метод:
 
 - `mutationRecords = observer.takeRecords()` -- получает список необработанных записей изменений, которые произошли, но колбэк для них ещё не выполнился.
+=======
+When we stop the observing, it might be possible that some changes were not processed by the observer yet.
+
+- `observer.takeRecords()` -- gets a list of unprocessed mutation records, those that happened, but the callback did not handle them.
+
+These methods can be used together, like this:
+>>>>>>> db3b3f8e7a08c153ad8fa0ae50633cdf95fa8912
 
 ```js
 // мы отключаем наблюдатель
 observer.disconnect();
 
+<<<<<<< HEAD
 // он, возможно, не успел обработать некоторые изменения
 let mutationRecords = observer.takeRecords();
 // обработать mutationRecords
@@ -250,6 +304,18 @@ let mutationRecords = observer.takeRecords();
 
 Объекты `MutationObserver` используют внутри себя так называемые ["слабые ссылки"](https://ru.wikipedia.org/wiki/%D0%A1%D0%BB%D0%B0%D0%B1%D0%B0%D1%8F_%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B0) на узлы, за которыми смотрят. Так что если узел удалён из DOM и больше не достижим, то он будет удалён из памяти вне зависимости от наличия наблюдателя.
 
+=======
+// handle unprocessed some mutations
+let mutationRecords = observer.takeRecords();
+...
+```
+
+```smart header="Garbage collection interaction"
+Observers use weak references to nodes internally. That is: if a node is removed from DOM, and becomes unreachable, then it becomes garbage collected.
+
+The mere fact that a DOM node is observed doesn't prevent the garbage collection.
+```
+>>>>>>> db3b3f8e7a08c153ad8fa0ae50633cdf95fa8912
 
 ## Итого
 

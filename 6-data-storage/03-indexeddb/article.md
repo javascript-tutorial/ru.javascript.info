@@ -159,7 +159,11 @@ openRequest.onblocked = function() {
 
 ## Хранилище объектов
 
+<<<<<<< HEAD
 Чтобы сохранить что-то в IndexedDB, нам нужно *хранилище объектов*.
+=======
+To store something in IndexedDB, we need an *object store*.
+>>>>>>> db3b3f8e7a08c153ad8fa0ae50633cdf95fa8912
 
 Хранилище объектов - это основная концепция IndexedDB. В других базах данных это "таблицы" или "коллекции". Здесь хранятся данные. В базе данных может быть множество хранилищ: одно для пользователей, другое для товаров и так далее.
 
@@ -469,10 +473,17 @@ request.onerror = function(event) {
 
 Диапазоны создаются с помощью следующих вызовов:
 
+<<<<<<< HEAD
 - `IDBKeyRange.lowerBound(lower, [open])` означает: `>lower` (или `≥lower`, если `open` это true)
 - `IDBKeyRange.upperBound(upper, [open])` означает: `<upper` (или `≤upper`, если `open` это true)
 - `IDBKeyRange.bound(lower, upper, [lowerOpen], [upperOpen])` означает: между `lower` и `upper`, включительно, если соответствующий `open` равен `true`.
 - `IDBKeyRange.only(key)` -- диапазон, который состоит только из одного ключа `key`, редко используется.
+=======
+- `IDBKeyRange.lowerBound(lower, [open])` means: `≥lower` (or `>lower` if `open` is true)
+- `IDBKeyRange.upperBound(upper, [open])` means: `≤upper` (or `<upper` if `open` is true)
+- `IDBKeyRange.bound(lower, upper, [lowerOpen], [upperOpen])` means: between `lower` and `upper`. If the open flags is true, the corresponding key is not included in the range.
+- `IDBKeyRange.only(key)` -- a range that consists of only one `key`, rarely used.
+>>>>>>> db3b3f8e7a08c153ad8fa0ae50633cdf95fa8912
 
 Все методы поиска принимают аргумент `query`, который может быть либо точным ключом, либо диапазоном ключей:
 
@@ -490,16 +501,28 @@ request.onerror = function(event) {
 // получить одну книгу
 books.get('js')
 
+<<<<<<< HEAD
 // получить все книги с 'css' < id < 'html'
 books.getAll(IDBKeyRange.bound('css', 'html'))
 
 // получить книги с 'html' <= id
 books.getAll(IDBKeyRange.lowerBound('html', true))
+=======
+// get books with 'css' <= id <= 'html'
+books.getAll(IDBKeyRange.bound('css', 'html'))
+
+// get books with id < 'html'
+books.getAll(IDBKeyRange.upperBound('html', true))
+>>>>>>> db3b3f8e7a08c153ad8fa0ae50633cdf95fa8912
 
 // получить все книги
 books.getAll()
 
+<<<<<<< HEAD
 // получить все ключи: id >= 'js'
+=======
+// get all keys: id > 'js'
+>>>>>>> db3b3f8e7a08c153ad8fa0ae50633cdf95fa8912
 books.getAllKeys(IDBKeyRange.lowerBound('js', true))
 ```
 
@@ -579,7 +602,11 @@ request.onsuccess = function() {
 Мы также можем использовать `IDBKeyRange`, чтобы создать диапазон и найти дешёвые/дорогие книги:
 
 ```js
+<<<<<<< HEAD
 // найдём книги, где цена < 5
+=======
+// find books where price <= 5
+>>>>>>> db3b3f8e7a08c153ad8fa0ae50633cdf95fa8912
 let request = priceIndex.getAll(IDBKeyRange.upperBound(5));
 ```
 

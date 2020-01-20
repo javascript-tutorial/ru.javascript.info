@@ -22,10 +22,17 @@ importance: 5
 
 Детали оформления:
 
+<<<<<<< HEAD
 - Отступ от подсказки до элемента с `data-tooltip` должен быть `5px` по высоте.
 - Подсказка должна быть, по возможности, посередине элемента.
 - Подсказка не должна вылезать за границы экрана, в том числе если страница частично прокручена, если нельзя показать сверху -- показывать снизу элемента.
 - Текст подсказки брать из значения атрибута `data-tooltip`. Это может быть произвольный HTML.
+=======
+- The distance between the element and the tooltip should be `5px`.
+- The tooltip should be centered relative to the element, if possible.
+- The tooltip should not cross window edges. Normally it should be above the element, but if the element is at the page top and there's no space for the tooltip, then below it.
+- The tooltip content is given in the `data-tooltip` attribute. It can be arbitrary HTML.
+>>>>>>> db3b3f8e7a08c153ad8fa0ae50633cdf95fa8912
 
 Для решения вам понадобятся два события:
 - `mouseover` срабатывает, когда указатель мыши заходит на элемент.

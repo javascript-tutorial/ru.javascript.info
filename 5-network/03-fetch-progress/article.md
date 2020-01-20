@@ -107,6 +107,10 @@ alert(commits[0].author.login);
     let blob = new Blob(chunks);
     ```
 
+<<<<<<< HEAD
 В итоге у нас есть результат (строки или `Blob`, смотря что удобно) и отслеживание прогресса получения.
+=======
+At the end we have the result (as a string or a blob, whatever is convenient), and progress-tracking in the process.
+>>>>>>> db3b3f8e7a08c153ad8fa0ae50633cdf95fa8912
 
 На всякий случай повторимся, что здесь мы рассмотрели, как отслеживать процесс получения данных с сервера, а не их отправки на сервер. Для отслеживания отправки у `fetch` пока нет способа.

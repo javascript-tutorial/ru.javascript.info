@@ -11,7 +11,11 @@
 
 - `Map`
 - `Set`
+<<<<<<< HEAD
 - `Array` (кроме `arr.values()`)
+=======
+- `Array`
+>>>>>>> db3b3f8e7a08c153ad8fa0ae50633cdf95fa8912
 
 Простые объекты также можно перебирать похожими методами, но синтаксис немного отличается.
 
@@ -98,6 +102,10 @@ let doublePrices = Object.fromEntries(
 alert(doublePrices.meat); // 8
 ```   
 
+<<<<<<< HEAD
 Это может выглядеть сложным на первый взгляд, но становится лёгким для понимания после нескольких раз использования.
 
 Можно делать и более сложные "однострочные" преобразования таким путём. Важно только сохранять баланс, чтобы код при этом был достаточно простым для понимания.
+=======
+It may look difficult from the first sight, but becomes easy to understand after you use it once or twice. We can make powerful chains of transforms this way. 
+>>>>>>> db3b3f8e7a08c153ad8fa0ae50633cdf95fa8912
