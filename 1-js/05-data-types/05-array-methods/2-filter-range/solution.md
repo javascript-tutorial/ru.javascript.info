@@ -1,7 +1,7 @@
 ```js run demo
 function filterRange(arr, a, b) {
   // добавлены скобки вокруг выражения для улучшения читабельности
-  return arr.filter(item => (a <= item && item <= b));
+  return arr.filter(item => (a <= item && item <= b) || (a >= item && item >= b));
 }
 
 let arr = [5, 3, 8, 1];
