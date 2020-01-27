@@ -59,9 +59,15 @@ new Promise((resolve, reject) => {
 ```js run
 new Promise((resolve, reject) => {
 *!*
+<<<<<<< HEAD
   reject(new Error("Ошибка!"));
 */!*  
 }).catch(alert); // Error: Ошибка!
+=======
+  reject(new Error("Whoops!"));
+*/!*
+}).catch(alert); // Error: Whoops!
+>>>>>>> ff042a03191dfad1268219ae78758193a5803b38
 ```
 
 "Невидимый `try..catch`" вокруг промиса автоматически перехватывает ошибку и превращает её в отклонённый промис.
@@ -98,7 +104,11 @@ new Promise((resolve, reject) => {
 
 Как мы уже заметили, `.catch` ведёт себя как `try..catch`. Мы можем иметь столько обработчиков `.then`, сколько мы хотим, и затем использовать один `.catch` в конце, чтобы перехватить ошибки из всех обработчиков.
 
+<<<<<<< HEAD
 В обычном `try..catch` мы можем проанализировать ошибку и повторно пробросить дальше, если не можем её обработать. То же самое возможно для промисов.
+=======
+In a regular `try..catch` we can analyze the error and maybe rethrow it if it can't be handled. The same thing is possible for promises.
+>>>>>>> ff042a03191dfad1268219ae78758193a5803b38
 
 Если мы пробросим (`throw`) ошибку внутри блока `.catch`, то управление перейдёт к следующему ближайшему обработчику ошибок. А если мы обработаем ошибку и завершим работу обработчика нормально, то продолжит работу ближайший успешный обработчик `.then`.
 
@@ -166,11 +176,19 @@ new Promise(function() {
 
 В случае ошибки выполнение должно перейти к ближайшему обработчику ошибок. Но в примере выше нет никакого обработчика. Поэтому ошибка как бы "застревает", её некому обработать.
 
+<<<<<<< HEAD
 На практике, как и при обычных необработанных ошибках в коде, это означает, что что-то пошло сильно не так.
 
 Что происходит, когда обычная ошибка не перехвачена `try..catch`? Скрипт умирает с сообщением в консоли. Похожее происходит и в случае необработанной ошибки промиса.
 
 JavaScript-движок отслеживает такие ситуации и генерирует в этом случае глобальную ошибку. Вы можете увидеть её в консоли, если запустите пример выше.
+=======
+In practice, just like with regular unhandled errors in code, it means that something has gone terribly wrong.
+
+What happens when a regular error occurs and is not caught by `try..catch`? The script dies with a message in the console. A similar thing happens with unhandled promise rejections.
+
+The JavaScript engine tracks such rejections and generates a global error in that case. You can see it in the console if you run the example above.
+>>>>>>> ff042a03191dfad1268219ae78758193a5803b38
 
 В браузере мы можем поймать такие ошибки, используя событие `unhandledrejection`:
 
@@ -198,7 +216,14 @@ new Promise(function() {
 
 ## Итого
 
+<<<<<<< HEAD
 - `.catch` перехватывает все виды ошибок в промисах: будь то вызов `reject()` или ошибка, брошенная в обработчике при помощи `throw`.
 - Необходимо размещать `.catch` там, где мы хотим обработать ошибки и знаем, как это сделать. Обработчик может проанализировать ошибку (могут быть полезны пользовательские классы ошибок) и пробросить её, если ничего не знает о ней (возможно, это программная ошибка).
 - Можно и совсем не использовать `.catch`, если нет нормального способа восстановиться после ошибки.
 - В любом случае нам следует использовать обработчик события `unhandledrejection` (для браузеров и аналог для других окружений), чтобы отслеживать необработанные ошибки и информировать о них пользователя (и, возможно, наш сервер), благодаря чему наше приложение никогда не будет "просто умирать".
+=======
+- `.catch` handles errors in promises of all kinds: be it a `reject()` call, or an error thrown in a handler.
+- We should place `.catch` exactly in places where we want to handle errors and know how to handle them. The handler should analyze errors (custom error classes help) and rethrow unknown ones (maybe they are programming mistakes).
+- It's ok not to use `.catch` at all, if there's no way to recover from an error.
+- In any case we should have the `unhandledrejection` event handler (for browsers, and analogs for other environments) to track unhandled errors and inform the user (and probably our server) about them, so that our app never "just dies".
+>>>>>>> ff042a03191dfad1268219ae78758193a5803b38

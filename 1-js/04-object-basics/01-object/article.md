@@ -325,8 +325,13 @@ let key = "age";
 alert( *!*key*/!* in user ); // true, имя свойства было взято из переменной key
 ```
 
+<<<<<<< HEAD
 ````smart header="Оператор \"in\" для свойств со значением *'undefined'*"
 Обычно строгого сравнения `"=== undefined"` достаточно для проверки наличия свойства. Но есть особый случай, когда оно не подходит, и нужно использовать `"in"`.
+=======
+````smart header="Using \"in\" for properties that store `undefined`"
+Usually, the strict comparison `"=== undefined"` check the property existence just fine. But there's a special case when it fails, but `"in"` works correctly.
+>>>>>>> ff042a03191dfad1268219ae78758193a5803b38
 
 Это когда свойство существует, но содержит значение `undefined`:
 

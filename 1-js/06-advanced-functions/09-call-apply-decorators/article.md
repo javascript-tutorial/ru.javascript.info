@@ -76,7 +76,11 @@ let worker = {
   },
 
   slow(x) {
+<<<<<<< HEAD
     // здесь может быть страшно тяжёлая задача для процессора  
+=======
+    // scary CPU-heavy task here  
+>>>>>>> ff042a03191dfad1268219ae78758193a5803b38
     alert("Called with " + x);
     return x * this.someMethod(); // (*)
   }
@@ -150,7 +154,11 @@ function sayHi() {
 let user = { name: "John" };
 let admin = { name: "Admin" };
 
+<<<<<<< HEAD
 // используем 'call' для передачи различных объектов в качестве 'this'
+=======
+// use call to pass different objects as "this"
+>>>>>>> ff042a03191dfad1268219ae78758193a5803b38
 sayHi.call( user ); // John
 sayHi.call( admin ); // Admin
 ```
@@ -305,14 +313,24 @@ func.apply(context, args)
 Эти два вызова почти эквивалентны:
 
 ```js
+<<<<<<< HEAD
 func.call(context, ...args); // передаёт массив как список с оператором расширения
 func.apply(context, args);   // тот же эффект
+=======
+func.call(context, ...args); // pass an array as list with spread syntax
+func.apply(context, args);   // is same as using apply
+>>>>>>> ff042a03191dfad1268219ae78758193a5803b38
 ```
 
 Есть только одна небольшая разница:
 
+<<<<<<< HEAD
 - Оператор расширения `...` позволяет передавать *перебираемый* объект `args` в виде списка в `call`.
 - А `apply` принимает только *псевдомассив* `args`.
+=======
+- The spread syntax `...` allows to pass *iterable* `args` as the list to `call`.
+- The `apply` accepts only *array-like* `args`.
+>>>>>>> ff042a03191dfad1268219ae78758193a5803b38
 
 Так что эти вызовы дополняют друг друга. Для перебираемых объектов сработает `call`, а где мы ожидаем псевдомассив - `apply`.
 
@@ -376,7 +394,13 @@ function hash() {
 hash(1, 2);
 ```
 
+<<<<<<< HEAD
 Этот трюк называется *заимствование метода*.
+=======
+The trick is called *method borrowing*.
+
+We take (borrow) a join method from a regular array (`[].join`) and use `[].join.call` to run it in the context of `arguments`.
+>>>>>>> ff042a03191dfad1268219ae78758193a5803b38
 
 Мы берём (заимствуем) метод `join` из обычного массива `[].join`. И используем `[].join.call`, чтобы выполнить его в контексте `arguments`.
 

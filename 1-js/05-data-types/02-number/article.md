@@ -1,8 +1,18 @@
 # Числа
 
+<<<<<<< HEAD
 Все числа в JavaScript хранятся в 64-битном формате [IEEE-754](http://en.wikipedia.org/wiki/IEEE_754-1985), который также называют "числа с плавающей точкой двойной точности" (double precision floating point numbers).
 
 Давайте глубже изучим, как работать с числами в JavaScript.
+=======
+In modern JavaScript, there are two types of numbers:
+
+1. Regular numbers in JavaScript are stored in 64-bit format [IEEE-754](https://en.wikipedia.org/wiki/IEEE_754-2008_revision), also known as "double precision floating point numbers". These are numbers that we're using most of the time, and we'll talk about them in this chapter.
+
+2. BigInt numbers, to represent integers of arbitrary length. They are sometimes needed, because a regular number can't exceed <code>2<sup>53</sup></code> or be less than <code>-2<sup>53</sup></code>. As bigints are used in few special areas, we devote them a special chapter <info:bigint>.
+
+So here we'll talk about regular numbers. Let's expand our knowledge of them.
+>>>>>>> ff042a03191dfad1268219ae78758193a5803b38
 
 ## Способы записи числа
 
@@ -29,14 +39,22 @@ alert( 7.3e9 );  // 7.3 миллиардов (7,300,000,000)
 1.23e6 = 1.23 * 1000000
 ```
 
+<<<<<<< HEAD
 
 Сейчас давайте запишем что-нибудь очень маленькое. К примеру, 1 микросекунду (одна миллионная секунды):
+=======
+Now let's write something very small. Say, 1 microsecond (one millionth of a second):
+>>>>>>> ff042a03191dfad1268219ae78758193a5803b38
 
 ```js
 let ms = 0.000001;
 ```
 
+<<<<<<< HEAD
 Записать микросекунду в укороченном виде нам поможет `"e"`.
+=======
+Just like before, using `"e"` can help. If we'd like to avoid writing the zeroes explicitly, we could say the same as:
+>>>>>>> ff042a03191dfad1268219ae78758193a5803b38
 
 ```js
 let ms = 1e-6; // шесть нулей, слева от 1
@@ -201,7 +219,11 @@ alert( 0.1 + 0.2 == 0.3 ); // *!*false*/!*
 alert( 0.1 + 0.2 ); // 0.30000000000000004
 ```
 
+<<<<<<< HEAD
 Ой! Здесь гораздо больше последствий, чем просто некорректное сравнение. Представьте, вы делаете интернет-магазин и посетители формируют заказ из 2-х позиций за `$0.10` и `$0.20`. Итоговый заказ будет `$0.30000000000000004`. Это будет сюрпризом для всех.
+=======
+Ouch! There are more consequences than an incorrect comparison here. Imagine you're making an e-shopping site and the visitor puts `$0.10` and `$0.20` goods into their cart. The order total will be `$0.30000000000000004`. That would surprise anyone.
+>>>>>>> ff042a03191dfad1268219ae78758193a5803b38
 
 Но почему это происходит?
 
@@ -269,14 +291,22 @@ alert( 9999999999999999 ); // покажет 10000000000000000
 ```smart header="Два нуля"
 Другим забавным следствием внутреннего представления чисел является наличие двух нулей: `0` и `-0`.
 
+<<<<<<< HEAD
 Все потому, что знак представлен отдельным битом, так что, любое число может быть положительным и отрицательным, включая нуль.
+=======
+That's because a sign is represented by a single bit, so it can be set or not set for any number including a zero.
+>>>>>>> ff042a03191dfad1268219ae78758193a5803b38
 
 В большинстве случаев это поведение незаметно, так как операторы в JavaScript воспринимают их одинаковыми.
 ```
 
+<<<<<<< HEAD
 
 
 ## Проверка: isFinite и isNaN
+=======
+## Tests: isFinite and isNaN
+>>>>>>> ff042a03191dfad1268219ae78758193a5803b38
 
 Помните эти специальные числовые значения?
 
@@ -407,10 +437,17 @@ alert( parseInt('2n9c', 36) ); // 123456
 
 ## Итого
 
+<<<<<<< HEAD
 Чтобы писать большие числа:
 
 - Используйте краткую форму записи больших чисел - `"e"`, с указанным количеством нулей. Например: `123e6` это `123` с 6-ю нулями.
 - Отрицательное число после `"e"` приводит к делению числа на 1 с указанным количеством нулей.
+=======
+To write numbers with many zeroes:
+
+- Append `"e"` with the zeroes count to the number. Like: `123e6` is the same as `123` with 6 zeroes `123000000`.
+- A negative number after `"e"` causes the number to be divided by 1 with given zeroes. E.g. `123e-6` means `0.000123` (`123` millionths).
+>>>>>>> ff042a03191dfad1268219ae78758193a5803b38
 
 Для других систем счисления:
 

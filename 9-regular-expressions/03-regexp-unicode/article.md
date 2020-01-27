@@ -33,8 +33,13 @@ alert('𝒳'.length); // 2
 
 ## Юникодные свойства \p{...}
 
+<<<<<<< HEAD
 ```warn header="Не поддерживается в Firefox и Edge"
 Несмотря на то, что это часть стандарта с 2018 года, юникодные свойства не поддерживаются в Firefox ([задача](https://bugzilla.mozilla.org/show_bug.cgi?id=1361876)) и Edge ([задача](https://github.com/Microsoft/ChakraCore/issues/2969)).
+=======
+```warn header="Not supported in Firefox and Edge"
+Despite being a part of the standard since 2018, unicode properties are not supported in Firefox ([bug](https://bugzilla.mozilla.org/show_bug.cgi?id=1361876)) and Edge ([bug](https://github.com/Microsoft/ChakraCore/issues/2969)).
+>>>>>>> ff042a03191dfad1268219ae78758193a5803b38
 
 Существует библиотека [XRegExp](http://xregexp.com), которая реализует "расширенные" регулярные выражения с кросс-браузерной поддержкой юникодных свойств.
 ```

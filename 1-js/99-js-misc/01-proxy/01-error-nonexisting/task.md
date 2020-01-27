@@ -27,6 +27,10 @@ user = wrap(user);
 
 alert(user.name); // John
 *!*
+<<<<<<< HEAD
 alert(user.age); // Ошибка: такого свойства не существует
+=======
+alert(user.age); // ReferenceError: Property doesn't exist "age"
+>>>>>>> ff042a03191dfad1268219ae78758193a5803b38
 */!*
 ```

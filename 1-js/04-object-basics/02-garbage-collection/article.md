@@ -153,11 +153,19 @@ family = null;
 
 Согласно этому алгоритму, сборщик мусора регулярно выполняет следующие шаги:
 
+<<<<<<< HEAD
 - Сборщик мусора "помечает" (запоминает) все корневые объекты.
 - Затем он идёт по их ссылкам и помечает все найденные объекты.
 - Затем он идёт по ссылкам помеченных объектов и помечает объекты, на которые есть ссылка от них. Все объекты запоминаются, чтобы в будущем не посещать один и тот же объект дважды.
 - ...И так далее, пока не будут посещены все ссылки (достижимые от корней).
 - Все непомеченные объекты удаляются.
+=======
+- The garbage collector takes roots and "marks" (remembers) them.
+- Then it visits and "marks" all references from them.
+- Then it visits marked objects and marks *their* references. All visited objects are remembered, so as not to visit the same object twice in the future.
+- ...And so on until every reachable (from the roots) references are visited.
+- All objects except marked ones are removed.
+>>>>>>> ff042a03191dfad1268219ae78758193a5803b38
 
 Например, пусть наша структура объектов выглядит так:
 
@@ -181,9 +189,15 @@ family = null;
 
 ![](garbage-collection-5.svg)
 
+<<<<<<< HEAD
 Это и есть принцип работы сборки мусора.
 
 Интерпретаторы JavaScript применяют множество оптимизаций, чтобы сборка мусора работала быстрее и не влияла на производительность.
+=======
+We can also imagine the process as spilling a huge bucket of paint from the roots, that flows through all references and marks all reachable objects. The unmarked ones are then removed.
+
+That's the concept of how garbage collection works. JavaScript engines apply many optimizations to make it run faster and not affect the execution.
+>>>>>>> ff042a03191dfad1268219ae78758193a5803b38
 
 Вот некоторые из оптимизаций:
 
@@ -191,7 +205,11 @@ family = null;
 - **Инкрементальная сборка (Incremental collection)** - если объектов много, то обход всех ссылок и пометка достижимых объектов может занять значительное время и привести к видимым задержкам выполнения скрипта. Поэтому интерпретатор пытается организовать сборку мусора поэтапно. Этапы выполняются по отдельности один за другим. Это требует дополнительного учёта для отслеживания изменений между этапами, но зато теперь у нас есть много крошечных задержек вместо одной большой.
 - **Сборка в свободное время (Idle-time collection)** - чтобы уменьшить возможное влияние на производительность, сборщик мусора старается работать только во время простоя процессора.
 
+<<<<<<< HEAD
 Существуют и другие способы оптимизации и разновидности алгоритмов сборки мусора. Но как бы мне ни хотелось описать их здесь, я должен воздержаться от этого, потому что разные интерпретаторы JavaScript применяют разные приёмы и хитрости. И, что более важно, всё меняется по мере развития интерпретаторов, поэтому углубляться в эту тему заранее, без реальной необходимости, вероятно, не стоит. Если, конечно, это не вопрос чистого интереса, тогда для вас будут полезны некоторые ссылки ниже.
+=======
+There exist other optimizations and flavours of garbage collection algorithms. As much as I'd like to describe them here, I have to hold off, because different engines implement different tweaks and techniques. And, what's even more important, things change as engines develop, so studying deeper "in advance", without a real need is probably not worth that. Unless, of course, it is a matter of pure interest, then there will be some links for you below.
+>>>>>>> ff042a03191dfad1268219ae78758193a5803b38
 
 ## Итого
 

@@ -7,7 +7,20 @@ describe("debounce", function() {
     this.clock.restore();
   });
 
+<<<<<<< HEAD
   it("вызывает функцию один раз в 'ms' мс", function() {
+=======
+  it("trigger the fuction execution immediately", function () {
+    let mode;
+    const f = () => mode='leading';
+    
+    debounce(f, 1000)(); // runs without a delay
+  
+    assert.equal(mode, 'leading');
+  });
+  
+  it("calls the function at maximum once in ms milliseconds", function() {
+>>>>>>> ff042a03191dfad1268219ae78758193a5803b38
     let log = '';
 
     function f(a) {

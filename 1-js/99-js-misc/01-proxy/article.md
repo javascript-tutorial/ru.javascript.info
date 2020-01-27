@@ -313,7 +313,11 @@ user = new Proxy(user, {
     return {
       enumerable: true,
       configurable: true
+<<<<<<< HEAD
       /* ...другие флаги, возможно, "value: ..." */
+=======
+      /* ...other flags, probable "value:..." */
+>>>>>>> ff042a03191dfad1268219ae78758193a5803b38
     };
   }
 
@@ -600,7 +604,11 @@ sayHi("Вася"); // Привет, Вася! (через 3 секунды)
 
 `Reflect` - встроенный объект, упрощающий создание прокси.
 
+<<<<<<< HEAD
 Ранее мы говорили о том, что внутренние методы, такие как `[[Get]]`, `[[Set]]` и другие, существуют только в спецификации, что к ним нельзя обратиться напрямую.
+=======
+It was said previously that internal methods, such as `[[Get]]`, `[[Set]]` and others are specification-only, they can't be called directly.
+>>>>>>> ff042a03191dfad1268219ae78758193a5803b38
 
 Объект `Reflect` делает это возможным. Его методы - минимальные обёртки вокруг внутренних методов.
 
