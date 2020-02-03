@@ -1,8 +1,14 @@
 # Размеры и прокрутка окна
 
+<<<<<<< HEAD
 Как узнать ширину и высоту окна браузера? Как получить полную ширину и высоту документа, включая прокрученную часть? Как прокрутить страницу с помощью JavaScript?
 
 Для большинства таких запросов мы можем использовать корневой элемент документа `document.documentElement`, который соответствует тегу `<html>`. Однако есть дополнительные методы и особенности, которые необходимо учитывать.
+=======
+How do we find the width and height of the browser window? How do we get the full width and height of the document, including the scrolled out part? How do we scroll the page using JavaScript?
+
+For most such requests, we can use the root document element `document.documentElement`, that corresponds to the `<html>` tag. But there are additional methods and peculiarities important enough to consider.
+>>>>>>> d10b50ae7f67d91606a751926cb06aa06f10c1b4
 
 ## Ширина/высота окна
 
@@ -40,7 +46,11 @@ alert( document.documentElement.clientWidth ); // ширина окна за в�
 
 ## Ширина/высота документа
 
+<<<<<<< HEAD
 Теоретически, т.к. корневым элементом документа является `documentElement.clientWidth/Height`, и он включает в себя всё содержимое, мы можем получить полный размер документа как `documentElement.scrollWidth/scrollHeight`.
+=======
+Theoretically, as the root document element is `document.documentElement`, and it encloses all the content, we could measure document full size as `document.documentElement.scrollWidth/scrollHeight`.
+>>>>>>> d10b50ae7f67d91606a751926cb06aa06f10c1b4
 
 Но именно на этом элементе, для страницы в целом, эти свойства работают не так, как предполагается. В Chrome/Safari/Opera, если нет прокрутки, то `documentElement.scrollHeight` может быть даже меньше, чем `documentElement.clientHeight`! С точки зрения элемента это невозможная ситуация.
 
@@ -63,8 +73,12 @@ alert('Полная высота документа с прокручиваем�
 
 Обычные элементы хранят текущее состояние прокрутки в `elem.scrollLeft/scrollTop`.
 
+<<<<<<< HEAD
 Что же со страницей?
 В большинстве браузеров мы можем обратиться к `documentElement.scrollLeft/Top`, за исключением основанных на старом WebKit (Safari), где есть ошибка ([5991](https://bugs.webkit.org/show_bug.cgi?id=5991)), и там нужно использовать `document.body` вместо `document.documentElement`.
+=======
+For document scroll `document.documentElement.scrollLeft/Top` works in most browsers, except older WebKit-based ones, like Safari (bug [5991](https://bugs.webkit.org/show_bug.cgi?id=5991)), where we should use `document.body` instead of `document.documentElement`.
+>>>>>>> d10b50ae7f67d91606a751926cb06aa06f10c1b4
 
 К счастью, нам совсем не обязательно запоминать эти особенности, потому что текущую прокрутку можно прочитать из свойств `window.pageXOffset/pageYOffset`:
 
@@ -134,9 +148,9 @@ alert('Текущая прокрутка слева: ' + window.pageXOffset);
 ```online
 Попробуйте сами:
 
-<button onclick="document.body.style.overflow = 'hidden'">`document.body.style.overflow = 'hidden'`</button>
+<button onclick="document.body.style.overflow = 'hidden'">document.body.style.overflow = 'hidden'</button>
 
-<button onclick="document.body.style.overflow = ''">`document.body.style.overflow = ''`</button>
+<button onclick="document.body.style.overflow = ''">document.body.style.overflow = ''</button>
 
 Первая кнопка останавливает прокрутку, вторая возобновляет её.
 ```

@@ -1,6 +1,10 @@
 # Обработка ошибок, "try..catch"
 
+<<<<<<< HEAD
 Неважно, насколько мы хороши в программировании, иногда наши скрипты содержат ошибки. Они могут возникать из-за наших промахов, неожиданного ввода пользователя, неправильного ответа сервера и по тысяче других причин.
+=======
+No matter how great we are at programming, sometimes our scripts have errors. They may occur because of our mistakes, an unexpected user input, an erroneous server response, and for a thousand other reasons.
+>>>>>>> d10b50ae7f67d91606a751926cb06aa06f10c1b4
 
 Обычно скрипт в случае ошибки "падает" (сразу же останавливается), с выводом ошибки в консоль.
 
@@ -24,9 +28,15 @@ try {
 
 Работает она так:
 
+<<<<<<< HEAD
 1. Сначала выполняется код внутри блока `try {...}`.
 2. Если в нём нет ошибок, то блок `catch(err)` игнорируется: выполнение доходит до конца `try` и потом далее, полностью пропуская `catch`.
 3. Если же в нём возникает ошибка, то выполнение `try` прерывается, и поток управления переходит в начало `catch(err)`. Переменная `err` (можно использовать любое имя) содержит объект ошибки с подробной информацией о произошедшем.
+=======
+1. First, the code in `try {...}` is executed.
+2. If there were no errors, then `catch(err)` is ignored: the execution reaches the end of `try` and goes on, skipping `catch`.
+3. If an error occurs, then `try` execution is stopped, and the control flows to the beginning of `catch(err)`. The `err` variable (can use any name for it) will contain an error object with details about what happened.
+>>>>>>> d10b50ae7f67d91606a751926cb06aa06f10c1b4
 
 ![](try-catch-flow.svg)
 
@@ -201,7 +211,11 @@ alert( user.age );  // 30
 
 **Если `json` некорректен, `JSON.parse` генерирует ошибку, то есть скрипт "падает".**
 
+<<<<<<< HEAD
 Устроит ли нас такое поведение? Конечно нет!
+=======
+Should we be satisfied with that? Of course not!
+>>>>>>> d10b50ae7f67d91606a751926cb06aa06f10c1b4
 
 Получается, что если вдруг что-то не так с данными, то посетитель никогда (если, конечно, не откроет консоль) об этом не узнает. А люди очень не любят, когда что-то "просто падает" без всякого сообщения об ошибке.
 
@@ -298,7 +312,7 @@ try {
 *!*
   alert(e.name); // SyntaxError
 */!*
-  alert(e.message); // Unexpected token o in JSON at position 2
+  alert(e.message); // Unexpected token b in JSON at position 2
 }
 ```
 
@@ -334,9 +348,15 @@ try {
 
 ## Проброс исключения
 
+<<<<<<< HEAD
 В примере выше мы использовали `try..catch` для обработки некорректных данных. А что, если в блоке `try {...}` возникнет *другая неожиданная ошибка*? Например, программная (неопределённая переменная) или какая-то ещё, а не ошибка, связанная с некорректными данными.
 
 Пример:
+=======
+In the example above we use `try..catch` to handle incorrect data. But is it possible that *another unexpected error* occurs within the `try {...}` block? Like a programming error (variable is not defined) or something else, not just this "incorrect data" thing.
+
+For example:
+>>>>>>> d10b50ae7f67d91606a751926cb06aa06f10c1b4
 
 ```js run
 let json = '{ "age": 30 }'; // данные неполны
@@ -373,9 +393,15 @@ try {
 
 Техника "проброс исключения" выглядит так:
 
+<<<<<<< HEAD
 1. Блок `catch` получает все ошибки.
 2. В блоке `catch(err) {...}` мы анализируем объект ошибки `err`.
 3. Если мы не знаем как её обработать, тогда делаем `throw err`.
+=======
+1. Catch gets all errors.
+2. In the `catch(err) {...}` block we analyze the error object `err`.
+2. If we don't know how to handle it, we do `throw err`.
+>>>>>>> d10b50ae7f67d91606a751926cb06aa06f10c1b4
 
 В коде ниже мы используем проброс исключения, `catch` обрабатывает только `SyntaxError`:
 
@@ -582,11 +608,19 @@ function func() {
 Информация из данной секции не является частью языка JavaScript.
 ```
 
+<<<<<<< HEAD
 Давайте представим, что произошла фатальная ошибка (программная или что-то ещё ужасное) снаружи `try..catch`, и скрипт упал.
 
 Существует ли способ отреагировать на такие ситуации? Мы можем захотеть залогировать ошибку, показать что-то пользователю (обычно они не видят сообщение об ошибке) и т.д.
 
 Такого способа нет в спецификации, но обычно окружения предоставляют его, потому что это весьма полезно. Например, в Node.js для этого есть [`process.on("uncaughtException")`](https://nodejs.org/api/process.html#process_event_uncaughtexception). А в браузере мы можем присвоить функцию специальному свойству [window.onerror](mdn:api/GlobalEventHandlers/onerror), которая будет вызвана в случае необработанной ошибки.
+=======
+Let's imagine we've got a fatal error outside of `try..catch`, and the script died. Like a programming error or some other terrible thing.
+
+Is there a way to react on such occurrences? We may want to log the error, show something to the user (normally they don't see error messages), etc.
+
+There is none in the specification, but environments usually provide it, because it's really useful. For instance, Node.js has [`process.on("uncaughtException")`](https://nodejs.org/api/process.html#process_event_uncaughtexception) for that. And in the browser we can assign a function to the special [window.onerror](mdn:api/GlobalEventHandlers/onerror) property, that will run in case of an uncaught error.
+>>>>>>> d10b50ae7f67d91606a751926cb06aa06f10c1b4
 
 Синтаксис:
 
@@ -668,4 +702,8 @@ try {
 
 *Проброс исключения* -- это очень важный приём обработки ошибок: блок `catch` обычно ожидает и знает, как обработать определённый тип ошибок, поэтому он должен пробрасывать дальше ошибки, о которых он не знает.
 
+<<<<<<< HEAD
 Даже если у нас нет `try..catch`, большинство сред позволяют настроить "глобальный" обработчик ошибок, чтобы ловить ошибки, которые "выпадают наружу". В браузере это `window.onerror`.
+=======
+Even if we don't have `try..catch`, most environments allow us to setup a "global" error handler to catch errors that "fall out". In-browser, that's `window.onerror`.
+>>>>>>> d10b50ae7f67d91606a751926cb06aa06f10c1b4

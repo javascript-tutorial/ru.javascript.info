@@ -19,7 +19,11 @@ JavaScript - динамично развивающийся язык програ
 
 На самом деле, есть две части Babel:
 
+<<<<<<< HEAD
 1. Во-первых, транспилер, который переписывает код. Разработчик запускает Babel на своём компьютере. Он переписывает код в старый стандарт. И после этого код отправляется на сайт. Современные сборщики проектов, такие как [webpack](http://webpack.github.io/) или [brunch](http://brunch.io/), предоставляют возможность запускать транспилер автоматически после каждого изменения кода, что позволяет экономить время.
+=======
+1. First, the transpiler program, which rewrites the code. The developer runs it on their own computer. It rewrites the code into the older standard. And then the code is delivered to the website for users. Modern project build systems like [webpack](http://webpack.github.io/) provide means to run transpiler automatically on every code change, so that it's very easy to integrate into development process.
+>>>>>>> d10b50ae7f67d91606a751926cb06aa06f10c1b4
 
 2. Во-вторых, полифил.
 

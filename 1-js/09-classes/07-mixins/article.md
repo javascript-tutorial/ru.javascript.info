@@ -101,7 +101,11 @@ new User("Вася").sayHi(); // Привет, Вася!
 
 ![](mixin-inheritance.svg)
 
+<<<<<<< HEAD
 Это связано с тем, что методы `sayHi` и `sayBye` были изначально созданы в объекте `sayHiMixin`. Несмотря на то, что они скопированы, их внутреннее свойство `[[HomeObject]]` ссылается на `sayHiMixin`, как показано на картинке выше.
+=======
+That's because methods `sayHi` and `sayBye` were initially created in `sayHiMixin`. So even though they got copied, their `[[HomeObject]]` internal property references `sayHiMixin`, as shown in the picture above.
+>>>>>>> d10b50ae7f67d91606a751926cb06aa06f10c1b4
 
 Так как `super` ищет родительские методы в `[[HomeObject]].[[Prototype]]`, это означает `sayHiMixin.[[Prototype]]`, а не `User.[[Prototype]]`.
 
@@ -109,6 +113,7 @@ new User("Вася").sayHi(); // Привет, Вася!
 
 Многие объекты в браузерной разработке (и не только) обладают важной способностью - они могут генерировать события. События - отличный способ передачи информации всем, кто в ней заинтересован. Давайте создадим примесь, которая позволит легко добавлять функционал по работе с событиями любым классам/объектам.
 
+<<<<<<< HEAD
 - Примесь добавит метод `.trigger(name, [data])` для генерации события. Аргумент `name` - это имя события, за которым могут следовать другие аргументы с данными для события.
 - Также будет добавлен метод `.on(name, handler)`, который назначает обработчик для события с заданным именем. Обработчик будет вызван, когда произойдёт событие с указанным именем `name`, и получит данные из `.trigger`.
 - ...и метод `.off(name, handler)`, который удаляет обработчик указанного события.
@@ -116,6 +121,15 @@ new User("Вася").sayHi(); // Привет, Вася!
 После того, как все методы примеси будут добавлены, объект `user` сможет сгенерировать событие `"login"` после входа пользователя в личный кабинет. А другой объект, к примеру, `calendar` сможет использовать это событие, чтобы показывать зашедшему пользователю актуальный для него календарь.
 
 Или `menu` может генерировать событие `"select"`, когда элемент меню выбран, а другие объекты могут назначать обработчики, чтобы реагировать на это событие, и т.п.
+=======
+An important feature of many browser objects (for instance) is that they can generate events. Events are a great way to "broadcast information" to anyone who wants it. So let's make a mixin that allows us to easily add event-related functions to any class/object.
+
+- The mixin will provide a method `.trigger(name, [...data])` to "generate an event" when something important happens to it. The `name` argument is a name of the event, optionally followed by additional arguments with event data.
+- Also the method `.on(name, handler)` that adds `handler` function as the listener to events with the given name. It will be called when an event with the given `name` triggers, and get the arguments from the `.trigger` call.
+- ...And the method `.off(name, handler)` that removes the `handler` listener.
+
+After adding the mixin, an object `user` will be able to generate an event `"login"` when the visitor logs in. And another object, say, `calendar` may want to listen for such events to load the calendar for the logged-in person.
+>>>>>>> d10b50ae7f67d91606a751926cb06aa06f10c1b4
 
 Вот код примеси:
 
@@ -168,7 +182,13 @@ let eventMixin = {
 
 2. `.off(eventName, handler)` -- убирает функцию из списка обработчиков.
 
+<<<<<<< HEAD
 3. `.trigger(eventName, ...args)` -- генерирует событие: все назначенные обработчики из `_eventHandlers[eventName]` вызываются, и `...args` передаются им в качестве аргументов.
+=======
+- `.on(eventName, handler)` -- assigns function `handler` to run when the event with that name occurs. Technically, there's an `_eventHandlers` property that stores an array of handlers for each event name, and it just adds it to the list.
+- `.off(eventName, handler)` -- removes the function from the handlers list.
+- `.trigger(eventName, ...args)` -- generates the event: all handlers from `_eventHandlers[eventName]` are called, with a list of arguments `...args`.
+>>>>>>> d10b50ae7f67d91606a751926cb06aa06f10c1b4
 
 Использование:
 
@@ -193,7 +213,11 @@ menu.on("select", value => alert(`Выбранное значение: ${value}`
 menu.choose("123"); // Выбранное значение: 123
 ```
 
+<<<<<<< HEAD
 Теперь если у нас есть код, заинтересованный в событии `"select"`, то он может слушать его с помощью `menu.on(...)`.
+=======
+Now, if we'd like any code to react to a menu selection, we can listen for it with `menu.on(...)`.
+>>>>>>> d10b50ae7f67d91606a751926cb06aa06f10c1b4
 
 А `eventMixin` позволяет легко добавить такое поведение в любой класс без вмешательства в цепочку наследования.
 
@@ -203,6 +227,12 @@ menu.choose("123"); // Выбранное значение: 123
 
 Некоторые другие языки допускают множественное наследование. JavaScript не поддерживает множественное наследование, но с помощью примесей мы можем реализовать нечто похожее, скопировав методы в прототип.
 
+<<<<<<< HEAD
 Мы можем использовать примеси для расширения функционала классов, например, для обработки событий, как мы сделали это выше.
 
 С примесями могут возникнуть конфликты, если они перезаписывают существующие методы класса. Стоит помнить об этом и быть внимательнее при выборе имён для методов примеси, чтобы их избежать.
+=======
+We can use mixins as a way to augment a class by adding multiple behaviors, like event-handling as we have seen above.
+
+Mixins may become a point of conflict if they accidentally overwrite existing class methods. So generally one should think well about the naming methods of a mixin, to minimize the probability of that happening.
+>>>>>>> d10b50ae7f67d91606a751926cb06aa06f10c1b4
