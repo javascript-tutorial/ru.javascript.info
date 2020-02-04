@@ -143,7 +143,6 @@ function countUser(user) {
 let john = { name: "John" };
 
 countUser(john); //ведём подсчёт посещений
-countUser(john);
 
 // пользователь покинул нас
 john = null;
