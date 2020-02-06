@@ -56,8 +56,8 @@ questions:
     type: single
     answers:
       - Новый язык программирования
-      - Переработанная реализация Javascript
-      - Спецификация языка Javascript
+      - Переработанная реализация JavaScript
+      - Спецификация языка JavaScript
     correctAnswer: 2
 
   -
@@ -76,7 +76,7 @@ questions:
 
   -
     content: |
-      Какие конструкции для циклов есть в javascript?
+      Какие конструкции для циклов есть в JavaScript?
 
     type: single
     answers:
@@ -134,7 +134,7 @@ questions:
 
   -
     content: |
-      Сколько параметров можно передать функции ?
+      Сколько параметров можно передать функции?
     type: single
     answers:
       - Ровно столько, сколько указано в определении функции
@@ -148,7 +148,7 @@ questions:
       Какие из этих вариантов задают массив из элементов "a", "b"?
     type: multi
     answers:
-      - '`let a = new Array("a","b")`'
+      - '`let a = new Array("a", "b")`'
       - '`let a = { "a", "b" }`'
       - '`let a = ( "a", "b" )`'
       - '`let a = [ "a", "b" ]`'
@@ -162,12 +162,12 @@ questions:
 
   -
     content: |
-      Какие варианты правильно объявляют функцию `f`, возвращающую сумму двух аргументов ?
+      Какие варианты правильно объявляют функцию `f`, возвращающую сумму двух аргументов?
     type: multi
     answers:
-      - '`let f = function(a,b) { return a+b }`'
-      - '`let f = new Function("a,b", "return a+b")`'
-      - '`let f = new Function("a", "b", "return a+b")`'
+      - '`let f = function(a,b) { return a + b }`'
+      - '`let f = new Function("a, b", "return a + b")`'
+      - '`let f = new Function("a", "b", "return a + b")`'
       - '`let f = (a, b) => a + b`'
       - '`let f = (a, b) => { a + b }`'
       - Никакие
@@ -185,7 +185,7 @@ questions:
       ```
     type: single
     answers:
-      - Ломает интерпретатор javascript
+      - Ломает интерпретатор JavaScript
       - Выходит из текущего блока цикла или switch на метку "me"
       - Выдает ошибку
     correctAnswer: 1
@@ -201,7 +201,7 @@ questions:
     answers:
       - Да
       - Нет
-      - В первом выражении ошибка, что еще за "!!" ??
+      - В первом выражении ошибка, что ещё за "!!"??
     correctAnswer: 0
 
   -
@@ -226,7 +226,7 @@ questions:
     content: |
       Чему равно `i` в конце кода?
       ```js
-      for(var i=0; i<10; i++) {
+      for (var i = 0; i < 10; i++) {
         console.log(i);
       }
       // i = ?
@@ -243,7 +243,7 @@ questions:
     content: |
       Чему равно `i` в конце кода?
       ```js
-      for(let i=0; i<10; i++) {
+      for (let i = 0; i < 10; i++) {
         console.log(i);
       }
       // i = ?
@@ -283,10 +283,10 @@ questions:
 
   -
     content: |
-      Существует ли такое значение `X`, что после присваивания `a = X` вызов `alert(a == X)` выдаст `false`?
+      Существует ли такое значение `X`, которое после присваивания `a = X` вызов `alert(a == X)` выдаст `false`?
       ```js
       let a = X;
-      alert( a == X ); // false
+      alert(a == X); // false
       ```
     type: single
     answers:
@@ -314,7 +314,7 @@ questions:
 
   -
     content: |
-      Каких операторов из этого списка нет в javascript?
+      Каких операторов из этого списка нет в JavaScript?
     type: multi
     answers:
       - '`*`'
@@ -384,7 +384,7 @@ questions:
 
   -
     content: |
-      Какая арифметическая операция приводит к ошибке в javascript?
+      Какая арифметическая операция приводит к ошибке в JavaScript?
     type: single
     answers:
       - Деление на ноль
@@ -396,7 +396,7 @@ questions:
 
   -
     content: |
-      Чему равно `0 || "" || 2 || undefined || true || falsе` ?
+      Чему равно `0 || "" || 2 || undefined || true || falsе`?
     type: single
     answers:
       - '`0`'
@@ -411,7 +411,7 @@ questions:
 
   -
     content: |
-      Чему равно `2 && 1 && null && 0 && undefined` ?
+      Чему равно `2 && 1 && null && 0 && undefined`?
     type: single
     answers:
       - '`2`'
@@ -424,7 +424,7 @@ questions:
 
   -
     content: |
-      Чему равно `0 || 1 && 2 || 3` ?
+      Чему равно `0 || 1 && 2 || 3`?
 
     type: single
     answers:
@@ -505,7 +505,7 @@ questions:
     content: |
       Что выведет этот код?
       ```js
-      for(var i=0; i<10; i++) {
+      for (var i = 0; i < 10; i++) {
         setTimeout(function() {
           alert(i);
         }, 100);
@@ -524,7 +524,7 @@ questions:
     content: |
       Что выведет этот код?
       ```js
-      for(let i=0; i<10; i++) {
+      for (let i = 0; i < 10; i++) {
         setTimeout(function() {
           alert(i);
         }, 100);
@@ -604,7 +604,7 @@ questions:
       Какое будет выведено значение?
       ```js
       let x = 5;
-      alert( x++ );
+      alert(x++);
       ```
     type: single
     answers:
@@ -681,21 +681,21 @@ questions:
       f.call(f);
 
       function f() {
-        alert( this );
+        alert(this);
       }
       ```
     type: single
     answers:
       - '`[object Object]`'
-      - 'код функции `f`'
-      - 'ошибка: слишком глубокая рекурсия'
-      - 'ошибка: переменная `f` не определена'
+      - 'Код функции `f`'
+      - 'Ошибка: слишком глубокая рекурсия'
+      - 'Ошибка: переменная `f` не определена'
       - другое
     correctAnswer: 1
     correctAnswerComment: |
       Функция `f` определяется при входе в область видимости, так что на первой строке она уже есть.
 
-      Далее, вызов `f.call(f)` вызывает функцию, передавая ей `f` в качестве `this`, так что выводится строковое представление `f`.
+      Далее вызов `f.call(f)` вызывает функцию, передавая ей `f` в качестве `this`, так что выводится строковое представление `f`.
 
 
   -
@@ -704,7 +704,7 @@ questions:
       ```js
       let f = function g() { return 23; };
 
-      alert( typeof g() );
+      alert(typeof g());
       ```
 
     type: single
@@ -712,7 +712,7 @@ questions:
       - '`number`'
       - '`undefined`'
       - '`function`'
-      - ошибка
+      - Ошибка
     correctAnswer: 3
     correctAnswerComment: |
       Ошибка, так как это Named Function Expression.
@@ -734,7 +734,7 @@ questions:
       - В коде ошибка
     correctAnswer: 3
     correctAnswerComment: |
-      Переменная не определена, в "strict mode" все переменные должны быть определены.
+      Переменная не определена, в строгом режиме все переменные должны быть определены.
 
 
   -
@@ -755,7 +755,7 @@ questions:
       - Будет ошибка
     correctAnswer: 1
     correctAnswerComment: |
-      Двойное присваивание выполняется справа налево. То есть, сначала `y` станет `2`, а потом `x=y`.
+      Двойное присваивание выполняется справа налево. То есть сначала `y` станет `2`, а потом `x = y`.
 
 
   -
@@ -869,7 +869,7 @@ questions:
         return new Function('b', 'return a + b');
       }
 
-      alert( f()(1) );
+      alert(f()(1));
       ```
     type: single
     answers:
@@ -916,8 +916,8 @@ questions:
       ```js
       function F() { return F; }
 
-      alert( new F() instanceof F );
-      alert( new F() instanceof Function );
+      alert(new F() instanceof F);
+      alert(new F() instanceof Function);
       ```
 
     type: single
@@ -930,14 +930,14 @@ questions:
     correctAnswerComment: |
       Если функция, запущенная через `new`, возвращает объект (не примитив!), то именно этот объект служит результатом, вместо `this`. Так что результатом `new F` является сама функция `F`.
 
-      Поэтому получается, что первый `alert` проверяет: `F instanceof F`. Это неверно, т.к. `a instanceof B` проверяет, был ли объект `a` создан конструктором `B` (с учетом прототипов, но здесь это неважно).  Функция `F` не была создана собой же, а является объектом встроенного класса `Function`, поэтому `false`.
+      Поэтому получается, что первый `alert` проверяет: `F instanceof F`. Это неверно, т.к. `a instanceof B` проверяет, был ли объект `a` создан конструктором `B` (с учетом прототипов, но здесь это неважно). Функция `F` не была создана собой же, а является объектом встроенного класса `Function`, поэтому `false`.
 
       Следующая строка идентична такой проверке: `F instanceof Function`. Это верно.
 
 
   -
     content: |
-      Чему равен `typeof null` в режиме `use strict`?
+      Чему равен `typeof null` в режиме строгом режиме?
     type: single
     answers:
       - '`null`'
@@ -954,7 +954,7 @@ questions:
     content: |
       Что выведет этот код?
       ```js
-      alert( "1"[0] );
+      alert("1"[0]);
       ```
 
     type: single
@@ -972,7 +972,7 @@ questions:
     content: |
       Что выведет этот код?
       ```js
-      alert( 20e-1['toString'](2) );
+      alert(20e-1['toString'](2));
       ```
 
     type: single
@@ -988,7 +988,7 @@ questions:
       <li>Запись числа `20e-1` означает `20`, сдвинутое на 1 знак после запятой, т.е. `2`:
       ```js
       //+ run
-      alert( 20e-1 ); // 2
+      alert(20e-1); // 2
       ```
       </li>
       <li>У каждого числа есть метод `toString(radix)`, который преобразует число в строку, используя `radix` как основание системы счисления. В этом коде `radix = 2`. Так что возвращается `2` в двоичной системе: `"10"`.
@@ -999,7 +999,7 @@ questions:
     content: |
       Что выведет этот код?
       ```js
-      alert( +"Infinity" );
+      alert(+"Infinity");
       ```
     type: single
     answers:
@@ -1029,7 +1029,7 @@ questions:
       - '`4`'
     correctAnswer: 3
     correctAnswerComment: |
-      Оператор "запятая", вычисляемый в скобках, возвращает последнее вычисленное значение. То есть, `1` игнорируется и возвращается `4` (`5-1`).
+      Оператор "запятая", вычисляемый в скобках, возвращает последнее вычисленное значение. То есть, `1` игнорируется и возвращается `4` (`5 - 1`).
 
       Затем идёт умножение на два, в результате -- `8`.
 
@@ -1038,7 +1038,7 @@ questions:
     content: |
       Что выведет этот код? Посмотрите на него очень внимательно, в этом вопросе есть подвох.
       ```js
-      let a = [1,2]
+      let a = [1, 2]
 
       (function() { alert(a) })()
       ```
@@ -1050,13 +1050,13 @@ questions:
       - Будет ошибка
     correctAnswer: 3
     correctAnswerComment: |
-      Пропущена точка с запятой после `let a = [1,2]`.
+      Пропущена точка с запятой после `let a = [1, 2]`.
 
       Браузер автоматически не вставляет её перед скобкой, поэтому интерпретирует это как:
       ```js
-      let a = [1,2](function() { alert(a) })()
+      let a = [1, 2](function() { alert(a) })()
       ```
-      ...То есть, пытается вызвать массив `[1,2]` как функцию, что, естественно, не выходит. Отсюда и ошибка.
+      ...То есть, пытается вызвать массив `[1, 2]` как функцию, что, естественно, не выходит. Отсюда и ошибка.
 
 
 
@@ -1200,7 +1200,7 @@ questions:
       Что выведет код ниже?
 
       ```js
-      for(let key in  {1:1, 0:0}) {
+      for (let key in {1:1, 0:0}) {
        alert(key);
       }
       ```
@@ -1220,9 +1220,9 @@ questions:
       Есть ли различия между проверками:
 
       ```js
-      if( x <= 100 ) {...}
+      if ( x <= 100 ) {...}
       // и
-      if( !(x > 100) ) {...}
+      if ( !(x > 100) ) {...}
       ```
 
     type: single
