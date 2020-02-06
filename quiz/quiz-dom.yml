@@ -149,7 +149,7 @@ questions:
       Верно ли следующее утверждение:
 
       Содержимое тега `script` нужно заключать в комментарии `<!-- .. -->`,
-      чтобы браузеры, которые не поддерживают javascript, работали корректно?
+      чтобы браузеры, которые не поддерживают JavaScript, работали корректно?
 
     correctAnswer: 1
     answers:
@@ -183,9 +183,9 @@ questions:
 
     correctAnswer: 2
     answers:
-      - 'Ровно каждые 100мс.'
-      - 'Примерно каждые 100мс.'
-      - 'Обычно каждые 100мс, но возможно, что вызовы будут происходить гораздо реже.'
+      - 'Ровно каждые 100 мс.'
+      - 'Примерно каждые 100 мс.'
+      - 'Обычно каждые 100 мс, но возможно, что вызовы будут происходить гораздо реже.'
     type: 'single'
   -
     content: |
@@ -220,11 +220,11 @@ questions:
       - '`onmouseover`'
       - '`onmousemove`'
       - '`onwheel`'
-      - 'все существуют.'
+      - 'Все существуют.'
     type: 'single'
   -
     content: |
-      Может ли скрипт во время работы страницы подключить к ней другие внешние js-файлы?
+      Может ли скрипт во время работы страницы подключить к ней другие внешние JS-файлы?
 
     correctAnswer: 2
     answers:
@@ -234,7 +234,7 @@ questions:
     type: 'single'
   -
     content: |
-      Какое событие не может быть вызвано кликом мыши ?
+      Какое событие не может быть вызвано кликом мыши?
 
     correctAnswer:
       - 2
@@ -246,9 +246,9 @@ questions:
     type: 'multi'
   -
     content: |
-      Можно ли инициировать DOM-событие из javascript?
+      Можно ли инициировать DOM-событие из JavaScript?
 
-      Например, сэмулировать клик мышкой на элементе, чтобы javascript-код кликнул за пользователя, и сработали соответствующие обработчики.
+      Например, сэмулировать клик мышкой на элементе, чтобы JavaScript-код кликнул за пользователя, и сработали соответствующие обработчики.
 
     correctAnswer: 0
     answers:
@@ -264,7 +264,7 @@ questions:
       - 'Только в `<head>`.'
       - 'Только в `<body>`.'
       - 'В `<head>` или в `<body>`.'
-      - 'Где угодно, главное чтоб был.'
+      - 'Где угодно, главное, чтобы был.'
     type: 'single'
   -
     content: |
@@ -329,7 +329,7 @@ questions:
 
     correctAnswer: 0
     answers:
-      - 'Да, комментарий -- DOM-узел, можно получить.'
+      - 'Да, комментарий -- DOM-узел, который можно получить.'
       - 'Нет, комментарии есть в HTML, но отсутствуют в DOM.'
       - 'Можно получить, но только до окончания загрузки страницы.'
     type: 'single'
@@ -510,7 +510,7 @@ questions:
 
     correctAnswer:
       - 2
-    correctAnswerComment: 'Например, для обычного `<span>` первые два метода вернут `NaN`, так как у `inline`-элемента нет CSS-ширины. А `clientWidth` будет равен нулю.
+    correctAnswerComment: 'Например, для обычного `<span>` первые два метода вернут `NaN`, так как у строчного элемента нет CSS-ширины. А `clientWidth` будет равен нулю.
       '
     answers:
       - '`parseInt(elem.style.width)`'
@@ -535,7 +535,7 @@ questions:
 
   -
     content: |
-      При каком условии `elem.scrollHeight == elem.clientHeight` ?
+      При каком условии `elem.scrollHeight == elem.clientHeight`?
 
     correctAnswer: 3
     answers:
@@ -547,7 +547,7 @@ questions:
     type: 'single'
   -
     content: |
-      Какое значение содержит "внешннюю" высоту элемента, то есть вертикальный размер, который он занимает во внешнем контейнере?
+      Какое значение содержит "внешнюю" высоту элемента, то есть вертикальный размер, который он занимает во внешнем контейнере?
 
     correctAnswer: 0
     answers:
@@ -608,28 +608,28 @@ questions:
         title: 'Вариант 1.'
         description: |
           ```js
-          var elems = document.querySelectorAll('form');
-          for(var i in elems) console.log(elems[i]);
+          var elems = document.querySelectorAll("form");
+          for (var i in elems) console.log(elems[i]);
           ```
       -
         description: |
           ```js
-          var elems = document.querySelectorAll('form');
-          for(var i = 0; i < elems.length; i++) console.log(elems[i]);
+          var elems = document.querySelectorAll("form");
+          for (var i = 0; i < elems.length; i++) console.log(elems[i]);
           ```
         title: 'Вариант 2.'
       -
         description: |
           ```js
-          var elems = document.getElementsByTagName('form');
-          for(var i in elems) console.log(elems[i]);
+          var elems = document.getElementsByTagName("form");
+          for (var i in elems) console.log(elems[i]);
           ```
         title: 'Вариант 3.'
       -
         description: |
           ```js
           var elems = document.forms;
-          for(var i = 0; i < elems.length; i++) console.log(elems[i]);
+          for (var i = 0; i < elems.length; i++) console.log(elems[i]);
           ```
         title: 'Вариант 4.'
     type: 'multi'
@@ -649,9 +649,9 @@ questions:
 
     correctAnswer: 1
     answers:
-      - 'да.'
-      - 'нет.'
-      - 'будет ошибка.'
+      - 'Да.'
+      - 'Нет.'
+      - 'Будет ошибка.'
     type: 'single'
   -
     content: |
@@ -667,9 +667,9 @@ questions:
 
     correctAnswer: 1
     answers:
-      - 'да.'
-      - 'нет.'
-      - 'зависит от положения звёзд в момент клика.'
+      - 'Да.'
+      - 'Нет.'
+      - 'Зависит от положения звёзд в момент клика.'
     type: 'single'
   -
     content: |
@@ -687,9 +687,9 @@ questions:
       Это полноценная отдельная стадия обработки события, не всплытие или погружение.
       Обработчики на ней срабатывают в порядке назначения.
     answers:
-      - 'первый.'
-      - 'второй.'
-      - 'стандарт не указывает точную последовательность.'
+      - 'Первый.'
+      - 'Второй.'
+      - 'Стандарт не указывает точную последовательность.'
     type: 'single'
   -
     content: |
@@ -706,10 +706,10 @@ questions:
       Сначала происходит стадия погружения, на которой срабатывают обработчики от корня до `elem`, в данном случае `handler2`.
       Затем -- стадия "на элементе" и стадия всплытия, на которой срабатывают обработчики выше `elem`, в данном случае `handler1`.
     answers:
-      - 'первый.'
-      - 'второй.'
-      - 'ни один.'
-      - 'стандарт не указывает точную последовательность.'
+      - 'Первый.'
+      - 'Второй.'
+      - 'Ни один.'
+      - 'Стандарт не указывает точную последовательность.'
     type: 'single'
   -
     content: |
@@ -783,7 +783,7 @@ questions:
         alert(event.type);
       };
 
-      document.body.dispatchEvent(new CustomEvent('click'));
+      document.body.dispatchEvent(new CustomEvent("click"));
       ```
 
     correctAnswer: 3
@@ -805,7 +805,7 @@ questions:
       - '`keydown`'
       - '`keyup`'
       - '`keypress`'
-      - 'никаких не возникнет'
+      - 'Никаких не возникнет'
     type: 'multi'
 
   -
@@ -820,5 +820,5 @@ questions:
       - '`keydown`'
       - '`keyup`'
       - '`keypress`'
-      - 'никаких не возникнет'
+      - 'Никаких не возникнет'
     type: 'multi'
