@@ -99,12 +99,21 @@ alert(f.__proto__.__proto__ == Object.prototype); // true, наследует о
 
 Самое сложное происходит со строками, числами и булевыми значениями.
 
+<<<<<<< HEAD
 Как мы помним, они не объекты. Но если мы попытаемся получить доступ к их свойствам, то тогда будет создан временный объект-обёртка с использованием встроенных конструкторов `String`, `Number` и `Boolean`, который предоставит методы и после этого исчезнет.
+=======
+As we remember, they are not objects. But if we try to access their properties, temporary wrapper objects are created using built-in constructors `String`, `Number` and `Boolean`. They provide the methods and disappear.
+>>>>>>> 10c7807f49122f475f7cda5d07a324247091c080
 
 Эти объекты создаются невидимо для нас, и большая часть движков оптимизирует этот процесс, но спецификация описывает это именно таким образом. Методы этих объектов также находятся в прототипах, доступных как `String.prototype`, `Number.prototype` и `Boolean.prototype`.
 
+<<<<<<< HEAD
 ```warn header="Значения `null` и `undefined` не имеют объектов-обёрток"
 Специальные значения `null` и `undefined` стоят особняком. У них нет объектов-обёрток, так что методы и свойства им недоступны. Также у них нет соответствующих прототипов.
+=======
+```warn header="Values `null` and `undefined` have no object wrappers"
+Special values `null` and `undefined` stand apart. They have no object wrappers, so methods and properties are not available for them. And there are no corresponding prototypes either.
+>>>>>>> 10c7807f49122f475f7cda5d07a324247091c080
 ```
 
 ## Изменение встроенных прототипов [#native-prototype-change]
@@ -129,9 +138,15 @@ String.prototype.show = function() {
 
 **В современном программировании есть только один случай, в котором одобряется изменение встроенных прототипов. Это создание полифилов.**
 
+<<<<<<< HEAD
 Полифил - это термин, который означает эмуляцию метода, который существует в спецификации JavaScript, но ещё не поддерживается текущим движком JavaScript.
 
 Тогда мы можем реализовать его сами и добавить во встроенный прототип.
+=======
+Polyfilling is a term for making a substitute for a method that exists in the JavaScript specification, but is not yet supported by a particular JavaScript engine.
+
+We may then implement it manually and populate the built-in prototype with it.
+>>>>>>> 10c7807f49122f475f7cda5d07a324247091c080
 
 Например:
 
@@ -142,9 +157,15 @@ if (!String.prototype.repeat) { // Если такого метода нет
   String.prototype.repeat = function(n) {
     // повторить строку n раз
 
+<<<<<<< HEAD
     // на самом деле код должен быть немного более сложным
     // (полный алгоритм можно найти в спецификации)
     // но даже неполный полифил зачастую достаточно хорош для использования
+=======
+    // actually, the code should be a little bit more complex than that
+    // (the full algorithm is in the specification)
+    // but even an imperfect polyfill is often considered good enough
+>>>>>>> 10c7807f49122f475f7cda5d07a324247091c080
     return new Array(n + 1).join(this);
   };
 }
@@ -179,18 +200,34 @@ obj.join = Array.prototype.join;
 alert( obj.join(',') ); // Hello,world!
 ```
 
+<<<<<<< HEAD
 Это работает, потому что для внутреннего алгоритма встроенного метода `join` важны только корректность индексов и свойство `length`, он не проверяет, является ли объект на самом деле массивом. И многие встроенные методы работают так же.
+=======
+It works because the internal algorithm of the built-in `join` method only cares about the correct indexes and the `length` property. It doesn't check if the object is indeed an array. Many built-in methods are like that.
+>>>>>>> 10c7807f49122f475f7cda5d07a324247091c080
 
 Альтернативная возможность - мы можем унаследовать от массива, установив `obj.__proto__` как `Array.prototype`, таким образом все методы `Array` станут автоматически доступны в `obj`.
 
 Но это будет невозможно, если `obj` уже наследует от другого объекта. Помните, мы можем наследовать только от одного объекта одновременно.
 
+<<<<<<< HEAD
 Заимствование методов - гибкий способ, позволяющий смешивать функциональность разных объектов по необходимости.
+=======
+Borrowing methods is flexible, it allows to mix functionalities from different objects if needed.
+>>>>>>> 10c7807f49122f475f7cda5d07a324247091c080
 
 ## Итого
 
+<<<<<<< HEAD
 - Все встроенные объекты следуют одному шаблону:
     - Методы хранятся в прототипах (`Array.prototype`, `Object.prototype`, `Date.prototype` и т.д.).
     - Сами объекты хранят только данные (элементы массивов, свойства объектов, даты).
 - Примитивы также хранят свои методы в прототипах объектов-обёрток: `Number.prototype`, `String.prototype`, `Boolean.prototype`. Только у значений `undefined` и `null` нет объектов-обёрток.
 - Встроенные прототипы могут быть изменены или дополнены новыми методами. Но не рекомендуется менять их. Единственная допустимая причина -- это добавление нового метода из стандарта, который ещё не поддерживается движком JavaScript.
+=======
+- All built-in objects follow the same pattern:
+    - The methods are stored in the prototype (`Array.prototype`, `Object.prototype`, `Date.prototype`, etc.)
+    - The object itself stores only the data (array items, object properties, the date)
+- Primitives also store methods in prototypes of wrapper objects: `Number.prototype`, `String.prototype` and `Boolean.prototype`. Only `undefined` and `null` do not have wrapper objects
+- Built-in prototypes can be modified or populated with new methods. But it's not recommended to change them. The only allowable case is probably when we add-in a new standard, but it's not yet supported by the JavaScript engine
+>>>>>>> 10c7807f49122f475f7cda5d07a324247091c080

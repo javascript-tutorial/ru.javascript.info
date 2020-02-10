@@ -103,9 +103,15 @@ let user = {
 user.likes birds = true
 ```
 
+<<<<<<< HEAD
 JavaScript видит, что мы обращаемся к свойству `user.likes`, а затем идёт непонятное слово `birds`. В итоге синтаксическая ошибка.
 
 Точка требует, чтобы ключ был именован по правилам именования переменных. То есть не имел пробелов, не начинался с цифры и не содержал специальные символы, кроме `$` и `_`.
+=======
+JavaScript doesn't understand that. It thinks that we address `user.likes`, and then gives a syntax error when comes across unexpected `birds`.
+
+The dot requires the key to be a valid variable identifier. That implies: contains no spaces, doesn't start with a digit and doesn't include special characters (`$` и `_` are allowed).
+>>>>>>> 10c7807f49122f475f7cda5d07a324247091c080
 
 Для таких случаев существует альтернативный способ доступа к свойствам через квадратные скобки. Такой способ сработает с любым именем свойства:
 
@@ -208,6 +214,7 @@ let bag = {
 
 Квадратные скобки дают намного больше возможностей, чем запись через точку. Они позволяют использовать любые имена свойств и переменные, хотя и требуют более громоздких конструкций кода.
 
+<<<<<<< HEAD
 Подведём итог: в большинстве случаев, когда имена свойств известны и просты, используется запись через точку. Если же нам нужно что-то более сложное, то мы используем квадратные скобки.
 
 ## Свойство из переменной
@@ -215,6 +222,13 @@ let bag = {
 В реальном коде часто нам необходимо использовать существующие переменные как значения для свойств с тем же именем.
 
 Например:
+=======
+## Property value shorthand
+
+In real code we often use existing variables as values for property names.
+
+For instance:
+>>>>>>> 10c7807f49122f475f7cda5d07a324247091c080
 
 ```js run
 function makeUser(name, age) {
@@ -254,6 +268,7 @@ let user = {
 };
 ```
 
+<<<<<<< HEAD
 ## Ограничения на имена свойств
 
 Мы можем использовать только строки и символы в качестве ключей свойств. Все другие типы данных будут автоматически преобразованы к строке.
@@ -271,6 +286,65 @@ alert( obj[0] ); // Тест (то же свойство)
 ```
 
 **Зарезервированные слова разрешено использовать как имена свойств.**
+=======
+## Property names limitations
+
+Property names (keys) must be either strings or symbols (a special type for identifiers, to be covered later).
+
+Other types are automatically converted to strings.
+
+For instance, a number `0` becomes a string `"0"` when used as a property key:
+
+```js run
+let obj = {
+  0: "test" // same as "0": "test"
+};
+
+// both alerts access the same property (the number 0 is converted to string "0")
+alert( obj["0"] ); // test
+alert( obj[0] ); // test (same property)
+```
+
+**Reserved words are allowed as property names.**
+
+As we already know, a variable cannot have a name equal to one of language-reserved words like "for", "let", "return" etc.
+
+But for an object property, there's no such restriction. Any name is fine:
+
+```js run
+let obj = {
+  for: 1,
+  let: 2,
+  return: 3
+};
+
+alert( obj.for + obj.let + obj.return );  // 6
+```
+
+We can use any string as a key, but there's a special property named `__proto__` that gets special treatment for historical reasons.
+
+For instance, we can't set it to a non-object value:
+
+```js run
+let obj = {};
+obj.__proto__ = 5; // assign a number
+alert(obj.__proto__); // [object Object] - the value is an object, didn't work as intended
+```
+
+As we see from the code, the assignment to a primitive `5` is ignored.
+
+The nature of `__proto__` will be revealed in detail later in the chapter [](info:prototype-inheritance).
+
+As for now, it's important to know that such behavior of `__proto__` can become a source of bugs and even vulnerabilities if we intend to store user-provided keys in an object.
+
+The problem is that a visitor may choose `__proto__` as the key, and the assignment logic will be ruined (as shown above).
+
+Later we'll see workarounds for the problem:
+1. We'll see how to make an objects treat `__proto__` as a regular property in the chapter [](info:prototype-methods).
+2. There's also study another data structure [Map](info:map-set) in the chapter <info:map-set>, which supports arbitrary keys.
+
+## Property existance test, "in" operator
+>>>>>>> 10c7807f49122f475f7cda5d07a324247091c080
 
 Как мы уже знаем, имя переменной не может совпадать с зарезервированными словами, такими как "for", "let", "return" и т.д.
 
@@ -345,8 +419,13 @@ let key = "age";
 alert( *!*key*/!* in user ); // true, имя свойства было взято из переменной key
 ```
 
+<<<<<<< HEAD
 ````smart header="Оператор \"in\" для свойств со значением *'undefined'*"
 Обычно строгого сравнения `"=== undefined"` достаточно для проверки наличия свойства. Но есть особый случай, когда оно не подходит, и нужно использовать `"in"`.
+=======
+````smart header="Using \"in\" for properties that store `undefined`"
+Usually, the strict comparison `"=== undefined"` check the property existence just fine. But there's a special case when it fails, but `"in"` works correctly.
+>>>>>>> 10c7807f49122f475f7cda5d07a324247091c080
 
 Это когда свойство существует, но содержит значение `undefined`:
 

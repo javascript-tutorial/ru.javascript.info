@@ -148,7 +148,11 @@ elem.onclick = sayThanks;
 
 ## Частые ошибки
 
+<<<<<<< HEAD
 Если вы только начинаете работать с событиями, обратите внимание на следующие моменты.
+=======
+If you're starting to work with events -- please note some subtleties.
+>>>>>>> 10c7807f49122f475f7cda5d07a324247091c080
 
 **Функция должна быть присвоена как `sayThanks`, а не `sayThanks()`.**
 
@@ -181,7 +185,11 @@ button.onclick = function() {
 
 **Используйте именно функции, а не строки.**
 
+<<<<<<< HEAD
 Назначение обработчика строкой `elem.onclick = "alert(1)"` также сработает. Это сделано из соображений совместимости, но делать так не рекомендуется.
+=======
+The assignment `elem.onclick = "alert(1)"` would work too. It works for compatibility reasons, but is strongly not recommended.
+>>>>>>> 10c7807f49122f475f7cda5d07a324247091c080
 
 **Не используйте `setAttribute` для обработчиков.**
 
@@ -293,20 +301,35 @@ input.removeEventListener("click", handler);
 ````warn header="Обработчики некоторых событий можно назначать только через `addEventListener`"
 Существуют события, которые нельзя назначить через DOM-свойство, но можно через `addEventListener`.
 
+<<<<<<< HEAD
 Например, таково событие `DOMContentLoaded`, которое срабатывает, когда завершена загрузка и построение DOM документа.
 
 ```js
 document.onDOMContentLoaded = function() {
   alert("DOM построен"); // не будет работать
+=======
+For instance, the event `DOMContentLoaded`, that triggers when the document is loaded and DOM is built.
+
+```js
+document.onDOMContentLoaded = function() {
+  alert("DOM built"); // will never run
+>>>>>>> 10c7807f49122f475f7cda5d07a324247091c080
 };
 ```
 
 ```js
 document.addEventListener("DOMContentLoaded", function() {
+<<<<<<< HEAD
   alert("DOM построен"); // а вот так сработает
 });
 ```
 Так что `addEventListener` более универсален. Хотя заметим, что таких событий меньшинство, это скорее исключение, чем правило.
+=======
+  alert("DOM built"); // this way it works
+});
+```
+So `addEventListener` is more universal. Although, such events are an exception rather than the rule.
+>>>>>>> 10c7807f49122f475f7cda5d07a324247091c080
 ````
 
 ## Объект события

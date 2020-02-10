@@ -1,7 +1,17 @@
 
 # Устаревшее ключевое слово "var"
 
+<<<<<<< HEAD
 В самой первой главе про [переменные](info:variables) мы ознакомились с тремя способами объявления переменных:
+=======
+```smart header="This article is for understanding old scripts"
+The information in this article is useful for understanding old scripts.
+
+That's not how we write a new code.
+```
+
+In the very first chapter about [variables](info:variables), we mentioned three ways of variable declaration:
+>>>>>>> 10c7807f49122f475f7cda5d07a324247091c080
 
 1. `let`
 2. `const`
@@ -188,13 +198,89 @@ sayHi();
 
 В обоих примерах выше вызов `alert` происходил без ошибки, потому что переменная `phrase` уже существовала. Но её значение ещё не было присвоено, поэтому мы получали `undefined`.
 
+<<<<<<< HEAD
 ## Итого
+=======
+### IIFE
+
+As in the past there was only `var`, and it has no block-level visibility, programmers invented a way to emulate it. What they did was called "immediately-invoked function expressions" (abbreviated as IIFE).
+
+That's not something we should use nowadays, but you can find them in old scripts.
+
+An IIFE looks like this:
+
+```js run
+(function() {
+
+  let message = "Hello";
+
+  alert(message); // Hello
+
+})();
+```
+
+Here a Function Expression is created and immediately called. So the code executes right away and has its own private variables.
+
+The Function Expression is wrapped with parenthesis `(function {...})`, because when JavaScript meets `"function"` in the main code flow, it understands it as the start of a Function Declaration. But a Function Declaration must have a name, so this kind of code will give an error:
+
+```js run
+// Try to declare and immediately call a function
+function() { // <-- Error: Unexpected token (
+
+  let message = "Hello";
+
+  alert(message); // Hello
+
+}();
+```
+
+Even if we say: "okay, let's add a name", that won't work, as JavaScript does not allow Function Declarations to be called immediately:
+
+```js run
+// syntax error because of parentheses below
+function go() {
+
+}(); // <-- can't call Function Declaration immediately
+```
+
+So, the parentheses around the function is a trick to show JavaScript that the function is created in the context of another expression, and hence it's a Function Expression: it needs no name and can be called immediately.
+
+There exist other ways besides parentheses to tell JavaScript that we mean a Function Expression:
+
+```js run
+// Ways to create IIFE
+
+(function() {
+  alert("Parentheses around the function");
+}*!*)*/!*();
+
+(function() {
+  alert("Parentheses around the whole thing");
+}()*!*)*/!*;
+
+*!*!*/!*function() {
+  alert("Bitwise NOT operator starts the expression");
+}();
+
+*!*+*/!*function() {
+  alert("Unary plus starts the expression");
+}();
+```
+
+In all the above cases we declare a Function Expression and run it immediately. Let's note again: nowadays there's no reason to write such code.
+
+## Summary
+>>>>>>> 10c7807f49122f475f7cda5d07a324247091c080
 
 Существует 2 основных отличия `var` от `let/const`:
 
 1. Переменные `var` не имеют блочной области видимости, они ограничены, как минимум, телом функции.
 2. Объявления (инициализация) переменных `var`производится в начале исполнения функции (или скрипта для глобальных переменных).
 
+<<<<<<< HEAD
 Есть ещё одно небольшое отличие, относящееся к глобальному объекту, мы рассмотрим его в следующей главе.
+=======
+There's one more very minor difference related to the global object, that we'll cover in the next chapter.
+>>>>>>> 10c7807f49122f475f7cda5d07a324247091c080
 
 Эти особенности, как правило, не очень хорошо влияют на код. Блочная область видимости - это удобно. Поэтому много лет назад `let` и `const` были введены в стандарт и сейчас являются основным способом объявления переменных.

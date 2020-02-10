@@ -12,6 +12,7 @@ null === +"\n0\n" → false
 
 Разъяснения:
 
+<<<<<<< HEAD
 1. Очевидно, `true`.
 2. Используется посимвольное сравнение, поэтому `false`.
 3. Снова посимвольное сравнение. Первый символ первой строки `"2"` больше, чем первый символ второй `"1"`.
@@ -19,3 +20,12 @@ null === +"\n0\n" → false
 5. Строгое сравнение разных типов, поэтому `false`.
 6. Аналогично `(4)`, `null` равен только `undefined`.
 7. Строгое сравнение разных типов.
+=======
+1. Obviously, true.
+2. Dictionary comparison, hence false. `"a"` is smaller than `"p"`.
+3. Again, dictionary comparison, first char of `"2"` is greater than the first char of `"1"`.
+4. Values `null` and `undefined` equal each other only.
+5. Strict equality is strict. Different types from both sides lead to false.
+6. Similar to `(4)`, `null` only equals `undefined`.
+7. Strict equality of different types.
+>>>>>>> 10c7807f49122f475f7cda5d07a324247091c080

@@ -16,7 +16,11 @@
 
 Свойство `[[Prototype]]` является внутренним и скрытым, но есть много способов задать его.
 
+<<<<<<< HEAD
 Одним из них является использование `__proto__`, например так:
+=======
+One of them is to use the special name `__proto__`, like this:
+>>>>>>> 10c7807f49122f475f7cda5d07a324247091c080
 
 ```js run
 let animal = {
@@ -34,7 +38,11 @@ rabbit.__proto__ = animal;
 ```smart header="Свойство `__proto__` — исторически обусловленный геттер/сеттер для `[[Prototype]]`"
 Обратите внимание, что `__proto__` — *не то же самое*, что `[[Prototype]]`. Это геттер/сеттер для него.
 
+<<<<<<< HEAD
 Он существует по историческим причинам, в современном языке его заменяют функции `Object.getPrototypeOf/Object.setPrototypeOf`, которые также получают/устанавливают прототип. Мы рассмотрим причины этого и сами функции позже.
+=======
+It exists for historical reasons. In modern language it is replaced with functions `Object.getPrototypeOf/Object.setPrototypeOf` that also get/set the prototype. We'll study the reasons for that and these functions later.
+>>>>>>> 10c7807f49122f475f7cda5d07a324247091c080
 
 По спецификации `__proto__` должен поддерживаться только браузерами, но по факту все среды, включая серверную, поддерживают его. Далее мы будем в примерах использовать `__proto__`, так как это самый короткий и интуитивно понятный способ установки и чтения прототипа.
 ```
@@ -43,7 +51,7 @@ rabbit.__proto__ = animal;
 
 Например:
 
-```js run
+```js
 let animal = {
   eats: true
 };
@@ -205,7 +213,11 @@ alert(admin.surname); // Cooper
 
 ## Значение "this"
 
+<<<<<<< HEAD
 В приведённом выше примере может возникнуть интересный вопрос: каково значение `this` внутри `set fullName(value)`? Куда записаны свойства `this.name` и `this.surname`: в `user` или в `admin`?
+=======
+An interesting question may arise in the example above: what's the value of `this` inside `set fullName(value)`? Where are the properties `this.name` and `this.surname` written: into `user` or `admin`?
+>>>>>>> 10c7807f49122f475f7cda5d07a324247091c080
 
 Ответ прост: прототипы никак не влияют на `this`.
 
@@ -213,7 +225,11 @@ alert(admin.surname); // Cooper
 
 Таким образом, вызов сеттера `admin.fullName=` в качестве `this` использует `admin`, а не `user`.
 
+<<<<<<< HEAD
 Это на самом деле очень важная деталь, потому что у нас может быть большой объект со множеством методов, от которого можно наследовать. Затем наследующие объекты могут вызывать его методы, но они будут изменять своё состояние, а не состояние объекта-родителя.
+=======
+That is actually a super-important thing, because we may have a big object with many methods, and have objects that inherit from it. And when the inheriting objects run the inherited methods, they will modify only their own states, not the state of the big object.
+>>>>>>> 10c7807f49122f475f7cda5d07a324247091c080
 
 Например, здесь `animal` представляет собой "хранилище методов", и `rabbit` использует его.
 
@@ -248,13 +264,21 @@ alert(animal.isSleeping); // undefined (нет такого свойства в 
 
 ![](proto-animal-rabbit-walk-3.svg)
 
+<<<<<<< HEAD
 Если бы у нас были другие объекты, такие как `bird`, `snake` и т.д., унаследованные от `animal`, они также получили бы доступ к методам `animal`. Но `this` при вызове каждого метода будет соответствовать объекту (перед точкой), на котором происходит вызов, а не `animal`. Поэтому, когда мы записываем данные в `this`, они сохраняются в этих объектах.
+=======
+If we had other objects, like `bird`, `snake`, etc., inheriting from `animal`, they would also gain access to methods of `animal`. But `this` in each method call would be the corresponding object, evaluated at the call-time (before dot), not `animal`. So when we write data into `this`, it is stored into these objects.
+>>>>>>> 10c7807f49122f475f7cda5d07a324247091c080
 
 В результате методы являются общими, а состояние объекта — нет.
 
 ## Цикл for..in
 
+<<<<<<< HEAD
 Цикл `for..in` проходит не только по собственным, но и по унаследованным свойствам объекта.
+=======
+The `for..in` loop iterates over inherited properties too.
+>>>>>>> 10c7807f49122f475f7cda5d07a324247091c080
 
 Например:
 
@@ -269,7 +293,11 @@ let rabbit = {
 };
 
 *!*
+<<<<<<< HEAD
 // Object.keys возвращает только собственные ключи
+=======
+// Object.keys only returns own keys
+>>>>>>> 10c7807f49122f475f7cda5d07a324247091c080
 alert(Object.keys(rabbit)); // jumps
 */!*
 

@@ -73,7 +73,11 @@ function log(date, importance, message) {
 log = _.curry(log);
 ```
 
+<<<<<<< HEAD
 После этого `log` продолжает работать нормально:
+=======
+After that `log` works normally:
+>>>>>>> 10c7807f49122f475f7cda5d07a324247091c080
 
 ```js
 log(new Date(), "DEBUG", "some debug"); // log(a, b, c)
