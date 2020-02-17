@@ -1,7 +1,11 @@
 
 # Proxy и Reflect
 
+<<<<<<< HEAD
 Объект `Proxy` "оборачивается" вокруг другого объекта и может перехватывать (и, при желании, самостоятельно обрабатывать) разные действия с ним, например чтение/запись свойств и другие. Далее мы будем называть такие объекты "прокси".
+=======
+Proxies are used in many libraries and some browser frameworks. We'll see many practical applications in this article.
+>>>>>>> 9acc1302a14a3bbabbc9bf95d04581094bd0f1a8
 
 Прокси используются во многих библиотеках и некоторых браузерных фреймворках. В этой главе мы увидим много случаев применения прокси в решении реальных задач.
 
@@ -242,11 +246,19 @@ alert("Интерпретатор никогда не доходит до это
 
 `Object.keys`, цикл `for..in` и большинство других методов, которые работают со списком свойств объекта, используют внутренний метод `[[OwnPropertyKeys]]` (перехватываемый ловушкой `ownKeys`) для их получения.
 
+<<<<<<< HEAD
 Такие методы различаются в деталях:
 - `Object.getOwnPropertyNames(obj)` возвращает не-символьные ключи.
 - `Object.getOwnPropertySymbols(obj)` возвращает символьные ключи.
 - `Object.keys/values()` возвращает не-символьные ключи/значения с флагом `enumerable` (подробнее про флаги свойств было в главе <info:property-descriptors>).
 - `for..in` перебирает не-символьные ключи с флагом `enumerable`, а также ключи прототипов.
+=======
+Such methods differ in details:
+- `Object.getOwnPropertyNames(obj)` returns non-symbol keys.
+- `Object.getOwnPropertySymbols(obj)` returns symbol keys.
+- `Object.keys/values()` returns non-symbol keys/values with `enumerable` flag (property flags were explained in the article <info:property-descriptors>).
+- `for..in` loops over non-symbol keys with `enumerable` flag, and also prototype keys.
+>>>>>>> 9acc1302a14a3bbabbc9bf95d04581094bd0f1a8
 
 ...Но все они начинают с этого списка.
 
@@ -313,7 +325,11 @@ user = new Proxy(user, {
     return {
       enumerable: true,
       configurable: true
+<<<<<<< HEAD
       /* ...другие флаги, возможно, "value: ..." */
+=======
+      /* ...other flags, probable "value:..." */
+>>>>>>> 9acc1302a14a3bbabbc9bf95d04581094bd0f1a8
     };
   }
 
@@ -448,16 +464,25 @@ user = {
 
 Так что везде использовать такой прокси не стоит.
 
+<<<<<<< HEAD
 ```smart header="Приватные свойства в классах"
 Современные интерпретаторы JavaScript поддерживают приватные свойства в классах. Названия таких свойств должны начинаться с символа `#`. Они подробно описаны в главе <info:private-protected-properties-methods>. Для них не нужны подобные прокси.
+=======
+```smart header="Private properties of a class"
+Modern JavaScript engines natively support private properties in classes, prefixed with `#`. They are described in the article <info:private-protected-properties-methods>. No proxies required.
+>>>>>>> 9acc1302a14a3bbabbc9bf95d04581094bd0f1a8
 
 Впрочем, приватные свойства имеют свои недостатки. В частности, они не наследуются.
 ```
 
 
+<<<<<<< HEAD
 ## "В диапазоне" с ловушкой "has"
 
 Давайте посмотрим ещё примеры.
+=======
+Let's see more examples.ar
+>>>>>>> 9acc1302a14a3bbabbc9bf95d04581094bd0f1a8
 
 Предположим, у нас есть объект `range`, описывающий диапазон:
 
@@ -489,7 +514,7 @@ range = new Proxy(range, {
 *!*
   has(target, prop) {
 */!*
-    return prop >= target.start && prop <= target.end
+    return prop >= target.start && prop <= target.end;
   }
 });
 
@@ -511,9 +536,15 @@ alert(50 in range); // false
 - `thisArg` -- это контекст `this`.
 - `args` -- список аргументов.
 
+<<<<<<< HEAD
 Например, давайте вспомним декоратор `delay(f, ms)`, созданный нами в главе <info:call-apply-decorators>.
 
 Тогда мы обошлись без создания прокси. Вызов `delay(f, ms)` возвращал функцию, которая передавала вызовы `f` после `ms` миллисекунд.
+=======
+For example, let's recall `delay(f, ms)` decorator, that we did in the article <info:call-apply-decorators>.
+
+In that article we did it without proxies. A call to `delay(f, ms)` returned a function that forwards all calls to `f` after `ms` milliseconds.
+>>>>>>> 9acc1302a14a3bbabbc9bf95d04581094bd0f1a8
 
 Вот предыдущая реализация, на основе функции:
 
@@ -594,13 +625,21 @@ sayHi("Вася"); // Привет, Вася! (через 3 секунды)
 
 Мы получили лучшую обёртку.
 
+<<<<<<< HEAD
 Существуют и другие ловушки: полный список есть в начале этой главы. Использовать их можно по аналогии с вышеописанными.
+=======
+Other traps exist: the full list is in the beginning of this article. Their usage pattern is similar to the above.
+>>>>>>> 9acc1302a14a3bbabbc9bf95d04581094bd0f1a8
 
 ## Reflect
 
 `Reflect` - встроенный объект, упрощающий создание прокси.
 
+<<<<<<< HEAD
 Ранее мы говорили о том, что внутренние методы, такие как `[[Get]]`, `[[Set]]` и другие, существуют только в спецификации, что к ним нельзя обратиться напрямую.
+=======
+It was said previously that internal methods, such as `[[Get]]`, `[[Set]]` and others are specification-only, they can't be called directly.
+>>>>>>> 9acc1302a14a3bbabbc9bf95d04581094bd0f1a8
 
 Объект `Reflect` делает это возможным. Его методы - минимальные обёртки вокруг внутренних методов.
 
@@ -626,7 +665,11 @@ alert(user.name); // Вася
 
 В частности, `Reflect` позволяет вызвать операторы (`new`, `delete`...) как функции (`Reflect.construct`, `Reflect.deleteProperty`, ...). Это интересная возможность, но здесь нам важно другое.
 
+<<<<<<< HEAD
 **Для каждого внутреннего метода, перехватываемого `Proxy`, есть соответствующий метод в `Reflect`, который имеет такое же имя и те же аргументы, что и у ловушки `Proxy`.**
+=======
+**For every internal method, trappable by `Proxy`, there's a corresponding method in `Reflect`, with the same name and arguments as the `Proxy` trap.**
+>>>>>>> 9acc1302a14a3bbabbc9bf95d04581094bd0f1a8
 
 Поэтому мы можем использовать `Reflect`, чтобы перенаправить операцию на исходный объект.
 

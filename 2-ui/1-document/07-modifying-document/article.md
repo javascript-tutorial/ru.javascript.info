@@ -1,12 +1,20 @@
 # Изменение документа
 
+<<<<<<< HEAD
 Модификации DOM - это ключ к созданию "живых" страниц.
+=======
+DOM modification is the key to creating "live" pages.
+>>>>>>> 9acc1302a14a3bbabbc9bf95d04581094bd0f1a8
 
 Здесь мы увидим, как создавать новые элементы "на лету" и изменять уже существующие.
 
 ## Пример: показать сообщение
 
+<<<<<<< HEAD
 Рассмотрим методы на примере - а именно, добавим на страницу сообщение, которое будет выглядеть получше, чем `alert`.
+=======
+Let's demonstrate using an example. We'll add a message on the page that looks nicer than `alert`.
+>>>>>>> 9acc1302a14a3bbabbc9bf95d04581094bd0f1a8
 
 Вот такое:
 
@@ -92,11 +100,19 @@ div.innerHTML = "<strong>Всем привет!</strong> Вы прочитали
 
 Вот методы для различных вариантов вставки:
 
+<<<<<<< HEAD
 - `node.append(...nodes or strings)` -- добавляет узлы или строки в конец `node`,
 - `node.prepend(...nodes or strings)` -- вставляет узлы или строки в начало `node`,
 - `node.before(...nodes or strings)` –- вставляет узлы или строки до `node`,
 - `node.after(...nodes or strings)` –- вставляет узлы или строки после `node`,
 - `node.replaceWith(...nodes or strings)` –- заменяет `node` заданными узлами или строками.
+=======
+- `node.append(...nodes or strings)` -- append nodes or strings at the end of `node`,
+- `node.prepend(...nodes or strings)` -- insert nodes or strings at the beginning of `node`,
+- `node.before(...nodes or strings)` –- insert nodes or strings before `node`,
+- `node.after(...nodes or strings)` –- insert nodes or strings after `node`,
+- `node.replaceWith(...nodes or strings)` –- replaces `node` with the given nodes or strings.
+>>>>>>> 9acc1302a14a3bbabbc9bf95d04581094bd0f1a8
 
 Вот пример использования этих методов, чтобы добавить новые элементы в список и текст до/после него:
 
@@ -199,7 +215,11 @@ after
 <p>Пока</p>
 ```
 
+<<<<<<< HEAD
 Так мы можем добавлять произвольный HTML на страницу.
+=======
+That's how we can append arbitrary HTML to the page.
+>>>>>>> 9acc1302a14a3bbabbc9bf95d04581094bd0f1a8
 
 Варианты вставки:
 
@@ -532,6 +552,7 @@ ul.append(...getListContent()); // append + оператор "..." = друзь�
 
     Все эти методы возвращают `node`.
 
+<<<<<<< HEAD
 - Если нужно вставить фрагмент HTML, то `elem.insertAdjacentHTML(where, html)` вставляет в зависимости от `where`:
     - `"beforebegin"` -- вставляет `html` прямо перед `elem`,
     - `"afterbegin"` -- вставляет `html` в `elem` в начало,
@@ -539,6 +560,15 @@ ul.append(...getListContent()); // append + оператор "..." = друзь�
     - `"afterend"` -- вставляет `html` сразу после `elem`.
 
     Также существуют похожие методы `elem.insertAdjacentText` и `elem.insertAdjacentElement`, они вставляют текстовые строки и элементы, но они редко используются.
+=======
+- Given some HTML in `html`, `elem.insertAdjacentHTML(where, html)` inserts it depending on the value of `where`:
+    - `"beforebegin"` -- insert `html` right before `elem`,
+    - `"afterbegin"` -- insert `html` into `elem`, at the beginning,
+    - `"beforeend"` -- insert `html` into `elem`, at the end,
+    - `"afterend"` -- insert `html` right after `elem`.
+
+    Also there are similar methods, `elem.insertAdjacentText` and `elem.insertAdjacentElement`, that insert text strings and elements, but they are rarely used.
+>>>>>>> 9acc1302a14a3bbabbc9bf95d04581094bd0f1a8
 
 - Чтобы добавить HTML на страницу до завершения её загрузки:
     - `document.write(html)`

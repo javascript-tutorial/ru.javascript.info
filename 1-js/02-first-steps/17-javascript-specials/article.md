@@ -1,51 +1,51 @@
-# Особенности JavaScript
+# JavaScript specials
 
-Давайте кратко повторим изученный материал и отметим наиболее "тонкие" моменты.
+This chapter briefly recaps the features of JavaScript that we've learned by now, paying special attention to subtle moments.
 
-## Структура кода
+## Code structure
 
-Инструкции разделяются точкой с запятой:
-
-```js run no-beautify
-alert('Привет'); alert('Мир');
-```
-
-Как правило, перевод строки также интерпретируется как разделитель, так тоже будет работать:
+Statements are delimited with a semicolon:
 
 ```js run no-beautify
-alert('Привет')
-alert('Мир')
+alert('Hello'); alert('World');
 ```
 
-Это так называемая "автоматическая вставка точки с запятой". Впрочем, она не всегда срабатывает, например:
+Usually, a line-break is also treated as a delimiter, so that would also work:
+
+```js run no-beautify
+alert('Hello')
+alert('World')
+```
+
+That's called "automatic semicolon insertion". Sometimes it doesn't work, for instance:
 
 ```js run
-alert("После этого сообщения ждите ошибку")
+alert("There will be an error after this message")
 
 [1, 2].forEach(alert)
 ```
 
-Большинство руководств по стилю кода рекомендуют ставить точку с запятой после каждой инструкции.
+Most codestyle guides agree that we should put a semicolon after each statement.
 
-Точка с запятой не требуется после блоков кода {...} и синтаксических конструкций с ними, таких как, например, циклы:
+Semicolons are not required after code blocks `{...}` and syntax constructs with them like loops:
 
 ```js
 function f() {
-  // после объявления функции необязательно ставить точку с запятой   
+  // no semicolon needed after function declaration
 }
 
 for(;;) {
-  // после цикла точка с запятой также необязательна
+  // no semicolon needed after the loop
 }
 ```
 
-...Впрочем, если даже мы и поставим "лишнюю" точку с запятой, ошибки не будет. Она просто будет проигнорирована.
+...But even if we can put an "extra" semicolon somewhere, that's not an error. It will be ignored.
 
-Подробности: <info:structure>.
+More in: <info:structure>.
 
-## Строгий режим
+## Strict mode
 
-Чтобы по максимуму использовать возможности современного JavaScript, все скрипты рекомендуется начинать с добавления директивы `"use strict"`.
+To fully enable all features of modern JavaScript, we should start scripts with `"use strict"`.
 
 ```js
 'use strict';
@@ -53,128 +53,128 @@ for(;;) {
 ...
 ```
 
-Эту директиву следует размещать в первой строке скрипта или в начале тела функции.
+The directive must be at the top of a script or at the beginning of a function body.
 
-Без `"use strict"` код также запустится, но некоторые возможности будут работать в "режиме совместимости" со старыми версиями языка JavaScript. Нам же предпочтительнее современное поведение.
+Without `"use strict"`, everything still works, but some features behave in the old-fashion, "compatible" way. We'd generally prefer the modern behavior.
 
-Некоторые конструкции языка (например, классы, которые нам ещё предстоит изучить) включают строгий режим по умолчанию.
+Some modern features of the language (like classes that we'll study in the future) enable strict mode implicitly.
 
-Подробности: <info:strict-mode>.
+More in: <info:strict-mode>.
 
-## Переменные
+## Variables
 
-Можно объявить при помощи:
+Can be declared using:
 
 - `let`
-- `const` (константа, т.е. изменению не подлежит)
-- `var` (устаревший способ, подробности позже)
+- `const` (constant, can't be changed)
+- `var` (old-style, will see later)
 
-Имя переменной может включать:
-- Буквы и цифры, однако цифра не может быть первым символом.
-- Символы `$` и `_` используются наряду с буквами.
-- Иероглифы и символы нелатинского алфавита также допустимы, но обычно не используются.
+A variable name can include:
+- Letters and digits, but the first character may not be a digit.
+- Characters `$` and `_` are normal, on par with letters.
+- Non-Latin alphabets and hieroglyphs are also allowed, but commonly not used.
 
-Переменные типизируются динамически. В них могут храниться любые значения:
+Variables are dynamically typed. They can store any value:
 
 ```js
 let x = 5;
-x = "Вася";
+x = "John";
 ```
 
-Всего существует 7 типов данных:
+There are 7 data types:
 
-- `number` для целых и вещественных чисел,
-- `string` для строк,
-- `boolean` для логических значений истинности или ложности: `true/false`,
-- `null` – тип с единственным значением `null`, т.е. "пустое значение" или "значение не существует",
-- `undefined` – тип с единственным значением `undefined`, т.е. "значение не задано",
-- `object` и `symbol` – сложные структуры данных и уникальные идентификаторы; их мы ещё не изучили.
+- `number` for both floating-point and integer numbers,
+- `string` for strings,
+- `boolean` for logical values: `true/false`,
+- `null` -- a type with a single value `null`, meaning "empty" or "does not exist",
+- `undefined` -- a type with a single value `undefined`, meaning "not assigned",
+- `object` and `symbol` -- for complex data structures and unique identifiers, we haven't learnt them yet.
 
-Оператор `typeof` возвращает тип значения переменной, с двумя исключениями:
+The `typeof` operator returns the type for a value, with two exceptions:
 ```js
-typeof null == "object" // ошибка в языке
-typeof function(){} == "function" // именно для функций
+typeof null == "object" // error in the language
+typeof function(){} == "function" // functions are treated specially
 ```
 
-Подробности: <info:variables>, <info:types>.
+More in: <info:variables> and <info:types>.
 
-## Взаимодействие с посетителем
+## Interaction
 
-В качестве рабочей среды мы используем браузер, так что простейшими функциями взаимодействия с посетителем являются:
+We're using a browser as a working environment, so basic UI functions will be:
 
-[`prompt(question, [default])`](https://developer.mozilla.org/ru/docs/Web/API/Window/prompt)
-: Задаёт вопрос `question` и возвращает то, что ввёл посетитель, либо `null`, если посетитель нажал на кнопку "Отмена".
+[`prompt(question, [default])`](mdn:api/Window/prompt)
+: Ask a `question`, and return either what the visitor entered or `null` if they clicked "cancel".
 
-[`confirm(question)`](https://developer.mozilla.org/ru/docs/Web/API/Window/confirm)
-: Задаёт вопрос `question` и предлагает выбрать "ОК" или "Отмена". Выбор возвращается в формате `true/false`.
+[`confirm(question)`](mdn:api/Window/confirm)
+: Ask a `question` and suggest to choose between Ok and Cancel. The choice is returned as `true/false`.
 
-[`alert(message)`](https://developer.mozilla.org/ru/docs/Web/API/Window/alert)
-: Выводит сообщение `message`.
+[`alert(message)`](mdn:api/Window/alert)
+: Output a `message`.
 
-Все эти функции показывают *модальные окна*, они останавливают выполнение кода и не позволяют посетителю взаимодействовать со страницей, пока не будет дан ответ на вопрос.
+All these functions are *modal*, they pause the code execution and prevent the visitor from interacting with the page until they answer.
 
-Например:
+For instance:
 
 ```js run
-let userName = prompt("Введите имя", "Алиса");
-let isTeaWanted = confirm("Вы хотите чаю?");
+let userName = prompt("Your name?", "Alice");
+let isTeaWanted = confirm("Do you want some tea?");
 
-alert( "Посетитель: " + userName ); // Алиса
-alert( "Чай: " + isTeaWanted ); // true
+alert( "Visitor: " + userName ); // Alice
+alert( "Tea wanted: " + isTeaWanted ); // true
 ```
 
-Подробности: <info:alert-prompt-confirm>.
+More in: <info:alert-prompt-confirm>.
 
-## Операторы
+## Operators
 
-JavaScript поддерживает следующие операторы:
+JavaScript supports the following operators:
 
-Арифметические
-: Простые `* + - /`, а также деление по модулю `%` и возведение в степень `**`.
+Arithmetical
+: Regular: `* + - /`, also `%` for the remainder and `**` for power of a number.
 
-    Бинарный плюс `+` объединяет строки. А если одним из операндов является строка, то второй тоже будет конвертирован в строку:
+    The binary plus `+` concatenates strings. And if any of the operands is a string, the other one is converted to string too:
 
     ```js run
-    alert( '1' + 2 ); // '12', строка
-    alert( 1 + '2' ); // '12', строка
+    alert( '1' + 2 ); // '12', string
+    alert( 1 + '2' ); // '12', string
     ```
 
-Операторы присваивания
-: Простые `a = b` и составные `a *= 2`.
+Assignments
+: There is a simple assignment: `a = b` and combined ones like `a *= 2`.
 
-Битовые операции
-: Битовые операторы работают с 32-битными целыми числами на самом низком, побитовом уровне. Подробнее об их использовании можно прочитать на ресурсе [MDN](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators).
+Bitwise
+: Bitwise operators work with 32-bit integers at the lowest, bit-level: see the [docs](mdn:/JavaScript/Reference/Operators/Bitwise_Operators) when they are needed.
 
-Условный оператор
-: Единственный оператор с тремя параметрами: `cond ? resultA : resultB`. Если условие `cond` истинно, возвращается `resultA`, иначе – `resultB`.
+Conditional
+: The only operator with three parameters: `cond ? resultA : resultB`. If `cond` is truthy, returns `resultA`, otherwise `resultB`.
 
-Логические операторы
-: Логические И `&&`, ИЛИ `||` используют так называемое "ленивое вычисление" и возвращают значение, на котором оно остановилось (не обязательно `true` или `false`). Логическое НЕТ `!` конвертирует операнд в логический тип и возвращает инвертированное значение.
+Logical operators
+: Logical AND `&&` and OR `||` perform short-circuit evaluation and then return the value where it stopped (not necessary `true`/`false`). Logical NOT `!` converts the operand to boolean type and returns the inverse value.
 
-Сравнение
-: Проверка на равенство `==` значений разных типов конвертирует их в число (за исключением `null` и `undefined`, которые могут равняться только друг другу), так что примеры ниже равны:
+Comparisons
+: Equality check `==` for values of different types converts them to a number (except `null` and `undefined` that equal each other and nothing else), so these are equal:
 
     ```js run
     alert( 0 == false ); // true
     alert( 0 == '' ); // true
     ```
 
-    Другие операторы сравнения тоже конвертируют значения разных типов в числовой тип.
+    Other comparisons convert to a number as well.
 
-    Оператор строгого равенства `===` не выполняет конвертирования: разные типы для него всегда означают разные значения.
+    The strict equality operator `===` doesn't do the conversion: different types always mean different values for it.
 
-    Значения `null` и `undefined` особенные: они равны `==` только друг другу, но не равны ничему ещё.
+    Values `null` and `undefined` are special: they equal `==` each other and don't equal anything else.
 
-    Операторы сравнения больше/меньше сравнивают строки посимвольно, остальные типы конвертируются в число.
+    Greater/less comparisons compare strings character-by-character, other types are converted to a number.
 
-Другие операторы
-: Существуют и другие операторы, такие как запятая.
+Other operators
+: There are few others, like a comma operator.
 
-Подробности: <info:operators>, <info:comparison>, <info:logical-operators>.
+More in: <info:operators>, <info:comparison>, <info:logical-operators>.
 
-## Циклы
+## Loops
 
-- Мы изучили три вида циклов:
+- We covered 3 types of loops:
 
     ```js
     // 1
@@ -193,42 +193,42 @@ JavaScript поддерживает следующие операторы:
     }
     ```
 
-- Переменная, объявленная в цикле `for(let...)`, видна только внутри цикла. Но мы также можем опустить `let` и переиспользовать существующую переменную.
-- Директивы `break/continue` позволяют выйти из цикла/текущей итерации. Используйте метки для выхода из вложенных циклов.
+- The variable declared in `for(let...)` loop is visible only inside the loop. But we can also omit `let` and reuse an existing variable.
+- Directives `break/continue` allow to exit the whole loop/current iteration. Use labels to break nested loops.
 
-Подробности: <info:while-for>.
+Details in: <info:while-for>.
 
-Позже мы изучим ещё виды циклов для работы с объектами.
+Later we'll study more types of loops to deal with objects.
 
-## Конструкция "switch"
+## The "switch" construct
 
-Конструкция "switch" может заменить несколько проверок `if`. При сравнении она использует оператор строгого равенства `===`.
+The "switch" construct can replace multiple `if` checks. It uses `===` (strict equality) for comparisons.
 
-Например:
+For instance:
 
 ```js run
-let age = prompt('Сколько вам лет?', 18);
+let age = prompt('Your age?', 18);
 
 switch (age) {
   case 18:
-    alert("Так не сработает"); // результатом prompt является строка, а не число
+    alert("Won't work"); // the result of prompt is a string, not a number
 
   case "18":
-    alert("А так сработает!");
+    alert("This works!");
     break;
 
   default:
-    alert("Любое значение, неравное значению выше");
+    alert("Any value not equal to one above");
 }
 ```
 
-Подробности: <info:switch>.
+Details in: <info:switch>.
 
-## Функции
+## Functions
 
-Мы рассмотрели три способа создания функции в JavaScript:
+We covered three ways to create a function in JavaScript:
 
-1. Function Declaration: функция в основном потоке кода
+1. Function Declaration: the function in the main code flow
 
     ```js
     function sum(a, b) {
@@ -238,7 +238,7 @@ switch (age) {
     }
     ```
 
-2. Function Expression: функция как часть выражения
+2. Function Expression: the function in the context of an expression
 
     ```js
     let sum = function(a, b) {
@@ -248,32 +248,32 @@ switch (age) {
     };
     ```
 
-3. Стрелочные функции:
+3. Arrow functions:
 
     ```js
-    // выражение в правой части
+    // expression at the right side
     let sum = (a, b) => a + b;
 
-    // многострочный код в фигурных скобках { ... }, здесь нужен return:
+    // or multi-line syntax with { ... }, need return here:
     let sum = (a, b) => {
       // ...
       return a + b;
     }
 
-    // без аргументов
-    let sayHi = () => alert("Привет");
+    // without arguments
+    let sayHi = () => alert("Hello");
 
-    // с одним аргументом
+    // with a single argument
     let double = n => n * 2;
     ```
 
 
-- У функций могут быть локальные переменные: т.е. объявленные в теле функции. Такие переменные видимы только внутри функции.
-- У параметров могут быть значения по умолчанию: `function sum(a = 1, b = 2) {...}`.
-- Функции всегда что-нибудь возвращают. Если нет оператора `return`, результатом будет `undefined`.
+- Functions may have local variables: those declared inside its body. Such variables are only visible inside the function.
+- Parameters can have default values: `function sum(a = 1, b = 2) {...}`.
+- Functions always return something. If there's no `return` statement, then the result is `undefined`.
 
-Подробности: <info:function-basics>, <info:arrow-functions-basics>.
+Details: see <info:function-basics>, <info:arrow-functions-basics>.
 
-## Далее мы изучим больше
+## More to come
 
-Это был краткий список возможностей JavaScript. На данный момент мы изучили только основы. Далее в учебнике вы найдёте больше особенностей и продвинутых возможностей JavaScript.
+That was a brief list of JavaScript features. As of now we've studied only basics. Further in the tutorial you'll find more specials and advanced features of JavaScript.

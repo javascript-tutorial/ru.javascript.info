@@ -19,12 +19,18 @@ User.staticMethod(); // true
 
 Это фактически то же самое, что присвоить метод напрямую как свойство функции:
 
+<<<<<<< HEAD
 ```js
+=======
+```js run
+>>>>>>> 9acc1302a14a3bbabbc9bf95d04581094bd0f1a8
 class User { }
 
 User.staticMethod = function() {
   alert(this === User);
 };
+
+User.staticMethod(); // true
 ```
 
 Значением `this` при вызове `User.staticMethod()` является сам конструктор класса `User` (правило "объект до точки").
@@ -123,14 +129,23 @@ alert( Article.publisher ); // Илья Кантор
 Article.publisher = "Илья Кантор";
 ```
 
+<<<<<<< HEAD
 ## Наследование статических свойств и методов
 
 Статические свойства и методы наследуются.
 
 Например, метод `Animal.compare` в коде ниже наследуется и доступен как `Rabbit.compare`:
+=======
+## Inheritance of static properties and methods
+
+Static properties and methods are inherited.
+
+For instance, `Animal.compare` and `Animal.planet` in the code below are inherited and accessible as `Rabbit.compare` and `Rabbit.planet`:
+>>>>>>> 9acc1302a14a3bbabbc9bf95d04581094bd0f1a8
 
 ```js run
 class Animal {
+  static planet = "Earth";
 
   constructor(name, speed) {
     this.speed = speed;
@@ -166,10 +181,19 @@ let rabbits = [
 rabbits.sort(Rabbit.compare);
 */!*
 
+<<<<<<< HEAD
 rabbits[0].run(); // Чёрный кролик бежит со скоростью 5.
 ```
 
 Мы можем вызвать `Rabbit.compare`, при этом будет вызван унаследованный `Animal.compare`.
+=======
+rabbits[0].run(); // Black Rabbit runs with speed 5.
+
+alert(Rabbit.planet); // Earth
+```
+
+Now when we call `Rabbit.compare`, the inherited `Animal.compare` will be called.
+>>>>>>> 9acc1302a14a3bbabbc9bf95d04581094bd0f1a8
 
 Как это работает? Снова с использованием прототипов. Как вы уже могли предположить, `extends` даёт `Rabbit` ссылку `[[Prototype]]` на `Animal`.
 
@@ -180,7 +204,11 @@ rabbits[0].run(); // Чёрный кролик бежит со скорость�
 1. Функция `Rabbit` прототипно наследует от `Animal` function.
 2. `Rabbit.prototype` прототипно наследует от `Animal.prototype`.
 
+<<<<<<< HEAD
 В результате наследование работает как для обычных, так и для статических методов.
+=======
+As a result, inheritance works both for regular and static methods.
+>>>>>>> 9acc1302a14a3bbabbc9bf95d04581094bd0f1a8
 
 Давайте это проверим кодом:
 
@@ -191,13 +219,22 @@ class Rabbit extends Animal {}
 // для статики
 alert(Rabbit.__proto__ === Animal); // true
 
+<<<<<<< HEAD
 // для обычных методов
 alert(Rabbit.prototype.__proto__ === Animal.prototype);
+=======
+// for regular methods
+alert(Rabbit.prototype.__proto__ === Animal.prototype); // true
+>>>>>>> 9acc1302a14a3bbabbc9bf95d04581094bd0f1a8
 ```
 
 ## Итого
 
+<<<<<<< HEAD
 Статические методы используются для функциональности, принадлежат классу "в целом", а не относятся к конкретному объекту класса.
+=======
+Static methods are used for the functionality that belongs to the class "as a whole". It doesn't relate to a concrete class instance.
+>>>>>>> 9acc1302a14a3bbabbc9bf95d04581094bd0f1a8
 
 Например, метод для сравнения двух статей `Article.compare(article1, article2)` или фабричный метод `Article.createTodays()`.
 

@@ -212,7 +212,7 @@ for (;;) {
 
 Например, следующий код подсчитывает сумму вводимых чисел до тех пор, пока посетитель их вводит, а затем – выдаёт:
 
-```js
+```js run
 let sum = 0;
 
 while (true) {
@@ -256,7 +256,7 @@ for (let i = 0; i < 10; i++) {
 ````smart header="Директива `continue` позволяет избегать вложенности"
 Цикл, который обрабатывает только нечётные значения, мог бы выглядеть так:
 
-```js
+```js run
 for (let i = 0; i < 10; i++) {
 
   if (i % 2) {
@@ -268,7 +268,11 @@ for (let i = 0; i < 10; i++) {
 
 С технической точки зрения он полностью идентичен. Действительно, вместо `continue` можно просто завернуть действия в блок `if`.
 
+<<<<<<< HEAD
 Однако мы получили дополнительный уровень вложенности фигурных скобок. Если код внутри `if` более длинный, то это ухудшает читаемость, в отличие от варианта с `continue`.
+=======
+But as a side-effect, this created one more level of nesting (the `alert` call inside the curly braces). If the code inside of `if` is longer than a few lines, that may decrease the overall readability.
+>>>>>>> 9acc1302a14a3bbabbc9bf95d04581094bd0f1a8
 ````
 
 ````warn header="Нельзя использовать `break/continue` справа от оператора '?'"
