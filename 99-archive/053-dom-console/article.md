@@ -78,4 +78,4 @@ $0.style.backgroundColor = 'red';
 
 Более полная документация по методам консоли доступна на страницах [Console API Reference для Chrome](https://developers.google.com/web/tools/chrome-devtools/debug/console/console-reference) и [Command Line API для Firebug](https://getfirebug.com/wiki/index.php/Command_Line_API), а также на [firebug.ru](http://firebug.ru).
 
-Другие браузеры реализуют похожий функционал, освоив Chrome/Firebug, вы легко с ними разберётесь.
+Другие браузеры реализуют похожую функциональность, освоив Chrome/Firebug, вы легко с ними разберётесь.
