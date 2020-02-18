@@ -83,6 +83,7 @@ document.querySelector('.hello').innerHTML = text;
 | Comparison             | Операция сравнения                                     |
 | Construct              | Конструкция                                     |
 | Conversion             | Конвертирование                                            |
+| Functionality          | Функциональность                                                               |
 | Left click/right click | Левый/правый клик? Кликните? левой кнопкой мыши        |
 | More in / Details in   | Подробнее в                                                      |
 | Script                 | Скрипт                                                        |

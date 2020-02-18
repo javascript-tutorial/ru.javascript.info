@@ -293,36 +293,20 @@ input.removeEventListener("click", handler);
 ````warn header="Обработчики некоторых событий можно назначать только через `addEventListener`"
 Существуют события, которые нельзя назначить через DOM-свойство, но можно через `addEventListener`.
 
-Например, таково событие `transitionend`, то есть окончание CSS-анимации.
+Например, таково событие `DOMContentLoaded`, которое срабатывает, когда завершена загрузка и построение DOM документа.
 
-Вы можете проверить это, запустив код в примере ниже. В большинстве браузеров, сработает лишь второй обработчик, но не первый.
-
-```html run
-<style>
-  input {
-    transition: width 1s;
-    width: 100px;
-  }
-
-  .wide {
-    width: 300px;
-  }
-</style>
-
-<input type="button" id="elem" onclick="this.classList.toggle('wide')" value="Нажми меня">
-
-<script>
-  elem.ontransitionend = function() {
-    alert("DOM property"); // не сработает
-  };
-
-*!*
-  elem.addEventListener("transitionend", function() {
-    alert("addEventListener"); // сработает по окончании анимации
-  });
-*/!*
-</script>
+```js
+document.onDOMContentLoaded = function() {
+  alert("DOM построен"); // не будет работать
+};
 ```
+
+```js
+document.addEventListener("DOMContentLoaded", function() {
+  alert("DOM построен"); // а вот так сработает
+});
+```
+Так что `addEventListener` более универсален. Хотя заметим, что таких событий меньшинство, это скорее исключение, чем правило.
 ````
 
 ## Объект события
