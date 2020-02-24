@@ -19,7 +19,11 @@
 - `key(index)` -- получить ключ на заданной позиции.
 - `length` -- количество элементов в хранилище.
 
+<<<<<<< HEAD
 Как видим, интерфейс похож на `Map` (`setItem/getItem/removeItem`), но также запоминается порядок элементов, и можно получить доступ к элементу по индексу -- `key(index)`.
+=======
+As you can see, it's like a `Map` collection (`setItem/getItem/removeItem`), but also allows to access by index with `key(index)`.
+>>>>>>> 405150f1f286db19a3c1ed913fa3e905fcefbe46
 
 Давайте посмотрим, как это работает.
 

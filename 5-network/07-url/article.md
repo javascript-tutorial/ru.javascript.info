@@ -3,9 +3,15 @@
 
 Встроенный класс [URL](https://url.spec.whatwg.org/#api) предоставляет удобный интерфейс для создания и разбора URL-адресов.
 
+<<<<<<< HEAD
 Нет сетевых методов, которые требуют именно объект `URL`, обычные строки вполне подходят. Так что, технически, мы не обязаны использовать `URL`. Но иногда он может быть весьма удобным.
 
 ## Создание URL
+=======
+There are no networking methods that require exactly a `URL` object, strings are good enough. So technically we don't have to use `URL`. But sometimes it can be really helpful.
+
+## Creating a URL
+>>>>>>> 405150f1f286db19a3c1ed913fa3e905fcefbe46
 
 Синтаксис создания нового объекта `URL`:
 
@@ -64,12 +70,23 @@ alert(url.pathname); // /url
 ```smart header="Можно передавать объекты `URL` в сетевые методы (и большинство других) вместо строк"
 Мы можем использовать объект `URL` в методах `fetch` или `XMLHttpRequest` и почти во всех других, где ожидается URL-строка.
 
+<<<<<<< HEAD
 Вообще, объект `URL` можно передавать почти куда угодно вместо строки, так как большинство методов сконвертируют объект в строку, при этом он станет строкой с полным URL-адресом.
+=======
+```smart header="We can pass `URL` objects to networking (and most other) methods instead of a string"
+We can use a `URL` object in `fetch` or `XMLHttpRequest`, almost everywhere where a URL-string is expected.
+
+Generally, `URL` object can be passed to any method instead of a string, as most method will perform the string conversion, that turns a `URL` object into a string with full URL.
+>>>>>>> 405150f1f286db19a3c1ed913fa3e905fcefbe46
 ```
 
 ## SearchParams "?..."
 
+<<<<<<< HEAD
 Допустим, мы хотим создать URL-адрес с заданными параметрами, например, `https://google.com/search?query=JavaScript`.
+=======
+Let's say we want to create a url with given search params, for instance, `https://google.com/search?query=JavaScript`.
+>>>>>>> 405150f1f286db19a3c1ed913fa3e905fcefbe46
 
 Мы можем указать их в строке:
 

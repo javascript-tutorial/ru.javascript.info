@@ -2,7 +2,11 @@
 
 Оператор `instanceof` позволяет проверить, к какому классу принадлежит объект, с учётом наследования.
 
+<<<<<<< HEAD
 Такая проверка может потребоваться во многих случаях. Здесь мы используем её для создания *полиморфной* функции, которая интерпретирует аргументы по-разному в зависимости от их типа.
+=======
+Such a check may be necessary in many cases. Here we'll use it for building a *polymorphic* function, the one that treats arguments differently depending on their type.
+>>>>>>> 405150f1f286db19a3c1ed913fa3e905fcefbe46
 
 ## Оператор instanceof [#ref-instanceof]
 
@@ -46,7 +50,11 @@ alert( arr instanceof Object ); // true
 
 Пожалуйста, обратите внимание, что `arr` также принадлежит классу `Object`, потому что `Array` наследует от `Object`.
 
+<<<<<<< HEAD
 Обычно оператор `instanceof` просматривает для проверки цепочку прототипов. Но это поведение может быть изменено при помощи статического метода `Symbol.hasInstance`.
+=======
+Normally, `instanceof` examines the prototype chain for the check. We can also set a custom logic in the static method `Symbol.hasInstance`.
+>>>>>>> 405150f1f286db19a3c1ed913fa3e905fcefbe46
 
 Алгоритм работы `obj instanceof Class` работает примерно так:
 
@@ -67,7 +75,11 @@ alert( arr instanceof Object ); // true
     alert(obj instanceof Animal); // true: вызван Animal[Symbol.hasInstance](obj)
     ```
 
+<<<<<<< HEAD
 2. Большая часть классов не имеет метода `Symbol.hasInstance`. В этом случае используется стандартная логика: проверяется, равен ли `Class.prototype` одному из прототипов в прототипной цепочке `obj`.
+=======
+2. Most classes do not have `Symbol.hasInstance`. In that case, the standard logic is used: `obj instanceOf Class` checks whether `Class.prototype` is equal to one of the prototypes in the `obj` prototype chain.
+>>>>>>> 405150f1f286db19a3c1ed913fa3e905fcefbe46
 
     Другими словами, сравнивается:
     ```js
@@ -104,9 +116,15 @@ alert( arr instanceof Object ); // true
 
 Кстати, есть метод [objA.isPrototypeOf(objB)](mdn:js/object/isPrototypeOf), которые возвращает `true`, если объект `objA` есть где-то в прототипной цепочке объекта `objB`. Так что `obj instanceof Class` можно перефразировать как `Class.prototype.isPrototypeOf(obj)`.
 
+<<<<<<< HEAD
 Забавно, но сам конструктор `Class` не участвует в процессе проверки! Важна только цепочка прототипов `Class.prototype`.
 
 Это может приводить к интересным последствиям при изменении свойства `prototype` после создания объекта.
+=======
+It's funny, but the `Class` constructor itself does not participate in the check! Only the chain of prototypes and `Class.prototype` matters.
+
+That can lead to interesting consequences when a `prototype` property is changed after the object is created.
+>>>>>>> 405150f1f286db19a3c1ed913fa3e905fcefbe46
 
 Как, например, тут:
 
@@ -185,7 +203,11 @@ let user = {
 alert( {}.toString.call(user) ); // [object User]
 ```
 
+<<<<<<< HEAD
 Такое свойство есть у большей части объектов, специфичных для определённых окружений. Вот несколько примеров для браузера:
+=======
+For most environment-specific objects, there is such a property. Here are some browser specific examples:
+>>>>>>> 405150f1f286db19a3c1ed913fa3e905fcefbe46
 
 ```js run
 // toStringTag для браузерного объекта и класса

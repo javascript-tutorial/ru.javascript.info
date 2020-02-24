@@ -12,8 +12,13 @@
 
 Это отличает JavaScript от другого языка - [Java](https://ru.wikipedia.org/wiki/Java).
 
+<<<<<<< HEAD
 ```smart header="Почему <u>Java</u>Script?"
 Когда JavaScript создавался, у него было другое имя - "LiveScript". Однако, язык Java был очень популярен в то время, и было решено, что позиционирование JavaScript как "младшего брата" Java будет полезно.
+=======
+```smart header="Why is it called <u>Java</u>Script?"
+When JavaScript was created, it initially had another name: "LiveScript". But Java was very popular at that time, so it was decided that positioning a new language as a "younger brother" of Java would help.
+>>>>>>> 405150f1f286db19a3c1ed913fa3e905fcefbe46
 
 Со временем JavaScript стал полностью независимым языком со своей собственной спецификацией, называющейся [ECMAScript](http://ru.wikipedia.org/wiki/ECMAScript), и сейчас не имеет никакого отношения к Java.
 ```
@@ -38,7 +43,11 @@
 2. Затем он преобразует ("компилирует") скрипт в машинный язык.
 3. После этого машинный код запускается и работает достаточно быстро.
 
+<<<<<<< HEAD
 Движок применяет оптимизации на каждом этапе. Он даже просматривает скомпилированный скрипт во время его работы, анализируя проходящие через него данные, и применяет оптимизации к машинному коду, полагаясь на полученные знания. В результате скрипты работают очень быстро.
+=======
+The engine applies optimizations at each step of the process. It even watches the compiled script as it runs, analyzes the data that flows through it, and further optimizes the machine code based on that knowledge.
+>>>>>>> 405150f1f286db19a3c1ed913fa3e905fcefbe46
 ```
 
 ## Что может JavaScript в браузере?
@@ -63,7 +72,11 @@
 
 Примеры таких ограничений включают в себя:
 
+<<<<<<< HEAD
 - JavaScript на веб-странице не может читать/записывать произвольные файлы на жёстком диске, копировать их или запускать программы. Он не имеет прямого доступа к системным функциям ОС.
+=======
+- JavaScript on a webpage may not read/write arbitrary files on the hard disk, copy them or execute programs. It has no direct access to OS functions.
+>>>>>>> 405150f1f286db19a3c1ed913fa3e905fcefbe46
 
     Современные браузеры позволяют ему работать с файлами, но с ограниченным доступом, и предоставляют его, только если пользователь выполняет определённые действия, такие как "перетаскивание" файла в окно браузера или его выбор с помощью тега `<input>`.
 

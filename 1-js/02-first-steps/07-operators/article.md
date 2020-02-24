@@ -138,17 +138,30 @@ alert( +apples + +oranges ); // 5
 | Приоритет | Название | Обозначение |
 |------------|------|------|
 | ... | ... | ... |
+<<<<<<< HEAD
 | 16 | унарный плюс | `+` |
 | 16 | унарный минус | `-` |
 | 14 | умножение | `*` |
 | 14 | деление | `/` |
 | 13 | сложение | `+` |
 | 13 | вычитание | `-` |
+=======
+| 17 | unary plus | `+` |
+| 17 | unary negation | `-` |
+| 15 | multiplication | `*` |
+| 15 | division | `/` |
+| 13 | addition | `+` |
+| 13 | subtraction | `-` |
+>>>>>>> 405150f1f286db19a3c1ed913fa3e905fcefbe46
 | ... | ... | ... |
 | 3 | присваивание | `=` |
 | ... | ... | ... |
 
+<<<<<<< HEAD
 Так как "унарный плюс" имеет приоритет `16`, который выше, чем `13` у "сложения" (бинарный плюс), то в выражении `"+apples + +oranges"` сначала выполнятся унарные плюсы, а затем сложение.
+=======
+As we can see, the "unary plus" has a priority of `17` which is higher than the `13` of "addition" (binary plus). That's why, in the expression `"+apples + +oranges"`, unary pluses work before the addition.
+>>>>>>> 405150f1f286db19a3c1ed913fa3e905fcefbe46
 
 ## Присваивание
 
