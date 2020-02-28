@@ -7,7 +7,7 @@
 Чтобы создать значение типа `BigInt`, необходимо добавить `n` в конец числового литерала или вызвать функцию `BigInt`, которая создаст число типа `BigInt` из переданного аргумента. Аргументом может быть число, строка и др.
 
 ```js
-const `bigint` = 1234567890123456789012345678901234567890n;
+const bigint = 1234567890123456789012345678901234567890n;
 
 const sameBigint = BigInt("1234567890123456789012345678901234567890");
 
@@ -29,13 +29,13 @@ alert(5n / 2n); // 2
 В математических операциях мы не можем смешивать `bigint` и обычные числа:
 
 ```js run
-alert(1n + 2); // Error: Cannot mix `bigint` and other types
+alert(1n + 2); // Error: Cannot mix bigint and other types
 ```
 
 Мы должны явно их конвертировать: используя либо `BigInt()`, либо `Number()`, например:
 
 ```js run
-let `bigint` = 1n;
+let bigint = 1n;
 let number = 2;
 
 // конвертируем number в bigint
@@ -52,7 +52,7 @@ alert(Number(bigint) + number); // 3
 
 Данный оператор не поддерживается при работе с `BigInt` числами.
 ```js run
-let `bigint` = 1n;
+let bigint = 1n;
 
 alert( +bigint ); // SyntaxError: Unexpected identifier
 ```
