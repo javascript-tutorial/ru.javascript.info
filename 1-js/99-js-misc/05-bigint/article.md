@@ -29,7 +29,7 @@ alert(5n / 2n); // 2
 В математических операциях мы не можем смешивать `bigint` и обычные числа:
 
 ```js run
-alert(1n + 2); // Error: Cannot mix bigint and other types
+alert(1n + 2); // Error: Cannot mix BigInt and other types
 ```
 
 Мы должны явно их конвертировать: используя либо `BigInt()`, либо `Number()`, например:
