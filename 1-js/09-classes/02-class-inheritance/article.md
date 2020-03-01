@@ -11,7 +11,7 @@ class Animal {
     this.name = name;
   }
   run(speed) {
-    this.speed += speed;
+    this.speed = speed;
     alert(`${this.name} бежит со скоростью ${this.speed}.`);
   }
   stop() {
@@ -57,7 +57,7 @@ class Animal {
     this.name = name;
   }
   run(speed) {
-    this.speed += speed;
+    this.speed = speed;
     alert(`${this.name} бежит со скоростью ${this.speed}.`);
   }
   stop() {
@@ -144,7 +144,7 @@ class Animal {
   }
 
   run(speed) {
-    this.speed += speed;
+    this.speed = speed;
     alert(`${this.name} бежит со скоростью ${this.speed}.`);
   }
 
