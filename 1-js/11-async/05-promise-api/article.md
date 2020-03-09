@@ -4,9 +4,15 @@
 
 ## Promise.all
 
+<<<<<<< HEAD
 Допустим, нам нужно запустить множество промисов параллельно и дождаться, пока все они выполнятся.
 
 Например, параллельно загрузить несколько файлов и обработать результат, когда он готов.
+=======
+Let's say we want many promises to execute in parallel and wait until all of them are ready.
+
+For instance, download several URLs in parallel and process the content once they are all done.
+>>>>>>> fcfef6a07842ed56144e04a80c3a24de049a952a
 
 Для этого как раз и пригодится `Promise.all`.
 
@@ -16,9 +22,15 @@
 let promise = Promise.all([...промисы...]);
 ```
 
+<<<<<<< HEAD
 Метод `Promise.all` принимает массив промисов (может принимать любой перебираемый объект, но обычно используется массив) и возвращает новый промис.
 
 Новый промис завершится, когда завершится весь переданный список промисов, и его результатом будет массив их результатов.
+=======
+`Promise.all` takes an array of promises (it technically can be any iterable, but is usually an array) and returns a new promise.
+
+The new promise resolves when all listed promises are settled, and the array of their results becomes its result.
+>>>>>>> fcfef6a07842ed56144e04a80c3a24de049a952a
 
 Например, `Promise.all`, представленный ниже, выполнится спустя 3 секунды, его результатом будет массив `[1, 2, 3]`:
 
@@ -31,7 +43,11 @@ Promise.all([
 // каждый промис даёт элемент массива
 ```
 
+<<<<<<< HEAD
 Обратите внимание, что порядок элементов массива в точности соответствует порядку исходных промисов. Даже если первый промис будет выполняться дольше всех, его результат всё равно будет первым в массиве.
+=======
+Please note that the order of the resulting array members is the same as in its source promises. Even though the first promise takes the longest time to resolve, it's still first in the array of results.
+>>>>>>> fcfef6a07842ed56144e04a80c3a24de049a952a
 
 Часто применяемый трюк - пропустить массив данных через map-функцию, которая для каждого элемента создаст задачу-промис, и затем обернёт получившийся массив в `Promise.all`.
 
@@ -54,7 +70,11 @@ Promise.all(requests)
   ));
 ```
 
+<<<<<<< HEAD
 А вот пример побольше, с получением информации о пользователях GitHub по их логинам из массива (мы могли бы получать массив товаров по их идентификаторам, логика та же):
+=======
+A bigger example with fetching user information for an array of GitHub users by their names (we could fetch an array of goods by their ids, the logic is identical):
+>>>>>>> fcfef6a07842ed56144e04a80c3a24de049a952a
 
 ```js run
 let names = ['iliakan', 'remy', 'jeresig'];
@@ -70,8 +90,12 @@ Promise.all(requests)
 
     return responses;
   })
+<<<<<<< HEAD
   // преобразовать массив ответов response в response.json(),
   // чтобы прочитать содержимое каждого
+=======
+  // map array of responses into an array of response.json() to read their content
+>>>>>>> fcfef6a07842ed56144e04a80c3a24de049a952a
   .then(responses => Promise.all(responses.map(r => r.json())))
   // все JSON-ответы обработаны, users - массив с результатами
   .then(users => users.forEach(user => alert(user.name)));
@@ -91,12 +115,20 @@ Promise.all([
 ]).catch(alert); // Error: Ошибка!
 ```
 
+<<<<<<< HEAD
 Здесь второй промис завершится с ошибкой через 2 секунды. Это приведёт к немедленной ошибке в `Promise.all`, так что выполнится `.catch`: ошибка этого промиса становится ошибкой всего `Promise.all`.
+=======
+Here the second promise rejects in two seconds. That leads to an immediate rejection of `Promise.all`, so `.catch` executes: the rejection error becomes the outcome of the entire `Promise.all`.
+>>>>>>> fcfef6a07842ed56144e04a80c3a24de049a952a
 
 ```warn header="В случае ошибки, остальные результаты игнорируются"
 Если один промис завершается с ошибкой, то весь `Promise.all` завершается с ней, полностью забывая про остальные промисы в списке. Их результаты игнорируются.
 
+<<<<<<< HEAD
 Например, если сделано несколько вызовов `fetch`, как в примере выше, и один не прошёл, то остальные будут всё ещё выполняться, но `Promise.all` за ними уже не смотрит. Скорее всего, они так или иначе завершатся, но их результаты будут проигнорированы.
+=======
+For example, if there are multiple `fetch` calls, like in the example above, and one fails, the others will still continue to execute, but `Promise.all` won't watch them anymore. They will probably settle, but their results will be ignored.
+>>>>>>> fcfef6a07842ed56144e04a80c3a24de049a952a
 
 `Promise.all` ничего не делает для их отмены, так как в промисах вообще нет концепии "отмены". В главе <info:fetch-abort> мы рассмотрим `AbortController`, который помогает с этим, но он не является частью Promise API.
 ```
@@ -112,7 +144,7 @@ Promise.all([
     setTimeout(() => resolve(1), 1000)
   }),
   2,
-  3  
+  3
 ]).then(alert); // 1, 2, 3
 ```
 
@@ -123,7 +155,11 @@ Promise.all([
 
 [recent browser="new"]
 
+<<<<<<< HEAD
 `Promise.all` завершается с ошибкой, если она возникает в любом из переданных промисов. Это подходит для ситуаций "всё или ничего", когда нам нужны *все* результаты для продолжения:
+=======
+`Promise.all` rejects as a whole if any promise rejects. That's good for "all or nothing" cases, when we need *all* results successful to proceed:
+>>>>>>> fcfef6a07842ed56144e04a80c3a24de049a952a
 
 ```js
 Promise.all([
@@ -133,7 +169,11 @@ Promise.all([
 ]).then(render); // методу render нужны результаты всех fetch
 ```
 
+<<<<<<< HEAD
 Метод `Promise.allSettled` всегда ждёт завершения всех промисов. В массиве результатов будет
+=======
+`Promise.allSettled` just waits for all promises to settle, regardless of the result. The resulting array has:
+>>>>>>> fcfef6a07842ed56144e04a80c3a24de049a952a
 
 - `{status:"fulfilled", value:результат}` для успешных завершений,
 - `{status:"rejected", reason:ошибка}` для ошибок.
@@ -171,7 +211,11 @@ Promise.allSettled(urls.map(url => fetch(url)))
 ]
 ```
 
+<<<<<<< HEAD
 То есть, для каждого промиса у нас есть его статус и значение/ошибка.
+=======
+So for each promise we get its status and `value/error`.
+>>>>>>> fcfef6a07842ed56144e04a80c3a24de049a952a
 
 ### Полифил
 
@@ -191,15 +235,27 @@ if(!Promise.allSettled) {
 }
 ```
 
+<<<<<<< HEAD
 В этом коде `promises.map` берёт аргументы, превращает их в промисы (на всякий случай) и добавляет каждому обработчик `.then`.
+=======
+In this code, `promises.map` takes input values, turns them into promises (just in case a non-promise was passed) with `p => Promise.resolve(p)`, and then adds `.then` handler to every one.
+>>>>>>> fcfef6a07842ed56144e04a80c3a24de049a952a
 
 Этот обработчик превращает успешный результат `value` в `{state:'fulfilled', value: value}`, а ошибку `error` в `{state:'rejected', reason: error}`. Это как раз и есть формат результатов `Promise.allSettled`.
 
+<<<<<<< HEAD
 Затем мы можем использовать `Promise.allSettled`, чтобы получить результаты *всех* промисов, даже если при выполнении какого-то возникнет ошибка.
 
 ## Promise.race
 
 Метод очень похож на `Promise.all`, но ждёт только первый промис, из которого берёт результат (или ошибку).
+=======
+Now we can use `Promise.allSettled` to get the results of *all* given promises, even if some of them reject.
+
+## Promise.race
+
+Similar to `Promise.all`, but waits only for the first settled promise and gets its result (or error).
+>>>>>>> fcfef6a07842ed56144e04a80c3a24de049a952a
 
 Синтаксис:
 
@@ -221,11 +277,21 @@ Promise.race([
 
 ## Promise.resolve/reject
 
+<<<<<<< HEAD
 Методы `Promise.resolve` и `Promise.reject` редко используются в современном коде, так как синтаксис `async/await` (мы рассмотрим его [чуть позже](info:async-await)) делает его, в общем-то, не нужным.
 
 Мы рассмотрим их здесь для полноты картины, а также для тех, кто по каким-то причинам не может использовать `async/await`.
 
 - `Promise.resolve(value)` создаёт успешно выполненный промис с результатом `value`.
+=======
+Methods `Promise.resolve` and `Promise.reject` are rarely needed in modern code, because `async/await` syntax (we'll cover it [a bit later](info:async-await)) makes them somewhat obsolete.
+
+We cover them here for completeness and for those who can't use `async/await` for some reason.
+
+### Promise.resolve
+
+`Promise.resolve(value)` creates a resolved promise with the result `value`.
+>>>>>>> fcfef6a07842ed56144e04a80c3a24de049a952a
 
 То же самое, что:
 
@@ -235,7 +301,11 @@ let promise = new Promise(resolve => resolve(value));
 
 Этот метод используют для совместимости: когда ожидается, что функция возвратит именно промис.
 
+<<<<<<< HEAD
 Например, функция `loadCached` ниже загружает URL и запоминает (кеширует) его содержимое. При будущих вызовах с тем же URL он тут же читает предыдущее содержимое из кеша, но использует `Promise.resolve`, чтобы сделать из него промис, для того, чтобы возвращаемое значение всегда было промисом:
+=======
+For example, the `loadCached` function below fetches a URL and remembers (caches) its content. For future calls with the same URL it immediately gets the previous content from cache, but uses `Promise.resolve` to make a promise of it, so the returned value is always a promise:
+>>>>>>> fcfef6a07842ed56144e04a80c3a24de049a952a
 
 ```js
 let cache = new Map();
@@ -260,7 +330,11 @@ function loadCached(url) {
 
 ### Promise.reject
 
+<<<<<<< HEAD
 - `Promise.reject(error)` создаёт промис, завершённый с ошибкой `error`.
+=======
+`Promise.reject(error)` creates a rejected promise with `error`.
+>>>>>>> fcfef6a07842ed56144e04a80c3a24de049a952a
 
 То же самое, что:
 
@@ -274,6 +348,7 @@ let promise = new Promise((resolve, reject) => reject(error));
 
 Мы ознакомились с пятью статическими методами класса `Promise`:
 
+<<<<<<< HEAD
 1. `Promise.all(promises)` -- ожидает выполнения всех промисов и возвращает массив с результатами. Если любой из указанных промисов вернёт ошибку, то результатом работы `Promise.all` будет эта ошибка, результаты остальных промисов будут игнорироваться.
 2. `Promise.allSettled(promises)` (добавлен недавно) -- ждёт, пока все промисы завершатся и возвращает их результаты в виде массива с объектами, у каждого объекта два свойства:
     - `state`: `"fulfilled"`, если выполнен успешно или `"rejected"`, если ошибка,
@@ -281,5 +356,14 @@ let promise = new Promise((resolve, reject) => reject(error));
 3. `Promise.race(promises)` -- ожидает первый выполненный промис, который становится его результатом, остальные игнорируются.
 4. `Promise.resolve(value)` -- возвращает успешно выполнившийся промис с результатом `value`.
 5. `Promise.reject(error)` -- возвращает промис с ошибкой `error`.
+=======
+1. `Promise.all(promises)` -- waits for all promises to resolve and returns an array of their results. If any of the given promises rejects, it becomes the error of `Promise.all`, and all other results are ignored.
+2. `Promise.allSettled(promises)` (recently added method) -- waits for all promises to settle and returns their results as an array of objects with:
+    - `state`: `"fulfilled"` or `"rejected"`
+    - `value` (if fulfilled) or `reason` (if rejected).
+3. `Promise.race(promises)` -- waits for the first promise to settle, and its result/error becomes the outcome.
+4. `Promise.resolve(value)` -- makes a resolved promise with the given value.
+5. `Promise.reject(error)` -- makes a rejected promise with the given error.
+>>>>>>> fcfef6a07842ed56144e04a80c3a24de049a952a
 
 Из всех перечисленных методов, самый часто используемый - это, пожалуй, `Promise.all`.

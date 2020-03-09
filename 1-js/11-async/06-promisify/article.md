@@ -1,8 +1,14 @@
 # Промисификация
 
+<<<<<<< HEAD
 Промисификация -- это длинное слово для простого преобразования. Мы берём функцию, которая принимает колбэк и меняем её, чтобы она вместо этого возвращала промис.
 
 Такие преобразования часто необходимы в реальной жизни, так как многие функции и библиотеки основаны на колбэках, а использование промисов более удобно, поэтому есть смысл "промисифицировать" их.
+=======
+"Promisification" is a long word for a simple transformation. It's the conversion of a function that accepts a callback into a function that returns a promise.
+
+Such transformations are often required in real-life, as many functions and libraries are callback-based. But promises are more convenient, so it makes sense to promisify them.
+>>>>>>> fcfef6a07842ed56144e04a80c3a24de049a952a
 
 Например, у нас есть `loadScript(src, callback)` из главы <info:callbacks>.
 
@@ -21,7 +27,11 @@ function loadScript(src, callback) {
 // loadScript('path/script.js', (err, script) => {...})
 ```
 
+<<<<<<< HEAD
 Давайте промисифицируем её. Новая функция `loadScriptPromise(src)` будет делать то же самое, но будет принимать только `src` (не `callback`) и возвращать промис.
+=======
+Let's promisify it. The new `loadScriptPromise(src)` function achieves the same result, but it accepts only `src` (no `callback`) and returns a promise.
+>>>>>>> fcfef6a07842ed56144e04a80c3a24de049a952a
 
 ```js
 let loadScriptPromise = function(src) {
@@ -41,9 +51,13 @@ let loadScriptPromise = function(src) {
 
 Как видно, она передаёт всю работу исходной функции `loadScript`, предоставляя ей колбэк, по вызову которого происходит `resolve/reject` промиса.
 
+<<<<<<< HEAD
 На практике нам, скорее всего, понадобится промисифицировать не одну функцию, поэтому имеет смысл сделать для этого специальную "функцию-помощник".
 
 Мы назовём её `promisify(f)` - она принимает функцию для промисификации `f` и возвращает функцию-обёртку.
+=======
+In practice we'll probably need to promisify many functions, so it makes sense to use a helper. We'll call it `promisify(f)`: it accepts a to-promisify function `f` and returns a wrapper function.
+>>>>>>> fcfef6a07842ed56144e04a80c3a24de049a952a
 
 Эта функция-обёртка делает то же самое, что и код выше: возвращает промис и передаёт вызов оригинальной `f`, отслеживая результат в своём колбэке:
 
@@ -53,7 +67,7 @@ function promisify(f) {
     return new Promise((resolve, reject) => {
       function callback(err, result) { // наш специальный колбэк для f
         if (err) {
-          return reject(err);
+          reject(err);
         } else {
           resolve(result);
         }
@@ -84,7 +98,7 @@ function promisify(f, manyArgs = false) {
     return new Promise((resolve, reject) => {
       function *!*callback(err, ...results*/!*) { // наш специальный колбэк для f
         if (err) {
-          return reject(err);
+          reject(err);
         } else {
           // делаем resolve для всех results колбэка, если задано manyArgs
           *!*resolve(manyArgs ? results : results[0]);*/!*
@@ -103,7 +117,11 @@ f = promisify(f, true);
 f(...).then(arrayOfResults => ..., err => ...)
 ```
 
+<<<<<<< HEAD
 Для более экзотических форматов колбэка, например без `err`: `callback(result)`, мы можем промисифицировать функции без помощника, "вручную".
+=======
+For more exotic callback formats, like those without `err` at all: `callback(result)`, we can promisify such functions manually without using the helper.
+>>>>>>> fcfef6a07842ed56144e04a80c3a24de049a952a
 
 Также существуют модули с более гибкой промисификацией, например, [es6-promisify](https://github.com/digitaldesignlabs/es6-promisify) или встроенная функция `util.promisify` в Node.js.
 

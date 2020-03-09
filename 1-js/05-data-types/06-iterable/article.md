@@ -1,7 +1,11 @@
 
 # Перебираемые объекты
 
+<<<<<<< HEAD
 *Перебираемые* (или *итерируемые*) объекты - это концепция, которая позволяет использовать любой объект в цикле `for..of`.
+=======
+*Iterable* objects is a generalization of arrays. That's a concept that allows us to make any object useable in a `for..of` loop.
+>>>>>>> fcfef6a07842ed56144e04a80c3a24de049a952a
 
 Конечно же, сами массивы являются перебираемыми объектами. Но есть и много других встроенных перебираемых объектов, например, строки.
 
@@ -11,7 +15,11 @@
 
 Мы легко поймём принцип устройства перебираемых объектов, создав один из них.
 
+<<<<<<< HEAD
 Например, у нас есть объект. Это не массив, но он выглядит подходящим для `for..of`.
+=======
+For instance, we have an object that is not an array, but looks suitable for `for..of`.
+>>>>>>> fcfef6a07842ed56144e04a80c3a24de049a952a
 
 Например, объект `range`, который представляет собой диапазон чисел:
 
@@ -141,7 +149,11 @@ for (let char of str) {
 
 Чтобы понять устройство итераторов чуть глубже, давайте посмотрим, как их использовать явно.
 
+<<<<<<< HEAD
 Мы будем перебирать строку точно так же, как цикл `for..of`, но вручную, прямыми вызовами. Нижеприведённый код получает строковый итератор и берёт из него значения:
+=======
+We'll iterate over a string in exactly the same way as `for..of`, but with direct calls. This code creates a string iterator and gets values from it "manually":
+>>>>>>> fcfef6a07842ed56144e04a80c3a24de049a952a
 
 ```js run
 let str = "Hello";
@@ -149,7 +161,9 @@ let str = "Hello";
 // делает то же самое, что и
 // for (let char of str) alert(char);
 
+*!*
 let iterator = str[Symbol.iterator]();
+*/!*
 
 while (true) {
   let result = iterator.next();
@@ -211,7 +225,11 @@ let arr = Array.from(arrayLike); // (*)
 alert(arr.pop()); // World (метод работает)
 ```
 
+<<<<<<< HEAD
 `Array.from` в строке `(*)` принимает объект, проверяет, является ли он итерируемым объектом или псевдомассивом, затем создаёт новый массив и копирует туда все элементы.
+=======
+`Array.from` at the line `(*)` takes the object, examines it for being an iterable or array-like, then makes a new array and copies all items to it.
+>>>>>>> fcfef6a07842ed56144e04a80c3a24de049a952a
 
 То же самое происходит с итерируемым объектом:
 
@@ -221,12 +239,20 @@ let arr = Array.from(range);
 alert(arr); // 1,2,3,4,5 (преобразование массива через toString работает)
 ```
 
+<<<<<<< HEAD
 Полный синтаксис `Array.from` позволяет указать необязательную "трансформирующую" функцию:
+=======
+The full syntax for `Array.from` also allows us to provide an optional "mapping" function:
+>>>>>>> fcfef6a07842ed56144e04a80c3a24de049a952a
 ```js
 Array.from(obj[, mapFn, thisArg])
 ```
 
+<<<<<<< HEAD
 Необязательный второй аргумент может быть функцией, которая будет применена к каждому элементу перед добавлением в массив, а `thisArg` позволяет установить `this` для этой функции.
+=======
+The optional second argument `mapFn` can be a function that will be applied to each element before adding it to the array, and `thisArg` allows us to set `this` for it.
+>>>>>>> fcfef6a07842ed56144e04a80c3a24de049a952a
 
 Например:
 
@@ -267,7 +293,11 @@ for (let char of str) {
 alert(chars);
 ```
 
+<<<<<<< HEAD
 ...Но гораздо короче.    
+=======
+...But it is shorter.    
+>>>>>>> fcfef6a07842ed56144e04a80c3a24de049a952a
 
 Мы можем даже создать `slice`, который поддерживает суррогатные пары:
 
@@ -289,12 +319,21 @@ alert( str.slice(1, 3) ); // мусор (две части различных с
 
 Объекты, которые можно использовать в цикле `for..of`, называются *итерируемыми*.
 
+<<<<<<< HEAD
 - Технически итерируемые объекты должны иметь метод `Symbol.iterator`.
     - Результат вызова `obj[Symbol.iterator]` называется *итератором*. Он управляет процессом итерации.
     - Итератор должен иметь метод `next()`, который возвращает объект `{done: Boolean, value: any}`, где `done:true` сигнализирует об окончании процесса итерации, в противном случае `value` - следующее значение.
 - Метод `Symbol.iterator` автоматически вызывается циклом `for..of`, но можно вызвать его и напрямую.
 - Встроенные итерируемые объекты, такие как строки или массивы, также реализуют метод `Symbol.iterator`.
 - Строковой итератор знает про суррогатные пары.
+=======
+- Technically, iterables must implement the method named `Symbol.iterator`.
+    - The result of `obj[Symbol.iterator]` is called an *iterator*. It handles the further iteration process.
+    - An iterator must have the method named `next()` that returns an object `{done: Boolean, value: any}`, here `done:true` denotes the end of the iteration process, otherwise the `value` is the next value.
+- The `Symbol.iterator` method is called automatically by `for..of`, but we also can do it directly.
+- Built-in iterables like strings or arrays, also implement `Symbol.iterator`.
+- String iterator knows about surrogate pairs.
+>>>>>>> fcfef6a07842ed56144e04a80c3a24de049a952a
 
 
 Объекты, имеющие индексированные свойства и `length`, называются *псевдомассивами*. Они также могут иметь другие свойства и методы, но у них нет встроенных методов массивов.

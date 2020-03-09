@@ -64,7 +64,11 @@ user.sayHi(); // Привет!
 ```smart header="Объектно-ориентированное программирование"
 Когда мы пишем наш код, используя объекты для представления сущностей реального мира, - это называется [объектно-ориентированное программирование](https://ru.wikipedia.org/wiki/%D0%9E%D0%B1%D1%8A%D0%B5%D0%BA%D1%82%D0%BD%D0%BE-%D0%BE%D1%80%D0%B8%D0%B5%D0%BD%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%BD%D0%BE%D0%B5_%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5) или сокращённо: "ООП".
 
+<<<<<<< HEAD
 ООП является большой предметной областью и интересной наукой само по себе. Как выбрать правильные сущности? Как организовать взаимодействие между ними? Это -- создание архитектуры, и есть хорошие книги по этой теме, такие как "Приёмы объектно-ориентированного проектирования. Паттерны проектирования" авторов Эрих Гамма, Ричард Хелм, Ральф Джонсон, Джон Влиссидес или "Объектно-ориентированный анализ и проектирование с примерами приложений" Гради Буча, а также ещё множество других книг.
+=======
+OOP is a big thing, an interesting science of its own. How to choose the right entities? How to organize the interaction between them? That's architecture, and there are great books on that topic, like "Design Patterns: Elements of Reusable Object-Oriented Software" by E. Gamma, R. Helm, R. Johnson, J. Vissides or "Object-Oriented Analysis and Design with Applications" by G. Booch, and more.
+>>>>>>> fcfef6a07842ed56144e04a80c3a24de049a952a
 ```
 ### Сокращённая запись метода
 

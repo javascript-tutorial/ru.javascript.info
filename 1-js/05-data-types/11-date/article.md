@@ -33,6 +33,7 @@
 
     Это -- легковесное численное представление даты. Из таймстампа всегда можно получить дату с помощью `new Date(timestamp)` и преобразовать существующий объект `Date` в таймстамп, используя метод `date.getTime()` (см. ниже).
 
+<<<<<<< HEAD
     Датам до 1 января 1970 будут соответствовать отрицательные таймстампы, например:
     ```js run
     // 31 декабря 1969 года
@@ -40,6 +41,15 @@
     alert( Dec31_1969 );
     ```
     
+=======
+    Dates before 01.01.1970 have negative timestamps, e.g.:
+    ```js run
+    // 31 Dec 1969
+    let Dec31_1969 = new Date(-24 * 3600 * 1000);
+    alert( Dec31_1969 );
+    ```
+
+>>>>>>> fcfef6a07842ed56144e04a80c3a24de049a952a
 `new Date(datestring)`
 : Если аргумент всего один, и это строка, то из неё "прочитывается" дата. Алгоритм разбора - такой же, как в `Date.parse`, который мы рассмотрим позже.
 
@@ -65,8 +75,13 @@
     Например:
 
     ```js
+<<<<<<< HEAD
     new Date(2011, 0, 1, 0, 0, 0, 0); // // 1 Jan 2011, 00:00:00
     new Date(2011, 0, 1); // то же самое, так как часы и проч. равны 0
+=======
+    new Date(2011, 0, 1, 0, 0, 0, 0); // 1 Jan 2011, 00:00:00
+    new Date(2011, 0, 1); // the same, hours etc are 0 by default
+>>>>>>> fcfef6a07842ed56144e04a80c3a24de049a952a
     ```
 
     Минимальная точность – 1 мс (1/1000 секунды):
@@ -123,8 +138,13 @@ alert( date.getUTCHours() );
 [getTime()](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date/getTime)
 : Для заданной даты возвращает таймстамп - количество миллисекунд, прошедших с 1 января 1970 года UTC+0.
 
+<<<<<<< HEAD
 [getTimezoneOffset()](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date/getTimezoneOffset)
 : Возвращает разницу в минутах между местным часовым поясом и UTC:
+=======
+[getTimezoneOffset()](mdn:js/Date/getTimezoneOffset)
+: Returns the difference between UTC and the local time zone, in minutes:
+>>>>>>> fcfef6a07842ed56144e04a80c3a24de049a952a
 
     ```js run
     // если вы в часовом поясе UTC-1, то выводится 60
