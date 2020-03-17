@@ -23,5 +23,6 @@ document.body.children[1]
 
 ```js
 // получаем <ul>, и его последнего ребёнка
-document.body.lastElementChild.lastElementChild
+document.body.lastElementChild.lastElementChild // непправильно
+document.body.children[1].lastElementChild
 ```
