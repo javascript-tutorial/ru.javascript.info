@@ -68,8 +68,13 @@
 
 При этом внутри обработчика`form.onclick`:
 
+<<<<<<< HEAD
 - `this` (`=event.currentTarget`) всегда будет элемент `<form>`, так как обработчик сработал на ней.
 - `event.target` будет содержать ссылку на конкретный элемент внутри формы, на котором произошёл клик.
+=======
+- `this` (=`event.currentTarget`) is the `<form>` element, because the handler runs on it.
+- `event.target` is the actual element inside the form that was clicked.
+>>>>>>> 162280b6d238ce32bbd8ff7a3f7992be82c2311a
 
 Попробуйте сами:
 
@@ -101,8 +106,13 @@
 Для того, чтобы полностью остановить обработку, существует метод `event.stopImmediatePropagation()`. Он не только предотвращает всплытие, но и останавливает обработку событий на текущем элементе.
 ```
 
+<<<<<<< HEAD
 ```warn header="Не прекращайте всплытие без необходимости!"
 Всплытие -- это удобно. Не прекращайте его без явной нужды, очевидной и архитектурно прозрачной.
+=======
+```warn header="Don't stop bubbling without a need!"
+Bubbling is convenient. Don't stop it without a real need: obvious and architecturally well thought out.
+>>>>>>> 162280b6d238ce32bbd8ff7a3f7992be82c2311a
 
 Зачастую прекращение всплытия через `event.stopPropagation()` имеет свои подводные камни, которые со временем могут стать проблемами.
 

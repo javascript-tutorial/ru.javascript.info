@@ -41,7 +41,17 @@ alert(map.size); // 3
 
 Как мы видим, в отличие от объектов, ключи не были приведены к строкам. Можно использовать любые типы данных для ключей.
 
+<<<<<<< HEAD
 **Map может использовать объекты в качестве ключей.**
+=======
+```smart header="`map[key]` isn't the right way to use a `Map`"
+Although `map[key]` also works, e.g. we can set `map[key] = 2`, this is treating `map` as a plain JavaScript object, so it implies all corresponding limitations (no object keys and so on).
+
+So we should use `map` methods: `set`, `get` and so on.
+```
+
+**Map can also use objects as keys.**
+>>>>>>> 162280b6d238ce32bbd8ff7a3f7992be82c2311a
 
 Например:
 

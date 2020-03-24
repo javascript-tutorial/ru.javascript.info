@@ -125,6 +125,7 @@ function addJuice(container) {
 Документируйте параметры и использование функций
 : Есть специальный синтаксис [JSDoc](https://ru.wikipedia.org/wiki/JSDoc) для документирования функций: использование, параметры, возвращаемое значение.
 
+<<<<<<< HEAD
     Например:
     ```js
     /**
@@ -144,6 +145,27 @@ function addJuice(container) {
     Кстати, многие редакторы, такие как [WebStorm](https://www.jetbrains.com/webstorm/), прекрасно их распознают для того, чтобы выполнить автодополнение ввода и различные автоматические проверки кода.
 
     Также существуют инструменты, например, [JSDoc 3](https://github.com/jsdoc3/jsdoc), которые умеют генерировать HTML-документацию из комментариев. Получить больше информации о JSDoc вы можете здесь: <http://usejsdoc.org/>.
+=======
+For instance:
+```js
+/**
+ * Returns x raised to the n-th power.
+ *
+ * @param {number} x The number to raise.
+ * @param {number} n The power, must be a natural number.
+ * @return {number} x raised to the n-th power.
+ */
+function pow(x, n) {
+  ...
+}
+```
+
+Such comments allow us to understand the purpose of the function and use it the right way without looking in its code.
+
+By the way, many editors like [WebStorm](https://www.jetbrains.com/webstorm/) can understand them as well and use them to provide autocomplete and some automatic code-checking.
+
+Also, there are tools like [JSDoc 3](https://github.com/jsdoc3/jsdoc) that can generate HTML-documentation from the comments. You can read more information about JSDoc at <http://usejsdoc.org/>.
+>>>>>>> 162280b6d238ce32bbd8ff7a3f7992be82c2311a
 
 Почему задача решена именно таким способом?
 : Важно то, что написано. Но то, что *не* написано, может быть даже более важным, чтобы понимать происходящее. Почему задача решена именно этим способом? Код не даёт ответа.

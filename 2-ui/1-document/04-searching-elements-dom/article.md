@@ -102,8 +102,13 @@
 
 Этот метод действительно мощный, потому что можно использовать любой CSS-селектор.
 
+<<<<<<< HEAD
 ```smart header="Псевдоклассы тоже работают"
 Псевдоклассы в CSS-селекторе, в частности `:hover` и `:active`, также поддерживаются. Например, `document.querySelectorAll(':hover')` вернёт коллекцию (в порядке вложенности: от внешнего к внутреннему) из текущих элементов под курсором мыши.
+=======
+```smart header="Can use pseudo-classes as well"
+Pseudo-classes in the CSS selector like `:hover` and `:active` are also supported. For instance, `document.querySelectorAll(':hover')` will return the collection with elements that the pointer is over now (in nesting order: from the outermost `<html>` to the most nested one).
+>>>>>>> 162280b6d238ce32bbd8ff7a3f7992be82c2311a
 ```
 
 ## querySelector [#querySelector]
@@ -119,7 +124,13 @@
 
 Этот метод удобен, когда мы перебираем элементы (например, в массиве или в чём-то подобном) и пытаемся выбрать те из них, которые нас интересуют.
 
+<<<<<<< HEAD
 Например:
+=======
+The method comes in handy when we are iterating over elements (like in an array or something) and trying to filter out those that interest us.
+
+For instance:
+>>>>>>> 162280b6d238ce32bbd8ff7a3f7992be82c2311a
 
 ```html run
 <a href="http://example.com/file.zip">...</a>
@@ -175,9 +186,15 @@
 
 Здесь мы рассмотрим их для полноты картины, также вы можете встретить их в старом коде.
 
+<<<<<<< HEAD
 - `elem.getElementsByTagName(tag)` ищет элементы с данным тегом и возвращает их коллекцию. Передав `"*"` вместо тега, можно получить всех потомков.
 - `elem.getElementsByClassName(className)` возвращает элементы, которые имеют данный CSS-класс.
 - `document.getElementsByName(name)` возвращает элементы с заданным атрибутом `name`. Очень редко используется.
+=======
+- `elem.getElementsByTagName(tag)` looks for elements with the given tag and returns the collection of them. The `tag` parameter can also be a star `"*"` for "any tags".
+- `elem.getElementsByClassName(className)` returns elements that have the given CSS class.
+- `document.getElementsByName(name)` returns elements with the given `name` attribute, document-wide. Very rarely used.
+>>>>>>> 162280b6d238ce32bbd8ff7a3f7992be82c2311a
 
 Например:
 ```js

@@ -24,17 +24,30 @@ ball.style.left = Math.round(field.clientWidth / 2 - ball.offsetWidth / 2) + 'px
 ball.style.top = Math.round(field.clientHeight / 2 - ball.offsetHeight / 2) + 'px';
 ```
 
+<<<<<<< HEAD
 **Внимание, подводный камень!**
+=======
+Now the ball is finally centered.
+
+````warn header="Attention: the pitfall!"
+>>>>>>> 162280b6d238ce32bbd8ff7a3f7992be82c2311a
 
 Код выше стабильно работать не будет, потому что `<img>` идёт без ширины/высоты:
 
 ```html
 <img src="ball.png" id="ball">
 ```
+````
 
 Если браузеру неизвестны ширина и высота изображения (из атрибута HTML-тега или CSS-свойств), он считает их равными `0` до тех пор, пока изображение не загрузится.
 
+<<<<<<< HEAD
 При первой загрузке браузер обычно кеширует изображения, так что при последующей загрузке оно будет доступно тут же, вместе с размерами. Но при первой загрузке значение ширины мяча `ball.offsetWidth` равно `0`. Это приводит к вычислению неверных координат.
+=======
+So the value of `ball.offsetWidth` will be `0` until the image loads. That leads to wrong coordinates in the code above.
+
+After the first load, the browser usually caches the image, and on reloads it will have the size immediately. But on the first load the value of `ball.offsetWidth` is `0`.
+>>>>>>> 162280b6d238ce32bbd8ff7a3f7992be82c2311a
 
 Мы можем исправить это, добавив атрибуты `width/height` тегу `<img>`:
 

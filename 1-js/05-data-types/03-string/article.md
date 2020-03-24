@@ -397,7 +397,11 @@ alert( "Widget".endsWith("get") ); // true, "get" — окончание "Widget
 
     ```js run
     let str = "st*!*ringify*/!*";
+<<<<<<< HEAD
     alert( str.slice(2) ); // ringify, с позиции 2 и до конца
+=======
+    alert( str.slice(2) ); // 'ringify', from the 2nd position till the end
+>>>>>>> 162280b6d238ce32bbd8ff7a3f7992be82c2311a
     ```
 
     Также для `start/end` можно задавать отрицательные значения. Это означает, что позиция определена как заданное количество символов *с конца строки*:
@@ -405,8 +409,13 @@ alert( "Widget".endsWith("get") ); // true, "get" — окончание "Widget
     ```js run
     let str = "strin*!*gif*/!*y";
 
+<<<<<<< HEAD
     // начинаем с позиции 4 справа, а заканчиваем на позиции 1 справа
     alert( str.slice(-4, -1) ); // gif
+=======
+    // start at the 4th position from the right, end at the 1st from the right
+    alert( str.slice(-4, -1) ); // 'gif'
+>>>>>>> 162280b6d238ce32bbd8ff7a3f7992be82c2311a
     ```
 
 `str.substring(start [, end])`
@@ -438,16 +447,24 @@ alert( "Widget".endsWith("get") ); // true, "get" — окончание "Widget
 
     ```js run
     let str = "st*!*ring*/!*ify";
+<<<<<<< HEAD
     // ring, получаем 4 символа, начиная с позиции 2
     alert( str.substr(2, 4) );
+=======
+    alert( str.substr(2, 4) ); // 'ring', from the 2nd position get 4 characters
+>>>>>>> 162280b6d238ce32bbd8ff7a3f7992be82c2311a
     ```
 
     Значение первого аргумента может быть отрицательным, тогда позиция определяется с конца:
 
     ```js run
     let str = "strin*!*gi*/!*fy";
+<<<<<<< HEAD
     // gi, получаем 2 символа, начиная с позиции 4 с конца строки
     alert( str.substr(-4, 2) );
+=======
+    alert( str.substr(-4, 2) ); // 'gi', from the 4th position get 2 characters
+>>>>>>> 162280b6d238ce32bbd8ff7a3f7992be82c2311a
     ```
 
 Давайте подытожим, как работают эти методы, чтобы не запутаться:
@@ -540,7 +557,11 @@ alert( str );
 
 Поэтому браузеру нужно знать, какой язык использовать для сравнения.
 
+<<<<<<< HEAD
 К счастью, все современные браузеры (для IE10− нужна дополнительная библиотека [Intl.JS](https://github.com/andyearnshaw/Intl.js/)) поддерживают стандарт [ECMA 402](http://www.ecma-international.org/ecma-402/1.0/ECMA-402.pdf), обеспечивающий правильное сравнение строк на разных языках с учётом их правил.
+=======
+Luckily, all modern browsers (IE10- requires the additional library [Intl.js](https://github.com/andyearnshaw/Intl.js/)) support the internationalization standard [ECMA-402](http://www.ecma-international.org/ecma-402/1.0/ECMA-402.pdf).
+>>>>>>> 162280b6d238ce32bbd8ff7a3f7992be82c2311a
 
 Для этого есть соответствующий метод.
 

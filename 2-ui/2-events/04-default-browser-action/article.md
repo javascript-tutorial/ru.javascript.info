@@ -1,23 +1,42 @@
 # Действия браузера по умолчанию
 
+<<<<<<< HEAD
 Многие события автоматически влекут за собой действие браузера.
+=======
+Many events automatically lead to certain actions performed by the browser.
+>>>>>>> 162280b6d238ce32bbd8ff7a3f7992be82c2311a
 
 Например:
 
+<<<<<<< HEAD
 - Клик по ссылке инициирует переход на новый URL.
 - Нажатие на кнопку "отправить" в форме – отсылку её на сервер.
 - Зажатие кнопки мыши над текстом и её движение в таком состоянии – инициирует его выделение.
 
 Если мы обрабатываем событие в JavaScript, то зачастую такое действие браузера нам не нужно. К счастью, его можно отменить.
+=======
+- A click on a link - initiates navigation to its URL.
+- A click on a form submit button - initiates its submission to the server.
+- Pressing a mouse button over a text and moving it - selects the text.
+
+If we handle an event in JavaScript, we may not want the corresponding browser action to happen, and want to implement another behavior instead.
+>>>>>>> 162280b6d238ce32bbd8ff7a3f7992be82c2311a
 
 ## Отмена действия браузера
 
 Есть два способа отменить действие браузера:
 
+<<<<<<< HEAD
 - Основной способ – это воспользоваться объектом `event`. Для отмены действия браузера существует стандартный метод `event.preventDefault()`.
 - Если же обработчик назначен через `on<событие>` (не через `addEventListener`), то также можно вернуть `false` из обработчика.
 
 В следующем примере при клике по ссылке переход не произойдёт:
+=======
+- The main way is to use the `event` object. There's a method `event.preventDefault()`.
+- If the handler is assigned using `on<event>` (not by `addEventListener`), then returning `false` also works the same.
+
+In this HTML a click on a link doesn't lead to navigation, browser doesn't do anything:
+>>>>>>> 162280b6d238ce32bbd8ff7a3f7992be82c2311a
 
 ```html autorun height=60 no-beautify
 <a href="/" onclick="return false">Нажми здесь</a>
@@ -25,12 +44,23 @@
 <a href="/" onclick="event.preventDefault()">здесь</a>
 ```
 
+<<<<<<< HEAD
 ```warn header="Возвращать `true` не нужно"
 Обычно значение, которое возвращает обработчик события, игнорируется.
 
 Единственное исключение – это `return false` из обработчика, назначенного через `on<событие>`.
 
 В других случаях `return` не нужен, он никак не обрабатывается.
+=======
+In the next example we'll use this technique to create a JavaScript-powered menu.
+
+```warn header="Returning `false` from a handler is an exception"
+The value returned by an event handler is usually ignored.
+
+The only exception is `return false` from a handler assigned using `on<event>`.
+
+In all other cases, `return` value is ignored. In particular, there's no sense in returning `true`.
+>>>>>>> 162280b6d238ce32bbd8ff7a3f7992be82c2311a
 ```
 
 ### Пример: меню
@@ -49,7 +79,11 @@
 
 [iframe height=70 src="menu" link edit]
 
+<<<<<<< HEAD
 В HTML-разметке все элементы меню являются не кнопками, а ссылками, то есть тегами `<a>`. В этом подходе есть некоторые преимущества, например:
+=======
+Menu items are implemented as HTML-links `<a>`, not buttons `<button>`. There are several reasons to do so, for instance:
+>>>>>>> 162280b6d238ce32bbd8ff7a3f7992be82c2311a
 
 - Некоторые посетители очень любят сочетание "правый клик – открыть в новом окне". Если мы будем использовать `<button>` или `<span>`, то данное сочетание работать не будет.
 - Поисковые движки переходят по ссылкам `<a href="...">` при индексации.
@@ -204,8 +238,13 @@ menu.onclick = function(event) {
 Как мы можем видеть, `event.stopPropagation()` и `event.preventDefault()` (также известный как `return false`)  - это две разные функции. Они никак не связаны друг с другом.
 ```
 
+<<<<<<< HEAD
 ```smart header="Архитектура вложенных контекстных меню"
 Есть также несколько альтернативных путей, чтобы реализовать вложенные контекстные меню. Одним из них является единый глобальный объект с обработчиком `document.oncontextmenu` и методами, позволяющими хранить в нём другие обработчики.
+=======
+```smart header="Nested context menus architecture"
+There are also alternative ways to implement nested context menus. One of them is to have a single global object with a handler for `document.oncontextmenu`, and also methods that allow us to store other handlers in it.
+>>>>>>> 162280b6d238ce32bbd8ff7a3f7992be82c2311a
 
 Объект будет перехватывать любой клик правой кнопкой мыши, просматривать сохранённые обработчики и запускать соответствующий.
 
@@ -238,5 +277,9 @@ menu.onclick = function(event) {
 
 Помимо того, что это "хорошо", это делает ваш HTML лучше с точки зрения доступности для людей с ограниченными возможностями и с особых устройств.
 
+<<<<<<< HEAD
 Также, если мы рассматриваем пример с тегом `<a>`, то обратите внимание: браузер предоставляет возможность открывать ссылки в новом окне (кликая правой кнопкой мыши или используя другие возможности). И пользователям это нравится. Но если мы заменим ссылку кнопкой и стилизуем её как ссылку, используя CSS, то специфичные функции браузера для тега `<a>` всё равно работать не будут.
+=======
+Also if we consider the example with `<a>`, then please note: a browser allows us to open such links in a new window (by right-clicking them and other means). And people like that. But if we make a button behave as a link using JavaScript and even look like a link using CSS, then `<a>`-specific browser features still won't work for it.
+>>>>>>> 162280b6d238ce32bbd8ff7a3f7992be82c2311a
 ```

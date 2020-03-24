@@ -249,8 +249,13 @@ pseudo
 ```smart header="Вычисленное (computed) и окончательное (resolved) значения"
 Есть две концепции в [CSS](https://drafts.csswg.org/cssom/#resolved-values):
 
+<<<<<<< HEAD
 1. *Вычисленное* (computed) значение – это то, которое получено после применения всех CSS-правил и CSS-наследования. Например, `height:1em` или `font-size:125%`.
 2. *Окончательное* ([resolved](https://drafts.csswg.org/cssom/#resolved-values)) значение – непосредственно применяемое к элементу. Значения `1em` или `125%` являются относительными. Браузер берёт вычисленное значение и делает все единицы измерения фиксированными и абсолютными, например, `height:20px` или `font-size:16px`. Для геометрических свойств разрешённые значения могут иметь плавающую точку, например, `width:50.5px`.
+=======
+1. A *computed* style value is the value after all CSS rules and CSS inheritance is applied, as the result of the CSS cascade. It can look like `height:1em` or `font-size:125%`.
+2. A *resolved* style value is the one finally applied to the element. Values like `1em` or `125%` are relative. The browser takes the computed value and makes all units fixed and absolute, for instance: `height:20px` or `font-size:16px`. For geometry properties resolved values may have a floating point, like `width:50.5px`.
+>>>>>>> 162280b6d238ce32bbd8ff7a3f7992be82c2311a
 
 Давным-давно `getComputedStyle` был создан для получения вычисленных значений, но оказалось, что окончательные значения гораздо удобнее, и стандарт изменился.
 
@@ -282,7 +287,11 @@ pseudo
 
 Но `getComputedStyle` не даёт доступ к этой информации, чтобы произвольная страница не могла определить, посещал ли пользователь ту или иную ссылку, проверив стили.
 
+<<<<<<< HEAD
 JavaScript не видит стили, применяемые с помощью `:visited`. Кроме того, в CSS есть ограничение, которое запрещает в целях безопасности применять к `:visited` CSS-стили, изменяющие геометрию элемента. Это гарантирует, что нет обходного пути для "злой" страницы проверить, была ли ссылка посещена и, следовательно, нарушить конфиденциальность.
+=======
+JavaScript may not see the styles applied by `:visited`. And also, there's a limitation in CSS that forbids applying geometry-changing styles in `:visited`. That's to guarantee that there's no side way for an evil page to test if a link was visited and hence to break the privacy.
+>>>>>>> 162280b6d238ce32bbd8ff7a3f7992be82c2311a
 ```
 
 ## Итого

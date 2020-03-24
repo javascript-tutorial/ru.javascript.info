@@ -22,15 +22,24 @@
 : Каждое движение мыши над элементом генерирует это событие.
 
 `contextmenu`
+<<<<<<< HEAD
 : Вызывается при попытке открытия контекстного меню, как правило, нажатием правой кнопки мыши. Но, заметим, это не совсем событие мыши, оно может вызываться и специальной клавишей клавиатуры.
+=======
+: Triggers when opening a context menu is attempted. In the most common case, that happens when the right mouse button is pressed. Although, there are other ways to open a context menu, e.g. using a special keyboard key, so it's not exactly the mouse event.
+
+...There are several other event types too, we'll cover them later.
+>>>>>>> 162280b6d238ce32bbd8ff7a3f7992be82c2311a
 
 ...Есть также несколько иных типов событий, которые мы рассмотрим позже.
 
 ### Комплексные события
 
+<<<<<<< HEAD
 `click`
 : Вызывается при `mousedown` , а затем `mouseup`  над одним и тем же элементом, если использовалась левая кнопка мыши.
 
+=======
+>>>>>>> 162280b6d238ce32bbd8ff7a3f7992be82c2311a
 `dblclick`
 : Вызывается двойным кликом на элементе.
 
@@ -47,7 +56,11 @@
 ```online
 Кликните на кнопку ниже, и вы увидите события. Также попробуйте двойной клик.
 
+<<<<<<< HEAD
 В окне теста ниже все события мыши записываются, и если задержка между ними более 1 секунды, то они разделяются горизонтальной чертой.
+=======
+On the teststand below all mouse events are logged, and if there is more than a 1 second delay between them they are separated by a horizontal ruler.
+>>>>>>> 162280b6d238ce32bbd8ff7a3f7992be82c2311a
 
 При этом мы также можем увидеть свойство `which`, которое позволяет определить, какая кнопка мыши была нажата.
 
@@ -110,7 +123,11 @@
 
 Даже если мы и хотели бы заставить людей на Mac использовать именно `key:Ctrl`+клик, это довольно сложно. Проблема в том, что левый клик в сочетании с `key:Ctrl` интерпретируется как *правый клик* на MacOS и генерирует событие `contextmenu`, а не `click` как на Windows/Linux.
 
+<<<<<<< HEAD
 Поэтому, если мы хотим, чтобы пользователям всех операционных систем было удобно, то вместе с `ctrlKey` нам нужно проверять `metaKey`.
+=======
+So if we want users of all operating systems to feel comfortable, then together with `ctrlKey` we should check `metaKey`.
+>>>>>>> 162280b6d238ce32bbd8ff7a3f7992be82c2311a
 
 Для JS-кода это означает, что мы должны проверить `if (event.ctrlKey || event.metaKey)`.
 ```
