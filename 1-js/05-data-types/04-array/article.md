@@ -121,7 +121,13 @@ let fruits = [
 
 В компьютерных науках структура данных, делающая это возможным, называется [двусторонняя очередь](https://ru.wikipedia.org/wiki/Двухсторонняя_очередь).
 
+<<<<<<< HEAD
 **Методы, работающие с концом массива:**
+=======
+In computer science the data structure that allows this, is called [deque](https://en.wikipedia.org/wiki/Double-ended_queue).
+
+**Methods that work with the end of the array:**
+>>>>>>> 62299ed853674c4fd1427cd310516d5535bce648
 
 `pop`
 : Удаляет последний элемент из массива и возвращает его:

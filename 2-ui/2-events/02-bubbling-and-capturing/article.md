@@ -68,8 +68,13 @@
 
 При этом внутри обработчика`form.onclick`:
 
+<<<<<<< HEAD
 - `this` (`=event.currentTarget`) всегда будет элемент `<form>`, так как обработчик сработал на ней.
 - `event.target` будет содержать ссылку на конкретный элемент внутри формы, на котором произошёл клик.
+=======
+- `this` (=`event.currentTarget`) is the `<form>` element, because the handler runs on it.
+- `event.target` is the actual element inside the form that was clicked.
+>>>>>>> 62299ed853674c4fd1427cd310516d5535bce648
 
 Попробуйте сами:
 
@@ -101,8 +106,13 @@
 Для того, чтобы полностью остановить обработку, существует метод `event.stopImmediatePropagation()`. Он не только предотвращает всплытие, но и останавливает обработку событий на текущем элементе.
 ```
 
+<<<<<<< HEAD
 ```warn header="Не прекращайте всплытие без необходимости!"
 Всплытие -- это удобно. Не прекращайте его без явной нужды, очевидной и архитектурно прозрачной.
+=======
+```warn header="Don't stop bubbling without a need!"
+Bubbling is convenient. Don't stop it without a real need: obvious and architecturally well thought out.
+>>>>>>> 62299ed853674c4fd1427cd310516d5535bce648
 
 Зачастую прекращение всплытия через `event.stopPropagation()` имеет свои подводные камни, которые со временем могут стать проблемами.
 
@@ -202,9 +212,15 @@ elem.addEventListener("click", e => alert(2));
 
 При наступлении события - самый глубоко вложенный элемент, на котором оно произошло, помечается как "целевой" (`event.target`).
 
+<<<<<<< HEAD
 - Затем событие сначала двигается вниз от корня документа к `event.target`, по пути вызывая обработчики, поставленные через `addEventListener(...., true)`, где `true` -- это сокращение для `{capture: true}`.
 - Далее обработчики вызываются на целевом элементе.
 - Далее событие двигается от `event.target` вверх к корню документа, по пути вызывая обработчики, поставленные через `on<event>` и `addEventListener` без третьего аргумента или с третьим аргументом равным `false`.
+=======
+- Then the event moves down from the document root to `event.target`, calling handlers assigned with `addEventListener(..., true)` on the way (`true` is a shorthand for `{capture: true}`).
+- Then handlers are called on the target element itself.
+- Then the event bubbles up from `event.target` up to the root, calling handlers assigned using `on<event>` and `addEventListener` without the 3rd argument or with the 3rd argument `false/{capture:false}`.
+>>>>>>> 62299ed853674c4fd1427cd310516d5535bce648
 
 Каждый обработчик имеет доступ к свойствам события `event`:
 

@@ -12,7 +12,11 @@ let formData = new FormData([form]);
 
 Его особенность заключается в том, что методы для работы с сетью, например `fetch`, позволяют указать объект `FormData` в свойстве тела запроса `body`.
 
+<<<<<<< HEAD
 Он будет соответствующим образом закодирован и отправлен с заголовком `Content-Type: form/multipart`.
+=======
+The special thing about `FormData` is that network methods, such as `fetch`, can accept a `FormData` object as a body. It's encoded and sent out with `Content-Type: multipart/form-data`.
+>>>>>>> 62299ed853674c4fd1427cd310516d5535bce648
 
 То есть, для сервера это выглядит как обычная отправка формы.
 
@@ -53,15 +57,27 @@ let formData = new FormData([form]);
 
 С помощью указанных ниже методов мы можем изменять поля в объекте `FormData`:
 
+<<<<<<< HEAD
 - `formData.append(name, value)` - добавляет к объекту поле с именем `name` и значением `value`,
 - `formData.append(name, blob, fileName)` - добавляет поле, как будто в форме имеется элемент `<input type="file">`, третий аргумент `fileName` устанавливает имя файла (не имя поля формы), как будто это имя из файловой системы пользователя,
 - `formData.delete(name)` - удаляет поле с заданным именем `name`,
 - `formData.get(name)` - получает значение поля с именем `name`,
 - `formData.has(name)` - если существует поле с именем `name`, то возвращает `true`, иначе `false`
+=======
+- `formData.append(name, value)` - add a form field with the given `name` and `value`,
+- `formData.append(name, blob, fileName)` - add a field as if it were `<input type="file">`, the third argument `fileName` sets file name (not form field name), as it were a name of the file in user's filesystem,
+- `formData.delete(name)` - remove the field with the given `name`,
+- `formData.get(name)` - get the value of the field with the given `name`,
+- `formData.has(name)` - if there exists a field with the given `name`, returns `true`, otherwise `false`
+>>>>>>> 62299ed853674c4fd1427cd310516d5535bce648
 
 Технически форма может иметь много полей с одним и тем же именем `name`, поэтому несколько вызовов `append` добавят несколько полей с одинаковыми именами.
 
+<<<<<<< HEAD
 Ещё существует метод `set`, его синтаксис такой же, как у `append`. Разница в том, что `.set` удаляет все уже имеющиеся поля с именем `name` и только затем добавляет новое. То есть этот метод гарантирует, что будет существовать только одно поле с именем `name`, в остальном он аналогичен `.append`:
+=======
+There's also method `set`, with the same syntax as `append`. The difference is that `.set` removes all fields with the given `name`, and then appends a new field. So it makes sure there's only one field with such `name`, the rest is just like `append`:
+>>>>>>> 62299ed853674c4fd1427cd310516d5535bce648
 
 - `formData.set(name, value)`,
 - `formData.set(name, blob, fileName)`.
@@ -81,7 +97,11 @@ for(let [name, value] of formData) {
 
 ## Отправка формы с файлом
 
+<<<<<<< HEAD
 Объекты `FormData` всегда отсылаются с заголовком `Content-Type: form/multipart`, этот способ кодировки позволяет отсылать файлы. Таким образом, поля `<input type="file">` тоже отправляются, как это и происходит в случае обычной формы.
+=======
+The form is always sent as `Content-Type: multipart/form-data`, this encoding allows to send files. So, `<input type="file">` fields are sent also, similar to a usual form submission.
+>>>>>>> 62299ed853674c4fd1427cd310516d5535bce648
 
 Пример такой формы:
 

@@ -6,8 +6,13 @@ JavaScript позволяет нам работать с примитивным�
 
 Примитив
 
+<<<<<<< HEAD
 - Это - значение «примитивного» типа.
 - Есть 6 примитивных типов: `string`, `number`, `boolean`, `symbol`, `null` и `undefined`.
+=======
+- Is a value of a primitive type.
+- There are 7 primitive types: `string`, `number`, `bigint`, `boolean`, `symbol`, `null` and `undefined`.
+>>>>>>> 62299ed853674c4fd1427cd310516d5535bce648
 
 Объект
 

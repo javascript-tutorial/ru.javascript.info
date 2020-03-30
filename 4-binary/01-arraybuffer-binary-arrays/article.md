@@ -73,8 +73,15 @@ for(let num of view) {
 
 Общий термин для всех таких представлений (`Uint8Array`, `Uint32Array` и т.д.) -- это [TypedArray](https://tc39.github.io/ecma262/#sec-typedarray-objects), типизированный массив. У них имеется набор одинаковых свойств и методов.
 
+<<<<<<< HEAD
 Они уже намного больше напоминают обычные массивы: элементы проиндексированы, и возможно осуществить обход содержимого.
+=======
+Please note, there's no constructor called `TypedArray`, it's just a common "umbrella" term to represent one of views over `ArrayBuffer`: `Int8Array`, `Uint8Array` and so on, the full list will soon follow.
+>>>>>>> 62299ed853674c4fd1427cd310516d5535bce648
 
+When you see something like `new TypedArray`, it means any of `new Int8Array`, `new Uint8Array`, etc.
+
+Typed array behave like regular arrays: have indexes and iterable.
 
 Конструкторы типизированных массивов (будь то `Int8Array` или `Float64Array`, без разницы) ведут себя по-разному в зависимости от типа передаваемого им аргумента.
 

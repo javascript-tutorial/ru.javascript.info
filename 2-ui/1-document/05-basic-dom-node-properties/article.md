@@ -18,6 +18,7 @@
 
 Существуют следующие классы:
 
+<<<<<<< HEAD
 - [EventTarget](https://dom.spec.whatwg.org/#eventtarget) -- это корневой "абстрактный" класс. Объекты этого класса никогда не создаются. Он служит основой, благодаря которой все DOM-узлы поддерживают так называемые "события", о которых мы поговорим позже.
 - [Node](http://dom.spec.whatwg.org/#interface-node) -- также является "абстрактным" классом, и служит основой для DOM-узлов. Он обеспечивает базовую функциональность: `parentNode`, `nextSibling`, `childNodes` и т.д. (это геттеры). Объекты класса `Node` никогда не создаются. Но есть определённые классы узлов, которые наследуют от него: `Text` -- для текстовых узлов, `Element` -- для узлов-элементов и более экзотический `Comment` -- для узлов-комментариев.
 - [Element](http://dom.spec.whatwg.org/#interface-element) -- это базовый класс для DOM-элементов. Он обеспечивает навигацию на уровне элементов: `nextElementSibling`, `children` и методы поиска: `getElementsByTagName`, `querySelector`. Браузер поддерживает не только HTML, но также XML и SVG. Класс Element служит базой для следующих классов: `SVGElement`, `XMLElement` и `HTMLElement`.
@@ -26,6 +27,16 @@
     - [HTMLBodyElement](https://html.spec.whatwg.org/multipage/semantics.html#htmlbodyelement) -- класс для тега `<body>`,
     - [HTMLAnchorElement](https://html.spec.whatwg.org/multipage/semantics.html#htmlanchorelement) -- класс для тега `<a>`,
     - ...и т.д, каждому тегу соответствует свой класс, который предоставляет определённые свойства и методы.
+=======
+- [EventTarget](https://dom.spec.whatwg.org/#eventtarget) -- is the root "abstract" class. Objects of that class are never created. It serves as a base, so that all DOM nodes support so-called "events", we'll study them later.
+- [Node](http://dom.spec.whatwg.org/#interface-node) -- is also an "abstract" class, serving as a base  for DOM nodes. It provides the core tree functionality: `parentNode`, `nextSibling`, `childNodes` and so on (they are getters). Objects of `Node` class are never created. But there are concrete node classes that inherit from it, namely: `Text` for text nodes, `Element` for element nodes and more exotic ones like `Comment` for comment nodes.
+- [Element](http://dom.spec.whatwg.org/#interface-element) -- is a base class for DOM elements. It provides element-level navigation like `nextElementSibling`, `children` and searching methods like `getElementsByTagName`, `querySelector`. A browser supports not only HTML, but also XML and SVG. The `Element` class serves as a base for more specific classes: `SVGElement`, `XMLElement` and `HTMLElement`.
+- [HTMLElement](https://html.spec.whatwg.org/multipage/dom.html#htmlelement) -- is finally the basic class for all HTML elements. It is inherited by concrete HTML elements:
+    - [HTMLInputElement](https://html.spec.whatwg.org/multipage/forms.html#htmlinputelement) -- the class for `<input>` elements,
+    - [HTMLBodyElement](https://html.spec.whatwg.org/multipage/semantics.html#htmlbodyelement) -- the class for `<body>` elements,
+    - [HTMLAnchorElement](https://html.spec.whatwg.org/multipage/semantics.html#htmlanchorelement) -- the class for `<a>` elements,
+    - ...and so on, each tag has its own class that may provide specific properties and methods.
+>>>>>>> 62299ed853674c4fd1427cd310516d5535bce648
 
 Таким образом, полный набор свойств и методов данного узла собирается в результате наследования.
 
@@ -33,12 +44,21 @@
 
 Он получает свойства и методы из (в порядке наследования):
 
+<<<<<<< HEAD
 - `HTMLInputElement` -- этот класс предоставляет специфичные для элементов формы свойства,
 - `HTMLElement` -- предоставляет общие для HTML-элементов методы (и геттеры/сеттеры),
 - `Element` -- предоставляет типовые методы элемента,
 - `Node` -- предоставляет общие свойства DOM-узлов,
 - `EventTarget` -- обеспечивает поддержку событий (поговорим о них дальше),
 - ...и, наконец, он наследует от `Object`, поэтому доступны также методы "обычного объекта", такие как `hasOwnProperty`.
+=======
+- `HTMLInputElement` -- this class provides input-specific properties,
+- `HTMLElement` -- it provides common HTML element methods (and getters/setters),
+- `Element` -- provides generic element methods,
+- `Node` -- provides common DOM node properties,
+- `EventTarget` -- gives the support for events (to be covered),
+- ...and finally it inherits from `Object`, so "plain object" methods like `hasOwnProperty` are also available.
+>>>>>>> 62299ed853674c4fd1427cd310516d5535bce648
 
 Для того, чтобы узнать имя класса DOM-узла, вспомним, что обычно у объекта есть свойство `constructor`. Оно ссылается на конструктор класса, и в свойстве `constructor.name` содержится его имя:
 
@@ -187,8 +207,13 @@ alert( document.body.tagName ); // BODY
 
 Если мы имеем дело только с элементами, то можно использовать `tagName` или `nodeName`, нет разницы.
 
+<<<<<<< HEAD
 ```smart header="Имена тегов (кроме XHTML) всегда пишутся в верхнем регистре"
 В браузере существуют два режима обработки документа: HTML и XML. HTML-режим обычно используется для веб-страниц. XML-режим включается, если браузер получает XML-документ с заголовком: `Content-Type: application/xml+xhtml`.
+=======
+```smart header="The tag name is always uppercase except in XML mode"
+The browser has two modes of processing documents: HTML and XML. Usually the HTML-mode is used for webpages. XML-mode is enabled when the browser receives an XML-document with the header: `Content-Type: application/xml+xhtml`.
+>>>>>>> 62299ed853674c4fd1427cd310516d5535bce648
 
 В HTML-режиме значения `tagName/nodeName` всегда записаны в верхнем регистре. Будет выведено `BODY` вне зависимости от того, как записан тег в HTML `<body>` или `<BoDy>`.
 
@@ -285,7 +310,11 @@ elem.innerHTML = elem.innerHTML + "..."
 </script>
 ```
 
+<<<<<<< HEAD
 **Будьте осторожны: в отличие от `innerHTML`, запись в `outerHTML` не изменяет элемент. Вместо этого элемент заменяется целиком во внешнем контексте.**
+=======
+**Beware: unlike `innerHTML`, writing to `outerHTML` does not change the element. Instead, it replaces it in the DOM.**
+>>>>>>> 62299ed853674c4fd1427cd310516d5535bce648
 
 Да, звучит странно, и это действительно необычно, поэтому здесь мы и отмечаем это особо.
 
@@ -303,7 +332,11 @@ elem.innerHTML = elem.innerHTML + "..."
   div.outerHTML = '<p>Новый элемент</p>'; // (*)
 
 *!*
+<<<<<<< HEAD
   // Содержимое div осталось тем же!
+=======
+  // Wow! 'div' is still the same!
+>>>>>>> 62299ed853674c4fd1427cd310516d5535bce648
 */!*
   alert(div.outerHTML); // <div>Привет, мир!</div> (**)
 </script>
@@ -311,6 +344,7 @@ elem.innerHTML = elem.innerHTML + "..."
 
 Какая-то магия, да?
 
+<<<<<<< HEAD
 В строке `(*)` мы заменили `div` на `<p>Новый элемент</p>`. Во внешнем документе мы видим новое содержимое вместо `<div>`. Но, как видно в строке (`**`), старая переменная `div` осталась прежней!
 
 Это потому, что использование `outerHTML` не изменяет DOM-элемент, а удаляет его из внешнего контекста и вставляет вместо него новый HTML-код.
@@ -319,10 +353,24 @@ elem.innerHTML = elem.innerHTML + "..."
 - `div` был удалён из документа.
 - Вместо него был вставлен другой HTML `<p>Новый элемент</p>`.
 - В `div` осталось старое значение. Новый HTML не сохранён ни в какой переменной.
+=======
+In the line `(*)` we replaced `div` with `<p>A new element</p>`. In the outer document (the DOM) we can see the new content instead of the `<div>`. But, as we can see in line `(**)`, the value of the old `div` variable hasn't changed!
+
+The `outerHTML` assignment does not modify the DOM element (the object referenced by, in this case, the variable 'div'), but removes it from the DOM and inserts the new HTML in its place.
+
+So what happened in `div.outerHTML=...` is:
+- `div` was removed from the document.
+- Another piece of HTML `<p>A new element</p>` was inserted in its place.
+- `div` still has its old value. The new HTML wasn't saved to any variable.
+>>>>>>> 62299ed853674c4fd1427cd310516d5535bce648
 
 Здесь легко сделать ошибку: заменить `div.outerHTML`, а потом продолжить работать с `div`, как будто там новое содержимое. Но это не так. Подобное верно для `innerHTML`, но не для `outerHTML`.
 
+<<<<<<< HEAD
 Мы можем писать в `elem.outerHTML`, но надо иметь в виду, что это не меняет элемент, в который мы пишем. Вместо этого создаётся новый HTML на его месте. Мы можем получить ссылки на новые элементы, обратившись к DOM.
+=======
+We can write to `elem.outerHTML`, but should keep in mind that it doesn't change the element we're writing to ('elem'). It puts the new HTML in its place instead. We can get references to the new elements by querying the DOM.
+>>>>>>> 62299ed853674c4fd1427cd310516d5535bce648
 
 ## nodeValue/data: содержимое текстового узла
 
@@ -475,7 +523,11 @@ elem.innerHTML = elem.innerHTML + "..."
 Главные свойства DOM-узла:
 
 `nodeType`
+<<<<<<< HEAD
 : Свойство `nodeType` позволяет узнать тип DOM-узла. Его значение - числовое: `1` для элементов,`3` для текстовых узлов, и т.д. Только для чтения.
+=======
+: We can use it to see if a node is a text or an element node. It has a numeric value: `1` for elements,`3` for text nodes, and a few others for other node types. Read-only.
+>>>>>>> 62299ed853674c4fd1427cd310516d5535bce648
 
 `nodeName/tagName`
 : Для элементов это свойство возвращает название тега (записывается в верхнем регистре, за исключением XML-режима). Для узлов-неэлементов `nodeName` описывает, что это за узел. Только для чтения.
@@ -497,4 +549,8 @@ elem.innerHTML = elem.innerHTML + "..."
 
 В зависимости от своего класса DOM-узлы имеют и другие свойства. Например у элементов `<input>` (`HTMLInputElement`) есть свойства `value`, `type`, у элементов `<a>` (`HTMLAnchorElement`) есть `href` и т.д. Большинство стандартных HTML-атрибутов имеют соответствующие свойства DOM.
 
+<<<<<<< HEAD
 Впрочем, HTML-атрибуты и свойства DOM не всегда одинаковы, мы увидим это в следующей главе.
+=======
+However, HTML attributes and DOM properties are not always the same, as we'll see in the next chapter.
+>>>>>>> 62299ed853674c4fd1427cd310516d5535bce648

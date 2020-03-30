@@ -82,10 +82,19 @@ let user = {
 
 setTimeout(() => user.sayHi(), 1000);
 
+<<<<<<< HEAD
 // ...в течение 1 секунды
 user = { sayHi() { alert("Другой пользователь в 'setTimeout'!"); } };
 
 // Другой пользователь в 'setTimeout'!
+=======
+// ...the value of user changes within 1 second
+user = {
+  sayHi() { alert("Another user in setTimeout!"); }
+};
+
+// Another user in setTimeout!
+>>>>>>> 62299ed853674c4fd1427cd310516d5535bce648
 ```
 
 Следующее решение гарантирует, что такого не случится.
@@ -97,7 +106,11 @@ user = { sayHi() { alert("Другой пользователь в 'setTimeout'!
 Базовый синтаксис `bind`:
 
 ```js
+<<<<<<< HEAD
 // полный синтаксис будет представлен немного позже
+=======
+// more complex syntax will come a little later
+>>>>>>> 62299ed853674c4fd1427cd310516d5535bce648
 let boundFunc = func.bind(context);
 ```
 
@@ -157,9 +170,22 @@ let user = {
 let sayHi = user.sayHi.bind(user); // (*)
 */!*
 
+<<<<<<< HEAD
 sayHi(); // Привет, Вася!
 
 setTimeout(sayHi, 1000); // Привет, Вася!
+=======
+// can run it without an object
+sayHi(); // Hello, John!
+
+setTimeout(sayHi, 1000); // Hello, John!
+
+// even if the value of user changes within 1 second
+// sayHi uses the pre-bound value
+user = {
+  sayHi() { alert("Another user in setTimeout!"); }
+};
+>>>>>>> 62299ed853674c4fd1427cd310516d5535bce648
 ```
 
 В строке `(*)` мы берём метод `user.sayHi` и привязываем его к `user`. Теперь `sayHi` - это "связанная" функция, которая может быть вызвана отдельно или передана в `setTimeout` (контекст всегда будет правильным).
@@ -267,7 +293,11 @@ alert( triple(5) ); // = mul(3, 5) = 15
 
 Встроенный `bind` не позволяет этого. Мы не можем просто опустить контекст и перейти к аргументам.
 
+<<<<<<< HEAD
 К счастью, легко создать вспомогательную функцию `partial`, которая привязывает только аргументы.
+=======
+Fortunately, a function `partial` for binding only arguments can be easily implemented.
+>>>>>>> 62299ed853674c4fd1427cd310516d5535bce648
 
 Вот так:
 
@@ -301,7 +331,11 @@ user.sayNow("Hello");
 - Затем передаёт ей `...argsBound` -- аргументы из вызова `partial` (`"10:00"`)
 - Затем передаёт ей `...args` -- аргументы, полученные обёрткой (`"Hello"`)
 
+<<<<<<< HEAD
 Благодаря оператору расширения `...` реализовать это очень легко, не правда ли?
+=======
+So easy to do it with the spread syntax, right?
+>>>>>>> 62299ed853674c4fd1427cd310516d5535bce648
 
 Также есть готовый вариант [_.partial](https://lodash.com/docs#partial) из библиотеки lodash.
 

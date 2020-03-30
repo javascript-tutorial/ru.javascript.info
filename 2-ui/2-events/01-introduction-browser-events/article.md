@@ -148,7 +148,11 @@ elem.onclick = sayThanks;
 
 ## Частые ошибки
 
+<<<<<<< HEAD
 Если вы только начинаете работать с событиями, обратите внимание на следующие моменты.
+=======
+If you're starting to work with events -- please note some subtleties.
+>>>>>>> 62299ed853674c4fd1427cd310516d5535bce648
 
 **Функция должна быть присвоена как `sayThanks`, а не `sayThanks()`.**
 
@@ -181,7 +185,11 @@ button.onclick = function() {
 
 **Используйте именно функции, а не строки.**
 
+<<<<<<< HEAD
 Назначение обработчика строкой `elem.onclick = "alert(1)"` также сработает. Это сделано из соображений совместимости, но делать так не рекомендуется.
+=======
+The assignment `elem.onclick = "alert(1)"` would work too. It works for compatibility reasons, but is strongly not recommended.
+>>>>>>> 62299ed853674c4fd1427cd310516d5535bce648
 
 **Не используйте `setAttribute` для обработчиков.**
 
@@ -216,7 +224,7 @@ input.onclick = function() { alert(2); } // заменит предыдущий 
 Синтаксис добавления обработчика:
 
 ```js
-element.addEventListener(event, handler[, options]);
+element.addEventListener(event, handler, [options]);
 ```
 
 `event`
@@ -235,7 +243,7 @@ element.addEventListener(event, handler[, options]);
 Для удаления обработчика следует использовать `removeEventListener`:
 
 ```js
-element.removeEventListener(event, handler[, options]);
+element.removeEventListener(event, handler, [options]);
 ```
 
 ````warn header="Удаление требует именно ту же функцию"
@@ -293,20 +301,35 @@ input.removeEventListener("click", handler);
 ````warn header="Обработчики некоторых событий можно назначать только через `addEventListener`"
 Существуют события, которые нельзя назначить через DOM-свойство, но можно через `addEventListener`.
 
+<<<<<<< HEAD
 Например, таково событие `DOMContentLoaded`, которое срабатывает, когда завершена загрузка и построение DOM документа.
 
 ```js
 document.onDOMContentLoaded = function() {
   alert("DOM построен"); // не будет работать
+=======
+For instance, the event `DOMContentLoaded`, that triggers when the document is loaded and DOM is built.
+
+```js
+document.onDOMContentLoaded = function() {
+  alert("DOM built"); // will never run
+>>>>>>> 62299ed853674c4fd1427cd310516d5535bce648
 };
 ```
 
 ```js
 document.addEventListener("DOMContentLoaded", function() {
+<<<<<<< HEAD
   alert("DOM построен"); // а вот так сработает
 });
 ```
 Так что `addEventListener` более универсален. Хотя заметим, что таких событий меньшинство, это скорее исключение, чем правило.
+=======
+  alert("DOM built"); // this way it works
+});
+```
+So `addEventListener` is more universal. Although, such events are an exception rather than the rule.
+>>>>>>> 62299ed853674c4fd1427cd310516d5535bce648
 ````
 
 ## Объект события
@@ -446,7 +469,11 @@ HTML-атрибуты используются редко потому, что J
 
 DOM-свойства вполне можно использовать, но мы не можем назначить больше одного обработчика на один тип события. Во многих случаях с этим ограничением можно мириться.
 
+<<<<<<< HEAD
 Последний способ самый гибкий, однако нужно писать больше всего кода. Есть несколько типов событий, которые работают только через него, к примеру `transitionend` и `DOMContentLoaded`. Также `addEventListener` поддерживает объекты в качестве обработчиков событий. В этом случае вызывается метод объекта `handleEvent`.
+=======
+The last way is the most flexible, but it is also the longest to write. There are few events that only work with it, for instance `transitionend` and `DOMContentLoaded` (to be covered). Also `addEventListener` supports objects as event handlers. In that case the method `handleEvent` is called in case of the event.
+>>>>>>> 62299ed853674c4fd1427cd310516d5535bce648
 
 Не важно, как вы назначаете обработчик -- он получает объект события первым аргументом. Этот объект содержит подробности о том, что произошло.
 

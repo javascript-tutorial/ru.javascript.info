@@ -69,10 +69,17 @@ alert("my@mail.com @ his@site.com.uk".match(regexp)); // my@mail.com, his@site.c
 
 Метод `str.match(regexp)`, если у регулярного выражения `regexp` нет флага `g`, ищет первое совпадение и возвращает его в виде массива:
 
+<<<<<<< HEAD
 1. На позиции `0` будет всё совпадение целиком.
 2. На позиции `1` - содержимое первой скобочной группы.
 3. На позиции `2` - содержимое второй скобочной группы.
 4. ...и так далее...
+=======
+1. At index `0`: the full match.
+2. At index `1`: the contents of the first parentheses.
+3. At index `2`: the contents of the second parentheses.
+4. ...and so on...
+>>>>>>> 62299ed853674c4fd1427cd310516d5535bce648
 
 Например, мы хотим найти HTML теги `pattern:<.*?>` и обработать их. Было бы удобно иметь содержимое тега (то, что внутри уголков) в отдельной переменной.
 
@@ -218,8 +225,8 @@ let results = '<h1> <h2>'.matchAll(/<(.*?)>/gi);
 
 for(let result of results) {
   alert(result);
-  // первый вывод: <h1>,h1
-  // второй: <h2>,h2
+  // first alert: <h1>,h1
+  // second: <h2>,h2
 }
 ```
 
@@ -249,7 +256,11 @@ alert( tag1.input ); // <h1> <h2>
 
 Таким образом, будет найдено ровно столько результатов, сколько нам нужно.
 
+<<<<<<< HEAD
 Например, всего в тексте может быть 100 совпадений, а в цикле после 5-го результата мы поняли, что нам их достаточно и сделали `break`. Тогда движок не будет тратить время на поиск остальных 95.
+=======
+E.g. there are potentially 100 matches in the text, but in a `for..of` loop we found 5 of them, then decided it's enough and make a `break`. Then the engine won't spend time finding other 95 matches.
+>>>>>>> 62299ed853674c4fd1427cd310516d5535bce648
 ```
 
 ## Именованные группы

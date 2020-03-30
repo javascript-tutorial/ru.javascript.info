@@ -18,8 +18,13 @@ let id = Symbol();
 
 При создании символу можно дать описание (также называемое имя), в основном использующееся для отладки кода:
 
+<<<<<<< HEAD
 ```js run
 // Создаём символ id с описанием (именем) "id"
+=======
+```js
+// id is a symbol with the description "id"
+>>>>>>> 62299ed853674c4fd1427cd310516d5535bce648
 let id = Symbol("id");
 ```
 
@@ -176,10 +181,16 @@ let clone = Object.assign({}, user);
 alert( clone[id] ); // 123
 ```
 
+<<<<<<< HEAD
 
 Здесь нет никакого парадокса или противоречия. Так и задумано. Идея заключается в том, что, когда мы клонируем или объединяем объекты, мы обычно хотим скопировать *все* свойства (включая такие свойства с ключами-символами, как, например, `id` в примере выше).
 
 ## Глобальные символы
+=======
+There's no paradox here. That's by design. The idea is that when we clone an object or merge objects, we usually want *all* properties to be copied (including symbols like `id`).
+
+## Global symbols
+>>>>>>> 62299ed853674c4fd1427cd310516d5535bce648
 
 Итак, как мы видели, обычно все символы уникальны, даже если их имена совпадают. Но иногда мы наоборот хотим, чтобы символы с одинаковыми именами были одной сущностью. Например, разные части нашего приложения хотят получить доступ к символу `"id"`, подразумевая именно одно и то же свойство.
 
@@ -226,7 +237,11 @@ alert( Symbol.keyFor(sym) ); // name
 alert( Symbol.keyFor(sym2) ); // id
 ```
 
+<<<<<<< HEAD
 Внутри метода `Symbol.keyFor` используется глобальный реестр символов для нахождения имени символа. Так что этот метод не будет работать для неглобальных символов. Если символ неглобальный, метод не сможет его найти и вернёт `undefined`.
+=======
+The `Symbol.keyFor` internally uses the global symbol registry to look up the key for the symbol. So it doesn't work for non-global symbols. If the symbol is not global, it won't be able to find it and returns `undefined`.
+>>>>>>> 62299ed853674c4fd1427cd310516d5535bce648
 
 Впрочем, для любых символов доступно свойство `description`.
 

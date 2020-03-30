@@ -2,7 +2,11 @@
 
 Как мы помним, новые объекты могут быть созданы с помощью функции-конструктора `new F()`.
 
+<<<<<<< HEAD
 Если в `F.prototype` содержится объект, оператор `new` устанавливает его в качестве `[[Prototype]]` для нового объекта.
+=======
+If `F.prototype` is an object, then the `new` operator uses it to set `[[Prototype]]` for the new object.
+>>>>>>> 62299ed853674c4fd1427cd310516d5535bce648
 
 ```smart
 JavaScript использовал прототипное наследование с момента своего появления. Это одна из основных особенностей языка.
@@ -40,8 +44,13 @@ alert( rabbit.eats ); // true
 
 На изображении: `"prototype"` - горизонтальная стрелка, обозначающая обычное свойство для `"F"`, а `[[Prototype]]` -- вертикальная, обозначающая наследование `rabbit` от `animal`.
 
+<<<<<<< HEAD
 ```smart header="`F.prototype` используется только в момент вызова `new F()`"
 `F.prototype` используется только при вызове `new F()` и присваивается в качестве свойства `[[Prototype]]` нового объекта. После этого `F.prototype` и новый объект ничего не связывает. Следует понимать это как "единоразовый подарок" объекту.
+=======
+```smart header="`F.prototype` only used at `new F` time"
+`F.prototype` property is only used when `new F` is called, it assigns `[[Prototype]]` of the new object.
+>>>>>>> 62299ed853674c4fd1427cd310516d5535bce648
 
 После создания `F.prototype` может измениться, и новые объекты, созданные с помощью `new F()`, будут иметь другой объект в качестве `[[Prototype]]`, но уже существующие объекты сохранят старый.
 ```
@@ -158,11 +167,19 @@ Rabbit.prototype = {
 
 В этой главе мы кратко описали способ задания `[[Prototype]]` для объектов, создаваемых с помощью функции-конструктора. Позже мы рассмотрим, как можно использовать эту возможность.
 
+<<<<<<< HEAD
 Всё достаточно просто. Выделим основные моменты:
 
 - Свойство `F.prototype` (не путать с `[[Prototype]]`) устанавливает`[[Prototype]]` для новых объектов при вызове `new F()`.
 - Значение `F.prototype` должно быть либо объектом, либо `null`. Другие значения не будут работать.
 -  Свойство `"prototype"` является особым, только когда оно назначено функции-конструктору, которая вызывается оператором `new`.
+=======
+Everything is quite simple, just a few notes to make things clear:
+
+- The `F.prototype` property (don't mistake it for `[[Prototype]]`) sets `[[Prototype]]` of new objects when `new F()` is called.
+- The value of `F.prototype` should be either an object or `null`: other values won't work.
+-  The `"prototype"` property only has such a special effect when set on a constructor function, and invoked with `new`.
+>>>>>>> 62299ed853674c4fd1427cd310516d5535bce648
 
 В обычных объектах `prototype` не является чем-то особенным:
 ```js

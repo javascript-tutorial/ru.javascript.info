@@ -1,4 +1,8 @@
+<<<<<<< HEAD:1-js/06-advanced-functions/02-rest-parameters-spread-operator/article.md
 # Остаточные параметры и оператор расширения
+=======
+# Rest parameters and spread syntax
+>>>>>>> 62299ed853674c4fd1427cd310516d5535bce648:1-js/06-advanced-functions/02-rest-parameters-spread/article.md
 
 Многие встроенные функции JavaScript поддерживают произвольное количество аргументов.
 
@@ -122,7 +126,11 @@ f(1); // 1
 ````
 
 
+<<<<<<< HEAD:1-js/06-advanced-functions/02-rest-parameters-spread-operator/article.md
 ## Оператор расширения [#spread-operator]
+=======
+## Spread syntax [#spread-syntax]
+>>>>>>> 62299ed853674c4fd1427cd310516d5535bce648:1-js/06-advanced-functions/02-rest-parameters-spread/article.md
 
 Мы узнали, как получить массив из списка параметров.
 
@@ -148,7 +156,11 @@ alert( Math.max(arr) ); // NaN
 
 Конечно, мы можем вводить числа вручную : `Math.max(arr[0], arr[1], arr[2])`. Но, во-первых, это плохо выглядит, а, во-вторых, мы не всегда знаем, сколько будет аргументов. Их может быть как очень много, так и не быть совсем.
 
+<<<<<<< HEAD:1-js/06-advanced-functions/02-rest-parameters-spread-operator/article.md
 И тут нам поможет *оператор расширения*. Он похож на остаточные параметры – тоже использует `...`, но делает совершенно противоположное.
+=======
+*Spread syntax* to the rescue! It looks similar to rest parameters, also using `...`, but does quite the opposite.
+>>>>>>> 62299ed853674c4fd1427cd310516d5535bce648:1-js/06-advanced-functions/02-rest-parameters-spread/article.md
 
 Когда `...arr` используется при вызове функции, он "расширяет" перебираемый объект `arr` в список аргументов.
 
@@ -169,7 +181,12 @@ let arr2 = [8, 3, -8, 1];
 alert( Math.max(...arr1, ...arr2) ); // 8
 ```
 
+<<<<<<< HEAD:1-js/06-advanced-functions/02-rest-parameters-spread-operator/article.md
 Мы даже можем комбинировать оператор расширения с обычными значениями:
+=======
+We can even combine the spread syntax with normal values:
+
+>>>>>>> 62299ed853674c4fd1427cd310516d5535bce648:1-js/06-advanced-functions/02-rest-parameters-spread/article.md
 
 ```js run
 let arr1 = [1, -2, 3, 4];
@@ -178,7 +195,11 @@ let arr2 = [8, 3, -8, 1];
 alert( Math.max(1, ...arr1, 2, ...arr2, 25) ); // 25
 ```
 
+<<<<<<< HEAD:1-js/06-advanced-functions/02-rest-parameters-spread-operator/article.md
 Оператор расширения можно использовать и для слияния массивов:
+=======
+Also, the spread syntax can be used to merge arrays:
+>>>>>>> 62299ed853674c4fd1427cd310516d5535bce648:1-js/06-advanced-functions/02-rest-parameters-spread/article.md
 
 ```js run
 let arr = [3, 5, 1];
@@ -191,9 +212,15 @@ let merged = [0, ...arr, 2, ...arr2];
 alert(merged); // 0,3,5,1,2,8,9,15 (0, затем arr, затем 2, в конце arr2)
 ```
 
+<<<<<<< HEAD:1-js/06-advanced-functions/02-rest-parameters-spread-operator/article.md
 В примерах выше мы использовали массив, чтобы продемонстрировать свойства оператора расширения, но он работает с любым перебираемым объектом.
 
 Например, оператор расширения подойдёт для того, чтобы превратить строку в массив символов:
+=======
+In the examples above we used an array to demonstrate the spread syntax, but any iterable will do.
+
+For instance, here we use the spread syntax to turn the string into array of characters:
+>>>>>>> 62299ed853674c4fd1427cd310516d5535bce648:1-js/06-advanced-functions/02-rest-parameters-spread/article.md
 
 ```js run
 let str = "Привет";
@@ -201,7 +228,11 @@ let str = "Привет";
 alert( [...str] ); // П,р,и,в,е,т
 ```
 
+<<<<<<< HEAD:1-js/06-advanced-functions/02-rest-parameters-spread-operator/article.md
 Посмотрим, что происходит. Под капотом оператор расширения использует итераторы, чтобы перебирать элементы. Так же, как это делает `for..of`.
+=======
+The spread syntax internally uses iterators to gather elements, the same way as `for..of` does.
+>>>>>>> 62299ed853674c4fd1427cd310516d5535bce648:1-js/06-advanced-functions/02-rest-parameters-spread/article.md
 
 Цикл `for..of` перебирает строку как последовательность символов, поэтому из `...str` получается `"П", "р", "и", "в", "е", "т"`. Получившиеся символы собираются в массив при помощи стандартного объявления массива: `[...str]`.
 
@@ -218,25 +249,91 @@ alert( Array.from(str) ); // П,р,и,в,е,т
 
 Но между `Array.from(obj)` и `[...obj]` есть разница:
 
+<<<<<<< HEAD:1-js/06-advanced-functions/02-rest-parameters-spread-operator/article.md
 - `Array.from` работает как с псевдомассивами, так и с итерируемыми объектами
 - Оператор расширения работает только с итерируемыми объектами
+=======
+- `Array.from` operates on both array-likes and iterables.
+- The spread syntax works only with iterables.
+>>>>>>> 62299ed853674c4fd1427cd310516d5535bce648:1-js/06-advanced-functions/02-rest-parameters-spread/article.md
 
 Выходит, что если нужно сделать из чего угодно массив, то `Array.from` — более универсальный метод.
 
 
+<<<<<<< HEAD:1-js/06-advanced-functions/02-rest-parameters-spread-operator/article.md
 ## Итого
 
 Когда мы видим `"..."` в коде, это могут быть как остаточные параметры, так и оператор расширения.
+=======
+## Get a new copy of an object/array
+
+Remember when we talked about `Object.assign()` [in the past](https://javascript.info/symbol#symbols-are-skipped-by-for-in)?
+
+It is possible to do the same thing with the spread operator!
+
+```
+let arr = [1, 2, 3];
+let arrCopy = [...arr]; // spread the array into a list of parameters
+                        // then put the result into a new array
+
+// do the arrays have the same contents?
+alert(JSON.stringify(arr) === JSON.stringify(arrCopy)); // true
+
+// are the arrays equal?
+alert(arr === arrCopy); // false (not same reference)
+
+// modifying our initial array does not modify the copy:
+arr.push(4);
+alert(arr); // 1, 2, 3, 4
+alert(arrCopy); // 1, 2, 3
+```
+
+Note that it is possible to do the same thing to make a copy of an object:
+
+```
+let obj = { a: 1, b: 2, c: 3 };
+let objCopy = { ...obj }; // spread the object into a list of parameters
+                          // then return the result in a new object
+
+// do the objects have the same contents?
+alert(JSON.stringify(obj) === JSON.stringify(objCopy)); // true
+
+// are the objects equal?
+alert(obj === objCopy); // false (not same reference)
+
+// modifying our initial object does not modify the copy:
+obj.d = 4;
+alert(JSON.stringify(obj)); // {"a":1,"b":2,"c":3,"d":4}
+alert(JSON.stringify(objCopy)); // {"a":1,"b":2,"c":3}
+```
+
+This way of copying an object is much shorter than `let objCopy = Object.assign({}, obj);` or for an array `let arrCopy = Object.assign([], arr);` so we prefer to use it whenever we can.
+
+
+## Summary
+
+When we see `"..."` in the code, it is either rest parameters or the spread syntax.
+>>>>>>> 62299ed853674c4fd1427cd310516d5535bce648:1-js/06-advanced-functions/02-rest-parameters-spread/article.md
 
 Как отличить их друг от друга:
 
+<<<<<<< HEAD:1-js/06-advanced-functions/02-rest-parameters-spread-operator/article.md
 - Если `...` располагается в конце списка аргументов функции, то это "остаточные параметры". Он собирает остальные неуказанные аргументы и делает из них массив.
 - Если `...` встретился в вызове функции или где-либо ещё, то это "оператор расширения". Он извлекает элементы из массива.
+=======
+- When `...` is at the end of function parameters, it's "rest parameters" and gathers the rest of the list of arguments into an array.
+- When `...` occurs in a function call or alike, it's called a "spread syntax" and expands an array into a list.
+>>>>>>> 62299ed853674c4fd1427cd310516d5535bce648:1-js/06-advanced-functions/02-rest-parameters-spread/article.md
 
 Полезно запомнить:
 
+<<<<<<< HEAD:1-js/06-advanced-functions/02-rest-parameters-spread-operator/article.md
 - Остаточные параметры используются, чтобы создавать новые функции с неопределённым числом аргументов.
 - С помощью оператора расширения можно вставить массив в функцию, которая по умолчанию работает с обычным списком аргументов.
+=======
+- Rest parameters are used to create functions that accept any number of arguments.
+- The spread syntax is used to pass an array to functions that normally require a list of many arguments.
+>>>>>>> 62299ed853674c4fd1427cd310516d5535bce648:1-js/06-advanced-functions/02-rest-parameters-spread/article.md
 
 Вместе эти конструкции помогают легко преобразовывать наборы значений в массивы и обратно.
 

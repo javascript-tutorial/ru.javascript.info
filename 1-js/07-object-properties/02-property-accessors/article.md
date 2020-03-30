@@ -3,7 +3,11 @@
 
 Есть два типа свойств объекта.
 
+<<<<<<< HEAD
 Первый тип это *свойства-данные (data properties)*. Мы уже знаем, как работать с ними. Все свойства, которые мы использовали до текущего момента, были свойствами-данными.
+=======
+The first kind is *data properties*. We already know how to work with them. All properties that we've been using until now were data properties.
+>>>>>>> 62299ed853674c4fd1427cd310516d5535bce648
 
 Второй тип свойств мы ещё не рассматривали. Это *свойства-аксессоры (accessor properties)*. По своей сути это функции, которые используются для присвоения и получения значения, но во внешнем коде они выглядят как обычные свойства объекта.
 
@@ -92,7 +96,11 @@ alert(user.name); // Alice
 alert(user.surname); // Cooper
 ```
 
+<<<<<<< HEAD
 В итоге мы получили "виртуальное" свойство `fullName`. Его можно прочитать и изменить.
+=======
+As the result, we have a "virtual" property `fullName`. It is readable and writable.
+>>>>>>> 62299ed853674c4fd1427cd310516d5535bce648
 
 ## Дескрипторы свойств доступа
 
@@ -132,7 +140,11 @@ alert(user.fullName); // John Smith
 for(let key in user) alert(key); // name, surname
 ```
 
+<<<<<<< HEAD
 Ещё раз заметим, что свойство объекта может быть либо свойством-аксессором (с методами `get/set`), либо свойством-данным (со значением `value`).
+=======
+Please note that a property can be either an accessor (has `get/set` methods) or a data property (has a `value`), not both.
+>>>>>>> 62299ed853674c4fd1427cd310516d5535bce648
 
 При попытке указать и `get`, и `value` в одном дескрипторе будет ошибка:
 
@@ -183,9 +195,15 @@ user.name = ""; // Имя слишком короткое...
 
 ## Использование для совместимости
 
+<<<<<<< HEAD
 У аксессоров есть интересная область применения - они позволяют в любой момент взять "обычное" свойство и изменить его поведение, поменяв на геттер и сеттер.
 
 Например, представим, что мы начали реализовывать объект `user`, используя свойства-данные имя `name` и возраст `age`:
+=======
+One of the great uses of accessors is that they allow to take control over a "regular" data property at any moment by replacing it with a getter and a setter and tweak its behavior.
+
+Imagine we started implementing user objects using data properties `name` and `age`:
+>>>>>>> 62299ed853674c4fd1427cd310516d5535bce648
 
 ```js
 function User(name, age) {
