@@ -85,9 +85,15 @@ if (condition) {
 ```js
 // обратные кавычки ` позволяют разделять строку на части
 let str = `
+<<<<<<< HEAD
   Рабочая группа TC39 организации Ecma International -
   это группа JavaScript-разработчиков, теоретиков и авторов движков JavaScript,
   которые вместе с сообществом занимаются поддержкой и развитием языка JavaScript.
+=======
+  ECMA International's TC39 is a group of JavaScript developers,
+  implementers, academics, and more, collaborating with the community
+  to maintain and evolve the definition of JavaScript.
+>>>>>>> c89ddc5d92195e08e2c32e30526fdb755fec4622
 `;
 ```
 
