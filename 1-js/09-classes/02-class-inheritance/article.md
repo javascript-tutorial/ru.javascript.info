@@ -465,7 +465,7 @@ longEar.eat();  // Длинноух ест.
 ```js run
 let animal = {
   sayHi() {
-    console.log(`Я животное`);
+    console.log("Я животное");
   }
 };
 
@@ -518,7 +518,7 @@ tree.sayHi();  // Я животное (?!?)
 
 ```js run
 let animal = {
-  eat: function() { // намеренно не пишем так, а не eat() { ...
+  eat: function() { // намеренно пишем так, а не eat() { ...
     // ...
   }
 };
