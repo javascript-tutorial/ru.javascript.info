@@ -102,7 +102,7 @@ let user = {
 *!*
 for (let [key, value] of Object.entries(user)) {
 */!*
-  alert(`${key}:${value}`); // name:John, then age:30
+  alert(`${key}:${value}`); // name:John, затем age:30
 }
 ```
 
@@ -116,7 +116,7 @@ user.set("age", "30");
 *!*
 for (let [key, value] of user) {
 */!*
-  alert(`${key}:${value}`); // name:John, then age:30
+  alert(`${key}:${value}`); // name:John, затем age:30
 }
 ```
 ````
