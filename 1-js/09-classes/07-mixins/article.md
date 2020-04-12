@@ -57,7 +57,7 @@ class User extends Person {
 Object.assign(User.prototype, sayHiMixin);
 ```
 
-Примеси могут наследовать друг другу.
+Примеси могут наследовать друг друга.
 
 В примере ниже `sayHiMixin` наследует от `sayMixin`:
 
