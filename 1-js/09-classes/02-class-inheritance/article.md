@@ -82,7 +82,7 @@ rabbit.hide(); // Белый кролик прячется!
 ```
 Теперь код `Rabbit` стал короче, так как используется конструктор класса `Animal` по умолчанию и кролик может использовать метод `run` как и все животные.
 
-На самом деле ключевое слово `extends` добавляет ссылку на `[[Prototype]]` из `Rabbit.prototype` в `Animal.prototype`:
+Ключевое слово `extends` работает, используя прототипы. Оно устанавливает  `Rabbit.prototype.[[Prototype]]` в `Animal.prototype`. Так что если метод не найден в  `Rabbit.prototype`, JavaScript берёт его из `Animal.prototype`.
 
 ![](animal-rabbit-extends.svg)
 
