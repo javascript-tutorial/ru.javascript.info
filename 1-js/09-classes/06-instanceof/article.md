@@ -102,7 +102,7 @@ alert( arr instanceof Object ); // true
 
 ![](instanceof.svg)
 
-Кстати, есть метод [objA.isPrototypeOf(objB)](mdn:js/object/isPrototypeOf), которые возвращает `true`, если объект `objA` есть где-то в прототипной цепочке объекта `objB`. Так что `obj instanceof Class` можно перефразировать как `Class.prototype.isPrototypeOf(obj)`.
+Кстати, есть метод [objA.isPrototypeOf(objB)](mdn:js/object/isPrototypeOf), который возвращает `true`, если объект `objA` есть где-то в прототипной цепочке объекта `objB`. Так что `obj instanceof Class` можно перефразировать как `Class.prototype.isPrototypeOf(obj)`.
 
 Забавно, но сам конструктор `Class` не участвует в процессе проверки! Важна только цепочка прототипов `Class.prototype`.
 
