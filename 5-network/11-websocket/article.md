@@ -297,11 +297,11 @@ HTML: нам нужна форма `<form>` для отправки данных
 Вот код:
 
 ```js
-let socket = new WebSocket("wss://javascript.info/article/websocket/chat/ws");
+const socket = new WebSocket("wss://javascript.info/article/websocket/chat/ws");
 
 // отправка сообщения из формы
 document.forms.publish.onsubmit = function() {
-  let outgoingMessage = this.message.value;
+  const outgoingMessage = this.message.value;
 
   socket.send(outgoingMessage);
   return false;
@@ -309,9 +309,9 @@ document.forms.publish.onsubmit = function() {
 
 // получение сообщения - отобразить данные в div#messages
 socket.onmessage = function(event) {
-  let message = event.data;
+  const message = event.data;
+  const messageElem = document.createElement('div');
 
-  let messageElem = document.createElement('div');
   messageElem.textContent = message;
   document.getElementById('messages').prepend(messageElem);
 }
