@@ -28,14 +28,14 @@ function SubscribePane(elem, url) {
   }
 
   async function subscribe() {
-    let response = await fetch(url);
+    const response = await fetch(url);
 
-    if (response.status == 502) {
+    if (response.status === 502) {
       // Таймаут подключения
       // случается, когда соединение ждало слишком долго.
       // давайте восстановим связь
       await subscribe();
-    } else if (response.status != 200) {
+    } else if (response.status !== 200) {
       // Показать ошибку
       showMessage(response.statusText);
       // Подключиться снова через секунду.
@@ -43,7 +43,7 @@ function SubscribePane(elem, url) {
       await subscribe();
     } else {
       // Получить сообщение
-      let message = await response.text();
+      const message = await response.text();
       showMessage(message);
       await subscribe();
     }
