@@ -192,7 +192,7 @@ class Rabbit extends Animal {}
 alert(Rabbit.__proto__ === Animal); // true
 
 // для обычных методов
-alert(Rabbit.prototype.__proto__ === Animal.prototype);
+alert(Rabbit.prototype.__proto__ === Animal.prototype); // true
 ```
 
 ## Итого
