@@ -1,7 +1,11 @@
 
 # Перепишите, используя async/await
 
+<<<<<<< HEAD
 Перепишите один из примеров раздела <info:promise-chaining>, используя `async/await` вместо `.then/catch`:
+=======
+Rewrite this example code from the chapter <info:promise-chaining> using `async/await` instead of `.then/catch`:
+>>>>>>> cd2c7ce3c8f033e6f7861ed1b126552e41ba3e31
 
 ```js run
 function loadJson(url) {
@@ -15,6 +19,6 @@ function loadJson(url) {
     })
 }
 
-loadJson('no-such-user.json') // (3)
+loadJson('no-such-user.json')
   .catch(alert); // Error: 404
 ```

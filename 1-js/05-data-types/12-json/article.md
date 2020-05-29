@@ -424,9 +424,9 @@ alert( numbers[1] ); // 1
 Или для вложенных объектов:
 
 ```js run
-let user = '{ "name": "John", "age": 35, "isAdmin": false, "friends": [0,1,2,3] }';
+let userData = '{ "name": "John", "age": 35, "isAdmin": false, "friends": [0,1,2,3] }';
 
-user = JSON.parse(user);
+let user = JSON.parse(userData);
 
 alert( user.friends[1] ); // 1
 ```

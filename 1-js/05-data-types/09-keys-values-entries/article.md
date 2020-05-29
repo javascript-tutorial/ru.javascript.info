@@ -98,6 +98,10 @@ let doublePrices = Object.fromEntries(
 alert(doublePrices.meat); // 8
 ```   
 
+<<<<<<< HEAD
 Это может выглядеть сложным на первый взгляд, но становится лёгким для понимания после нескольких раз использования.
 
 Можно делать и более сложные "однострочные" преобразования таким путём. Важно только сохранять баланс, чтобы код при этом был достаточно простым для понимания.
+=======
+It may look difficult from the first sight, but becomes easy to understand after you use it once or twice. We can make powerful chains of transforms this way. 
+>>>>>>> cd2c7ce3c8f033e6f7861ed1b126552e41ba3e31
