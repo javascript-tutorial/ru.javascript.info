@@ -26,12 +26,21 @@ alert( str.match(/\d+(?=€)/) ); // 30, число 1 проигнорирова
 
 Возможны и более сложные проверки, например `pattern:X(?=Y)(?=Z)` означает:
 
+<<<<<<< HEAD
 1. Найти `pattern:X`.
 2. Проверить, идёт ли `pattern:Y` сразу после `pattern:X` (если нет - не подходит).
 3. Проверить, идёт ли `pattern:Z` сразу после `pattern:X` (если нет - не подходит).
 4. Если обе проверки прошли - совпадение найдено.
 
 То есть, этот шаблон означает, что мы ищем `pattern:X` при условии, что за ним идёт и `pattern:Y` и `pattern:Z`.
+=======
+1. Find `pattern:X`.
+2. Check if `pattern:Y` is immediately after `pattern:X` (skip if isn't).
+3. Check if `pattern:Z` is also immediately after `pattern:X` (skip if isn't).
+4. If both tests passed, then the `pattern:X` is a match, otherwise continue searching.
+
+In other words, such pattern means that we're looking for `pattern:X` followed by `pattern:Y` and `pattern:Z` at the same time.
+>>>>>>> 69e44506c3e9dac74c282be37b55ba7ff122ae74
 
 Такое возможно только при условии, что шаблоны `pattern:Y` и `pattern:Z` не являются взаимно исключающими.
 

@@ -333,11 +333,15 @@ window.addEventListener("message", function(event) {
 
 [codetabs src="postmessage" height=120]
 
+<<<<<<< HEAD
 ```smart header="Без задержек"
 Между `postMessage` и событием `message` не существует задержки. Событие происходит синхронно, быстрее, чем `setTimeout(...,0)`.
 ```
 
 ## Итого
+=======
+## Summary
+>>>>>>> 69e44506c3e9dac74c282be37b55ba7ff122ae74
 
 Чтобы вызвать метод или получить содержимое из другого окна, нам во-первых необходимо иметь ссылку на него.
 

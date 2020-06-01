@@ -6,7 +6,11 @@ importance: 5
 
 Задача состоит из двух частей.
 
+<<<<<<< HEAD
 У нас есть объекты:
+=======
+Given the following objects:
+>>>>>>> 69e44506c3e9dac74c282be37b55ba7ff122ae74
 
 ```js
 let head = {

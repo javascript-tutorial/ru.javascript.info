@@ -120,7 +120,30 @@ for (let [key, value] of user) {
 }
 ```
 ````
+<<<<<<< HEAD
 ### Остаточные параметры "..."
+=======
+
+```smart header="Swap variables trick"
+A well-known trick for swapping values of two variables:
+
+```js run
+let guest = "Jane";
+let admin = "Pete";
+
+// Swap values: make guest=Pete, admin=Jane
+[guest, admin] = [admin, guest];
+
+alert(`${guest} ${admin}`); // Pete Jane (successfully swapped!)
+```
+
+Here we create a temporary array of two variables and immediately destructure it in swapped order.
+
+We can swap more than two variables this way.
+```
+
+### The rest '...'
+>>>>>>> 69e44506c3e9dac74c282be37b55ba7ff122ae74
 
 Если мы хотим не просто получить первые значения, но и собрать все остальные, то мы можем добавить ещё один параметр, который получает остальные значения, используя оператор "остаточные параметры" -- троеточие (`"..."`):
 
@@ -355,7 +378,11 @@ let title, width, height;
 }
 ```
 
+<<<<<<< HEAD
 Так что здесь JavaScript считает, что видит блок кода, отсюда и ошибка. На самом-то деле у нас деструктуризация.
+=======
+So here JavaScript assumes that we have a code block, that's why there's an error. We want destructuring instead.
+>>>>>>> 69e44506c3e9dac74c282be37b55ba7ff122ae74
 
 Чтобы показать JavaScript, что это не блок кода, мы можем заключить выражение в скобки `(...)`:
 

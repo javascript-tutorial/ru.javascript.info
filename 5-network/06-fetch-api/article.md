@@ -84,6 +84,7 @@ fetch('/page', {
 
 Возможные значения описаны в [спецификации Referrer Policy](https://w3c.github.io/webappsec-referrer-policy/):
 
+<<<<<<< HEAD
 - **`"no-referrer-when-downgrade"`** -- это значение по умолчанию: `Referer` отправляется всегда, если только мы не отправим запрос из HTTPS в HTTP (из более безопасного протокола в менее безопасный).
 - **`"no-referrer"`** -- никогда не отправлять `Referer`.
 - **`"origin"`** -- отправлять в `Referer` только текущий источник, а не полный URL-адрес страницы, например, посылать только `http://site.com` вместо `http://site.com/path`.
@@ -92,6 +93,16 @@ fetch('/page', {
 - **`"strict-origin"`** -- отправлять только значение источника, не отправлять Referer для HTTPS→HTTP запросов.
 - **`"strict-origin-when-cross-origin"`** -- для запросов в пределах текущего источника отправлять полный Referer, для запросов на другой источник отправлять только значение источника, в случае HTTPS→HTTP запросов не отправлять ничего.
 - **`"unsafe-url"`** -- всегда отправлять полный URL-адрес в `Referer`, даже при запросах `HTTPS→HTTP`.
+=======
+- **`"no-referrer-when-downgrade"`** -- the default value: full `Referer` is sent always, unless we send a request from HTTPS to HTTP (to less secure protocol).
+- **`"no-referrer"`** -- never send `Referer`.
+- **`"origin"`** -- only send the origin in `Referer`, not the full page URL, e.g. only `http://site.com` instead of `http://site.com/path`.
+- **`"origin-when-cross-origin"`** -- send full `Referer` to the same origin, but only the origin part for cross-origin requests (as above).
+- **`"same-origin"`** -- send full `Referer` to the same origin, but no `Referer` for cross-origin requests.
+- **`"strict-origin"`** -- send only origin, don't send `Referer` for HTTPS→HTTP requests.
+- **`"strict-origin-when-cross-origin"`** -- for same-origin send full `Referer`, for cross-origin send only origin, unless it's HTTPS→HTTP request, then send nothing.
+- **`"unsafe-url"`** -- always send full url in `Referer`, even for HTTPS→HTTP requests.
+>>>>>>> 69e44506c3e9dac74c282be37b55ba7ff122ae74
 
 Вот таблица со всеми комбинациями:
 

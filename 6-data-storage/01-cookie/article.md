@@ -163,7 +163,7 @@ document.cookie = "user=John; max-age=3600";
 
 // удалим куки (срок действия истекает прямо сейчас)
 document.cookie = "user=John; max-age=0";
-```  
+```
 
 ## secure
 
@@ -244,7 +244,11 @@ document.cookie = "user=John; secure";
 
 Таким образом, режим `samesite=lax`, позволяет самой распространённой операции "переход по ссылке" передавать куки. Например, открытие сайта из заметок удовлетворяет этим условиям.
 
+<<<<<<< HEAD
 Но что-то более сложное, например, сетевой запрос с другого сайта или отправка формы, теряет куки.
+=======
+But anything more complicated, like a network request from another site or a form submission loses cookies.
+>>>>>>> 69e44506c3e9dac74c282be37b55ba7ff122ae74
 
 Если это вам походит, то добавление `samesite=lax`, скорее всего, не испортит впечатление пользователей от работы с сайтом и добавит защиту.
 
