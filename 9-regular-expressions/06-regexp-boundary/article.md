@@ -27,7 +27,11 @@ alert( "Hello, JavaScript!".match(/\bJava\b/) ); // null
 2. Далее слово `pattern:Hello` совпадает.
 3. Далее проверка `pattern:\b` - снова совпадает, так как мы находимся между `subject:o` и пробелом.
 
+<<<<<<< HEAD
 Шаблон `pattern:\bJava\b` также совпадёт. Но не `pattern:\bHell\b` (потому что после `subject:l` нет границы слова), и не `pattern:Java!\b` (восклицательный знак не является "символом слова" `pattern:\w`, поэтому после него нет границы слова).
+=======
+The pattern `pattern:\bHello\b` would also match. But not `pattern:\bHell\b` (because there's no word boundary after `l`) and not `Java!\b` (because the exclamation sign is not a wordly character `pattern:\w`, so there's no word boundary after it).
+>>>>>>> d35baee32dcce127a69325c274799bb81db1afd8
 
 ```js run
 alert( "Hello, Java!".match(/\bHello\b/) ); // Hello

@@ -49,7 +49,11 @@
 </script>
 ```
 
+<<<<<<< HEAD
 Современный HTML позволяет делать валидацию с помощью атрибутов `required`, `pattern` и т.д. Иногда - это всё, что нам нужно. JavaScript можно использовать, когда мы хотим больше гибкости. А ещё мы могли бы отправлять изменённое значение на сервер, если оно правильное.
+=======
+Modern HTML allows us to do many validations using input attributes: `required`, `pattern` and so on. And sometimes they are just what we need. JavaScript can be used when we want more flexibility. Also we could automatically send the changed value to the server if it's correct.
+>>>>>>> d35baee32dcce127a69325c274799bb81db1afd8
 
 
 ## Методы focus/blur

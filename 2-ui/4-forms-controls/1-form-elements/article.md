@@ -124,7 +124,11 @@ alert(ageElems[0]); // [object HTMLInputElement]
 
 ## Обратная ссылка: element.form
 
+<<<<<<< HEAD
 Для любого элемента форма доступна через `element.form`. Так что форма ссылается на все элементы, а эти элементы ссылаются на форму.
+=======
+For any element, the form is available as `element.form`. So a form references all elements, and elements reference the form.
+>>>>>>> d35baee32dcce127a69325c274799bb81db1afd8
 
 Вот иллюстрация:
 

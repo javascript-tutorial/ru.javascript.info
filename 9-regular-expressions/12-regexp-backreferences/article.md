@@ -57,7 +57,11 @@ alert( str.match(regexp) ); // "She's the one!"
 
 Если в регулярном выражении много скобочных групп, то удобно давать им имена.
 
+<<<<<<< HEAD
 Для обращения к именованной группе можно использовать синтаксис `pattern:\k<имя>`.
+=======
+To reference a named group we can use `pattern:\k<name>`.
+>>>>>>> d35baee32dcce127a69325c274799bb81db1afd8
 
 В примере ниже кавычки обозначены `pattern:?<quote>`, так что обращение будет `pattern:\k<quote>`:
 
