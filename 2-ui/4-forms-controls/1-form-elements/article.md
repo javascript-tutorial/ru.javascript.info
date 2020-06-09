@@ -221,7 +221,7 @@ input.checked = true; // для чекбоксов и переключателе
     .filter(option => option.selected)
     .map(option => option.value);
 
-  alert(selected); // Блюз,Рок
+  alert(selected); // blues,rock
 </script>
 ```
 
