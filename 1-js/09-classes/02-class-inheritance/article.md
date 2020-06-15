@@ -86,8 +86,6 @@ rabbit.hide(); // Белый кролик прячется!
 
 ![](animal-rabbit-extends.svg)
 
-Если метод не найден в `Rabbit.prototype`, JavaScript возьмёт его из `Animal.prototype`.
-
 Как мы помним из главы <info:native-prototypes>, в JavaScript используется наследование на прототипах для встроенных объектов. Например `Date.prototype.[[Prototype]]` это `Object.prototype`, поэтому у дат есть универсальные методы объекта.
 
 ````smart header="После `extends` разрешены любые выражения"
