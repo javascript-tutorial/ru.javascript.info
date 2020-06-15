@@ -4,16 +4,31 @@ importance: 5
 
 # Тормозящий (throttling) декоратор
 
+<<<<<<< HEAD
 Создайте "тормозящий" декоратор `throttle(f, ms)`, который возвращает обёртку, передавая вызов в `f` не более одного раза в `ms` миллисекунд. Те вызовы, которые попадают в период "торможения", игнорируются.
 
 **Отличие от `debounce` - если проигнорированный вызов является последним во время "задержки", то он выполняется в конце.**
+=======
+Create a "throttling" decorator `throttle(f, ms)` -- that returns a wrapper.
+
+When it's called multiple times, it passes the call to `f` at maximum once per `ms` milliseconds. 
+
+The difference with debounce is that it's completely different decorator:
+- `debounce` runs the function once after the "cooldown" period. Good for processing the final result.
+- `throttle` runs it not more often than given `ms` time. Good for regular updates that shouldn't be very often.
+>>>>>>> b52aa942a8e9b75ba8a65124c22593171e273bb6
 
 Давайте рассмотрим реальное применение, чтобы лучше понять это требование и выяснить, откуда оно взято.
 
 **Например, мы хотим отслеживать движения мыши.**
 
+<<<<<<< HEAD
 
 В браузере мы можем объявить функцию, которая будет запускаться при каждом движении указателя и получать его местоположение. Во время активного использования мыши эта функция запускается очень часто, это может происходить около 100 раз в секунду (каждые 10 мс).
+=======
+In a browser we can setup a function to run at every mouse movement and get the pointer location as it moves. During an active mouse usage, this function usually runs very frequently, can be something like 100 times per second (every 10 ms).
+**We'd like to update some information on the web-page when the pointer moves.**
+>>>>>>> b52aa942a8e9b75ba8a65124c22593171e273bb6
 
 **Мы бы хотели обновлять информацию на странице при передвижениях.**
 
@@ -32,7 +47,11 @@ importance: 5
 
 ```js
 function f(a) {
+<<<<<<< HEAD
   console.log(a)
+=======
+  console.log(a);
+>>>>>>> b52aa942a8e9b75ba8a65124c22593171e273bb6
 }
 
 // f1000 передаёт вызовы f максимум раз в 1000 мс

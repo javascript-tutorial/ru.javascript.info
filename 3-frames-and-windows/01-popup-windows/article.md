@@ -154,7 +154,11 @@ newWindow.onload = function() {
 Иначе, например, если основное окно с `site.com`, а попап с `gmail.com`, это невозможно по соображениям пользовательской безопасности. Детали см. в главе  <info:cross-window-communication>.
 ```
 
+<<<<<<< HEAD
 ## Доступ к открывшему окну из попапа
+=======
+## Accessing window from popup
+>>>>>>> b52aa942a8e9b75ba8a65124c22593171e273bb6
 
 Попап также может обратиться к открывшему его окну по ссылке `window.opener`. Она равна `null` для всех окон, кроме попапов.
 
@@ -261,11 +265,19 @@ window.onblur = () => window.focus();
 
 Если мы открываем попап, хорошей практикой будет предупредить пользователя об этом. Иконка открывающегося окошка на ссылке поможет посетителю понять, что происходит и не потерять оба окна из поля зрения.
 
+<<<<<<< HEAD
 - Новое окно можно открыть с помощью вызова `open(url, name, params)`. Этот метод возвращает ссылку на это новое окно.
 - По умолчанию браузеры блокируют вызовы `open`, выполненные не в результате действий пользователя. Обычно браузеры показывают предупреждение, так что пользователь все-таки может разрешить вызов этого метода.
 - Вместо попапа открывается вкладка, если в вызове `open` не указаны его размеры.
 - У попапа есть доступ к породившему его окну через свойство `window.opener`.
 - Если основное окно и попап имеют один домен и протокол, то они свободно могут читать и изменять друг друга. В противном случае, они могут только изменять положение друг друга и взаимодействовать [с помощью сообщений](info:cross-window-communication).
+=======
+- A popup can be opened by the `open(url, name, params)` call. It returns the reference to the newly opened window.
+- Browsers block `open` calls from the code outside of user actions. Usually a notification appears, so that a user may allow them.
+- Browsers open a new tab by default, but if sizes are provided, then it'll be a popup window.
+- The popup may access the opener window using the `window.opener` property.
+- The main window and the popup can freely read and modify each other if they have the same origin. Otherwise, they can change location of each other and [exchange messages](info:cross-window-communication).
+>>>>>>> b52aa942a8e9b75ba8a65124c22593171e273bb6
 
 Чтобы закрыть попап: метод `close()`. Также попап может закрыть и пользователь (как и любое другое окно). После закрытия окна свойство `window.closed` имеет значение `true`.  
 

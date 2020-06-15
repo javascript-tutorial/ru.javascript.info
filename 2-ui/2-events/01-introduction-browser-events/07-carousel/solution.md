@@ -1,6 +1,10 @@
 Лента изображений в разметке должна быть представлена как список `ul/li` с картинками `<img>`.
 
+<<<<<<< HEAD
 Нужно расположить ленту внутри `<div>` фиксированного размера, так чтобы в один момент была видна только нужная часть списка:
+=======
+Normally, such a ribbon is wide, but we put a fixed-size `<div>` around to "cut" it, so that only a part of the ribbon is visible:
+>>>>>>> b52aa942a8e9b75ba8a65124c22593171e273bb6
 
 ![](carousel1.svg)
 

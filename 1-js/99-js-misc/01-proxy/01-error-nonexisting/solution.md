@@ -19,5 +19,9 @@ function wrap(target) {
 user = wrap(user);
 
 alert(user.name); // John
+<<<<<<< HEAD
 alert(user.age); // Ошибка: Свойство не существует
+=======
+alert(user.age); // ReferenceError: Property doesn't exist "age"
+>>>>>>> b52aa942a8e9b75ba8a65124c22593171e273bb6
 ```
