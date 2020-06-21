@@ -19,11 +19,12 @@ let event = new Event(type[, options]);
 Где:
 
 - *type* -- тип события, строка, например `"click"` или же любой придуманный нами --  `"my-event"`.
-- *options* -- объект с двумя необязательными свойствами:
+- *options* -- объект с тремя необязательными свойствами:
   - `bubbles: true/false` -- если `true`, тогда событие всплывает.
   - `cancelable: true/false` -- если `true`, тогда можно отменить действие по умолчанию. Позже мы разберём, что это значит для пользовательских событий.
+  - `composed: true/false` -- если `true`, тогда событие будет всплывать наружу за пределы Shadow DOM. Позже мы разберём это в [разделе Веб-компоненты](https://learn.javascript.ru/shadow-dom-events#generatsiya-sobytiy).
 
-По умолчанию оба свойства установлены в false: `{bubbles: false, cancelable: false}`.
+По умолчанию все три свойства установлены в **false**: `{bubbles: false, cancelable: false, composed: false}`.
 
 ## Метод dispatchEvent
 
