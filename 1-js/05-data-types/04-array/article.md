@@ -121,7 +121,13 @@ let fruits = [
 
 В компьютерных науках структура данных, делающая это возможным, называется [двусторонняя очередь](https://ru.wikipedia.org/wiki/Двухсторонняя_очередь).
 
+<<<<<<< HEAD
 **Методы, работающие с концом массива:**
+=======
+In computer science the data structure that allows this, is called [deque](https://en.wikipedia.org/wiki/Double-ended_queue).
+
+**Methods that work with the end of the array:**
+>>>>>>> e4e6a50b5762dd5dc4c0f0c58f870c64be39dcfa
 
 `pop`
 : Удаляет последний элемент из массива и возвращает его:
@@ -152,8 +158,13 @@ let fruits = [
 `shift`
 : Удаляет из массива первый элемент и возвращает его:
 
+<<<<<<< HEAD
     ```js
     let fruits = ["Яблоко", "Апельсин", "Груша"];
+=======
+    ```js run
+    let fruits = ["Apple", "Orange", "Pear"];
+>>>>>>> e4e6a50b5762dd5dc4c0f0c58f870c64be39dcfa
 
     alert( fruits.shift() ); // удаляем Яблоко и выводим его
 
@@ -163,8 +174,13 @@ let fruits = [
 `unshift`
 : Добавляет элемент в начало массива:
 
+<<<<<<< HEAD
     ```js
     let fruits = ["Апельсин", "Груша"];
+=======
+    ```js run
+    let fruits = ["Orange", "Pear"];
+>>>>>>> e4e6a50b5762dd5dc4c0f0c58f870c64be39dcfa
 
     fruits.unshift('Яблоко');
 

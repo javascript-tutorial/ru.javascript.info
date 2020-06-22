@@ -67,8 +67,13 @@ alert(user.sayBye.name); // sayBye
 
 В этом нет никакой магии. Бывает, что корректное имя определить невозможно. В таких случаях свойство name имеет пустое значение. Например:
 
+<<<<<<< HEAD
 ```js
 // функция объявлена внутри массива
+=======
+```js run
+// function created inside array
+>>>>>>> e4e6a50b5762dd5dc4c0f0c58f870c64be39dcfa
 let arr = [function() {}];
 
 alert( arr[0].name ); // <пустая строка>
