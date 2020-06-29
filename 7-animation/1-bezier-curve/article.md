@@ -49,7 +49,12 @@
 
 ## Алгоритм "де Кастельжо"
 
+<<<<<<< HEAD
 Есть математическая формула для кривых Безье, но давайте рассмотрим её чуть позже, потому что [Алгоритм де Кастельжо](http://ru.wikipedia.org/wiki/%D0%90%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC_%D0%B4%D0%B5_%D0%9A%D0%B0%D1%81%D1%82%D0%B5%D0%BB%D1%8C%D0%B6%D0%BE) идентичен математическому определению кривой и наглядно показывает, как она строится.
+=======
+There's a mathematical formula for Bezier curves, but let's cover it a bit later, because
+[De Casteljau's algorithm](https://en.wikipedia.org/wiki/De_Casteljau%27s_algorithm) is identical to the mathematical definition and visually shows how it is constructed.
+>>>>>>> 340ce4342100f36bb3c4e42dbe9ffa647d8716c8
 
 Рассмотрим его на примере трёх точек (точки 1,2 и 3 можно двигать). Нажатие на кнопку "play" запустит демонстрацию.
 

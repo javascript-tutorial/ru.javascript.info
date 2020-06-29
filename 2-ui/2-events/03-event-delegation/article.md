@@ -21,9 +21,15 @@
     <th colspan="3">Квадрат <em>Bagua</em>: Направление, Элемент, Цвет, Значение</th>
   </tr>
   <tr>
+<<<<<<< HEAD
     <td>...<strong>Северо-Запад</strong>...</td>
     <td>...</td>
     <td>...</td>
+=======
+    <td class="nw"><strong>Northwest</strong><br>Metal<br>Silver<br>Elders</td>
+    <td class="n">...</td>
+    <td class="ne">...</td>
+>>>>>>> 340ce4342100f36bb3c4e42dbe9ffa647d8716c8
   </tr>
   <tr>...ещё 2 строки такого же вида...</tr>
   <tr>...ещё 2 строки такого же вида...</tr>
@@ -99,11 +105,19 @@ table.onclick = function(event) {
 };
 ```
 
+<<<<<<< HEAD
 Разберём пример:
 1. Метод `elem.closest(selector)` возвращает ближайшего предка, соответствующего селектору. В данном случае нам нужен `<td>`, находящийся выше по дереву от исходного элемента.
 2. Если `event.target` не содержится внутри элемента `<td>`, то вызов вернёт `null`, и ничего не произойдёт.
 3. Если таблицы вложенные, `event.target` может содержать элемент `<td>`, находящийся вне текущей таблицы. В таких случаях мы должны проверить действительно ли это `<td>` *нашей таблицы*.
 4. И если это так, то подсвечиваем его.
+=======
+Explanations:
+1. The method `elem.closest(selector)` returns the nearest ancestor that matches the selector. In our case we look for `<td>` on the way up from the source element.
+2. If `event.target` is not inside any `<td>`, then the call returns immediately, as there's nothing to do.
+3. In case of nested tables, `event.target` may be a `<td>`, but lying outside of the current table. So we check if that's actually *our table's* `<td>`.
+4. And, if it's so, then highlight it.
+>>>>>>> 340ce4342100f36bb3c4e42dbe9ffa647d8716c8
 
 В итоге мы получили короткий код подсветки, быстрый и эффективный, которому совершенно не важно, сколько всего в таблице `<td>`.
 
@@ -121,7 +135,7 @@ table.onclick = function(event) {
 
 Обработчик считывает содержимое атрибута и выполняет метод. Взгляните на рабочий пример:
 
-```html autorun height=60 run
+```html autorun height=60 run untrusted
 <div id="menu">
   <button data-action="save">Сохранить</button>
   <button data-action="load">Загрузить</button>
@@ -163,7 +177,11 @@ table.onclick = function(event) {
 
 Обратите внимание, что метод `this.onClick` в строке, отмеченной звёздочкой `(*)`, привязывается к контексту текущего объекта `this`. Это важно, т.к. иначе `this` внутри него будет ссылаться на DOM-элемент (`elem`), а не на объект `Menu`, и `this[action]` будет не тем, что нам нужно.
 
+<<<<<<< HEAD
 Так что же даёт нам здесь делегирование?
+=======
+So, what advantages does delegation give us here?
+>>>>>>> 340ce4342100f36bb3c4e42dbe9ffa647d8716c8
 
 ```compare
 + Не нужно писать код, чтобы присвоить обработчик каждой кнопке. Достаточно просто создать один метод и поместить его в разметку.
@@ -242,13 +260,21 @@ table.onclick = function(event) {
 
 Мы можем комбинировать несколько вариантов поведения на одном элементе.
 
+<<<<<<< HEAD
 Шаблон "поведение" может служить альтернативой для фрагментов JS-кода в вёрстке.
+=======
+The "behavior" pattern can be an alternative to mini-fragments of JavaScript.
+>>>>>>> 340ce4342100f36bb3c4e42dbe9ffa647d8716c8
 
 ## Итого
 
 Делегирование событий -- это здорово! Пожалуй, это один из самых полезных приёмов для работы с DOM.
 
+<<<<<<< HEAD
 Он часто используется, если есть много элементов, обработка которых очень схожа, но не только для этого.
+=======
+It's often used to add the same handling for many similar elements, but not only for that.
+>>>>>>> 340ce4342100f36bb3c4e42dbe9ffa647d8716c8
 
 Алгоритм:
 
@@ -259,14 +285,25 @@ table.onclick = function(event) {
 Зачем использовать:
 
 ```compare
+<<<<<<< HEAD
 + Упрощает процесс инициализации и экономит память: не нужно вешать много обработчиков.
 + Меньше кода: при добавлении и удалении элементов не нужно ставить или снимать обработчики.
 + Удобство изменений DOM: можно массово добавлять или удалять элементы путём изменения `innerHTML` и ему подобных.
+=======
++ Simplifies initialization and saves memory: no need to add many handlers.
++ Less code: when adding or removing elements, no need to add/remove handlers.
++ DOM modifications: we can mass add/remove elements with `innerHTML` and the like.
+>>>>>>> 340ce4342100f36bb3c4e42dbe9ffa647d8716c8
 ```
 
 Конечно, у делегирования событий есть свои ограничения:
 
 ```compare
+<<<<<<< HEAD
 - Во-первых, событие должно всплывать. Некоторые события этого не делают. Также, низкоуровневые обработчики не должны вызывать `event.stopPropagation()`.
 - Во-вторых, делегирование создаёт дополнительную нагрузку на браузер, ведь обработчик запускается, когда событие происходит в любом месте контейнера, не обязательно на элементах, которые нам интересны. Но обычно эта нагрузка настолько пустяковая, что её даже не стоит принимать во внимание.
+=======
+- First, the event must be bubbling. Some events do not bubble. Also, low-level handlers should not use `event.stopPropagation()`.
+- Second, the delegation may add CPU load, because the container-level handler reacts on events in any place of the container, no matter whether they interest us or not. But usually the load is negligible, so we don't take it into account.
+>>>>>>> 340ce4342100f36bb3c4e42dbe9ffa647d8716c8
 ```

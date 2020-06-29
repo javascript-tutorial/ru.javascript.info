@@ -19,7 +19,11 @@
 - `key(index)` -- получить ключ на заданной позиции.
 - `length` -- количество элементов в хранилище.
 
+<<<<<<< HEAD
 Как видим, интерфейс похож на `Map` (`setItem/getItem/removeItem`), но также запоминается порядок элементов, и можно получить доступ к элементу по индексу -- `key(index)`.
+=======
+As you can see, it's like a `Map` collection (`setItem/getItem/removeItem`), but also allows access by index with `key(index)`.
+>>>>>>> 340ce4342100f36bb3c4e42dbe9ffa647d8716c8
 
 Давайте посмотрим, как это работает.
 
@@ -202,8 +206,13 @@ alert( sessionStorage.getItem('test') ); // после обновления: 1
 Теперь, если оба окна слушают `window.onstorage`, то каждое из них будет реагировать на обновления, произошедшие в другом окне.
 
 ```js run
+<<<<<<< HEAD
 // срабатывает при обновлениях, сделанных в том же хранилище из других документов
 window.onstorage = event => {
+=======
+// triggers on updates made to the same storage from other documents
+window.onstorage = event => { // same as window.addEventListener('storage', () => {
+>>>>>>> 340ce4342100f36bb3c4e42dbe9ffa647d8716c8
   if (event.key != 'now') return;
   alert(event.key + ':' + event.newValue + " at " + event.url);
 };
