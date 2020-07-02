@@ -265,7 +265,7 @@ alert( "JavaScript".match(/(?=(\w+))\1Script/)); // null
 Внутрь `pattern:(?=(\w+))\1` можно вместо `pattern:\w` вставить и более сложное регулярное выражение, при поиске которого квантификатор `pattern:+` не должен делать возврат.
 
 ```smart
-Больше о связи между захватывающих квантификаторов и опережающей проверки вы можете найти в статьях [Regex: Emulate Atomic Grouping (and Possessive Quantifiers) with LookAhead](http://instanceof.me/post/52245507631/regex-emulate-atomic-grouping-with-lookahead) и [Mimicking Atomic Groups](http://blog.stevenlevithan.com/archives/mimic-atomic-groups).
+Больше о связи захватывающих квантификаторов и опережающей проверки вы можете найти в статьях [Regex: Emulate Atomic Grouping (and Possessive Quantifiers) with LookAhead](http://instanceof.me/post/52245507631/regex-emulate-atomic-grouping-with-lookahead) и [Mimicking Atomic Groups](http://blog.stevenlevithan.com/archives/mimic-atomic-groups).
 ```
 
 Перепишем исходный пример, используя опережающую проверку для запрета возврата:
