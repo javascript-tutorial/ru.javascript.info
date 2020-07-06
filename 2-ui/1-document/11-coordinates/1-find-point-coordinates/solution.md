@@ -1,6 +1,10 @@
 # Внешние углы
 
+<<<<<<< HEAD
 Координаты внешних углов -- это как раз то, что возвращает функция [elem.getBoundingClientRect()](https://developer.mozilla.org/ru/docs/DOM/element.getBoundingClientRect).
+=======
+Outer corners are basically what we get from [elem.getBoundingClientRect()](https://developer.mozilla.org/en-US/docs/DOM/element.getBoundingClientRect).
+>>>>>>> 445bda39806050acd96f87166a7c97533a0c67e9
 
 Координаты верхнего левого внешнего угла будут в переменной `answer1` и нижнего правого -- в `answer2`:
 
