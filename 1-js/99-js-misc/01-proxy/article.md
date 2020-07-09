@@ -8,7 +8,7 @@
 Синтаксис:
 
 ```js
-let proxy = new Proxy(target, handler)
+let proxy = new Proxy(target, handler);
 ```
 
 - `target` -- это объект, для которого нужно сделать прокси, может быть чем угодно, включая функции.
