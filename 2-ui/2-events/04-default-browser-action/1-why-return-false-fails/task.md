@@ -14,7 +14,11 @@ importance: 3
   }
 </script>
 
+<<<<<<< HEAD
 <a href="http://w3.org" onclick="handler()">браузер откроет w3.org</a>
+=======
+<a href="https://w3.org" onclick="handler()">the browser will go to w3.org</a>
+>>>>>>> c3a11c85e54153ebb137b5541b1d1f751c804439
 ```
 
 Браузер переходит по указанной ссылке, но нам этого не нужно.
