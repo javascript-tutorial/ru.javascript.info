@@ -81,9 +81,14 @@ let user = 'John'
 
 В принципе, все эти варианты работают одинаково. Так что это вопрос личного вкуса и эстетики.
 
+<<<<<<< HEAD
 
 ````smart header="`var` вместо `let`"
 В старых скриптах вы также можете найти другое ключевое слово: `var` вместо `let`:
+=======
+````smart header="`var` instead of `let`"
+In older scripts, you may also find another keyword: `var` instead of `let`:
+>>>>>>> ae1171069c2e50b932d030264545e126138d5bdc
 
 ```js
 *!*var*/!* message = 'Hello';
@@ -137,8 +142,27 @@ alert(hello); // Hello world!
 alert(message); // Hello world!
 ```
 
+<<<<<<< HEAD
 ```smart header="Функциональные языки программирования"
 Примечательно, что существуют [функциональные](https://ru.wikipedia.org/wiki/%D0%A4%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%BE%D0%BD%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%B5_%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5) языки программирования, такие как [Scala](http://www.scala-lang.org/) или [Erlang](http://www.erlang.org/), которые запрещают изменять значение переменной.
+=======
+````warn header="Declaring twice triggers an error"
+A variable should be declared only once.
+
+A repeated declaration of the same variable is an error:
+
+```js run
+let message = "This";
+
+// repeated 'let' leads to an error
+let message = "That"; // SyntaxError: 'message' has already been declared
+```
+So, we should declare a variable once and then refer to it without `let`.
+````
+
+```smart header="Functional languages"
+It's interesting to note that there exist [functional](https://en.wikipedia.org/wiki/Functional_programming) programming languages, like [Scala](http://www.scala-lang.org/) or [Erlang](http://www.erlang.org/) that forbid changing variable values.
+>>>>>>> ae1171069c2e50b932d030264545e126138d5bdc
 
 В таких языках однажды сохранённое "в коробку" значение остаётся там навсегда. Если нам нужно сохранить что-то другое, язык заставляет нас создать новую коробку (объявить новую переменную). Мы не можем использовать старую переменную.
 
@@ -195,7 +219,11 @@ let имя = '...';
 let 我 = '...';
 ```
 
+<<<<<<< HEAD
 Технически здесь нет ошибки, такие имена разрешены, но есть международная традиция использовать английский язык в именах переменных. Даже если мы пишем небольшой скрипт, у него может быть долгая жизнь впереди. Людям из других стран, возможно, придётся прочесть его не один раз.
+=======
+Technically, there is no error here. Such names are allowed, but there is an international convention to use English in variable names. Even if we're writing a small script, it may have a long life ahead. People from other countries may need to read it some time.
+>>>>>>> ae1171069c2e50b932d030264545e126138d5bdc
 ````
 
 ````warn header="Зарезервированные имена"

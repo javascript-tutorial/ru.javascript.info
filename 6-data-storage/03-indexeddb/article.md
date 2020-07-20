@@ -5,22 +5,39 @@ libs:
 
 # IndexedDB
 
+<<<<<<< HEAD
 IndexedDB - это встроенная база данных, более мощная, чем `localStorage`.
 
 - Хранилище ключей/значений: доступны несколько типов ключей, а значения могут быть (почти) любыми.
 - Поддерживает транзакции для надёжности.
 - Поддерживает запросы в диапазоне ключей и индексы.
 - Позволяет хранить больше данных, чем `localStorage`.
+=======
+IndexedDB is a database that is built into browser, much more powerful than `localStorage`.
+
+- Stores almost any kind of values by keys, multiple key types.
+- Supports transactions for reliability.
+- Supports key range queries, indexes.
+- Can store much bigger volumes of data than `localStorage`.
+>>>>>>> ae1171069c2e50b932d030264545e126138d5bdc
 
 Для традиционных клиент-серверных приложений эта мощность обычно чрезмерна. IndexedDB предназначена для оффлайн приложений, можно совмещать с ServiceWorkers и другими технологиями.
 
 Интерфейс для IndexedDB, описанный в спецификации <https://www.w3.org/TR/IndexedDB>, основан на событиях.
 
+<<<<<<< HEAD
 Мы также можем использовать `async/await` с помощью обёртки, которая основана на промисах, например <https://github.com/jakearchibald/idb>. Это очень удобно, но обёртка не идеальна, она не может полностью заменить события. Поэтому мы начнём с событий, а затем, когда разберёмся в IndexedDB, рассмотрим и обёртку.
+=======
+We can also use `async/await` with the help of a promise-based wrapper, like <https://github.com/jakearchibald/idb>. That's pretty convenient, but the wrapper is not perfect, it can't replace events for all cases. So we'll start with events, and then, after we gain understanding of IndexedDb, we'll use the wrapper.
+>>>>>>> ae1171069c2e50b932d030264545e126138d5bdc
 
 ## Открыть базу данных
 
+<<<<<<< HEAD
 Для начала работы с IndexedDB нужно открыть базу данных.
+=======
+To start working with IndexedDB, we first need to `open` (connect to) a database.
+>>>>>>> ae1171069c2e50b932d030264545e126138d5bdc
 
 Синтаксис:
 
@@ -33,20 +50,39 @@ let openRequest = indexedDB.open(name, version);
 
 У нас может быть множество баз данных с различными именами, но все они существуют в контексте текущего источника (домен/протокол/порт). Разные сайты не могут получить доступ к базам данных друг друга.
 
+<<<<<<< HEAD
 После этого вызова необходимо назначить обработчик событий для объекта `openRequest`:
 - `success`: база данных готова к работе, готов "объект базы данных" `openRequest.result`, его следует использовать для дальнейших вызовов.
 - `error`: не удалось открыть базу данных.
 - `upgradeneeded`: база открыта, но её схема устарела (см. ниже).
+=======
+The call returns `openRequest` object, we should listen to events on it:
+- `success`: database is ready, there's the "database object" in `openRequest.result`, that we should use it for further calls.
+- `error`: opening failed.
+- `upgradeneeded`: database is ready, but its version is outdated (see below).
+>>>>>>> ae1171069c2e50b932d030264545e126138d5bdc
 
 **IndexedDB имеет встроенный механизм "версионирования схемы", который отсутствует в серверных базах данных.**
 
+<<<<<<< HEAD
 В отличие от серверных баз данных, IndexedDB работает на стороне клиента, в браузере, и у нас нет прямого доступа к данным. Но когда мы публикуем новую версию нашего приложения,  возможно, нам понадобится обновить базу данных.
+=======
+Unlike server-side databases, IndexedDB is client-side, the data is stored in the browser, so we, developers, don't have "any time" access to it. So, when we published a new version of our app, and the user visits our webpage, we may need to update the database.
+>>>>>>> ae1171069c2e50b932d030264545e126138d5bdc
 
 Если локальная версия базы данных меньше, чем версия, определённая в `open`, то сработает специальное событие `upgradeneeded`, и мы сможем сравнить версии и обновить структуры данных по мере необходимости.
 
+<<<<<<< HEAD
 Это событие также сработает, если базы данных ещё не существует, так что в этом обработчике мы можем выполнить инициализацию.
 
 Например, когда мы впервые публикуем наше приложение, мы открываем базу данных с версией `1` и выполняем инициализацию в обработчике `upgradeneeded`:
+=======
+The `upgradeneeded` event also triggers when the database did not exist yet (technically, it's version is `0`), so we can perform initialization.
+
+Let's say we published the first version of our app.
+
+Then we can open the database with version `1` and perform the initialization in `upgradeneeded` handler like this:
+>>>>>>> ae1171069c2e50b932d030264545e126138d5bdc
 
 ```js
 let openRequest = indexedDB.open("store", *!*1*/!*);
@@ -66,16 +102,29 @@ openRequest.onsuccess = function() {
 };
 ```
 
+<<<<<<< HEAD
 Когда мы публикуем вторую версию:
+=======
+Then, later, we publish the 2nd version.
+
+We can open it with version `2` and perform the upgrade like this:
+>>>>>>> ae1171069c2e50b932d030264545e126138d5bdc
 
 ```js
 let openRequest = indexedDB.open("store", *!*2*/!*);
 
+<<<<<<< HEAD
 // проверить существование указанной версии базы данных, обновить по мере необходимости:
 openRequest.onupgradeneeded = function() {
   // the existing database version is less than 2 (or it doesn't exist)
   let db = openRequest.result;
   switch(db.version) { // существующая (старая) версия базы данных
+=======
+openRequest.onupgradeneeded = function(event) {
+  // the existing database version is less than 2 (or it doesn't exist)
+  let db = openRequest.result;
+  switch(event.oldVersion) { // existing db version
+>>>>>>> ae1171069c2e50b932d030264545e126138d5bdc
     case 0:
       // версия 0 означает, что на клиенте нет базы данных
       // выполнить инициализацию
@@ -86,9 +135,15 @@ openRequest.onupgradeneeded = function() {
 };
 ```
 
+<<<<<<< HEAD
 Таким образом, в `openRequest.onupgradeneeded` мы обновляем базу данных. Скоро подробно увидим, как это делается. А после того, как этот обработчик завершится без ошибок, сработает `openRequest.onsuccess`.
 
 После `openRequest.onsuccess` у нас есть объект базы данных в `openRequest.result`, который мы будем использовать для дальнейших операций.
+=======
+Please note: as our current version is `2`, `onupgradeneeded` handler has a code branch for version `0`, suitable for users that come for the first time and have no database, and also for version `1`, for upgrades.
+
+And then, only if `onupgradeneeded` handler finishes without errors, `openRequest.onsuccess` triggers, and the database is considered successfully opened.
+>>>>>>> ae1171069c2e50b932d030264545e126138d5bdc
 
 Удалить базу данных:
 
@@ -97,18 +152,28 @@ let deleteRequest = indexedDB.deleteDatabase(name)
 // deleteRequest.onsuccess/onerror отслеживает результат
 ```
 
+<<<<<<< HEAD
 ```warn header="А что, если открыть предыдущую версию?"
 Что если мы попробуем открыть базу с более низкой версией, чем текущая? Например, на клиенте база версии 3, а мы вызываем `open(...2)`.
 
 Возникнет ошибка, сработает `openRequest.onerror`.
 
 Такое может произойти, если посетитель загрузил устаревший код, например, из кеша прокси. Нам следует проверить `db.version` и предложить ему перезагрузить страницу. А также проверить наши кеширующие заголовки, убедиться, что посетитель никогда не получит устаревший код.
+=======
+```warn header="We can't open an older version of the database"
+If the current user database has a higher version than in the `open` call, e.g. the existing DB version is `3`, and we try to `open(...2)`, then that's an error, `openRequest.onerror` triggers.
+
+That's odd, but such thing may happen when a visitor loaded an outdated JavaScript code, e.g. from a proxy cache. So the code is old, but his database is new.
+
+To protect from errors, we should check `db.version` and suggest him to reload the page. Use proper HTTP caching headers to avoid loading the old code, so that you'll never have such problem.
+>>>>>>> ae1171069c2e50b932d030264545e126138d5bdc
 ```
 
 ### Проблема параллельного обновления
 
 Раз уж мы говорим про версионирование, рассмотрим связанную с этим небольшую проблему.
 
+<<<<<<< HEAD
 Допустим, посетитель открыл наш сайт во вкладке браузера, с базой версии 1.
 
 Затем мы выкатили обновление, и тот же посетитель открыл наш сайт в другой вкладке. Так что есть две вкладки, на которых открыт наш сайт, но в одной открыто соединение с базой версии 1, а другая пытается обновить версию базы в обработчике `upgradeneeded`.
@@ -120,6 +185,24 @@ let deleteRequest = indexedDB.deleteDatabase(name)
 Если мы его не закроем, то второе, новое соединение будет заблокировано с событием `blocked` вместо `success`.
 
 Код, который это делает:
+=======
+Let's say:
+1. A visitor opened our site in a browser tab, with database version `1`.
+2. Then we rolled out an update, so our code is newer.
+3. And then the same visitor opens our site in another tab.
+
+So there's a tab with an open connection to DB version `1`, while the second tab one attempts to update it to version `2` in its `upgradeneeded` handler.
+
+The problem is that a database is shared between two tabs, as it's the same site, same origin. And it can't be both version `1` and `2`. To perform the update to version `2`, all connections to version 1 must be closed, including the one in the first tab.
+
+In order to organize that, the `versionchange` event triggers in such case on the "outdated" database object. We should listen to it and close the old database connection (and probably suggest the visitor to reload the page, to load the updated code).
+
+If we don't listen to `versionchange` event and don't close the old connection, then the second, new connection won't be made. The `openRequest` object will emit the `blocked` event instead of `success`. So the second tab won't work.
+
+Here's the code to correctly handle the parallel upgrade.
+
+It installs `onversionchange` handler after the database is opened, that closes the old connection:
+>>>>>>> ae1171069c2e50b932d030264545e126138d5bdc
 
 ```js
 let openRequest = indexedDB.open("store", 2);
@@ -142,8 +225,15 @@ openRequest.onsuccess = function() {
 
 *!*
 openRequest.onblocked = function() {
+<<<<<<< HEAD
   // есть другое соединение к той же базе
   // и оно не было закрыто после срабатывания на нём db.onversionchange 
+=======
+  // this event shouldn't trigger if we handle onversionchange correctly
+
+  // it means that there's another open connection to same database
+  // and it wasn't closed after db.onversionchange triggered for them
+>>>>>>> ae1171069c2e50b932d030264545e126138d5bdc
 };
 */!*
 ```
@@ -159,7 +249,11 @@ openRequest.onblocked = function() {
 
 ## Хранилище объектов
 
+<<<<<<< HEAD
 Чтобы сохранить что-то в IndexedDB, нам нужно *хранилище объектов*.
+=======
+To store something in IndexedDB, we need an *object store*.
+>>>>>>> ae1171069c2e50b932d030264545e126138d5bdc
 
 Хранилище объектов - это основная концепция IndexedDB. В других базах данных это "таблицы" или "коллекции". Здесь хранятся данные. В базе данных может быть множество хранилищ: одно для пользователей, другое для товаров и так далее.
 
@@ -469,10 +563,17 @@ request.onerror = function(event) {
 
 Диапазоны создаются с помощью следующих вызовов:
 
+<<<<<<< HEAD
 - `IDBKeyRange.lowerBound(lower, [open])` означает: `>lower` (или `≥lower`, если `open` это true)
 - `IDBKeyRange.upperBound(upper, [open])` означает: `<upper` (или `≤upper`, если `open` это true)
 - `IDBKeyRange.bound(lower, upper, [lowerOpen], [upperOpen])` означает: между `lower` и `upper`, включительно, если соответствующий `open` равен `true`.
 - `IDBKeyRange.only(key)` -- диапазон, который состоит только из одного ключа `key`, редко используется.
+=======
+- `IDBKeyRange.lowerBound(lower, [open])` means: `≥lower` (or `>lower` if `open` is true)
+- `IDBKeyRange.upperBound(upper, [open])` means: `≤upper` (or `<upper` if `open` is true)
+- `IDBKeyRange.bound(lower, upper, [lowerOpen], [upperOpen])` means: between `lower` and `upper`. If the open flags is true, the corresponding key is not included in the range.
+- `IDBKeyRange.only(key)` -- a range that consists of only one `key`, rarely used.
+>>>>>>> ae1171069c2e50b932d030264545e126138d5bdc
 
 Все методы поиска принимают аргумент `query`, который может быть либо точным ключом, либо диапазоном ключей:
 
@@ -490,16 +591,28 @@ request.onerror = function(event) {
 // получить одну книгу
 books.get('js')
 
+<<<<<<< HEAD
 // получить все книги с 'css' < id < 'html'
 books.getAll(IDBKeyRange.bound('css', 'html'))
 
 // получить книги с 'html' <= id
 books.getAll(IDBKeyRange.lowerBound('html', true))
+=======
+// get books with 'css' <= id <= 'html'
+books.getAll(IDBKeyRange.bound('css', 'html'))
+
+// get books with id < 'html'
+books.getAll(IDBKeyRange.upperBound('html', true))
+>>>>>>> ae1171069c2e50b932d030264545e126138d5bdc
 
 // получить все книги
 books.getAll()
 
+<<<<<<< HEAD
 // получить все ключи: id >= 'js'
+=======
+// get all keys: id > 'js'
+>>>>>>> ae1171069c2e50b932d030264545e126138d5bdc
 books.getAllKeys(IDBKeyRange.lowerBound('js', true))
 ```
 
@@ -579,7 +692,11 @@ request.onsuccess = function() {
 Мы также можем использовать `IDBKeyRange`, чтобы создать диапазон и найти дешёвые/дорогие книги:
 
 ```js
+<<<<<<< HEAD
 // найдём книги, где цена < 5
+=======
+// find books where price <= 5
+>>>>>>> ae1171069c2e50b932d030264545e126138d5bdc
 let request = priceIndex.getAll(IDBKeyRange.upperBound(5));
 ```
 

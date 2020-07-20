@@ -82,10 +82,19 @@ let user = {
 
 setTimeout(() => user.sayHi(), 1000);
 
+<<<<<<< HEAD
 // ...в течение 1 секунды
 user = { sayHi() { alert("Другой пользователь в 'setTimeout'!"); } };
 
 // Другой пользователь в 'setTimeout'!
+=======
+// ...the value of user changes within 1 second
+user = {
+  sayHi() { alert("Another user in setTimeout!"); }
+};
+
+// Another user in setTimeout!
+>>>>>>> ae1171069c2e50b932d030264545e126138d5bdc
 ```
 
 Следующее решение гарантирует, что такого не случится.
@@ -97,7 +106,11 @@ user = { sayHi() { alert("Другой пользователь в 'setTimeout'!
 Базовый синтаксис `bind`:
 
 ```js
+<<<<<<< HEAD
 // полный синтаксис будет представлен немного позже
+=======
+// more complex syntax will come a little later
+>>>>>>> ae1171069c2e50b932d030264545e126138d5bdc
 let boundFunc = func.bind(context);
 ```
 
@@ -157,9 +170,22 @@ let user = {
 let sayHi = user.sayHi.bind(user); // (*)
 */!*
 
+<<<<<<< HEAD
 sayHi(); // Привет, Вася!
 
 setTimeout(sayHi, 1000); // Привет, Вася!
+=======
+// can run it without an object
+sayHi(); // Hello, John!
+
+setTimeout(sayHi, 1000); // Hello, John!
+
+// even if the value of user changes within 1 second
+// sayHi uses the pre-bound value
+user = {
+  sayHi() { alert("Another user in setTimeout!"); }
+};
+>>>>>>> ae1171069c2e50b932d030264545e126138d5bdc
 ```
 
 В строке `(*)` мы берём метод `user.sayHi` и привязываем его к `user`. Теперь `sayHi` - это "связанная" функция, которая может быть вызвана отдельно или передана в `setTimeout` (контекст всегда будет правильным).
@@ -191,7 +217,11 @@ for (let key in user) {
 }
 ```
 
+<<<<<<< HEAD
 Некоторые JS-библиотеки предоставляют встроенные функции для удобной массовой привязки контекста, например [_.bindAll(obj)](http://lodash.com/docs#bindAll) в lodash.
+=======
+JavaScript libraries also provide functions for convenient mass binding , e.g. [_.bindAll(object, methodNames)](http://lodash.com/docs#bindAll) in lodash.
+>>>>>>> ae1171069c2e50b932d030264545e126138d5bdc
 ````
 
 ## Частичное применение
@@ -267,7 +297,11 @@ alert( triple(5) ); // = mul(3, 5) = 15
 
 Встроенный `bind` не позволяет этого. Мы не можем просто опустить контекст и перейти к аргументам.
 
+<<<<<<< HEAD
 К счастью, легко создать вспомогательную функцию `partial`, которая привязывает только аргументы.
+=======
+Fortunately, a function `partial` for binding only arguments can be easily implemented.
+>>>>>>> ae1171069c2e50b932d030264545e126138d5bdc
 
 Вот так:
 
@@ -301,7 +335,11 @@ user.sayNow("Hello");
 - Затем передаёт ей `...argsBound` -- аргументы из вызова `partial` (`"10:00"`)
 - Затем передаёт ей `...args` -- аргументы, полученные обёрткой (`"Hello"`)
 
+<<<<<<< HEAD
 Благодаря оператору расширения `...` реализовать это очень легко, не правда ли?
+=======
+So easy to do it with the spread syntax, right?
+>>>>>>> ae1171069c2e50b932d030264545e126138d5bdc
 
 Также есть готовый вариант [_.partial](https://lodash.com/docs#partial) из библиотеки lodash.
 
