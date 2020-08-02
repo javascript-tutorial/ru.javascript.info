@@ -519,10 +519,10 @@ ul.append(...getListContent()); // append + оператор "..." = друзь�
 - Вставка и удаление:
     - `node.append(...nodes or strings)` -- вставляет в `node` в конец,
     - `node.prepend(...nodes or strings)` -- вставляет в `node` в начало,
-    - `node.before(...nodes or strings)` –- вставляет прямо перед `node`,
-    - `node.after(...nodes or strings)` –- вставляет сразу после `node`,
-    - `node.replaceWith(...nodes or strings)` –- заменяет `node`.
-    - `node.remove()` –- удаляет `node`.
+    - `node.before(...nodes or strings)` -- вставляет прямо перед `node`,
+    - `node.after(...nodes or strings)` -- вставляет сразу после `node`,
+    - `node.replaceWith(...nodes or strings)` -- заменяет `node`.
+    - `node.remove()` -- удаляет `node`.
 
 - Устаревшие методы:
     - `parent.appendChild(node)`
