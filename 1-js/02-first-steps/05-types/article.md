@@ -1,6 +1,14 @@
 # Типы данных
 
+<<<<<<< HEAD
 Переменная в JavaScript может содержать любые данные. В один момент там может быть строка, а в другой - число:
+=======
+A value in JavaScript is always of a certain type. For example, a string or a number.
+
+There are eight basic data types in JavaScript. Here, we'll cover them in general and in the next chapters we'll talk about each of them in detail.
+
+We can put any type in a variable. For example, a variable can at one moment be a string and then store a number:
+>>>>>>> cdf382de4cf3ed39ca70cb7df60c4c4886f2d22e
 
 ```js
 // Не будет ошибкой
@@ -8,11 +16,17 @@ let message = "hello";
 message = 123456;
 ```
 
+<<<<<<< HEAD
 Языки программирования, в которых такое возможно, называются "динамически типизированными". Это значит, что типы данных есть, но переменные не привязаны ни к одному из них.
 
 Есть восемь основных типов данных в JavaScript. В этой главе мы рассмотрим их в общем, а в следующих главах поговорим подробнее о каждом.
 
 ## Число
+=======
+Programming languages that allow such things, such as JavaScript, are called "dynamically typed", meaning that there exist data types, but variables are not bound to any of them.
+
+## Number
+>>>>>>> cdf382de4cf3ed39ca70cb7df60c4c4886f2d22e
 
 ```js
 let n = 123;
@@ -63,6 +77,30 @@ n = 12.345;
 Подробнее о работе с числами мы поговорим в главе  <info:number>.
 
 ## BigInt
+<<<<<<< HEAD
+=======
+
+In JavaScript, the "number" type cannot represent integer values larger than <code>(2<sup>53</sup>-1)</code> (that's `9007199254740991`), or less than <code>-(2<sup>53</sup>-1)</code> for negatives. It's a technical limitation caused by their internal representation.
+
+For most purposes that's quite enough, but sometimes we need really big numbers, e.g. for cryptography or microsecond-precision timestamps.
+
+`BigInt` type was recently added to the language to represent integers of arbitrary length.
+
+A `BigInt` value is created by appending `n` to the end of an integer:
+
+```js
+// the "n" at the end means it's a BigInt
+const bigInt = 1234567890123456789012345678901234567890n;
+```
+
+As `BigInt` numbers are rarely needed, we don't cover them here, but devoted them a separate chapter <info:bigint>. Read it when you need such big numbers.
+
+```smart header="Compatability issues"
+Right now `BigInt` is supported in Firefox/Chrome/Edge, but not in Safari/IE.
+```
+
+## String
+>>>>>>> cdf382de4cf3ed39ca70cb7df60c4c4886f2d22e
 
 В JavaScript тип "number" не может содержать числа больше, чем <code>2<sup>53</sup></code> (или меньше, чем <code>-2<sup>53</sup></code> для отрицательных). Это техническое ограничение вызвано их внутренним представлением. <code>2<sup>53</sup></code> - это достаточно большое число, состоящее из 16 цифр, поэтому чаще всего проблем не возникает. Но иногда нам нужны действительно гигантские числа, например в криптографии или при использовании метки времени ("timestamp") с микросекундами.
 
@@ -71,8 +109,14 @@ n = 12.345;
 Чтобы создать значение типа `BigInt`, необходимо добавить `n` в конец числового литерала:
 
 ```js
+<<<<<<< HEAD
 // символ "n" в конце означает, что это BigInt
 const bigInt = 1234567890123456789012345678901234567890n;
+=======
+let str = "Hello";
+let str2 = 'Single quotes are ok too';
+let phrase = `can embed another ${str}`;
+>>>>>>> cdf382de4cf3ed39ca70cb7df60c4c4886f2d22e
 ```
 
 Так как `BigInt` числа нужны достаточно редко, мы рассмотрим их в отдельной главе <info:bigint>.
@@ -83,7 +127,11 @@ const bigInt = 1234567890123456789012345678901234567890n;
 
 ## Строка
 
+<<<<<<< HEAD
 Строка (`string`) в JavaScript должна быть заключена в кавычки.
+=======
+Double and single quotes are "simple" quotes. There's practically no difference between them in JavaScript.
+>>>>>>> cdf382de4cf3ed39ca70cb7df60c4c4886f2d22e
 
 ```js
 let str = "Привет";
@@ -120,13 +168,22 @@ alert( "результат: ${1 + 2}" ); // результат: ${1 + 2} (дво
 
 Мы рассмотрим строки более подробно в главе <info:string>.
 
+<<<<<<< HEAD
 ```smart header="Нет отдельного типа данных для одного символа."
 В некоторых языках, например C и Java, для хранения одного символа, например `"a"` или `"%"`, существует отдельный тип. В языках C и Java это `char`.
+=======
+```smart header="There is no *character* type."
+In some languages, there is a special "character" type for a single character. For example, in the C language and in Java it is called "char".
+>>>>>>> cdf382de4cf3ed39ca70cb7df60c4c4886f2d22e
 
 В JavaScript подобного типа нет, есть только тип `string`. Строка может содержать один символ или множество.
 ```
 
+<<<<<<< HEAD
 ## Булевый (логический) тип
+=======
+## Boolean (logical type)
+>>>>>>> cdf382de4cf3ed39ca70cb7df60c4c4886f2d22e
 
 Булевый тип (`boolean`) может принимать только два значения: `true` (истина) и `false` (ложь).
 
@@ -163,7 +220,11 @@ let age = null;
 
 Это просто специальное значение, которое представляет собой "ничего", "пусто" или "значение неизвестно".
 
+<<<<<<< HEAD
 В приведённом выше коде указано, что переменная `age` неизвестна или не имеет значения по какой-то причине.
+=======
+The code above states that `age` is unknown.
+>>>>>>> cdf382de4cf3ed39ca70cb7df60c4c4886f2d22e
 
 ## Значение "undefined"
 
@@ -174,30 +235,50 @@ let age = null;
 Если переменная объявлена, но ей не присвоено никакого значения, то её значением будет `undefined`:
 
 ```js run
-let x;
+let age;
 
+<<<<<<< HEAD
 alert(x); // выведет "undefined"
 ```
 
 Технически мы можем присвоить значение `undefined` любой переменной:
-
-```js run
-let x = 123;
-
-x = undefined;
-
-alert(x); // "undefined"
+=======
+alert(age); // shows "undefined"
 ```
 
+Technically, it is possible to explicitly assign `undefined` to a variable:
+>>>>>>> cdf382de4cf3ed39ca70cb7df60c4c4886f2d22e
+
+```js run
+let age = 100;
+
+// change the value to undefined
+age = undefined;
+
+alert(age); // "undefined"
+```
+
+<<<<<<< HEAD
 ...Но так делать не рекомендуется. Обычно `null` используется для присвоения переменной "пустого" или "неизвестного" значения, а `undefined` -- для проверок, была ли переменная назначена.
+=======
+...But we don't recommend doing that. Normally, one uses `null` to assign an "empty" or "unknown" value to a variable, while `undefined` is reserved as a default initial value for unassigned things.
+>>>>>>> cdf382de4cf3ed39ca70cb7df60c4c4886f2d22e
 
 ## Объекты и символы
 
 Тип `object` (объект) -- особенный.
 
+<<<<<<< HEAD
 Все остальные типы называются "примитивными", потому что их значениями могут быть только простые значения (будь то строка или число, или что-то ещё). Объекты же используются для хранения коллекций данных или более сложных объектов. Мы разберёмся с ними позднее в главе <info:object> после того, как узнаем больше о примитивах.
 
 Тип `symbol` (символ) используется для создания уникальных идентификаторов объектов. Мы упоминаем здесь о нём для полноты картины, изучим этот тип после объектов.
+=======
+All other types are called "primitive" because their values can contain only a single thing (be it a string or a number or whatever). In contrast, objects are used to store collections of data and more complex entities.
+
+Being that important, objects deserve a special treatment. We'll deal with them later in the chapter <info:object>, after we learn more about primitives.
+
+The `symbol` type is used to create unique identifiers for objects. We have to mention it here for the sake of completeness, but also postpone the details till we know objects.
+>>>>>>> cdf382de4cf3ed39ca70cb7df60c4c4886f2d22e
 
 ## Оператор typeof [#type-typeof]
 
@@ -240,13 +321,20 @@ typeof alert // "function"  (3)
 
 Последние три строки нуждаются в пояснении:
 
+<<<<<<< HEAD
 1. `Math` - это встроенный объект, который предоставляет математические операции и константы. Мы рассмотрим его подробнее в главе <info:number>. Здесь он служит лишь примером объекта.
 2. Результатом вызова `typeof null` является `"object"`. Это неверно. Это официально признанная ошибка в `typeof`, сохранённая для совместимости. Конечно, `null` не является объектом. Это специальное значение с отдельным типом. Повторимся, это ошибка в языке.
 3. Вызов `typeof alert` возвращает `"function"`, потому что `alert` является функцией. Мы изучим функции в следующих главах, где заодно увидим, что в JavaScript нет специального типа "функция". Функции относятся к объектному типу. Но `typeof` обрабатывает их особым образом, возвращая `"function"`. Формально это неверно, но очень удобно на практике.
 
+=======
+1. `Math` is a built-in object that provides mathematical operations. We will learn it in the chapter <info:number>. Here, it serves just as an example of an object.
+2. The result of `typeof null` is `"object"`. That's an officially recognized error in `typeof` behavior, coming from the early days of JavaScript and kept for compatibility. Definitely, `null` is not an object. It is a special value with a separate type of its own.
+3. The result of `typeof alert` is `"function"`, because `alert` is a function. We'll study functions in the next chapters where we'll also see that there's no special "function" type in JavaScript. Functions belong to the object type. But `typeof` treats them differently, returning `"function"`. That also comes from the early days of JavaScript. Technically, such behavior isn't correct, but can be convenient in practice.
+>>>>>>> cdf382de4cf3ed39ca70cb7df60c4c4886f2d22e
 
 ## Итого
 
+<<<<<<< HEAD
 В JavaScript есть 8 основных типов.
 
 - `number` для любых чисел: целочисленных или чисел с плавающей точкой, целочисленные значения ограничены диапазоном ±2<sup>53</sup>.
@@ -257,6 +345,18 @@ typeof alert // "function"  (3)
 - `undefined` для неприсвоенных значений -- отдельный тип, имеющий одно значение `undefined`.
 - `object` для более сложных структур данных.
 - `symbol` для уникальных идентификаторов.
+=======
+There are 8 basic data types in JavaScript.
+
+- `number` for numbers of any kind: integer or floating-point, integers are limited by ±2<sup>53</sup>.
+- `bigint` is for integer numbers of arbitrary length.
+- `string` for strings. A string may have zero or more characters, there's no separate single-character type.
+- `boolean` for `true`/`false`.
+- `null` for unknown values -- a standalone type that has a single value `null`.
+- `undefined` for unassigned values -- a standalone type that has a single value `undefined`.
+- `object` for more complex data structures.
+- `symbol` for unique identifiers.
+>>>>>>> cdf382de4cf3ed39ca70cb7df60c4c4886f2d22e
 
 Оператор `typeof` позволяет нам увидеть, какой тип данных сохранён в переменной.
 
