@@ -152,10 +152,10 @@ var formatter = new Intl.DateTimeFormat([locales, [options]])
     <td><code>localeMatcher</code> </td>
     <td> Алгоритм подбора локали</td>
     <td>
-      lookup,best fit
+      <code>lookup</code>, <code>best fit</code>
     </td>
     <td>
-      best fit
+      <code>best fit</code>
     </td>
   </tr>
   <tr>
