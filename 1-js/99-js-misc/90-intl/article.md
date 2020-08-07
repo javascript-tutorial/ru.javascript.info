@@ -351,7 +351,7 @@ formatter.format(number); // форматирование
   <tr>
     <td><code>minimumIntegerDigits</code></td>
     <td>Минимальное количество цифр целой части</td>
-    <td>от `1` до `21`
+    <td>от <code>1</code> до <code>21</code>
     </td>
     <td><code>21</code></td>
   </tr>
