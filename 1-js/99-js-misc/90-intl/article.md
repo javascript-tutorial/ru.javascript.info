@@ -332,7 +332,7 @@ formatter.format(number); // форматирование
   <tr>
     <td> <code>currency</code> </td>
     <td> Алфавитный код валюты</td>
-    <td> См. [Список кодов валюты](http://www.currency-iso.org/en/home/tables/table-a1.html), например <code>USD</code> </td>
+    <td> См. <a href="http://www.currency-iso.org/en/home/tables/table-a1.html">Список кодов валюты</a>, например <code>USD</code> </td>
     <td> </td>
   </tr>
   <tr>
