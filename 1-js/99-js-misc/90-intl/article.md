@@ -294,7 +294,7 @@ var formatter = new Intl.DateTimeFormat("ru", {
 alert( formatter.format(date) ); // 12:30:00
 ```
 
-## Числа: Intl.NumberFormat
+## Числа, Intl.NumberFormat
 
 Форматтер `Intl.NumberFormat` умеет красиво форматировать не только числа, но и валюту, а также проценты.
 
