@@ -172,7 +172,7 @@ button.onclick = sayThanks();
 
 Так что разметка генерирует такое свойство:
 ```js
-button.onclick = function() {
+button.onclick = function(event) {
 *!*
   sayThanks(); // содержимое атрибута
 */!*
