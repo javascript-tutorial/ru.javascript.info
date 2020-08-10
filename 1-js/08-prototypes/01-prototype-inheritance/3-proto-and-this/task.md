@@ -2,7 +2,11 @@ importance: 5
 
 ---
 
+<<<<<<< HEAD
 # Куда будет произведена запись?
+=======
+# Where does it write?
+>>>>>>> fbf443e414097e5a3a41dd1273ef9a4a3230e72c
 
 Объект `rabbit` наследует от объекта `animal`.
 
