@@ -4,7 +4,11 @@ importance: 5
 
 # Найти размер прокрутки снизу
 
+<<<<<<< HEAD
 Свойство `elem.scrollTop` содержит размер прокрученной области при отсчёте сверху. А как подсчитать размер прокрутки снизу (назовём его `scrollBottom`)?
+=======
+The `elem.scrollTop` property is the size of the scrolled out part from the top. How to get the size of the bottom scroll (let's call it `scrollBottom`)?
+>>>>>>> fe571b36ed9e225f29239e82947005b08d74ac05
 
 Напишите соответствующее выражение для произвольного элемента `elem`.
 

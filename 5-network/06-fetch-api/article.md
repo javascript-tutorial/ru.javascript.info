@@ -84,6 +84,7 @@ fetch('/page', {
 
 Возможные значения описаны в [спецификации Referrer Policy](https://w3c.github.io/webappsec-referrer-policy/):
 
+<<<<<<< HEAD
 - **`"no-referrer-when-downgrade"`** -- это значение по умолчанию: `Referer` отправляется всегда, если только мы не отправим запрос из HTTPS в HTTP (из более безопасного протокола в менее безопасный).
 - **`"no-referrer"`** -- никогда не отправлять `Referer`.
 - **`"origin"`** -- отправлять в `Referer` только текущий источник, а не полный URL-адрес страницы, например, посылать только `http://site.com` вместо `http://site.com/path`.
@@ -92,6 +93,16 @@ fetch('/page', {
 - **`"strict-origin"`** -- отправлять только значение источника, не отправлять Referer для HTTPS→HTTP запросов.
 - **`"strict-origin-when-cross-origin"`** -- для запросов в пределах текущего источника отправлять полный Referer, для запросов на другой источник отправлять только значение источника, в случае HTTPS→HTTP запросов не отправлять ничего.
 - **`"unsafe-url"`** -- всегда отправлять полный URL-адрес в `Referer`, даже при запросах `HTTPS→HTTP`.
+=======
+- **`"no-referrer-when-downgrade"`** -- the default value: full `Referer` is sent always, unless we send a request from HTTPS to HTTP (to less secure protocol).
+- **`"no-referrer"`** -- never send `Referer`.
+- **`"origin"`** -- only send the origin in `Referer`, not the full page URL, e.g. only `http://site.com` instead of `http://site.com/path`.
+- **`"origin-when-cross-origin"`** -- send full `Referer` to the same origin, but only the origin part for cross-origin requests (as above).
+- **`"same-origin"`** -- send full `Referer` to the same origin, but no `Referer` for cross-origin requests.
+- **`"strict-origin"`** -- send only origin, don't send `Referer` for HTTPS→HTTP requests.
+- **`"strict-origin-when-cross-origin"`** -- for same-origin send full `Referer`, for cross-origin send only origin, unless it's HTTPS→HTTP request, then send nothing.
+- **`"unsafe-url"`** -- always send full url in `Referer`, even for HTTPS→HTTP requests.
+>>>>>>> fe571b36ed9e225f29239e82947005b08d74ac05
 
 Вот таблица со всеми комбинациями:
 
@@ -214,6 +225,7 @@ window.onunload = function() {
 
 Обычно, когда документ выгружается, все связанные с ним сетевые запросы прерываются. Но настройка `keepalive` указывает браузеру выполнять запрос в фоновом режиме даже после того, как пользователь покидает страницу. Поэтому эта опция обязательна, чтобы такой запрос удался.
 
+<<<<<<< HEAD
 У неё есть ряд ограничений:
 
 - Мы не можем посылать мегабайты: лимит тела для запроса с `keepalive` - 64кб.
@@ -221,3 +233,12 @@ window.onunload = function() {
     - Этот лимит распространяется на все запросы с `keepalive`. То есть, мы не можем его обойти, послав 100 запросов одновременно - каждый по 64Кбайт.
 - Мы не сможем обработать ответ от сервера, если запрос сделан при `onunload`: в тот момент документ уже выгружен, его функции не сработают.
     - Обычно сервер посылает пустой ответ на такие запросы, так что это не является проблемой.
+=======
+It has a few limitations:
+
+- We can't send megabytes: the body limit for `keepalive` requests is 64kb.
+    - If we need to gather a lot of statistics about the visit, we should send it out regularly in packets, so that there won't be a lot left for the last `onunload` request.
+    - This limit applies to all `keepalive` requests together. In other words, we can perform multiple `keepalive` requests in parallel, but the sum of their body lengths should not exceed 64kb.
+- We can't handle the server response if the document is unloaded. So in our example `fetch` will succeed due to `keepalive`, but subsequent functions  won't work.
+    - In most cases, such as sending out statistics, it's not a problem, as server just accepts the data and usually sends an empty response to such requests.
+>>>>>>> fe571b36ed9e225f29239e82947005b08d74ac05

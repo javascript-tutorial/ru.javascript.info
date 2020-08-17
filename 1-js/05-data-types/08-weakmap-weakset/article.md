@@ -142,7 +142,11 @@ function countUser(user) {
 // 📁 main.js
 let john = { name: "John" };
 
+<<<<<<< HEAD
 countUser(john); //ведём подсчёт посещений
+=======
+countUser(john); // count his visits
+>>>>>>> fe571b36ed9e225f29239e82947005b08d74ac05
 
 // пользователь покинул нас
 john = null;

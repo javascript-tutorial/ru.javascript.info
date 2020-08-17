@@ -306,7 +306,11 @@ CSS:
 - ...
 - `9s` -- `-90%`
 
+<<<<<<< HEAD
 Пример `step(9, end)` в действии (обратите внимание на паузу между первым изменением цифр):
+=======
+Here's `steps(9, end)` in action (note the pause between the first digit change):
+>>>>>>> fe571b36ed9e225f29239e82947005b08d74ac05
 
 [codetabs src="step-end"]
 
