@@ -69,7 +69,12 @@ document.addEventListener('mousedown', function(event) {
     let newBottom = newY + dragElement.offsetHeight; // new bottom
 
     // below the window? let's scroll the page
-    if (newBottom > document.documentElement.clientHeight) {
+    let documentHeight = Math.max(
+      document.body.scrollHeight, document.documentElement.scrollHeight,
+      document.body.offsetHeight, document.documentElement.offsetHeight,
+      document.body.clientHeight, document.documentElement.clientHeight
+    );
+    if (newBottom > documentHeight) {
       // window-relative coordinate of document end
       let docBottom = document.documentElement.getBoundingClientRect().bottom;
 
@@ -87,7 +92,7 @@ document.addEventListener('mousedown', function(event) {
       // a swift mouse move make put the cursor beyond the document end
       // if that happens -
       // limit the new Y by the maximally possible (right at the bottom of the document)
-      newY = Math.min(newY, document.documentElement.clientHeight - dragElement.offsetHeight);
+      newY = Math.min(newY, documentHeight - dragElement.offsetHeight);
     }
 
     // check if the new coordinates are above the top window edge (similar logic)
