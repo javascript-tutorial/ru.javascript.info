@@ -24,15 +24,28 @@ XMLHttpRequest имеет два режима работы: синхронный
 
 1. Создать `XMLHttpRequest`.
     ```js
+<<<<<<< HEAD
     let xhr = new XMLHttpRequest(); // у конструктора нет аргументов
+=======
+    let xhr = new XMLHttpRequest();
+>>>>>>> b85413d0bdd6f4f468fcadeacb4c4056e3671ce1
     ```
+    The constructor has no arguments.
 
+<<<<<<< HEAD
 2. Инициализировать его.
+=======
+2. Initialize it, usually right after `new XMLHttpRequest`:
+>>>>>>> b85413d0bdd6f4f468fcadeacb4c4056e3671ce1
     ```js
     xhr.open(method, URL, [async, user, password])
     ```
 
+<<<<<<< HEAD
     Этот метод обычно вызывается сразу после `new XMLHttpRequest`. В него передаются основные параметры запроса:
+=======
+    This method specifies the main parameters of the request:
+>>>>>>> b85413d0bdd6f4f468fcadeacb4c4056e3671ce1
 
     - `method` -- HTTP-метод. Обычно это `"GET"` или `"POST"`.
     - `URL` -- URL, куда отправляется запрос: строка, может быть и объект [URL](info:url).
@@ -49,14 +62,25 @@ XMLHttpRequest имеет два режима работы: синхронный
 
     Этот метод устанавливает соединение и отсылает запрос к серверу. Необязательный параметр `body` содержит тело запроса.
 
+<<<<<<< HEAD
     Некоторые типы запросов, такие как `GET`, не имеют тела. А некоторые, как, например, `POST`, используют `body`, чтобы отправлять данные на сервер. Мы позже увидим примеры.
+=======
+    Some request methods like `GET` do not have a body. And some of them like `POST` use `body` to send the data to the server. We'll see examples of that later.
+>>>>>>> b85413d0bdd6f4f468fcadeacb4c4056e3671ce1
 
 4. Слушать события на `xhr`, чтобы получить ответ.
 
+<<<<<<< HEAD
     Три наиболее используемых события:
     - `load` -- происходит, когда получен какой-либо ответ, включая ответы с HTTP-ошибкой, например 404.
     - `error` -- когда запрос не может быть выполнен, например, нет соединения или невалидный URL.
     - `progress` -- происходит периодически во время загрузки ответа, сообщает о прогрессе.
+=======
+    These three events are the most widely used:
+    - `load` -- when the request is complete (even if HTTP status is like 400 or 500), and the response is fully downloaded.
+    - `error` -- when the request couldn't be made, e.g. network down or invalid URL.
+    - `progress` -- triggers periodically while the response is being downloaded, reports how much has been downloaded.
+>>>>>>> b85413d0bdd6f4f468fcadeacb4c4056e3671ce1
 
     ```js
     xhr.onload = function() {
@@ -89,10 +113,17 @@ xhr.send();
 
 // 4. Этот код сработает после того, как мы получим ответ сервера
 xhr.onload = function() {
+<<<<<<< HEAD
   if (xhr.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
     alert(`Ошибка ${xhr.status}: ${xhr.statusText}`); // Например, 404: Not Found
   } else { // если всё прошло гладко, выводим результат
     alert(`Готово, получили ${xhr.response.length} байт`); // response -- это ответ сервера
+=======
+  if (xhr.status != 200) { // analyze HTTP status of the response
+    alert(`Error ${xhr.status}: ${xhr.statusText}`); // e.g. 404: Not Found
+  } else { // show the result
+    alert(`Done, got ${xhr.response.length} bytes`); // response is the server
+>>>>>>> b85413d0bdd6f4f468fcadeacb4c4056e3671ce1
   }
 };
 
@@ -508,6 +539,7 @@ xhr.onerror = function() {
 
 Событий на самом деле больше, в [современной спецификации](http://www.w3.org/TR/XMLHttpRequest/#events) они все перечислены в том порядке, в каком генерируются во время запроса:
 
+<<<<<<< HEAD
 - `loadstart` -- начало запроса.
 - `progress` -- прибыла часть данных ответа, тело ответа полностью на данный момент можно получить из свойства `responseText`.
 - `abort` -- запрос был прерван вызовом `xhr.abort()`.
@@ -515,6 +547,15 @@ xhr.onerror = function() {
 - `load` -- запрос успешно завершён.
 - `timeout` -- запрос был отменён по причине истечения отведённого для него времени (происходит, только если был установлен таймаут).
 - `loadend` -- срабатывает после `load`, `error`, `timeout` или `abort`.
+=======
+- `loadstart` -- the request has started.
+- `progress` -- a data packet of the response has arrived, the whole response body at the moment is in `response`.
+- `abort` -- the request was canceled by the call `xhr.abort()`.
+- `error` -- connection error has occurred, e.g. wrong domain name. Doesn't happen for HTTP-errors like 404.
+- `load` -- the request has finished successfully.
+- `timeout` -- the request was canceled due to timeout (only happens if it was set).
+- `loadend` -- triggers after `load`, `error`, `timeout` or `abort`.
+>>>>>>> b85413d0bdd6f4f468fcadeacb4c4056e3671ce1
 
 События `error`, `abort`, `timeout` и `load` взаимно исключают друг друга - может произойти только одно из них.
 
