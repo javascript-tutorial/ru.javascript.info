@@ -38,9 +38,15 @@ alert( carriedSum(1)(2) ); // 3
 
 Как вы видите, реализация довольна проста: это две обёртки.
 
+<<<<<<< HEAD
 - Результат `curry(func)` -- обёртка `function(a)`.
 - Когда она вызывается как `sum(1)`, аргумент сохраняется в лексическом окружении и возвращается новая обёртка `function(b)`.
 - Далее уже эта обёртка вызывается с аргументом `2` и передаёт вызов к оригинальной функции `sum`.
+=======
+- The result of `curry(func)` is a wrapper `function(a)`.
+- When it is called like `curriedSum(1)`, the argument is saved in the Lexical Environment, and a new wrapper is returned `function(b)`.
+- Then this wrapper is called with `2` as an argument, and it passes the call to the original `sum`.
+>>>>>>> f830bc5d9454d85829e011d914f215eb5896579a
 
 Более продвинутые реализации каррирования, как например [_.curry](https://lodash.com/docs#curry) из библиотеки lodash, возвращают обёртку, которая позволяет запустить функцию как обычным образом, так и частично.
 
@@ -73,7 +79,11 @@ function log(date, importance, message) {
 log = _.curry(log);
 ```
 
+<<<<<<< HEAD
 После этого `log` продолжает работать нормально:
+=======
+After that `log` works normally:
+>>>>>>> f830bc5d9454d85829e011d914f215eb5896579a
 
 ```js
 log(new Date(), "DEBUG", "some debug"); // log(a, b, c)
@@ -111,7 +121,11 @@ debugNow("message"); // [HH:mm] DEBUG message
 
 ## Продвинутая реализация каррирования
 
+<<<<<<< HEAD
 В случае, если вам интересны детали, вот "продвинутая" реализация каррирования для функций с множеством аргументов, которую мы могли бы использовать выше.
+=======
+In case you'd like to get in to the details, here's the "advanced" curry implementation for multi-argument functions that we could use above.
+>>>>>>> f830bc5d9454d85829e011d914f215eb5896579a
 
 Она очень короткая:
 
@@ -175,7 +189,11 @@ function curried(...args) {
 2. Обёртка `pass` вызывается с `(2)`: она берёт предыдущие аргументы (`1`), объединяет их с тем, что получила сама `(2)` и вызывает `curried(1, 2)` со всеми ними. Так как число аргументов всё ещё меньше 3-х, `curry` возвращает `pass`.
 3. Обёртка `pass` вызывается снова с `(3)`. Для следующего вызова `pass(3)` берёт предыдущие аргументы (`1`, `2`) и добавляет к ним `3`, делая вызов `curried(1, 2, 3)` -- наконец 3 аргумента, и они передаются оригинальной функции.
 
+<<<<<<< HEAD
 Если всё ещё не понятно, просто распишите последовательность вызовов на бумаге.
+=======
+If that's still not obvious, just trace the calls sequence in your mind or on paper.
+>>>>>>> f830bc5d9454d85829e011d914f215eb5896579a
 
 ```smart header="Только функции с фиксированным количеством аргументов"
 Для каррирования необходима функция с фиксированным количеством аргументов.
@@ -191,6 +209,12 @@ function curried(...args) {
 
 ## Итого
 
+<<<<<<< HEAD
 *Каррирование* -- это трансформация, которая превращает вызов `f(a, b, c)` в `f(a)(b)(c)`. В JavaScript реализация обычно позволяет вызывать функцию обоими вариантами: либо нормально, либо возвращает частично применённую функцию, если количество аргументов недостаточно.
 
 Каррирование позволяет легко получать частичные функции. Как мы видели в примерах с логами: универсальная функция `log(date, importance, message)` после каррирования возвращает нам частично применённую функцию, когда вызывается с одним аргументом, как `log(date)` или двумя аргументами, как `log(date, importance)`.
+=======
+*Currying* is a transform that makes `f(a,b,c)` callable as `f(a)(b)(c)`. JavaScript implementations usually both keep the function callable normally and return the partial if the arguments count is not enough.
+
+Currying allows us to easily get partials. As we've seen in the logging example, after currying the three argument universal function `log(date, importance, message)` gives us partials when called with one argument (like `log(date)`) or two arguments (like `log(date, importance)`).  
+>>>>>>> f830bc5d9454d85829e011d914f215eb5896579a
