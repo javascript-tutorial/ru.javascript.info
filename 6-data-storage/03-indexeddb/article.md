@@ -73,7 +73,7 @@ let openRequest = indexedDB.open("store", *!*2*/!*);
 
 // проверить существование указанной версии базы данных, обновить по мере необходимости:
 openRequest.onupgradeneeded = function() {
-  // the existing database version is less than 2 (or it doesn't exist)
+  // версия существующей базы данных меньше 2 (или база данных не существует)
   let db = openRequest.result;
   switch(db.version) { // существующая (старая) версия базы данных
     case 0:
@@ -218,8 +218,8 @@ let openRequest = indexedDB.open("db", 2);
 // создаём хранилище объектов для books, если ешё не существует
 openRequest.onupgradeneeded = function() {
   let db = openRequest.result;
-  if (!db.objectStoreNames.contains('books')) { // if there's no "books" store
-    db.createObjectStore('books', {keyPath: 'id'}); // create it
+  if (!db.objectStoreNames.contains('books')) { // если хранилище "books" не существует
+    db.createObjectStore('books', {keyPath: 'id'}); // создаем хранилище
   }
 };
 ```
