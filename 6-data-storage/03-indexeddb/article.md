@@ -73,7 +73,7 @@ let openRequest = indexedDB.open("store", *!*2*/!*);
 
 // проверить существование указанной версии базы данных, обновить по мере необходимости:
 openRequest.onupgradeneeded = function() {
-  // the existing database version is less than 2 (or it doesn't exist)
+  // существующая версия базы данных меньше 2 (или она не существует)
   let db = openRequest.result;
   switch(db.version) { // существующая (старая) версия базы данных
     case 0:
