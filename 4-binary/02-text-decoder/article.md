@@ -59,7 +59,7 @@ alert( new TextDecoder().decode(binaryString) ); // Hello
 
 Имеет следующий синтаксис:
 
-```js run
+```js
 let encoder = new TextEncoder();
 ```
 

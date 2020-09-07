@@ -6,7 +6,11 @@
 
 ## Частые опросы
 
+<<<<<<< HEAD
 Самый простой способ получать новую информацию от сервера - периодический опрос. То есть, регулярные запросы на сервер вида: "Привет, я здесь, у вас есть какая-нибудь информация для меня?". Например, раз в 10 секунд.
+=======
+The simplest way to get new information from the server is periodic polling. That is, regular requests to the server: "Hello, I'm here, do you have any information for me?". For example, once every 10 seconds.
+>>>>>>> 58f6599df71b8d50417bb0a52b1ebdc995614017
 
 В ответ сервер, во-первых, помечает у себя, что клиент онлайн, а во-вторых посылает весь пакет сообщений, накопившихся к данному моменту.
 
@@ -70,9 +74,15 @@ subscribe();
 ```warn header="Сервер должен поддерживать много ожидающих соединений."
 Архитектура сервера должна быть способна работать со многими ожидающими подключениями.
 
+<<<<<<< HEAD
 Некоторые серверные архитектуры запускают отдельный процесс для каждого соединения. Для большого количества соединений будет столько же процессов, и каждый процесс занимает значительный объём памяти. Так много соединений просто поглотят всю память.
 
 Часто такая проблема возникает с бэкендом, написанными на PHP или Ruby, но технически дело не в языке, а в реализации. На большинстве современных языков можно написать подходящий сервер, но на некоторых это проще сделать.
+=======
+Certain server architectures run one process per connect. So there will be as many processes as connections, and each process takes a lot of memory. Too many connections just will consume it all.
+
+That's often the case for backends written in PHP, Ruby languages, but technically isn't a language issue, but rather implementation one. Most modern language allow to implement a proper backend, but some of them make it easier than others..
+>>>>>>> 58f6599df71b8d50417bb0a52b1ebdc995614017
 
 Бэкенды, написанные с помощью Node.js, обычно не имеют таких проблем.
 ```

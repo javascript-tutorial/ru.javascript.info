@@ -1,6 +1,10 @@
 # Юникод: флаг "u" и класс \p{...}
 
+<<<<<<< HEAD
 В JavaScript для строк используется кодировка [Юникод](https://ru.wikipedia.org/wiki/Юникод). Обычно символы кодируются с помощью 2 байтов, что позволяет закодировать максимум 65536 символов.
+=======
+JavaScript uses [Unicode encoding](https://en.wikipedia.org/wiki/Unicode) for strings. Most characters are encoded with 2 bytes, but that allows to represent at most 65536 characters.
+>>>>>>> 58f6599df71b8d50417bb0a52b1ebdc995614017
 
 Этого диапазона не хватает для того, чтобы закодировать все символы. Поэтому некоторые редкие символы кодируются с помощью 4 байтов, например `𝒳` (математический X) или `😄` (смайлик), некоторые иероглифы, и т.п.
 
@@ -33,6 +37,7 @@ alert('𝒳'.length); // 2
 
 ## Юникодные свойства \p{...}
 
+<<<<<<< HEAD
 ```warn header="Не поддерживается в Firefox и Edge"
 Несмотря на то, что это часть стандарта с 2018 года, юникодные свойства не поддерживаются в Firefox ([задача](https://bugzilla.mozilla.org/show_bug.cgi?id=1361876)) и Edge ([задача](https://github.com/Microsoft/ChakraCore/issues/2969)).
 
@@ -40,6 +45,9 @@ alert('𝒳'.length); // 2
 ```
 
 Каждому символу в кодировке Юникод соответствует множество свойств. Они описывают к какой "категории" относится символ, содержат различную информацию о нём.
+=======
+Every character in Unicode has a lot of properties. They describe what "category" the character belongs to, contain miscellaneous information about it.
+>>>>>>> 58f6599df71b8d50417bb0a52b1ebdc995614017
 
 Например, свойство `Letter` у символа означает, что это буква какого-то алфавита, причём любого. А свойство `Number` означает, что это цифра - арабская или китайская, и т.п, на каком-то из языков.
 
@@ -56,6 +64,7 @@ alert( str.match(/\p{L}/gu) ); // A,ბ,ㄱ
 alert( str.match(/\p{L}/g) ); // null (ничего не нашло, так как нет флага "u")
 ```
 
+<<<<<<< HEAD
 Вот основные категории символов и их подкатегории:
 
 - Буквы `L`:
@@ -112,6 +121,68 @@ alert( str.match(/\p{L}/g) ); // null (ничего не нашло, так ка
 Например, давайте поищем шестнадцатеричные числа, записанные в формате `xFF`, где вместо `F` может быть любая шестнадцатеричная цифра (0..1 или A..F).
 
 Шестнадцатеричная цифра может быть обозначена как `pattern:\p{Hex_Digit}`:
+=======
+Here's the main character categories and their subcategories:
+
+- Letter `L`:
+  - lowercase `Ll`
+  - modifier `Lm`,
+  - titlecase `Lt`,
+  - uppercase `Lu`,
+  - other `Lo`.
+- Number `N`:
+  - decimal digit `Nd`,
+  - letter number `Nl`,
+  - other `No`.
+- Punctuation `P`:
+  - connector `Pc`,
+  - dash `Pd`,
+  - initial quote `Pi`,
+  - final quote `Pf`,
+  - open `Ps`,
+  - close `Pe`,
+  - other `Po`.
+- Mark `M` (accents etc):
+  - spacing combining `Mc`,
+  - enclosing `Me`,
+  - non-spacing `Mn`.
+- Symbol `S`:
+  - currency `Sc`,
+  - modifier `Sk`,
+  - math `Sm`,
+  - other `So`.
+- Separator `Z`:
+  - line `Zl`,
+  - paragraph `Zp`,
+  - space `Zs`.
+- Other `C`:
+  - control `Cc`,
+  - format `Cf`,
+  - not assigned `Cn`,
+  - private use `Co`,
+  - surrogate `Cs`.
+
+
+So, e.g. if we need letters in lower case, we can write `pattern:\p{Ll}`, punctuation signs: `pattern:\p{P}` and so on.
+
+There are also other derived categories, like:
+- `Alphabetic` (`Alpha`), includes Letters `L`, plus letter numbers `Nl` (e.g. Ⅻ - a character for the roman number 12), plus some other symbols `Other_Alphabetic` (`OAlpha`).
+- `Hex_Digit` includes hexadecimal digits: `0-9`, `a-f`.
+- ...And so on.
+
+Unicode supports many different properties, their full list would require a lot of space, so here are the references:
+
+- List all properties by a character: <https://unicode.org/cldr/utility/character.jsp>.
+- List all characters by a property: <https://unicode.org/cldr/utility/list-unicodeset.jsp>.
+- Short aliases for properties: <https://www.unicode.org/Public/UCD/latest/ucd/PropertyValueAliases.txt>.
+- A full base of Unicode characters in text format, with all properties, is here: <https://www.unicode.org/Public/UCD/latest/ucd/>.
+
+### Example: hexadecimal numbers
+
+For instance, let's look for hexadecimal numbers, written as `xFF`, where `F` is a hex digit (0..1 or A..F).
+
+A hex digit can be denoted as `pattern:\p{Hex_Digit}`:
+>>>>>>> 58f6599df71b8d50417bb0a52b1ebdc995614017
 
 ```js run
 let regexp = /x\p{Hex_Digit}\p{Hex_Digit}/u;
@@ -123,7 +194,11 @@ alert("число: xAF".match(regexp)); // xAF
 
 Поищем китайские иероглифы.
 
+<<<<<<< HEAD
 В Юникоде есть свойство `Script` (система написания), которое может иметь значения `Cyrillic` (Кириллическая), `Greek` (Греческая), `Arabic` (Арабская), `Han` (Китайская) и так далее, [здесь полный список](https://en.wikipedia.org/wiki/Script_(Unicode)).
+=======
+There's a unicode property `Script` (a writing system), that may have a value: `Cyrillic`, `Greek`, `Arabic`, `Han` (Chinese) and so on, [here's the full list](https://en.wikipedia.org/wiki/Script_(Unicode)).
+>>>>>>> 58f6599df71b8d50417bb0a52b1ebdc995614017
 
 Для поиска символов в нужной системе мы должны установить `pattern:Script=<значение>`, например для поиска кириллических букв: `pattern:\p{sc=Cyrillic}`, для китайских иероглифов: `pattern:\p{sc=Han}`, и так далее:
 
