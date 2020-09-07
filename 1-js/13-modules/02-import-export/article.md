@@ -421,7 +421,7 @@ export default class User {
 
 - Именованные экспорты из модуля:
   - `import {x [as y], ...} from "module"`
-- Экспорт по умолчанию:  
+- Импорт по умолчанию:  
   - `import x from "module"`
   - `import {default as x} from "module"`
 - Всё сразу:
