@@ -13,7 +13,7 @@
 Числа
 : В одних странах выводятся цифрами, в других -- иероглифами, длинные числа разделяются где-то пробелом, где-то запятой.
 
-Все современные браузеры, кроме IE10- (но есть библиотеки и для него) поддерживают стандарт [ECMA 402](http://www.ecma-international.org/ecma-402/1.0/ECMA-402.pdf), предназначенный решить эти проблемы навсегда.
+Все современные браузеры, кроме IE10 (но есть библиотеки и для него) поддерживают стандарт [ECMA 402](http://www.ecma-international.org/ecma-402/1.0/ECMA-402.pdf), предназначенный решить эти проблемы навсегда.
 
 ## Основные объекты
 
@@ -93,7 +93,7 @@ var collator = new Intl.Collator([locales, [options]])
 
     - `ignorePunctuation` -- игнорировать знаки пунктуации: `true/false`, по умолчанию `false`.
     - `numeric` -- использовать ли численное сравнение: `true/false`, если `true`, то будет `12 > 2`, иначе `12 < 2`.
-    - `caseFirst` -- в сортировке должны идти первыми прописные или строчные буквы,  варианты: `"upper"` (прописные), `lower` (строчные) или `false` (стандартное для локали, также является значением по умолчанию). Не поддерживается IE11-.
+    - `caseFirst` -- в сортировке должны идти первыми прописные или строчные буквы,  варианты: `"upper"` (прописные), `"lower"` (строчные) или `"false"` (стандартное для локали, также является значением по умолчанию). Не поддерживается IE11.
 
 В подавляющем большинстве случаев подходят стандартные параметры, то есть `options` указывать не нужно.
 
@@ -152,10 +152,10 @@ var formatter = new Intl.DateTimeFormat([locales, [options]])
     <td><code>localeMatcher</code> </td>
     <td> Алгоритм подбора локали</td>
     <td>
-      lookup,best fit
+      <code>lookup</code>, <code>best fit</code>
     </td>
     <td>
-      best fit
+      <code>best fit</code>
     </td>
   </tr>
   <tr>
@@ -294,7 +294,7 @@ var formatter = new Intl.DateTimeFormat("ru", {
 alert( formatter.format(date) ); // 12:30:00
 ```
 
-## Числа: Intl.NumberFormat
+## Числа, Intl.NumberFormat
 
 Форматтер `Intl.NumberFormat` умеет красиво форматировать не только числа, но и валюту, а также проценты.
 
@@ -332,7 +332,7 @@ formatter.format(number); // форматирование
   <tr>
     <td> <code>currency</code> </td>
     <td> Алфавитный код валюты</td>
-    <td> См. [Список кодов валюты](http://www.currency-iso.org/en/home/tables/table-a1.html), например <code>USD</code> </td>
+    <td> См. <a href="http://www.currency-iso.org/en/home/tables/table-a1.html">Список кодов валюты</a>, например <code>USD</code> </td>
     <td> </td>
   </tr>
   <tr>
@@ -351,7 +351,7 @@ formatter.format(number); // форматирование
   <tr>
     <td><code>minimumIntegerDigits</code></td>
     <td>Минимальное количество цифр целой части</td>
-    <td>от `1` до `21`
+    <td>от <code>1</code> до <code>21</code>
     </td>
     <td><code>21</code></td>
   </tr>
@@ -456,4 +456,4 @@ alert( formatter.format(1234.5) ); // 1 234,50 £
 
 ## Старые IE
 
-В IE10- рекомендуется использовать полифил, например библиотеку <https://github.com/andyearnshaw/Intl.js>.
+В IE10 рекомендуется использовать полифил, например библиотеку <https://github.com/andyearnshaw/Intl.js>.
