@@ -19,7 +19,11 @@
 - `key(index)` -- получить ключ на заданной позиции.
 - `length` -- количество элементов в хранилище.
 
+<<<<<<< HEAD
 Как видим, интерфейс похож на `Map` (`setItem/getItem/removeItem`), но также запоминается порядок элементов, и можно получить доступ к элементу по индексу -- `key(index)`.
+=======
+As you can see, it's like a `Map` collection (`setItem/getItem/removeItem`), but also allows access by index with `key(index)`.
+>>>>>>> ff152b126ec70a9de919bfdc1913215539d37187
 
 Давайте посмотрим, как это работает.
 
@@ -202,8 +206,13 @@ alert( sessionStorage.getItem('test') ); // после обновления: 1
 Теперь, если оба окна слушают `window.onstorage`, то каждое из них будет реагировать на обновления, произошедшие в другом окне.
 
 ```js run
+<<<<<<< HEAD
 // срабатывает при обновлениях, сделанных в том же хранилище из других документов
 window.onstorage = event => {
+=======
+// triggers on updates made to the same storage from other documents
+window.onstorage = event => { // same as window.addEventListener('storage', () => {
+>>>>>>> ff152b126ec70a9de919bfdc1913215539d37187
   if (event.key != 'now') return;
   alert(event.key + ':' + event.newValue + " at " + event.url);
 };
@@ -221,11 +230,19 @@ localStorage.setItem('now', Date.now());
 
 ## Итого
 
+<<<<<<< HEAD
 Объекты веб-хранилища `localStorage` и `sessionStorage` позволяют хранить пары ключ/значение в браузере.
 - `key` и `value` должны быть строками.
 - Лимит 2 Мб+, зависит от браузера.
 - Данные не имеют "времени истечения".
 - Данные привязаны к источнику (домен/протокол/порт).
+=======
+Web storage objects `localStorage` and `sessionStorage` allow to store key/value in the browser.
+- Both `key` and `value` must be strings.
+- The limit is 5mb+, depends on the browser.
+- They do not expire.
+- The data is bound to the origin (domain/port/protocol).
+>>>>>>> ff152b126ec70a9de919bfdc1913215539d37187
 
 | `localStorage` | `sessionStorage` |
 |----------------|------------------|

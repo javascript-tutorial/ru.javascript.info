@@ -121,7 +121,13 @@ let fruits = [
 
 В компьютерных науках структура данных, делающая это возможным, называется [двусторонняя очередь](https://ru.wikipedia.org/wiki/Двухсторонняя_очередь).
 
+<<<<<<< HEAD
 **Методы, работающие с концом массива:**
+=======
+In computer science the data structure that allows this, is called [deque](https://en.wikipedia.org/wiki/Double-ended_queue).
+
+**Methods that work with the end of the array:**
+>>>>>>> ff152b126ec70a9de919bfdc1913215539d37187
 
 `pop`
 : Удаляет последний элемент из массива и возвращает его:
@@ -152,8 +158,13 @@ let fruits = [
 `shift`
 : Удаляет из массива первый элемент и возвращает его:
 
+<<<<<<< HEAD
     ```js
     let fruits = ["Яблоко", "Апельсин", "Груша"];
+=======
+    ```js run
+    let fruits = ["Apple", "Orange", "Pear"];
+>>>>>>> ff152b126ec70a9de919bfdc1913215539d37187
 
     alert( fruits.shift() ); // удаляем Яблоко и выводим его
 
@@ -163,8 +174,13 @@ let fruits = [
 `unshift`
 : Добавляет элемент в начало массива:
 
+<<<<<<< HEAD
     ```js
     let fruits = ["Апельсин", "Груша"];
+=======
+    ```js run
+    let fruits = ["Orange", "Pear"];
+>>>>>>> ff152b126ec70a9de919bfdc1913215539d37187
 
     fruits.unshift('Яблоко');
 
@@ -189,7 +205,11 @@ alert( fruits );
 
 Массивы расширяют объекты, так как предусматривают специальные методы для работы с упорядоченными коллекциями данных, а также свойство `length`. Но в основе всё равно лежит объект.
 
+<<<<<<< HEAD
 Следует помнить, что в JavaScript существует 8 основных типов данных. Массив является объектом и, следовательно, ведёт себя как объект.
+=======
+Remember, there are only eight basic data types in JavaScript (see the [Data types](info:types) chapter for more info). Array is an object and thus behaves like an object.
+>>>>>>> ff152b126ec70a9de919bfdc1913215539d37187
 
 Например, копируется по ссылке:
 

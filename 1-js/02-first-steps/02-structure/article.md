@@ -94,7 +94,11 @@ alert("Сейчас будет ошибка")[1, 2].forEach(alert)
 
 ## Комментарии
 
+<<<<<<< HEAD
 Со временем программы становятся всё сложнее и сложнее. Возникает необходимость добавлять *комментарии*, которые бы описывали, что делает код и почему.
+=======
+## Comments [#code-comments]
+>>>>>>> ff152b126ec70a9de919bfdc1913215539d37187
 
 Комментарии могут находиться в любом месте скрипта. Они не влияют на его выполнение, поскольку движок просто игнорирует их.
 
@@ -134,8 +138,13 @@ alert('Привет');
 alert('Мир');
 ```
 
+<<<<<<< HEAD
 ```smart header="Используйте горячие клавиши!"
 В большинстве редакторов строку кода можно закомментировать, нажав комбинацию клавиш `key:Ctrl+/` для однострочного комментария и что-то вроде `key:Ctrl+Shift+/` -- для многострочных комментариев (выделите кусок кода и нажмите комбинацию клавиш). В системе Mac попробуйте `key:Cmd` вместо `key:Ctrl` и `key:Option` вместо `key:Shift`.
+=======
+```smart header="Use hotkeys!"
+In most editors, a line of code can be commented out by pressing the `key:Ctrl+/` hotkey for a single-line comment and something like `key:Ctrl+Shift+/` -- for multiline comments (select a piece of code and press the hotkey). For Mac, try `key:Cmd` instead of `key:Ctrl` and `key:Option` instead of `key:Shift`.
+>>>>>>> ff152b126ec70a9de919bfdc1913215539d37187
 ```
 
 ````warn header="Вложенные комментарии не поддерживаются!"

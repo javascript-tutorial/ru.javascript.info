@@ -8,7 +8,11 @@ libs:
 
 В этой главе мы рассмотрим выделение как в документе, так и в полях формы, таких как `<input>`.
 
+<<<<<<< HEAD
 JavaScript позволяет получать существующее выделение, выделять и снимать выделение как целиком, так и по частям, убирать выделенную часть из документа, оборачивать её в тег и так далее.
+=======
+JavaScript can get the existing selection, select/deselect both as a whole or partially, remove the selected part from the document, wrap it into a tag, and so on.
+>>>>>>> ff152b126ec70a9de919bfdc1913215539d37187
 
 Вы можете получить готовые решения в секции "Итого" в конце статьи, но узнаете гораздо больше, если прочитаете главу целиком. Используемые для выделения встроенные объекты `Range` и `Selection` просты для понимания, и после их изучения вам уже не понадобятся "готовые рецепты", чтобы сделать всё, что захотите.
 
@@ -16,7 +20,11 @@ JavaScript позволяет получать существующее выде
 
 В основе выделения лежит [Range](https://dom.spec.whatwg.org/#ranges) -- диапазон. Он представляет собой пару "граничных точек": начало и конец диапазона.
 
+<<<<<<< HEAD
 Каждая точка представлена как родительский DOM-узел с относительным смещением от начала. Если этот узел - DOM-элемент, то смещение - это номер дочернего элемента, а для текстового узла смещение - позиция в тексте. Скоро будут примеры.
+=======
+Each point represented as a parent DOM node with the relative offset from its start. If the parent node is an element node, then the offset is a child number, for a text node it's the position in the text. Examples to follow.
+>>>>>>> ff152b126ec70a9de919bfdc1913215539d37187
 
 Давайте что-нибудь выделим.
 
@@ -95,8 +103,13 @@ drawHtmlTree(selectPDomtree, 'div.select-p-domtree', 690, 320);
 </script>
 ```
 
+<<<<<<< HEAD
 - `range.setStart(p, 0)` -- устанавливает начало диапазона на нулевом дочернем элементе тега `<p>` (Это текстовый узел `"Example: "`).
 - `range.setEnd(p, 2)` -- расширяет диапазон до 2го (но не включая его) дочернего элемента тега `<p>` (это текстовый узел `" and "`, но так как конец не включён, последний включённый узел - это тег `<i>`).
+=======
+- `range.setStart(p, 0)` -- sets the start at the 0th child of `<p>` (that's the text node `"Example: "`).
+- `range.setEnd(p, 2)` -- spans the range up to (but not including) 2nd child of `<p>` (that's the text node `" and "`, but as the end is not included, so the last selected node is `<i>`).
+>>>>>>> ff152b126ec70a9de919bfdc1913215539d37187
 
 Ниже представлен расширенный пример, в котором вы можете попробовать другие варианты:
 
@@ -194,11 +207,19 @@ From <input id="start" type="number" value=1> – To <input id="end" type="numbe
 
 Чтобы манипулировать содержимым в пределах диапазона:
 
+<<<<<<< HEAD
 - `deleteContents()` - удалить содержимое диапазона из документа
 - `extractContents()` - удалить содержимое диапазона из документа и вернуть как [DocumentFragment](info:modifying-document#document-fragment)
 - `cloneContents()` - склонировать содержимое диапазона и вернуть как [DocumentFragment](info:modifying-document#document-fragment)
 - `insertNode(node)` -- вставить `node` в документ в начале диапазона
 - `surroundContents(node)` -- обернуть `node` вокруг содержимого диапазона. Чтобы этот метод сработал, диапазон должен содержать как открывающие, так и закрывающие теги для всех элементов внутри себя: не допускаются частичные диапазоны по типу `<i>abc`.
+=======
+- `deleteContents()` -- remove range content from the document
+- `extractContents()` -- remove range content from the document and return as [DocumentFragment](info:modifying-document#document-fragment)
+- `cloneContents()` -- clone range content and return as [DocumentFragment](info:modifying-document#document-fragment)
+- `insertNode(node)` -- insert `node` into the document at the beginning of the range
+- `surroundContents(node)` -- wrap `node` around range content. For this to work, the range must contain both opening and closing tags for all elements inside it: no partial ranges like `<i>abc`.
+>>>>>>> ff152b126ec70a9de919bfdc1913215539d37187
 
 Используя эти методы, мы можем делать с выделенными узлами что угодно.
 
@@ -318,8 +339,12 @@ From <input id="start" type="number" value=1> – To <input id="end" type="numbe
 
 ### Демо отслеживания выделения
 
+<<<<<<< HEAD
 Ниже представлено небольшое демо.
 В нём границы выделения выводятся динамически по мере того, как оно меняется:
+=======
+Here's a small demo that shows selection boundaries dynamically as it changes:
+>>>>>>> ff152b126ec70a9de919bfdc1913215539d37187
 
 ```html run height=80
 <p id="p">Выдели меня: <i>курсив</i> и <b>жирный</b></p>
@@ -379,6 +404,7 @@ From <input id="start" type="number" value=1> – To <input id="end" type="numbe
 
 Также существуют методы управления диапазонами выделения напрямую, без обращения к Range:
 
+<<<<<<< HEAD
 - `collapse(node, offset)` -- заменить выделенный диапазон новым, который начинается и заканчивается на `node`, на позиции `offset`.
 - `setPosition(node, offset)` -- то же самое, что `collapse` (дублирующий метод-псевдоним).
 - `collapseToStart()` - схлопнуть (заменить на пустой диапазон) к началу выделения,
@@ -388,6 +414,17 @@ From <input id="start" type="number" value=1> – To <input id="end" type="numbe
 - `selectAllChildren(node)` -- выделить все дочерние узлы данного узла `node`.
 - `deleteFromDocument()` -- удалить содержимое выделения из документа.
 - `containsNode(node, allowPartialContainment = false)` -- проверяет, содержит ли выделение `node` (частично, если второй аргумент равен `true`)
+=======
+- `collapse(node, offset)` -- replace selected range with a new one that starts and ends at the given `node`, at position `offset`.
+- `setPosition(node, offset)` -- alias to `collapse`.
+- `collapseToStart()` - collapse (replace with an empty range) to selection start,
+- `collapseToEnd()` - collapse to selection end,
+- `extend(node, offset)` - move focus of the selection to the given `node`, position `offset`,
+- `setBaseAndExtent(anchorNode, anchorOffset, focusNode, focusOffset)` - replace selection range with the given start `anchorNode/anchorOffset` and end `focusNode/focusOffset`. All content in-between them is selected.
+- `selectAllChildren(node)` -- select all children of the `node`.
+- `deleteFromDocument()` -- remove selected content from the document.
+- `containsNode(node, allowPartialContainment = false)` -- checks whether the selection contains `node` (partially if the second argument is `true`)
+>>>>>>> ff152b126ec70a9de919bfdc1913215539d37187
 
 Так что для многих задач мы можем вызывать методы `Selection`, не обращаясь к связанному объекту `Range`.
 
@@ -426,10 +463,17 @@ From <input id="start" type="number" value=1> – To <input id="end" type="numbe
 
 Элементы форм, такие как `input` и `textarea`, предоставляют [отдельное API для выделения](https://html.spec.whatwg.org/#textFieldSelection). Так как значения полей представляют собой простой текст, а не HTML, и нам не нужны такие сложные объекты, как `Range` и `Selection`.
 
+<<<<<<< HEAD
 Свойства:
 - `input.selectionStart` -- позиция начала выделения (это свойство можно изменять),
 - `input.selectionEnd` -- позиция конца выделения (это свойство можно изменять),
 - `input.selectionDirection` -- направление выделения, одно из: "forward" (вперёд), "backward" (назад) или "none" (без направления, если, к примеру, выделено с помощью двойного клика мыши).
+=======
+Properties:
+- `input.selectionStart` -- position of selection start (writeable),
+- `input.selectionEnd` -- position of selection end (writeable),
+- `input.selectionDirection` -- selection direction, one of: "forward", "backward" or "none" (if e.g. selected with a double mouse click),
+>>>>>>> ff152b126ec70a9de919bfdc1913215539d37187
 
 События:
 - `input.onselect` -- срабатывает, когда начинается выделение.
@@ -551,7 +595,11 @@ button.onclick = () => {
 
 Мы также можем вставить что-нибудь на текущей позиции курсора, используя `setRangeText`.
 
+<<<<<<< HEAD
 Кнопка в примере вставляет `"ПРИВЕТ"` на месте курсора и устанавливает его после вставленного текста. Если какой-то текст был выделен, он будет заменён (мы можем узнать о наличии выделения, проверив `selectionStart!=selectionEnd` и, если выделение есть, сделать что-то ещё):
+=======
+Here's a button that inserts `"HELLO"` at the cursor position and puts the cursor immediately after it. If the selection is not empty, then it gets replaced (we can detect it by comparing `selectionStart!=selectionEnd` and do something else instead):
+>>>>>>> ff152b126ec70a9de919bfdc1913215539d37187
 
 ```html run autorun
 <input id="input" style="width:200px" value="Текст Текст Текст Текст Текст">
@@ -583,7 +631,11 @@ button.onclick = () => {
 
     Это свойство не позволяет начать выделение с `elem`, но пользователь может начать выделять с другого места и включить `elem`.
 
+<<<<<<< HEAD
     После этого `elem` станет частью `document.getSelection()`, так что на самом деле выделение произойдёт, но его содержимое обычно игнорируется при копировании и вставке.
+=======
+    Then `elem` will become a part of `document.getSelection()`, so the selection actually happens, but its content is usually ignored in copy-paste.
+>>>>>>> ff152b126ec70a9de919bfdc1913215539d37187
 
 
 2. Предотвратить действие по умолчанию в событии `onselectstart` или `mousedown`.
@@ -622,8 +674,13 @@ button.onclick = () => {
 
 Самые используемые готовые решения:
 
+<<<<<<< HEAD
 1. Получить выделение:
     ```js run
+=======
+1. Getting the selection:
+    ```js
+>>>>>>> ff152b126ec70a9de919bfdc1913215539d37187
     let selection = document.getSelection();
 
     let cloned = /* элемент, в который мы хотим скопировать выделенные узлы */;
@@ -634,8 +691,13 @@ button.onclick = () => {
       cloned.append(selection.getRangeAt(i).cloneContents());
     }
     ```
+<<<<<<< HEAD
 2. Установить выделение:
     ```js run
+=======
+2. Setting the selection:
+    ```js
+>>>>>>> ff152b126ec70a9de919bfdc1913215539d37187
     let selection = document.getSelection();
 
     // напрямую:

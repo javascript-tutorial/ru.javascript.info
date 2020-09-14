@@ -3,7 +3,11 @@
 
 Как мы знаем, объекты могут содержать свойства.
 
+<<<<<<< HEAD
 До этого момента мы рассматривали свойство только как пару "ключ-значение". Но на самом деле свойство объекта гораздо мощнее и гибче.
+=======
+Until now, a property was a simple "key-value" pair to us. But an object property is actually a more flexible and powerful thing.
+>>>>>>> ff152b126ec70a9de919bfdc1913215539d37187
 
 В этой главе мы изучим дополнительные флаги конфигурации для свойств, а в следующей -- увидим, как можно незаметно превратить их в специальные функции - геттеры и сеттеры.
 
@@ -66,7 +70,11 @@ Object.defineProperty(obj, propertyName, descriptor)
 : Объект и его свойство, для которого нужно применить дескриптор.
 
 `descriptor`
+<<<<<<< HEAD
 : Применяемый дескриптор.
+=======
+: Property descriptor object to apply.
+>>>>>>> ff152b126ec70a9de919bfdc1913215539d37187
 
 Если свойство существует, `defineProperty` обновит его флаги. В противном случае метод создаёт новое свойство с указанным значением и флагами; если какой-либо флаг не указан явно, ему присваивается значение `false`.
 
@@ -134,7 +142,11 @@ let user = { };
 Object.defineProperty(user, "name", {
 *!*
   value: "John",
+<<<<<<< HEAD
   // для нового свойства необходимо явно указывать все флаги, для которых значение true
+=======
+  // for new properties we need to explicitly list what's true
+>>>>>>> ff152b126ec70a9de919bfdc1913215539d37187
   enumerable: true,
   configurable: true
 */!*
@@ -148,7 +160,11 @@ user.name = "Pete"; // Ошибка
 
 Теперь добавим собственный метод `toString` к объекту `user`.
 
+<<<<<<< HEAD
 Встроенный метод `toString` в объектах - неперечислимый, его не видно в цикле `for..in`. Но если мы напишем свой собственный метод `toString`, цикл `for..in` будет выводить его по умолчанию:
+=======
+Normally, a built-in `toString` for objects is non-enumerable, it does not show up in `for..in`. But if we add a `toString` of our own, then by default it shows up in `for..in`, like this:
+>>>>>>> ff152b126ec70a9de919bfdc1913215539d37187
 
 ```js run
 let user = {
@@ -162,7 +178,11 @@ let user = {
 for (let key in user) alert(key); // name, toString
 ```
 
+<<<<<<< HEAD
 Если мы этого не хотим, можно установить для свойства `enumerable:false`. Тогда оно перестанет появляться в цикле `for..in` аналогично встроенному `toString`:
+=======
+If we don't like it, then we can set `enumerable:false`. Then it won't appear in a `for..in` loop, just like the built-in one:
+>>>>>>> ff152b126ec70a9de919bfdc1913215539d37187
 
 ```js run
 let user = {
@@ -237,8 +257,13 @@ Object.defineProperty(user, "name", {
 // всё это не будет работать:
 //   user.name = "Pete"
 //   delete user.name
+<<<<<<< HEAD
 //   defineProperty(user, "name", ...)
 Object.defineProperty(user, "name", {writable: true}); // Ошибка
+=======
+//   Object.defineProperty(user, "name", { value: "Pete" })
+Object.defineProperty(user, "name", {writable: true}); // Error
+>>>>>>> ff152b126ec70a9de919bfdc1913215539d37187
 */!*
 ```
 
