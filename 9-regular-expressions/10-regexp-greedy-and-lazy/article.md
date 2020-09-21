@@ -140,7 +140,11 @@ alert( str.match(regexp) ); // witch, broom
 
     ![](witch_lazy6.svg)
 
+<<<<<<< HEAD
 В этом примере мы увидели, как ленивый режим работает для `pattern:+?`. Квантификаторы `pattern:+?` и `pattern:??` работают аналогичным образом -- движок регулярного выражения увеличит количество совпадений, только если не сможет найти совпадение для оставшегося шаблона на текущей позиции.
+=======
+In this example we saw how the lazy mode works for `pattern:+?`. Quantifiers `pattern:*?` and `pattern:??` work the similar way -- the regexp engine increases the number of repetitions only if the rest of the pattern can't match on the given position.
+>>>>>>> e074a5f825a3d10b0c1e5e82561162f75516d7e3
 
 **Ленивый режим включается только для квантификаторов с `?`.**
 
