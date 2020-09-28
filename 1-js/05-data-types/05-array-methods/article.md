@@ -36,15 +36,23 @@ alert( arr.length ); // 3
 
 Поэтому для этого нужно использовать специальные методы.
 
+<<<<<<< HEAD
 Метод [arr.splice(str)](mdn:js/Array/splice) – это универсальный "швейцарский нож" для работы с массивами. Умеет всё: добавлять, удалять и заменять элементы.
+=======
+The [arr.splice](mdn:js/Array/splice) method is a swiss army knife for arrays. It can do everything: insert, remove and replace elements.
+>>>>>>> f489145731a45df6e369a3c063e52250f3f0061d
 
 Его синтаксис:
 
 ```js
-arr.splice(index[, deleteCount, elem1, ..., elemN])
+arr.splice(start[, deleteCount, elem1, ..., elemN])
 ```
 
+<<<<<<< HEAD
 Он начинает с позиции `index`, удаляет `deleteCount` элементов и вставляет `elem1, ..., elemN` на их место. Возвращает массив из удалённых элементов.
+=======
+It modified `arr` starting from the index `start`: removes `deleteCount` elements and then inserts `elem1, ..., elemN` at their place. Returns the array of removed elements.
+>>>>>>> f489145731a45df6e369a3c063e52250f3f0061d
 
 Этот метод проще всего понять, рассмотрев примеры.
 
@@ -159,6 +167,7 @@ arr.concat(arg1, arg2...)
 ```js run
 let arr = [1, 2];
 
+<<<<<<< HEAD
 // создать массив из: arr и [3,4]
 alert( arr.concat([3, 4]) ); // 1,2,3,4
 
@@ -166,6 +175,15 @@ alert( arr.concat([3, 4]) ); // 1,2,3,4
 alert( arr.concat([3, 4], [5, 6]) ); // 1,2,3,4,5,6
 
 // создать массив из: arr и [3,4], потом добавить значения 5 и 6
+=======
+// create an array from: arr and [3,4]
+alert( arr.concat([3, 4]) ); // 1,2,3,4
+
+// create an array from: arr and [3,4] and [5,6]
+alert( arr.concat([3, 4], [5, 6]) ); // 1,2,3,4,5,6
+
+// create an array from: arr and [3,4], then add values 5 and 6
+>>>>>>> f489145731a45df6e369a3c063e52250f3f0061d
 alert( arr.concat([3, 4], 5, 6) ); // 1,2,3,4,5,6
 ```
 
@@ -270,7 +288,11 @@ alert( arr.includes(NaN) );// true (верно)
 
 Представьте, что у нас есть массив объектов. Как нам найти объект с определённым условием?
 
+<<<<<<< HEAD
 Здесь пригодится метод [arr.find](mdn:js/Array/find).
+=======
+Here the [arr.find(fn)](mdn:js/Array/find) method comes in handy.
+>>>>>>> f489145731a45df6e369a3c063e52250f3f0061d
 
 Его синтаксис таков:
 ```js
@@ -387,7 +409,11 @@ alert( arr );  // *!*1, 15, 2*/!*
 
 **По умолчанию элементы сортируются как строки.**
 
+<<<<<<< HEAD
 Буквально, элементы преобразуются в строки при сравнении. Для строк применяется лексикографический порядок, и действительно выходит, что `"2" > "15"`.
+=======
+Literally, all elements are converted to strings for comparisons. For strings, lexicographic ordering is applied and indeed `"2" > "15"`.
+>>>>>>> f489145731a45df6e369a3c063e52250f3f0061d
 
 Чтобы использовать наш собственный порядок сортировки, нам нужно предоставить функцию в качестве аргумента `arr.sort()`.
 
@@ -434,9 +460,14 @@ alert(arr);  // *!*1, 2, 15*/!*
 
 В процессе работы алгоритм может сравнивать элемент с другими по нескольку раз, но он старается сделать как можно меньше сравнений.
 
+<<<<<<< HEAD
 
 ````smart header="Функция сравнения может вернуть любое число"
 На самом деле от функции сравнения требуется любое положительное число, чтобы сказать "больше", и отрицательное число, чтобы сказать "меньше".
+=======
+````smart header="A comparison function may return any number"
+Actually, a comparison function is only required to return a positive number to say "greater" and a negative number to say "less".
+>>>>>>> f489145731a45df6e369a3c063e52250f3f0061d
 
 Это позволяет писать более короткие функции:
 
@@ -449,14 +480,35 @@ alert(arr);  // *!*1, 2, 15*/!*
 ```
 ````
 
+<<<<<<< HEAD
 ````smart header="Лучше использовать стрелочные функции"
 Помните [стрелочные функции](info:arrow-functions-basics)? Можно использовать их здесь для того, чтобы сортировка выглядела более аккуратной:
+=======
+````smart header="Arrow functions for the best"
+Remember [arrow functions](info:arrow-functions-basics)? We can use them here for neater sorting:
+>>>>>>> f489145731a45df6e369a3c063e52250f3f0061d
 
 ```js
 arr.sort( (a, b) => a - b );
 ```
 
 Будет работать точно так же, как и более длинная версия выше.
+````
+
+````smart header="Use `localeCompare` for strings"
+Remember [strings](info:string#correct-comparisons) comparison algorithm? It compares letters by their codes by default.
+
+For many alphabets, it's better to use `str.localeCompare` method to correctly sort letters, such as `Ö`.
+
+For example, let's sort a few countries in German:
+
+```js run
+let countries = ['Österreich', 'Andorra', 'Vietnam'];
+
+alert( countries.sort( (a, b) => a > b ? 1 : -1) ); // Andorra, Vietnam, Österreich (wrong)
+
+alert( countries.sort( (a, b) => a.localeCompare(b) ) ); // Andorra,Österreich,Vietnam (correct!)
+```
 ````
 
 ### reverse
@@ -533,7 +585,7 @@ alert( str ); // Вася;Петя;Маша
 Синтаксис:
 
 ```js
-let value = arr.reduce(function(previousValue, item, index, array) {
+let value = arr.reduce(function(accumulator, item, index, array) {
   // ...
 }, [initial]);
 ```
@@ -542,14 +594,27 @@ let value = arr.reduce(function(previousValue, item, index, array) {
 
 Аргументы:
 
+<<<<<<< HEAD
 - `previousValue` -- результат предыдущего вызова этой функции, равен `initial` при первом вызове (если передан `initial`),
 - `item` -- очередной элемент массива,
 - `index` -- его индекс,
 - `array` -- сам массив.
+=======
+- `accumulator` -- is the result of the previous function call, equals `initial` the first time (if `initial` is provided).
+- `item` -- is the current array item.
+- `index` -- is its position.
+- `array` -- is the array.
+>>>>>>> f489145731a45df6e369a3c063e52250f3f0061d
 
 При вызове функции результат её вызова на предыдущем элементе массива передаётся как первый аргумент.
 
+<<<<<<< HEAD
 Звучит сложновато, но всё становится проще, если думать о первом аргументе как "аккумулирующем" результат предыдущих вызовов функции. По окончании он становится результатом `reduce`.
+=======
+So, the first argument is essentially the accumulator that stores the combined result of all previous executions. And at the end it becomes the result of `reduce`.
+
+Sounds complicated?
+>>>>>>> f489145731a45df6e369a3c063e52250f3f0061d
 
 Этот метод проще всего понять на примере.
 
@@ -577,7 +642,7 @@ alert(result); // 15
 
 В виде таблицы, где каждая строка –- вызов функции на очередном элементе массива:
 
-|   |`sum`|`current`|`result`|
+|   |`sum`|`current`|result|
 |---|-----|---------|---------|
 |первый вызов|`0`|`1`|`1`|
 |второй вызов|`1`|`2`|`3`|
@@ -615,8 +680,12 @@ let arr = [];
 arr.reduce((sum, current) => sum + current);
 ```
 
+<<<<<<< HEAD
 
 Поэтому рекомендуется всегда указывать начальное значение.
+=======
+So it's advised to always specify the initial value.
+>>>>>>> f489145731a45df6e369a3c063e52250f3f0061d
 
 Метод [arr.reduceRight](mdn:js/Array/reduceRight) работает аналогично, но проходит по массиву справа налево.
 
@@ -694,6 +763,7 @@ alert(soldiers[1].age); // 23
 
 Шпаргалка по методам массива:
 
+<<<<<<< HEAD
 - Для добавления/удаления элементов:  
   - `push (...items)` -- добавляет элементы в конец,
   - `pop()` -- извлекает элемент с конца,
@@ -702,6 +772,16 @@ alert(soldiers[1].age); // 23
   - `splice(pos, deleteCount, ...items)` -- начиная с индекса `pos`, удаляет `deleteCount` элементов и вставляет `items`.
   - `slice(start, end)` -- создаёт новый массив, копируя в него элементы с позиции `start` до `end` (не включая `end`).
   - `concat(...items)` -- возвращает новый массив: копирует все члены текущего массива и добавляет к нему `items`. Если какой-то из `items` является массивом, тогда берутся его элементы.  
+=======
+- To add/remove elements:
+  - `push(...items)` -- adds items to the end,
+  - `pop()` -- extracts an item from the end,
+  - `shift()` -- extracts an item from the beginning,
+  - `unshift(...items)` -- adds items to the beginning.
+  - `splice(pos, deleteCount, ...items)` -- at index `pos` delete `deleteCount` elements and insert `items`.
+  - `slice(start, end)` -- creates a new array, copies elements from index `start` till `end` (not inclusive) into it.
+  - `concat(...items)` -- returns a new array: copies all members of the current one and adds `items` to it. If any of `items` is an array, then its elements are taken.
+>>>>>>> f489145731a45df6e369a3c063e52250f3f0061d
 
 - Для поиска среди элементов:
   - `indexOf/lastIndexOf(item, pos)` -- ищет `item`, начиная с позиции `pos`, и возвращает его индекс или `-1`, если ничего не найдено.
@@ -730,7 +810,20 @@ alert(soldiers[1].age); // 23
 
   Функция `fn` вызывается для каждого элемента массива аналогично `map`. Если какие-либо/все результаты вызовов являются `true`, то метод возвращает `true`, иначе `false`.
 
+<<<<<<< HEAD
 - [arr.fill(value, start, end)](mdn:js/Array/fill) -- заполняет массив повторяющимися `value`, начиная с индекса `start` до `end`.
+=======
+  We can use `every` to compare arrays:
+  ```js run
+  function arraysEqual(arr1, arr2) {
+    return arr1.length === arr2.length && arr1.every((value, index) => value === arr2[index]);
+  }
+
+  alert( arraysEqual([1, 2], [1, 2])); // true
+  ```
+
+- [arr.fill(value, start, end)](mdn:js/Array/fill) -- fills the array with repeating `value` from index `start` to `end`.
+>>>>>>> f489145731a45df6e369a3c063e52250f3f0061d
 
 - [arr.copyWithin(target, start, end)](mdn:js/Array/copyWithin) -- копирует свои элементы, начиная со `start` и заканчивая `end`, в *собственную* позицию `target` (перезаписывает существующие).
 
