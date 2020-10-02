@@ -228,7 +228,7 @@ element.addEventListener(event, handler[, options]);
 `options`
 : Дополнительный объект со свойствами:
     - `once`: если `true`, тогда обработчик будет автоматически удалён после выполнения.
-    - `capture`: фаза, на которой должен сработать обработчик, подробнее об этом будет рассказано в главе <info:bubbling-and-capturing>. Так исторически сложилось, что `options` может быть `false/true`, это тоже самое, что `{capture: false/true}`.
+    - `capture`: фаза, на которой должен сработать обработчик, подробнее об этом будет рассказано в главе <info:bubbling-and-capturing>. Так исторически сложилось, что `options` может быть `false/true`, это то же самое, что `{capture: false/true}`.
     - `passive`: если `true`, то указывает, что обработчик никогда не вызовет `preventDefault()`, подробнее об этом будет рассказано в главе <info:default-browser-action>.
 
 
