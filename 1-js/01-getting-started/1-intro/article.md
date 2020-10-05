@@ -4,7 +4,11 @@
 
 ## Что такое JavaScript?
 
+<<<<<<< HEAD
 Изначально *JavaScript* был создан, чтобы *"сделать веб-страницы живыми"*.
+=======
+*JavaScript* was initially created to "make web pages alive".
+>>>>>>> 181cc781ab6c55fe8c43887a0c060db7f93fb0ca
 
 Программы на этом языке называются *скриптами*. Они могут встраиваться в HTML и выполняться автоматически при загрузке веб-страницы.
 
@@ -12,8 +16,13 @@
 
 Это отличает JavaScript от другого языка - [Java](https://ru.wikipedia.org/wiki/Java).
 
+<<<<<<< HEAD
 ```smart header="Почему <u>Java</u>Script?"
 Когда JavaScript создавался, у него было другое имя - "LiveScript". Однако, язык Java был очень популярен в то время, и было решено, что позиционирование JavaScript как "младшего брата" Java будет полезно.
+=======
+```smart header="Why is it called <u>Java</u>Script?"
+When JavaScript was created, it initially had another name: "LiveScript". But Java was very popular at that time, so it was decided that positioning a new language as a "younger brother" of Java would help.
+>>>>>>> 181cc781ab6c55fe8c43887a0c060db7f93fb0ca
 
 Со временем JavaScript стал полностью независимым языком со своей собственной спецификацией, называющейся [ECMAScript](http://ru.wikipedia.org/wiki/ECMAScript), и сейчас не имеет никакого отношения к Java.
 ```
@@ -24,9 +33,15 @@
 
 Разные движки имеют разные "кодовые имена". Например:
 
+<<<<<<< HEAD
 - [V8](https://ru.wikipedia.org/wiki/V8_(%D0%B4%D0%B2%D0%B8%D0%B6%D0%BE%D0%BA_JavaScript)) -- в Chrome и Opera.
 - [SpiderMonkey](https://ru.wikipedia.org/wiki/SpiderMonkey) -- в Firefox.
 - ...Ещё есть "Trident" и "Chakra" для разных версий IE, "ChakraCore" для Microsoft Edge, "Nitro" и "SquirrelFish" для Safari и т.д.
+=======
+- [V8](https://en.wikipedia.org/wiki/V8_(JavaScript_engine)) -- in Chrome and Opera.
+- [SpiderMonkey](https://en.wikipedia.org/wiki/SpiderMonkey) -- in Firefox.
+- ...There are other codenames like "Chakra" for IE, "ChakraCore" for Microsoft Edge, "Nitro" and "SquirrelFish" for Safari, etc.
+>>>>>>> 181cc781ab6c55fe8c43887a0c060db7f93fb0ca
 
 Эти названия полезно знать, так как они часто используются в статьях для разработчиков. Мы тоже будем их использовать. Например, если "функциональность X поддерживается V8", тогда "Х", скорее всего, работает в Chrome и Opera.
 
@@ -38,7 +53,11 @@
 2. Затем он преобразует ("компилирует") скрипт в машинный язык.
 3. После этого машинный код запускается и работает достаточно быстро.
 
+<<<<<<< HEAD
 Движок применяет оптимизации на каждом этапе. Он даже просматривает скомпилированный скрипт во время его работы, анализируя проходящие через него данные, и применяет оптимизации к машинному коду, полагаясь на полученные знания. В результате скрипты работают очень быстро.
+=======
+The engine applies optimizations at each step of the process. It even watches the compiled script as it runs, analyzes the data that flows through it, and further optimizes the machine code based on that knowledge.
+>>>>>>> 181cc781ab6c55fe8c43887a0c060db7f93fb0ca
 ```
 
 ## Что может JavaScript в браузере?
@@ -63,7 +82,11 @@
 
 Примеры таких ограничений включают в себя:
 
+<<<<<<< HEAD
 - JavaScript на веб-странице не может читать/записывать произвольные файлы на жёстком диске, копировать их или запускать программы. Он не имеет прямого доступа к системным функциям ОС.
+=======
+- JavaScript on a webpage may not read/write arbitrary files on the hard disk, copy them or execute programs. It has no direct access to OS functions.
+>>>>>>> 181cc781ab6c55fe8c43887a0c060db7f93fb0ca
 
     Современные браузеры позволяют ему работать с файлами, но с ограниченным доступом, и предоставляют его, только если пользователь выполняет определённые действия, такие как "перетаскивание" файла в окно браузера или его выбор с помощью тега `<input>`.
 
@@ -106,11 +129,19 @@ JavaScript - это единственная браузерная техноло
 
 Примеры таких языков:
 
+<<<<<<< HEAD
 - [CoffeeScript](http://coffeescript.org/) добавляет "синтаксический сахар" для JavaScript. Он вводит более короткий синтаксис, который позволяет писать чистый и лаконичный код. Обычно такое нравится Ruby-программистам.
 - [TypeScript](http://www.typescriptlang.org/) концентрируется на добавлении "строгой типизации" для упрощения разработки и поддержки больших и сложных систем. Разработан Microsoft.
 - [Flow](http://flow.org/) тоже добавляет типизацию, но иначе. Разработан Facebook.
 - [Dart](https://www.dartlang.org/) стоит особняком, потому что имеет собственный движок, работающий вне браузера (например, в мобильных приложениях). Первоначально был предложен Google, как замена JavaScript, но на данный момент необходима его транспиляция для запуска так же, как для вышеперечисленных языков.
 - [Brython](https://brython.info/) транспилирует Python в JavaScript, что позволяет писать приложения на чистом Python без JavaScript.
+=======
+- [CoffeeScript](http://coffeescript.org/) is a "syntactic sugar" for JavaScript. It introduces shorter syntax, allowing us to write clearer and more precise code. Usually, Ruby devs like it.
+- [TypeScript](http://www.typescriptlang.org/) is concentrated on adding "strict data typing" to simplify the development and support of complex systems. It is developed by Microsoft.
+- [Flow](http://flow.org/) also adds data typing, but in a different way. Developed by Facebook.
+- [Dart](https://www.dartlang.org/) is a standalone language that has its own engine that runs in non-browser environments (like mobile apps), but also can be transpiled to JavaScript. Developed by Google.
+- [Brython](https://brython.info/) is a Python transpiler to JavaScript that allow to write application in pure Python without JavaScript.
+>>>>>>> 181cc781ab6c55fe8c43887a0c060db7f93fb0ca
 
 Есть и другие. Но даже если мы используем один из этих языков, мы должны знать JavaScript, чтобы действительно понимать, что мы делаем.
 

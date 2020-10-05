@@ -1,6 +1,6 @@
 Можно хранить прочитанные сообщения в `WeakSet`:
 
-```js
+```js run
 let messages = [
     {text: "Hello", from: "John"},
     {text: "How goes?", from: "John"},

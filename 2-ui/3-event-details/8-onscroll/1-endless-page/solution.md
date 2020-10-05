@@ -55,11 +55,19 @@ function populate() {
     // нижняя граница документа
     let windowRelativeBottom = document.documentElement.getBoundingClientRect().bottom;
 
+<<<<<<< HEAD
     // если пользователь прокрутил достаточно далеко (< 100px до конца)
     if (windowRelativeBottom < document.documentElement.clientHeight + 100) {
       // добавим больше данных
       document.body.insertAdjacentHTML("beforeend", `<p>Дата: ${new Date()}</p>`);
     }
+=======
+    // if the user hasn't scrolled far enough (>100px to the end)
+    if (windowRelativeBottom > document.documentElement.clientHeight + 100) break;
+    
+    // let's add more data
+    document.body.insertAdjacentHTML("beforeend", `<p>Date: ${new Date()}</p>`);
+>>>>>>> 181cc781ab6c55fe8c43887a0c060db7f93fb0ca
   }
 }
 ```

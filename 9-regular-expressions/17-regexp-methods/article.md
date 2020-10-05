@@ -87,7 +87,11 @@ alert( firstMatch.index );  // 0
 alert( firstMatch.input );  // <h1>Hello, world!</h1>
 ```
 
+<<<<<<< HEAD
 При переборе результатов `matchAll` в цикле `for..of` вызов `Array.from`, разумеется, не нужен.
+=======
+If we use `for..of` to loop over `matchAll` matches, then we don't need `Array.from` any more.
+>>>>>>> 181cc781ab6c55fe8c43887a0c060db7f93fb0ca
 
 ## str.split(regexp|substr, limit)
 
@@ -151,7 +155,11 @@ alert( '12-34-56'.replace( *!*/-/g*/!*, ":" ))  // 12:34:56
 
 Второй аргумент - строка замены. Мы можем использовать специальные символы в нем:
 
+<<<<<<< HEAD
 | Спецсимволы | Действие в строке замены |
+=======
+| Symbols | Action in the replacement string |
+>>>>>>> 181cc781ab6c55fe8c43887a0c060db7f93fb0ca
 |--------|--------|
 |`$$`|вставляет `"$"` |
 |`$&`|вставляет всё найденное совпадение|
@@ -209,7 +217,11 @@ let result = str.replace(/(\w+) (\w+)/, (match, name, surname) => `${surname}, $
 alert(result); // Smith, John
 ```
 
+<<<<<<< HEAD
 Если в регулярном выражении много скобочных групп, то бывает удобно использовать остаточные аргументы для обращения к ним:
+=======
+If there are many groups, it's convenient to use rest parameters to access them:
+>>>>>>> 181cc781ab6c55fe8c43887a0c060db7f93fb0ca
 
 ```js run
 let str = "John Smith";
