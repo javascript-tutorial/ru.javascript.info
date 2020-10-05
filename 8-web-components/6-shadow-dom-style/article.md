@@ -259,7 +259,6 @@ customElements.define('user-card', class extends HTMLElement {
 </style>
 <div class="field">Имя: <slot name="username"></slot></div>
 <div class="field">Дата рождения: <slot name="birthday"></slot></div>
-</style>
 ```
 
 Затем мы можем объявить это свойство во внешнем документе для `<user-card>`:
