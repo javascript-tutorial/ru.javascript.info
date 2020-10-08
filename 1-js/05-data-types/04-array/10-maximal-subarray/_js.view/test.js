@@ -31,7 +31,7 @@ describe("getMaxSubSum", function() {
     assert.equal(getMaxSubSum([-1, -2]), 0);
   });
 
-  it("maximal subsum of [2, -8, 5, -1, 2, -3, 2] equals 6", function() {
-    assert.equal(getMaxSubSum([2, -8, 5, -1, 2, -3, 2]), 6);
+  it("maximal subsum of [2, -8, 5, -1, 2, -3, 2] equals 5", function() {
+    assert.equal(getMaxSubSum([2, -8, 5, -1, 2, -3, 2]), 5);
   });
 });
