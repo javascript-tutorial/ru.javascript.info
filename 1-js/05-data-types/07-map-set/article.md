@@ -41,7 +41,17 @@ alert(map.size); // 3
 
 Как мы видим, в отличие от объектов, ключи не были приведены к строкам. Можно использовать любые типы данных для ключей.
 
+<<<<<<< HEAD
 **Map может использовать объекты в качестве ключей.**
+=======
+```smart header="`map[key]` isn't the right way to use a `Map`"
+Although `map[key]` also works, e.g. we can set `map[key] = 2`, this is treating `map` as a plain JavaScript object, so it implies all corresponding limitations (no object keys and so on).
+
+So we should use `map` methods: `set`, `get` and so on.
+```
+
+**Map can also use objects as keys.**
+>>>>>>> 0599d07b3c13ee25f583fc091cead3c17a7e7779
 
 Например:
 
@@ -189,7 +199,11 @@ let prices = Object.fromEntries([
 alert(prices.orange); // 2
 ```
 
+<<<<<<< HEAD
 Мы можем использовать `Object.fromEntries`, чтобы получить обычный объект из `Map`.
+=======
+We can use `Object.fromEntries` to get a plain object from `Map`.
+>>>>>>> 0599d07b3c13ee25f583fc091cead3c17a7e7779
 
 К примеру, у нас данные в `Map`, но их нужно передать в сторонний код, который ожидает обычный объект.
 
@@ -211,9 +225,13 @@ let obj = Object.fromEntries(map.entries()); // make a plain object (*)
 alert(obj.orange); // 2
 ```
 
+<<<<<<< HEAD
 Вызов `map.entries()` возвращает массив пар ключ/значение, как раз в нужном формате для `Object.fromEntries`.
 
 Мы могли бы написать строку `(*)` ещё короче:
+=======
+A call to `map.entries()` returns an iterable of key/value pairs, exactly in the right format for `Object.fromEntries`.
+>>>>>>> 0599d07b3c13ee25f583fc091cead3c17a7e7779
 
 ```js
 let obj = Object.fromEntries(map); // убрать .entries()

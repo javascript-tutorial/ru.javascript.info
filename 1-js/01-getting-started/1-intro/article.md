@@ -1,10 +1,18 @@
 # Введение в JavaScript
 
+<<<<<<< HEAD
 Давайте посмотрим, что такого особенного в JavaScript, чего можно достичь с его помощью и какие другие технологии хорошо с ним работают.
+=======
+Let's see what's so special about JavaScript, what we can achieve with it, and what other technologies play well with it.
+>>>>>>> 0599d07b3c13ee25f583fc091cead3c17a7e7779
 
 ## Что такое JavaScript?
 
+<<<<<<< HEAD
 Изначально *JavaScript* был создан, чтобы *"сделать веб-страницы живыми"*.
+=======
+*JavaScript* was initially created to "make web pages alive".
+>>>>>>> 0599d07b3c13ee25f583fc091cead3c17a7e7779
 
 Программы на этом языке называются *скриптами*. Они могут встраиваться в HTML и выполняться автоматически при загрузке веб-страницы.
 
@@ -12,8 +20,13 @@
 
 Это отличает JavaScript от другого языка - [Java](https://ru.wikipedia.org/wiki/Java).
 
+<<<<<<< HEAD
 ```smart header="Почему <u>Java</u>Script?"
 Когда JavaScript создавался, у него было другое имя - "LiveScript". Однако, язык Java был очень популярен в то время, и было решено, что позиционирование JavaScript как "младшего брата" Java будет полезно.
+=======
+```smart header="Why is it called <u>Java</u>Script?"
+When JavaScript was created, it initially had another name: "LiveScript". But Java was very popular at that time, so it was decided that positioning a new language as a "younger brother" of Java would help.
+>>>>>>> 0599d07b3c13ee25f583fc091cead3c17a7e7779
 
 Со временем JavaScript стал полностью независимым языком со своей собственной спецификацией, называющейся [ECMAScript](http://ru.wikipedia.org/wiki/ECMAScript), и сейчас не имеет никакого отношения к Java.
 ```
@@ -24,9 +37,15 @@
 
 Разные движки имеют разные "кодовые имена". Например:
 
+<<<<<<< HEAD
 - [V8](https://ru.wikipedia.org/wiki/V8_(%D0%B4%D0%B2%D0%B8%D0%B6%D0%BE%D0%BA_JavaScript)) -- в Chrome и Opera.
 - [SpiderMonkey](https://ru.wikipedia.org/wiki/SpiderMonkey) -- в Firefox.
 - ...Ещё есть "Trident" и "Chakra" для разных версий IE, "ChakraCore" для Microsoft Edge, "Nitro" и "SquirrelFish" для Safari и т.д.
+=======
+- [V8](https://en.wikipedia.org/wiki/V8_(JavaScript_engine)) -- in Chrome and Opera.
+- [SpiderMonkey](https://en.wikipedia.org/wiki/SpiderMonkey) -- in Firefox.
+- ...There are other codenames like "Chakra" for IE, "ChakraCore" for Microsoft Edge, "Nitro" and "SquirrelFish" for Safari, etc.
+>>>>>>> 0599d07b3c13ee25f583fc091cead3c17a7e7779
 
 Эти названия полезно знать, так как они часто используются в статьях для разработчиков. Мы тоже будем их использовать. Например, если "функциональность X поддерживается V8", тогда "Х", скорее всего, работает в Chrome и Opera.
 
@@ -38,7 +57,11 @@
 2. Затем он преобразует ("компилирует") скрипт в машинный язык.
 3. После этого машинный код запускается и работает достаточно быстро.
 
+<<<<<<< HEAD
 Движок применяет оптимизации на каждом этапе. Он даже просматривает скомпилированный скрипт во время его работы, анализируя проходящие через него данные, и применяет оптимизации к машинному коду, полагаясь на полученные знания. В результате скрипты работают очень быстро.
+=======
+The engine applies optimizations at each step of the process. It even watches the compiled script as it runs, analyzes the data that flows through it, and further optimizes the machine code based on that knowledge.
+>>>>>>> 0599d07b3c13ee25f583fc091cead3c17a7e7779
 ```
 
 ## Что может JavaScript в браузере?
@@ -63,12 +86,21 @@
 
 Примеры таких ограничений включают в себя:
 
+<<<<<<< HEAD
 - JavaScript на веб-странице не может читать/записывать произвольные файлы на жёстком диске, копировать их или запускать программы. Он не имеет прямого доступа к системным функциям ОС.
+=======
+- JavaScript on a webpage may not read/write arbitrary files on the hard disk, copy them or execute programs. It has no direct access to OS functions.
+>>>>>>> 0599d07b3c13ee25f583fc091cead3c17a7e7779
 
     Современные браузеры позволяют ему работать с файлами, но с ограниченным доступом, и предоставляют его, только если пользователь выполняет определённые действия, такие как "перетаскивание" файла в окно браузера или его выбор с помощью тега `<input>`.
 
+<<<<<<< HEAD
     Существуют способы взаимодействия с камерой/микрофоном и другими устройствами, но они требуют явного разрешения пользователя. Таким образом, страница с поддержкой JavaScript не может незаметно включить веб-камеру, наблюдать за происходящим и отправлять информацию в [ФСБ](https://ru.wikipedia.org/wiki/%D0%A4%D0%B5%D0%B4%D0%B5%D1%80%D0%B0%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F_%D1%81%D0%BB%D1%83%D0%B6%D0%B1%D0%B0_%D0%B1%D0%B5%D0%B7%D0%BE%D0%BF%D0%B0%D1%81%D0%BD%D0%BE%D1%81%D1%82%D0%B8_%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D0%B9%D1%81%D0%BA%D0%BE%D0%B9_%D0%A4%D0%B5%D0%B4%D0%B5%D1%80%D0%B0%D1%86%D0%B8%D0%B8).
 - Различные окна/вкладки не знают друг о друге. Иногда одно окно, используя JavaScript, открывает другое окно. Но даже в этом случае JavaScript с одной страницы не имеет доступа к другой, если они пришли с разных сайтов (с другого домена, протокола или порта).
+=======
+    There are ways to interact with camera/microphone and other devices, but they require a user's explicit permission. So a JavaScript-enabled page may not sneakily enable a web-camera, observe the surroundings and send the information to the [NSA](https://en.wikipedia.org/wiki/National_Security_Agency).
+- Different tabs/windows generally do not know about each other. Sometimes they do; for example when one window uses JavaScript to open the other one. But even in this case, JavaScript from one page may not access the other if they come from different sites (from a different domain, protocol or port).
+>>>>>>> 0599d07b3c13ee25f583fc091cead3c17a7e7779
 
     Это называется "Политика одинакового источника" (Same Origin Policy). Чтобы обойти это ограничение, обе страницы должны согласиться с этим и содержать JavaScript-код, который специальным образом обменивается данными.
 
@@ -106,16 +138,30 @@ JavaScript - это единственная браузерная техноло
 
 Примеры таких языков:
 
+<<<<<<< HEAD
 - [CoffeeScript](http://coffeescript.org/) добавляет "синтаксический сахар" для JavaScript. Он вводит более короткий синтаксис, который позволяет писать чистый и лаконичный код. Обычно такое нравится Ruby-программистам.
 - [TypeScript](http://www.typescriptlang.org/) концентрируется на добавлении "строгой типизации" для упрощения разработки и поддержки больших и сложных систем. Разработан Microsoft.
 - [Flow](http://flow.org/) тоже добавляет типизацию, но иначе. Разработан Facebook.
 - [Dart](https://www.dartlang.org/) стоит особняком, потому что имеет собственный движок, работающий вне браузера (например, в мобильных приложениях). Первоначально был предложен Google, как замена JavaScript, но на данный момент необходима его транспиляция для запуска так же, как для вышеперечисленных языков.
 - [Brython](https://brython.info/) транспилирует Python в JavaScript, что позволяет писать приложения на чистом Python без JavaScript.
+=======
+- [CoffeeScript](http://coffeescript.org/) is a "syntactic sugar" for JavaScript. It introduces shorter syntax, allowing us to write clearer and more precise code. Usually, Ruby devs like it.
+- [TypeScript](http://www.typescriptlang.org/) is concentrated on adding "strict data typing" to simplify the development and support of complex systems. It is developed by Microsoft.
+- [Flow](http://flow.org/) also adds data typing, but in a different way. Developed by Facebook.
+- [Dart](https://www.dartlang.org/) is a standalone language that has its own engine that runs in non-browser environments (like mobile apps), but also can be transpiled to JavaScript. Developed by Google.
+- [Brython](https://brython.info/) is a Python transpiler to JavaScript that allow to write application in pure Python without JavaScript.
+>>>>>>> 0599d07b3c13ee25f583fc091cead3c17a7e7779
 
 Есть и другие. Но даже если мы используем один из этих языков, мы должны знать JavaScript, чтобы действительно понимать, что мы делаем.
 
 ## Итого
 
+<<<<<<< HEAD
 - JavaScript изначально создавался только для браузера, но сейчас используется на многих других платформах.
 - Сегодня JavaScript занимает уникальную позицию в качестве самого распространённого языка для браузера, обладающего полной интеграцией с HTML/CSS.
 - Многие языки могут быть "транспилированы" в JavaScript для предоставления дополнительных функций. Рекомендуется хотя бы кратко рассмотреть их после освоения JavaScript.
+=======
+- JavaScript was initially created as a browser-only language, but it is now used in many other environments as well.
+- Today, JavaScript has a unique position as the most widely-adopted browser language with full integration in HTML/CSS.
+- There are many languages that get "transpiled" to JavaScript and provide certain features. It is recommended to take a look at them, at least briefly, after mastering JavaScript.
+>>>>>>> 0599d07b3c13ee25f583fc091cead3c17a7e7779

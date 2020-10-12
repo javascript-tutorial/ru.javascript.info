@@ -5,7 +5,13 @@
 	
 2. Здесь то же самое. Круглые скобки (оператор группировки) тут не изменяют порядок выполнения операций - доступ к методу через точку в любом случае срабатывает первым.
 
+<<<<<<< HEAD:1-js/04-object-basics/04-object-methods/3-why-this/solution.md
 3. Здесь мы имеем более сложный вызов `(expression).method()`. Такой вызов работает, как если бы он был разделён на 2 строчки:
+=======
+2. The same, parentheses do not change the order of operations here, the dot is first anyway.
+
+3. Here we have a more complex call `(expression).method()`. The call works as if it were split into two lines:
+>>>>>>> 0599d07b3c13ee25f583fc091cead3c17a7e7779:1-js/99-js-misc/04-reference-type/3-why-this/solution.md
 
     ```js no-beautify
     f = obj.go; // вычисляется выражение (переменная f ссылается на код функции)

@@ -6,7 +6,9 @@ importance: 5
 
 Таблица:
 
+```html run
 <table>
+<<<<<<< HEAD
 <tr>
   <th>Имя</th>
   <th>Фамилия</th>
@@ -32,7 +34,29 @@ importance: 5
   <td>...</td>
   <td>...</td>
 </tr>
+=======
+<thead>
+  <tr>
+    <th>Name</th><th>Surname</th><th>Age</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>John</td><td>Smith</td><td>10</td>
+  </tr>
+  <tr>
+    <td>Pete</td><td>Brown</td><td>15</td>
+  </tr>
+  <tr>
+    <td>Ann</td><td>Lee</td><td>5</td>
+  </tr>
+  <tr>
+    <td>...</td><td>...</td><td>...</td>
+  </tr>
+</tbody>
+>>>>>>> 0599d07b3c13ee25f583fc091cead3c17a7e7779
 </table>
+```
 
 Может быть больше строк.
 
