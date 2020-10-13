@@ -150,7 +150,7 @@ let permissions2 = { canEdit: true };
 Object.assign(user, permissions1, permissions2);
 */!*
 
-// теперь user = { name: "John", canView: true, canEdit: true }
+// теперь user = { name: "Иван", canView: true, canEdit: true }
 ```
 
 Если принимающий объект (`user`) уже имеет свойство с таким именем, оно будет перезаписано:
