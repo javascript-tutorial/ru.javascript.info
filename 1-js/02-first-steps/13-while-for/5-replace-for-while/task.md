@@ -2,12 +2,13 @@ importance: 5
 
 ---
 
-# Замените for на while
+# Replace "for" with "while"
 
-Перепишите код, заменив цикл `for` на `while`, без изменения поведения цикла.
+Rewrite the code changing the `for` loop to `while` without altering its behavior (the output should stay same).
 
 ```js run
 for (let i = 0; i < 3; i++) {
   alert( `number ${i}!` );
 }
 ```
+
