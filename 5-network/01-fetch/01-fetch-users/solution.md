@@ -3,7 +3,11 @@
 
 Если ответ приходит cо статусом `200`, то вызываем метод `.json()`, чтобы прочитать JS-объект.
 
+<<<<<<< HEAD
 А если запрос завершается ошибкой или код статуса в ответе отличен от 200, то мы просто возвращаем `null` в массиве результатов.
+=======
+Otherwise, if a `fetch` fails, or the response has non-200 status, we just return `null` in the resulting array.
+>>>>>>> 2d5be7b7307b0a4a85e872d229e0cebd2d8563b5
 
 Вот код:
 
