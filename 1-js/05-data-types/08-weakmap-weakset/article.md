@@ -31,8 +31,14 @@ let array = [ john ];
 john = null; // перезаписываем ссылку на объект
 
 *!*
+<<<<<<< HEAD
 // объект john хранится в массиве, поэтому он не будет удалён сборщиком мусора
 // мы можем взять его значение как array[0]
+=======
+// the object previously referenced by john is stored inside the array 
+// therefore it won't be garbage-collected
+// we can get it as array[0]
+>>>>>>> dccca58f268ad6d5a6f2160613a8ea3c5cd53a2d
 */!*
 ```
 
@@ -142,7 +148,11 @@ function countUser(user) {
 // 📁 main.js
 let john = { name: "John" };
 
+<<<<<<< HEAD
 countUser(john); //ведём подсчёт посещений
+=======
+countUser(john); // count his visits
+>>>>>>> dccca58f268ad6d5a6f2160613a8ea3c5cd53a2d
 
 // пользователь покинул нас
 john = null;

@@ -261,7 +261,11 @@ if (window == top) { // текущий window == window.top?
 Аргументы:
 
 `data`
+<<<<<<< HEAD
 : Данные для отправки. Может быть любым объектом, данные клонируются с использованием "алгоритма структурированного клонирования". IE поддерживает только строки, поэтому мы должны использовать метод `JSON.stringify` на сложных объектах, чтобы поддержать этот браузер.
+=======
+: The data to send. Can be any object, the data is cloned using the "structured serialization algorithm". IE supports only strings, so we should `JSON.stringify` complex objects to support that browser.
+>>>>>>> dccca58f268ad6d5a6f2160613a8ea3c5cd53a2d
 
 `targetOrigin`
 : Определяет источник для окна-получателя, только окно с данного источника имеет право получить сообщение.
@@ -333,11 +337,15 @@ window.addEventListener("message", function(event) {
 
 [codetabs src="postmessage" height=120]
 
+<<<<<<< HEAD
 ```smart header="Без задержек"
 Между `postMessage` и событием `message` не существует задержки. Событие происходит синхронно, быстрее, чем `setTimeout(...,0)`.
 ```
 
 ## Итого
+=======
+## Summary
+>>>>>>> dccca58f268ad6d5a6f2160613a8ea3c5cd53a2d
 
 Чтобы вызвать метод или получить содержимое из другого окна, нам, во-первых, необходимо иметь ссылку на него.
 

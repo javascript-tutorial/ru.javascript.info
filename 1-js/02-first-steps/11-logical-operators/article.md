@@ -84,34 +84,55 @@ result = value1 || value2 || value3;
 
 Значение возвращается в исходном виде, без преобразования.
 
+<<<<<<< HEAD
 Другими словами, цепочка ИЛИ `"||"` возвращает первое истинное значение или последнее, если такое значение не найдено.
+=======
+In other words, a chain of OR `||` returns the first truthy value or the last one if no truthy value is found.
+>>>>>>> dccca58f268ad6d5a6f2160613a8ea3c5cd53a2d
 
 Например:
 
 ```js run
+<<<<<<< HEAD
 alert( 1 || 0 ); // 1
 alert( true || 'no matter what' ); // true
 
 alert( null || 1 ); // 1 (первое истинное значение)
 alert( null || 0 || 1 ); // 1 (первое истинное значение)
 alert( undefined || null || 0 ); // 0 (поскольку все ложно, возвращается последнее значение)
+=======
+alert( 1 || 0 ); // 1 (1 is truthy)
+
+alert( null || 1 ); // 1 (1 is the first truthy value)
+alert( null || 0 || 1 ); // 1 (the first truthy value)
+
+alert( undefined || null || 0 ); // 0 (all falsy, returns the last value)
+>>>>>>> dccca58f268ad6d5a6f2160613a8ea3c5cd53a2d
 ```
 
 Это делает возможным более интересное применение оператора по сравнению с "чистым, традиционным, только булевым ИЛИ".
 
 1. **Получение первого истинного значения из списка переменных или выражений.**
 
+<<<<<<< HEAD
     Представим, что у нас имеется ряд переменных, которые могут содержать данные или быть `null/undefined`. Как мы можем найти первую переменную с данными?
 
     С помощью `||`:
+=======
+    For instance, we have `firstName`, `lastName` and `nickName` variables, all optional (i.e. can be undefined or have falsy values).
+
+    Let's use OR `||` to choose the one that has the data and show it (or `"Anonymous"` if nothing set):
+>>>>>>> dccca58f268ad6d5a6f2160613a8ea3c5cd53a2d
 
     ```js run
-    let currentUser = null;
-    let defaultUser = "John";
+    let firstName = "";
+    let lastName = "";
+    let nickName = "SuperCoder";
 
     *!*
-    let name = currentUser || defaultUser || "unnamed";
+    alert( firstName || lastName || nickName || "Anonymous"); // SuperCoder
     */!*
+<<<<<<< HEAD
 
     alert( name ); // выбирается "John" – первое истинное значение
     ```
@@ -124,30 +145,45 @@ alert( undefined || null || 0 ); // 0 (поскольку все ложно, в�
     Это хорошо заметно, когда выражение, указанное в качестве второго аргумента, имеет побочный эффект, например, изменение переменной.
 
     В приведённом ниже примере `x` не изменяется:
+=======
+    ```
 
-    ```js run no-beautify
-    let x;
+    If all variables were falsy, `"Anonymous"` would show up.
 
-    *!*true*/!* || (x = 1);
+2. **Short-circuit evaluation.**
 
+    Another feature of OR `||` operator is the so-called "short-circuit" evaluation.
+>>>>>>> dccca58f268ad6d5a6f2160613a8ea3c5cd53a2d
+
+    It means that `||` processes its arguments until the first truthy value is reached, and then the value is returned immediately, without even touching the other argument.
+
+    That importance of this feature becomes obvious if an operand isn't just a value, but an expression with a side effect, such as a variable assignment or a function call.
+
+<<<<<<< HEAD
     alert(x); // undefined, потому что (x = 1) не вычисляется
     ```
 
     Если бы первый аргумент имел значение `false`, то `||` приступил бы к вычислению второго и выполнил операцию присваивания:
+=======
+    In the example below, only the second message is printed:
+>>>>>>> dccca58f268ad6d5a6f2160613a8ea3c5cd53a2d
 
     ```js run no-beautify
-    let x;
-
-    *!*false*/!* || (x = 1);
-
-    alert(x); // 1
+    *!*true*/!* || alert("not printed");
+    *!*false*/!* || alert("printed");
     ```
 
+<<<<<<< HEAD
     Присваивание - лишь один пример. Конечно, могут быть и другие побочные эффекты, которые не проявятся, если вычисление до них не дойдёт.
 
     Как мы видим, этот вариант использования `||` является "аналогом `if`". Первый операнд преобразуется в логический. Если он оказывается ложным, начинается вычисление второго.
 
     В большинстве случаев лучше использовать "обычный" `if`, чтобы облегчить понимание кода, но иногда это может быть удобно.
+=======
+    In the first line, the OR `||` operator stops the evaluation immediately upon seeing `true`, so the `alert` isn't run.
+
+    Sometimes, people use this feature to execute commands only if the condition on the left part is falsy.
+>>>>>>> dccca58f268ad6d5a6f2160613a8ea3c5cd53a2d
 
 ## && (И)
 
@@ -236,7 +272,12 @@ alert( 1 && 2 && 3 ); // 3
 Таким образом, код `a && b || c && d` по существу такой же, как если бы выражения `&&` были в круглых скобках: `(a && b) || (c && d)`.
 ````
 
+<<<<<<< HEAD
 Как и оператор ИЛИ, И `&&` иногда может заменять `if`.
+=======
+````warn header="Don't replace `if` with `||` or `&&`"
+Sometimes, people use the AND `&&` operator as a "shorter way to write `if`".
+>>>>>>> dccca58f268ad6d5a6f2160613a8ea3c5cd53a2d
 
 К примеру:
 
@@ -254,14 +295,18 @@ let x = 1;
 ```js run
 let x = 1;
 
-if (x > 0) {
-  alert( 'Greater than zero!' );
-}
+if (x > 0) alert( 'Greater than zero!' );
 ```
 
+<<<<<<< HEAD
 Однако, как правило, вариант с `if` лучше читается и воспринимается.
 
 Он более очевиден, поэтому лучше использовать его.
+=======
+Although, the variant with `&&` appears shorter, `if` is more obvious and tends to be a little bit more readable. So we recommend using every construct for its purpose: use `if` if we want `if` and use `&&` if we want AND.
+````
+
+>>>>>>> dccca58f268ad6d5a6f2160613a8ea3c5cd53a2d
 
 ## ! (НЕ)
 

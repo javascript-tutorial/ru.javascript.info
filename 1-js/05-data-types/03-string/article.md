@@ -112,7 +112,11 @@ alert( 'I*!*\'*/!*m the Walrus!' ); // *!*I'm*/!* the Walrus!
 
 Здесь перед входящей в строку кавычкой необходимо добавить обратный слеш — `\'` — иначе она бы обозначала окончание строки.
 
+<<<<<<< HEAD
 Разумеется, требование экранировать относится только к таким же кавычкам, как те, в которые заключена строка. Так что мы можем применить и более элегантное решение, использовав для этой строки двойные или обратные кавычки:
+=======
+Of course, only the quotes that are the same as the enclosing ones need to be escaped. So, as a more elegant solution, we could switch to double quotes or backticks instead:
+>>>>>>> dccca58f268ad6d5a6f2160613a8ea3c5cd53a2d
 
 ```js run
 alert( `I'm the Walrus!` ); // I'm the Walrus!
@@ -312,8 +316,14 @@ if (str.indexOf("Widget") != -1) {
 }
 ```
 
+<<<<<<< HEAD
 #### Трюк с побитовым НЕ
 Существует старый трюк с использованием [побитового оператора НЕ](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators#.7E_.28Bitwise_NOT.29) — `~`. Он преобразует число в 32-разрядное целое со знаком (signed 32-bit integer). Дробная часть, в случае, если она присутствует, отбрасывается. Затем все биты числа инвертируются.
+=======
+#### The bitwise NOT trick
+
+One of the old tricks used here is the [bitwise NOT](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_NOT) `~` operator. It converts the number to a 32-bit integer (removes the decimal part if exists) and then reverses all bits in its binary representation.
+>>>>>>> dccca58f268ad6d5a6f2160613a8ea3c5cd53a2d
 
 На практике это означает простую вещь: для 32-разрядных целых чисел значение `~n` равно `-(n+1)`.
 
@@ -346,7 +356,11 @@ if (~str.indexOf("Widget")) {
 
 Просто запомните: `if (~str.indexOf(…))` означает "если найдено".
 
+<<<<<<< HEAD
 Впрочем, если быть точнее, из-за того, что большие числа обрезаются до 32 битов оператором `~`, существуют другие числа, для которых результат тоже будет `0`, самое маленькое из которых — `~4294967295=0`. Поэтому такая проверка будет правильно работать только для строк меньшей длины.
+=======
+To be precise though, as big numbers are truncated to 32 bits by `~` operator, there exist other numbers that give `0`, the smallest is `~4294967295=0`. That makes such check correct only if a string is not that long.
+>>>>>>> dccca58f268ad6d5a6f2160613a8ea3c5cd53a2d
 
 На данный момент такой трюк можно встретить только в старом коде, потому что в новом он просто не нужен: есть метод `.includes` (см. ниже).
 
@@ -397,7 +411,11 @@ alert( "Widget".endsWith("get") ); // true, "get" — окончание "Widget
 
     ```js run
     let str = "st*!*ringify*/!*";
+<<<<<<< HEAD
     alert( str.slice(2) ); // ringify, с позиции 2 и до конца
+=======
+    alert( str.slice(2) ); // 'ringify', from the 2nd position till the end
+>>>>>>> dccca58f268ad6d5a6f2160613a8ea3c5cd53a2d
     ```
 
     Также для `start/end` можно задавать отрицательные значения. Это означает, что позиция определена как заданное количество символов *с конца строки*:
@@ -405,8 +423,13 @@ alert( "Widget".endsWith("get") ); // true, "get" — окончание "Widget
     ```js run
     let str = "strin*!*gif*/!*y";
 
+<<<<<<< HEAD
     // начинаем с позиции 4 справа, а заканчиваем на позиции 1 справа
     alert( str.slice(-4, -1) ); // gif
+=======
+    // start at the 4th position from the right, end at the 1st from the right
+    alert( str.slice(-4, -1) ); // 'gif'
+>>>>>>> dccca58f268ad6d5a6f2160613a8ea3c5cd53a2d
     ```
 
 `str.substring(start [, end])`
@@ -438,16 +461,24 @@ alert( "Widget".endsWith("get") ); // true, "get" — окончание "Widget
 
     ```js run
     let str = "st*!*ring*/!*ify";
+<<<<<<< HEAD
     // ring, получаем 4 символа, начиная с позиции 2
     alert( str.substr(2, 4) );
+=======
+    alert( str.substr(2, 4) ); // 'ring', from the 2nd position get 4 characters
+>>>>>>> dccca58f268ad6d5a6f2160613a8ea3c5cd53a2d
     ```
 
     Значение первого аргумента может быть отрицательным, тогда позиция определяется с конца:
 
     ```js run
     let str = "strin*!*gi*/!*fy";
+<<<<<<< HEAD
     // gi, получаем 2 символа, начиная с позиции 4 с конца строки
     alert( str.substr(-4, 2) );
+=======
+    alert( str.substr(-4, 2) ); // 'gi', from the 4th position get 2 characters
+>>>>>>> dccca58f268ad6d5a6f2160613a8ea3c5cd53a2d
     ```
 
 Давайте подытожим, как работают эти методы, чтобы не запутаться:
@@ -540,7 +571,11 @@ alert( str );
 
 Поэтому браузеру нужно знать, какой язык использовать для сравнения.
 
+<<<<<<< HEAD
 К счастью, все современные браузеры (для IE10− нужна дополнительная библиотека [Intl.JS](https://github.com/andyearnshaw/Intl.js/)) поддерживают стандарт [ECMA 402](http://www.ecma-international.org/ecma-402/1.0/ECMA-402.pdf), обеспечивающий правильное сравнение строк на разных языках с учётом их правил.
+=======
+Luckily, all modern browsers (IE10- requires the additional library [Intl.js](https://github.com/andyearnshaw/Intl.js/)) support the internationalization standard [ECMA-402](http://www.ecma-international.org/ecma-402/1.0/ECMA-402.pdf).
+>>>>>>> dccca58f268ad6d5a6f2160613a8ea3c5cd53a2d
 
 Для этого есть соответствующий метод.
 

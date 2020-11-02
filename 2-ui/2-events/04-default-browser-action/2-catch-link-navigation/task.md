@@ -12,5 +12,10 @@ importance: 5
 
 Детали:
 
+<<<<<<< HEAD
 - Содержимое `#contents` может быть загружено динамически и присвоено при помощи `innerHTML`. Так что найти все ссылки и поставить на них обработчики нельзя. Используйте делегирование.
 - Содержимое может иметь вложенные теги, *в том числе внутри ссылок*, например, `<a href=".."><i>...</i></a>`.
+=======
+- HTML inside the element may be loaded or regenerated dynamically at any time, so we can't find all links and put handlers on them. Use event delegation.
+- The content may have nested tags. Inside links too, like `<a href=".."><i>...</i></a>`.
+>>>>>>> dccca58f268ad6d5a6f2160613a8ea3c5cd53a2d
