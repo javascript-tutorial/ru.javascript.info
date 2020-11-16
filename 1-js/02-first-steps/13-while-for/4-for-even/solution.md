@@ -8,4 +8,4 @@ for (let i = 2; i <= 10; i++) {
 }
 ```
 
-Для проверки на чётность мы здесь используем оператор получения остатка от деления `%`.
+We use the "modulo" operator `%` to get the remainder and check for the evenness here.
