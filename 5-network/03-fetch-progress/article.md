@@ -5,7 +5,11 @@
 
 Заметим, на данный момент в `fetch` нет способа отслеживать процесс *отправки*. Для этого используйте [XMLHttpRequest](info:xmlhttprequest), позже мы его рассмотрим.
 
+<<<<<<< HEAD
 Чтобы отслеживать ход загрузки данных с сервера, можно использовать свойство `response.body`. Это `ReadableStream` ("поток для чтения") -- особый объект, который предоставляет тело ответа по частям, по мере поступления. Потоки для чтения описаны в спецификации [Streams API](https://streams.spec.whatwg.org/#rs-class).
+=======
+To track download progress, we can use `response.body` property. It's `ReadableStream` -- a special object that provides body chunk-by-chunk, as it comes. Readable streams are described in the [Streams API](https://streams.spec.whatwg.org/#rs-class) specification.
+>>>>>>> 23da191b58643387783f38e999f5b05be87d3d93
 
 В отличие от `response.text()`, `response.json()` и других методов, `response.body` даёт полный контроль над процессом чтения, и мы можем подсчитать, сколько данных получено на каждый момент.
 
@@ -107,6 +111,10 @@ alert(commits[0].author.login);
     let blob = new Blob(chunks);
     ```
 
+<<<<<<< HEAD
 В итоге у нас есть результат (строки или `Blob`, смотря что удобно) и отслеживание прогресса получения.
+=======
+At the end we have the result (as a string or a blob, whatever is convenient), and progress-tracking in the process.
+>>>>>>> 23da191b58643387783f38e999f5b05be87d3d93
 
 На всякий случай повторимся, что здесь мы рассмотрели, как отслеживать процесс получения данных с сервера, а не их отправки на сервер. Для отслеживания отправки у `fetch` пока нет способа.

@@ -114,9 +114,15 @@ customElements.define("time-formatted", TimeFormatted); // (2)
 ></time-formatted>
 ```
 
+<<<<<<< HEAD
 1. Класс имеет только один метод `connectedCallback()` -- браузер вызывает его, когда элемент `<time-formatted>` добавляется на страницу (или когда HTML-парсер обнаруживает его), и он использует встроенный форматировщик данных [Intl.DateTimeFormat](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/DateTimeFormat), хорошо поддерживаемый в браузерах, чтобы показать красиво отформатированное время.
 2. Нам нужно зарегистрировать наш новый элемент, используя `customElements.define(tag, class)`.
 3. И тогда мы сможем использовать его везде.
+=======
+1. The class has only one method `connectedCallback()` -- the browser calls it when `<time-formatted>` element is added to page (or when HTML parser detects it), and it uses the built-in [Intl.DateTimeFormat](mdn:/JavaScript/Reference/Global_Objects/DateTimeFormat) data formatter, well-supported across the browsers, to show a nicely formatted time.
+2. We need to register our new element by `customElements.define(tag, class)`.
+3. And then we can use it everywhere.
+>>>>>>> 23da191b58643387783f38e999f5b05be87d3d93
 
 
 ```smart header="Обновление пользовательских элементов"
@@ -394,4 +400,8 @@ customElements.define('hello-button', HelloButton, {extends: 'button'});
     /* <button is="my-button"> */
     ```
 
+<<<<<<< HEAD
 Пользовательские элементы широко поддерживаются браузерами. Edge немного отстаёт, но есть полифил <https://github.com/webcomponents/webcomponentsjs>.
+=======
+Custom elements are well-supported among browsers. Edge is a bit behind, but there's a polyfill <https://github.com/webcomponents/polyfills/tree/master/packages/webcomponentsjs>.
+>>>>>>> 23da191b58643387783f38e999f5b05be87d3d93

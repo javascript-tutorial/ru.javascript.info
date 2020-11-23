@@ -1,5 +1,9 @@
 
+<<<<<<< HEAD
 # Современный учебник JavaScript
+=======
+This repository hosts the English content of the Modern JavaScript Tutorial, published in [https://javascript.info](https://javascript.info).
+>>>>>>> 23da191b58643387783f38e999f5b05be87d3d93
 
 Всем привет!
 
@@ -27,7 +31,13 @@
 
 # Запуск локально
 
+<<<<<<< HEAD
 Для удобства редактирования учебник можно запустить локально.
+=======
+  - `index.md` stands for a chapter
+  - `article.md` stands for an article
+  - `task.md` stands for a task (solution must be provided in `solution.md` file as well)
+>>>>>>> 23da191b58643387783f38e999f5b05be87d3d93
 
 Сервер для этого находится здесь: <https://github.com/javascript-tutorial/server>. 
 

@@ -15,6 +15,14 @@ importance: 5
 
 Используя JavaScript:
 
+<<<<<<< HEAD
 1. Выведите значение и текст выбранного пункта.
 2. Добавьте пункт: `<option value="classic">Классика</option>`.
 3. Сделайте его выбранным.
+=======
+1. Show the value and the text of the selected option.
+2. Add an option: `<option value="classic">Classic</option>`.
+3. Make it selected.
+
+Note, if you've done everything right, your alert should show `blues`.
+>>>>>>> 23da191b58643387783f38e999f5b05be87d3d93

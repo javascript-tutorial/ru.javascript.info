@@ -19,9 +19,15 @@
     alert( result[1] );     // Script (первые скобки)
     alert( result.length ); // 2
 
+<<<<<<< HEAD
     // Дополнительная информация:
     alert( result.index );  // 7 (позиция совпадения)
     alert( result.input );  // I love JavaScript (исходная строка)
+=======
+    // Additional information:
+    alert( result.index );  // 7 (match position)
+    alert( result.input );  // I love JavaScript (source string)
+>>>>>>> 23da191b58643387783f38e999f5b05be87d3d93
     ```
 
 2. Если у регулярного выражения есть флаг `pattern:g`, то он возвращает массив всех совпадений, без скобочных групп и других деталей.
@@ -87,7 +93,11 @@ alert( firstMatch.index );  // 0
 alert( firstMatch.input );  // <h1>Hello, world!</h1>
 ```
 
+<<<<<<< HEAD
 При переборе результатов `matchAll` в цикле `for..of` вызов `Array.from`, разумеется, не нужен.
+=======
+If we use `for..of` to loop over `matchAll` matches, then we don't need `Array.from` any more.
+>>>>>>> 23da191b58643387783f38e999f5b05be87d3d93
 
 ## str.split(regexp|substr, limit)
 
@@ -151,7 +161,11 @@ alert( '12-34-56'.replace( *!*/-/g*/!*, ":" ))  // 12:34:56
 
 Второй аргумент - строка замены. Мы можем использовать специальные символы в нем:
 
+<<<<<<< HEAD
 | Спецсимволы | Действие в строке замены |
+=======
+| Symbols | Action in the replacement string |
+>>>>>>> 23da191b58643387783f38e999f5b05be87d3d93
 |--------|--------|
 |`$$`|вставляет `"$"` |
 |`$&`|вставляет всё найденное совпадение|
@@ -209,7 +223,11 @@ let result = str.replace(/(\w+) (\w+)/, (match, name, surname) => `${surname}, $
 alert(result); // Smith, John
 ```
 
+<<<<<<< HEAD
 Если в регулярном выражении много скобочных групп, то бывает удобно использовать остаточные аргументы для обращения к ним:
+=======
+If there are many groups, it's convenient to use rest parameters to access them:
+>>>>>>> 23da191b58643387783f38e999f5b05be87d3d93
 
 ```js run
 let str = "John Smith";
