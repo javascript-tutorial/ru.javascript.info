@@ -33,7 +33,7 @@
             <path id="Line" d="M528.5,293.5 L307.5,293.5 L307.5,291.5 L528.5,291.5 L528.5,285.5 L542.5,292.5 L528.5,299.5 L528.5,293.5 Z" fill="#EE6B47" fill-rule="nonzero"></path>
             <text id="200-OK" font-family="OpenSans-Regular, Open Sans" font-size="14" font-weight="normal" line-spacing="18" fill="#8A704D">
                 <tspan x="402.913574" y="287">200 OK</tspan>
-                <tspan x="330.866211" y="305">Access-Control-Allow-Method</tspan>
+                <tspan x="330.866211" y="305">Access-Control-Allow-Methods</tspan>
                 <tspan x="329" y="323">Access-Control-Allow-Headers</tspan>
                 <tspan x="347.82959" y="341">Access-Control-Max-Age</tspan>
             </text>
