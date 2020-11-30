@@ -19,11 +19,20 @@ JavaScript - динамично развивающийся язык програ
 
 На самом деле, есть две части Babel:
 
+<<<<<<< HEAD
 1. Во-первых, транспилер, который переписывает код. Разработчик запускает Babel на своём компьютере. Он переписывает код в старый стандарт. И после этого код отправляется на сайт. Современные сборщики проектов, такие как [webpack](http://webpack.github.io/) или [brunch](http://brunch.io/), предоставляют возможность запускать транспилер автоматически после каждого изменения кода, что позволяет экономить время.
+=======
+1. First, the transpiler program, which rewrites the code. The developer runs it on their own computer. It rewrites the code into the older standard. And then the code is delivered to the website for users. Modern project build systems like [webpack](http://webpack.github.io/) provide means to run transpiler automatically on every code change, so that it's very easy to integrate into development process.
+>>>>>>> e1a3f634a47c119cf1ec7420c49fc0fc7172c0b5
 
 2. Во-вторых, полифил.
 
+<<<<<<< HEAD
     Новые возможности языка могут включать встроенные функции и синтаксические конструкции. Транспилер переписывает код, преобразовывая новые синтаксические конструкции в старые. Но что касается новых встроенных функций, нам нужно их как-то реализовать. JavaScript является высокодинамичным языком, скрипты могут добавлять/изменять любые функции, чтобы они вели себя в соответствии с современным стандартом.
+=======
+    New language features may include not only syntax constructs, but also built-in functions.
+    The transpiler rewrites the code, transforming syntax constructs into older ones. But as for new built-in functions, we need to implement them. JavaScript is a highly dynamic language, scripts may add/modify any functions, so that they behave according to the modern standard.
+>>>>>>> e1a3f634a47c119cf1ec7420c49fc0fc7172c0b5
 
     Термин "полифил" означает, что скрипт "заполняет" пробелы и добавляет современные функции.
 

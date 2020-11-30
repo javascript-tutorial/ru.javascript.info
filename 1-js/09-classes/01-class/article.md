@@ -67,7 +67,11 @@ user.sayHi();
 
 Давайте развеем всю магию и посмотрим, что такое класс на самом деле. Это поможет в понимании многих сложных аспектов.
 
+<<<<<<< HEAD
 В JavaScript класс - это разновидность функции.
+=======
+In JavaScript, a class is a kind of function.
+>>>>>>> e1a3f634a47c119cf1ec7420c49fc0fc7172c0b5
 
 Взгляните:
 
@@ -88,7 +92,11 @@ alert(typeof User); // function
 1. Создаёт функцию с именем `User`, которая становится результатом объявления класса. Код функции берётся из метода `constructor` (она будет пустой, если такого метода нет).
 2. Сохраняет все методы, такие как `sayHi`, в `User.prototype`.
 
+<<<<<<< HEAD
 При вызове метода объекта `new User` он будет взят из прототипа, как описано в главе <info:function-prototype>. Таким образом, объекты `new User` имеют доступ к методам класса.
+=======
+After `new User` object is created, when we call its method, it's taken from the prototype, just as described in the chapter <info:function-prototype>. So the object has access to class methods.
+>>>>>>> e1a3f634a47c119cf1ec7420c49fc0fc7172c0b5
 
 На картинке показан результат объявления `class User`:
 
@@ -115,9 +123,15 @@ alert(User.prototype.sayHi); // alert(this.name);
 alert(Object.getOwnPropertyNames(User.prototype)); // constructor, sayHi
 ```
 
+<<<<<<< HEAD
 ## Не просто синтаксический сахар
 
 Иногда говорят, что `class` - это просто "синтаксический сахар" в JavaScript (синтаксис для улучшения читаемости кода, но не делающий ничего принципиально нового), потому что мы можем сделать всё то же самое без конструкции `class`:
+=======
+## Not just a syntactic sugar
+
+Sometimes people say that `class` is a "syntactic sugar" (syntax that is designed to make things easier to read, but doesn't introduce anything new), because we could actually declare the same without `class` keyword at all:
+>>>>>>> e1a3f634a47c119cf1ec7420c49fc0fc7172c0b5
 
 ```js run
 // перепишем класс User на чистых функциях
@@ -126,8 +140,13 @@ alert(Object.getOwnPropertyNames(User.prototype)); // constructor, sayHi
 function User(name) {
   this.name = name;
 }
+<<<<<<< HEAD
 // каждый прототип функции имеет свойство constructor по умолчанию,
 // поэтому нам нет необходимости его создавать
+=======
+// a function prototype has "constructor" property by default,
+// so we don't need to create it
+>>>>>>> e1a3f634a47c119cf1ec7420c49fc0fc7172c0b5
 
 // 2. Добавляем метод в прототип
 User.prototype.sayHi = function() {
@@ -140,11 +159,21 @@ user.sayHi();
 ```
 Результат этого кода очень похож. Поэтому, действительно, есть причины, по которым `class` можно считать синтаксическим сахаром для определения конструктора вместе с методами прототипа.
 
+<<<<<<< HEAD
 Однако есть важные отличия:
+=======
+The result of this definition is about the same. So, there are indeed reasons why `class` can be considered a syntactic sugar to define a constructor together with its prototype methods.
+
+Still, there are important differences.
+>>>>>>> e1a3f634a47c119cf1ec7420c49fc0fc7172c0b5
 
 1. Во-первых, функция, созданная с помощью `class`, помечена специальным внутренним свойством `[[FunctionKind]]:"classConstructor"`. Поэтому это не совсем то же самое, что создавать её вручную.
 
+<<<<<<< HEAD
     В отличие от обычных функций, конструктор класса не может быть вызван без `new`:
+=======
+    The language checks for that property in a variety of places. For example, unlike a regular function, it must be called with `new`:
+>>>>>>> e1a3f634a47c119cf1ec7420c49fc0fc7172c0b5
 
     ```js run
     class User {
@@ -163,6 +192,7 @@ user.sayHi();
 
     alert(User); // class User { ... }
     ```
+    There are other differences, we'll see them soon.
 
 2. Методы класса являются неперечислимыми.
     Определение класса устанавливает флаг `enumerable` в` false` для всех методов в `"prototype"`.
@@ -176,7 +206,11 @@ user.sayHi();
 
 ## Class Expression
 
+<<<<<<< HEAD
 Как и функции, классы можно определять внутри другого выражения, передавать, возвращать, присваивать и т.д.
+=======
+Just like functions, classes can be defined inside another expression, passed around, returned, assigned, etc.
+>>>>>>> e1a3f634a47c119cf1ec7420c49fc0fc7172c0b5
 
 Пример Class Expression (по аналогии с Function Expression):
 
@@ -206,7 +240,11 @@ new User().sayHi(); // работает, выводит определение M
 alert(MyClass); // ошибка, имя MyClass не видно за пределами класса
 ```
 
+<<<<<<< HEAD
 Мы даже можем динамически создавать классы "по запросу":
+=======
+We can even make classes dynamically "on-demand", like this:
+>>>>>>> e1a3f634a47c119cf1ec7420c49fc0fc7172c0b5
 
 ```js run
 function makeClass(phrase) {
@@ -214,7 +252,7 @@ function makeClass(phrase) {
   return class {
     sayHi() {
       alert(phrase);
-    };
+    }
   };
 }
 
@@ -225,7 +263,11 @@ new User().sayHi(); // Привет
 ```
 
 
+<<<<<<< HEAD
 ## Геттеры/сеттеры, другие сокращения
+=======
+## Getters/setters
+>>>>>>> e1a3f634a47c119cf1ec7420c49fc0fc7172c0b5
 
 Как и в литеральных объектах, в классах можно объявлять вычисляемые свойства, геттеры/сеттеры и т.д.
 
@@ -260,25 +302,25 @@ class User {
 let user = new User("Иван");
 alert(user.name); // Иван
 
+<<<<<<< HEAD
 user = new User(""); // Имя слишком короткое.
 ```
 
 При объявлении класса геттеры/сеттеры создаются на `User.prototype`, вот так:
-
-```js
-Object.defineProperties(User.prototype, {
-  name: {
-    get() {
-      return this._name
-    },
-    set(name) {
-      // ...
-    }
-  }
-});
+=======
+user = new User(""); // Name is too short.
 ```
 
+Technically, such class declaration works by creating getters and setters in `User.prototype`.
+>>>>>>> e1a3f634a47c119cf1ec7420c49fc0fc7172c0b5
+
+## Computed names [...]
+
+<<<<<<< HEAD
 Пример с вычисляемым свойством в скобках `[...]`:
+=======
+Here's an example with a computed method name using brackets `[...]`:
+>>>>>>> e1a3f634a47c119cf1ec7420c49fc0fc7172c0b5
 
 ```js run
 class User {
@@ -292,17 +334,37 @@ class User {
 new User().sayHi();
 ```
 
+<<<<<<< HEAD
 ## Свойства классов
 
 ```warn header="Старым браузерам может понадобиться полифил"
 Свойства классов добавлены в язык недавно.
 ```
 В приведённом выше примере у класса `User` были только методы. Давайте добавим свойство:
+=======
+Such features are easy to remember, as they resemble that of literal objects.
+
+## Class fields
+
+```warn header="Old browsers may need a polyfill"
+Class fields are a recent addition to the language.
+```
+
+Previously, our classes only had methods.
+
+"Class fields" is a syntax that allows to add any properties.
+
+For instance, let's add `name` property to `class User`:
+>>>>>>> e1a3f634a47c119cf1ec7420c49fc0fc7172c0b5
 
 ```js run
 class User {
 *!*
+<<<<<<< HEAD
   name = "Аноним";
+=======
+  name = "John";
+>>>>>>> e1a3f634a47c119cf1ec7420c49fc0fc7172c0b5
 */!*
 
   sayHi() {
@@ -310,10 +372,98 @@ class User {
   }
 }
 
-new User().sayHi();
+new User().sayHi(); // Hello, John!
 ```
 
+So, we just write "<property name> = <value>" in the declaration, and that's it.
+
+The important difference of class fields is that they are set on individual objects, not `User.prototype`:
+
+```js run
+class User {
+*!*
+  name = "John";
+*/!*
+}
+
+let user = new User();
+alert(user.name); // John
+alert(User.prototype.name); // undefined
+```
+
+We can also assign values using more complex expressions and function calls:
+
+```js run
+class User {
+*!*
+  name = prompt("Name, please?", "John");
+*/!*
+}
+
+let user = new User();
+alert(user.name); // John
+```
+
+<<<<<<< HEAD
 Свойство `name` не устанавливается в `User.prototype`. Вместо этого оно создаётся оператором `new` перед запуском конструктора, это именно свойство объекта.
+=======
+
+### Making bound methods with class fields
+
+As demonstrated in the chapter <info:bind> functions in JavaScript have a dynamic `this`. It depends on the context of the call.
+
+So if an object method is passed around and called in another context, `this` won't be a reference to its object any more.
+
+For instance, this code will show `undefined`:
+
+```js run
+class Button {
+  constructor(value) {
+    this.value = value;
+  }
+
+  click() {
+    alert(this.value);
+  }
+}
+
+let button = new Button("hello");
+
+*!*
+setTimeout(button.click, 1000); // undefined
+*/!*
+```
+
+The problem is called "losing `this`".
+
+There are two approaches to fixing it, as discussed in the chapter <info:bind>:
+
+1. Pass a wrapper-function, such as `setTimeout(() => button.click(), 1000)`.
+2. Bind the method to object, e.g. in the constructor.
+
+Class fields provide another, quite elegant syntax:
+
+```js run
+class Button {
+  constructor(value) {
+    this.value = value;
+  }
+*!*
+  click = () => {
+    alert(this.value);
+  }
+*/!*
+}
+
+let button = new Button("hello");
+
+setTimeout(button.click, 1000); // hello
+```
+
+The class field `click = () => {...}` is created on a per-object basis, there's a separate function for each `Button` object, with `this` inside it referencing that object. We can pass `button.click` around anywhere, and the value of `this` will always be correct.
+
+That's especially useful in browser environment, for event listeners.
+>>>>>>> e1a3f634a47c119cf1ec7420c49fc0fc7172c0b5
 
 ## Итого
 
@@ -333,6 +483,10 @@ class MyClass {
 }
 ```
 
+<<<<<<< HEAD
 `MyClass` технически является функцией (той, которую мы определяем как `constructor`), в то время как методы, геттеры и сеттеры записываются в `MyClass.prototype`.
+=======
+`MyClass` is technically a function (the one that we provide as `constructor`), while methods, getters and setters are written to `MyClass.prototype`.
+>>>>>>> e1a3f634a47c119cf1ec7420c49fc0fc7172c0b5
 
 В следующих главах мы узнаем больше о классах, включая наследование и другие возможности.

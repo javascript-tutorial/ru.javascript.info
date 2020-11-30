@@ -20,7 +20,11 @@
   thumb.onpointermove = function(event) {
     let newLeft = event.clientX - shiftX - slider.getBoundingClientRect().left;
 
+<<<<<<< HEAD
     // если указатель находится за пределами слайдера => отрегулировать "left", чтобы оставаться в пределах границ
+=======
+    // if the pointer is out of slider => adjust left to be within the bounaries
+>>>>>>> e1a3f634a47c119cf1ec7420c49fc0fc7172c0b5
     if (newLeft < 0) {
       newLeft = 0;
     }
