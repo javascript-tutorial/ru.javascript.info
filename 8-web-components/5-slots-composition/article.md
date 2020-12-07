@@ -103,11 +103,19 @@ customElements.define('user-card', class extends HTMLElement {
 
 ...Но развёрнутое DOM-дерево существует только для целей отображения и обработки событий. Это то, что мы видим на экране. Оно, в некотором плане, "виртуальное". Фактически в документе расположение узлов не меняется.
 
+<<<<<<< HEAD
 Это можно легко проверить, запустив `querySelector`: все узлы находятся на своих местах.
 
 ```js
 // узлы светлого DOM находятся в том же месте, в `<user-card>`
 alert( document.querySelector('user-card span').length ); // 2
+=======
+That can be easily checked if we run `querySelectorAll`: nodes are still at their places.
+
+```js
+// light DOM <span> nodes are still at the same place, under `<user-card>`
+alert( document.querySelectorAll('user-card span').length ); // 2
+>>>>>>> c56e6a57ac3497aab77128c5bfca13513980709b
 ```
 
 Так что развёрнутый DOM составляется из теневого вставкой в слоты. Браузер использует его для рендеринга и при всплытии событий (об этом позже). Но JavaScript видит документ "как есть" - до построения развёрнутого DOM-дерева.
@@ -228,11 +236,19 @@ customElements.define('user-card', class extends HTMLElement {
       </slot>
     </div>
     <fieldset>
+<<<<<<< HEAD
       <legend>Обо мне</legend>
 *!*
       <slot>
         <div>Привет!</div>
         <div>Я Иван!</div>
+=======
+      <legend>Other information</legend>
+*!*
+      <slot>
+        <div>I like to swim.</div>
+        <div>...And play volleyball too!</div>
+>>>>>>> c56e6a57ac3497aab77128c5bfca13513980709b
       </slot>
 */!*
     </fieldset>

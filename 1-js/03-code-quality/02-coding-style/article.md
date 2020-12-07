@@ -85,9 +85,15 @@ if (condition) {
 ```js
 // обратные кавычки ` позволяют разделять строку на части
 let str = `
+<<<<<<< HEAD
   Рабочая группа TC39 организации Ecma International -
   это группа JavaScript-разработчиков, теоретиков и авторов движков JavaScript,
   которые вместе с сообществом занимаются поддержкой и развитием языка JavaScript.
+=======
+  ECMA International's TC39 is a group of JavaScript developers,
+  implementers, academics, and more, collaborating with the community
+  to maintain and evolve the definition of JavaScript.
+>>>>>>> c56e6a57ac3497aab77128c5bfca13513980709b
 `;
 ```
 
@@ -284,9 +290,15 @@ function pow(x, n) {
 
 Некоторые популярные руководства:
 
+<<<<<<< HEAD
 - [Google JavaScript Style Guide](https://google.github.io/styleguide/javascriptguide.xml)
 - [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript) (есть [перевод](https://leonidlebedev.github.io/javascript-airbnb/))
 - [Idiomatic.JS](https://github.com/rwaldron/idiomatic.js) (есть [перевод](https://github.com/rwaldron/idiomatic.js/tree/master/translations/ru_RU))
+=======
+- [Google JavaScript Style Guide](https://google.github.io/styleguide/jsguide.html)
+- [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript)
+- [Idiomatic.JS](https://github.com/rwaldron/idiomatic.js)
+>>>>>>> c56e6a57ac3497aab77128c5bfca13513980709b
 - [StandardJS](https://standardjs.com/)
 - (и ещё множество других)
 
@@ -327,7 +339,7 @@ function pow(x, n) {
   },
   "rules": {
     "no-console": 0,
-    "indent": ["warning", 2]
+    "indent": 2
   }
 }
 ```
