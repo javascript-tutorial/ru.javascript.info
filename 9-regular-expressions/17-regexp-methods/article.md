@@ -19,9 +19,15 @@
     alert( result[1] );     // Script (первые скобки)
     alert( result.length ); // 2
 
+<<<<<<< HEAD
     // Дополнительная информация:
     alert( result.index );  // 7 (позиция совпадения)
     alert( result.input );  // I love JavaScript (исходная строка)
+=======
+    // Additional information:
+    alert( result.index );  // 7 (match position)
+    alert( result.input );  // I love JavaScript (source string)
+>>>>>>> fc3f811c03ca97ff8304271bb2b918413bed720f
     ```
 
 2. Если у регулярного выражения есть флаг `pattern:g`, то он возвращает массив всех совпадений, без скобочных групп и других деталей.
@@ -87,7 +93,11 @@ alert( firstMatch.index );  // 0
 alert( firstMatch.input );  // <h1>Hello, world!</h1>
 ```
 
+<<<<<<< HEAD
 При переборе результатов `matchAll` в цикле `for..of` вызов `Array.from`, разумеется, не нужен.
+=======
+If we use `for..of` to loop over `matchAll` matches, then we don't need `Array.from` any more.
+>>>>>>> fc3f811c03ca97ff8304271bb2b918413bed720f
 
 ## str.split(regexp|substr, limit)
 
@@ -149,9 +159,15 @@ alert('12-34-56'.replace("-", ":")) // 12:34-56
 alert( '12-34-56'.replace( *!*/-/g*/!*, ":" ))  // 12:34:56
 ```
 
+<<<<<<< HEAD
 Второй аргумент - строка замены. Мы можем использовать специальные символы в нем:
 
 | Спецсимволы | Действие в строке замены |
+=======
+The second argument is a replacement string. We can use special characters in it:
+
+| Symbols | Action in the replacement string |
+>>>>>>> fc3f811c03ca97ff8304271bb2b918413bed720f
 |--------|--------|
 |`$$`|вставляет `"$"` |
 |`$&`|вставляет всё найденное совпадение|
@@ -209,7 +225,11 @@ let result = str.replace(/(\w+) (\w+)/, (match, name, surname) => `${surname}, $
 alert(result); // Smith, John
 ```
 
+<<<<<<< HEAD
 Если в регулярном выражении много скобочных групп, то бывает удобно использовать остаточные аргументы для обращения к ним:
+=======
+If there are many groups, it's convenient to use rest parameters to access them:
+>>>>>>> fc3f811c03ca97ff8304271bb2b918413bed720f
 
 ```js run
 let str = "John Smith";
@@ -234,6 +254,23 @@ alert(result); // Smith, John
 ```
 
 Использование функции даёт нам  максимальные возможности по замене, потому что функция получает всю информацию о совпадении, имеет доступ к внешним переменным и может делать всё что угодно.
+
+## str.replaceAll(str|regexp, str|func)
+
+This method is essentially the same as `str.replace`, with two major differences:
+
+1. If the first argument is a string, it replaces *all occurences* of the string, while `replace` replaces only the *first occurence*.
+2. If the first argument is a regular expression without the `g` flag, there'll be an error. With `g` flag, it works the same as `replace`.
+
+The main use case for `replaceAll` is replacing all occurences of a string.
+
+Like this:
+
+```js run
+// replace all dashes by a colon
+alert('12-34-56'.replaceAll("-", ":")) // 12:34:56
+```
+
 
 ## regexp.exec(str)
 

@@ -93,6 +93,12 @@ alert( "Глава 5.1".match(regexp) ); // 5.1
 
 ## Итого
 
+<<<<<<< HEAD
 - Для поиска специальных символов `pattern:[ \ ^ $ . | ? * + ( )`, нам нужно добавить перед ними `\` ("экранировать их").
 - Нам также нужно экранировать `/`, если мы используем `pattern:/.../` (но не `new RegExp`).
 - При передаче строки в `new RegExp` нужно удваивать обратную косую черту: `\\` для экранирования специальных символов, потому что строковые кавычки "съедят" одну черту.
+=======
+- To search for special characters `pattern:[ \ ^ $ . | ? * + ( )` literally, we need to prepend them with a backslash `\` ("escape them").
+- We also need to escape `/` if we're inside `pattern:/.../` (but not inside `new RegExp`).
+- When passing a string to `new RegExp`, we need to double backslashes `\\`, cause string quotes consume one of them.
+>>>>>>> fc3f811c03ca97ff8304271bb2b918413bed720f
