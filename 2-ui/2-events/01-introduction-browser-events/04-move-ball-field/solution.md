@@ -22,7 +22,11 @@
 }
 ```
 
+<<<<<<< HEAD
 Далее мы должны назначить корректные значения `ball.style.left/top`. Сейчас они содержат координаты относительно поля.
+=======
+Next we need to assign the correct `ball.style.left/top`. They contain field-relative coordinates now.
+>>>>>>> 13da056653754765b50aa5a9f706f84a4a0d6293
 
 Картинка:
 
@@ -36,7 +40,11 @@
 let left = event.clientX - fieldCoords.left - field.clientLeft;
 ```
 
+<<<<<<< HEAD
 Значение `ball.style.left` означает "левый край элемента" (мяча). И если мы назначим такой `left` для мяча, тогда его левая граница, а не центр, будет под курсором мыши.
+=======
+Normally, `ball.style.left` means the "left edge of the element" (the ball). So if we assign that `left`, then the ball edge, not center, would be under the mouse cursor.
+>>>>>>> 13da056653754765b50aa5a9f706f84a4a0d6293
 
 Нам нужно сдвинуть мяч на половину его высоты вверх и половину его ширины влево, чтобы центр мяча точно совпадал с точкой нажатия мышки.
 

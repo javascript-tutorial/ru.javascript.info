@@ -2,11 +2,19 @@ importance: 5
 
 ---
 
+<<<<<<< HEAD
 # Сколько сегодня прошло секунд?
+=======
+# How many seconds have passed today?
+>>>>>>> 13da056653754765b50aa5a9f706f84a4a0d6293
 
 Напишите функцию `getSecondsToday()`, возвращающую количество секунд с начала сегодняшнего дня.
 
+<<<<<<< HEAD
 Например, если сейчас `10:00`, и не было перехода на зимнее/летнее время, то:
+=======
+For instance, if now were `10:00 am`, and there was no daylight savings shift, then:
+>>>>>>> 13da056653754765b50aa5a9f706f84a4a0d6293
 
 ```js
 getSecondsToday() == 36000 // (3600 * 10)

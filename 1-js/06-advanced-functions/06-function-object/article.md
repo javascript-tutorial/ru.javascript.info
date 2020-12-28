@@ -67,8 +67,13 @@ alert(user.sayBye.name); // sayBye
 
 В этом нет никакой магии. Бывает, что корректное имя определить невозможно. В таких случаях свойство name имеет пустое значение. Например:
 
+<<<<<<< HEAD
 ```js
 // функция объявлена внутри массива
+=======
+```js run
+// function created inside array
+>>>>>>> 13da056653754765b50aa5a9f706f84a4a0d6293
 let arr = [function() {}];
 
 alert( arr[0].name ); // <пустая строка>
@@ -344,7 +349,11 @@ welcome(); // Hello, Guest (вложенный вызов работает)
 
 Если функция объявлена как Function Expression (вне основного потока кода) и имеет имя, тогда это называется Named Function Expression (Именованным Функциональным Выражением). Это имя может быть использовано для ссылки на себя же, для рекурсивных вызовов и т.п.
 
+<<<<<<< HEAD
 Также функции могут содержать дополнительные свойства. Многие известные JavaScript-библиотеки искусно используют эту возможность.
+=======
+They create a "main" function and attach many other "helper" functions to it. For instance, the [jQuery](https://jquery.com) library creates a function named `$`. The [lodash](https://lodash.com) library creates a function `_`, and then adds `_.clone`, `_.keyBy` and other properties to it (see the [docs](https://lodash.com/docs) when you want to learn more about them). Actually, they do it to lessen their pollution of the global space, so that a single library gives only one global variable. That reduces the possibility of naming conflicts.
+>>>>>>> 13da056653754765b50aa5a9f706f84a4a0d6293
 
 Они создают "основную" функцию и добавляют множество "вспомогательных" функций внутрь первой. Например, библиотека [jQuery](https://jquery.com) создаёт функцию с именем `$`. Библиотека [lodash](https://lodash.com) создаёт функцию `_`, а потом добавляет в неё  `_.clone`, `_.keyBy` и другие свойства (чтобы узнать о ней побольше см. [документацию](https://lodash.com/docs)). Они делают это, чтобы уменьшить засорение глобального пространства имён посредством того, что одна библиотека предоставляет только одну глобальную переменную, уменьшая вероятность конфликта имён.
 

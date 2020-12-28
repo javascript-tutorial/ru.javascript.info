@@ -1,6 +1,6 @@
 ```js run no-beautify
 function sortByAge(arr) {
-  arr.sort((a, b) => a.age > b.age ? 1 : -1);
+  arr.sort((a, b) => a.age - b.age);
 }
 
 let vasya = { name: "Вася", age: 25 };

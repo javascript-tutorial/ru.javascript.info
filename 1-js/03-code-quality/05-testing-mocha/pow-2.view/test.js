@@ -4,8 +4,13 @@ describe("pow", function() {
     assert.equal(pow(2, 3), 8);
   });
 
+<<<<<<< HEAD
   it("3 в степени 3 будет 27", function () {
     assert.equal(pow(3, 3), 27);
+=======
+  it("3 raised to power 4 is 81", function() {
+    assert.equal(pow(3, 4), 81);
+>>>>>>> 13da056653754765b50aa5a9f706f84a4a0d6293
   });
 
 });
