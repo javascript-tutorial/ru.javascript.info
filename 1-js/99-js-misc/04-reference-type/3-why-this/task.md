@@ -4,7 +4,11 @@ importance: 3
 
 # Объясните значение "this"
 
+<<<<<<< HEAD:1-js/04-object-basics/04-object-methods/3-why-this/task.md
 В представленном ниже коде мы намерены вызвать `obj.go()` метод 4 раза подряд.
+=======
+In the code below we intend to call `obj.go()` method 4 times in a row.
+>>>>>>> 039716de8a96f49b5fccd7aed5effff2e719dfe5:1-js/99-js-misc/04-reference-type/3-why-this/task.md
 
 Но вызовы `(1)` и `(2)` работают иначе, чем `(3)` и `(4)`. Почему?
 

@@ -6,7 +6,13 @@
 let ourPlanetName = "Земля";
 ```
 
+<<<<<<< HEAD
 Обратите внимание, мы могли бы использовать короткое имя `planet`, но тогда будет непонятно, о какой планете мы говорим. Лучше описать содержимое переменной подробнее, по крайней мере, до тех пор, пока имя переменной неСтанетСлишкомДлинным.
+=======
+Note, we could use a shorter name `planet`, but it might not be obvious what planet it refers to. It's nice to be more verbose. At least until the variable isNotTooLong.
+
+## The name of the current visitor
+>>>>>>> 039716de8a96f49b5fccd7aed5effff2e719dfe5
 
 ## Имя текущего посетителя:
 ```js

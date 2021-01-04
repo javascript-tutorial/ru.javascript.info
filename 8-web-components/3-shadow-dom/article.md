@@ -37,7 +37,11 @@ input::-webkit-slider-runnable-track {
 
 Ещё раз заметим, что `pseudo` – нестандартный атрибут. Если говорить хронологически, то сначала браузеры начали экспериментировать с инкапсуляцией внутренних DOM-структур для элементов, а уже потом, через некоторое время, появился стандарт Shadow DOM, который позволяет делать то же самое нам, разработчикам.
 
+<<<<<<< HEAD
 Далее мы воспользуемся современным стандартом Shadow DOM, описанным в спецификации [DOM spec](https://dom.spec.whatwg.org/#shadow-trees) и других спецификациях.
+=======
+Further on, we'll use the modern shadow DOM standard, covered by [DOM spec](https://dom.spec.whatwg.org/#shadow-trees) and other related specifications.
+>>>>>>> 039716de8a96f49b5fccd7aed5effff2e719dfe5
 
 ## Теневое дерево
 
