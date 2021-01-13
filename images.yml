@@ -54,9 +54,12 @@ code-style.svg:
   "parameters":
     position: "center"
     text: "параметрами"
-  "A space between parameters":
+  "arguments":
     position: "center"
-    text: "Пробел между параметрами"
+    text: "аргументами"
+  "A space between arguments":
+    position: "center"
+    text: "Пробел между аргументами"
 
 try-catch-flow.svg:
   "Begin":
