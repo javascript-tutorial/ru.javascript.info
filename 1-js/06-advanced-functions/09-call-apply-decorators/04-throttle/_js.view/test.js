@@ -7,8 +7,8 @@ describe("throttle(f, 1000)", function() {
   }
 
   before(function() {
-    f1000 = throttle(f, 1000);
     this.clock = sinon.useFakeTimers();
+    f1000 = throttle(f, 1000);
   });
 
   it("1-й вызов происходит немедленно", function() {
@@ -45,3 +45,22 @@ describe("throttle(f, 1000)", function() {
   });
 
 });
+<<<<<<< HEAD
+=======
+
+describe('throttle', () => {
+
+  it('runs a forwarded call once', done => {
+    let log = '';
+    const f = str => log += str;
+    const f10 = throttle(f, 10);
+    f10('once');
+
+    setTimeout(() => {
+      assert.equal(log, 'once');
+      done();
+    }, 20);
+  });
+
+});
+>>>>>>> 3a0b3f4e31d4c4bbe90ed4c9c6e676a888ad8311

@@ -75,9 +75,13 @@ for (let value of Object.values(user)) {
 
 Если мы хотели бы их применить, то можно использовать `Object.entries` с последующим вызовом `Object.fromEntries`:
 
+<<<<<<< HEAD
 1. Вызов `Object.entries(obj)` возвращает массив пар ключ/значение для `obj`.
 2. На нём вызываем методы массива, например, `map`.
 3. Используем `Object.fromEntries(array)` на результате, чтобы преобразовать его обратно в объект.
+=======
+If we'd like to apply them, then we can use `Object.entries` followed by `Object.fromEntries`:
+>>>>>>> 3a0b3f4e31d4c4bbe90ed4c9c6e676a888ad8311
 
 Например, у нас есть объект с ценами, и мы хотели бы их удвоить:
 
@@ -98,6 +102,10 @@ let doublePrices = Object.fromEntries(
 alert(doublePrices.meat); // 8
 ```   
 
+<<<<<<< HEAD
 Это может выглядеть сложным на первый взгляд, но становится лёгким для понимания после нескольких раз использования.
 
 Можно делать и более сложные "однострочные" преобразования таким путём. Важно только сохранять баланс, чтобы код при этом был достаточно простым для понимания.
+=======
+It may look difficult from the first sight, but becomes easy to understand after you use it once or twice. We can make powerful chains of transforms this way. 
+>>>>>>> 3a0b3f4e31d4c4bbe90ed4c9c6e676a888ad8311

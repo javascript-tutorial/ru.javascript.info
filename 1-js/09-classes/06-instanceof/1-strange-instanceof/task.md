@@ -4,7 +4,11 @@ importance: 5
 
 # Странный instanceof
 
+<<<<<<< HEAD
 Почему `instanceof` в примере ниже возвращает `true`? Мы же видим, что `a` не создан с помощью `B()`.
+=======
+In the code below, why does `instanceof` return `true`? We can easily see that `a` is not created by `B()`.
+>>>>>>> 3a0b3f4e31d4c4bbe90ed4c9c6e676a888ad8311
 
 ```js run
 function A() {}

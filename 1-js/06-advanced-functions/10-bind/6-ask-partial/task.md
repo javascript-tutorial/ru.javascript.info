@@ -8,7 +8,11 @@ importance: 5
 
 Объект `user` был изменён. Теперь вместо двух функций `loginOk/loginFail` у него есть только одна -- `user.login(true/false)`.
 
+<<<<<<< HEAD
 Что нужно передать в вызов функции `askPassword` в коде ниже, чтобы она могла вызывать функцию `user.login(true)` как `ok` и функцию `user.login(false)` как `fail`?
+=======
+What should we pass `askPassword` in the code below, so that it calls `user.login(true)` as `ok` and `user.login(false)` as `fail`?
+>>>>>>> 3a0b3f4e31d4c4bbe90ed4c9c6e676a888ad8311
 
 ```js
 function askPassword(ok, fail) {

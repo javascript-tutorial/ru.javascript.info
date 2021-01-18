@@ -124,7 +124,11 @@ alert(ageElems[0]); // [object HTMLInputElement]
 
 ## Обратная ссылка: element.form
 
+<<<<<<< HEAD
 Для любого элемента форма доступна через `element.form`. Так что форма ссылается на все элементы, а эти элементы ссылаются на форму.
+=======
+For any element, the form is available as `element.form`. So a form references all elements, and elements reference the form.
+>>>>>>> 3a0b3f4e31d4c4bbe90ed4c9c6e676a888ad8311
 
 Вот иллюстрация:
 
@@ -175,12 +179,19 @@ input.checked = true; // для чекбоксов и переключателе
 
 Элемент `<select>` имеет 3 важных свойства:
 
+<<<<<<< HEAD
 1. `select.options` -- коллекция из подэлементов `<option>`,
 2. `select.value` -- значение выбранного в данный момент `<option>`,
 3. `select.selectedIndex` -- номер выбранного `<option>`.
+=======
+1. `select.options` -- the collection of `<option>` subelements,
+2. `select.value` -- the *value* of the currently selected `<option>`,
+3. `select.selectedIndex` -- the *number* of the currently selected `<option>`.
+>>>>>>> 3a0b3f4e31d4c4bbe90ed4c9c6e676a888ad8311
 
 Они дают три разных способа установить значение в `<select>`:
 
+<<<<<<< HEAD
 1. Найти соответствующий элемент `<option>` и установить в `option.selected` значение `true`.
 2. Установить в `select.value` значение нужного `<option>`.
 3. Установить в `select.selectedIndex` номер нужного `<option>`.
@@ -188,6 +199,13 @@ input.checked = true; // для чекбоксов и переключателе
 Первый способ наиболее понятный, но `(2)` и `(3)` являются более удобными при работе.
 
 Вот эти способы на примере:
+=======
+1. Find the corresponding `<option>` element (e.g. among `select.options`) and set its `option.selected` to `true`.
+2. If we know a new value: set `select.value` to the new value.
+3. If we know the new option number: set `select.selectedIndex` to that number.
+
+Here is an example of all three methods:
+>>>>>>> 3a0b3f4e31d4c4bbe90ed4c9c6e676a888ad8311
 
 ```html run
 <select id="select">
@@ -197,16 +215,30 @@ input.checked = true; // для чекбоксов и переключателе
 </select>
 
 <script>
+<<<<<<< HEAD
   // все три строки делают одно и то же
   select.options[2].selected = true;
+=======
+  // all three lines do the same thing
+  select.options[2].selected = true; 
+>>>>>>> 3a0b3f4e31d4c4bbe90ed4c9c6e676a888ad8311
   select.selectedIndex = 2;
   select.value = 'banana';
+  // please note: options start from zero, so index 2 means the 3rd option.
 </script>
 ```
 
+<<<<<<< HEAD
 В отличие от большинства других элементов управления, `<select>` позволяет нам выбрать несколько вариантов одновременно, если у него стоит атрибут `multiple`. Эту возможность используют редко, но в этом случае для работы со значениями необходимо использовать первый способ, то есть ставить или удалять свойство `selected` у подэлементов `<option>`.
 
 Их коллекцию можно получить как `select.options`, например:
+=======
+Unlike most other controls, `<select>` allows to select multiple options at once if it has `multiple` attribute. This attribute is rarely used though.
+
+For multiple selected values, use the first way of setting values: add/remove the `selected` property from `<option>` subelements.
+
+Here's an example of how to get selected values from a multi-select:
+>>>>>>> 3a0b3f4e31d4c4bbe90ed4c9c6e676a888ad8311
 
 ```html run
 <select id="select" *!*multiple*/!*>
@@ -229,31 +261,51 @@ input.checked = true; // для чекбоксов и переключателе
 
 ### new Option
 
+<<<<<<< HEAD
 Элемент `<option>` редко используется сам по себе, но и здесь есть кое-что интересное.
 
 В [спецификации](https://html.spec.whatwg.org/multipage/forms.html#the-option-element) есть красивый короткий синтаксис для создания элемента `<option>`:
+=======
+In the [specification](https://html.spec.whatwg.org/multipage/forms.html#the-option-element) there's a nice short syntax to create an `<option>` element:
+>>>>>>> 3a0b3f4e31d4c4bbe90ed4c9c6e676a888ad8311
 
 ```js
 option = new Option(text, value, defaultSelected, selected);
 ```
 
+<<<<<<< HEAD
 Параметры:
+=======
+This syntax is optional. We can use `document.createElement('option')` and set attributes manually. Still, it may be shorter, so here are the parameters:
+>>>>>>> 3a0b3f4e31d4c4bbe90ed4c9c6e676a888ad8311
 
 - `text` -- текст внутри `<option>`,
 - `value` -- значение,
 - `defaultSelected` -- если `true`, то ставится HTML-атрибут `selected`,
 - `selected` -- если `true`, то элемент `<option>` будет выбранным.
 
+<<<<<<< HEAD
 Тут может быть небольшая путаница с `defaultSelected` и `selected`. Всё просто: `defaultSelected` задаёт HTML-атрибут, его можно получить как  `option.getAttribute('selected')`, а `selected` - выбрано значение или нет, именно его важно поставить правильно. Впрочем, обычно ставят оба этих значения в `true` или не ставят вовсе (т.е. `false`).
 
 Пример:
+=======
+The difference between `defaultSelected` and `selected` is that `defaultSelected` sets the HTML-attribute (that we can get using `option.getAttribute('selected')`, while `selected` sets whether the option is selected or not.
+
+In practice, we usually should set both values to `true` or `false` (or omit, that's the same as `false`).
+
+For instance, here's a new "unselected" option:
+>>>>>>> 3a0b3f4e31d4c4bbe90ed4c9c6e676a888ad8311
 
 ```js
 let option = new Option("Текст", "value");
 // создаст <option value="value">Текст</option>
 ```
 
+<<<<<<< HEAD
 Тот же элемент, но выбранный:
+=======
+The same option, but selected:
+>>>>>>> 3a0b3f4e31d4c4bbe90ed4c9c6e676a888ad8311
 
 ```js
 let option = new Option("Текст", "value", true, true);

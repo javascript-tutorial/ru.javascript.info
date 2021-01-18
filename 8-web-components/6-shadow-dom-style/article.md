@@ -257,8 +257,13 @@ customElements.define('user-card', class extends HTMLElement {
     /* если переменная --user-card-field-color не определена, будет использован цвет black */
   }
 </style>
+<<<<<<< HEAD
 <div class="field">Имя: <slot name="username"></slot></div>
 <div class="field">Дата рождения: <slot name="birthday"></slot></div>
+=======
+<div class="field">Name: <slot name="username"></slot></div>
+<div class="field">Birthday: <slot name="birthday"></slot></div>
+>>>>>>> 3a0b3f4e31d4c4bbe90ed4c9c6e676a888ad8311
 ```
 
 Затем мы можем объявить это свойство во внешнем документе для `<user-card>`:
