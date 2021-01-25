@@ -54,9 +54,21 @@ let str = `Винни: 1
 alert( str.match(/\d$/gm) ); // 1,2,3
 ```
 
+<<<<<<< HEAD
 Без флага `pattern:m` якорь `pattern:$` обозначал бы конец всей строки, и была бы найдена только последняя цифра.
 
 ## Ищем \n вместо ^ $
+=======
+Without the flag `pattern:m`, the dollar `pattern:$` would only match the end of the whole text, so only the very last digit would be found.
+
+```smart
+"End of a line" formally means "immediately before a line break": the test  `pattern:$` in multiline mode matches at all positions succeeded by a newline character `\n`.
+
+And at the text end.
+```
+
+## Searching for \n instead of ^ $
+>>>>>>> 97ef86242f9f236b13152e1baf52a55c4db8728a
 
 Для того, чтобы найти конец строки, можно использовать не только якоря `pattern:^` и `pattern:$`, но и символ перевода строки `\n`.
 

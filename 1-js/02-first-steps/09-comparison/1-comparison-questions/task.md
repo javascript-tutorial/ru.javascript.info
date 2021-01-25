@@ -2,13 +2,13 @@ importance: 5
 
 ---
 
-# Операторы сравнения
+# Comparisons
 
-Каким будет результат этих выражений?
+What will be the result for these expressions?
 
 ```js no-beautify
 5 > 4
-"ананас" > "яблоко"
+"apple" > "pineapple"
 "2" > "12"
 undefined == null
 undefined === null

@@ -20,6 +20,7 @@
   <div id="tooltip" hidden>Подсказка</div>
 
   <script>
+<<<<<<< HEAD
     // для демо
     setTimeout(function() {
       new HoverIntent({
@@ -34,6 +35,19 @@
         }
       });
     }, 2000);
+=======
+    new HoverIntent({
+      elem,
+      over() {
+        tooltip.style.left = elem.getBoundingClientRect().left + 5 + 'px';
+        tooltip.style.top = elem.getBoundingClientRect().bottom + 5 + 'px';
+        tooltip.hidden = false;
+      },
+      out() {
+        tooltip.hidden = true;
+      }
+    });
+>>>>>>> 97ef86242f9f236b13152e1baf52a55c4db8728a
   </script>
 
 </body>
