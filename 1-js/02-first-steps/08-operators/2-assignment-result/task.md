@@ -2,9 +2,9 @@ importance: 3
 
 ---
 
-# Результат присваивания
+# Assignment result
 
-Чему будут равны переменные `a` и `x` после исполнения кода в примере ниже?
+What are the values of `a` and `x` after the code below?
 
 ```js
 let a = 2;
