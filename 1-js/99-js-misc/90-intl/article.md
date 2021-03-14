@@ -120,7 +120,7 @@ alert( collator.compare("ёжик", "яблоко") ); // -1 (ёжик мень�
 let collator = new Intl.Collator();
 alert( collator.compare("ЁжиК", "ёжик") ); // 1, разные
 
-let collator = new Intl.Collator(undefined, {
+collator = new Intl.Collator(undefined, {
   sensitivity: "accent"
 });
 alert( collator.compare("ЁжиК", "ёжик") ); // 0, одинаковые
@@ -261,7 +261,7 @@ let date = new Date(2014, 11, 31, 12, 30, 0);
 let formatter = new Intl.DateTimeFormat("ru");
 alert( formatter.format(date) ); // 31.12.2014
 
-let formatter = new Intl.DateTimeFormat("en-US");
+formatter = new Intl.DateTimeFormat("en-US");
 alert( formatter.format(date) ); // 12/31/2014
 ```
 
