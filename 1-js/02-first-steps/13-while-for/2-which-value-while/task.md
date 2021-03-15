@@ -2,19 +2,19 @@ importance: 4
 
 ---
 
-# Какие значения выведет цикл while?
+# Which values does the while loop show?
 
-Для каждого цикла запишите, какие значения он выведет. Потом сравните с ответом.
+For every loop iteration, write down which value it outputs and then compare it with the solution.
 
-Оба цикла выводят `alert` с одинаковыми значениями или нет?
+Both loops `alert` the same values, or not?
 
-1. Префиксный вариант `++i`:
+1. The prefix form `++i`:
 
     ```js
     let i = 0;
     while (++i < 5) alert( i );
     ```
-2. Постфиксный вариант `i++`
+2. The postfix form `i++`
 
     ```js
     let i = 0;
