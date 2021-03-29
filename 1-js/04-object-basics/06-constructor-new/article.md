@@ -89,7 +89,11 @@ let user = new function() {
 
 Используя специальное свойство `new.target` внутри функции, мы можем проверить, вызвана ли функция при помощи оператора `new` или без него.
 
+<<<<<<< HEAD
 В случае, если функция вызвана при помощи `new`, то в `new.target` будет сама функция, в противном случае `undefined`.
+=======
+It is undefined for regular calls and equals the function if called with `new`:
+>>>>>>> 7b76185892aa9798c3f058256aed44a9fb413cc3
 
 ```js run
 function User() {
