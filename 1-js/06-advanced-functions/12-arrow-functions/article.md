@@ -44,6 +44,8 @@ group.showList();
 Если бы мы использовали "обычную" функцию, была бы ошибка:
 
 ```js run
+'use strict';
+
 let group = {
   title: "Our Group",
   students: ["John", "Pete", "Alice"],
