@@ -81,9 +81,14 @@ let user = 'John'
 
 В принципе, все эти варианты работают одинаково. Так что это вопрос личного вкуса и эстетики.
 
+<<<<<<< HEAD
 
 ````smart header="`var` вместо `let`"
 В старых скриптах вы также можете найти другое ключевое слово: `var` вместо `let`:
+=======
+````smart header="`var` instead of `let`"
+In older scripts, you may also find another keyword: `var` instead of `let`:
+>>>>>>> 7b76185892aa9798c3f058256aed44a9fb413cc3
 
 ```js
 *!*var*/!* message = 'Hello';
@@ -137,8 +142,27 @@ alert(hello); // Hello world!
 alert(message); // Hello world!
 ```
 
+<<<<<<< HEAD
 ````warn header="Повторное объявление вызывает ошибку"
 Переменная может быть объявлена только один раз.
+=======
+````warn header="Declaring twice triggers an error"
+A variable should be declared only once.
+
+A repeated declaration of the same variable is an error:
+
+```js run
+let message = "This";
+
+// repeated 'let' leads to an error
+let message = "That"; // SyntaxError: 'message' has already been declared
+```
+So, we should declare a variable once and then refer to it without `let`.
+````
+
+```smart header="Functional languages"
+It's interesting to note that there exist [functional](https://en.wikipedia.org/wiki/Functional_programming) programming languages, like [Scala](http://www.scala-lang.org/) or [Erlang](http://www.erlang.org/) that forbid changing variable values.
+>>>>>>> 7b76185892aa9798c3f058256aed44a9fb413cc3
 
 Повторное объявление той же переменной является ошибкой:
 
@@ -209,7 +233,11 @@ let имя = '...';
 let 我 = '...';
 ```
 
+<<<<<<< HEAD
 Технически здесь нет ошибки, такие имена разрешены, но есть международная традиция использовать английский язык в именах переменных. Даже если мы пишем небольшой скрипт, у него может быть долгая жизнь впереди. Людям из других стран, возможно, придётся прочесть его не один раз.
+=======
+Technically, there is no error here. Such names are allowed, but there is an international convention to use English in variable names. Even if we're writing a small script, it may have a long life ahead. People from other countries may need to read it some time.
+>>>>>>> 7b76185892aa9798c3f058256aed44a9fb413cc3
 ````
 
 ````warn header="Зарезервированные имена"

@@ -1,14 +1,14 @@
-# Конструкция "switch"
+# The "switch" statement
 
-Конструкция `switch` заменяет собой сразу несколько `if`.
+A `switch` statement can replace multiple `if` checks.
 
-Она представляет собой более наглядный способ сравнить выражение сразу с несколькими вариантами.
+It gives a more descriptive way to compare a value with multiple variants.
 
-## Синтаксис
+## The syntax
 
-Конструкция `switch` имеет один или более блок `case` и необязательный блок `default`.
+The `switch` has one or more `case` blocks and an optional default.
 
-Выглядит она так:
+It looks like this:
 
 ```js no-beautify
 switch(x) {
@@ -26,71 +26,71 @@ switch(x) {
 }
 ```
 
-- Переменная `x` проверяется на строгое равенство первому значению `value1`, затем второму `value2` и так далее.
-- Если соответствие установлено – `switch` начинает выполняться от соответствующей директивы `case` и далее, до ближайшего `break` (или до конца `switch`).
-- Если ни один `case` не совпал – выполняется (если есть) вариант `default`.
+- The value of `x` is checked for a strict equality to the value from the first `case` (that is, `value1`) then to the second (`value2`) and so on.
+- If the equality is found, `switch` starts to execute the code starting from the corresponding `case`, until the nearest `break` (or until the end of `switch`).
+- If no case is matched then the `default` code is executed (if it exists).
 
-## Пример работы
+## An example
 
-Пример использования `switch` (сработавший код выделен):
-
-```js run
-let a = 2 + 2;
-
-switch (a) {
-  case 3:
-    alert( 'Маловато' );
-    break;
-*!*
-  case 4:
-    alert( 'В точку!' );
-    break;
-*/!*
-  case 5:
-    alert( 'Перебор' );
-    break;
-  default:
-    alert( "Нет таких значений" );
-}
-```
-
-Здесь оператор `switch` последовательно сравнит `a` со всеми вариантами из `case`.
-
-Сначала `3`, затем – так как нет совпадения – `4`. Совпадение найдено, будет выполнен этот вариант, со строки `alert( 'В точку!' )` и далее, до ближайшего `break`, который прервёт выполнение.
-
-**Если `break` нет, то выполнение пойдёт ниже по следующим `case`, при этом остальные проверки игнорируются.**
-
-Пример без `break`:
+An example of `switch` (the executed code is highlighted):
 
 ```js run
 let a = 2 + 2;
 
 switch (a) {
   case 3:
-    alert( 'Маловато' );
+    alert( 'Too small' );
+    break;
 *!*
   case 4:
-    alert( 'В точку!' );
+    alert( 'Exactly!' );
+    break;
+*/!*
   case 5:
-    alert( 'Перебор' );
+    alert( 'Too big' );
+    break;
   default:
-    alert( "Нет таких значений" );
+    alert( "I don't know such values" );
+}
+```
+
+Here the `switch` starts to compare `a` from the first `case` variant that is `3`. The match fails.
+
+Then `4`. That's a match, so the execution starts from `case 4` until the nearest `break`.
+
+**If there is no `break` then the execution continues with the next `case` without any checks.**
+
+An example without `break`:
+
+```js run
+let a = 2 + 2;
+
+switch (a) {
+  case 3:
+    alert( 'Too small' );
+*!*
+  case 4:
+    alert( 'Exactly!' );
+  case 5:
+    alert( 'Too big' );
+  default:
+    alert( "I don't know such values" );
 */!*
 }
 ```
 
-В примере выше последовательно выполнятся три `alert`:
+In the example above we'll see sequential execution of three `alert`s:
 
 ```js
-alert( 'В точку!' );
-alert( 'Перебор' );
-alert( "Нет таких значений" );
+alert( 'Exactly!' );
+alert( 'Too big' );
+alert( "I don't know such values" );
 ```
 
-````smart header="Любое выражение может быть аргументом для `switch/case`"
-И `switch` и `case` допускают любое выражение в качестве аргумента.
+````smart header="Any expression can be a `switch/case` argument"
+Both `switch` and `case` allow arbitrary expressions.
 
-Например:
+For example:
 
 ```js run
 let a = "1";
@@ -99,74 +99,74 @@ let b = 0;
 switch (+a) {
 *!*
   case b + 1:
-    alert("Выполнится, т.к. значением +a будет 1, что в точности равно b+1");
+    alert("this runs, because +a is 1, exactly equals b+1");
     break;
 */!*
 
   default:
-    alert("Это не выполнится");
+    alert("this doesn't run");
 }
 ```
-В этом примере выражение `+a` вычисляется в `1`, что совпадает с выражением `b + 1` в `case`, и следовательно, код в этом блоке будет выполнен.
+Here `+a` gives `1`, that's compared with `b + 1` in `case`, and the corresponding code is executed.
 ````
 
-## Группировка "case"
+## Grouping of "case"
 
-Несколько вариантов `case`, использующих один код, можно группировать.
+Several variants of `case` which share the same code can be grouped.
 
-Для примера, выполним один и тот же код для `case 3` и `case 5`, сгруппировав их:
+For example, if we want the same code to run for `case 3` and `case 5`:
 
 ```js run no-beautify
-let a = 2 + 2;
+let a = 3;
 
 switch (a) {
   case 4:
-    alert('Правильно!');
+    alert('Right!');
     break;
 
 *!*
-  case 3: // (*) группируем оба case
+  case 3: // (*) grouped two cases
   case 5:
-    alert('Неправильно!');
-    alert("Может вам посетить урок математики?");
+    alert('Wrong!');
+    alert("Why don't you take a math class?");
     break;
 */!*
 
   default:
-    alert('Результат выглядит странновато. Честно.');
+    alert('The result is strange. Really.');
 }
 ```
 
-Теперь оба варианта `3` и `5` выводят одно сообщение.
+Now both `3` and `5` show the same message.
 
-Возможность группировать `case` – это побочный эффект того, как `switch/case` работает без `break`. Здесь выполнение `case 3` начинается со строки `(*)` и продолжается в `case 5`, потому что отсутствует `break`.
+The ability to "group" cases is a side-effect of how `switch/case` works without `break`. Here the execution of `case 3` starts from the line `(*)` and goes through `case 5`, because there's no `break`.
 
-## Тип имеет значение
+## Type matters
 
-Нужно отметить, что проверка на равенство всегда строгая. Значения должны быть одного типа, чтобы выполнялось равенство.
+Let's emphasize that the equality check is always strict. The values must be of the same type to match.
 
-Для примера, давайте рассмотрим следующий код:
+For example, let's consider the code:
 
 ```js run
-let arg = prompt("Введите число?");
+let arg = prompt("Enter a value?");
 switch (arg) {
   case '0':
   case '1':
-    alert( 'Один или ноль' );
+    alert( 'One or zero' );
     break;
 
   case '2':
-    alert( 'Два' );
+    alert( 'Two' );
     break;
 
   case 3:
-    alert( 'Никогда не выполнится!' );
+    alert( 'Never executes!' );
     break;
   default:
-    alert( 'Неизвестное значение' );
+    alert( 'An unknown value' );
 }
 ```
 
-1. Для `'0'` и `'1'` выполнится первый `alert`.
-2. Для `'2'` -- второй `alert`.
-3. Но для `3`, результат выполнения `prompt` будет строка `"3"`, которая не соответствует строгому равенству `===` с числом `3`. Таким образом, мы имеем "мёртвый код" в `case 3`! Выполнится вариант `default`.
+1. For `0`, `1`, the first `alert` runs.
+2. For `2` the second `alert` runs.
+3. But for `3`, the result of the `prompt` is a string `"3"`, which is not strictly equal `===` to the number `3`. So we've got a dead code in `case 3`! The `default` variant will execute.

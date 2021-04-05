@@ -1,54 +1,54 @@
-# Циклы while и for
+# Loops: while and for
 
-При написании скриптов зачастую встаёт задача сделать однотипное действие много раз.
+We often need to repeat actions.
 
-Например, вывести товары из списка один за другим. Или просто перебрать все числа от `1` до `10` и для каждого выполнить одинаковый код.
+For example, outputting goods from a list one after another or just running the same code for each number from 1 to 10.
 
-Для многократного повторения одного участка кода предусмотрены *циклы*.
+*Loops* are a way to repeat the same code multiple times.
 
-## Цикл "while"
+## The "while" loop
 
-Цикл `while` имеет следующий синтаксис:
+The `while` loop has the following syntax:
 
 ```js
 while (condition) {
-  // код
-  // также называемый "телом цикла"
+  // code
+  // so-called "loop body"
 }
 ```
 
-Код из тела цикла выполняется, пока условие `condition` истинно.
+While the `condition` is truthy, the `code` from the loop body is executed.
 
-Например, цикл ниже выводит `i`, пока `i < 3`:
+For instance, the loop below outputs `i` while `i < 3`:
 
 ```js run
 let i = 0;
-while (i < 3) { // выводит 0, затем 1, затем 2
+while (i < 3) { // shows 0, then 1, then 2
   alert( i );
   i++;
 }
 ```
 
-Одно выполнение тела цикла по-научному называется *итерация*. Цикл в примере выше совершает три итерации.
+A single execution of the loop body is called *an iteration*. The loop in the example above makes three iterations.
 
-Если бы строка `i++` отсутствовала в примере выше, то цикл бы повторялся (в теории) вечно. На практике, конечно, браузер не позволит такому случиться, он предоставит пользователю возможность остановить "подвисший" скрипт, а JavaScript на стороне сервера придётся "убить" процесс.
+If `i++` was missing from the example above, the loop would repeat (in theory) forever. In practice, the browser provides ways to stop such loops, and in server-side JavaScript, we can kill the process.
 
-Любое выражение или переменная может быть условием цикла, а не только сравнение: условие `while` вычисляется и преобразуется в логическое значение.
+Any expression or variable can be a loop condition, not just comparisons: the condition is evaluated and converted to a boolean by `while`.
 
-Например, `while (i)` -- более краткий вариант `while (i != 0)`:
+For instance, a shorter way to write `while (i != 0)` is `while (i)`:
 
 ```js run
 let i = 3;
 *!*
-while (i) { // когда i будет равно 0, условие станет ложным, и цикл остановится
+while (i) { // when i becomes 0, the condition becomes falsy, and the loop stops
 */!*
   alert( i );
   i--;
 }
 ```
 
-````smart header="Фигурные скобки не требуются для тела цикла из одной строки"
-Если тело цикла состоит лишь из одной инструкции, мы можем опустить фигурные скобки `{…}`:
+````smart header="Curly braces are not required for a single-line body"
+If the loop body has a single statement, we can omit the curly braces `{…}`:
 
 ```js run
 let i = 3;
@@ -58,19 +58,19 @@ while (i) alert(i--);
 ```
 ````
 
-## Цикл "do…while"
+## The "do..while" loop
 
-Проверку условия можно разместить под телом цикла, используя специальный синтаксис `do..while`:
+The condition check can be moved *below* the loop body using the `do..while` syntax:
 
 ```js
 do {
-  // тело цикла
+  // loop body
 } while (condition);
 ```
 
-Цикл сначала выполнит тело, а затем проверит условие `condition`, и пока его значение равно `true`, он будет выполняться снова и снова.
+The loop will first execute the body, then check the condition, and, while it's truthy, execute it again and again.
 
-Например:
+For example:
 
 ```js run
 let i = 0;
@@ -80,109 +80,109 @@ do {
 } while (i < 3);
 ```
 
-Такая форма синтаксиса оправдана, если вы хотите, чтобы тело цикла выполнилось **хотя бы один раз**, даже если условие окажется ложным. На практике чаще используется форма с предусловием: `while(…) {…}`.
+This form of syntax should only be used when you want the body of the loop to execute **at least once** regardless of the condition being truthy. Usually, the other form is preferred: `while(…) {…}`.
 
-## Цикл "for"
+## The "for" loop
 
-Более сложный, но при этом самый распространённый цикл — цикл `for`.
+The `for` loop is more complex, but it's also the most commonly used loop.
 
-Выглядит он так:
+It looks like this:
 
 ```js
-for (начало; условие; шаг) {
-  // ... тело цикла ...
+for (begin; condition; step) {
+  // ... loop body ...
 }
 ```
 
-Давайте разберёмся, что означает каждая часть, на примере. Цикл ниже выполняет `alert(i)` для `i` от `0` до (но не включая) `3`:
+Let's learn the meaning of these parts by example. The loop below runs `alert(i)` for `i` from `0` up to (but not including) `3`:
 
 ```js run
-for (let i = 0; i < 3; i++) { // выведет 0, затем 1, затем 2
+for (let i = 0; i < 3; i++) { // shows 0, then 1, then 2
   alert(i);
 }
 ```
 
-Рассмотрим конструкцию `for` подробней:
+Let's examine the `for` statement part-by-part:
 
-| часть  |          |                                                                            |
+| part  |          |                                                                            |
 |-------|----------|----------------------------------------------------------------------------|
-| *начало* | `i = 0`    | Выполняется один раз при входе в цикл                                      |
-| *условие* | `i < 3`| Проверяется *перед* каждой итерацией цикла. Если оно вычислится в `false`, цикл остановится.              |
-| *шаг* | `i++`      | Выполняется *после* тела цикла на каждой итерации *перед* проверкой условия. |
-| *тело* | `alert(i)`| Выполняется снова и снова, пока условие вычисляется в `true`.                         |
+| begin | `i = 0`    | Executes once upon entering the loop.                                      |
+| condition | `i < 3`| Checked before every loop iteration. If false, the loop stops.              |
+| body | `alert(i)`| Runs again and again while the condition is truthy.                         |
+| step| `i++`      | Executes after the body on each iteration. |
 
-В целом, алгоритм работы цикла выглядит следующим образом:
+The general loop algorithm works like this:
 
 ```
-Выполнить *начало*
-→ (Если *условие* == true → Выполнить *тело*, Выполнить *шаг*)
-→ (Если *условие* == true → Выполнить *тело*, Выполнить *шаг*)
-→ (Если *условие* == true → Выполнить *тело*, Выполнить *шаг*)
+Run begin
+→ (if condition → run body and run step)
+→ (if condition → run body and run step)
+→ (if condition → run body and run step)
 → ...
 ```
 
-То есть, *начало* выполняется один раз, а затем каждая итерация заключается в проверке *условия*, после которой выполняется *тело* и *шаг*.
+That is, `begin` executes once, and then it iterates: after each `condition` test, `body` and `step` are executed.
 
-Если тема циклов для вас нова, может быть полезным вернуться к примеру выше и воспроизвести его работу на листе бумаги, шаг за шагом.
+If you are new to loops, it could help to go back to the example and reproduce how it runs step-by-step on a piece of paper.
 
-Вот в точности то, что происходит в нашем случае:
+Here's exactly what happens in our case:
 
 ```js
 // for (let i = 0; i < 3; i++) alert(i)
 
-// Выполнить начало
-let i = 0;
-// Если условие == true → Выполнить тело, Выполнить шаг
+// run begin
+let i = 0
+// if condition → run body and run step
 if (i < 3) { alert(i); i++ }
-// Если условие == true → Выполнить тело, Выполнить шаг
+// if condition → run body and run step
 if (i < 3) { alert(i); i++ }
-// Если условие == true → Выполнить тело, Выполнить шаг
+// if condition → run body and run step
 if (i < 3) { alert(i); i++ }
-// ...конец, потому что теперь i == 3
+// ...finish, because now i == 3
 ```
 
-````smart header="Встроенное объявление переменной"
-В примере переменная счётчика `i` была объявлена прямо в цикле. Это так называемое "встроенное" объявление переменной. Такие переменные существуют только внутри цикла.
+````smart header="Inline variable declaration"
+Here, the "counter" variable `i` is declared right in the loop. This is called an "inline" variable declaration. Such variables are visible only inside the loop.
 
 ```js run
 for (*!*let*/!* i = 0; i < 3; i++) {
   alert(i); // 0, 1, 2
 }
-alert(i); // ошибка, нет такой переменной
+alert(i); // error, no such variable
 ```
 
-Вместо объявления новой переменной мы можем использовать уже существующую:
+Instead of defining a variable, we could use an existing one:
 
 ```js run
 let i = 0;
 
-for (i = 0; i < 3; i++) { // используем существующую переменную
+for (i = 0; i < 3; i++) { // use an existing variable
   alert(i); // 0, 1, 2
 }
 
-alert(i); // 3, переменная доступна, т.к. была объявлена снаружи цикла
+alert(i); // 3, visible, because declared outside of the loop
 ```
 
 ````
 
 
-### Пропуск частей "for"
+### Skipping parts
 
-Любая часть `for` может быть пропущена.
+Any part of `for` can be skipped.
 
-Для примера, мы можем пропустить `начало` если нам ничего не нужно делать перед стартом цикла.
+For example, we can omit `begin` if we don't need to do anything at the loop start.
 
-Вот так:
+Like here:
 
 ```js run
-let i = 0; // мы уже имеем объявленную i с присвоенным значением
+let i = 0; // we have i already declared and assigned
 
-for (; i < 3; i++) { // нет необходимости в "начале"
+for (; i < 3; i++) { // no need for "begin"
   alert( i ); // 0, 1, 2
 }
 ```
 
-Можно убрать и `шаг`:
+We can also remove the `step` part:
 
 ```js run
 let i = 0;
@@ -192,32 +192,32 @@ for (; i < 3;) {
 }
 ```
 
-Это сделает цикл аналогичным `while (i < 3)`.
+This makes the loop identical to `while (i < 3)`.
 
-А можно и вообще убрать всё, получив бесконечный цикл:
+We can actually remove everything, creating an infinite loop:
 
 ```js
 for (;;) {
-  // будет выполняться вечно
+  // repeats without limits
 }
 ```
 
-При этом сами точки с запятой `;` обязательно должны присутствовать, иначе будет ошибка синтаксиса.
+Please note that the two `for` semicolons `;` must be present. Otherwise, there would be a syntax error.
 
-## Прерывание цикла: "break"
+## Breaking the loop
 
-Обычно цикл завершается при вычислении *условия* в `false`.
+Normally, a loop exits when its condition becomes falsy.
 
-Но мы можем выйти из цикла в любой момент с помощью специальной директивы `break`.
+But we can force the exit at any time using the special `break` directive.
 
-Например, следующий код подсчитывает сумму вводимых чисел до тех пор, пока посетитель их вводит, а затем – выдаёт:
+For example, the loop below asks the user for a series of numbers, "breaking" when no number is entered:
 
-```js
+```js run
 let sum = 0;
 
 while (true) {
 
-  let value = +prompt("Введите число", '');
+  let value = +prompt("Enter a number", '');
 
 *!*
   if (!value) break; // (*)
@@ -226,37 +226,37 @@ while (true) {
   sum += value;
 
 }
-alert( 'Сумма: ' + sum );
+alert( 'Sum: ' + sum );
 ```
 
-Директива `break` в строке `(*)` полностью прекращает выполнение цикла и передаёт управление на строку за его телом, то есть на `alert`.
+The `break` directive is activated at the line `(*)` if the user enters an empty line or cancels the input. It stops the loop immediately, passing control to the first line after the loop. Namely, `alert`.
 
-Вообще, сочетание «бесконечный цикл + `break`» – отличная штука для тех ситуаций, когда условие, по которому нужно прерваться, находится не в начале или конце цикла, а посередине.
+The combination "infinite loop + `break` as needed" is great for situations when a loop's condition must be checked not in the beginning or end of the loop, but in the middle or even in several places of its body.
 
-## Переход к следующей итерации: continue [#continue]
+## Continue to the next iteration [#continue]
 
-Директива `continue` -- "облегчённая версия" `break`. При её выполнении цикл не прерывается, а переходит к следующей итерации (если условие все ещё равно `true`).
+The `continue` directive is a "lighter version" of `break`. It doesn't stop the whole loop. Instead, it stops the current iteration and forces the loop to start a new one (if the condition allows).
 
-Её используют, если понятно, что на текущем повторе цикла делать больше нечего.
+We can use it if we're done with the current iteration and would like to move on to the next one.
 
-Например, цикл ниже использует `continue`, чтобы выводить только нечётные значения:
+The loop below uses `continue` to output only odd values:
 
 ```js run no-beautify
 for (let i = 0; i < 10; i++) {
 
-  // если true, пропустить оставшуюся часть тела цикла
+  // if true, skip the remaining part of the body
   *!*if (i % 2 == 0) continue;*/!*
 
-  alert(i); // 1, затем 3, 5, 7, 9
+  alert(i); // 1, then 3, 5, 7, 9
 }
 ```
 
-Для чётных значений `i`, директива `continue` прекращает выполнение тела цикла и передаёт управление на следующую итерацию `for` (со следующим числом). Таким образом `alert` вызывается только для нечётных значений.
+For even values of `i`, the `continue` directive stops executing the body and passes control to the next iteration of `for` (with the next number). So the `alert` is only called for odd values.
 
-````smart header="Директива `continue` позволяет избегать вложенности"
-Цикл, который обрабатывает только нечётные значения, мог бы выглядеть так:
+````smart header="The `continue` directive helps decrease nesting"
+A loop that shows odd values could look like this:
 
-```js
+```js run
 for (let i = 0; i < 10; i++) {
 
   if (i % 2) {
@@ -266,15 +266,15 @@ for (let i = 0; i < 10; i++) {
 }
 ```
 
-С технической точки зрения он полностью идентичен. Действительно, вместо `continue` можно просто завернуть действия в блок `if`.
+From a technical point of view, this is identical to the example above. Surely, we can just wrap the code in an `if` block instead of using `continue`.
 
-Однако мы получили дополнительный уровень вложенности фигурных скобок. Если код внутри `if` более длинный, то это ухудшает читаемость, в отличие от варианта с `continue`.
+But as a side-effect, this created one more level of nesting (the `alert` call inside the curly braces). If the code inside of `if` is longer than a few lines, that may decrease the overall readability.
 ````
 
-````warn header="Нельзя использовать `break/continue` справа от оператора '?'"
-Обратите внимание, что эти синтаксические конструкции не являются выражениями и не могут быть использованы с тернарным оператором `?`. В частности, использование таких директив, как `break/continue`, вызовет ошибку.
+````warn header="No `break/continue` to the right side of '?'"
+Please note that syntax constructs that are not expressions cannot be used with the ternary operator `?`. In particular, directives such as `break/continue` aren't allowed there.
 
-Например, если мы возьмём этот код:
+For example, if we take this code:
 
 ```js
 if (i > 5) {
@@ -284,105 +284,114 @@ if (i > 5) {
 }
 ```
 
-...и перепишем его, используя вопросительный знак:
+...and rewrite it using a question mark:
 
 
 ```js no-beautify
-(i > 5) ? alert(i) : *!*continue*/!*; // continue здесь приведёт к ошибке
+(i > 5) ? alert(i) : *!*continue*/!*; // continue isn't allowed here
 ```
 
-...то будет синтаксическая ошибка.
+...it stops working: there's a syntax error.
 
-Это ещё один повод не использовать оператор вопросительного знака `?` вместо `if`.
+This is just another reason not to use the question mark operator `?` instead of `if`.
 ````
 
-## Метки для break/continue
+## Labels for break/continue
 
-Бывает, нужно выйти одновременно из нескольких уровней цикла сразу.
+Sometimes we need to break out from multiple nested loops at once.
 
-Например, в коде ниже мы проходимся циклами по `i` и `j`, запрашивая с помощью `prompt` координаты `(i, j)` с `(0,0)` до `(2,2)`:
+For example, in the code below we loop over `i` and `j`, prompting for the coordinates `(i, j)` from `(0,0)` to `(2,2)`:
 
 ```js run no-beautify
 for (let i = 0; i < 3; i++) {
 
   for (let j = 0; j < 3; j++) {
 
-    let input = prompt(`Значение на координатах (${i},${j})`, '');
+    let input = prompt(`Value at coords (${i},${j})`, '');
 
-    // Что если мы захотим перейти к Готово (ниже) прямо отсюда?
-
+    // what if we want to exit from here to Done (below)?
   }
 }
 
-alert('Готово!');
+alert('Done!');
 ```
 
-Нам нужен способ остановить выполнение если пользователь отменит ввод.
+We need a way to stop the process if the user cancels the input.
 
-Обычный `break` после `input` лишь прервёт внутренний цикл, но этого недостаточно. Достичь желаемого поведения можно с помощью меток.
+The ordinary `break` after `input` would only break the inner loop. That's not sufficient -- labels, come to the rescue!
 
-*Метка* имеет вид идентификатора с двоеточием перед циклом:
+A *label* is an identifier with a colon before a loop:
 ```js
 labelName: for (...) {
   ...
 }
 ```
 
-Вызов `break <labelName>` в цикле ниже ищет ближайший внешний цикл с такой меткой и переходит в его конец.
+The `break <labelName>` statement in the loop below breaks out to the label:
 
 ```js run no-beautify
 *!*outer:*/!* for (let i = 0; i < 3; i++) {
 
   for (let j = 0; j < 3; j++) {
 
-    let input = prompt(`Значение на координатах (${i},${j})`, '');
+    let input = prompt(`Value at coords (${i},${j})`, '');
 
-    // если пустая строка или Отмена, то выйти из обоих циклов
+    // if an empty string or canceled, then break out of both loops
     if (!input) *!*break outer*/!*; // (*)
 
-    // сделать что-нибудь со значениями...
+    // do something with the value...
   }
 }
-
-alert('Готово!');
+alert('Done!');
 ```
 
-В примере выше это означает, что вызовом `break outer` будет разорван внешний цикл до метки с именем `outer`, и управление перейдёт со строки, помеченной `(*)`, к `alert('Готово!')`.
+In the code above, `break outer` looks upwards for the label named `outer` and breaks out of that loop.
 
-Можно размещать метку на отдельной строке:
+So the control goes straight from `(*)` to `alert('Done!')`.
+
+We can also move the label onto a separate line:
 
 ```js no-beautify
 outer:
 for (let i = 0; i < 3; i++) { ... }
 ```
 
-Директива `continue` также может быть использована с меткой. В этом случае управление перейдёт на следующую итерацию цикла с меткой.
+The `continue` directive can also be used with a label. In this case, code execution jumps to the next iteration of the labeled loop.
 
-````warn header="Метки не позволяют \"прыгнуть\" куда угодно"
-Метки не дают возможности передавать управление в произвольное место кода.
+````warn header="Labels do not allow to \"jump\" anywhere"
+Labels do not allow us to jump into an arbitrary place in the code.
 
-Например, нет возможности сделать следующее:
+For example, it is impossible to do this:
 ```js
-break label; // не прыгает к метке ниже
+break label; // jump to the label below (doesn't work)
 
 label: for (...)
 ```
 
-Вызов `break/continue` возможен только внутри цикла, и метка должна находиться где-то выше этой директивы.
+A `break` directive must be inside a code block. Technically, any labelled code block will do, e.g.:
+```js
+label: {
+  // ...
+  break label; // works
+  // ...
+}
+```
+
+...Although, 99.9% of the time `break` used is inside loops, as we've seen in the examples above.
+
+A `continue` is only possible from inside a loop.
 ````
 
-## Итого
+## Summary
 
-Мы рассмотрели 3 вида циклов:
+We covered 3 types of loops:
 
-- `while` -- Проверяет условие перед каждой итерацией.
-- `do..while` -- Проверяет условие после каждой итерации.
-- `for (;;)` -- Проверяет условие перед каждой итерацией, есть возможность задать дополнительные настройки.
+- `while` -- The condition is checked before each iteration.
+- `do..while` -- The condition is checked after each iteration.
+- `for (;;)` -- The condition is checked before each iteration, additional settings available.
 
-Чтобы организовать бесконечный цикл, используют конструкцию `while (true)`. При этом он, как и любой другой цикл, может быть прерван директивой `break`.
+To make an "infinite" loop, usually the `while(true)` construct is used. Such a loop, just like any other, can be stopped with the `break` directive.
 
-Если на данной итерации цикла делать больше ничего не надо, но полностью прекращать цикл не следует – используют директиву `continue`.
+If we don't want to do anything in the current iteration and would like to forward to the next one, we can use the `continue` directive.
 
-Обе этих директивы поддерживают *метки*, которые ставятся перед циклом. Метки – единственный способ для `break/continue` выйти за пределы текущего цикла, повлиять на выполнение внешнего.
-
-Заметим, что метки не позволяют прыгнуть в произвольное место кода, в JavaScript нет такой возможности.
+`break/continue` support labels before the loop. A label is the only way for `break/continue` to escape a nested loop to go to an outer one.

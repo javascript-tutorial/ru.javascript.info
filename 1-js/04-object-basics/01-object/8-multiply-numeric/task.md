@@ -2,9 +2,15 @@ importance: 3
 
 ---
 
+<<<<<<< HEAD
 # Умножаем все числовые свойства на 2
 
 Создайте функцию `multiplyNumeric(obj)`, которая умножает все числовые свойства объекта `obj` на `2`.
+=======
+# Multiply numeric property values by 2
+
+Create a function `multiplyNumeric(obj)` that multiplies all numeric property values of `obj` by `2`.
+>>>>>>> 7b76185892aa9798c3f058256aed44a9fb413cc3
 
 Например:
 

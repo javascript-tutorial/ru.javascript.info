@@ -3,20 +3,36 @@
 ```js run demo
 let userName = prompt("Кто там?", '');
 
+<<<<<<< HEAD
 if (userName == 'Админ') {
+=======
+if (userName === 'Admin') {
+>>>>>>> 7b76185892aa9798c3f058256aed44a9fb413cc3
 
   let pass = prompt('Пароль?', '');
 
+<<<<<<< HEAD
   if (pass == 'Я главный') {
     alert( 'Здравствуйте!' );
   } else if (pass == '' || pass == null) {
     alert( 'Отменено' );
+=======
+  if (pass === 'TheMaster') {
+    alert( 'Welcome!' );
+  } else if (pass === '' || pass === null) {
+    alert( 'Canceled' );
+>>>>>>> 7b76185892aa9798c3f058256aed44a9fb413cc3
   } else {
     alert( 'Неверный пароль' );
   }
 
+<<<<<<< HEAD
 } else if (userName == '' || userName == null) {
   alert( 'Отменено' );
+=======
+} else if (userName === '' || userName === null) {
+  alert( 'Canceled' );
+>>>>>>> 7b76185892aa9798c3f058256aed44a9fb413cc3
 } else {
   alert( "Я вас не знаю" );
 }
