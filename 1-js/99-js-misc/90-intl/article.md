@@ -117,13 +117,13 @@ alert( collator.compare("ёжик", "яблоко") ); // -1 (ёжик мень�
 Выше были использованы полностью стандартные настройки. Они различают регистр символа, но это различие можно убрать, если настроить чувствительность `sensitivity`:
 
 ```js run
-let collator = new Intl.Collator();
-alert( collator.compare("ЁжиК", "ёжик") ); // 1, разные
+let collator1 = new Intl.Collator();
+alert( collator1.compare("ЁжиК", "ёжик") ); // 1, разные
 
-let collator = new Intl.Collator(undefined, {
+let collator2 = new Intl.Collator(undefined, {
   sensitivity: "accent"
 });
-alert( collator.compare("ЁжиК", "ёжик") ); // 0, одинаковые
+alert( collator2.compare("ЁжиК", "ёжик") ); // 0, одинаковые
 ```
 
 ## Даты, Intl.DateTimeFormat [#intl-datetimeformat]
@@ -258,11 +258,11 @@ let dateString = formatter.format(date);
 ```js run
 let date = new Date(2014, 11, 31, 12, 30, 0);
 
-let formatter = new Intl.DateTimeFormat("ru");
-alert( formatter.format(date) ); // 31.12.2014
+let formatter1 = new Intl.DateTimeFormat("ru");
+alert( formatter1.format(date) ); // 31.12.2014
 
-let formatter = new Intl.DateTimeFormat("en-US");
-alert( formatter.format(date) ); // 12/31/2014
+let formatter2 = new Intl.DateTimeFormat("en-US");
+alert( formatter2.format(date) ); // 12/31/2014
 ```
 
 Длинная дата, с настройками:
@@ -438,7 +438,7 @@ alert( formatter.format(1234.5) ); // 1 234,50 £
 : Форматирует дату в соответствии с локалью, например:
 
     ```js run no-beautify
-    let date = new Date(2014, 11, 31, 12, 00);
+    let date = new Date(2014, 11, 31, 12, 0);
 
     alert( date.toLocaleString("ru", { year: 'numeric', month: 'long' }) ); // Декабрь 2014
     ```
