@@ -211,7 +211,7 @@ let obj = Object.fromEntries(map.entries()); // make a plain object (*)
 alert(obj.orange); // 2
 ```
 
-Вызов `map.entries()` возвращает массив пар ключ/значение, как раз в нужном формате для `Object.fromEntries`.
+Вызов `map.entries()` возвращает итерируемый объект пар ключ/значение, как раз в нужном формате для `Object.fromEntries`.
 
 Мы могли бы написать строку `(*)` ещё короче:
 
