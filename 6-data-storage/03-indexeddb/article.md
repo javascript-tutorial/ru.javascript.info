@@ -215,7 +215,7 @@ db.createObjectStore('books', {keyPath: 'id'});
 ```js
 let openRequest = indexedDB.open("db", 2);
 
-// создаём хранилище объектов для books, если ешё не существует
+// создаём хранилище объектов для books, если ещё не существует
 openRequest.onupgradeneeded = function() {
   let db = openRequest.result;
   if (!db.objectStoreNames.contains('books')) { // если хранилище "books" не существует
