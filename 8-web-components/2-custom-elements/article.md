@@ -87,13 +87,13 @@ class TimeFormatted extends HTMLElement { // (1)
     let date = new Date(this.getAttribute('datetime') || Date.now());
 
     this.innerHTML = new Intl.DateTimeFormat("default", {
-      year: this.getAttribute('year') || undefined,
-      month: this.getAttribute('month') || undefined,
-      day: this.getAttribute('day') || undefined,
-      hour: this.getAttribute('hour') || undefined,
-      minute: this.getAttribute('minute') || undefined,
-      second: this.getAttribute('second') || undefined,
-      timeZoneName: this.getAttribute('time-zone-name') || undefined,
+      year: this.getAttribute('year'),
+      month: this.getAttribute('month'),
+      day: this.getAttribute('day'),
+      hour: this.getAttribute('hour'),
+      minute: this.getAttribute('minute'),
+      second: this.getAttribute('second'),
+      timeZoneName: this.getAttribute('time-zone-name'),
     }).format(date);
   }
 
