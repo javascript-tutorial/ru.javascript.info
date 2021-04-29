@@ -1,0 +1,824 @@
+title: 'DOM, работа со страницей'
+description: 'Элементы, их содержимое, координаты, обработчики событий.'
+slug: 'dom'
+questionsToAskCount: 20
+weight: 2
+questions:
+  -
+    content: |
+      Сколько детей (дочерних DOM-узлов) у элемента `<ul>` в примере ниже:
+      ```html
+      <ul>
+        <li>Привет</li>
+        <li>Мир</li>
+      </ul>
+      ```
+
+    correctAnswer: 4
+    answers:
+      - '1'
+      - '2'
+      - '3'
+      - '4'
+      - '5'
+      - '6'
+    type: 'single'
+  -
+    content: |
+      В каких случаях для элемента `elem` верно `elem.firstChild == elem.lastChild`?
+
+    correctAnswer:
+      - 0
+      - 1
+    answers:
+      - 'Когда у `elem` нет детей.'
+      - 'Когда у `elem` единственный потомок.'
+      - 'Когда у `elem` два или более потомков.'
+    type: 'multi'
+  -
+    content: |
+      Как получить DOM-элемент `form` в документе?
+      ```html
+      <!DOCTYPE HTML>
+      <html>
+      <body>
+          <form name="myform">...</form>
+      </body>
+      </html>
+      ```
+
+    correctAnswer:
+      - 0
+      - 2
+      - 4
+    answers:
+      - '`document.forms.myform`'
+      - '`document.getElementById("myform")`'
+      - '`document.body.children[0]`'
+      - '`document.body.firstChild`'
+      - '`document.forms[0]`'
+    type: 'multi'
+  -
+    content: |
+      Дан такой HTML:
+      ```html
+      <div id="outer">
+        <div id="inner"></div>
+      </div>
+      ```
+
+      Какие вызовы вернут `div#inner`?
+
+    correctAnswer:
+      - 0
+      - 2
+    answers:
+      - '`document.querySelector("#outer #inner")`'
+      - '`document.getElementById("#outer").getElementById("#inner")`'
+      - '`document.querySelector("#outer").children[0]`'
+      - '`document.getElementById("#outer").firstChild`'
+    type: 'multi'
+  -
+    content: |
+      Есть такой элемент:
+      ```html
+      <input id="input" value="Привет">
+      ```
+      Какие вызовы поменяют значение в нём?
+
+    correctAnswer:
+      - 0
+      - 2
+    answers:
+      - '`input.value = "Пока"`'
+      - '`input.setValue("Пока")`'
+      - '`input.setAttribute("value", "Пока");`'
+      - '`input.dataset.value = "Пока";`'
+      - '`input["Пока"] = true;`'
+      - 'Все вышеперечисленные'
+    type: 'multi'
+  -
+    content: |
+      Какие варианты подключения скрипта соответствуют современному стандарту HTML?
+
+    correctAnswer:
+      - 0
+      - 1
+    answers:
+      - '`<script type="text/javascript" src="my.js"></script>`'
+      - '`<script src="my.js"></script>`'
+      - '`<script src="my.js"/>`'
+      - '`<хачу-javascript отсюда="my.js">`'
+    type: 'multi'
+  -
+    content: |
+      Есть кнопка `<button id="elem"></button>`, как показать в ней строку `"<hello>"`?
+
+      Результат должен быть таким:
+      ```html
+      <!--+ run -->
+      <button id="elem">&lt;hello&gt;</button>
+      ```
+
+    correctAnswer: 2
+    answers:
+      - '`elem.innerHTML = "<hello>"`'
+      - '`elem.innerText = "<hello>"`'
+      - '`elem.textContent = "<hello>"`'
+      - '`elem.setText("<hello>")`'
+    type: 'single'
+  -
+    content: |
+      Какие из этих обработчиков сработают?
+      ```js
+      div.onclick = function() { alert(1) };
+      div.onclick = function() { alert(2) };
+      div.addEventListener('click', function() { alert(3) });
+      ```
+
+    correctAnswer:
+      - 1
+      - 2
+    answers:
+      - 'Первый.'
+      - 'Второй.'
+      - 'Третий.'
+    type: 'multi'
+  -
+    content: |
+      Верно ли следующее утверждение:
+
+      Содержимое тега `script` нужно заключать в комментарии `<!-- .. -->`,
+      чтобы браузеры, которые не поддерживают JavaScript, работали корректно?
+
+    correctAnswer: 1
+    answers:
+      - 'Да.'
+      - 'Нет.'
+    type: 'single'
+  -
+    content: |
+      Можно ли скриптом перевести посетителя на другую страницу сайта?
+
+    correctAnswer: 0
+    answers:
+      - 'Да, куда угодно.'
+      - 'Да, но только в рамках текущего сайта.'
+      - 'Нет, нельзя.'
+    type: 'single'
+  -
+    content: |
+      Вызов `setTimeout(func, 0)` вызовет `func`...
+
+    correctAnswer: 3
+    answers:
+      - 'Сразу после `setTimeout`, до следующей строки кода.'
+      - 'Сразу после текущего скрипта, когда браузер сможет выполнить JavaScript.'
+      - 'Ровно через 4 миллисекунды.'
+      - 'Через 4 миллисекунды или больше, в зависимости от пожеланий браузера.'
+    type: 'single'
+  -
+    content: |
+      Вызов `setInterval(func, 100)` вызовет `func`...
+
+    correctAnswer: 2
+    answers:
+      - 'Ровно каждые 100 мс.'
+      - 'Примерно каждые 100 мс.'
+      - 'Обычно каждые 100 мс, но возможно, что вызовы будут происходить гораздо реже.'
+    type: 'single'
+  -
+    content: |
+      Браузер вызывает `setInterval` и `setTimeout` гораздо реже, чем обычно, если...
+
+    correctAnswer: 2
+    answers:
+      - 'Вкладка, в которой работает JavaScript, не видна и находится в фоновом режиме.'
+      - 'Посетитель зашёл с ноутбука, с питанием от батареи.'
+      - 'В обоих этих случаях.'
+    type: 'single'
+
+  -
+    content: |
+      Как правильно вывести приветствие через 5 секунд?
+
+    correctAnswer: 2
+    answers:
+      - '`sleep(5); alert("Привет!");`'
+      - '`sleep(5000); alert("Привет!");`'
+      - '`setTimeout(function() {alert("Привет!")}, 5000);`'
+      - '`setTimeout(function() {alert("Привет!")}, 5);`'
+    type: 'single'
+  -
+    content: |
+      Какое событие из этого списка не существует?
+
+    correctAnswer: 0
+    answers:
+      - '`onmousescroll`'
+      - '`onclick`'
+      - '`onmouseover`'
+      - '`onmousemove`'
+      - '`onwheel`'
+      - 'Все существуют.'
+    type: 'single'
+  -
+    content: |
+      Может ли скрипт во время работы страницы подключить к ней другие внешние JS-файлы?
+
+    correctAnswer: 2
+    answers:
+      - 'Да, но только один раз.'
+      - 'Да, но только до полной загрузки страницы.'
+      - 'Да, сколько угодно файлов когда угодно.'
+    type: 'single'
+  -
+    content: |
+      Какое событие не может быть вызвано кликом мыши?
+
+    correctAnswer:
+      - 2
+    answers:
+      - '`onfocus`'
+      - '`onclick`'
+      - '`onkeydown`'
+      - '`onmousedown`'
+    type: 'multi'
+  -
+    content: |
+      Можно ли инициировать DOM-событие из JavaScript?
+
+      Например, сэмулировать клик мышкой на элементе, чтобы JavaScript-код кликнул за пользователя, и сработали соответствующие обработчики.
+
+    correctAnswer: 0
+    answers:
+      - 'Да, можно.'
+      - 'Нет, нельзя.'
+    type: 'single'
+  -
+    content: |
+      Где в документе может располагаться тег `script` по стандарту HTML?
+
+    correctAnswer: 2
+    answers:
+      - 'Только в `<head>`.'
+      - 'Только в `<body>`.'
+      - 'В `<head>` или в `<body>`.'
+      - 'Где угодно, главное, чтобы был.'
+    type: 'single'
+  -
+    content: |
+      Чему равно значение свойства `checked` в коде ниже?
+      ```js
+      var input = document.createElement('input');
+      input.setAttribute('checked', 'checked');
+      // input.checked = ?
+      ```
+
+    correctAnswer: 2
+    answers:
+      - '`"checked"`'
+      - '`"true"`'
+      - '`true`'
+    type: 'single'
+  -
+    content: |
+      Посмотрим на HTML-документ:
+      ```html
+      <table>
+      <tr>
+        <td id="hi">Привет!</td>
+      </tr>
+      </table>
+      ```
+      Каков будет результат `document.getElementById('hi').parentNode.parentNode.tagName`?
+
+    correctAnswer: 3
+    answers:
+      - '`TR`'
+      - '`TD`'
+      - '`TABLE`'
+      - 'Другой.'
+    type: 'single'
+  -
+    content: |
+      Чем отличаются стандарты DOM Level 2 и DOM Level 3?
+    type: 'single'
+    answers:
+      - 'DOM Level 2 -- это свойства второго уровня, а DOM Level 3 -- третьего.'
+      - 'DOM Level 3 появился позже чем DOM Level 2, он доопределяет DOM-свойства и события.'
+      - 'DOM Level 3 работает в 3 раза быстрее, чем DOM Level 1, а DOM Level 2 -- только в 2 раза.'
+      - 'DOM Level 3 описывает новые свойства, которых нет в DOM Level 2.'
+      - 'DOM Level 3 описывает только события, а DOM Level 2 -- только свойства элементов.'
+      - 'Хорош выдумывать, какой ещё DOM Level? Есть только "просто DOM".'
+    correctAnswer: 1
+
+  -
+    content: |
+      Как получить HTML-содержимое DOM-элемента `elem`?
+
+    correctAnswer: 1
+    answers:
+      - '`elem.html`'
+      - '`elem.innerHTML`'
+      - '`elem.content`'
+    type: 'single'
+  -
+    content: |
+      Можно ли из JavaScript получить содержимое комментария?
+
+    correctAnswer: 0
+    answers:
+      - 'Да, комментарий -- DOM-узел, который можно получить.'
+      - 'Нет, комментарии есть в HTML, но отсутствуют в DOM.'
+      - 'Можно получить, но только до окончания загрузки страницы.'
+    type: 'single'
+  -
+    content: |
+      Можно ли из JavaScript получить содержимое комментария?
+
+    correctAnswer: 0
+    answers:
+      - 'Да, комментарий -- DOM-узел, можно получить всегда.'
+      - 'Нет, комментарии есть в HTML, но отсутствуют в DOM.'
+      - 'Можно получить, но только до окончания загрузки страницы.'
+    type: 'single'
+  -
+    content: |
+      Что выведет скрипт на этой странице?
+      ```html
+      <p id="elem">Привет, мир!</p>
+
+      <script>
+        elem.outerHTML = "Прощай, жестокий мир!"
+        alert(elem.outerHTML);
+      </script>
+      ```
+
+    correctAnswer: 4
+    correctAnswerComment: |
+      На странице теперь нет элемента с id="elem", он заменён на текст.
+    answers:
+      - 'Выведет `undefined`, теперь `elem` -- текстовый узел.'
+      - 'Прощай, жестокий мир!'
+      - '`<p id="elem">Привет, мир!</p>`'
+      - '`<p id="elem">Прощай, жестокий мир!</p>`'
+      - 'Будет ошибка.'
+    type: 'single'
+  -
+    content: |
+      Что выведет этот код?
+      ```html
+      <p id="elem">Привет!</p>
+
+      <script>
+        elem.textContent = elem.outerHTML
+        alert(elem.innerHTML);
+      </script>
+      ```
+
+    correctAnswer: 2
+    answers:
+      - 'Привет!'
+      - '`<p id="elem">Привет!</p>`'
+      - '`&lt;p id="elem"&gt;Привет!&lt;/p&gt;`'
+      - 'Будет ошибка.'
+    type: 'single'
+  -
+    content: |
+      Как получить атрибут `test` у элемента `<div id="elem" test="5">`?
+
+    correctAnswer:
+      - 1
+      - 2
+      - 3
+    answers:
+      - '`elem.test`'
+      - '`elem.getAttribute("test")`'
+      - '`elem.attributes.test.value`'
+      - '`elem.attributes[1].value`'
+      - '`elem.dataset.test`'
+    type: 'multi'
+  -
+    content: |
+      Сколько потомков будет у `<div>` после кода ниже?
+      ```html
+      <div id="div"></div>
+      <p id="p">Привет</p>
+      <script>
+        div.appendChild(p);
+        p.appendChild(div);
+      </script>
+      ```
+
+    correctAnswer: 3
+    answers:
+      - '`0`'
+      - '`1`'
+      - '`2`'
+      - 'В коде ошибка.'
+    type: 'single'
+  -
+    content: |
+      Сколько потомков будет у `<div>` после кода ниже?
+      ```html
+      <div id="div"></div>
+      <p id="p">Привет</p>
+      <script>
+        div.appendChild(p);
+        div.appendChild(p);
+      </script>
+      ```
+
+    correctAnswer: 1
+    answers:
+      - '`0`'
+      - '`1`'
+      - '`2`'
+      - 'В коде ошибка.'
+    type: 'single'
+  -
+    content: |
+      Сколько детей будет у `<div>` после кода ниже?
+      ```html
+      <div id="div">текст</div>
+      <script>
+        div.insertAdjacentHTML('beforeBegin', '<p>Привет</p>');
+        div.insertAdjacentHTML('afterEnd', '<p>Пока</p>');
+      </script>
+      ```
+
+    correctAnswer: 1
+    answers:
+      - '`0`'
+      - '`1`'
+      - '`2`'
+      - '`3`'
+      - 'В коде ошибка.'
+    type: 'single'
+  -
+    content: |
+      Сколько детей будет у `<div>` после кода ниже?
+      ```html
+      <div id="div">текст</div>
+      <script>
+        div.insertAdjacentHTML('afterBegin', '<p>Привет</p>');
+        div.insertAdjacentHTML('beforeEnd', '<p>Пока</p>');
+      </script>
+      ```
+
+    correctAnswer: 3
+    answers:
+      - '`0`'
+      - '`1`'
+      - '`2`'
+      - '`3`'
+      - 'В коде ошибка.'
+    type: 'single'
+  -
+    content: |
+      Что будет, если вызвать `document.write(str)` после загрузки страницы?
+
+    correctAnswer: 1
+    answers:
+      - 'Строка `str` допишется в конец документа.'
+      - 'Содержимое документа будет полностью заменено на строку `str`.'
+      - 'Будет ошибка.'
+    type: 'single'
+  -
+    content: |
+      Как получить размер отступа `margin-top` у `<div>`?
+      ```html
+      <style>
+        div { margin: 10px; }
+      </style>
+
+      <div id="div"></div>
+      ```
+
+    correctAnswer: 3
+    answers:
+      - '`div.style.marginTop`'
+      - '`div.style["margin-top"]`'
+      - '`getComputedStyle(div, "margin").top`'
+      - '`getComputedStyle(div).marginTop`'
+      - '`getComputedStyle(div).margin.top`'
+    type: 'single'
+  -
+    content: |
+      Как получить ширину *произвольного* DOM-элемента, если у него нет `border` и `padding`?
+
+    correctAnswer:
+      - 2
+    correctAnswerComment: 'Например, для обычного `<span>` первые два метода вернут `NaN`, так как у строчного элемента нет CSS-ширины. А `clientWidth` будет равен нулю.
+      '
+    answers:
+      - '`parseInt(elem.style.width)`'
+      - '`parseInt(getComputedStyle(elem).width)`'
+      - '`elem.offsetWidth`'
+      - '`elem.clientWidth`'
+    type: 'multi'
+
+  -
+    content: |
+      Как получить полную ширину *блочного* DOM-элемента, если у него есть `border` и `padding`?
+
+    correctAnswer:
+      - 1
+      - 2
+    answers:
+      - '`parseInt(elem.style.width)`'
+      - '`parseInt(getComputedStyle(elem).width)`'
+      - '`elem.offsetWidth`'
+      - '`elem.clientWidth`'
+    type: 'multi'
+
+  -
+    content: |
+      При каком условии `elem.scrollHeight == elem.clientHeight`?
+
+    correctAnswer: 3
+    answers:
+      - 'Содержимое элемента полностью прокручено вниз.'
+      - 'Страница прокручена так, что элемент полностью видим и находится в границах окна.'
+      - 'Высота элемента равна высоте полосы прокрутки.'
+      - 'Содержимое элемента полностью видимо, в нём нет прокрутки.'
+      - 'У элемента нет `padding`.'
+    type: 'single'
+  -
+    content: |
+      Какое значение содержит "внешнюю" высоту элемента, то есть вертикальный размер, который он занимает во внешнем контейнере?
+
+    correctAnswer: 0
+    answers:
+      - '`offsetHeight`'
+      - '`outerHeight`'
+      - '`clientHeight`'
+      - '`scrollHeight`'
+      - 'Ни одно из вышеперечисленных.'
+    type: 'single'
+  -
+    content: |
+      Когда у элемента гарантированно совпадают `offsetHeight` и `clientHeight`?
+
+    correctAnswer: 1
+    answers:
+      - 'Когда у элемента нет `border`.'
+      - 'Когда у элемента нет `border` и `padding`.'
+      - 'Когда у элемента нет `border`, `padding` и `margin`.'
+      - 'Когда у элемента нет прокрутки.'
+    type: 'single'
+  -
+    content: |
+      Результат `elem.getBoundingClientRect()` содержит отрицательное значение `top: -10`.
+
+      Что это означает?
+
+    correctAnswer: 1
+    answers:
+      - 'Что верх элемента вылезает за верхнюю границу документа.'
+      - 'Что верх элемента вылезает за верхнюю границу окна.'
+      - 'Что содержимое элемента прокручено на `10px`.'
+      - 'Ничего не означает, браузер чудит.'
+    type: 'single'
+  -
+    content: |
+      Результат `elem.getBoundingClientRect()` содержит отрицательное значение `bottom: -10`.
+
+      Что это означает?
+
+    correctAnswer: 3
+    answers:
+      - 'Что низ элемента вылезает за нижнюю границу документа.'
+      - 'Что низ элемента вылезает за нижнюю границу окна.'
+      - 'Что низ элемента вылезает за верхнюю границу документа.'
+      - 'Что низ элемента вылезает за верхнюю границу окна.'
+      - 'Что содержимое элемента прокручено на `10px`.'
+      - 'Такого не может быть.'
+    type: 'single'
+  -
+    content: |
+      Какие варианты корректно перебирают все формы на странице?
+
+    correctAnswer:
+      - 1
+      - 3
+    answers:
+      -
+        title: 'Вариант 1.'
+        description: |
+          ```js
+          var elems = document.querySelectorAll("form");
+          for (var i in elems) console.log(elems[i]);
+          ```
+      -
+        description: |
+          ```js
+          var elems = document.querySelectorAll("form");
+          for (var i = 0; i < elems.length; i++) console.log(elems[i]);
+          ```
+        title: 'Вариант 2.'
+      -
+        description: |
+          ```js
+          var elems = document.getElementsByTagName("form");
+          for (var i in elems) console.log(elems[i]);
+          ```
+        title: 'Вариант 3.'
+      -
+        description: |
+          ```js
+          var elems = document.forms;
+          for (var i = 0; i < elems.length; i++) console.log(elems[i]);
+          ```
+        title: 'Вариант 4.'
+    type: 'multi'
+  -
+    content: |
+      Есть два вложенных элемента:
+      ```html
+      <a id="outer" href="http://site.com">
+        <em id="inner">Текст ссылки</em>
+      </a>
+      ```
+      На внутреннем стоит обработчик:
+      ```js
+      inner.onclick = function(e) { e.preventDefault(); }
+      ```
+      Произойдёт ли при клике на `#inner` переход по ссылке?
+
+    correctAnswer: 1
+    answers:
+      - 'Да.'
+      - 'Нет.'
+      - 'Будет ошибка.'
+    type: 'single'
+  -
+    content: |
+      Есть ссылка:
+      ```html
+      <a href="http://site.com">Текст ссылки</a>
+      ```
+      На документе стоит обработчик:
+      ```js
+      document.onclick = function(e) { e.preventDefault(); }
+      ```
+      Произойдёт ли при клике на ссылку переход по ней?
+
+    correctAnswer: 1
+    answers:
+      - 'Да.'
+      - 'Нет.'
+      - 'Зависит от положения звёзд в момент клика.'
+    type: 'single'
+  -
+    content: |
+      Есть элемент <input type="button" id="elem"/>. На нём два обработчика:
+
+      ```js
+      elem.addEventListener("click", handler1, false);
+      elem.addEventListener("click", handler2, true);
+      ```
+      Какой из них сработает раньше при клике на `elem`?
+
+    correctAnswer: 0
+    correctAnswerComment: |
+      Оба обработчика сработают не на стадии всплытия и погружения, а на самом элементе, то есть на стадии AT_TARGET.
+      Это полноценная отдельная стадия обработки события, не всплытие или погружение.
+      Обработчики на ней срабатывают в порядке назначения.
+    answers:
+      - 'Первый.'
+      - 'Второй.'
+      - 'Стандарт не указывает точную последовательность.'
+    type: 'single'
+  -
+    content: |
+      Есть элемент <div id="elem"><input/></div>. На нём два обработчика:
+
+      ```js
+      elem.addEventListener("click", handler1, false);
+      elem.addEventListener("click", handler2, true);
+      ```
+      Какой из них сработает раньше при клике на `<input>`?
+
+    correctAnswer: 1
+    correctAnswerComment: |
+      Сначала происходит стадия погружения, на которой срабатывают обработчики от корня до `elem`, в данном случае `handler2`.
+      Затем -- стадия "на элементе" и стадия всплытия, на которой срабатывают обработчики выше `elem`, в данном случае `handler1`.
+    answers:
+      - 'Первый.'
+      - 'Второй.'
+      - 'Ни один.'
+      - 'Стандарт не указывает точную последовательность.'
+    type: 'single'
+  -
+    content: |
+      Есть обработчик события на элементе:
+      ```js
+      elem.onclick = function(event) {
+        // ...
+      }
+      ```
+      Какие значения внутри этого обработчика будут всегда одинаковы?
+
+    correctAnswer: 2
+    answers:
+      - '`event.target` и `event.currentTarget`.'
+      - '`event.target` и `this`.'
+      - '`event.currentTarget` и `this`.'
+      - 'Ни одна пара из указанных выше.'
+    type: 'single'
+  -
+    content: |
+      Если функция-обработчик события `onclick` выполняется долго,
+      и посетитель во время её работы нажал на кнопку клавиатуры -- что будет с возникшим событием `keydown`?
+
+    correctAnswer: 2
+    answers:
+      - 'Будет проигнорировано, так как браузер занят.'
+      - 'Обработчик `onclick` приостановится, браузер обработает `keydown`, а потом возобновится обработка `onclick`.'
+      - 'Событие `keydown` будет обработано после `onclick`.'
+      - 'Если событие на том же элементе, что и `onclick`, то будет проигнорировано, иначе -- обработано после `onclick`.'
+    type: 'single'
+  -
+    content: |
+      Какие из этих свойств элемента могут указывать на текстовый узел?
+
+    correctAnswer:
+      - 1
+      - 4
+    answers:
+      - '`firstElementChild`'
+      - '`firstChild`'
+      - '`parentNode`'
+      - '`parentElement`'
+      - '`nextSibling`'
+    type: 'multi'
+  -
+    content: |
+      На ссылке `<a href="..." id="link">` стоит обработчик события:
+      ```js
+      link.addEventListener('click', function(event) {
+        // ...
+      });
+      ```
+      Какой код нужно записать в обработчик события, чтобы переход по ссылке не состоялся?
+
+      Если подходят несколько вариантов из перечисленных -- выберите несколько.
+
+    correctAnswer:
+      - 2
+    answers:
+      - '`event.stopPropagation()`'
+      - '`event.stopImmediatePropagation()`'
+      - '`event.preventDefault()`'
+      - '`return false`'
+      - '`event.cancel()`'
+    type: 'multi'
+  -
+    content: |
+      Этот код ничего не выведет. Почему?
+      ```js
+      document.onclick = function(event) {
+        alert(event.type);
+      };
+
+      document.body.dispatchEvent(new CustomEvent("click"));
+      ```
+
+    correctAnswer: 3
+    answers:
+      - 'Из JavaScript нельзя генерировать встроенные события.'
+      - 'Обработчик через `on-свойство` не срабатывает для событий, сгенерированных из JavaScript.'
+      - 'Встроенное событие нужно генерировать иначе, конструктор `CustomEvent` надо заменить на другой.'
+      - 'При генерации события не указано, что оно должно всплывать.'
+      - 'Боже, что это?'
+    type: 'single'
+  -
+    content: |
+      Какие события из этого списка возникнут при нажатии и отпускании клавиши "Shift"? Другие клавиши не нажимаются.
+
+    correctAnswer:
+      - 0
+      - 1
+    answers:
+      - '`keydown`'
+      - '`keyup`'
+      - '`keypress`'
+      - 'Никаких не возникнет'
+    type: 'multi'
+
+  -
+    content: |
+      Какие события из этого списка возникнут при нажатии и отпускании клавиши "пробел"? Другие клавиши не нажимаются.
+
+    correctAnswer:
+      - 0
+      - 1
+      - 2
+    answers:
+      - '`keydown`'
+      - '`keyup`'
+      - '`keypress`'
+      - 'Никаких не возникнет'
+    type: 'multi'

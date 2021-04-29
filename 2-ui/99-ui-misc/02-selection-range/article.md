@@ -6,7 +6,7 @@ libs:
 
 # Selection и Range
 
-В этой главе мы расмотрим выделение как в документе, так и в полях формы, таких как `<input>`.
+В этой главе мы рассмотрим выделение как в документе, так и в полях формы, таких как `<input>`.
 
 JavaScript позволяет получать существующее выделение, выделять и снимать выделение как целиком, так и по частям, убирать выделенную часть из документа, оборачивать её в тег и так далее.
 
@@ -384,7 +384,7 @@ From <input id="start" type="number" value=1> – To <input id="end" type="numbe
 - `collapseToStart()` - схлопнуть (заменить на пустой диапазон) к началу выделения,
 - `collapseToEnd()` - схлопнуть диапазон к концу выделения,
 - `extend(node, offset)` - переместить фокус выделения к данному `node`, с позиции `offset`,
-- `setBaseAndExtent(anchorNode, anchorOffset, focusNode, focusOffset)` - ззаменить диапазон выделения на заданные начало `anchorNode/anchorOffset` и конец `focusNode/focusOffset`. Будет выделено всё содержимое между этими границами
+- `setBaseAndExtent(anchorNode, anchorOffset, focusNode, focusOffset)` - заменить диапазон выделения на заданные начало `anchorNode/anchorOffset` и конец `focusNode/focusOffset`. Будет выделено всё содержимое между этими границами
 - `selectAllChildren(node)` -- выделить все дочерние узлы данного узла `node`.
 - `deleteFromDocument()` -- удалить содержимое выделения из документа.
 - `containsNode(node, allowPartialContainment = false)` -- проверяет, содержит ли выделение `node` (частично, если второй аргумент равен `true`)
@@ -481,7 +481,7 @@ From <input id="start" type="number" value=1> – To <input id="end" type="numbe
 
 Важный граничный случай - когда `selectionStart` и `selectionEnd` равны друг другу. В этом случае они указывают на позицию курсора. Иными словами, когда ничего не выбрано, выделение схлопнуто на позиции курсора.
 
-Таким образом, задавая `selectionStart` и `selectionEnd` одно и тоже значение, мы можем передвигать курсор.
+Таким образом, задавая `selectionStart` и `selectionEnd` одно и то же значение, мы можем передвигать курсор.
 
 Например:
 

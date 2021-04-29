@@ -19,7 +19,7 @@ let values = ["Hare", "Krishna", "Hare", "Krishna",
   "Krishna", "Krishna", "Hare", "Hare", ":-O"
 ];
 
-alert( unique(values) ); // Hare, Krishna, :-O
+alert( unique(values) ); // Hare,Krishna,:-O
 ```
 
 P.S. Здесь мы используем строки, но значения могут быть любого типа.

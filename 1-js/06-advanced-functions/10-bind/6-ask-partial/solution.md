@@ -1,16 +1,16 @@
 
 
-1. Either use a wrapper function, an arrow to be concise:
+1. Можно использовать стрелочную функцию-обёртку:
 
-    ```js 
-    askPassword(() => user.login(true), () => user.login(false)); 
+    ```js
+    askPassword(() => user.login(true), () => user.login(false));
     ```
 
-    Now it gets `user` from outer variables and runs it the normal way.
+    Теперь она получает `user` извне и нормально выполняется.
 
-2. Or create a partial function from `user.login` that uses `user` as the context and has the correct first argument:
+2. Или же можно создать частично применённую функцию на основе `user.login`, которая использует объект `user` в качестве контекста и получает соответствующий первый аргумент:
 
 
-    ```js 
-    askPassword(user.login.bind(user, true), user.login.bind(user, false)); 
+    ```js
+    askPassword(user.login.bind(user, true), user.login.bind(user, false));
     ```

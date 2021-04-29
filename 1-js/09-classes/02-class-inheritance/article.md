@@ -11,7 +11,7 @@ class Animal {
     this.name = name;
   }
   run(speed) {
-    this.speed += speed;
+    this.speed = speed;
     alert(`${this.name} бежит со скоростью ${this.speed}.`);
   }
   stop() {
@@ -57,7 +57,7 @@ class Animal {
     this.name = name;
   }
   run(speed) {
-    this.speed += speed;
+    this.speed = speed;
     alert(`${this.name} бежит со скоростью ${this.speed}.`);
   }
   stop() {
@@ -82,11 +82,9 @@ rabbit.hide(); // Белый кролик прячется!
 ```
 Теперь код `Rabbit` стал короче, так как используется конструктор класса `Animal` по умолчанию и кролик может использовать метод `run` как и все животные.
 
-На самом деле ключевое слово `extends` добавляет ссылку на `[[Prototype]]` из `Rabbit.prototype` в `Animal.prototype`:
+Ключевое слово `extends` работает, используя прототипы. Оно устанавливает  `Rabbit.prototype.[[Prototype]]` в `Animal.prototype`. Так что если метод не найден в  `Rabbit.prototype`, JavaScript берёт его из `Animal.prototype`.
 
 ![](animal-rabbit-extends.svg)
-
-Если метод не найден в `Rabbit.prototype`, JavaScript возьмёт его из `Animal.prototype`.
 
 Как мы помним из главы <info:native-prototypes>, в JavaScript используется наследование на прототипах для встроенных объектов. Например `Date.prototype.[[Prototype]]` это `Object.prototype`, поэтому у дат есть универсальные методы объекта.
 
@@ -144,7 +142,7 @@ class Animal {
   }
 
   run(speed) {
-    this.speed += speed;
+    this.speed = speed;
     alert(`${this.name} бежит со скоростью ${this.speed}.`);
   }
 
@@ -309,9 +307,9 @@ alert(rabbit.earLength); // 10
 
 Вообще, исходя из наших знаний до этого момента, `super` вообще не может работать!
 
-Ну правда, давайте спросим себя - как он должен работать, чисто технически? Когда метод объекта выполняется, он получает текущий объект как `this`. Если мы вызываем `super.method()`, то движку необходимо плучить `method` из прототипа текущего объекта. И как ему это сделать?
+Ну правда, давайте спросим себя - как он должен работать, чисто технически? Когда метод объекта выполняется, он получает текущий объект как `this`. Если мы вызываем `super.method()`, то движку необходимо получить `method` из прототипа текущего объекта. И как ему это сделать?
 
-Задача может показаться простой, но это не так. Движок знает текущий `this` и могу бы попытаться получить родительский метод как `this.__proto__.method`. Однако, увы, такой "наивный" путь не работает.
+Задача может показаться простой, но это не так. Движок знает текущий `this` и мог бы попытаться получить родительский метод как `this.__proto__.method`. Однако, увы, такой "наивный" путь не работает.
 
 Продемонстрируем проблему. Без классов, используя простые объекты для наглядности.
 
@@ -424,7 +422,7 @@ longEar.eat(); // Error: Maximum call stack size exceeded
 let animal = {
   name: "Животное",
   eat() {         // animal.eat.[[HomeObject]] == animal
-    alert(`${this.name} eats.`);
+    alert(`${this.name} ест.`);
   }
 };
 
@@ -465,7 +463,7 @@ longEar.eat();  // Длинноух ест.
 ```js run
 let animal = {
   sayHi() {
-    console.log(`Я животное`);
+    console.log("Я животное");
   }
 };
 
@@ -518,7 +516,7 @@ tree.sayHi();  // Я животное (?!?)
 
 ```js run
 let animal = {
-  eat: function() { // должен быть короткий синтаксис: eat() {...}
+  eat: function() { // намеренно пишем так, а не eat() { ...
     // ...
   }
 };

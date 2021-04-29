@@ -102,7 +102,7 @@ alert( arr instanceof Object ); // true
 
 ![](instanceof.svg)
 
-Кстати, есть метод [objA.isPrototypeOf(objB)](mdn:js/object/isPrototypeOf), которые возвращает `true`, если объект `objA` есть где-то в прототипной цепочке объекта `objB`. Так что `obj instanceof Class` можно перефразировать как `Class.prototype.isPrototypeOf(obj)`.
+Кстати, есть метод [objA.isPrototypeOf(objB)](mdn:js/object/isPrototypeOf), который возвращает `true`, если объект `objA` есть где-то в прототипной цепочке объекта `objB`. Так что `obj instanceof Class` можно перефразировать как `Class.prototype.isPrototypeOf(obj)`.
 
 Забавно, но сам конструктор `Class` не участвует в процессе проверки! Важна только цепочка прототипов `Class.prototype`.
 
@@ -138,7 +138,7 @@ alert(obj.toString()); // то же самое
 
 Звучит странно? Так и есть. Давайте развеем мистику.
 
-Согласно [спецификации](https://tc39.github.io/ecma262/#sec-object.prototype.tostring) встроенный метод `toString` может бы позаимствован у объекта и вызван в контексте любого другого значения. И результат зависит от типа этого значения.
+Согласно [спецификации](https://tc39.github.io/ecma262/#sec-object.prototype.tostring) встроенный метод `toString` может быть позаимствован у объекта и вызван в контексте любого другого значения. И результат зависит от типа этого значения.
 
 - Для числа это будет `[object Number]`
 - Для булева типа это будет `[object Boolean]`

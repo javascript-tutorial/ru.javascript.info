@@ -7,7 +7,7 @@ if (userName == 'Админ') {
 
   let pass = prompt('Пароль?', '');
 
-  if (pass == 'Я Главный') {
+  if (pass == 'Я главный') {
     alert( 'Здравствуйте!' );
   } else if (pass == '' || pass == null) {
     alert( 'Отменено' );

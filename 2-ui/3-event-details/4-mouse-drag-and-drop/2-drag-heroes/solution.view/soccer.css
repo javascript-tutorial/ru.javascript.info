@@ -4,9 +4,9 @@ html, body {
 }
 
 #field {
-  background: url(field.svg);
+  background: url(https://js.cx/drag-heroes/field.png);
   width: 800px;
-  height: 500px;
+  height: 600px;
   float: left;
 }
 
