@@ -48,7 +48,7 @@ class HoverIntent {
     this.prevTime = Date.now();
 
     elem.addEventListener('mousemove', this.onMouseMove);
-    this.checkSpeedInterval = setInterval(this.trackSpeed, this.interval);
+    this.checkSpeedInterval = setInterval(this.trackSpeed, this.interval, event);
   }
 
   onMouseOut(event) {
@@ -71,7 +71,7 @@ class HoverIntent {
     this.lastTime = Date.now();
   }
 
-  trackSpeed() {
+  trackSpeed(event) {
 
     let speed;
 
