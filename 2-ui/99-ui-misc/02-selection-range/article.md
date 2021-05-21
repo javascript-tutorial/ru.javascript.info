@@ -432,7 +432,7 @@ From <input id="start" type="number" value=1> – To <input id="end" type="numbe
 - `input.selectionDirection` -- направление выделения, одно из: "forward" (вперёд), "backward" (назад) или "none" (без направления, если, к примеру, выделено с помощью двойного клика мыши).
 
 События:
-- `input.onselect` -- срабатывает, когда начинается выделение.
+- `input.onselect` -- срабатывает, когда выделение завершено.
 
 Методы:
 
