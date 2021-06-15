@@ -633,7 +633,7 @@ books.clear(); // очищаем хранилище.
 Синтаксис:
 ```js
 // как getAll, но с использованием курсора:
-let request = store.openCursor(query, [direction]);
+let request = store.openCursor([query], [direction]);
 
 // чтобы получить ключи, не значения (как getAllKeys): store.openKeyCursor
 ```
