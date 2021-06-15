@@ -1,10 +1,20 @@
 # Числа
 
+<<<<<<< HEAD
 В современном JavaScript существует два типа чисел:
 1. Обычные числа в JavaScript хранятся в 64-битном формате [IEEE-754](http://en.wikipedia.org/wiki/IEEE_754-1985), который также называют "числа с плавающей точкой двойной точности" (double precision floating point numbers). Это числа, которые мы будем использовать чаще всего. Мы поговорим о них в этой главе.
 2. `BigInt` числа дают возможность работать с целыми числами произвольной длины. Они нужны достаточно редко и используются в случаях, когда необходимо работать со значениями более чем <code>2<sup>53</sup></code> или менее чем <code>-2<sup>53</sup></code>. Так как `BigInt` числа нужны достаточно редко, мы рассмотрим их в отдельной главе <info:bigint>.
 
 В данной главе мы рассмотрим только первый тип чисел: числа типа `number`. Давайте глубже изучим, как с ними работать в JavaScript.
+=======
+In modern JavaScript, there are two types of numbers:
+
+1. Regular numbers in JavaScript are stored in 64-bit format [IEEE-754](https://en.wikipedia.org/wiki/IEEE_754-2008_revision), also known as "double precision floating point numbers". These are numbers that we're using most of the time, and we'll talk about them in this chapter.
+
+2. BigInt numbers, to represent integers of arbitrary length. They are sometimes needed, because a regular number can't exceed <code>2<sup>53</sup></code> or be less than <code>-2<sup>53</sup></code>. As bigints are used in few special areas, we devote them a special chapter <info:bigint>.
+
+So here we'll talk about regular numbers. Let's expand our knowledge of them.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ## Способы записи числа
 
@@ -14,31 +24,60 @@
 let billion = 1000000000;
 ```
 
+<<<<<<< HEAD
 Но в реальной жизни мы обычно опускаем запись множества нулей, так как можно легко ошибиться. Укороченная запись может выглядеть как `"1млрд"` или `"7.3млрд"` для 7 миллиардов 300 миллионов. Такой принцип работает для всех больших чисел.
 
 В JavaScript можно использовать букву `"e"`, чтобы укоротить запись числа. Она добавляется к числу и заменяет указанное количество нулей:
+=======
+We also can use underscore `_` as the separator:
+
+```js
+let billion = 1_000_000_000;
+```
+
+Here the underscore `_` plays the role of the "syntactic sugar", it makes the number more readable. The JavaScript engine simply ignores `_` between digits, so it's exactly the same one billion as above.
+
+In real life though, we try to avoid writing long sequences of zeroes. We're too lazy for that. We'll try to write something like `"1bn"` for a billion or `"7.3bn"` for 7 billion 300 million. The same is true for most large numbers.
+
+In JavaScript, we can shorten a number by appending the letter `"e"` to it and specifying the zeroes count:
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js run
 let billion = 1e9;  // 1 миллиард, буквально: 1 и 9 нулей
 
+<<<<<<< HEAD
 alert( 7.3e9 );  // 7.3 миллиардов (7,300,000,000)
 ```
 
 Другими словами, `"e"` производит операцию умножения числа на 1 с указанным количеством нулей.
-
-```js
-1e3 = 1 * 1000
-1.23e6 = 1.23 * 1000000
+=======
+alert( 7.3e9 );  // 7.3 billions (same as 7300000000 or 7_300_000_000)
 ```
 
+In other words, `e` multiplies the number by `1` with the given zeroes count.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+
+```js
+1e3 = 1 * 1000 // e3 means *1000
+1.23e6 = 1.23 * 1000000 // e6 means *1000000
+```
+
+<<<<<<< HEAD
 
 Сейчас давайте запишем что-нибудь очень маленькое. К примеру, 1 микросекунду (одна миллионная секунды):
+=======
+Now let's write something very small. Say, 1 microsecond (one millionth of a second):
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js
 let ms = 0.000001;
 ```
 
+<<<<<<< HEAD
 Записать микросекунду в укороченном виде нам поможет `"e"`.
+=======
+Just like before, using `"e"` can help. If we'd like to avoid writing the zeroes explicitly, we could say the same as:
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js
 let ms = 1e-6; // шесть нулей, слева от 1
@@ -124,7 +163,11 @@ alert( num.toString(2) );   // 11111111
 : Округление в большую сторону: `3.1` становится `4`, а `-1.1` — `-1`.
 
 `Math.round`
+<<<<<<< HEAD
 : Округление до ближайшего целого: `3.1` становится `3`, `3.6` — `4`, а `-1.1` — `-1`.
+=======
+: Rounds to the nearest integer: `3.1` becomes `3`, `3.6` becomes `4`, the middle case: `3.5` rounds up to `4` too.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 `Math.trunc` (не поддерживается в Internet Explorer)
 : Производит удаление дробной части без округления: `3.1` становится `3`, а `-1.1` — `-1`.
@@ -147,11 +190,15 @@ alert( num.toString(2) );   // 11111111
 
 1. Умножить и разделить.
 
+<<<<<<< HEAD
     Например, чтобы округлить число до второго знака после запятой, мы можем умножить число на `100`, вызвать функцию округления и разделить обратно.
+=======
+    For example, to round the number to the 2nd digit after the decimal, we can multiply the number by `100` (or a bigger power of 10), call the rounding function and then divide it back.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
     ```js run
     let num = 1.23456;
 
-    alert( Math.floor(num * 100) / 100 ); // 1.23456 -> 123.456 -> 123 -> 1.23
+    alert( Math.round(num * 100) / 100 ); // 1.23456 -> 123.456 -> 123 -> 1.23
     ```
 
 2. Метод [toFixed(n)](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed) округляет число до `n` знаков после запятой и возвращает строковое представление результата.
@@ -203,7 +250,11 @@ alert( 0.1 + 0.2 == 0.3 ); // *!*false*/!*
 alert( 0.1 + 0.2 ); // 0.30000000000000004
 ```
 
+<<<<<<< HEAD
 Ой! Здесь гораздо больше последствий, чем просто некорректное сравнение. Представьте, вы делаете интернет-магазин и посетители формируют заказ из 2-х позиций за `$0.10` и `$0.20`. Итоговый заказ будет `$0.30000000000000004`. Это будет сюрпризом для всех.
+=======
+Ouch! There are more consequences than an incorrect comparison here. Imagine you're making an e-shopping site and the visitor puts `$0.10` and `$0.20` goods into their cart. The order total will be `$0.30000000000000004`. That would surprise anyone.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Но почему это происходит?
 
@@ -271,14 +322,22 @@ alert( 9999999999999999 ); // покажет 10000000000000000
 ```smart header="Два нуля"
 Другим забавным следствием внутреннего представления чисел является наличие двух нулей: `0` и `-0`.
 
+<<<<<<< HEAD
 Все потому, что знак представлен отдельным битом, так что, любое число может быть положительным и отрицательным, включая нуль.
+=======
+That's because a sign is represented by a single bit, so it can be set or not set for any number including a zero.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 В большинстве случаев это поведение незаметно, так как операторы в JavaScript воспринимают их одинаковыми.
 ```
 
+<<<<<<< HEAD
 
 
 ## Проверка: isFinite и isNaN
+=======
+## Tests: isFinite and isNaN
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Помните эти специальные числовые значения?
 
@@ -323,7 +382,11 @@ alert( isFinite(num) );
 
 ```smart header="Сравнение `Object.is`"
 
+<<<<<<< HEAD
 Существует специальный метод [Object.is](mdn:js/Object/is), который сравнивает значения примерно как `===`, но более надёжен в двух особых ситуациях:
+=======
+There is a special built-in method [`Object.is`](mdn:js/Object/is) that compares values like `===`, but is more reliable for two edge cases:
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 1. Работает с `NaN`: `Object.is(NaN, NaN) === true`, здесь он хорош.
 2. Значения `0` и `-0` разные: `Object.is(0, -0) === false`, это редко используется, но технически эти значения разные.
@@ -382,7 +445,11 @@ alert( parseInt('2n9c', 36) ); // 123456
 Несколько примеров:
 
 `Math.random()`
+<<<<<<< HEAD
 : Возвращает псевдослучайное число в диапазоне от 0 (включительно) до 1 (но не включая 1)
+=======
+: Returns a random number from 0 to 1 (not including 1).
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
     ```js run
     alert( Math.random() ); // 0.1234567894322
@@ -399,26 +466,47 @@ alert( parseInt('2n9c', 36) ); // 123456
     ```
 
 `Math.pow(n, power)`
+<<<<<<< HEAD
 : Возвращает число `n`, возведённое в степень `power`
+=======
+: Returns `n` raised to the given power.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
     ```js run
     alert( Math.pow(2, 10) ); // 2 в степени 10 = 1024
     ```
 
+<<<<<<< HEAD
 В объекте `Math` есть множество функций и констант, включая тригонометрические функции, подробнее можно ознакомиться в документации по объекту [Math](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Math).
+=======
+There are more functions and constants in `Math` object, including trigonometry, which you can find in the [docs for the Math object](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Math).
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ## Итого
 
+<<<<<<< HEAD
 Чтобы писать числа с большим количеством нулей:
 
 - Используйте краткую форму записи чисел - `"e"`, с указанным количеством нулей. Например: `123e6` это `123` с 6-ю нулями `123000000`.
 - Отрицательное число после `"e"` приводит к делению числа на 1 с указанным количеством нулей. Например: `123e-6` это `0.000123` (`123` миллионных).
+=======
+To write numbers with many zeroes:
+
+- Append `"e"` with the zeroes count to the number. Like: `123e6` is the same as `123` with 6 zeroes `123000000`.
+- A negative number after `"e"` causes the number to be divided by 1 with given zeroes. E.g. `123e-6` means `0.000123` (`123` millionths).
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Для других систем счисления:
 
+<<<<<<< HEAD
 - Можно записывать числа сразу в шестнадцатеричной (`0x`), восьмеричной (`0o`) и бинарной (`0b`) системах счисления
 - `parseInt(str, base)` преобразует строку в целое число в соответствии с указанной системой счисления: `2 ≤ base ≤ 36`.
 - `num.toString(base)` представляет число в строковом виде в указанной системе счисления `base`.
+=======
+- Can write numbers directly in hex (`0x`), octal (`0o`) and binary (`0b`) systems.
+- `parseInt(str, base)` parses the string `str` into an integer in numeral system with given `base`, `2 ≤ base ≤ 36`.
+- `num.toString(base)` converts a number to a string in the numeral system with the given `base`.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Для преобразования значений типа `12pt` и `100px` в число:
 

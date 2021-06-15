@@ -14,8 +14,13 @@ let socket = new WebSocket("*!*ws*/!*://javascript.info");
 
 Также существует протокол `wss://`, использующий шифрование. Это как HTTPS для веб-сокетов.
 
+<<<<<<< HEAD
 ```smart header="Всегда предпочитайте `wss://`"
 Протокол `wss://` не только использует шифрование, но и обладает повышенной надёжностью.
+=======
+```smart header="Always prefer `wss://`"
+The `wss://` protocol is not only encrypted, but also more reliable.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Это потому, что данные `ws://` не зашифрованы, видны для любого посредника. Старые прокси-серверы не знают о WebSocket, они могут увидеть "странные" заголовки и закрыть соединение.
 
@@ -88,11 +93,19 @@ Sec-WebSocket-Key: Iv8io/9s+lYFgZWcXczP8Q==
 Sec-WebSocket-Version: 13
 ```
 
+<<<<<<< HEAD
 - `Origin` -- источник текущей страницы (например `https://javascript.info`). Объект WebSocket по своей природе не завязан на текущий источник. Нет никаких специальных заголовков или других ограничений. Старые сервера все равно не могут работать с WebSocket, поэтому проблем с совместимостью нет. Но заголовок `Origin` важен, так как он позволяет серверу решать, использовать ли WebSocket с этим сайтом.
 - `Connection: Upgrade` -- сигнализирует, что клиент хотел бы изменить протокол.
 - `Upgrade: websocket` -- запрошен протокол "websocket".
 - `Sec-WebSocket-Key` -- случайный ключ, созданный браузером для обеспечения безопасности.
 - `Sec-WebSocket-Version` -- версия протокола WebSocket, текущая версия 13.
+=======
+- `Origin` -- the origin of the client page, e.g. `https://javascript.info`. WebSocket objects are cross-origin by nature. There are no special headers or other limitations. Old servers are unable to handle WebSocket anyway, so there are no compatibility issues. But `Origin` header is important, as it allows the server to decide whether or not to talk WebSocket with this website.
+- `Connection: Upgrade` -- signals that the client would like to change the protocol.
+- `Upgrade: websocket` -- the requested protocol is "websocket".
+- `Sec-WebSocket-Key` -- a random browser-generated key for security.
+- `Sec-WebSocket-Version` -- WebSocket protocol version, 13 is the current one.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```smart header="Запрос WebSocket нельзя эмулировать"
 Мы не можем использовать`XMLHttpRequest` или `fetch` для создания такого HTTP-запроса, потому что JavaScript не позволяет устанавливать такие заголовки.
@@ -117,11 +130,19 @@ Sec-WebSocket-Accept: hsBlbuDTkk24srzEOTBUlZAlC2g=
 
 Например:
 
+<<<<<<< HEAD
 - `Sec-WebSocket-Extensions: deflate-frame` означает, что браузер поддерживает сжатие данных. Расширение -- это что-то, связанное с передачей данных, расширяющее сам протокол WebSocket. Заголовок `Sec-WebSocket-Extensions` отправляется браузером автоматически со списком всевозможных расширений, которые он поддерживает.
 
 - `Sec-WebSocket-Protocol: soap, wamp` означает, что мы будем передавать не только произвольные данные, но и данные в протоколах [SOAP](http://en.wikipedia.org/wiki/SOAP) или WAMP (The WebSocket Application Messaging Protocol" -- "протокол обмена сообщениями WebSocket приложений"). То есть, этот заголовок описывает не передачу, а формат данных, который мы собираемся использовать. Официальные подпротоколы WebSocket регистрируются в [каталоге IANA](http://www.iana.org/assignments/websocket/websocket.xml).
 
     Этот необязательный заголовок ставим мы сами, передавая массив подпротоколов вторым параметром `new WebSocket`, вот так:
+=======
+- `Sec-WebSocket-Extensions: deflate-frame` means that the browser supports data compression. An extension is something related to transferring the data, functionality that extends WebSocket protocol. The header `Sec-WebSocket-Extensions` is sent automatically by the browser, with the list of all extensions it supports.
+
+- `Sec-WebSocket-Protocol: soap, wamp` means that we'd like to transfer not just any data, but the data in [SOAP](http://en.wikipedia.org/wiki/SOAP) or WAMP ("The WebSocket Application Messaging Protocol") protocols. WebSocket subprotocols are registered in the [IANA catalogue](http://www.iana.org/assignments/websocket/websocket.xml). So, this header describes data formats that we're going to use.
+
+    This optional header is set using the second parameter of `new WebSocket`. That's the array of subprotocols, e.g. if we'd like to use SOAP or WAMP:
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
     ```js
     let socket = new WebSocket("wss://javascript.info/chat", ["soap", "wamp"]);
@@ -177,12 +198,16 @@ Sec-WebSocket-Protocol: soap
 
 **При получении данных, текст всегда поступает в виде строки. А для бинарных данных мы можем выбрать один из двух форматов: `Blob` или `ArrayBuffer`.**
 
+<<<<<<< HEAD
 Это задаётся свойством `socket.bufferType`, по умолчанию оно равно `"blob"`, так что бинарные данные поступают в виде `Blob`-объектов.
+=======
+That's set by `socket.binaryType` property, it's `"blob"` by default, so binary data comes as `Blob` objects.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 [Blob](info:blob) -- это высокоуровневый бинарный объект, он напрямую интегрируется с `<a>`, `<img>` и другими тегами, так что это вполне удобное значение по умолчанию. Но для обработки данных, если требуется доступ к отдельным байтам, мы можем изменить его на `"arraybuffer"`:
 
 ```js
-socket.bufferType = "arraybuffer";
+socket.binaryType = "arraybuffer";
 socket.onmessage = (event) => {
   // event.data является строкой (если текст) или arraybuffer (если двоичные данные)
 };
@@ -194,7 +219,11 @@ socket.onmessage = (event) => {
 
 Мы можем вызывать `socket.send(data)` снова и снова. Но данные будут буферизованы (сохранены) в памяти и отправлены лишь с той скоростью, которую позволяет сеть.
 
+<<<<<<< HEAD
 Свойство `socket.bufferedAmount` хранит количество байт буферизованных данных на текущий момент, ожидающих отправки по сети.
+=======
+The `socket.bufferedAmount` property stores how many bytes remain buffered at this moment, waiting to be sent over the network.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Мы можем изучить его, чтобы увидеть, действительно ли сокет доступен для передачи.
 
@@ -238,8 +267,13 @@ socket.onclose = event => {
 
 Наиболее распространённые значения:
 
+<<<<<<< HEAD
 - `1000` -- по умолчанию, нормальное закрытие,
 - `1006` -- невозможно установить такой код вручную, указывает, что соединение было потеряно (нет фрейма закрытия).
+=======
+- `1000` -- the default, normal closure (used if no `code` supplied),
+- `1006` -- no way to set such code manually, indicates that the connection was lost (no close frame).
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Есть и другие коды:
 

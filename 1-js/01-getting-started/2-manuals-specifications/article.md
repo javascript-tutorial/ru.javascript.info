@@ -13,20 +13,32 @@
 
 Чтобы почитать о самых последних возможностях, включая те, которые "почти в стандарте" (так называемые "stage 3 proposals"), посетите <https://github.com/tc39/proposals>.
 
+<<<<<<< HEAD
 Если вы разрабатываете под браузеры, то существуют и другие спецификации, о которых рассказывается во [второй части](info:browser-environment) этого учебника.
+=======
+Also, if you're developing for the browser, then there are other specifications covered in the [second part](info:browser-environment) of the tutorial.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ## Справочники
 
+<<<<<<< HEAD
 - **MDN (Mozilla) JavaScript Reference** -- это справочник с примерами и другой информацией. Хороший источник для получения подробных сведений о функциях языка, методах встроенных объектов и так далее.
+=======
+- **MDN (Mozilla) JavaScript Reference** is the main manual with examples and other information. It's great to get in-depth information about individual language functions, methods etc.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
     Располагается по адресу <https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference>.
 
+<<<<<<< HEAD
     Хотя зачастую вместо их сайта удобнее использовать какой-нибудь интернет-поисковик, вводя там запрос "MDN [что вы хотите найти]", например <https://google.com/search?q=MDN+parseInt> для поиска информации о функции `parseInt`.
 
 
 - **MSDN** – справочник от Microsoft, содержащий много информации, в том числе по JavaScript (который там часто обозначается как JScript). Если вам нужно найти что-то специфическое по браузеру Internet Explorer, лучше искать там: <http://msdn.microsoft.com/>.
 
     Так же, как и в предыдущем случае, можно использовать интернет-поиск, набирая фразы типа "RegExp MSDN" или "RegExp MSDN jscript".
+=======
+Although, it's often best to use an internet search instead. Just use "MDN [term]" in the query, e.g. <https://google.com/search?q=MDN+parseInt> to search for `parseInt` function.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ## Таблицы совместимости
 

@@ -1,10 +1,17 @@
 
 # Map и Set
 
+<<<<<<< HEAD
 Сейчас мы знаем о следующих сложных структурах данных:
 
 - Объекты для хранения именованных коллекций.
 - Массивы для хранения упорядоченных коллекций.
+=======
+Till now, we've learned about the following complex data structures:
+
+- Objects are used for storing keyed collections.
+- Arrays are used for storing ordered collections.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Но этого не всегда достаточно для решения повседневных задач. Поэтому также существуют `Map` и `Set`.
 
@@ -41,7 +48,17 @@ alert(map.size); // 3
 
 Как мы видим, в отличие от объектов, ключи не были приведены к строкам. Можно использовать любые типы данных для ключей.
 
+<<<<<<< HEAD
 **Map может использовать объекты в качестве ключей.**
+=======
+```smart header="`map[key]` isn't the right way to use a `Map`"
+Although `map[key]` also works, e.g. we can set `map[key] = 2`, this is treating `map` as a plain JavaScript object, so it implies all corresponding limitations (only string/symbol keys and so on).
+
+So we should use `map` methods: `set`, `get` and so on.
+```
+
+**Map can also use objects as keys.**
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Например:
 
@@ -57,15 +74,21 @@ visitsCountMap.set(john, 123);
 alert(visitsCountMap.get(john)); // 123
 ```
 
+<<<<<<< HEAD
 Использование объектов в качестве ключей -- это одна из известных и часто применяемых возможностей объекта `Map`. При строковых ключах обычный объект `Object` может подойти, но для ключей-объектов - уже нет.
+=======
+Using objects as keys is one of the most notable and important `Map` features. The same does not count for `Object`. String as a key in `Object` is fine, but we can't use another `Object` as a key in `Object`.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Попробуем заменить `Map` на `Object` в примере выше:
 
 ```js run
 let john = { name: "John" };
+let ben = { name: "Ben" };
 
 let visitsCountObj = {}; // попробуем использовать объект
 
+<<<<<<< HEAD
 visitsCountObj[john] = 123; // возьмём объект john как ключ
 
 *!*
@@ -75,6 +98,18 @@ alert( visitsCountObj["[object Object]"] ); // 123
 ```
 
 Так как `visitsCountObj` -- это объект, то все ключи он автоматически преобразует к строке, в итоге получился строковой ключ `"[object Object]"`. Это не то, чего мы хотим.
+=======
+visitsCountObj[ben] = 234; // try to use ben object as the key
+visitsCountObj[john] = 123; // try to use john object as the key, ben object will get replaced
+
+*!*
+// That's what got written!
+alert( visitsCountObj["[object Object]"] ); // 123 
+*/!*
+```
+
+As `visitsCountObj` is an object, it converts all `Object` keys, such as `john` and `ben` above, to same string `"[object Object]"`. Definitely not what we want.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```smart header="Как объект `Map` сравнивает ключи"
 Чтобы сравнивать ключи, объект `Map` использует алгоритм [SameValueZero](https://tc39.github.io/ecma262/#sec-samevaluezero). Это почти такое же сравнение, что и `===`, с той лишь разницей, что `NaN` считается равным `NaN`. Так что `NaN` также может использоваться в качестве ключа.
@@ -189,7 +224,11 @@ let prices = Object.fromEntries([
 alert(prices.orange); // 2
 ```
 
+<<<<<<< HEAD
 Мы можем использовать `Object.fromEntries`, чтобы получить обычный объект из `Map`.
+=======
+We can use `Object.fromEntries` to get a plain object from `Map`.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 К примеру, у нас данные в `Map`, но их нужно передать в сторонний код, который ожидает обычный объект.
 
@@ -211,9 +250,13 @@ let obj = Object.fromEntries(map.entries()); // make a plain object (*)
 alert(obj.orange); // 2
 ```
 
+<<<<<<< HEAD
 Вызов `map.entries()` возвращает массив пар ключ/значение, как раз в нужном формате для `Object.fromEntries`.
 
 Мы могли бы написать строку `(*)` ещё короче:
+=======
+A call to `map.entries()` returns an iterable of key/value pairs, exactly in the right format for `Object.fromEntries`.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js
 let obj = Object.fromEntries(map); // убрать .entries()
@@ -295,6 +338,7 @@ set.forEach((value, valueAgain, set) => {
 
 Методы и свойства:
 
+<<<<<<< HEAD
 - `new Map([iterable])` -- создаёт коллекцию, можно указать перебираемый объект (обычно массив) из пар `[ключ,значение]` для инициализации.
 - `map.set(key, value)` -- записывает по ключу `key` значение `value`.
 - `map.get(key)` -- возвращает значение по ключу или `undefined`, если ключ `key` отсутствует.
@@ -302,6 +346,15 @@ set.forEach((value, valueAgain, set) => {
 - `map.delete(key)` -- удаляет элемент по ключу `key`.
 - `map.clear()` -- очищает коллекцию от всех элементов.
 - `map.size` -- возвращает текущее количество элементов.
+=======
+- `new Map([iterable])` -- creates the map, with optional `iterable` (e.g. array) of `[key,value]` pairs for initialization.
+- `map.set(key, value)` -- stores the value by the key, returns the map itself.
+- `map.get(key)` -- returns the value by the key, `undefined` if `key` doesn't exist in map.
+- `map.has(key)` -- returns `true` if the `key` exists, `false` otherwise.
+- `map.delete(key)` -- removes the value by the key, returns `true` if `key` existed at the moment of the call, otherwise `false`.
+- `map.clear()` -- removes everything from the map.
+- `map.size` -- returns the current element count.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Отличия от обычного объекта `Object`:
 

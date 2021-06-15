@@ -19,7 +19,11 @@
 - `key(index)` -- получить ключ на заданной позиции.
 - `length` -- количество элементов в хранилище.
 
+<<<<<<< HEAD
 Как видим, интерфейс похож на `Map` (`setItem/getItem/removeItem`), но также запоминается порядок элементов, и можно получить доступ к элементу по индексу -- `key(index)`.
+=======
+As you can see, it's like a `Map` collection (`setItem/getItem/removeItem`), but also allows access by index with `key(index)`.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Давайте посмотрим, как это работает.
 
@@ -128,17 +132,22 @@ for(let key of keys) {
 Если мы используем любой другой тип, например число или объект, то он автоматически преобразуется в строку:
 
 ```js run
-sessionStorage.user = {name: "John"};
-alert(sessionStorage.user); // [object Object]
+localStorage.user = {name: "John"};
+alert(localStorage.user); // [object Object]
 ```
 
 Мы можем использовать `JSON` для хранения объектов:
 
 ```js run
-sessionStorage.user = JSON.stringify({name: "John"});
+localStorage.user = JSON.stringify({name: "John"});
 
+<<<<<<< HEAD
 // немного позже
 let user = JSON.parse( sessionStorage.user );
+=======
+// sometime later
+let user = JSON.parse( localStorage.user );
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 alert( user.name ); // John
 ```
 
@@ -202,8 +211,13 @@ alert( sessionStorage.getItem('test') ); // после обновления: 1
 Теперь, если оба окна слушают `window.onstorage`, то каждое из них будет реагировать на обновления, произошедшие в другом окне.
 
 ```js run
+<<<<<<< HEAD
 // срабатывает при обновлениях, сделанных в том же хранилище из других документов
 window.onstorage = event => {
+=======
+// triggers on updates made to the same storage from other documents
+window.onstorage = event => { // same as window.addEventListener('storage', event => {
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
   if (event.key != 'now') return;
   alert(event.key + ':' + event.newValue + " at " + event.url);
 };
@@ -217,15 +231,27 @@ localStorage.setItem('now', Date.now());
 
 **Это позволяет разным окнам одного источника обмениваться сообщениями.**
 
+<<<<<<< HEAD
 Современные браузеры также поддерживают [Broadcast channel API](https://developer.mozilla.org/ru/docs/Web/API/Broadcast_Channel_API) специальный API для связи между окнами одного источника, он более полнофункциональный, но менее поддерживаемый. Существуют библиотеки (полифилы), которые эмулируют это API на основе `localStorage` и делают его доступным везде.
+=======
+Modern browsers also support [Broadcast channel API](mdn:/api/Broadcast_Channel_API), the special API for same-origin inter-window communication, it's more full featured, but less supported. There are libraries that polyfill that API, based on `localStorage`, that make it available everywhere.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ## Итого
 
+<<<<<<< HEAD
 Объекты веб-хранилища `localStorage` и `sessionStorage` позволяют хранить пары ключ/значение в браузере.
 - `key` и `value` должны быть строками.
 - Лимит 2 Мб+, зависит от браузера.
 - Данные не имеют "времени истечения".
 - Данные привязаны к источнику (домен/протокол/порт).
+=======
+Web storage objects `localStorage` and `sessionStorage` allow to store key/value in the browser.
+- Both `key` and `value` must be strings.
+- The limit is 5mb+, depends on the browser.
+- They do not expire.
+- The data is bound to the origin (domain/port/protocol).
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 | `localStorage` | `sessionStorage` |
 |----------------|------------------|

@@ -170,7 +170,17 @@ function checkPhoneKey(key) {
 
 Но количество браузерных несовместимостей при работе с ними было столь велико, что у разработчиков спецификации не было другого выхода, кроме как объявить их устаревшими и создать новые, современные события (которые и описываются в этой главе). Старый код ещё работает, так как браузеры продолжают поддерживать и `keypress`, и `keyCode` с `charCode`, и `which`, но более нет никакой необходимости в их использовании.
 
+<<<<<<< HEAD:2-ui/3-event-details/5-keyboard-events/article.md
 ## Итого
+=======
+## Mobile Keyboards
+
+When using virtual/mobile keyboards, formally known as IME (Input-Method Editor), the W3C standard states that a KeyboardEvent's [`e.keyCode` should be `229`](https://www.w3.org/TR/uievents/#determine-keydown-keyup-keyCode) and [`e.key` should be `"Unidentified"`](https://www.w3.org/TR/uievents-key/#key-attr-values).
+
+While some of these keyboards might still use the right values for `e.key`, `e.code`, `e.keyCode`... when pressing certain keys such as arrows or backspace, there's no guarantee, so your keyboard logic might not always work on mobile devices.
+
+## Summary
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:2-ui/3-event-details/7-keyboard-events/article.md
 
 Нажатие клавиши всегда генерирует клавиатурное событие, будь то буквенно-цифровая клавиша или специальная типа `key:Shift` или `key:Ctrl` и т.д. Единственным исключением является клавиша `Fn`, которая присутствует на клавиатуре некоторых ноутбуков. События на клавиатуре для неё нет, потому что она обычно работает на уровне более низком, чем даже ОС.
 

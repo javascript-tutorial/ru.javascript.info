@@ -1,7 +1,11 @@
 
 # Fetch
 
+<<<<<<< HEAD
 JavaScript может отправлять сетевые запросы на сервер и подгружать новую информацию по мере необходимости.
+=======
+JavaScript can send network requests to the server and load new information whenever it's needed.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Например, мы можем использовать сетевой запрос, чтобы:
 - Отправить заказ,
@@ -24,7 +28,11 @@ let promise = fetch(url, [options])
 - **`url`** -- URL для отправки запроса.
 - **`options`** -- дополнительные параметры: метод, заголовки и так далее.
 
+<<<<<<< HEAD
 Без `options` это простой GET-запрос, скачивающий содержимое по адресу `url`.
+=======
+Without `options`, this is a simple GET request, downloading the contents of the `url`.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Браузер сразу же начинает запрос и возвращает промис, который внешний код использует для получения результата.
 
@@ -58,12 +66,21 @@ if (response.ok) { // если HTTP-статус в диапазоне 200-299
 
 `Response` предоставляет несколько методов, основанных на промисах, для доступа к телу ответа в различных форматах:
 
+<<<<<<< HEAD
 - **`response.text()`** -- читает ответ и возвращает как обычный текст,
 - **`response.json()`** -- декодирует ответ в формате JSON,
 - **`response.formData()`** -- возвращает ответ как объект `FormData` (разберём его в [следующей главе](info:formdata)),
 - **`response.blob()`** -- возвращает объект как [Blob](info:blob) (бинарные данные с типом),
 - **`response.arrayBuffer()`** -- возвращает ответ как [ArrayBuffer](info:arraybuffer-binary-arrays) (низкоуровневое представление бинарных данных),
 - помимо этого, `response.body` - это объект [ReadableStream](https://streams.spec.whatwg.org/#rs-class), с помощью которого можно считывать тело запроса по частям. Мы рассмотрим и такой пример несколько позже.
+=======
+- **`response.text()`** -- read the response and return as text,
+- **`response.json()`** -- parse the response as JSON,
+- **`response.formData()`** -- return the response as `FormData` object (explained in the [next chapter](info:formdata)),
+- **`response.blob()`** -- return the response as [Blob](info:blob) (binary data with type),
+- **`response.arrayBuffer()`** -- return the response as [ArrayBuffer](info:arraybuffer-binary-arrays) (low-level representation of binary data),
+- additionally, `response.body` is a [ReadableStream](https://streams.spec.whatwg.org/#rs-class) object, it allows you to read the body chunk-by-chunk, we'll see an example later.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Например, получим JSON-объект с последними коммитами из репозитория на GitHub:
 
@@ -86,7 +103,11 @@ fetch('https://api.github.com/repos/javascript-tutorial/en.javascript.info/commi
   .then(commits => alert(commits[0].author.login));
 ```
 
+<<<<<<< HEAD
 Для получения ответа в виде текста используем `await response.text()` вместо `.json()`:
+=======
+To get the response text, `await response.text()` instead of `.json()`:
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js run async
 let response = await fetch('https://api.github.com/repos/javascript-tutorial/en.javascript.info/commits');
@@ -125,8 +146,14 @@ setTimeout(() => { // прячем через три секунды
 Если мы уже получили ответ с `response.text()`, тогда `response.json()` не сработает, так как данные уже были обработаны.
 
 ```js
+<<<<<<< HEAD
 let text = await response.text(); // тело ответа обработано
 let parsed = await response.json(); // ошибка (данные уже были обработаны)
+=======
+let text = await response.text(); // response body consumed
+let parsed = await response.json(); // fails (already consumed)
+```
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 ````
 
 ## Заголовки ответа
@@ -227,7 +254,11 @@ alert(result.message);
 
 Мы можем отправить бинарные данные при помощи `fetch`, используя объекты `Blob` или `BufferSource`.
 
+<<<<<<< HEAD
 В этом примере есть элемент `<canvas>`, на котором мы можем рисовать движением мыши. При нажатии на кнопку "Отправить" изображение отправляется на сервер:
+=======
+In this example, there's a `<canvas>` where we can draw by moving a mouse over it. A click on the "submit" button sends the image to the server:
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```html run autorun height="90"
 <body style="margin:0">

@@ -103,9 +103,15 @@ JSON является независимой от языка специфика�
 
 А именно:
 
+<<<<<<< HEAD
 - Свойства-функции (методы).
 - Символьные свойства.
 - Свойства, содержащие `undefined`.
+=======
+- Function properties (methods).
+- Symbolic keys and values.
+- Properties that store `undefined`.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js run
 let user = {
@@ -275,6 +281,7 @@ name:         John
 name:         Alice
 place:        [object Object]
 number:       23
+occupiedBy: [object Object]
 */
 ```
 
@@ -327,7 +334,13 @@ alert(JSON.stringify(user, null, 2));
 */
 ```
 
+<<<<<<< HEAD
 Параметр `space` применяется для логирования и красивого вывода.
+=======
+The third argument can also be a string. In this case, the string is used for indentation instead of a number of spaces.
+
+The `space` parameter is used solely for logging and nice-output purposes.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ## Пользовательский "toJSON"
 
@@ -424,9 +437,9 @@ alert( numbers[1] ); // 1
 Или для вложенных объектов:
 
 ```js run
-let user = '{ "name": "John", "age": 35, "isAdmin": false, "friends": [0,1,2,3] }';
+let userData = '{ "name": "John", "age": 35, "isAdmin": false, "friends": [0,1,2,3] }';
 
-user = JSON.parse(user);
+let user = JSON.parse(userData);
 
 alert( user.friends[1] ); // 1
 ```

@@ -23,11 +23,19 @@ alert( "Hello, JavaScript!".match(/\bJava\b/) ); // null
 
 Так что она соответствует регулярному выражению `pattern:\bHello\b`, потому что:
 
+<<<<<<< HEAD
 1. В начале строки совпадает первая проверка `pattern:\b`.
 2. Далее слово `pattern:Hello` совпадает.
 3. Далее проверка `pattern:\b` - снова совпадает, так как мы находимся между `subject:o` и запятой.
 
 Шаблон `pattern:\bJava\b` также совпадёт. Но не `pattern:\bHell\b` (потому что после `subject:l` нет границы слова), и не `pattern:Java!\b` (восклицательный знак не является "символом слова" `pattern:\w`, поэтому после него нет границы слова).
+=======
+1. At the beginning of the string matches the first test `pattern:\b`.
+2. Then matches the word `pattern:Hello`.
+3. Then the test `pattern:\b` matches again, as we're between `subject:o` and a comma.
+
+So the pattern `pattern:\bHello\b` would match, but not `pattern:\bHell\b` (because there's no word boundary after `l`) and not `Java!\b` (because the exclamation sign is not a wordly character `pattern:\w`, so there's no word boundary after it).
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js run
 alert( "Hello, Java!".match(/\bHello\b/) ); // Hello

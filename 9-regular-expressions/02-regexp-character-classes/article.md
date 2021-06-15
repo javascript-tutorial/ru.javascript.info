@@ -1,6 +1,10 @@
 # Символьные классы
 
+<<<<<<< HEAD
 Рассмотрим практическую задачу - у нас есть номер телефона вида `"+7(903)-123-45-67"`, и нам нужно превратить его в строку только из чисел: `79035419441`.
+=======
+Consider a practical task -- we have a phone number like `"+7(903)-123-45-67"`, and we need to turn it into pure numbers: `79031234567`.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Для этого мы можем найти и удалить все, что не является числом. С этим нам помогут символьные классы.
 
@@ -8,7 +12,11 @@
 
 Для начала давайте рассмотрим класс "цифра". Он обозначается как `pattern:\d` и в регулярном выражении соответствует "любой одной цифре".
 
+<<<<<<< HEAD
 Например, давайте найдём первую цифру в номере телефона:
+=======
+For instance, let's find the first digit in the phone number:
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js run
 let str = "+7(903)-123-45-67";
@@ -29,8 +37,13 @@ let regexp = /\d/g;
 
 alert( str.match(regexp) ); // массив совпадений: 7,9,0,3,1,2,3,4,5,6,7
 
+<<<<<<< HEAD
 // и можно сделать из них уже чисто цифровой номер телефона
 alert( str.match(regexp).join('') ); // 79035419441
+=======
+// let's make the digits-only phone number of them:
+alert( str.match(regexp).join('') ); // 79031234567
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 ```
 
 Это был символьный класс для цифр. Есть и другие символьные классы.
@@ -101,7 +114,11 @@ let str = "+7(903)-123-45-67";
 alert( str.replace(/\D/g, "") ); // 79031234567
 ```
 
+<<<<<<< HEAD
 ## Точка - это любой символ
+=======
+## A dot is "any character"
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Точка `pattern:.` - это специальный символьный класс, который соответствует "любому символу, кроме новой строки".
 
@@ -121,7 +138,11 @@ alert( "CS-4".match(regexp) ); // CS-4
 alert( "CS 4".match(regexp) ); // CS 4 (пробел тоже является символом)
 ```
 
+<<<<<<< HEAD
 Обратите внимание, что точка означает "любой символ", но не "отсутствие символа". Там должен быть какой-либо символ, чтобы соответствовать условию поиска:
+=======
+Please note that a dot means "any character", but not the "absence of a character". There must be a character to match it:
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js run
 alert( "CS4".match(/CS.4/) ); // null, нет совпадений потому что нет символа для точки
@@ -129,7 +150,11 @@ alert( "CS4".match(/CS.4/) ); // null, нет совпадений потому 
 
 ### Точка как буквально любой символ, с флагом "s"
 
+<<<<<<< HEAD
 Обычно точка не соответствует символу новой строки `\n`.
+=======
+By default, a dot doesn't match the newline character `\n`.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 То есть, регулярное выражение `pattern:A.B` будет искать символ `match:A` и затем `match:B`, с любым символом между ними, кроме перевода строки `\n`:
 
@@ -145,8 +170,27 @@ alert( "A\nB".match(/A.B/) ); // null (нет совпадения)
 alert( "A\nB".match(/A.B/s) ); // A\nB (совпадение!)
 ```
 
+<<<<<<< HEAD
 ````warn header="Внимание, пробелы!"
 Обычно мы уделяем мало внимания пробелам. Для нас строки `subject:1-5` и `subject: 1 - 5` практически идентичны.
+=======
+````warn header="Not supported in IE"
+The `pattern:s` flag is not supported in IE.
+
+Luckily, there's an alternative, that works everywhere. We can use a regexp like `pattern:[\s\S]` to match "any character" (this pattern will be covered in the article <info:regexp-character-sets-and-ranges>).
+
+```js run
+alert( "A\nB".match(/A[\s\S]B/) ); // A\nB (match!)
+```
+
+The pattern `pattern:[\s\S]` literally says: "a space character OR not a space character". In other words, "anything". We could use another pair of complementary classes, such as `pattern:[\d\D]`, that doesn't matter. Or even the `pattern:[^]` -- as it means match any character except nothing.
+
+Also we can use this trick if we want both kind of "dots" in the same pattern: the actual dot `pattern:.` behaving the regular way ("not including a newline"), and also a way to match "any character" with `pattern:[\s\S]` or alike.
+````
+
+````warn header="Pay attention to spaces"
+Usually we pay little attention to spaces. For us strings `subject:1-5` and `subject:1 - 5` are nearly identical.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Но если регулярное выражение не учитывает пробелы, оно может не сработать.
 
@@ -166,7 +210,11 @@ alert( "1 - 5".match(/\d\s-\s\d/) ); // 1 - 5, тоже работает
 
 **Пробел - это символ. Такой же важный, как любой другой.**
 
+<<<<<<< HEAD
 Нельзя просто добавить или удалить пробелы из регулярного выражения, и ожидать, что оно будет также работать.
+=======
+We can't add or remove spaces from a regular expression and expect it to work the same.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Другими словами, в регулярном выражении все символы имеют значение, даже пробелы.
 ````
@@ -185,6 +233,10 @@ alert( "1 - 5".match(/\d\s-\s\d/) ); // 1 - 5, тоже работает
 
 ...Но это не всё!
 
+<<<<<<< HEAD
 В кодировке Юникод, которую JavaScript использует для строк, каждому символу соответствует ряд свойств, например - какого языка это буква (если буква), является ли символ знаком пунктуации, и т.п.
+=======
+Unicode encoding, used by JavaScript for strings, provides many properties for characters, like: which language the letter belongs to (if it's a letter), is it a punctuation sign, etc.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Можно искать, в том числе, и по этим свойствам. Для этого нужен флаг `pattern:u`, который мы рассмотрим в следующей главе.

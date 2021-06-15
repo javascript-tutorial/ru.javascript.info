@@ -3,7 +3,11 @@
 
 Как мы знаем, объекты могут содержать свойства.
 
+<<<<<<< HEAD
 До этого момента мы рассматривали свойство только как пару "ключ-значение". Но на самом деле свойство объекта гораздо мощнее и гибче.
+=======
+Until now, a property was a simple "key-value" pair to us. But an object property is actually a more flexible and powerful thing.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 В этой главе мы изучим дополнительные флаги конфигурации для свойств, а в следующей -- увидим, как можно незаметно превратить их в специальные функции - геттеры и сеттеры.
 
@@ -66,7 +70,11 @@ Object.defineProperty(obj, propertyName, descriptor)
 : Объект и его свойство, для которого нужно применить дескриптор.
 
 `descriptor`
+<<<<<<< HEAD
 : Применяемый дескриптор.
+=======
+: Property descriptor object to apply.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Если свойство существует, `defineProperty` обновит его флаги. В противном случае метод создаёт новое свойство с указанным значением и флагами; если какой-либо флаг не указан явно, ему присваивается значение `false`.
 
@@ -134,7 +142,11 @@ let user = { };
 Object.defineProperty(user, "name", {
 *!*
   value: "John",
+<<<<<<< HEAD
   // для нового свойства необходимо явно указывать все флаги, для которых значение true
+=======
+  // for new properties we need to explicitly list what's true
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
   enumerable: true,
   configurable: true
 */!*
@@ -148,7 +160,11 @@ user.name = "Pete"; // Ошибка
 
 Теперь добавим собственный метод `toString` к объекту `user`.
 
+<<<<<<< HEAD
 Встроенный метод `toString` в объектах - неперечислимый, его не видно в цикле `for..in`. Но если мы напишем свой собственный метод `toString`, цикл `for..in` будет выводить его по умолчанию:
+=======
+Normally, a built-in `toString` for objects is non-enumerable, it does not show up in `for..in`. But if we add a `toString` of our own, then by default it shows up in `for..in`, like this:
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js run
 let user = {
@@ -162,7 +178,11 @@ let user = {
 for (let key in user) alert(key); // name, toString
 ```
 
+<<<<<<< HEAD
 Если мы этого не хотим, можно установить для свойства `enumerable:false`. Тогда оно перестанет появляться в цикле `for..in` аналогично встроенному `toString`:
+=======
+If we don't like it, then we can set `enumerable:false`. Then it won't appear in a `for..in` loop, just like the built-in one:
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js run
 let user = {
@@ -221,17 +241,46 @@ Math.PI = 3; // Ошибка
 
 Определение свойства как неконфигурируемого - это дорога в один конец. Мы не сможем отменить это действие, потому что `defineProperty` не работает с неконфигурируемыми свойствами.
 
+<<<<<<< HEAD
 В коде ниже мы делаем `user.name` "навечно запечатанной" константой:
+=======
+To be precise, non-configurability imposes several restrictions on `defineProperty`:
+1. Can't change `configurable` flag.
+2. Can't change `enumerable` flag.
+3. Can't change `writable: false` to `true` (the other way round works).
+4. Can't change `get/set` for an accessor property (but can assign them if absent).
+
+**The idea of "configurable: false" is to prevent changes of property flags and its deletion, while allowing to change its value.**
+
+Here `user.name` is non-configurable, but we can still change it (as it's writable):
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js run
-let user = { };
+let user = {
+  name: "John"
+};
 
 Object.defineProperty(user, "name", {
-  value: "John",
+  configurable: false
+});
+
+user.name = "Pete"; // works fine
+delete user.name; // Error
+```
+
+And here we make `user.name` a "forever sealed" constant:
+
+```js run
+let user = {
+  name: "John"
+};
+
+Object.defineProperty(user, "name", {
   writable: false,
   configurable: false
 });
 
+<<<<<<< HEAD
 *!*
 // теперь невозможно изменить user.name или его флаги
 // всё это не будет работать:
@@ -245,6 +294,15 @@ Object.defineProperty(user, "name", {writable: true}); // Ошибка
 ```smart header="Ошибки отображаются только в строгом режиме"
 В нестрогом режиме мы не увидим никаких ошибок при записи в свойства "только для чтения" и т.п. Эти операции всё равно не будут выполнены успешно. Действия, нарушающие ограничения флагов, в нестрогом режиме просто молча игнорируются.
 ```
+=======
+// won't be able to change user.name or its flags
+// all this won't work:
+user.name = "Pete";
+delete user.name;
+Object.defineProperty(user, "name", { value: "Pete" });
+```
+
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ## Метод Object.defineProperties
 

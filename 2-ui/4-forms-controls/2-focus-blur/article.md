@@ -1,6 +1,10 @@
 # Фокусировка: focus/blur
 
+<<<<<<< HEAD
 Элемент получает фокус, когда пользователь кликает по нему или использует клавишу `key:Tab`. Также существует HTML-атрибут `autofocus`, который устанавливает фокус на элемент, когда страница загружается. Есть и другие способы получения фокуса, о них - далее.
+=======
+An element receives the focus when the user either clicks on it or uses the `key:Tab` key on the keyboard. There's also an `autofocus` HTML attribute that puts the focus onto an element by default when a page loads and other means of getting the focus.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Фокусировка обычно означает: "приготовься к вводу данных на этом элементе", это хороший момент, чтобы инициализовать или загрузить что-нибудь.
 
@@ -18,8 +22,13 @@
 
 В примере ниже:
 
+<<<<<<< HEAD
 - Обработчик `blur` проверяет, введён ли email, и если нет -- показывает ошибку.
 - Обработчик `focus` скрывает это сообщение об ошибке (в момент потери фокуса проверка повторится):
+=======
+- The `blur` handler checks if the field has an email entered, and if not -- shows an error.
+- The `focus` handler hides the error message (on `blur` it will be checked again):
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```html run autorun height=60
 <style>
@@ -49,7 +58,11 @@
 </script>
 ```
 
+<<<<<<< HEAD
 Современный HTML позволяет делать валидацию с помощью атрибутов `required`, `pattern` и т.д. Иногда - это всё, что нам нужно. JavaScript можно использовать, когда мы хотим больше гибкости. А ещё мы могли бы отправлять изменённое значение на сервер, если оно правильное.
+=======
+Modern HTML allows us to do many validations using input attributes: `required`, `pattern` and so on. And sometimes they are just what we need. JavaScript can be used when we want more flexibility. Also we could automatically send the changed value to the server if it's correct.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 
 ## Методы focus/blur
@@ -104,11 +117,19 @@
 ```
 ## Включаем фокусировку на любом элементе: tabindex
 
+<<<<<<< HEAD
 Многие элементы по умолчанию не поддерживают фокусировку.
+=======
+By default, many elements do not support focusing.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Какие именно - зависит от браузера, но одно всегда верно: поддержка `focus/blur` гарантирована для элементов, с которыми посетитель может взаимодействовать: `<button>`, `<input>`, `<select>`, `<a>` и т.д.
 
+<<<<<<< HEAD
 С другой стороны, элементы форматирования `<div>`, `<span>`, `<table>` -- по умолчанию не могут получить фокус. Метод `elem.focus()` не работает для них, и события `focus/blur` никогда не срабатывают.
+=======
+On the other hand, elements that exist to format something, such as `<div>`, `<span>`, `<table>` -- are unfocusable by default. The method `elem.focus()` doesn't work on them, and `focus/blur` events are never triggered.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Это можно изменить HTML-атрибутом `tabindex`.
 
@@ -118,7 +139,11 @@
 
 Порядок перебора таков: сначала идут элементы со значениями `tabindex` от `1` и выше, в порядке `tabindex`, а затем элементы без `tabindex` (например, обычный `<input>`).
 
+<<<<<<< HEAD
 При совпадающих `tabindex` элементы перебираются в том порядке, в котором идут в документе.
+=======
+Elements without matching `tabindex` are switched in the document source order (the default order).
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Есть два специальных значения:
 
@@ -130,7 +155,11 @@
 Например, список ниже. Кликните первый пункт в списке и нажмите `key:Tab`:
 
 ```html autorun no-beautify
+<<<<<<< HEAD
 Кликните первый пункт в списке и нажмите Tab. Продолжайте следить за порядком. Обратите внимание, что много последовательных нажатий Tab могут вывести фокус из iframe с примером.
+=======
+Click the first item and press Tab. Keep track of the order. Please note that many subsequent Tabs can move the focus out of the iframe in the example.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 <ul>
   <li tabindex="1">Один</li>
   <li tabindex="0">Ноль</li>
@@ -215,7 +244,11 @@
 
 ## Итого
 
+<<<<<<< HEAD
 События `focus` и `blur` срабатывают на фокусировке/потере фокуса элемента.
+=======
+Events `focus` and `blur` trigger on an element focusing/losing focus.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Их особенности:
 - Они не всплывают. Но можно использовать фазу перехвата или `focusin/focusout`.

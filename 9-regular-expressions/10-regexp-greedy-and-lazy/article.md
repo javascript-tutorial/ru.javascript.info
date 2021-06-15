@@ -88,7 +88,11 @@ alert( str.match(regexp) ); // "witch" and her "broom"
 
 Это, определённо, не то, что мы ожидали. Но так оно работает.
 
+<<<<<<< HEAD
 **В жадном режиме (по умолчанию) квантификатор повторяется столько раз, сколько это возможно.**
+=======
+**In the greedy mode (by default) a quantified character is repeated as many times as possible.**
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Движок регулярного выражения пытается получить максимальное количество символов, соответствующих `pattern:.+`, а затем сокращает это количество символ за символом, если остаток шаблона не совпадает.
 
@@ -109,7 +113,7 @@ let regexp = /".+?"/g;
 
 let str = 'a "witch" and her "broom" is one';
 
-alert( str.match(regexp) ); // witch, broom
+alert( str.match(regexp) ); // "witch", "broom"
 ```
 
 Чтобы лучше понять, что поменялось, давайте рассмотрим процесс поиска шаг за шагом.
@@ -140,7 +144,11 @@ alert( str.match(regexp) ); // witch, broom
 
     ![](witch_lazy6.svg)
 
+<<<<<<< HEAD
 В этом примере мы увидели, как ленивый режим работает для `pattern:+?`. Квантификаторы `pattern:+?` и `pattern:??` работают аналогичным образом -- движок регулярного выражения увеличит количество совпадений, только если не сможет найти совпадение для оставшегося шаблона на текущей позиции.
+=======
+In this example we saw how the lazy mode works for `pattern:+?`. Quantifiers `pattern:*?` and `pattern:??` work the similar way -- the regexp engine increases the number of repetitions only if the rest of the pattern can't match on the given position.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 **Ленивый режим включается только для квантификаторов с `?`.**
 
@@ -179,7 +187,7 @@ let regexp = /"[^"]+"/g;
 
 let str = 'a "witch" and her "broom" is one';
 
-alert( str.match(regexp) ); // witch, broom
+alert( str.match(regexp) ); // "witch", "broom"
 ```
 
 Регулярное выражение `pattern:"[^"]+"` получит нужный результат, потому что оно ищет кавычку `pattern:'"'`, за которой следует один или несколько символов "не-кавычек" `pattern:[^"]`, а затем -- закрывающая кавычка.
@@ -292,10 +300,18 @@ alert( str2.match(regexp) ); // <a href="link1" class="doc">, <a href="link2" cl
 
 У квантификаторов есть два режима работы:
 
+<<<<<<< HEAD
 Жадный
 : По умолчанию движок регулярного выражения пытается повторить квантификатор столько раз, сколько это возможно. Например, `pattern:\d+` получит все возможные цифры. Когда цифры закончатся или он дойдёт до конца строки, движок продолжит искать совпадение для оставшегося шаблона. Если совпадения не будет, он уменьшит количество повторов (осуществит возврат) и попробует снова.
 
 Ленивый
 : Включается с помощью знака вопроса `pattern:?` после квантификатора. Движок регулярного выражения пытается найти совпадение для оставшегося шаблона перед каждым повторением квантификатора.
+=======
+Greedy
+: By default the regular expression engine tries to repeat the quantified character as many times as possible. For instance, `pattern:\d+` consumes all possible digits. When it becomes impossible to consume more (no more digits or string end), then it continues to match the rest of the pattern. If there's no match then it decreases the number of repetitions (backtracks) and tries again.
+
+Lazy
+: Enabled by the question mark `pattern:?` after the quantifier. The regexp engine tries to match the rest of the pattern before each repetition of the quantified character.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Как мы увидели на примере поиска строк в кавычках, ленивый режим не "панацея" от всех проблем жадного поиска. В качестве альтернативы может выступать "хорошо настроенный" жадный поиск, как в шаблоне `pattern:"[^"]+"`.

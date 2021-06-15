@@ -43,12 +43,22 @@
     }
 
     function clockStart() {
+<<<<<<< HEAD
       timerId = setInterval(update, 1000);
       update(); // <--  начать тут же, не ждать 1 секунду пока setInterval сработает
+=======
+      // set a new interval only if the clock is stopped
+      // otherwise we would rewrite the timerID reference to the running interval and wouldn't be able to stop the clock ever again
+      if (!timerId) { 
+        timerId = setInterval(update, 1000);
+      }
+      update(); // <--  start right now, don't wait 1 second till the first setInterval works
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
     }
 
     function clockStop() {
       clearInterval(timerId);
+      timerId = null; // <-- clear timerID to indicate that the clock has been stopped, so that it is possible to start it again in clockStart()
     }
 
     clockStart();

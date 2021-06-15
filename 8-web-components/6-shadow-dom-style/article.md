@@ -111,6 +111,7 @@ customElements.define('custom-dialog', class extends HTMLElement {
 
 Теперь дополнительные стили для выравнивания по центру применяются только к первому элементу: `<custom-dialog centered>`.
 
+<<<<<<< HEAD
 ## :host-context(selector)
 
 То же самое, что и `:host`, но применяется только в том случае, если элемент-хозяин или любой из его предков во внешнем документе подходит под селектор `selector`.
@@ -127,6 +128,9 @@ customElements.define('custom-dialog', class extends HTMLElement {
 ```
 
 Подводя итог, мы можем использовать семейство селекторов `:host` для стилизации основного элемента компонента в зависимости от контекста. Эти стили (если только не стоит !important) могут быть переопределены документом.
+=======
+To summarize, we can use `:host`-family of selectors to style the main element of the component. These styles (unless `!important`) can be overridden by the document.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ## Применение стилей к содержимому слотов
 
@@ -257,8 +261,13 @@ customElements.define('user-card', class extends HTMLElement {
     /* если переменная --user-card-field-color не определена, будет использован цвет black */
   }
 </style>
+<<<<<<< HEAD
 <div class="field">Имя: <slot name="username"></slot></div>
 <div class="field">Дата рождения: <slot name="birthday"></slot></div>
+=======
+<div class="field">Name: <slot name="username"></slot></div>
+<div class="field">Birthday: <slot name="birthday"></slot></div>
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 ```
 
 Затем мы можем объявить это свойство во внешнем документе для `<user-card>`:
@@ -315,10 +324,17 @@ customElements.define('user-card', class extends HTMLElement {
 
 Теневой DOM может включать в себя стили, такие как `<style>` или `<link rel="stylesheet">`.
 
+<<<<<<< HEAD
 Локальные стили могут влиять на:
 - теневое дерево,
 - элемент-хозяин, при помощи псевдоклассов семейства `:host`,
 - слотовые элементы (из светлого DOM), `::slotted(селектор)` позволяет стилизовать сами слотовые элементы, но не их дочерние элементы.
+=======
+Local styles can affect:
+- shadow tree,
+- shadow host with `:host` and `:host()` pseudoclasses,
+- slotted elements (coming from light DOM), `::slotted(selector)` allows to select  slotted elements themselves, but not their children.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Стили документов могут влиять на:
 - элемент-хозяин (так как он находится во внешнем документе)

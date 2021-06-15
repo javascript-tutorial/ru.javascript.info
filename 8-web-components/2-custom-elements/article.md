@@ -114,9 +114,15 @@ customElements.define("time-formatted", TimeFormatted); // (2)
 ></time-formatted>
 ```
 
+<<<<<<< HEAD
 1. Класс имеет только один метод `connectedCallback()` -- браузер вызывает его, когда элемент `<time-formatted>` добавляется на страницу (или когда HTML-парсер обнаруживает его), и он использует встроенный форматировщик данных [Intl.DateTimeFormat](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/DateTimeFormat), хорошо поддерживаемый в браузерах, чтобы показать красиво отформатированное время.
 2. Нам нужно зарегистрировать наш новый элемент, используя `customElements.define(tag, class)`.
 3. И тогда мы сможем использовать его везде.
+=======
+1. The class has only one method `connectedCallback()` -- the browser calls it when `<time-formatted>` element is added to page (or when HTML parser detects it), and it uses the built-in [Intl.DateTimeFormat](mdn:/JavaScript/Reference/Global_Objects/DateTimeFormat) data formatter, well-supported across the browsers, to show a nicely formatted time.
+2. We need to register our new element by `customElements.define(tag, class)`.
+3. And then we can use it everywhere.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 
 ```smart header="Обновление пользовательских элементов"
@@ -147,7 +153,11 @@ customElements.define("time-formatted", TimeFormatted); // (2)
 
 В текущей реализации `<time-formatted>` после того, как элемент отрендерился, дальнейшие изменения атрибутов не дают никакого эффекта. Это странно для HTML-элемента. Обычно, когда мы изменяем атрибут, например `a.href`, мы ожидаем, что изменение будет видно сразу. Так что давайте исправим это.
 
+<<<<<<< HEAD
 Мы можем наблюдать за атрибутами, поместив их список в статический геттер `observedAttributes()`. При изменении таких атрибутов вызывается `attributeChangedCallback`. Он срабатывает не для любого атрибута по соображениям производительности.
+=======
+We can observe attributes by providing their list in `observedAttributes()` static getter. For such attributes, `attributeChangedCallback` is called when they are modified. It doesn't trigger for other, unlisted attributes (that's for performance reasons).
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Вот новый `<time-formatted>`, который автоматически обновляется при изменении атрибутов:
 
@@ -318,7 +328,11 @@ customElements.define('user-info', class extends HTMLElement {
     class HelloButton extends HTMLButtonElement { /* методы пользовательского элемента */ }
     ```
 
+<<<<<<< HEAD
 2. Предоставим третий аргумент в `customElements.define`, указывающий тег:
+=======
+2. Provide the third argument to `customElements.define`, that specifies the tag:
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
     ```js
     customElements.define('hello-button', HelloButton, *!*{extends: 'button'}*/!*);
     ```    
@@ -362,7 +376,11 @@ customElements.define('hello-button', HelloButton, {extends: 'button'});
 ## Ссылки
 
 - HTML Living Standard: <https://html.spec.whatwg.org/#custom-elements>.
+<<<<<<< HEAD
 - Совместимость: <https://caniuse.com/#feat=custom-elements>.
+=======
+- Compatiblity: <https://caniuse.com/#feat=custom-elementsv1>.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ## Итого
 
@@ -394,4 +412,8 @@ customElements.define('hello-button', HelloButton, {extends: 'button'});
     /* <button is="my-button"> */
     ```
 
+<<<<<<< HEAD
 Пользовательские элементы широко поддерживаются браузерами. Edge немного отстаёт, но есть полифил <https://github.com/webcomponents/webcomponentsjs>.
+=======
+Custom elements are well-supported among browsers. There's a polyfill <https://github.com/webcomponents/polyfills/tree/master/packages/webcomponentsjs>.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c

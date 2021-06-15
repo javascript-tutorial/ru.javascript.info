@@ -2,7 +2,17 @@
 
 Предлагаю вашему вниманию советы мастеров древности.
 
+<<<<<<< HEAD
 Программисты прошлого использовали их, чтобы заострить разум тех, кто после них будет поддерживать код.
+=======
+```quote author="Confucius (Analects)"
+Learning without thought is labor lost; thought without learning is perilous.
+```
+
+Programmer ninjas of the past used these tricks to sharpen the mind of code maintainers.
+
+Code review gurus look for them in test tasks.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Гуру разработки при найме старательно ищут их применение в тестовых заданиях.
 
@@ -35,7 +45,11 @@ i = i ? i < 0 ? Math.max(0, len + i) : i : 0;
 Кто знает — не говорит. Кто говорит — не знает.
 ```
 
+<<<<<<< HEAD
 Ещё один способ писать быстрее - использовать короткие имена переменных. Называйте их `a`, `b` или `c`.
+=======
+Another way to code shorter is to use single-letter variable names everywhere. Like `a`, `b` or `c`.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Короткая переменная прячется в коде лучше, чем ниндзя в лесу. Никто не сможет найти её, используя функцию "Поиск" текстового редактора. Более того, даже найдя – никто не сможет "расшифровать" её и догадаться, что она означает.
 
@@ -102,6 +116,7 @@ i = i ? i < 0 ? Math.max(0, len + i) : i : 0;
 
 **Назовите переменные "калькой" с русского языка или как-то "улучшите" английское слово.**
 
+<<<<<<< HEAD
 В одном месте напишите `var ssilka`, в другом `var ssylka`, в третьем `var link`, в четвёртом – `var lnk`… Это действительно великолепно работает и очень креативно!
 
 Количество ошибок при поддержке такого кода увеличивается во много раз.
@@ -111,6 +126,10 @@ i = i ? i < 0 ? Math.max(0, len + i) : i : 0;
 
 ```quote author="Конфуций"
 Очень трудно найти чёрную кошку в тёмной комнате, особенно, когда её там нет.
+=======
+```quote author="Laozi (Tao Te Ching)"
+The Tao that can be told is not the eternal Tao. The name that can be named is not the eternal name.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 ```
 
 **Чтобы было не скучно – используйте *похожие* названия для обозначения *одинаковых* действий.**

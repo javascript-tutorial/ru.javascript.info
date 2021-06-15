@@ -9,10 +9,17 @@
 let decoder = new TextDecoder([label], [options]);
 ```
 
+<<<<<<< HEAD
 - **`label`** -- тип кодировки, `utf-8` используется по умолчанию, но также поддерживаются `big5`, `windows-1251` и многие другие.
 - **`options`** -- объект с дополнительными настройками:
   - **`fatal`** -- boolean, если значение `true`, тогда генерируется ошибка для невалидных (не декодируемых) символов, в ином случае (по умолчанию) они заменяются символом `\uFFFD`.
   - **`ignoreBOM`** -- boolean, если значение `true`, тогда игнорируется BOM (дополнительный признак, определяющий порядок следования байтов), что необходимо крайне редко.
+=======
+- **`label`** -- the encoding, `utf-8` by default, but `big5`, `windows-1251` and many other are also supported.
+- **`options`** -- optional object:
+  - **`fatal`** -- boolean, if `true` then throw an exception for invalid (non-decodable) characters, otherwise (default) replace them with character `\uFFFD`.
+  - **`ignoreBOM`** -- boolean, if `true` then ignore BOM (an optional byte-order Unicode mark), rarely needed.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ...и после использовать его метод decode:
 
@@ -59,7 +66,7 @@ alert( new TextDecoder().decode(binaryString) ); // Hello
 
 Имеет следующий синтаксис:
 
-```js run
+```js
 let encoder = new TextEncoder();
 ```
 

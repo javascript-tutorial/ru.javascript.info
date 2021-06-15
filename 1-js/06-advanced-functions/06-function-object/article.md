@@ -67,8 +67,13 @@ alert(user.sayBye.name); // sayBye
 
 В этом нет никакой магии. Бывает, что корректное имя определить невозможно. В таких случаях свойство name имеет пустое значение. Например:
 
+<<<<<<< HEAD
 ```js
 // функция объявлена внутри массива
+=======
+```js run
+// function created inside array
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 let arr = [function() {}];
 
 alert( arr[0].name ); // <пустая строка>
@@ -325,7 +330,11 @@ welcome(); // Hello, Guest (вложенный вызов работает)
 
 Теперь всё работает, потому что имя `"func"` локальное и находится внутри функции. Теперь оно взято не снаружи (и недоступно оттуда). Спецификация гарантирует, что оно всегда будет ссылаться на текущую функцию.
 
+<<<<<<< HEAD
 Внешний код все ещё содержит переменные `sayHi` и `welcome`, но теперь `func` -- это "внутреннее имя функции", таким образом она может вызвать себя изнутри.
+=======
+The outer code still has its variable `sayHi` or `welcome`. And `func` is an "internal function name", how the function can call itself internally.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```smart header="Это не работает с Function Declaration"
 Трюк с "внутренним" именем, описанный выше, работает только для Function Expression и *не* работает для Function Declaration. Для Function Declaration синтаксис не предусматривает возможность объявить дополнительное "внутреннее" имя.
@@ -344,7 +353,11 @@ welcome(); // Hello, Guest (вложенный вызов работает)
 
 Если функция объявлена как Function Expression (вне основного потока кода) и имеет имя, тогда это называется Named Function Expression (Именованным Функциональным Выражением). Это имя может быть использовано для ссылки на себя же, для рекурсивных вызовов и т.п.
 
+<<<<<<< HEAD
 Также функции могут содержать дополнительные свойства. Многие известные JavaScript-библиотеки искусно используют эту возможность.
+=======
+They create a "main" function and attach many other "helper" functions to it. For instance, the [jQuery](https://jquery.com) library creates a function named `$`. The [lodash](https://lodash.com) library creates a function `_`, and then adds `_.clone`, `_.keyBy` and other properties to it (see the [docs](https://lodash.com/docs) when you want to learn more about them). Actually, they do it to lessen their pollution of the global space, so that a single library gives only one global variable. That reduces the possibility of naming conflicts.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Они создают "основную" функцию и добавляют множество "вспомогательных" функций внутрь первой. Например, библиотека [jQuery](https://jquery.com) создаёт функцию с именем `$`. Библиотека [lodash](https://lodash.com) создаёт функцию `_`, а потом добавляет в неё  `_.clone`, `_.keyBy` и другие свойства (чтобы узнать о ней побольше см. [документацию](https://lodash.com/docs)). Они делают это, чтобы уменьшить засорение глобального пространства имён посредством того, что одна библиотека предоставляет только одну глобальную переменную, уменьшая вероятность конфликта имён.
 

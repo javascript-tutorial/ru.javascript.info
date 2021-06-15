@@ -12,11 +12,19 @@
 
 ![prototype](object-prototype-empty.svg)
 
+<<<<<<< HEAD
 Прототип даёт нам немного "магии". Когда мы хотим прочитать свойство из `object`, а оно отсутствует, JavaScript автоматически берёт его из прототипа. В программировании такой механизм называется "прототипным наследованием". Многие интересные возможности языка и техники программирования основываются на нём.
+=======
+When we read a property from `object`, and it's missing, JavaScript automatically takes it from the prototype. In programming, this is called "prototypal inheritance". And soon we'll study many examples of such inheritance, as well as cooler language features built upon it.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Свойство `[[Prototype]]` является внутренним и скрытым, но есть много способов задать его.
 
+<<<<<<< HEAD
 Одним из них является использование `__proto__`, например так:
+=======
+One of them is to use the special name `__proto__`, like this:
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js run
 let animal = {
@@ -27,10 +35,11 @@ let rabbit = {
 };
 
 *!*
-rabbit.__proto__ = animal;
+rabbit.__proto__ = animal; // sets rabbit.[[Prototype]] = animal
 */!*
 ```
 
+<<<<<<< HEAD
 ```smart header="Свойство `__proto__` — исторически обусловленный геттер/сеттер для `[[Prototype]]`"
 Обратите внимание, что `__proto__` — *не то же самое*, что `[[Prototype]]`. Это геттер/сеттер для него.
 
@@ -40,10 +49,13 @@ rabbit.__proto__ = animal;
 ```
 
 Если мы ищем свойство в `rabbit`, а оно отсутствует, JavaScript автоматически берёт его из `animal`.
+=======
+Now if we read a property from `rabbit`, and it's missing, JavaScript will automatically take it from `animal`.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Например:
 
-```js run
+```js
 let animal = {
   eats: true
 };
@@ -130,14 +142,37 @@ alert(longEar.jumps); // true (из rabbit)
 
 ![](proto-animal-rabbit-chain.svg)
 
+<<<<<<< HEAD
 Есть только два ограничения:
+=======
+Now if we read something from `longEar`, and it's missing, JavaScript will look for it in `rabbit`, and then in `animal`.
+
+There are only two limitations:
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 1. Ссылки не могут идти по кругу. JavaScript выдаст ошибку, если мы попытаемся назначить `__proto__` по кругу.
 2. Значение `__proto__` может быть объектом или `null`. Другие типы игнорируются.
 
 Это вполне очевидно, но всё же: может быть только один `[[Prototype]]`. Объект не может наследоваться от двух других объектов.
 
+<<<<<<< HEAD
 ## Операция записи не использует прототип
+=======
+
+```smart header="`__proto__` is a historical getter/setter for `[[Prototype]]`"
+It's a common mistake of novice developers not to know the difference between these two.
+
+Please note that `__proto__` is *not the same* as the internal `[[Prototype]]` property. It's a getter/setter for `[[Prototype]]`. Later we'll see situations where it matters, for now let's just keep it in mind, as we build our understanding of JavaScript language.
+
+The `__proto__` property is a bit outdated. It exists for historical reasons, modern JavaScript suggests that we should use `Object.getPrototypeOf/Object.setPrototypeOf` functions instead that get/set the prototype. We'll also cover these functions later.
+
+By the specification, `__proto__` must only be supported by browsers. In fact though, all environments including server-side support `__proto__`, so we're quite safe using it.
+
+As the `__proto__` notation is a bit more intuitively obvious, we use it in the examples.
+```
+
+## Writing doesn't use prototype
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Прототип используется только для чтения свойств.
 
@@ -197,15 +232,25 @@ alert(admin.fullName); // John Smith (*)
 
 // срабатывает сеттер!
 admin.fullName = "Alice Cooper"; // (**)
+<<<<<<< HEAD
 alert(admin.name); // Alice
 alert(admin.surname); // Cooper
+=======
+
+alert(admin.fullName); // Alice Cooper, state of admin modified
+alert(user.fullName); // John Smith, state of user protected
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 ```
 
 Здесь в строке `(*)` свойство `admin.fullName` имеет геттер в прототипе `user`, поэтому вызывается он. В строке `(**)` свойство также имеет сеттер в прототипе, который и будет вызван.
 
 ## Значение "this"
 
+<<<<<<< HEAD
 В приведённом выше примере может возникнуть интересный вопрос: каково значение `this` внутри `set fullName(value)`? Куда записаны свойства `this.name` и `this.surname`: в `user` или в `admin`?
+=======
+An interesting question may arise in the example above: what's the value of `this` inside `set fullName(value)`? Where are the properties `this.name` and `this.surname` written: into `user` or `admin`?
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Ответ прост: прототипы никак не влияют на `this`.
 
@@ -213,7 +258,11 @@ alert(admin.surname); // Cooper
 
 Таким образом, вызов сеттера `admin.fullName=` в качестве `this` использует `admin`, а не `user`.
 
+<<<<<<< HEAD
 Это на самом деле очень важная деталь, потому что у нас может быть большой объект со множеством методов, от которого можно наследовать. Затем наследующие объекты могут вызывать его методы, но они будут изменять своё состояние, а не состояние объекта-родителя.
+=======
+That is actually a super-important thing, because we may have a big object with many methods, and have objects that inherit from it. And when the inheriting objects run the inherited methods, they will modify only their own states, not the state of the big object.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Например, здесь `animal` представляет собой "хранилище методов", и `rabbit` использует его.
 
@@ -248,13 +297,21 @@ alert(animal.isSleeping); // undefined (нет такого свойства в 
 
 ![](proto-animal-rabbit-walk-3.svg)
 
+<<<<<<< HEAD
 Если бы у нас были другие объекты, такие как `bird`, `snake` и т.д., унаследованные от `animal`, они также получили бы доступ к методам `animal`. Но `this` при вызове каждого метода будет соответствовать объекту (перед точкой), на котором происходит вызов, а не `animal`. Поэтому, когда мы записываем данные в `this`, они сохраняются в этих объектах.
+=======
+If we had other objects, like `bird`, `snake`, etc., inheriting from `animal`, they would also gain access to methods of `animal`. But `this` in each method call would be the corresponding object, evaluated at the call-time (before dot), not `animal`. So when we write data into `this`, it is stored into these objects.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 В результате методы являются общими, а состояние объекта — нет.
 
 ## Цикл for..in
 
+<<<<<<< HEAD
 Цикл `for..in` проходит не только по собственным, но и по унаследованным свойствам объекта.
+=======
+The `for..in` loop iterates over inherited properties too.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Например:
 
@@ -269,7 +326,11 @@ let rabbit = {
 };
 
 *!*
+<<<<<<< HEAD
 // Object.keys возвращает только собственные ключи
+=======
+// Object.keys only returns own keys
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 alert(Object.keys(rabbit)); // jumps
 */!*
 

@@ -75,11 +75,21 @@
 
 Технически, мы можем скопировать/вставить всё. Например, мы можем скопировать файл из файловой системы и вставить его.
 
+<<<<<<< HEAD
 Существует список методов [в спецификации](https://www.w3.org/TR/clipboard-apis/#dfn-datatransfer) для работы с различными типами данных, чтения/записи в буфер обмена.
 
 Но обратите внимание, что буфер обмена работает глобально, на уровне ОС. Большинство браузеров в целях безопасности разрешают доступ на чтение/запись в буфер обмена только в рамках определённых действий пользователя, к примеру, в обработчиках событий `onclick`.
 
 Также запрещается генерировать "пользовательские" события буфера обмена при помощи `dispatchEvent` во всех браузерах, кроме Firefox.
+=======
+That's because `clipboardData` implements `DataTransfer` interface, commonly used for drag'n'drop and copy/pasting. It's bit beyound our scope now, but you can find its methods [in the specification](https://html.spec.whatwg.org/multipage/dnd.html#the-datatransfer-interface).
+
+```warn header="ClipboardAPI: user safety restrictions"
+The clipboard is a "global" OS-level thing. So most browsers allow read/write access to the clipboard only in the scope of certain user actions for the safety, e.g. in `onclick` event handlers.
+
+Also it's forbidden to generate "custom" clipboard events with `dispatchEvent` in all browsers except Firefox.
+```
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ## Итого
 

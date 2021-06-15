@@ -77,7 +77,11 @@ setInterval(animate3, 20);
 
 Эти независимые перерисовки лучше сгруппировать вместе, тогда они будут легче для браузера, а значит - не грузить процессор и более плавно выглядеть.
 
+<<<<<<< HEAD
 Существует ещё одна вещь, про которую надо помнить: когда CPU перегружен или есть другие причины делать перерисовку реже (например, когда вкладка браузера скрыта), нам не следует делать её каждые `20ms`.
+=======
+There's one more thing to keep in mind. Sometimes CPU is overloaded, or there are other reasons to redraw less often (like when the browser tab is hidden), so we really shouldn't run it every `20ms`.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Но как нам узнать об этом в JavaScript? Спецификация [Animation timing](http://www.w3.org/TR/animation-timing/) описывает функцию `requestAnimationFrame`, которая решает все описанные проблемы и делает даже больше.
 
@@ -227,7 +231,11 @@ function quad(timeFraction) {
 
 [iframe height=40 src="quad" link]
 
+<<<<<<< HEAD
 ...Или кубическая кривая, или любой другой множитель `n`. Повышение степени увеличивает скорость анимации.
+=======
+...Or the cubic curve or even greater `n`. Increasing the power makes it speed up faster.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Вот график для функции `progress` в степени `5`:
 
@@ -396,15 +404,25 @@ bounceEaseInOut = makeEaseInOut(bounce);
 
 ![](circ-ease.svg)
 
+<<<<<<< HEAD
 - <span style="color:#EE6B47">Красный</span> обычный вариант `circ` (`easeIn`).
 - <span style="color:#8DB173">Зелёный</span> -- `easeOut`.
 - <span style="color:#62C0DC">Синий</span> -- `easeInOut`.
+=======
+- <span style="color:#EE6B47">Red</span> is the regular variant of `circ` (`easeIn`).
+- <span style="color:#8DB173">Green</span> -- `easeOut`.
+- <span style="color:#62C0DC">Blue</span> -- `easeInOut`.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Как видно, график первой половины анимации представляет собой уменьшенный `easeIn`, а второй – уменьшенный `easeOut`. В результате, анимация начинается и заканчивается одинаковым эффектом.
 
 ## Более интересная функция "draw"
 
+<<<<<<< HEAD
 Вместо передвижения элемента мы можем делать что-нибудь ещё. Всё, что нам нужно -- это правильно написать функцию `draw`.
+=======
+Instead of moving the element we can do something else. All we need is to write the proper `draw`.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Вот пример "скачущей" анимации набирающегося текста:
 

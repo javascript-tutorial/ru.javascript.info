@@ -3,9 +3,15 @@
 
 Встроенный класс [URL](https://url.spec.whatwg.org/#api) предоставляет удобный интерфейс для создания и разбора URL-адресов.
 
+<<<<<<< HEAD
 Нет сетевых методов, которые требуют именно объект `URL`, обычные строки вполне подходят. Так что, технически, мы не обязаны использовать `URL`. Но иногда он может быть весьма удобным.
 
 ## Создание URL
+=======
+There are no networking methods that require exactly a `URL` object, strings are good enough. So technically we don't have to use `URL`. But sometimes it can be really helpful.
+
+## Creating a URL
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Синтаксис создания нового объекта `URL`:
 
@@ -64,12 +70,23 @@ alert(url.pathname); // /url
 ```smart header="Можно передавать объекты `URL` в сетевые методы (и большинство других) вместо строк"
 Мы можем использовать объект `URL` в методах `fetch` или `XMLHttpRequest` и почти во всех других, где ожидается URL-строка.
 
+<<<<<<< HEAD
 Вообще, объект `URL` можно передавать почти куда угодно вместо строки, так как большинство методов сконвертируют объект в строку, при этом он станет строкой с полным URL-адресом.
+=======
+```smart header="We can pass `URL` objects to networking (and most other) methods instead of a string"
+We can use a `URL` object in `fetch` or `XMLHttpRequest`, almost everywhere where a URL-string is expected.
+
+Generally, the `URL` object can be passed to any method instead of a string, as most methods will perform the string conversion, that turns a `URL` object into a string with full URL.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 ```
 
 ## SearchParams "?..."
 
+<<<<<<< HEAD
 Допустим, мы хотим создать URL-адрес с заданными параметрами, например, `https://google.com/search?query=JavaScript`.
+=======
+Let's say we want to create a url with given search params, for instance, `https://google.com/search?query=JavaScript`.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Мы можем указать их в строке:
 
@@ -79,10 +96,15 @@ new URL('https://google.com/search?query=JavaScript')
 
 ...Но параметры должны быть правильно закодированы, чтобы они могли содержать не-латинские буквы, пробелы и т.п. (об этом подробнее далее).
 
+<<<<<<< HEAD
 Так что для этого есть свойство `url.searchParams` -- объект типа [URLSearchParams](https://url.spec.whatwg.org/#urlsearchparams).
+=======
+So there's a URL property for that: `url.searchParams`, an object of type [URLSearchParams](https://url.spec.whatwg.org/#urlsearchparams).
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Он предоставляет удобные методы для работы с параметрами:
 
+<<<<<<< HEAD
 - **`append(name, value)`** -- добавить параметр по имени,
 - **`delete(name)`** -- удалить параметр по имени,
 - **`get(name)`** -- получить параметр по имени,
@@ -91,6 +113,16 @@ new URL('https://google.com/search?query=JavaScript')
 - **`set(name, value)`** -- задать/заменить параметр,
 - **`sort()`** -- отсортировать параметры по имени, используется редко,
 - ...и является перебираемым, аналогично `Map`.
+=======
+- **`append(name, value)`** -- add the parameter by `name`,
+- **`delete(name)`** -- remove the parameter by `name`,
+- **`get(name)`** -- get the parameter by `name`,
+- **`getAll(name)`** -- get all parameters with the same `name` (that's possible, e.g. `?user=John&user=Pete`),
+- **`has(name)`** -- check for the existence of the parameter by `name`,
+- **`set(name, value)`** -- set/replace the parameter,
+- **`sort()`** -- sort parameters by name, rarely needed,
+- ...and it's also iterable, similar to `Map`.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Пример добавления параметров, содержащих пробелы и знаки препинания:
 
@@ -140,10 +172,17 @@ URL стал длиннее, так как каждая кириллическа
 
 Для этого есть встроенные функции:
 
+<<<<<<< HEAD
 - [encodeURI](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURI) - кодирует URL-адрес целиком.
 - [decodeURI](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/decodeURI) - декодирует URL-адрес целиком.
 - [encodeURIComponent](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent) - кодирует компонент URL, например, параметр, хеш, имя пути и т.п.
 - [decodeURIComponent](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/decodeURIComponent) - декодирует компонент URL.
+=======
+- [encodeURI](mdn:/JavaScript/Reference/Global_Objects/encodeURI) - encodes URL as a whole.
+- [decodeURI](mdn:/JavaScript/Reference/Global_Objects/decodeURI) - decodes it back.
+- [encodeURIComponent](mdn:/JavaScript/Reference/Global_Objects/encodeURIComponent) - encodes a URL component, such as a search parameter, or a hash, or a pathname.
+- [decodeURIComponent](mdn:/JavaScript/Reference/Global_Objects/decodeURIComponent) - decodes it back.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Возникает естественный вопрос: "Какая разница между `encodeURIComponent` и `encodeURI`? Когда использовать одну и другую функцию?"
 
@@ -195,7 +234,11 @@ alert(url); // https://google.com/search?q=Rock&Roll
 ````smart header="Разница в кодировании с `URL`"
 Классы [URL](https://url.spec.whatwg.org/#url-class) и [URLSearchParams](https://url.spec.whatwg.org/#interface-urlsearchparams) базируются на последней спецификации URI, описывающей устройство адресов: [RFC3986](https://tools.ietf.org/html/rfc3986), в то время как функции `encode*` -- на устаревшей версии стандарта [RFC2396](https://www.ietf.org/rfc/rfc2396.txt).
 
+<<<<<<< HEAD
 Различий мало, но они есть, например, по-разному кодируются адреса IPv6:
+=======
+There are a few differences, e.g. IPv6 addresses are encoded differently:
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js run
 // допустимый URL-адрес IPv6

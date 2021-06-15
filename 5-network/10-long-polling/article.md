@@ -6,7 +6,11 @@
 
 ## Частые опросы
 
+<<<<<<< HEAD
 Самый простой способ получать новую информацию от сервера - периодический опрос. То есть, регулярные запросы на сервер вида: "Привет, я здесь, у вас есть какая-нибудь информация для меня?". Например, раз в 10 секунд.
+=======
+The simplest way to get new information from the server is periodic polling. That is, regular requests to the server: "Hello, I'm here, do you have any information for me?". For example, once every 10 seconds.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 В ответ сервер, во-первых, помечает у себя, что клиент онлайн, а во-вторых посылает весь пакет сообщений, накопившихся к данному моменту.
 
@@ -70,11 +74,21 @@ subscribe();
 ```warn header="Сервер должен поддерживать много ожидающих соединений."
 Архитектура сервера должна быть способна работать со многими ожидающими подключениями.
 
+<<<<<<< HEAD
 Некоторые серверные архитектуры запускают отдельный процесс для каждого соединения. Для большого количества соединений будет столько же процессов, и каждый процесс занимает значительный объём памяти. Так много соединений просто поглотят всю память.
 
 Часто такая проблема возникает с бэкендом, написанными на PHP или Ruby, но технически дело не в языке, а в реализации. На большинстве современных языков можно написать подходящий сервер, но на некоторых это проще сделать.
 
 Бэкенды, написанные с помощью Node.js, обычно не имеют таких проблем.
+=======
+Certain server architectures run one process per connection, resulting in there being as many processes as there are connections, while each process consumes quite a bit of memory. So, too many connections will just consume it all.
+
+That's often the case for backends written in languages like PHP and Ruby.
+
+Servers written using Node.js usually don't have such problems.
+
+That said, it isn't a programming language issue. Most modern languages, including PHP and Ruby allow to implement a proper backend. Just please make sure that your server architecture works fine with many simultaneous connections.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 ```
 
 ## Демо: чат

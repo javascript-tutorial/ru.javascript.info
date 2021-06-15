@@ -1,19 +1,12 @@
 ```js demo
-function debounce(f, ms) {
-
-  let isCooldown = false;
-
+function debounce(func, ms) {
+  let timeout;
   return function() {
-    if (isCooldown) return;
-
-    f.apply(this, arguments);
-
-    isCooldown = true;
-
-    setTimeout(() => isCooldown = false, ms);
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(this, arguments), ms);
   };
-
 }
+<<<<<<< HEAD
 ```
 
 Вызов `debounce` возвращает обёртку. Возможны два состояния:
@@ -25,3 +18,10 @@ function debounce(f, ms) {
 Пока `isCoolDown` имеет значение `true`, все остальные вызовы игнорируются.
 
 Затем `setTimeout` устанавливает его в `false` после заданной задержки.
+=======
+
+```
+
+A call to `debounce` returns a wrapper. When called, it schedules the original function call after given `ms` and cancels the previous such timeout.
+
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c

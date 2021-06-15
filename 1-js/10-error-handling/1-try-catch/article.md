@@ -1,14 +1,28 @@
+<<<<<<< HEAD
 # Обработка ошибок, "try..catch"
 
 Неважно, насколько мы хороши в программировании, иногда наши скрипты содержат ошибки. Они могут возникать из-за наших промахов, неожиданного ввода пользователя, неправильного ответа сервера и по тысяче других причин.
+=======
+# Error handling, "try...catch"
+
+No matter how great we are at programming, sometimes our scripts have errors. They may occur because of our mistakes, an unexpected user input, an erroneous server response, and for a thousand other reasons.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Обычно скрипт в случае ошибки "падает" (сразу же останавливается), с выводом ошибки в консоль.
 
+<<<<<<< HEAD
 Но есть синтаксическая конструкция `try..catch`, которая позволяет "ловить" ошибки и вместо падения делать что-то более осмысленное.
 
 ## Синтаксис "try..catch"
 
 Конструкция `try..catch` состоит из двух основных блоков: `try`, и затем `catch`:
+=======
+But there's a syntax construct `try...catch` that allows us to "catch" errors so the script can, instead of dying, do something more reasonable.
+
+## The "try...catch" syntax
+
+The `try...catch` construct has two main blocks: `try`, and then `catch`:
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js
 try {
@@ -24,6 +38,7 @@ try {
 
 Работает она так:
 
+<<<<<<< HEAD
 1. Сначала выполняется код внутри блока `try {...}`.
 2. Если в нём нет ошибок, то блок `catch(err)` игнорируется: выполнение доходит до конца `try` и потом далее, полностью пропуская `catch`.
 3. Если же в нём возникает ошибка, то выполнение `try` прерывается, и поток управления переходит в начало `catch(err)`. Переменная `err` (можно использовать любое имя) содержит объект ошибки с подробной информацией о произошедшем.
@@ -33,6 +48,17 @@ try {
 Таким образом, при ошибке в блоке `try {…}` скрипт не "падает", и мы получаем возможность обработать ошибку внутри `catch`.
 
 Давайте рассмотрим примеры.
+=======
+1. First, the code in `try {...}` is executed.
+2. If there were no errors, then `catch (err)` is ignored: the execution reaches the end of `try` and goes on, skipping `catch`.
+3. If an error occurs, then the `try` execution is stopped, and control flows to the beginning of `catch (err)`. The `err` variable (we can use any name for it) will contain an error object with details about what happened.
+
+![](try-catch-flow.svg)
+
+So, an error inside the `try {...}` block does not kill the script -- we have a chance to handle it in `catch`.
+
+Let's look at some examples.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 - Пример без ошибок: выведет  `alert` `(1)` и `(2)`:
 
@@ -45,7 +71,7 @@ try {
 
       alert('Конец блока try');   // *!*(2) <--*/!*
 
-    } catch(err) {
+    } catch (err) {
 
       alert('Catch игнорируется, так как нет ошибок'); // (3)
 
@@ -64,7 +90,7 @@ try {
 
       alert('Конец блока try (никогда не выполнится)');  // (2)
 
-    } catch(err) {
+    } catch (err) {
 
       alert(`Возникла ошибка!`); // *!*(3) <--*/!*
 
@@ -72,33 +98,53 @@ try {
     ```
 
 
+<<<<<<< HEAD
 ````warn header="`try..catch` работает только для ошибок, возникающих во время выполнения кода"
 Чтобы `try..catch` работал, код должен быть выполнимым. Другими словами, это должен быть корректный JavaScript-код.
+=======
+````warn header="`try...catch` only works for runtime errors"
+For `try...catch` to work, the code must be runnable. In other words, it should be valid JavaScript.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Он не сработает, если код синтаксически неверен, например, содержит несовпадающее количество фигурных скобок:
 
 ```js run
 try {
   {{{{{{{{{{{{
+<<<<<<< HEAD
 } catch(e) {
   alert("Движок не может понять этот код, он некорректен");
+=======
+} catch (err) {
+  alert("The engine can't understand this code, it's invalid");
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 }
 ```
 
 JavaScript-движок сначала читает код, а затем исполняет его. Ошибки, которые возникают во время фазы чтения, называются ошибками парсинга. Их нельзя обработать (изнутри этого кода), потому что движок не понимает код.
 
+<<<<<<< HEAD
 Таким образом, `try..catch` может обрабатывать только ошибки, которые возникают в корректном коде. Такие ошибки называют "ошибками во время выполнения", а иногда "исключениями".
 ````
 
 
 ````warn header="`try..catch` работает синхронно"
 Исключение, которое произойдёт в коде, запланированном "на будущее", например в `setTimeout`, `try..catch` не поймает:
+=======
+So, `try...catch` can only handle errors that occur in valid code. Such errors are called "runtime errors" or, sometimes, "exceptions".
+````
+
+
+````warn header="`try...catch` works synchronously"
+If an exception happens in "scheduled" code, like in `setTimeout`, then `try...catch` won't catch it:
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js run
 try {
   setTimeout(function() {
     noSuchVariable; // скрипт упадёт тут
   }, 1000);
+<<<<<<< HEAD
 } catch (e) {
   alert( "не сработает" );
 }
@@ -111,6 +157,20 @@ try {
 setTimeout(function() {
   try {    
     noSuchVariable; // try..catch обрабатывает ошибку!
+=======
+} catch (err) {
+  alert( "won't work" );
+}
+```
+
+That's because the function itself is executed later, when the engine has already left the `try...catch` construct.
+
+To catch an exception inside a scheduled function, `try...catch` must be inside that function:
+```js run
+setTimeout(function() {
+  try {    
+    noSuchVariable; // try...catch handles the error!
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
   } catch {
     alert( "ошибка поймана!" );
   }
@@ -125,7 +185,11 @@ setTimeout(function() {
 ```js
 try {
   // ...
+<<<<<<< HEAD
 } catch(err) { // <-- объект ошибки, можно использовать другое название вместо err
+=======
+} catch (err) { // <-- the "error object", could use another word instead of err
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
   // ...
 }
 ```
@@ -150,7 +214,7 @@ try {
 *!*
   lalala; // ошибка, переменная не определена!
 */!*
-} catch(err) {
+} catch (err) {
   alert(err.name); // ReferenceError
   alert(err.message); // lalala is not defined
   alert(err.stack); // ReferenceError: lalala is not defined at (...стек вызовов)
@@ -175,9 +239,15 @@ try {
 }
 ```
 
+<<<<<<< HEAD
 ## Использование "try..catch"
 
 Давайте рассмотрим реальные случаи использования `try..catch`.
+=======
+## Using "try...catch"
+
+Let's explore a real-life use case of `try...catch`.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Как мы уже знаем, JavaScript поддерживает метод [JSON.parse(str)](mdn:js/JSON/parse) для чтения JSON.
 
@@ -201,11 +271,19 @@ alert( user.age );  // 30
 
 **Если `json` некорректен, `JSON.parse` генерирует ошибку, то есть скрипт "падает".**
 
+<<<<<<< HEAD
 Устроит ли нас такое поведение? Конечно нет!
+=======
+Should we be satisfied with that? Of course not!
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Получается, что если вдруг что-то не так с данными, то посетитель никогда (если, конечно, не откроет консоль) об этом не узнает. А люди очень не любят, когда что-то "просто падает" без всякого сообщения об ошибке.
 
+<<<<<<< HEAD
 Давайте используем `try..catch` для обработки ошибки:
+=======
+Let's use `try...catch` to handle the error:
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js run
 let json = "{ некорректный JSON }";
@@ -217,12 +295,19 @@ try {
 */!*
   alert( user.name ); // не сработает
 
-} catch (e) {
+} catch (err) {
 *!*
+<<<<<<< HEAD
   // ...выполнение прыгает сюда
   alert( "Извините, в данных ошибка, мы попробуем получить их ещё раз." );
   alert( e.name );
   alert( e.message );
+=======
+  // ...the execution jumps here
+  alert( "Our apologies, the data has errors, we'll try to request it one more time." );
+  alert( err.name );
+  alert( err.message );
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 */!*
 }
 ```
@@ -245,8 +330,13 @@ try {
   alert( user.name ); // нет свойства name!
 */!*
 
+<<<<<<< HEAD
 } catch (e) {
   alert( "не выполнится" );
+=======
+} catch (err) {
+  alert( "doesn't execute" );
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 }
 ```
 
@@ -294,11 +384,15 @@ alert(error.message); //  Ого, ошибка! o_O
 ```js run
 try {
   JSON.parse("{ bad json o_O }");
-} catch(e) {
+} catch (err) {
 *!*
-  alert(e.name); // SyntaxError
+  alert(err.name); // SyntaxError
 */!*
+<<<<<<< HEAD
   alert(e.message); // Unexpected token b in JSON at position 2
+=======
+  alert(err.message); // Unexpected token b in JSON at position 2
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 }
 ```
 
@@ -323,8 +417,13 @@ try {
 
   alert( user.name );
 
+<<<<<<< HEAD
 } catch(e) {
   alert( "JSON Error: " + e.message ); // JSON Error: Данные неполны: нет имени
+=======
+} catch (err) {
+  alert( "JSON Error: " + err.message ); // JSON Error: Incomplete data: no name
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 }
 ```
 
@@ -334,9 +433,15 @@ try {
 
 ## Проброс исключения
 
+<<<<<<< HEAD
 В примере выше мы использовали `try..catch` для обработки некорректных данных. А что, если в блоке `try {...}` возникнет *другая неожиданная ошибка*? Например, программная (неопределённая переменная) или какая-то ещё, а не ошибка, связанная с некорректными данными.
 
 Пример:
+=======
+In the example above we use `try...catch` to handle incorrect data. But is it possible that *another unexpected error* occurs within the `try {...}` block? Like a programming error (variable is not defined) or something else, not just this "incorrect data" thing.
+
+For example:
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js run
 let json = '{ "age": 30 }'; // данные неполны
@@ -345,7 +450,7 @@ try {
   user = JSON.parse(json); // <-- забыл добавить "let" перед user
 
   // ...
-} catch(err) {
+} catch (err) {
   alert("JSON Error: " + err); // JSON Error: ReferenceError: user is not defined
   // (не JSON ошибка на самом деле)
 }
@@ -353,20 +458,43 @@ try {
 
 Конечно, возможно все! Программисты совершают ошибки. Даже в утилитах с открытым исходным кодом, используемых миллионами людей на протяжении десятилетий -- вдруг может быть обнаружена ошибка, которая приводит к ужасным взломам.
 
+<<<<<<< HEAD
 В нашем случае `try..catch` предназначен для выявления ошибок, связанных с некорректными данными. Но по своей природе `catch` получает *все* свои ошибки из `try`. Здесь он получает неожиданную ошибку, но всё также показывает то же самое сообщение `"JSON Error"`. Это неправильно и затрудняет отладку кода.
 
 К счастью, мы можем выяснить, какую ошибку мы получили, например, по её свойству `name`:
+=======
+In our case, `try...catch` is placed to catch "incorrect data" errors. But by its nature, `catch` gets *all* errors from `try`. Here it gets an unexpected error, but still shows the same `"JSON Error"` message. That's wrong and also makes the code more difficult to debug.
+
+To avoid such problems, we can employ the "rethrowing" technique. The rule is simple:
+
+**Catch should only process errors that it knows and "rethrow" all others.**
+
+The "rethrowing" technique can be explained in more detail as:
+
+1. Catch gets all errors.
+2. In the `catch (err) {...}` block we analyze the error object `err`.
+3. If we don't know how to handle it, we do `throw err`.
+
+Usually, we can check the error type using the `instanceof` operator:
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js run
 try {
   user = { /*...*/ };
-} catch(e) {
+} catch (err) {
 *!*
+<<<<<<< HEAD
   alert(e.name); // "ReferenceError" из-за неопределённой переменной
+=======
+  if (err instanceof ReferenceError) {
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 */!*
+    alert('ReferenceError'); // "ReferenceError" for accessing an undefined variable
+  }
 }
 ```
 
+<<<<<<< HEAD
 Есть простое правило:
 
 **Блок `catch` должен обрабатывать только те ошибки, которые ему известны, и "пробрасывать" все остальные.**
@@ -376,6 +504,9 @@ try {
 1. Блок `catch` получает все ошибки.
 2. В блоке `catch(err) {...}` мы анализируем объект ошибки `err`.
 3. Если мы не знаем как её обработать, тогда делаем `throw err`.
+=======
+We can also get the error class name from `err.name` property. All native errors have it. Another option is to read `err.constructor.name`.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 В коде ниже мы используем проброс исключения, `catch` обрабатывает только `SyntaxError`:
 
@@ -395,24 +526,36 @@ try {
 
   alert( user.name );
 
-} catch(e) {
+} catch (err) {
 
 *!*
-  if (e.name == "SyntaxError") {
-    alert( "JSON Error: " + e.message );
+  if (err instanceof SyntaxError) {
+    alert( "JSON Error: " + err.message );
   } else {
+<<<<<<< HEAD
     throw e; // проброс (*)
+=======
+    throw err; // rethrow (*)
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
   }
 */!*
 
 }
 ```
 
+<<<<<<< HEAD
 Ошибка в строке `(*)` из блока `catch` "выпадает наружу" и может быть поймана другой внешней конструкцией `try..catch` (если есть), или "убьёт" скрипт.
+=======
+The error throwing on line `(*)` from inside `catch` block "falls out" of `try...catch` and can be either caught by an outer `try...catch` construct (if it exists), or it kills the script.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Таким образом, блок `catch` фактически обрабатывает только те ошибки, с которыми он знает, как справляться, и пропускает остальные.
 
+<<<<<<< HEAD
 Пример ниже демонстрирует, как такие ошибки могут быть пойманы с помощью ещё одного уровня `try..catch`:
+=======
+The example below demonstrates how such errors can be caught by one more level of `try...catch`:
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js run
 function readData() {
@@ -423,11 +566,15 @@ function readData() {
 *!*
     blabla(); // ошибка!
 */!*
-  } catch (e) {
+  } catch (err) {
     // ...
-    if (e.name != 'SyntaxError') {
+    if (!(err instanceof SyntaxError)) {
 *!*
+<<<<<<< HEAD
       throw e; // проброс исключения (не знаю как это обработать)
+=======
+      throw err; // rethrow (don't know how to deal with it)
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 */!*
     }
   }
@@ -435,20 +582,32 @@ function readData() {
 
 try {
   readData();
-} catch (e) {
+} catch (err) {
 *!*
+<<<<<<< HEAD
   alert( "Внешний catch поймал: " + e ); // поймал!
+=======
+  alert( "External catch got: " + err ); // caught it!
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 */!*
 }
 ```
 
+<<<<<<< HEAD
 Здесь `readData` знает только, как обработать `SyntaxError`, тогда как внешний блок `try..catch` знает, как обработать всё.
+=======
+Here `readData` only knows how to handle `SyntaxError`, while the outer `try...catch` knows how to handle everything.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
-## try..catch..finally
+## try...catch...finally
 
 Подождите, это ещё не всё.
 
+<<<<<<< HEAD
 Конструкция `try..catch` может содержать ещё одну секцию: `finally`.
+=======
+The `try...catch` construct may have one more code clause: `finally`.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Если секция есть, то она выполняется в любом случае:
 
@@ -459,9 +618,15 @@ try {
 
 ```js
 *!*try*/!* {
+<<<<<<< HEAD
    ... пробуем выполнить код...
 } *!*catch*/!*(e) {
    ... обрабатываем ошибки ...
+=======
+   ... try to execute the code ...
+} *!*catch*/!* (err) {
+   ... handle errors ...
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 } *!*finally*/!* {
    ... выполняем всегда ...
 }
@@ -472,8 +637,13 @@ try {
 ```js run
 try {
   alert( 'try' );
+<<<<<<< HEAD
   if (confirm('Сгенерировать ошибку?')) BAD_CODE();
 } catch (e) {
+=======
+  if (confirm('Make an error?')) BAD_CODE();
+} catch (err) {
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
   alert( 'catch' );
 } finally {
   alert( 'finally' );
@@ -509,7 +679,7 @@ let start = Date.now();
 
 try {
   result = fib(num);
-} catch (e) {
+} catch (err) {
   result = 0;
 *!*
 } finally {
@@ -527,14 +697,24 @@ alert( `Выполнение заняло ${diff}ms` );
 Другими словами, неважно как завершилась функция: через `return` или `throw`. Секция `finally` срабатывает в обоих случаях.
 
 
+<<<<<<< HEAD
 ```smart header="Переменные внутри `try..catch..finally` локальны"
 Обратите внимание, что переменные `result` и `diff` в коде выше объявлены *до* `try..catch`.
+=======
+```smart header="Variables are local inside `try...catch...finally`"
+Please note that `result` and `diff` variables in the code above are declared *before* `try...catch`.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Если переменную объявить в блоке, например, в `try`, то она не будет доступна после него.
 ```
 
+<<<<<<< HEAD
 ````smart header="`finally` и `return`"
 Блок `finally` срабатывает при *любом* выходе из `try..catch`, в том числе и `return`.
+=======
+````smart header="`finally` and `return`"
+The `finally` clause works for *any* exit from `try...catch`. That includes an explicit `return`.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 В примере ниже из `try` происходит `return`, но `finally` получает управление до того, как контроль возвращается во внешний код.
 
@@ -546,7 +726,7 @@ function func() {
     return 1;
 */!*
 
-  } catch (e) {
+  } catch (err) {
     /* ... */
   } finally {
 *!*
@@ -559,9 +739,13 @@ alert( func() ); // сначала срабатывает alert из finally, а
 ```
 ````
 
-````smart header="`try..finally`"
+````smart header="`try...finally`"
 
+<<<<<<< HEAD
 Конструкция `try..finally` без секции `catch` также полезна. Мы применяем её, когда не хотим здесь обрабатывать ошибки (пусть выпадут), но хотим быть уверены, что начатые процессы завершились.
+=======
+The `try...finally` construct, without `catch` clause, is also useful. We apply it when we don't want to handle errors here (let them fall through), but want to be sure that processes that we started are finalized.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js
 function func() {
@@ -582,11 +766,19 @@ function func() {
 Информация из данной секции не является частью языка JavaScript.
 ```
 
+<<<<<<< HEAD
 Давайте представим, что произошла фатальная ошибка (программная или что-то ещё ужасное) снаружи `try..catch`, и скрипт упал.
 
 Существует ли способ отреагировать на такие ситуации? Мы можем захотеть залогировать ошибку, показать что-то пользователю (обычно они не видят сообщение об ошибке) и т.д.
 
 Такого способа нет в спецификации, но обычно окружения предоставляют его, потому что это весьма полезно. Например, в Node.js для этого есть [`process.on("uncaughtException")`](https://nodejs.org/api/process.html#process_event_uncaughtexception). А в браузере мы можем присвоить функцию специальному свойству [window.onerror](mdn:api/GlobalEventHandlers/onerror), которая будет вызвана в случае необработанной ошибки.
+=======
+Let's imagine we've got a fatal error outside of `try...catch`, and the script died. Like a programming error or some other terrible thing.
+
+Is there a way to react on such occurrences? We may want to log the error, show something to the user (normally they don't see error messages), etc.
+
+There is none in the specification, but environments usually provide it, because it's really useful. For instance, Node.js has [`process.on("uncaughtException")`](https://nodejs.org/api/process.html#process_event_uncaughtexception) for that. And in the browser we can assign a function to the special [window.onerror](mdn:api/GlobalEventHandlers/onerror) property, that will run in case of an uncaught error.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Синтаксис:
 
@@ -639,22 +831,37 @@ window.onerror = function(message, url, line, col, error) {
 
 ## Итого
 
+<<<<<<< HEAD
 Конструкция `try..catch` позволяет обрабатывать ошибки во время исполнения кода. Она позволяет запустить код и перехватить ошибки, которые могут в нём возникнуть.
+=======
+The `try...catch` construct allows to handle runtime errors. It literally allows to "try" running the code and "catch" errors that may occur in it.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Синтаксис:
 
 ```js
 try {
+<<<<<<< HEAD
   // исполняем код
 } catch(err) {
   // если случилась ошибка, прыгаем сюда
   // err - это объект ошибки
+=======
+  // run this code
+} catch (err) {
+  // if an error happened, then jump here
+  // err is the error object
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 } finally {
   // выполняется всегда после try/catch
 }
 ```
 
+<<<<<<< HEAD
 Секций `catch` или `finally` может не быть, то есть более короткие конструкции `try..catch` и `try..finally` также корректны.
+=======
+There may be no `catch` section or no `finally`, so shorter constructs `try...catch` and `try...finally` are also valid.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Объекты ошибок содержат следующие свойства:
 
@@ -662,10 +869,18 @@ try {
 - `name` -- строка с именем ошибки (имя конструктора ошибки).
 - `stack` (нестандартное, но хорошо поддерживается) -- стек на момент ошибки.
 
+<<<<<<< HEAD
 Если объект ошибки не нужен, мы можем пропустить его, используя `catch {` вместо `catch(err) {`.
+=======
+If an error object is not needed, we can omit it by using `catch {` instead of `catch (err) {`.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Мы можем также генерировать собственные ошибки, используя оператор `throw`. Аргументом `throw` может быть что угодно, но обычно это объект ошибки, наследуемый от встроенного класса `Error`. Подробнее о расширении ошибок см. в следующей главе.  
 
 *Проброс исключения* -- это очень важный приём обработки ошибок: блок `catch` обычно ожидает и знает, как обработать определённый тип ошибок, поэтому он должен пробрасывать дальше ошибки, о которых он не знает.
 
+<<<<<<< HEAD
 Даже если у нас нет `try..catch`, большинство сред позволяют настроить "глобальный" обработчик ошибок, чтобы ловить ошибки, которые "выпадают наружу". В браузере это `window.onerror`.
+=======
+Even if we don't have `try...catch`, most environments allow us to setup a "global" error handler to catch errors that "fall out". In-browser, that's `window.onerror`.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c

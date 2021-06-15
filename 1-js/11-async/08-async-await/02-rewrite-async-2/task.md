@@ -1,7 +1,11 @@
 
 # Перепишите, используя async/await
 
+<<<<<<< HEAD
 Ниже пример из раздела <info:promise-chaining>, перепишите его, используя `async/await` вместо `.then/catch`.
+=======
+Below you can find the "rethrow" example. Rewrite it using `async/await` instead of `.then/catch`.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 В функции `demoGithubUser` замените рекурсию на цикл: используя `async/await`, сделать это будет просто.
 
@@ -22,7 +26,7 @@ function loadJson(url) {
       } else {
         throw new HttpError(response);
       }
-    })
+    });
 }
 
 // Запрашивать логин, пока github не вернёт существующего пользователя.

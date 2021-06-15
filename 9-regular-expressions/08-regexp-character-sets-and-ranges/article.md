@@ -60,18 +60,30 @@ alert( "Exception 0xAF".match(/x[0-9A-F][0-9A-F]/g) ); // xAF
 
 Например:
 
+<<<<<<< HEAD
 - **\d** -- то же самое, что и `pattern:[0-9]`,
 - **\w** -- то же самое, что и `pattern:[a-zA-Z0-9_]`,
 - **\s** -- то же самое, что и `pattern:[\t\n\v\f\r ]`, плюс несколько редких пробельных символов Юникода.
+=======
+- **\d** -- is the same as `pattern:[0-9]`,
+- **\w** -- is the same as `pattern:[a-zA-Z0-9_]`,
+- **\s** -- is the same as `pattern:[\t\n\v\f\r ]`, plus few other rare Unicode space characters.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 ```
 
 ### Пример: многоязычный аналог \w
 
 Так как символьный класс `pattern:\w` является всего лишь сокращением для `pattern:[a-zA-Z0-9_]`, он не найдёт китайские иероглифы, кириллические буквы и т.п.
 
+<<<<<<< HEAD
 Давайте сделаем более универсальный шаблон, который ищет символы, используемые в словах, для любого языка. Это очень легко с Юникод-свойствами: `pattern:[\p{Alpha}\p{M}\p{Nd}\p{Pc}\p{Join_C}]`.
 
 Расшифруем его. По аналогии с классом `pattern:\w`, мы делаем свой набор, который включает в себя символы со следующими юникодными свойствами:
+=======
+We can write a more universal pattern, that looks for wordly characters in any language. That's easy with Unicode properties: `pattern:[\p{Alpha}\p{M}\p{Nd}\p{Pc}\p{Join_C}]`.
+
+Let's decipher it. Similar to `pattern:\w`, we're making a set of our own that includes characters with following Unicode properties:
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 - `Alphabetic` (`Alpha`) - для букв,
 - `Mark` (`M`) - для акцентов,
@@ -90,10 +102,17 @@ let str = `Hi 你好 12`;
 alert( str.match(regexp) ); // H,i,你,好,1,2
 ```
 
+<<<<<<< HEAD
 Конечно, этот шаблон можно адаптировать: добавить юникодные свойства или убрать. Более подробно о них было рассказано в главе <info:regexp-unicode>.
 
 ```warn header="Юникодные свойства не работают в некоторых старых браузерах"
 Поддержка юникодных свойств `pattern:p{…}` была добавлена в Edge и Firefox относительно недавно. Если нужно реализовать поддержку `pattern:p{…}` для устаревших версий этих браузеров, можно использовать библиотеку [XRegExp](http://xregexp.com/).
+=======
+Of course, we can edit this pattern: add Unicode properties or remove them. Unicode properties are covered in more details in the article <info:regexp-unicode>.
+
+```warn header="Unicode properties aren't supported in IE"
+Unicode properties `pattern:p{…}` are not implemented in IE. If we really need them, we can use library [XRegExp](http://xregexp.com/).
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Или же использовать диапазоны символов в интересующем нас языке, например `pattern:[а-я]` для кириллицы.
 ```

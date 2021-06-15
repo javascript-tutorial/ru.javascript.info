@@ -10,7 +10,13 @@
 
 Программы на JavaScript могут быть вставлены в любое место HTML-документа с помощью тега `<script>`.
 
+<<<<<<< HEAD
 Для примера:
+=======
+JavaScript programs can be inserted almost anywhere into an HTML document using the `<script>` tag.
+
+For instance:
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```html run height=100
 <!DOCTYPE HTML>
@@ -43,8 +49,13 @@
 
 Тег `<script>` имеет несколько атрибутов, которые редко используются, но всё ещё могут встретиться в старом коде:
 
+<<<<<<< HEAD
 Атрибут `type`: <code>&lt;script <u>type</u>=...&gt;</code>
 : Старый стандарт HTML, HTML4, требовал наличия этого атрибута в теге `<script>`. Обычно он имел значение `type="text/javascript"`. На текущий момент этого больше не требуется. Более того, в современном стандарте HTML смысл этого атрибута полностью изменился. Теперь он может использоваться для JavaScript-модулей. Но это тема не для начального уровня, и о ней мы поговорим в другой части учебника.
+=======
+The `type` attribute: <code>&lt;script <u>type</u>=...&gt;</code>
+: The old HTML standard, HTML4, required a script to have a `type`. Usually it was `type="text/javascript"`. It's not required anymore. Also, the modern HTML standard totally changed the meaning of this attribute. Now, it can be used for JavaScript modules. But that's an advanced topic, we'll talk about modules in another part of the tutorial.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Атрибут `language`: <code>&lt;script <u>language</u>=...&gt;</code>
 : Этот атрибут должен был задавать язык, на котором написан скрипт. Но так как JavaScript является языком по умолчанию, в этом атрибуте уже нет необходимости.
@@ -75,7 +86,7 @@
 Можно указать и полный URL-адрес. Например:
 
 ```html
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.2.0/lodash.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.js"></script>
 ```
 
 Для подключения нескольких скриптов используйте несколько тегов:

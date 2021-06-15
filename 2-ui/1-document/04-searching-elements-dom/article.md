@@ -70,8 +70,13 @@
 Если в документе есть несколько элементов с одинаковым значением `id`, то поведение методов поиска непредсказуемо. Браузер может вернуть любой из них случайным образом. Поэтому, пожалуйста, придерживайтесь правила сохранения уникальности `id`.
 ```
 
+<<<<<<< HEAD
 ```warn header="Только `document.getElementById`, а не `anyElem.getElementById`"
 Метод `getElementById` можно вызвать только для объекта `document`. Он осуществляет поиск по `id` по всему документу.
+=======
+```warn header="Only `document.getElementById`, not `anyElem.getElementById`"
+The method `getElementById` can be called only on `document` object. It looks for the given `id` in the whole document.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 ```
 
 ## querySelectorAll [#querySelectorAll]
@@ -102,8 +107,13 @@
 
 Этот метод действительно мощный, потому что можно использовать любой CSS-селектор.
 
+<<<<<<< HEAD
 ```smart header="Псевдоклассы тоже работают"
 Псевдоклассы в CSS-селекторе, в частности `:hover` и `:active`, также поддерживаются. Например, `document.querySelectorAll(':hover')` вернёт коллекцию (в порядке вложенности: от внешнего к внутреннему) из текущих элементов под курсором мыши.
+=======
+```smart header="Can use pseudo-classes as well"
+Pseudo-classes in the CSS selector like `:hover` and `:active` are also supported. For instance, `document.querySelectorAll(':hover')` will return the collection with elements that the pointer is over now (in nesting order: from the outermost `<html>` to the most nested one).
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 ```
 
 ## querySelector [#querySelector]
@@ -119,7 +129,13 @@
 
 Этот метод удобен, когда мы перебираем элементы (например, в массиве или в чём-то подобном) и пытаемся выбрать те из них, которые нас интересуют.
 
+<<<<<<< HEAD
 Например:
+=======
+The method comes in handy when we are iterating over elements (like in an array or something) and trying to filter out those that interest us.
+
+For instance:
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```html run
 <a href="http://example.com/file.zip">...</a>
@@ -141,7 +157,11 @@
 
 *Предки* элемента - родитель, родитель родителя, его родитель и так далее. Вместе они образуют цепочку иерархии от элемента до вершины.
 
+<<<<<<< HEAD
 Метод `elem.closest(css)` ищет ближайшего предка, который соответствует CSS-селектору. Сам элемент также включается в поиск.
+=======
+The method `elem.closest(css)` looks for the nearest ancestor that matches the CSS-selector. The `elem` itself is also included in the search.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Другими словами, метод `closest` поднимается вверх от элемента и проверяет каждого из родителей. Если он соответствует селектору, поиск прекращается. Метод возвращает либо предка, либо `null`, если такой элемент не найден.
 
@@ -175,9 +195,15 @@
 
 Здесь мы рассмотрим их для полноты картины, также вы можете встретить их в старом коде.
 
+<<<<<<< HEAD
 - `elem.getElementsByTagName(tag)` ищет элементы с данным тегом и возвращает их коллекцию. Передав `"*"` вместо тега, можно получить всех потомков.
 - `elem.getElementsByClassName(className)` возвращает элементы, которые имеют данный CSS-класс.
 - `document.getElementsByName(name)` возвращает элементы с заданным атрибутом `name`. Очень редко используется.
+=======
+- `elem.getElementsByTagName(tag)` looks for elements with the given tag and returns the collection of them. The `tag` parameter can also be a star `"*"` for "any tags".
+- `elem.getElementsByClassName(className)` returns elements that have the given CSS class.
+- `document.getElementsByName(name)` returns elements with the given `name` attribute, document-wide. Very rarely used.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Например:
 ```js
@@ -362,7 +388,11 @@ document.getElementsByTagName('input')[0].value = 5;
 </tbody>
 </table>
 
+<<<<<<< HEAD
 Безусловно, наиболее часто используемыми в настоящее время являются методы `querySelector` и `querySelectorAll`, но и методы  `getElement(s)By*` могут быть полезны в отдельных случаях, а также встречаются в старом коде.
+=======
+By far the most used are `querySelector` and `querySelectorAll`, but `getElement(s)By*` can be sporadically helpful or found in the old scripts.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Кроме того:
 

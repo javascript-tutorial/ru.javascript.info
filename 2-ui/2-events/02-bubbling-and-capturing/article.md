@@ -68,8 +68,13 @@
 
 При этом внутри обработчика `form.onclick`:
 
+<<<<<<< HEAD
 - `this` (=`event.currentTarget`) всегда будет элемент `<form>`, так как обработчик сработал на ней.
 - `event.target` будет содержать ссылку на конкретный элемент внутри формы, на котором произошёл клик.
+=======
+- `this` (=`event.currentTarget`) is the `<form>` element, because the handler runs on it.
+- `event.target` is the actual element inside the form that was clicked.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Попробуйте сами:
 
@@ -101,8 +106,13 @@
 Для того, чтобы полностью остановить обработку, существует метод `event.stopImmediatePropagation()`. Он не только предотвращает всплытие, но и останавливает обработку событий на текущем элементе.
 ```
 
+<<<<<<< HEAD
 ```warn header="Не прекращайте всплытие без необходимости!"
 Всплытие -- это удобно. Не прекращайте его без явной нужды, очевидной и архитектурно прозрачной.
+=======
+```warn header="Don't stop bubbling without a need!"
+Bubbling is convenient. Don't stop it without a real need: obvious and architecturally well thought out.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Зачастую прекращение всплытия через `event.stopPropagation()` имеет свои подводные камни, которые со временем могут стать проблемами.
 
@@ -179,9 +189,15 @@ elem.addEventListener(..., true)
 
 Если вы кликните по `<p>`, то последовательность следующая:
 
+<<<<<<< HEAD
 1. `HTML` -> `BODY` -> `FORM` -> `DIV` (фаза погружения, первый обработчик)
 2. `P` (фаза цели, срабатывают обработчики, установленные и на погружение и на всплытие, так что выведется два раза)
 3. `DIV` -> `FORM` -> `BODY` -> `HTML` (фаза всплытия, второй обработчик)
+=======
+1. `HTML` -> `BODY` -> `FORM` -> `DIV` (capturing phase, the first listener):
+2. `P` (target phase, triggers two times, as we've set two listeners: capturing and bubbling)
+3. `DIV` -> `FORM` -> `BODY` -> `HTML` (bubbling phase, the second listener).
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Существует свойство `event.eventPhase`, содержащее номер фазы, на которой событие было поймано. Но оно используется редко, мы обычно и так знаем об этом в обработчике.
 
@@ -202,9 +218,15 @@ elem.addEventListener("click", e => alert(2));
 
 При наступлении события - самый глубоко вложенный элемент, на котором оно произошло, помечается как "целевой" (`event.target`).
 
+<<<<<<< HEAD
 - Затем событие сначала двигается вниз от корня документа к `event.target`, по пути вызывая обработчики, поставленные через `addEventListener(...., true)`, где `true` -- это сокращение для `{capture: true}`.
 - Далее обработчики вызываются на целевом элементе.
 - Далее событие двигается от `event.target` вверх к корню документа, по пути вызывая обработчики, поставленные через `on<event>` и `addEventListener` без третьего аргумента или с третьим аргументом равным `false`.
+=======
+- Then the event moves down from the document root to `event.target`, calling handlers assigned with `addEventListener(..., true)` on the way (`true` is a shorthand for `{capture: true}`).
+- Then handlers are called on the target element itself.
+- Then the event bubbles up from `event.target` to the root, calling handlers assigned using `on<event>`, HTML attributes and `addEventListener` without the 3rd argument or with the 3rd argument `false/{capture:false}`.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Каждый обработчик имеет доступ к свойствам события `event`:
 
@@ -218,6 +240,10 @@ elem.addEventListener("click", e => alert(2));
 
 В реальном мире, когда происходит чрезвычайная ситуация, местные службы реагируют первыми. Они знают лучше всех местность, в которой это произошло, и другие детали. Вышестоящие инстанции подключаются уже после этого и при необходимости.
 
+<<<<<<< HEAD
 Тоже самое справедливо для обработчиков событий. Код, который "навесил" обработчик на конкретный элемент, знает максимум деталей об элементе и его предназначении. Например, обработчик на определённом `<td>` скорее всего подходит только для этого конкретного `<td>`, он знает все о нём, поэтому он должен отработать первым. Далее имеет смысл передать обработку события родителю -- он тоже понимает, что происходит, но уже менее детально, далее – выше, и так далее, до самого объекта `document`, обработчик на котором реализовывает самую общую функциональность уровня документа.
+=======
+The same for event handlers. The code that set the handler on a particular element knows maximum details about the element and what it does. A handler on a particular `<td>` may be suited for that exactly `<td>`, it knows everything about it, so it should get the chance first. Then its immediate parent also knows about the context, but a little bit less, and so on till the very top element that handles general concepts and runs the last one.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Всплытие и погружение являются основой для "делегирования событий" -- очень мощного приёма обработки событий. Его мы изучим в следующей главе.

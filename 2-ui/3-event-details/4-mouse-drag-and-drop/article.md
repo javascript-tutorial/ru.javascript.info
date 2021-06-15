@@ -1,5 +1,6 @@
 # Drag'n'Drop с событиями мыши
 
+<<<<<<< HEAD
 Drag'n'Drop - отличный способ улучшить интерфейс. Захват элемента мышкой и его перенос визуально упростят что угодно: от копирования и перемещения документов (как в файловых менеджерах) до оформления заказа ("положить в корзину").
 
 В современном стандарте HTML5 есть [раздел о Drag and Drop](https://html.spec.whatwg.org/multipage/interaction.html#dnd) - и там есть специальные события именно для Drag'n'Drop переноса, такие как `dragstart`, `dragend` и так далее.
@@ -9,11 +10,23 @@ Drag'n'Drop - отличный способ улучшить интерфейс.
 Но у них есть и ограничения. Например, нельзя организовать перенос "только по горизонтали" или "только по вертикали". Также нельзя ограничить перенос внутри заданной зоны. Есть и другие интерфейсные задачи, которые такими встроенными событиями не реализуемы. Кроме того, мобильные устройства плохо их поддерживают.
 
 Здесь мы будем рассматривать Drag'n'Drop при помощи событий мыши.
+=======
+Drag'n'Drop is a great interface solution. Taking something and dragging and dropping it is a clear and simple way to do many things, from copying and moving documents (as in file managers) to ordering (dropping items into a cart).
+
+In the modern HTML standard there's a [section about Drag and Drop](https://html.spec.whatwg.org/multipage/interaction.html#dnd) with special events such as `dragstart`, `dragend`, and so on.
+
+These events allow us to support special kinds of drag'n'drop, such as handling dragging a file from OS file-manager and dropping it into the browser window. Then JavaScript can access the contents of such files.
+
+But native Drag Events also have limitations. For instance, we can't prevent dragging from a certain area. Also we can't make the dragging "horizontal" or "vertical" only. And there are many other drag'n'drop tasks that can't be done using them. Also, mobile device support for such events is very weak.
+
+So here we'll see how to implement Drag'n'Drop using mouse events.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ## Алгоритм Drag'n'Drop
 
 Базовый алгоритм Drag'n'Drop выглядит так:
 
+<<<<<<< HEAD
 1. При `mousedown` - готовим элемент к перемещению, если необходимо (например, создаём его копию).
 2. Затем при `mousemove` передвигаем элемент на новые координаты путём смены `left/top` и `position:absolute`.
 3. При `mouseup` - остановить перенос элемента и произвести все действия, связанные с окончанием Drag'n'Drop.
@@ -34,6 +47,25 @@ ball.onmousedown = function(event) { // (1) отследить нажатие
   // и установим абсолютно спозиционированный мяч под курсор
 
   moveAt(event.pageX, event.pageY);
+=======
+1. On `mousedown` - prepare the element for moving, if needed (maybe create a clone of it, add a class to it or whatever).
+2. Then on `mousemove` move it by changing `left/top` with `position:absolute`.
+3. On `mouseup` - perform all actions related to finishing the drag'n'drop.
+
+These are the basics. Later we'll see how to other features, such as highlighting current underlying elements while we drag over them.
+
+Here's the implementation of dragging a ball:
+
+```js
+ball.onmousedown = function(event) { 
+  // (1) prepare to moving: make absolute and on top by z-index
+  ball.style.position = 'absolute';
+  ball.style.zIndex = 1000;
+
+  // move it out of any current parents directly into body
+  // to make it positioned relative to the body
+  document.body.append(ball);  
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
   // передвинуть мяч под координаты курсора
   // и сдвинуть на половину ширины/высоты для центрирования
@@ -42,14 +74,24 @@ ball.onmousedown = function(event) { // (1) отследить нажатие
     ball.style.top = pageY - ball.offsetHeight / 2 + 'px';
   }
 
+  // move our absolutely positioned ball under the pointer
+  moveAt(event.pageX, event.pageY);
+
   function onMouseMove(event) {
     moveAt(event.pageX, event.pageY);
   }
 
+<<<<<<< HEAD
   // (3) перемещать по экрану
   document.addEventListener('mousemove', onMouseMove);
 
   // (4) положить мяч, удалить более ненужные обработчики событий
+=======
+  // (2) move the ball on mousemove
+  document.addEventListener('mousemove', onMouseMove);
+
+  // (3) drop the ball, remove unneeded handlers
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
   ball.onmouseup = function() {
     document.removeEventListener('mousemove', onMouseMove);
     ball.onmouseup = null;
@@ -65,10 +107,17 @@ ball.onmousedown = function(event) { // (1) отследить нажатие
 
 [iframe src="ball" height=230]
 
+<<<<<<< HEAD
 Попробуйте перенести мяч мышкой и вы увидите описанное поведение.
 ```
 
 Всё потому, что браузер имеет свой собственный Drag'n'Drop, который автоматически запускается и вступает в конфликт с нашим. Это происходит именно для картинок и некоторых других элементов.
+=======
+Try to drag'n'drop with the mouse and you'll see such behavior.
+```
+
+That's because the browser has its own drag'n'drop support for images and some other elements. It runs automatically and conflicts with ours.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Его нужно отключить:
 
@@ -125,7 +174,11 @@ ball.style.top = pageY - ball.offsetHeight / 2 + 'px';
 
     ```js
     // onmousemove
+<<<<<<< HEAD
     // ball has position:absoute
+=======
+    // ball has position:absolute
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
     ball.style.left = event.pageX - *!*shiftX*/!* + 'px';
     ball.style.top = event.pageY - *!*shiftY*/!* + 'px';
     ```
@@ -281,7 +334,11 @@ function onMouseMove(event) {
 }
 ```
 
+<<<<<<< HEAD
 В приведённом ниже примере, когда мяч перетаскивается через футбольные ворота, ворота подсвечиваются.
+=======
+In the example below when the ball is dragged over the soccer goal, the goal is highlighted.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 [codetabs height=250 src="ball4"]
 
@@ -305,4 +362,8 @@ function onMouseMove(event) {
 - Можно использовать делегирование событий для `mousedown/up`. Один обработчик событий на большой зоне, который проверяет `event.target`, может управлять Drag'n'Drop для сотен элементов.
 - И так далее.
 
+<<<<<<< HEAD
 Существуют фреймворки, которые строят архитектуру поверх этого алгоритма, создавая такие классы, как `DragZone`, `Droppable`, `Draggable`. Большинство из них делают вещи, аналогичные описанным выше. Вы можете и создать вашу собственную реализацию переноса, как видите, это достаточно просто, возможно, проще, чем адаптация чего-то готового.
+=======
+There are frameworks that build architecture over it: `DragZone`, `Droppable`, `Draggable` and other classes. Most of them do the similar stuff to what's described above, so it should be easy to understand them now. Or roll your own, as you can see that that's easy enough to do, sometimes easier than adapting a third-party solution.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c

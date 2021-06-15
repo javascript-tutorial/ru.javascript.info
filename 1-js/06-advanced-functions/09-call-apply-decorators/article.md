@@ -36,11 +36,19 @@ function cachingDecorator(func) {
 
 slow = cachingDecorator(slow);
 
+<<<<<<< HEAD
 alert( slow(1) ); // slow(1) кешируем
 alert( "Again: " + slow(1) ); // возвращаем из кеша
 
 alert( slow(2) ); // slow(2) кешируем
 alert( "Again: " + slow(2) ); // возвращаем из кеша
+=======
+alert( slow(1) ); // slow(1) is cached and the result returned
+alert( "Again: " + slow(1) ); // slow(1) result returned from cache
+
+alert( slow(2) ); // slow(2) is cached and the result returned
+alert( "Again: " + slow(2) ); // slow(2) result returned from cache
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 ```
 
 В коде выше `cachingDecorator` -- это *декоратор*, специальная функция, которая принимает другую функцию и изменяет её поведение.
@@ -76,7 +84,11 @@ let worker = {
   },
 
   slow(x) {
+<<<<<<< HEAD
     // здесь может быть страшно тяжёлая задача для процессора  
+=======
+    // scary CPU-heavy task here  
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
     alert("Called with " + x);
     return x * this.someMethod(); // (*)
   }
@@ -150,7 +162,11 @@ function sayHi() {
 let user = { name: "John" };
 let admin = { name: "Admin" };
 
+<<<<<<< HEAD
 // используем 'call' для передачи различных объектов в качестве 'this'
+=======
+// use call to pass different objects as "this"
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 sayHi.call( user ); // John
 sayHi.call( admin ); // Admin
 ```
@@ -213,7 +229,11 @@ alert( worker.slow(2) ); // работает, не вызывая первона
 2. Так что при выполнении `worker.slow(2)` обёртка получает `2` в качестве аргумента и `this=worker` (так как это объект перед точкой).
 3. Внутри обёртки, если результат ещё не кеширован, `func.call(this, x)` передаёт текущий `this` (`=worker`) и текущий аргумент (`=2`) в оригинальную функцию.
 
+<<<<<<< HEAD
 ## Переходим к нескольким аргументам с "func.apply"
+=======
+## Going multi-argument
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Теперь давайте сделаем `cachingDecorator` ещё более универсальным. До сих пор он работал только с функциями с одним аргументом.
 
@@ -242,7 +262,11 @@ worker.slow = cachingDecorator(worker.slow);
 
 Для многих практических применений третий вариант достаточно хорош, поэтому мы будем придерживаться его.
 
+<<<<<<< HEAD
 Также нам понадобится заменить `func.call(this, x)` на `func.call(this, ...arguments)`, чтобы передавать все аргументы обёрнутой функции, а не только первый.
+=======
+Also we need to pass not just `x`, but all arguments in `func.call`. Let's recall that in a `function()` we can get a pseudo-array of its arguments as `arguments`, so `func.call(this, x)` should be replaced with `func.call(this, ...arguments)`.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Вот более мощный `cachingDecorator`:
 
@@ -290,7 +314,13 @@ alert( "Again " + worker.slow(3, 5) ); // аналогично (из кеша)
 - В строке `(*)` вызываем `hash` для создания одного ключа из `arguments`. Здесь мы используем простую функцию "объединения", которая превращает аргументы `(3, 5)` в ключ `"3,5"`. В более сложных случаях могут потребоваться другие функции хеширования.
 - Затем в строке `(**)` используем `func.call(this, ...arguments)` для передачи как контекста, так и всех аргументов, полученных обёрткой (независимо от их количества), в исходную функцию.
 
+<<<<<<< HEAD
 Вместо `func.call(this, ...arguments)` мы могли бы написать `func.apply(this, arguments)`.
+=======
+## func.apply
+
+Instead of `func.call(this, ...arguments)` we could use `func.apply(this, arguments)`.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Синтаксис встроенного метода  [func.apply](mdn:js/Function/apply):
 
@@ -305,6 +335,7 @@ func.apply(context, args)
 Эти два вызова почти эквивалентны:
 
 ```js
+<<<<<<< HEAD
 func.call(context, ...args); // передаёт массив как список с оператором расширения
 func.apply(context, args);   // тот же эффект
 ```
@@ -317,6 +348,20 @@ func.apply(context, args);   // тот же эффект
 Так что эти вызовы дополняют друг друга. Для перебираемых объектов сработает `call`, а где мы ожидаем псевдомассив - `apply`.
 
 А если у нас объект, который и то, и другое, например, реальный массив, то технически мы могли бы использовать любой метод, но `apply`, вероятно, будет быстрее, потому что большинство движков JavaScript внутренне оптимизируют его лучше.
+=======
+func.call(context, ...args);
+func.apply(context, args);
+```
+
+They perform the same call of `func` with given context and arguments.
+
+There's only a subtle difference regarding `args`:
+
+- The spread syntax `...` allows to pass *iterable* `args` as the list to `call`.
+- The `apply` accepts only *array-like* `args`.
+
+...And for objects that are both iterable and array-like, such as a real array, we can use any of them, but `apply` will probably be faster, because most JavaScript engines internally optimize it better.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Передача всех аргументов вместе с контекстом другой функции называется "перенаправлением вызова" (call forwarding).
 
@@ -350,7 +395,11 @@ function hash(args) {
 }
 ```
 
+<<<<<<< HEAD
 ...К сожалению, это не сработает, потому что мы вызываем `hash(arguments)`, а объект `arguments` является перебираемым и псевдомассивом, но не реальным массивом.
+=======
+...Unfortunately, that won't work. Because we are calling `hash(arguments)`, and `arguments` object is both iterable and array-like, but not a real array.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Таким образом, вызов `join` для него потерпит неудачу, что мы и можем видеть ниже:
 
@@ -376,7 +425,13 @@ function hash() {
 hash(1, 2);
 ```
 
+<<<<<<< HEAD
 Этот трюк называется *заимствование метода*.
+=======
+The trick is called *method borrowing*.
+
+We take (borrow) a join method from a regular array (`[].join`) and use `[].join.call` to run it in the context of `arguments`.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Мы берём (заимствуем) метод `join` из обычного массива `[].join`. И используем `[].join.call`, чтобы выполнить его в контексте `arguments`.
 

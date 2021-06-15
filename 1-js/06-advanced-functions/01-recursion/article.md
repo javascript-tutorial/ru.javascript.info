@@ -131,7 +131,11 @@ function pow(x, n) {
   </li>
 </ul>
 
+<<<<<<< HEAD
 Это только начало выполнения функции. Условие `n == 1` ложно, поэтому выполнение идёт во вторую ветку `if`:
+=======
+That's when the function starts to execute. The condition `n == 1` is falsy, so the flow continues into the second branch of `if`:
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js run
 function pow(x, n) {
@@ -184,7 +188,17 @@ alert( pow(2, 3) );
 
 Новый контекст выполнения находится на вершине стека (и выделен жирным), а предыдущие запомненные контексты -- под ним.
 
+<<<<<<< HEAD
 Когда выполнение подвызова закончится, можно будет легко вернуться назад, потому что контекст сохраняет как переменные, так и точное место кода, в котором он остановился. Слово "строка" на рисунках условно, на самом деле запоминается более точное место в цепочке команд.
+=======
+When we finish the subcall -- it is easy to resume the previous context, because it keeps both variables and the exact place of the code where it stopped.
+
+```smart
+Here in the picture we use the word "line", as in our example there's only one subcall in line, but generally a single line of code may contain multiple subcalls, like `pow(…) + pow(…) + somethingElse(…)`.
+
+So it would be more precise to say that the execution resumes "immediately after the subcall".
+```
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ### pow(2, 1)
 
@@ -295,7 +309,7 @@ let company = {
     salary: 1000
   }, {
     name: 'Alice',
-    salary: 600
+    salary: 1600
   }],
 
   development: {
@@ -342,8 +356,13 @@ let company = {
 
 
 ```js run
+<<<<<<< HEAD
 let company = { // тот же самый объект, сжатый для краткости
   sales: [{name: 'John', salary: 1000}, {name: 'Alice', salary: 600 }],
+=======
+let company = { // the same object, compressed for brevity
+  sales: [{name: 'John', salary: 1000}, {name: 'Alice', salary: 1600 }],
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
   development: {
     sites: [{name: 'Peter', salary: 2000}, {name: 'Alex', salary: 1800 }],
     internals: [{name: 'Jack', salary: 1300}]
@@ -365,7 +384,7 @@ function sumSalaries(department) {
 }
 */!*
 
-alert(sumSalaries(company)); // 6700
+alert(sumSalaries(company)); // 7700
 ```
 
 Код краток и прост для понимания (надеюсь?). В этом сила рекурсии. Она работает на любом уровне вложенности отделов.
@@ -452,9 +471,14 @@ let list = { value: 1 };
 list.next = { value: 2 };
 list.next.next = { value: 3 };
 list.next.next.next = { value: 4 };
+list.next.next.next.next = null;
 ```
 
+<<<<<<< HEAD
 Здесь мы можем ещё лучше увидеть, что есть несколько объектов, каждый из которых имеет `value` и `next`, указывающий на соседа. Переменная `list` является первым объектом в цепочке, поэтому, следуя по указателям `next` из неё, мы можем попасть в любой элемент.
+=======
+Here we can even more clearly see that there are multiple objects, each one has the `value` and `next` pointing to the neighbour. The `list` variable is the first object in the chain, so following `next` pointers from it we can reach any element.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Список можно легко разделить на несколько частей и впоследствии объединить обратно:
 

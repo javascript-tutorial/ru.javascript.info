@@ -46,7 +46,11 @@ alert(3 +
 + 2);
 ```
 
+<<<<<<< HEAD
 Код выведет `6`, потому что JavaScript не вставляет здесь точку с запятой. Интуитивно очевидно, что, если строка заканчивается знаком `"+"`, значит, это "незавершённое выражение", поэтому точка с запятой не требуется. И в этом случае всё работает, как задумано.
+=======
+The code outputs `6` because JavaScript does not insert semicolons here. It is intuitively obvious that if the line ends with a plus `"+"`, then it is an "incomplete expression", so a semicolon there would be incorrect. And in this case, that works as intended.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 **Но есть ситуации, где JavaScript "забывает" вставить точку с запятой там, где она нужна.**
 
@@ -56,19 +60,31 @@ alert(3 +
 Если вы хотите увидеть конкретный пример такой ошибки, обратите внимание на этот код:
 
 ```js run
-[1, 2].forEach(alert)
+alert("Hello");
+
+[1, 2].forEach(alert);
 ```
 
+<<<<<<< HEAD
 Пока нет необходимости знать значение скобок `[]` и `forEach`. Мы изучим их позже. Пока что просто запомните результат выполнения этого кода: выводится `1`, а затем `2`.
 
 А теперь добавим `alert` перед кодом и *не* поставим в конце точку с запятой:
 
 ```js run no-beautify
 alert("Сейчас будет ошибка")
+=======
+No need to think about the meaning of the brackets `[]` and `forEach` yet. We'll study them later. For now, just remember the result of running the code: it shows `Hello`, then `1`, then `2`.
 
-[1, 2].forEach(alert)
+Now let's remove the semicolon after the `alert`:
+
+```js run no-beautify
+alert("Hello")
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+
+[1, 2].forEach(alert);
 ```
 
+<<<<<<< HEAD
 Теперь, если запустить код, выведется только первый `alert`, а затем мы получим ошибку!
 
 Всё исправится, если мы поставим точку с запятой после `alert`:
@@ -88,13 +104,34 @@ alert("Сейчас будет ошибка")[1, 2].forEach(alert)
 ```
 
 Но это должны быть две отдельные инструкции, а не одна. Такое слияние в данном случае неправильное, оттого и ошибка. Это может произойти и в некоторых других ситуациях.
+=======
+The difference compared to the code above is only one character: the semicolon at the end of the first line is gone.
+
+If we run this code, only the first `Hello` shows (and there's an error, you may need to open the console to see it). There are no numbers any more.
+
+That's because JavaScript does not assume a semicolon before square brackets `[...]`. So, the code in the last example is treated as a single statement.
+
+Here's how the engine sees it:
+
+```js run no-beautify
+alert("Hello")[1, 2].forEach(alert);
+```
+
+Looks weird, right? Such merging in this case is just wrong. We need to put a semicolon after `alert` for the code to work correctly.
+
+This can happen in other situations also.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 ````
 
 Мы рекомендуем ставить точку с запятой между инструкциями, даже если они отделены переносами строк. Это правило широко используется в сообществе разработчиков. Стоит отметить ещё раз -- в большинстве случаев *можно* не ставить точку с запятой. Но безопаснее, особенно для новичка, ставить её.
 
 ## Комментарии
 
+<<<<<<< HEAD
 Со временем программы становятся всё сложнее и сложнее. Возникает необходимость добавлять *комментарии*, которые бы описывали, что делает код и почему.
+=======
+## Comments [#code-comments]
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Комментарии могут находиться в любом месте скрипта. Они не влияют на его выполнение, поскольку движок просто игнорирует их.
 
@@ -134,8 +171,13 @@ alert('Привет');
 alert('Мир');
 ```
 
+<<<<<<< HEAD
 ```smart header="Используйте горячие клавиши!"
 В большинстве редакторов строку кода можно закомментировать, нажав комбинацию клавиш `key:Ctrl+/` для однострочного комментария и что-то вроде `key:Ctrl+Shift+/` -- для многострочных комментариев (выделите кусок кода и нажмите комбинацию клавиш). В системе Mac попробуйте `key:Cmd` вместо `key:Ctrl` и `key:Option` вместо `key:Shift`.
+=======
+```smart header="Use hotkeys!"
+In most editors, a line of code can be commented out by pressing the `key:Ctrl+/` hotkey for a single-line comment and something like `key:Ctrl+Shift+/` -- for multiline comments (select a piece of code and press the hotkey). For Mac, try `key:Cmd` instead of `key:Ctrl` and `key:Option` instead of `key:Shift`.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 ```
 
 ````warn header="Вложенные комментарии не поддерживаются!"

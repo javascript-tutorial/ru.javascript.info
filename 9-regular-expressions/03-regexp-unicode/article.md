@@ -1,12 +1,22 @@
 # Юникод: флаг "u" и класс \p{...}
 
+<<<<<<< HEAD
 В JavaScript для строк используется кодировка [Юникод](https://ru.wikipedia.org/wiki/Юникод). Обычно символы кодируются с помощью 2 байтов, что позволяет закодировать максимум 65536 символов.
+=======
+JavaScript uses [Unicode encoding](https://en.wikipedia.org/wiki/Unicode) for strings. Most characters are encoded with 2 bytes, but that allows to represent at most 65536 characters.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Этого диапазона не хватает для того, чтобы закодировать все символы. Поэтому некоторые редкие символы кодируются с помощью 4 байтов, например `𝒳` (математический X) или `😄` (смайлик), некоторые иероглифы, и т.п.
 
+<<<<<<< HEAD
 В таблице ниже приведены юникоды нескольких символов:
 
 | Символ  | Юникод | Количество байт в юникоде  |
+=======
+Here are the Unicode values of some characters:
+
+| Character  | Unicode | Bytes count in Unicode  |
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 |------------|---------|--------|
 | a | `0x0061` | 2 |
 | ≈ | `0x2248` | 2 |
@@ -33,6 +43,7 @@ alert('𝒳'.length); // 2
 
 ## Юникодные свойства \p{...}
 
+<<<<<<< HEAD
 ```warn header="Не поддерживается в некоторых старых браузерах"
 Несмотря на то, что это часть стандарта с 2018 года, юникодные свойства не поддерживаются в Firefox до 78 версии и в Edge до 79 версии.
 
@@ -40,19 +51,29 @@ alert('𝒳'.length); // 2
 ```
 
 Каждому символу в кодировке Юникод соответствует множество свойств. Они описывают к какой "категории" относится символ, содержат различную информацию о нём.
+=======
+Every character in Unicode has a lot of properties. They describe what "category" the character belongs to, contain miscellaneous information about it.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Например, свойство `Letter` у символа означает, что это буква какого-то алфавита, причём любого. А свойство `Number` означает, что это цифра - арабская или китайская, и т.п, на каком-то из языков.
 
 В регулярном выражении можно искать символ с заданным свойством, указав его в `pattern:\p{…}`. Для таких регулярных выражений обязательно использовать флаг `pattern:u`.
 
+<<<<<<< HEAD
 Например, `pattern:\p{Letter}` обозначает букву в любом языке. Также можно использовать запись `pattern:\p{L}`, так как `L` - это псевдоним `Letter`. Существуют короткие записи почти для всех свойств.
 
 В примере ниже будут найдены английская, грузинская и корейская буквы:
+=======
+For instance, `\p{Letter}` denotes a letter in any language. We can also use `\p{L}`, as `L` is an alias of `Letter`. There are shorter aliases for almost every property.
+
+In the example below three kinds of letters will be found: English, Georgian and Korean.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js run
 let str = "A ბ ㄱ";
 
 alert( str.match(/\p{L}/gu) ); // A,ბ,ㄱ
+<<<<<<< HEAD
 alert( str.match(/\p{L}/g) ); // null (ничего не нашло, так как нет флага "u")
 ```
 
@@ -112,6 +133,71 @@ alert( str.match(/\p{L}/g) ); // null (ничего не нашло, так ка
 Например, давайте поищем шестнадцатеричные числа, записанные в формате `xFF`, где вместо `F` может быть любая шестнадцатеричная цифра (0..1 или A..F).
 
 Шестнадцатеричная цифра может быть обозначена как `pattern:\p{Hex_Digit}`:
+=======
+alert( str.match(/\p{L}/g) ); // null (no matches, \p doesn't work without the flag "u")
+```
+
+Here's the main character categories and their subcategories:
+
+- Letter `L`:
+  - lowercase `Ll`
+  - modifier `Lm`,
+  - titlecase `Lt`,
+  - uppercase `Lu`,
+  - other `Lo`.
+- Number `N`:
+  - decimal digit `Nd`,
+  - letter number `Nl`,
+  - other `No`.
+- Punctuation `P`:
+  - connector `Pc`,
+  - dash `Pd`,
+  - initial quote `Pi`,
+  - final quote `Pf`,
+  - open `Ps`,
+  - close `Pe`,
+  - other `Po`.
+- Mark `M` (accents etc):
+  - spacing combining `Mc`,
+  - enclosing `Me`,
+  - non-spacing `Mn`.
+- Symbol `S`:
+  - currency `Sc`,
+  - modifier `Sk`,
+  - math `Sm`,
+  - other `So`.
+- Separator `Z`:
+  - line `Zl`,
+  - paragraph `Zp`,
+  - space `Zs`.
+- Other `C`:
+  - control `Cc`,
+  - format `Cf`,
+  - not assigned `Cn`,
+  - private use `Co`,
+  - surrogate `Cs`.
+
+
+So, e.g. if we need letters in lower case, we can write `pattern:\p{Ll}`, punctuation signs: `pattern:\p{P}` and so on.
+
+There are also other derived categories, like:
+- `Alphabetic` (`Alpha`), includes Letters `L`, plus letter numbers `Nl` (e.g. Ⅻ - a character for the roman number 12), plus some other symbols `Other_Alphabetic` (`OAlpha`).
+- `Hex_Digit` includes hexadecimal digits: `0-9`, `a-f`.
+- ...And so on.
+
+Unicode supports many different properties, their full list would require a lot of space, so here are the references:
+
+- List all properties by a character: <https://unicode.org/cldr/utility/character.jsp>.
+- List all characters by a property: <https://unicode.org/cldr/utility/list-unicodeset.jsp>.
+- Short aliases for properties: <https://www.unicode.org/Public/UCD/latest/ucd/PropertyValueAliases.txt>.
+- A full base of Unicode characters in text format, with all properties, is here: <https://www.unicode.org/Public/UCD/latest/ucd/>.
+
+### Example: hexadecimal numbers
+
+For instance, let's look for hexadecimal numbers, written as `xFF`, where `F` is a hex digit (0..9 or A..F).
+
+A hex digit can be denoted as `pattern:\p{Hex_Digit}`:
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js run
 let regexp = /x\p{Hex_Digit}\p{Hex_Digit}/u;
@@ -123,7 +209,11 @@ alert("число: xAF".match(regexp)); // xAF
 
 Поищем китайские иероглифы.
 
+<<<<<<< HEAD
 В Юникоде есть свойство `Script` (система написания), которое может иметь значения `Cyrillic` (Кириллическая), `Greek` (Греческая), `Arabic` (Арабская), `Han` (Китайская) и так далее, [здесь полный список](https://en.wikipedia.org/wiki/Script_(Unicode)).
+=======
+There's a Unicode property `Script` (a writing system), that may have a value: `Cyrillic`, `Greek`, `Arabic`, `Han` (Chinese) and so on, [here's the full list](https://en.wikipedia.org/wiki/Script_(Unicode)).
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Для поиска символов в нужной системе мы должны установить `pattern:Script=<значение>`, например для поиска кириллических букв: `pattern:\p{sc=Cyrillic}`, для китайских иероглифов: `pattern:\p{sc=Han}`, и так далее:
 
@@ -137,7 +227,11 @@ alert( str.match(regexp) ); // 你,好
 
 ### Пример: валюта
 
+<<<<<<< HEAD
 Символы, обозначающие валюты, такие как `$`, `€`, `¥` и другие, имеют свойство `pattern:\p{Currency_Symbol}`, короткая запись `pattern:\p{Sc}`.
+=======
+Characters that denote a currency, such as `$`, `€`, `¥`, have Unicode property  `pattern:\p{Currency_Symbol}`, the short alias: `pattern:\p{Sc}`.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Используем его, чтобы поискать цены в формате "валюта, за которой идёт цифра":
 

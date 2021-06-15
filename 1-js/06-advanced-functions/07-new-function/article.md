@@ -90,7 +90,11 @@ getFunc()(); // *!*"test"*/!*, из лексического окружения 
 
 Проблема в том, что перед отправкой JavaScript-кода на реальные работающие проекты код сжимается с помощью *минификатора* - специальной программы, которая уменьшает размер кода, удаляя комментарии, лишние пробелы, и, что самое главное, локальным переменным даются укороченные имена.
 
+<<<<<<< HEAD
 Например, если в функции объявляется переменная `let userName`, то минификатор изменяет её на `let a` (или другую букву, если она не занята) и изменяет её везде. Обычно так делать безопасно, потому что переменная является локальной, и никто снаружи не имеет к ней доступ. И внутри функции минификатор заменяет каждое её упоминание. Минификаторы достаточно умные. Они не просто осуществляют "тупой" поиск-замену, они анализируют структуру кода, и поэтому ничего не ломается.
+=======
+For instance, if a function has `let userName`, minifier replaces it with `let a` (or another letter if this one is occupied), and does it everywhere. That's usually a safe thing to do, because the variable is local, nothing outside the function can access it. And inside the function, minifier replaces every mention of it. Minifiers are smart, they analyze the code structure, so they don't break anything. They're not just a dumb find-and-replace.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Так что если бы даже `new Function` и имела доступ к внешним переменным, она не смогла бы найти переименованную `userName`.
 

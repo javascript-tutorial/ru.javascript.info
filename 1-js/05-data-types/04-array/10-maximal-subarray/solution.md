@@ -57,7 +57,11 @@ alert( getMaxSubSum([1, 2, 3]) ); // 6
 alert( getMaxSubSum([100, -9, 2, -3, 5]) ); // 100
 ```
 
+<<<<<<< HEAD
 Это решение имеет [оценку сложности](https://ru.wikipedia.org/wiki/«O»_большое_и_«o»_малое) O(n<sup>2</sup>). Другими словами, если мы увеличим размер массива в 2 раза, время выполнения алгоритма увеличится в 4 раза.
+=======
+The solution has a time complexity of [O(n<sup>2</sup>)](https://en.wikipedia.org/wiki/Big_O_notation). In other words, if we increase the array size 2 times, the algorithm will work 4 times longer.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Для больших массивов(1000, 10000 или больше элементов) такие алгоритмы могут приводить к серьёзным "тормозам".
 

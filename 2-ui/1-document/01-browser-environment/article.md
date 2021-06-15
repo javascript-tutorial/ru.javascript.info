@@ -1,12 +1,22 @@
 # Браузерное окружение, спецификации
 
+<<<<<<< HEAD
 Язык JavaScript изначально был создан для веб-браузеров. Но с тех пор он значительно эволюционировал и превратился в кроссплатформенный язык программирования для решения широкого круга задач.
 
 Сегодня JavaScript может использоваться в браузере, на веб-сервере или в какой-то другой среде, даже в кофеварке. Каждая среда предоставляет свою функциональность, которую спецификация JavaScript называет *окружением*.
+=======
+The JavaScript language was initially created for web browsers. Since then it has evolved and become a language with many uses and platforms.
+
+A platform may be a browser, or a web-server or another *host*, even a "smart" coffee machine, if it can run JavaScript. Each of them provides platform-specific functionality. The JavaScript specification calls that a *host environment*.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Окружение предоставляет свои объекты и дополнительные функции, в дополнение базовым языковым. Браузеры, например, дают средства для управления веб-страницами. Node.js делает доступными какие-то серверные возможности и так далее.
 
+<<<<<<< HEAD
 На картинке ниже в общих чертах показано, что доступно для JavaScript в браузерном окружении:
+=======
+Here's a bird's-eye view of what we have when JavaScript runs in a web browser:
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ![](windowObjects.svg)
 
@@ -49,9 +59,13 @@ document.body.style.background = "red";
 setTimeout(() => document.body.style.background = "", 1000);
 ```
 
+<<<<<<< HEAD
 Мы использовали в примере только `document.body.style`, но на самом деле возможности по управлению страницей намного шире. Различные свойства и методы описаны в спецификации:
 
 - **DOM Living Standard** на <https://dom.spec.whatwg.org>
+=======
+Here we used `document.body.style`, but there's much, much more. Properties and methods are described in the specification: [DOM Living Standard](https://dom.spec.whatwg.org).
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```smart header="DOM - не только для браузеров"
 Спецификация DOM описывает структуру документа и предоставляет объекты для манипуляций со страницей. Существует и другие, отличные от браузеров, инструменты, использующие DOM.
@@ -59,15 +73,26 @@ setTimeout(() => document.body.style.background = "", 1000);
 Например, серверные скрипты, которые загружают и обрабатывают HTML-страницы, также могут использовать DOM. При этом они могут поддерживать спецификацию не полностью.
 ```
 
+<<<<<<< HEAD
 ```smart header="CSSOM для стилей"
 Правила стилей CSS структурированы иначе чем HTML. Для них есть отдельная спецификация [CSSOM](https://www.w3.org/TR/cssom-1/), которая объясняет, как стили должны представляться в виде объектов, как их читать и писать.
 
 CSSOM используется вместе с DOM при изменении стилей документа. В реальности CSSOM требуется редко, обычно правила CSS статичны. Мы редко добавляем/удаляем стили из JavaScript, но и это возможно.
+=======
+```smart header="CSSOM for styling"
+There's also a separate specification, [CSS Object Model (CSSOM)](https://www.w3.org/TR/cssom-1/) for CSS rules and stylesheets, that explains how they are represented as objects, and how to read and write them.
+
+CSSOM is used together with DOM when we modify style rules for the document. In practice though, CSSOM is rarely required, because we rarely need to modify CSS rules from JavaScript (usually we just add/remove CSS classes, not modify their CSS rules), but that's also possible.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 ```
 
 ## BOM (Browser Object Model)
 
+<<<<<<< HEAD
 Объектная модель браузера (Browser Object Model, BOM) - это дополнительные объекты, предоставляемые браузером (окружением), чтобы работать со всем, кроме документа.
+=======
+The Browser Object Model (BOM) represents additional objects provided by the browser (host environment) for working with everything except the document.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Например:
 

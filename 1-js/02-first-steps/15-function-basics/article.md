@@ -1,40 +1,40 @@
-# Функции
+# Functions
 
-Зачастую нам надо повторять одно и то же действие во многих частях программы.
+Quite often we need to perform a similar action in many places of the script.
 
-Например, необходимо красиво вывести сообщение при приветствии посетителя, при выходе посетителя с сайта, ещё где-нибудь.
+For example, we need to show a nice-looking message when a visitor logs in, logs out and maybe somewhere else.
 
-Чтобы не повторять один и тот же код во многих местах, придуманы функции. Функции являются основными «строительными блоками» программы.
+Functions are the main "building blocks" of the program. They allow the code to be called many times without repetition.
 
-Примеры встроенных функций вы уже видели – это `alert(message)`, `prompt(message, default)` и `confirm(question)`. Но можно создавать и свои.
+We've already seen examples of built-in functions, like `alert(message)`, `prompt(message, default)` and `confirm(question)`. But we can create functions of our own as well.
 
-## Объявление функции
+## Function Declaration
 
-Для создания функций мы можем использовать *объявление функции*.
+To create a function we can use a *function declaration*.
 
-Пример объявления функции:
+It looks like this:
 
 ```js
 function showMessage() {
-  alert( 'Всем привет!' );
+  alert( 'Hello everyone!' );
 }
 ```
 
-Вначале идёт ключевое слово `function`, после него *имя функции*, затем список *параметров* в круглых скобках через запятую (в вышеприведённом примере он пустой) и, наконец, код функции, также называемый "телом функции", внутри фигурных скобок.
+The `function` keyword goes first, then goes the *name of the function*, then a list of *parameters* between the parentheses (comma-separated, empty in the example above, we'll see examples later) and finally the code of the function, also named "the function body", between curly braces.
 
 ```js
-function имя(параметры) {
-  ...тело...
+function name(parameter1, parameter2, ... parameterN) {
+  ...body...
 }
 ```
 
-Наша новая функция может быть вызвана по её имени: `showMessage()`.
+Our new function can be called by its name: `showMessage()`.
 
-Например:
+For instance:
 
 ```js run
 function showMessage() {
-  alert( 'Всем привет!' );
+  alert( 'Hello everyone!' );
 }
 
 *!*
@@ -43,211 +43,238 @@ showMessage();
 */!*
 ```
 
-Вызов `showMessage()` выполняет код функции. Здесь мы увидим сообщение дважды.
+The call `showMessage()` executes the code of the function. Here we will see the message two times.
 
-Этот пример явно демонстрирует одно из главных предназначений функций: избавление от дублирования кода.
+This example clearly demonstrates one of the main purposes of functions: to avoid code duplication.
 
-Если понадобится поменять сообщение или способ его вывода – достаточно изменить его в одном месте: в функции, которая его выводит.
+If we ever need to change the message or the way it is shown, it's enough to modify the code in one place: the function which outputs it.
 
-## Локальные переменные
+## Local variables
 
-Переменные, объявленные внутри функции, видны только внутри этой функции.
+A variable declared inside a function is only visible inside that function.
 
-Например:
+For example:
 
 ```js run
 function showMessage() {
 *!*
-  let message = "Привет, я JavaScript!"; // локальная переменная
+  let message = "Hello, I'm JavaScript!"; // local variable
 */!*
 
   alert( message );
 }
 
-showMessage(); // Привет, я JavaScript!
+showMessage(); // Hello, I'm JavaScript!
 
-alert( message ); // <-- будет ошибка, т.к. переменная видна только внутри функции
+alert( message ); // <-- Error! The variable is local to the function
 ```
 
-## Внешние переменные
+## Outer variables
 
-У функции есть доступ к внешним переменным, например:
+A function can access an outer variable as well, for example:
 
 ```js run no-beautify
-let *!*userName*/!* = 'Вася';
+let *!*userName*/!* = 'John';
 
 function showMessage() {
-  let message = 'Привет, ' + *!*userName*/!*;
+  let message = 'Hello, ' + *!*userName*/!*;
   alert(message);
 }
 
-showMessage(); // Привет, Вася
+showMessage(); // Hello, John
 ```
 
-Функция обладает полным доступом к внешним переменным и может изменять их значение.
+The function has full access to the outer variable. It can modify it as well.
 
-Например:
+For instance:
 
 ```js run
-let *!*userName*/!* = 'Вася';
+let *!*userName*/!* = 'John';
 
 function showMessage() {
-  *!*userName*/!* = "Петя"; // (1) изменяем значение внешней переменной
+  *!*userName*/!* = "Bob"; // (1) changed the outer variable
 
-  let message = 'Привет, ' + *!*userName*/!*;
+  let message = 'Hello, ' + *!*userName*/!*;
   alert(message);
 }
 
-alert( userName ); // *!*Вася*/!* перед вызовом функции
+alert( userName ); // *!*John*/!* before the function call
 
 showMessage();
 
-alert( userName ); // *!*Петя*/!*, значение внешней переменной было изменено функцией
+alert( userName ); // *!*Bob*/!*, the value was modified by the function
 ```
 
-Внешняя переменная используется, только если внутри функции нет такой локальной.
+The outer variable is only used if there's no local one.
 
-Если одноимённая переменная объявляется внутри функции, тогда она перекрывает внешнюю. Например, в коде ниже функция использует локальную переменную `userName`. Внешняя будет проигнорирована:
+If a same-named variable is declared inside the function then it *shadows* the outer one. For instance, in the code below the function uses the local `userName`. The outer one is ignored:
 
 ```js run
-let userName = 'Вася';
+let userName = 'John';
 
 function showMessage() {
 *!*
-  let userName = "Петя"; // объявляем локальную переменную
+  let userName = "Bob"; // declare a local variable
 */!*
 
-  let message = 'Привет, ' + userName; // *!*Петя*/!*
+  let message = 'Hello, ' + userName; // *!*Bob*/!*
   alert(message);
 }
 
-// функция создаст и будет использовать свою собственную локальную переменную userName
+// the function will create and use its own userName
 showMessage();
 
-alert( userName ); // *!*Вася*/!*, не изменилась, функция не трогала внешнюю переменную
+alert( userName ); // *!*John*/!*, unchanged, the function did not access the outer variable
 ```
 
-```smart header="Глобальные переменные"
-Переменные, объявленные снаружи всех функций, такие как внешняя переменная `userName` в вышеприведённом коде -- называются *глобальными*.
+```smart header="Global variables"
+Variables declared outside of any function, such as the outer `userName` in the code above, are called *global*.
 
-*Глобальные переменные* видимы для любой функции (если только их не перекрывают одноимённые локальные переменные).
+Global variables are visible from any function (unless shadowed by locals).
 
-Желательно сводить использование глобальных переменных к минимуму. В современном коде обычно мало или совсем нет глобальных переменных. Хотя они иногда полезны для хранения важнейших "общепроектовых" данных.
+It's a good practice to minimize the use of global variables. Modern code has few or no globals. Most variables reside in their functions. Sometimes though, they can be useful to store project-level data.
 ```
 
-## Параметры
+## Parameters
 
-Мы можем передать внутрь функции любую информацию, используя параметры (также называемые *аргументами функции*).
+We can pass arbitrary data to functions using parameters.
 
-В нижеприведённом примере функции передаются два параметра: `from` и `text`.
+In the example below, the function has two parameters: `from` and `text`.
 
 ```js run
-function showMessage(*!*from, text*/!*) { // аргументы: from, text
+function showMessage(*!*from, text*/!*) { // parameters: from, text
   alert(from + ': ' + text);
 }
 
-*!*
-showMessage('Аня', 'Привет!'); // Аня: Привет! (*)
-showMessage('Аня', "Как дела?"); // Аня: Как дела? (**)
-*/!*
+*!*showMessage('Ann', 'Hello!');*/!* // Ann: Hello! (*)
+*!*showMessage('Ann', "What's up?");*/!* // Ann: What's up? (**)
 ```
 
-Когда функция вызывается в строках `(*)` и `(**)`, переданные значения копируются в локальные переменные `from` и `text`. Затем они используются в теле функции.
+When the function is called in lines `(*)` and `(**)`, the given values are copied to local variables `from` and `text`. Then the function uses them.
 
-Вот ещё один пример: у нас есть переменная `from`, и мы передаём её функции. Обратите внимание: функция изменяет значение `from`, но это изменение не видно снаружи. Функция всегда получает только копию значения:
-
+Here's one more example: we have a variable `from` and pass it to the function. Please note: the function changes `from`, but the change is not seen outside, because a function always gets a copy of the value:
 
 ```js run
 function showMessage(from, text) {
 
 *!*
-  from = '*' + from + '*'; // немного украсим "from"
+  from = '*' + from + '*'; // make "from" look nicer
 */!*
 
   alert( from + ': ' + text );
 }
 
-let from = "Аня";
+let from = "Ann";
 
-showMessage(from, "Привет"); // *Аня*: Привет
+showMessage(from, "Hello"); // *Ann*: Hello
 
-// значение "from" осталось прежним, функция изменила значение локальной переменной
-alert( from ); // Аня
+// the value of "from" is the same, the function modified a local copy
+alert( from ); // Ann
 ```
 
-## Параметры по умолчанию
+When a value is passed as a function parameter, it's also called an *argument*.
 
-Если параметр не указан, то его значением становится `undefined`.
+In other words, to put these terms straight:
 
-Например, вышеупомянутая функция `showMessage(from, text)` может быть вызвана с одним аргументом:
+- A parameter is the variable listed inside the parentheses in the function declaration (it's a declaration time term)
+- An argument is the value that is passed to the function when it is called (it's a call time term).
+
+We declare functions listing their parameters, then call them passing arguments.
+
+In the example above, one might say: "the function `sayMessage` is declared with two parameters, then called with two arguments: `from` and `"Hello"`".
+
+
+## Default values
+
+If a function is called, but an argument is not provided, then the corresponding value becomes `undefined`.
+
+For instance, the aforementioned function `showMessage(from, text)` can be called with a single argument:
 
 ```js
-showMessage("Аня");
+showMessage("Ann");
 ```
 
-Это не приведёт к ошибке. Такой вызов выведет `"Аня: undefined"`. В вызове не указан параметр `text`, поэтому предполагается, что `text === undefined`.
+That's not an error. Such a call would output `"*Ann*: undefined"`. As the value for `text` isn't passed, it becomes `undefined`.
 
-Если мы хотим задать параметру `text` значение по умолчанию, мы должны указать его после `=`:
+We can specify the so-called "default" (to use if omitted) value for a parameter in the function declaration, using `=`:
 
 ```js run
-function showMessage(from, *!*text = "текст не добавлен"*/!*) {
+function showMessage(from, *!*text = "no text given"*/!*) {
   alert( from + ": " + text );
 }
 
-showMessage("Аня"); // Аня: текст не добавлен
+showMessage("Ann"); // Ann: no text given
 ```
 
-Теперь, если параметр `text` не указан, его значением будет `"текст не добавлен"`
+Now if the `text` parameter is not passed, it will get the value `"no text given"`
 
-В данном случае `"текст не добавлен"` это строка, но на её месте могло бы быть и более сложное выражение, которое бы вычислялось и присваивалось при отсутствии параметра. Например:
+Here `"no text given"` is a string, but it can be a more complex expression, which is only evaluated and assigned if the parameter is missing. So, this is also possible:
 
 ```js run
 function showMessage(from, text = anotherFunction()) {
-  // anotherFunction() выполнится только если не передан text
-  // результатом будет значение text
+  // anotherFunction() only executed if no text given
+  // its result becomes the value of text
 }
 ```
 
-```smart header="Вычисление параметров по умолчанию"
-В JavaScript параметры по умолчанию вычисляются каждый раз, когда функция вызывается без соответствующего параметра.
+```smart header="Evaluation of default parameters"
+In JavaScript, a default parameter is evaluated every time the function is called without the respective parameter.
 
-В примере выше `anotherFunction()` будет вызываться каждый раз, когда `showMessage()` вызывается без параметра `text`.
+In the example above, `anotherFunction()` isn't called at all, if the `text` parameter is provided.
+
+On the other hand, it's independently called every time when `text` is missing.
 ```
 
-````smart header="Использование параметров по умолчанию в ранних версиях JavaScript"
-Ранние версии JavaScript не поддерживали параметры по умолчанию. Поэтому существуют альтернативные способы, которые могут встречаться в старых скриптах.
+### Alternative default parameters
 
-Например, явная проверка на `undefined`:
+Sometimes it makes sense to assign default values for parameters not in the function declaration, but at a later stage.
 
-```js
-function showMessage(from, text) {
+We can check if the parameter is passed during the function execution, by comparing it with `undefined`:
+
+```js run
+function showMessage(text) {
+  // ...
+
 *!*
-  if (text === undefined) {
-    text = 'текст не добавлен';
+  if (text === undefined) { // if the parameter is missing
+    text = 'empty message';
   }
 */!*
 
-  alert( from + ": " + text );
+  alert(text);
 }
+
+showMessage(); // empty message
 ```
 
-...Или с помощью оператора `||`:
+...Or we could use the `??` operator:
 
 ```js
-function showMessage(from, text) {
-  // Если значение text ложно, тогда присвоить параметру text значение по умолчанию
-  text = text || 'текст не добавлен';
+function showMessage(text) {
+  // if text is undefined or otherwise falsy, set it to 'empty'
+  text = text || 'empty';
   ...
 }
 ```
-````
 
+Modern JavaScript engines support the [nullish coalescing operator](info:nullish-coalescing-operator) `??`, it's better when most falsy values, such as `0`, should be considered "normal":
 
-## Возврат значения
+```js run
+function showCount(count) {
+  // if count is undefined or null, show "unknown"
+  alert(count ?? "unknown");
+}
 
-Функция может вернуть результат, который будет передан в вызвавший её код.
+showCount(0); // 0
+showCount(null); // unknown
+showCount(); // unknown
+```
 
-Простейшим примером может служить функция сложения двух чисел:
+## Returning a value
+
+A function can return a value back into the calling code as the result.
+
+The simplest example would be a function that sums two values:
 
 ```js run no-beautify
 function sum(a, b) {
@@ -258,35 +285,35 @@ let result = sum(1, 2);
 alert( result ); // 3
 ```
 
-Директива `return` может находиться в любом месте тела функции. Как только выполнение доходит до этого места, функция останавливается, и значение возвращается в вызвавший её код (присваивается переменной `result` выше).
+The directive `return` can be in any place of the function. When the execution reaches it, the function stops, and the value is returned to the calling code (assigned to `result` above).
 
-Вызовов `return` может быть несколько, например:
+There may be many occurrences of `return` in a single function. For instance:
 
 ```js run
 function checkAge(age) {
-  if (age > 18) {
+  if (age >= 18) {
 *!*
     return true;
 */!*
   } else {
 *!*
-    return confirm('А родители разрешили?');
+    return confirm('Do you have permission from your parents?');
 */!*
   }
 }
 
-let age = prompt('Сколько вам лет?', 18);
+let age = prompt('How old are you?', 18);
 
 if ( checkAge(age) ) {
-  alert( 'Доступ получен' );
+  alert( 'Access granted' );
 } else {
-  alert( 'Доступ закрыт' );
+  alert( 'Access denied' );
 }
 ```
 
-Возможно использовать `return` и без значения. Это приведёт к немедленному выходу из функции.
+It is possible to use `return` without a value. That causes the function to exit immediately.
 
-Например:
+For example:
 
 ```js
 function showMovie(age) {
@@ -296,23 +323,23 @@ function showMovie(age) {
 */!*
   }
 
-  alert( "Вам показывается кино" ); // (*)
+  alert( "Showing you the movie" ); // (*)
   // ...
 }
 ```
 
-В коде выше, если `checkAge(age)` вернёт `false`, `showMovie` не выполнит `alert`.
+In the code above, if `checkAge(age)` returns `false`, then `showMovie` won't proceed to the `alert`.
 
-````smart header="Результат функции с пустым `return` или без него - `undefined`"
-Если функция не возвращает значения, это всё равно, как если бы она возвращала `undefined`:
+````smart header="A function with an empty `return` or without it returns `undefined`"
+If a function does not return a value, it is the same as if it returns `undefined`:
 
 ```js run
-function doNothing() { /* пусто */ }
+function doNothing() { /* empty */ }
 
 alert( doNothing() === undefined ); // true
 ```
 
-Пустой `return` аналогичен `return undefined`:
+An empty `return` is also the same as `return undefined`:
 
 ```js run
 function doNothing() {
@@ -323,23 +350,23 @@ alert( doNothing() === undefined ); // true
 ```
 ````
 
-````warn header="Никогда не добавляйте перевод строки между `return` и его значением"
-Для длинного выражения в `return` может быть заманчиво разместить его на нескольких отдельных строках, например так:
+````warn header="Never add a newline between `return` and the value"
+For a long expression in `return`, it might be tempting to put it on a separate line, like this:
 
 ```js
 return
  (some + long + expression + or + whatever * f(a) + f(b))
 ```
-Код не выполнится, потому что интерпретатор JavaScript подставит точку с запятой после `return`. Для него это будет выглядеть так:
+That doesn't work, because JavaScript assumes a semicolon after `return`. That'll work the same as:
 
 ```js
 return*!*;*/!*
  (some + long + expression + or + whatever * f(a) + f(b))
 ```
 
-Таким образом, это фактически стало пустым `return`.
+So, it effectively becomes an empty return.
 
-Если мы хотим, чтобы возвращаемое выражение занимало несколько строк, нужно начать его на той же строке, что и `return`. Или, хотя бы, поставить там открывающую скобку, вот так:
+If we want the returned expression to wrap across multiple lines, we should start it at the same line as `return`. Or at least put the opening parentheses there as follows:
 
 ```js
 return (
@@ -348,68 +375,67 @@ return (
   whatever * f(a) + f(b)
   )
 ```
-
-И тогда всё сработает, как задумано.
+And it will work just as we expect it to.
 ````
 
-## Выбор имени функции [#function-naming]
+## Naming a function [#function-naming]
 
-Функция - это действие. Поэтому имя функции обычно является глаголом. Оно должно быть простым, точным и описывать действие функции, чтобы программист, который будет читать код, получил верное представление о том, что делает функция.
+Functions are actions. So their name is usually a verb. It should be brief, as accurate as possible and describe what the function does, so that someone reading the code gets an indication of what the function does.
 
-Как правило, используются глагольные префиксы, обозначающие общий характер действия, после которых следует уточнение. Обычно в командах разработчиков действуют соглашения, касающиеся значений этих префиксов.
+It is a widespread practice to start a function with a verbal prefix which vaguely describes the action. There must be an agreement within the team on the meaning of the prefixes.
 
-Например, функции, начинающиеся с `"show"` обычно что-то показывают.
+For instance, functions that start with `"show"` usually show something.
 
-Функции, начинающиеся с...
+Function starting with...
 
-- `"get…"` -- возвращают значение,
-- `"calc…"` -- что-то вычисляют,
-- `"create…"` -- что-то создают,
-- `"check…"` -- что-то проверяют и возвращают логическое значение, и т.д.
+- `"get…"` -- return a value,
+- `"calc…"` -- calculate something,
+- `"create…"` -- create something,
+- `"check…"` -- check something and return a boolean, etc.
 
-Примеры таких имён:
+Examples of such names:
 
 ```js no-beautify
-showMessage(..)     // показывает сообщение
-getAge(..)          // возвращает возраст (в каком либо значении)
-calcSum(..)         // вычисляет сумму и возвращает результат
-createForm(..)      // создаёт форму (и обычно возвращает её)
-checkPermission(..) // проверяет доступ, возвращая true/false
+showMessage(..)     // shows a message
+getAge(..)          // returns the age (gets it somehow)
+calcSum(..)         // calculates a sum and returns the result
+createForm(..)      // creates a form (and usually returns it)
+checkPermission(..) // checks a permission, returns true/false
 ```
 
-Благодаря префиксам, при первом взгляде на имя функции становится понятным что делает её код, и какое значение она может возвращать.
+With prefixes in place, a glance at a function name gives an understanding what kind of work it does and what kind of value it returns.
 
-```smart header="Одна функция -- одно действие"
-Функция должна делать только то, что явно подразумевается её названием. И это должно быть одним действием.
+```smart header="One function -- one action"
+A function should do exactly what is suggested by its name, no more.
 
-Два независимых действия обычно подразумевают две функции, даже если предполагается, что они будут вызываться вместе (в этом случае мы можем создать третью функцию, которая будет их вызывать).
+Two independent actions usually deserve two functions, even if they are usually called together (in that case we can make a 3rd function that calls those two).
 
-Несколько примеров, которые нарушают это правило:
+A few examples of breaking this rule:
 
-- `getAge` -- будет плохим выбором, если функция будет выводить `alert` с возрастом (должна только возвращать его).
-- `createForm` -- будет плохим выбором, если функция будет изменять документ, добавляя форму в него (должна только создавать форму и возвращать её).
-- `checkPermission` -- будет плохим выбором, если функция будет отображать сообщение с текстом `доступ разрешён/запрещён` (должна только выполнять проверку и возвращать её результат).
+- `getAge` -- would be bad if it shows an `alert` with the age (should only get).
+- `createForm` -- would be bad if it modifies the document, adding a form to it (should only create it and return).
+- `checkPermission` -- would be bad if it displays the `access granted/denied` message (should only perform the check and return the result).
 
-В этих примерах использовались общепринятые смыслы префиксов. Конечно, вы в команде можете договориться о других значениях, но обычно они мало отличаются от общепринятых. В любом случае вы и ваша команда должны точно понимать, что значит префикс, что функция с ним может делать, а чего не может.
+These examples assume common meanings of prefixes. You and your team are free to agree on other meanings, but usually they're not much different. In any case, you should have a firm understanding of what a prefix means, what a prefixed function can and cannot do. All same-prefixed functions should obey the rules. And the team should share the knowledge.
 ```
 
-```smart header="Сверхкороткие имена функций"
-Имена функций, которые используются *очень часто*, иногда делают сверхкороткими.
+```smart header="Ultrashort function names"
+Functions that are used *very often* sometimes have ultrashort names.
 
-Например, во фреймворке [jQuery](http://jquery.com) есть функция с именем `$`. В библиотеке [Lodash](http://lodash.com/) основная функция представлена именем `_`.
+For example, the [jQuery](http://jquery.com) framework defines a function with `$`. The [Lodash](http://lodash.com/) library has its core function named `_`.
 
-Это исключения. В основном имена функций должны быть в меру краткими и описательными.
+These are exceptions. Generally function names should be concise and descriptive.
 ```
 
-## Функции == Комментарии
+## Functions == Comments
 
-Функции должны быть короткими и делать только что-то одно. Если это что-то большое, имеет смысл разбить функцию на несколько меньших. Иногда следовать этому правилу непросто, но это определённо хорошее правило.
+Functions should be short and do exactly one thing. If that thing is big, maybe it's worth it to split the function into a few smaller functions. Sometimes following this rule may not be that easy, but it's definitely a good thing.
 
-Небольшие функции не только облегчают тестирование и отладку -- само существование таких функций выполняет роль хороших комментариев!
+A separate function is not only easier to test and debug -- its very existence is a great comment!
 
-Например, сравним ниже две функции `showPrimes(n)`. Каждая из них выводит [простое число](https://ru.wikipedia.org/wiki/%D0%9F%D1%80%D0%BE%D1%81%D1%82%D0%BE%D0%B5_%D1%87%D0%B8%D1%81%D0%BB%D0%BE) до `n`.
+For instance, compare the two functions `showPrimes(n)` below. Each one outputs [prime numbers](https://en.wikipedia.org/wiki/Prime_number) up to `n`.
 
-Первый вариант использует метку `nextPrime`:
+The first variant uses a label:
 
 ```js
 function showPrimes(n) {
@@ -419,12 +445,12 @@ function showPrimes(n) {
       if (i % j == 0) continue nextPrime;
     }
 
-    alert( i ); // простое
+    alert( i ); // a prime
   }
 }
 ```
 
-Второй вариант использует дополнительную функцию `isPrime(n)` для проверки на простое:
+The second variant uses an additional function `isPrime(n)` to test for primality:
 
 ```js
 function showPrimes(n) {
@@ -432,7 +458,7 @@ function showPrimes(n) {
   for (let i = 2; i < n; i++) {
     *!*if (!isPrime(i)) continue;*/!*
 
-    alert(i);  // простое
+    alert(i);  // a prime
   }
 }
 
@@ -444,32 +470,32 @@ function isPrime(n) {
 }
 ```
 
-Второй вариант легче для понимания, не правда ли? Вместо куска кода мы видим название действия (`isPrime`). Иногда разработчики называют такой код *самодокументируемым*.
+The second variant is easier to understand, isn't it? Instead of the code piece we see a name of the action (`isPrime`). Sometimes people refer to such code as *self-describing*.
 
-Таким образом, допустимо создавать функции, даже если мы не планируем повторно использовать их. Такие функции структурируют код и делают его более понятным.
+So, functions can be created even if we don't intend to reuse them. They structure the code and make it readable.
 
-## Итого
+## Summary
 
-Объявление функции имеет вид:
+A function declaration looks like this:
 
 ```js
-function имя(параметры, через, запятую) {
-  /* тело, код функции */
+function name(parameters, delimited, by, comma) {
+  /* code */
 }
 ```
 
-- Передаваемые значения копируются в параметры функции и становятся локальными переменными.
-- Функции имеют доступ к внешним переменным. Но это работает только изнутри наружу. Код вне функции не имеет доступа к её локальным переменным.
-- Функция может возвращать значение. Если этого не происходит, тогда результат равен `undefined`.
+- Values passed to a function as parameters are copied to its local variables.
+- A function may access outer variables. But it works only from inside out. The code outside of the function doesn't see its local variables.
+- A function can return a value. If it doesn't, then its result is `undefined`.
 
-Для того, чтобы сделать код более чистым и понятным, рекомендуется использовать локальные переменные и параметры функций, не пользоваться внешними переменными.
+To make the code clean and easy to understand, it's recommended to use mainly local variables and parameters in the function, not outer variables.
 
-Функция, которая получает параметры, работает с ними и затем возвращает результат, гораздо понятнее функции, вызываемой без параметров, но изменяющей внешние переменные, что чревато побочными эффектами.
+It is always easier to understand a function which gets parameters, works with them and returns a result than a function which gets no parameters, but modifies outer variables as a side-effect.
 
-Именование функций:
+Function naming:
 
-- Имя функции должно понятно и чётко отражать, что она делает. Увидев её вызов в коде, вы должны тут же понимать, что она делает, и что возвращает.
-- Функция - это действие, поэтому её имя обычно является глаголом.
-- Есть много общепринятых префиксов, таких как: `create…`, `show…`, `get…`, `check…` и т.д. Пользуйтесь ими как подсказками, поясняющими, что делает функция.
+- A name should clearly describe what the function does. When we see a function call in the code, a good name instantly gives us an understanding what it does and returns.
+- A function is an action, so function names are usually verbal.
+- There exist many well-known function prefixes like `create…`, `show…`, `get…`, `check…` and so on. Use them to hint what a function does.
 
-Функции являются основными строительными блоками скриптов. Мы рассмотрели лишь основы функций в JavaScript, но уже сейчас можем создавать и использовать их. Это только начало пути. Мы будем неоднократно возвращаться к функциям и изучать их всё более и более глубоко.
+Functions are the main building blocks of scripts. Now we've covered the basics, so we actually can start creating and using them. But that's only the beginning of the path. We are going to return to them many times, going more deeply into their advanced features.

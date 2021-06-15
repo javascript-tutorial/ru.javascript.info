@@ -9,7 +9,11 @@
 
 ## Событийный цикл
 
+<<<<<<< HEAD
 Идея *событийного цикла* очень проста. Есть бесконечный цикл, в котором движок JavaScript ожидает задачи, исполняет их и снова ожидает появления новых.
+=======
+The *event loop* concept is very simple. There's an endless loop, where the JavaScript engine waits for tasks, executes them and then sleeps, waiting for more tasks.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Общий алгоритм движка:
 
@@ -17,7 +21,11 @@
     - выполнить их, начиная с самой старой
 2. Бездействовать до появления новой задачи, а затем перейти к пункту 1
 
+<<<<<<< HEAD
 Это формализация того, что мы наблюдаем, просматривая веб-страницу. Движок JavaScript большую часть времени ничего не делает и работает, только если требуется исполнить скрипт/обработчик или обработать событие.
+=======
+That's a formalization for what we see when browsing a page. The JavaScript engine does nothing most of the time, it only runs if a script/handler/event activates.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Примеры задач:
 
@@ -40,23 +48,41 @@
 
 Пока что всё просто, не правда ли?
 
+<<<<<<< HEAD
 Отметим две детали:
 1.  Рендеринг (отрисовка страницы) никогда не происходит во время выполнения задачи движком. Не имеет значения, сколь долго выполняется задача. Изменения в DOM отрисовываются только после того, как задача выполнена.
 2.  Если задача выполняется очень долго, то браузер не может выполнять другие задачи, обрабатывать пользовательские события, поэтому спустя некоторое время браузер предлагает "убить" долго выполняющуюся задачу. Такое возможно, когда в скрипте много сложных вычислений или ошибка, ведущая к бесконечному циклу.
 
 Это была теория. Теперь давайте взглянем, как можно применить эти знания.
+=======
+Two more details:
+1. Rendering never happens while the engine executes a task. It doesn't matter if the task takes a long time. Changes to the DOM are painted only after the task is complete.
+2. If a task takes too long, the browser can't do other tasks, such as processing user events. So after a time, it raises an alert like "Page Unresponsive", suggesting killing the task with the whole page. That happens when there are a lot of complex calculations or a programming error leading to an infinite loop.
+
+That was the theory. Now let's see how we can apply that knowledge.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ## Пример 1: разбиение "тяжёлой" задачи.
 
 Допустим, у нас есть задача, требующая значительных ресурсов процессора.
 
+<<<<<<< HEAD
 Например, подсветка синтаксиса (используется для выделения цветом участков кода на этой странице) -- довольно процессороёмкая задача. Для подсветки кода надо выполнить синтаксический анализ, создать много элементов для цветового выделения, добавить их в документ -- для большого текста это требует значительных ресурсов.
+=======
+For example, syntax-highlighting (used to colorize code examples on this page) is quite CPU-heavy. To highlight the code, it performs the analysis, creates many colored elements, adds them to the document -- for a large amount of text that takes a lot of time.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Пока движок занят подсветкой синтаксиса, он не может делать ничего, связанного с DOM, не может обрабатывать пользовательские события и т.д. Возможно даже "подвисание" браузера, что совершенно неприемлемо.
 
+<<<<<<< HEAD
 Мы можем избежать этого, разбив задачу на части. Сделать подсветку для первых 100 строк, затем запланировать `setTimeout` (с нулевой задержкой) для разметки следующих 100 строк и т.д.
 
 Чтобы продемонстрировать такой подход, давайте будем использовать для простоты функцию, которая считает от `1` до `1000000000`.
+=======
+We can avoid problems by splitting the big task into pieces. Highlight first 100 lines, then schedule `setTimeout` (with zero-delay) for the next 100 lines, and so on.
+
+To demonstrate this approach, for the sake of simplicity, instead of text-highlighting, let's take a function that counts from `1` to `1000000000`.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Если вы запустите код ниже, движок "зависнет" на некоторое время. Для серверного JS это будет явно заметно, а если вы будете выполнять этот код в браузере, то попробуйте понажимать другие кнопки на странице -- вы заметите, что никакие другие события не обрабатываются до завершения функции счёта.
 
@@ -78,9 +104,15 @@ function count() {
 count();
 ```
 
+<<<<<<< HEAD
 Браузер может даже показать сообщение "скрипт выполняется слишком долго".
 
 Давайте разобьём задачу на части, воспользовавшись вложенным `setTimeout`:
+=======
+The browser may even show a "the script takes too long" warning.
+
+Let's split the job using nested `setTimeout` calls:
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js run
 let i = 0;
@@ -113,13 +145,23 @@ count();
 2.  Второе выполнение производит счёт: i=1000001...2000000.
 3.  ...и так далее.
 
+<<<<<<< HEAD
 Теперь если новая сторонняя задача (например, событие `onclick`) появляется, пока движок занят выполнением 1-й части, то она становится в очередь, и затем выполняется, когда 1-я часть завершена, перед следующей частью. Периодические возвраты в событийный цикл между запусками `count` дают движку достаточно "воздуха", чтобы сделать что-то ещё, отреагировать на действия пользователя.
 
 Отметим, что оба варианта -- с разбиением задачи с помощью `setTimeout` и без -- сопоставимы по скорости выполнения. Нет большой разницы в общем времени счёта.
+=======
+Now, if a new side task (e.g. `onclick` event) appears while the engine is busy executing part 1, it gets queued and then executes when part 1 finished, before the next part. Periodic returns to the event loop between `count` executions provide just enough "air" for the JavaScript engine to do something else, to react to other user actions.
+
+The notable thing is that both variants -- with and without splitting the job by `setTimeout` -- are comparable in speed. There's not much difference in the overall counting time.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Чтобы сократить разницу ещё сильнее, давайте немного улучшим наш код.
 
+<<<<<<< HEAD
 Мы перенесём планирование очередного вызова в начало `count()`:
+=======
+We'll move the scheduling to the beginning of the `count()`:
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js run
 let i = 0;
@@ -128,7 +170,11 @@ let start = Date.now();
 
 function count() {
 
+<<<<<<< HEAD
   // перенесём планирование очередного вызова в начало
+=======
+  // move the scheduling to the beginning
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
   if (i < 1e9 - 1e6) {
     setTimeout(count); // запланировать новый вызов
   }
@@ -160,9 +206,15 @@ count();
 
 Ещё одно преимущество разделения на части крупной задачи в браузерных скриптах - это возможность показывать индикатор выполнения.
 
+<<<<<<< HEAD
 Обычно браузер отрисовывает содержимое страницы после того, как заканчивается выполнение текущего кода. Не имеет значения, насколько долго выполняется задача. Изменения в DOM отображаются только после её завершения.
 
 С одной стороны, это хорошо, потому что наша функция может создавать много элементов, добавлять их по одному в документ и изменять их стили -- пользователь не увидит "промежуточного", незаконченного состояния. Это важно, верно?
+=======
+As mentioned earlier, changes to DOM are painted only after the currently running task is completed, irrespective of how long it takes.
+
+On one hand, that's great, because our function may create many elements, add them one-by-one to the document and change their styles -- the visitor won't see any "intermediate", unfinished state. An important thing, right?
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 В примере ниже изменения `i` не будут заметны, пока функция не завершится, поэтому мы увидим только последнее значение `i`:
 
@@ -238,7 +290,11 @@ menu.onclick = function() {
 
 ## Макрозадачи и Микрозадачи
 
+<<<<<<< HEAD
 Помимо *макрозадач*, описанных в этой части, существуют *микрозадачи*, упомянутые в главе <info:microtask-queue>.
+=======
+Along with *macrotasks*, described in this chapter, there are *microtasks*, mentioned in the chapter <info:microtask-queue>.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Микрозадачи приходят только из кода. Обычно они создаются промисами: выполнение обработчика `.then/catch/finally` становится микрозадачей. Микрозадачи также используются "под капотом" `await`, т.к. это форма обработки промиса.
 
@@ -263,11 +319,19 @@ alert("code");
 2.  `promise` появляется вторым, потому что `.then` проходит через очередь микрозадач и выполняется после текущего синхронного кода.
 3.  `timeout` появляется последним, потому что это макрозадача.
 
+<<<<<<< HEAD
 Более подробное изображение событийного цикла выглядит так:
 
 ![](eventLoop-full.svg)
 
 **Все микрозадачи завершаются до обработки каких-либо событий или рендеринга, или перехода к другой макрозадаче.**
+=======
+The richer event loop picture looks like this (order is from top to bottom, that is: the script first, then microtasks, rendering and so on):
+
+![](eventLoop-full.svg)
+
+All microtasks are completed before any other event handling or rendering or any other macrotask takes place.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Это важно, так как гарантирует, что общее окружение остаётся одним и тем же между микрозадачами - не изменены координаты мыши, не получены новые данные по сети и т.п.
 
@@ -303,7 +367,11 @@ alert("code");
 
 ## Итого
 
+<<<<<<< HEAD
 Более подробный алгоритм событийного цикла (хоть и упрощённый в сравнении со [спецификацией](https://html.spec.whatwg.org/multipage/webappapis.html#event-loop-processing-model)):
+=======
+A more detailed event loop algorithm (though still simplified compared to the [specification](https://html.spec.whatwg.org/multipage/webappapis.html#event-loop-processing-model)):
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 1. Выбрать и исполнить старейшую задачу из очереди *макрозадач* (например, "script").
 2. Исполнить все *микрозадачи*:
@@ -316,7 +384,11 @@ alert("code");
 Чтобы добавить в очередь новую *макрозадачу*:
 - Используйте `setTimeout(f)` с нулевой задержкой.
 
+<<<<<<< HEAD
 Этот способ можно использовать для разбиения больших вычислительных задач на части, чтобы браузер мог реагировать на пользовательские события и показывать прогресс выполнения этих частей.
+=======
+That may be used to split a big calculation-heavy task into pieces, for the browser to be able to react to user events and show progress between them.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Также это используется в обработчиках событий для отложенного выполнения действия после того, как событие полностью обработано (всплытие завершено).
 
@@ -335,5 +407,9 @@ alert("code");
 
 Web Workers могут обмениваться сообщениями с основным процессом, но они имеют свои переменные и свой событийный цикл.
 
+<<<<<<< HEAD
 Web Workers не имеют доступа к DOM, поэтому основное их применение - вычисления. Они позволяют задействовать несколько ядер процессора одновременно.
+=======
+Web Workers do not have access to DOM, so they are useful, mainly, for calculations, to use multiple CPU cores simultaneously.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 ```

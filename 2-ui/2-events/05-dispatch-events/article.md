@@ -2,13 +2,21 @@
 
 Можно не только назначать обработчики, но и генерировать события из JavaScript-кода.
 
+<<<<<<< HEAD
 Пользовательские события могут быть использованы при создании графических компонентов. Например, корневой элемент нашего меню, реализованного при помощи JavaScript, может генерировать события, относящиеся к этому меню: `open` (меню раскрыто), `select` (выбран пункт меню) и т.п. А другой код может слушать эти события и узнавать, что происходит с меню.
+=======
+Custom events can be used to create "graphical components". For instance, a root element of our own JS-based menu may trigger events telling what happens with the menu: `open` (menu open), `select` (an item is selected) and so on. Another code may listen for the events and observe what's happening with the menu.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Можно генерировать не только совершенно новые, придуманные нами события, но и встроенные, такие как `click`, `mousedown` и другие. Это бывает полезно для автоматического тестирования.
 
 ## Конструктор Event
 
+<<<<<<< HEAD
 Встроенные классы для событий формируют иерархию аналогично классам для DOM-элементов. Её корнем является встроенный класс [Event](http://www.w3.org/TR/dom/#event).
+=======
+Built-in event classes form a hierarchy, similar to DOM element classes. The root is the built-in [Event](http://www.w3.org/TR/dom/#event) class.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Событие встроенного класса `Event` можно создать так:
 
@@ -162,7 +170,11 @@ alert(event.clientX); // undefined, неизвестное свойство пр
 
 ## event.preventDefault()
 
+<<<<<<< HEAD
 Для многих браузерных событий есть "действия по умолчанию", такие как переход по ссылке, выделение и т.п.
+=======
+Many browser events have a "default action", such as navigating to a link, starting a selection, and so on.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Для новых, пользовательских событий браузерных действий, конечно, нет, но код, который генерирует такое событие, может предусматривать какие-то свои действия после события.
 
@@ -174,7 +186,11 @@ alert(event.clientX); // undefined, неизвестное свойство пр
 
 Ниже вы можете видеть кролика `#rabbit` и функцию `hide()`, которая при вызове генерирует на нём событие `"hide"`, уведомляя всех интересующихся, что кролик собирается спрятаться.
 
+<<<<<<< HEAD
 Любой обработчик может узнать об этом, подписавшись на событие `hide` через `rabbit.addEventListener('hide',...)` и, при желании, отменить действие по умолчанию через `event.preventDefault()`. Тогда кролик не исчезнет:
+=======
+Any handler can listen for that event with `rabbit.addEventListener('hide',...)` and, if needed, cancel the action using `event.preventDefault()`. Then the rabbit won't disappear:
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```html run refresh autorun
 <pre id="rabbit">
@@ -187,7 +203,10 @@ alert(event.clientX); // undefined, неизвестное свойство пр
 <button onclick="hide()">Hide()</button>
 
 <script>
+<<<<<<< HEAD
   // hide() будет вызван автоматически через 2 секунды
+=======
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
   function hide() {
     let event = new CustomEvent("hide", {
       cancelable: true // без этого флага preventDefault не сработает
@@ -207,10 +226,15 @@ alert(event.clientX); // undefined, неизвестное свойство пр
 </script>
 ```
 
+<<<<<<< HEAD
 Обратите внимание: событие должно содержать флаг `cancelable: true`. Иначе, вызов `event.preventDefault()` будет проигнорирован.
+=======
+Please note: the event must have the flag `cancelable: true`, otherwise the call `event.preventDefault()` is ignored.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ## Вложенные события обрабатываются синхронно
 
+<<<<<<< HEAD
 Обычно события обрабатываются асинхронно. То есть, если браузер обрабатывает `onclick` и в процессе этого произойдёт новое событие, то оно ждёт, пока закончится обработка `onclick`.
 
 Исключением является ситуация, когда событие инициировано из обработчика другого события.
@@ -218,6 +242,16 @@ alert(event.clientX); // undefined, неизвестное свойство пр
 Тогда управление сначала переходит в обработчик вложенного события и уже после этого возвращается назад.
 
 В примере ниже событие `menu-open` обрабатывается синхронно во время обработки `onclick`:
+=======
+Usually events are processed in a queue. That is: if the browser is processing `onclick` and a new event occurs, e.g. mouse moved, then it's handling is queued up, corresponding `mousemove` handlers will be called after `onclick` processing is finished.
+
+The notable exception is when one event is initiated from within another one, e.g. using `dispatchEvent`. Such events are processed immediately: the new event handlers are called, and then the current event handling is resumed.
+
+For instance, in the code below the `menu-open` event is triggered during the `onclick`.
+
+It's processed immediately, without waiting for `onclick` handler to end:
+
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```html run autorun
 <button id="menu">Меню (нажми меня)</button>
@@ -226,7 +260,10 @@ alert(event.clientX); // undefined, неизвестное свойство пр
   menu.onclick = function() {
     alert(1);
 
+<<<<<<< HEAD
     // alert("вложенное событие")
+=======
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
     menu.dispatchEvent(new CustomEvent("menu-open", {
       bubbles: true
     }));
@@ -234,17 +271,32 @@ alert(event.clientX); // undefined, неизвестное свойство пр
     alert(2);
   };
 
+<<<<<<< HEAD
   document.addEventListener('menu-open', () => alert('вложенное событие'))
+=======
+  // triggers between 1 and 2
+  document.addEventListener('menu-open', () => alert('nested'));
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 </script>
-```    
+```
 
 Порядок вывода: 1 -> вложенное событие -> 2.
 
+<<<<<<< HEAD
 Обратите внимание, что вложенное событие `menu-open` успевает всплыть и запустить обработчик на `document`. Обработка вложенного события полностью завершается до того, как управление возвращается во внешний код (`onclick`).
 
 Это справедливо не только для `dispatchEvent`, но и для других ситуаций. JavaScript в обработчике события может вызвать другие методы, которые приведут к другим событиям -- они тоже обрабатываются синхронно.
 
 Если нам это не подходит, то мы можем либо поместить `dispatchEvent` (или любой другой код, инициирующий события) в конец обработчика `onclick`, либо, если это неудобно, можно обернуть генерацию события в `setTimeout` с нулевой задержкой:
+=======
+Please note that the nested event `menu-open` is caught on the `document`. The propagation and handling of the nested event is finished before the processing gets back to the outer code (`onclick`).
+
+That's not only about `dispatchEvent`, there are other cases. If an event handler calls methods that trigger other events -- they are processed synchronously too, in a nested fashion.
+
+Let's say we don't like it. We'd want `onclick` to be fully processed first, independently from `menu-open` or any other nested events.
+
+Then we can either put the `dispatchEvent` (or another event-triggering call) at the end of `onclick` or, maybe better, wrap it in the zero-delay `setTimeout`:
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```html run
 <button id="menu">Меню (нажми меня)</button>
@@ -253,7 +305,6 @@ alert(event.clientX); // undefined, неизвестное свойство пр
   menu.onclick = function() {
     alert(1);
 
-    // alert(2)
     setTimeout(() => menu.dispatchEvent(new CustomEvent("menu-open", {
       bubbles: true
     })));
@@ -263,9 +314,13 @@ alert(event.clientX); // undefined, неизвестное свойство пр
 
   document.addEventListener('menu-open', () => alert('вложенное событие'))
 </script>
-```    
+```
 
+<<<<<<< HEAD
 Теперь `dispatchEvent` запускается асинхронно после исполнения текущего кода, включая `mouse.onclick`, поэтому обработчики полностью независимы.
+=======
+Now `dispatchEvent` runs asynchronously after the current code execution is finished, including `menu.onclick`, so event handlers are totally separate.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Новый порядок вывода: 1 -> 2 -> вложенное событие.
 
@@ -281,9 +336,15 @@ alert(event.clientX); // undefined, неизвестное свойство пр
 
 Для пользовательских событий стоит применять конструктор `CustomEvent`. У него есть дополнительная опция `detail`, с помощью которой можно передавать информацию в объекте события. После чего все обработчики смогут получить к ней доступ через `event.detail`.
 
+<<<<<<< HEAD
 Несмотря на техническую возможность генерировать встроенные браузерные события типа `click` или `keydown`, пользоваться ей стоит с большой осторожностью.
 
 Весьма часто, когда разработчик хочет сгенерировать встроенное событие – это вызвано "кривой" архитектурой кода.
+=======
+Despite the technical possibility of generating browser events like `click` or `keydown`, we should use them with great care.
+
+We shouldn't generate browser events as it's a hacky way to run handlers. That's bad architecture most of the time.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Как правило, генерация встроенных событий полезна в следующих случаях:
 

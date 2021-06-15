@@ -24,15 +24,28 @@ XMLHttpRequest имеет два режима работы: синхронный
 
 1. Создать `XMLHttpRequest`.
     ```js
+<<<<<<< HEAD
     let xhr = new XMLHttpRequest(); // у конструктора нет аргументов
+=======
+    let xhr = new XMLHttpRequest();
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
     ```
+    The constructor has no arguments.
 
+<<<<<<< HEAD
 2. Инициализировать его.
+=======
+2. Initialize it, usually right after `new XMLHttpRequest`:
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
     ```js
     xhr.open(method, URL, [async, user, password])
     ```
 
+<<<<<<< HEAD
     Этот метод обычно вызывается сразу после `new XMLHttpRequest`. В него передаются основные параметры запроса:
+=======
+    This method specifies the main parameters of the request:
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
     - `method` -- HTTP-метод. Обычно это `"GET"` или `"POST"`.
     - `URL` -- URL, куда отправляется запрос: строка, может быть и объект [URL](info:url).
@@ -49,14 +62,25 @@ XMLHttpRequest имеет два режима работы: синхронный
 
     Этот метод устанавливает соединение и отсылает запрос к серверу. Необязательный параметр `body` содержит тело запроса.
 
+<<<<<<< HEAD
     Некоторые типы запросов, такие как `GET`, не имеют тела. А некоторые, как, например, `POST`, используют `body`, чтобы отправлять данные на сервер. Мы позже увидим примеры.
+=======
+    Some request methods like `GET` do not have a body. And some of them like `POST` use `body` to send the data to the server. We'll see examples of that later.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 4. Слушать события на `xhr`, чтобы получить ответ.
 
+<<<<<<< HEAD
     Три наиболее используемых события:
     - `load` -- происходит, когда получен какой-либо ответ, включая ответы с HTTP-ошибкой, например 404.
     - `error` -- когда запрос не может быть выполнен, например, нет соединения или невалидный URL.
     - `progress` -- происходит периодически во время загрузки ответа, сообщает о прогрессе.
+=======
+    These three events are the most widely used:
+    - `load` -- when the request is complete (even if HTTP status is like 400 or 500), and the response is fully downloaded.
+    - `error` -- when the request couldn't be made, e.g. network down or invalid URL.
+    - `progress` -- triggers periodically while the response is being downloaded, reports how much has been downloaded.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
     ```js
     xhr.onload = function() {
@@ -89,10 +113,17 @@ xhr.send();
 
 // 4. Этот код сработает после того, как мы получим ответ сервера
 xhr.onload = function() {
+<<<<<<< HEAD
   if (xhr.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
     alert(`Ошибка ${xhr.status}: ${xhr.statusText}`); // Например, 404: Not Found
   } else { // если всё прошло гладко, выводим результат
     alert(`Готово, получили ${xhr.response.length} байт`); // response -- это ответ сервера
+=======
+  if (xhr.status != 200) { // analyze HTTP status of the response
+    alert(`Error ${xhr.status}: ${xhr.statusText}`); // e.g. 404: Not Found
+  } else { // show the result
+    alert(`Done, got ${xhr.response.length} bytes`); // response is the server response
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
   }
 };
 
@@ -146,12 +177,21 @@ xhr.open('GET', url); // https://google.com/search?q=test+me%21
 
 Мы можем использовать свойство `xhr.responseType`, чтобы указать ожидаемый тип ответа:
 
+<<<<<<< HEAD
 - `""` (по умолчанию) -- строка,
 - `"text"` -- строка,
 - `"arraybuffer"` -- `ArrayBuffer` (для бинарных данных, смотрите в <info:arraybuffer-binary-arrays>),
 - `"blob"` -- `Blob` (для бинарных данных, смотрите в <info:blob>),
 - `"document"` -- XML-документ (может использовать XPath и другие XML-методы),
 - `"json"` -- JSON (парсится автоматически).
+=======
+- `""` (default) -- get as string,
+- `"text"` -- get as string,
+- `"arraybuffer"` -- get as `ArrayBuffer` (for binary data, see chapter <info:arraybuffer-binary-arrays>),
+- `"blob"` -- get as `Blob` (for binary data, see chapter <info:blob>),
+- `"document"` -- get as XML document (can use XPath and other XML methods) or HTML document (based on the MIME type of the received data),
+- `"json"` -- get as JSON (parsed automatically).
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 К примеру, давайте получим ответ в формате JSON:
 
@@ -186,11 +226,19 @@ xhr.onload = function() {
 Список всех состояний, указанных в [спецификации](https://xhr.spec.whatwg.org/#states):
 
 ```js
+<<<<<<< HEAD
 UNSENT = 0; // исходное состояние
 OPENED = 1; // вызван метод open
 HEADERS_RECEIVED = 2; // получены заголовки ответа
 LOADING = 3; // ответ в процессе передачи (данные частично получены)
 DONE = 4; // запрос завершён
+=======
+UNSENT = 0; // initial state
+OPENED = 1; // open called
+HEADERS_RECEIVED = 2; // response headers received
+LOADING = 3; // response is loading (a data packet is received)
+DONE = 4; // request complete
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 ```
 
 Состояния объекта `XMLHttpRequest` меняются в таком порядке: `0` -> `1` -> `2` -> `3` -> ... -> `3` -> `4`. Состояние `3` повторяется каждый раз, когда получена часть данных.
@@ -266,9 +314,15 @@ try {
     xhr.setRequestHeader('Content-Type', 'application/json');
     ```
 
+<<<<<<< HEAD
     ```warn header="Ограничения на заголовки"
     Некоторые заголовки управляются исключительно браузером, например `Referer` или `Host`, а также ряд других.
     Полный список [тут](http://www.w3.org/TR/XMLHttpRequest/#the-setrequestheader-method).
+=======
+    ```warn header="Headers limitations"
+    Several headers are managed exclusively by the browser, e.g. `Referer` and `Host`.
+    The full list is [in the specification](https://xhr.spec.whatwg.org/#the-setrequestheader()-method).
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
     `XMLHttpRequest` не разрешено изменять их ради безопасности пользователей и для обеспечения корректности HTTP-запроса.
     ```
@@ -331,7 +385,11 @@ try {
 
 ## POST, FormData
 
+<<<<<<< HEAD
 Чтобы сделать POST-запрос, мы можем использовать встроенный объект [FormData](https://developer.mozilla.org/ru/docs/Web/API/FormData).
+=======
+To make a POST request, we can use the built-in [FormData](mdn:api/FormData) object.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Синтаксис:
 
@@ -506,6 +564,7 @@ xhr.onerror = function() {
 };
 ```
 
+<<<<<<< HEAD
 Событий на самом деле больше, в [современной спецификации](http://www.w3.org/TR/XMLHttpRequest/#events) они все перечислены в том порядке, в каком генерируются во время запроса:
 
 - `loadstart` -- начало запроса.
@@ -515,6 +574,17 @@ xhr.onerror = function() {
 - `load` -- запрос успешно завершён.
 - `timeout` -- запрос был отменён по причине истечения отведённого для него времени (происходит, только если был установлен таймаут).
 - `loadend` -- срабатывает после `load`, `error`, `timeout` или `abort`.
+=======
+There are actually more events, the [modern specification](https://xhr.spec.whatwg.org/#events) lists them (in the lifecycle order):
+
+- `loadstart` -- the request has started.
+- `progress` -- a data packet of the response has arrived, the whole response body at the moment is in `response`.
+- `abort` -- the request was canceled by the call `xhr.abort()`.
+- `error` -- connection error has occurred, e.g. wrong domain name. Doesn't happen for HTTP-errors like 404.
+- `load` -- the request has finished successfully.
+- `timeout` -- the request was canceled due to timeout (only happens if it was set).
+- `loadend` -- triggers after `load`, `error`, `timeout` or `abort`.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 События `error`, `abort`, `timeout` и `load` взаимно исключают друг друга - может произойти только одно из них.
 

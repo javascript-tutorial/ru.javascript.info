@@ -85,9 +85,15 @@ if (condition) {
 ```js
 // обратные кавычки ` позволяют разделять строку на части
 let str = `
+<<<<<<< HEAD
   Рабочая группа TC39 организации Ecma International -
   это группа JavaScript-разработчиков, теоретиков и авторов движков JavaScript,
   которые вместе с сообществом занимаются поддержкой и развитием языка JavaScript.
+=======
+  ECMA International's TC39 is a group of JavaScript developers,
+  implementers, academics, and more, collaborating with the community
+  to maintain and evolve the definition of JavaScript.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 `;
 ```
 
@@ -115,7 +121,11 @@ if (
 
     Одно из преимуществ пробелов над табуляцией заключается в том, что пробелы допускают более гибкие конфигурации отступов, чем символ табуляции.
 
+<<<<<<< HEAD
     Например, мы можем выровнять аргументы относительно открывающей скобки:
+=======
+    For instance, we can align the parameters with the opening bracket, like this:
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
     ```js no-beautify
     show(parameters,
@@ -284,9 +294,15 @@ function pow(x, n) {
 
 Некоторые популярные руководства:
 
+<<<<<<< HEAD
 - [Google JavaScript Style Guide](https://google.github.io/styleguide/javascriptguide.xml)
 - [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript) (есть [перевод](https://leonidlebedev.github.io/javascript-airbnb/))
 - [Idiomatic.JS](https://github.com/rwaldron/idiomatic.js) (есть [перевод](https://github.com/rwaldron/idiomatic.js/tree/master/translations/ru_RU))
+=======
+- [Google JavaScript Style Guide](https://google.github.io/styleguide/jsguide.html)
+- [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript)
+- [Idiomatic.JS](https://github.com/rwaldron/idiomatic.js)
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 - [StandardJS](https://standardjs.com/)
 - (и ещё множество других)
 
@@ -327,7 +343,7 @@ function pow(x, n) {
   },
   "rules": {
     "no-console": 0,
-    "indent": ["warning", 2]
+    "indent": 2
   }
 }
 ```

@@ -20,7 +20,11 @@ alert( str.match(regexp) ); // Java,HTML,JavaScript
 
 Мы уже видели нечто подобное - квадратные скобки. Они позволяют выбирать между несколькими символами, например  `pattern:gr[ae]y` найдёт `match:gray`, либо `match:grey`.
 
+<<<<<<< HEAD
 Квадратные скобки работают только с символами или наборами символов. Альтернация мощнее, она работает с любыми выражениями. Регулярное выражение `pattern:A|B|C` обозначает поиск одного из выражений: `A`, `B` или `C`.
+=======
+Square brackets allow only characters or character classes. Alternation allows any expressions. A regexp `pattern:A|B|C` means one of expressions `A`, `B` or `C`.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Например:
 
@@ -33,7 +37,11 @@ alert( str.match(regexp) ); // Java,HTML,JavaScript
 
 ## Пример: шаблон для времени
 
+<<<<<<< HEAD
 В предыдущих главах было задание написать регулярное выражение для поиска времени в формате  `чч:мм`, например `12:00`. Но шаблон `pattern:\d\d:\d\d` недостаточно точный. Он принимает `25:99` за время (99 секунд подходят под шаблон, но так не должно быть).
+=======
+In previous articles there was a task to build a regexp for searching time in the form `hh:mm`, for instance `12:00`. But a simple `pattern:\d\d:\d\d` is too vague. It accepts `25:99` as the time (as 99 minutes match the pattern, but that time is invalid).
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Как сделать лучше?
 
@@ -47,7 +55,11 @@ alert( str.match(regexp) ); // Java,HTML,JavaScript
 
 Далее, минуты должны быть от `00` до `59`. На языке регулярных выражений это означает `pattern:[0-5]\d`: первая цифра `0-5`, а за ней любая.
 
+<<<<<<< HEAD
 Давайте соединим часы и минуты в одно выражение, получится так: `pattern:[01]\d|2[0-3]:[0-5]\d`.
+=======
+If we glue hours and minutes together, we get the pattern: `pattern:[01]\d|2[0-3]:[0-5]\d`.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Почти готово, но есть проблема. После такого соединения альтернация `pattern:|` оказалась между `pattern:[01]\d` и `pattern:2[0-3]:[0-5]\d`.
 

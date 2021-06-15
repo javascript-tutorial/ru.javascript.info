@@ -121,7 +121,13 @@ let fruits = [
 
 В компьютерных науках структура данных, делающая это возможным, называется [двусторонняя очередь](https://ru.wikipedia.org/wiki/Двухсторонняя_очередь).
 
+<<<<<<< HEAD
 **Методы, работающие с концом массива:**
+=======
+In computer science the data structure that allows this, is called [deque](https://en.wikipedia.org/wiki/Double-ended_queue).
+
+**Methods that work with the end of the array:**
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 `pop`
 : Удаляет последний элемент из массива и возвращает его:
@@ -152,8 +158,13 @@ let fruits = [
 `shift`
 : Удаляет из массива первый элемент и возвращает его:
 
+<<<<<<< HEAD
     ```js
     let fruits = ["Яблоко", "Апельсин", "Груша"];
+=======
+    ```js run
+    let fruits = ["Apple", "Orange", "Pear"];
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
     alert( fruits.shift() ); // удаляем Яблоко и выводим его
 
@@ -163,8 +174,13 @@ let fruits = [
 `unshift`
 : Добавляет элемент в начало массива:
 
+<<<<<<< HEAD
     ```js
     let fruits = ["Апельсин", "Груша"];
+=======
+    ```js run
+    let fruits = ["Orange", "Pear"];
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
     fruits.unshift('Яблоко');
 
@@ -189,7 +205,11 @@ alert( fruits );
 
 Массивы расширяют объекты, так как предусматривают специальные методы для работы с упорядоченными коллекциями данных, а также свойство `length`. Но в основе всё равно лежит объект.
 
+<<<<<<< HEAD
 Следует помнить, что в JavaScript существует 8 основных типов данных. Массив является объектом и, следовательно, ведёт себя как объект.
+=======
+Remember, there are only eight basic data types in JavaScript (see the [Data types](info:types) chapter for more info). Array is an object and thus behaves like an object.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Например, копируется по ссылке:
 
@@ -205,7 +225,11 @@ arr.push("Груша"); // массив меняется по ссылке
 alert( fruits ); // Банан, Груша - теперь два элемента
 ```
 
+<<<<<<< HEAD
 ...Но то, что действительно делает массивы особенными - это их внутреннее представление. Движок JavaScript старается хранить элементы массива в непрерывной области памяти, один за другим, так, как это показано на иллюстрациях к этой главе. Существуют и другие способы оптимизации, благодаря которым массивы работают очень быстро.
+=======
+...But what makes arrays really special is their internal representation. The engine tries to store its elements in the contiguous memory area, one after another, just as depicted on the illustrations in this chapter, and there are other optimizations as well, to make arrays work really fast.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Но все они утратят эффективность, если мы перестанем работать с массивом как с "упорядоченной коллекцией данных" и начнём использовать его как обычный объект.
 
@@ -374,9 +398,13 @@ alert( arr[0] ); // undefined! нет элементов.
 alert( arr.length ); // length 2
 ```
 
+<<<<<<< HEAD
 Как мы видим, в коде, представленном выше, в `new Array(number)` все элементы равны `undefined`.
 
 Чтобы избежать появления таких неожиданных ситуаций, мы обычно используем квадратные скобки, если, конечно, не знаем точно, что по какой-то причине нужен именно `Array`.
+=======
+To avoid such surprises, we usually use square brackets, unless we really know what we're doing.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ## Многомерные массивы
 
@@ -424,7 +452,58 @@ alert( "1" + 1 ); // "11"
 alert( "1,2" + 1 ); // "1,21"
 ```
 
+<<<<<<< HEAD
 ## Итого
+=======
+## Don't compare arrays with ==
+
+Arrays in JavaScript, unlike some other programming languages, shouldn't be compared with operator `==`.
+
+This operator has no special treatment for arrays, it works with them as with any objects.
+
+Let's recall the rules:
+
+- Two objects are equal `==` only if they're references to the same object.
+- If one of the arguments of `==` is an object, and the other one is a primitive, then the object gets converted to primitive, as explained in the chapter <info:object-toprimitive>.
+- ...With an exception of `null` and `undefined` that equal `==` each other and nothing else.
+
+The strict comparison `===` is even simpler, as it doesn't convert types. 
+
+So, if we compare arrays with `==`, they are never the same, unless we compare two variables that reference exactly the same array.
+
+For example:
+```js run
+alert( [] == [] ); // false
+alert( [0] == [0] ); // false
+```
+
+These arrays are technically different objects. So they aren't equal. The `==` operator doesn't do item-by-item comparison.
+
+Comparison with primitives may give seemingly strange results as well:
+
+```js run
+alert( 0 == [] ); // true
+
+alert('0' == [] ); // false
+```
+
+Here, in both cases, we compare a primitive with an array object. So the array `[]` gets converted to primitive for the purpose of comparison and becomes an empty string `''`. 
+
+Then the comparison process goes on with the primitives, as described in the chapter <info:type-conversions>:
+
+```js run
+// after [] was converted to ''
+alert( 0 == '' ); // true, as '' becomes converted to number 0
+
+alert('0' == '' ); // false, no type conversion, different strings
+```
+
+So, how to compare arrays?
+
+That's simple: don't use the `==` operator. Instead, compare them item-by-item in a loop or using iteration methods explained in the next chapter.
+
+## Summary
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Массив – это особый тип объекта, предназначенный для работы с упорядоченным набором элементов.
 
@@ -455,4 +534,12 @@ alert( "1,2" + 1 ); // "1,21"
  - `for (let item of arr)` -- современный синтаксис только для значений элементов (к индексам нет доступа).
  - `for (let i in arr)` -- никогда не используйте для массивов!
 
+<<<<<<< HEAD
 Мы вернёмся к массивам и изучим другие методы добавления, удаления, выделения элементов и сортировки массивов в главе: <info:array-methods>.
+=======
+To compare arrays, don't use the `==` operator (as well as `>`, `<` and others), as they have no special treatment for arrays. They handle them as any objects, and it's not what we usually want.
+
+Instead you can use `for..of` loop to compare arrays item-by-item.
+
+We will continue with arrays and study more methods to add, remove, extract elements and sort arrays in the next chapter <info:array-methods>.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c

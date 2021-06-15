@@ -5,11 +5,19 @@
 
 Заметим, на данный момент в `fetch` нет способа отслеживать процесс *отправки*. Для этого используйте [XMLHttpRequest](info:xmlhttprequest), позже мы его рассмотрим.
 
+<<<<<<< HEAD
 Чтобы отслеживать ход загрузки данных с сервера, можно использовать свойство `response.body`. Это `ReadableStream` ("поток для чтения") -- особый объект, который предоставляет тело ответа по частям, по мере поступления. Потоки для чтения описаны в спецификации [Streams API](https://streams.spec.whatwg.org/#rs-class).
+=======
+To track download progress, we can use `response.body` property. It's `ReadableStream` -- a special object that provides body chunk-by-chunk, as it comes. Readable streams are described in the [Streams API](https://streams.spec.whatwg.org/#rs-class) specification.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 В отличие от `response.text()`, `response.json()` и других методов, `response.body` даёт полный контроль над процессом чтения, и мы можем подсчитать, сколько данных получено на каждый момент.
 
+<<<<<<< HEAD
 Вот примерный код, который читает ответ из `response.body`:
+=======
+Here's the sketch of code that reads the response from `response.body`:
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js
 // вместо response.json() и других методов
@@ -107,6 +115,14 @@ alert(commits[0].author.login);
     let blob = new Blob(chunks);
     ```
 
+<<<<<<< HEAD
 В итоге у нас есть результат (строки или `Blob`, смотря что удобно) и отслеживание прогресса получения.
 
 На всякий случай повторимся, что здесь мы рассмотрели, как отслеживать процесс получения данных с сервера, а не их отправки на сервер. Для отслеживания отправки у `fetch` пока нет способа.
+=======
+At the end we have the result (as a string or a blob, whatever is convenient), and progress-tracking in the process.
+
+Once again, please note, that's not for *upload* progress (no way now with `fetch`), only for *download* progress.
+
+Also, if the size is unknown, we should check `receivedLength` in the loop and break it once it reaches a certain limit. So that the `chunks` won't overflow the memory. 
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
