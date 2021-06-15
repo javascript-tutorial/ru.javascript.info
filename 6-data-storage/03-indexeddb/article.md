@@ -539,7 +539,7 @@ openRequest.onupgradeneeded = function() {
   // мы должны создать индекс здесь, в versionchange транзакции
   let books = db.createObjectStore('books', {keyPath: 'id'});
 *!*
-  let index = inventory.createIndex('price_idx', 'price');
+  let index = books.createIndex('price_idx', 'price');
 */!*
 };
 ```
@@ -548,7 +548,7 @@ openRequest.onupgradeneeded = function() {
 - Поле price не уникальное, у нас может быть несколько книг с одинаковой ценой, поэтому мы не устанавливаем опцию `unique`.
 - Поле price не является массивом, поэтому флаг `multiEntry` не применим.
 
-Представим, что в нашем `inventory` есть 4 книги. Вот картинка, которая показывает, что такое "индекс".
+Представим, что в нашем `books` есть 4 книги. Вот картинка, которая показывает, что такое "индекс".
 
 ![](indexeddb-index.svg)
 
