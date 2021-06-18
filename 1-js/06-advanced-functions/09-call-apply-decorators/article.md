@@ -23,11 +23,15 @@ function cachingDecorator(func) {
   let cache = new Map();
 
   return function(x) {
-    if (cache.has(x)) {    // если кеш содержит такой x,
-      return cache.get(x); // читаем из него результат
+    if (cache.has(x)) {                // если кеш содержит такой x,
+      let cached_value = cache.get(x); // читаем из него результат
+      alert(`From cache ${cached_value}`);
+
+      return cached_value;
     }
 
     let result = func(x); // иначе, вызываем функцию
+    alert(`Calculated ${result}`);
 
     cache.set(x, result); // и кешируем (запоминаем) результат
     return result;
@@ -36,11 +40,11 @@ function cachingDecorator(func) {
 
 slow = cachingDecorator(slow);
 
-alert( slow(1) ); // slow(1) кешируем
-alert( "Again: " + slow(1) ); // возвращаем из кеша
+slow(1); // slow(1) кешируем
+slow(1); // возвращаем из кеша
 
-alert( slow(2) ); // slow(2) кешируем
-alert( "Again: " + slow(2) ); // возвращаем из кеша
+slow(2); // slow(2) кешируем
+slow(2); // возвращаем из кеша
 ```
 
 В коде выше `cachingDecorator` -- это *декоратор*, специальная функция, которая принимает другую функцию и изменяет её поведение.
@@ -87,11 +91,16 @@ function cachingDecorator(func) {
   let cache = new Map();
   return function(x) {
     if (cache.has(x)) {
-      return cache.get(x);
+      let cached_value = cache.get(x);
+      alert(`From cache ${cached_value}`);
+
+      return cached_value;
     }
 *!*
     let result = func(x); // (**)
 */!*
+    alert(`Calculated ${result}`);
+
     cache.set(x, result);
     return result;
   };
@@ -189,11 +198,16 @@ function cachingDecorator(func) {
   let cache = new Map();
   return function(x) {
     if (cache.has(x)) {
-      return cache.get(x);
+      let cached_value = cache.get(x);
+      alert(`From cache ${cached_value}`); // получаем из кеша
+
+      return cached_value;
     }
 *!*
     let result = func.call(this, x); // теперь 'this' передаётся правильно
 */!*
+    alert(`Calculated ${result}`); // высчитываем...
+
     cache.set(x, result);
     return result;
   };
@@ -201,8 +215,8 @@ function cachingDecorator(func) {
 
 worker.slow = cachingDecorator(worker.slow); // теперь сделаем её кеширующей
 
-alert( worker.slow(2) ); // работает
-alert( worker.slow(2) ); // работает, не вызывая первоначальную функцию (кешируется)
+worker.slow(2)  // работает
+worker.slow(2)  // работает, не вызывая первоначальную функцию (получаем результат из кеша)
 ```
 
 Теперь всё в порядке.
@@ -261,13 +275,17 @@ function cachingDecorator(func, hash) {
     let key = hash(arguments); // (*)
 */!*
     if (cache.has(key)) {
-      return cache.get(key);
+      let cached_value = cache.get(key);
+      alert(`From cache ${cached_value}`); // получаем из кеша
+      
+      return cached_value;
     }
 
 *!*
     let result = func.call(this, ...arguments); // (**)
 */!*
-
+    alert(`Calculated ${result}`); // высчитываем...
+    
     cache.set(key, result);
     return result;
   };
@@ -279,8 +297,8 @@ function hash(args) {
 
 worker.slow = cachingDecorator(worker.slow, hash);
 
-alert( worker.slow(3, 5) ); // работает
-alert( "Again " + worker.slow(3, 5) ); // аналогично (из кеша)
+worker.slow(3, 5); // работает
+worker.slow(3, 5); // аналогично (из кеша)
 ```
 
 Теперь он работает с любым количеством аргументов.
