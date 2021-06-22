@@ -228,11 +228,11 @@ customElements.define('user-card', class extends HTMLElement {
       </slot>
     </div>
     <fieldset>
-      <legend>Обо мне</legend>
+      <legend>Другая информация</legend>
 *!*
       <slot>
-        <div>Привет!</div>
-        <div>Я Иван!</div>
+        <div>Я люблю плавать.</div>
+        <div>...И играть в волейбол!</div>
       </slot>
 */!*
     </fieldset>
