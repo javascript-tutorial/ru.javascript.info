@@ -2,7 +2,11 @@
 
 Далее у нас будут задачи, для проверки которых используется автоматическое тестирование. Также его часто применяют в реальных проектах.
 
+<<<<<<< HEAD
 ## Зачем нам нужны тесты?
+=======
+## Why do we need tests?
+>>>>>>> ef8d576821ff28c69bfb7410dc79fd216b0a315b
 
 Обычно, когда мы пишем функцию, мы легко можем представить, что она должна делать, и как она будет вести себя в зависимости от переданных параметров.
 
@@ -79,7 +83,11 @@ describe("pow", function() {
 
 Давайте посмотрим этот поток разработки на нашем примере.
 
+<<<<<<< HEAD
 Первый шаг уже завершён. У нас есть спецификация для функции `pow`. Теперь, перед тем, как писать реализацию, давайте подключим библиотеки для пробного запуска тестов, просто чтобы убедиться, что тесты работают (разумеется, они завершатся ошибками).
+=======
+The first step is already complete: we have an initial spec for `pow`. Now, before making the implementation, let's use few JavaScript libraries to run the tests, just to see that they are working (they will all fail).
+>>>>>>> ef8d576821ff28c69bfb7410dc79fd216b0a315b
 
 ## Спецификация в действии
 
@@ -160,7 +168,11 @@ function pow(x, n) {
         assert.equal(pow(2, 3), 8);
       });
 
+<<<<<<< HEAD
       it("3 в степени 4 будет 81", function() {
+=======
+      it("3 raised to power 4 is 81", function() {
+>>>>>>> ef8d576821ff28c69bfb7410dc79fd216b0a315b
         assert.equal(pow(3, 4), 81);
       });
 
@@ -183,7 +195,11 @@ function pow(x, n) {
 
 [iframe height=250 src="pow-2" edit border="1"]
 
+<<<<<<< HEAD
 Как мы и ожидали, второй тест провалился. Естественно, наша функция всегда возвращает `8`, в то время как `assert` ожидает `81`.
+=======
+As we could expect, the second test failed. Sure, our function always returns `8`, while the `assert` expects `81`.
+>>>>>>> ef8d576821ff28c69bfb7410dc79fd216b0a315b
 
 ## Улучшаем реализацию
 

@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# Постфиксная и префиксная формы
+# The postfix and prefix forms
 
-Чему будут равны переменные `a`, `b`, `c` и `d` в примере ниже?
+What are the final values of all variables `a`, `b`, `c` and `d` after the code below?
 
 ```js
 let a = 1, b = 1;
