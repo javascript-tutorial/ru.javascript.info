@@ -144,7 +144,7 @@ JavaScript поддерживает следующие операторы:
 : Простые `a = b` и составные `a *= 2`.
 
 Битовые операции
-: Битовые операторы работают с 32-битными целыми числами на самом низком, побитовом уровне. Подробнее об их использовании можно прочитать на ресурсе [MDN](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators) и в разделе [Побитовые операторы](https://learn.javascript.ru/bitwise-operators).
+: Битовые операторы работают с 32-битными целыми числами на самом низком, побитовом уровне. Подробнее об их использовании можно прочитать на ресурсе [MDN](https://developer.mozilla.org/ru/docs/Web/JavaScript/Guide/Expressions_and_Operators#Битовые_поразрядные_операторы) и в разделе [Побитовые операторы](https://learn.javascript.ru/bitwise-operators).
 
 Условный оператор
 : Единственный оператор с тремя параметрами: `cond ? resultA : resultB`. Если условие `cond` истинно, возвращается `resultA`, иначе – `resultB`.
