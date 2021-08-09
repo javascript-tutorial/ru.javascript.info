@@ -25,7 +25,11 @@ alert( usersMapped[0].id ); // 1
 alert( usersMapped[0].fullName ); // Вася Пупкин
 ```
 
+<<<<<<< HEAD
 Обратите внимание, что для стрелочных функций мы должны использовать дополнительные скобки.
+=======
+Please note that in the arrow functions we need to use additional brackets. 
+>>>>>>> bc08fd1b32285304b14afea12a9deaa10d13452b
 
 Мы не можем написать вот так:
 ```js

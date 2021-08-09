@@ -4,7 +4,11 @@ importance: 4
 
 # Фильтрация по диапазону
 
+<<<<<<< HEAD
 Напишите функцию `filterRange(arr, a, b)`, которая принимает массив `arr`, ищет в нём элементы между `a` и `b` и отдаёт массив этих элементов.
+=======
+Write a function `filterRange(arr, a, b)` that gets an array `arr`, looks for elements with values higher or equal to `a` and lower or equal to `b` and return a result as an array.
+>>>>>>> bc08fd1b32285304b14afea12a9deaa10d13452b
 
 Функция должна возвращать новый массив и не изменять исходный.
 

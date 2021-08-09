@@ -3,7 +3,11 @@
 
 Как мы знаем, объекты могут содержать свойства.
 
+<<<<<<< HEAD
 До этого момента мы рассматривали свойство только как пару "ключ-значение". Но на самом деле свойство объекта гораздо мощнее и гибче.
+=======
+Until now, a property was a simple "key-value" pair to us. But an object property is actually a more flexible and powerful thing.
+>>>>>>> bc08fd1b32285304b14afea12a9deaa10d13452b
 
 В этой главе мы изучим дополнительные флаги конфигурации для свойств, а в следующей -- увидим, как можно незаметно превратить их в специальные функции - геттеры и сеттеры.
 
@@ -66,7 +70,11 @@ Object.defineProperty(obj, propertyName, descriptor)
 : Объект и его свойство, для которого нужно применить дескриптор.
 
 `descriptor`
+<<<<<<< HEAD
 : Применяемый дескриптор.
+=======
+: Property descriptor object to apply.
+>>>>>>> bc08fd1b32285304b14afea12a9deaa10d13452b
 
 Если свойство существует, `defineProperty` обновит его флаги. В противном случае метод создаёт новое свойство с указанным значением и флагами; если какой-либо флаг не указан явно, ему присваивается значение `false`.
 
@@ -134,7 +142,11 @@ let user = { };
 Object.defineProperty(user, "name", {
 *!*
   value: "John",
+<<<<<<< HEAD
   // для нового свойства необходимо явно указывать все флаги, для которых значение true
+=======
+  // for new properties we need to explicitly list what's true
+>>>>>>> bc08fd1b32285304b14afea12a9deaa10d13452b
   enumerable: true,
   configurable: true
 */!*
@@ -148,7 +160,11 @@ user.name = "Pete"; // Ошибка
 
 Теперь добавим собственный метод `toString` к объекту `user`.
 
+<<<<<<< HEAD
 Встроенный метод `toString` в объектах - неперечислимый, его не видно в цикле `for..in`. Но если мы напишем свой собственный метод `toString`, цикл `for..in` будет выводить его по умолчанию:
+=======
+Normally, a built-in `toString` for objects is non-enumerable, it does not show up in `for..in`. But if we add a `toString` of our own, then by default it shows up in `for..in`, like this:
+>>>>>>> bc08fd1b32285304b14afea12a9deaa10d13452b
 
 ```js run
 let user = {
@@ -162,7 +178,11 @@ let user = {
 for (let key in user) alert(key); // name, toString
 ```
 
+<<<<<<< HEAD
 Если мы этого не хотим, можно установить для свойства `enumerable:false`. Тогда оно перестанет появляться в цикле `for..in` аналогично встроенному `toString`:
+=======
+If we don't like it, then we can set `enumerable:false`. Then it won't appear in a `for..in` loop, just like the built-in one:
+>>>>>>> bc08fd1b32285304b14afea12a9deaa10d13452b
 
 ```js run
 let user = {
@@ -194,7 +214,11 @@ alert(Object.keys(user)); // name
 
 Флаг неконфигурируемого свойства (`configurable:false`) иногда предустановлен для некоторых встроенных объектов и свойств.
 
+<<<<<<< HEAD
 Неконфигурируемое свойство не может быть удалено.
+=======
+A non-configurable property can't be deleted, its attributes can't be modified.
+>>>>>>> bc08fd1b32285304b14afea12a9deaa10d13452b
 
 Например, свойство `Math.PI` - только для чтения, неперечислимое и неконфигурируемое:
 
@@ -214,24 +238,62 @@ alert( JSON.stringify(descriptor, null, 2 ) );
 То есть программист не сможет изменить значение `Math.PI` или перезаписать его.
 
 ```js run
+<<<<<<< HEAD
 Math.PI = 3; // Ошибка
+=======
+Math.PI = 3; // Error, because it has writable: false
+>>>>>>> bc08fd1b32285304b14afea12a9deaa10d13452b
 
 // delete Math.PI тоже не сработает
 ```
 
+<<<<<<< HEAD
 Определение свойства как неконфигурируемого - это дорога в один конец. Мы не сможем отменить это действие, потому что `defineProperty` не работает с неконфигурируемыми свойствами.
 
 В коде ниже мы делаем `user.name` "навечно запечатанной" константой:
+=======
+We also can't change `Math.PI` to be `writable` again:
 
 ```js run
-let user = { };
+// Error, because of configurable: false
+Object.defineProperty(Math, "PI", { writable: true });
+```
+
+There's absolutely nothing we can do with `Math.PI`.
+
+Making a property non-configurable is a one-way road. We cannot change it back with `defineProperty`.
+
+**Please note: `configurable: false` prevents changes of property flags and its deletion, while allowing to change its value.**
+
+Here `user.name` is non-configurable, but we can still change it (as it's writable):
+>>>>>>> bc08fd1b32285304b14afea12a9deaa10d13452b
+
+```js run
+let user = {
+  name: "John"
+};
 
 Object.defineProperty(user, "name", {
-  value: "John",
+  configurable: false
+});
+
+user.name = "Pete"; // works fine
+delete user.name; // Error
+```
+
+And here we make `user.name` a "forever sealed" constant, just like the built-in `Math.PI`:
+
+```js run
+let user = {
+  name: "John"
+};
+
+Object.defineProperty(user, "name", {
   writable: false,
   configurable: false
 });
 
+<<<<<<< HEAD
 *!*
 // теперь невозможно изменить user.name или его флаги
 // всё это не будет работать:
@@ -244,6 +306,19 @@ Object.defineProperty(user, "name", {writable: true}); // Ошибка
 
 ```smart header="Ошибки отображаются только в строгом режиме"
 В нестрогом режиме мы не увидим никаких ошибок при записи в свойства "только для чтения" и т.п. Эти операции всё равно не будут выполнены успешно. Действия, нарушающие ограничения флагов, в нестрогом режиме просто молча игнорируются.
+=======
+// won't be able to change user.name or its flags
+// all this won't work:
+user.name = "Pete";
+delete user.name;
+Object.defineProperty(user, "name", { value: "Pete" });
+```
+
+```smart header="The only attribute change possible: writable true -> false"
+There's a minor exception about changing flags.
+
+We can change `writable: true` to `false` for a non-configurable property, thus preventing its value modification (to add another layer of protection). Not the other way around though.
+>>>>>>> bc08fd1b32285304b14afea12a9deaa10d13452b
 ```
 
 ## Метод Object.defineProperties

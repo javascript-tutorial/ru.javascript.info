@@ -10,7 +10,11 @@ importance: 5
 
 Каковы координаты центра поля?
 
+<<<<<<< HEAD
 Вычислите их и используйте, чтобы поместить мяч в центр поля:
+=======
+Calculate them and use to place the ball into the center of the green field:
+>>>>>>> bc08fd1b32285304b14afea12a9deaa10d13452b
 
 [iframe src="solution" height=180]
 
