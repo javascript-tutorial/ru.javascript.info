@@ -14,8 +14,15 @@
 
 Формула:
 ```js
+<<<<<<< HEAD
 // initial: начальная сумма денег
 // interest: проценты, например, 0.05 означает 5% в год
 // years: сколько лет ждать
 let result = Math.round(initial * (1 + interest * years));
+=======
+// initial: the initial money sum
+// interest: e.g. 0.05 means 5% per year
+// years: how many years to wait
+let result = Math.round(initial * (1 + interest) ** years);
+>>>>>>> 4d01fc20d4d82358e61518a31efe80dec9bb2602
 ```
