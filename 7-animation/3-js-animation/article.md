@@ -390,7 +390,7 @@ bounceEaseInOut = makeEaseInOut(bounce);
 
 [codetabs src="bounce-easeinout"]
 
-Функция "easeInOut" объединяет два графика в один: `easeIn` (обычный) для первой половины анимации and `easeOut` (обратный) -- для второй половины.
+Функция "easeInOut" объединяет два графика в один: `easeIn` (обычный) для первой половины анимации и `easeOut` (обратный) -- для второй половины.
 
 Разница хорошо заметна, если сравнивать графики `easeIn`, `easeOut` и `easeInOut` для функции `circ`:
 
