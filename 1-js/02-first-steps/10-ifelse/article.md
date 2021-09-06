@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # Условное ветвление: if, '?'
+=======
+# Conditional branching: if, '?'
+>>>>>>> 4d01fc20d4d82358e61518a31efe80dec9bb2602
 
 Иногда нам нужно выполнить различные действия в зависимости от условий.
 
@@ -68,9 +72,13 @@ if (condition) {
 
 ## Блок "else"
 
+<<<<<<< HEAD
 Инструкция `if` может содержать необязательный блок "else" ("иначе"). Он выполняется, когда условие ложно.
 
 Например:
+=======
+The `if` statement may contain an optional "else" block. It executes when the condition is falsy.
+>>>>>>> 4d01fc20d4d82358e61518a31efe80dec9bb2602
 
 ```js run
 let year = prompt('В каком году была опубликована спецификация ECMAScript-2015?', '');
