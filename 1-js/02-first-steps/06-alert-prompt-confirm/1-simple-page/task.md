@@ -2,8 +2,8 @@ importance: 4
 
 ---
 
-# Простая страница
+# A simple page
 
-Создайте страницу, которая спрашивает имя у пользователя и выводит его.
+Create a web-page that asks for a name and outputs it.
 
 [demo]
