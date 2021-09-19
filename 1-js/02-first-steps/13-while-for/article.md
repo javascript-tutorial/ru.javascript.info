@@ -217,17 +217,20 @@ let sum = 0;
 
 while (true) {
 
-  let value = +prompt("Введите число", '');
+  let userInput = prompt("Введите число", '');
+  let number = Number(userInput);
 
 *!*
-  if (!value) break; // (*)
+  if (!userInput || isNaN(number)) break; // (*)
 */!*
 
-  sum += value;
+  sum += number;
 
 }
 alert( 'Сумма: ' + sum );
 ```
+
+Для проверки вводимого числа на `NaN` используется функция `isNaN`, которая будет подробнее рассмотрена в главе <info:number>.
 
 Директива `break` в строке `(*)` полностью прекращает выполнение цикла и передаёт управление на строку за его телом, то есть на `alert`.
 
