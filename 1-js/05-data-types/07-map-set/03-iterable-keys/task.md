@@ -4,7 +4,11 @@ importance: 5
 
 # Перебираемые ключи
 
+<<<<<<< HEAD
 Мы хотели бы получить массив ключей `map.keys()` в переменную и далее работать с ними, например, применить метод `.push`.
+=======
+We'd like to get an array of `map.keys()` in a variable and then apply array-specific methods to it, e.g. `.push`.
+>>>>>>> b09e38c5573346c401a9f9f7410b4ff9be5f4115
 
 Но это не выходит:
 

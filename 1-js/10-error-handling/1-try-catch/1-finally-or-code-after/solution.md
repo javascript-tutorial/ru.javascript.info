@@ -1,8 +1,14 @@
 Разница в поведении станет очевидной, если рассмотреть код внутри функции.
 
+<<<<<<< HEAD
 Поведение будет различным, если управление каким-то образом выпрыгнет из `try..catch`.
 
 Например, когда есть `return` внутри `try..catch`. Секция `finally` работает в любом случае при *любом* выходе из `try..catch`, даже через `return`: сразу после того как `try..catch` выполнится, но до того, как вызывающий код получит контроль.
+=======
+The behavior is different if there's a "jump out" of `try...catch`.
+
+For instance, when there's a `return` inside `try...catch`. The `finally` clause works in case of *any* exit from `try...catch`, even via the `return` statement: right after `try...catch` is done, but before the calling code gets the control.
+>>>>>>> b09e38c5573346c401a9f9f7410b4ff9be5f4115
 
 ```js run
 function f() {
@@ -11,7 +17,7 @@ function f() {
 *!*
     return "result";
 */!*
-  } catch (e) {
+  } catch (err) {
     /// ...
   } finally {
     alert('очистка!');
@@ -26,13 +32,19 @@ f(); // очистка!
 ```js run
 function f() {
   try {
+<<<<<<< HEAD
     alert('начало');
     throw new Error("ошибка");
   } catch (e) {
+=======
+    alert('start');
+    throw new Error("an error");
+  } catch (err) {
+>>>>>>> b09e38c5573346c401a9f9f7410b4ff9be5f4115
     // ...
     if("не могу обработать ошибку") {
 *!*
-      throw e;
+      throw err;
 */!*
     }
 
