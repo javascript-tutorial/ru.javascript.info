@@ -269,8 +269,9 @@ function checkAge(age) {
     return true;
 */!*
   } else {
+    confirm('А родители разрешили?');
 *!*
-    return confirm('А родители разрешили?');
+    return false;
 */!*
   }
 }
