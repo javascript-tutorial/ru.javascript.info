@@ -33,7 +33,11 @@ printReverseList(list);
 
 # С использованием цикла
 
+<<<<<<< HEAD
 Вариант с использованием цикла сложнее, чем в предыдущей задаче.
+=======
+The loop variant is also a little bit more complicated than the direct output.
+>>>>>>> eda333d423db8ade41f75d2e2d30ea06c7d997ef
 
 Нет способа сразу получить последнее значение в списке `list`. Мы также не можем "вернуться назад", к предыдущему элементу списка.
 

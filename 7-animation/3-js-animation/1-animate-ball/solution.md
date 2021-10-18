@@ -2,7 +2,11 @@
 
 Нижняя координата поля -- `field.clientHeight`. CSS-свойство `top` относится к верхней границе мяча, которая должна идти от 0 до `field.clientHeight - ball.clientHeight`.
 
+<<<<<<< HEAD
 А чтобы получить эффект "скачущего" мяча, мы можем использовать функцию расчёта времени `bounce` в режиме `easeOut`.
+=======
+To get the "bouncing" effect we can use the timing function `bounce` in `easeOut` mode.
+>>>>>>> eda333d423db8ade41f75d2e2d30ea06c7d997ef
 
 Вот конечный код для анимации:
 
