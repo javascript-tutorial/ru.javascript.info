@@ -139,22 +139,31 @@ document.addEventListener('keydown', function(event) {
 ```html autorun height=60 run
 <script>
 function checkPhoneKey(key) {
-  return (key >= '0' && key <= '9') || key == '+' || key == '(' || key == ')' || key == '-';
+  return (key >= '0' && key <= '9') || ['+','(',')','-'].includes(key);
 }
 </script>
 <input *!*onkeydown="return checkPhoneKey(event.key)"*/!* placeholder="Введите телефон" type="tel">
 ```
 
+<<<<<<< HEAD:2-ui/3-event-details/5-keyboard-events/article.md
 Заметьте, что специальные клавиши, такие как `key:Backspace`, `key:Left`, `key:Right`, `key:Ctrl+V`, в этом поле для ввода не работают. Это побочный эффект чересчур жёсткого фильтра `checkPhoneKey`.
 
 Добавим ему немного больше свободы:
+=======
+The `onkeydown` handler here uses `checkPhoneKey` to check for the key pressed. If it's valid (from `0..9` or one of `+-()`), then it returns `true`, otherwise `false`.
 
+As we know, the `false` value returned from the event handler, assigned using a DOM property or an attribute, such as above, prevents the default action, so nothing appears in the `<input>` for keys that don't pass the test. (The `true` value returned doesn't affect anything, only returning `false` matters)
+>>>>>>> 3699f73b4ccb2a57ac5ef990d2687bf31ccf564c:2-ui/3-event-details/7-keyboard-events/article.md
+
+Please note that special keys, such as `key:Backspace`, `key:Left`, `key:Right`, do not work in the input. That's a side-effect of the strict filter `checkPhoneKey`. These keys make it return `false`.
+
+Let's relax the filter a little bit by allowing arrow keys `key:Left`, `key:Right` and `key:Delete`, `key:Backspace`:
 
 ```html autorun height=60 run
 <script>
 function checkPhoneKey(key) {
-  return (key >= '0' && key <= '9') || key == '+' || key == '(' || key == ')' || key == '-' ||
-    key == 'ArrowLeft' || key == 'ArrowRight' || key == 'Delete' || key == 'Backspace';
+  return (key >= '0' && key <= '9') ||
+    ['+','(',')','-',*!*'ArrowLeft','ArrowRight','Delete','Backspace'*/!*].includes(key);
 }
 </script>
 <input onkeydown="return checkPhoneKey(event.key)" placeholder="Введите телефон" type="tel">
@@ -162,7 +171,13 @@ function checkPhoneKey(key) {
 
 Теперь стрелочки и удаление прекрасно работают.
 
+<<<<<<< HEAD:2-ui/3-event-details/5-keyboard-events/article.md
 ...Впрочем, мы всё равно можем ввести в `<input>` что угодно с помощью правого клика мыши и  пункта "Вставить" контекстного меню. Так что такой фильтр не обладает 100% надёжностью. Мы можем просто оставить всё как есть, потому что в большинстве случаев это работает. Альтернатива -- отслеживать событие `input`, оно генерируется после любых изменений в поле `<input>`, и мы можем проверять новое значение и подчёркивать/изменять его, если оно не подходит.
+=======
+Even though we have the key filter, one still can enter anything using a mouse and right-click + Paste. Mobile devices provide other means to enter values. So the filter is not 100% reliable.
+
+The alternative approach would be to track the `oninput` event -- it triggers *after* any modification. There we can check the new `input.value` and modify it/highlight the `<input>` when it's invalid. Or we can use both event handlers together.
+>>>>>>> 3699f73b4ccb2a57ac5ef990d2687bf31ccf564c:2-ui/3-event-details/7-keyboard-events/article.md
 
 ## "Дела минувших дней"
 
@@ -170,7 +185,17 @@ function checkPhoneKey(key) {
 
 Но количество браузерных несовместимостей при работе с ними было столь велико, что у разработчиков спецификации не было другого выхода, кроме как объявить их устаревшими и создать новые, современные события (которые и описываются в этой главе). Старый код ещё работает, так как браузеры продолжают поддерживать и `keypress`, и `keyCode` с `charCode`, и `which`, но более нет никакой необходимости в их использовании.
 
+<<<<<<< HEAD:2-ui/3-event-details/5-keyboard-events/article.md
 ## Итого
+=======
+## Mobile Keyboards
+
+When using virtual/mobile keyboards, formally known as IME (Input-Method Editor), the W3C standard states that a KeyboardEvent's [`e.keyCode` should be `229`](https://www.w3.org/TR/uievents/#determine-keydown-keyup-keyCode) and [`e.key` should be `"Unidentified"`](https://www.w3.org/TR/uievents-key/#key-attr-values).
+
+While some of these keyboards might still use the right values for `e.key`, `e.code`, `e.keyCode`... when pressing certain keys such as arrows or backspace, there's no guarantee, so your keyboard logic might not always work on mobile devices.
+
+## Summary
+>>>>>>> 3699f73b4ccb2a57ac5ef990d2687bf31ccf564c:2-ui/3-event-details/7-keyboard-events/article.md
 
 Нажатие клавиши всегда генерирует клавиатурное событие, будь то буквенно-цифровая клавиша или специальная типа `key:Shift` или `key:Ctrl` и т.д. Единственным исключением является клавиша `Fn`, которая присутствует на клавиатуре некоторых ноутбуков. События на клавиатуре для неё нет, потому что она обычно работает на уровне более низком, чем даже ОС.
 

@@ -26,9 +26,15 @@
 
 ...И эта штука летает, поддерживая жизни людей в космосе!
 
+<<<<<<< HEAD
 Как создаются столь сложные устройства?
 
 Какие принципы мы могли бы позаимствовать, чтобы сделать нашу разработку такой же надёжной и масштабируемой? Или, по крайней мере, приблизиться к такому уровню.
+=======
+How are such complex devices created?
+
+Which principles could we borrow to make our development same-level reliable and scalable? Or, at least, close to it?
+>>>>>>> 3699f73b4ccb2a57ac5ef990d2687bf31ccf564c
 
 ## Компонентная архитектура
 
@@ -56,15 +62,27 @@
 
 Как мы определяем, что является компонентом? Это приходит из соображений здравого смысла, а также с интуицией и опытом. Обычно это объект, отделимый визуально, который мы можем описать с точки зрения того, что он делает и как он взаимодействует со страницей. В примере выше, страница содержит блоки, каждый из которых играет свою роль, и логично выделить их в компоненты.
 
+<<<<<<< HEAD
 Компонент имеет:
 - свой собственный JavaScript-класс.
 - DOM-структура управляется исключительно своим классом, и внешний код не имеет к ней доступа (принцип "инкапсуляции").
 - CSS-стили, применённые к компоненту.
 - API: события, методы класса и т.п., для взаимодействия с другими компонентами.
+=======
+A component has:
+- Its own JavaScript class.
+- DOM structure, managed solely by its class, outside code doesn't access it ("encapsulation" principle).
+- CSS styles, applied to the component.
+- API: events, class methods etc, to interact with other components.
+>>>>>>> 3699f73b4ccb2a57ac5ef990d2687bf31ccf564c
 
 Ещё раз заметим, в компонентном подходе как таковом нет ничего особенного.
 
+<<<<<<< HEAD
 Существует множество фреймворков и методов разработки для их создания, каждый из которых со своими плюсами и минусами. Обычно особые CSS классы и соглашения используются для эмуляции компонентов -- области видимости CSS и инкапсуляция DOM.
+=======
+There exist many frameworks and development methodologies to build them, each with its own bells and whistles. Usually, special CSS classes and conventions are used to provide "component feel" -- CSS scoping and DOM encapsulation.
+>>>>>>> 3699f73b4ccb2a57ac5ef990d2687bf31ccf564c
 
 "Веб-компоненты" предоставляют встроенные возможности браузера для этого, поэтому нам больше не нужно эмулировать их.
 
