@@ -120,11 +120,11 @@
 Например:
 
 ```js run
-var access = parseInt("11000", 2); // получаем число из строки
+let access = parseInt("11000", 2); // получаем число из строки
 
 alert( access ); // 24, число с таким 2-ным представлением
 
-var access2 = access.toString(2); // обратно двоичную строку из числа
+let access2 = access.toString(2); // обратно двоичную строку из числа
 
 alert( access2 ); // 11000
 ```
@@ -536,19 +536,19 @@ alert( 100 >> 3 ); // 12, деление на 2 три раза, целая ча
 Как правило, доступы задаются в виде констант:
 
 ```js no-beautify
-var ACCESS_ADMIN = 1;          // 00001
-var ACCESS_GOODS_EDIT = 2;   // 00010
-var ACCESS_GOODS_VIEW = 4;     // 00100
-var ACCESS_ARTICLE_EDIT = 8; // 01000
-var ACCESS_ARTICLE_VIEW = 16;  // 10000
+const ACCESS_ADMIN = 1;          // 00001
+const ACCESS_GOODS_EDIT = 2;   // 00010
+const ACCESS_GOODS_VIEW = 4;     // 00100
+const ACCESS_ARTICLE_EDIT = 8; // 01000
+const ACCESS_ARTICLE_VIEW = 16;  // 10000
 ```
 
 Из этих констант получить нужную комбинацию доступов можно при помощи операции `|`.
 
 ```js
-var guest = ACCESS_ARTICLE_VIEW | ACCESS_GOODS_VIEW; // 10100
-var editor = guest | ACCESS_ARTICLE_EDIT | ACCESS_GOODS_EDIT; // 11110
-var admin = editor | ACCESS_ADMIN; // 11111
+const guest = ACCESS_ARTICLE_VIEW | ACCESS_GOODS_VIEW; // 10100
+const editor = guest | ACCESS_ARTICLE_EDIT | ACCESS_GOODS_EDIT; // 11110
+const admin = editor | ACCESS_ADMIN; // 11111
 ```
 
 Теперь, чтобы понять, есть ли в доступе `editor` нужный доступ, например управление правами -- достаточно применить к нему побитовый оператор И (`&`) с соответствующей константой.
@@ -567,7 +567,7 @@ alert(editor & ACCESS_ARTICLE_EDIT); // 8, доступ есть
 Например, проверим, есть ли права на просмотр ИЛИ изменение товаров. Соответствующие права задаются битом `1` на втором и третьем месте с конца, что даёт число `00110` (=`6` в 10-ной системе).
 
 ```js
-var check = ACCESS_GOODS_VIEW | ACCESS_GOODS_EDIT; // 6, 00110
+const check = ACCESS_GOODS_VIEW | ACCESS_GOODS_EDIT; // 6, 00110
 
 alert( admin & check ); // не 0, значит есть доступ к просмотру ИЛИ изменению
 ```
@@ -625,7 +625,7 @@ alert( 1.1 + 1.2 ^ 0 ); // 2, сложение выполнится раньше
 Как видно из последнего равенства, `~n == 0` только если `n == -1`. Поэтому можно легко проверить равенство `n == -1`:
 
 ```js run
-var n = 5;
+let n = 5;
 
 if (~n) { // сработает, т.к. ~n = -(5+1) = -6
   alert( "n не -1" ); // выведет!
@@ -633,7 +633,7 @@ if (~n) { // сработает, т.к. ~n = -(5+1) = -6
 ```
 
 ```js run
-var n = -1;
+let n = -1;
 
 if (~n) { // не сработает, т.к. ~n = -(-1+1) = 0
   alert( "...ничего не выведет..." );
@@ -643,7 +643,7 @@ if (~n) { // не сработает, т.к. ~n = -(-1+1) = 0
 Проверка на `-1` пригождается, например, при поиске символа в строке. Вызов `str.indexOf("подстрока")` возвращает позицию подстроки в `str`, или `-1` если не нашёл.
 
 ```js run
-var str = "Проверка";
+let str = "Проверка";
 
 if (~str.indexOf("верка")) { // Сочетание "if (~...indexOf)" читается как "если найдено"
   alert( 'найдено!' );
