@@ -328,7 +328,7 @@ timingEaseOut(timeFraction) = 1 - timing(1 - timeFraction)
 Другими словами, мы имеем функцию "преобразования" -- `makeEaseOut`, которая берет "обычную" функцию расчёта времени и возвращает обёртку над ней:
 
 ```js
-// принимает функцию расчёта времени и возрващает преобразованный вариант
+// принимает функцию расчёта времени и возвращает преобразованный вариант
 function makeEaseOut(timing) {
   return function(timeFraction) {
     return 1 - timing(1 - timeFraction);
