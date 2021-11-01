@@ -328,7 +328,7 @@ timingEaseOut(timeFraction) = 1 - timing(1 - timeFraction)
 Другими словами, мы имеем функцию "преобразования" -- `makeEaseOut`, которая берет "обычную" функцию расчёта времени и возвращает обёртку над ней:
 
 ```js
-// принимает функцию расчёта времени и возрващает преобразованный вариант
+// принимает функцию расчёта времени и возвращает преобразованный вариант
 function makeEaseOut(timing) {
   return function(timeFraction) {
     return 1 - timing(1 - timeFraction);
@@ -390,7 +390,7 @@ bounceEaseInOut = makeEaseInOut(bounce);
 
 [codetabs src="bounce-easeinout"]
 
-Функция "easeInOut" объединяет два графика в один: `easeIn` (обычный) для первой половины анимации and `easeOut` (обратный) -- для второй половины.
+Функция "easeInOut" объединяет два графика в один: `easeIn` (обычный) для первой половины анимации и `easeOut` (обратный) -- для второй половины.
 
 Разница хорошо заметна, если сравнивать графики `easeIn`, `easeOut` и `easeInOut` для функции `circ`:
 
