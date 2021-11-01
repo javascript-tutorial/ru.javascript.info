@@ -690,7 +690,7 @@ request.onsuccess = function() {
   if (cursor) {
     let key = cursor.primaryKey; // следующий ключ в хранилище объектов (поле id)
     let value = cursor.value; // следующее значение в хранилище объектов (объект "книга")
-    let key = cursor.key; // следующий ключ индекса (price)
+    let keyIndex = cursor.key; // следующий ключ индекса (price)
     console.log(key, value);
     cursor.continue();
   } else {
