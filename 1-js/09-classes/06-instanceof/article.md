@@ -92,7 +92,7 @@ alert( arr instanceof Object ); // true
     alert(rabbit instanceof Animal); // true
     */!*
 
-    // rabbit.__proto__ === Rabbit.prototype
+    // rabbit.__proto__ === Animal.prototype (нет совпадения)
     *!*
     // rabbit.__proto__.__proto__ === Animal.prototype (совпадение!)
     */!*

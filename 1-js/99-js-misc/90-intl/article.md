@@ -221,8 +221,7 @@ let formatter = new Intl.DateTimeFormat([locales, [options]])
     <td></td>
   </tr>
   <tr>
-    <td>second
-    </td>
+    <td><code>second</code></td>
     <td>Секунды</td>
     <td><code>2-digit</code>, <code>numeric</code></td>
     <td></td>

@@ -124,7 +124,7 @@ alert( date.getUTCHours() );
 : Для заданной даты возвращает таймстамп - количество миллисекунд, прошедших с 1 января 1970 года UTC+0.
 
 [getTimezoneOffset()](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date/getTimezoneOffset)
-: Возвращает разницу в минутах между местным часовым поясом и UTC:
+: Возвращает разницу в минутах между UTC и местным часовым поясом:
 
     ```js run
     // если вы в часовом поясе UTC-1, то выводится 60

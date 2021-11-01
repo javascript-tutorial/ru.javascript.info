@@ -267,6 +267,9 @@ let option = new Option("Текст", "value", true, true);
 `option.index`
 : Номер опции среди других в списке `<select>`.
 
+`option.value`
+: Значение опции.
+
 `option.text`
 : Содержимое опции (то, что видит посетитель).
 

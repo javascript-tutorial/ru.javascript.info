@@ -148,7 +148,7 @@ alert( user2?.[key] ); // undefined
 alert( user1?.[key]?.something?.not?.existing); // undefined
 ```
 
-Кроме этого, `?.` можно совместно использовать с `delete`:
+Кроме этого, `?.` можно использовать совместно с `delete`:
 
 ```js run
 delete user?.name; // Удалить user.name, если пользователь существует

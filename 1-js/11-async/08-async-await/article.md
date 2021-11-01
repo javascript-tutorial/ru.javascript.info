@@ -133,7 +133,7 @@ let user = await response.json();
 
 Можно обернуть этот код в анонимную `async`–функцию, тогда всё заработает:
 
-```js run
+```js
 (async () => {
   let response = await fetch('/article/promise-chaining/user.json');
   let user = await response.json();
