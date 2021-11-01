@@ -184,7 +184,7 @@ let prices = Object.fromEntries([
   ['meat', 4]
 ]);
 
-// now prices = { banana: 1, orange: 2, meat: 4 }
+// prices = { banana: 1, orange: 2, meat: 4 }
 
 alert(prices.orange); // 2
 ```
@@ -202,7 +202,7 @@ map.set('orange', 2);
 map.set('meat', 4);
 
 *!*
-let obj = Object.fromEntries(map.entries()); // make a plain object (*)
+let obj = Object.fromEntries(map.entries()); // создаём обычный объект (*)
 */!*
 
 // готово!
