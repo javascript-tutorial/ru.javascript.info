@@ -103,10 +103,17 @@ customElements.define('user-card', class extends HTMLElement {
 
 ...Но развёрнутое DOM-дерево существует только для целей отображения и обработки событий. Это то, что мы видим на экране. Оно, в некотором плане, "виртуальное". Фактически в документе расположение узлов не меняется.
 
+<<<<<<< HEAD
 Это можно легко проверить, запустив `querySelectorAll`: все узлы находятся на своих местах.
 
 ```js
 // узлы светлого DOM находятся в том же месте, в `<user-card>`
+=======
+That can be easily checked if we run `querySelectorAll`: nodes are still at their places.
+
+```js
+// light DOM <span> nodes are still at the same place, under `<user-card>`
+>>>>>>> 4541b7af7584014a676da731f6e8774da5e059f6
 alert( document.querySelectorAll('user-card span').length ); // 2
 ```
 
@@ -228,11 +235,19 @@ customElements.define('user-card', class extends HTMLElement {
       </slot>
     </div>
     <fieldset>
+<<<<<<< HEAD
       <legend>Другая информация</legend>
 *!*
       <slot>
         <div>Я люблю плавать.</div>
         <div>...И играть в волейбол!</div>
+=======
+      <legend>Other information</legend>
+*!*
+      <slot>
+        <div>I like to swim.</div>
+        <div>...And play volleyball too!</div>
+>>>>>>> 4541b7af7584014a676da731f6e8774da5e059f6
       </slot>
 */!*
     </fieldset>
@@ -409,7 +424,11 @@ customElements.define('custom-menu', class extends HTMLElement {
       <ul><slot name="item"></slot></ul>
     </div>`;
 
+<<<<<<< HEAD
     // слотовый элемент добавляется/удаляется/заменяется
+=======
+    // triggers when slot content changes
+>>>>>>> 4541b7af7584014a676da731f6e8774da5e059f6
 *!*
     this.shadowRoot.firstElementChild.addEventListener('slotchange', e => {
       let slot = e.target;
@@ -445,9 +464,15 @@ setTimeout(() => {
 
 При композиции не происходит перемещения узлов -- с точки зрения JavaScript, DOM остаётся прежним.
 
+<<<<<<< HEAD
 JavaScript может получить доступ к слотам с помощью следующих методов:
 - `slot.assignedNodes/Elements()` -- возвращает узлы/элементы, которые находятся внутри `slot`.
 - `node.assignedSlot` -- обратный метод, возвращает слот по узлу.
+=======
+JavaScript can access slots using methods:
+- `slot.assignedNodes/Elements()` -- returns nodes/elements inside the `slot`.
+- `node.assignedSlot` -- the reverse property, returns slot by a node.
+>>>>>>> 4541b7af7584014a676da731f6e8774da5e059f6
 
 Если мы хотим знать, что показываем, мы можем отследить контент слота следующими способами:
 - событие `slotchange` -- запускается, когда слот наполняется контентом в первый раз, и при каждой операции добавления/удаления/замещения элемента в слоте, за исключением его потомков. Сам слот будет `event.target`.

@@ -2,17 +2,28 @@
 
 Что если бинарные данные фактически являются строкой? Например, мы получили файл с текстовыми данными.
 
+<<<<<<< HEAD
 Встроенный объект [TextDecoder](https://encoding.spec.whatwg.org/#interface-textdecoder) позволяет декодировать данные из бинарного буфера в обычную строку.
+=======
+The built-in [TextDecoder](https://encoding.spec.whatwg.org/#interface-textdecoder) object allows one to read the value into an actual JavaScript string, given the buffer and the encoding.
+>>>>>>> 4541b7af7584014a676da731f6e8774da5e059f6
 
 Для этого прежде всего нам нужно создать сам декодер:
 ```js
 let decoder = new TextDecoder([label], [options]);
 ```
 
+<<<<<<< HEAD
 - **`label`** -- тип кодировки, `utf-8` используется по умолчанию, но также поддерживаются `big5`, `windows-1251` и многие другие.
 - **`options`** -- объект с дополнительными настройками:
   - **`fatal`** -- boolean, если значение `true`, тогда генерируется ошибка для невалидных (не декодируемых) символов, в ином случае (по умолчанию) они заменяются символом `\uFFFD`.
   - **`ignoreBOM`** -- boolean, если значение `true`, тогда игнорируется BOM (дополнительный признак, определяющий порядок следования байтов), что необходимо крайне редко.
+=======
+- **`label`** -- the encoding, `utf-8` by default, but `big5`, `windows-1251` and many other are also supported.
+- **`options`** -- optional object:
+  - **`fatal`** -- boolean, if `true` then throw an exception for invalid (non-decodable) characters, otherwise (default) replace them with character `\uFFFD`.
+  - **`ignoreBOM`** -- boolean, if `true` then ignore BOM (an optional byte-order Unicode mark), rarely needed.
+>>>>>>> 4541b7af7584014a676da731f6e8774da5e059f6
 
 ...и после использовать его метод decode:
 
@@ -59,7 +70,7 @@ alert( new TextDecoder().decode(binaryString) ); // Hello
 
 Имеет следующий синтаксис:
 
-```js run
+```js
 let encoder = new TextEncoder();
 ```
 
