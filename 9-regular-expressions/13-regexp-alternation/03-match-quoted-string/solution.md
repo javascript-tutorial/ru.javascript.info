@@ -11,7 +11,10 @@
 
 ```js run
 let regexp = /"(\\.|[^"\\])*"/g;
-let str = ' .. "test me" .. "Скажи \\"Привет\\"!" .. \\"_" .. "\\\\ \\"" .. ';
 
-alert( str.match(regexp) ); // "test me","Скажи \"Привет\"!","_","\\ \""
+let str1 = ' .. "test me" .. "Скажи \\"Привет\\"!" .. '
+let str2 = ' .. \\" ^_^ " .. "\\\\ \\"" .. ';
+
+alert( str1.match(regexp) ); //  "test me",  "Скажи \"Привет\"!"
+alert( str2.match(regexp) ); //  " ^_^ ",    "\\ \""
 ```
