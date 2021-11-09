@@ -539,7 +539,7 @@ openRequest.onupgradeneeded = function() {
   // мы должны создать индекс здесь, в versionchange транзакции
   let books = db.createObjectStore('books', {keyPath: 'id'});
 *!*
-  let index = inventory.createIndex('price_idx', 'price');
+  let index = books.createIndex('price_idx', 'price');
 */!*
 };
 ```
@@ -548,7 +548,7 @@ openRequest.onupgradeneeded = function() {
 - Поле price не уникальное, у нас может быть несколько книг с одинаковой ценой, поэтому мы не устанавливаем опцию `unique`.
 - Поле price не является массивом, поэтому флаг `multiEntry` не применим.
 
-Представим, что в нашем `inventory` есть 4 книги. Вот картинка, которая показывает, что такое "индекс".
+Представим, что в нашем `books` есть 4 книги. Вот картинка, которая показывает, что такое "индекс".
 
 ![](indexeddb-index.svg)
 
@@ -633,7 +633,7 @@ books.clear(); // очищаем хранилище.
 Синтаксис:
 ```js
 // как getAll, но с использованием курсора:
-let request = store.openCursor(query, [direction]);
+let request = store.openCursor([query], [direction]);
 
 // чтобы получить ключи, не значения (как getAllKeys): store.openKeyCursor
 ```
@@ -690,7 +690,7 @@ request.onsuccess = function() {
   if (cursor) {
     let key = cursor.primaryKey; // следующий ключ в хранилище объектов (поле id)
     let value = cursor.value; // следующее значение в хранилище объектов (объект "книга")
-    let key = cursor.key; // следующий ключ индекса (price)
+    let keyIndex = cursor.key; // следующий ключ индекса (price)
     console.log(key, value);
     cursor.continue();
   } else {
@@ -780,7 +780,7 @@ await inventory.add({ id: 'js', price: 10, created: new Date() }); // Ошибк
 
 Это работает в большинстве случаев. Примеры можно увидеть на странице библиотеки <https://github.com/jakearchibald/idb>.
 
-В некоторых редких случаях, когда нам нужен оригинальный объект `request`, мы можем получить в нему доступ, используя свойство `promise.request`:
+В некоторых редких случаях, когда нам нужен оригинальный объект `request`, мы можем получить к нему доступ, используя свойство `promise.request`:
 
 ```js
 let promise = books.add(book); // получаем промис (без await, не ждём результата)

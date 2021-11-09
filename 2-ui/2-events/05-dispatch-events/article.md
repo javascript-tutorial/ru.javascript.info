@@ -187,7 +187,7 @@ alert(event.clientX); // undefined, неизвестное свойство пр
 <button onclick="hide()">Hide()</button>
 
 <script>
-  // hide() будет вызван автоматически через 2 секунды
+  // hide() будет вызван при щелчке на кнопке
   function hide() {
     let event = new CustomEvent("hide", {
       cancelable: true // без этого флага preventDefault не сработает

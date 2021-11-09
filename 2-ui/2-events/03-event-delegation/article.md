@@ -154,7 +154,7 @@ table.onclick = function(event) {
         this[action]();
       }
 */!*
-    };
+    }
   }
 
   new Menu(menu);

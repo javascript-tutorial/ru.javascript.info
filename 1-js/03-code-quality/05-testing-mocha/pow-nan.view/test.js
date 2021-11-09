@@ -15,11 +15,11 @@ describe("pow", function() {
 
   });
 
-  it("если n - отрицательное число, результат будет NaN", function() {
+  it("для отрицательных n возвращает NaN", function() {
     assert.isNaN(pow(2, -1));
   });
 
-  it("если n не число, результат будет NaN", function() {
+  it("для дробных n возвращает NaN", function() {
     assert.isNaN(pow(2, 1.5));
   });
 
