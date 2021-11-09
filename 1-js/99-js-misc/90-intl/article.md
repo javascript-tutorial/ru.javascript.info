@@ -377,7 +377,7 @@ formatter.format(number); // форматирование
     <td><code>maximumSignificantDigits</code></td>
     <td>Максимальное количество значимых цифр</td>
     <td>от <code>minimumSignificantDigits</code> до <code>21</code></td>
-    <td><code>minimumSignificantDigits</code></td>
+    <td><code>21</code></td>
   </tr>
 </table>
 
