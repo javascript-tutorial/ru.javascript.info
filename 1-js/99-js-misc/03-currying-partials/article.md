@@ -31,9 +31,9 @@ function sum(a, b) {
   return a + b;
 }
 
-let carriedSum = curry(sum);
+let curriedSum = curry(sum);
 
-alert( carriedSum(1)(2) ); // 3
+alert( curriedSum(1)(2) ); // 3
 ```
 
 Как вы видите, реализация довольна проста: это две обёртки.
@@ -49,10 +49,10 @@ function sum(a, b) {
   return a + b;
 }
 
-let carriedSum = _.curry(sum); // используем _.curry из lodash
+let curriedSum = _.curry(sum); // используем _.curry из lodash
 
-alert( carriedSum(1, 2) ); // 3, можно вызывать как обычно
-alert( carriedSum(1)(2) ); // 3, а можно частично
+alert( curriedSum(1, 2) ); // 3, можно вызывать как обычно
+alert( curriedSum(1)(2) ); // 3, а можно частично
 ```
 
 ## Каррирование? Зачем?
