@@ -64,7 +64,7 @@ document.head.append(script);
 
 *!*
 script.onerror = function() {
-  alert("Error loading " + this.src); // Ошибка загрузки https://example.com/404.js
+  alert("Error loading " + this.src); // Error loading https://example.com/404.js
 };
 */!*
 ```
