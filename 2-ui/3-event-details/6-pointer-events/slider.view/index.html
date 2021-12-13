@@ -5,22 +5,49 @@
   <div class="thumb"></div>
 </div>
 
+<<<<<<< HEAD
+=======
+<p style="border:1px solid gray" onmousemove="this.textContent = new Date()">Mouse over here to see the date</p>
+
+>>>>>>> c5358c59494b53efb832c81a5338e0a23b22c269
 <script>
   let thumb = slider.querySelector('.thumb');
   let shiftX;
 
+<<<<<<< HEAD
   thumb.onpointerdown = function(event) {
+=======
+  function onThumbDown(event) {
+>>>>>>> c5358c59494b53efb832c81a5338e0a23b22c269
     event.preventDefault(); // prevent selection start (browser action)
 
     shiftX = event.clientX - thumb.getBoundingClientRect().left;
 
     thumb.setPointerCapture(event.pointerId);
+<<<<<<< HEAD
   };
 
   thumb.onpointermove = function(event) {
     let newLeft = event.clientX - shiftX - slider.getBoundingClientRect().left;
 
     // если указатель находится за пределами слайдера => отрегулировать "left", чтобы оставаться в пределах границ
+=======
+
+    thumb.onpointermove = onThumbMove;
+
+    thumb.onpointerup = event => {
+      // dragging finished, no need to track pointer any more
+      // ...any other "drag end" logic here...
+      thumb.onpointermove = null;
+      thumb.onpointerup = null;
+    }
+  };
+
+  function onThumbMove(event) {
+    let newLeft = event.clientX - shiftX - slider.getBoundingClientRect().left;
+
+    // if the pointer is out of slider => adjust left to be within the boundaries
+>>>>>>> c5358c59494b53efb832c81a5338e0a23b22c269
     if (newLeft < 0) {
       newLeft = 0;
     }
@@ -32,6 +59,11 @@
     thumb.style.left = newLeft + 'px';
   };
 
+<<<<<<< HEAD
+=======
+  thumb.onpointerdown = onThumbDown;
+
+>>>>>>> c5358c59494b53efb832c81a5338e0a23b22c269
   thumb.ondragstart = () => false;
 
 </script>
