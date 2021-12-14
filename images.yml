@@ -1,4 +1,7 @@
 code-style.svg:
+  "A space between parameters":
+    text: "Пробел между параметрами"
+    position: "center"
   "No space":
     text: "Без пробелов"
     position: "center"
@@ -319,11 +322,17 @@ lexical-environment-global-2.svg:
   execution start: 'начало выполнения'
   '&lt;empty&gt;': '&lt;пусто&gt;'
 
+lexical-environment-global.svg:
+  'Lexical Environment':
+    text: 'Лексическое Окружение'
+
 lexenv-makearmy.svg:
   for block: 'блочный'
 
 lexical-environment-simple.svg:
-  'LexicalEnvironment for the call': 'LexicalEnvironment вызова'
+  'Lexical Environment of the call':
+    text: 'Лексическое Окружение вызова'
+    position: 'center'
 
 lexenv-nested-makecounter-2.svg:
   global LexicalEnvironment: 'глобальное LexicalEnvironment'
