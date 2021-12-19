@@ -181,7 +181,7 @@ alert( sessionStorage.getItem('test') ); // после обновления: 1
 
 ## Событие storage
 
-Когда обновляются данные в `localStorage` или `sessionStorage`, генерируется событие [storage](https://www.w3.org/TR/webstorage/#the-storage-event) со следующими свойствами:
+Когда обновляются данные в `localStorage` или `sessionStorage`, генерируется событие [storage](https://html.spec.whatwg.org/multipage/webstorage.html#the-storageevent-interface) со следующими свойствами:
 
 - `key` – ключ, который обновился (`null`, если вызван `.clear()`).
 - `oldValue` – старое значение (`null`, если ключ добавлен впервые).
