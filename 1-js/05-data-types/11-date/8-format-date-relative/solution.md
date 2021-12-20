@@ -40,7 +40,11 @@ alert( formatDate(new Date(new Date - 30 * 1000)) ); // "30 сек. назад"
 
 alert( formatDate(new Date(new Date - 5 * 60 * 1000)) ); // "5 мин. назад"
 
+<<<<<<< HEAD
 // вчерашняя дата вроде 31.12.2016, 20:00
+=======
+// yesterday's date like 31.12.2016 20:00
+>>>>>>> 8d04d0d2db97276dbb2b451c30a7bd3e05d65831
 alert( formatDate(new Date(new Date - 86400 * 1000)) );
 ```
 

@@ -8,6 +8,10 @@
 }
 
 .thumb {
+<<<<<<< HEAD
+=======
+  touch-action: none;
+>>>>>>> 8d04d0d2db97276dbb2b451c30a7bd3e05d65831
   width: 10px;
   height: 25px;
   border-radius: 3px;

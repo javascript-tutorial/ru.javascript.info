@@ -85,9 +85,15 @@ if (condition) {
 ```js
 // обратные кавычки ` позволяют разделять строку на части
 let str = `
+<<<<<<< HEAD
   Рабочая группа TC39 организации Ecma International -
   это группа JavaScript-разработчиков, теоретиков и авторов движков JavaScript,
   которые вместе с сообществом занимаются поддержкой и развитием языка JavaScript.
+=======
+  ECMA International's TC39 is a group of JavaScript developers,
+  implementers, academics, and more, collaborating with the community
+  to maintain and evolve the definition of JavaScript.
+>>>>>>> 8d04d0d2db97276dbb2b451c30a7bd3e05d65831
 `;
 ```
 
@@ -115,7 +121,11 @@ if (
 
     Одно из преимуществ пробелов над табуляцией заключается в том, что пробелы допускают более гибкие конфигурации отступов, чем символ табуляции.
 
+<<<<<<< HEAD
     Например, мы можем выровнять аргументы относительно открывающей скобки:
+=======
+    For instance, we can align the parameters with the opening bracket, like this:
+>>>>>>> 8d04d0d2db97276dbb2b451c30a7bd3e05d65831
 
     ```js no-beautify
     show(parameters,
@@ -284,9 +294,15 @@ function pow(x, n) {
 
 Некоторые популярные руководства:
 
+<<<<<<< HEAD
 - [Google JavaScript Style Guide](https://google.github.io/styleguide/javascriptguide.xml)
 - [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript) (есть [перевод](https://leonidlebedev.github.io/javascript-airbnb/))
 - [Idiomatic.JS](https://github.com/rwaldron/idiomatic.js) (есть [перевод](https://github.com/rwaldron/idiomatic.js/tree/master/translations/ru_RU))
+=======
+- [Google JavaScript Style Guide](https://google.github.io/styleguide/jsguide.html)
+- [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript)
+- [Idiomatic.JS](https://github.com/rwaldron/idiomatic.js)
+>>>>>>> 8d04d0d2db97276dbb2b451c30a7bd3e05d65831
 - [StandardJS](https://standardjs.com/)
 - (и ещё множество других)
 
@@ -300,11 +316,19 @@ function pow(x, n) {
 
 Вот некоторые известные инструменты для проверки:
 
+<<<<<<< HEAD
 - [JSLint](http://www.jslint.com/) -- проверяет код на соответствие [стилю JSLint](http://jslint.com/index.html), в онлайн-интерфейсе вверху можно ввести код, а внизу -- различные настройки проверки, чтобы попробовать её в действии.
 - [JSHint](http://www.jshint.com/) -- больше проверок, чем в JSLint.
 - [ESLint](http://eslint.org/) -- пожалуй, самый современный линтер.
 
 Все они, в общем-то, работают. Автор пользуется [ESLint](http://eslint.org/).
+=======
+- [JSLint](https://www.jslint.com/) -- one of the first linters.
+- [JSHint](https://jshint.com/) -- more settings than JSLint.
+- [ESLint](https://eslint.org/) -- probably the newest one.
+
+All of them can do the job. The author uses [ESLint](https://eslint.org/).
+>>>>>>> 8d04d0d2db97276dbb2b451c30a7bd3e05d65831
 
 Большинство линтеров интегрированы со многими популярными редакторами: просто включите плагин в редакторе и настройте стиль.
 
@@ -327,14 +351,18 @@ function pow(x, n) {
   },
   "rules": {
     "no-console": 0,
-    "indent": ["warning", 2]
+    "indent": 2
   }
 }
 ```
 
 Здесь директива `"extends"` означает, что конфигурация основана на наборе настроек "eslint:recommended". После этого мы уточняем наши собственные.
 
+<<<<<<< HEAD
 Кроме того, возможно загрузить наборы правил стиля из сети и расширить их. Смотрите <https://eslint.org/docs/user-guide/getting-started> для получения более подробной информации об установке.
+=======
+It is also possible to download style rule sets from the web and extend them instead. See <https://eslint.org/docs/user-guide/getting-started> for more details about installation.
+>>>>>>> 8d04d0d2db97276dbb2b451c30a7bd3e05d65831
 
 Также некоторые среды разработки имеют встроенные линтеры, возможно, удобные, но не такие гибкие в настройке, как ESLint.
 
