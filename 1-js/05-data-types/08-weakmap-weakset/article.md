@@ -272,7 +272,7 @@ alert(visitedSet.has(john)); // true
 // проверим, заходила ли Mary?
 alert(visitedSet.has(mary)); // false
 
-john = null;
+mary = null;
 
 // структура данных visitedSet будет очищена автоматически
 ```
