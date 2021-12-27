@@ -1,9 +1,17 @@
 
+<<<<<<< HEAD
 Открывающий тег -- это `pattern:\[(b|url|quote)]`.
+=======
+Opening tag is `pattern:\[(b|url|quote)]`.
+>>>>>>> 3c934b5a46a76861255e3a4f29da6fd54ab05c8c
 
 Затем, чтобы найти всё до закрывающего тега -- используем выражение `pattern:.*?` с флагом `pattern:s`: оно найдёт любые символы, включая новую строку, и затем добавим обратную ссылку на открывающий тег.
 
+<<<<<<< HEAD
 Полное выражение: `pattern:\[(b|url|quote)\].*?\[/\1]`.
+=======
+The full pattern: `pattern:\[(b|url|quote)\].*?\[/\1]`.
+>>>>>>> 3c934b5a46a76861255e3a4f29da6fd54ab05c8c
 
 В действии:
 
@@ -20,4 +28,8 @@ let str = `
 alert( str.match(regexp) ); // [b]привет![/b],[quote][url]http://ya.ru[/url][/quote]
 ```
 
+<<<<<<< HEAD
 Обратите внимание, что кроме экранирования `pattern:[` нам необходимо экранировать слеш в закрывающем теге `pattern:[\/\1]`, потому что обычно слеш завершает паттерн.
+=======
+Please note that besides escaping `pattern:[`, we had to escape a slash for the closing tag `pattern:[\/\1]`, because normally the slash closes the pattern.
+>>>>>>> 3c934b5a46a76861255e3a4f29da6fd54ab05c8c

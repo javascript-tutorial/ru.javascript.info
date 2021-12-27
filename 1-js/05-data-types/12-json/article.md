@@ -27,7 +27,11 @@ alert(user); // {name: "John", age: 30}
 
 ## JSON.stringify
 
+<<<<<<< HEAD
 [JSON](https://ru.wikipedia.org/wiki/JSON) (JavaScript Object Notation) - это общий формат для представления значений и объектов. Его описание задокументировано в стандарте [RFC 4627](http://tools.ietf.org/html/rfc4627). Первоначально он был создан для JavaScript, но многие другие языки также имеют библиотеки, которые могут работать с ним. Таким образом, JSON легко использовать для обмена данными, когда клиент использует JavaScript, а сервер написан на Ruby/PHP/Java или любом другом языке.
+=======
+The [JSON](http://en.wikipedia.org/wiki/JSON) (JavaScript Object Notation) is a general format to represent values and objects. It is described as in [RFC 4627](https://tools.ietf.org/html/rfc4627) standard. Initially it was made for JavaScript, but many other languages have libraries to handle it as well.  So it's easy to use JSON for data exchange when the client uses JavaScript and the server is written on Ruby/PHP/Java/Whatever.
+>>>>>>> 3c934b5a46a76861255e3a4f29da6fd54ab05c8c
 
 JavaScript предоставляет методы:
 
@@ -103,9 +107,15 @@ JSON является независимой от языка специфика�
 
 А именно:
 
+<<<<<<< HEAD
 - Свойства-функции (методы).
 - Символьные свойства.
 - Свойства, содержащие `undefined`.
+=======
+- Function properties (methods).
+- Symbolic keys and values.
+- Properties that store `undefined`.
+>>>>>>> 3c934b5a46a76861255e3a4f29da6fd54ab05c8c
 
 ```js run
 let user = {
@@ -275,6 +285,7 @@ name:         John
 name:         Alice
 place:        [object Object]
 number:       23
+occupiedBy: [object Object]
 */
 ```
 
@@ -327,7 +338,13 @@ alert(JSON.stringify(user, null, 2));
 */
 ```
 
+<<<<<<< HEAD
 Параметр `space` применяется для логирования и красивого вывода.
+=======
+The third argument can also be a string. In this case, the string is used for indentation instead of a number of spaces.
+
+The `space` parameter is used solely for logging and nice-output purposes.
+>>>>>>> 3c934b5a46a76861255e3a4f29da6fd54ab05c8c
 
 ## Пользовательский "toJSON"
 
@@ -424,9 +441,9 @@ alert( numbers[1] ); // 1
 Или для вложенных объектов:
 
 ```js run
-let user = '{ "name": "John", "age": 35, "isAdmin": false, "friends": [0,1,2,3] }';
+let userData = '{ "name": "John", "age": 35, "isAdmin": false, "friends": [0,1,2,3] }';
 
-user = JSON.parse(user);
+let user = JSON.parse(userData);
 
 alert( user.friends[1] ); // 1
 ```
