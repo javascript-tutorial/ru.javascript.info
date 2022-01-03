@@ -6,6 +6,7 @@ importance: 5
 
 Сравните два фрагмента кода.
 
+<<<<<<< HEAD
 1. Первый использует `finally` для выполнения кода после `try..catch`:
 
     ```js
@@ -14,12 +15,22 @@ importance: 5
       работать
     } catch (e) {
       обработать ошибку
+=======
+1. The first one uses `finally` to execute the code after `try...catch`:
+
+    ```js
+    try {
+      work work
+    } catch (err) {
+      handle errors
+>>>>>>> 3c934b5a46a76861255e3a4f29da6fd54ab05c8c
     } finally {
     *!*
       очистить рабочее пространство
     */!*
     }
     ```
+<<<<<<< HEAD
 2. Второй фрагмент просто ставит очистку после `try..catch`:
 
     ```js
@@ -28,6 +39,15 @@ importance: 5
       работать
     } catch (e) {
       обработать ошибку
+=======
+2. The second fragment puts the cleaning right after `try...catch`:
+
+    ```js
+    try {
+      work work
+    } catch (err) {
+      handle errors
+>>>>>>> 3c934b5a46a76861255e3a4f29da6fd54ab05c8c
     }
 
     *!*

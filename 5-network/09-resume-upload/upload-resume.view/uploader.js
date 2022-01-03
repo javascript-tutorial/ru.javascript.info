@@ -4,9 +4,15 @@ class Uploader {
     this.file = file;
     this.onProgress = onProgress;
 
+<<<<<<< HEAD
     // создаём уникальный идентификатор файла
     // для большей уникальности мы также могли бы добавить идентификатор пользовательской сессии (если она есть)
     this.fileId = file.name + '-' + file.size + '-' + +file.lastModifiedDate;
+=======
+    // create fileId that uniquely identifies the file
+    // we could also add user session identifier (if had one), to make it even more unique
+    this.fileId = file.name + '-' + file.size + '-' + file.lastModified;
+>>>>>>> 3c934b5a46a76861255e3a4f29da6fd54ab05c8c
   }
 
   async getUploadedBytes() {
