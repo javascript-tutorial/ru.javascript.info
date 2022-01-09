@@ -226,7 +226,7 @@ Access-Control-Expose-Headers: Content-Length,API-Key
 let response = await fetch('https://site.com/service.json', {
   method: 'PATCH',
   headers: {
-    'Content-Type': 'application/json'  
+    'Content-Type': 'application/json',  
     'API-Key': 'secret'
   }
 });
