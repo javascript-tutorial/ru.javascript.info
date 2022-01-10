@@ -2,6 +2,7 @@ importance: 5
 
 ---
 
+<<<<<<< HEAD
 # Исправьте сложение
 
 Ниже приведён код, который запрашивает у пользователя два числа и показывает их сумму.
@@ -13,6 +14,19 @@ importance: 5
 ```js run
 let a = prompt("Первое число?", 1);
 let b = prompt("Второе число?", 2);
+=======
+# Fix the addition
+
+Here's a code that asks the user for two numbers and shows their sum.
+
+It works incorrectly. The output in the example below is `12` (for default prompt values).
+
+Why? Fix it. The result should be `3`.
+
+```js run
+let a = prompt("First number?", 1);
+let b = prompt("Second number?", 2);
+>>>>>>> 246c600f11b4e6c52b4ae14f83e65319671f998f
 
 alert(a + b); // 12
 ```
