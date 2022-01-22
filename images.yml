@@ -109,7 +109,7 @@ ifelse_task2.svg:
     text: "Не знаете?"
     position: "center"
   "Right!":
-    text: "Правильно!"
+    text: "Верно!"
     position: "center"
   "What's the ":
     text: "Каково"
