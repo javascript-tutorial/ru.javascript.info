@@ -410,3 +410,6 @@ event-order-bubbling.svg:
     position: "center"
   'Most deeply': 'Самый глубоко'
   'nested element': 'вложенный элемент'
+
+variable-copy-value.svg:
+  '"Hello!"': '"Привет!"'
