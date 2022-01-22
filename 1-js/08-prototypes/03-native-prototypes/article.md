@@ -33,7 +33,7 @@ alert( obj ); // "[object Object]" ?
 let obj = {};
 
 alert(obj.__proto__ === Object.prototype); // true
-// obj.toString === obj.__proto__.toString == Object.prototype.toString
+// obj.toString === obj.__proto__.toString === Object.prototype.toString
 ```
 
 Обратите внимание, что по цепочке прототипов выше `Object.prototype` больше нет свойства `[[Prototype]]`:
