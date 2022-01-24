@@ -4,7 +4,11 @@ importance: 5
 
 # Анимировать самолёт с перелётом (CSS)
 
+<<<<<<< HEAD
 Модифицируйте решение предыдущей задачи <info:task/animate-logo-css> , чтобы в процессе анимации изображение выросло больше своего стандартного размера 400x240px («выпрыгнуло»), а затем вернулось к нему.
+=======
+Modify the solution of the previous task <info:task/animate-logo-css> to make the plane grow more than its original size 400x240px (jump out), and then return to that size.
+>>>>>>> bae0ef44d0208506f6e9b7f3421ee640ab41af2b
 
 Должно получиться, как в примере ниже (клик на самолёт):
 
