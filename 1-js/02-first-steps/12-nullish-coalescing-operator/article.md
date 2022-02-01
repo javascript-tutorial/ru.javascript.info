@@ -104,7 +104,7 @@ alert(height ?? 100); // 0
 
 ## Приоритет
 
-Оператор `??` имеет довольно низкий приоритет: `5`, согласно [таблице на MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence#Table).
+Оператор `??` имеет довольно низкий приоритет: `4`, согласно [таблице на MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence#Table).
 Таким образом, оператор `??` вычисляется до `=` и `?`, но после большинства других операций, таких как `+`, `*`.
 
 Из этого следует, что если нужно выбрать значение при помощи оператора `??` вместе с другими операторами в выражении, следует добавить круглые скобки:
