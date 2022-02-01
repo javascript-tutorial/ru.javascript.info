@@ -182,7 +182,7 @@ let user = {
   [Symbol.toStringTag]: "User"
 };
 
-alert( {}.toString.call(user) ); // [object User]
+alert( ({}).toString.call(user) ); // [object User]
 ```
 
 Такое свойство есть у большей части объектов, специфичных для определённых окружений. Вот несколько примеров для браузера:
@@ -192,15 +192,15 @@ alert( {}.toString.call(user) ); // [object User]
 alert( window[Symbol.toStringTag]); // window
 alert( XMLHttpRequest.prototype[Symbol.toStringTag] ); // XMLHttpRequest
 
-alert( {}.toString.call(window) ); // [object Window]
-alert( {}.toString.call(new XMLHttpRequest()) ); // [object XMLHttpRequest]
+alert( ({}).toString.call(window) ); // [object Window]
+alert( ({}).toString.call(new XMLHttpRequest()) ); // [object XMLHttpRequest]
 ```
 
 Как вы можете видеть, результат -- это значение `Symbol.toStringTag` (если он имеется) обёрнутое в `[object ...]`.
 
 В итоге мы получили "typeof на стероидах", который не только работает с примитивными типами данных, но также и со встроенными объектами, и даже может быть настроен.
 
-Можно использовать `{}.toString.call` вместо `instanceof` для встроенных объектов, когда мы хотим получить тип в виде строки, а не просто сделать проверку.
+Можно использовать `({}).toString.call` вместо `instanceof` для встроенных объектов, когда мы хотим получить тип в виде строки, а не просто сделать проверку.
 
 ## Итого
 
@@ -209,9 +209,9 @@ alert( {}.toString.call(new XMLHttpRequest()) ); // [object XMLHttpRequest]
 |               | работает для   |  возвращает      |
 |---------------|----------------|------------------|
 | `typeof`      | примитивов     |  строка          |
-| `{}.toString` | примитивов, встроенных объектов, объектов с `Symbol.toStringTag`   |       строка |
+| `({}).toString` | примитивов, встроенных объектов, объектов с `Symbol.toStringTag`   |       строка |
 | `instanceof`  | объектов        |  true/false      |
 
-Как мы можем видеть, технически `{}.toString` "более продвинут", чем `typeof`.
+Как мы можем видеть, технически `({}).toString` "более продвинут", чем `typeof`.
 
 А оператор `instanceof` - отличный выбор, когда мы работаем с иерархией классов и хотим делать проверки с учётом наследования.
