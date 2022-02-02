@@ -97,7 +97,7 @@ xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
 
 - `application/x-www-form-urlencoded`
 - `multipart/form-data`
-- `text-plain`
+- `text/plain`
 
 В зависимости от `enctype` браузер кодирует данные соответствующим способом перед отправкой на сервер.
 

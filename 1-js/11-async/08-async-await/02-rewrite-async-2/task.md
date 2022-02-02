@@ -3,7 +3,7 @@
 
 Ниже пример из раздела <info:promise-chaining>, перепишите его, используя `async/await` вместо `.then/catch`.
 
-В функции `demoGithubUser` замените рекурсию на цикл: используя `async/await` сделать это просто.
+В функции `demoGithubUser` замените рекурсию на цикл: используя `async/await`, сделать это будет просто.
 
 ```js run
 class HttpError extends Error {

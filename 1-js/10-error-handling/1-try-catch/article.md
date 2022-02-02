@@ -81,7 +81,7 @@ try {
 try {
   {{{{{{{{{{{{
 } catch(e) {
-  alert("Движок не может понять этот код, он не корректен");
+  alert("Движок не может понять этот код, он некорректен");
 }
 ```
 
@@ -298,7 +298,7 @@ try {
 *!*
   alert(e.name); // SyntaxError
 */!*
-  alert(e.message); // Unexpected token o in JSON at position 0
+  alert(e.message); // Unexpected token b in JSON at position 2
 }
 ```
 
@@ -401,7 +401,7 @@ try {
   if (e.name == "SyntaxError") {
     alert( "JSON Error: " + e.message );
   } else {
-    throw e; // rethrow (*)
+    throw e; // проброс (*)
   }
 */!*
 
@@ -626,7 +626,7 @@ window.onerror = function(message, url, line, col, error) {
 </script>
 ```
 
-Роль глобального обработчика `window.onerror` обычно заключается не в восстановлении выполнения скрипта -- это скорее всего невозможно в случае программной ошибки, а в отправке сообщение об ошибке разработчикам.
+Роль глобального обработчика `window.onerror` обычно заключается не в восстановлении выполнения скрипта -- это скорее всего невозможно в случае программной ошибки, а в отправке сообщения об ошибке разработчикам.
 
 Существуют также веб-сервисы, которые предоставляют логирование ошибок для таких случаев, такие как <https://errorception.com> или <http://www.muscula.com>.
 

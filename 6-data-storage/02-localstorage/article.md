@@ -175,13 +175,13 @@ sessionStorage.setItem('test', 1);
 alert( sessionStorage.getItem('test') ); // после обновления: 1
 ```
 
-...Но если вы откроете ту же страницу в другой вкладке и попробуете получить данные снова, то код выше вернет `null`, что значит "ничего не найдено".
+...Но если вы откроете ту же страницу в другой вкладке и попробуете получить данные снова, то код выше вернёт `null`, что значит "ничего не найдено".
 
 Так получилось, потому что `sessionStorage` привязан не только к источнику, но и к вкладке браузера. Поэтому `sessionStorage` используется нечасто.
 
 ## Событие storage
 
-Когда обновляются данные в `localStorage` или `sessionStorage`, генерируется событие [storage](https://www.w3.org/TR/webstorage/#the-storage-event) со следующими свойствами:
+Когда обновляются данные в `localStorage` или `sessionStorage`, генерируется событие [storage](https://html.spec.whatwg.org/multipage/webstorage.html#the-storageevent-interface) со следующими свойствами:
 
 - `key` – ключ, который обновился (`null`, если вызван `.clear()`).
 - `oldValue` – старое значение (`null`, если ключ добавлен впервые).

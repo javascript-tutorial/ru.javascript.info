@@ -65,7 +65,7 @@ if (condition) {
     if (n < 0)
       alert(`Степень ${n} не поддерживается`);
     ```
-3. 😏 В одну строку без скобок - приемлемо, если это строка короткая:
+3. 😏 В одну строку без скобок - приемлемо, если эта строка короткая:
     ```js
     if (n < 0) alert(`Степень ${n} не поддерживается`);
     ```
@@ -286,7 +286,7 @@ function pow(x, n) {
 
 - [Google JavaScript Style Guide](https://google.github.io/styleguide/javascriptguide.xml)
 - [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript) (есть [перевод](https://leonidlebedev.github.io/javascript-airbnb/))
-- [Idiomatic.JS](https://github.com/rwaldron/idiomatic.js) (есть [перевод](https://github.com/leonidlebedev/javascript-airbnb))
+- [Idiomatic.JS](https://github.com/rwaldron/idiomatic.js) (есть [перевод](https://github.com/rwaldron/idiomatic.js/tree/master/translations/ru_RU))
 - [StandardJS](https://standardjs.com/)
 - (и ещё множество других)
 
@@ -300,7 +300,7 @@ function pow(x, n) {
 
 Вот некоторые известные инструменты для проверки:
 
-- [JSLint](http://www.jslint.com/) -- проверяет код на соответствие [стилю JSLint](http://www.jslint.com/lint.html), в онлайн-интерфейсе вверху можно ввести код, а внизу -- различные настройки проверки, чтобы попробовать её в действии.
+- [JSLint](http://www.jslint.com/) -- проверяет код на соответствие [стилю JSLint](http://jslint.com/index.html), в онлайн-интерфейсе вверху можно ввести код, а внизу -- различные настройки проверки, чтобы попробовать её в действии.
 - [JSHint](http://www.jshint.com/) -- больше проверок, чем в JSLint.
 - [ESLint](http://eslint.org/) -- пожалуй, самый современный линтер.
 

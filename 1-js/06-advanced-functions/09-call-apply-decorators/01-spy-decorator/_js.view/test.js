@@ -1,5 +1,5 @@
 describe("spy", function() {
-  it("records calls into its property", function() {
+  it("записывает вызовы в своё свойство", function() {
     function work() {}
 
     work = spy(work);
@@ -17,7 +17,7 @@ describe("spy", function() {
     ]);
   });
 
-  it("transparently wraps functions", function() {
+  it("прозрачно оборачивает функции", function() {
 
     let sum = sinon.spy((a, b) => a + b);
 
@@ -28,7 +28,7 @@ describe("spy", function() {
   });
 
 
-  it("transparently wraps methods", function() {
+  it("прозрачно оборачивает методы", function() {
 
     let calc = {
       sum: sinon.spy((a, b) => a + b)

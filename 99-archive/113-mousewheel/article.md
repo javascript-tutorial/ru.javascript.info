@@ -58,7 +58,7 @@ if (elem.addEventListener) {
 function onWheel(e) {
   e = e || window.event;
 
-  // wheelDelta не дает возможность узнать количество пикселей
+  // wheelDelta не даёт возможность узнать количество пикселей
   var delta = e.deltaY || e.detail || e.wheelDelta;
 
   var info = document.getElementById('delta');

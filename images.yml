@@ -1,4 +1,7 @@
 code-style.svg:
+  "A space between parameters":
+    text: "Пробел между параметрами"
+    position: "center"
   "No space":
     text: "Без пробелов"
     position: "center"
@@ -54,9 +57,12 @@ code-style.svg:
   "parameters":
     position: "center"
     text: "параметрами"
-  "A space between parameters":
+  "arguments":
     position: "center"
-    text: "Пробел между параметрами"
+    text: "аргументами"
+  "A space between arguments":
+    position: "center"
+    text: "Пробел между аргументами"
 
 try-catch-flow.svg:
   "Begin":
@@ -103,7 +109,7 @@ ifelse_task2.svg:
     text: "Не знаете?"
     position: "center"
   "Right!":
-    text: "Правильно!"
+    text: "Верно!"
     position: "center"
   "What's the ":
     text: "Каково"
@@ -142,8 +148,8 @@ chrome-sources-breakpoint.svg:
     text: "точки останова"
 
 chrome-sources-debugger-pause.svg:
-  "jump to the outer function":
-    text: "выпрыгнуть во внешнюю функцию"
+  "see the outer call details":
+    text: "посмотреть детали внешнего вызова"
     position: "right"
   "watch expressions":
     text: "смотреть за выражениями"
@@ -194,7 +200,7 @@ xhr-another-domain.svg:
   HTTP-request: 'HTTP-запрос'
   HTTP-response: 'HTTP-ответ'
   '* OR https://javascript.info': '* ИЛИ https://javascript.info'
-  'if the header allows, success,': 'если заголовок разрешает, успех'
+  'if the header allows, then success,': 'если заголовок разрешает, то успех'
   otherwise fail: 'иначе ошибка'
 
 xhr-preflight.svg:
@@ -204,10 +210,14 @@ xhr-preflight.svg:
   Server: 'Сервер'
   Main HTTP-response: 'Основной HTTP-ответ'
   otherwise error: 'иначе ошибка'
-  'if allowed: success,': 'если разрешено, успех,'
+  'if allowed: success,': 'если разрешено, то успех,'
   Main HTTP-request: 'Основной HTTP-запрос'
-  preflight: 'предзапрос'
-  if allowed: 'если разрешено'
+  preflight:
+    text: 'предзапрос'
+    position: 'right'
+  if allowed:
+    text: 'если разрешено'
+    position: 'right'
 
 cors-gmail-messages.svg:
   _defaults:
@@ -312,11 +322,17 @@ lexical-environment-global-2.svg:
   execution start: 'начало выполнения'
   '&lt;empty&gt;': '&lt;пусто&gt;'
 
+lexical-environment-global.svg:
+  'Lexical Environment':
+    text: 'Лексическое Окружение'
+
 lexenv-makearmy.svg:
   for block: 'блочный'
 
 lexical-environment-simple.svg:
-  'LexicalEnvironment for the call': 'LexicalEnvironment вызова'
+  'Lexical Environment of the call':
+    text: 'Лексическое Окружение вызова'
+    position: 'center'
 
 lexenv-nested-makecounter-2.svg:
   global LexicalEnvironment: 'глобальное LexicalEnvironment'
@@ -326,16 +342,28 @@ lexenv-nested-makecounter-6.svg:
   modified here: 'изменено здесь'
 
 proxy-inherit.svg:
-  _defaults:
+  '_name: &quot;Guest&quot;': '_name: "Гость"'
+  user (proxied):
+    text: 'user (прокси)'
     position: "center"
-  '_name: "Guest"': '_name: "Гость"'
-  '_name: "Admin"': '_name: "Админ"'
-  user (proxied): 'user (прокси)'
-  original user: 'исходный user'
+  original user:
+    text: 'исходный user'
+    position: "center"
+
+
+proxy-inherit-admin.svg:
+  '_name: &quot;Guest&quot;': '_name: "Гость"'
+  '_name: &quot;Admin&quot;': '_name: "Админ"'
+  user (proxied):
+    text: 'user (прокси)'
+    position: "center"
+  original user:
+    text: 'исходный user'
+    position: "center"
+
 
 selection-firefox.svg:
   selection: 'выделение'
-
 
 selection-direction-backward.svg:
   focus: 'фокус'
@@ -382,3 +410,6 @@ event-order-bubbling.svg:
     position: "center"
   'Most deeply': 'Самый глубоко'
   'nested element': 'вложенный элемент'
+
+variable-copy-value.svg:
+  '"Hello!"': '"Привет!"'
