@@ -45,7 +45,7 @@
 
 Также через суффикс `-u-*` можно указать расширения локалей, например `"th-TH-u-nu-thai"` -- тайский язык (`th`), используемый в Таиланде (`TH`), с записью чисел тайскими буквами (๐, ๑, ๒, ๓, ๔, ๕, ๖, ๗, ๘, ๙) .
 
-Стандарт, который описывает локали -- [RFC 5464](http://tools.ietf.org/html/rfc5646), языки описаны в [IANA language registry](http://www.iana.org/assignments/language-subtag-registry/language-subtag-registry).
+Стандарт, который описывает локали -- [RFC 5646](https://datatracker.ietf.org/doc/html/rfc5646), языки описаны в [IANA language registry](http://www.iana.org/assignments/language-subtag-registry/language-subtag-registry).
 
 Все методы принимают локаль в виде строки или массива, содержащего несколько локалей в порядке предпочтения.
 
@@ -72,7 +72,7 @@
 
 ```js
 // создание
-var collator = new Intl.Collator([locales, [options]])
+let collator = new Intl.Collator([locales, [options]])
 ```
 
 Параметры:
@@ -100,7 +100,7 @@ var collator = new Intl.Collator([locales, [options]])
 Использование:
 
 ```js
-var result = collator.compare(str1, str2);
+let result = collator.compare(str1, str2);
 ```
 
 Результат `compare` имеет значение `1` (больше), `0` (равно) или `-1` (меньше).
@@ -108,7 +108,7 @@ var result = collator.compare(str1, str2);
 Например:
 
 ```js run
-var collator = new Intl.Collator();
+let collator = new Intl.Collator();
 
 alert( "ёжик" > "яблоко" ); // true (ёжик больше, что неверно)
 alert( collator.compare("ёжик", "яблоко") ); // -1 (ёжик меньше, верно)
@@ -117,13 +117,13 @@ alert( collator.compare("ёжик", "яблоко") ); // -1 (ёжик мень�
 Выше были использованы полностью стандартные настройки. Они различают регистр символа, но это различие можно убрать, если настроить чувствительность `sensitivity`:
 
 ```js run
-var collator = new Intl.Collator();
-alert( collator.compare("ЁжиК", "ёжик") ); // 1, разные
+let collator1 = new Intl.Collator();
+alert( collator1.compare("ЁжиК", "ёжик") ); // 1, разные
 
-var collator = new Intl.Collator(undefined, {
+let collator2 = new Intl.Collator(undefined, {
   sensitivity: "accent"
 });
-alert( collator.compare("ЁжиК", "ёжик") ); // 0, одинаковые
+alert( collator2.compare("ЁжиК", "ёжик") ); // 0, одинаковые
 ```
 
 ## Даты, Intl.DateTimeFormat [#intl-datetimeformat]
@@ -132,7 +132,7 @@ alert( collator.compare("ЁжиК", "ёжик") ); // 0, одинаковые
 
 ```js
 // создание
-var formatter = new Intl.DateTimeFormat([locales, [options]])
+let formatter = new Intl.DateTimeFormat([locales, [options]])
 ```
 
 Первый аргумент -- такой же, как и в `Collator`, а в объекте `options` мы можем определить, какие именно части даты показывать (часы, месяц, год...) и в каком формате.
@@ -221,8 +221,7 @@ var formatter = new Intl.DateTimeFormat([locales, [options]])
     <td></td>
   </tr>
   <tr>
-    <td>second
-    </td>
+    <td><code>second</code></td>
     <td>Секунды</td>
     <td><code>2-digit</code>, <code>numeric</code></td>
     <td></td>
@@ -250,27 +249,27 @@ var formatter = new Intl.DateTimeFormat([locales, [options]])
 Использование:
 
 ```js
-var dateString = formatter.format(date);
+let dateString = formatter.format(date);
 ```
 
 Например:
 
 ```js run
-var date = new Date(2014, 11, 31, 12, 30, 0);
+let date = new Date(2014, 11, 31, 12, 30, 0);
 
-var formatter = new Intl.DateTimeFormat("ru");
-alert( formatter.format(date) ); // 31.12.2014
+let formatter1 = new Intl.DateTimeFormat("ru");
+alert( formatter1.format(date) ); // 31.12.2014
 
-var formatter = new Intl.DateTimeFormat("en-US");
-alert( formatter.format(date) ); // 12/31/2014
+let formatter2 = new Intl.DateTimeFormat("en-US");
+alert( formatter2.format(date) ); // 12/31/2014
 ```
 
 Длинная дата, с настройками:
 
 ```js run
-var date = new Date(2014, 11, 31, 12, 30, 0);
+let date = new Date(2014, 11, 31, 12, 30, 0);
 
-var formatter = new Intl.DateTimeFormat("ru", {
+let formatter = new Intl.DateTimeFormat("ru", {
   weekday: "long",
   year: "numeric",
   month: "long",
@@ -283,9 +282,9 @@ alert( formatter.format(date) ); // среда, 31 декабря 2014 г.
 Только время:
 
 ```js run
-var date = new Date(2014, 11, 31, 12, 30, 0);
+let date = new Date(2014, 11, 31, 12, 30, 0);
 
-var formatter = new Intl.DateTimeFormat("ru", {
+let formatter = new Intl.DateTimeFormat("ru", {
   hour: "numeric",
   minute: "numeric",
   second: "numeric"
@@ -301,7 +300,7 @@ alert( formatter.format(date) ); // 12:30:00
 Синтаксис:
 
 ```js
-var formatter = new Intl.NumberFormat([locales[, options]]);
+let formatter = new Intl.NumberFormat([locales[, options]]);
 
 formatter.format(number); // форматирование
 ```
@@ -378,21 +377,21 @@ formatter.format(number); // форматирование
     <td><code>maximumSignificantDigits</code></td>
     <td>Максимальное количество значимых цифр</td>
     <td>от <code>minimumSignificantDigits</code> до <code>21</code></td>
-    <td><code>minimumSignificantDigits</code></td>
+    <td><code>21</code></td>
   </tr>
 </table>
 
 Пример без опций:
 
 ```js run
-var formatter = new Intl.NumberFormat("ru");
+let formatter = new Intl.NumberFormat("ru");
 alert( formatter.format(1234567890.123) ); // 1 234 567 890,123
 ```
 
 С ограничением значимых цифр (важны только первые 3):
 
 ```js run
-var formatter = new Intl.NumberFormat("ru", {
+let formatter = new Intl.NumberFormat("ru", {
   maximumSignificantDigits: 3
 });
 alert( formatter.format(1234567890.123) ); // 1 230 000 000
@@ -401,7 +400,7 @@ alert( formatter.format(1234567890.123) ); // 1 230 000 000
 С опциями для валюты:
 
 ```js
-var formatter = new Intl.NumberFormat("ru", {
+let formatter = new Intl.NumberFormat("ru", {
   style: "currency",
   currency: "GBP"
 });
@@ -412,7 +411,7 @@ alert( formatter.format(1234.5) ); // 1 234,5 £
 С двумя цифрами после запятой:
 
 ```js
-var formatter = new Intl.NumberFormat("ru", {
+let formatter = new Intl.NumberFormat("ru", {
   style: "currency",
   currency: "GBP",
   minimumFractionDigits: 2
@@ -429,7 +428,7 @@ alert( formatter.format(1234.5) ); // 1 234,50 £
 : Сравнивает строку с другой, с учётом локали, например:
 
     ```js run
-    var str = "ёжик";
+    let str = "ёжик";
 
     alert( str.localeCompare("яблоко", "ru") ); // -1
     ```
@@ -438,7 +437,7 @@ alert( formatter.format(1234.5) ); // 1 234,50 £
 : Форматирует дату в соответствии с локалью, например:
 
     ```js run no-beautify
-    var date = new Date(2014, 11, 31, 12, 00);
+    let date = new Date(2014, 11, 31, 12, 0);
 
     alert( date.toLocaleString("ru", { year: 'numeric', month: 'long' }) ); // Декабрь 2014
     ```

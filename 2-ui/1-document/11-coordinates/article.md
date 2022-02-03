@@ -11,7 +11,7 @@
 
 Когда страница полностью прокручена в самое начало, то верхний левый угол окна совпадает с левым верхним углом документа, при этом обе этих системы координат тоже совпадают. Но если происходит прокрутка, то координаты элементов в контексте окна меняются, так как они двигаются, но в то же время их координаты относительно документа остаются такими же.
 
-На приведённой картинке взята точка в документе и показаны её координат до прокрутки (слева) и после (справа):
+На приведённой картинке взята точка в документе и показаны её координаты до прокрутки (слева) и после (справа):
 
 ![](document-and-window-coordinates-scrolled.svg)
 
@@ -216,8 +216,10 @@ function getCoords(elem) {
   let box = elem.getBoundingClientRect();
 
   return {
-    top: box.top + pageYOffset,
-    left: box.left + pageXOffset
+    top: box.top + window.pageYOffset,
+    right: box.right + window.pageXOffset,
+    bottom: box.bottom + window.pageYOffset,
+    left: box.left + window.pageXOffset
   };
 }
 ```

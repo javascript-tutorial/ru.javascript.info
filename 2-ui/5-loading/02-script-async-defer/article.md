@@ -59,10 +59,10 @@
 <p>...содержимое до скрипта...</p>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => alert("Дерево DOM готово после скрипта с 'defer'!")); // (2)
+  document.addEventListener('DOMContentLoaded', () => alert("Дерево DOM готово после скрипта с 'defer'!"));
 </script>
 
-<script defer src="https://javascript.info/article/script-async-defer/long.js?speed=1"></script>
+<script defer src="https://javascript.info/article/script-async-defer/long.js?speed=1"></script> // (2)
 
 <p>...содержимое после скрипта...</p>
 ```

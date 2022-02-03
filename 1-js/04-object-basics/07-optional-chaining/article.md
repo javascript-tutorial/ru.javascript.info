@@ -99,7 +99,7 @@ user?.address;
 let user = null;
 let x = 0;
 
-user?.sayHi(x++); // нет sayHi, поэтому до x++ вычисление не дойдет
+user?.sayHi(x++); // нет user, поэтому до x++ вычисление не дойдет
 
 alert(x); // 0, значение не было увеличено на единицу
 ```
@@ -148,7 +148,7 @@ alert( user2?.[key] ); // undefined
 alert( user1?.[key]?.something?.not?.existing); // undefined
 ```
 
-Кроме этого, `?.` можно совместно использовать с `delete`:
+Кроме этого, `?.` можно использовать совместно с `delete`:
 
 ```js run
 delete user?.name; // Удалить user.name, если пользователь существует

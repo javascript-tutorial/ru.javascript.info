@@ -362,7 +362,7 @@ customElements.define('hello-button', HelloButton, {extends: 'button'});
 ## Ссылки
 
 - HTML Living Standard: <https://html.spec.whatwg.org/#custom-elements>.
-- Совместимость: <https://caniuse.com/#feat=custom-elements>.
+- Совместимость: <https://caniuse.com/#feat=custom-elementsv1>.
 
 ## Итого
 

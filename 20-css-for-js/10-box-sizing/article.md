@@ -165,7 +165,6 @@ div {
     display: block;
     padding-left: 5px;
 *!*
-    -moz-box-sizing: border-box; /* в Firefox нужен префикс */
     box-sizing: border-box;
     width: 100%;
 */!*

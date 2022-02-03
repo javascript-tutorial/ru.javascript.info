@@ -226,7 +226,7 @@ Access-Control-Expose-Headers: Content-Length,API-Key
 let response = await fetch('https://site.com/service.json', {
   method: 'PATCH',
   headers: {
-    'Content-Type': 'application/json'  
+    'Content-Type': 'application/json',  
     'API-Key': 'secret'
   }
 });
@@ -362,7 +362,7 @@ Access-Control-Allow-Credentials: true
 **Для простых запросов:**
 
 - → Браузер посылает заголовок `Origin` с источником.
-- ← Для запросов без авторизационных данных (не отправляются умолчанию) сервер должен установить:
+- ← Для запросов без авторизационных данных (не отправляются по умолчанию) сервер должен установить:
     - `Access-Control-Allow-Origin` в `*` или то же значение, что и `Origin`
 - ← Для запросов с авторизационными данными сервер должен установить:
     - `Access-Control-Allow-Origin` в то же значение, что и `Origin`

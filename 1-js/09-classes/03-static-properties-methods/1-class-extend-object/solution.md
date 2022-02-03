@@ -44,11 +44,11 @@ class Rabbit extends Object {}
 
 *!*
 // обычно мы вызываем Object.getOwnPropertyNames
-alert ( Rabbit.getOwnPropertyNames({a: 1, b: 2})); // a,b
+alert( Rabbit.getOwnPropertyNames({a: 1, b: 2}) ); // a,b
 */!*
 ```
 
-Но если явно не наследуем от объекта, то для `Rabbit.__ proto__` не установлено значение `Object`.
+Но если явно не наследуем от объекта, то для `Rabbit.__proto__` не установлено значение `Object`.
 
 Пример:
 
@@ -61,7 +61,7 @@ alert( Rabbit.__proto__ === Function.prototype ); // как у каждой фу
 
 *!*
 // ошибка - нет такой функции у Rabbit
-alert ( Rabbit.getOwnPropertyNames({a: 1, b: 2})); // Error
+alert( Rabbit.getOwnPropertyNames({a: 1, b: 2}) ); // Error
 */!*
 ```
 
