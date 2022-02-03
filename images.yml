@@ -112,7 +112,7 @@ ifelse_task2.svg:
     text: "Верно!"
     position: "center"
   "What's the":
-    text: "Каково"
+    text: "Какое"
     position: "center"
   "“official” name of":
     text: "\"официальное название\""
