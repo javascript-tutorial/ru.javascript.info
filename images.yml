@@ -111,7 +111,7 @@ ifelse_task2.svg:
   "Right!":
     text: "Верно!"
     position: "center"
-  "What's the ":
+  "What's the":
     text: "Каково"
     position: "center"
   "“official” name of":
