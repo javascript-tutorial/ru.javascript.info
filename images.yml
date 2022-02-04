@@ -115,7 +115,7 @@ ifelse_task2.svg:
     text: "Какое"
     position: "center"
   "“official” name of":
-    text: "\"официальное название\""
+    text: "\"официальное\" название"
     position: "center"
   "Иначе": ""
 
