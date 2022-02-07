@@ -19,7 +19,11 @@
 - `key(index)` -- получить ключ на заданной позиции.
 - `length` -- количество элементов в хранилище.
 
+<<<<<<< HEAD
 Как видим, интерфейс похож на `Map` (`setItem/getItem/removeItem`), но также запоминается порядок элементов, и можно получить доступ к элементу по индексу -- `key(index)`.
+=======
+As you can see, it's like a `Map` collection (`setItem/getItem/removeItem`), but also allows access by index with `key(index)`.
+>>>>>>> 71da17e5960f1c76aad0d04d21f10bc65318d3f6
 
 Давайте посмотрим, как это работает.
 
@@ -64,7 +68,12 @@ delete localStorage.test;
 
 Это возможно по историческим причинам и, как правило, работает, но обычно не рекомендуется, потому что:
 
+<<<<<<< HEAD
 1. Если ключ генерируется пользователем, то он может быть каким угодно, включая `length` или `toString` или другой встроенный метод `localStorage`. В этом случае `getItem/setItem` сработают нормально, а вот чтение/запись как свойства объекта не пройдут:
+=======
+1. If the key is user-generated, it can be anything, like `length` or `toString`, or another built-in method of `localStorage`. In that case `getItem/setItem` work fine, while object-like access fails:
+
+>>>>>>> 71da17e5960f1c76aad0d04d21f10bc65318d3f6
     ```js run
     let key = 'length';
     localStorage[key] = 5; // Ошибка, невозможно установить length
@@ -120,25 +129,34 @@ for(let key of keys) {
 
 Последнее работает, потому что `Object.keys` возвращает только ключи, принадлежащие объекту, игнорируя прототип.
 
+<<<<<<< HEAD
 
 ## Только строки
+=======
+## Strings only
+>>>>>>> 71da17e5960f1c76aad0d04d21f10bc65318d3f6
 
 Обратите внимание, что ключ и значение должны быть строками.
 
 Если мы используем любой другой тип, например число или объект, то он автоматически преобразуется в строку:
 
 ```js run
-sessionStorage.user = {name: "John"};
-alert(sessionStorage.user); // [object Object]
+localStorage.user = {name: "John"};
+alert(localStorage.user); // [object Object]
 ```
 
 Мы можем использовать `JSON` для хранения объектов:
 
 ```js run
-sessionStorage.user = JSON.stringify({name: "John"});
+localStorage.user = JSON.stringify({name: "John"});
 
+<<<<<<< HEAD
 // немного позже
 let user = JSON.parse( sessionStorage.user );
+=======
+// sometime later
+let user = JSON.parse( localStorage.user );
+>>>>>>> 71da17e5960f1c76aad0d04d21f10bc65318d3f6
 alert( user.name ); // John
 ```
 
@@ -148,7 +166,6 @@ alert( user.name ); // John
 // для JSON.stringify добавлены параметры форматирования, чтобы объект выглядел лучше
 alert( JSON.stringify(localStorage, null, 2) );
 ```
-
 
 ## sessionStorage
 
@@ -181,7 +198,11 @@ alert( sessionStorage.getItem('test') ); // после обновления: 1
 
 ## Событие storage
 
+<<<<<<< HEAD
 Когда обновляются данные в `localStorage` или `sessionStorage`, генерируется событие [storage](https://html.spec.whatwg.org/multipage/webstorage.html#the-storageevent-interface) со следующими свойствами:
+=======
+When the data gets updated in `localStorage` or `sessionStorage`, [storage](https://html.spec.whatwg.org/multipage/webstorage.html#the-storageevent-interface) event triggers, with properties:
+>>>>>>> 71da17e5960f1c76aad0d04d21f10bc65318d3f6
 
 - `key` – ключ, который обновился (`null`, если вызван `.clear()`).
 - `oldValue` – старое значение (`null`, если ключ добавлен впервые).
@@ -202,8 +223,13 @@ alert( sessionStorage.getItem('test') ); // после обновления: 1
 Теперь, если оба окна слушают `window.onstorage`, то каждое из них будет реагировать на обновления, произошедшие в другом окне.
 
 ```js run
+<<<<<<< HEAD
 // срабатывает при обновлениях, сделанных в том же хранилище из других документов
 window.onstorage = event => {
+=======
+// triggers on updates made to the same storage from other documents
+window.onstorage = event => { // can also use window.addEventListener('storage', event => {
+>>>>>>> 71da17e5960f1c76aad0d04d21f10bc65318d3f6
   if (event.key != 'now') return;
   alert(event.key + ':' + event.newValue + " at " + event.url);
 };
@@ -217,15 +243,28 @@ localStorage.setItem('now', Date.now());
 
 **Это позволяет разным окнам одного источника обмениваться сообщениями.**
 
+<<<<<<< HEAD
 Современные браузеры также поддерживают [Broadcast channel API](https://developer.mozilla.org/ru/docs/Web/API/Broadcast_Channel_API) специальный API для связи между окнами одного источника, он более полнофункциональный, но менее поддерживаемый. Существуют библиотеки (полифилы), которые эмулируют это API на основе `localStorage` и делают его доступным везде.
+=======
+Modern browsers also support [Broadcast channel API](mdn:/api/Broadcast_Channel_API), the special API for same-origin inter-window communication, it's more full featured, but less supported. There are libraries that polyfill that API, based on `localStorage`, that make it available everywhere.
+>>>>>>> 71da17e5960f1c76aad0d04d21f10bc65318d3f6
 
 ## Итого
 
+<<<<<<< HEAD
 Объекты веб-хранилища `localStorage` и `sessionStorage` позволяют хранить пары ключ/значение в браузере.
 - `key` и `value` должны быть строками.
 - Лимит 2 Мб+, зависит от браузера.
 - Данные не имеют "времени истечения".
 - Данные привязаны к источнику (домен/протокол/порт).
+=======
+Web storage objects `localStorage` and `sessionStorage` allow to store key/value in the browser.
+
+- Both `key` and `value` must be strings.
+- The limit is 5mb+, depends on the browser.
+- They do not expire.
+- The data is bound to the origin (domain/port/protocol).
+>>>>>>> 71da17e5960f1c76aad0d04d21f10bc65318d3f6
 
 | `localStorage` | `sessionStorage` |
 |----------------|------------------|

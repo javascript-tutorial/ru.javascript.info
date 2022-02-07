@@ -117,7 +117,18 @@ document.domain = 'site.com';
 
 После этого они смогут взаимодействовать без ограничений. Ещё раз заметим, что это доступно только для страниц с одинаковым доменом второго уровня.
 
+<<<<<<< HEAD
 ### Ифрейм: подождите документ
+=======
+```warn header="Deprecated, but still working"
+The `document.domain` property is in the process of being removed from the [specification](https://html.spec.whatwg.org/multipage/origin.html#relaxing-the-same-origin-restriction). The cross-window messaging (explained soon below) is the suggested replacement.
+
+That said, as of now all browsers support it. And the support will be kept for the future, not to break old code that relies on `document.domain`.
+```
+
+
+## Iframe: wrong document pitfall
+>>>>>>> 71da17e5960f1c76aad0d04d21f10bc65318d3f6
 
 Когда ифрейм - с того же источника, мы имеем доступ к документу в нём. Но есть подвох. Не связанный с кросс-доменными особенностями, но достаточно важный, чтобы о нём знать.
 
@@ -261,7 +272,11 @@ if (window == top) { // текущий window == window.top?
 Аргументы:
 
 `data`
+<<<<<<< HEAD
 : Данные для отправки. Может быть любым объектом, данные клонируются с использованием "алгоритма структурированного клонирования". IE поддерживает только строки, поэтому мы должны использовать метод `JSON.stringify` на сложных объектах, чтобы поддержать этот браузер.
+=======
+: The data to send. Can be any object, the data is cloned using the "structured serialization algorithm". IE supports only strings, so we should `JSON.stringify` complex objects to support that browser.
+>>>>>>> 71da17e5960f1c76aad0d04d21f10bc65318d3f6
 
 `targetOrigin`
 : Определяет источник для окна-получателя, только окно с данного источника имеет право получить сообщение.
@@ -333,11 +348,15 @@ window.addEventListener("message", function(event) {
 
 [codetabs src="postmessage" height=120]
 
+<<<<<<< HEAD
 ```smart header="Без задержек"
 Между `postMessage` и событием `message` не существует задержки. Событие происходит синхронно, быстрее, чем `setTimeout(...,0)`.
 ```
 
 ## Итого
+=======
+## Summary
+>>>>>>> 71da17e5960f1c76aad0d04d21f10bc65318d3f6
 
 Чтобы вызвать метод или получить содержимое из другого окна, нам, во-первых, необходимо иметь ссылку на него.
 
