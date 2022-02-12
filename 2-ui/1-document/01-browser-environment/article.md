@@ -17,7 +17,7 @@
 
 Например, здесь мы используем `window` как глобальный объект:
 
-```js run
+```js run global
 function sayHi() {
   alert("Hello");
 }
