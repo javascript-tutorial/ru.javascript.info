@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <form id="form" onsubmit="return false">
+
+    Предотвратить действие по умолчанию для:
+    <label>
+      <input type="checkbox" name="keydownStop" value="1"> keydown</label>&nbsp;&nbsp;&nbsp;
+    <label>
+      <input type="checkbox" name="keyupStop" value="1"> keyup</label>
+
+    <p>
+      Игнорировать:
+      <label>
+        <input type="checkbox" name="keydownIgnore" value="1"> keydown</label>&nbsp;&nbsp;&nbsp;
+      <label>
+        <input type="checkbox" name="keyupIgnore" value="1"> keyup</label>
+    </p>
+
+    <p>Сфокусируйтесь на поле и нажмите какую-нибудь клавишу.</p>
+
+    <input type="text" placeholder="Клавишу нажимать тут" id="kinput">
+
+<<<<<<< HEAD:2-ui/3-event-details/5-keyboard-events/keyboard-dump.view/index.html
+    <textarea id="area"></textarea>
+    <input type="button" value="Очистить" onclick="area.value = ''" />
+=======
+    <textarea id="area" readonly></textarea>
+    <input type="button" value="Clear" onclick="area.value = ''" />
+>>>>>>> 29216730a877be28d0a75a459676db6e7f5c4834:2-ui/3-event-details/7-keyboard-events/keyboard-dump.view/index.html
+  </form>
+  <script src="script.js"></script>
+
+
+</body>
+</html>

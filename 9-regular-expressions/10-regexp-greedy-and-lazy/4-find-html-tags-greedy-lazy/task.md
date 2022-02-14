@@ -12,4 +12,8 @@ let str = '<> <a href="/"> <input type="radio" checked> <b>';
 alert( str.match(regexp) ); // '<a href="/">', '<input type="radio" checked>', '<b>'
 ```
 
+<<<<<<< HEAD
 В этой задаче мы предполагаем, что теги выглядят как `<...что угодно...>`, и внутри тегов не может быть символов `<` и `>` (первый встреченный `>` закрывает тег).
+=======
+Here we assume that tag attributes may not contain `<` and `>` (inside quotes too), that simplifies things a bit.
+>>>>>>> 29216730a877be28d0a75a459676db6e7f5c4834
