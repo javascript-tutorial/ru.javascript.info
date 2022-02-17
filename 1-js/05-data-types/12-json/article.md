@@ -177,7 +177,7 @@ JSON.stringify(meetup); // Ошибка: Преобразование цикли
 Полный синтаксис `JSON.stringify`:
 
 ```js
-let json = JSON.stringify(value[, replacer, space])
+let json = JSON.stringify(value, [replacer, space])
 ```
 
 value
