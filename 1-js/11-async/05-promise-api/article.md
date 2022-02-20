@@ -1,6 +1,6 @@
 # Promise API
 
-В классе `Promise` есть 5 статических методов. Давайте познакомимся с ними.
+В классе `Promise` есть 6 статических методов. Давайте познакомимся с ними.
 
 ## Promise.all
 
@@ -224,6 +224,44 @@ Promise.race([
 ```
 
 Быстрее всех выполнился первый промис, он и дал результат. После этого остальные промисы игнорируются.
+
+## Promise.any
+[recent browser="new"]
+
+Метод очень похож на `Promise.race`, но ждёт только первый успешно выполненный промис, из которого берёт результат. Если все промисы будут отклонены, то возвращаемый промис отклоняется с AggregateError - специальным объектом ошибок, который хранит все ошибки промисов в своем свойстве errors.
+
+Синтаксис:
+
+```js
+let promise = Promise.any(iterable);
+```
+
+Например, тут результат будет `1`:
+
+```js run
+Promise.any([
+  new Promise((resolve, reject) => setTimeout(() => reject(new Error("Ошибка!")), 1000)),
+  new Promise((resolve, reject) => setTimeout(() => resolve(1), 2000)),
+  new Promise((resolve, reject) => setTimeout(() => resolve(2), 3000))
+]).then(alert); // 1
+```
+
+Быстрее всех выполниться первый промис, но с ошибкой, поэтому результатом стало второе обещание. После того как первый выполненный промис «выиграет гонку», успешно завершившись с результатом 1, все дальнейшие промисы будут игнорироваться.
+
+Вот пример, когда все обещания терпят неудачу:
+
+```js run
+Promise.any([
+  new Promise((resolve, reject) => setTimeout(() => reject(new Error("Ауч!")), 1000)),
+  new Promise((resolve, reject) => setTimeout(() => reject(new Error("Error!")), 2000))
+]).catch(error => {
+  console.log(error.constructor.name); // AggregateError
+  console.log(error.errors[0]); // Ошибка: Ауч!
+  console.log(error.errors[1]); // Ошибка: Error!
+});
+```
+
+Как вы видите, объекты ошибок для неудачных промисов доступны в свойстве errors объекта AggregateError.
 
 ## Promise.resolve/reject
 
