@@ -240,6 +240,19 @@ function showMessage(from, text) {
   ...
 }
 ```
+
+Современные движки JavaScript поддерживают [нулевой оператор объединения](https://learn.javascript.ru/nullish-coalescing-operator) `??`, он лучше, когда большинство ложных значений, таких как `0`, следует считать "нормальными":
+
+```js run
+function showCount(count) {
+  // если count не определен или равен null, выведи "unknown".
+  alert(count ?? "unknown");
+}
+
+showCount(0); // 0
+showCount(null); // unknown
+showCount(); // unknown
+```
 ````
 
 
