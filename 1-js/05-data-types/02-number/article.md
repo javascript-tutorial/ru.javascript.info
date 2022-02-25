@@ -435,8 +435,8 @@ alert( parseInt('2n9c', 36) ); // 123456
 
 Для дробей:
 
-- Используйте округления `Math.floor`, `Math.ceil`, `Math.trunc`, `Math.round` или `num.toFixed(precision)`.
-- Помните, что при работе с дробями происходит потеря точности.
+- Округлите, используя `Math.floor`, `Math.ceil`, `Math.trunc`, `Math.round` или `num.toFixed(precision)`.
+- Обязательно помните, что при работе с дробями теряется точность.
 
 Ещё больше математических функций:
 
