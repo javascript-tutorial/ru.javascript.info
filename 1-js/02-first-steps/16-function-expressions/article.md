@@ -285,7 +285,7 @@ welcome(); // Error: welcome is not defined
 Вот ещё один пример:
 
 ```js run
-let age = 16; // возьмем в качестве примера 16
+let age = 16; // возьмем для примера 16
 
 if (age < 18) {
 *!*
