@@ -39,10 +39,9 @@ alert( sum(1, 2) ); // 3
 - Если у нас только один аргумент, то круглые скобки вокруг параметров можно опустить, сделав запись ещё короче:
 
     ```js run
-    // тоже что и
-    // let double = function(n) { return n * 2 }
     *!*
     let double = n => n * 2;
+    // примерно тоже что и: let double = function(n) { return n * 2 }
     */!*
 
     alert( double(3) ); // 6
