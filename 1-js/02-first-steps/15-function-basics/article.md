@@ -211,7 +211,7 @@ function showMessage(from, text = anotherFunction()) {
 ```smart header="Вычисление параметров по умолчанию"
 В JavaScript параметры по умолчанию вычисляются каждый раз, когда функция вызывается без соответствующего параметра.
 
-В приведенном выше примере `anotherFunction()` может вообще не вызываться, если указан параметр `text`.
+В приведённом выше примере `anotherFunction()` может вообще не вызываться, если указан параметр `text`.
 
 С другой стороны, функция будет независимо вызываться каждый раз, когда `text` отсутствует.
 ```
@@ -247,7 +247,7 @@ function showMessage(from, text) {
 
 ```js run
 function showCount(count) {
-  // если count не определен или равен null, выведи "unknown".
+  // если count не определён или равен null, выведи "unknown".
   alert(count ?? "unknown");
 }
 
