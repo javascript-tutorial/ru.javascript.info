@@ -275,7 +275,7 @@ alert( obj.for + obj.let + obj.return );  // 6
 
 ```js run
 let obj = {
-  0: "тест" // то же самое что и "0": "Тест"
+  0: "тест" // то же самое что и "0": "тест"
 };
 
 // обе функции alert обращаются к одному и тому же свойству (число 0 преобразуется в строку "0")
@@ -304,7 +304,7 @@ alert(obj.__proto__); // [object Object], значение - это объект
 ```js run
 let user = {};
 
-alert( user.noSuchProperty === undefined ); // true означает "свойства нет"
+alert( user.noSuchProperty === undefined ); // true означает "такого свойства нет"
 ```
 
 Для этого также есть специальный оператор `"in"`.
