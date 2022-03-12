@@ -75,7 +75,7 @@ customElements.define('show-hello', class extends HTMLElement {
 
 Есть два ограничения:
 1. Для каждого элемента мы можем создать только один shadow root.
-2. В качестве `elem` может быть использован пользовательский элемент (Custom Element), либо один из следующих элементов: "article", "aside", "blockquote", "body", "div", "footer", "h1..h6", "header", "main" "nav", "p", "section" или "span". Остальные, например, `<img>`, не могут содержать теневое дерево.
+2. В качестве `elem` может быть использован пользовательский элемент (Custom Element), либо один из следующих элементов: "article", "aside", "blockquote", "body", "div", "footer", "h1..h6", "header", "main", "nav", "p", "section" или "span". Остальные, например, `<img>`, не могут содержать теневое дерево.
 
 Свойство `mode` задаёт уровень инкапсуляции. У него может быть только два значения:
 - `"open"` -- корень теневого дерева ("shadow root") доступен как `elem.shadowRoot`.
