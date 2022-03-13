@@ -220,7 +220,7 @@ let clone = Object.assign({}, user);
 
 alert( user.sizes === clone.sizes ); // true, тот же объект
 
-// user и  clone обладают общими размерами
+// user и clone обладают общими размерами
 user.sizes.width++;       // изменяем свойства в первом объекте
 alert(clone.sizes.width); // 51, видим результат в другом
 ```
