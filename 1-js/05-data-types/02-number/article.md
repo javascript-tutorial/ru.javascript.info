@@ -1,6 +1,7 @@
 # Числа
 
 В современном JavaScript существует два типа чисел:
+
 1. Обычные числа в JavaScript хранятся в 64-битном формате [IEEE-754](http://en.wikipedia.org/wiki/IEEE_754-1985), который также называют "числа двойной точности с плавающей точкой" (double precision floating point numbers). Это числа, которые мы используем большую часть времени, и мы поговорим о них в этой главе.
 2. Числа BigInt нужны для представления целых чисел произвольной длины. Иногда они необходимы, поскольку обычное число не может безопасно превышать <code>2<sup>53</sup></code> или быть меньше <code>-2<sup>53</sup></code>. Так как `BigInt` числа нужны в нескольких специальных областях, мы посвятили им отдельную главу <info:bigint>.
 
@@ -162,8 +163,7 @@ alert( num.toString(2) );   // 11111111
     alert( Math.floor(num * 100) / 100 ); // 1.23456 -> 123.456 -> 123 -> 1.23
     ```
 
-2. Метод [toFixed(n)](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed) округляет число до `n` знаков после запятой и возвращает строковое представление результата.
-3. Метод [toFixed(n)](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed) округляет число до `n` цифр после точки и возвращает строковое представление результата.
+3. Метод [toFixed(n)](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed) округляет число до `n-ого` количества цифр после точки и возвращает строковое представление результата.
 
     ```js run
     let num = 12.34;
