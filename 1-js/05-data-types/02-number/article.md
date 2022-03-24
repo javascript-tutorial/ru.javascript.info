@@ -163,7 +163,7 @@ alert( num.toString(2) );   // 11111111
     alert( Math.floor(num * 100) / 100 ); // 1.23456 -> 123.456 -> 123 -> 1.23
     ```
 
-3. Метод [toFixed(n)](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed) округляет число до `n-ого` количества цифр после точки и возвращает строковое представление результата.
+2. Метод [toFixed(n)](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed) округляет число до `n-ого` количества цифр после точки и возвращает строковое представление результата.
 
     ```js run
     let num = 12.34;
