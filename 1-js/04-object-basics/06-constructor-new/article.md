@@ -123,7 +123,7 @@ function User(name) {
   this.name = name;
 }
 
-let john = User("John"); // переадресовывает вызовы на new User
+let john = User("John"); // переадресовывает вызов на new User
 alert(john.name); // John
 ```
 
