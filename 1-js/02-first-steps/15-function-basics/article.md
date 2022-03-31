@@ -243,7 +243,7 @@ function showMessage(from, text) {
 }
 ```
 
-Современные движки JavaScript поддерживают [нулевой оператор объединения](https://learn.javascript.ru/nullish-coalescing-operator) `??`, он лучше, когда большинство ложных значений, таких как `0`, следует считать "нормальными":
+Современные движки JavaScript поддерживают [оператор нулевого слияния](https://learn.javascript.ru/nullish-coalescing-operator) `??`, он лучше, когда большинство ложных значений, таких как `0`, следует считать "нормальными":
 
 ```js run
 function showCount(count) {
