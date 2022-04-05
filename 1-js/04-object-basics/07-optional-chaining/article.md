@@ -105,7 +105,7 @@ alert( user?.address?.street ); // undefined (без ошибки)
 А вот пример с `document.querySelector`:
 
 ```js run
-let html = document.querySelector('.elem')?.innerHTML; // будет null, если элемента нет
+let html = document.querySelector('.elem')?.innerHTML; // будет undefined, если элемента нет
 ```
 
 Считывание адреса с помощью `user?.address` работает, даже если объект `user` не существует:
