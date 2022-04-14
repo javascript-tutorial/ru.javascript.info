@@ -247,6 +247,7 @@ function showMessage(from, text) {
 ```js
 function showMessage(from, text) {
   // Если значение text ложно, тогда присвоить параметру text значение по умолчанию
+  // это предполагает, что text == "" - как если бы текста не было вообще
   text = text || 'текст не добавлен';
   ...
 }
