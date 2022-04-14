@@ -63,7 +63,7 @@ alert( sum(1, 2) ); // 3
 let age = prompt("Сколько Вам лет?", 18);
 
 let welcome = (age < 18) ?
-  () => alert('Привет') :
+  () => alert('Привет!') :
   () => alert("Здравствуйте!");
 
 welcome();
