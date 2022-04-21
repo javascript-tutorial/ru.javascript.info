@@ -114,7 +114,7 @@ class CoffeeMachine {
 let coffeeMachine = new CoffeeMachine(100);
 
 // устанавливаем количество воды
-coffeeMachine.waterAmount = -10; // Error: Отрицательное количество воды
+coffeeMachine._waterAmount = -10; // Error: Отрицательное количество воды
 ```
 
 Теперь доступ под контролем, поэтому указать воду ниже нуля не удалось.
