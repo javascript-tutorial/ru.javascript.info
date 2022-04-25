@@ -41,7 +41,7 @@
 
 В окне теста ниже все события мыши записываются, и если задержка между ними более 1 секунды, то они разделяются горизонтальной чертой.
 
-При этом мы также можем увидеть свойство `which`, которое позволяет определить, какая кнопка мыши была нажата.
+Кроме того, мы можем видеть свойство `button`, которое позволяет нам определять кнопку мыши; это объясняется ниже.
 
 <input onmousedown="return logMouse(event)" onmouseup="return logMouse(event)" onclick="return logMouse(event)" oncontextmenu="return logMouse(event)" ondblclick="return logMouse(event)" value="Кликни меня левой или правой кнопкой мыши" type="button"> <input onclick="logClear('test')" value="Очистить" type="button"> <form id="testform" name="testform"> <textarea style="font-size:12px;height:150px;width:360px;"></textarea></form>
 ```
