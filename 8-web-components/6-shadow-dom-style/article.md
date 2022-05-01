@@ -49,6 +49,7 @@ customElements.define('custom-dialog', class extends HTMLElement {
 Если есть некоторое свойство, стилизованное как в `:host` локально, так и в документе, то стиль документа будет приоритетным.
 
 Например, если в документе из примера поставить:
+
 ```html
 <style>
 custom-dialog {
@@ -120,6 +121,7 @@ customElements.define('custom-dialog', class extends HTMLElement {
 Элементы слотов происходят из светлого DOM, поэтому они используют стили документа. Локальные стили не влияют на содержимое слотов.
 
 В примере ниже текст в `<span>` жирный в соответствии со стилями документа, но не берёт `background` из локальных стилей:
+
 ```html run autorun="no-epub" untrusted height=80
 <style>
 *!*
