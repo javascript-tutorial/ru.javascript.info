@@ -469,7 +469,7 @@ questions:
       - '`5`'
       - '`undefined`'
       - Будет ошибка
-    correctAnswer: 2
+    correctAnswer: 1
 
 
   -
