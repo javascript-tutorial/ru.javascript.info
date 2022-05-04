@@ -367,8 +367,8 @@ alert( "Midget".includes("id", 3) ); // false, поиск начат с пози
 Методы [str.startsWith](mdn:js/String/startsWith) и [str.endsWith](mdn:js/String/endsWith) проверяют, соответственно, начинается ли и заканчивается ли строка определённой строкой:
 
 ```js run
-alert( "Widget".startsWith("Wid") ); // true, "Wid" — начало "Widget"
-alert( "Widget".endsWith("get") ); // true, "get" — окончание "Widget"
+alert( "*!*Wid*/!*get".startsWith("Wid") ); // true, "Wid" — начало "Widget"
+alert( "Wid*!*get*/!*".endsWith("get") ); // true, "get" — окончание "Widget"
 ```
 
 ## Получение подстроки
