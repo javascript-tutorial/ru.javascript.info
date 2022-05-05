@@ -4,7 +4,7 @@ function concat(arrays) {
 
   let result = new Uint8Array(totalLength);
   
-  if (!arrays.length) return null;
+  if (!arrays.length) return result;
 
   // копируем каждый из массивов в result
   // следующий массив копируется сразу после предыдущего
