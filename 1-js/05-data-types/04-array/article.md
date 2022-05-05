@@ -197,7 +197,7 @@ alert( fruits.at(-1) ); // Plum
 `unshift`
 : Добавляет элемент в начало массива:
 
-    ```js
+    ```js run
     let fruits = ["Апельсин", "Груша"];
 
     fruits.unshift('Яблоко');
