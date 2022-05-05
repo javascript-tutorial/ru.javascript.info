@@ -486,6 +486,7 @@ alert( [0] == [0] ); // false
 
 ```js run
 alert( 0 == [] ); // true
+
 alert('0' == [] ); // false
 ```
 
