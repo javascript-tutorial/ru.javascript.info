@@ -211,7 +211,7 @@ alert( 'Interface'.toLowerCase() ); // interface
 
 Если мы захотим перевести в нижний регистр какой-то конкретный символ:
 
-```js
+```js run
 alert( 'Interface'[0].toLowerCase() ); // 'i'
 ```
 
