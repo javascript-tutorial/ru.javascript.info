@@ -68,88 +68,16 @@ rabbit.hide(); // Белый кролик прячется!
 
 Как мы помним из главы <info:native-prototypes>, в JavaScript используется наследование на прототипах для встроенных объектов. Например `Date.prototype.[[Prototype]]` это `Object.prototype`. Вот почему у dates есть доступ к общим объектным методам.
 
-````smart header="Any expression is allowed after `extends`"
-Class syntax allows to specify not just a class, but any expression after `extends`.
-
-For instance, a function call that generates the parent class:
-
-```js run
-function f(phrase) {
-  return class {
-    sayHi() { alert(phrase); }
-  };
-}
-
-*!*
-class User extends f("Hello") {}
-*/!*
-
-new User().sayHi(); // Hello
-```
-Here `class User` inherits from the result of `f("Hello")`.
-
-That may be useful for advanced programming patterns when we use functions to generate classes depending on many conditions and can inherit from them.
-````
-
-
-
-
-Сейчас они полностью независимы.
-
-Но мы хотим, чтобы `Rabbit` расширял `Animal`. Другими словами, кролики должны происходить от животных, т.е. иметь доступ к методам `Animal` и расширять функциональность `Animal` своими методами.
-
-Для того, чтобы наследовать класс от другого, мы должны использовать ключевое слово `"extends"` и указать название родительского класса перед `{..}`.
-
-Ниже `Rabbit` наследует от `Animal`:
-
-```js run
-class Animal {
-  constructor(name) {
-    this.speed = 0;
-    this.name = name;
-  }
-  run(speed) {
-    this.speed = speed;
-    alert(`${this.name} бежит со скоростью ${this.speed}.`);
-  }
-  stop() {
-    this.speed = 0;
-    alert(`${this.name} стоит.`);
-  }
-}
-
-// Наследуем от Animal указывая "extends Animal"
-*!*
-class Rabbit extends Animal {
-*/!*
-  hide() {
-    alert(`${this.name} прячется!`);
-  }
-}
-
-let rabbit = new Rabbit("Белый кролик");
-
-rabbit.run(5); // Белый кролик бежит со скоростью 5.
-rabbit.hide(); // Белый кролик прячется!
-```
-Теперь код `Rabbit` стал короче, так как используется конструктор класса `Animal` по умолчанию и кролик может использовать метод `run` как и все животные.
-
-Ключевое слово `extends` работает, используя прототипы. Оно устанавливает  `Rabbit.prototype.[[Prototype]]` в `Animal.prototype`. Так что если метод не найден в  `Rabbit.prototype`, JavaScript берёт его из `Animal.prototype`.
-
-![](animal-rabbit-extends.svg)
-
-Как мы помним из главы <info:native-prototypes>, в JavaScript используется наследование на прототипах для встроенных объектов. Например `Date.prototype.[[Prototype]]` это `Object.prototype`, поэтому у дат есть универсальные методы объекта.
-
 ````smart header="После `extends` разрешены любые выражения"
-Синтаксис создания класса допускает указывать после `extends` не только класс, но любое выражение.
+Синтаксис создания класса допускает указывать после `extends` не только класс, но любое выражение после `extends`.
 
 Пример вызова функции, которая генерирует родительский класс:
 
 ```js run
 function f(phrase) {
   return class {
-    sayHi() { alert(phrase) }
-  }
+    sayHi() { alert(phrase); }
+  };
 }
 
 *!*
