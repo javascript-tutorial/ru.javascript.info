@@ -24,11 +24,11 @@
 
 Разные движки имеют разные "кодовые имена". Например:
 
-- [V8](https://ru.wikipedia.org/wiki/V8_(%D0%B4%D0%B2%D0%B8%D0%B6%D0%BE%D0%BA_JavaScript)) -- в Chrome и Opera.
+- [V8](https://ru.wikipedia.org/wiki/V8_(%D0%B4%D0%B2%D0%B8%D0%B6%D0%BE%D0%BA_JavaScript)) -- в Chrome, Opera и Edge.
 - [SpiderMonkey](https://ru.wikipedia.org/wiki/SpiderMonkey) -- в Firefox.
-- ...Ещё есть "Trident" и "Chakra" для разных версий IE, "ChakraCore" для Microsoft Edge, "Nitro" и "SquirrelFish" для Safari и т.д.
+- ...Ещё есть "Chakra" для IE, "JavaScriptCore", "Nitro" и "SquirrelFish" для Safari и т.д.
 
-Эти названия полезно знать, так как они часто используются в статьях для разработчиков. Мы тоже будем их использовать. Например, если "функциональность X поддерживается V8", тогда "Х", скорее всего, работает в Chrome и Opera.
+Эти названия полезно знать, так как они часто используются в статьях для разработчиков. Мы тоже будем их использовать. Например, если "функциональность X поддерживается V8", тогда "Х", скорее всего, работает в Chrome, Opera и Edge.
 
 ```smart header="Как работают движки?"
 

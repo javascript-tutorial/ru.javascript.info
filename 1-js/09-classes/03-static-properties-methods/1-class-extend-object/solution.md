@@ -61,7 +61,7 @@ alert( Rabbit.__proto__ === Function.prototype ); // как у каждой фу
 
 *!*
 // ошибка - нет такой функции у Rabbit
-alert( Rabbit.getOwnPropertyNames({a: 1, b: 2}) ); // Error
+alert( Rabbit.getOwnPropertyNames({a: 1, b: 2}) ); // Ошибка
 */!*
 ```
 

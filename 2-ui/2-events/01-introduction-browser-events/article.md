@@ -216,7 +216,7 @@ input.onclick = function() { alert(2); } // заменит предыдущий 
 Синтаксис добавления обработчика:
 
 ```js
-element.addEventListener(event, handler[, options]);
+element.addEventListener(event, handler, [options]);
 ```
 
 `event`
