@@ -122,7 +122,7 @@ alert(longEar.jumps); // true (из rabbit)
 
 ![](proto-animal-rabbit-chain.svg)
 
-Теперь, если мы прочитаем что-то из `longEar`, и оно отсутствует, JavaScript будет искать его в `rabbit`, а затем в `animal`.
+Теперь, если мы прочтём что-нибудь из `longEar`, и оно будет отсутствовать, JavaScript будет искать его в `rabbit`, а затем в `animal`.
 
 Есть только два ограничения:
 
