@@ -28,7 +28,7 @@ alert( rabbit.hasOwnProperty('name') ); // true
 1. Между `"prototype"` функций-конструкторов (для методов)
 2. Между самими функциями-конструкторами (для статических методов).
 
-В случае для `class Rabbit extends Object` это значит:
+В случае с  `class Rabbit extends Object` это значит:
 
 ```js run
 class Rabbit extends Object {}
