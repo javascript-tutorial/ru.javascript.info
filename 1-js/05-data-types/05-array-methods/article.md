@@ -547,7 +547,7 @@ alert( str ); // Вася;Петя;Маша
 Синтаксис:
 
 ```js
-let value = arr.reduce(function(previousValue, item, index, array) {
+let value = arr.reduce(function(accumulator, item, index, array) {
   // ...
 }, [initial]);
 ```
@@ -556,7 +556,7 @@ let value = arr.reduce(function(previousValue, item, index, array) {
 
 Аргументы:
 
-- `previousValue` -- результат предыдущего вызова этой функции, равен `initial` при первом вызове (если передан `initial`),
+- `accumulator` -- результат предыдущего вызова этой функции, равен `initial` при первом вызове (если передан `initial`),
 - `item` -- очередной элемент массива,
 - `index` -- его индекс,
 - `array` -- сам массив.
@@ -564,8 +564,6 @@ let value = arr.reduce(function(previousValue, item, index, array) {
 При вызове функции результат её вызова на предыдущем элементе массива передаётся как первый аргумент.
 
 Звучит сложновато, но всё становится проще, если думать о первом аргументе как "аккумулирующем" результат предыдущих вызовов функции. По окончании он становится результатом `reduce`.
-
-
 
 Этот метод проще всего понять на примере.
 
