@@ -86,6 +86,7 @@ document.querySelector('.hello').innerHTML = text;
 | Functionality          | Функциональность                                                               |
 | Left click/right click | Левый/правый клик? Кликните? левой кнопкой мыши        |
 | More in / Details in   | Подробнее в                                                      |
+| Nullish coalescing operator |  Оператор нулевого слияния  |
 | Script                 | Скрипт                                                        |
 | Statement              | Инструкция                                                       |
 | Summary                | Итого                                                                          |
