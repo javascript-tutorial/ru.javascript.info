@@ -304,7 +304,7 @@ alert( regexp.exec(str) ); // null
 ```js run
 let str = "Я люблю JavaScript";
 
-// эти два теста делают одно и же
+// эти два теста делают одно и то же
 alert( *!*/люблю/i*/!*.test(str) ); // true
 alert( str.search(*!*/люблю/i*/!*) != -1 ); // true
 ```
