@@ -12,11 +12,8 @@ IDE загружает проект (который может состоять 
 
 Если вы ещё не выбрали себе IDE, присмотритесь к этим:
 
-
-- [Visual Studio Code](https://code.visualstudio.com/) (бесплатно).
-- [WebStorm](http://www.jetbrains.com/webstorm/) (платно).
-
-Обе IDE -- кроссплатформенные.
+- [Visual Studio Code](https://code.visualstudio.com/) (кросс-платформенная, бесплатная).
+- [WebStorm](http://www.jetbrains.com/webstorm/) (кросс-платформенная, платная).
 
 Для Windows есть ещё Visual Studio (не путать с Visual Studio Code). Visual Studio - это платная мощная среда разработки, которая работает только на Windows. Она хорошо подходит для .NET платформы. У неё есть бесплатная версия, которая называется [Visual Studio Community](https://www.visualstudio.com/vs/community/).
 
