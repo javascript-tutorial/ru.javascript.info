@@ -11,7 +11,7 @@ archive:
 
 ## Range
 
-`Range` -- это объект, соответствующий фрагменту документа, который может включать узлы и участки текста из этого документа. Наиболее подробно объект `Range` описан в спецификации [DOM Range](http://www.w3.org/TR/DOM-Level-2-Traversal-Range/ranges.html).
+`Range` -- это объект, соответствующий фрагменту документа, который может включать узлы и участки текста из этого документа. Наиболее подробно объект `Range` описан в спецификации [DOM Range](https://www.w3.org/TR/DOM-Level-2-Traversal-Range/ranges.html).
 
 Чтобы понять о чем речь, обратимся к самому простому случаю  `Range`, который будет подробно рассмотрен ниже -- к выделениям. В приводимом ниже примере выделите несколько слов в предложении. Будет выводиться текстовое содержимое выделяемой области:
 
@@ -33,7 +33,7 @@ archive:
 
 Если контейнер является текстовым узлом, то смещение определяется в символах от начала DOM-узла. Если контейнер является элементом (`Document`, `DocumentFragment`, `Element`...), то смещение определяется в дочерних узлах.
 
-Смотрим на иллюстрацию ([источник](http://www.w3.org/TR/DOM-Level-2-Traversal-Range/ranges.html#td-boundarypoint)):
+Смотрим на иллюстрацию ([источник](https://www.w3.org/TR/DOM-Level-2-Traversal-Range/ranges.html#td-boundarypoint)):
 
 ![|alt="Пример Range"](56.gif)
 
@@ -80,7 +80,7 @@ HTML:
 
 [iframe border="1" src="domRangeCreate" edit link]
 
-Рассмотрим вкратце [свойства и методы Range](http://www.w3.org/TR/DOM-Level-2-Traversal-Range/ranges.html#Level-2-Range-Interface):
+Рассмотрим вкратце [свойства и методы Range](https://www.w3.org/TR/DOM-Level-2-Traversal-Range/ranges.html#Level-2-Range-Interface):
 
 - Свойство `commonAncestorContainer` вернёт ссылку на наиболее вложенный корневой контейнер.
 - Свойство `startContainer` (`endContainer`) вернёт ссылку на контейнер верхней (нижней) граничной точки.
@@ -361,7 +361,7 @@ function clearSelection() {
 
 ## Итого
 
-- В современных браузерах поддерживается стандартный объект [Range](http://www.w3.org/TR/DOM-Level-2-Traversal-Range/ranges.html)
+- В современных браузерах поддерживается стандартный объект [Range](https://www.w3.org/TR/DOM-Level-2-Traversal-Range/ranges.html)
 - В IE8- поддерживается только собственный объект [TextRange](http://help.dottoro.com/ljgbbkjf.php).
 
 Есть библиотеки, которые "исправляют" объект `TextRange`, добавляя ему нужные свойства из `Range`.

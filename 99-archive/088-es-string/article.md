@@ -279,7 +279,7 @@ alert( "S\u0307\u0323" == "S\u0323\u0307" ); // false
 alert( "S\u0307\u0323".normalize() == "S\u0323\u0307".normalize() ); // true
 ```
 
-Забавно, что в данной конкретной ситуации `normalize()` приведёт последовательность из трёх символов к одному: [\u1e68 (S с двумя точками)](http://www.fileformat.info/info/unicode/char/1e68/index.htm).
+Забавно, что в данной конкретной ситуации `normalize()` приведёт последовательность из трёх символов к одному: [\u1e68 (S с двумя точками)](https://www.fileformat.info/info/unicode/char/1e68/index.htm).
 
 ```js run
 alert( "S\u0307\u0323".normalize().length ); // 1, нормализовало в один символ

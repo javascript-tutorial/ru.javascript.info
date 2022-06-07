@@ -178,4 +178,4 @@ required: (Object|null|undefined)
 
 С ней аннотации, документирующие типы и параметры, становятся не просто украшением, а реальным средством проверки, уменьшающим количество ошибок на production.
 
-Очень подробно проверка типов описана в книге [Closure: The Definitive Guide](http://www.ozon.ru/context/detail/id/6089988/), автора Michael Bolin.
+Очень подробно проверка типов описана в книге [Closure: The Definitive Guide](https://www.ozon.ru/context/detail/id/6089988/), автора Michael Bolin.

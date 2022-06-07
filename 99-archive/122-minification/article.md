@@ -27,7 +27,7 @@ archive:
 
 Для GCC:
 
-1. Убедиться, что стоит [Java](http://java.oracle.com)
+1. Убедиться, что стоит [Java](https://www.oracle.com/java/technologies/)
 2. Скачать и распаковать <http://closure-compiler.googlecode.com/files/compiler-latest.zip>, нам нужен файл `compiler.jar`.
 3. Сжать файл `my.js`: `java -jar compiler.jar --charset UTF-8 --js my.js --js_output_file my.min.js`
 
