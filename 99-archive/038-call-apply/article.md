@@ -99,7 +99,7 @@ printArgs(1, 2, 3);
 ````smart header="Почему вызов сработает?"
 Здесь метод <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/join">join</a> массива скопирован и вызван в контексте `arguments`. Не произойдёт ли что-то плохое от того, что `arguments` -- не массив? Почему он, вообще, сработал?
 
-Ответ на эти вопросы простой. В соответствии [со спецификацией](http://es5.github.com/x15.4.html#x15.4.4.5), внутри `join` реализован примерно так:
+Ответ на эти вопросы простой. В соответствии [со спецификацией](https://es5.github.io/x15.4.html#x15.4.4.5), внутри `join` реализован примерно так:
 
 ```js
 function join(separator) {
