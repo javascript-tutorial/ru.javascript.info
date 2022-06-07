@@ -757,7 +757,7 @@ alert(soldiers[1].age); // 23
 
 - [arr.copyWithin(target, start, end)](mdn:js/Array/copyWithin) -- копирует свои элементы, начиная со `start` и заканчивая `end`, в *собственную* позицию `target` (перезаписывает существующие).
 
-- [arr.flat(depth)](mdn:js/Array/flat)/[arr.flatMap(fn)](mdn:js/Array/flatMap) создайте новый плоский массив из многомерного массива.
+- [arr.flat(depth)](mdn:js/Array/flat)/[arr.flatMap(fn)](mdn:js/Array/flatMap) создаёт новый плоский массив из многомерного массива.
 
 Полный список есть в [справочнике MDN](mdn:js/Array).
 
