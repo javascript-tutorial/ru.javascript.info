@@ -3,12 +3,12 @@
 Впрочем, для таких строк, подойдёт и обычное сравнение `'=='`.
 
 ```js no-beautify
-if(browser == 'Edge') {
+if(browser === 'Edge') {
   alert("You've got the Edge!");
 } else if (browser == 'Chrome'
- || browser == 'Firefox'
- || browser == 'Safari'
- || browser == 'Opera') {
+ || browser === 'Firefox'
+ || browser === 'Safari'
+ || browser === 'Opera') {
   alert( 'Okay we support these browsers too' );
 } else {
   alert( 'We hope that this page looks ok!' );
@@ -18,3 +18,4 @@ if(browser == 'Edge') {
 Обратите внимание: конструкция `browser == 'Chrome' || browser == 'Firefox' ...` разбита на несколько строк для лучшей читаемости.
 
 Но всё равно запись через `switch` нагляднее.
+Switch использует строгое ===, поэтому важно использовать его и с else
