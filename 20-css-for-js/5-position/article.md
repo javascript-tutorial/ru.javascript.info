@@ -116,8 +116,8 @@ position: absolute;
 
 Кроме того:
 
-- **Ширина элемента с `position: absolute` устанавливается по содержимому.** Детали алгоритма вычисления ширины [описаны в стандарте](http://www.w3.org/TR/CSS2/visudet.html#abs-non-replaced-width).
-- **Элемент получает `display:block`**, который перекрывает почти все возможные `display` (см. [Relationships between 'display', 'position', and 'float'](http://www.w3.org/TR/CSS2/visuren.html#dis-pos-flo)).
+- **Ширина элемента с `position: absolute` устанавливается по содержимому.** Детали алгоритма вычисления ширины [описаны в стандарте](https://www.w3.org/TR/CSS2/visudet.html#abs-non-replaced-width).
+- **Элемент получает `display:block`**, который перекрывает почти все возможные `display` (см. [Relationships between 'display', 'position', and 'float'](https://www.w3.org/TR/CSS2/visuren.html#dis-pos-flo)).
 
 Например, отпозиционируем заголовок в правом-верхнем углу документа:
 
@@ -191,7 +191,7 @@ div {
 
 Дело в том, что в CSS `100%` относится к ширине внешнего блока ("containing block"). А какой внешний блок имеется в виду здесь, ведь элемент изъят со своего обычного места?
 
-В данном случае им является так называемый (["\"initial containing block\""](http://www.w3.org/TR/CSS21/visudet.html#containing-block-details)), которым является окно, *а не документ*.
+В данном случае им является так называемый (["\"initial containing block\""](https://www.w3.org/TR/CSS21/visudet.html#containing-block-details)), которым является окно, *а не документ*.
 
 **То есть, координаты и ширины вычисляются относительно окна, а не документа.**
 
@@ -337,7 +337,7 @@ position: fixed;
 
 ## Почитать
 
-CSS-позиционирование по-настоящему глубоко в спецификации <a href="http://www.w3.org/TR/CSS2/visuren.html#positioning-scheme">Visual Formatting Model, 9.3 и ниже</a>.
+CSS-позиционирование по-настоящему глубоко в спецификации [Visual Formatting Model, 9.3 и ниже](https://www.w3.org/TR/CSS2/visuren.html#positioning-scheme).
 
-Ещё есть хорошее руководство <a href="http://www.barelyfitz.com/screencast/html-training/css/positioning/">CSS Positioning in 10 steps</a>, которое охватывает основные типы позиционирования.
+Ещё есть хорошее руководство [CSS Positioning in 10 steps](https://www.barelyfitz.com/screencast/html-training/css/positioning/), которое охватывает основные типы позиционирования.
 

@@ -25,9 +25,9 @@ float: left | right | none | inherit;
 
     То есть, указав элементу, у которого `display:inline` свойство `float: left/right`, мы автоматически сделаем его блочным. В частности, для него будут работать  `width/height`.
 
-    Исключением являются некоторые редкие `display` наподобие `inline-table` и `run-in` (см. [Relationships between 'display', 'position', and 'float'](http://www.w3.org/TR/CSS2/visuren.html#dis-pos-flo))
+    Исключением являются некоторые редкие `display` наподобие `inline-table` и `run-in` (см. [Relationships between 'display', 'position', and 'float'](https://www.w3.org/TR/CSS2/visuren.html#dis-pos-flo))
 
-2. Ширина `float`-блока определяется по содержимому. (["CSS 2.1, 10.3.5"](http://www.w3.org/TR/CSS2/visudet.html#float-width)).
+2. Ширина `float`-блока определяется по содержимому. (["CSS 2.1, 10.3.5"](https://www.w3.org/TR/CSS2/visudet.html#float-width)).
 
 3. Вертикальные отступы `margin` элементов с `float` не сливаются с отступами соседей, в отличие от обычных блочных элементов.
 

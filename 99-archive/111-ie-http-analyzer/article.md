@@ -44,4 +44,4 @@ IE HTTP Analyzer -- платный, и имеет две ипостаси.
 
 Программа платная.
 
-Живёт на <a href="http://www.ieinspector.com/httpanalyzer/">http://www.ieinspector.com/httpanalyzer/</a>.
+Живёт на [https://www.ieinspector.com/httpanalyzer/](https://www.ieinspector.com/httpanalyzer/).

@@ -10,7 +10,7 @@
 
 Каждый DOM-узел принадлежит соответствующему встроенному классу.
 
-Корнем иерархии является [EventTarget](https://dom.spec.whatwg.org/#eventtarget), от него наследует [Node](http://dom.spec.whatwg.org/#interface-node) и остальные DOM-узлы.
+Корнем иерархии является [EventTarget](https://dom.spec.whatwg.org/#eventtarget), от него наследует [Node](https://dom.spec.whatwg.org/#interface-node) и остальные DOM-узлы.
 
 На рисунке ниже изображены основные классы:
 
@@ -19,8 +19,8 @@
 Существуют следующие классы:
 
 - [EventTarget](https://dom.spec.whatwg.org/#eventtarget) -- это корневой "абстрактный" класс. Объекты этого класса никогда не создаются. Он служит основой, благодаря которой все DOM-узлы поддерживают так называемые "события", о которых мы поговорим позже.
-- [Node](http://dom.spec.whatwg.org/#interface-node) -- также является "абстрактным" классом, и служит основой для DOM-узлов. Он обеспечивает базовую функциональность: `parentNode`, `nextSibling`, `childNodes` и т.д. (это геттеры). Объекты класса `Node` никогда не создаются. Но есть определённые классы узлов, которые наследуют от него: `Text` -- для текстовых узлов, `Element` -- для узлов-элементов и более экзотический `Comment` -- для узлов-комментариев.
-- [Element](http://dom.spec.whatwg.org/#interface-element) -- это базовый класс для DOM-элементов. Он обеспечивает навигацию на уровне элементов: `nextElementSibling`, `children` и методы поиска: `getElementsByTagName`, `querySelector`. Браузер поддерживает не только HTML, но также XML и SVG. Класс Element служит базой для следующих классов: `SVGElement`, `XMLElement` и `HTMLElement`.
+- [Node](https://dom.spec.whatwg.org/#interface-node) -- также является "абстрактным" классом, и служит основой для DOM-узлов. Он обеспечивает базовую функциональность: `parentNode`, `nextSibling`, `childNodes` и т.д. (это геттеры). Объекты класса `Node` никогда не создаются. Но есть определённые классы узлов, которые наследуют от него: `Text` -- для текстовых узлов, `Element` -- для узлов-элементов и более экзотический `Comment` -- для узлов-комментариев.
+- [Element](https://dom.spec.whatwg.org/#interface-element) -- это базовый класс для DOM-элементов. Он обеспечивает навигацию на уровне элементов: `nextElementSibling`, `children` и методы поиска: `getElementsByTagName`, `querySelector`. Браузер поддерживает не только HTML, но также XML и SVG. Класс Element служит базой для следующих классов: `SVGElement`, `XMLElement` и `HTMLElement`.
 - [HTMLElement](https://html.spec.whatwg.org/multipage/dom.html#htmlelement) -- является базовым классом для всех остальных HTML-элементов. От него наследуют конкретные элементы:
     - [HTMLInputElement](https://html.spec.whatwg.org/multipage/forms.html#htmlinputelement) -- класс для тега `<input>`,
     - [HTMLBodyElement](https://html.spec.whatwg.org/multipage/semantics.html#htmlbodyelement) -- класс для тега `<body>`,

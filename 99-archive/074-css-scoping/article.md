@@ -6,7 +6,7 @@ archive:
 
 # Стили и селекторы
 
-Стилизация Shadow DOM покрывается более общей спецификацией ["CSS Scoping"](http://drafts.csswg.org/css-scoping/).
+Стилизация Shadow DOM покрывается более общей спецификацией ["CSS Scoping"](https://drafts.csswg.org/css-scoping/).
 
 По умолчанию стили внутри Shadow DOM относятся только к его содержимому.
 
@@ -273,7 +273,7 @@ elems[1].createShadowRoot().appendChild( tmpl.content.cloneNode(true) );
 
 Текст внутри `<h3>` -- зелёный и подчёркнутый одновременно, но стилизуется именно тот `<span>`, который показан в `<content>`, а тот, который просто в Shadow DOM -- нет.
 
-Приоритет селекторов рассчитывается по [обычным правилам специфичности](http://www.w3.org/TR/css3-selectors/#specificity), если же приоритеты стилей на странице и в Shadow DOM равны, то, как описано в секции [Cascading](http://dev.w3.org/csswg/css-scoping/#cascading), побеждает страница, а для `!important`-стиля побеждает Shadow DOM.
+Приоритет селекторов рассчитывается по [обычным правилам специфичности](https://www.w3.org/TR/selectors-3/#specificity), если же приоритеты стилей на странице и в Shadow DOM равны, то, как описано в секции [Cascading](https://drafts.csswg.org/css-scoping/#cascading), побеждает страница, а для `!important`-стиля побеждает Shadow DOM.
 
 ## Итого
 

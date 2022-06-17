@@ -21,11 +21,11 @@ archive:
 
 Если вы ещё не задумывались над выбором IDE, присмотритесь к следующим вариантам.
 
-- Продукты IntelliJ: [WebStorm](http://www.jetbrains.com/webstorm/), а также в зависимости от дополнительного языка программирования [PHPStorm (PHP)](http://www.jetbrains.com/phpstorm/), [IDEA (Java)](http://www.jetbrains.com/idea/), [RubyMine (Ruby)](http://www.jetbrains.com/ruby/) и другие.
+- Продукты IntelliJ: [WebStorm](https://www.jetbrains.com/webstorm/), а также в зависимости от дополнительного языка программирования [PHPStorm (PHP)](https://www.jetbrains.com/phpstorm/), [IDEA (Java)](https://www.jetbrains.com/idea/), [RubyMine (Ruby)](https://www.jetbrains.com/ruby/) и другие.
 - Visual Studio, в сочетании с разработкой под .NET (Win)
 - Продукты на основе Eclipse, в частности [Aptana](http://www.aptana.com/) и Zend Studio
-- [Komodo IDE](http://www.activestate.com/komodo-ide) и его облегчённая версия [Komodo Edit](http://www.activestate.com/komodo-edit).
-- [Netbeans](http://netbeans.org/)
+- [Komodo IDE](https://www.activestate.com/komodo-ide) и его облегчённая версия [Komodo Edit](https://www.activestate.com/komodo-edit).
+- [Netbeans](https://netbeans.apache.org/)
 
 Почти все они, за исключением Visual Studio, кросс-платформенные.
 
@@ -46,16 +46,16 @@ archive:
 - [Sublime Text](http://www.sublimetext.com/) (кросс-платформенный, shareware).
 - [Visual Studio Code](https://code.visualstudio.com/) (кросс-платформенный, бесплатный).
 - [Atom](https://atom.io/) (кросс-платформенный, бесплатный).
-- [Brackets](http://brackets.io/) (кросс-платформенный, бесплатный).
-- [SciTe](http://www.scintilla.org/) -- простой, лёгкий и очень быстрый (Windows, бесплатный).
+- [Brackets](https://brackets.io/) (кросс-платформенный, бесплатный).
+- [SciTe](https://www.scintilla.org/) -- простой, лёгкий и очень быстрый (Windows, бесплатный).
 - [Notepad++](https://notepad-plus-plus.org/) (Windows, бесплатный).
-- [Vim](http://www.vim.org/), [Emacs](http://www.gnu.org/software/emacs/). Если умеете их готовить.
+- [Vim](https://www.vim.org/), [Emacs](http://www.gnu.org/software/emacs/). Если умеете их готовить.
 
 ## Мои редакторы
 
 Лично мои любимые редакторы:
 
-- Как IDE -- редакторы от Jetbrains: для чистого JavaScript [WebStorm](http://www.jetbrains.com/webstorm/), если ещё какой-то язык, то в зависимости от языка: [PHPStorm (PHP)](http://www.jetbrains.com/phpstorm/), [IDEA (Java)](http://www.jetbrains.com/idea/), [RubyMine (Ruby)](http://www.jetbrains.com/ruby/). У них есть и другие редакторы под разные языки, но я ими не пользовался.
+- Как IDE -- редакторы от Jetbrains: для чистого JavaScript [WebStorm](https://www.jetbrains.com/webstorm/), если ещё какой-то язык, то в зависимости от языка: [PHPStorm (PHP)](https://www.jetbrains.com/phpstorm/), [IDEA (Java)](https://www.jetbrains.com/idea/), [RubyMine (Ruby)](https://www.jetbrains.com/ruby/). У них есть и другие редакторы под разные языки, но я ими не пользовался.
 - Как быстрый редактор -- <a href="http://www.sublimetext.com">Sublime Text</a>.
 - Иногда Visual Studio, если разработка идёт под платформу .NET (Win).
 

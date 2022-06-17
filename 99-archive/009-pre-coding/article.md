@@ -33,8 +33,8 @@ archive:
 
 1. <http://help.dottoro.com> -- содержит подробную информацию по HTML/CSS/JavaScript.
 2. <http://javascript.ru/manual> -- справочник по JavaScript на русском языке, он содержит основную информацию по языку, без функций для работы с документом. К нему можно обращаться и по адресу, если знаете, что искать. Например, так: <http://javascript.ru/RegExp>.
-3. <http://www.quirksmode.org> -- информация о браузерных несовместимостях. Этот ресурс сам по себе довольно старый и, в первую очередь, полезен для поддержки устаревших браузеров. Для поиска можно пользоваться комбинацией **"quirksmode onkeypress"** в Google.
-4. <http://caniuse.com> -- ресурс о поддержке браузерами новейших возможностей HTML/CSS/JavaScript. Например, для поддержки функций криптографии: <http://caniuse.com/#feat=cryptography>.
+3. <https://www.quirksmode.org> -- информация о браузерных несовместимостях. Этот ресурс сам по себе довольно старый и, в первую очередь, полезен для поддержки устаревших браузеров. Для поиска можно пользоваться комбинацией **"quirksmode onkeypress"** в Google.
+4. <https://caniuse.com> -- ресурс о поддержке браузерами новейших возможностей HTML/CSS/JavaScript. Например, для поддержки функций криптографии: <https://caniuse.com/#feat=cryptography>.
 5. <https://kangax.github.io/compat-table> -- таблица с обзором поддержки спецификации ECMAScript различными платформами.
 
 ## Спецификации
@@ -45,7 +45,7 @@ archive:
 
 ### Спецификация ECMAScript
 
-Спецификация (формальное описание синтаксиса, базовых объектов и алгоритмов) языка JavaScript называется [ECMAScript](http://www.ecma-international.org/publications/standards/Ecma-262.htm).
+Спецификация (формальное описание синтаксиса, базовых объектов и алгоритмов) языка JavaScript называется [ECMAScript](https://www.ecma-international.org/publications/standards/Ecma-262.htm).
 
 ```smart header="Почему не просто &quot;JavaScript&quot; ?"
 Вы можете спросить: "Почему спецификация для JavaScript не называется просто *"JavaScript"*, зачем существует какое-то отдельное название?"
@@ -63,15 +63,15 @@ JavaScript -- язык общего назначения, поэтому в сп
 
 Главная организация, которая занимается HTML, CSS, XML и множеством других стандартов -- [Консорциум Всемирной паутины](https://ru.wikipedia.org/wiki/%D0%9A%D0%BE%D0%BD%D1%81%D0%BE%D1%80%D1%86%D0%B8%D1%83%D0%BC_%D0%92%D1%81%D0%B5%D0%BC%D0%B8%D1%80%D0%BD%D0%BE%D0%B9_%D0%BF%D0%B0%D1%83%D1%82%D0%B8%D0%BD%D1%8B) (World Wide Web Consortium, сокращённо W3C).
 
-Информацию о них можно найти на сайте [w3.org](http://w3.org). К сожалению, найти в этой куче то, что нужно, может быть нелегко, особенно когда неизвестно в каком именно стандарте искать. Самый лучший способ -- попросить Google с указанием сайта.
+Информацию о них можно найти на сайте [w3.org](https://w3.org). К сожалению, найти в этой куче то, что нужно, может быть нелегко, особенно когда неизвестно в каком именно стандарте искать. Самый лучший способ -- попросить Google с указанием сайта.
 
 Например, для поиска `document.cookie` набрать [document.cookie site:w3.org](https://www.google.com/search?q=document.cookie+site%3Aw3.org).
 
-Последние версии стандартов расположены на домене [dev.w3.org](http://dev.w3.org).
+Последние версии стандартов расположены на домене [dev.w3.org](https://dev.w3.org).
 
 Кроме того, в том, что касается HTML5 и DOM/CSS, W3C активно использует наработки другой организации -- [WhatWG](https://whatwg.org/). Поэтому самые актуальные версии спецификаций по этим темам обычно находятся на <https://whatwg.org/specs/>.
 
-Иногда бывает так, что информация на сайте <http://dev.w3.org> отличается от <http://whatwg.org>. В этом случае, как правило, следует руководствоваться <http://whatwg.org>.
+Иногда бывает так, что информация на сайте <https://dev.w3.org> отличается от <https://whatwg.org>. В этом случае, как правило, следует руководствоваться <https://whatwg.org>.
 
 ## Итого
 
@@ -91,16 +91,16 @@ Google-комбо: `"RegExp site:javascript.ru"`.
 
 Спецификации содержат важнейшую информацию о том, как оно "должно работать":
 
-- JavaScript, современный стандарт [ES5 (англ)](http://www.ecma-international.org/publications/standards/Ecma-262.htm), и предыдущий [ES3 (рус)](http://javascript.ru/ecma).
-- HTML/DOM/CSS -- на сайте [http://w3.org](http://www.w3.org).
+- JavaScript, современный стандарт [ES5 (англ)](https://www.ecma-international.org/publications/standards/Ecma-262.htm), и предыдущий [ES3 (рус)](http://javascript.ru/ecma).
+- HTML/DOM/CSS -- на сайте [https://w3.org](https://www.w3.org).
 Google-комбо: `"document.cookie site:w3.org"`.
-- ...А самые последние версии стандартов -- на <http://dev.w3.org> и на [http://whatwg.org/specs/](https://whatwg.org/specs/).
+- ...А самые последние версии стандартов -- на <https://dev.w3.org> и на [https://whatwg.org/specs/](https://whatwg.org/specs/).
 
 То, как оно на самом деле работает и несовместимости:
 
-- <http://quirksmode.org/>. Google-комбо: `"innerHeight quirksmode"`.
+- <https://quirksmode.org/>. Google-комбо: `"innerHeight quirksmode"`.
 
 Поддержка современных и новейших возможностей браузерами:
 
-- <http://caniuse.com>. Google-комбо: `"caniuse geolocation"`.
+- <https://caniuse.com>. Google-комбо: `"caniuse geolocation"`.
 

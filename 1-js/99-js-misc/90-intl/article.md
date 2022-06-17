@@ -13,7 +13,7 @@
 Числа
 : В одних странах выводятся цифрами, в других -- иероглифами, длинные числа разделяются где-то пробелом, где-то запятой.
 
-Все современные браузеры, кроме IE10 (но есть библиотеки и для него) поддерживают стандарт [ECMA 402](http://www.ecma-international.org/ecma-402/1.0/ECMA-402.pdf), предназначенный решить эти проблемы навсегда.
+Все современные браузеры, кроме IE10 (но есть библиотеки и для него) поддерживают стандарт [ECMA 402](https://www.ecma-international.org/ecma-402/1.0/ECMA-402.pdf), предназначенный решить эти проблемы навсегда.
 
 ## Основные объекты
 
@@ -244,7 +244,7 @@ let formatter = new Intl.DateTimeFormat([locales, [options]])
 - month, day
 - hour, minute, second
 
-Если указанный формат не поддерживается, то настройка `formatMatcher` задаёт алгоритм подбора наиболее близкого формата: `basic` -- по [стандартным правилам](http://www.ecma-international.org/ecma-402/1.0/#BasicFormatMatcher) и `best fit` -- по умолчанию, на усмотрение окружения (браузера).
+Если указанный формат не поддерживается, то настройка `formatMatcher` задаёт алгоритм подбора наиболее близкого формата: `basic` -- по [стандартным правилам](https://www.ecma-international.org/ecma-402/1.0/#BasicFormatMatcher) и `best fit` -- по умолчанию, на усмотрение окружения (браузера).
 
 Использование:
 
@@ -331,7 +331,7 @@ formatter.format(number); // форматирование
   <tr>
     <td> <code>currency</code> </td>
     <td> Алфавитный код валюты</td>
-    <td> См. <a href="http://www.currency-iso.org/en/home/tables/table-a1.html">Список кодов валюты</a>, например <code>USD</code> </td>
+    <td> См. <a href="https://www.currency-iso.org/en/home/tables/table-a1.html">Список кодов валюты</a>, например <code>USD</code> </td>
     <td> </td>
   </tr>
   <tr>

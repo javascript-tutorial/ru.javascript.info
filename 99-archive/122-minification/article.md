@@ -27,17 +27,17 @@ archive:
 
 Для GCC:
 
-1. Убедиться, что стоит [Java](http://java.oracle.com)
+1. Убедиться, что стоит [Java](https://www.oracle.com/java/technologies/)
 2. Скачать и распаковать <http://closure-compiler.googlecode.com/files/compiler-latest.zip>, нам нужен файл `compiler.jar`.
 3. Сжать файл `my.js`: `java -jar compiler.jar --charset UTF-8 --js my.js --js_output_file my.min.js`
 
 Обратите внимание на флаг `--charset` для GCC. Без него русские буквы будут закодированы во что-то типа `\u1234`.
 
-Google Closure Compiler также содержит [песочницу](http://closure-compiler.appspot.com/home) для тестирования сжатия и [веб-сервис](https://developers.google.com/closure/compiler/docs/gettingstarted_api?hl=ru), на который код можно отправлять для сжатия. Но скачать файл обычно гораздо проще, поэтому его редко где используют.
+Google Closure Compiler также содержит [песочницу](https://closure-compiler.appspot.com/home) для тестирования сжатия и [веб-сервис](https://developers.google.com/closure/compiler/docs/gettingstarted_api?hl=ru), на который код можно отправлять для сжатия. Но скачать файл обычно гораздо проще, поэтому его редко где используют.
 
 Для UglifyJS:
 
-1. Убедиться, что стоит [Node.js](http://nodejs.org)
+1. Убедиться, что стоит [Node.js](https://nodejs.org)
 2. Поставить `npm install -g uglify-js`.
 3. Сжать файл `my.js`: `uglifyjs my.js -o my.min.js`
 
@@ -57,7 +57,7 @@ Google Closure Compiler также содержит [песочницу](http://
 
 Для GCC есть даже способ вывести его:
 
-1. Сначала сгенерируем дерево в формате [DOT](http://en.wikipedia.org/wiki/DOT_language):
+1. Сначала сгенерируем дерево в формате [DOT](https://en.wikipedia.org/wiki/DOT_language):
 
     ```
     java -jar compiler.jar --js my.js --use_only_custom_externs --print_tree >my.dot
