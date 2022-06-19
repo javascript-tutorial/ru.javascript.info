@@ -1,3 +1,4 @@
+
 # XMLHttpRequest
 
 `XMLHttpRequest` -- это встроенный в браузер объект, который даёт возможность делать HTTP-запросы к серверу без перезагрузки страницы.
@@ -23,11 +24,15 @@ XMLHttpRequest имеет два режима работы: синхронный
 Чтобы сделать запрос, нам нужно выполнить три шага:
 
 1. Создать `XMLHttpRequest`.
+
     ```js
     let xhr = new XMLHttpRequest(); // у конструктора нет аргументов
     ```
 
+    Конструктор не имеет аргументов.
+
 2. Инициализировать его.
+
     ```js
     xhr.open(method, URL, [async, user, password])
     ```
@@ -473,6 +478,7 @@ xhr.withCredentials = true;
 xhr.open('POST', 'http://anywhere.com/request');
 ...
 ```
+
 Детали по заголовкам, которые при этом необходимы, смотрите в главе [fetch](info:fetch-crossorigin).
 
 ## Итого
