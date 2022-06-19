@@ -145,7 +145,7 @@ openRequest.onsuccess = function() {
   *!*
   db.onversionchange = function() {
     db.close();
-    alert("База данных устарела, пожалуста, перезагрузите страницу.")
+    alert("База данных устарела, пожалуйста, перезагрузите страницу.")
   };
   */!*
 
