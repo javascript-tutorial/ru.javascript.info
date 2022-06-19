@@ -48,7 +48,9 @@
     - [HTMLInputElement](https://html.spec.whatwg.org/multipage/forms.html#htmlinputelement) -- класс для тега `<input>`,
     - [HTMLBodyElement](https://html.spec.whatwg.org/multipage/semantics.html#htmlbodyelement) -- класс для тега `<body>`,
     - [HTMLAnchorElement](https://html.spec.whatwg.org/multipage/semantics.html#htmlanchorelement) -- класс для тега `<a>`,
-    - ...и т.д, каждому тегу соответствует свой класс, который предоставляет определённые свойства и методы.
+    - ...и т.д.
+
+Существует множество других тегов со своими собственными классами, которые могут иметь определенные свойства и методы, в то время как некоторые элементы, такие как `<span>`, `<section>`, `<article>`, не имеют каких-либо определенных свойств, поэтому они являются экземплярами класса `HTMLElement`.
 
 Таким образом, полный набор свойств и методов данного узла собирается в результате наследования.
 
