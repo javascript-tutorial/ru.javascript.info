@@ -165,7 +165,7 @@ alert( map.get('1') ); // str1
 
 Так что мы можем создать `Map` из обычного объекта следующим образом:
 
-```js
+```js run
 let obj = {
   name: "John",
   age: 30
@@ -174,6 +174,8 @@ let obj = {
 *!*
 let map = new Map(Object.entries(obj));
 */!*
+
+alert( map.get('name') ); // John
 ```
 
 Здесь `Object.entries` возвращает массив пар ключ-значение: `[ ["name","John"], ["age", 30] ]`. Это именно то, что нужно для создания `Map`.
