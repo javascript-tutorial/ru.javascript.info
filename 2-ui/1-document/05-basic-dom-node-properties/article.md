@@ -26,6 +26,23 @@
 - [Node](https://dom.spec.whatwg.org/#interface-node) -- также является "абстрактным" классом, и служит основой для DOM-узлов.
     Он обеспечивает базовую функциональность: `parentNode`, `nextSibling`, `childNodes` и т.д. (это геттеры). Объекты класса `Node` никогда не создаются. Но есть определённые классы узлов, которые наследуют от него (и следовательно наследуют функциональность `Node`).
 
+- [Document](https://dom.spec.whatwg.org/#interface-document), for historical reasons often inherited by `HTMLDocument` (though the latest spec doesn't dictate it) -- is a document as a whole.
+
+    The `document` global object belongs exactly to this class. It servers as an entry point to the DOM.
+
+- [CharacterData](https://dom.spec.whatwg.org/#interface-characterdata) -- an "abstract" class, inherited by:
+    - [Text](https://dom.spec.whatwg.org/#interface-text) -- the class corresponding to a text inside elements, e.g. `Hello` in `<p>Hello</p>`.
+    - [Comment](https://dom.spec.whatwg.org/#interface-comment) -- the class for comments. They are not shown, but each comment becomes a member of DOM.
+
+- [Element](https://dom.spec.whatwg.org/#interface-element) -- это базовый класс для DOM-элементов.
+
+    Он обеспечивает навигацию на уровне элементов: `nextElementSibling`, `children` и методы поиска: `getElementsByTagName`, `querySelector`.
+
+    A browser supports not only HTML, but also XML and SVG. So the `Element` class serves as a base for more specific classes: `SVGElement`, `XMLElement` (we don't need them here) and `HTMLElement`.
+
+- Finally, [HTMLElement](https://html.spec.whatwg.org/multipage/dom.html#htmlelement) is the basic class for all HTML elements. We'll work with it most of the time.
+
+    It is inherited by concrete HTML elements:
     
 - [Element](https://dom.spec.whatwg.org/#interface-element) -- это базовый класс для DOM-элементов. Он обеспечивает навигацию на уровне элементов: `nextElementSibling`, `children` и методы поиска: `getElementsByTagName`, `querySelector`. Браузер поддерживает не только HTML, но также XML и SVG. Класс Element служит базой для следующих классов: `SVGElement`, `XMLElement` и `HTMLElement`.
 - [HTMLElement](https://html.spec.whatwg.org/multipage/dom.html#htmlelement) -- является базовым классом для всех остальных HTML-элементов. От него наследуют конкретные элементы:
