@@ -24,28 +24,27 @@
     Объекты этого класса никогда не создаются. Он служит основой, благодаря которой все DOM-узлы поддерживают так называемые "события", мы изучим их позже.
 
 - [Node](https://dom.spec.whatwg.org/#interface-node) -- также является "абстрактным" классом, и служит основой для DOM-узлов.
+
     Он обеспечивает базовую функциональность: `parentNode`, `nextSibling`, `childNodes` и т.д. (это геттеры). Объекты класса `Node` никогда не создаются. Но есть определённые классы узлов, которые наследуют от него (и следовательно наследуют функциональность `Node`).
 
-- [Document](https://dom.spec.whatwg.org/#interface-document), for historical reasons often inherited by `HTMLDocument` (though the latest spec doesn't dictate it) -- is a document as a whole.
+- [Document](https://dom.spec.whatwg.org/#interface-document), по историческим причинам часто наследуется `HTMLDocument` (хотя последняя спецификация этого не навязывает) -- это документ в целом.
 
-    The `document` global object belongs exactly to this class. It servers as an entry point to the DOM.
+    Глобальный объект `document` принадлежит именно к этому классу. Он служит точкой входа в DOM.
 
-- [CharacterData](https://dom.spec.whatwg.org/#interface-characterdata) -- an "abstract" class, inherited by:
-    - [Text](https://dom.spec.whatwg.org/#interface-text) -- the class corresponding to a text inside elements, e.g. `Hello` in `<p>Hello</p>`.
-    - [Comment](https://dom.spec.whatwg.org/#interface-comment) -- the class for comments. They are not shown, but each comment becomes a member of DOM.
+- [CharacterData](https://dom.spec.whatwg.org/#interface-characterdata) -- "абстрактным" класс, он наследуется:
+    - [Text](https://dom.spec.whatwg.org/#interface-text) -- класс, соответствующий тексту внутри элементов, например `Hello` в `<p>Hello</p>`.
+    - [Comment](https://dom.spec.whatwg.org/#interface-comment) -- класс для комментариев. Они не отображаются, но каждый комментарий становится членом DOM.
 
 - [Element](https://dom.spec.whatwg.org/#interface-element) -- это базовый класс для DOM-элементов.
 
     Он обеспечивает навигацию на уровне элементов: `nextElementSibling`, `children` и методы поиска: `getElementsByTagName`, `querySelector`.
 
-    A browser supports not only HTML, but also XML and SVG. So the `Element` class serves as a base for more specific classes: `SVGElement`, `XMLElement` (we don't need them here) and `HTMLElement`.
+    Браузер поддерживает не только HTML, но также XML и SVG. Таким образом, класс `Element` служит основой для более специфичных классов: `SVGElement`, `XmlElement` (они нам здесь не нужны) и `HTMLElement`.
 
-- Finally, [HTMLElement](https://html.spec.whatwg.org/multipage/dom.html#htmlelement) is the basic class for all HTML elements. We'll work with it most of the time.
+- И наконец, [HTMLElement](https://html.spec.whatwg.org/multipage/dom.html#htmlelement) является базовым классом для всех остальных HTML-элементов. Мы будем работать с ним большую часть времени.
 
-    It is inherited by concrete HTML elements:
-    
-- [Element](https://dom.spec.whatwg.org/#interface-element) -- это базовый класс для DOM-элементов. Он обеспечивает навигацию на уровне элементов: `nextElementSibling`, `children` и методы поиска: `getElementsByTagName`, `querySelector`. Браузер поддерживает не только HTML, но также XML и SVG. Класс Element служит базой для следующих классов: `SVGElement`, `XMLElement` и `HTMLElement`.
-- [HTMLElement](https://html.spec.whatwg.org/multipage/dom.html#htmlelement) -- является базовым классом для всех остальных HTML-элементов. От него наследуют конкретные элементы:
+    От него наследуют конкретные элементы:
+
     - [HTMLInputElement](https://html.spec.whatwg.org/multipage/forms.html#htmlinputelement) -- класс для тега `<input>`,
     - [HTMLBodyElement](https://html.spec.whatwg.org/multipage/semantics.html#htmlbodyelement) -- класс для тега `<body>`,
     - [HTMLAnchorElement](https://html.spec.whatwg.org/multipage/semantics.html#htmlanchorelement) -- класс для тега `<a>`,
