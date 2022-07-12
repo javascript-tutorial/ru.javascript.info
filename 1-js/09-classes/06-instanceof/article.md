@@ -125,7 +125,7 @@ alert( rabbit instanceof Rabbit ); // false
 
 ## Бонус: Object.prototype.toString возвращает тип
 
-Мы уже знаем, что обычные объекты преобразуется к строке как `[object Object]`:
+Мы уже знаем, что обычные объекты преобразуются к строке как `[object Object]`:
 
 ```js run
 let obj = {};
