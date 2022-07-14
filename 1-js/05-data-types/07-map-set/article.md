@@ -180,7 +180,6 @@ alert( map.get('name') ); // John
 
 Здесь `Object.entries` возвращает массив пар ключ-значение: `[ ["name","John"], ["age", 30] ]`. Это именно то, что нужно для создания `Map`.
 
-
 ## Object.fromEntries: Object из Map
 
 Мы только что видели, как создать `Map` из обычного объекта при помощи `Object.entries(obj)`.
