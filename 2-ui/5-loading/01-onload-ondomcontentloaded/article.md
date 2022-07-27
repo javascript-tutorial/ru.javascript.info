@@ -114,10 +114,10 @@ Firefox, Chrome и Opera автоматически заполняют поля 
 
 ```html run height=200 refresh
 <script>
-  window.onload = function() {
+  window.onload = function() { // можно также использовать window.addEventListener('load', (event) => {
     alert('Страница загружена');
 
-    // к этому моменту страница загружена
+    // к этому моменту картинка загружена
     alert(`Image size: ${img.offsetWidth}x${img.offsetHeight}`);
   };
 </script>
