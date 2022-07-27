@@ -128,17 +128,17 @@ for(let key of keys) {
 Если мы используем любой другой тип, например число или объект, то он автоматически преобразуется в строку:
 
 ```js run
-sessionStorage.user = {name: "John"};
-alert(sessionStorage.user); // [object Object]
+localStorage.user = {name: "John"};
+alert(localStorage.user); // [object Object]
 ```
 
 Мы можем использовать `JSON` для хранения объектов:
 
 ```js run
-sessionStorage.user = JSON.stringify({name: "John"});
+localStorage.user = JSON.stringify({name: "John"});
 
-// немного позже
-let user = JSON.parse( sessionStorage.user );
+// sometime later
+let user = JSON.parse( localStorage.user );
 alert( user.name ); // John
 ```
 
