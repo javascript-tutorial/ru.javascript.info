@@ -137,7 +137,7 @@ alert(localStorage.user); // [object Object]
 ```js run
 localStorage.user = JSON.stringify({name: "John"});
 
-// sometime later
+// немного позже
 let user = JSON.parse( localStorage.user );
 alert( user.name ); // John
 ```
