@@ -202,7 +202,7 @@ alert( sessionStorage.getItem('test') ); // после обновления: 1
 
 ```js run
 // срабатывает при обновлениях, сделанных в том же хранилище из других документов
-window.onstorage = event => {
+window.onstorage = event => { // можно также использовать window.addEventListener('storage', event => {
   if (event.key != 'now') return;
   alert(event.key + ':' + event.newValue + " at " + event.url);
 };
