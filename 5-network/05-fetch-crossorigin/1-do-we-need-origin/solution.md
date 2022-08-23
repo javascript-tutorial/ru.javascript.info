@@ -1,6 +1,6 @@
 Нам нужен `Origin`, потому что иногда `Referer` отсутствует. Например, когда мы запрашиваем через `fetch` HTTP-страницу с HTTPS (менее безопасный доступ с более безопасного), то `Referer` нет.
 
-[Content Security Policy](http://en.wikipedia.org/wiki/Content_Security_Policy) (политика безопасности содержимого) может запретить отправление `Referer`.
+[Content Security Policy](https://en.wikipedia.org/wiki/Content_Security_Policy) (политика безопасности содержимого) может запретить отправление `Referer`.
 
 Как мы увидим позже, у `fetch` есть опции, которые предотвращают отправку `Referer` и даже позволяют изменять его (в пределах того же сайта).
 

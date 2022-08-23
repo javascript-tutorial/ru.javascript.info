@@ -28,7 +28,7 @@ alert( rabbit.hasOwnProperty('name') ); // true
 1. Между `"prototype"` функций-конструкторов (для методов)
 2. Между самими функциями-конструкторами (для статических методов).
 
-В нашем случае, для `class Rabbit extends Object` это значит:
+В случае с  `class Rabbit extends Object` это значит:
 
 ```js run
 class Rabbit extends Object {}
@@ -61,13 +61,13 @@ alert( Rabbit.__proto__ === Function.prototype ); // как у каждой фу
 
 *!*
 // ошибка - нет такой функции у Rabbit
-alert( Rabbit.getOwnPropertyNames({a: 1, b: 2}) ); // Error
+alert( Rabbit.getOwnPropertyNames({a: 1, b: 2}) ); // Ошибка
 */!*
 ```
 
 Таким образом, в этом случае у `Rabbit` нет доступа к статическим методам `Object`.
 
-Кстати, у `Function.prototype` есть "общие" методы, такие как `call`, `bind` и т. д. Они в конечном итоге доступны в обоих случаях, потому что для встроенного конструктора `Object` `Object.__proto__ === Function.prototype`.
+Кстати, у `Function.prototype` также есть "общие" методы, такие как `call`, `bind` и т. д. Они в конечном итоге доступны в обоих случаях, потому что для встроенного конструктора `Object` `Object.__proto__ === Function.prototype`.
 
 
 Пример на картинке:

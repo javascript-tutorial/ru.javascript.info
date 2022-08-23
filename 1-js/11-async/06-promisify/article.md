@@ -53,7 +53,7 @@ function promisify(f) {
     return new Promise((resolve, reject) => {
       function callback(err, result) { // наш специальный колбэк для f
         if (err) {
-          return reject(err);
+          reject(err);
         } else {
           resolve(result);
         }
@@ -84,7 +84,7 @@ function promisify(f, manyArgs = false) {
     return new Promise((resolve, reject) => {
       function *!*callback(err, ...results*/!*) { // наш специальный колбэк для f
         if (err) {
-          return reject(err);
+          reject(err);
         } else {
           // делаем resolve для всех results колбэка, если задано manyArgs
           *!*resolve(manyArgs ? results : results[0]);*/!*

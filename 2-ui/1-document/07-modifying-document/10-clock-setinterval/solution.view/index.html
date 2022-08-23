@@ -43,20 +43,26 @@
     }
 
     function clockStart() {
-      timerId = setInterval(update, 1000);
-      update(); // <--  начать тут же, не ждать 1 секунду пока setInterval сработает
+      // устанавить новый интервал только в том случае, если часы остановлены
+      // в противном случае мы бы переписали ссылку timerID на интервал выполнения и никогда больше не смогли бы остановить часы
+      if (!timerId) {
+        timerId = setInterval(update, 1000);
+      }
+      update(); // <--  начать тут же, не ждать 1 секунду пока первый setInterval сработает
     }
 
     function clockStop() {
       clearInterval(timerId);
+      timerId = null; // <-- очистить timerID, чтобы указать, что часы были остановлены, чтобы можно было запустить их снова в clockStart()
     }
+
   </script>
 
-  <!-- клик по этой кнопке вызовет clockStart() -->
-  <input type="button" onclick="clockStart()" value="Старт">
+ <!-- клик по этой кнопке вызовет clockStart() -->
+  <input type="button" onclick="clockStart()" value="Start">
 
   <!-- клик по этой кнопке вызовет clockStop() -->
-  <input type="button" onclick="clockStop()" value="Стоп">
+  <input type="button" onclick="clockStop()" value="Stop">
 
 </body>
 </html>

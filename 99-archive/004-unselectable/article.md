@@ -23,7 +23,7 @@ archive:
 <span ondblclick="alert('двойной клик!')">Текст</span>
 ```
 
-Чтобы избежать выделения, мы должны предотвратить действие браузера по умолчанию для события [selectstart](http://msdn.microsoft.com/en-us/library/ms536969%28VS.85%29.aspx) в IE и `mousedown` в других браузерах.
+Чтобы избежать выделения, мы должны предотвратить действие браузера по умолчанию для события [selectstart](https://developer.mozilla.org/en-US/docs/Web/API/Document/selectstart_event) в IE и `mousedown` в других браузерах.
 
 Полный код элемента, который обрабатывает двойной клик без выделения:
 

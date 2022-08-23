@@ -170,7 +170,7 @@ required: (Object|null|undefined)
 
 Из нескольких примеров, которые мы рассмотрели, должна быть понятна общая логика проверки типов.
 
-Соответствующие различным типам и ограничениям на типы аннотации вы можете найти в <a href="http://code.google.com/intl/ru/closure/compiler/docs/js-for-compiler.html">Документации Google</a>. В частности, возможно указание нескольких возможных типов, типа <code>undefined</code> и т.п.
+Соответствующие различным типам и ограничениям на типы аннотации вы можете найти в [Документации Google](http://code.google.com/intl/ru/closure/compiler/docs/js-for-compiler.html). В частности, возможно указание нескольких возможных типов, типа <code>undefined</code> и т.п.
 
 Также можно указывать количество и тип параметров функции, ключевого слова <code>this</code>, объявлять классы, приватные методы и интерфейсы.
 
@@ -178,4 +178,4 @@ required: (Object|null|undefined)
 
 С ней аннотации, документирующие типы и параметры, становятся не просто украшением, а реальным средством проверки, уменьшающим количество ошибок на production.
 
-Очень подробно проверка типов описана в книге [Closure: The Definitive Guide](http://www.ozon.ru/context/detail/id/6089988/), автора Michael Bolin.
+Очень подробно проверка типов описана в книге [Closure: The Definitive Guide](https://www.ozon.ru/context/detail/id/6089988/), автора Michael Bolin.

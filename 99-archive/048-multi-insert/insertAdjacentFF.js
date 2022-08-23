@@ -1,4 +1,4 @@
-// http://learn.javascript.ru/files/tutorial/browser/dom/insertAdjacentFF.js
+// https://learn.javascript.ru/files/tutorial/browser/dom/insertAdjacentFF.js
 // Добавляет поддержку insertAdjacent* в Firefox
 
 if (typeof HTMLElement != "undefined" && !HTMLElement.prototype.insertAdjacentElement) {
