@@ -172,7 +172,7 @@ Object.assign(user, { name: "Pete" });
 alert(user.name); // теперь user = { name: "Pete" }
 ```
 
-Мы также можем использовать `Object.assign` для замены `for..in ` цикла для простого клонирования:
+Мы также можем использовать `Object.assign` для замены цикла `for..in ` для простого клонирования:
 
 ```js
 let user = {
