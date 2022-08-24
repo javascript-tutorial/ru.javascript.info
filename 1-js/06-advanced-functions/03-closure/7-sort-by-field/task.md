@@ -31,6 +31,6 @@ users.sort(byField('name'));
 users.sort(byField('age'));
 ```
 
-То есть, чтобы вместо функции, мы просто писали `byField(fieldName)`.
+То есть чтобы вместо функции мы просто писали `byField(fieldName)`.
 
 Напишите функцию `byField`, которая может быть использована для этого.
