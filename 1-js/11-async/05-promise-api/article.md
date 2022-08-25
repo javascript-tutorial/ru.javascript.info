@@ -1,6 +1,6 @@
 # Promise API
 
-В классе `Promise` есть 5 статических методов. Давайте познакомимся с ними.
+В классе `Promise` есть 6 статических методов. Давайте познакомимся с ними.
 
 ## Promise.all
 
@@ -205,7 +205,7 @@ if(!Promise.allSettled) {
 
 ## Promise.race
 
-Метод очень похож на `Promise.all`, но ждёт только первый выполненный промис, из которого берёт результат (или ошибку).
+Метод очень похож на `Promise.all`, но ждёт только первый *выполненный* промис, из которого берёт результат (или ошибку).
 
 Синтаксис:
 
@@ -224,6 +224,43 @@ Promise.race([
 ```
 
 Быстрее всех выполнился первый промис, он и дал результат. После этого остальные промисы игнорируются.
+
+## Promise.any
+
+Метод очень похож на `Promise.race`, но ждёт только первый *успешно выполненный* промис, из которого берёт результат. Если ни один из переданных промисов не завершится успешно, тогда возвращённый объект Promise будет отклонён с помощью [`AggregateError`](mdn:js/AggregateError) – специального объекта ошибки, который хранит все ошибки промисов в свойстве `errors`.
+
+Синтаксис:
+
+```js
+let promise = Promise.any(iterable);
+```
+
+Например, здесь, результатом будет `1`:
+
+```js run
+Promise.any([
+  new Promise((resolve, reject) => setTimeout(() => reject(new Error("Ошибка!")), 1000)),
+  new Promise((resolve, reject) => setTimeout(() => resolve(1), 2000)),
+  new Promise((resolve, reject) => setTimeout(() => resolve(3), 3000))
+]).then(alert); // 1
+```
+
+Первый промис в этом примере был самым быстрым, но он был отклонён, поэтому результатом стал второй. После того, как первый успешно выполненный промис "выиграет гонку", все дальнейшие результаты будут проигнорированы.
+
+Вот пример, в котором все промисы отклоняются:
+
+```js run
+Promise.any([
+  new Promise((resolve, reject) => setTimeout(() => reject(new Error("Ошибка!")), 1000)),
+  new Promise((resolve, reject) => setTimeout(() => reject(new Error("Ещё одна ошибка!")), 2000))
+]).catch(error => {
+  console.log(error.constructor.name); // AggregateError
+  console.log(error.errors[0]); // Error: Ошибка!
+  console.log(error.errors[1]); // Error: Ещё одна ошибка!
+});
+```
+
+Как вы можете видеть, объекты ошибок для отклонённых промисов доступны в свойстве `errors` объекта `AggregateError`.
 
 ## Promise.resolve/reject
 
