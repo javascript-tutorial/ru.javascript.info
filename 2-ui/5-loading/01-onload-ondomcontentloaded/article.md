@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", ready);
 
 Но здесь есть подводный камень. Если после стилей у нас есть скрипт, то этот скрипт должен дождаться, пока загрузятся стили:
 
-```html
+```html run
 <link type="text/css" rel="stylesheet" href="style.css">
 <script>
   // скрипт не выполняется, пока не загрузятся стили
@@ -108,16 +108,16 @@ Firefox, Chrome и Opera автоматически заполняют поля 
 
 ## window.onload [#window-onload]
 
-Событие `load` на объекте `window` наступает, когда загрузилась вся страница, включая стили, картинки и другие ресурсы.
+Событие `load` на объекте `window` наступает, когда загрузилась вся страница, включая стили, картинки и другие ресурсы. Это событие доступно через свойство `onload`.
 
 В примере ниже правильно показаны размеры картинки, потому что `window.onload` дожидается всех изображений:
 
 ```html run height=200 refresh
 <script>
-  window.onload = function() {
+  window.onload = function() { // можно также использовать window.addEventListener('load', (event) => {
     alert('Страница загружена');
 
-    // к этому моменту страница загружена
+    // к этому моменту картинка загружена
     alert(`Image size: ${img.offsetWidth}x${img.offsetHeight}`);
   };
 </script>
