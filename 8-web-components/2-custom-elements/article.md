@@ -393,4 +393,4 @@ customElements.define('hello-button', HelloButton, {extends: 'button'});
     /* <button is="my-button"> */
     ```
 
-Несмотря на то, что пользовательские элементы широко поддерживаются среди браузеров, существует и полифил: <https://github.com/webcomponents/polyfills/tree/master/packages/webcomponentsjs>.
+Пользовательские элементы широко поддерживаются среди браузеров. Существует полифил: <https://github.com/webcomponents/polyfills/tree/master/packages/webcomponentsjs>.
