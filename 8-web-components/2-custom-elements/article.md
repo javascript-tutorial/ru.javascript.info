@@ -393,4 +393,4 @@ customElements.define('hello-button', HelloButton, {extends: 'button'});
     /* <button is="my-button"> */
     ```
 
-Пользовательские элементы широко поддерживаются браузерами. Edge немного отстаёт, но есть полифил <https://github.com/webcomponents/webcomponentsjs>.
+Несмотря на то, что пользовательские элементы широко поддерживаются среди браузеров, существует и полифил: <https://github.com/webcomponents/polyfills/tree/master/packages/webcomponentsjs>.
