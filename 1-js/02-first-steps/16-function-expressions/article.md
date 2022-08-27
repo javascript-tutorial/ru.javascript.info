@@ -40,7 +40,7 @@ let sayHi = function() {
 
 ```js run
 function sayHi() {
-  alert( "Hello" );
+  alert( "Привет" );
 }
 
 *!*
