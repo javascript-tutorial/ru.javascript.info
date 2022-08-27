@@ -1,4 +1,4 @@
-# Function Expressions
+# Function Expression
 
 Функция в JavaScript - это не магическая языковая структура, а особого типа значение.
 
