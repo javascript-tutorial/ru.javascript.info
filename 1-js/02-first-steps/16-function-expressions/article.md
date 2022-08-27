@@ -181,7 +181,7 @@ ask(
 ```
 
 
-## Function Expression против Function Declaration
+## Function Expression в сравнении с Function Declaration
 
 Давайте разберём ключевые отличия Function Declaration от Function Expression.
 
