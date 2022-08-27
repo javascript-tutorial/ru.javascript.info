@@ -59,7 +59,7 @@ alert( sayHi ); // выведет код функции
 
 ```js run no-beautify
 function sayHi() {   // (1) создаём
-  alert( "Hello" );
+  alert( "Привет" );
 }
 
 let func = sayHi;    // (2) копируем
