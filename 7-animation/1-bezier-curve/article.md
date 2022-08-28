@@ -6,7 +6,6 @@
 Это очень простая вещь, которую стоит изучить один раз, а затем чувствовать себя комфортно в мире векторной графики и продвинутых анимаций.
 
 ```smart header="Немножко теории"
-This article provides a theoretical, but very needed insight into what Bezier curves are, while [the next one](info:css-animations#bezier-curve) shows how we can use them for CSS animations.
 Эта статья даёт теоретическое, но очень необходимое представление о том, что такое кривые Безье, в то время как [следующая](info:css-animations#bezier-curve) показывает, как мы можем использовать их для CSS-анимаций.
 
 Найдите время, чтобы прочитать и понять концепцию, это сослужит вам хорошую службу.
