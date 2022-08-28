@@ -157,7 +157,7 @@ interface HTMLInputElement: HTMLElement {
   <script>  
   let elem = document.body;
 
-  // давайте проверим: какой тип узла находится в elem?
+  // давайте разберёмся: какой тип узла находится в elem?
   alert(elem.nodeType); // 1 => элемент
 
   // и его первый потомок...
