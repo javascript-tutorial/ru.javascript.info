@@ -37,7 +37,8 @@
 
 - [Element](https://dom.spec.whatwg.org/#interface-element) -- это базовый класс для DOM-элементов.
 
-    Он обеспечивает навигацию на уровне элементов: `nextElementSibling`, `children` и методы поиска: `getElementsByTagName`, `querySelector`.
+    Он обеспечивает навигацию на уровне элементов: `nextElementSibling`, `children`.
+    А также и методы поиска элементов: `getElementsByTagName`, `querySelector`.
 
     Браузер поддерживает не только HTML, но также XML и SVG. Таким образом, класс `Element` служит основой для более специфичных классов: `SVGElement`, `XmlElement` (они нам здесь не нужны) и `HTMLElement`.
 
