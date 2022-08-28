@@ -44,7 +44,7 @@
 
 - И наконец, [HTMLElement](https://html.spec.whatwg.org/multipage/dom.html#htmlelement) является базовым классом для всех остальных HTML-элементов. Мы будем работать с ним большую часть времени.
 
-    От него наследуют конкретные элементы:
+    От него наследуются конкретные элементы:
 
     - [HTMLInputElement](https://html.spec.whatwg.org/multipage/forms.html#htmlinputelement) -- класс для тега `<input>`,
     - [HTMLBodyElement](https://html.spec.whatwg.org/multipage/semantics.html#htmlbodyelement) -- класс для тега `<body>`,
