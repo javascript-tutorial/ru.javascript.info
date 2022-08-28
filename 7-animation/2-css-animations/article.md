@@ -275,7 +275,7 @@ CSS:
 
 [codetabs src="step-list"]
 
-В HTML вереница цифр заключена в строку фиксированной длины `<div id="digits">`:
+В HTML, вереница цифр заключена в `<div id="digits">` фиксированной длины:
 
 ```html
 <div id="digit">
