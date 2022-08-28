@@ -31,7 +31,7 @@
 
     Глобальный объект `document` принадлежит именно к этому классу. Он служит точкой входа в DOM.
 
-- [CharacterData](https://dom.spec.whatwg.org/#interface-characterdata) -- "абстрактный" класс, он наследуется:
+- [CharacterData](https://dom.spec.whatwg.org/#interface-characterdata) -- "абстрактный" класс. Вот, кем он наследуется:
     - [Text](https://dom.spec.whatwg.org/#interface-text) -- класс, соответствующий тексту внутри элементов, например `Hello` в `<p>Hello</p>`.
     - [Comment](https://dom.spec.whatwg.org/#interface-comment) -- класс для комментариев. Они не отображаются, но каждый комментарий становится членом DOM.
 
