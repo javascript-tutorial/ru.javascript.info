@@ -159,7 +159,7 @@ let user = {
 
 
 let admin = user;
-user = null; // перезапишим переменную для наглядности, теперь она не хранит ссылку на объект.
+user = null; // перезапишем переменную для наглядности, теперь она не хранит ссылку на объект.
 
 *!*
 admin.sayHi(); // TypeError: Cannot read property 'name' of null 
