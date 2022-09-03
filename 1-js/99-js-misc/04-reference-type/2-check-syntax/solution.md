@@ -4,7 +4,7 @@
 
 ```js run
 let user = {
-  name: "Джон",
+  name: "John",
   go: function() { alert(this.name) }
 }
 
