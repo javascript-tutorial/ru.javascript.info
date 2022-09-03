@@ -26,7 +26,7 @@ alert( user.ref.name ); // Error: Cannot read property 'name' of undefined
 
 ```js run
 function makeUser(){
-  return this; // this time there's no object literal
+  return this; // на этот раз нет литерала объекта
 }
 
 alert( makeUser().name ); // Error: Cannot read property 'name' of undefined
