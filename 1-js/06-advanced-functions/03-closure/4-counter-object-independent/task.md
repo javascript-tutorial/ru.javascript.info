@@ -26,4 +26,3 @@ alert( counter.up() ); // ?
 alert( counter.up() ); // ?
 alert( counter.down() ); // ?
 ```
-
