@@ -9,7 +9,7 @@ importance: 2
 
 ```js no-beautify
 let user = {
-  name: "Джон",
+  name: "John",
   go: function() { alert(this.name) }
 }
 
