@@ -1,6 +1,6 @@
 
 
-describe("calculator", function() {
+describe("калькулятор", function() {
   
   context("когда 2 и 3 введены", function() {
     beforeEach(function() {
