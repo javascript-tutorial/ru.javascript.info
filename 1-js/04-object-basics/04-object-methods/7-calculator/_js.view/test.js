@@ -2,7 +2,7 @@
 
 describe("калькулятор", function() {
   
-  context("Когда 2 и 3 введены", function() {
+  context("когда 2 и 3 введены", function() {
     beforeEach(function() {
       sinon.stub(window, "prompt");
 
@@ -15,12 +15,17 @@ describe("калькулятор", function() {
     afterEach(function() {
       prompt.restore();
     });
+    
+    it('read получает два значения и сохраняет их как свойства объекта', function () {
+      assert.equal(calculator.a, 2);
+      assert.equal(calculator.b, 3);
+    });
 
-    it("Сумма равна 5", function() {
+    it("сумма равна 5", function() {
       assert.equal(calculator.sum(), 5);
     });
 
-    it("Произведение равно 6", function() {
+    it("произведение равно 6", function() {
       assert.equal(calculator.mul(), 6);
     });
   });

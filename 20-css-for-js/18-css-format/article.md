@@ -133,7 +133,7 @@ box-shadow:0 0 100px 20px #000;
     }
     ```
 
-CSS-препроцессоры, такие как [SASS](http://sass-lang.com/), [LESS](http://lesscss.org/), [Stylus](http://learnboost.github.com/stylus/), [Autoprefixer](https://github.com/postcss/autoprefixer) делают написание CSS сильно удобнее.
+CSS-препроцессоры, такие как [SASS](https://sass-lang.com/), [LESS](https://lesscss.org/), [Stylus](https://learnboost.github.com/stylus/), [Autoprefixer](https://github.com/postcss/autoprefixer) ([доступен как онлайн-инструмент](https://goonlinetools.com/autoprefixer/)) делают написание CSS сильно удобнее.
 
 Выберите один из них и используйте. Единственно, они добавляют дополнительную предобработку CSS, которую нужно учесть, и желательно, на сервере.
 

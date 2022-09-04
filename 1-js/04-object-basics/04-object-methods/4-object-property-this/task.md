@@ -11,10 +11,10 @@ importance: 5
 ```js
 function makeUser() {
   return {
-    name: "Джон",
+    name: "John",
     ref: this
   };
-};
+}
 
 let user = makeUser();
 

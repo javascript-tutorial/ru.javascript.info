@@ -20,7 +20,7 @@ archive:
 
 ## Зоопарк wheel в разных браузерах
 
-Событие `wheel` появилось в [стандарте](http://www.w3.org/TR/DOM-Level-3-Events/#event-type-wheel) не так давно. Оно поддерживается Chrome 31+, IE9+, Firefox 17+.
+Событие `wheel` появилось в [стандарте](https://www.w3.org/TR/DOM-Level-3-Events/#event-type-wheel) не так давно. Оно поддерживается Chrome 31+, IE9+, Firefox 17+.
 
 До него браузеры обрабатывали прокрутку при помощи событий [mousewheel](http://msdn.microsoft.com/en-us/library/ie/ms536951.aspx) (все кроме Firefox) и [DOMMouseScroll](https://developer.mozilla.org/en-US/docs/DOM/DOM_event_reference/DOMMouseScroll), [MozMousePixelScroll](https://developer.mozilla.org/en-US/docs/DOM/DOM_event_reference/MozMousePixelScroll) (только Firefox).
 

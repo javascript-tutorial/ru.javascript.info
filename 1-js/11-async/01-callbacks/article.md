@@ -1,5 +1,4 @@
 
-
 # Введение: колбэки
 
 Многие действия в JavaScript *асинхронные*.
@@ -54,14 +53,14 @@ newFunction(); // такой функции не существует!
 function loadScript(src, *!*callback*/!*) {
   let script = document.createElement('script');
   script.src = src;
-
 *!*
   script.onload = () => callback(script);
 */!*
-
   document.head.append(script);
 }
 ```
+
+Событие `onload` описано в статье <info:onload-onerror#loading-a-script>, оно в основном выполняет функцию после загрузки и выполнения скрипта.
 
 Теперь, если мы хотим вызвать функцию из скрипта, нужно делать это в колбэке:
 

@@ -9,8 +9,8 @@
 
 Например:
 
-- [AMD](https://ru.wikipedia.org/wiki/Asynchronous_module_definition) -- одна из самых старых модульных систем, изначально реализована библиотекой [require.js](http://requirejs.org/).
-- [CommonJS](http://wiki.commonjs.org/wiki/Modules/1.1) -- модульная система, созданная для сервера Node.js.
+- [AMD](https://ru.wikipedia.org/wiki/Asynchronous_module_definition) -- одна из самых старых модульных систем, изначально реализована библиотекой [require.js](https://requirejs.org/).
+- [CommonJS](https://wiki.commonjs.org/wiki/Modules/1.1) -- модульная система, созданная для сервера Node.js.
 - [UMD](https://github.com/umdjs/umd) -- ещё одна модульная система, предлагается как универсальная, совместима с AMD и CommonJS.
 
 Теперь все они постепенно становятся частью истории, хотя их и можно найти в старых скриптах.
@@ -56,6 +56,10 @@ sayHi('John'); // Hello, John!
 [codetabs src="say" height="140" current="index.html"]
 
 Браузер автоматически загрузит и запустит импортированный модуль (и те, которые он импортирует, если надо), а затем запустит скрипт.
+
+```warn header="Модули не работают локально. Только через HTTP(s)"
+Если вы попытаетесь открыть веб-страницу локально, через протокол `file://`, вы обнаружите, что директивы `import/export` не работают. Для тестирования модулей используйте локальный веб-сервер, например, [static-server](https://www.npmjs.com/package/static-server#getting-started) или используйте возможности "живого сервера" вашего редактора, например, расширение [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) для VS Code.
+```
 
 ## Основные возможности модулей
 

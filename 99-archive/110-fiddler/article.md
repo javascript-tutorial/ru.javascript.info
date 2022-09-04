@@ -32,7 +32,7 @@ Fiddler можно расширять с помощью скриптов на я
 
 Чтобы сделать возможной подключение внешних браузеров, нужно включить настройках Fiddler: Tools -> Fiddler Options -> Connections(вкладка) галочку "Allow remote clients to connect".  После этого Fiddler станет доступен как прокси на интерфейсе `0.0.0.0`, так что можно будет браузеру из внешней ОС указать в качестве прокси виртуальную машину. И пользоваться Fiddler.
 
-Если вы так захотите поступить, то вдобавок возьмите удобный переключатель прокси, например Elite Proxy Switcher под Firefox или [Proxy Pick](http://www.bayden.com/ietoys/) для IE, чтобы переключение на прокси осуществлялось в один клик.
+Если вы так захотите поступить, то вдобавок возьмите удобный переключатель прокси, например Elite Proxy Switcher под Firefox или [Proxy Pick](https://www.bayden.com/ietoys/) для IE, чтобы переключение на прокси осуществлялось в один клик.
 
 ## Операции над запросами
 
@@ -91,8 +91,8 @@ Fiddler является прокси, а HTTPS шифруется от брау
 
 ## Скачать
 
-Fiddler можно бесплатно скачать с <a href="http://www.fiddler2.com/fiddler2/">сайта разработчика</a>. Там же доступна <a href="http://www.fiddler2.com/Fiddler/help/">документация и видео</a>.
+Fiddler можно бесплатно скачать с [сайта разработчика](http://www.fiddler2.com/fiddler2/). Там же доступна [документация и видео](http://www.fiddler2.com/Fiddler/help/).
 
-К фиддлеру прилагается галерея расширений <a href="http://www.fiddlertool.com/fiddler2/extensions.asp">http://www.fiddlertool.com/fiddler2/extensions.asp</a>.
+К фиддлеру прилагается галерея расширений [http://www.fiddlertool.com/fiddler2/extensions.asp](http://www.fiddlertool.com/fiddler2/extensions.asp).
 
-Примеры скриптов для Fiddler, которые дают общее представление о том, на что он может быть способен: <a href="http://www.fiddlertool.com/fiddler/dev/scriptsamples.asp">http://www.fiddlertool.com/fiddler/dev/scriptsamples.asp</a>.
+Примеры скриптов для Fiddler, которые дают общее представление о том, на что он может быть способен: [http://www.fiddlertool.com/fiddler/dev/scriptsamples.asp](http://www.fiddlertool.com/fiddler/dev/scriptsamples.asp).

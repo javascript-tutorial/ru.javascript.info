@@ -177,7 +177,7 @@ button.disabled = true;
 
 В примере выше мы использовали только состояние `4` (запрос завершён), но есть и другие.
 
-Все состояния, по [спецификации](http://www.w3.org/TR/XMLHttpRequest/#states):
+Все состояния, по [спецификации](https://www.w3.org/TR/XMLHttpRequest/#states):
 
 ```js
 const unsigned short UNSENT = 0; // начальное состояние
@@ -219,7 +219,7 @@ const unsigned short DONE = 4; // запрос завершён
     ```
 
 ```warn header="Ограничения на заголовки"
-Нельзя установить заголовки, которые контролирует браузер, например `Referer` или `Host` и ряд других (полный список [тут](http://www.w3.org/TR/XMLHttpRequest/#the-setrequestheader-method)).
+Нельзя установить заголовки, которые контролирует браузер, например `Referer` или `Host` и ряд других (полный список [тут](https://www.w3.org/TR/XMLHttpRequest/#the-setrequestheader-method)).
 
 Это ограничение существует в целях безопасности и для контроля корректности запроса.
 ```
@@ -281,7 +281,7 @@ xhr.ontimeout = function() {
 
 ## Полный список событий
 
-Современная [спецификация](http://www.w3.org/TR/XMLHttpRequest/#events) предусматривает следующие события по ходу обработки запроса:
+Современная [спецификация](https://www.w3.org/TR/XMLHttpRequest/#events) предусматривает следующие события по ходу обработки запроса:
 
 - `loadstart` -- запрос начат.
 - `progress` -- браузер получил очередной пакет данных, можно прочитать текущие полученные данные в `responseText`.

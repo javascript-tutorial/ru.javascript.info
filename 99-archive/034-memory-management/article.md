@@ -147,7 +147,7 @@ function showTime() {
 }
 ```
 
-Если вы знаете низкоуровневые языки программирования, то более подробно об организации сборки мусора в V8 можно почитать, например, в статье [A tour of V8: Garbage Collection](http://jayconrod.com/posts/55/a-tour-of-v8-garbage-collection).
+Если вы знаете низкоуровневые языки программирования, то более подробно об организации сборки мусора в V8 можно почитать, например, в статье [A tour of V8: Garbage Collection](https://jayconrod.com/posts/55/a-tour-of-v8-garbage-collection).
 ````
 
 ## Замыкания

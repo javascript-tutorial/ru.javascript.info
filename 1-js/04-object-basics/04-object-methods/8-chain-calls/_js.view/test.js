@@ -21,16 +21,24 @@ describe('Лестница', function() {
     assert(alert.called);
   });
 
-  it('up() должен увеличивать ступеньки', function() {
+  it('up() должен увеличивать ступеньку', function() {
     assert.equal(ladder.up().up().step, 2);
   });
 
-  it('down() должен уменьшать ступеньки', function() {
+  it('down() должен уменьшать ступеньку', function() {
     assert.equal(ladder.down().step, -1);
   });
 
   it('down().up().up().up() ', function() {
     assert.equal(ladder.down().up().up().up().step, 2);
+  });
+
+  it('showStep() должен возвращать this', function() {
+    assert.equal(ladder.showStep(), ladder);
+  });
+ 
+  it('up().up().down().showStep().down().showStep()', function () {
+    assert.equal(ladder.up().up().down().showStep().down().showStep().step, 0)
   });
   
   after(function() {

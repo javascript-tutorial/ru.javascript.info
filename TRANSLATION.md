@@ -65,7 +65,7 @@ document.querySelector('.hello').innerHTML = text;
 
 - _Вы_ и его производные пишите с маленькой буквы
 - Используйте букву `ё` ([этот npm-пакет](https://github.com/hcodes/eyo) может проверить текст и вставить её, где нужно)
-- Не знаете, как перевести термин? [Словарь «Веб-стандартов»](https://github.com/web-standards-ru/dictionary/blob/master/dictionary.md) поможет!
+- Не знаете, как перевести термин? [Словарь «Веб-стандартов»](https://github.com/web-standards-ru/dictionary/blob/main/dictionary.md) поможет!
 - Названия компаний (Google), библиотек (Jest) и аббревиатуры (DOM) не переводятся.
 - **importance: n** встречающееся в начале задач - служебное поле, перевод не требуется.
 
@@ -86,6 +86,7 @@ document.querySelector('.hello').innerHTML = text;
 | Functionality          | Функциональность                                                               |
 | Left click/right click | Левый/правый клик? Кликните? левой кнопкой мыши        |
 | More in / Details in   | Подробнее в                                                      |
+| Nullish coalescing operator |  Оператор нулевого слияния  |
 | Script                 | Скрипт                                                        |
 | Statement              | Инструкция                                                       |
 | Summary                | Итого                                                                          |

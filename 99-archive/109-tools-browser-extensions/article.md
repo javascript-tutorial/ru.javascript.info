@@ -51,7 +51,7 @@ FireQuery
 Firebug Autocompleter
 : Включает автодополнение для консоли, когда она в многострочном режиме.
 
-[CSS-X-Fire](http://code.google.com/p/css-x-fire/)
+[CSS-X-Fire](https://code.google.com/p/css-x-fire/)
 : Позволяет редактировать CSS в Firebug и сохранять изменения, интегрировано с редакторами от JetBrains (IntelliJ IDEA и другие).
 
 ## JsonView (FF,Ch)

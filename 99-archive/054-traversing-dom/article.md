@@ -318,7 +318,7 @@ alert( table.*!*rows[0].cells[0]*/!*.innerHTML ) // "один"
 </script>
 ```
 
-Спецификация: [HTML5: tabular data](http://www.w3.org/TR/html5/tabular-data.html).
+Спецификация: [HTML5: tabular data](https://html.spec.whatwg.org/multipage/tables.html).
 
 Даже если эти свойства не нужны вам прямо сейчас, имейте их в виду на будущее, когда понадобится пройтись по таблице.
 

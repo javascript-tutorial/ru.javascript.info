@@ -156,7 +156,7 @@ alert(obj[key]); // "some value"
 let obj = Object.create(null);
 */!*
 
-alert(obj); // Error (no toString)
+alert(obj); // Ошибка (no toString)
 ```
 
 ...Но обычно это нормально для ассоциативных массивов.

@@ -76,7 +76,6 @@ customElements.define("my-element", MyElement);
 Например, элемент `<time>` уже существует в HTML для даты/времени. Но сам по себе он не выполняет никакого форматирования.
 Давайте создадим элемент `<time-formatted>`, который отображает время в удобном формате с учётом языка:
 
-
 ```html run height=50 autorun="no-epub"
 <script>
 *!*
@@ -394,4 +393,4 @@ customElements.define('hello-button', HelloButton, {extends: 'button'});
     /* <button is="my-button"> */
     ```
 
-Пользовательские элементы широко поддерживаются браузерами. Edge немного отстаёт, но есть полифил <https://github.com/webcomponents/webcomponentsjs>.
+Пользовательские элементы широко поддерживаются среди браузеров. Существует полифил: <https://github.com/webcomponents/polyfills/tree/master/packages/webcomponentsjs>.
