@@ -10,17 +10,17 @@
 
 ```js run
 let user = {
-  name: "John",
+  name: "Джон",
   hi() { alert(this.name); },
   bye() { alert("Пока"); }
 };
 
-user.hi(); // John (простой вызов метода работает хорошо)
+user.hi(); // Джон (простой вызов метода работает хорошо)
 
 *!*
 // теперь давайте попробуем вызывать user.hi или user.bye
 // в зависимости от имени пользователя user.name
-(user.name == "John" ? user.hi : user.bye)(); // Ошибка!
+(user.name == "Джон" ? user.hi : user.bye)(); // Ошибка!
 */!*
 ```
 
