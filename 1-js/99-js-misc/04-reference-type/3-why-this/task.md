@@ -23,4 +23,3 @@ obj.go();               // (1) [object Object]
 
 (obj.go || obj.stop)(); // (4) undefined
 ```
-
