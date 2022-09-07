@@ -139,7 +139,7 @@ alert( user.name ); // все ещё John в первоначальном объ
 Синтаксис:
 
 ```js
-Object.assign(dest, [src1, src2, src3...])
+Object.assign(dest, src1[, src2, src3...])
 ```
 
 - Первый аргумент `dest` — целевой объект.
