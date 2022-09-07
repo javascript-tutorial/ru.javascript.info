@@ -163,7 +163,6 @@ alert(obj); // Ошибка (no toString)
 
 Обратите внимание, что большая часть методов, связанных с объектами, имеют вид `Object.something(...)`. К примеру, `Object.keys(obj)`. Подобные методы не находятся в прототипе, так что они продолжат работать для таких объектов:
 
-
 ```js run
 let chineseDictionary = Object.create(null);
 chineseDictionary.hello = "你好";
