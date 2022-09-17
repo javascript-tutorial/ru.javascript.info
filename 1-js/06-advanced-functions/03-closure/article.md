@@ -63,7 +63,7 @@ alert(message);
 
 // выводит другое сообщение
 *!*
-let message = "Goodbye"; // Error: variable already declared
+let message = "Goodbye"; // Ошибка: переменная уже объявлена
 */!*
 alert(message);
 ```
