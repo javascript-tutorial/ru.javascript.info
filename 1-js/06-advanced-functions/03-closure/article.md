@@ -78,7 +78,7 @@ if (true) {
   alert(phrase); // Hello!
 }
 
-alert(phrase); // Error, нет такой переменной!
+alert(phrase); // Ошибка: нет такой переменной!
 ```
 
 Здесь, после завершения `if`, `alert` внизу не увидит phrase`, отсюда и ошибка.
