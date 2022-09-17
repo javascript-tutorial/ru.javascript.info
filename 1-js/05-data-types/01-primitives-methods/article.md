@@ -73,9 +73,9 @@ alert( str.toUpperCase() ); // ПРИВЕТ
 Число имеет собственный набор методов. Например, [toFixed(n)](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed) округляет число до n знаков после запятой.
 
 ```js run
-let n = 1.23456;
+let num = 1.23456;
 
-alert( n.toFixed(2) ); // 1.23
+alert( num.toFixed(2) ); // 1.23
 ```
 
 Более подробно с различными свойствами и методами мы познакомимся в главах <info:number> и <info:string>.

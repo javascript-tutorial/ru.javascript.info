@@ -109,6 +109,17 @@ alert( article.title ); // Сегодняшний дайджест
 Article.remove({id: 12345});
 ```
 
+````warn header="Статические методы недоступны для отдельных объектов"
+Статические методы могут вызываться для классов, но не для отдельных объектов.
+
+Например. такой код не будет работать:
+
+```js
+// ...
+article.createTodays(); /// Error: article.createTodays is not a function
+```
+````
+
 ## Статические свойства
 
 [recent browser=Chrome]

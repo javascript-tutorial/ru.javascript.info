@@ -157,7 +157,7 @@ alert( regexp.test(str) );
 
 К сожалению, нет: если мы заменим `pattern:\d+` на `pattern:\d+?`, то регулярное выражение всё ещё будет "зависать". Поменяется только порядок перебора, но не общее количество комбинаций.
 
-Некоторые движки регулярных выражений содержат хитрые проверки и конечные автоматы, которые позволяют избежать полного перебора в таких ситуациях или кардинально ускорить его, но не все движки и не всегда.
+Некоторые движки регулярных выражений содержат хитрые проверки и специальные алгоритмы, которые позволяют избежать полного перебора в таких ситуациях или кардинально ускорить его, но не все движки и не всегда.
 
 ## Назад к словам и строкам
 
@@ -265,7 +265,7 @@ alert( "JavaScript".match(/(?=(\w+))\1Script/)); // null
 Внутрь `pattern:(?=(\w+))\1` можно вместо `pattern:\w` вставить и более сложное регулярное выражение, при поиске которого квантификатор `pattern:+` не должен делать возврат.
 
 ```smart
-Больше о связи захватывающих квантификаторов и опережающей проверки вы можете найти в статьях [Regex: Emulate Atomic Grouping (and Possessive Quantifiers) with LookAhead](http://instanceof.me/post/52245507631/regex-emulate-atomic-grouping-with-lookahead) и [Mimicking Atomic Groups](http://blog.stevenlevithan.com/archives/mimic-atomic-groups).
+Больше о связи захватывающих квантификаторов и опережающей проверки вы можете найти в статьях [Regex: Emulate Atomic Grouping (and Possessive Quantifiers) with LookAhead](https://instanceof.me/post/52245507631/regex-emulate-atomic-grouping-with-lookahead) и [Mimicking Atomic Groups](https://blog.stevenlevithan.com/archives/mimic-atomic-groups).
 ```
 
 Перепишем исходный пример, используя опережающую проверку для запрета возврата:

@@ -119,7 +119,7 @@ Sec-WebSocket-Accept: hsBlbuDTkk24srzEOTBUlZAlC2g=
 
 - `Sec-WebSocket-Extensions: deflate-frame` означает, что браузер поддерживает сжатие данных. Расширение -- это что-то, связанное с передачей данных, расширяющее сам протокол WebSocket. Заголовок `Sec-WebSocket-Extensions` отправляется браузером автоматически со списком всевозможных расширений, которые он поддерживает.
 
-- `Sec-WebSocket-Protocol: soap, wamp` означает, что мы будем передавать не только произвольные данные, но и данные в протоколах [SOAP](http://en.wikipedia.org/wiki/SOAP) или WAMP (The WebSocket Application Messaging Protocol" -- "протокол обмена сообщениями WebSocket приложений"). То есть, этот заголовок описывает не передачу, а формат данных, который мы собираемся использовать. Официальные подпротоколы WebSocket регистрируются в [каталоге IANA](http://www.iana.org/assignments/websocket/websocket.xml).
+- `Sec-WebSocket-Protocol: soap, wamp` означает, что мы будем передавать не только произвольные данные, но и данные в протоколах [SOAP](https://en.wikipedia.org/wiki/SOAP) или WAMP (The WebSocket Application Messaging Protocol" -- "протокол обмена сообщениями WebSocket приложений"). То есть, этот заголовок описывает не передачу, а формат данных, который мы собираемся использовать. Официальные подпротоколы WebSocket регистрируются в [каталоге IANA](http://www.iana.org/assignments/websocket/websocket.xml).
 
     Этот необязательный заголовок ставим мы сами, передавая массив подпротоколов вторым параметром `new WebSocket`, вот так:
 
@@ -171,7 +171,7 @@ Sec-WebSocket-Protocol: soap
 
 В браузере мы напрямую работаем только с текстовыми и бинарными фреймами.
 
-**Метод WebSocket `.send()` может отправлять и текстовые и бинарные данные.**
+**Метод WebSocket `.send()` может отправлять и текстовые, и бинарные данные.**
 
 Вызов `socket.send(body)` принимает `body` в виде строки или любом бинарном формате включая `Blob`, `ArrayBuffer` и другие. Дополнительных настроек не требуется, просто отправляем в любом формате.
 

@@ -126,7 +126,7 @@ archive:
 2. Событие достигло целевого элемента. Это -- *"стадия цели"* (target stage).
 3. После этого событие начинает всплывать. Это -- *"стадия всплытия"* (bubbling stage).
 
-В [стандарте DOM Events 3](http://www.w3.org/TR/DOM-Level-3-Events/) это продемонстрировано так:
+В [стандарте DOM Events 3](https://www.w3.org/TR/DOM-Level-3-Events/) это продемонстрировано так:
 
 ![](eventflow.png)
 

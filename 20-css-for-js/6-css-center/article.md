@@ -61,7 +61,7 @@
 
 В отличие от `width/height`, значение `auto` для `margin` само не появляется. Обычно `margin` равно конкретной величине для элемента, например `0` для `DIV`. Нужно поставить его явно.
 
-Значение `margin-left:auto/margin-right:auto` заставляет браузер выделять под `margin` всё доступное сбоку пространство. А если и то и другое `auto`, то слева и справа будет одинаковый отступ, таким образом элемент окажется в середине. Детали вычислений описаны в разделе спецификации [Calculating widths and margins](http://www.w3.org/TR/CSS21/visudet.html#Computing_widths_and_margins).
+Значение `margin-left:auto/margin-right:auto` заставляет браузер выделять под `margin` всё доступное сбоку пространство. А если и то и другое `auto`, то слева и справа будет одинаковый отступ, таким образом элемент окажется в середине. Детали вычислений описаны в разделе спецификации [Calculating widths and margins](https://www.w3.org/TR/CSS21/visudet.html#Computing_widths_and_margins).
 
 ## Вертикальное
 
@@ -158,7 +158,7 @@
 
 ### Таблица с vertical-align
 
-У свойства [vertical-align](http://www.w3.org/TR/CSS2/visudet.html#propdef-vertical-align), которое управляет вертикальным расположением элемента, есть два режима работы.
+У свойства [vertical-align](https://www.w3.org/TR/CSS2/visudet.html#propdef-vertical-align), которое управляет вертикальным расположением элемента, есть два режима работы.
 
 **В таблицах свойство `vertical-align` указывает расположение *содержимого* ячейки.**
 

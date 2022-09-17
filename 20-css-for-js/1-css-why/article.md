@@ -43,7 +43,7 @@
     - Приоритет селекторов
     - Селекторы `#id`, `.class`, `a > b`
 
-- Сброс браузерных стилей, <a href="http://meyerweb.com/eric/tools/css/reset/">reset.css</a>
+- Сброс браузерных стилей, <a href="https://meyerweb.com/eric/tools/css/reset/">reset.css</a>
 
 ## Почитать
 
@@ -51,9 +51,9 @@
 
 С уверенностью могу рекомендовать следующие:
 
-- <a href="http://www.ozon.ru/context/detail/id/24493075/?partner=iliakan">Большая книга CSS3.</a>
+- <a href="https://www.ozon.ru/context/detail/id/24493075/?partner=iliakan">Большая книга CSS3.</a>
 <i>Дэвид Макфарланд.</i>
-- <a href="http://www.ozon.ru/context/detail/id/3881079/?partner=iliakan">CSS. Каскадные таблицы стилей. Подробное руководство.</a>
+- <a href="https://www.ozon.ru/context/detail/id/3881079/?partner=iliakan">CSS. Каскадные таблицы стилей. Подробное руководство.</a>
 <i>Эрик Мейер</i>
 - <a href="https://debuggingcss.com/">Отладка CSS</a>
 <i>Ахмад Шадид</i>

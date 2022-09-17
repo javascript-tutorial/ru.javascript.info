@@ -1,3 +1,4 @@
+
 # Свойства узлов: тип, тег и содержимое
 
 Теперь давайте более внимательно взглянем на DOM-узлы.
@@ -10,7 +11,7 @@
 
 Каждый DOM-узел принадлежит соответствующему встроенному классу.
 
-Корнем иерархии является [EventTarget](https://dom.spec.whatwg.org/#eventtarget), от него наследует [Node](http://dom.spec.whatwg.org/#interface-node) и остальные DOM-узлы.
+Корнем иерархии является [EventTarget](https://dom.spec.whatwg.org/#eventtarget), от него наследует [Node](https://dom.spec.whatwg.org/#interface-node) и остальные DOM-узлы.
 
 На рисунке ниже изображены основные классы:
 
@@ -18,16 +19,41 @@
 
 Существуют следующие классы:
 
-- [EventTarget](https://dom.spec.whatwg.org/#eventtarget) -- это корневой "абстрактный" класс. Объекты этого класса никогда не создаются. Он служит основой, благодаря которой все DOM-узлы поддерживают так называемые "события", о которых мы поговорим позже.
-- [Node](http://dom.spec.whatwg.org/#interface-node) -- также является "абстрактным" классом, и служит основой для DOM-узлов. Он обеспечивает базовую функциональность: `parentNode`, `nextSibling`, `childNodes` и т.д. (это геттеры). Объекты класса `Node` никогда не создаются. Но есть определённые классы узлов, которые наследуют от него: `Text` -- для текстовых узлов, `Element` -- для узлов-элементов и более экзотический `Comment` -- для узлов-комментариев.
-- [Element](http://dom.spec.whatwg.org/#interface-element) -- это базовый класс для DOM-элементов. Он обеспечивает навигацию на уровне элементов: `nextElementSibling`, `children` и методы поиска: `getElementsByTagName`, `querySelector`. Браузер поддерживает не только HTML, но также XML и SVG. Класс Element служит базой для следующих классов: `SVGElement`, `XMLElement` и `HTMLElement`.
-- [HTMLElement](https://html.spec.whatwg.org/multipage/dom.html#htmlelement) -- является базовым классом для всех остальных HTML-элементов. От него наследуют конкретные элементы:
+- [EventTarget](https://dom.spec.whatwg.org/#eventtarget) -- это корневой "абстрактный" класс для всего.
+
+    Объекты этого класса никогда не создаются. Он служит основой, благодаря которой все DOM-узлы поддерживают так называемые "события", о которых мы поговорим позже.
+
+- [Node](https://dom.spec.whatwg.org/#interface-node) -- также является "абстрактным" классом, и служит основой для DOM-узлов.
+
+    Он обеспечивает базовую функциональность: `parentNode`, `nextSibling`, `childNodes` и т.д. (это геттеры). Объекты класса `Node` никогда не создаются. Но есть определённые классы узлов, которые наследуются от него (и следовательно наследуют функционал `Node`).
+
+- [Document](https://dom.spec.whatwg.org/#interface-document), по историческим причинам часто наследуется `HTMLDocument` (хотя последняя спецификация этого не навязывает) -- это документ в целом.
+
+    Глобальный объект `document` принадлежит именно к этому классу. Он служит точкой входа в DOM.
+
+- [CharacterData](https://dom.spec.whatwg.org/#interface-characterdata) -- "абстрактный" класс. Вот, кем он наследуется:
+    - [Text](https://dom.spec.whatwg.org/#interface-text) -- класс, соответствующий тексту внутри элементов. Например, `Hello` в `<p>Hello</p>`.
+    - [Comment](https://dom.spec.whatwg.org/#interface-comment) -- класс для комментариев. Они не отображаются, но каждый комментарий становится членом DOM.
+
+- [Element](https://dom.spec.whatwg.org/#interface-element) -- это базовый класс для DOM-элементов.
+
+    Он обеспечивает навигацию на уровне элементов: `nextElementSibling`, `children`.
+    А также и методы поиска элементов: `getElementsByTagName`, `querySelector`.
+
+    Браузер поддерживает не только HTML, но также XML и SVG. Таким образом, класс `Element` служит основой для более специфичных классов: `SVGElement`, `XmlElement` (они нам здесь не нужны) и `HTMLElement`.
+
+- И наконец, [HTMLElement](https://html.spec.whatwg.org/multipage/dom.html#htmlelement) является базовым классом для всех остальных HTML-элементов. Мы будем работать с ним большую часть времени.
+
+    От него наследуются конкретные элементы:
+
     - [HTMLInputElement](https://html.spec.whatwg.org/multipage/forms.html#htmlinputelement) -- класс для тега `<input>`,
     - [HTMLBodyElement](https://html.spec.whatwg.org/multipage/semantics.html#htmlbodyelement) -- класс для тега `<body>`,
     - [HTMLAnchorElement](https://html.spec.whatwg.org/multipage/semantics.html#htmlanchorelement) -- класс для тега `<a>`,
-    - ...и т.д, каждому тегу соответствует свой класс, который предоставляет определённые свойства и методы.
+    - ...и т.д.
 
-Таким образом, полный набор свойств и методов данного узла собирается в результате наследования.
+Также существует множество других тегов со своими собственными классами, которые могут иметь определенные свойства и методы, в то время как некоторые элементы, такие как `<span>`, `<section>` и `<article>`, не имеют каких-либо определенных свойств, поэтому они являются экземплярами класса `HTMLElement`.
+
+Таким образом, полный набор свойств и методов данного узла является результатом цепочки наследования.
 
 Рассмотрим DOM-объект для тега `<input>`. Он принадлежит классу [HTMLInputElement](https://html.spec.whatwg.org/multipage/forms.html#htmlinputelement).
 
@@ -131,10 +157,10 @@ interface HTMLInputElement: HTMLElement {
   <script>  
   let elem = document.body;
 
-  // посмотрим что это?
+  // давайте разберёмся: какой тип узла находится в elem?
   alert(elem.nodeType); // 1 => элемент
 
-  // и первый потомок...
+  // и его первый потомок...
   alert(elem.firstChild.nodeType); // 3 => текст
 
   // для объекта document значение типа -- 9
