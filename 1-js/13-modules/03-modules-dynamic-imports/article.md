@@ -59,10 +59,12 @@ export function bye() {
 ...То динамический импорт может выглядеть так:
 
 ```js
-let {hi, bye} = await import('./say.js');
+(async () => {
+  let {hi, bye} = await import('./say.js');
 
-hi();
-bye();
+  hi();
+  bye();
+})();
 ```
 
 А если в `say.js` указан экспорт по умолчанию:
@@ -77,11 +79,13 @@ export default function() {
 ...То для доступа к нему нам следует взять свойство `default` объекта модуля:
 
 ```js
-let obj = await import('./say.js');
-let say = obj.default;
-// или, одной строкой: let {default: say} = await import('./say.js');
+(async () => {
+  let obj = await import('./say.js');
+  let say = obj.default;
+  // или, одной строкой: let {default: say} = await import('./say.js');
 
-say();
+  say();
+})();
 ```
 
 Вот полный пример:
