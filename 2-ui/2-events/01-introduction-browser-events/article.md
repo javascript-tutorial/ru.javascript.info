@@ -235,7 +235,7 @@ element.addEventListener(event, handler, [options]);
 Для удаления обработчика следует использовать `removeEventListener`:
 
 ```js
-element.removeEventListener(event, handler[, options]);
+element.removeEventListener(event, handler, [options]);
 ```
 
 ````warn header="Удаление требует именно ту же функцию"
