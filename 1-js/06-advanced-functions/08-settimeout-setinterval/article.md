@@ -14,7 +14,7 @@
 Синтаксис:
 
 ```js
-let timerId = setTimeout(func|code, [delay], [arg1], [arg2], ...)
+let timerId = setTimeout(func|code, [delay], [arg1], [arg2], ...);
 ```
 
 Параметры:
@@ -109,7 +109,7 @@ alert(timerId); // тот же идентификатор (не принимае
 Метод `setInterval` имеет такой же синтаксис как `setTimeout`:
 
 ```js
-let timerId = setInterval(func|code, [delay], [arg1], [arg2], ...)
+let timerId = setInterval(func|code, [delay], [arg1], [arg2], ...);
 ```
 
 Все аргументы имеют такое же значение. Но отличие этого метода от `setTimeout` в том, что функция запускается не один раз, а периодически через указанный интервал времени.
