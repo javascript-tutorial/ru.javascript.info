@@ -306,7 +306,7 @@ set.forEach((value, valueAgain, set) => {
 
 - [`new Map([iterable])`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/Map) -- создаёт коллекцию, можно указать перебираемый объект (обычно массив) из пар `[ключ,значение]` для инициализации.
 - [`map.set(key, value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/set) -- записывает по ключу `key` значение `value`.
-- [`map.get(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/get)` -- возвращает значение по ключу или `undefined`, если ключ `key` отсутствует.
+- [`map.get(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/get) -- возвращает значение по ключу или `undefined`, если ключ `key` отсутствует.
 - [`map.has(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/has) -- возвращает `true`, если ключ `key` присутствует в коллекции, иначе `false`.
 - [`map.delete(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/delete) -- удаляет элемент по ключу `key`.
 - [`map.clear()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/clear) -- очищает коллекцию от всех элементов.
