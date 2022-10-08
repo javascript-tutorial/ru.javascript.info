@@ -14,13 +14,13 @@
 
 Методы и свойства:
 
-- `new Map()` -- создаёт коллекцию.
-- [`map.set(key, value)`](mdn:js/Map/set) -- записывает по ключу `key` значение `value`.
-- [`map.get(key)`](mdn:js/Map/get) -- возвращает значение по ключу или `undefined`, если ключ `key` отсутствует.
-- [`map.has(key)`](mdn:js/Map/has) -- возвращает `true`, если ключ `key` присутствует в коллекции, иначе `false`.
-- [`map.delete(key)`](mdn:js/Map/delete) -- удаляет элемент по ключу `key`.
-- [`map.clear()`](mdn:js/Map/clear) -- очищает коллекцию от всех элементов.
-- [`map.size`](mdn:js/Map/size) -- возвращает текущее количество элементов.
+- [`new Map()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/Map) -- создаёт коллекцию.
+- [`map.set(key, value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/set) -- записывает по ключу `key` значение `value`.
+- [`map.get(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/get) -- возвращает значение по ключу или `undefined`, если ключ `key` отсутствует.
+- [`map.has(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/has) -- возвращает `true`, если ключ `key` присутствует в коллекции, иначе `false`.
+- [`map.delete(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/delete) -- удаляет элемент по ключу `key`.
+- [`map.clear()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/clear) -- очищает коллекцию от всех элементов.
+- [`map.size`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/size) -- возвращает текущее количество элементов.
 
 Например:
 
@@ -104,9 +104,9 @@ map.set("1", "str1")
 
 Для перебора коллекции `Map` есть 3 метода:
 
-- [`map.keys()`](mdn:js/Map/keys) -- возвращает итерируемый объект по ключам,
-- [`map.values()`](mdn:js/Map/values) -- возвращает итерируемый объект по значениям,
-- [`map.entries()`](mdn:js/Map/entries) -- возвращает итерируемый объект по парам вида `[ключ, значение]`, этот вариант используется по умолчанию в `for..of`.
+- [`map.keys()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/keys) -- возвращает итерируемый объект по ключам,
+- [`map.values()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/values) -- возвращает итерируемый объект по значениям,
+- [`map.entries()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/entries) -- возвращает итерируемый объект по парам вида `[ключ, значение]`, этот вариант используется по умолчанию в `for..of`.
 
 Например:
 
@@ -232,16 +232,16 @@ let obj = Object.fromEntries(map); // убрать .entries()
 
 ## Set
 
-Объект `Set` -- это особый вид коллекции: "множество" значений (без ключей), где каждое значение может появляться только один раз.
+Объект [`Set`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) -- это особый вид коллекции: "множество" значений (без ключей), где каждое значение может появляться только один раз.
 
 Его основные методы это:
 
-- `new Set(iterable)` -- создаёт `Set`, и если в качестве аргумента был предоставлен итерируемый объект (обычно это массив), то копирует его значения в новый `Set`.
-- [`set.add(value)`](mdn:js/Set/add) -- добавляет значение (если оно уже есть, то ничего не делает), возвращает тот же объект `set`.
-- [`set.delete(value)`](mdn:js/Set/delete) -- удаляет значение, возвращает `true`, если `value` было в множестве на момент вызова, иначе `false`.
-- [`set.has(value)`](mdn:js/Set/has) -- возвращает `true`, если значение присутствует в множестве, иначе `false`.
-- [`set.clear()`](mdn:js/Set/clear) -- удаляет все имеющиеся значения.
-- [`set.size`](mdn:js/Set/size) -- возвращает количество элементов в множестве.
+- [`new Set(iterable)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/Set) -- создаёт `Set`, и если в качестве аргумента был предоставлен итерируемый объект (обычно это массив), то копирует его значения в новый `Set`.
+- [`set.add(value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/add) -- добавляет значение (если оно уже есть, то ничего не делает), возвращает тот же объект `set`.
+- [`set.delete(value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/delete) -- удаляет значение, возвращает `true`, если `value` было в множестве на момент вызова, иначе `false`.
+- [`set.has(value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/has) -- возвращает `true`, если значение присутствует в множестве, иначе `false`.
+- [`set.clear()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/clear) -- удаляет все имеющиеся значения.
+- [`set.size`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/size) -- возвращает количество элементов в множестве.
 
 Основная "изюминка" - это то, что при повторных вызовах `set.add()` с одним и тем же значением ничего не происходит, за счёт этого как раз и получается, что каждое значение появляется один раз.
 
@@ -294,38 +294,38 @@ set.forEach((value, valueAgain, set) => {
 
 `Set` имеет те же встроенные методы, что и `Map`:
 
-- [`set.keys()`](mdn:js/Set/keys) -- возвращает перебираемый объект для значений,
-- [`set.values()`](mdn:js/Set/values) -- то же самое, что и `set.keys()`, присутствует для обратной совместимости с `Map`,
-- [`set.entries()`](mdn:js/Set/entries) -- возвращает перебираемый объект для пар вида `[значение, значение]`, присутствует для обратной совместимости с `Map`.
+- [`set.keys()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/keys) -- возвращает перебираемый объект для значений,
+- [`set.values()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/values) -- то же самое, что и `set.keys()`, присутствует для обратной совместимости с `Map`,
+- [`set.entries()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/entries) -- возвращает перебираемый объект для пар вида `[значение, значение]`, присутствует для обратной совместимости с `Map`.
 
 ## Итого
 
-`Map` -- коллекция пар ключ-значение.
+[`Map`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) -- коллекция пар ключ-значение.
 
 Методы и свойства:
 
-- `new Map([iterable])` -- создаёт коллекцию, можно указать перебираемый объект (обычно массив) из пар `[ключ,значение]` для инициализации.
-- [`map.set(key, value)`](mdn:js/Map/set) -- записывает по ключу `key` значение `value`.
-- [`map.get(key)`](mdn:js/Map/get)` -- возвращает значение по ключу или `undefined`, если ключ `key` отсутствует.
-- [`map.has(key)`](mdn:js/Map/has) -- возвращает `true`, если ключ `key` присутствует в коллекции, иначе `false`.
-- [`map.delete(key)`](mdn:js/Map/delete) -- удаляет элемент по ключу `key`.
-- [`map.clear()`](mdn:js/Map/clear) -- очищает коллекцию от всех элементов.
-- [`map.size`](mdn:js/Map/size) -- возвращает текущее количество элементов.
+- [`new Map([iterable])`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/Map) -- создаёт коллекцию, можно указать перебираемый объект (обычно массив) из пар `[ключ,значение]` для инициализации.
+- [`map.set(key, value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/set) -- записывает по ключу `key` значение `value`.
+- [`map.get(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/get) -- возвращает значение по ключу или `undefined`, если ключ `key` отсутствует.
+- [`map.has(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/has) -- возвращает `true`, если ключ `key` присутствует в коллекции, иначе `false`.
+- [`map.delete(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/delete) -- удаляет элемент по ключу `key`.
+- [`map.clear()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/clear) -- очищает коллекцию от всех элементов.
+- [`map.size`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/size) -- возвращает текущее количество элементов.
 
 Отличия от обычного объекта `Object`:
 
 - Что угодно может быть ключом, в том числе и объекты.
 - Есть дополнительные методы, свойство `size`.
 
-`Set` -- коллекция уникальных значений, так называемое "множество".
+[`Set`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) -- коллекция уникальных значений, так называемое "множество".
 
 Методы и свойства:
 
-- `new Set([iterable])` -- создаёт `Set`, можно указать перебираемый объект со значениями для инициализации.
-- [`set.add(value)`](mdn:js/Set/add) -- добавляет значение (если оно уже есть, то ничего не делает), возвращает тот же объект `set`.
-- [`set.delete(value)`](mdn:js/Set/delete) -- удаляет значение, возвращает `true` если `value` было в множестве на момент вызова, иначе `false`.
-- [`set.has(value)`](mdn:js/Set/has) -- возвращает `true`, если значение присутствует в множестве, иначе `false`.
-- [`set.clear()`](mdn:js/Set/clear) -- удаляет все имеющиеся значения.
-- [`set.size`](mdn:js/Set/size) -- возвращает количество элементов в множестве.
+- [`new Set(iterable)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/Set) -- создаёт `Set`, можно указать перебираемый объект со значениями для инициализации.
+- [`set.add(value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/add) -- добавляет значение (если оно уже есть, то ничего не делает), возвращает тот же объект `set`.
+- [`set.delete(value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/delete) -- удаляет значение, возвращает `true` если `value` было в множестве на момент вызова, иначе `false`.
+- [`set.has(value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/has) -- возвращает `true`, если значение присутствует в множестве, иначе `false`.
+- [`set.clear()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/clear) -- удаляет все имеющиеся значения.
+- [`set.size`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/size) -- возвращает количество элементов в множестве.
 
 Перебор `Map` и `Set` всегда осуществляется в порядке добавления элементов, так что нельзя сказать, что это -- неупорядоченные коллекции, но поменять порядок элементов или получить элемент напрямую по его номеру нельзя.
