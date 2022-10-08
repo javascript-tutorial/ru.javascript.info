@@ -15,12 +15,12 @@
 Методы и свойства:
 
 - `new Map()` -- создаёт коллекцию.
-- [`map.set(key, value)`](mdn:js/Map/set) -- записывает по ключу `key` значение `value`.
-- [`map.get(key)`](mdn:js/Map/get) -- возвращает значение по ключу или `undefined`, если ключ `key` отсутствует.
-- [`map.has(key)`](mdn:js/Map/has) -- возвращает `true`, если ключ `key` присутствует в коллекции, иначе `false`.
-- [`map.delete(key)`](mdn:js/Map/delete) -- удаляет элемент по ключу `key`.
-- [`map.clear()`](mdn:js/Map/clear) -- очищает коллекцию от всех элементов.
-- [`map.size`](mdn:js/Map/size) -- возвращает текущее количество элементов.
+- [`map.set(key, value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/set) -- записывает по ключу `key` значение `value`.
+- [`map.get(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/get) -- возвращает значение по ключу или `undefined`, если ключ `key` отсутствует.
+- [`map.has(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/has) -- возвращает `true`, если ключ `key` присутствует в коллекции, иначе `false`.
+- [`map.delete(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/delete) -- удаляет элемент по ключу `key`.
+- [`map.clear()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/clear) -- очищает коллекцию от всех элементов.
+- [`map.size`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/size) -- возвращает текущее количество элементов.
 
 Например:
 
@@ -104,9 +104,9 @@ map.set("1", "str1")
 
 Для перебора коллекции `Map` есть 3 метода:
 
-- [`map.keys()`](mdn:js/Map/keys) -- возвращает итерируемый объект по ключам,
-- [`map.values()`](mdn:js/Map/values) -- возвращает итерируемый объект по значениям,
-- [`map.entries()`](mdn:js/Map/entries) -- возвращает итерируемый объект по парам вида `[ключ, значение]`, этот вариант используется по умолчанию в `for..of`.
+- [`map.keys()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/keys) -- возвращает итерируемый объект по ключам,
+- [`map.values()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/values) -- возвращает итерируемый объект по значениям,
+- [`map.entries()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/entries) -- возвращает итерируемый объект по парам вида `[ключ, значение]`, этот вариант используется по умолчанию в `for..of`.
 
 Например:
 
@@ -161,7 +161,7 @@ let map = new Map([
 alert( map.get('1') ); // str1
 ```
 
-Если у нас уже есть обычный объект, и мы хотели бы создать `Map` из него, то поможет встроенный метод [Object.entries(obj)](mdn:js/Object/entries), который получает объект и возвращает массив пар ключ-значение для него, как раз в этом формате.
+Если у нас уже есть обычный объект, и мы хотели бы создать `Map` из него, то поможет встроенный метод [Object.entries(obj)](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Object/entries), который получает объект и возвращает массив пар ключ-значение для него, как раз в этом формате.
 
 Так что мы можем создать `Map` из обычного объекта следующим образом:
 
