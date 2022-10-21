@@ -7,7 +7,7 @@
 
 Как мы уже знаем, строки в JavaScript основаны на [Юникоде](https://ru.wikipedia.org/wiki/Юникод): каждый символ представляет из себя последовательность байтов из 1-4 байтов.
 
-JavaScript позволяет нам вставить символ в строку, указав его шестнадцатеричный код Юникода с помощью одной из этих трех нотаций:
+JavaScript позволяет нам вставить символ в строку, указав его шестнадцатеричный Юникод с помощью одной из этих трех нотаций:
 
 - `\xXX`
 
@@ -23,7 +23,7 @@ JavaScript позволяет нам вставить символ в строк
     ```
 
 - `\uXXXX`
-    Вместо `XXXX` должны быть указаны ровно 4 шестнадцатеричные цифры со значением от `0000` до `FFFF`. В этом случае `\uXXXX` - это символ, код Юникода которого равен `XXXX`.
+    Вместо `XXXX` должны быть указаны ровно 4 шестнадцатеричные цифры со значением от `0000` до `FFFF`. В этом случае `\uXXXX` - это символ, Юникод которого равен `XXXX`.
 
     Символы со значениями Юникода, превышающими `U+FFFF`, также могут быть представлены с помощью этой нотации, но в таком случае нам придется использовать так называемую суррогатную пару (о ней мы поговорим позже в этой главе).
     
@@ -35,7 +35,7 @@ JavaScript позволяет нам вставить символ в строк
 
 - `\u{X…XXXXXX}`
 
-    Вместо `X…XXXXXX` должно быть шестнадцатеричное значение от 1 до 6 байт от `0` до `10FFFF` (самая высокая точка кода, определенная стандартом Юникод). Эта нотация позволяет нам легко представлять все существующие символы Юникода.
+    Вместо `X…XXXXXX` должно быть шестнадцатеричное значение от 1 до 6 байт от `0` до `10FFFF` (максимальная точка кода, определенная стандартом Юникод). Эта нотация позволяет нам легко представлять все существующие символы Юникода.
 
     ```js run
     alert( "\u{20331}" ); // 佫, редкий китайский иероглиф (длинный Юникод)
@@ -44,122 +44,122 @@ JavaScript позволяет нам вставить символ в строк
 
 ## Суррогатные пары
 
-All frequently used characters have 2-byte codes (4 hex digits). Letters in most European languages, numbers, and the basic unified CJK ideographic sets (CJK -- from Chinese, Japanese, and Korean writing systems), have a 2-byte representation.
+Все часто используемые символы имеют 2-байтовые коды (4 шестнадцатеричные цифры). В большинстве европейских языков буквы, цифры и основные унифицированные идеографические наборы CJK (CJK -- от китайской, японской и корейской систем письма) имеют 2-байтовое представление.
 
-Initially, JavaScript was based on UTF-16 encoding that only allowed 2 bytes per character. But 2 bytes only allow 65536 combinations and that's not enough for every possible symbol of Unicode.
+Изначально JavaScript был основан на кодировке UTF-16, которая предусматривала только 2 байта на один символ. Однако 2 байта допускают только 65536 комбинаций, и этого недостаточно для всех возможных символов Юникода.
 
-So rare symbols that require more than 2 bytes are encoded with a pair of 2-byte characters called "a surrogate pair".
+Поэтому редкие символы, требующие более 2 байт, кодируются парой 2-байтовых символов, которые называются "суррогатной парой".
 
-As a side effect, the length of such symbols is `2`:
+Побочным эффектом является то, что длина таких символов равна `2`:
 
 ```js run
 alert( '𝒳'.length ); // 2, MATHEMATICAL SCRIPT CAPITAL X
 alert( '😂'.length ); // 2, FACE WITH TEARS OF JOY
-alert( '𩷶'.length ); // 2, a rare Chinese character
+alert( '𩷶'.length ); // 2, редкий китайский иероглиф
 ```
 
-That's because surrogate pairs did not exist at the time when JavaScript was created, and thus are not correctly processed by the language!
+Это происходит потому, что суррогатные пары не существовали в то время, когда был создан JavaScript, и поэтому они не обрабатываются языком корректно.
 
-We actually have a single symbol in each of the strings above, but the `length` property shows a length of `2`.
+На самом деле в каждой из приведенных строк у нас по одному символу, но свойство `length` показывает длину `2`.
 
-Getting a symbol can also be tricky, because most language features treat surrogate pairs as two characters.
+Получить такой символ также может быть непросто, поскольку большинство языковых функций рассматривают суррогатные пары как два символа.
 
-For example, here we can see two odd characters in the output:
+Например, здесь мы видим два странных символа в выводе:
 
 ```js run
-alert( '𝒳'[0] ); // shows strange symbols...
-alert( '𝒳'[1] ); // ...pieces of the surrogate pair
+alert( '𝒳'[0] ); // показывает странные символы...
+alert( '𝒳'[1] ); // ...части суррогатной пары
 ```
 
-Pieces of a surrogate pair have no meaning without each other. So the alerts in the example above actually display garbage.
+Части суррогатной пары не имеют никакого значения друг без друга.
 
-Technically, surrogate pairs are also detectable by their codes: if a character has the code in the interval of `0xd800..0xdbff`, then it is the first part of the surrogate pair. The next character (second part) must have the code in interval `0xdc00..0xdfff`. These intervals are reserved exclusively for surrogate pairs by the standard.
+Технически, суррогатные пары также можно определить по их кодам: если символ имеет код в интервале `0xd800...0xdbff`, то он является первой частью суррогатной пары. Следующий символ (вторая часть) должен иметь код в интервале `0xdc00...0xdfff`. Эти интервалы зарезервированы стандартом исключительно для суррогатных пар.
 
-So the methods `String.fromCodePoint` and `str.codePointAt` were added in JavaScript to deal with surrogate pairs.
+Поэтому для работы с суррогатными парами в JavaScript были добавлены методы `String.fromCodePoint` и `str.codePointAt`.
 
-They are essentially the same as [String.fromCharCode](mdn:js/String/fromCharCode) and [str.charCodeAt](mdn:js/String/charCodeAt), but they treat surrogate pairs correctly.
+По сути, они аналогичны [String.fromCharCode](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/String/fromCharCode) и [str.charCodeAt](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/String/charCodeAt), но они правильно обрабатывают суррогатные пары.
 
-One can see the difference here:
+Здесь можно увидеть разницу:
 
 ```js run
-// charCodeAt is not surrogate-pair aware, so it gives codes for the 1st part of 𝒳:
+// charCodeAt не учитывает суррогатные пары, поэтому он выдает коды для 1-й части 𝒳:
 
 alert( '𝒳'.charCodeAt(0).toString(16) ); // d835
 
-// codePointAt is surrogate-pair aware
-alert( '𝒳'.codePointAt(0).toString(16) ); // 1d4b3, reads both parts of the surrogate pair
+// codePointAt учитывает суррогатные пары
+alert( '𝒳'.codePointAt(0).toString(16) ); // 1d4b3, считывает обе части суррогатной пары
 ```
 
-That said, if we take from position 1 (and that's rather incorrect here), then they both return only the 2nd part of the pair:
+При этом, если брать с позиции 1 (а это здесь скорее неверно), то они оба возвращают только 2-ю часть пары:
 
 ```js run
 alert( '𝒳'.charCodeAt(1).toString(16) ); // dcb3
 alert( '𝒳'.codePointAt(1).toString(16) ); // dcb3
-// meaningless 2nd half of the pair
+// бессмысленная 2-я половина пары
 ```
 
-You will find more ways to deal with surrogate pairs later in the chapter <info:iterable>. There are probably special libraries for that too, but nothing famous enough to suggest here.
+Другие способы работы с суррогатными парами вы найдете в главе <info:iterable>. Возможно, для этого тоже существуют специальные библиотеки, но они не настолько известные, чтобы предлагать их в учебнике.
 
-````warn header="Takeaway: splitting strings at an arbitrary point is dangerous"
-We can't just split a string at an arbitrary position, e.g. take `str.slice(0, 4)` and expect it to be a valid string, e.g.:
+````warn header="Разделение строки в случайном месте может быть опасным!"
+Разделив строку в случайном месте, например, с помощью `str.slice(0, 4)`, мы не можем гарантировать валидность полученного значения. Например: 
 
 ```js run
 alert( 'hi 😂'.slice(0, 4) ); //  hi [?]
 ```
 
-Here we can see a garbage character (first half of the smile surrogate pair) in the output.
+Здесь мы видим мусорный символ (первая половина суррогатной пары 😂) в выводе.
 
-Just be aware of it if you intend to reliably work with surrogate pairs. May not be a big problem, but at least you should understand what happens.
+Просто имейте это в виду, если вы намерены надежно работать с суррогатными парами. Может быть, это не очень большая проблема, но, по крайней мере, вы должны понимать, что происходит.
 ````
 
-## Diacritical marks and normalization
+## Диакритические знаки и нормализация
 
-In many languages, there are symbols that are composed of the base character with a mark above/under it.
+Во многих языках есть символы, состоящие из основного символа и знака над/под ним.
 
-For instance, the letter `a` can be the base character for these characters: `àáâäãåā`.
+Например, буква `a` может быть основой для этих символов: `àáâäãåā`.
 
-Most common "composite" characters have their own code in the Unicode table. But not all of them, because there are too many possible combinations.
+Большинство распространенных "составных" символов имеют свой собственный код в таблице Юникода. Но не все, потому что существует слишком большое количество возможных комбинаций.
 
-To support arbitrary compositions, the Unicode standard allows us to use several Unicode characters: the base character followed by one or many "mark" characters that "decorate" it.
+Для поддержки любых комбинаций стандарт Юникод позволяет нам использовать несколько Юникодных символов: основной символ, за которым следует один или много символов-"меток", которые "украшают" его.
 
-For instance, if we have `S` followed by the special "dot above" character (code `\u0307`), it is shown as Ṡ.
+Например, если за `S` следует специальный символ "точка сверху" (код `\u0307`), то он отобразится как Ṡ.
 
 ```js run
 alert( 'S\u0307' ); // Ṡ
 ```
 
-If we need an additional mark above the letter (or below it) -- no problem, just add the necessary mark character.
+Если нам нужен дополнительный знак над буквой (или под ней) -- нет проблем, просто добавляем соответствующий символ.
 
-For instance, if we append a character "dot below" (code `\u0323`), then we'll have "S with dots above and below": `Ṩ`.
+Например, если мы добавим символ "точка снизу" (код `\u0323`), то получим "S с точками сверху и снизу": `Ṩ`.
 
-For example:
+Вот, как это будет выглядеть:
 
 ```js run
 alert( 'S\u0307\u0323' ); // Ṩ
 ```
 
-This provides great flexibility, but also an interesting problem: two characters may visually look the same, but be represented with different Unicode compositions.
+Это обеспечивает большую гибкость, но при этом возникает определенная проблема: два символа могут визуально выглядеть одинаково, но при этом они будут представлены разными комбинациями Юникода.
 
-For instance:
+Например:
 
 ```js run
-let s1 = 'S\u0307\u0323'; // Ṩ, S + dot above + dot below
-let s2 = 'S\u0323\u0307'; // Ṩ, S + dot below + dot above
+let s1 = 'S\u0307\u0323'; // Ṩ, S + точка сверху + точка снизу
+let s2 = 'S\u0323\u0307'; // Ṩ, S + точка снизу + точка сверху
 
 alert( `s1: ${s1}, s2: ${s2}` );
 
-alert( s1 == s2 ); // false though the characters look identical (?!)
+alert( s1 == s2 ); // false, хотя символы выглядят одинаково (?!)
 ```
 
-To solve this, there exists a "Unicode normalization" algorithm that brings each string to the single "normal" form.
+Для решения этой проблемы предусмотрен алгоритм "Юникодной нормализации", приводящий каждую строку к единому "нормальному" виду.
 
-It is implemented by [str.normalize()](mdn:js/String/normalize).
+Его реализует метод [str.normalize()](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/String/normalize).
 
 ```js run
 alert( "S\u0307\u0323".normalize() == "S\u0323\u0307".normalize() ); // true
 ```
 
-It's funny that in our situation `normalize()` actually brings together a sequence of 3 characters to one: `\u1e68` (S with two dots).
+Забавно, но в нашем случае `normalize()` "схлопывает" последовательность из трёх символов в один: `\u1e68` — S с двумя точками.
 
 ```js run
 alert( "S\u0307\u0323".normalize().length ); // 1
@@ -167,6 +167,6 @@ alert( "S\u0307\u0323".normalize().length ); // 1
 alert( "S\u0307\u0323".normalize() == "\u1e68" ); // true
 ```
 
-In reality, this is not always the case. The reason is that the symbol `Ṩ` is "common enough", so Unicode creators included it in the main table and gave it the code.
+В действительности это не всегда так. Причина в том, что символ `Ṩ` является "достаточно распространенным", поэтому создатели стандарта Юникод включили его в основную таблицу и присвоили ему код.
 
-If you want to learn more about normalization rules and variants -- they are described in the appendix of the Unicode standard: [Unicode Normalization Forms](https://www.unicode.org/reports/tr15/), but for most practical purposes the information from this section is enough.
+Если вы хотите узнать больше о правилах и вариантах нормализации -- они описаны в дополнении к стандарту Юникод: [Unicode Normalization Forms](https://www.unicode.org/reports/tr15/), но для большинства практических целей достаточно информации из этого раздела.
