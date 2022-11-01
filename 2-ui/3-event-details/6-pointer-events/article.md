@@ -4,8 +4,6 @@
 
 ## Краткая история
 
-[iframe src="_slider" height=100 edit]
-
 Сделаем небольшой обзор, чтобы вы поняли общую картину и место событий указателя среди других типов событий.
 
 - Давным-давно, в прошлом, существовали только события мыши
@@ -236,7 +234,7 @@ thumb.onpointerdown = function(event) {
 ```online
 Полное демо:
 
-[iframe src="slider" height=100 edit]
+[iframe src="_slider" height=100 edit]
 
 <p></p>
 
