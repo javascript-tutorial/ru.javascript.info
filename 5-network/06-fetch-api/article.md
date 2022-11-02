@@ -23,7 +23,7 @@ let promise = fetch(url, {
   body: undefined, // string, FormData, Blob, BufferSource или URLSearchParams
   referrer: "about:client", // или "" для того, чтобы не послать заголовок Referer,
   // или URL с текущего источника
-  referrerPolicy: "no-referrer-when-downgrade", // no-referrer, origin, same-origin...
+  referrerPolicy: "strict-origin-when-cross-origin", // no-referrer-when-downgrade, no-referrer, origin, same-origin...
   mode: "cors", // same-origin, no-cors
   credentials: "same-origin", // omit, include
   cache: "default", // no-store, reload, no-cache, force-cache или only-if-cached
@@ -84,13 +84,13 @@ fetch('/page', {
 
 Возможные значения описаны в [спецификации Referrer Policy](https://w3c.github.io/webappsec-referrer-policy/):
 
-- **`"no-referrer-when-downgrade"`** -- это значение по умолчанию: `Referer` отправляется всегда, если только мы не отправим запрос из HTTPS в HTTP (из более безопасного протокола в менее безопасный).
+- **`"strict-origin-when-cross-origin"`** -- значение по умолчанию: для `"same-origin"` отправлять полный `Referer`, для `"cross-origin"` отправлять только `"origin"`, если только это не HTTPS→HTTP запрос, тогда не отправлять ничего.
+- **`"no-referrer-when-downgrade"`** -- всегда отправлять полный `Referer`, за исключением случаев, когда мы отправляем запрос с HTTPS на HTTP (на менее безопасный протокол).
 - **`"no-referrer"`** -- никогда не отправлять `Referer`.
 - **`"origin"`** -- отправлять в `Referer` только текущий источник, а не полный URL-адрес страницы, например, посылать только `http://site.com` вместо `http://site.com/path`.
-- **`"origin-when-cross-origin"`** -- отправлять полный Referer для запросов в пределах текущего источника, но для запросов на другой источник отправлять только сам источник (как выше).
-- **`"same-origin"`** -- отправлять полный Referer для запросов в пределах текущего источника, а для запросов на другой источник не отправлять его вообще.
-- **`"strict-origin"`** -- отправлять только значение источника, не отправлять Referer для HTTPS→HTTP запросов.
-- **`"strict-origin-when-cross-origin"`** -- для запросов в пределах текущего источника отправлять полный Referer, для запросов на другой источник отправлять только значение источника, в случае HTTPS→HTTP запросов не отправлять ничего.
+- **`"origin-when-cross-origin"`** -- отправлять полный `Referer` для запросов в пределах текущего источника, но для запросов на другой источник отправлять только сам источник (как выше).
+- **`"same-origin"`** -- отправлять полный `Referer` для запросов в пределах текущего источника, а для запросов на другой источник не отправлять его вообще.
+- **`"strict-origin"`** -- отправлять только значение источника, не отправлять `Referer` для HTTPS→HTTP запросов.
 - **`"unsafe-url"`** -- всегда отправлять полный URL-адрес в `Referer`, даже при запросах `HTTPS→HTTP`.
 
 Вот таблица со всеми комбинациями:
@@ -98,12 +98,12 @@ fetch('/page', {
 | Значение | На тот же источник | На другой источник | HTTPS→HTTP |
 |----------|--------------------|--------------------|------------|
 | `"no-referrer"` | - | - | - |
-| `"no-referrer-when-downgrade"` или `""` (по умолчанию) | full | full | - |
+| `"no-referrer-when-downgrade"` | full | full | - |
 | `"origin"` | origin | origin | origin |
 | `"origin-when-cross-origin"` | full | origin | origin |
 | `"same-origin"` | full | - | - |
 | `"strict-origin"` | origin | origin | - |
-| `"strict-origin-when-cross-origin"` | full | origin | - |
+| `"strict-origin-when-cross-origin"` или `""` (по умолчанию) | full | origin | - |
 | `"unsafe-url"` | full | full | full |
 
 Допустим, у нас есть админка со структурой URL, которая не должна стать известной снаружи сайта.
