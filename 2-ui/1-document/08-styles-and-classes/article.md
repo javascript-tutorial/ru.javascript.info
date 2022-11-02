@@ -261,20 +261,6 @@ pseudo
 Для правильного получения значения нужно указать точное свойство. Например: `paddingLeft`, `marginTop`, `borderTopWidth`. При обращении к сокращённому: `padding`, `margin`, `border` – правильный результат не гарантируется.
 
 Например, если есть свойства `paddingLeft/paddingTop`, то что мы получим вызывая `getComputedStyle(elem).padding`? Ничего, или, может быть, "сгенерированное" значение из известных внутренних отступов? Стандарта для этого нет.
-
-Есть и другие несоответствия. Например, некоторые браузеры (Chrome) отображают `10px` в документе ниже, а некоторые (Firefox) -- нет:
-
-```html run
-<style>
-  body {
-    margin: 10px;
-  }
-</style>
-<script>
-  let style = getComputedStyle(document.body);
-  alert(style.margin); // пустая строка в Firefox
-</script>
-```
 ````
 
 ```smart header="Стили, применяемые к посещённым `:visited` ссылкам, скрываются!"
