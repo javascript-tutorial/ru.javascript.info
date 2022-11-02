@@ -169,18 +169,13 @@ Access-Control-Allow-Origin: https://javascript.info
 
 - `Cache-Control`
 - `Content-Language`
+- `Content-Length`
 - `Content-Type`
 - `Expires`
 - `Last-Modified`
 - `Pragma`
 
 При доступе к любому другому заголовку ответа будет ошибка.
-
-```smart header="Обратите внимание: нет `Content-Length`"
-Пожалуйста, обратите внимание: в списке нет заголовка `Content-Length`!
-
-Этот заголовок содержит полную длину ответа. Поэтому если мы загружаем что-то и хотели бы отслеживать прогресс в процентах, то требуется дополнительное разрешение для доступа к этому заголовку (читайте ниже).
-```
 
 Чтобы разрешить JavaScript доступ к любому другому заголовку ответа, сервер должен указать заголовок `Access-Control-Expose-Headers`. Он содержит список, через запятую, заголовков, которые не являются простыми, но доступ к которым разрешён.
 
@@ -190,14 +185,15 @@ Access-Control-Allow-Origin: https://javascript.info
 200 OK
 Content-Type:text/html; charset=UTF-8
 Content-Length: 12345
+Content-Encoding: gzip
 API-Key: 2c9de507f2c54aa1
 Access-Control-Allow-Origin: https://javascript.info
 *!*
-Access-Control-Expose-Headers: Content-Length,API-Key
+Access-Control-Expose-Headers: Content-Encoding,API-Key
 */!*
 ```
 
-При таком заголовке `Access-Control-Expose-Headers`, скрипту разрешено получить заголовки `Content-Length` и `API-Key` ответа.
+При таком заголовке `Access-Control-Expose-Headers`, скрипту разрешено получить заголовки `Content-Encoding` и `API-Key` ответа.
 
 ## "Непростые" запросы
 
