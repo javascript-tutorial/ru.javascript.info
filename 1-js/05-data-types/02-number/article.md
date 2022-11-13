@@ -44,7 +44,7 @@ let ms = 0.000001;
 let ms = 1e-6; // шесть нулей, слева от 1
 ```
 
-Если мы подсчитаем количество нулей `0.000001`, их будет 6. Естественно, верная запись `1e-6`.  
+Если мы подсчитаем количество нулей `0.000001`, их будет 6. Естественно, верная запись `1e-6`.
 
 Другими словами, отрицательное число после `"e"` подразумевает деление на 1 с указанным количеством нулей:
 
@@ -295,7 +295,7 @@ alert( 9999999999999999 ); // покажет 10000000000000000
     alert( isNaN("str") ); // true
     ```
 
-    Нужна ли нам эта функция? Разве не можем ли мы просто сравнить `=== NaN`? К сожалению, нет. Значение `NaN` уникально тем, что оно не является равным ни чему другому, даже самому себе:
+    Нужна ли нам эта функция? Разве не можем ли мы просто сравнить `=== NaN`? К сожалению, нет. Значение `NaN` уникально тем, что оно не является равным ничему другому, даже самому себе:
 
     ```js run
     alert( NaN === NaN ); // false
@@ -319,17 +319,17 @@ let num = +prompt("Enter a number", '');
 alert( isFinite(num) );
 ```
 
-Помните, что пустая строка интерпретируется как `0` во всех числовых функциях, включая`isFinite`.  
+Помните, что пустая строка интерпретируется как `0` во всех числовых функциях, включая`isFinite`.
 
 ````smart header="`Number.isNaN` и `]`"
-Методы [Number.isNaN](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Number/isNaN) и [Number.isFinite](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Number/isNaN) - это более "строгие" версии функций `isNaN` и `isFinite`. Они не преобразуют аргумент в число, а наоборот - первым делом проверяют, является ли аргумент числом (принадлежит ли он к типу `number`). 
+Методы [Number.isNaN](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Number/isNaN) и [Number.isFinite](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Number/isNaN) - это более "строгие" версии функций `isNaN` и `isFinite`. Они не преобразуют аргумент в число, а наоборот - первым делом проверяют, является ли аргумент числом (принадлежит ли он к типу `number`).
 
 - `Number.isNaN(value)` возвращает `true` только в том случае, если аргумент принадлежит к типу `number` и является `NaN`. Во всех остальных случаях возвращает `false`.
 
     ```js run
     alert( Number.isNaN(NaN) ); // true
     alert( Number.isNaN("str" / 2) ); // true
-    
+
     // Обратите внимание на разный результат:
     alert( Number.isNaN("str") ); // false, так как "str" является строкой, а не числом
     alert( isNaN("str") ); // true, так как isNaN сначала преобразует строку "str" в число и в результате преобразования получает NaN
@@ -341,12 +341,12 @@ alert( isFinite(num) );
     alert( Number.isFinite(123) ); // true
     alert( Number.isFinite(Infinity) ); // false
     alert( Number.isFinite(2 / 0) ); // false
-    
+
     // Обратите внимание на разный результат:
     alert( Number.isFinite("123") ); // false, так как "123" является строкой, а не числом
     alert( isFinite("123") ); // true, так как isFinite сначала преобразует строку "123" в число 123
     ```
-    
+
 Не стоит считать `Number.isNaN` и `Number.isFinite` более "корректными" версиями функций `isNaN` и `isFinite`. Это дополняющие друг-друга инструменты для разных задач.
 ````
 
