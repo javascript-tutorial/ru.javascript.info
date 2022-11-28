@@ -109,7 +109,7 @@ alert(typeof User); // function
 alert(User === User.prototype.constructor); // true
 
 // Методы находятся в User.prototype, например:
-alert(User.prototype.sayHi); // alert(this.name);
+alert(User.prototype.sayHi); // sayHi() { alert(this.name); }
 
 // в прототипе ровно 2 метода
 alert(Object.getOwnPropertyNames(User.prototype)); // constructor, sayHi
