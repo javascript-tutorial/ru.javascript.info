@@ -244,7 +244,7 @@ Object.defineProperty(user, "name", {
 user.name = "Pete"; // работает
 delete user.name; // Ошибка
 ```
-А здесь мы делаем `user.name` "навечно запечатанной" константой, как встроенный `Math.PI`
+А здесь мы делаем `user.name` "навечно запечатанной" константой, как и встроенный `Math.PI`:
 ```js run
 let user = {
   name: "John"
