@@ -221,7 +221,7 @@ Math.PI = 3; // Ошибка, потому что writable: false
 Мы также не можем изменить `writable`:
 
 ```js run
-// Оишбка, из-за configurable: false
+// Ошибка, из-за configurable: false
 Object.defineProperty(Math, "PI", { writable: true });
 ```
 Мы абсолютно ничего не можем сделать с `Math.PI`
