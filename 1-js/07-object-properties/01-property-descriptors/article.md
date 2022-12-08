@@ -218,7 +218,7 @@ Math.PI = 3; // Ошибка, потому что writable: false
 
 // delete Math.PI тоже не сработает
 ```
-Мы также не можем изменить `writable`
+Мы также не можем изменить `writable`:
 
 ```js run
 // Оишбка, из-за configurable: false
