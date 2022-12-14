@@ -321,7 +321,7 @@ alert( isFinite(num) );
 
 Помните, что пустая строка интерпретируется как `0` во всех числовых функциях, включая`isFinite`.
 
-````smart header="`Number.isNaN` и `]`"
+````smart header="`Number.isNaN` и `Number.isFinite`"
 Методы [Number.isNaN](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Number/isNaN) и [Number.isFinite](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Number/isNaN) - это более "строгие" версии функций `isNaN` и `isFinite`. Они не преобразуют аргумент в число, а наоборот - первым делом проверяют, является ли аргумент числом (принадлежит ли он к типу `number`).
 
 - `Number.isNaN(value)` возвращает `true` только в том случае, если аргумент принадлежит к типу `number` и является `NaN`. Во всех остальных случаях возвращает `false`.
