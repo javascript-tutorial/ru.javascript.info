@@ -299,7 +299,7 @@ fetch(url, options)
 
 Методы для получения тела ответа:
 - **`response.text()`** -- возвращает ответ как обычный текст,
-- **`response.json()`** -- преобразовывает ответ в JSON-объект,
+- **`response.json()`** -- декодирует ответ в формате JSON,
 - **`response.formData()`** -- возвращает ответ как объект FormData (кодировка form/multipart, см. следующую главу),
 - **`response.blob()`** -- возвращает объект как [Blob](info:blob) (бинарные данные с типом),
 - **`response.arrayBuffer()`** -- возвращает ответ как [ArrayBuffer](info:arraybuffer-binary-arrays) (низкоуровневые бинарные данные),
