@@ -211,7 +211,7 @@ element.style.height = `${element.scrollHeight}px`;
 <div onclick="this.scrollTop+=10" style="cursor:pointer;border:1px solid black;width:100px;height:80px;overflow:auto">Кликни<br>Меня<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9</div>
 ```
 
-Установка значения `scrollTop` на `0` или `Infinity` прокрутит элемент в самый верх/низ соответственно.
+Установка значения `scrollTop` на `0` или на большое значение, такое как `1e9`, прокрутит элемент в самый верх/низ соответственно.
 ````
 
 ## Не стоит брать width/height из CSS
