@@ -36,7 +36,7 @@
 ```online
 Кликните на кнопку, чтобы увидеть её координаты относительно окна:
 
-<p><input id="brTest" type="button" value="Показать результат вызова button.getBoundingClientRect() для этой кнопки" onclick='showRect(this)'/></p>
+<p><input id="brTest" type="button" style="max-width: 90vw;" value="Показать результат вызова button.getBoundingClientRect() для этой кнопки" onclick='showRect(this)'/></p>
 
 <script>
 function showRect(elem) {
