@@ -385,7 +385,7 @@ alert( "test" in obj ); // true, свойство существует!
 Синтаксис:
 
 ```js
-for (key in object) {
+for (let key in object) {
   // тело цикла выполняется для каждого свойства объекта
 }
 ```
