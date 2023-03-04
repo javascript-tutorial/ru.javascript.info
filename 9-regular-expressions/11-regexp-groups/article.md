@@ -18,7 +18,7 @@
 Скобки группируют символы вместе. Так что `pattern:(go)+` означает `match:go`, `match:gogo`, `match:gogogo` и т.п.
 
 ```js run
-alert( 'Gogogo now!'.match(/(go)+/i) ); // "Gogogo"
+alert( 'Gogogo now!'.match(/(go)+/ig) ); // "Gogogo"
 ```
 
 ### Пример: домен
