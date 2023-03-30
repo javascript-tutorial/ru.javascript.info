@@ -28,4 +28,3 @@ alert( counter2() ); // ?
 alert( counter2() ); // ?
 */!*
 ```
-
