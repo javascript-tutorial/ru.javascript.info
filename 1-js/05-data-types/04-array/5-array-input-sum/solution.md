@@ -4,7 +4,7 @@
 ```js run demo
 function sumInput() {
  
-  let numbers = [];
+  let sum = 0;
 
   while (true) {
 
@@ -13,13 +13,9 @@ function sumInput() {
     // Прекращаем ввод?
     if (value === "" || value === null || !isFinite(value)) break;
 
-    numbers.push(+value);
+    sum += +value;
   }
-
-  let sum = 0;
-  for (let number of numbers) {
-    sum += number;
-  }
+  
   return sum;
 }
 
