@@ -239,7 +239,6 @@ function User(name) {
 }
 
 let user = new User("John");
-// у кода метода "sayHi" есть доступ к внешней переменной "name"
 user.sayHi(); // "John" (у кода метода "sayHi" есть доступ к внешней переменной "name")
 ```
 
