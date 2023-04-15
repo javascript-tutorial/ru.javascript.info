@@ -19,7 +19,7 @@ describe("pow", function() {
     assert.isNaN(pow(2, -1));
   });
 
-  it("если n не число, результат будет NaN", function() {
+  it("если n - дробное число, результат будет NaN", function() {
     assert.isNaN(pow(2, 1.5));
   });
 
