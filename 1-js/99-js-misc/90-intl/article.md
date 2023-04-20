@@ -399,7 +399,7 @@ alert( formatter.format(1234567890.123) ); // 1 230 000 000
 
 С опциями для валюты:
 
-```js
+```js run
 let formatter = new Intl.NumberFormat("ru", {
   style: "currency",
   currency: "GBP"
@@ -410,7 +410,7 @@ alert( formatter.format(1234.5) ); // 1 234,5 £
 
 С двумя цифрами после запятой:
 
-```js
+```js run
 let formatter = new Intl.NumberFormat("ru", {
   style: "currency",
   currency: "GBP",
