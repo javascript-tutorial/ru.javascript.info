@@ -27,13 +27,17 @@ let rabbit = Object.create(animal);
 
 alert(rabbit.eats); // true
 
+// получаем прототип объекта rabbit
 *!*
-alert(Object.getPrototypeOf(rabbit) === animal); // получаем прототип объекта rabbit
+alert(Object.getPrototypeOf(rabbit) === animal); // true
 */!*
 
 *!*
 Object.setPrototypeOf(rabbit, {}); // заменяем прототип объекта rabbit на {}
 */!*
+
+//теперь rabbit не наследует от animal
+alert(rabbit.eats); // false
 ```
 
 У `Object.create` есть необязательный второй аргумент: дескрипторы свойств. Мы можем добавить дополнительное свойство новому объекту таким образом:
