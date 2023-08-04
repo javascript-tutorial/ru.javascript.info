@@ -1,15 +1,13 @@
 
 ```js run demo
 function readNumber() {
-  let num;
+	let num;
 
-  do {
-    num = prompt("Введите число", 0);
-  } while ( !isFinite(num) );
+	do {
+		num = prompt('Введите числовое значение', '');
+	} while (!isFinite(num) && num)
 
-  if (num === null || num === '') return null;
-  
-  return +num;
+	return num || null;
 }
 
 alert(`Число: ${readNumber()}`);
