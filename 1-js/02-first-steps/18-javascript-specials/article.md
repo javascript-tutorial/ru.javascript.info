@@ -174,7 +174,7 @@ JavaScript поддерживает следующие операторы:
 Другие операторы
 : Существуют и другие операторы, такие как запятая.
 
-Подробности: <info:operators>, <info:comparison>, <info:logical-operators>, <info:nullish-coalescing-operator>.
+Подробности: <info:operators>, <info:comparison>, <info:logical-operators>, <info:nullish-operators>.
 
 ## Циклы
 
