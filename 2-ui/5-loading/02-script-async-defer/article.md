@@ -127,6 +127,9 @@
 <script async src="https://google-analytics.com/analytics.js"></script>
 ```
 
+```smart header="Атрибут `async` предназначен только для внешних скриптов"
+Как и в случае с `defer`, атрибут `async` будет проигнорирован, если в теге `<script>` нет `src`.
+```
 
 ## Динамически загружаемые скрипты
 
