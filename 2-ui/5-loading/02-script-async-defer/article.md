@@ -72,7 +72,7 @@
 
 **Отложенные с помощью `defer` скрипты сохраняют порядок относительно друг друга, как и обычные скрипты.**
 
-Допустим, у нас есть два `defer` скрипта: `small.js` и `long.js`:
+Допустим, у нас есть два скрипта c `defer`: `small.js` и `long.js`:
 
 ```html
 <script defer src="https://javascript.info/article/script-async-defer/long.js"></script>
