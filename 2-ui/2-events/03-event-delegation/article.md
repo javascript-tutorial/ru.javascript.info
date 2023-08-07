@@ -131,7 +131,6 @@ table.onclick = function(event) {
 <script>
   class Menu {
     constructor(elem) {
-      this._elem = elem;
       elem.onclick = this.onClick.bind(this); // (*)
     }
 
