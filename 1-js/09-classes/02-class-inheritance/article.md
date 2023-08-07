@@ -542,7 +542,7 @@ longEar.eat();  // Длинноух ест.
 ```js run
 let animal = {
   sayHi() {
-    console.log("Я животное");
+    alert("Я животное");
   }
 };
 
@@ -556,7 +556,7 @@ let rabbit = {
 
 let plant = {
   sayHi() {
-    console.log("Я растение");
+    alert("Я растение");
   }
 };
 
