@@ -40,7 +40,7 @@ class Error {
 
 Теперь давайте унаследуем от него `ValidationError` и попробуем новый класс в действии:
 
-```js run untrusted
+```js run
 *!*
 class ValidationError extends Error {
 */!*
@@ -119,7 +119,7 @@ try {
 // вместо (err instanceof SyntaxError)
 } else if (err.name == "SyntaxError") { // (*)
 // ...
-```  
+```
 
 Версия с `instanceof` гораздо лучше, потому что в будущем мы собираемся расширить `ValidationError`, сделав его подтипы, такие как `PropertyRequiredError`. И проверка `instanceof` продолжит работать для новых наследованных классов. Так что это на будущее.
 
