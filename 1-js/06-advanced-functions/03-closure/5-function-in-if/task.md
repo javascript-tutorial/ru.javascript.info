@@ -1,8 +1,11 @@
-# Функция в if
+importance: 5
 
-Посмотрите на код. Какой будет результат у вызова на последней строке?
+---
+# Function in if
 
-```js
+Look at the code. What will be the result of the call at the last line?
+
+```js run
 let phrase = "Hello";
 
 if (true) {
