@@ -100,7 +100,7 @@ alert( document.body instanceof EventTarget ); // true
 - `console.log(elem)` выводит элемент в виде DOM-дерева.
 - `console.dir(elem)` выводит элемент в виде DOM-объекта, что удобно для анализа его свойств.
 
-Попробуйте сами на `document.body`.
+Попробуйте сами на `document.body`. Вы увидите разницу во всех современных браузерах (кроме Firefox, где `console.log(elem)` и `console.dir(elem)` выводят одно и то же -- элемент в виде DOM-объекта).
 ```
 
 ````smart header="Спецификация IDL"
