@@ -414,7 +414,7 @@ document.addEventListener("DOMContentLoaded", function() {
     handleEvent(event) {
       // mousedown -> onMousedown
       let method = 'on' + event.type[0].toUpperCase() + event.type.slice(1);
-      this[method](event);
+      this[method]();
     }
 
     onMousedown() {
