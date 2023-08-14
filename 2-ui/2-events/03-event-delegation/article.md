@@ -121,7 +121,7 @@ table.onclick = function(event) {
 
 Обработчик считывает содержимое атрибута и выполняет метод. Взгляните на рабочий пример:
 
-```html autorun height=60 run
+```html autorun height=60 run untrusted
 <div id="menu">
   <button data-action="save">Сохранить</button>
   <button data-action="load">Загрузить</button>
