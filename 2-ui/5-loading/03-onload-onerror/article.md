@@ -32,7 +32,7 @@ document.head.append(script);
 
 Например:
 
-```js run untrusted
+```js run
 let script = document.createElement('script');
 
 // мы можем загрузить любой скрипт с любого домена
