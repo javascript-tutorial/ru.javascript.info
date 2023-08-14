@@ -48,7 +48,7 @@ observer.observe(node, config);
 
 Для примера возьмём `<div>` с атрибутом `contentEditable`. Этот атрибут позволяет нам сфокусироваться на элементе, например, кликнув, и отредактировать содержимое.
 
-```html run
+```html run untrusted
 <div contentEditable id="elem">Отредактируй <b>меня</b>, пожалуйста</div>
 
 <script>
