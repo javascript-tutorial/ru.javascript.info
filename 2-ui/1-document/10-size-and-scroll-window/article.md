@@ -75,6 +75,12 @@ alert('Текущая прокрутка слева: ' + window.pageXOffset);
 
 Эти свойства доступны только для чтения.
 
+```smart header="В качестве свойств объекта `window` также доступны `scrollX` и `scrollY`"
+По историческим причинам существует два аналога `window.pageXOffset` и `window.pageYOffset`:
+- `window.pageXOffset` -- то же самое, что и `window.scrollX`.
+- `window.pageYOffset` -- то же самое, что и `window.scrollY`.
+```
+
 ## Прокрутка: scrollTo, scrollBy, scrollIntoView [#window-scroll]
 
 ```warn
