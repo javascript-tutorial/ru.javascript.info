@@ -111,6 +111,23 @@ alert('Текущая прокрутка слева: ' + window.pageXOffset);
 
 Эти методы одинаково работают для всех браузеров.
 
+scrollTo/scrollBy могут иметь options, как аргумент:
+element.scrollTo(options).
+
+options - объект с тремя свойствами:
+
+```js
+element.scrollTo({`
+  top: 100,
+  left: 100,
+  behavior: "smooth"
+});
+```
+
+где behavior: "smooth" означает плавную прокрутку. Принимает значения "auto" или "smooth". По умолчанию "auto" - то есть, без плавной прокрутки.
+
+Не поддерживается только в IE.
+
 ## scrollIntoView
 
 Для полноты картины давайте рассмотрим ещё один метод: [elem.scrollIntoView(top)](mdn:api/Element/scrollIntoView).
@@ -130,6 +147,22 @@ alert('Текущая прокрутка слева: ' + window.pageXOffset);
 
 <button onclick="this.scrollIntoView(false)">this.scrollIntoView(false)</button>
 ```
+
+scrollIntoView также может иметь options, как аргумент:
+element.scrollIntoView(options).
+
+options - объект с тремя свойствами:
+
+- behavior - Анимация прокрутки. Принимает значения "auto" или "smooth". По умолчанию "auto".
+- block - Вертикальное выравнивание. Одно из значений: "start", "center", "end" или "nearest". По умолчанию "start".
+- inline - Горизонтальное выравнивание. Одно из значений: "start", "center", "end" или "nearest". По умолчанию "nearest".
+
+```js
+elem.scrollIntoView({block: "center", behavior: "smooth"});
+```
+
+behavior: "smooth" не поддерживается в IE и Safari, но начиная с версии 16.0 в Safari появилась поддержка behavior:
+"smooth".
 
 ## Запретить прокрутку
 
