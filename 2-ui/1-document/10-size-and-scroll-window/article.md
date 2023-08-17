@@ -109,24 +109,36 @@ alert('Текущая прокрутка слева: ' + window.pageXOffset);
     <button onclick="window.scrollTo(0,0)">window.scrollTo(0,0)</button>
     ```
 
-Эти методы одинаково работают для всех браузеров.
-
-scrollTo/scrollBy могут иметь options, как аргумент:
-element.scrollTo(options).
-
-options - объект с тремя свойствами:
+В обоих методах вместо координат также может использоваться объект `options`, как аргумент:
 
 ```js
-element.scrollTo({`
+window.scrollTo(options);
+window.scrollBy(options);
+```
+
+`options` поддерживает три свойства:
+
+```js
+window.scrollTo({
   top: 100,
-  left: 100,
+  left: 0,
   behavior: "smooth"
 });
 ```
 
-где behavior: "smooth" означает плавную прокрутку. Принимает значения "auto" или "smooth". По умолчанию "auto" - то есть, без плавной прокрутки.
+- `top` -- то же самое, что `y`/`pageY`
+- `left` -- то же самое, что `x`/`pageX`
+- `behavior` -- определяет, каким образом будет прокручиваться страница:
 
-Не поддерживается только в IE.
+  - `"smooth"` -- плавно (не поддерживается в Safari)
+  - `"instant"` -- мгновенно
+  - `"auto"` -- определяется браузером (зависит от CSS-свойства [scroll-behavior](https://developer.mozilla.org/ru/docs/Web/CSS/scroll-behavior))
+
+```online
+Демонстрация плавной прокрутки страницы (в Safari прокрутка будет мгновенной):
+
+<button onclick="window.scrollTo({ top: 500, left: 0, behavior: "smooth" })">window.scrollTo({ top: 500, left: 0, behavior: "smooth" })</button>
+```
 
 ## scrollIntoView
 
@@ -148,21 +160,21 @@ element.scrollTo({`
 <button onclick="this.scrollIntoView(false)">this.scrollIntoView(false)</button>
 ```
 
-scrollIntoView также может иметь options, как аргумент:
-element.scrollIntoView(options).
-
-options - объект с тремя свойствами:
-
-- behavior - Анимация прокрутки. Принимает значения "auto" или "smooth". По умолчанию "auto".
-- block - Вертикальное выравнивание. Одно из значений: "start", "center", "end" или "nearest". По умолчанию "start".
-- inline - Горизонтальное выравнивание. Одно из значений: "start", "center", "end" или "nearest". По умолчанию "nearest".
+Как и `scrollTo`/`scrollBy`, `scrollIntoView` также принимает объект `options` как аргумент (он немного отличается):
 
 ```js
-elem.scrollIntoView({block: "center", behavior: "smooth"});
+this.scrollIntoView(options).
 ```
 
-behavior: "smooth" не поддерживается в IE и Safari, но начиная с версии 16.0 в Safari появилась поддержка behavior:
-"smooth".
+`options` поддерживает три свойства:
+
+```js
+this.scrollIntoView({
+  behavior: "smooth",
+  block: "end",
+  inline: "nearest" 
+});
+```
 
 ## Запретить прокрутку
 
