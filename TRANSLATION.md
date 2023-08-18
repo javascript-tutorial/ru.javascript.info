@@ -88,6 +88,7 @@ document.querySelector('.hello').innerHTML = text;
 | More in / Details in   | Подробнее в                                                      |
 | Nullish coalescing operator |  Оператор нулевого слияния  |
 | Script                 | Скрипт                                                        |
+| “Short-circuit” evaluation | Сокращённое вычисление
 | Statement              | Инструкция                                                       |
 | Summary                | Итого                                                                          |
 
