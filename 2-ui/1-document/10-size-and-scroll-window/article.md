@@ -137,7 +137,7 @@ window.scrollTo({
 ```online
 Демонстрация плавной прокрутки страницы:
 
-<button onclick="window.scrollBy({ top: 500, left: 0, behavior: 'smooth' })">window.scrollBy({ top: 500, left: 0, behavior: "smooth" })</button>
+<button onclick="window.scrollBy({ top: 500, left: 0, behavior: 'smooth' })">window.scrollBy({ top: 500, left: 0, behavior: 'smooth' })</button>
 ```
 
 ## scrollIntoView
