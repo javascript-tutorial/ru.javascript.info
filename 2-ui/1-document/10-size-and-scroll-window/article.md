@@ -93,7 +93,7 @@ alert('Текущая прокрутка слева: ' + window.pageXOffset);
 
 Мы можем сделать то же самое для страницы в целом, используя  `document.documentElement.scrollTop/Left` (кроме основанных на старом WebKit (Safari), где, как сказано выше, `document.body.scrollTop/Left`).
 
-Есть и другие способы, в которых подобных несовместимостей нет: специальные методы `window.scrollBy(x,y)` и `window.scrollTo(pageX,pageY)`.
+Есть и другие способы, в которых подобных несовместимостей нет: специальные методы [window.scrollBy(x,y)](https://developer.mozilla.org/ru/docs/Web/API/Window/scrollBy) и [window.scrollTo(pageX,pageY)](https://developer.mozilla.org/ru/docs/Web/API/Window/scrollTo).
 
 - Метод `scrollBy(x,y)` прокручивает страницу *относительно её текущего положения*. Например, `scrollBy(0,10)` прокручивает страницу на `10px` вниз.
 
