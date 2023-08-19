@@ -130,7 +130,7 @@ window.scrollTo({
 - `left` -- то же самое, что `x`/`pageX`
 - `behavior` -- определяет, каким образом будет прокручиваться страница:
 
-  - `"smooth"` -- плавно (не поддерживается в Safari)
+  - `"smooth"` -- плавно (не поддерживается в IE и в старых версиях Safari)
   - `"instant"` -- мгновенно
   - `"auto"` -- определяется браузером (зависит от CSS-свойства [scroll-behavior](https://developer.mozilla.org/ru/docs/Web/CSS/scroll-behavior))
 
