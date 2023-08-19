@@ -137,7 +137,7 @@ window.scrollTo({
 ```online
 Демонстрация плавной прокрутки страницы (в Safari прокрутка будет мгновенной):
 
-<button onclick="window.scrollTo({ top: 500, left: 0, behavior: "smooth" })">window.scrollTo({ top: 500, left: 0, behavior: "smooth" })</button>
+<button onclick="window.scrollBy({ top: 500, left: 0, behavior: "smooth" })">window.scrollBy({ top: 500, left: 0, behavior: "smooth" })</button>
 ```
 
 ## scrollIntoView
