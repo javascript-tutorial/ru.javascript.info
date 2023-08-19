@@ -135,7 +135,7 @@ window.scrollTo({
   - `"auto"` -- определяется браузером (зависит от CSS-свойства [scroll-behavior](https://developer.mozilla.org/ru/docs/Web/CSS/scroll-behavior))
 
 ```online
-Демонстрация плавной прокрутки страницы (в Safari прокрутка будет мгновенной):
+Демонстрация плавной прокрутки страницы:
 
 <button onclick="window.scrollBy({ top: 500, left: 0, behavior: "smooth" })">window.scrollBy({ top: 500, left: 0, behavior: "smooth" })</button>
 ```
