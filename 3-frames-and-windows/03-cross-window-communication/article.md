@@ -58,7 +58,7 @@
 
     // также мы не можем прочитать URL страницы в ифрейме
     try {
-      // Нельзя читать из объекта Location 
+      // нельзя читать из объекта Location 
 *!*
       let href = iframe.contentWindow.location.href; // ОШИБКА
 */!*
