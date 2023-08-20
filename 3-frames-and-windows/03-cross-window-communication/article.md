@@ -49,14 +49,12 @@
 *!*
     let iframeWindow = iframe.contentWindow; // OK
 */!*
-    try {
-      // ...но не на document внутри него
+
+    // ...но при попытке получить доступ к document страницы
+
 *!*
-      let doc = iframe.contentDocument; // ОШИБКА
+    let doc = iframe.contentDocument; // ...получим null
 */!*
-    } catch(e) {
-      alert(e); // Security Error
-    }
 
     // также мы не можем прочитать URL страницы в ифрейме
     try {
@@ -78,7 +76,7 @@
 </script>
 ```
 
-Код выше выведет ошибку для любых операций, кроме:
+Код выше выведет ошибку или `null` для любых операций, кроме:
 
 - Получения ссылки на внутренний объект `window` из `iframe.contentWindow`
 - Изменения `location`.
