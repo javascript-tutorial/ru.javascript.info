@@ -54,8 +54,10 @@ alert(Number(bigint) + number); // 3
 ```js run
 let bigint = 1n;
 
-alert( +bigint ); // SyntaxError: Unexpected identifier
+alert( +bigint ); // Ошибка!
 ```
+
+Мы должны использовать `Number()` для преобразования `bigint` к `number`.
 ````
 
 ## Операции сравнения
