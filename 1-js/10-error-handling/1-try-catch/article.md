@@ -283,17 +283,17 @@ let error = new ReferenceError(message);
 Например:
 
 ```js run
-let error = new Error(" Ого, ошибка! o_O");
+let error = new Error("Ого, ошибка! o_O");
 
 alert(error.name); // Error
-alert(error.message); //  Ого, ошибка! o_O
+alert(error.message); // Ого, ошибка! o_O
 ```
 
 Давайте посмотрим, какую ошибку генерирует `JSON.parse`:
 
 ```js run
 try {
-  JSON.parse("{ bad json o_O }");
+  JSON.parse("{ некорректный json o_O }");
 } catch(e) {
 *!*
   alert(e.name); // SyntaxError
