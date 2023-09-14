@@ -217,7 +217,7 @@ alert(arr.pop()); // World (метод работает)
 То же самое происходит с итерируемым объектом:
 
 ```js run
-// range взят из примера выше
+// range взят из примера выше => ReferenceError: range is not defined
 let arr = Array.from(range);
 alert(arr); // 1,2,3,4,5 (преобразование массива через toString работает)
 ```
