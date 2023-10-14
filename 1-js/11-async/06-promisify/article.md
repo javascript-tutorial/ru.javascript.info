@@ -6,7 +6,7 @@
 
 Например, у нас есть `loadScript(src, callback)` из главы <info:callbacks>.
 
-```js run
+```js
 function loadScript(src, callback) {
   let script = document.createElement('script');
   script.src = src;
