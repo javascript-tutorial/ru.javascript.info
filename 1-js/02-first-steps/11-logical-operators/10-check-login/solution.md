@@ -9,7 +9,7 @@ if (userName === 'Админ') {
 
   if (pass === 'Я главный') {
     alert( 'Здравствуйте!' );
-  } else if (pass === '' || pass === null) {
+  } else if (pass === null) {
     alert( 'Отменено' );
   } else {
     alert( 'Неверный пароль' );
