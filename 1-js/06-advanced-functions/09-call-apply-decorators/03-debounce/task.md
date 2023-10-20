@@ -16,7 +16,7 @@ importance: 5
 
 ...И она получит аргументы самого последнего вызова, остальные вызовы игнорируются.
 
-Ниже код этого примера (используется декоратор debounce из библиотеки [Lodash library](https://lodash.com/docs/4.17.15#debounce)):
+Ниже код этого примера (используется декоратор debounce из библиотеки [Lodash](https://lodash.com/docs/4.17.15#debounce)):
 
 ```js no-beautify
 let f = _.debounce(alert, 1000);
