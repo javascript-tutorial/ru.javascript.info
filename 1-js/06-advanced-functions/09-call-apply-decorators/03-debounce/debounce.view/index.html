@@ -1,0 +1,24 @@
+<!doctype html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.js"></script>
+
+Функция <code>handler</code> вызывается на этом поле для ввода:
+<br>
+<input id="input1" placeholder="введите текст">
+
+<p>
+
+А на этом поле функция <code>handler</code> вызывается с применением debounce – <code>debounce(handler, 1000)</code>:
+<br>
+<input id="input2" placeholder="введите текст">
+
+<p>
+<button id="result">Функция <code>handler</code> помещает результат сюда</button>
+
+<script>
+  function handler(event) {
+    result.innerHTML = event.target.value;
+  }
+
+  input1.oninput = handler;
+  input2.oninput = _.debounce(handler, 1000);
+</script>

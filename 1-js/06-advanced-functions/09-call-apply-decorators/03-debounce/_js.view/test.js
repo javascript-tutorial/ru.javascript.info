@@ -1,41 +1,47 @@
-describe("debounce", function() {
-  before(function() {
+describe('debounce', function () {
+  before(function () {
     this.clock = sinon.useFakeTimers();
   });
 
-  after(function() {
+  after(function () {
     this.clock.restore();
   });
 
-  it("вызывает функцию один раз в 'ms' мс", function() {
-    let log = '';
+  it('для одного вызова - запускается через "ms" миллисекунд', function () {
+    const f = sinon.spy();
+    const debounced = debounce(f, 1000);
 
-    function f(a) {
-      log += a;
-    }
-
-    f = debounce(f, 1000);
-
-    f(1); // вызвана
-    f(2); // проигнорирована
-
-    setTimeout(() => f(3), 100);  // проигнорирована (слишком рано)
-    setTimeout(() => f(4), 1100); // вызвана (1000 мс истекли)
-    setTimeout(() => f(5), 1500); // проигнорирована (менее 1000 мс с последнего вызова)
-
-    this.clock.tick(5000);
-    assert.equal(log, "14");
+    debounced('test');
+    assert(f.notCalled, 'не вызывается сразу');
+    this.clock.tick(1000);
+    assert(f.calledOnceWith('test'), 'вызывается после 1000ms');
   });
 
-  it("сохраняет контекст вызова", function() {
+  it('для 3 вызовов - вызывает последний через "ms" миллисекунд', function () {
+    const f = sinon.spy();
+    const debounced = debounce(f, 1000);
+
+    debounced('a');
+    setTimeout(() => debounced('b'), 200); // проигнорирована
+    setTimeout(() => debounced('c'), 500); // вызвана
+    this.clock.tick(1000);
+
+    assert(f.notCalled, 'не вызывается после 1000ms');
+
+    this.clock.tick(500);
+
+    assert(f.calledOnceWith('c'), 'вызывается после 1500ms');
+  });
+
+  it('сохраняет контекст вызова', function () {
     let obj = {
       f() {
         assert.equal(this, obj);
-      }
+      },
     };
 
     obj.f = debounce(obj.f, 1000);
-    obj.f("test");
+    obj.f('test');
+    this.clock.tick(5000);
   });
-
 });
