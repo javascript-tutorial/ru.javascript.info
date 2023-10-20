@@ -22,7 +22,7 @@ describe('debounce', function () {
     const debounced = debounce(f, 1000);
 
     debounced('a');
-    setTimeout(() => debounced('b'), 200); // проигнорирована (есть следующий вызов раньше чем 1000 мс)
+    setTimeout(() => debounced('b'), 200); // проигнорирована
     setTimeout(() => debounced('c'), 500); // вызвана (последний вызов)
     this.clock.tick(1000);
 
