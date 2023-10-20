@@ -23,7 +23,7 @@ describe('debounce', function () {
 
     debounced('a');
     setTimeout(() => debounced('b'), 200); // проигнорирована
-    setTimeout(() => debounced('c'), 500); // вызвана (последний вызов)
+    setTimeout(() => debounced('c'), 500); // вызвана
     this.clock.tick(1000);
 
     assert(f.notCalled, 'не вызывается после 1000ms');
