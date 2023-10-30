@@ -1,6 +1,6 @@
 const startMessagesBtn = document.querySelector('.start-messages'); // (1)
-const windowElementRef = new WeakRef(document.querySelector(".window__body")); // (2)
-const closeWindowBtn = document.querySelector('.window__button'); // (3)
+const closeWindowBtn = document.querySelector('.window__button'); // (2)
+const windowElementRef = new WeakRef(document.querySelector(".window__body")); // (3)
 
 startMessagesBtn.addEventListener('click', () => { // (4)
     startMessages(windowElementRef);
