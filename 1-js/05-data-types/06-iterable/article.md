@@ -217,7 +217,8 @@ alert(arr.pop()); // World (метод работает)
 То же самое происходит с итерируемым объектом:
 
 ```js run
-// range взят из примера выше
+// range взят из примера в начале статьи
+
 let arr = Array.from(range);
 alert(arr); // 1,2,3,4,5 (преобразование массива через toString работает)
 ```
@@ -233,7 +234,7 @@ Array.from(obj[, mapFn, thisArg])
 Например:
 
 ```js run
-// range взят из примера выше
+// range взят из примера в начале статьи
 
 // возводим каждое число в квадрат
 let arr = Array.from(range, num => num * num);
