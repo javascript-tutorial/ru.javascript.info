@@ -61,7 +61,6 @@ body, html {
     height: calc(100vh - var(--topBarHeight) - (var(--itemPadding) * 2));
 }
 
-/*Thumbnails.*/
 .thumbnails-container {
     display: flex;
     flex-wrap: wrap;
@@ -116,7 +115,6 @@ body, html {
     object-fit: cover;
 }
 
-/*Preview.*/
 .actions {
     display: flex;
     flex-wrap: wrap;
@@ -240,7 +238,6 @@ body, html {
     }
 }
 
-/*Logger.*/
 .loggerContainer {
     display: flex;
     flex-direction: column;

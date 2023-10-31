@@ -4,10 +4,6 @@
     <style bx:fonts="Open Sans">@import url(https://fonts.googleapis.com/css2?family=Open+Sans%3Aital%2Cwght%400%2C300%3B0%2C400%3B0%2C500%3B0%2C600%3B0%2C700%3B0%2C800%3B1%2C300%3B1%2C400%3B1%2C500%3B1%2C600%3B1%2C700%3B1%2C800&amp;display=swap);</style>
   </defs>
   <g id="memory-user-john-admin.svg" transform="matrix(1.708757996559143, 0, 0, 1.708757996559143, -443.0394287109375, -47.168914794921875)" fill="none" fill-rule="evenodd" stroke="none" stroke-width="1">
-    <text id="name:-&quot;John&quot;" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="12" font-weight="normal" style="white-space: pre;" x="19.382" y="-93.28"><tspan x="49.382" y="36.72" style="font-size: 12px; word-spacing: 0px;">name: "John"</tspan></text>
-    <text id="Object" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" style="white-space: pre;" x="17.598" y="-86.206"><tspan x="61.598" y="23.794" style="font-size: 14px; word-spacing: 0px;">Object</tspan></text>
-    <path id="Rectangle-1" fill="#FBF2EC" stroke="#DBAF88" stroke-width="2" d="M 40.047 -102 L 133.047 -102 L 133.047 -76 L 40.047 -76 L 40.047 -102 Z"/>
-    <text id="text-1" style="fill: rgb(172, 67, 67); font-family: PTMono-Regular, 'PT Mono'; font-size: 14px; white-space: pre;" transform="matrix(0.735667, 0, 0, 0.753868, 86.426659, 10.790039)" x="31.917" y="-40.191">admin</text>
     <path id="path-1" fill="#FBF2EC" stroke="#DBAF88" stroke-width="2" d="M 234.068 -87.403 L 333.494 -87.403 L 333.494 -57.762 L 234.068 -57.762 L 234.068 -87.403 Z" style=""/>
     <path id="path-2" fill="#FBF2EC" stroke="#DBAF88" stroke-width="2" d="M 336.651 -87.403 L 492.549 -87.403 L 492.549 -57.762 L 336.651 -57.762 L 336.651 -87.403 Z" style=""/>
     <path id="path-3" fill="#FBF2EC" stroke="#DBAF88" stroke-width="2" d="M 234.068 -53.711 L 333.494 -53.711 L 333.494 -24.07 L 234.068 -24.07 L 234.068 -53.711 Z" style=""/>

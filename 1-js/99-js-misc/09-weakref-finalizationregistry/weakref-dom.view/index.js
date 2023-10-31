@@ -9,7 +9,6 @@ startMessagesBtn.addEventListener('click', () => { // (4)
 
 closeWindowBtn.addEventListener('click', () =>  document.querySelector(".window__body").remove()); // (5)
 
-
 const startMessages = (element) => {
     const timerId = setInterval(() => { // (6)
         if (element.deref()) { // (7)
