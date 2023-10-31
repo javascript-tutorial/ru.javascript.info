@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<svg width="486" height="295" viewBox="0 0 548.504 295" xmlns="http://www.w3.org/2000/svg">
+<svg width="486" height="295" viewBox="0 0 486 295" xmlns="http://www.w3.org/2000/svg">
   <g id="inheritance" fill="none" fill-rule="evenodd" stroke="none" stroke-width="1">
     <g id="mixin-inheritance.svg">
-      <path id="Rectangle-1" fill="#FBF2EC" stroke="#DBAF88" stroke-width="2" d="M 326 130.11 L 504 130.11 L 504 188.11 L 326 188.11 L 326 130.11 Z"/>
-      <text id="sayHi:-function-sayB" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" style="white-space: pre;" x="21"><tspan x="336" y="153.11" style="font-size: 14px; word-spacing: 0px;">sayHi: function</tspan> <tspan x="336" y="168.11" style="font-size: 14px; word-spacing: 0px;">sayBye: function</tspan></text>
-      <text id="sayHiMixin" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" style="white-space: pre;" x="21"><tspan x="325" y="122.11" style="font-size: 14px; word-spacing: 0px;">sayHiMixin</tspan></text>
-      <path id="Rectangle-1" fill="#FBF2EC" stroke="#DBAF88" stroke-width="2" d="M 326 23.11 L 504 23.11 L 504 51.11 L 326 51.11 L 326 23.11 Z"/>
-      <text id="say:-function" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" style="white-space: pre;" x="21"><tspan x="336" y="41.11" style="font-size: 14px; word-spacing: 0px;">say: function</tspan></text>
-      <text id="sayMixin" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" style="white-space: pre;" x="21"><tspan x="325" y="15.11" style="font-size: 14px; word-spacing: 0px;">sayMixin</tspan></text>
-      <path id="Line-2" fill="#C06334" fill-rule="nonzero" d="M 385.5 64.61 L 392.5 78.61 L 386.5 78.609 L 386.5 106.609 L 384.5 106.609 L 384.5 78.609 L 378.5 78.609 L 385.5 64.609 L 385.5 64.61 Z"/>
-      <text id="[[Prototype]]" fill="#C06334" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" style="white-space: pre;" x="21"><tspan x="399" y="87" style="font-size: 14px; word-spacing: 0px;">[[Prototype]]</tspan></text>
+      <path id="Rectangle-1" fill="#FBF2EC" stroke="#DBAF88" stroke-width="2" d="M305 130.11h178v58H305z"/>
+      <text id="sayHi:-function-sayB" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" style="white-space: pre;"><tspan x="315" y="153.11">sayHi: function</tspan> <tspan x="315" y="168.11">sayBye: function</tspan></text>
+      <text id="sayHiMixin" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" style="white-space: pre;"><tspan x="304" y="122.11">sayHiMixin</tspan></text>
+      <path id="Rectangle-1" fill="#FBF2EC" stroke="#DBAF88" stroke-width="2" d="M305 23.11h178v28H305z"/>
+      <text id="say:-function" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" style="white-space: pre;"><tspan x="315" y="41.11">say: function</tspan></text>
+      <text id="sayMixin" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" style="white-space: pre;"><tspan x="304" y="15.11">sayMixin</tspan></text>
+      <path id="Line-2" fill="#C06334" fill-rule="nonzero" d="M364.5 64.61l7 14-6-.001v28h-2v-28h-6l7-14z"/>
+      <text id="[[Prototype]]" fill="#C06334" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" style="white-space: pre;"><tspan x="378" y="87">[[Prototype]]</tspan></text>
       <path id="Rectangle-1-Copy" fill="#FBF2EC" stroke="#DBAF88" stroke-width="2" d="M8 130.11h178v58H8z"/>
       <text id="constructor:-User-sa" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" style="white-space: pre;"><tspan x="18" y="146.11">constructor: User</tspan> <tspan x="18" y="161.11">sayHi: function</tspan> <tspan x="18" y="176.11">sayBye: function</tspan></text>
       <text id="User.prototype" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" style="white-space: pre;"><tspan x="7" y="122.11">User.prototype</tspan></text>
@@ -20,7 +20,7 @@
       <path id="Rectangle-1-Copy-2" fill="#FBF2EC" stroke="#DBAF88" stroke-width="2" d="M12 261h99v28H12z"/>
       <text id="name:-..." fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" style="white-space: pre;"><tspan x="18" y="278.11">name: ...</tspan></text>
       <text id="user" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" style="white-space: pre;"><tspan x="11" y="253">user</tspan></text>
-      <text id="[[HomeObject]" fill="#C06334" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" style="white-space: pre;"><tspan x="193" y="148">[[HomeObject]]</tspan></text>
+      <text id="[[HomeObject]" fill="#C06334" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" style="white-space: pre;" y="0.604"><tspan x="193" y="148.604" style="font-size: 11.1px; word-spacing: 0px;">[[HomeObject]]</tspan></text>
     </g>
   </g>
 </svg>
