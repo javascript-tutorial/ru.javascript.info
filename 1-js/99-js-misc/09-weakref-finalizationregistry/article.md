@@ -226,7 +226,6 @@ const getCachedImg = weakRefCache(fetchImg);
 
     ![](google-chrome-developer-tools.png)
 
-    <br>
     Данный функционал поддерживается в большинстве современных браузеров. После проделанных действий <code>alert</code> сработает незамедлительно.
 
 ## FinalizationRegistry
