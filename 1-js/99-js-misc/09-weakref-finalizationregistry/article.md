@@ -274,7 +274,7 @@ const registry = new FinalizationRegistry(cleanupCallback);
 let user = { name: "John" };
 
 const registry = new FinalizationRegistry((heldValue) => {
-  console.log(`${heldValue} был собрано сборщиком мусора.`);
+  console.log(`${heldValue} был собран сборщиком мусора.`);
 });
 ```
 
