@@ -59,3 +59,27 @@ function printNumbers(from, to) {
 
 printNumbers(5, 10);
 ```
+
+В примере выше будет ошибка для случая printNumbers(5, 5) при обращение к timerId. Можно использовать var для всплытия или вынести timerId в начало функции
+
+```js run
+function printNumbers(from, to) {
+  let timerId
+  let current = from;
+
+  function go() {
+    alert(current);
+    if (current == to && timerId) {
+      clearInterval(timerId);
+    }
+    current++;
+  }
+
+*!*
+  go();
+*/!*
+  timerId = setInterval(go, 1000);
+}
+
+printNumbers(5, 10);
+```
