@@ -298,7 +298,7 @@ try {
 *!*
   alert(e.name); // SyntaxError
 */!*
-  alert(e.message); // Unexpected token b in JSON at position 2
+  alert(e.message); // Expected property name or '}' in JSON at position 2 (line 1 column 3)
 }
 ```
 
