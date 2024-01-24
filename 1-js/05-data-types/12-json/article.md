@@ -404,7 +404,7 @@ alert( JSON.stringify(meetup) );
 
 Синтаксис:
 ```js
-let value = JSON.parse(str [, reviver]);
+let value = JSON.parse(str[, reviver]);
 ```
 
 str
