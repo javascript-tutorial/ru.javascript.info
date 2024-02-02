@@ -130,7 +130,7 @@ class Animal {
 
   stop() {
     this.speed = 0;
-    alert(`${this.name} стоит неподвижно.`);
+    alert(`${this.name} стоит.`);
   }
 
 }
