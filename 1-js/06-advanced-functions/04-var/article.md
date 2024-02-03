@@ -105,22 +105,22 @@ let user; // SyntaxError: 'user' has already been declared
 
 Используя `var`, можно переобъявлять переменную сколько угодно раз. Повторные `var` игнорируются:
 ```js run
-var user = "Pete";
+var user = "Пётр";
 
 var user; // ничего не делает, переменная объявлена раньше
 // ...нет ошибки
 
-alert(user); // Pete
+alert(user); // Пётр
 ```
 
 Если дополнительно присвоить значение, то переменная примет новое значение:
 
 ```js run
-var user = "Pete";
+var user = "Пётр";
 
-var user = "John";
+var user = "Иван";
 
-alert(user); // John
+alert(user); // Иван
 ```
 
 ## "var" обрабатываются в начале запуска функции
