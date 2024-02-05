@@ -708,7 +708,7 @@ arr.map(func, thisArg);
 ```js run
 let army = {
   minAge: 18,
-  maxAge: 27,
+  maxAge: 30,
   canJoin(user) {
     return user.age >= this.minAge && user.age < this.maxAge;
   }
