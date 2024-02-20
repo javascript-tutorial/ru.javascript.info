@@ -234,9 +234,9 @@ IIFE выглядит следующим образом:
 ```js run
 (function() {
 
-  var message = "Hello";
+  var message = "Привет";
 
-  alert(message); // Hello
+  alert(message); // Привет
 
 })();
 ```
@@ -249,9 +249,9 @@ Function Expression обёрнуто в скобки `(function {...})`, пот�
 // Пробуем объявить и сразу же вызвать функцию
 function() { // <-- SyntaxError: Function statements require a function name
 
-  var message = "Hello";
+  var message = "Привет";
 
-  alert(message); // Hello
+  alert(message); // Привет
 
 }();
 ```
