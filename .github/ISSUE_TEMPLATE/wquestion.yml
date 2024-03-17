@@ -13,7 +13,7 @@ body:
     id: question-description
     attributes:
       label: Описание
-      description: Какой у вас вопрос(ы)?
+      description: О чём вы хотите спросить?
       placeholder: |
         Например: «почему раздел [...] идёт перед разделом [...], а не после него?». 
     validations:
