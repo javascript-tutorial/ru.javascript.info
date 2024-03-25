@@ -256,16 +256,16 @@ let worker = {
 
 function cachingDecorator(func, hash) {
   let cache = new Map();
-  return function() {
+  return function(...args) {
 *!*
-    let key = hash(arguments); // (*)
+    let key = hash(args); // (*)
 */!*
     if (cache.has(key)) {
       return cache.get(key);
     }
 
 *!*
-    let result = func.call(this, ...arguments); // (**)
+    let result = func.call(this, ...args); // (**)
 */!*
 
     cache.set(key, result);
@@ -274,7 +274,7 @@ function cachingDecorator(func, hash) {
 }
 
 function hash(args) {
-  return args[0] + ',' + args[1];
+  return args.toString();
 }
 
 worker.slow = cachingDecorator(worker.slow, hash);
