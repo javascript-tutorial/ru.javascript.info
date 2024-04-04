@@ -109,7 +109,7 @@ let regexp = /".+?"/g;
 
 let str = 'a "witch" and her "broom" is one';
 
-alert( str.match(regexp) ); // witch, broom
+alert( str.match(regexp) ); // "witch","broom"
 ```
 
 Чтобы лучше понять, что поменялось, давайте рассмотрим процесс поиска шаг за шагом.
@@ -179,7 +179,7 @@ let regexp = /"[^"]+"/g;
 
 let str = 'a "witch" and her "broom" is one';
 
-alert( str.match(regexp) ); // witch, broom
+alert( str.match(regexp) ); // "witch","broom"
 ```
 
 Регулярное выражение `pattern:"[^"]+"` получит нужный результат, потому что оно ищет кавычку `pattern:'"'`, за которой следует один или несколько символов "не-кавычек" `pattern:[^"]`, а затем -- закрывающая кавычка.
