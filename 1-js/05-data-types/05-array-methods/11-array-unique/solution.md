@@ -14,6 +14,15 @@ function unique(arr) {
 
   return result;
 }
+Альтернативный способ:
+
+function unique(arr) {
+  const newArr = [];
+  arr.map((string, index, defArr) =>
+    index === defArr.indexOf(string) ? newArr.push(string) : ""
+  );
+  return newArr;
+}
 
 let strings = ["кришна", "кришна", "харе", "харе",
   "харе", "харе", "кришна", "кришна", ":-O"
