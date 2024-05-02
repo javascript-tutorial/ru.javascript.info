@@ -256,7 +256,7 @@ if (window == top) { // текущий window == window.top?
 
 ### postMessage
 
-Окно, которое хочет отправить сообщение, должно вызвать метод [postMessage](mdn:api/Window.postMessage) окна получателя. Другими словами, если мы хотим отправить сообщение в окно `win`, тогда нам следует вызвать `win.postMessage(data, targetOrigin)`.
+Окно, которое хочет отправить сообщение, должно вызвать метод [postMessage](mdn:api/Window/postMessage) окна получателя. Другими словами, если мы хотим отправить сообщение в окно `win`, тогда нам следует вызвать `win.postMessage(data, targetOrigin)`.
 
 Аргументы:
 
