@@ -8,19 +8,19 @@ importance: 5
 
 ```js
 let users = [
-  { name: "John", age: 20, surname: "Johnson" },
-  { name: "Pete", age: 18, surname: "Peterson" },
-  { name: "Ann", age: 19, surname: "Hathaway" }
+  { name: "Иван", age: 20, surname: "Иванов" },
+  { name: "Пётр", age: 18, surname: "Петров" },
+  { name: "Анна", age: 19, surname: "Каренина" }
 ];
 ```
 
 Обычный способ был бы таким:
 
 ```js
-// по имени (Ann, John, Pete)
+// по имени (Анна, Иван, Пётр)
 users.sort((a, b) => a.name > b.name ? 1 : -1);
 
-// по возрасту (Pete, Ann, John)
+// по возрасту (Пётр, Анна, Иван)
 users.sort((a, b) => a.age > b.age ? 1 : -1);
 ```
 
