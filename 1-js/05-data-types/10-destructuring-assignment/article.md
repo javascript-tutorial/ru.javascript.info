@@ -563,7 +563,7 @@ showMenu(); // Menu 100 200
 - Полный синтаксис для объекта:
 
     ```js
-    let {prop : varName = default, ...rest} = object
+    let {prop : varName = defaultValue, ...rest} = object
     ```
     
     Cвойство `prop` объекта `object` здесь должно быть присвоено переменной `varName`. Если в объекте отсутствует такое свойство, переменной `varName` присваивается значение по умолчанию.
@@ -573,7 +573,7 @@ showMenu(); // Menu 100 200
 - Полный синтаксис для массива:
 
     ```js
-    let [item1 = default, item2, ...rest] = array
+    let [item1 = defaultValue, item2, ...rest] = array
     ```
 
     Первый элемент отправляется в `item1`; второй отправляется в `item2`, все остальные элементы попадают в массив `rest`.
