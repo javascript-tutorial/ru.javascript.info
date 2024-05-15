@@ -45,7 +45,7 @@
 
 Также через суффикс `-u-*` можно указать расширения локалей, например `"th-TH-u-nu-thai"` -- тайский язык (`th`), используемый в Таиланде (`TH`), с записью чисел тайскими буквами (๐, ๑, ๒, ๓, ๔, ๕, ๖, ๗, ๘, ๙) .
 
-Стандарт, который описывает локали -- [RFC 5646](https://datatracker.ietf.org/doc/html/rfc5646), языки описаны в [IANA language registry](http://www.iana.org/assignments/language-subtag-registry/language-subtag-registry).
+Стандарт, который описывает локали -- [RFC 5646](https://datatracker.ietf.org/doc/html/rfc5646), языки описаны в [IANA language registry](https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry).
 
 Все методы принимают локаль в виде строки или массива, содержащего несколько локалей в порядке предпочтения.
 

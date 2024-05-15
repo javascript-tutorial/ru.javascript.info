@@ -31,7 +31,7 @@ IDE загружает проект (который может состоять 
 
 Следующие варианты заслуживают вашего внимания:
 
-- [Sublime Text](http://www.sublimetext.com) (кроссплатформенный, условно-бесплатный).
+- [Sublime Text](https://www.sublimetext.com) (кроссплатформенный, условно-бесплатный).
 - [Notepad++](https://notepad-plus-plus.org/) (Windows, бесплатный).
 - [Vim](https://www.vim.org/) и [Emacs](https://www.gnu.org/software/emacs/) тоже хороши, если знать, как ими пользоваться.
 
