@@ -113,7 +113,7 @@ for(let [name, value] of url.searchParams) {
 
 ## Кодирование
 
-Существует стандарт [RFC3986](https://tools.ietf.org/html/rfc3986), который определяет список разрешённых и запрещённых символов в URL.
+Существует стандарт [RFC3986](https://datatracker.ietf.org/doc/html/rfc3986), который определяет список разрешённых и запрещённых символов в URL.
 
 Запрещённые символы, например, нелатинские буквы и пробелы, должны быть закодированы -- заменены соответствующими кодами UTF-8 с префиксом `%`, например: `%20` (исторически сложилось так, что пробел в URL-адресе можно также кодировать символом `+`, но это исключение).
 
@@ -193,7 +193,7 @@ alert(url); // https://google.com/search?q=Rock&Roll
 Чтобы правильно вставить параметр поиска в строку URL, мы должны использовать для него только `encodeURIComponent`. Наиболее безопасно кодировать и имя, и значение, за исключением случаев, когда мы абсолютно уверены в том, что они содержат только разрешённые символы.
 
 ````smart header="Разница в кодировании с `URL`"
-Классы [URL](https://url.spec.whatwg.org/#url-class) и [URLSearchParams](https://url.spec.whatwg.org/#interface-urlsearchparams) базируются на последней спецификации URI, описывающей устройство адресов: [RFC3986](https://tools.ietf.org/html/rfc3986), в то время как функции `encode*` -- на устаревшей версии стандарта [RFC2396](https://www.ietf.org/rfc/rfc2396.txt).
+Классы [URL](https://url.spec.whatwg.org/#url-class) и [URLSearchParams](https://url.spec.whatwg.org/#interface-urlsearchparams) базируются на последней спецификации URI, описывающей устройство адресов: [RFC3986](https://datatracker.ietf.org/doc/html/rfc3986), в то время как функции `encode*` -- на устаревшей версии стандарта [RFC2396](https://www.ietf.org/rfc/rfc2396.txt).
 
 Различий мало, но они есть, например, по-разному кодируются адреса IPv6:
 
