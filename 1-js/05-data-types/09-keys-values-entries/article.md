@@ -90,7 +90,7 @@ let prices = {
 
 *!*
 let doublePrices = Object.fromEntries(
-  // преобразовать в массив, затем map, затем fromEntries обратно объект
+  // преобразовать в массив, затем map, затем fromEntries (обратно в объект)
   Object.entries(prices).map(([key, value]) => [key, value * 2])
 );
 */!*
