@@ -71,7 +71,7 @@ let animal = {
   eats: true,
 *!*
   walk() {
-    alert("Animal walk");
+    alert("Животное идёт");
   }
 */!*
 };
@@ -83,7 +83,7 @@ let rabbit = {
 
 // walk взят из прототипа
 *!*
-rabbit.walk(); // Animal walk
+rabbit.walk(); // Животное идёт
 */!*
 ```
 
@@ -97,7 +97,7 @@ rabbit.walk(); // Animal walk
 let animal = {
   eats: true,
   walk() {
-    alert("Animal walk");
+    alert("Животное идёт");
   }
 };
 
@@ -116,7 +116,7 @@ let longEar = {
 };
 
 // walk взят из цепочки прототипов
-longEar.walk(); // Animal walk
+longEar.walk(); // Животное идёт
 alert(longEar.jumps); // true (из rabbit)
 ```
 
@@ -165,11 +165,11 @@ let rabbit = {
 
 *!*
 rabbit.walk = function() {
-  alert("Rabbit! Bounce-bounce!");
+  alert("Кролик! Прыг-скок!");
 };
 */!*
 
-rabbit.walk(); // Rabbit! Bounce-bounce!
+rabbit.walk(); // Кролик! Прыг-скок!
 ```
 
 Теперь вызов `rabbit.walk()` находит метод непосредственно в объекте и выполняет его, не используя прототип:
@@ -199,10 +199,14 @@ let admin = {
   isAdmin: true
 };
 
+*!*
 alert(admin.fullName); // John Smith (*)
+*/!*
 
 // срабатывает сеттер!
+*!*
 admin.fullName = "Alice Cooper"; // (**)
+*/!*
 alert(admin.name); // Alice
 alert(admin.surname); // Cooper
 ```
@@ -230,7 +234,7 @@ alert(admin.surname); // Cooper
 let animal = {
   walk() {
     if (!this.isSleeping) {
-      alert(`I walk`);
+      alert('Я иду');
     }
   },
   sleep() {
@@ -239,7 +243,7 @@ let animal = {
 };
 
 let rabbit = {
-  name: "White Rabbit",
+  name: "Белый кролик",
   __proto__: animal
 };
 
@@ -276,12 +280,12 @@ let rabbit = {
 
 *!*
 // Object.keys возвращает только собственные ключи
-alert(Object.keys(rabbit)); // jumps
+alert( Object.keys(rabbit) ); // jumps
 */!*
 
 *!*
 // for..in проходит и по своим, и по унаследованным ключам
-for(let prop in rabbit) alert(prop); // jumps, затем eats
+for (let prop in rabbit) alert(prop); // jumps, затем eats
 */!*
 ```
 
@@ -299,13 +303,13 @@ let rabbit = {
   __proto__: animal
 };
 
-for(let prop in rabbit) {
+for (let prop in rabbit) {
   let isOwn = rabbit.hasOwnProperty(prop);
 
   if (isOwn) {
-    alert(`Our: ${prop}`); // Our: jumps
+    alert(`Собственное: ${prop}`); // Собственное: jumps
   } else {
-    alert(`Inherited: ${prop}`); // Inherited: eats
+    alert(`Унаследованное: ${prop}`); // Унаследованное: eats
   }
 }
 ```
