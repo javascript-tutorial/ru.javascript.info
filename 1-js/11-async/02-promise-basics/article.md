@@ -48,7 +48,7 @@ let promise = new Promise(function(resolve, reject) {
 
 Ниже пример конструктора `Promise` и простого исполнителя с кодом, дающим результат с задержкой (через `setTimeout`):
 
-```js run
+```js
 let promise = new Promise(function(resolve, reject) {
   // эта функция выполнится автоматически, при вызове new Promise
 
