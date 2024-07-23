@@ -208,7 +208,7 @@ class CoffeeMachine {
 let coffeeMachine = new CoffeeMachine();
 
 *!*
-// снаружи  нет доступа к приватным методам класса
+// снаружи нет доступа к приватным методам класса
 coffeeMachine.#checkWater(); // Error
 coffeeMachine.#waterLimit = 1000; // Error
 */!*
