@@ -55,7 +55,7 @@ function populate() {
     // нижняя граница документа
     let windowRelativeBottom = document.documentElement.getBoundingClientRect().bottom;
 
-    // если до конца страницы достаточно далеко (>100px до конца)  - прерываем цикл;
+    // если пользователь не прокрутил достаточно далеко (>100px до конца страницы) — прерываем цикл
     if (windowRelativeBottom > document.documentElement.clientHeight + 100) {
         break;
     }
