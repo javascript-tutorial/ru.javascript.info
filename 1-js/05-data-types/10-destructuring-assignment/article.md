@@ -529,7 +529,7 @@ showMenu(options);
 Полный синтаксис - такой же, как для деструктурирующего присваивания:
 
 ```js
-function({
+function showMenu({
   incomingProperty: varName = defaultValue
   ...
 })
