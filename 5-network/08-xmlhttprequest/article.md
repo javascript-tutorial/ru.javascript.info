@@ -273,7 +273,7 @@ try {
 
     ```warn header="Ограничения на заголовки"
     Некоторые заголовки управляются исключительно браузером, например `Referer` или `Host`, а также ряд других.
-    Полный список [тут](https://www.w3.org/TR/XMLHttpRequest/#the-setrequestheader-method).
+    Полный список [тут](https://fetch.spec.whatwg.org/#forbidden-request-header).
 
     `XMLHttpRequest` не разрешено изменять их ради безопасности пользователей и для обеспечения корректности HTTP-запроса.
     ```
