@@ -324,7 +324,7 @@ function checkAge(age) {
 */!*
   } else {
 *!*
-    return confirm('А родители разрешили?');
+    return false;
 */!*
   }
 }
