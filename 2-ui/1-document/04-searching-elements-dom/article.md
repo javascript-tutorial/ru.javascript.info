@@ -55,8 +55,13 @@
 </script>
 ```
 
+<<<<<<< HEAD
 ```warn header="Пожалуйста, не используйте такие глобальные переменные для доступа к элементам"
 Это поведение соответствует [стандарту](https://html.spec.whatwg.org/#dom-window-nameditem), но поддерживается в основном для совместимости, как осколок далёкого прошлого.
+=======
+```warn header="Please don't use id-named global variables to access elements"
+This behavior is described [in the specification](https://html.spec.whatwg.org/multipage/window-object.html#named-access-on-the-window-object), but it is supported mainly for compatibility.
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 Браузер пытается помочь нам, смешивая пространства имён JS и DOM. Это удобно для простых скриптов, которые находятся прямо в HTML, но, вообще говоря, не очень хорошо. Возможны конфликты имён. Кроме того, при чтении JS-кода, не видя HTML, непонятно, откуда берётся переменная.
 
@@ -71,8 +76,13 @@
 Если в документе есть несколько элементов с одинаковым значением `id`, то поведение методов поиска непредсказуемо. Браузер может вернуть любой из них случайным образом. Поэтому, пожалуйста, придерживайтесь правила сохранения уникальности `id`.
 ```
 
+<<<<<<< HEAD
 ```warn header="Только `document.getElementById`, а не `anyElem.getElementById`"
 Метод `getElementById` можно вызвать только для объекта `document`. Он осуществляет поиск по `id` по всему документу.
+=======
+```warn header="Only `document.getElementById`, not `anyElem.getElementById`"
+The method `getElementById` can be called only on `document` object. It looks for the given `id` in the whole document.
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 ```
 
 ## querySelectorAll [#querySelectorAll]
@@ -103,8 +113,13 @@
 
 Этот метод действительно мощный, потому что можно использовать любой CSS-селектор.
 
+<<<<<<< HEAD
 ```smart header="Псевдоклассы тоже работают"
 Псевдоклассы в CSS-селекторе, в частности `:hover` и `:active`, также поддерживаются. Например, `document.querySelectorAll(':hover')` вернёт коллекцию (в порядке вложенности: от внешнего к внутреннему) из текущих элементов под курсором мыши.
+=======
+```smart header="Can use pseudo-classes as well"
+Pseudo-classes in the CSS selector like `:hover` and `:active` are also supported. For instance, `document.querySelectorAll(':hover')` will return the collection with elements that the pointer is over now (in nesting order: from the outermost `<html>` to the most nested one).
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 ```
 
 ## querySelector [#querySelector]
@@ -117,9 +132,15 @@
 
 Предыдущие методы искали по DOM.
 
+<<<<<<< HEAD
 Метод [elem.matches(css)](https://dom.spec.whatwg.org/#dom-element-matches) ничего не ищет, а проверяет, удовлетворяет ли `elem` CSS-селектору, и возвращает `true` или `false`.
 
 Этот метод удобен, когда мы перебираем элементы (например, в массиве или в чём-то подобном) и пытаемся выбрать те из них, которые нас интересуют.
+=======
+The [elem.matches(css)](https://dom.spec.whatwg.org/#dom-element-matches) does not look for anything, it merely checks if `elem` matches the given CSS-selector. It returns `true` or `false`.
+
+The method comes in handy when we are iterating over elements (like in an array or something) and trying to filter out those that interest us.
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 Например:
 
@@ -143,7 +164,11 @@
 
 *Предки* элемента - родитель, родитель родителя, его родитель и так далее. Вместе они образуют цепочку иерархии от элемента до вершины.
 
+<<<<<<< HEAD
 Метод `elem.closest(css)` ищет ближайшего предка, который соответствует CSS-селектору. Сам элемент также включается в поиск.
+=======
+The method `elem.closest(css)` looks for the nearest ancestor that matches the CSS-selector. The `elem` itself is also included in the search.
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 Другими словами, метод `closest` поднимается вверх от элемента и проверяет каждого из родителей. Если он соответствует селектору, поиск прекращается. Метод возвращает либо предка, либо `null`, если такой элемент не найден.
 
@@ -154,8 +179,13 @@
 
 <div class="contents">
   <ul class="book">
+<<<<<<< HEAD
     <li class="chapter">Глава 1</li>
     <li class="chapter">Глава 2</li>
+=======
+    <li class="chapter">Chapter 1</li>
+    <li class="chapter">Chapter 2</li>
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
   </ul>
 </div>
 
@@ -177,9 +207,15 @@
 
 Здесь мы рассмотрим их для полноты картины, также вы можете встретить их в старом коде.
 
+<<<<<<< HEAD
 - `elem.getElementsByTagName(tag)` ищет элементы с данным тегом и возвращает их коллекцию. Передав `"*"` вместо тега, можно получить всех потомков.
 - `elem.getElementsByClassName(className)` возвращает элементы, которые имеют данный CSS-класс.
 - `document.getElementsByName(name)` возвращает элементы с заданным атрибутом `name`. Очень редко используется.
+=======
+- `elem.getElementsByTagName(tag)` looks for elements with the given tag and returns the collection of them. The `tag` parameter can also be a star `"*"` for "any tags".
+- `elem.getElementsByClassName(className)` returns elements that have the given CSS class.
+- `document.getElementsByName(name)` returns elements with the given `name` attribute, document-wide. Very rarely used.
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 Например:
 ```js
@@ -364,7 +400,11 @@ document.getElementsByTagName('input')[0].value = 5;
 </tbody>
 </table>
 
+<<<<<<< HEAD
 Безусловно, наиболее часто используемыми в настоящее время являются методы `querySelector` и `querySelectorAll`, но и методы  `getElement(s)By*` могут быть полезны в отдельных случаях, а также встречаются в старом коде.
+=======
+By far the most used are `querySelector` and `querySelectorAll`, but `getElement(s)By*` can be sporadically helpful or found in the old scripts.
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 Кроме того:
 
