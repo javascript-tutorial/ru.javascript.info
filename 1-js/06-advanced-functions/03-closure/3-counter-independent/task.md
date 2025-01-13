@@ -2,11 +2,19 @@ importance: 5
 
 ---
 
+<<<<<<< HEAD
 # Независимы ли счётчики?
 
 Здесь мы делаем два счётчика: `counter` и `counter2`, используя одну и ту же функцию `makeCounter`.
 
 Они независимы? Что покажет второй счётчик? `0,1` или `2,3` или что-то ещё?
+=======
+# Are counters independent?
+
+Here we make two counters: `counter` and `counter2` using the same `makeCounter` function.
+
+Are they independent? What is the second counter going to show? `0,1` or `2,3` or something else?
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 ```js
 function makeCounter() {
