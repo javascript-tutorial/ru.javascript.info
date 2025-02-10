@@ -24,7 +24,11 @@ let message;
 let message;
 
 *!*
+<<<<<<< HEAD
 message = 'Hello'; // сохранить строку 'Hello' в переменной с именем message
+=======
+message = 'Hello'; // store the string 'Hello' in the variable named message
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 */!*
 ```
 
@@ -63,7 +67,11 @@ let age = 25;
 let message = 'Hello';
 ```
 
+<<<<<<< HEAD
 Некоторые люди также определяют несколько переменных в таком вот многострочном стиле:
+=======
+Some people also define multiple variables in this multiline style:
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 ```js no-beautify
 let user = 'John',
@@ -81,23 +89,38 @@ let user = 'John'
 
 В принципе, все эти варианты работают одинаково. Так что это вопрос личного вкуса и эстетики.
 
+<<<<<<< HEAD
 ````smart header="`var` вместо `let`"
 В старых скриптах вы также можете найти другое ключевое слово: `var` вместо `let`:
+=======
+````smart header="`var` instead of `let`"
+In older scripts, you may also find another keyword: `var` instead of `let`:
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 ```js
 *!*var*/!* message = 'Hello';
 ```
 
+<<<<<<< HEAD
 Ключевое слово `var` - *почти* то же самое, что и `let`. Оно объявляет переменную, но немного по-другому, "устаревшим" способом.
 
 Есть тонкие различия между `let` и `var`, но они пока не имеют для нас значения. Мы подробно рассмотрим их в главе <info:var>.
+=======
+The `var` keyword is *almost* the same as `let`. It also declares a variable but in a slightly different, "old-school" way.
+
+There are subtle differences between `let` and `var`, but they do not matter to us yet. We'll cover them in detail in the chapter <info:var>.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 ````
 
 ## Аналогия из жизни
 
 Мы легко поймём концепцию "переменной", если представим её в виде "коробки" для данных с уникальным названием на ней.
 
+<<<<<<< HEAD
 Например, переменную `message` можно представить как коробку с названием `"message"` и значением `"Hello!"` внутри:
+=======
+For instance, the variable `message` can be imagined as a box labelled `"message"` with the value `"Hello!"` in it:
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 ![](variable.svg)
 
@@ -105,6 +128,11 @@ let user = 'John'
 
 Мы также можем изменить его столько раз, сколько захотим:
 
+<<<<<<< HEAD
+=======
+We can also change it as many times as we want:
+
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 ```js run
 let message;
 
@@ -136,11 +164,31 @@ alert(hello); // Hello world!
 alert(message); // Hello world!
 ```
 
+<<<<<<< HEAD
 ````warn header="Повторное объявление вызывает ошибку"
 Переменная может быть объявлена только один раз.
+=======
+````warn header="Declaring twice triggers an error"
+A variable should be declared only once.
+
+A repeated declaration of the same variable is an error:
+
+```js run
+let message = "This";
+
+// repeated 'let' leads to an error
+let message = "That"; // SyntaxError: 'message' has already been declared
+```
+So, we should declare a variable once and then refer to it without `let`.
+````
+
+```smart header="Functional languages"
+It's interesting to note that there exist so-called [pure functional](https://en.wikipedia.org/wiki/Purely_functional_programming) programming languages, such as [Haskell](https://en.wikipedia.org/wiki/Haskell), that forbid changing variable values.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 Повторное объявление той же переменной является ошибкой:
 
+<<<<<<< HEAD
 ```js run
 let message = "Это";
 
@@ -156,6 +204,9 @@ let message = "Другое"; // SyntaxError: 'message' has already been declare
 В таких языках однажды сохранённое "в коробку" значение остаётся там навсегда. Если нам нужно сохранить что-то другое, язык заставляет нас создать новую коробку (объявить новую переменную). Мы не можем использовать старую переменную.
 
 Хотя на первый взгляд это может показаться немного странным, эти языки вполне подходят для серьёзной разработки. Более того, есть такая область, как параллельные вычисления, где это ограничение даёт определённые преимущества. Изучение такого языка (даже если вы не планируете использовать его в ближайшее время) рекомендуется для расширения кругозора.
+=======
+Though it may seem a little odd at first sight, these languages are quite capable of serious development. More than that, there are areas like parallel computations where this limitation confers certain benefits.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 ```
 
 ## Имена переменных [#variable-naming]
@@ -193,19 +244,32 @@ let 1a; // не может начинаться с цифры
 let my-name; // дефис '-' не разрешён в имени
 ```
 
+<<<<<<< HEAD
 ```smart header="Регистр имеет значение"
 Переменные с именами `apple` и `APPLE` -- это две разные переменные.
 ```
 
 ````smart header="Нелатинские буквы разрешены, но не рекомендуются"
 Можно использовать любой язык, включая кириллицу или даже иероглифы, например:
+=======
+```smart header="Case matters"
+Variables named `apple` and `APPLE` are two different variables.
+```
+
+````smart header="Non-Latin letters are allowed, but not recommended"
+It is possible to use any language, including Cyrillic letters, Chinese logograms and so on, like this:
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 ```js
 let имя = '...';
 let 我 = '...';
 ```
 
+<<<<<<< HEAD
 Технически здесь нет ошибки, такие имена разрешены, но есть международная традиция использовать английский язык в именах переменных. Даже если мы пишем небольшой скрипт, у него может быть долгая жизнь впереди. Людям из других стран, возможно, придётся прочесть его не один раз.
+=======
+Technically, there is no error here. Such names are allowed, but there is an international convention to use English in variable names. Even if we're writing a small script, it may have a long life ahead. People from other countries may need to read it sometime.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 ````
 
 ````warn header="Зарезервированные имена"
@@ -260,13 +324,21 @@ const myBirthday = '18.04.1982';
 myBirthday = '01.01.2001'; // ошибка, константу нельзя перезаписать!
 ```
 
+<<<<<<< HEAD
 Если программист уверен, что переменная никогда не будет меняться, он может гарантировать это и наглядно донести до каждого, объявив её через `const`.
 
 ### Константы в верхнем регистре
+=======
+When a programmer is sure that a variable will never change, they can declare it with `const` to guarantee and communicate that fact to everyone.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 Широко распространена практика использования констант в качестве псевдонимов для трудно запоминаемых значений, которые известны до начала исполнения скрипта.
 
+<<<<<<< HEAD
 Названия таких констант пишутся с использованием заглавных букв и подчёркивания.
+=======
+There is a widespread practice to use constants as aliases for difficult-to-remember values that are known before execution.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 Например, сделаем константы для различных цветов в "шестнадцатеричном формате":
 
@@ -289,17 +361,30 @@ alert(color); // #FF7F00
 
 Когда мы должны использовать для констант заглавные буквы, а когда называть их нормально? Давайте разберёмся и с этим.
 
+<<<<<<< HEAD
 Название "константа" просто означает, что значение переменной никогда не меняется. Но есть константы, которые известны до выполнения (например, шестнадцатеричное значение для красного цвета), а есть константы, которые *вычисляются* во время выполнения сценария, но не изменяются после их первоначального назначения.
 
 Например:
 
+=======
+Being a "constant" just means that a variable's value never changes. But some constants are known before execution (like a hexadecimal value for red) and some constants are *calculated* in run-time, during the execution, but do not change after their initial assignment.
+
+For instance:
+
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 ```js
 const pageLoadTime = /* время, потраченное на загрузку веб-страницы */;
 ```
 
+<<<<<<< HEAD
 Значение `pageLoadTime` неизвестно до загрузки страницы, поэтому её имя записано обычными, а не прописными буквами. Но это всё ещё константа, потому что она не изменяется после назначения.
 
 Другими словами, константы с именами, записанными заглавными буквами, используются только как псевдонимы для "жёстко закодированных" значений.
+=======
+The value of `pageLoadTime` is not known before the page load, so it's named normally. But it's still a constant because it doesn't change after the assignment.
+
+In other words, capital-named constants are only used as aliases for "hard-coded" values.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 ## Придумывайте правильные имена
 
@@ -307,18 +392,31 @@ const pageLoadTime = /* время, потраченное на загрузку
 
 Название переменной должно иметь ясный и понятный смысл, говорить о том, какие данные в ней хранятся.
 
+<<<<<<< HEAD
 Именование переменных -- это один из самых важных и сложных навыков в программировании. Быстрый взгляд на имена переменных может показать, какой код был написан новичком, а какой -- опытным разработчиком.
 
 В реальном проекте большая часть времени тратится на изменение и расширение существующей кодовой базы, а не на написание чего-то совершенно нового с нуля. Когда мы возвращаемся к коду после какого-то промежутка времени, гораздо легче найти информацию, которая хорошо размечена. Или, другими словами, когда переменные имеют хорошие имена.
+=======
+Variable naming is one of the most important and complex skills in programming. A glance at variable names can reveal which code was written by a beginner versus an experienced developer.
+
+In a real project, most of the time is spent modifying and extending an existing code base rather than writing something completely separate from scratch. When we return to some code after doing something else for a while, it's much easier to find information that is well-labelled. Or, in other words, when the variables have good names.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 Пожалуйста, потратьте время на обдумывание правильного имени переменной перед её объявлением. Делайте так, и будете вознаграждены.
 
 Несколько хороших правил:
 
+<<<<<<< HEAD
 - Используйте легко читаемые имена, такие как `userName` или `shoppingCart`.
 - Избегайте использования аббревиатур или коротких имён, таких как `a`, `b`, `c`, за исключением тех случаев, когда вы точно знаете, что так нужно.
 - Делайте имена максимально описательными и лаконичными. Примеры плохих имён: `data` и `value`. Такие имена ничего не говорят. Их можно использовать только в том случае, если из контекста кода очевидно, какие данные хранит переменная.
 - Договоритесь с вашей командой об используемых терминах. Если посетитель сайта называется "user", тогда мы должны называть связанные с ним переменные `currentUser` или `newUser`, а не, к примеру, `currentVisitor` или `newManInTown`.
+=======
+- Use human-readable names like `userName` or `shoppingCart`.
+- Stay away from abbreviations or short names like `a`, `b`, and `c`, unless you know what you're doing.
+- Make names maximally descriptive and concise. Examples of bad names are `data` and `value`. Such names say nothing. It's only okay to use them if the context of the code makes it exceptionally obvious which data or value the variable is referencing.
+- Agree on terms within your team and in your mind. If a site visitor is called a "user" then we should name related variables `currentUser` or `newUser` instead of `currentVisitor` or `newManInTown`.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 Звучит просто? Действительно, это так, но на практике для создания описательных и кратких имён переменных зачастую требуется подумать. Действуйте.
 

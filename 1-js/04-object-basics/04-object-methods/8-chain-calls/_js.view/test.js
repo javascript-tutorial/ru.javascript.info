@@ -33,7 +33,11 @@ describe('Лестница', function() {
     assert.equal(ladder.down().up().up().up().step, 2);
   });
 
+<<<<<<< HEAD
   it('showStep() должен возвращать this', function() {
+=======
+  it('showStep() should return this', function() {
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
     assert.equal(ladder.showStep(), ladder);
   });
  

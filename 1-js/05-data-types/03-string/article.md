@@ -47,9 +47,15 @@ let guestList = "Guests: // Error: Unexpected token ILLEGAL
   * John";
 ```
 
+<<<<<<< HEAD
 Одинарные и двойные кавычки в языке с незапамятных времён: тогда потребность в многострочных строках не учитывалась. Что касается обратных кавычек, они появились существенно позже, и поэтому они гибче.
 
 Обратные кавычки также позволяют задавать "шаблонную функцию" перед первой обратной кавычкой. Используемый синтаксис: <code>func&#96;string&#96;</code>. Автоматически вызываемая функция `func` получает строку и встроенные в неё выражения и может их обработать. Подробнее об этом можно прочитать в [документации](mdn:/JavaScript/Reference/template_strings#%D0%A2%D0%B5%D0%B3%D0%BE%D0%B2%D1%8B%D0%B5_%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD%D1%8B). Если перед строкой есть выражение, то шаблонная строка называется "теговым шаблоном". Это позволяет использовать свою шаблонизацию для строк, но на практике теговые шаблоны применяются редко.
+=======
+Single and double quotes come from ancient times of language creation, when the need for multiline strings was not taken into account. Backticks appeared much later and thus are more versatile.
+
+Backticks also allow us to specify a "template function" before the first backtick. The syntax is: <code>func&#96;string&#96;</code>. The function `func` is called automatically, receives the string and embedded expressions and can process them. This feature is called "tagged templates", it's rarely seen, but you can read about it in the MDN: [Template literals](mdn:/JavaScript/Reference/Template_literals#Tagged_templates).
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 ## Спецсимволы
 
@@ -58,10 +64,17 @@ let guestList = "Guests: // Error: Unexpected token ILLEGAL
 ```js run
 let guestList = "Guests:\n * John\n * Pete\n * Mary";
 
+<<<<<<< HEAD
 alert(guestList); // список гостей, состоящий из нескольких строк
 ```
 
 В частности, эти две строки эквивалентны, просто записаны по-разному:
+=======
+alert(guestList); // a multiline list of guests, same as above
+```
+
+As a simpler example, these two lines are equal, just written differently:
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 ```js run
 // перевод строки добавлен с помощью символа перевода строки
@@ -74,6 +87,7 @@ World`;
 alert(str1 == str2); // true
 ```
 
+<<<<<<< HEAD
 Есть и другие, реже используемые спецсимволы. Вот список:
 
 | Символ | Описание |
@@ -90,6 +104,30 @@ alert(str1 == str2); // true
 Он также используется, если необходимо вставить в строку кавычку.
 
 К примеру:
+=======
+There are other, less common special characters:
+
+| Character | Description |
+|-----------|-------------|
+|`\n`|New line|
+|`\r`|In Windows text files a combination of two characters `\r\n` represents a new break, while on non-Windows OS it's just `\n`. That's for historical reasons, most Windows software also understands `\n`. |
+|`\'`,&nbsp;`\"`,&nbsp;<code>\\`</code>|Quotes|
+|`\\`|Backslash|
+|`\t`|Tab|
+|`\b`, `\f`, `\v`| Backspace, Form Feed, Vertical Tab -- mentioned for completeness, coming from old times, not used nowadays (you can forget them right now). |
+
+As you can see, all special characters start with a backslash character `\`. It is also called an "escape character".
+
+Because it's so special, if we need to show an actual backslash `\` within the string, we need to double it:
+
+```js run
+alert( `The backslash: \\` ); // The backslash: \
+```
+
+So-called "escaped" quotes `\'`, `\"`, <code>\\`</code> are used to insert a quote into the same-quoted string.
+
+For instance:
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 ```js run
 alert( 'I*!*\'*/!*m the Walrus!' ); // *!*I'm*/!* the Walrus!
@@ -97,12 +135,17 @@ alert( 'I*!*\'*/!*m the Walrus!' ); // *!*I'm*/!* the Walrus!
 
 Здесь перед входящей в строку кавычкой необходимо добавить обратный слеш — `\'` — иначе она бы обозначала окончание строки.
 
+<<<<<<< HEAD
 Разумеется, требование экранировать относится только к таким же кавычкам, как те, в которые заключена строка. Так что мы можем применить и более элегантное решение, использовав для этой строки двойные или обратные кавычки:
+=======
+Of course, only the quotes that are the same as the enclosing ones need to be escaped. So, as a more elegant solution, we could switch to double quotes or backticks instead:
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 ```js run
-alert( `I'm the Walrus!` ); // I'm the Walrus!
+alert( "I'm the Walrus!" ); // I'm the Walrus!
 ```
 
+<<<<<<< HEAD
 Заметим, что обратный слеш `\` служит лишь для корректного прочтения строки интерпретатором, но он не записывается в строку после её прочтения. Когда строка сохраняется в оперативную память, в неё не добавляется символ `\`. Вы можете явно видеть это в выводах `alert` в примерах выше.
 
 Но что, если нам надо добавить в строку собственно сам обратный слеш `\`?
@@ -112,6 +155,9 @@ alert( `I'm the Walrus!` ); // I'm the Walrus!
 ```js run
 alert( `The backslash: \\` ); // The backslash: \
 ```
+=======
+Besides these special characters, there's also a special notation for Unicode codes `\u…`, it's rarely used and is covered in the optional chapter about [Unicode](info:unicode).
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 ## Длина строки
 
@@ -126,12 +172,20 @@ alert( `My\n`.length ); // 3
 ```warn header="`length` — это свойство"
 Бывает так, что люди с практикой в других языках случайно пытаются вызвать его, добавляя круглые скобки: они пишут `str.length()` вместо `str.length`. Это не работает.
 
+<<<<<<< HEAD
 Так как `str.length` — это числовое свойство, а не функция, добавлять скобки не нужно.
+=======
+Please note that `str.length` is a numeric property, not a function. There is no need to add parenthesis after it. Not `.length()`, but `.length`.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 ```
 
 ## Доступ к символам
 
+<<<<<<< HEAD
 Получить символ, который занимает позицию `pos`, можно с помощью квадратных скобок: `[pos]`. Также можно использовать метод [str.at(pos)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/at). Первый символ занимает нулевую позицию:
+=======
+To get a character at position `pos`, use square brackets `[pos]` or call the method [str.at(pos)](mdn:js/String/at). The first character starts from the zero position:
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 ```js run
 let str = `Hello`;
@@ -142,6 +196,7 @@ alert( str.at(0) ); // H
 
 // получаем последний символ
 alert( str[str.length - 1] ); // o
+<<<<<<< HEAD
 alert( str.at(-1) ); // o
 ```
 
@@ -150,6 +205,16 @@ alert( str.at(-1) ); // o
 Таким образом, `.at(-1)` означает последний символ, а `.at(-2)` -- тот, что перед ним, и т.д.
 
 Квадратные скобки всегда возвращают `undefined` для отрицательных индексов. Например:
+=======
+alert( str.at(-1) );
+```
+
+As you can see, the `.at(pos)` method has a benefit of allowing negative position. If `pos` is negative, then it's counted from the end of the string.
+
+So `.at(-1)` means the last character, and `.at(-2)` is the one before it, etc.
+
+The square brackets always return `undefined` for negative indexes, for instance:
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 ```js run
 let str = `Hello`;
@@ -229,7 +294,11 @@ alert( str.indexOf('widget') ); // -1, совпадений нет, поиск �
 alert( str.indexOf("id") ); // 1, подстрока "id" найдена на позиции 1 (..idget with id)
 ```
 
+<<<<<<< HEAD
 Необязательный второй аргумент позволяет начать поиск с определённой позиции.
+=======
+The optional second parameter allows us to start searching from a given position.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 Например, первое вхождение `"id"` — на позиции `1`. Для того, чтобы найти следующее, начнём поиск с позиции `2`:
 
@@ -300,6 +369,7 @@ if (str.indexOf("Widget") != -1) {
 }
 ```
 
+<<<<<<< HEAD
 #### Трюк с побитовым НЕ
 Существует старый трюк с использованием [побитового оператора НЕ](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_NOT) — `~`. Он преобразует число в 32-разрядное целое со знаком (signed 32-bit integer). Дробная часть, в случае, если она присутствует, отбрасывается. Затем все биты числа инвертируются.
 
@@ -338,6 +408,8 @@ if (~str.indexOf("Widget")) {
 
 На данный момент такой трюк можно встретить только в старом коде, потому что в новом он просто не нужен: есть метод `.includes` (см. ниже).
 
+=======
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 ### includes, startsWith, endsWith
 
 Более современный метод [str.includes(substr, pos)](mdn:js/String/includes) возвращает `true`, если в строке `str` есть подстрока `substr`, либо `false`, если нет.
@@ -360,8 +432,13 @@ alert( "Midget".includes("id", 3) ); // false, поиск начат с пози
 Методы [str.startsWith](mdn:js/String/startsWith) и [str.endsWith](mdn:js/String/endsWith) проверяют, соответственно, начинается ли и заканчивается ли строка определённой строкой:
 
 ```js run
+<<<<<<< HEAD
 alert( "*!*Wid*/!*get".startsWith("Wid") ); // true, "Wid" — начало "Widget"
 alert( "Wid*!*get*/!*".endsWith("get") ); // true, "get" — окончание "Widget"
+=======
+alert( "*!*Wid*/!*get".startsWith("Wid") ); // true, "Widget" starts with "Wid"
+alert( "Wid*!*get*/!*".endsWith("get") ); // true, "Widget" ends with "get"
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 ```
 
 ## Получение подстроки
@@ -385,7 +462,11 @@ alert( "Wid*!*get*/!*".endsWith("get") ); // true, "get" — окончание 
 
     ```js run
     let str = "st*!*ringify*/!*";
+<<<<<<< HEAD
     alert( str.slice(2) ); // ringify, с позиции 2 и до конца
+=======
+    alert( str.slice(2) ); // 'ringify', from the 2nd position till the end
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
     ```
 
     Также для `start/end` можно задавать отрицательные значения. Это означает, что позиция определена как заданное количество символов *с конца строки*:
@@ -393,6 +474,7 @@ alert( "Wid*!*get*/!*".endsWith("get") ); // true, "get" — окончание 
     ```js run
     let str = "strin*!*gif*/!*y";
 
+<<<<<<< HEAD
     // начинаем с позиции 4 справа, а заканчиваем на позиции 1 справа
     alert( str.slice(-4, -1) ); // gif
     ```
@@ -402,6 +484,16 @@ alert( "Wid*!*get*/!*".endsWith("get") ); // true, "get" — окончание 
 
     Это — почти то же, что и `slice`, но можно задавать `start` больше `end`.  
     Если `start` больше `end`, то метод `substring` сработает так, как если бы аргументы были поменяны местами.
+=======
+    // start at the 4th position from the right, end at the 1st from the right
+    alert( str.slice(-4, -1) ); // 'gif'
+    ```
+
+`str.substring(start [, end])`
+: Returns the part of the string *between* `start` and `end` (not including `end`).
+
+    This is almost the same as `slice`, but it allows `start` to be greater than `end` (in this case it simply swaps `start` and `end` values).
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
     Например:
 
@@ -427,32 +519,57 @@ alert( "Wid*!*get*/!*".endsWith("get") ); // true, "get" — окончание 
 
     ```js run
     let str = "st*!*ring*/!*ify";
+<<<<<<< HEAD
     // ring, получаем 4 символа, начиная с позиции 2
     alert( str.substr(2, 4) );
+=======
+    alert( str.substr(2, 4) ); // 'ring', from the 2nd position get 4 characters
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
     ```
 
     Значение первого аргумента может быть отрицательным, тогда позиция определяется с конца:
 
     ```js run
     let str = "strin*!*gi*/!*fy";
+<<<<<<< HEAD
     // gi, получаем 2 символа, начиная с позиции 4 с конца строки
     alert( str.substr(-4, 2) );
     ```
 
     Этот метод находится в [Annex B](https://tc39.es/ecma262/#sec-string.prototype.substr) спецификации языка. Это означает, что его должны поддерживать только браузерные движки JavaScript, и использовать его не рекомендуется. Но на практике он поддерживается везде.
+=======
+    alert( str.substr(-4, 2) ); // 'gi', from the 4th position get 2 characters
+    ```
+
+    This method resides in the [Annex B](https://tc39.es/ecma262/#sec-string.prototype.substr) of the language specification. It means that only browser-hosted Javascript engines should support it, and it's not recommended to use it. In practice, it's supported everywhere.
+
+Let's recap these methods to avoid any confusion:
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 Давайте подытожим, как работают эти методы, чтобы не запутаться:
 
 | метод | выбирает… | отрицательные значения |
 |--------|-----------|-----------|
+<<<<<<< HEAD
 | `slice(start, end)` | от `start` до `end` (не включая `end`) | можно передавать отрицательные значения |
 | `substring(start, end)` | между `start` и `end` (не включая `end`) | отрицательные значения равнозначны `0` |
 | `substr(start, length)` | `length` символов, начиная от `start` | значение `start` может быть отрицательным |
+=======
+| `slice(start, end)` | from `start` to `end` (not including `end`) | allows negatives |
+| `substring(start, end)` | between `start` and `end` (not including `end`)| negative values mean `0` |
+| `substr(start, length)` | from `start` get `length` characters | allows negative `start` |
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 ```smart header="Какой метод выбрать?"
 Все эти методы эффективно выполняют задачу. Формально у метода `substr` есть небольшой недостаток: он описан не в собственно спецификации JavaScript, а в приложении к ней — Annex B. Это приложение описывает возможности языка для использования в браузерах, существующие в основном по историческим причинам. Таким образом, в другом окружении, отличном от браузера, он может не поддерживаться. Однако на практике он работает везде.
 
+<<<<<<< HEAD
 Из двух других вариантов, `slice` более гибок, он поддерживает отрицательные аргументы, и его короче писать. Так что, в принципе, можно запомнить только его.
+=======
+Of the other two variants, `slice` is a little bit more flexible, it allows negative arguments and shorter to write.
+
+So, for practical use it's enough to remember only `slice`.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 ```
 
 ## Сравнение строк
@@ -475,6 +592,7 @@ alert( "Wid*!*get*/!*".endsWith("get") ); // true, "get" — окончание 
 
     Это может привести к своеобразным результатам при сортировке названий стран: нормально было бы ожидать, что `Zealand` будет после `Österreich` в списке.
 
+<<<<<<< HEAD
 Чтобы разобраться, что происходит, давайте ознакомимся с внутренним представлением строк в JavaScript.
 
 Строки кодируются в [UTF-16](https://ru.wikipedia.org/wiki/UTF-16). Таким образом, у любого символа есть соответствующий код. Есть специальные методы, позволяющие получить символ по его коду и наоборот.
@@ -486,7 +604,20 @@ alert( "Wid*!*get*/!*".endsWith("get") ); // true, "get" — окончание 
     // одна и та же буква в нижнем и верхнем регистре
     // будет иметь разные коды
     alert( "z".codePointAt(0) ); // 122
+=======
+To understand what happens, we should be aware that strings in Javascript are encoded using [UTF-16](https://en.wikipedia.org/wiki/UTF-16). That is: each character has a corresponding numeric code.
+
+There are special methods that allow to get the character for the code and back:
+
+`str.codePointAt(pos)`
+: Returns a decimal number representing the code for the character at position `pos`:
+
+    ```js run
+    // different case letters have different codes
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
     alert( "Z".codePointAt(0) ); // 90
+    alert( "z".codePointAt(0) ); // 122
+    alert( "z".codePointAt(0).toString(16) ); // 7a (if we need a hexadecimal value)
     ```
 
 `String.fromCodePoint(code)`
@@ -494,9 +625,16 @@ alert( "Wid*!*get*/!*".endsWith("get") ); // true, "get" — окончание 
 
     ```js run
     alert( String.fromCodePoint(90) ); // Z
+<<<<<<< HEAD
     ```
 
 Давайте сделаем строку, содержащую символы с кодами от `65` до `220` — это латиница и ещё некоторые распространённые символы:
+=======
+    alert( String.fromCodePoint(0x5a) ); // Z (we can also use a hex value as an argument)
+    ```
+
+Now let's see the characters with codes `65..220` (the latin alphabet and a little bit extra) by making a string of them:
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 ```js run
 let str = '';
@@ -505,6 +643,7 @@ for (let i = 65; i <= 220; i++) {
   str += String.fromCodePoint(i);
 }
 alert( str );
+// Output:
 // ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~
 // ¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜ
 ```
@@ -515,16 +654,27 @@ alert( str );
 
 Символы сравниваются по их кодам. Больший код — больший символ. Код `a` (97) больше кода `Z` (90).
 
+<<<<<<< HEAD
 - Все строчные буквы идут после заглавных, так как их коды больше.
 - Некоторые буквы, такие как `Ö`, вообще находятся вне основного алфавита. У этой буквы код больше, чем у любой буквы от `a` до `z`.
 
 ### Правильное сравнение [#correct-comparisons]
+=======
+- All lowercase letters go after uppercase letters because their codes are greater.
+- Some letters like `Ö` stand apart from the main alphabet. Here, its code is greater than anything from `a` to `z`.
+
+### Correct comparisons [#correct-comparisons]
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 "Правильный" алгоритм сравнения строк сложнее, чем может показаться, так как разные языки используют разные алфавиты.
 
 Поэтому браузеру нужно знать, какой язык использовать для сравнения.
 
+<<<<<<< HEAD
 К счастью, все современные браузеры (для IE10− нужна дополнительная библиотека [Intl.JS](https://github.com/andyearnshaw/Intl.js/)) поддерживают стандарт [ECMA 402](https://www.ecma-international.org/ecma-402/1.0/ECMA-402.pdf), обеспечивающий правильное сравнение строк на разных языках с учётом их правил.
+=======
+Luckily, modern browsers support the internationalization standard [ECMA-402](https://www.ecma-international.org/publications-and-standards/standards/ecma-402/).
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 Для этого есть соответствующий метод.
 
@@ -542,6 +692,7 @@ alert( 'Österreich'.localeCompare('Zealand') ); // -1
 
 У этого метода есть два дополнительных аргумента, которые указаны в [документации](mdn:js/String/localeCompare). Первый позволяет указать язык (по умолчанию берётся из окружения) — от него зависит порядок букв. Второй — определить дополнительные правила, такие как чувствительность к регистру, а также следует ли учитывать различия между `"a"` и `"á"`.
 
+<<<<<<< HEAD
 ## Итого
 
 - Есть три типа кавычек. Строки, использующие обратные кавычки, могут занимать более одной строки в коде и включать выражения `${…}`.
@@ -562,3 +713,24 @@ alert( 'Österreich'.localeCompare('Zealand') ); // -1
 Для строк предусмотрены методы для поиска и замены с использованием регулярных выражений. Но это отдельная большая тема, поэтому ей посвящена отдельная глава учебника <info:regular-expressions>. 
 
 Также, на данный момент важно знать, что строки основаны на кодировке Юникод, и поэтому иногда могут возникать проблемы со сравнениями. Подробнее о Юникоде в главе <info:unicode>.
+=======
+## Summary
+
+- There are 3 types of quotes. Backticks allow a string to span multiple lines and embed expressions `${…}`.
+- We can use special characters, such as a line break `\n`.
+- To get a character, use: `[]` or `at` method.
+- To get a substring, use: `slice` or `substring`.
+- To lowercase/uppercase a string, use: `toLowerCase/toUpperCase`.
+- To look for a substring, use: `indexOf`, or `includes/startsWith/endsWith` for simple checks.
+- To compare strings according to the language, use: `localeCompare`, otherwise they are compared by character codes.
+
+There are several other helpful methods in strings:
+
+- `str.trim()` -- removes ("trims") spaces from the beginning and end of the string.
+- `str.repeat(n)` -- repeats the string `n` times.
+- ...and more to be found in the [manual](mdn:js/String).
+
+Strings also have methods for doing search/replace with regular expressions. But that's big topic, so it's explained in a separate tutorial section <info:regular-expressions>.
+
+Also, as of now it's important to know that strings are based on Unicode encoding, and hence there're issues with comparisons. There's more about Unicode in the chapter <info:unicode>.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e

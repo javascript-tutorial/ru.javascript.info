@@ -57,9 +57,15 @@ alert( getMaxSubSum([1, 2, 3]) ); // 6
 alert( getMaxSubSum([100, -9, 2, -3, 5]) ); // 100
 ```
 
+<<<<<<< HEAD
 Это решение имеет [оценку сложности](https://ru.wikipedia.org/wiki/«O»_большое_и_«o»_малое) O(n<sup>2</sup>). Другими словами, если мы увеличим размер массива в 2 раза, время выполнения алгоритма увеличится в 4 раза.
 
 Для больших массивов(1000, 10000 или больше элементов) такие алгоритмы могут приводить к серьёзным "тормозам".
+=======
+The solution has a time complexity of [O(n<sup>2</sup>)](https://en.wikipedia.org/wiki/Big_O_notation). In other words, if we increase the array size 2 times, the algorithm will work 4 times longer.
+
+For big arrays (1000, 10000 or more items) such algorithms can lead to serious sluggishness.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 # Быстрое решение
 
@@ -91,4 +97,8 @@ alert( getMaxSubSum([-1, -2, -3]) ); // 0
 
 Этот алгоритм требует ровно 1 проход по массиву и его оценка сложности O(n).
 
+<<<<<<< HEAD
 Больше информации об алгоритме тут: [Задача поиска максимальной суммы подмассива](https://en.wikipedia.org/wiki/Maximum_subarray_problem). Если всё ещё не очевидно как это работает, просмотрите алгоритм в примерах выше, это будет лучше всяких слов.
+=======
+You can find more detailed information about the algorithm here: [Maximum subarray problem](http://en.wikipedia.org/wiki/Maximum_subarray_problem). If it's still not obvious why that works, then please trace the algorithm on the examples above, see how it works, that's better than any words.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e

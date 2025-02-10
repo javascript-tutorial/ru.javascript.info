@@ -1,7 +1,11 @@
 
 # Объекты
 
+<<<<<<< HEAD
 Как мы знаем из главы <info:types>, в JavaScript существует 8 типов данных. Семь из них называются "примитивными", так как содержат только одно значение (будь то строка, число или что-то другое).
+=======
+As we know from the chapter <info:types>, there are eight data types in JavaScript. Seven of them are called "primitive", because their values contain only a single thing (be it a string or a number or whatever).
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 Объекты же используются для хранения коллекций различных значений и более сложных сущностей. В JavaScript объекты используются очень часто, это одна из основ языка. Поэтому мы должны понять их, прежде чем углубляться куда-либо ещё.
 
@@ -44,7 +48,11 @@ let user = {     // объект
 
 ![user object](object-user.svg)
 
+<<<<<<< HEAD
 Мы можем в любой момент добавить в него новые папки, удалить папки или прочитать содержимое любой папки.
+=======
+We can add, remove and read files from it at any time.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 Для обращения к свойствам используется запись "через точку":
 
@@ -62,7 +70,11 @@ user.isAdmin = true;
 
 ![user object 2](object-user-isadmin.svg)
 
+<<<<<<< HEAD
 Для удаления свойства мы можем использовать оператор `delete`:
+=======
+To remove a property, we can use the `delete` operator:
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 ```js
 delete user.age;
@@ -125,7 +137,13 @@ alert(user.name); // Pete
 user.likes birds = true
 ```
 
+<<<<<<< HEAD
 JavaScript видит, что мы обращаемся к свойству `user.likes`, а затем идёт непонятное слово `birds`. В итоге синтаксическая ошибка.
+=======
+JavaScript doesn't understand that. It thinks that we address `user.likes`, and then gives a syntax error when comes across unexpected `birds`.
+
+The dot requires the key to be a valid variable identifier. That implies: contains no spaces, doesn't start with a digit and doesn't include special characters (`$` and `_` are allowed).
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 Точка требует, чтобы ключ был именован по правилам именования переменных. То есть не имел пробелов, не начинался с цифры и не содержал специальные символы, кроме `$` и `_`.
 
@@ -185,7 +203,11 @@ alert( user.key ); // undefined
 
 ### Вычисляемые свойства
 
+<<<<<<< HEAD
 Мы можем использовать квадратные скобки в литеральной нотации для создания *вычисляемого свойства*.
+=======
+We can use square brackets in an object literal, when creating an object. That's called *computed properties*.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 Пример:
 
@@ -226,22 +248,39 @@ let bag = {
 };
 ```
 
+<<<<<<< HEAD
 Квадратные скобки дают намного больше возможностей, чем запись через точку. Они позволяют использовать любые имена свойств и переменные, хотя и требуют более громоздких конструкций кода.
+=======
+Square brackets are much more powerful than dot notation. They allow any property names and variables. But they are also more cumbersome to write.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 Подведём итог: в большинстве случаев, когда имена свойств известны и просты, используется запись через точку. Если же нам нужно что-то более сложное, то мы используем квадратные скобки.
 
+<<<<<<< HEAD
 ## Свойство из переменной
 
 В реальном коде часто нам необходимо использовать существующие переменные как значения для свойств с тем же именем.
 
 Например:
+=======
+## Property value shorthand
+
+In real code, we often use existing variables as values for property names.
+
+For instance:
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 ```js run
 function makeUser(name, age) {
   return {
     name: name,
+<<<<<<< HEAD
     age: age
     // ...другие свойства
+=======
+    age: age,
+    // ...other properties
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
   };
 }
 
@@ -249,32 +288,52 @@ let user = makeUser("John", 30);
 alert(user.name); // John
 ```
 
+<<<<<<< HEAD
 В примере выше название свойств `name` и `age` совпадают с названиями переменных, которые мы подставляем в качестве значений этих свойств. Такой подход настолько распространён, что существуют специальные *короткие свойства* для упрощения этой записи.
 
 Вместо `name:name` мы можем написать просто `name`:
+=======
+In the example above, properties have the same names as variables. The use-case of making a property from a variable is so common, that there's a special *property value shorthand* to make it shorter.
+
+Instead of `name:name` we can just write `name`, like this:
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 ```js
 function makeUser(name, age) {
 *!*
   return {
+<<<<<<< HEAD
     name, // то же самое, что и name: name
     age   // то же самое, что и age: age
+=======
+    name, // same as name: name
+    age,  // same as age: age
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
     // ...
   };
 */!*
 }
 ```
 
+<<<<<<< HEAD
 Мы можем использовать как обычные свойства, так и короткие в одном и том же объекте:
 
 ```js
 let user = {
   name,  // тоже самое, что и name:name
+=======
+We can use both normal properties and shorthands in the same object:
+
+```js
+let user = {
+  name,  // same as name:name
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
   age: 30
 };
 ```
 
 
+<<<<<<< HEAD
 ## Ограничения на имена свойств
 
 Как мы уже знаем, имя переменной не может совпадать с зарезервированными словами, такими как "for", "let", "return" и т.д.
@@ -283,6 +342,16 @@ let user = {
 
 ```js run
 // эти имена свойств допустимы
+=======
+## Property names limitations
+
+As we already know, a variable cannot have a name equal to one of the language-reserved words like "for", "let", "return" etc.
+
+But for an object property, there's no such restriction:
+
+```js run
+// these properties are all right
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 let obj = {
   for: 1,
   let: 2,
@@ -292,6 +361,7 @@ let obj = {
 alert( obj.for + obj.let + obj.return );  // 6
 ```
 
+<<<<<<< HEAD
 Иными словами, нет никаких ограничений к именам свойств. Они могут быть в виде строк или символов (специальный тип для идентификаторов, который будет рассмотрен позже).
 
 Все другие типы данных будут автоматически преобразованы к строке.
@@ -325,6 +395,41 @@ alert(obj.__proto__); // [object Object], значение - это объект
 В отличие от многих других языков, особенность JavaScript-объектов в том, что можно получить доступ к любому свойству. Даже если свойства не существует - ошибки не будет!
 
 При обращении к свойству, которого нет, возвращается `undefined`. Это позволяет просто проверить существование свойства:
+=======
+In short, there are no limitations on property names. They can be any strings or symbols (a special type for identifiers, to be covered later).
+
+Other types are automatically converted to strings.
+
+For instance, a number `0` becomes a string `"0"` when used as a property key:
+
+```js run
+let obj = {
+  0: "test" // same as "0": "test"
+};
+
+// both alerts access the same property (the number 0 is converted to string "0")
+alert( obj["0"] ); // test
+alert( obj[0] ); // test (same property)
+```
+
+There's a minor gotcha with a special property named `__proto__`. We can't set it to a non-object value:
+
+```js run
+let obj = {};
+obj.__proto__ = 5; // assign a number
+alert(obj.__proto__); // [object Object] - the value is an object, didn't work as intended
+```
+
+As we see from the code, the assignment to a primitive `5` is ignored.
+
+We'll cover the special nature of `__proto__` in [subsequent chapters](info:prototype-inheritance), and suggest the [ways to fix](info:prototype-methods) such behavior.
+
+## Property existence test, "in" operator
+
+A notable feature of objects in JavaScript, compared to many other languages, is that it's possible to access any property. There will be no error if the property doesn't exist!
+
+Reading a non-existing property just returns `undefined`. So we can easily test whether the property exists:
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 ```js run
 let user = {};
@@ -332,7 +437,11 @@ let user = {};
 alert( user.noSuchProperty === undefined ); // true означает "свойства нет"
 ```
 
+<<<<<<< HEAD
 Также существует специальный оператор `"in"` для проверки существования свойства в объекте.
+=======
+There's also a special operator `"in"` for that.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 Синтаксис оператора:
 ```js
@@ -350,16 +459,29 @@ alert( "blabla" in user ); // false, user.blabla не существует
 
 Обратите внимание, что слева от оператора `in` должно быть *имя свойства*. Обычно это строка в кавычках.
 
+<<<<<<< HEAD
 Если мы опускаем кавычки, это значит, что мы указываем переменную, в которой находится имя свойства. Например:
+=======
+If we omit quotes, that means a variable should contain the actual name to be tested. For instance:
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 ```js run
 let user = { age: 30 };
 
 let key = "age";
+<<<<<<< HEAD
 alert( *!*key*/!* in user ); // true, имя свойства было взято из переменной key
 ```
 
 Для чего вообще нужен оператор `in`? Разве недостаточно сравнения с `undefined`?
+=======
+alert( *!*key*/!* in user ); // true, property "age" exists
+```
+
+Why does the `in` operator exist? Isn't it enough to compare against `undefined`?
+
+Well, most of the time the comparison with `undefined` works fine. But there's a special case when it fails, but `"in"` works correctly.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 В большинстве случаев прекрасно сработает сравнение с `undefined`. Но есть особый случай, когда оно не подходит и нужно использовать `"in"`.
 
@@ -374,6 +496,7 @@ alert( obj.test ); //  выведет undefined, значит свойство �
 alert( "test" in obj ); // true, свойство существует!
 ```
 
+<<<<<<< HEAD
 В примере выше свойство `obj.test` технически существует в объекте. Оператор `in` сработал правильно.
 
 Подобные ситуации случаются очень редко, так как `undefined` обычно явно не присваивается. Для "неизвестных" или "пустых" свойств мы используем значение `null`.
@@ -381,6 +504,14 @@ alert( "test" in obj ); // true, свойство существует!
 ## Цикл "for..in" [#forin]
 
 Для перебора всех свойств объекта используется цикл `for..in`. Этот цикл отличается от изученного ранее цикла `for(;;)`.
+=======
+In the code above, the property `obj.test` technically exists. So the `in` operator works right.
+
+Situations like this happen very rarely, because `undefined` should not be explicitly assigned. We mostly use `null` for "unknown" or "empty" values. So the `in` operator is an exotic guest in the code.
+
+
+## The "for..in" loop [#forin]
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 Синтаксис:
 
@@ -411,9 +542,13 @@ for (let key in user) {
 
 Кроме того, мы могли бы использовать другое имя переменной. Например, часто используется вариант `"for (let prop in obj)"`.
 
+<<<<<<< HEAD
 ### Упорядочение свойств объекта
 
 Упорядочены ли свойства объекта? Другими словами, если мы будем в цикле перебирать все свойства объекта, получим ли мы их в том же порядке, в котором мы их добавляли? Можем ли мы на это рассчитывать?
+=======
+### Ordered like an object
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 Короткий ответ: свойства упорядочены особым образом: свойства с целочисленными ключами сортируются по возрастанию, остальные располагаются в порядке создания. Разберёмся подробнее.
 
@@ -435,7 +570,11 @@ for (let code in codes) {
 */!*
 ```
 
+<<<<<<< HEAD
 Если мы делаем сайт для немецкой аудитории, то, вероятно, мы хотим, чтобы код `49` был первым.
+=======
+The object may be used to suggest a list of options to the user. If we're making a site mainly for a German audience then we probably want `49` to be the first.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 Но если мы запустим код, мы увидим совершенно другую картину:
 
@@ -447,6 +586,7 @@ for (let code in codes) {
 ````smart header="Целочисленные свойства? Это что?"
 Термин "целочисленное свойство" означает строку, которая может быть преобразована в целое число и обратно без изменений.
 
+<<<<<<< HEAD
 То есть, `"49"` - это целочисленное имя свойства, потому что если его преобразовать в целое число, а затем обратно в строку, то оно не изменится. А вот свойства `"+49"` или `"1.2"` таковыми не являются:
 
 ```js run
@@ -454,6 +594,16 @@ for (let code in codes) {
 alert( String(Math.trunc(Number("49"))) ); // "49", то же самое ⇒ свойство целочисленное
 alert( String(Math.trunc(Number("+49"))) ); // "49", не то же самое, что "+49" ⇒ свойство не целочисленное
 alert( String(Math.trunc(Number("1.2"))) ); // "1", не то же самое, что "1.2" ⇒ свойство не целочисленное
+=======
+So, `"49"` is an integer property name, because when it's transformed to an integer number and back, it's still the same. But `"+49"` and `"1.2"` are not:
+
+```js run
+// Number(...) explicitly converts to a number
+// Math.trunc is a built-in function that removes the decimal part
+alert( String(Math.trunc(Number("49"))) ); // "49", same, integer property
+alert( String(Math.trunc(Number("+49"))) ); // "49", not same "+49" ⇒ not integer property
+alert( String(Math.trunc(Number("1.2"))) ); // "1", not same "1.2" ⇒ not integer property
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 ```
 ````
 
@@ -494,6 +644,7 @@ for (let code in codes) {
 
 Теперь код работает так, как мы задумывали.
 
+<<<<<<< HEAD
 ## Итого
 
 Объекты - это ассоциативные массивы с рядом дополнительных возможностей.
@@ -524,3 +675,34 @@ for (let code in codes) {
 У них есть свои особенности, которые мы изучим позже. Иногда люди говорят что-то вроде "тип данных Array" или "тип данных Date", но формально они не являются отдельными типами, а относятся к типу данных `Object`. Они лишь расширяют его различными способами.
 
 Объекты в JavaScript очень мощные. Здесь мы только немного углубились в действительно огромную тему. Мы будем плотно работать с объектами и узнаем о них больше в следующих частях учебника.
+=======
+## Summary
+
+Objects are associative arrays with several special features.
+
+They store properties (key-value pairs), where:
+- Property keys must be strings or symbols (usually strings).
+- Values can be of any type.
+
+To access a property, we can use:
+- The dot notation: `obj.property`.
+- Square brackets notation `obj["property"]`. Square brackets allow taking the key from a variable, like `obj[varWithKey]`.
+
+Additional operators:
+- To delete a property: `delete obj.prop`.
+- To check if a property with the given key exists: `"key" in obj`.
+- To iterate over an object: `for (let key in obj)` loop.
+
+What we've studied in this chapter is called a "plain object", or just `Object`.
+
+There are many other kinds of objects in JavaScript:
+
+- `Array` to store ordered data collections,
+- `Date` to store the information about the date and time,
+- `Error` to store the information about an error.
+- ...And so on.
+
+They have their special features that we'll study later. Sometimes people say something like "Array type" or "Date type", but formally they are not types of their own, but belong to a single "object" data type. And they extend it in various ways.
+
+Objects in JavaScript are very powerful. Here we've just scratched the surface of a topic that is really huge. We'll be closely working with objects and learning more about them in further parts of the tutorial.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e

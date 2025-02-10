@@ -27,7 +27,11 @@ alert(user); // {name: "John", age: 30}
 
 ## JSON.stringify
 
+<<<<<<< HEAD
 [JSON](https://ru.wikipedia.org/wiki/JSON) (JavaScript Object Notation) - это общий формат для представления значений и объектов. Его описание задокументировано в стандарте [RFC 4627](https://datatracker.ietf.org/doc/html/rfc4627). Первоначально он был создан для JavaScript, но многие другие языки также имеют библиотеки, которые могут работать с ним. Таким образом, JSON легко использовать для обмена данными, когда клиент использует JavaScript, а сервер написан на Ruby/PHP/Java или любом другом языке.
+=======
+The [JSON](https://en.wikipedia.org/wiki/JSON) (JavaScript Object Notation) is a general format to represent values and objects. It is described as in [RFC 4627](https://tools.ietf.org/html/rfc4627) standard. Initially it was made for JavaScript, but many other languages have libraries to handle it as well.  So it's easy to use JSON for data exchange when the client uses JavaScript and the server is written on Ruby/PHP/Java/Whatever.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 JavaScript предоставляет методы:
 
@@ -41,7 +45,7 @@ let student = {
   age: 30,
   isAdmin: false,
   courses: ['html', 'css', 'js'],
-  wife: null
+  spouse: null
 };
 
 *!*
@@ -58,7 +62,7 @@ alert(json);
   "age": 30,
   "isAdmin": false,
   "courses": ["html", "css", "js"],
-  "wife": null
+  "spouse": null
 }
 */
 */!*
@@ -103,9 +107,15 @@ JSON является независимой от языка специфика�
 
 А именно:
 
+<<<<<<< HEAD
 - Свойства-функции (методы).
 - Символьные ключи и значения.
 - Свойства, содержащие `undefined`.
+=======
+- Function properties (methods).
+- Symbolic keys and values.
+- Properties that store `undefined`.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 ```js run
 let user = {
@@ -328,7 +338,13 @@ alert(JSON.stringify(user, null, 2));
 */
 ```
 
+<<<<<<< HEAD
 Третьим аргументом также может быть строка. В этом случае строка будет использоваться для отступа вместо ряда пробелов.
+=======
+The third argument can also be a string. In this case, the string is used for indentation instead of a number of spaces.
+
+The `space` parameter is used solely for logging and nice-output purposes.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 Параметр `space` применяется исключительно для логирования и красивого вывода.
 
@@ -427,9 +443,9 @@ alert( numbers[1] ); // 1
 Или для вложенных объектов:
 
 ```js run
-let user = '{ "name": "John", "age": 35, "isAdmin": false, "friends": [0,1,2,3] }';
+let userData = '{ "name": "John", "age": 35, "isAdmin": false, "friends": [0,1,2,3] }';
 
-user = JSON.parse(user);
+let user = JSON.parse(userData);
 
 alert( user.friends[1] ); // 1
 ```
@@ -451,7 +467,11 @@ let json = `{
 
 Кроме того, JSON не поддерживает комментарии. Добавление комментария в JSON делает его недействительным.
 
+<<<<<<< HEAD
 Существует ещё один формат [JSON5](https://json5.org/), который поддерживает ключи без кавычек, комментарии и т.д. Но это самостоятельная библиотека, а не спецификация языка.
+=======
+There's another format named [JSON5](https://json5.org/), which allows unquoted keys, comments etc. But this is a standalone library, not in the specification of the language.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 Обычный JSON настолько строг не потому, что его разработчики ленивы, а потому, что позволяет легко, надёжно и очень быстро реализовывать алгоритм кодирования и чтения.
 

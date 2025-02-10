@@ -4,4 +4,8 @@ function debounce(func, ms) {
     clearTimeout(timeout);
     timeout = setTimeout(() => func.apply(this, arguments), ms);
   };
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
