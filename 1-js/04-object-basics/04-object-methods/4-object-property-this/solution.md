@@ -22,18 +22,32 @@ alert( user.ref.name ); // Error: Cannot read property 'name' of undefined
 
 Таким образом, `ref: this` фактически принимает текущее `this` функции `makeUser()`.
 
+<<<<<<< HEAD
 Мы можем переписать функцию и вернуть то же самое `this` со значением `undefined`:
 
 ```js run
 function makeUser(){
   return this; // на этот раз нет литерала объекта
+=======
+We can rewrite the function and return the same `this` with `undefined` value: 
+
+```js run
+function makeUser(){
+  return this; // this time there's no object literal
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 }
 
 alert( makeUser().name ); // Error: Cannot read property 'name' of undefined
 ```
+<<<<<<< HEAD
 Как вы можете видеть, результат `alert( makeUser().name )` совпадает с результатом `alert( user.ref.name )` из предыдущего примера.
 
 Вот противоположный случай:
+=======
+As you can see the result of `alert( makeUser().name )` is the same as the result of `alert( user.ref.name )` from the previous example.
+
+Here's the opposite case:
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 ```js run
 function makeUser() {

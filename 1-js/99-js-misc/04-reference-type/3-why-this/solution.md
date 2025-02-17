@@ -1,4 +1,5 @@
 
+<<<<<<< HEAD
 Вот как это объясняется.
 
 1. Это обычный вызов метода объекта через точку `.`, и `this` ссылается на объект перед точкой.
@@ -16,3 +17,26 @@
 Чтобы объяснить поведение в примерах `(3)` и `(4)`, нам нужно помнить, что доступ к свойству (через точку или квадратные скобки) возвращает специальное значение ссылочного типа (Reference Type).
 
 За исключением вызова метода, любая другая операция (подобно операции присваивания `=` или сравнения через логические операторы, например `||`) превращает это значение в обычное, которое не несёт информации, позволяющей установить `this`.
+=======
+Here's the explanations.
+
+1. That's a regular object method call.
+
+2. The same, parentheses do not change the order of operations here, the dot is first anyway.
+
+3. Here we have a more complex call `(expression)()`. The call works as if it were split into two lines:
+
+    ```js no-beautify
+    f = obj.go; // calculate the expression
+    f();        // call what we have
+    ```
+
+    Here `f()` is executed as a function, without `this`.
+
+4. The similar thing as `(3)`, to the left of the parentheses `()` we have an expression.
+
+To explain the behavior of `(3)` and `(4)` we need to recall that property accessors (dot or square brackets) return a value of the Reference Type.  
+
+Any operation on it except a method call (like assignment `=` or `||`) turns it into an ordinary value, which does not carry the information allowing to set `this`.
+
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a

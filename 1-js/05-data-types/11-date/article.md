@@ -33,6 +33,7 @@
 
     Это -- легковесное численное представление даты. Из таймстампа всегда можно получить дату с помощью `new Date(timestamp)` и преобразовать существующий объект `Date` в таймстамп, используя метод `date.getTime()` (см. ниже).
 
+<<<<<<< HEAD
     Датам до 1 января 1970 будут соответствовать отрицательные таймстампы, например:
     ```js run
     // 31 декабря 1969 года
@@ -40,6 +41,15 @@
     alert( Dec31_1969 );
     ```
     
+=======
+    Dates before 01.01.1970 have negative timestamps, e.g.:
+    ```js run
+    // 31 Dec 1969
+    let Dec31_1969 = new Date(-24 * 3600 * 1000);
+    alert( Dec31_1969 );
+    ```
+
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 `new Date(datestring)`
 : Если аргумент всего один, и это строка, то из неё "прочитывается" дата. Алгоритм разбора - такой же, как в `Date.parse`, который мы рассмотрим позже.
 
@@ -57,19 +67,34 @@
 `new Date(year, month, date, hours, minutes, seconds, ms)`
 : Создать объект `Date` с заданными компонентами в местном часовом поясе. Обязательны только первые два аргумента.
 
+<<<<<<< HEAD
     - `year` должен состоять из четырёх цифр. Для совместимости также принимаются 2 цифры и рассматриваются как `19xx`, к примеру, `98` здесь это тоже самое, что и `1998`, но настоятельно рекомендуется всегда использовать 4 цифры.
     - `month` начинается с `0` (январь) по `11` (декабрь).
     - Параметр `date` здесь представляет собой день месяца. Если параметр не задан, то принимается значение `1`.
     - Если параметры `hours/minutes/seconds/ms` отсутствуют, их значением становится `0`.
+=======
+    - The `year` should have 4 digits. For compatibility, 2 digits are also accepted and considered `19xx`, e.g. `98` is the same as `1998` here, but always using 4 digits is strongly encouraged.
+    - The `month` count starts with `0` (Jan), up to `11` (Dec).
+    - The `date` parameter is actually the day of month, if absent then `1` is assumed.
+    - If `hours/minutes/seconds/ms` is absent, they are assumed to be equal `0`.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
     Например:
 
     ```js
+<<<<<<< HEAD
     new Date(2011, 0, 1, 0, 0, 0, 0); // // 1 Jan 2011, 00:00:00
     new Date(2011, 0, 1); // то же самое, так как часы и проч. равны 0
     ```
 
     Максимальная точность – 1 мс (до 1/1000 секунды):
+=======
+    new Date(2011, 0, 1, 0, 0, 0, 0); // 1 Jan 2011, 00:00:00
+    new Date(2011, 0, 1); // the same, hours etc are 0 by default
+    ```
+
+    The maximal precision is 1 ms (1/1000 sec):
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
     ```js run
     let date = new Date(2011, 0, 1, 2, 3, 4, 567);
@@ -123,8 +148,13 @@ alert( date.getUTCHours() );
 [getTime()](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date/getTime)
 : Для заданной даты возвращает таймстамп - количество миллисекунд, прошедших с 1 января 1970 года UTC+0.
 
+<<<<<<< HEAD
 [getTimezoneOffset()](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date/getTimezoneOffset)
 : Возвращает разницу в минутах между UTC и местным часовым поясом:
+=======
+[getTimezoneOffset()](mdn:js/Date/getTimezoneOffset)
+: Returns the difference between UTC and the local time zone, in minutes:
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
     ```js run
     // если вы в часовом поясе UTC-1, то выводится 60
@@ -348,7 +378,11 @@ let time1 = 0;
 let time2 = 0;
 
 *!*
+<<<<<<< HEAD
 // bench(diffSubtract) и bench(diffGetTime) поочерёдно запускаются 10 раз
+=======
+// run bench(diffSubtract) and bench(diffGetTime) each 10 times alternating
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 for (let i = 0; i < 10; i++) {
   time1 += bench(diffSubtract);
   time2 += bench(diffGetTime);
@@ -376,7 +410,11 @@ for (let i = 0; i < 10; i++) {
 ```warn header="Будьте осторожны с микробенчмарками"
 Современные интерпретаторы JavaScript выполняют множество оптимизаций. Они могут повлиять на результаты "искусственных тестов" по сравнению с "нормальным использованием", особенно если мы тестируем что-то очень маленькое, например, работу оператора или встроенной функции. Поэтому если хотите серьёзно понять производительность, пожалуйста, изучите, как работают интерпретаторы JavaScript. И тогда вам, вероятно, уже не понадобятся микробенчмарки.
 
+<<<<<<< HEAD
 Отличный набор статей о V8 можно найти на <https://mrale.ph>.
+=======
+The great pack of articles about V8 can be found at <https://mrale.ph>.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 ```
 
 ## Разбор строки с датой
@@ -385,10 +423,17 @@ for (let i = 0; i < 10; i++) {
 
 Формат строки должен быть следующим: `YYYY-MM-DDTHH:mm:ss.sssZ`, где:
 
+<<<<<<< HEAD
 - `YYYY-MM-DD` -- это дата: год-месяц-день.
 - Символ `"T"` используется в качестве разделителя.
 - `HH:mm:ss.sss` -- время: часы, минуты, секунды и миллисекунды.
 - Необязательная часть `'Z'` обозначает часовой пояс в формате `+-hh:mm`. Если указать просто букву `Z`, то получим UTC+0.
+=======
+- `YYYY-MM-DD` -- is the date: year-month-day.
+- The character `"T"` is used as the delimiter.
+- `HH:mm:ss.sss` -- is the time: hours, minutes, seconds and milliseconds.
+- The optional `'Z'` part denotes the time zone in the format `+-hh:mm`. A single letter `Z` would mean UTC+0.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 Возможны и более короткие варианты, например, `YYYY-MM-DD` или `YYYY-MM`, или даже `YYYY`.
 
@@ -407,7 +452,7 @@ alert(ms); // 1327611110417 (таймстамп)
 ```js run
 let date = new Date( Date.parse('2012-01-26T13:51:50.417-07:00') );
 
-alert(date);  
+alert(date);
 ```
 
 ## Итого
@@ -424,10 +469,17 @@ alert(date);
 Порой нам нужно измерить время с большей точностью. Собственными средствами JavaScript измерять время в микросекундах (одна миллионная секунды) нельзя, но в большинстве сред такая возможность есть. К примеру, в браузерах есть метод [performance.now()](https://developer.mozilla.org/ru/docs/Web/API/Performance/now), возвращающий количество миллисекунд с начала загрузки страницы с точностью до микросекунд (3 цифры после точки):
 
 ```js run
+<<<<<<< HEAD
 alert(`Загрузка началась ${performance.now()}мс назад`);
 // Получаем что-то вроде: "Загрузка началась 34731.26000000001мс назад"
 // .26 –- это микросекунды (260 микросекунд)
 // корректными являются только первые три цифры после точки, а остальные -- это ошибка точности
+=======
+alert(`Loading started ${performance.now()}ms ago`);
+// Something like: "Loading started 34731.26000000001ms ago"
+// .26 is microseconds (260 microseconds)
+// more than 3 digits after the decimal point are precision errors, only the first 3 are correct
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 ```
 
 В Node.js для этого предусмотрен модуль `microtime` и ряд других способов. Технически почти любое устройство или среда позволяет добиться большей точности, просто её нет в объекте `Date`.

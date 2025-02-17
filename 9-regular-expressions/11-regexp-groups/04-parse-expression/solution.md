@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 Регулярное выражение для числа: `pattern:-?\d+(\.\d+)?`. Мы создали его в предыдущих задачах.
+=======
+A regexp for a number is: `pattern:-?\d+(\.\d+)?`. We created it in the previous task.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 Регулярное выражение для оператора `pattern:[-+*/]`. Дефис `pattern:-` стоит в начале квадратных скобок, потому что в середине этот символ будет означать диапазон, а нам нужен просто символ `-`.
 
@@ -8,10 +12,17 @@
 
 Полное выражение: `pattern:-?\d+(\.\d+)?\s*[-+*/]\s*-?\d+(\.\d+)?`.
 
+<<<<<<< HEAD
 Оно состоит из трёх частей, между которыми стоит `pattern:\s*`:
 1. `pattern:-?\d+(\.\d+)?` - первое число,
 1. `pattern:[-+*/]` - оператор,
 1. `pattern:-?\d+(\.\d+)?` - второе число.
+=======
+It has 3 parts, with `pattern:\s*` between them:
+1. `pattern:-?\d+(\.\d+)?` - the first number,
+2. `pattern:[-+*/]` - the operator,
+3. `pattern:-?\d+(\.\d+)?` - the second number.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 Для получения этих частей в виде отдельных элементов массива-результата давайте вставим скобки вокруг каждой из них, получится `pattern:(-?\d+(\.\d+)?)\s*([-+*/])\s*(-?\d+(\.\d+)?)`.
 
@@ -53,4 +64,18 @@ function parse(expr) {
 }
 
 alert( parse("-1.23 * 3.45") );  // -1.23, *, 3.45
+```
+
+As an alternative to using the non-capturing `?:`, we could name the groups, like this:
+
+```js run
+function parse(expr) {
+	let regexp = /(?<a>-?\d+(?:\.\d+)?)\s*(?<operator>[-+*\/])\s*(?<b>-?\d+(?:\.\d+)?)/;
+
+	let result = expr.match(regexp);
+
+	return [result.groups.a, result.groups.operator, result.groups.b];
+}
+
+alert( parse("-1.23 * 3.45") );  // -1.23, *, 3.45;
 ```

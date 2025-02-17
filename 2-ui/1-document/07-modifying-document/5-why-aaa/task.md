@@ -10,6 +10,14 @@ importance: 1
 
 Почему так происходит?
 
+<<<<<<< HEAD
+=======
+In the example below, the call `table.remove()` removes the table from the document.
+
+But if you run it, you can see that the text `"aaa"` is still visible.
+
+Why does that happen?
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 ```html height=100 run
 <table id="table">
@@ -23,6 +31,10 @@ importance: 1
   alert(table); // таблица, как и должно быть
 
   table.remove();
+<<<<<<< HEAD
   // почему в документе остался текст "ааа"?
+=======
+  // why there's still "aaa" in the document?
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 </script>
 ```

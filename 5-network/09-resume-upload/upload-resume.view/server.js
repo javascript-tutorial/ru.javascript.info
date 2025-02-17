@@ -10,7 +10,11 @@ let uploads = Object.create(null);
 function onUpload(req, res) {
 
   let fileId = req.headers['x-file-id'];
+<<<<<<< HEAD
   let startByte = parseInt(req.headers['x-start-byte']);
+=======
+  let startByte = +req.headers['x-start-byte'];
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
   if (!fileId) {
     res.writeHead(400, "No file id");
