@@ -4,6 +4,7 @@
 ```warn header="В примерах мы будем использовать браузерные методы"
 Для демонстрации использования колбэков, промисов и других абстрактных понятий мы будем использовать некоторые браузерные методы: в частности, загрузку скриптов и выполнение простых манипуляций с документом.
 
+<<<<<<< HEAD
 Если вы не знакомы с этими методами, и их использование в примерах вызывает у вас недоумение, возможно, вам стоит прочитать несколько глав из [следующей части](/document) учебника.
 
 Тем не менее, мы все равно попытаемся максимально доходчиво всё разъяснить. Ничего особо сложного в плане браузера не будет.
@@ -12,15 +13,35 @@
 Многие действия в JavaScript *асинхронные*.
 
 Например, рассмотрим функцию `loadScript(src)`:
+=======
+```warn header="We use browser methods in examples here"
+To demonstrate the use of callbacks, promises and other abstract concepts, we'll be using some browser methods: specifically, loading scripts and performing simple document manipulations.
+
+If you're not familiar with these methods, and their usage in the examples is confusing, you may want to read a few chapters from the [next part](/document) of the tutorial.
+
+Although, we'll try to make things clear anyway. There won't be anything really complex browser-wise.
+```
+
+Many functions are provided by JavaScript host environments that allow you to schedule *asynchronous* actions. In other words, actions that we initiate now, but they finish later.
+
+For instance, one such function is the `setTimeout` function.
+
+There are other real-world examples of asynchronous actions, e.g. loading scripts and modules (we'll cover them in later chapters).
+
+Take a look at the function `loadScript(src)`, that loads a script with the given `src`:
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 ```js
 function loadScript(src) {
+  // creates a <script> tag and append it to the page
+  // this causes the script with given src to start loading and run when complete
   let script = document.createElement('script');
   script.src = src;
   document.head.append(script);
 }
 ```
 
+<<<<<<< HEAD
 Эта функция загружает на страницу новый скрипт. Когда в тело документа добавится конструкция `<script src="…">`, браузер загрузит скрипт и выполнит его.
 
 Вот пример использования этой функции:
@@ -33,6 +54,20 @@ loadScript('/my/script.js');
 Такие функции называют "асинхронными", потому что действие (загрузка скрипта) будет завершено не сейчас, а потом.
 
 Если после вызова `loadScript(…)` есть какой-то код, то он не будет ждать, пока скрипт загрузится.
+=======
+It inserts into the document a new, dynamically created, tag `<script src="…">` with the given `src`. The browser automatically starts loading it and executes when complete.
+
+We can use this function like this:
+
+```js
+// load and execute the script at the given path
+loadScript('/my/script.js');
+```
+
+The script is executed "asynchronously", as it starts loading now, but runs later, when the function has already finished.
+
+If there's any code below `loadScript(…)`, it doesn't wait until the script loading finishes.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 ```js
 loadScript('/my/script.js');
@@ -41,7 +76,11 @@ loadScript('/my/script.js');
 // ...
 ```
 
+<<<<<<< HEAD
 Мы хотели бы использовать новый скрипт, как только он будет загружен. Скажем, он объявляет новую функцию, которую мы хотим выполнить.
+=======
+Let's say we need to use the new script as soon as it loads. It declares new functions, and we want to run them.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 Но если мы просто вызовем эту функцию после `loadScript(…)`, у нас ничего не выйдет:
 
@@ -68,9 +107,15 @@ function loadScript(src, *!*callback*/!*) {
 }
 ```
 
+<<<<<<< HEAD
 Событие `onload` описано в статье <info:onload-onerror#loading-a-script>, оно в основном выполняет функцию после загрузки и выполнения скрипта.
 
 Теперь, если мы хотим вызвать функцию из скрипта, нужно делать это в колбэке:
+=======
+The `onload` event is described in the article <info:onload-onerror#loading-a-script>, it basically executes a function after the script is loaded and executed.
+
+Now if we want to call new functions from the script, we should write that in the callback:
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 ```js
 loadScript('/my/script.js', function() {
@@ -94,15 +139,24 @@ function loadScript(src, callback) {
 
 *!*
 loadScript('https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.2.0/lodash.js', script => {
+<<<<<<< HEAD
   alert(`Здорово, скрипт ${script.src} загрузился`);
   alert( _ ); // функция, объявленная в загруженном скрипте
+=======
+  alert(`Cool, the script ${script.src} is loaded`);
+  alert( _ ); // _ is a function declared in the loaded script
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 });
 */!*
 ```
 
 Такое написание называют асинхронным программированием с использованием колбэков. В функции, которые выполняют какие-либо асинхронные операции, передаётся аргумент `callback` — функция, которая будет вызвана по завершению асинхронного действия.
 
+<<<<<<< HEAD
 Мы поступили похожим образом в `loadScript`, но это, конечно, распространённый подход.
+=======
+Here we did it in `loadScript`, but of course it's a general approach.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 ## Колбэк в колбэке
 
@@ -139,7 +193,7 @@ loadScript('/my/script.js', function(script) {
     });
 */!*
 
-  })
+  });
 
 });
 ```
@@ -152,7 +206,7 @@ loadScript('/my/script.js', function(script) {
 
 Ниже улучшенная версия `loadScript`, которая умеет отслеживать ошибки загрузки:
 
-```js run
+```js
 function loadScript(src, callback) {
   let script = document.createElement('script');
   script.src = src;
@@ -189,9 +243,15 @@ loadScript('/my/script.js', function(error, script) {
 
 ## Адская пирамида вызовов
 
+<<<<<<< HEAD
 На первый взгляд это рабочий способ написания асинхронного кода. Так и есть. Для одного или двух вложенных вызовов всё выглядит нормально.
 
 Но для нескольких асинхронных действий, которые нужно выполнить друг за другом, код выглядит вот так:
+=======
+At first glance, it looks like a viable approach to asynchronous coding. And indeed it is. For one or maybe two nested calls it looks fine.
+
+But for multiple asynchronous actions that follow one after another, we'll have code like this:
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 ```js
 loadScript('1.js', function(error, script) {
@@ -216,17 +276,26 @@ loadScript('1.js', function(error, script) {
         });
 
       }
-    })
+    });
   }
 });
 ```
 
+<<<<<<< HEAD
 В примере выше:
 1. Мы загружаем `1.js`. Продолжаем, если нет ошибок.
 2. Мы загружаем `2.js`. Продолжаем, если нет ошибок.
 3. Мы загружаем `3.js`. Продолжаем, если нет ошибок. И так далее `(*)`.
 
 Чем больше вложенных вызовов, тем наш код будет иметь всё большую вложенность, которую сложно поддерживать, особенно если вместо `...` у нас код, содержащий другие цепочки вызовов, условия и т.д.
+=======
+In the code above:
+1. We load `1.js`, then if there's no error...
+2. We load `2.js`, then if there's no error...
+3. We load `3.js`, then if there's no error -- do something else `(*)`.
+
+As calls become more nested, the code becomes deeper and increasingly more difficult to manage, especially if we have real code instead of `...` that may include more loops, conditional statements and so on.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 Иногда это называют «адом колбэков» или «адской пирамидой колбэков».
 
@@ -249,7 +318,7 @@ loadScript('1.js', function(error, script) {
           }
         });
       }
-    })
+    });
   }
 });
 -->
@@ -289,15 +358,27 @@ function step3(error, script) {
   } else {
     // ...и так далее, пока все скрипты не будут загружены (*)
   }
-};
+}
 ```
 
+<<<<<<< HEAD
 Заметили? Этот код делает всё то же самое, но вложенность отсутствует, потому что все действия вынесены в отдельные функции.
+=======
+See? It does the same thing, and there's no deep nesting now because we made every action a separate top-level function.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 Код абсолютно рабочий, но кажется разорванным на куски. Его трудно читать, вы наверняка заметили это. Приходится прыгать глазами между кусками кода, когда пытаешься его прочесть. Это неудобно, особенно, если читатель не знаком с кодом и не знает, что за чем следует.
 
+<<<<<<< HEAD
 Кроме того, все функции `step*` одноразовые, и созданы лишь только, чтобы избавиться от «адской пирамиды вызовов». Никто не будет их переиспользовать где-либо ещё. Таким образом, мы, кроме всего прочего, засоряем пространство имён.
+=======
+Also, the functions named `step*` are all of single use, they are created only to avoid the "pyramid of doom." No one is going to reuse them outside of the action chain. So there's a bit of namespace cluttering here.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 Нужно найти способ получше.
 
+<<<<<<< HEAD
 К счастью, такие способы существуют. Один из лучших — использовать промисы, о которых рассказано в следующей главе.
+=======
+Luckily, there are other ways to avoid such pyramids. One of the best ways is to use "promises", described in the next chapter.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a

@@ -1,7 +1,11 @@
 
 Регэксп для целого числа: `pattern:\d+`.
 
+<<<<<<< HEAD
 Мы можем исключить отрицательные добавлением негативной ретроспективной проверки: `pattern:(?<!-)\d+`.
+=======
+We can exclude negatives by prepending it with the negative lookbehind: `pattern:(?<!-)\d+`.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 Однако, если попробуем применить такой регэксп, то увидим лишний результат:
 
