@@ -1,5 +1,9 @@
 
+<<<<<<< HEAD
 Ошибка происходит потому, что `askPassword` получает функции `loginOk/loginFail` без контекста.
+=======
+The error occurs because `askPassword` gets functions `loginOk/loginFail` without the object.
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
 Когда они вызываются, то, естественно, `this=undefined`.
 

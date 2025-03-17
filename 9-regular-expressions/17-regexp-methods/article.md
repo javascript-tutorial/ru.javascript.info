@@ -19,9 +19,15 @@
     alert( result[1] );     // Script (первые скобки)
     alert( result.length ); // 2
 
+<<<<<<< HEAD
     // Дополнительная информация:
     alert( result.index );  // 7 (позиция совпадения)
     alert( result.input );  // I love JavaScript (исходная строка)
+=======
+    // Additional information:
+    alert( result.index );  // 7 (match position)
+    alert( result.input );  // I love JavaScript (source string)
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
     ```
 
 2. Если у регулярного выражения есть флаг `pattern:g`, то он возвращает массив всех совпадений, без скобочных групп и других деталей.
@@ -63,9 +69,15 @@
 
 У него 3 отличия от `match`:
 
+<<<<<<< HEAD
 1. Он возвращает не массив, а перебираемый объект с результатами, обычный массив можно сделать при помощи `Array.from`.
 2. Каждое совпадение возвращается в виде массива со скобочными группами (как `str.match` без флага `pattern:g`).
 3. Если совпадений нет, то возвращается не `null`, а пустой перебираемый объект.
+=======
+1. It returns an iterable object with matches instead of an array. We can make a regular array from it using `Array.from`.
+2. Every match is returned as an array with capturing groups (the same format as `str.match` without flag `pattern:g`).
+3. If there are no results, it returns an empty iterable object instead of `null`.
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
 Пример использования:
 
@@ -86,7 +98,11 @@ alert( firstMatch.index );  // 0
 alert( firstMatch.input );  // <h1>Hello, world!</h1>
 ```
 
+<<<<<<< HEAD
 При переборе результатов `matchAll` в цикле `for..of` вызов `Array.from`, разумеется, не нужен.
+=======
+If we use `for..of` to loop over `matchAll` matches, then we don't need `Array.from` any more.
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
 ## str.split(regexp|substr, limit)
 
@@ -95,13 +111,21 @@ alert( firstMatch.input );  // <h1>Hello, world!</h1>
 Обычно мы используем метод `split` со строками, вот так:
 
 ```js run
+<<<<<<< HEAD
 alert('12-34-56'.split('-')) // массив [12, 34, 56]
+=======
+alert('12-34-56'.split('-')) // array of ['12', '34', '56']
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 ```
 
 Но мы можем разделить по регулярному выражению аналогичным образом:
 
 ```js run
+<<<<<<< HEAD
 alert('12, 34, 56'.split(/,\s*/)) // массив [12, 34, 56]
+=======
+alert('12, 34, 56'.split(/,\s*/)) // array of ['12', '34', '56']
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 ```
 
 ## str.search(regexp)
@@ -148,9 +172,15 @@ alert('12-34-56'.replace("-", ":")) // 12:34-56
 alert( '12-34-56'.replace( *!*/-/g*/!*, ":" ))  // 12:34:56
 ```
 
+<<<<<<< HEAD
 Второй аргумент - строка замены. Мы можем использовать специальные символы в нем:
 
 | Спецсимволы | Действие в строке замены |
+=======
+The second argument is a replacement string. We can use special characters in it:
+
+| Symbols | Action in the replacement string |
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 |--------|--------|
 |`$&`|вставляет всё найденное совпадение|
 |<code>$&#096;</code>|вставляет часть строки до совпадения|
@@ -208,7 +238,11 @@ let result = str.replace(/(\w+) (\w+)/, (match, name, surname) => `${surname}, $
 alert(result); // Smith, John
 ```
 
+<<<<<<< HEAD
 Если в регулярном выражении много скобочных групп, то бывает удобно использовать остаточные аргументы для обращения к ним:
+=======
+If there are many groups, it's convenient to use rest parameters to access them:
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
 ```js run
 let str = "John Smith";
@@ -234,9 +268,30 @@ alert(result); // Smith, John
 
 Использование функции даёт нам  максимальные возможности по замене, потому что функция получает всю информацию о совпадении, имеет доступ к внешним переменным и может делать всё что угодно.
 
+## str.replaceAll(str|regexp, str|func)
+
+This method is essentially the same as `str.replace`, with two major differences:
+
+1. If the first argument is a string, it replaces *all occurrences* of the string, while `replace` replaces only the *first occurrence*.
+2. If the first argument is a regular expression without the `g` flag, there'll be an error. With `g` flag, it works the same as `replace`.
+
+The main use case for `replaceAll` is replacing all occurrences of a string.
+
+Like this:
+
+```js run
+// replace all dashes by a colon
+alert('12-34-56'.replaceAll("-", ":")) // 12:34:56
+```
+
+
 ## regexp.exec(str)
 
+<<<<<<< HEAD
 Метод `regexp.exec(str)` ищет совпадение с `regexp` в строке `str`. В отличие от предыдущих методов, вызывается на регулярном выражении, а не на строке.
+=======
+The `regexp.exec(str)` method returns a match for `regexp` in the string `str`.  Unlike previous methods, it's called on a regexp, not on a string.
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
 Он ведёт себя по-разному в зависимости от того, имеет ли регулярное выражение флаг `pattern:g`.
 

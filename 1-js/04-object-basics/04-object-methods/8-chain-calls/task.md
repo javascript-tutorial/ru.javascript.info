@@ -4,7 +4,11 @@ importance: 2
 
 # Цепь вызовов
 
+<<<<<<< HEAD
 У нас есть объект `ladder` (лестница), который позволяет подниматься и спускаться:
+=======
+There's a `ladder` object that allows you to go up and down:
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
 ```js
 let ladder = {
@@ -21,7 +25,11 @@ let ladder = {
 };
 ```
 
+<<<<<<< HEAD
 Теперь, если нам нужно выполнить несколько последовательных вызовов, мы можем сделать это так:
+=======
+Now, if we need to make several calls in sequence, we can do it like this:
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
 ```js
 ladder.up();
@@ -32,6 +40,7 @@ ladder.down();
 ladder.showStep(); // 0
 ```
 
+<<<<<<< HEAD
 Измените код методов `up`, `down` и `showStep` таким образом, чтобы их вызов можно было сделать по цепочке, например так:
 
 ```js
@@ -39,3 +48,12 @@ ladder.up().up().down().showStep().down().showStep(); // показывает 1 
 ```
 
 Такой подход широко используется в библиотеках JavaScript. 
+=======
+Modify the code of `up`, `down`, and `showStep` to make the calls chainable, like this:
+
+```js
+ladder.up().up().down().showStep().down().showStep(); // shows 1 then 0
+```
+
+Such an approach is widely used across JavaScript libraries.
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6

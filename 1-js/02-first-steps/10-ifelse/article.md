@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # Условное ветвление: if, '?'
+=======
+# Conditional branching: if, '?'
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
 Иногда нам нужно выполнить различные действия в зависимости от условий.
 
@@ -68,9 +72,13 @@ if (condition) {
 
 ## Блок "else"
 
+<<<<<<< HEAD
 Инструкция `if` может содержать необязательный блок "else" ("иначе"). Он выполняется, когда условие ложно.
 
 Например:
+=======
+The `if` statement may contain an optional `else` block. It executes when the condition is falsy.
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
 ```js run
 let year = prompt('В каком году была опубликована спецификация ECMAScript-2015?', '');
@@ -183,10 +191,17 @@ alert( message );
 
 Поначалу может быть сложно понять, что происходит. Но при ближайшем рассмотрении мы видим, что это обычная последовательная проверка:
 
+<<<<<<< HEAD
 1. Первый знак вопроса проверяет `age < 3`.
 2. Если верно -- возвращает `'Здравствуй, малыш!'`. В противном случае, проверяет выражение после двоеточия ':', вычисляет `age < 18`.
 3. Если это верно -- возвращает `'Привет!'`. В противном случае, проверяет выражение после следующего двоеточия ':', вычисляет `age < 100`.
 4. Если это верно -- возвращает `'Здравствуйте!'`. В противном случае, возвращает выражение после последнего двоеточия -- `'Какой необычный возраст!'`.
+=======
+1. The first question mark checks whether `age < 3`.
+2. If true -- it returns `'Hi, baby!'`. Otherwise, it continues to the expression after the colon ":", checking `age < 18`.
+3. If that's true -- it returns `'Hello!'`. Otherwise, it continues to the expression after the next colon ":", checking `age < 100`.
+4. If that's true -- it returns `'Greetings!'`. Otherwise, it continues to the expression after the last colon ":", returning `'What an unusual age!'`.
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
 Вот как это выглядит при использовании `if..else`:
 

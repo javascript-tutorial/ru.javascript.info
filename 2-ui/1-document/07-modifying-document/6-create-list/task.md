@@ -8,9 +8,15 @@ importance: 4
 
 Для каждого пункта:
 
+<<<<<<< HEAD
 1. Запрашивайте содержимое пункта у пользователя с помощью  `prompt`.
 2. Создавайте элемент `<li>` и добавляйте его к `<ul>`.
 3. Продолжайте до тех пор, пока пользователь не отменит ввод (нажатием клавиши `key:Esc` или введя пустую строку).
+=======
+1. Ask a user about its content using `prompt`.
+2. Create the `<li>` with it and add it to `<ul>`.
+3. Continue until the user cancels the input (by pressing `key:Esc` or via an empty entry).
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
 Все элементы должны создаваться динамически.
 

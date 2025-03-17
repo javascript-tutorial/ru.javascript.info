@@ -8,7 +8,11 @@
 
 ## DOM-свойства
 
+<<<<<<< HEAD
 Ранее мы уже видели встроенные DOM-свойства. Их много. Но технически нас никто не ограничивает, и если этого мало -- мы можем добавить своё собственное свойство.
+=======
+We've already seen built-in DOM properties. There are a lot. But technically no one limits us, and if there aren't enough, we can add our own.
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
 DOM-узлы -- это обычные объекты JavaScript. Мы можем их изменять.
 
@@ -162,7 +166,11 @@ document.body.sayHi(); // Hello, I'm BODY
 </script>
 ```
 
+<<<<<<< HEAD
 Но есть и исключения, например, `input.value` синхронизируется только в одну сторону -- атрибут -> значение, но не в обратную:
+=======
+But there are exclusions, for instance `input.value` synchronizes only from attribute -> property, but not back:
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
 ```html run
 <input>
@@ -297,16 +305,26 @@ DOM-свойства не всегда являются строками. Нап
 </div>
 ```
 
+<<<<<<< HEAD
 Почему атрибут может быть предпочтительнее таких классов, как `.order-state-new`, `.order-state-pending`, `order-state-canceled`?
 
 Это потому, что атрибутом удобнее управлять. Состояние может быть изменено достаточно просто:
+=======
+Why would using an attribute be preferable to having classes like `.order-state-new`, `.order-state-pending`, `.order-state-canceled`?
+
+Because an attribute is more convenient to manage. The state can be changed as easy as:
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
 ```js
 // немного проще, чем удаление старого/добавление нового класса
 div.setAttribute('order-state', 'canceled');
 ```
 
+<<<<<<< HEAD
 Но с пользовательскими атрибутами могут возникнуть проблемы. Что если мы используем нестандартный атрибут для наших целей, а позже он появится в стандарте и будет выполнять какую-то функцию? Язык HTML живой, он растёт, появляется больше атрибутов, чтобы удовлетворить потребности разработчиков. В этом случае могут возникнуть неожиданные эффекты.
+=======
+But there may be a possible problem with custom attributes. What if we use a non-standard attribute for our purposes and later the standard introduces it and makes it do something? The HTML language is alive, it grows, and more attributes appear to suit the needs of developers. There may be unexpected effects in such case.
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
 Чтобы избежать конфликтов, существуют атрибуты вида [data-*](https://html.spec.whatwg.org/#embedding-custom-non-visible-data-with-the-data-*-attributes).
 
