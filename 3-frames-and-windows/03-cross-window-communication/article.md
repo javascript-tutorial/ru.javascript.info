@@ -115,7 +115,18 @@ document.domain = 'site.com';
 
 После этого они смогут взаимодействовать без ограничений. Ещё раз заметим, что это доступно только для страниц с одинаковым доменом второго уровня.
 
+<<<<<<< HEAD
 ### Ифрейм: подождите документ
+=======
+```warn header="Deprecated, but still working"
+The `document.domain` property is in the process of being removed from the [specification](https://html.spec.whatwg.org/multipage/origin.html#relaxing-the-same-origin-restriction). The cross-window messaging (explained soon below) is the suggested replacement.
+
+That said, as of now all browsers support it. And the support will be kept for the future, not to break old code that relies on `document.domain`.
+```
+
+
+## Iframe: wrong document pitfall
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 Когда ифрейм - с того же источника, мы имеем доступ к документу в нём. Но есть подвох. Не связанный с кросс-доменными особенностями, но достаточно важный, чтобы о нём знать.
 
@@ -261,12 +272,20 @@ if (window == top) { // текущий window == window.top?
 Аргументы:
 
 `data`
+<<<<<<< HEAD
 : Данные для отправки. Может быть любым объектом, данные клонируются с использованием "алгоритма структурированного клонирования". IE поддерживает только строки, поэтому мы должны использовать метод `JSON.stringify` на сложных объектах, чтобы поддержать этот браузер.
+=======
+: The data to send. Can be any object, the data is cloned using the "structured serialization algorithm". IE supports only strings, so we should `JSON.stringify` complex objects to support that browser.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 `targetOrigin`
 : Определяет источник для окна-получателя, только окно с данного источника имеет право получить сообщение.
 
+<<<<<<< HEAD
 Указание `targetOrigin` является мерой безопасности. Как мы помним, если окно (получатель) происходит из другого источника, мы из окна-отправителя не можем прочитать его `location`. Таким образом, мы не можем быть уверены, какой сайт открыт в заданном окне прямо сейчас: пользователь мог перейти куда-то, окно-отправитель не может это знать.
+=======
+The `targetOrigin` is a safety measure. Remember, if the target window comes from another origin, we can't read its `location` in the sender window. So we can't be sure which site is open in the intended window right now: the user could navigate away, and the sender window has no idea about it.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 Если указать `targetOrigin`, то мы можем быть уверены, что окно получит данные только в том случае, если в нём правильный сайт. Особенно это важно, если данные конфиденциальные.
 
@@ -333,11 +352,15 @@ window.addEventListener("message", function(event) {
 
 [codetabs src="postmessage" height=120]
 
+<<<<<<< HEAD
 ```smart header="Без задержек"
 Между `postMessage` и событием `message` не существует задержки. Событие происходит синхронно, быстрее, чем `setTimeout(...,0)`.
 ```
 
 ## Итого
+=======
+## Summary
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 Чтобы вызвать метод или получить содержимое из другого окна, нам, во-первых, необходимо иметь ссылку на него.
 

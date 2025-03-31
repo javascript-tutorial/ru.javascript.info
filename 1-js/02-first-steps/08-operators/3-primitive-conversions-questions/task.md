@@ -2,9 +2,15 @@ importance: 5
 
 ---
 
+<<<<<<< HEAD
 # Преобразование типов
 
 Какой результат будет у выражений ниже?
+=======
+# Type conversions
+
+What are results of these expressions?
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 ```js no-beautify
 "" + 1 + 0
@@ -23,4 +29,8 @@ undefined + 1
 " \t \n" - 2
 ```
 
+<<<<<<< HEAD
 Подумайте как следует, запишите ответы и сверьтесь с решением.
+=======
+Think well, write down and then compare with the answer.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9

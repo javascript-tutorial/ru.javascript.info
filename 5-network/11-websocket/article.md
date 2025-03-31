@@ -1,6 +1,10 @@
 # WebSocket
 
+<<<<<<< HEAD
 Протокол `WebSocket` ("веб-сокет"), описанный в спецификации [RFC 6455](https://datatracker.ietf.org/doc/html/rfc6455), обеспечивает возможность обмена данными между браузером и сервером через постоянное соединение. Данные передаются по нему в обоих направлениях в виде "пакетов", без разрыва соединения и дополнительных HTTP-запросов.
+=======
+The `WebSocket` protocol, described in the specification [RFC 6455](https://datatracker.ietf.org/doc/html/rfc6455), provides a way to exchange data between browser and server via a persistent connection. The data can be passed in both directions as "packets", without breaking the connection and the need of additional HTTP-requests.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 WebSocket особенно хорош для сервисов, которые нуждаются в постоянном обмене данными, например онлайн игры, торговые площадки, работающие в реальном времени, и т.д.
 
@@ -14,12 +18,21 @@ let socket = new WebSocket("*!*ws*/!*://javascript.info");
 
 Также существует протокол `wss://`, использующий шифрование. Это как HTTPS для веб-сокетов.
 
+<<<<<<< HEAD
 ```smart header="Всегда предпочитайте `wss://`"
 Протокол `wss://` не только использует шифрование, но и обладает повышенной надёжностью.
+=======
+```smart header="Always prefer `wss://`"
+The `wss://` protocol is not only encrypted, but also more reliable.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 Это потому, что данные `ws://` не зашифрованы, видны для любого посредника. Старые прокси-серверы не знают о WebSocket, они могут увидеть "странные" заголовки и закрыть соединение.
 
+<<<<<<< HEAD
 С другой стороны, `wss://` -- это WebSocket поверх TLS (так же, как HTTPS -- это HTTP поверх TLS), безопасный транспортный уровень шифрует данные от отправителя и расшифровывает на стороне получателя. Пакеты данных передаются в зашифрованном виде через прокси, которые не могут видеть, что внутри, и всегда пропускают их.
+=======
+On the other hand, `wss://` is WebSocket over TLS, (same as HTTPS is HTTP over TLS), the transport security layer encrypts the data at the sender and decrypts it at the receiver. So data packets are passed encrypted through proxies. They can't see what's inside and let them through.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 ```
 
 Как только объект `WebSocket` создан, мы должны слушать его события. Их всего 4:
@@ -72,11 +85,19 @@ socket.onerror = function(error) {
 
 Когда `new WebSocket(url)` создан, он тут же сам начинает устанавливать соединение.
 
+<<<<<<< HEAD
 Браузер, при помощи специальных заголовков, спрашивает сервер: "Ты поддерживаешь Websocket?" и если сервер отвечает "да", они начинают работать по протоколу WebSocket, который уже не является HTTP.
 
 ![](websocket-handshake.svg)
 
 Вот пример заголовков для запроса, который делает `new WebSocket("wss://javascript.info/chat")`.
+=======
+During the connection, the browser (using headers) asks the server: "Do you support Websocket?" And if the server replies "yes", then the talk continues in WebSocket protocol, which is not HTTP at all.
+
+![](websocket-handshake.svg)
+
+Here's an example of browser headers for a request made by `new WebSocket("wss://javascript.info/chat")`.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 ```
 GET /chat
@@ -88,11 +109,19 @@ Sec-WebSocket-Key: Iv8io/9s+lYFgZWcXczP8Q==
 Sec-WebSocket-Version: 13
 ```
 
+<<<<<<< HEAD
 - `Origin` -- источник текущей страницы (например `https://javascript.info`). Объект WebSocket по своей природе не завязан на текущий источник. Нет никаких специальных заголовков или других ограничений. Старые сервера всё равно не могут работать с WebSocket, поэтому проблем с совместимостью нет. Но заголовок `Origin` важен, так как он позволяет серверу решать, использовать ли WebSocket с этим сайтом.
 - `Connection: Upgrade` -- сигнализирует, что клиент хотел бы изменить протокол.
 - `Upgrade: websocket` -- запрошен протокол "websocket".
 - `Sec-WebSocket-Key` -- случайный ключ, созданный браузером для обеспечения безопасности.
 - `Sec-WebSocket-Version` -- версия протокола WebSocket, текущая версия 13.
+=======
+- `Origin` -- the origin of the client page, e.g. `https://javascript.info`. WebSocket objects are cross-origin by nature. There are no special headers or other limitations. Old servers are unable to handle WebSocket anyway, so there are no compatibility issues. But the `Origin` header is important, as it allows the server to decide whether or not to talk WebSocket with this website.
+- `Connection: Upgrade` -- signals that the client would like to change the protocol.
+- `Upgrade: websocket` -- the requested protocol is "websocket".
+- `Sec-WebSocket-Key` -- a random browser-generated key, used to ensure that the server supports WebSocket protocol. It's random to prevent proxies from caching any following communication.
+- `Sec-WebSocket-Version` -- WebSocket protocol version, 13 is the current one.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 ```smart header="Запрос WebSocket нельзя эмулировать"
 Мы не можем использовать `XMLHttpRequest` или `fetch` для создания такого HTTP-запроса, потому что JavaScript не позволяет устанавливать такие заголовки.
@@ -107,9 +136,15 @@ Connection: Upgrade
 Sec-WebSocket-Accept: hsBlbuDTkk24srzEOTBUlZAlC2g=
 ```
 
+<<<<<<< HEAD
 Здесь `Sec-WebSocket-Accept` -- это `Sec-WebSocket-Key`, перекодированный с помощью специального алгоритма. Браузер использует его, чтобы убедиться, что ответ соответствует запросу.
 
 После этого данные передаются по протоколу WebSocket, и вскоре мы увидим его структуру ("фреймы"). И это вовсе не HTTP.
+=======
+Here `Sec-WebSocket-Accept` is `Sec-WebSocket-Key`, recoded using a special algorithm. Upon seeing it, the browser understands that the server really does support the WebSocket protocol.
+
+Afterwards, the data is transferred using the WebSocket protocol, we'll see its structure ("frames") soon. And that's not HTTP at all.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 ### Расширения и подпротоколы
 
@@ -117,11 +152,19 @@ Sec-WebSocket-Accept: hsBlbuDTkk24srzEOTBUlZAlC2g=
 
 Например:
 
+<<<<<<< HEAD
 - `Sec-WebSocket-Extensions: deflate-frame` означает, что браузер поддерживает сжатие данных. Расширение -- это что-то, связанное с передачей данных, расширяющее сам протокол WebSocket. Заголовок `Sec-WebSocket-Extensions` отправляется браузером автоматически со списком всевозможных расширений, которые он поддерживает.
 
 - `Sec-WebSocket-Protocol: soap, wamp` означает, что мы будем передавать не только произвольные данные, но и данные в протоколах [SOAP](https://en.wikipedia.org/wiki/SOAP) или WAMP (The WebSocket Application Messaging Protocol" -- "протокол обмена сообщениями WebSocket приложений"). То есть этот заголовок описывает не передачу, а формат данных, который мы собираемся использовать. Официальные подпротоколы WebSocket регистрируются в [каталоге IANA](https://www.iana.org/assignments/websocket/websocket.xml).
 
     Этот необязательный заголовок ставим мы сами, передавая массив подпротоколов вторым параметром `new WebSocket`, вот так:
+=======
+- `Sec-WebSocket-Extensions: deflate-frame` means that the browser supports data compression. An extension is something related to transferring the data, functionality that extends the WebSocket protocol. The header `Sec-WebSocket-Extensions` is sent automatically by the browser, with the list of all extensions it supports.
+
+- `Sec-WebSocket-Protocol: soap, wamp` means that we'd like to transfer not just any data, but the data in [SOAP](https://en.wikipedia.org/wiki/SOAP) or WAMP ("The WebSocket Application Messaging Protocol") protocols. WebSocket subprotocols are registered in the [IANA catalogue](https://www.iana.org/assignments/websocket/websocket.xml). So, this header describes the data formats that we're going to use.
+
+    This optional header is set using the second parameter of `new WebSocket`. That's the array of subprotocols, e.g. if we'd like to use SOAP or WAMP:
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
     ```js
     let socket = new WebSocket("wss://javascript.info/chat", ["soap", "wamp"]);
@@ -173,11 +216,19 @@ Sec-WebSocket-Protocol: soap
 
 **Метод WebSocket `.send()` может отправлять и текстовые, и бинарные данные.**
 
+<<<<<<< HEAD
 Вызов `socket.send(body)` принимает `body` в виде строки или любом бинарном формате включая `Blob`, `ArrayBuffer` и другие. Дополнительных настроек не требуется, просто отправляем в любом формате.
+=======
+A call `socket.send(body)` allows `body` in string or a binary format, including `Blob`, `ArrayBuffer`, etc. No settings are required: just send it out in any format.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 **При получении данных, текст всегда поступает в виде строки. А для бинарных данных мы можем выбрать один из двух форматов: `Blob` или `ArrayBuffer`.**
 
+<<<<<<< HEAD
 Это задаётся свойством `socket.binaryType`, по умолчанию оно равно `"blob"`, так что бинарные данные поступают в виде `Blob`-объектов.
+=======
+That's set by `socket.binaryType` property, it's `"blob"` by default, so binary data comes as `Blob` objects.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 [Blob](info:blob) -- это высокоуровневый бинарный объект, он напрямую интегрируется с `<a>`, `<img>` и другими тегами, так что это вполне удобное значение по умолчанию. Но для обработки данных, если требуется доступ к отдельным байтам, мы можем изменить его на `"arraybuffer"`:
 
@@ -194,7 +245,11 @@ socket.onmessage = (event) => {
 
 Мы можем вызывать `socket.send(data)` снова и снова. Но данные будут буферизованы (сохранены) в памяти и отправлены лишь с той скоростью, которую позволяет сеть.
 
+<<<<<<< HEAD
 Свойство `socket.bufferedAmount` хранит количество байт буферизованных данных на текущий момент, ожидающих отправки по сети.
+=======
+The `socket.bufferedAmount` property stores how many bytes remain buffered at this moment, waiting to be sent over the network.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 Мы можем изучить его, чтобы увидеть, действительно ли сокет доступен для передачи.
 
@@ -220,7 +275,11 @@ socket.close([code], [reason]);
 - `code` -- специальный WebSocket-код закрытия (не обязателен).
 - `reason` -- строка с описанием причины закрытия (не обязательна).
 
+<<<<<<< HEAD
 Затем противоположная сторона в обработчике события `close` получит и код `code` и причину `reason`, например:
+=======
+Then the other party in the `close` event handler gets the code and the reason, e.g.:
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 ```js
 // закрывающая сторона:
@@ -236,7 +295,12 @@ socket.onclose = event => {
 
 `code` -- это не любое число, а специальный код закрытия WebSocket.
 
+<<<<<<< HEAD
 Наиболее распространённые значения:
+=======
+- `1000` -- the default, normal closure (used if no `code` supplied),
+- `1006` -- no way to set such code manually, indicates that the connection was lost (no close frame).
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 - `1000` -- по умолчанию, нормальное закрытие,
 - `1006` -- невозможно установить такой код вручную, указывает, что соединение было потеряно (нет фрейма закрытия).
@@ -248,9 +312,13 @@ socket.onclose = event => {
 - `1011` -- непредвиденная ошибка на сервере,
 - ...и так далее.
 
+<<<<<<< HEAD
 Полный список находится в [RFC6455, §7.4.1](https://datatracker.ietf.org/doc/html/rfc6455#section-7.4.1).
 
 Коды WebSocket чем-то похожи на коды HTTP, но они разные. В частности, любые коды меньше `1000` зарезервированы. Если мы попытаемся установить такой код, то получим ошибку.
+=======
+WebSocket codes are somewhat like HTTP codes, but different. In particular, codes lower than `1000` are reserved, there'll be an error if we try to set such a code.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 ```js
 // в случае, если соединение сброшено
@@ -321,10 +389,17 @@ socket.onmessage = function(event) {
 
 Серверный алгоритм действий будет таким:
 
+<<<<<<< HEAD
 1. Создать `clients = new Set()` -- набор сокетов.
 2. Для каждого принятого веб-сокета - добавить его в набор `clients.add(socket)` и поставить ему обработчик события `message` для приёма сообщений.
 3. Когда сообщение получено: перебрать клиентов `clients` и отправить его всем.
 4. Когда подключение закрыто: `clients.delete(socket)`.
+=======
+1. Create `clients = new Set()` -- a set of sockets.
+2. For each accepted websocket, add it to the set `clients.add(socket)` and set `message` event listener to get its messages.
+3. When a message is received: iterate over clients and send it to everyone.
+4. When a connection is closed: `clients.delete(socket)`.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 ```js
 const ws = new require('ws');
@@ -359,7 +434,11 @@ function onSocketConnect(ws) {
 
 [iframe src="chat" height="100" zip]
 
+<<<<<<< HEAD
 Вы также можете скачать его (верхняя правая кнопка в ифрейме) и запустить локально. Только не забудьте установить [Node.js](https://nodejs.org/en/) и выполнить команду `npm install ws` до запуска.
+=======
+You can also download it (upper-right button in the iframe) and run it locally. Just don't forget to install [Node.js](https://nodejs.org/en/) and `npm install ws` before running.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 ## Итого
 
@@ -383,6 +462,10 @@ API прост.
 
 WebSocket сам по себе не содержит такие функции, как переподключение при обрыве соединения, аутентификацию пользователей и другие механизмы высокого уровня. Для этого есть клиентские и серверные библиотеки, а также можно реализовать это вручную.
 
+<<<<<<< HEAD
 Иногда, чтобы добавить WebSocket к уже существующему проекту, WebSocket-сервер запускают параллельно с основным сервером. Они совместно используют одну базу данных. Запросы к WebSocket отправляются на `wss://ws.site.com` -- поддомен, который ведёт к WebSocket-серверу, в то время как `https://site.com` ведёт на основной HTTP-сервер.
+=======
+Sometimes, to integrate WebSocket into existing projects, people run a WebSocket server in parallel with the main HTTP-server, and they share a single database. Requests to WebSocket use `wss://ws.site.com`, a subdomain that leads to the WebSocket server, while `https://site.com` goes to the main HTTP-server.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 Конечно, возможны и другие пути интеграции.

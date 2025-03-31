@@ -2,7 +2,11 @@
 
 Создайте регулярное выражение для поиска строк в двойных кавычках `subject:"..."`.
 
+<<<<<<< HEAD
 Важно, что строки должны поддерживать экранирование с помощью обратного слеша, по аналогии со строками JavaScript. Например, кавычки могут быть вставлены как `subject:\"`, новая строка как `subject:\n`, а сам обратный слеш как `subject:\\`.
+=======
+The strings should support escaping, the same way as JavaScript strings do. For instance, quotes can be inserted as `subject:\"` a newline as `subject:\n`, and the backslash itself as `subject:\\`.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 ```js
 let str = "Как вот \"здесь\".";
@@ -17,12 +21,21 @@ let str = "Как вот \"здесь\".";
 Примеры подходящих строк:
 ```js
 .. *!*"test me"*/!* ..  
+<<<<<<< HEAD
 .. *!*"Скажи \"Привет\"!"*/!* ... (строка с экранированными кавычками)
 .. *!*"\\"*/!* ..  (внутри двойной слеш)
 .. *!*"\\ \""*/!* ..  (внутри двойной слеш и экранированная кавычка)
 ```
 
 В JavaScript приходится удваивать обратные слеши, чтобы добавлять их в строку, как здесь:
+=======
+.. *!*"Say \"Hello\"!"*/!* ... (escaped quotes inside)
+.. *!*"\\"*/!* ..  (double backslash inside)
+.. *!*"\\ \""*/!* ..  (double backslash and an escaped quote inside)
+```
+
+In JavaScript we need to double the backslashes to pass them right into the string, like this:
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 ```js run
 let str = ' .. "test me" .. "Скажи \\"Привет\\"!" .. "\\\\ \\"" .. ';

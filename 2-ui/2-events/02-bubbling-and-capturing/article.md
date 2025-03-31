@@ -68,8 +68,13 @@
 
 При этом внутри обработчика `form.onclick`:
 
+<<<<<<< HEAD
 - `this` (=`event.currentTarget`) всегда будет элемент `<form>`, так как обработчик сработал на ней.
 - `event.target` будет содержать ссылку на конкретный элемент внутри формы, на котором произошёл клик.
+=======
+- `this` (=`event.currentTarget`) is the `<form>` element, because the handler runs on it.
+- `event.target` is the actual element inside the form that was clicked.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 Попробуйте сами:
 
@@ -101,8 +106,13 @@
 Для того, чтобы полностью остановить обработку, существует метод `event.stopImmediatePropagation()`. Он не только предотвращает всплытие, но и останавливает обработку событий на текущем элементе.
 ```
 
+<<<<<<< HEAD
 ```warn header="Не прекращайте всплытие без необходимости!"
 Всплытие -- это удобно. Не прекращайте его без явной нужды, очевидной и архитектурно прозрачной.
+=======
+```warn header="Don't stop bubbling without a need!"
+Bubbling is convenient. Don't stop it without a real need: obvious and architecturally well thought out.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 Зачастую прекращение всплытия через `event.stopPropagation()` имеет свои подводные камни, которые со временем могут стать проблемами.
 
@@ -120,27 +130,46 @@
 
 Существует ещё одна фаза из жизненного цикла события -- "погружение" (иногда её называют "перехват"). Она очень редко используется в реальном коде, однако тоже может быть полезной.
 
+<<<<<<< HEAD
 Стандарт [DOM Events](https://www.w3.org/TR/DOM-Level-3-Events/) описывает 3 фазы прохода события:
+=======
+The standard [DOM Events](https://www.w3.org/TR/DOM-Level-3-Events/) describes 3 phases of event propagation:
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 1. Фаза погружения (capturing phase) -- событие сначала идёт сверху вниз.
 2. Фаза цели (target phase) -- событие достигло целевого(исходного) элемента.
 3. Фаза всплытия (bubbling stage) -- событие начинает всплывать.
 
+<<<<<<< HEAD
 Картинка из спецификации демонстрирует, как это работает при клике по ячейке `<td>`, расположенной внутри таблицы:
+=======
+Here's the picture, taken from the specification, of the capturing `(1)`, target `(2)` and bubbling `(3)` phases for a click event on a `<td>` inside a table:
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 ![](eventflow.svg)
 
 То есть при клике на `<td>` событие путешествует по цепочке родителей сначала вниз к элементу (погружается), затем оно достигает целевой элемент (фаза цели), а потом идёт наверх (всплытие), вызывая по пути обработчики.
 
+<<<<<<< HEAD
 **Ранее мы говорили только о всплытии, потому что другие стадии, как правило, не используются и проходят незаметно для нас.**
 
 Обработчики, добавленные через `on<event>`-свойство или через HTML-атрибуты, или через `addEventListener(event, handler)` с двумя аргументами, ничего не знают о фазе погружения, а работают только на 2-ой и 3-ей фазах.
+=======
+Until now, we only talked about bubbling, because the capturing phase is rarely used.
+
+In fact, the capturing phase was invisible for us, because handlers added using `on<event>`-property or using HTML attributes or using two-argument `addEventListener(event, handler)` don't know anything about capturing, they only run on the 2nd and 3rd phases.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 Чтобы поймать событие на стадии погружения, нужно использовать третий аргумент `capture` вот так:
 
 ```js
 elem.addEventListener(..., {capture: true})
+<<<<<<< HEAD
 // или просто "true", как сокращение для {capture: true}
+=======
+
+// or, just "true" is an alias to {capture: true}
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 elem.addEventListener(..., true)
 ```
 
@@ -179,9 +208,16 @@ elem.addEventListener(..., true)
 
 Если вы кликните по `<p>`, то последовательность следующая:
 
+<<<<<<< HEAD
 1. `HTML` -> `BODY` -> `FORM` -> `DIV` (фаза погружения, первый обработчик)
 2. `P` (фаза цели, срабатывают обработчики, установленные и на погружение и на всплытие, так что выведется два раза)
 3. `DIV` -> `FORM` -> `BODY` -> `HTML` (фаза всплытия, второй обработчик)
+=======
+1. `HTML` -> `BODY` -> `FORM` -> `DIV -> P` (capturing phase, the first listener):
+2. `P` -> `DIV` -> `FORM` -> `BODY` -> `HTML` (bubbling phase, the second listener).
+
+Please note, the `P` shows up twice, because we've set two listeners: capturing and bubbling. The target triggers at the end of the first and at the beginning of the second phase.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 Существует свойство `event.eventPhase`, содержащее номер фазы, на которой событие было поймано. Но оно используется редко, мы обычно и так знаем об этом в обработчике.
 
@@ -189,8 +225,13 @@ elem.addEventListener(..., true)
 Если мы добавили обработчик вот так `addEventListener(..., true)`, то мы должны передать то же значение аргумента `capture` в `removeEventListener(..., true)`, когда снимаем обработчик.
 ```
 
+<<<<<<< HEAD
 ````smart header="На каждой фазе разные обработчики на одном элементе срабатывают в порядке назначения"
 Если у нас несколько обработчиков одного события, назначенных `addEventListener` на один элемент, в рамках одной фазы, то их порядок срабатывания - тот же, в котором они установлены:
+=======
+````smart header="Listeners on the same element and same phase run in their set order"
+If we have multiple event handlers on the same phase, assigned to the same element with `addEventListener`, they run in the same order as they are created:
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 ```js
 elem.addEventListener("click", e => alert(1)); // всегда сработает перед следующим
@@ -198,7 +239,16 @@ elem.addEventListener("click", e => alert(2));
 ```
 ````
 
+<<<<<<< HEAD
 ## Итого
+=======
+```smart header="The `event.stopPropagation()` during the capturing also prevents the bubbling"
+The `event.stopPropagation()` method and its sibling `event.stopImmediatePropagation()` can also be called on the capturing phase. Then not only the futher capturing is stopped, but the bubbling as well.
+
+In other words, normally the event goes first down ("capturing") and then up ("bubbling"). But if `event.stopPropagation()` is called during the capturing phase, then the event travel stops, no bubbling will occur.
+```
+
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 При наступлении события - самый глубоко вложенный элемент, на котором оно произошло, помечается как "целевой" (`event.target`).
 
@@ -206,7 +256,13 @@ elem.addEventListener("click", e => alert(2));
 - Далее обработчики вызываются на целевом элементе.
 - Далее событие двигается от `event.target` вверх к корню документа, по пути вызывая обработчики, поставленные через `on<event>` и `addEventListener` без третьего аргумента или с третьим аргументом равным `false`.
 
+<<<<<<< HEAD
 Каждый обработчик имеет доступ к свойствам события `event`:
+=======
+- Then the event moves down from the document root to `event.target`, calling handlers assigned with `addEventListener(..., true)` on the way (`true` is a shorthand for `{capture: true}`).
+- Then handlers are called on the target element itself.
+- Then the event bubbles up from `event.target` to the root, calling handlers assigned using `on<event>`, HTML attributes and `addEventListener` without the 3rd argument or with the 3rd argument `false/{capture:false}`.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 - `event.target` -- самый глубокий элемент, на котором произошло событие.
 - `event.currentTarget` (=`this`) -- элемент, на котором в данный момент сработал обработчик (тот, на котором "висит" конкретный обработчик)
@@ -216,8 +272,18 @@ elem.addEventListener("click", e => alert(2));
 
 В современной разработке стадия погружения используется очень редко, обычно события обрабатываются во время всплытия. И в этом есть логика.
 
+<<<<<<< HEAD
 В реальном мире, когда происходит чрезвычайная ситуация, местные службы реагируют первыми. Они знают лучше всех местность, в которой это произошло, и другие детали. Вышестоящие инстанции подключаются уже после этого и при необходимости.
+=======
+The capturing phase is used very rarely, usually we handle events on bubbling. And there's a logical explanation for that.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 Тоже самое справедливо для обработчиков событий. Код, который "навесил" обработчик на конкретный элемент, знает максимум деталей об элементе и его предназначении. Например, обработчик на определённом `<td>` скорее всего подходит только для этого конкретного `<td>`, он знает все о нём, поэтому он должен отработать первым. Далее имеет смысл передать обработку события родителю -- он тоже понимает, что происходит, но уже менее детально, далее – выше, и так далее, до самого объекта `document`, обработчик на котором реализовывает самую общую функциональность уровня документа.
 
+<<<<<<< HEAD
 Всплытие и погружение являются основой для "делегирования событий" -- очень мощного приёма обработки событий. Его мы изучим в следующей главе.
+=======
+The same for event handlers. The code that set the handler on a particular element knows maximum details about the element and what it does. A handler on a particular `<td>` may be suited for that exactly `<td>`, it knows everything about it, so it should get the chance first. Then its immediate parent also knows about the context, but a little bit less, and so on till the very top element that handles general concepts and runs the last one.
+
+Bubbling and capturing lay the foundation for "event delegation" -- an extremely powerful event handling pattern that we study in the next chapter.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
