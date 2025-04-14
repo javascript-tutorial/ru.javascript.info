@@ -5,24 +5,47 @@ libs:
 
 # IndexedDB
 
+<<<<<<< HEAD
 IndexedDB - это встроенная база данных, более мощная, чем `localStorage`.
 
 - Хранит практически любые значения по ключам, несколько типов ключей
 - Поддерживает транзакции для надёжности.
 - Поддерживает запросы в диапазоне ключей и индексы.
 - Позволяет хранить больше данных, чем `localStorage`.
+=======
+IndexedDB is a database that is built into a browser, much more powerful than `localStorage`.
+
+- Stores almost any kind of values by keys, multiple key types.
+- Supports transactions for reliability.
+- Supports key range queries, indexes.
+- Can store much bigger volumes of data than `localStorage`.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 Для традиционных клиент-серверных приложений эта мощность обычно чрезмерна. IndexedDB предназначена для оффлайн приложений, можно совмещать с ServiceWorkers и другими технологиями.
 
 Интерфейс для IndexedDB, описанный в спецификации <https://www.w3.org/TR/IndexedDB>, основан на событиях.
 
+<<<<<<< HEAD
 Мы также можем использовать `async/await` с помощью обёртки, которая основана на промисах, например <https://github.com/jakearchibald/idb>. Это очень удобно, но обёртка не идеальна, она не может полностью заменить события. Поэтому мы начнём с событий, а затем, когда разберёмся в IndexedDB, рассмотрим и обёртку.
+=======
+We can also use `async/await` with the help of a promise-based wrapper, like <https://github.com/jakearchibald/idb>. That's pretty convenient, but the wrapper is not perfect, it can't replace events for all cases. So we'll start with events, and then, after we gain an understanding of IndexedDB, we'll use the wrapper.
+
+```smart header="Where's the data?"
+Technically, the data is usually stored in the visitor's home directory, along with browser settings, extensions, etc.
+
+Different browsers and OS-level users have each their own independant storage.
+```
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 ```smart header="Где хранятся данные?"
 Технически данные обычно хранятся в домашнем каталоге посетителя вместе с настройками браузера, расширениями и т.д.
 
+<<<<<<< HEAD
 У разных браузеров и пользователей на уровне ОС есть своё собственное независимое хранилище.
 ```
+=======
+To start working with IndexedDB, we first need to `open` (connect to) a database.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 ## Открыть базу данных
 
@@ -37,24 +60,45 @@ let openRequest = indexedDB.open(name, version);
 - `name` -- название базы данных, строка.
 - `version` -- версия базы данных, положительное целое число, по умолчанию `1` (объясняется ниже).
 
+<<<<<<< HEAD
 У нас может быть множество баз данных с различными именами, но все они существуют в контексте текущего источника (домен/протокол/порт). Разные сайты не могут получить доступ к базам данных друг друга.
 
 После этого вызова необходимо назначить обработчик событий для объекта `openRequest`:
 - `success`: база данных готова к работе, готов "объект базы данных" `openRequest.result`, его следует использовать для дальнейших вызовов.
 - `error`: не удалось открыть базу данных.
 - `upgradeneeded`: база открыта, но её схема устарела (см. ниже).
+=======
+We can have many databases with different names, but all of them exist within the current origin (domain/protocol/port). Different websites can't access each other's databases.
+
+The call returns `openRequest` object, we should listen to events on it:
+- `success`: database is ready, there's the "database object" in `openRequest.result`, we should use it for further calls.
+- `error`: opening failed.
+- `upgradeneeded`: database is ready, but its version is outdated (see below).
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 **IndexedDB имеет встроенный механизм "версионирования схемы", который отсутствует в серверных базах данных.**
 
+<<<<<<< HEAD
 В отличие от серверных баз данных, IndexedDB работает на стороне клиента, в браузере, и у нас нет прямого доступа к данным. Но когда мы публикуем новую версию нашего приложения,  возможно, нам понадобится обновить базу данных.
+=======
+Unlike server-side databases, IndexedDB is client-side, the data is stored in the browser, so we, developers, don't have full-time access to it. So, when we have published a new version of our app, and the user visits our webpage, we may need to update the database.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 Если локальная версия базы данных меньше, чем версия, определённая в `open`, то сработает специальное событие `upgradeneeded`, и мы сможем сравнить версии и обновить структуры данных по мере необходимости.
 
+<<<<<<< HEAD
 Это событие также сработает, если базы данных ещё не существует, так что в этом обработчике мы можем выполнить инициализацию.
 
 Допустим, мы опубликовали первую версию нашего приложения.
 
 Затем мы можем открыть базу данных с версией `1` и выполнить инициализацию в обработчике `upgradeneeded` вот так:
+=======
+The `upgradeneeded` event also triggers when the database doesn't yet exist (technically, its version is `0`), so we can perform the initialization.
+
+Let's say we published the first version of our app.
+
+Then we can open the database with version `1` and perform the initialization in an `upgradeneeded` handler like this:
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 ```js
 let openRequest = indexedDB.open("store", *!*1*/!*);
@@ -70,6 +114,7 @@ openRequest.onerror = function() {
 
 openRequest.onsuccess = function() {
   let db = openRequest.result;
+<<<<<<< HEAD
   // продолжить работу с базой данных, используя объект db
 };
 ```
@@ -77,14 +122,29 @@ openRequest.onsuccess = function() {
 Затем, позже, мы публикуем 2-ю версию.
 
 Мы можем открыть его с версией `2` и выполнить обновление следующим образом:
+=======
+  // continue working with database using db object
+};
+```
+
+Then, later, we publish the 2nd version.
+
+We can open it with version `2` and perform the upgrade like this:
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 ```js
 let openRequest = indexedDB.open("store", *!*2*/!*);
 
 openRequest.onupgradeneeded = function(event) {
+<<<<<<< HEAD
   // версия существующей базы данных меньше 2 (или база данных не существует)
   let db = openRequest.result;
   switch(event.oldVersion) { // существующая (старая) версия базы данных
+=======
+  // the existing database version is less than 2 (or it doesn't exist)
+  let db = openRequest.result;
+  switch(event.oldVersion) { // existing db version
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
     case 0:
       // версия 0 означает, что на клиенте нет базы данных
       // выполнить инициализацию
@@ -95,9 +155,15 @@ openRequest.onupgradeneeded = function(event) {
 };
 ```
 
+<<<<<<< HEAD
 Таким образом, в `openRequest.onupgradeneeded` мы обновляем базу данных. Скоро подробно увидим, как это делается. А после того, как этот обработчик завершится без ошибок, сработает `openRequest.onsuccess`.
 
 После `openRequest.onsuccess` у нас есть объект базы данных в `openRequest.result`, который мы будем использовать для дальнейших операций.
+=======
+Please note: as our current version is `2`, the `onupgradeneeded` handler has a code branch for version `0`, suitable for users that are accessing for the first time and have no database, and also for version `1`, for upgrades.
+
+And then, only if `onupgradeneeded` handler finishes without errors, `openRequest.onsuccess` triggers, and the database is considered successfully opened.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 Удалить базу данных:
 
@@ -106,18 +172,28 @@ let deleteRequest = indexedDB.deleteDatabase(name)
 // deleteRequest.onsuccess/onerror отслеживает результат
 ```
 
+<<<<<<< HEAD
 ```warn header="А что, если открыть предыдущую версию?"
 Что если мы попробуем открыть базу с более низкой версией, чем текущая? Например, на клиенте база версии 3, а мы вызываем `open(...2)`.
 
 Возникнет ошибка, сработает `openRequest.onerror`.
 
 Такое может произойти, если посетитель загрузил устаревший код, например, из кеша прокси. Нам следует проверить `db.version` и предложить ему перезагрузить страницу. А также проверить наши кеширующие заголовки, убедиться, что посетитель никогда не получит устаревший код.
+=======
+```warn header="We can't open a database using an older open call version"
+If the current user database has a higher version than in the `open` call, e.g. the existing DB version is `3`, and we try to `open(...2)`, then that's an error, `openRequest.onerror` triggers.
+
+That's rare, but such a thing may happen when a visitor loads outdated JavaScript code, e.g. from a proxy cache. So the code is old, but his database is new.
+
+To protect from errors, we should check `db.version` and suggest a page reload. Use proper HTTP caching headers to avoid loading the old code, so that you'll never have such problems.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 ```
 
 ### Проблема параллельного обновления
 
 Раз уж мы говорим про версионирование, рассмотрим связанную с этим небольшую проблему.
 
+<<<<<<< HEAD
 Допустим:
 1. Посетитель открыл наш сайт во вкладке браузера, с базой версии `1`.
 2. Затем мы выпустили обновление, так что наш код обновился.
@@ -132,6 +208,22 @@ let deleteRequest = indexedDB.deleteDatabase(name)
 Если мы его не закроем, то второе, новое соединение будет заблокировано с событием `blocked` вместо `success`.
 
 Код, который это делает:
+=======
+Let's say:
+1. A visitor opened our site in a browser tab, with database version `1`.
+2. Then we rolled out an update, so our code is newer.
+3. And then the same visitor opens our site in another tab.
+
+So there's a tab with an open connection to DB version `1`, while the second one attempts to update it to version `2` in its `upgradeneeded` handler.
+
+The problem is that a database is shared between two tabs, as it's the same site, same origin. And it can't be both version `1` and `2`. To perform the update to version `2`, all connections to version 1 must be closed, including the one in the first tab.
+
+In order to organize that, the `versionchange` event triggers on the "outdated" database object. We should listen for it and close the old database connection (and probably suggest a page reload, to load the updated code).
+
+If we don't listen for the `versionchange` event and don't close the old connection, then the second, new connection won't be made. The `openRequest` object will emit the `blocked` event instead of `success`. So the second tab won't work.
+
+Here's the code to correctly handle the parallel upgrade. It installs the `onversionchange` handler, that triggers if the current database connection becomes outdated (db version is updated elsewhere) and closes the connection.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 ```js
 let openRequest = indexedDB.open("store", 2);
@@ -154,14 +246,22 @@ openRequest.onsuccess = function() {
 
 *!*
 openRequest.onblocked = function() {
+<<<<<<< HEAD
   // это событие не должно срабатывать, если мы правильно обрабатываем onversionchange
 
   // это означает, что есть ещё одно открытое соединение с той же базой данных
   // и он не был закрыт после того, как для него сработал db.onversionchange
+=======
+  // this event shouldn't trigger if we handle onversionchange correctly
+
+  // it means that there's another open connection to the same database
+  // and it wasn't closed after db.onversionchange triggered for it
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 };
 */!*
 ```
 
+<<<<<<< HEAD
 ...Другими словами, здесь мы делаем две вещи:
 
 1. Обработчик `db.onversionchange` сообщает нам о попытке параллельного обновления, если текущая версия базы данных устарела.
@@ -170,10 +270,26 @@ openRequest.onblocked = function() {
 Мы можем более изящно обращаться с вещами в `db.onversionchange`, например предлагать посетителю сохранить данные до закрытия соединения и так далее.
 
 Или альтернативным подходом было бы не закрывать базу данных в `db.onversionchange`, а вместо этого использовать обработчик `onblocked` (на новой вкладке), чтобы предупредить посетителя, что более новая версия не может быть загружена, пока они не закроют другие вкладки.
+=======
+...In other words, here we do two things:
+
+1. The `db.onversionchange` listener informs us about a parallel update attempt, if the current database version becomes outdated.
+2. The `openRequest.onblocked` listener informs us about the opposite situation: there's a connection to an outdated version elsewhere, and it doesn't close, so the newer connection can't be made.
+
+We can handle things more gracefully in `db.onversionchange`, prompt the visitor to save the data before the connection is closed and so on. 
+
+Or, an alternative approach would be to not close the database in `db.onversionchange`, but instead use the `onblocked` handler (in the new tab) to alert the visitor, tell him that the newer version can't be loaded until they close other tabs.
+
+These update collisions happen rarely, but we should at least have some handling for them, at least an `onblocked` handler, to prevent our script from dying silently.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 Такой конфликт при обновлении происходит редко, но мы должны как-то его обрабатывать, хотя бы поставить обработчик `onblocked`, чтобы наш скрипт не "умирал" молча, удивляя посетителя.
 
+<<<<<<< HEAD
 ## Хранилище объектов
+=======
+To store something in IndexedDB, we need an *object store*.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 Чтобы сохранить что-то в IndexedDB, нам нужно *хранилище объектов*.
 
@@ -183,10 +299,15 @@ openRequest.onblocked = function() {
 
 **Мы можем хранить почти любое значение, в том числе сложные объекты.**
 
+<<<<<<< HEAD
 IndexedDB использует [стандартный алгоритм сериализации](https://www.w3.org/TR/html53/infrastructure.html#section-structuredserializeforstorage) для клонирования и хранения объекта. Это как `JSON.stringify`, но более мощный, способный хранить гораздо больше типов данных.
+=======
+An example of an object that can't be stored: an object with circular references. Such objects are not serializable. `JSON.stringify` also fails for such objects.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 Пример объекта, который нельзя сохранить: объект с циклическими ссылками. Такие объекты не сериализуемы. `JSON.stringify` также выдаст ошибку при сериализации.
 
+<<<<<<< HEAD
 **Каждому значению в хранилище должен соответствовать уникальный ключ.**     
 
 Ключ должен быть одним из следующих типов: number, date, string, binary или array. Это уникальный идентификатор: по ключу мы можем искать/удалять/обновлять значения.
@@ -196,9 +317,21 @@ IndexedDB использует [стандартный алгоритм сери
 Как мы видим, можно указать ключ при добавлении значения в хранилище, аналогично `localStorage`. Но когда мы храним объекты, IndexedDB позволяет установить свойство объекта в качестве ключа, что гораздо удобнее. Или мы можем автоматически сгенерировать ключи.
 
 Но для начала нужно создать хранилище.
+=======
+A key must be one of these types - number, date, string, binary, or array. It's a unique identifier, so we can search/remove/update values by the key.
+
+![](indexeddb-structure.svg)
+
+As we'll see very soon, we can provide a key when we add a value to the store, similar to `localStorage`. But when we store objects, IndexedDB allows setting up an object property as the key, which is much more convenient. Or we can auto-generate keys.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 Синтаксис для создания хранилища объектов:
 
+<<<<<<< HEAD
+=======
+The syntax to create an object store:
+
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 ```js
 db.createObjectStore(name[, keyOptions]);
 ```
@@ -214,15 +347,29 @@ db.createObjectStore(name[, keyOptions]);
 
 Например, это хранилище объектов использует свойство `id` как ключ:
 
+<<<<<<< HEAD
+=======
+For instance, this object store uses `id` property as the key:
+
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 ```js
 db.createObjectStore('books', {keyPath: 'id'});
 ```
 
 **Хранилище объектов можно создавать/изменять только при обновлении версии базы данных в обработчике `upgradeneeded`.**
 
+<<<<<<< HEAD
 Это техническое ограничение. Вне обработчика мы сможем добавлять/удалять/обновлять данные, но хранилища объектов могут быть созданы/удалены/изменены только во время обновления версии базы данных.
 
 Для обновления версии базы есть два основных подхода:
+=======
+That's a technical limitation. Outside of the handler we'll be able to add/remove/update the data, but object stores can only be created/removed/altered during a version update.
+
+To perform a database version upgrade, there are two main approaches:
+
+1. We can implement per-version upgrade functions: from 1 to 2, from 2 to 3, from 3 to 4 etc. Then, in `upgradeneeded` we can compare versions (e.g. old 2, now 4) and run per-version upgrades step by step, for every intermediate version (2 to 3, then 3 to 4).
+2. Or we can just examine the database: get a list of existing object stores as `db.objectStoreNames`. That object is a [DOMStringList](https://html.spec.whatwg.org/multipage/common-dom-interfaces.html#domstringlist) that provides `contains(name)` method to check for existance. And then we can do updates depending on what exists and what doesn't.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 1. Мы можем реализовать функции обновления по версиям: с 1 на 2, с 2 на 3 и т.д. Потом в `upgradeneeded` сравнить версии (например, была 2, сейчас 4) и запустить операции обновления для каждой промежуточной версии (2 на 3, затем 3 на 4).
 2. Или мы можем взять список существующих хранилищ объектов, используя `db.objectStoreNames`. Этот объект является [DOMStringList](https://html.spec.whatwg.org/multipage/common-dom-interfaces.html#domstringlist), в нём есть метод `contains(name)`, используя который можно проверить существование хранилища. Посмотреть, какие хранилища есть и создать те, которых нет.
@@ -243,7 +390,11 @@ openRequest.onupgradeneeded = function() {
 };
 ```
 
+<<<<<<< HEAD
 Чтобы удалить хранилище объектов:
+=======
+To delete an object store:
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 ```js
 db.deleteObjectStore('books')
@@ -253,9 +404,18 @@ db.deleteObjectStore('books')
 
 Термин "транзакция" является общеизвестным, транзакции используются во многих видах баз данных.
 
+<<<<<<< HEAD
 Транзакция - это группа операций, которые должны быть или все выполнены, или все не выполнены (всё или ничего).
 
 Например, когда пользователь что-то покупает, нам нужно:
+=======
+A transaction is a group of operations, that should either all succeed or all fail.
+
+For instance, when a person buys something, we need to:
+
+1. Subtract the money from their account.
+2. Add the item to their inventory.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 1. Вычесть деньги с его счёта.
 2. Отправить ему покупку.
@@ -268,7 +428,7 @@ db.deleteObjectStore('books')
 
 Для начала транзакции:
 
-```js run
+```js
 db.transaction(store[, type]);
 ```
 
@@ -277,12 +437,21 @@ db.transaction(store[, type]);
   - `readonly` -- только чтение, по умолчанию.
   - `readwrite` -- только чтение и запись данных, создание/удаление самих хранилищ объектов недоступно.
 
+<<<<<<< HEAD
 Есть ещё один тип транзакций: `versionchange`. Такие транзакции могут делать любые операции, но мы не можем создать их вручную. IndexedDB автоматически создаёт транзакцию типа `versionchange`, когда открывает базу данных, для обработчика `upgradeneeded`. Вот почему это единственное место, где мы можем обновлять структуру базы данных, создавать/удалять хранилища объектов.
 
 ```smart header="Почему существует несколько типов транзакций?"
 Производительность является причиной, почему транзакции необходимо помечать как `readonly` или `readwrite`.
 
 Несколько readonly транзакций могут одновременно работать с одним и тем же хранилищем объектов, а readwrite транзакций - не могут. Транзакции типа readwrite "блокируют" хранилище для записи. Следующая такая транзакция должна дождаться выполнения предыдущей, перед тем как получит доступ к тому же самому хранилищу.
+=======
+There's also `versionchange` transaction type: such transactions can do everything, but we can't create them manually. IndexedDB automatically creates a `versionchange` transaction when opening the database, for `upgradeneeded` handler. That's why it's a single place where we can update the database structure, create/remove object stores.
+
+```smart header="Why are there different types of transactions?"
+Performance is the reason why transactions need to be labeled either `readonly` and `readwrite`.
+
+Many `readonly` transactions are able to access the same store concurrently, but `readwrite` transactions can't. A `readwrite` transaction "locks" the store for writing. The next transaction must wait before the previous one finishes before accessing the same store.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 ```
 
 После того, как транзакция будет создана, мы можем добавить элемент в хранилище, вот так:
@@ -316,15 +485,26 @@ request.onerror = function() {
 
 Мы сделали четыре шага:
 
+<<<<<<< HEAD
 1. Создать транзакцию и указать все хранилища, к которым необходим доступ, строка `(1)`.
 2. Получить хранилище объектов, используя `transaction.objectStore(name)`, строка `(2)`.
 3. Выполнить запрос на добавление элемента в хранилище объектов `books.add(book)`, строка `(3)`.
 4. ...Обработать результат запроса `(4)`, затем мы можем выполнить другие запросы и так далее.
+=======
+1. Create a transaction, mentioning all the stores it's going to access, at `(1)`.
+2. Get the store object using `transaction.objectStore(name)`, at `(2)`.
+3. Perform the request to the object store `books.add(book)`, at `(3)`.
+4. ...Handle request success/error `(4)`, then we can make other requests if needed, etc.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 Хранилища объектов поддерживают два метода для добавления значений:
 
 - **put(value, [key])**
+<<<<<<< HEAD
     Добавляет значение `value` в хранилище. Ключ `key` необходимо указать, если при создании хранилища объектов не было указано свойство `keyPath` или `autoIncrement`. Если уже есть значение с таким же ключом, то оно будет заменено.
+=======
+    Add the `value` to the store. The `key` is supplied only if the object store did not have `keyPath` or `autoIncrement` option. If there's already a value with the same key, it will be replaced.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 - **add(value, [key])**
     То же, что `put`, но если уже существует значение с таким ключом, то запрос не выполнится, будет сгенерирована ошибка с названием `"ConstraintError"`.
@@ -336,7 +516,11 @@ request.onerror = function() {
 
 ## Автоматическая фиксация транзакций
 
+<<<<<<< HEAD
 В примере выше мы запустили транзакцию и выполнили запрос `add`. Но, как говорилось ранее, транзакция может включать в себя несколько запросов, которые все вместе должны либо успешно завершиться, либо нет. Как нам закончить транзакцию, обозначить, что больше запросов в ней не будет?
+=======
+In the example above we started the transaction and made `add` request. But as we stated previously, a transaction may have multiple associated requests, that must either all succeed or all fail. How do we mark the transaction as finished, with no more requests to come?
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 Короткий ответ: этого не требуется.
 
@@ -348,9 +532,15 @@ request.onerror = function() {
 
 Таким образом, в приведённом выше примере не требуется никакого специального вызова, чтобы завершить транзакцию.
 
+<<<<<<< HEAD
 Такое автозавершение транзакций имеет важный побочный эффект. Мы не можем вставить асинхронную операцию, такую как `fetch` или `setTimeout` в середину транзакции. IndexedDB никак не заставит транзакцию "висеть" и ждать их выполнения.
 
 В приведённом ниже коде в запросе `request2` в строке с `(*)` будет ошибка, потому что транзакция уже завершена, больше нельзя выполнить в ней запрос:
+=======
+Transactions auto-commit principle has an important side effect. We can't insert an async operation like `fetch`, `setTimeout` in the middle of a transaction. IndexedDB will not keep the transaction waiting till these are done.
+
+In the code below, `request2` in the line `(*)` fails, because the transaction is already committed, and can't make any request in it:
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 ```js
 let request1 = books.add(book);
@@ -371,7 +561,11 @@ request1.onsuccess = function() {
 
 Авторы спецификации IndexedDB из соображений производительности считают, что транзакции должны завершаться быстро.
 
+<<<<<<< HEAD
 В частности, `readwrite` транзакции "блокируют" хранилища от записи. Таким образом, если одна часть приложения инициирует `readwrite` транзакцию в хранилище объектов `books`, то другая часть приложения, которая хочет сделать то же самое, должна ждать: новая транзакция "зависает" до завершения первой. Это может привести к странным задержкам, если транзакции слишком долго выполняются.
+=======
+Notably, `readwrite` transactions "lock" the stores for writing. So if one part of the application initiated `readwrite` on `books` object store, then another part that wants to do the same has to wait: the new transaction "hangs" till the first one is done. That can lead to strange delays if transactions take a long time.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 Что же делать?
 
@@ -476,6 +670,7 @@ request.onerror = function(event) {
 };
 ```
 
+<<<<<<< HEAD
 ## Поиск по ключам
 
 Есть два основных вида поиска в хранилище объектов:
@@ -490,6 +685,31 @@ request.onerror = function(event) {
 Методы поиска поддерживают либо точные ключи, либо так называемые "запросы с диапазоном" -- [IDBKeyRange](https://www.w3.org/TR/IndexedDB/#keyrange) объекты, которые задают "диапазон ключей".
 
 Диапазоны создаются с помощью следующих вызовов:
+=======
+## Searching
+
+There are two main types of search in an object store:
+
+1. By a key value or a key range. In our "books" storage that would be a value or range of values of `book.id`.
+2. By another object field, e.g. `book.price`. This required an additional data structure, named "index".
+
+### By key
+
+First let's deal with the first type of search: by key.
+
+Searching methods support both exact key values and so-called "ranges of values" -- [IDBKeyRange](https://www.w3.org/TR/IndexedDB/#keyrange) objects that specify an acceptable "key range".
+
+`IDBKeyRange` objects are created using following calls:
+
+- `IDBKeyRange.lowerBound(lower, [open])` means: `≥lower` (or `>lower` if `open` is true)
+- `IDBKeyRange.upperBound(upper, [open])` means: `≤upper` (or `<upper` if `open` is true)
+- `IDBKeyRange.bound(lower, upper, [lowerOpen], [upperOpen])` means: between `lower` and `upper`. If the open flags is true, the corresponding key is not included in the range.
+- `IDBKeyRange.only(key)` -- a range that consists of only one `key`, rarely used.
+
+We'll see practical examples of using them very soon.
+
+To perform the actual search, there are following methods. They accept a `query` argument that can be either an exact key or a key range:
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 - `IDBKeyRange.lowerBound(lower, [open])` означает: `>lower` (или `≥lower`, если `open` это true)
 - `IDBKeyRange.upperBound(upper, [open])` означает: `<upper` (или `≤upper`, если `open` это true)
@@ -514,28 +734,48 @@ request.onerror = function(event) {
 // получить одну книгу
 books.get('js')
 
+<<<<<<< HEAD
 // получить книги с 'css' <= id <= 'html'
 books.getAll(IDBKeyRange.bound('css', 'html'))
 
 // получить книги с id < 'html'
+=======
+// get books with 'css' <= id <= 'html'
+books.getAll(IDBKeyRange.bound('css', 'html'))
+
+// get books with id < 'html'
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 books.getAll(IDBKeyRange.upperBound('html', true))
 
 // получить все книги
 books.getAll()
 
+<<<<<<< HEAD
 // получить все ключи, гдe id > 'js'
 books.getAllKeys(IDBKeyRange.lowerBound('js', true))
 ```
 
 ```smart header="Хранилище объектов всегда отсортировано"
 Хранилище объектов внутренне сортирует значения по ключам.
+=======
+// get all keys, where id > 'js'
+books.getAllKeys(IDBKeyRange.lowerBound('js', true))
+```
+
+```smart header="Object store is always sorted"
+An object store sorts values by key internally.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 Поэтому запросы, которые возвращают много значений, всегда возвращают их в порядке сортировки по ключу.
 ```
 
+<<<<<<< HEAD
 ## Поиск по индексированному полю
 
 Для поиска по другим полям объекта нам нужно создать дополнительную структуру данных, называемую "индекс" (index).
+=======
+### By a field using an index
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 Индекс является "расширением" к хранилищу, которое отслеживает данное поле объекта. Для каждого значения этого поля хранится список ключей для объектов, которые имеют это значение. Ниже будет более подробная картина.
 
@@ -602,7 +842,11 @@ request.onsuccess = function() {
 Мы также можем использовать `IDBKeyRange`, чтобы создать диапазон и найти дешёвые/дорогие книги:
 
 ```js
+<<<<<<< HEAD
 // найдём книги, где цена < 5
+=======
+// find books where price <= 5
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 let request = priceIndex.getAll(IDBKeyRange.upperBound(5));
 ```
 
@@ -616,6 +860,11 @@ let request = priceIndex.getAll(IDBKeyRange.upperBound(5));
 
 Например:
 
+<<<<<<< HEAD
+=======
+For instance:
+
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 ```js
 // удалить книгу с id='js'
 books.delete('js');
@@ -633,7 +882,11 @@ request.onsuccess = function() {
 };
 ```
 
+<<<<<<< HEAD
 Чтобы удалить всё:
+=======
+To delete everything:
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 ```js
 books.clear(); // очищаем хранилище.
@@ -655,6 +908,11 @@ books.clear(); // очищаем хранилище.
 
 Синтаксис:
 
+<<<<<<< HEAD
+=======
+The syntax:
+
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 ```js
 // как getAll, но с использованием курсора:
 let request = store.openCursor([query], [direction]);
@@ -701,7 +959,11 @@ request.onsuccess = function() {
 
 В приведённом выше примере курсор был создан для хранилища объектов.
 
+<<<<<<< HEAD
 Но мы также можем создать курсор для индексов. Как мы помним, индексы позволяют искать по полю объекта. Курсоры для индексов работают так же, как для хранилищ объектов -- они позволяют экономить память, возвращая одно значение в единицу времени.
+=======
+But we also can make a cursor over an index. As we remember, indexes allow to search by an object field. Cursors over indexes do precisely the same as over object stores -- they save memory by returning one value at a time.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 Для курсоров по индексам `cursor.key` является ключом индекса (например price), нам следует использовать свойство `cursor.primaryKey` как ключ объекта:
 
@@ -712,9 +974,15 @@ let request = priceIdx.openCursor(IDBKeyRange.upperBound(5));
 request.onsuccess = function() {
   let cursor = request.result;
   if (cursor) {
+<<<<<<< HEAD
     let key = cursor.primaryKey; // следующий ключ в хранилище объектов (поле id)
     let value = cursor.value; // следующее значение в хранилище объектов (объект "книга")
     let keyIndex = cursor.key; // следующий ключ индекса (price)
+=======
+    let primaryKey = cursor.primaryKey; // next object store key (id field)
+    let value = cursor.value; // next object store object (book object)
+    let key = cursor.key; // next index key (price)
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
     console.log(key, value);
     cursor.continue();
   } else {
@@ -732,7 +1000,7 @@ request.onsuccess = function() {
 Тогда вместо `onsuccess/onerror` мы можем писать примерно так:
 
 ```js
-let db = await idb.openDb('store', 1, db => {
+let db = await idb.openDB('store', 1, db => {
   if (db.oldVersion == 0) {
     // выполняем инициализацию
     db.createObjectStore('books', {keyPath: 'id'});
@@ -774,11 +1042,19 @@ window.addEventListener('unhandledrejection', event => {
 
 ### Подводный камень: "Inactive transaction"
 
+<<<<<<< HEAD
 Как мы уже знаем, транзакции автоматически завершаются, как только браузер завершает работу с текущим кодом и макрозадачу. Поэтому, если мы поместим *макрозадачу* наподобие `fetch` в середину транзакции, транзакция не будет ожидать её завершения. Произойдёт автозавершение транзакции. Поэтому при следующем запросе возникнет ошибка.
 
 Для промисифицирующей обёртки и `async/await` поведение такое же.
 
 Вот пример `fetch` в середине транзакции:
+=======
+As we already know, a transaction auto-commits as soon as the browser is done with the current code and microtasks. So if we put a *macrotask* like `fetch` in the middle of a transaction, then the transaction won't wait for it to finish. It just auto-commits. So the next request in it would fail.
+
+For a promise wrapper and `async/await` the situation is the same.
+
+Here's an example of `fetch` in the middle of the transaction:
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 ```js
 let transaction = db.transaction("inventory", "readwrite");
@@ -793,7 +1069,14 @@ await inventory.add({ id: 'js', price: 10, created: new Date() }); // Ошибк
 
 Следующий `inventory.add` после `fetch` `(*)` не сработает, сгенерируется ошибка "inactive transaction", потому что транзакция уже завершена и закрыта к этому времени.
 
+<<<<<<< HEAD
 Решение такое же, как при работе с обычным IndexedDB: либо создать новую транзакцию, либо разделить задачу на части.
+=======
+The workaround is the same as when working with native IndexedDB: either make a new transaction or just split things apart.
+
+1. Prepare the data and fetch all that's needed first.
+2. Then save in the database.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 1. Подготовить данные и получить всё, что необходимо.
 2. Затем сохранить в базу данных.
@@ -821,7 +1104,11 @@ let result = await promise; // если ещё нужно
 
 IndexedDB можно рассматривать как "localStorage на стероидах". Это простая база данных типа ключ-значение, достаточно мощная для оффлайн приложений, но простая в использовании.
 
+<<<<<<< HEAD
 Лучшим руководством является спецификация, [текущая версия 2.0](https://w3c.github.io/IndexedDB), но также поддерживаются несколько методов из [3.0](https://w3c.github.io/IndexedDB/) (не так много отличий) версии.
+=======
+The best manual is the specification, [the current one](https://www.w3.org/TR/IndexedDB-2/) is 2.0, but few methods from [3.0](https://w3c.github.io/IndexedDB/) (it's not much different) are partially supported.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 Использование можно описать в нескольких фразах:
 

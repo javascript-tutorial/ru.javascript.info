@@ -7,11 +7,19 @@
 
 Но ведь у нас уже есть куки. Зачем тогда эти объекты? 
 
+<<<<<<< HEAD
 - В отличие от куки, объекты веб-хранилища не отправляются на сервер при каждом запросе. Именно поэтому мы можем хранить гораздо больше данных. Большинство современных браузеров могут выделить как минимум 5 мегабайтов данных (или больше), и этот размер можно поменять в настройках.
 - Ещё одно отличие от куки - сервер не может манипулировать объектами хранилища через HTTP-заголовки. Всё делается при помощи JavaScript.
 - Хранилище привязано к источнику (домен/протокол/порт). Это значит, что разные протоколы или поддомены определяют разные объекты хранилища, и они не могут получить доступ к данным друг друга.
 
 Объекты хранилища `localStorage` и `sessionStorage` предоставляют одинаковые методы и свойства:
+=======
+- Unlike cookies, web storage objects are not sent to server with each request. Because of that, we can store much more. Most modern browsers allow at least 5 megabytes of data (or more) and have settings to configure that.
+- Also unlike cookies, the server can't manipulate storage objects via HTTP headers. Everything's done in JavaScript.
+- The storage is bound to the origin (domain/protocol/port triplet). That is, different protocols or subdomains infer different storage objects, they can't access data from each other.
+
+Both storage objects provide the same methods and properties:
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 - `setItem(key, value)` -- сохранить пару ключ/значение.
 - `getItem(key)` -- получить данные по ключу `key`.
@@ -20,7 +28,11 @@
 - `key(index)` -- получить ключ на заданной позиции.
 - `length` -- количество элементов в хранилище.
 
+<<<<<<< HEAD
 Как видим, интерфейс похож на `Map` (`setItem/getItem/removeItem`), но также позволяет получить доступ к элементу по индексу -- `key(index)`.
+=======
+As you can see, it's like a `Map` collection (`setItem/getItem/removeItem`), but also allows access by index with `key(index)`.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 Давайте посмотрим, как это работает.
 
@@ -66,6 +78,11 @@ delete localStorage.test;
 
 1. Если ключ генерируется пользователем, то он может быть каким угодно, включая `length` или `toString` или другой встроенный метод `localStorage`. В этом случае `getItem/setItem` сработают нормально, а вот чтение/запись как свойства объекта не пройдут:
 
+<<<<<<< HEAD
+=======
+1. If the key is user-generated, it can be anything, like `length` or `toString`, or another built-in method of `localStorage`. In that case `getItem/setItem` work fine, while object-like access fails:
+
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
     ```js run
     let key = 'length';
     localStorage[key] = 5; // Ошибка, невозможно установить length
@@ -121,11 +138,19 @@ for(let key of keys) {
 
 Последнее работает, потому что `Object.keys` возвращает только ключи, принадлежащие объекту, игнорируя прототип.
 
+<<<<<<< HEAD
 ## Только строки
 
 Обратите внимание, что ключ и значение должны быть строками.
 
 Если мы используем любой другой тип, например число или объект, то он автоматически преобразуется в строку:
+=======
+## Strings only
+
+Please note that both key and value must be strings.
+
+If they were any other type, like a number, or an object, they would get converted to a string automatically:
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 ```js run
 localStorage.user = {name: "John"};
@@ -137,7 +162,11 @@ alert(localStorage.user); // [object Object]
 ```js run
 localStorage.user = JSON.stringify({name: "John"});
 
+<<<<<<< HEAD
 // немного позже
+=======
+// sometime later
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 let user = JSON.parse( localStorage.user );
 alert( user.name ); // John
 ```
@@ -180,7 +209,11 @@ alert( sessionStorage.getItem('test') ); // после обновления: 1
 
 ## Событие storage
 
+<<<<<<< HEAD
 Когда обновляются данные в `localStorage` или `sessionStorage`, генерируется событие [storage](https://html.spec.whatwg.org/multipage/webstorage.html#the-storageevent-interface) со следующими свойствами:
+=======
+When the data gets updated in `localStorage` or `sessionStorage`, [storage](https://html.spec.whatwg.org/multipage/webstorage.html#the-storageevent-interface) event triggers, with properties:
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 - `key` – ключ, который обновился (`null`, если вызван `.clear()`).
 - `oldValue` – старое значение (`null`, если ключ добавлен впервые).
@@ -201,8 +234,13 @@ alert( sessionStorage.getItem('test') ); // после обновления: 1
 Теперь, если оба окна слушают `window.onstorage`, то каждое из них будет реагировать на обновления, произошедшие в другом окне.
 
 ```js run
+<<<<<<< HEAD
 // срабатывает при обновлениях, сделанных в том же хранилище из других документов
 window.onstorage = event => { // можно также использовать window.addEventListener('storage', event => {
+=======
+// triggers on updates made to the same storage from other documents
+window.onstorage = event => { // can also use window.addEventListener('storage', event => {
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
   if (event.key != 'now') return;
   alert(event.key + ':' + event.newValue + " at " + event.url);
 };
@@ -216,16 +254,29 @@ localStorage.setItem('now', Date.now());
 
 **Это позволяет разным окнам одного источника обмениваться сообщениями.**
 
+<<<<<<< HEAD
 Современные браузеры также поддерживают [Broadcast channel API](https://developer.mozilla.org/en-US/docs/Web/API/Broadcast_Channel_API) специальный API для связи между окнами одного источника, он более полнофункциональный, но менее поддерживаемый. Существуют библиотеки (полифилы), которые эмулируют это API на основе `localStorage` и делают его доступным везде.
+=======
+Modern browsers also support [Broadcast channel API](mdn:/api/Broadcast_Channel_API), the special API for same-origin inter-window communication, it's more full featured, but less supported. There are libraries that polyfill that API, based on `localStorage`, that make it available everywhere.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 ## Итого
 
+<<<<<<< HEAD
 Объекты веб-хранилища `localStorage` и `sessionStorage` позволяют хранить пары ключ/значение в браузере.
 
 - `key` и `value` должны быть строками.
 - Лимит 5 Мб+, зависит от браузера.
 - Данные не имеют "времени истечения".
 - Данные привязаны к источнику (домен/протокол/порт).
+=======
+Web storage objects `localStorage` and `sessionStorage` allow to store key/value pairs in the browser.
+
+- Both `key` and `value` must be strings.
+- The limit is 5mb+, depends on the browser.
+- They do not expire.
+- The data is bound to the origin (domain/port/protocol).
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 | `localStorage` | `sessionStorage` |
 |----------------|------------------|

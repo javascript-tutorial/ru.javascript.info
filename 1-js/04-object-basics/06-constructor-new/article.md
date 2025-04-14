@@ -1,6 +1,10 @@
 # Конструктор, оператор "new"
 
+<<<<<<< HEAD
 Обычный синтаксис `{...}` позволяет создать только один объект. Но зачастую нам нужно создать множество похожих, однотипных объектов, таких как пользователи, элементы меню и так далее.
+=======
+The regular `{...}` syntax allows us to create one object. But often we need to create many similar objects, like multiple users or menu items and so on.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 Это можно сделать при помощи функции-конструктора и оператора `"new"`.
 
@@ -64,6 +68,7 @@ let user = {
 
 Это и является основной целью конструкторов - реализовать код для многократного создания однотипных объектов.
 
+<<<<<<< HEAD
 Давайте ещё раз отметим - технически любая функция (кроме стрелочных функций, поскольку у них нет `this`) может использоваться в качестве конструктора. Его можно запустить с помощью `new`, и он выполнит выше указанный алгоритм. Подобные функции должны начинаться с заглавной буквы - это общепринятое соглашение, чтобы было ясно, что функция должна вызываться с помощью "new".
 
 ````smart header="new function() { ... }"
@@ -71,6 +76,15 @@ let user = {
 
 ```js
 // создаём функцию и сразу же вызываем её с помощью new
+=======
+Let's note once again -- technically, any function (except arrow functions, as they don't have `this`) can be used as a constructor. It can be run with `new`, and it will execute the algorithm above. The "capital letter first" is a common agreement, to make it clear that a function is to be run with `new`.
+
+````smart header="new function() { ... }"
+If we have many lines of code all about creation of a single complex object, we can wrap them in an immediately called constructor function, like this:
+
+```js
+// create a function and immediately call it with new
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 let user = new function() { 
   this.name = "John";
   this.isAdmin = false;
@@ -81,7 +95,11 @@ let user = new function() {
 };
 ```
 
+<<<<<<< HEAD
 Такой конструктор не может быть вызван снова, так как он нигде не сохраняется, просто создаётся и тут же вызывается. Таким образом, этот трюк направлен на инкапсуляцию кода, который создаёт отдельный объект, без возможности повторного использования в будущем.
+=======
+This constructor can't be called again, because it is not saved anywhere, just created and called. So this trick aims to encapsulate the code that constructs the single object, without future reuse.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 ````
 
 ## Проверка на вызов в режиме конструктора: new.target
@@ -92,7 +110,11 @@ let user = new function() {
 
 Используя специальное свойство `new.target` внутри функции, мы можем проверить, вызвана ли функция при помощи оператора `new` или без него.
 
+<<<<<<< HEAD
 В случае обычного вызова функции `new.target` будет `undefined`. Если же она была вызвана при помощи `new`, `new.target` будет равен самой функции.
+=======
+It is undefined for regular calls and equals the function if called with `new`:
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 ```js run
 function User() {
@@ -170,8 +192,13 @@ alert( new SmallUser().name );  // John
 
 Обычно у конструкторов отсутствует `return`. Здесь мы упомянули особое поведение с возвращаемыми объектами в основном для полноты картины.
 
+<<<<<<< HEAD
 ````smart header="Пропуск скобок"
 Кстати, мы можем не ставить круглые скобки после `new`:
+=======
+````smart header="Omitting parentheses"
+By the way, we can omit parentheses after `new`:
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 ```js
 let user = new User; // <-- без скобок
