@@ -158,7 +158,20 @@ setTimeout(() => document.body.style.display = "", 1000); // возврат к �
 
 Если мы установим в `style.display` пустую строку, то браузер применит CSS-классы и встроенные стили, как если бы такого свойства `style.display` вообще не было.
 
+<<<<<<< HEAD
 ## Следите за единицами измерения
+=======
+Also there is a special method for that, `elem.style.removeProperty('style property')`. So, We can remove a property like this:
+
+```js run
+document.body.style.background = 'red'; //set background to red
+
+setTimeout(() => document.body.style.removeProperty('background'), 1000); // remove background after 1 second
+```
+
+````smart header="Full rewrite with `style.cssText`"
+Normally, we use `style.*` to assign individual style properties. We can't set the full style like `div.style="color: red; width: 100px"`, because `div.style` is an object, and it's read-only.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 Не забудьте добавить к значениям единицы измерения.
 
@@ -254,8 +267,13 @@ pseudo
 ```smart header="Вычисленное (computed) и окончательное (resolved) значения"
 Есть две концепции в [CSS](https://drafts.csswg.org/cssom/#resolved-values):
 
+<<<<<<< HEAD
 1. *Вычисленное* (computed) значение – это то, которое получено после применения всех CSS-правил и CSS-наследования. Например, `height:1em` или `font-size:125%`.
 2. *Окончательное* ([resolved](https://drafts.csswg.org/cssom/#resolved-values)) значение – непосредственно применяемое к элементу. Значения `1em` или `125%` являются относительными. Браузер берёт вычисленное значение и делает все единицы измерения фиксированными и абсолютными, например, `height:20px` или `font-size:16px`. Для геометрических свойств разрешённые значения могут иметь плавающую точку, например, `width:50.5px`.
+=======
+1. A *computed* style value is the value after all CSS rules and CSS inheritance is applied, as the result of the CSS cascade. It can look like `height:1em` or `font-size:125%`.
+2. A *resolved* style value is the one finally applied to the element. Values like `1em` or `125%` are relative. The browser takes the computed value and makes all units fixed and absolute, for instance: `height:20px` or `font-size:16px`. For geometry properties resolved values may have a floating point, like `width:50.5px`.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 Давным-давно `getComputedStyle` был создан для получения вычисленных значений, но оказалось, что окончательные значения гораздо удобнее, и стандарт изменился.
 
@@ -265,7 +283,11 @@ pseudo
 ````warn header="`getComputedStyle` требует полное свойство!"
 Для правильного получения значения нужно указать точное свойство. Например: `paddingLeft`, `marginTop`, `borderTopWidth`. При обращении к сокращённому: `padding`, `margin`, `border` – правильный результат не гарантируется.
 
+<<<<<<< HEAD
 Например, если есть свойства `paddingLeft/paddingTop`, то что мы получим вызывая `getComputedStyle(elem).padding`? Ничего, или, может быть, "сгенерированное" значение из известных внутренних отступов? Стандарта для этого нет.
+=======
+For instance, if there are properties `paddingLeft/paddingTop`, then what should we get for `getComputedStyle(elem).padding`? Nothing, or maybe a "generated" value from known paddings? There's no standard rule here.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 ````
 
 ```smart header="Стили, применяемые к посещённым `:visited` ссылкам, скрываются!"
@@ -273,7 +295,11 @@ pseudo
 
 Но `getComputedStyle` не даёт доступ к этой информации, чтобы произвольная страница не могла определить, посещал ли пользователь ту или иную ссылку, проверив стили.
 
+<<<<<<< HEAD
 JavaScript не видит стили, применяемые с помощью `:visited`. Кроме того, в CSS есть ограничение, которое запрещает в целях безопасности применять к `:visited` CSS-стили, изменяющие геометрию элемента. Это гарантирует, что нет обходного пути для "злой" страницы проверить, была ли ссылка посещена и, следовательно, нарушить конфиденциальность.
+=======
+JavaScript may not see the styles applied by `:visited`. And also, there's a limitation in CSS that forbids applying geometry-changing styles in `:visited`. That's to guarantee that there's no side way for an evil page to test if a link was visited and hence to break the privacy.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 ```
 
 ## Итого

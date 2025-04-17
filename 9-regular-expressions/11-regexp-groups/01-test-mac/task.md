@@ -16,5 +16,9 @@ alert( regexp.test('0132546789AB') ); // false (нет двоеточий)
 
 alert( regexp.test('01:32:54:67:89') ); // false (5 чисел, должно быть 6)
 
+<<<<<<< HEAD
 alert( regexp.test('01:32:54:67:89:ZZ') ) // false (ZZ в конце строки)
+=======
+alert( regexp.test('01:32:54:67:89:ZZ') ) // false (ZZ at the end)
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 ```

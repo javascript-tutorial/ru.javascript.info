@@ -3,7 +3,17 @@
 
 Кривые Безье используются в компьютерной графике для рисования плавных изгибов, в CSS-анимации и много где ещё.
 
+<<<<<<< HEAD
 Это очень простая вещь, которую стоит изучить один раз, а затем чувствовать себя комфортно в мире векторной графики и продвинутых анимаций.
+=======
+```smart header="Some theory, please"
+This article provides a theoretical, but very needed insight into what Bezier curves are, while [the next one](info:css-animations#bezier-curve) shows how we can use them for CSS animations.
+
+Please take your time to read and understand the concept, it'll serve you well.
+```
+
+## Control points
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 ```smart header="Немного теории"
 Эта статья даёт теоретическое, но очень необходимое представление о том, что такое кривые Безье, в то время как [следующая](info:css-animations#bezier-curve) показывает, как мы можем использовать их для CSS-анимаций.
@@ -38,7 +48,11 @@
 
     ![](bezier4-e.svg) ![](bezier3-e.svg)
 
+<<<<<<< HEAD
 Благодаря последнему свойству в компьютерной графике можно оптимизировать проверку пересечения двух кривых. Если их выпуклые оболочки не пересекаются, то и кривые тоже не пересекутся. Таким образом, проверка пересечения выпуклых оболочек в первую очередь может дать быстрый ответ на вопрос о наличии пересечения. Проверить пересечение или выпуклые оболочки гораздо проще, потому что это прямоугольники, треугольники и т.д. (см. рисунок выше), гораздо более простые фигуры, чем кривая.
+=======
+Because of that last property, in computer graphics it's possible to optimize intersection tests. If convex hulls do not intersect, then curves do not either. So checking for the convex hulls intersection first can give a very fast "no intersection" result. Checking the intersection of convex hulls is much easier, because they are rectangles, triangles and so on (see the picture above), much simpler figures than the curve.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 **Основная ценность кривых Безье для рисования в том, что, двигая точки, кривую можно менять, причём кривая при этом меняется интуитивно понятным образом.**
 
@@ -56,7 +70,12 @@
 
 ## Алгоритм "де Кастельжо"
 
+<<<<<<< HEAD
 Есть математическая формула для кривых Безье, но давайте рассмотрим её чуть позже, потому что [Алгоритм де Кастельжо](https://ru.wikipedia.org/wiki/%D0%90%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC_%D0%B4%D0%B5_%D0%9A%D0%B0%D1%81%D1%82%D0%B5%D0%BB%D1%8C%D0%B6%D0%BE) идентичен математическому определению кривой и наглядно показывает, как она строится.
+=======
+There's a mathematical formula for Bezier curves, but let's cover it a bit later, because
+[De Casteljau's algorithm](https://en.wikipedia.org/wiki/De_Casteljau%27s_algorithm) is identical to the mathematical definition and visually shows how it is constructed.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 Рассмотрим его на примере трёх точек (точки 1,2 и 3 можно двигать). Нажатие на кнопку "play" запустит демонстрацию.
 
