@@ -327,12 +327,13 @@ socket.onmessage = function(event) {
 4. Когда подключение закрыто: `clients.delete(socket)`.
 
 ```js
-const ws = new require('ws');
+const http = require('http');
+const ws = require('ws');
 const wss = new ws.Server({noServer: true});
 
 const clients = new Set();
 
-http.createServer((req, res) => {
+const server = http.createServer((req, res) => {
   // в реальном проекте здесь может также быть код для обработки отличных от websoсket-запросов
   // здесь мы работаем с каждым запросом как с веб-сокетом
   wss.handleUpgrade(req, req.socket, Buffer.alloc(0), onSocketConnect);
@@ -353,6 +354,8 @@ function onSocketConnect(ws) {
     clients.delete(ws);
   });
 }
+
+server.listen(80);
 ```
 
 Вот рабочий пример:
