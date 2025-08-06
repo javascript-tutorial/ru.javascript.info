@@ -122,8 +122,6 @@ article.createTodays(); /// Error: article.createTodays is not a function
 
 ## Статические свойства
 
-[recent browser=Chrome]
-
 Статические свойства также возможны, они выглядят как свойства класса, но с `static` в начале:
 
 ```js run
