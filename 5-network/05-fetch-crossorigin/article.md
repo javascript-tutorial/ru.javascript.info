@@ -257,6 +257,7 @@ Access-Control-Request-Headers: Content-Type,API-Key
 ### Шаг 2 (ответ сервера на предзапрос)
 
 Сервер должен ответить со статусом 200 и заголовками:
+- `Access-Control-Allow-Origin: https://javascript.info`
 - `Access-Control-Allow-Methods: PATCH`
 - `Access-Control-Allow-Headers: Content-Type,API-Key`.
 
@@ -266,12 +267,13 @@ Access-Control-Request-Headers: Content-Type,API-Key
 
 ```http
 200 OK
+Access-Control-Allow-Origin: https://javascript.info
 Access-Control-Allow-Methods: PUT,PATCH,DELETE
 Access-Control-Allow-Headers: API-Key,Content-Type,If-Modified-Since,Cache-Control
 Access-Control-Max-Age: 86400
 ```
 
-Теперь, когда браузер видит, что `PATCH` есть в `Access-Control-Allow-Methods`, а `Content-Type,API-Key` - в списке `Access-Control-Allow-Headers`, он посылает наш основной запрос.
+Теперь, когда браузер видит, что `https://javascript.info` есть в `Access-Control-Allow-Origin`, `PATCH` в `Access-Control-Allow-Methods`, а `Content-Type,API-Key` - в списке `Access-Control-Allow-Headers`, он посылает наш основной запрос.
 
 Кроме того, ответ на предзапрос кешируется на время, указанное в заголовке `Access-Control-Max-Age` (86400 секунд, один день), так что последующие запросы не вызовут предзапрос. Они будут отосланы сразу при условии, что соответствуют закешированным разрешениям.
 
