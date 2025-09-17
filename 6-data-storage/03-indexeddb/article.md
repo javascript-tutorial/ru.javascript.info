@@ -268,7 +268,7 @@ db.deleteObjectStore('books')
 
 Для начала транзакции:
 
-```js run
+```js
 db.transaction(store[, type]);
 ```
 
