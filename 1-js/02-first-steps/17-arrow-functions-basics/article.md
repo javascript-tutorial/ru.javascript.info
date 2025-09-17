@@ -41,7 +41,7 @@ alert( sum(1, 2) ); // 3
     ```js run
     *!*
     let double = n => n * 2;
-    // примерно тоже что и: let double = function(n) { return n * 2 }
+    // примерно то же, что и: let double = function(n) { return n * 2 }
     */!*
 
     alert( double(3) ); // 6
