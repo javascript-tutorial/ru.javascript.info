@@ -36,7 +36,7 @@ alert( aclean(arr) );
 Для удобства, давайте разделим это на несколько строк:
 
 ```js
-let sorted = arr[i] // PAN
+let sorted = word // PAN
   .toLowerCase() // pan
   .split("") // ["p","a","n"]
   .sort() // ["a","n","p"]
@@ -63,9 +63,14 @@ map.set(sorted, word);
 function aclean(arr) {
   let obj = {};
 
-  for (let i = 0; i < arr.length; i++) {
-    let sorted = arr[i].toLowerCase().split("").sort().join("");
-    obj[sorted] = arr[i];
+  for (let word of arr) {
+    let sorted = word
+      .toLowerCase()
+      .split("")
+      .sort()
+      .join("");
+
+    obj[sorted] = word;
   }
 
   return Object.values(obj);
