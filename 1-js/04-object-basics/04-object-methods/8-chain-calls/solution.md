@@ -23,7 +23,11 @@ let ladder = {
   }
 };
 
+<<<<<<< HEAD
 ladder.up().up().down().showStep().down().showStep(); // показывает 1 затем 0
+=======
+ladder.up().up().down().showStep().down().showStep(); // shows 1 then 0
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 ```
 
 Мы также можем записать один вызов на одной строке. Для длинных цепей вызовов это более читабельно:

@@ -1,9 +1,15 @@
 
 # Статические свойства и методы
 
+<<<<<<< HEAD
 Мы также можем присвоить метод самому классу. Такие методы называются *статическими*.
 
 В объявление класса они добавляются с помощью ключевого слова `static`, например:
+=======
+We can also assign a method to the class as a whole. Such methods are called *static*.
+
+In a class declaration, they are prepended by `static` keyword, like this:
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 ```js run
 class User {
@@ -19,16 +25,23 @@ User.staticMethod(); // true
 
 Это фактически то же самое, что присвоить метод напрямую как свойство функции:
 
+<<<<<<< HEAD
 ```js
+=======
+```js run
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 class User { }
 
 User.staticMethod = function() {
   alert(this === User);
 };
+
+User.staticMethod(); // true
 ```
 
 Значением `this` при вызове `User.staticMethod()` является сам конструктор класса `User` (правило "объект до точки").
 
+<<<<<<< HEAD
 Обычно статические методы используются для реализации функций, которые будут принадлежать классу в целом, но не какому-либо его конкретному объекту.
 
 Звучит не очень понятно? Сейчас все встанет на свои места.
@@ -36,6 +49,13 @@ User.staticMethod = function() {
 Например, есть объекты статей `Article`, и нужна функция для их сравнения.
 
 Естественное решение – сделать для этого статический метод `Article.compare`:
+=======
+Usually, static methods are used to implement functions that belong to the class as a whole, but not to any particular object of it.
+
+For instance, we have `Article` objects and need a function to compare them.
+
+A natural solution would be to add `Article.compare` static method:
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 ```js run
 class Article {
@@ -65,9 +85,17 @@ articles.sort(Article.compare);
 alert( articles[0].title ); // CSS
 ```
 
+<<<<<<< HEAD
 Здесь метод `Article.compare` стоит "над" статьями, как средство для их сравнения. Это метод не отдельной статьи, а всего класса.
 
 Другим примером может быть так называемый "фабричный" метод.
+=======
+Here `Article.compare` method stands "above" articles, as a means to compare them. It's not a method of an article, but rather of the whole class.
+
+Another example would be a so-called "factory" method.
+
+Let's say, we need multiple ways to create an article:
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 Скажем, нам нужно несколько способов создания статьи:
 
@@ -75,9 +103,13 @@ alert( articles[0].title ); // CSS
 2. Создание пустой статьи с сегодняшней датой.
 3. ...или как-то ещё.
 
+<<<<<<< HEAD
 Первый способ может быть реализован через конструктор. А для второго можно использовать статический метод класса.
 
 Такой как `Article.createTodays()` в следующем примере:
+=======
+Such as `Article.createTodays()` here:
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 ```js run
 class Article {
@@ -104,6 +136,7 @@ alert( article.title ); // Сегодняшний дайджест
 Статические методы также используются в классах, относящихся к базам данных, для поиска/сохранения/удаления вхождений в базу данных, например:
 
 ```js
+<<<<<<< HEAD
 // предположим, что Article - это специальный класс для управления статьями
 // статический метод для удаления статьи по id:
 Article.remove({id: 12345});
@@ -111,6 +144,25 @@ Article.remove({id: 12345});
 
 ````warn header="Статические методы недоступны для отдельных объектов"
 Статические методы могут вызываться для классов, но не для отдельных объектов.
+=======
+// assuming Article is a special class for managing articles
+// static method to remove the article by id:
+Article.remove({id: 12345});
+```
+
+````warn header="Static methods aren't available for individual objects"
+Static methods are callable on classes, not on individual objects.
+
+E.g. such code won't work:
+
+```js
+// ...
+article.createTodays(); /// Error: article.createTodays is not a function
+```
+````
+
+## Static properties
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 Например. такой код не будет работать:
 
@@ -138,14 +190,23 @@ alert( Article.publisher ); // Илья Кантор
 Article.publisher = "Илья Кантор";
 ```
 
+<<<<<<< HEAD
 ## Наследование статических свойств и методов [#statics-and-inheritance]
 
 Статические свойства и методы наследуются.
 
 Например, метод `Animal.compare` в коде ниже наследуется и доступен как `Rabbit.compare`:
+=======
+## Inheritance of static properties and methods [#statics-and-inheritance]
+
+Static properties and methods are inherited.
+
+For instance, `Animal.compare` and `Animal.planet` in the code below are inherited and accessible as `Rabbit.compare` and `Rabbit.planet`:
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 ```js run
 class Animal {
+  static planet = "Earth";
 
   constructor(name, speed) {
     this.speed = speed;
@@ -181,10 +242,19 @@ let rabbits = [
 rabbits.sort(Rabbit.compare);
 */!*
 
+<<<<<<< HEAD
 rabbits[0].run(); // Чёрный кролик бежит со скоростью 5.
 ```
 
 Мы можем вызвать `Rabbit.compare`, при этом будет вызван унаследованный `Animal.compare`.
+=======
+rabbits[0].run(); // Black Rabbit runs with speed 5.
+
+alert(Rabbit.planet); // Earth
+```
+
+Now when we call `Rabbit.compare`, the inherited `Animal.compare` will be called.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 Как это работает? Снова с использованием прототипов. Как вы уже могли предположить, `extends` даёт `Rabbit` ссылку `[[Prototype]]` на `Animal`.
 
@@ -195,7 +265,11 @@ rabbits[0].run(); // Чёрный кролик бежит со скорость�
 1. Функция `Rabbit` прототипно наследует от функции `Animal`.
 2. `Rabbit.prototype` прототипно наследует от `Animal.prototype`.
 
+<<<<<<< HEAD
 В результате наследование работает как для обычных, так и для статических методов.
+=======
+As a result, inheritance works both for regular and static methods.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 Давайте это проверим кодом:
 
@@ -206,13 +280,21 @@ class Rabbit extends Animal {}
 // для статики
 alert(Rabbit.__proto__ === Animal); // true
 
+<<<<<<< HEAD
 // для обычных методов
+=======
+// for regular methods
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 alert(Rabbit.prototype.__proto__ === Animal.prototype); // true
 ```
 
 ## Итого
 
+<<<<<<< HEAD
 Статические методы используются для функциональности, принадлежат классу "в целом", а не относятся к конкретному объекту класса.
+=======
+Static methods are used for the functionality that belongs to the class "as a whole". It doesn't relate to a concrete class instance.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 Например, метод для сравнения двух статей `Article.compare(article1, article2)` или фабричный метод `Article.createTodays()`.
 

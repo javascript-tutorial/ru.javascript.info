@@ -33,11 +33,19 @@ user.sayHi = function() {
 user.sayHi(); // Привет!
 ```
 
+<<<<<<< HEAD
 Здесь мы просто использовали Function Expression (функциональное выражение), чтобы создать функцию приветствия, и присвоили её свойству `user.sayHi` нашего объекта.
 
 Затем мы можем вызвать ee как `user.sayHi()`. Теперь пользователь может говорить!
 
 Функцию, которая является свойством объекта, называют *методом* этого объекта.
+=======
+Here we've just used a Function Expression to create a function and assign it to the property `user.sayHi` of the object.
+
+Then we can call it as `user.sayHi()`. The user can now speak!
+
+A function that is a property of an object is called its *method*.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 Итак, мы получили метод `sayHi` объекта `user`.
 
@@ -51,7 +59,11 @@ let user = {
 *!*
 // сначала, объявляем
 function sayHi() {
+<<<<<<< HEAD
   alert("Привет!");
+=======
+  alert("Hello!");
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 }
 
 // затем добавляем в качестве метода
@@ -64,7 +76,11 @@ user.sayHi(); // Привет!
 ```smart header="Объектно-ориентированное программирование"
 Когда мы пишем наш код, используя объекты для представления сущностей реального мира, - это называется [объектно-ориентированным программированием](https://ru.wikipedia.org/wiki/%D0%9E%D0%B1%D1%8A%D0%B5%D0%BA%D1%82%D0%BD%D0%BE-%D0%BE%D1%80%D0%B8%D0%B5%D0%BD%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%BD%D0%BE%D0%B5_%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5) или сокращённо: "ООП".
 
+<<<<<<< HEAD
 ООП является большой предметной областью и интересной наукой самой по себе. Как выбрать правильные сущности? Как организовать взаимодействие между ними? Это -- создание архитектуры, и на эту тему есть отличные книги, такие как "Приёмы объектно-ориентированного проектирования. Паттерны проектирования" авторов Эрих Гамма, Ричард Хелм, Ральф Джонсон, Джон Влиссидес или "Объектно-ориентированный анализ и проектирование с примерами приложений" Гради Буча, а также ещё множество других книг.
+=======
+OOP is a big thing, an interesting science of its own. How to choose the right entities? How to organize the interaction between them? That's architecture, and there are great books on that topic, like "Design Patterns: Elements of Reusable Object-Oriented Software" by E. Gamma, R. Helm, R. Johnson, J. Vissides or "Object-Oriented Analysis and Design with Applications" by G. Booch, and more.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 ```
 ### Сокращённая запись метода
 
@@ -82,7 +98,11 @@ user = {
 // сокращённая запись выглядит лучше, не так ли?
 user = {
 *!*
+<<<<<<< HEAD
   sayHi() { // то же самое, что и "sayHi: function(){...}"
+=======
+  sayHi() { // same as "sayHi: function(){...}"
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 */!*
     alert("Привет");
   }
@@ -91,7 +111,11 @@ user = {
 
 Как было показано, мы можем пропустить ключевое слово `"function"` и просто написать `sayHi()`.
 
+<<<<<<< HEAD
 Нужно отметить, что эти две записи не полностью эквивалентны. Есть тонкие различия, связанные с наследованием объектов (что будет рассмотрено позже), но на данном этапе изучения это неважно. Почти во всех случаях сокращённый синтаксис предпочтителен.
+=======
+To tell the truth, the notations are not fully identical. There are subtle differences related to object inheritance (to be covered later), but for now they do not matter. In almost all cases, the shorter syntax is preferred.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 ## Ключевое слово "this" в методах
 
@@ -162,7 +186,11 @@ let admin = user;
 user = null; // перезапишем переменную для наглядности, теперь она не хранит ссылку на объект.
 
 *!*
+<<<<<<< HEAD
 admin.sayHi(); // TypeError: Cannot read property 'name' of null 
+=======
+admin.sayHi(); // TypeError: Cannot read property 'name' of null
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 */!*
 ```
 
@@ -170,7 +198,11 @@ admin.sayHi(); // TypeError: Cannot read property 'name' of null
 
 ## "this" не является фиксированным
 
+<<<<<<< HEAD
 В JavaScript ключевое слово "this" ведёт себя иначе, чем в большинстве других языков программирования. Его можно использовать в любой функции, даже если это не метод объекта.
+=======
+In JavaScript, keyword `this` behaves unlike most other programming languages. It can be used in any function, even if it's not a method of an object.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 В следующем примере нет синтаксической ошибки:
 
@@ -236,11 +268,19 @@ sayHi(); // undefined
 Здесь наша позиция заключается не в том, чтобы судить, является ли это архитектурное решение в языке хорошим или плохим. Скоро мы поймем, как с этим работать, как получить выгоду и избежать проблем.
 ```
 
+<<<<<<< HEAD
 ## У стрелочных функций нет "this"
 
 Стрелочные функции особенные: у них нет своего "собственного" `this`. Если мы ссылаемся на `this` внутри такой функции, то оно берётся из внешней "нормальной" функции.
 
 Например, здесь `arrow()` использует значение `this` из внешнего метода `user.sayHi()`:
+=======
+## Arrow functions have no "this"
+
+Arrow functions are special: they don't have their "own" `this`. If we reference `this` from such a function, it's taken from the outer "normal" function.
+
+For instance, here `arrow()` uses `this` from the outer `user.sayHi()` method:
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 ```js run
 let user = {
