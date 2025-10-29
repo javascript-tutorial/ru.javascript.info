@@ -17,7 +17,7 @@ Rabbit.prototype.sayHi = function() {
 let rabbit = new Rabbit("Rabbit");
 ```
 
-Все эти вызовы делают одно и тоже или нет?
+Все эти вызовы делают одно и то же или нет?
 
 ```js
 rabbit.sayHi();
