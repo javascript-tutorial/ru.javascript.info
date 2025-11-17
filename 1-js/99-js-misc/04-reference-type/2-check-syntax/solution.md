@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 **Ошибка**!
 
 Попробуйте запустить:
@@ -35,3 +36,42 @@ let user = {
 ```
 
 Обратите внимание, что круглые скобки вокруг `(user.go)` ничего не значат. Обычно они определяют последовательность операций (оператор группировки), но здесь вызов метода через точку `.` срабатывает первым в любом случае, поэтому группировка ни на что не влияет. Только точка с запятой имеет значение.
+=======
+**Error**!
+
+Try it:
+
+```js run
+let user = {
+  name: "John",
+  go: function() { alert(this.name) }
+}
+
+(user.go)() // error!
+```
+
+The error message in most browsers does not give us much of a clue about what went wrong.
+
+**The error appears because a semicolon is missing after `user = {...}`.**
+
+JavaScript does not auto-insert a semicolon before a bracket `(user.go)()`, so it reads the code like:
+
+```js no-beautify
+let user = { go:... }(user.go)()
+```
+
+Then we can also see that such a joint expression is syntactically a call of the object `{ go: ... }` as a function with the argument `(user.go)`. And that also happens on the same line with `let user`, so the `user` object has not yet even been defined, hence the error.
+
+If we insert the semicolon, all is fine:
+
+```js run
+let user = {
+  name: "John",
+  go: function() { alert(this.name) }
+}*!*;*/!*
+
+(user.go)() // John
+```
+
+Please note that parentheses around `(user.go)` do nothing here. Usually they setup the order of operations, but here the dot `.` works first anyway, so there's no effect. Only the semicolon thing matters.
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533

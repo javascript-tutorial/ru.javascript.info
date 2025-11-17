@@ -4,9 +4,21 @@ importance: 5
 
 # Тормозящий (throttling) декоратор
 
+<<<<<<< HEAD
 Создайте «тормозящий» декоратор `throttle(f, ms)`, который возвращает обёртку.
 
 При многократном вызове он передает вызов `f` не чаще одного раза в `ms` миллисекунд.
+=======
+Create a "throttling" decorator `throttle(f, ms)` -- that returns a wrapper.
+
+When it's called multiple times, it passes the call to `f` at maximum once per `ms` milliseconds.
+
+Compared to the debounce decorator, the behavior is completely different:
+- `debounce` runs the function once after the "cooldown" period. Good for processing the final result.
+- `throttle` runs it not more often than given `ms` time. Good for regular updates that shouldn't be very often.
+
+In other words, `throttle` is like a secretary that accepts phone calls, but bothers the boss (calls the actual `f`) not more often than once per `ms` milliseconds.
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 По сравнению с декоратором `debounce` поведение совершенно другое:
 - `debounce` запускает функцию один раз после периода «бездействия». Подходит для обработки конечного результата.
@@ -14,9 +26,14 @@ importance: 5
 
 Другими словами, `throttle` похож на секретаря, который принимает телефонные звонки, но при этом беспокоит начальника (вызывает непосредственно `f`) не чаще, чем один раз в `ms` миллисекунд.
 
+<<<<<<< HEAD
 Давайте рассмотрим реальное применение, чтобы лучше понять это требование и выяснить, откуда оно взято.
 
 **Например, мы хотим отслеживать движения мыши.**
+=======
+In a browser we can setup a function to run at every mouse movement and get the pointer location as it moves. During an active mouse usage, this function usually runs very frequently, can be something like 100 times per second (every 10 ms).
+**We'd like to update some information on the web-page when the pointer moves.**
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 В браузере мы можем реализовать функцию, которая будет запускаться при каждом перемещении указателя и получать его местоположение. Во время активного использования мыши эта функция запускается очень часто, что-то около 100 раз в секунду (каждые 10 мс). **Мы бы хотели обновлять некоторую информацию на странице при передвижении указателя.**
 
@@ -35,7 +52,11 @@ importance: 5
 
 ```js
 function f(a) {
+<<<<<<< HEAD
   console.log(a)
+=======
+  console.log(a);
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 }
 
 // f1000 передаёт вызовы f максимум раз в 1000 мс

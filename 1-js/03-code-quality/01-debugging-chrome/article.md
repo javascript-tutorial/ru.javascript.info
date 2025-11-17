@@ -1,10 +1,18 @@
+<<<<<<< HEAD
 # Отладка в браузере
+=======
+# Debugging in the browser
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 Давайте отвлечёмся от написания кода и поговорим о его отладке.
 
 [Отладка](https://ru.wikipedia.org/wiki/%D0%9E%D1%82%D0%BB%D0%B0%D0%B4%D0%BA%D0%B0_%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D1%8B) - это процесс поиска и исправления ошибок в скрипте. Все современные браузеры и большинство других сред разработки поддерживают инструменты для отладки - специальный графический интерфейс, который сильно упрощает отладку. Он также позволяет по шагам отследить, что именно происходит в нашем коде.
 
+<<<<<<< HEAD
 Мы будем использовать браузер Chrome, так как у него достаточно возможностей, в большинстве других браузеров процесс будет схожим.
+=======
+We'll be using Chrome here, because it has enough features, most other browsers have a similar process.
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 ## Панель "Исходный код" ("Sources")
 
@@ -18,12 +26,17 @@
 
 ![](chrome-open-sources.svg)
 
+<<<<<<< HEAD
 Кнопка-переключатель <span class="devtools" style="background-position:-172px -98px"></span> откроет вкладку со списком файлов.
+=======
+The toggler button <span class="devtools" style="background-position:-172px -98px"></span> opens the tab with files.
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 Кликните на неё и выберите `hello.js` в дереве файлов. Вот что появится:
 
 ![](chrome-tabs.svg)
 
+<<<<<<< HEAD
 Интерфейс состоит из трёх зон:
 
 1. В зоне **File Navigator** (панель для навигации файлов) показаны файлы HTML, JavaScript, CSS, включая изображения, используемые на странице. Здесь также могут быть файлы различных расширений Chrome.
@@ -31,6 +44,15 @@
 3. Наконец, зона **JavaScript Debugging** (панель отладки JavaScript) отведена для отладки, скоро мы к ней вернёмся.
 
 Чтобы скрыть список ресурсов и освободить экранное место для исходного кода, щёлкните по тому же переключателю <span class="devtools" style="background-position:-172px -122px"></span>.
+=======
+The Sources panel has 3 parts:
+
+1. The **File Navigator** pane lists HTML, JavaScript, CSS and other files, including images that are attached to the page. Chrome extensions may appear here too.
+2. The **Code Editor** pane shows the source code.
+3. The **JavaScript Debugging** pane is for debugging, we'll explore it soon.
+
+Now you could click the same toggler <span class="devtools" style="background-position:-172px -122px"></span> again to hide the resources list and give the code some space.
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 ## Консоль
 
@@ -38,7 +60,11 @@
 
 Результат выполнения инструкций сразу же отображается в консоли.
 
+<<<<<<< HEAD
 Например, результатом `1+2` будет `3`, а вызов функции `hello("debugger")` ничего не возвращает, так что результатом будет `undefined`:
+=======
+For example, here `1+2` results in `3`, while the function call `hello("debugger")` returns nothing, so the result is `undefined`:
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 ![](chrome-sources-console.svg)
 
@@ -62,13 +88,22 @@
 - Удалите точку останова, щёлкнув правой кнопкой мыши и выбрав Remove (Удалить).
 - ...и так далее.
 
+<<<<<<< HEAD
 ```smart header="Условные точки останова"
 *Щелчок правой кнопкой мыши* по номеру строки позволяет создать *условную* точку останова. Она сработает только в тот момент, когда выражение, которое вы должны указать при создании такой точки, истинно.
+=======
+```smart header="Conditional breakpoints"
+*Right click* on the line number allows to create a *conditional* breakpoint. It only triggers when the given expression, that you should provide when you create it, is truthy.
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 Это удобно, когда нам нужно остановиться только при определённом значении переменной или для определённых параметров функции.
 ```
 
+<<<<<<< HEAD
 ## Команда debugger
+=======
+## The command "debugger"
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 Выполнение кода можно также приостановить с помощью команды `debugger` прямо изнутри самого кода:
 
@@ -84,9 +119,13 @@ function hello(name) {
 }
 ```
 
+<<<<<<< HEAD
 Такая команда сработает только если открыты инструменты разработки, иначе браузер ее проигнорирует.
 
 ## Остановимся и оглядимся
+=======
+Such command works only when the development tools are open, otherwise the browser ignores it.
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 В нашем примере функция `hello()` вызывается во время загрузки страницы, поэтому для начала отладки (после того, как мы поставили точки останова) проще всего её перезагрузить. Нажмите `key:F5` (Windows, Linux) или `key:Cmd+R` (Mac).
 
@@ -98,7 +137,11 @@ function hello(name) {
 
 1. **`Watch`– показывает текущие значения для любых выражений.**
 
+<<<<<<< HEAD
     Вы можете нажать на `+` и ввести выражение. Отладчик покажет его значение, автоматически пересчитывая его в процессе выполнения.
+=======
+    You can click the plus `+` and input an expression. The debugger will show its value, automatically recalculating it in the process of execution.
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 2. **`Call Stack` – показывает цепочку вложенных вызовов.**
 
@@ -116,12 +159,19 @@ function hello(name) {
 
 ## Пошаговое выполнение скрипта
 
+<<<<<<< HEAD
 А теперь давайте *пошагаем* по нашему скрипту.
 
 Для этого есть кнопки в верхней части правой панели. Давайте рассмотрим их.
 <!-- https://github.com/ChromeDevTools/devtools-frontend/blob/master/front_end/Images/src/largeIcons.svg -->
 <span class="devtools" style="background-position:-146px -168px"></span> – "Resume": продолжить выполнение, быстрая клавиша `key:F8`.
 : Возобновляет выполнение кода. Если больше нет точек останова, то выполнение просто продолжается, без контроля отладчиком.
+=======
+There are buttons for it at the top of the right panel. Let's engage them.
+<!-- https://github.com/ChromeDevTools/devtools-frontend/blob/master/front_end/Images/src/largeIcons.svg -->
+<span class="devtools" style="background-position:-146px -168px"></span> -- "Resume": continue the execution, hotkey `key:F8`.
+: Resumes the execution. If there are no additional breakpoints, then the execution just continues and the debugger loses control.
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
     Вот, что мы увидим, кликнув на неё:
 
@@ -129,6 +179,7 @@ function hello(name) {
 
     Выполнение кода возобновилось, дошло до другой точки останова внутри `say()`, и отладчик снова приостановил выполнение. Обратите внимание на пункт "Call stack" справа: в списке появился ещё один вызов. Сейчас мы внутри `say()`.
 
+<<<<<<< HEAD
 <span class="devtools" style="background-position:-200px -190px"></span> – "Step": выполнить следующую команду, быстрая клавиша `key:F9`.
 : Выполняет следующую инструкцию. Если мы нажмём на неё сейчас, появится `alert`.
 
@@ -156,6 +207,35 @@ function hello(name) {
 
 <span class="devtools" style="background-position:-90px -146px"></span> – включить/отключить автоматическую паузу в случае ошибки.
 : При включении, если открыты инструменты разработчика, ошибка при выполнении скрипта автоматически приостанавливает его. Затем мы можем проанализировать переменные в отладчике, чтобы понять, что пошло не так. Поэтому, если наш скрипт умирает с ошибкой, мы можем открыть отладчик, включить эту опцию и перезагрузить страницу, чтобы увидеть, где он умирает и каков контекст в этот момент.
+=======
+<span class="devtools" style="background-position:-200px -190px"></span> -- "Step": run the next command, hotkey `key:F9`.
+: Run the next statement. If we click it now, `alert` will be shown.
+
+    Clicking this again and again will step through all script statements one by one.
+
+<span class="devtools" style="background-position:-62px -192px"></span> -- "Step over": run the next command, but *don't go into a function*, hotkey `key:F10`.
+: Similar to the previous "Step" command, but behaves differently if the next statement is a function call (not a built-in, like `alert`, but a function of our own).
+
+    If we compare them, the "Step" command goes into a nested function call and pauses the execution at its first line, while "Step over" executes the nested function call invisibly to us, skipping the function internals.
+
+    The execution is then paused immediately after that function call.
+
+    That's good if we're not interested to see what happens inside the function call.
+
+<span class="devtools" style="background-position:-4px -194px"></span> -- "Step into", hotkey `key:F11`.
+: That's similar to "Step", but behaves differently in case of asynchronous function calls. If you're only starting to learn JavaScript, then you can ignore the difference, as we don't have asynchronous calls yet.
+
+    For the future, just note that "Step" command ignores async actions, such as `setTimeout` (scheduled function call), that execute later. The "Step into" goes into their code, waiting for them if necessary. See [DevTools manual](https://developers.google.com/web/updates/2018/01/devtools#async) for more details.
+
+<span class="devtools" style="background-position:-32px -194px"></span> -- "Step out": continue the execution till the end of the current function, hotkey `key:Shift+F11`.
+: Continue the execution and stop it at the very last line of the current function. That's handy when we accidentally entered a nested call using <span class="devtools" style="background-position:-200px -190px"></span>, but it does not interest us, and we want to continue to its end as soon as possible.
+
+<span class="devtools" style="background-position:-61px -74px"></span> -- enable/disable all breakpoints.
+: That button does not move the execution. Just a mass on/off for breakpoints.
+
+<span class="devtools" style="background-position:-90px -146px"></span> -- enable/disable automatic pause in case of an error.
+: When enabled, if the developer tools is open, an error during the script execution automatically pauses it. Then we can analyze variables in the debugger to see what went wrong. So if our script dies with an error, we can open debugger, enable this option and reload the page to see where it dies and what's the context at that moment.
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 ```smart header="Continue to here"
 Щелчок правой кнопкой мыши по строке кода открывает контекстное меню с отличной опцией под названием "Continue to here" ("продолжить до этого места").
@@ -182,11 +262,20 @@ for (let i = 0; i < 5; i++) {
 
 ## Итого
 
+<<<<<<< HEAD
 Приостановить выполнение скрипта можно тремя способами:
 
 1. Точками останова (breakpoints).
 2. Использованием в коде команд `debugger`.
 3. При ошибке (если инструменты разработчика открыты и кнопка <span class="devtools" style="background-position:-90px -146px"></span> "включена").
+=======
+As we can see, there are three main ways to pause a script:
+1. A breakpoint.
+2. The `debugger` statements.
+3. An error (if dev tools are open and the button <span class="devtools" style="background-position:-90px -146px"></span> is "on").
+
+When paused, we can debug: examine variables and trace the code to see where the execution goes wrong.
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 При остановке мы можем отлаживать: анализировать переменные и пошагово пройти по процессу, чтобы отыскать проблему.
 

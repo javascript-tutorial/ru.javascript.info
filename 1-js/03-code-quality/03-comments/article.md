@@ -125,6 +125,7 @@ function addJuice(container) {
 Документируйте параметры и использование функций
 : Есть специальный синтаксис [JSDoc](https://ru.wikipedia.org/wiki/JSDoc) для документирования функций: использование, параметры, возвращаемое значение.
 
+<<<<<<< HEAD
 Например:
 ```js
 /**
@@ -133,17 +134,35 @@ function addJuice(container) {
  * @param {number} x Возводимое в степень число.
  * @param {number} n Степень, должна быть натуральным числом.
  * @return {number} x, возведённое в n-ную степень.
+=======
+For instance:
+```js
+/**
+ * Returns x raised to the n-th power.
+ *
+ * @param {number} x The number to raise.
+ * @param {number} n The power, must be a natural number.
+ * @return {number} x raised to the n-th power.
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
  */
 function pow(x, n) {
   ...
 }
 ```
 
+<<<<<<< HEAD
 Подобные комментарии позволяют нам понимать назначение функции и правильно её использовать без необходимости заглядывать в код.
 
 Кстати, многие редакторы, такие как [WebStorm](https://www.jetbrains.com/webstorm/), прекрасно их распознают для того, чтобы выполнить автодополнение ввода и различные автоматические проверки кода.
 
 Также существуют инструменты, например, [JSDoc 3](https://github.com/jsdoc/jsdoc), которые умеют генерировать HTML-документацию из комментариев. Получить больше информации о JSDoc вы можете здесь: <https://jsdoc.app>.
+=======
+Such comments allow us to understand the purpose of the function and use it the right way without looking in its code.
+
+By the way, many editors like [WebStorm](https://www.jetbrains.com/webstorm/) can understand them as well and use them to provide autocomplete and some automatic code-checking.
+
+Also, there are tools like [JSDoc 3](https://github.com/jsdoc/jsdoc) that can generate HTML-documentation from the comments. You can read more information about JSDoc at <https://jsdoc.app>.
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 Почему задача решена именно таким способом?
 : Важно то, что написано. Но то, что *не* написано, может быть даже более важным, чтобы понимать происходящее. Почему задача решена именно этим способом? Код не даёт ответа.

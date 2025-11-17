@@ -1,6 +1,10 @@
 # Прокрутка
 
+<<<<<<< HEAD
 Событие прокрутки `scroll` позволяет реагировать на прокрутку страницы или элемента. Есть много хороших вещей, которые при этом можно сделать.
+=======
+The `scroll` event allows reacting to a page or element scrolling. There are quite a few good things we can do here.
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 Например:
 - Показать/скрыть дополнительные элементы управления или информацию, основываясь на том, в какой части документа находится пользователь.
@@ -10,7 +14,7 @@
 
 ```js autorun
 window.addEventListener('scroll', function() {
-  document.getElementById('showScroll').innerHTML = pageYOffset + 'px';
+  document.getElementById('showScroll').innerHTML = window.pageYOffset + 'px';
 });
 ```
 
@@ -34,4 +38,8 @@ window.addEventListener('scroll', function() {
 
 Способов инициировать прокрутку много, поэтому более надёжный способ -- использовать CSS, свойство `overflow`.
 
+<<<<<<< HEAD
 Вот несколько задач, которые вы можете решить или просмотреть, чтобы увидеть применение `onscroll`.
+=======
+Here are few tasks that you can solve or look through to see applications of `onscroll`.
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
