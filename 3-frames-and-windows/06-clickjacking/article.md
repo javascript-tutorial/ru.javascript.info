@@ -152,7 +152,11 @@ window.onbeforeunload = function() {
 
 ## Отображение с ограниченными возможностями
 
+<<<<<<< HEAD
 У заголовка `X-Frame-Options` есть побочный эффект. Другие сайты не смогут отобразить нашу страницу во фрейме, даже если у них будут на то веские причины.
+=======
+The `X-Frame-Options` header has a side effect. Other sites won't be able to show our page in a frame, even if they have good reasons to do so.
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 Так что есть другие решения... Например, мы можем "накрыть" страницу блоком `<div>` со стилями `height: 100%; width: 100%;`, чтобы он перехватывал все клики. Этот `<div>` будем убирать, если `window == top` или если мы поймём, что защита нам не нужна.
 
