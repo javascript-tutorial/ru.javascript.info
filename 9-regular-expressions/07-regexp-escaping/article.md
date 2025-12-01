@@ -4,9 +4,15 @@
 
 Есть и другие специальные символы, которые имеют особое значение в регулярном выражении. Они используются для более сложных поисковых конструкций. Вот полный перечень этих символов: `pattern:[ ] \ ^ $ . | ? * + ( )`.
 
+<<<<<<< HEAD
 Не надо пытаться запомнить этот список: мы разберёмся с каждым из них по отдельности, и таким образом вы выучите их "автоматически".
 
 ## Экранирование символов
+=======
+There are other special characters as well, that have special meaning in a regexp, such as `pattern:[ ] { } ( ) \ ^ $ . | ? * +`. They are used to do more powerful searches.
+
+Don't try to remember the list -- soon we'll deal with each of them, and you'll know them by heart automatically.
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 Допустим, мы хотим найти буквально точку. Не "любой символ", а именно точку.
 
@@ -64,7 +70,11 @@ alert( "Глава 5.1".match(regexp) ); // null
 
 Причина в том, что символы обратной косой черты "съедаются" строкой. Как вы помните, обычные строки имеют свои специальные символы, такие как `\n`, и для экранирования используется обратная косая черта.
 
+<<<<<<< HEAD
 Вот как воспринимается строка "\d\.\d":
+=======
+Here's how "\d\.\d" is perceived:
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 ```js run
 alert("\d\.\d"); // d.d
@@ -93,6 +103,12 @@ alert( "Глава 5.1".match(regexp) ); // 5.1
 
 ## Итого
 
+<<<<<<< HEAD
 - Для поиска специальных символов `pattern:[ ] \ ^ $ . | ? * + ( )`, нам нужно добавить перед ними `\` ("экранировать их").
 - Нам также нужно экранировать `/`, если мы используем `pattern:/.../` (но не `new RegExp`).
 - При передаче строки в `new RegExp` нужно удваивать обратную косую черту: `\\` для экранирования специальных символов, потому что строковые кавычки "съедят" одну черту.
+=======
+- To search for special characters `pattern:[ \ ^ $ . | ? * + ( )` literally, we need to prepend them with a backslash `\` ("escape them").
+- We also need to escape `/` if we're inside `pattern:/.../` (but not inside `new RegExp`).
+- When passing a string to `new RegExp`, we need to double backslashes `\\`, cause string quotes consume one of them.
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
