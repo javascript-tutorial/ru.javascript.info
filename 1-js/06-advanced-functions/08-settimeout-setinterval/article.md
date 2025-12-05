@@ -27,7 +27,11 @@ let timerId = setTimeout(func|code, [delay], [arg1], [arg2], ...);
 : Задержка перед запуском в миллисекундах (1000 мс = 1 с). Значение по умолчанию - 0.
 
 `arg1`, `arg2`...
+<<<<<<< HEAD
 : Аргументы, передаваемые в функцию
+=======
+: Arguments for the function
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 Например, данный код вызывает `sayHi()` спустя одну секунду:
 
@@ -61,7 +65,11 @@ setTimeout(sayHi, 1000, "Привет", "Джон"); // Привет, Джон
 setTimeout("alert('Привет')", 1000);
 ```
 
+<<<<<<< HEAD
 Но использование строк не рекомендуется. Вместо этого используйте функции. Например, так:
+=======
+But using strings is not recommended, use arrow functions instead of them, like this:
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 ```js run no-beautify
 setTimeout(() => alert('Привет'), 1000);
@@ -102,7 +110,11 @@ alert(timerId); // тот же идентификатор (не принимае
 
 Повторюсь, что нет единой спецификации на эти методы, поэтому такое поведение является нормальным.
 
+<<<<<<< HEAD
 Для браузеров таймеры описаны в [разделе таймеров](https://www.w3.org/TR/html5/webappapis.html#timers) стандарта HTML5.
+=======
+For browsers, timers are described in the [timers section](https://html.spec.whatwg.org/multipage/timers-and-user-prompts.html#timers) of HTML Living Standard.
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 ## setInterval
 
@@ -129,7 +141,11 @@ setTimeout(() => { clearInterval(timerId); alert('stop'); }, 5000);
 ```smart header="Во время показа `alert` время тоже идёт"
 В большинстве браузеров, включая Chrome и Firefox, внутренний счётчик продолжает тикать во время показа `alert/confirm/prompt`.
 
+<<<<<<< HEAD
 Так что если вы запустите код выше и подождёте с закрытием `alert` несколько секунд, то следующий `alert` будет показан сразу, как только вы закроете предыдущий. Интервал времени между сообщениями `alert` будет короче, чем 2 секунды.
+=======
+So if you run the code above and don't dismiss the `alert` window for some time, then the next `alert` will be shown immediately as you do it. The actual interval between alerts will be shorter than 2 seconds.
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 ```
 
 ## Вложенный setTimeout
@@ -183,7 +199,7 @@ let timerId = setTimeout(function request() {
 ```js
 let i = 1;
 setInterval(function() {
-  func(i);
+  func(i++);
 }, 100);
 ```
 
@@ -192,12 +208,16 @@ setInterval(function() {
 ```js
 let i = 1;
 setTimeout(function run() {
-  func(i);
+  func(i++);
   setTimeout(run, 100);
 }, 100);
 ```
 
+<<<<<<< HEAD
 Для `setInterval` внутренний планировщик будет выполнять `func(i)` каждые 100 мс:
+=======
+For `setInterval` the internal scheduler will run `func(i++)` every 100ms:
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 ![](setinterval-interval.svg)
 
@@ -231,7 +251,11 @@ setTimeout(function() {...}, 100);
 
 Для `setInterval` функция остаётся в памяти до тех пор, пока не будет вызван `clearInterval`.
 
+<<<<<<< HEAD
 Есть и побочный эффект. Функция ссылается на внешнее лексическое окружение, поэтому пока она существует, внешние переменные существуют тоже. Они могут занимать больше памяти, чем сама функция. Поэтому, если регулярный вызов функции больше не нужен, то лучше отменить его, даже если функция очень маленькая.
+=======
+There's a side effect. A function references the outer lexical environment, so, while it lives, outer variables live too. They may take much more memory than the function itself. So when we don't need the scheduled function anymore, it's better to cancel it, even if it's very small.
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 ````
 
 ## setTimeout с нулевой задержкой
@@ -254,6 +278,11 @@ alert("Привет");
 
 Есть и более продвинутые случаи использования нулевой задержки в браузерах, которые мы рассмотрим в главе <info:event-loop>.
 
+<<<<<<< HEAD
+=======
+````smart header="Zero delay is in fact not zero (in a browser)"
+In the browser, there's a limitation of how often nested timers can run. The [HTML Living Standard](https://html.spec.whatwg.org/multipage/timers-and-user-prompts.html#timers) says: "after five nested timers, the interval is forced to be at least 4 milliseconds.".
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 ````smart header="Минимальная задержка вложенных таймеров в браузере"
 В браузере есть ограничение на то, как часто внутренние счётчики могут выполняться. В [стандарте HTML5](https://www.w3.org/TR/html5/webappapis.html#timers) говорится: "после пяти вложенных таймеров интервал должен составлять не менее четырёх миллисекунд.".
@@ -281,22 +310,41 @@ setTimeout(function run() {
 
 Это ограничение существует давно, многие скрипты полагаются на него, поэтому оно сохраняется по историческим причинам.
 
+<<<<<<< HEAD
 Этого ограничения нет в серверном JavaScript. Там есть и другие способы планирования асинхронных задач. Например, [setImmediate](https://nodejs.org/api/timers.html) для Node.js. Так что это ограничение относится только к браузерам.
+=======
+For server-side JavaScript, that limitation does not exist, and there exist other ways to schedule an immediate asynchronous job, like [setImmediate](https://nodejs.org/api/timers.html#timers_setimmediate_callback_args) for Node.js. So this note is browser-specific.
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 ````
 
 ## Итого
 
+<<<<<<< HEAD
 - Методы `setInterval(func, delay, ...args)` и `setTimeout(func, delay, ...args)` позволяют выполнять `func` регулярно или только один раз после задержки `delay`, заданной в мс.
 - Для отмены выполнения необходимо вызвать `clearInterval/clearTimeout` со значением, которое возвращают методы `setInterval/setTimeout`.
 - Вложенный вызов `setTimeout` является более гибкой альтернативой `setInterval`. Также он позволяет более точно задать интервал между выполнениями.
 - Планирование с нулевой задержкой `setTimeout(func,0)` или, что то же самое, `setTimeout(func)` используется для вызовов, которые должны быть исполнены как можно скорее, после завершения исполнения текущего кода.
 - Браузер ограничивает 4-мя мс минимальную задержку между пятью и более вложенными вызовами `setTimeout`, а также для `setInterval`, начиная с 5-го вызова.
+=======
+- Methods `setTimeout(func, delay, ...args)` and `setInterval(func, delay, ...args)` allow us to run the `func` once/regularly after `delay` milliseconds.
+- To cancel the execution, we should call `clearTimeout/clearInterval` with the value returned by `setTimeout/setInterval`.
+- Nested `setTimeout` calls are a more flexible alternative to `setInterval`, allowing us to set the time *between* executions more precisely.
+- Zero delay scheduling with `setTimeout(func, 0)` (the same as `setTimeout(func)`) is used to schedule the call "as soon as possible, but after the current script is complete".
+- The browser limits the minimal delay for five or more nested calls of `setTimeout` or for `setInterval` (after 5th call) to 4ms. That's for historical reasons.
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 Обратим внимание, что все методы планирования *не гарантируют* точную задержку.
 
+<<<<<<< HEAD
 Например, таймер в браузере может замедляться по многим причинам:
 - Перегружен процессор.
 - Вкладка браузера в фоновом режиме.
 - Работа ноутбука от аккумулятора.
+=======
+For example, the in-browser timer may slow down for a lot of reasons:
+- The CPU is overloaded.
+- The browser tab is in the background mode.
+- The laptop is on battery saving mode.
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 Всё это может увеличивать минимальный интервал срабатывания таймера (и минимальную задержку) до 300 или даже 1000 мс в зависимости от браузера и настроек производительности ОС.
