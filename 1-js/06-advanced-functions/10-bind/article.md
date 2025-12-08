@@ -82,10 +82,19 @@ let user = {
 
 setTimeout(() => user.sayHi(), 1000);
 
+<<<<<<< HEAD
 // ...в течение 1 секунды
 user = { sayHi() { alert("Другой пользователь в 'setTimeout'!"); } };
 
 // Другой пользователь в 'setTimeout'!
+=======
+// ...the value of user changes within 1 second
+user = {
+  sayHi() { alert("Another user in setTimeout!"); }
+};
+
+// Another user in setTimeout!
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 ```
 
 Следующее решение гарантирует, что такого не случится.
@@ -97,7 +106,11 @@ user = { sayHi() { alert("Другой пользователь в 'setTimeout'!
 Базовый синтаксис `bind`:
 
 ```js
+<<<<<<< HEAD
 // полный синтаксис будет представлен немного позже
+=======
+// more complex syntax will come a little later
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 let boundFunc = func.bind(context);
 ```
 
@@ -122,7 +135,11 @@ funcUser(); // Вася
 */!*
 ```
 
+<<<<<<< HEAD
 Здесь `func.bind(user)` - это "связанный вариант" `func`, с фиксированным `this=user`.
+=======
+Here `func.bind(user)` is a "bound variant" of `func`, with fixed `this=user`.
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 Все аргументы передаются исходному методу `func` как есть, например:
 
@@ -157,9 +174,22 @@ let user = {
 let sayHi = user.sayHi.bind(user); // (*)
 */!*
 
+<<<<<<< HEAD
 sayHi(); // Привет, Вася!
 
 setTimeout(sayHi, 1000); // Привет, Вася!
+=======
+// can run it without an object
+sayHi(); // Hello, John!
+
+setTimeout(sayHi, 1000); // Hello, John!
+
+// even if the value of user changes within 1 second
+// sayHi uses the pre-bound value which is reference to the old user object
+user = {
+  sayHi() { alert("Another user in setTimeout!"); }
+};
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 ```
 
 В строке `(*)` мы берём метод `user.sayHi` и привязываем его к `user`. Теперь `sayHi` - это "связанная" функция, которая может быть вызвана отдельно или передана в `setTimeout` (контекст всегда будет правильным).
@@ -176,8 +206,13 @@ let user = {
 
 let say = user.say.bind(user);
 
+<<<<<<< HEAD
 say("Привет"); // Привет, Вася (аргумент "Привет" передан в функцию "say")
 say("Пока"); // Пока, Вася (аргумент "Пока" передан в функцию "say")
+=======
+say("Hello"); // Hello, John! ("Hello" argument is passed to say)
+say("Bye"); // Bye, John! ("Bye" is passed to say)
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 ```
 
 ````smart header="Удобный метод: `bindAll`"
@@ -191,7 +226,11 @@ for (let key in user) {
 }
 ```
 
+<<<<<<< HEAD
 Некоторые JS-библиотеки предоставляют встроенные функции для удобной массовой привязки контекста, например [_.bindAll(obj)](https://lodash.com/docs#bindAll) в lodash.
+=======
+JavaScript libraries also provide functions for convenient mass binding , e.g. [_.bindAll(object, methodNames)](https://lodash.com/docs#bindAll) in lodash.
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 ````
 
 ## Частичное применение
@@ -235,7 +274,11 @@ alert( double(5) ); // = mul(2, 5) = 10
 
 Это называется [частичное применение](https://ru.wikipedia.org/wiki/Частичное_применение) -- мы создаём новую функцию, фиксируя некоторые из существующих параметров.
 
+<<<<<<< HEAD
 Обратите внимание, что в данном случае мы на самом деле не используем `this`. Но для `bind` это обязательный параметр, так что мы должны передать туда что-нибудь вроде `null`.
+=======
+Please note that we actually don't use `this` here. But `bind` requires it, so we must put in something like `null`.
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 В следующем коде функция `triple` умножает значение на три:
 
@@ -267,7 +310,11 @@ alert( triple(5) ); // = mul(3, 5) = 15
 
 Встроенный `bind` не позволяет этого. Мы не можем просто опустить контекст и перейти к аргументам.
 
+<<<<<<< HEAD
 К счастью, легко создать вспомогательную функцию `partial`, которая привязывает только аргументы.
+=======
+Fortunately, a function `partial` for binding only arguments can be easily implemented.
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 Вот так:
 
@@ -301,7 +348,11 @@ user.sayNow("Hello");
 - Затем передаёт ей `...argsBound` -- аргументы из вызова `partial` (`"10:00"`)
 - Затем передаёт ей `...args` -- аргументы, полученные обёрткой (`"Hello"`)
 
+<<<<<<< HEAD
 Благодаря оператору расширения `...` реализовать это очень легко, не правда ли?
+=======
+So easy to do it with the spread syntax, right?
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 Также есть готовый вариант [_.partial](https://lodash.com/docs#partial) из библиотеки lodash.
 
