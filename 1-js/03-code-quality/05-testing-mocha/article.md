@@ -2,7 +2,11 @@
 
 Далее у нас будут задачи, для проверки которых используется автоматическое тестирование. Также его часто применяют в реальных проектах.
 
+<<<<<<< HEAD
 ## Зачем нам нужны тесты?
+=======
+## Why do we need tests?
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 Обычно, когда мы пишем функцию, мы легко можем представить, что она должна делать, и как она будет вести себя в зависимости от переданных параметров.
 
@@ -50,8 +54,13 @@ describe("pow", function() {
 
 Спецификация состоит из трёх основных блоков:
 
+<<<<<<< HEAD
 `describe("заголовок", function() { ... })`
 : Какую функциональность мы описываем. В нашем случае мы описываем функцию `pow`. Используется для группировки рабочих лошадок -- блоков `it`.
+=======
+`describe("title", function() { ... })`
+: What functionality we're describing? In our case we're describing the function `pow`. Used to group "workers" -- the `it` blocks.
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 `it("описание", function() { ... })`
 : В первом аргументе блока `it` мы *человеческим языком* описываем конкретный способ использования функции, а во втором -- пишем функцию, которая тестирует данный случай.
@@ -67,6 +76,7 @@ describe("pow", function() {
 
 Процесс разработки обычно выглядит следующим образом:
 
+<<<<<<< HEAD
 1. Пишется начальная спецификация с тестами, проверяющими основную функциональность.
 2. Создаётся начальная реализация.
 3. Для запуска тестов мы используем фреймворк [Mocha](https://mochajs.org/) (подробнее о нём чуть позже). Пока функция не готова, будут ошибки. Вносим изменения до тех пор, пока всё не начнёт работать так, как нам нужно.
@@ -74,20 +84,39 @@ describe("pow", function() {
 5. Мы добавляем новые способы использования в спецификацию, возможно, ещё не реализованные в тестируемом коде. Тесты начинают "падать" (выдавать ошибки).
 6. Возвращаемся на шаг 3, дописываем реализацию до тех пор, пока тесты не начнут завершаться без ошибок.
 7. Повторяем шаги 3-6, пока требуемая функциональность не будет готова.
+=======
+1. An initial spec is written, with tests for the most basic functionality.
+2. An initial implementation is created.
+3. To check whether it works, we run the testing framework [Mocha](https://mochajs.org/) (more details soon) that runs the spec. While the functionality is not complete, errors are displayed. We make corrections until everything works.
+4. Now we have a working initial implementation with tests.
+5. We add more use cases to the spec, probably not yet supported by the implementations. Tests start to fail.
+6. Go to 3, update the implementation till tests give no errors.
+7. Repeat steps 3-6 till the functionality is ready.
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 Таким образом, разработка проходит *итеративно*. Мы пишем спецификацию, реализуем её, проверяем, что тесты выполняются без ошибок, пишем ещё тесты, снова проверяем, что они проходят и т.д.
 
 Давайте посмотрим этот поток разработки на нашем примере.
 
+<<<<<<< HEAD
 Первый шаг уже завершён. У нас есть спецификация для функции `pow`. Теперь, перед тем, как писать реализацию, давайте подключим библиотеки для пробного запуска тестов, просто чтобы убедиться, что тесты работают (разумеется, они завершатся ошибками).
+=======
+The first step is already complete: we have an initial spec for `pow`. Now, before making the implementation, let's use a few JavaScript libraries to run the tests, just to see that they are working (they will all fail).
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 ## Спецификация в действии
 
 В этой главе мы будем пользоваться следующими JavaScript-библиотеками для тестов:
 
+<<<<<<< HEAD
 - [Mocha](https://mochajs.org/) -- основной фреймворк. Он предоставляет общие функции тестирования, такие как `describe` и `it`, а также функцию запуска тестов.
 - [Chai](https://chaijs.com) -- библиотека, предоставляющая множество функций проверки утверждений. Пока мы будем использовать только `assert.equal`.
 - [Sinon](https://sinonjs.org/) -- библиотека, позволяющая наблюдать за функциями, эмулировать встроенные функции и многое другое. Нам она пригодится позднее.
+=======
+- [Mocha](https://mochajs.org/) -- the core framework: it provides common testing functions including `describe` and `it` and the main function that runs tests.
+- [Chai](https://www.chaijs.com/) -- the library with many assertions. It allows to use a lot of different assertions, for now we need only `assert.equal`.
+- [Sinon](https://sinonjs.org/) -- a library to spy over functions, emulate built-in functions and more, we'll need it much later.
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 Эти библиотеки подходят как для тестирования внутри браузера, так и на стороне сервера. Мы рассмотрим вариант с браузером.
 
@@ -160,8 +189,13 @@ function pow(x, n) {
         assert.equal(pow(2, 3), 8);
       });
 
+<<<<<<< HEAD
       it("3 в степени 3 будет 27", function() {
         assert.equal(pow(3, 3), 27);
+=======
+      it("3 raised to power 4 is 81", function() {
+        assert.equal(pow(3, 4), 81);
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
       });
 
     });
@@ -183,7 +217,11 @@ function pow(x, n) {
 
 [iframe height=250 src="pow-2" edit border="1"]
 
+<<<<<<< HEAD
 Как мы и ожидали, второй тест провалился. Естественно, наша функция всегда возвращает `8`, в то время как `assert` ожидает `27`.
+=======
+As we could expect, the second test failed. Sure, our function always returns `8`, while the `assert` expects `81`.
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 ## Улучшаем реализацию
 
@@ -339,6 +377,7 @@ describe("pow", function() {
 ```smart header="Другие функции сравнения"
 Обратите внимание на `assert.isNaN`. Это проверка того, что переданное значение равно `NaN`.
 
+<<<<<<< HEAD
 Библиотека [Chai](https://chaijs.com) содержит множество других подобных функций, например:
 
 - `assert.equal(value1, value2)` -- проверяет равенство  `value1 == value2`.
@@ -347,6 +386,16 @@ describe("pow", function() {
 - `assert.isTrue(value)` -- проверяет, что `value === true`
 - `assert.isFalse(value)` -- проверяет, что `value === false`
 - ...с полным списком можно ознакомиться в [документации](https://chaijs.com/api/assert/)
+=======
+There are other assertions in [Chai](https://www.chaijs.com/) as well, for instance:
+
+- `assert.equal(value1, value2)` -- checks the equality  `value1 == value2`.
+- `assert.strictEqual(value1, value2)` -- checks the strict equality `value1 === value2`.
+- `assert.notEqual`, `assert.notStrictEqual` -- inverse checks to the ones above.
+- `assert.isTrue(value)` -- checks that `value === true`
+- `assert.isFalse(value)` -- checks that `value === false`
+- ...the full list is in the [docs](https://www.chaijs.com/api/assert/)
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 ```
 
 Итак, нам нужно добавить пару строчек в функцию `pow`:

@@ -36,7 +36,11 @@
 ```online
 Кликните на кнопку, чтобы увидеть её координаты относительно окна:
 
+<<<<<<< HEAD
 <p><input id="brTest" type="button" style="max-width: 90vw;" value="Показать результат вызова button.getBoundingClientRect() для этой кнопки" onclick='showRect(this)'/></p>
+=======
+<p><input id="brTest" type="button" style="max-width: 90vw;" value="Get coordinates using button.getBoundingClientRect() for this button" onclick='showRect(this)'/></p>
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 <script>
 function showRect(elem) {
@@ -68,13 +72,24 @@ right:${r.right}
 
 Заметим:
 
+<<<<<<< HEAD
 - Координаты могут считаться с десятичной частью, например `10.5`. Это нормально, ведь браузер использует дроби в своих внутренних вычислениях. Мы не обязаны округлять значения при установке `style.left/top`.
 - Координаты могут быть отрицательными. Например, если страница прокручена так, что элемент `elem` ушёл вверх за пределы окна, то вызов `elem.getBoundingClientRect().top` вернёт отрицательное значение.
+=======
+- Coordinates may be decimal fractions, such as `10.5`. That's normal, internally browser uses fractions in calculations. We don't have to round them when setting to `style.left/top`.
+- Coordinates may be negative. For instance, if the page is scrolled so that `elem` is now above the window, then `elem.getBoundingClientRect().top` is negative.
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 ```smart header="Зачем вообще нужны зависимые свойства? Для чего существуют `top/left`, если есть `x/y`?"
 С математической точки зрения, прямоугольник однозначно задаётся начальной точкой `(x,y)` и вектором направления `(width,height)`.
 
+<<<<<<< HEAD
 Так что дополнительные зависимые свойства существуют лишь для удобства.
+=======
+Technically it's possible for `width/height` to be negative, that allows for "directed" rectangle, e.g. to represent mouse selection with properly marked start and end.
+
+Negative `width/height` values mean that the rectangle starts at its bottom-right corner and then "grows" left-upwards.
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 Что же касается `top/left`, то они на самом деле не всегда равны `x/y`. Технически, значения `width/height` могут быть отрицательными. Это позволяет задать "направленный" прямоугольник, например, для выделения мышью с отмеченным началом и концом.
 
@@ -84,6 +99,7 @@ right:${r.right}
 
 ![](coordinates-negative.svg)
 
+<<<<<<< HEAD
 Как вы видите, свойства `left/top` при этом не равны `x/y`.
 
 Впрочем, на практике результат вызова `elem.getBoundingClientRect()` всегда возвращает положительные значения для ширины/высоты. Здесь мы упомянули отрицательные `width/height` лишь для того, чтобы вы поняли, зачем существуют эти с виду дублирующие свойства.
@@ -93,6 +109,17 @@ right:${r.right}
 Internet Explorer и Edge не поддерживают свойства `x/y` по историческим причинам.
 
 Таким образом, мы можем либо сделать полифил (добавив соответствующие геттеры в `DomRect.prototype`), либо использовать `top/left`, так как это всегда одно и то же при положительных `width/height`, в частности - в результате вызова `elem.getBoundingClientRect()`.
+=======
+As you can see, `left/top` do not equal `x/y` in such case.
+
+In practice though, `elem.getBoundingClientRect()` always returns positive width/height, here we mention negative `width/height` only for you to understand why these seemingly duplicate properties are not actually duplicates.
+```
+
+```warn header="Internet Explorer: no support for `x/y`"
+Internet Explorer doesn't support `x/y` properties for historical reasons.
+
+So we can either make a polyfill (add getters in `DomRect.prototype`) or just use `top/left`, as they are always the same as `x/y` for positive `width/height`, in particular in the result of `elem.getBoundingClientRect()`.
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 ```
 
 ```warn header="Координаты right/bottom отличаются от одноимённых CSS-свойств"
@@ -253,4 +280,8 @@ function createMessageUnder(elem, html) {
 
 Координаты в контексте окна подходят для использования с `position:fixed`, а координаты относительно документа -- для использования с `position:absolute`.
 
+<<<<<<< HEAD
 Каждая из систем координат имеет свои преимущества и недостатки. Иногда будет лучше применить одну, а иногда -- другую, как это и происходит с позиционированием в CSS, где мы выбираем между `absolute` и `fixed`.
+=======
+Both coordinate systems have their pros and cons; there are times we need one or the other one, just like CSS `position` `absolute` and `fixed`.
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
