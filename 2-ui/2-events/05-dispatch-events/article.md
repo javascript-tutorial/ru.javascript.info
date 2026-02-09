@@ -22,7 +22,7 @@ let event = new Event(type[, options]);
 - *options* -- объект с тремя необязательными свойствами:
   - `bubbles: true/false` -- если `true`, тогда событие всплывает.
   - `cancelable: true/false` -- если `true`, тогда можно отменить действие по умолчанию. Позже мы разберём, что это значит для пользовательских событий.
-  - `composed: true/false` -- если `true`, тогда событие будет вызывать обработчики вне shadow root, выходя за пределы Shadow DOM. Позже мы разберём это в [разделе Веб-компоненты](https://learn.javascript.ru/shadow-dom-events#generatsiya-sobytiy).
+  - `composed: true/false` -- если `true`, тогда событие будет вызывать обработчики вне shadow root, выходя за пределы Shadow DOM. Позже мы разберём это в [разделе Веб-компоненты](https://learn.javascript.ru/shadow-dom-events#svoystvo-event-composed).
 
 По умолчанию все три свойства установлены в **false**: `{bubbles: false, cancelable: false, composed: false}`.
 
