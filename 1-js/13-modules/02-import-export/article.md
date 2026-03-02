@@ -2,7 +2,11 @@
 
 Директивы экспорт и импорт имеют несколько вариантов вызова.
 
+<<<<<<< HEAD
 В предыдущей главе мы видели простое использование, давайте теперь посмотрим больше примеров.
+=======
+In the previous article we saw a simple use, now let's explore more examples.
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 ## Экспорт до объявления
 
@@ -25,8 +29,13 @@
 }
 ```
 
+<<<<<<< HEAD
 ````smart header="Не ставится точка с запятой после экспорта класса/функции"
 Обратите внимание, что `export` перед классом или функцией не делает их [функциональным выражением](info:function-expressions). Это всё также объявление функции, хотя и экспортируемое.
+=======
+````smart header="No semicolons after export class/function"
+Please note that `export` before a class or a function does not make it a [function expression](info:function-expressions). It's still a function declaration, albeit exported.
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 Большинство руководств по стилю кода в JavaScript не рекомендуют ставить точку с запятой после объявлений функций или классов.
 
@@ -46,7 +55,7 @@ export function sayHi(user) {
 
 Здесь мы сначала объявляем, а затем экспортируем:
 
-```js  
+```js
 // 📁 say.js
 function sayHi(user) {
   alert(`Hello, ${user}!`);
@@ -93,6 +102,7 @@ say.sayBye('John');
 
 Для этого есть несколько причин.
 
+<<<<<<< HEAD
 1. Современные инструменты сборки ([webpack](https://webpack.js.org) и другие) собирают модули вместе и оптимизируют их, ускоряя загрузку и удаляя неиспользуемый код.
 
     Предположим, мы добавили в наш проект стороннюю библиотеку `say.js` с множеством функций:
@@ -112,6 +122,16 @@ say.sayBye('John');
 
 2. Явно перечисляя то, что хотим импортировать, мы получаем более короткие имена функций: `sayHi()` вместо `say.sayHi()`.
 3. Явное перечисление импортов делает код более понятным, позволяет увидеть, что именно и где используется. Это упрощает поддержку и рефакторинг кода.
+=======
+1. Explicitly listing what to import gives shorter names: `sayHi()` instead of `say.sayHi()`.
+2. Explicit list of imports gives better overview of the code structure: what is used and where. It makes code support and refactoring easier.
+
+```smart header="Don't be afraid to import too much"
+Modern build tools, such as [webpack](https://webpack.js.org/) and others, bundle modules together and optimize them to speedup loading. They also remove unused imports.
+
+For instance, if you `import * as library` from a huge code library, and then use only few methods, then unused ones [will not be included](https://github.com/webpack/webpack/tree/main/examples/harmony-unused#examplejs) into the optimized bundle.
+```
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 ## Импорт "как"
 
@@ -155,14 +175,25 @@ say.*!*bye*/!*('John'); // Bye, John!
 
 На практике модули встречаются в основном одного из двух типов:
 
+<<<<<<< HEAD
 1. Модуль, содержащий библиотеку или набор функций, как `say.js` выше.
 2. Модуль, который объявляет что-то одно, например модуль `user.js` экспортирует только `class User`.
+=======
+1. Modules that contain a library, pack of functions, like `say.js` above.
+2. Modules that declare a single entity, e.g. a module `user.js` exports only `class User`.
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 По большей части, удобнее второй подход, когда каждая "вещь" находится в своём собственном модуле.
 
+<<<<<<< HEAD
 Естественно, требуется много файлов, если для всего делать отдельный модуль, но это не проблема. Так даже удобнее: навигация по проекту становится проще, особенно, если у файлов хорошие имена, и они структурированы по папкам.
 
 Модули предоставляют специальный синтаксис `export default` ("экспорт по умолчанию") для второго подхода.
+=======
+Naturally, that requires a lot of files, as everything wants its own module, but that's not a problem at all. Actually, code navigation becomes easier if files are well-named and structured into folders.
+
+Modules provide a special `export default` ("the default export") syntax to make the "one thing per module" way look better.
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 Ставим `export default` перед тем, что нужно экспортировать:
 
@@ -216,15 +247,21 @@ export default function(user) { // у функции нет имени
 export default ['Jan', 'Feb', 'Mar','Apr', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 ```
 
+<<<<<<< HEAD
 Это нормально, потому что может быть только один `export default` на файл, так что `import` без фигурных скобок всегда знает, что импортировать.
 
 Без `default` такой экспорт выдал бы ошибку:
+=======
+Not giving a name is fine, because there is only one `export default` per file, so `import` without curly braces knows what to import.
+
+Without `default`, such an export would give an error:
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 ```js
 export class { // Ошибка! (необходимо имя, если это не экспорт по умолчанию)
   constructor() {}
 }
-```     
+```
 
 ### Имя "default"
 
@@ -241,7 +278,11 @@ function sayHi(user) {
 export {sayHi as default};
 ```
 
+<<<<<<< HEAD
 Или, ещё ситуация, давайте представим следующее: модуль `user.js` экспортирует одну сущность "по умолчанию" и несколько именованных (редкий, но возможный случай):
+=======
+Or, another situation, let's say a module `user.js` exports one main "default" thing, and a few named ones (rarely the case, but it happens):
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 ```js
 // 📁 user.js
@@ -277,9 +318,15 @@ new User('John');
 
 ### Довод против экспортов по умолчанию
 
+<<<<<<< HEAD
 Именованные экспорты "включают в себя" своё имя. Эта информация является частью модуля, говорит нам, что именно экспортируется.
 
 Именованные экспорты вынуждают нас использовать правильное имя при импорте:
+=======
+Named exports are explicit. They exactly name what they import, so we have that information from them; that's a good thing.
+
+Named exports force us to use exactly the right name to import:
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 ```js
 import {User} from './user.js';
@@ -289,9 +336,15 @@ import {User} from './user.js';
 ...В то время как для экспорта по умолчанию мы выбираем любое имя при импорте:
 
 ```js
+<<<<<<< HEAD
 import User from './user.js'; // сработает
 import MyUser from './user.js'; // тоже сработает
 // можно импортировать с любым именем, и это будет работать
+=======
+import User from './user.js'; // works
+import MyUser from './user.js'; // works too
+// could be import Anything... and it'll still work
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 ```
 
 Так что члены команды могут использовать разные имена для импорта одной и той же вещи, и это не очень хорошо.
@@ -319,14 +372,20 @@ export {sayHi} from './say.js'; // реэкспортировать sayHi
 export {default as User} from './user.js'; // реэкспортировать default
 ```
 
+<<<<<<< HEAD
 Зачем это нужно? Рассмотрим практический пример использования.
 
 Представим, что мы пишем "пакет": папку со множеством модулей, из которой часть функциональности экспортируется наружу (инструменты вроде NPM позволяют нам публиковать и распространять такие пакеты), а многие модули - просто вспомогательные, для внутреннего использования в других модулях пакета.
+=======
+Why would that be needed? Let's see a practical use case.
+
+Imagine, we're writing a "package": a folder with a lot of modules, with some of the functionality exported outside (tools like NPM allow us to publish and distribute such packages, but we don't have to use them), and many modules are just "helpers", for internal use in other package modules.
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 Структура файлов может быть такой:
 ```
 auth/
-    index.js  
+    index.js
     user.js
     helpers.js
     tests/
@@ -337,13 +396,27 @@ auth/
         ...
 ```
 
+<<<<<<< HEAD
 Мы бы хотели сделать функциональность нашего пакета доступной через единую точку входа: "главный файл" `auth/index.js`. Чтобы можно было использовать её следующим образом:
+=======
+We'd like to expose the package functionality via a single entry point.
+
+In other words, a person who would like to use our package, should import only from the "main file" `auth/index.js`.
+
+Like this:
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 ```js
 import {login, logout} from 'auth/index.js'
 ```
 
+<<<<<<< HEAD
 Идея в том, что внешние разработчики, которые будут использовать наш пакет, не должны разбираться с его внутренней структурой, рыться в файлах внутри нашего пакета. Всё, что нужно, мы экспортируем в `auth/index.js`, а остальное скрываем от любопытных взглядов.
+=======
+The "main file", `auth/index.js` exports all the functionality that we'd like to provide in our package.
+
+The idea is that outsiders, other programmers who use our package, should not meddle with its internal structure, search for files inside our package folder. We export only what's necessary in `auth/index.js` and keep the rest hidden from prying eyes.
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 Так как нужная функциональность может быть разбросана по модулям нашего пакета, мы можем импортировать их в `auth/index.js` и тут же экспортировать наружу.
 
@@ -366,20 +439,37 @@ export {User};
 
 ```js
 // 📁 auth/index.js
+<<<<<<< HEAD
 
 // импортировать login/logout и тут же экспортировать
 export {login, logout} from './helpers.js';
 
 // импортировать экспорт по умолчанию как User и тут же экспортировать
+=======
+// re-export login/logout
+export {login, logout} from './helpers.js';
+
+// re-export the default export as User
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 export {default as User} from './user.js';
 ...
 ```
 
+<<<<<<< HEAD
 ### Реэкспорт экспорта по умолчанию
+=======
+The notable difference of `export ... from` compared to `import/export` is that re-exported modules aren't available in the current file. So inside the above example of `auth/index.js` we can't use re-exported `login/logout` functions.
+
+### Re-exporting the default export
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 При реэкспорте экспорт по умолчанию нужно обрабатывать особым образом.
 
+<<<<<<< HEAD
 Например, у нас есть `user.js`, из которого мы хотим реэкспортировать класс `User`:
+=======
+Let's say we have `user.js` with the `export default class User` and would like to re-export it:
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 ```js
 // 📁 user.js
@@ -388,6 +478,7 @@ export default class User {
 }
 ```
 
+<<<<<<< HEAD
 1. `export User from './user.js'` не будет работать. Казалось бы, что такого? Но возникнет синтаксическая ошибка!
 
     Чтобы реэкспортировать экспорт по умолчанию, мы должны написать `export {default as User}`, как в примере выше. Такая вот особенность синтаксиса.
@@ -395,16 +486,35 @@ export default class User {
 2. `export * from './user.js'` реэкспортирует только именованные экспорты, исключая экспорт по умолчанию.
 
     Если мы хотим реэкспортировать и именованные экспорты и экспорт по умолчанию, то понадобятся две инструкции:
+=======
+We can come across two problems with it:
+
+1. `export User from './user.js'` won't work. That would lead to a syntax error.
+
+    To re-export the default export, we have to write `export {default as User}`, as in the example above.
+
+2. `export * from './user.js'` re-exports only named exports, but ignores the default one.
+
+    If we'd like to re-export both named and default exports, then two statements are needed:
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
     ```js
     export * from './user.js'; // для реэкспорта именованных экспортов
     export {default} from './user.js'; // для реэкспорта по умолчанию
     ```
 
+<<<<<<< HEAD
 Такое особое поведение реэкспорта с экспортом по умолчанию - одна из причин того, почему некоторые разработчики их не любят.
+=======
+Such oddities of re-exporting a default export are one of the reasons why some developers don't like default exports and prefer named ones.
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 ## Итого
 
+<<<<<<< HEAD
 Вот все варианты `export`, которые мы разобрали в этой и предыдущей главах.
+=======
+Here are all types of `export` that we covered in this and previous articles.
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 Вы можете проверить себя, читая их и вспоминая, что они означают:
 
@@ -419,6 +529,7 @@ export default class User {
 
 Импорт:
 
+<<<<<<< HEAD
 - Именованные экспорты из модуля:
   - `import {x [as y], ...} from "module"`
 - Импорт по умолчанию:  
@@ -427,6 +538,16 @@ export default class User {
 - Всё сразу:
   - `import * as obj from "module"`
 - Только подключить модуль (его код запустится), но не присваивать его переменной:
+=======
+- Importing named exports:
+  - `import {x [as y], ...} from "module"`
+- Importing the default export:
+  - `import x from "module"`
+  - `import {default as x} from "module"`
+- Import all:
+  - `import * as obj from "module"`
+- Import the module (its code runs), but do not assign any of its exports to variables:
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
   - `import "module"`
 
 Мы можем поставить `import/export` в начало или в конец скрипта, это не имеет значения.
@@ -440,7 +561,11 @@ sayHi();
 import {sayHi} from './say.js'; // импорт в конце файла
 ```
 
+<<<<<<< HEAD
 На практике импорты, чаще всего, располагаются в начале файла. Но это только для большего удобства.
+=======
+In practice imports are usually at the start of the file, but that's only for more convenience.
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 **Обратите внимание, что инструкции import/export не работают внутри `{...}`.**
 
@@ -453,4 +578,8 @@ if (something) {
 
 ...Но что, если нам в самом деле нужно импортировать что-либо в зависимости от условий? Или в определённое время? Например, загрузить модуль, только когда он станет нужен?
 
+<<<<<<< HEAD
 Мы рассмотрим динамические импорты в следующей главе.
+=======
+We'll see dynamic imports in the next article.
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11

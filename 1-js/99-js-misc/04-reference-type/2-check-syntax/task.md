@@ -1,4 +1,5 @@
 importance: 2
+<<<<<<< HEAD
  
 ---
  
@@ -7,13 +8,31 @@ importance: 2
 Каким будет результат выполнения этого кода?
  
  
+=======
+
+---
+
+# Syntax check
+
+What is the result of this code?
+
+
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 ```js no-beautify
 let user = {
   name: "John",
   go: function() { alert(this.name) }
 }
+<<<<<<< HEAD
  
 (user.go)()
 ```
  
 P.S. Здесь есть подвох :)
+=======
+
+(user.go)()
+```
+
+P.S. There's a pitfall :)
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11

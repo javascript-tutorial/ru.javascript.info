@@ -10,15 +10,26 @@ importance: 2
 
 Функция `getMaxSubSum(arr)` должна возвращать эту сумму.
 
+<<<<<<< HEAD
 Например:
 
 ```js
 getMaxSubSum([-1, *!*2, 3*/!*, -9]) == 5 (сумма выделенных элементов)
+=======
+For instance:
+
+```js
+getMaxSubSum([-1, *!*2, 3*/!*, -9]) == 5 (the sum of highlighted items)
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 getMaxSubSum([*!*2, -1, 2, 3*/!*, -9]) == 6
 getMaxSubSum([-1, 2, 3, -9, *!*11*/!*]) == 11
 getMaxSubSum([-2, -1, *!*1, 2*/!*]) == 3
 getMaxSubSum([*!*100*/!*, -9, 2, -3, 5]) == 100
+<<<<<<< HEAD
 getMaxSubSum([*!*1, 2, 3*/!*]) == 6 (берём все)
+=======
+getMaxSubSum([*!*1, 2, 3*/!*]) == 6 (take all)
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 ```
 
 Если все элементы отрицательные - ничего не берём(подмассив пустой) и сумма равна "0":

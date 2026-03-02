@@ -2,11 +2,19 @@ importance: 5
 
 ---
 
+<<<<<<< HEAD
 # Почему наедаются оба хомяка?
+=======
+# Why are both hamsters full?
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 У нас есть два хомяка: шустрый (`speedy`) и ленивый (`lazy`); оба наследуют от общего объекта `hamster`.
 
+<<<<<<< HEAD
 Когда мы кормим одного хомяка, второй тоже наедается. Почему? Как это исправить?
+=======
+When we feed one of them, the other one is also full. Why? How can we fix it?
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 ```js run
 let hamster = {

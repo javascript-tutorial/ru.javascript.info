@@ -28,4 +28,8 @@ alert(dictionary); // "apple,__proto__"
 
 Когда мы создаём свойство с помощью дескриптора, все флаги по умолчанию имеют значение `false`. Таким образом, в коде выше `dictionary.toString` -- неперечисляемое свойство.
 
+<<<<<<< HEAD
 Смотрите главу [](info:property-descriptors) для ознакомления.
+=======
+See the chapter [](info:property-descriptors) for review.
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
