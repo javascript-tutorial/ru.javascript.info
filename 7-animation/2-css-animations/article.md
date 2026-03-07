@@ -231,7 +231,7 @@ CSS:
 ```css
 .train {
   left: 100px;
-  transition: left 5s cubic-bezier(.5, -1, 0.5, 2);
+  transition: left 5s cubic-bezier(0.5, -1, 0.5, 2);
   /* JavaScript sets left to 400px */
 }
 ```
