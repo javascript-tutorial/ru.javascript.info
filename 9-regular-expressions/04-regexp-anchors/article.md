@@ -16,7 +16,7 @@ alert( /^Mary/.test(str1) ); // true
 Аналогично можно проверить, кончается ли строка словом `snow` при помощи `pattern:snow$`:
 
 ```js run
-let str1 = "it's fleece was white as snow";
+let str1 = "its fleece was white as snow";
 alert( /snow$/.test(str1) ); // true
 ```
 
