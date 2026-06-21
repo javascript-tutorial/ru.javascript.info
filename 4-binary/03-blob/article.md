@@ -94,7 +94,7 @@ URL.revokeObjectURL(link.href);
 Вот как выглядит сгенерированный URL:
 
 ```
-blob:https://javascript.info/1e67e00e-860d-40a5-89ae-6ab0cbee6273
+blob:https://learn.javascript.ru/e942f15a-92ee-4d9f-ba80-f98918ad802f
 ```
 
 Браузер для каждого URL, сгенерированного через `URL.createObjectURL`, сохраняет внутреннее соответствие URL -> `Blob`. Таким образом, такие URL короткие, но дают доступ к большому объекту `Blob`.
