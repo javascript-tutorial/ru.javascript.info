@@ -149,17 +149,21 @@ for (let [key, value] of response.headers) {
 
 ## Заголовки запроса
 
-Для установки заголовка запроса в `fetch` мы можем использовать опцию `headers`. Она содержит объект с исходящими заголовками, например:
+Для установки заголовка запроса в `fetch` мы можем использовать опцию `headers`. Она содержит объект с исходящими заголовками.
+Пример: установка заголовка Authorization для базовой авторизации:
 
 ```js
+let username = 'admin';
+let password = 'secret';
 let response = fetch(protectedUrl, {
   headers: {
-    Authentication: 'secret'
+    Authorization: "Basic " + btoa(username + ":" + password) 
   }
 });
 ```
 
-Есть список [запрещённых HTTP-заголовков](https://fetch.spec.whatwg.org/#forbidden-header-name), которые мы не можем установить:
+
+Есть список [запрещённых HTTP-заголовков](https://developer.mozilla.org/ru/docs/Glossary/Forbidden_header_name), которые мы не можем установить:
 
 - `Accept-Charset`, `Accept-Encoding`
 - `Access-Control-Request-Headers`
