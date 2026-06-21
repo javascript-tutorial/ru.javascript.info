@@ -129,7 +129,7 @@ let start = Date.now();
 function count() {
 
   // перенесём планирование очередного вызова в начало
-  if (i < 1e9 - 1e6) {
+  if (i < 1e9) {
     setTimeout(count); // запланировать новый вызов
   }
 
