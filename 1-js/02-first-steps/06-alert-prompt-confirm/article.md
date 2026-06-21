@@ -19,7 +19,7 @@ alert("Hello");
 Функция `prompt` принимает два аргумента:
 
 ```js no-beautify
-result = prompt(title, [default]);
+let result = prompt(title, [default]);
 ```
 
 Этот код отобразит модальное окно с текстом, полем для ввода текста и кнопками OK/Отмена.
@@ -67,7 +67,7 @@ let test = prompt("Test", ''); // <-- для IE
 Синтаксис:
 
 ```js
-result = confirm(question);
+let result = confirm(question);
 ```
 
 Функция `confirm` отображает модальное окно с текстом вопроса `question` и двумя кнопками: OK и Отмена.
