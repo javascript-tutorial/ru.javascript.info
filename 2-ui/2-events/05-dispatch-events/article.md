@@ -18,11 +18,11 @@ let event = new Event(type[, options]);
 
 Где:
 
-- *type* -- тип события, строка, например `"click"` или же любой придуманный нами --  `"my-event"`.
+- *type* -- тип события, строка, например `"click"` или же любой придуманный нами -- `"my-event"`.
 - *options* -- объект с тремя необязательными свойствами:
   - `bubbles: true/false` -- если `true`, тогда событие всплывает.
   - `cancelable: true/false` -- если `true`, тогда можно отменить действие по умолчанию. Позже мы разберём, что это значит для пользовательских событий.
-  - `composed: true/false` -- если `true`, тогда событие будет всплывать наружу за пределы Shadow DOM. Позже мы разберём это в [разделе Веб-компоненты](https://learn.javascript.ru/shadow-dom-events#generatsiya-sobytiy).
+  - `composed: true/false` -- если `true`, тогда событие будет вызывать обработчики вне shadow root, выходя за пределы Shadow DOM. Позже мы разберём это в [разделе Веб-компоненты](https://learn.javascript.ru/shadow-dom-events#svoystvo-event-composed).
 
 По умолчанию все три свойства установлены в **false**: `{bubbles: false, cancelable: false, composed: false}`.
 
@@ -273,9 +273,10 @@ alert(event.clientX); // undefined, неизвестное свойство пр
 
 Чтобы сгенерировать событие из кода, вначале надо создать объект события.
 
-Базовый конструктор `Event(name, options)` принимает обязательное имя события и `options` - объект с двумя свойствами:
+Базовый конструктор `Event(type[, options])` принимает обязательный параметр `type` – строку, задающую имя (тип) события, и необязательный объект `options` с тремя свойствами (все по умолчанию false):
 - `bubbles: true` чтобы событие всплывало.
-- `cancelable: true` если мы хотим, чтобы `event.preventDefault()` работал.
+- `cancelable: true` чтобы `event.preventDefault()` работал.
+- `composed: true` чтобы событие выходило за пределы Shadow DOM, становясь доступным слушателям вне shadow root.
 
 Особые конструкторы встроенных событий `MouseEvent`, `KeyboardEvent` и другие принимают специфичные для каждого конкретного типа событий свойства. Например, `clientX` для событий мыши.
 
