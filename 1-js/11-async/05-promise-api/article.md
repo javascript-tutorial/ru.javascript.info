@@ -186,7 +186,7 @@ Promise.allSettled(urls.map(url => fetch(url)))
 ```js
 if(!Promise.allSettled) {
   Promise.allSettled = function(promises) {
-    return Promise.all(promises.map(p => Promise.resolve(p).then(value => ({
+    return Promise.all(Array.from(promises).map(p => Promise.resolve(p).then(value => ({
       status: 'fulfilled',
       value: value
     }), error => ({
