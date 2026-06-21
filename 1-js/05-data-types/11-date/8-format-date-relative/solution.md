@@ -55,8 +55,8 @@ function formatDate(date) {
   let minutes = date.getMinutes();
   let diffMs = new Date() - date;
   let diffSec = Math.round(diffMs / 1000);
-  let diffMin = diffSec / 60;
-  let diffHour = diffMin / 60;
+  let diffMin = Math.ceil(diffSec / 60);
+  let diffHour = Math.ceil(diffMin / 60);
 
   // форматирование
   year = year.toString().slice(-2);
