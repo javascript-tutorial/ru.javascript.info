@@ -274,7 +274,7 @@ function cachingDecorator(func, hash) {
 }
 
 function hash(args) {
-  return args[0] + ',' + args[1];
+  return Array.from(args).join(',');
 }
 
 worker.slow = cachingDecorator(worker.slow, hash);
