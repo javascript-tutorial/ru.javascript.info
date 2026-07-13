@@ -8,6 +8,12 @@ importance: 4
 
 [demo src="solution"]
 
+<<<<<<< HEAD
 P.S. Не добавляйте обработчики никуда, кроме элемента `#mouse`.
 
 P.P.S. Не изменяйте HTML/CSS, подход должен быть общим и работать с любым элементом.
+=======
+P.S. Don't put event handlers anywhere except the `#mouse` element.
+
+P.P.S. Don't modify HTML/CSS, the approach should be generic and work with any element.
+>>>>>>> 52c1e61915bc8970a950a3f59bd845827e49b4bf
