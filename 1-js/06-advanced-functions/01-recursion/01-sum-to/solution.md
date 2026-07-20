@@ -38,4 +38,8 @@ P.S. Надо ли говорить, что решение по формуле �
 
 Вариант с циклом – второй по скорости. Он быстрее рекурсии, так как операций сложения столько же, но нет дополнительных вычислительных затрат на организацию вложенных вызовов. Поэтому рекурсия в данном случае работает медленнее всех.
 
+<<<<<<< HEAD
 P.P.S. Некоторые движки поддерживают оптимизацию "хвостового вызова": если рекурсивный вызов является самым последним в функции, без каких-либо других вычислений, то внешней функции не нужно будет возобновлять выполнение и не нужно запоминать контекст его выполнения. В итоге требования к памяти снижаются. Но если JavaScript-движок не поддерживает это (большинство не поддерживают), будет ошибка: максимальный размер стека превышен, так как обычно существует ограничение на максимальный размер стека.
+=======
+P.P.S. Some engines support the "tail call" optimization: if a recursive call is the very last one in the function, with no other calculations performed, then the outer function will not need to resume the execution, so the engine doesn't need to remember its execution context. That removes the burden on memory. But if the JavaScript engine does not support tail call optimization (most of them don't), there will be an error: maximum stack size exceeded, because there's usually a limitation on the total stack size.
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e

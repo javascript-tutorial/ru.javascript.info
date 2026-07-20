@@ -22,14 +22,22 @@ Chrome и Firefox снискали любовь подавляющего бол�
 
 Она выглядит приблизительно следующим образом:
 
+<<<<<<< HEAD
 ![](chrome.webp)
+=======
+![chrome](chrome.webp)
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 Точный внешний вид инструментов разработки зависит от используемой версии Chrome. Время от времени некоторые детали изменяются, но в целом внешний вид остаётся примерно похожим на предыдущие версии.
 
 - В консоли мы можем увидеть сообщение об ошибке, отрисованное красным цветом. В нашем случае скрипт содержит неизвестную команду "lalala".
 - Справа присутствует ссылка на исходный код `bug.html:12` с номером строки кода, в которой эта ошибка и произошла.
 
+<<<<<<< HEAD
 Под сообщением об ошибке находится синий символ `>`. Он обозначает командную строку, в ней мы можем редактировать и запускать JavaScript-команды. Для их запуска нажмите `key:Enter`.
+=======
+Below the error message, there is a blue `>` symbol. It marks a "command line" where we can type JavaScript commands. Press `key:Enter` to run them.
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 ```smart header="Многострочный ввод"
 Обычно при нажатии `key:Enter` введённая строка кода сразу выполняется.
@@ -39,6 +47,11 @@ Chrome и Firefox снискали любовь подавляющего бол�
 
 Теперь мы явно видим ошибки, для начала этого вполне достаточно. Мы ещё вернёмся к инструментам разработчика позже и более подробно рассмотрим отладку кода в главе <info:debugging-chrome>.
 
+```smart header="Multi-line input"
+Usually, when we put a line of code into the console, and then press `key:Enter`, it executes.
+
+To insert multiple lines, press `key:Shift+Enter`. This way one can enter long fragments of JavaScript code.
+```
 
 ## Firefox, Edge и другие
 
@@ -50,15 +63,28 @@ Chrome и Firefox снискали любовь подавляющего бол�
 
 Safari (браузер для Mac, не поддерживается в системах Windows/Linux) всё же имеет небольшое отличие. Для начала работы нам нужно включить "Меню разработки" ("Developer menu").
 
+<<<<<<< HEAD
 Откройте Настройки (Preferences) и перейдите к панели "Продвинутые" (Advanced). В самом низу вы найдёте чекбокс:
+=======
+Open Settings and go to the "Advanced" pane. There's a checkbox at the bottom:
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 ![](safari.png)
 
 Теперь консоль можно активировать нажатием клавиш `key:Cmd+Opt+C`. Также обратите внимание на новый элемент меню "Разработка" ("Develop"). В нем содержится большое количество команд и настроек.
 
+<<<<<<< HEAD
 ## Итого
 
 - Инструменты разработчика позволяют нам смотреть ошибки, выполнять команды, проверять значение переменных и ещё много всего полезного.
 - В большинстве браузеров, работающих под Windows, инструменты разработчика можно открыть, нажав `key:F12`. В Chrome для Mac используйте комбинацию `key:Cmd+Opt+J`, Safari: `key:Cmd+Opt+C` (необходимо предварительное включение "Меню разработчика").
 
 Теперь наше окружение полностью настроено. В следующем разделе мы перейдём непосредственно к JavaScript.
+=======
+## Summary
+
+- Developer tools allow us to see errors, run commands, examine variables, and much more.
+- They can be opened with `key:F12` for most browsers on Windows. Chrome for Mac needs `key:Cmd+Opt+J`, Safari: `key:Cmd+Opt+C` (need to enable first).
+
+Now we have the environment ready. In the next section, we'll get down to JavaScript.
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e

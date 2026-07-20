@@ -95,5 +95,9 @@ say();
 ```smart
 Хотя `import()` и выглядит похоже на вызов функции, на самом деле это специальный синтаксис, так же, как, например, `super()`.
 
+<<<<<<< HEAD
 Так что мы не можем скопировать `import` в другую переменную или вызвать при помощи `.call/apply`. Это не функция.
+=======
+So we can't copy `import` to a variable or use `call/apply` with it. It's not a function.
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 ```

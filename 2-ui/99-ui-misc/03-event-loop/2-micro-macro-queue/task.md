@@ -2,7 +2,11 @@ importance: 5
 
 ---
 
+<<<<<<< HEAD
 # Что код выведет в консоли?
+=======
+# What will be the output of this code?
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 ```js
 console.log(1);
@@ -19,4 +23,7 @@ setTimeout(() => console.log(6));
 
 console.log(7);
 ```
+<<<<<<< HEAD
 
+=======
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e

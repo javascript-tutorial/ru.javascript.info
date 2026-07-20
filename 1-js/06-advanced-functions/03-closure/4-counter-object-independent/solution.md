@@ -1,7 +1,13 @@
 
+<<<<<<< HEAD
 Несомненно, он отлично будет работать.
 
 Обе вложенные функции были созданы с одним и тем же внешним лексическим окружением, так что они имеют доступ к одной и той же переменной `count`:
+=======
+Surely it will work just fine.
+
+Both nested functions are created within the same outer Lexical Environment, so they share access to the same `count` variable:
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 ```js run
 function Counter() {
@@ -10,7 +16,11 @@ function Counter() {
   this.up = function() {
     return ++count;
   };
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
   this.down = function() {
     return --count;
   };

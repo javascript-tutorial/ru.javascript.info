@@ -30,14 +30,25 @@ alert(buffer.byteLength); // 16
 
 **Для работы с `ArrayBuffer` нам нужен специальный объект, реализующий "представление" данных.**
 
+<<<<<<< HEAD
 Такие объекты не хранят какое-то собственное содержимое. Они интерпретируют бинарные данные, хранящиеся в `ArrayBuffer`.
+=======
+A view object does not store anything on its own. It's the "eyeglasses" that give an interpretation of the bytes stored in the `ArrayBuffer`.
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 Например:
 
+<<<<<<< HEAD
 - **`Uint8Array`** -- представляет каждый байт в `ArrayBuffer` как отдельное число; возможные значения находятся в промежутке от 0 до 255 (в байте 8 бит, отсюда такой набор). Такое значение называется "8-битное целое без знака".
 - **`Uint16Array`** -- представляет каждые 2 байта в `ArrayBuffer` как целое число; возможные значения находятся в промежутке от 0 до 65535. Такое значение называется "16-битное целое без знака".
 - **`Uint32Array`** -- представляет каждые 4 байта в `ArrayBuffer` как целое число; возможные значения находятся в промежутке от 0 до 4294967295. Такое значение называется "32-битное целое без знака".
 - **`Float64Array`** -- представляет каждые 8 байт в `ArrayBuffer` как число с плавающей точкой; возможные значения находятся в промежутке между <code>5.0x10<sup>-324</sup></code> и <code>1.8x10<sup>308</sup></code>.
+=======
+- **`Uint8Array`** -- treats each byte in `ArrayBuffer` as a separate number, with possible values from 0 to 255 (a byte is 8-bit, so it can hold only that much). Such value is called a "8-bit unsigned integer".
+- **`Uint16Array`** -- treats every 2 bytes as an integer, with possible values from 0 to 65535. That's called a "16-bit unsigned integer".
+- **`Uint32Array`** -- treats every 4 bytes as an integer, with possible values from 0 to 4294967295. That's called a "32-bit unsigned integer".
+- **`Float64Array`** -- treats every 8 bytes as a floating point number with possible values from <code>5.0x10<sup>-324</sup></code> to <code>1.8x10<sup>308</sup></code>.
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 Таким образом, бинарные данные из `ArrayBuffer` размером 16 байт могут быть представлены как 16 чисел маленькой разрядности или как 8 чисел большей разрядности (по 2 байта каждое), или как 4 числа ещё большей разрядности (по 4 байта каждое), или как 2 числа с плавающей точкой высокой точности (по 8 байт каждое).
 
@@ -71,10 +82,19 @@ for(let num of view) {
 
 ## TypedArray
 
+<<<<<<< HEAD
 Общий термин для всех таких представлений (`Uint8Array`, `Uint32Array` и т.д.) -- это [TypedArray](https://tc39.github.io/ecma262/#sec-typedarray-objects), типизированный массив. У них имеется набор одинаковых свойств и методов.
 
 Они уже намного больше напоминают обычные массивы: элементы проиндексированы, и возможно осуществить обход содержимого.
+=======
+The common term for all these views (`Uint8Array`, `Uint32Array`, etc) is [TypedArray](https://tc39.github.io/ecma262/#sec-typedarray-objects). They share the same set of methods and properties.
 
+Please note, there's no constructor called `TypedArray`, it's just a common "umbrella" term to represent one of views over `ArrayBuffer`: `Int8Array`, `Uint8Array` and so on, the full list will soon follow.
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
+
+When you see something like `new TypedArray`, it means any of `new Int8Array`, `new Uint8Array`, etc.
+
+Typed arrays behave like regular arrays: have indexes and are iterable.
 
 Конструкторы типизированных массивов (будь то `Int8Array` или `Float64Array`, без разницы) ведут себя по-разному в зависимости от типа передаваемого им аргумента.
 
@@ -123,9 +143,15 @@ new TypedArray();
 
 Как видим, можно создавать типизированные массивы `TypedArray` напрямую, не передавая в конструктор объект типа `ArrayBuffer`. Но представления не могут существовать сами по себе без двоичных данных, так что на самом деле объект `ArrayBuffer` создаётся автоматически во всех случаях, кроме первого, когда он явно передан в конструктор представления.
 
+<<<<<<< HEAD
 Для доступа к `ArrayBuffer` в `TypedArray` есть следующие свойства:
 - `buffer` -- ссылка на объект `ArrayBuffer`.
 - `byteLength` -- размер содержимого `ArrayBuffer` в байтах.
+=======
+To access the underlying `ArrayBuffer`, there are following properties in `TypedArray`:
+- `buffer` -- references the `ArrayBuffer`.
+- `byteLength` -- the length of the `ArrayBuffer`.
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 Таким образом, мы всегда можем перейти от одного представления к другому:
 ```js
@@ -205,7 +231,11 @@ alert(uint8array[1]); // 1
 
 ## DataView
 
+<<<<<<< HEAD
 [DataView](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView) -- это специальное супергибкое нетипизированное представление данных из `ArrayBuffer`. Оно позволяет обращаться к данным на любой позиции и в любом формате.
+=======
+[DataView](mdn:/JavaScript/Reference/Global_Objects/DataView) is a special super-flexible "untyped" view over `ArrayBuffer`. It allows to access the data on any offset in any format.
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 - В случае типизированных массивов конструктор строго задаёт формат данных. Весь массив состоит из однотипных значений. Доступ к i-ому элементу можно получить как `arr[i]`.
 - В случае `DataView` доступ к данным осуществляется посредством методов типа `.getUint8(i)` или `.getUint16(i)`. Мы выбираем формат данных в момент обращения к ним, а не в момент их создания.
@@ -231,8 +261,13 @@ let dataView = new DataView(buffer);
 // получим 8-битное число на позиции 0
 alert( dataView.getUint8(0) ); // 255
 
+<<<<<<< HEAD
 // а сейчас мы получим 16-битное число на той же позиции 0, оно состоит из 2-х байт, вместе составляющих число 65535
 alert( dataView.getUint16(0) ); // 65535 (максимальное 16-битное беззнаковое целое)
+=======
+// now get 16-bit number at offset 0, it consists of 2 bytes, together interpreted as 65535
+alert( dataView.getUint16(0) ); // 65535 (biggest 16-bit unsigned int)
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 // получим 32-битное число на позиции 0
 alert( dataView.getUint32(0) ); // 4294967295 (максимальное 32-битное беззнаковое целое)
@@ -240,7 +275,11 @@ alert( dataView.getUint32(0) ); // 4294967295 (максимальное 32-би�
 dataView.setUint32(0, 0); // при установке 4-байтового числа в 0, во все его 4 байта будут записаны нули
 ```
 
+<<<<<<< HEAD
 Представление `DataView` отлично подходит, когда мы храним данные разного формата в одном буфере. Например, мы храним последовательность пар, первое значение пары 16-битное целое, а второе -- 32-битное с плавающей точкой. `DataView` позволяет легко получить доступ к обоим.
+=======
+`DataView` is great when we store mixed-format data in the same buffer. For example, when we store a sequence of pairs (16-bit integer, 32-bit float), `DataView` allows to access them easily.
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 ## Итого
 
@@ -255,7 +294,11 @@ dataView.setUint32(0, 0); // при установке 4-байтового чи
     - `Float32Array`, `Float64Array` -- для 32- и 64-битных знаковых чисел с плавающей точкой.
 - Или `DataView` -- представление, использующее отдельные методы, чтобы уточнить формат данных при обращении, например, `getUint8(offset)`.
 
+<<<<<<< HEAD
 Обычно мы создаём и работаем с типизированными массивами, оставляя `ArrayBuffer` "под капотом". Но мы можем в любой момент получить к нему доступ с помощью `.buffer` и при необходимости создать другое представление.
+=======
+In most cases we create and operate directly on typed arrays, leaving `ArrayBuffer` under cover, as a "common denominator". We can access it as `.buffer` and make another view if needed.
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 Существуют ещё 2 дополнительных термина, которые используются в описаниях методов, работающих с бинарными данными:
 - `ArrayBufferView` -- это общее название для представлений всех типов.

@@ -9,4 +9,9 @@ function debounce(func, ms) {
 
 ```
 
+<<<<<<< HEAD
 Вызов `debounce` возвращает обёртку. При вызове он планирует вызов исходной функции через указанное количество `ms` и отменяет предыдущий такой тайм-аут.
+=======
+A call to `debounce` returns a wrapper. When called, it schedules the original function call after given `ms` and cancels the previous such timeout.
+
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e

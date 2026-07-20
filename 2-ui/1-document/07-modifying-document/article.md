@@ -1,12 +1,20 @@
 # Изменение документа
 
+<<<<<<< HEAD
 Модификации DOM - это ключ к созданию "живых" страниц.
+=======
+DOM modification is the key to creating "live" pages.
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 Здесь мы увидим, как создавать новые элементы "на лету" и изменять уже существующие.
 
 ## Пример: показать сообщение
 
+<<<<<<< HEAD
 Рассмотрим методы на примере - а именно, добавим на страницу сообщение, которое будет выглядеть получше, чем `alert`.
+=======
+Let's demonstrate using an example. We'll add a message on the page that looks nicer than `alert`.
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 Вот такое:
 
@@ -28,7 +36,11 @@
 */!*
 ```
 
+<<<<<<< HEAD
 Это был пример HTML. Теперь давайте создадим такой же `div`, используя JavaScript (предполагаем, что стили в HTML или во внешнем CSS-файле).
+=======
+That was the HTML example. Now let's create the same `div` with JavaScript (assuming that the styles are in the HTML/CSS already).
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 ## Создание элемента
 
@@ -50,21 +62,45 @@ DOM-узел можно создать двумя методами:
     
 Большую часть времени нам нужно создавать узлы элементов, такие как `div` для сообщения.
 
+<<<<<<< HEAD
 ### Создание сообщения
 
 В нашем случае сообщение - это `div` с классом `alert` и HTML в нём:
+=======
+Most of the time we need to create element nodes, such as the `div` for the message.
+
+### Creating the message
+
+Creating the message div takes 3 steps:
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 ```js
+// 1. Create <div> element
 let div = document.createElement('div');
+
+// 2. Set its class to "alert"
 div.className = "alert";
+<<<<<<< HEAD
 div.innerHTML = "<strong>Всем привет!</strong> Вы прочитали важное сообщение.";
 ```
 
 Мы создали элемент, но пока он только в переменной. Мы не можем видеть его на странице, поскольку он не является частью документа.
+=======
+
+// 3. Fill it with the content
+div.innerHTML = "<strong>Hi there!</strong> You've read an important message.";
+```
+
+We've created the element. But as of now it's only in a variable named `div`, not in the page yet. So we can't see it.
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 ## Методы вставки
 
+<<<<<<< HEAD
 Чтобы наш `div` появился, нам нужно вставить его где-нибудь в `document`. Например, в `document.body`.
+=======
+To make the `div` show up, we need to insert it somewhere into `document`. For instance, into `<body>` element, referenced by `document.body`.
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 Для этого есть метод `append`, в нашем случае: `document.body.append(div)`.
 
@@ -92,6 +128,7 @@ div.innerHTML = "<strong>Всем привет!</strong> Вы прочитали
 </script>
 ```
 
+<<<<<<< HEAD
 Вот методы для различных вариантов вставки:
 
 - `node.append(...nodes or strings)` -- добавляет узлы или строки в конец `node`,
@@ -101,6 +138,23 @@ div.innerHTML = "<strong>Всем привет!</strong> Вы прочитали
 - `node.replaceWith(...nodes or strings)` –- заменяет `node` заданными узлами или строками.
 
 Вот пример использования этих методов, чтобы добавить новые элементы в список и текст до/после него:
+=======
+Here we called `append` on `document.body`, but we can call `append` method on any other element, to put another element into it. For instance, we can append something to `<div>` by calling `div.append(anotherElement)`.
+
+Here are more insertion methods, they specify different places where to insert:
+
+- `node.append(...nodes or strings)` -- append nodes or strings *at the end* of `node`,
+- `node.prepend(...nodes or strings)` -- insert nodes or strings *at the beginning* of `node`,
+- `node.before(...nodes or strings)` –- insert nodes or strings *before* `node`,
+- `node.after(...nodes or strings)` –- insert nodes or strings *after* `node`,
+- `node.replaceWith(...nodes or strings)` –- replaces `node` with the given nodes or strings.
+
+Arguments of these methods are an arbitrary list of DOM nodes to insert, or text strings (that become text nodes automatically).
+
+Let's see them in action.
+
+Here's an example of using these methods to add items to a list and the text before/after it:
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 ```html autorun
 <ol id="ol">
@@ -123,7 +177,11 @@ div.innerHTML = "<strong>Всем привет!</strong> Вы прочитали
 </script>
 ```
 
+<<<<<<< HEAD
 Наглядная иллюстрация того, куда эти методы вставляют:
+=======
+Here's a visual picture of what the methods do:
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 ![](before-prepend-append-after.svg)
 
@@ -141,7 +199,11 @@ before
 after
 ```
 
+<<<<<<< HEAD
 Эти методы могут вставлять несколько узлов и текстовых фрагментов за один вызов.
+=======
+As said, these methods can insert multiple nodes and text pieces in a single call.
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 Например, здесь вставляется строка и элемент:
 
@@ -152,7 +214,11 @@ after
 </script>
 ```
 
+<<<<<<< HEAD
 Весь текст вставляется *как текст*.
+=======
+Please note: the text is inserted "as text", not "as HTML", with proper escaping of characters such as `<`, `>`.
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 Поэтому финальный HTML будет:
 
@@ -168,7 +234,11 @@ after
 
 Поэтому эти методы могут использоваться только для вставки DOM-узлов или текстовых фрагментов.
 
+<<<<<<< HEAD
 А что, если мы хотим вставить HTML именно "как html", со всеми тегами и прочим, как делает это `elem.innerHTML`?
+=======
+But what if we'd like to insert an HTML string "as html", with all tags and stuff working, in the same manner as `elem.innerHTML` does it?
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 ## insertAdjacentHTML/Text/Element
 
@@ -201,7 +271,11 @@ after
 <p>Пока</p>
 ```
 
+<<<<<<< HEAD
 Так мы можем добавлять произвольный HTML на страницу.
+=======
+That's how we can append arbitrary HTML to the page.
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 Варианты вставки:
 
@@ -534,6 +608,7 @@ ul.append(...getListContent()); // append + оператор "..." = друзь�
 
     Все эти методы возвращают `node`.
 
+<<<<<<< HEAD
 - Если нужно вставить фрагмент HTML, то `elem.insertAdjacentHTML(where, html)` вставляет в зависимости от `where`:
     - `"beforebegin"` -- вставляет `html` прямо перед `elem`,
     - `"afterbegin"` -- вставляет `html` в `elem` в начало,
@@ -541,6 +616,15 @@ ul.append(...getListContent()); // append + оператор "..." = друзь�
     - `"afterend"` -- вставляет `html` сразу после `elem`.
 
     Также существуют похожие методы `elem.insertAdjacentText` и `elem.insertAdjacentElement`, они вставляют текстовые строки и элементы, но они редко используются.
+=======
+- Given some HTML in `html`, `elem.insertAdjacentHTML(where, html)` inserts it depending on the value of `where`:
+    - `"beforebegin"` -- insert `html` right before `elem`,
+    - `"afterbegin"` -- insert `html` into `elem`, at the beginning,
+    - `"beforeend"` -- insert `html` into `elem`, at the end,
+    - `"afterend"` -- insert `html` right after `elem`.
+
+    Also there are similar methods, `elem.insertAdjacentText` and `elem.insertAdjacentElement`, that insert text strings and elements, but they are rarely used.
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 - Чтобы добавить HTML на страницу до завершения её загрузки:
     - `document.write(html)`
