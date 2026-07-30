@@ -329,21 +329,21 @@ after
 <ul id="ul"></ul>
 
 <script>
-function getListContent() {
-  let fragment = new DocumentFragment();
-
-  for(let i=1; i<=3; i++) {
-    let li = document.createElement('li');
-    li.append(i);
-    fragment.append(li);
+  function getListContent() {
+    let fragment = new DocumentFragment();
+  
+    for(let i=1; i<=3; i++) {
+      let li = document.createElement('li');
+      li.append(i);
+      fragment.append(li);
+    }
+  
+    return fragment;
   }
-
-  return fragment;
-}
-
-*!*
-ul.append(getListContent()); // (*)
-*/!*
+  
+  *!*
+  ul.append(getListContent()); // (*)
+  */!*
 </script>
 ```
 
@@ -363,21 +363,21 @@ ul.append(getListContent()); // (*)
 <ul id="ul"></ul>
 
 <script>
-function getListContent() {
-  let result = [];
-
-  for(let i=1; i<=3; i++) {
-    let li = document.createElement('li');
-    li.append(i);
-    result.push(li);
+  function getListContent() {
+    let result = [];
+  
+    for(let i=1; i<=3; i++) {
+      let li = document.createElement('li');
+      li.append(i);
+      result.push(li);
+    }
+  
+    return result;
   }
-
-  return result;
-}
-
-*!*
-ul.append(...getListContent()); // append + оператор "..." = друзья!
-*/!*
+  
+  *!*
+  ul.append(...getListContent()); // append + оператор "..." = друзья!
+  */!*
 </script>
 ```
 
