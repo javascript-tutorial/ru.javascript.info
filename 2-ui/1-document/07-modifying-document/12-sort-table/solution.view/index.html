@@ -26,10 +26,9 @@
   </table>
 
   <script>
-    let sortedRows = Array.from(table.rows)
-      .slice(1)
-      .sort((rowA, rowB) => rowA.cells[0].innerHTML > rowB.cells[0].innerHTML ? 1 : -1);
-
+    let sortedRows = Array.from(table.tBodies[0].rows)
+      .sort((rowA, rowB) => rowA.cells[0].textContent.trim().localeCompare(rowB.cells[0].textContent.trim()));
+    
     table.tBodies[0].append(...sortedRows);
   </script>
 
