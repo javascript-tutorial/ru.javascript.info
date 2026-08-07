@@ -491,9 +491,9 @@ request.onerror = function(event) {
 
 Диапазоны создаются с помощью следующих вызовов:
 
-- `IDBKeyRange.lowerBound(lower, [open])` означает: `>lower` (или `≥lower`, если `open` это true)
-- `IDBKeyRange.upperBound(upper, [open])` означает: `<upper` (или `≤upper`, если `open` это true)
-- `IDBKeyRange.bound(lower, upper, [lowerOpen], [upperOpen])` означает: между `lower` и `upper`, включительно, если соответствующий `open` равен `true`.
+- `IDBKeyRange.lowerBound(lower, [open])` означает: `≥lower` (или `>lower`, если `open` это true)
+- `IDBKeyRange.upperBound(upper, [open])` означает: `≤upper` (или `<upper`, если `open` это true)
+- `IDBKeyRange.bound(lower, upper, [lowerOpen], [upperOpen])` означает: между `lower` и `upper`. Если соответствующий `open` равен `true`, то граница не включается в диапазон.
 - `IDBKeyRange.only(key)` -- диапазон, который состоит только из одного ключа `key`, редко используется.
 
 Очень скоро мы увидим практические примеры их использования.
