@@ -41,7 +41,11 @@ alert(generator); // [object Generator]
 
 ![](generateSequence-1.svg)
 
+<<<<<<< HEAD
 Основным методом генератора является `next()`. При вызове он запускает выполнение кода до ближайшей инструкции `yield <значение>` (значение может отсутствовать, в этом случае оно предполагается равным `undefined`). По достижении `yield` выполнение функции приостанавливается, а соответствующее значение – возвращается во внешний код:
+=======
+The main method of a generator is `next()`. When called, it runs the execution until the nearest `yield <value>` statement (`value` can be omitted, then it's `undefined`). Then the function execution pauses, and the yielded `value` is returned to the outer code.
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 Результатом метода `next()` всегда является объект с двумя свойствами:
 - `value`: значение из `yield`.
@@ -79,7 +83,11 @@ alert(JSON.stringify(two)); // {value: 2, done: false}
 
 ![](generateSequence-3.svg)
 
+<<<<<<< HEAD
 И, наконец, последний вызов завершит выполнение функции и вернёт результат `return`:
+=======
+And, if we call it a third time, the execution reaches the `return` statement that finishes the function:
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 ```js
 let three = generator.next();
@@ -91,7 +99,11 @@ alert(JSON.stringify(three)); // {value: 3, *!*done: true*/!*}
 
 Сейчас генератор полностью выполнен. Мы можем увидеть это по свойству `done:true` и обработать `value:3` как окончательный результат.
 
+<<<<<<< HEAD
 Новые вызовы `generator.next()` больше не имеют смысла. Впрочем, если они и будут, то не вызовут ошибки, но будут возвращать один и тот же объект: `{done: true}`.
+=======
+New calls to `generator.next()` don't make sense any more. If we do them, they return the same object: `{done: true}`.
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 ```smart header="`function* f(…)` или `function *f(…)`?"
 Нет разницы, оба синтаксиса корректны.
@@ -103,7 +115,11 @@ alert(JSON.stringify(three)); // {value: 3, *!*done: true*/!*}
 
 Как вы, наверное, уже догадались по наличию метода `next()`, генераторы являются [перебираемыми](info:iterable) объектами.
 
+<<<<<<< HEAD
 Возвращаемые ими значения можно перебирать через `for..of`:
+=======
+We can loop over their values using `for..of`:
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 ```js run
 function* generateSequence() {
@@ -141,7 +157,11 @@ for(let value of generator) {
 }
 ```
 
+<<<<<<< HEAD
 Так как генераторы являются перебираемыми объектами, мы можем использовать всю связанную с ними функциональность, например оператор расширения `...`:
+=======
+As generators are iterable, we can call all related functionality, e.g. the spread syntax `...`:
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 ```js run
 function* generateSequence() {
@@ -155,7 +175,11 @@ let sequence = [0, ...generateSequence()];
 alert(sequence); // 0, 1, 2, 3
 ```
 
+<<<<<<< HEAD
 В коде выше `...generateSequence()` превращает перебираемый объект-генератор в массив элементов (подробнее ознакомиться с оператором расширения можно в главе [](info:rest-parameters-spread-operator#spread-operator))
+=======
+In the code above, `...generateSequence()` turns the iterable generator object into an array of items (read more about the spread syntax in the chapter [](info:rest-parameters-spread#spread-syntax))
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 ## Использование генераторов для перебираемых объектов
 
@@ -212,18 +236,30 @@ let range = {
 alert( [...range] ); // 1,2,3,4,5
 ```
 
+<<<<<<< HEAD
 Это работает, потому что `range[Symbol.iterator]()` теперь возвращает генератор, и его методы - в точности то, что ожидает `for..of`:
 - у него есть метод `.next()`
 - который возвращает значения в виде `{value: ..., done: true/false}`
 
 Это не совпадение, конечно. Генераторы были добавлены в язык JavaScript, в частности, с целью упростить создание перебираемых объектов.
+=======
+That works, because `range[Symbol.iterator]()` now returns a generator, and generator methods are exactly what `for..of` expects:
+- it has a `.next()` method
+- that returns values in the form `{value: ..., done: true/false}`
+
+That's not a coincidence, of course. Generators were added to JavaScript language with iterators in mind, to implement them easily.
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 Вариант с генератором намного короче, чем исходный вариант перебираемого `range`, и сохраняет те же функциональные возможности.
 
 ```smart header="Генераторы могут генерировать бесконечно"
 В примерах выше мы генерировали конечные последовательности, но мы также можем сделать генератор, который будет возвращать значения бесконечно. Например, бесконечная последовательность псевдослучайных чисел.
 
+<<<<<<< HEAD
 Конечно, нам потребуется `break` (или `return`) в цикле `for..of` по такому генератору, иначе цикл будет продолжаться бесконечно, и скрипт "зависнет".
+=======
+That surely would require a `break` (or `return`) in `for..of` over such generator. Otherwise, the loop would repeat forever and hang.
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 ```
 
 ## Композиция генераторов
@@ -238,10 +274,17 @@ function* generateSequence(start, end) {
 }
 ```
 
+<<<<<<< HEAD
 Мы хотели бы использовать её при генерации более сложной последовательности:
 - сначала цифры `0..9` (с кодами символов 48..57)
 - за которыми следуют буквы в верхнем регистре `A..Z` (коды символов 65..90)
 - за которыми следуют буквы алфавита `a..z` (коды символов 97..122)
+=======
+Now we'd like to reuse it to generate a more complex sequence:
+- first, digits `0..9` (with character codes 48..57),
+- followed by uppercase alphabet letters `A..Z` (character codes 65..90)
+- followed by lowercase alphabet letters `a..z` (character codes 97..122)
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 Мы можем использовать такую последовательность для генерации паролей, выбирать символы из неё (может быть, ещё добавить символы пунктуации), но сначала её нужно сгенерировать.
 
@@ -315,11 +358,19 @@ alert(str); // 0..9a..zA..Z
 
 Композиция генераторов – естественный способ вставлять вывод одного генератора в поток другого. Она не использует дополнительную память для хранения промежуточных результатов.
 
+<<<<<<< HEAD
 ## yield – дорога в обе стороны
 
 До этого момента генераторы сильно напоминали перебираемые объекты, со специальным синтаксисом для генерации значений. Но на самом деле они намного мощнее и гибче.
 
 Всё дело в том, что `yield` – дорога в обе стороны: он не только возвращает результат наружу, но и может передавать значение извне в генератор.
+=======
+## "yield" is a two-way street
+
+Until this moment, generators were similar to iterable objects, with a special syntax to generate values. But in fact they are much more powerful and flexible.
+
+That's because `yield` is a two-way street: it not only returns the result to the outside, but also can pass the value inside the generator.
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 Чтобы это сделать, нам нужно вызвать `generator.next(arg)` с аргументом. Этот аргумент становится результатом `yield`.
 
@@ -344,11 +395,19 @@ generator.next(4); // --> передаём результат в генерат�
 
 ![](genYield2.svg)
 
+<<<<<<< HEAD
 1. Первый вызов `generator.next()` – всегда без аргумента, он начинает выполнение и возвращает результат первого `yield "2+2=?"`. На этой точке генератор приостанавливает выполнение.
 2. Затем, как показано на картинке выше, результат `yield` переходит во внешний код в переменную `question`.
 3. При `generator.next(4)` выполнение генератора возобновляется, а `4` выходит из присваивания как результат: `let result = 4`.
 
 Обратите внимание, что внешний код не обязан немедленно вызывать `next(4)`. Ему может потребоваться время. Это не проблема, генератор подождёт.
+=======
+1. The first call `generator.next()` should be always made without an argument (the argument is ignored if passed). It starts the execution and returns the result of the first `yield "2+2=?"`. At this point the generator pauses the execution, while staying on the line `(*)`.
+2. Then, as shown at the picture above, the result of `yield` gets into the `question` variable in the calling code.
+3. On `generator.next(4)`, the generator resumes, and `4` gets in as the result: `let result = 4`.
+
+Please note, the outer code does not have to immediately call `next(4)`. It may take time. That's not a problem: the generator will wait.
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 Например:
 
@@ -423,7 +482,11 @@ generator.throw(new Error("Ответ не найден в моей базе д�
 */!*
 ```
 
+<<<<<<< HEAD
 Ошибка, которая проброшена в генератор на строке `(2)`, приводит к исключению на строке `(1)` с `yield`. В примере выше `try..catch` перехватывает её и отображает.
+=======
+The error, thrown into the generator at line `(2)` leads to an exception in line `(1)` with `yield`. In the example above, `try..catch` catches it and shows it.
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 Если мы не хотим перехватывать её, то она, как и любое обычное исключение, "вывалится" из генератора во внешний код.
 
@@ -449,7 +512,33 @@ try {
 
 Если же ошибка и там не перехвачена, то дальше – как обычно, она выпадает наружу и, если не перехвачена, "повалит" скрипт.
 
+<<<<<<< HEAD
 ## Итого
+=======
+## generator.return
+
+`generator.return(value)` finishes the generator execution and return the given `value`.
+
+```js
+function* gen() {
+  yield 1;
+  yield 2;
+  yield 3;
+}
+
+const g = gen();
+
+g.next();        // { value: 1, done: false }
+g.return('foo'); // { value: "foo", done: true }
+g.next();        // { value: undefined, done: true }
+```
+
+If we again use `generator.return()` in a completed generator, it will return that value again ([MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator/return)).
+
+Often we don't use it, as most of time we want to get all returning values, but it can be useful when we want to stop generator in a specific condition.
+
+## Summary
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 - Генераторы создаются при помощи функций-генераторов `function* f(…) {…}`.
 - Внутри генераторов и только внутри них существует оператор `yield`.
@@ -457,6 +546,10 @@ try {
 
 В современном JavaScript генераторы используются редко. Но иногда они оказываются полезными, потому что способность функции обмениваться данными с вызывающим кодом во время выполнения совершенно уникальна. И, конечно, для создания перебираемых объектов.
 
+<<<<<<< HEAD
 Также, в следующей главе мы будем изучать асинхронные генераторы, которые используются, чтобы читать потоки асинхронно сгенерированных данных (например, постранично загружаемые из сети) в цикле `for await ... of`.
+=======
+Also, in the next chapter we'll learn async generators, which are used to read streams of asynchronously generated data (e.g paginated fetches over a network) in `for await ... of` loops.
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 В веб-программировании мы часто работаем с потоками данных, так что это ещё один важный случай использования.
