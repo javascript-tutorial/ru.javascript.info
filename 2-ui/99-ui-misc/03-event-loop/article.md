@@ -174,7 +174,6 @@ count();
 
   function count() {
     for (let i = 0; i < 1e6; i++) {
-      i++;
       progress.innerHTML = i;
     }
   }
