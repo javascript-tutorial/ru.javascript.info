@@ -6,7 +6,11 @@ importance: 2
 
 Используя конструкцию `if..else`, напишите код, который будет спрашивать: 'Какое "официальное" название JavaScript?'
 
+<<<<<<< HEAD
 Если пользователь вводит "ECMAScript", то показать: "Верно!", в противном случае -- отобразить: "Не знаете? ECMAScript!"
+=======
+If the visitor enters "ECMAScript", then output "Right!", otherwise -- output: "You don't know? ECMAScript!"
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 ![](ifelse_task2.svg)
 

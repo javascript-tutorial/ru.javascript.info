@@ -16,7 +16,11 @@ describe("калькулятор", function() {
       prompt.restore();
     });
     
+<<<<<<< HEAD
     it('read получает два значения и сохраняет их как свойства объекта', function () {
+=======
+    it('the read get two values and saves them as object properties', function () {
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
       assert.equal(calculator.a, 2);
       assert.equal(calculator.b, 3);
     });
