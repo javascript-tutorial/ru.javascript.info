@@ -37,9 +37,15 @@ data: Сообщение 3
 data: в две строки
 ```
 
+<<<<<<< HEAD
 - Текст сообщения указывается после `data:`, пробел после двоеточия необязателен.
 - Сообщения разделяются двойным переносом строки `\n\n`.
 - Чтобы разделить сообщение на несколько строк, мы можем отправить несколько `data:` подряд (третье сообщение).
+=======
+- A message text goes after `data:`, the space after the colon is optional.
+- Messages are delimited with double line breaks `\n\n`.
+- To send a line break `\n`, we can immediately send one more `data:` (3rd message above).
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 На практике сложные сообщения обычно отправляются в формате JSON, в котором перевод строки кодируется как `\n`, так что в разделении сообщения на несколько строк обычно нет нужды.
 
@@ -66,7 +72,11 @@ eventSource.onmessage = function(event) {
 
 ### Кросс-доменные запросы
 
+<<<<<<< HEAD
 `EventSource`, как и `fetch`, поддерживает кросс-доменные запросы. Мы можем использовать любой URL:
+=======
+`EventSource` supports cross-origin requests, like `fetch` and any other networking methods. We can use any URL:
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 ```js
 let source = new EventSource("https://another-site.com/events");
@@ -102,7 +112,11 @@ data: Привет, я выставил задержку переподключ�
 
 Поле `retry:` может посылаться как вместе с данными, так и отдельным сообщением.
 
+<<<<<<< HEAD
 Браузеру следует ждать именно столько миллисекунд перед новой попыткой подключения. Или дольше, например, если браузер знает (от операционной системы) что соединения с сетью нет, то он может осуществить переподключение только когда оно появится.
+=======
+The browser should wait that many milliseconds before reconnecting. Or longer, e.g. if the browser knows (from OS) that there's no network connection at the moment, it may wait until the connection appears, and then retry.
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 - Если сервер хочет остановить попытки переподключения, он должен ответить со статусом 204.
 - Если браузер хочет прекратить соединение, он может вызвать `eventSource.close()`:
@@ -113,7 +127,11 @@ let eventSource = new EventSource(...);
 eventSource.close();
 ```
 
+<<<<<<< HEAD
 Также переподключение не произойдёт, если в ответе указан неверный `Content-Type` или его статус отличается от 301, 307, 200 и 204. Браузер создаст событие `"error"` и не будет восстанавливать соединение.
+=======
+Also, there will be no reconnection if the response has an incorrect `Content-Type` or its HTTP status differs from 301, 307, 200 and 204. In such cases the `"error"` event will be emitted, and the browser won't reconnect.
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 ```smart
 После того как соединение окончательно закрыто, "переоткрыть" его уже нельзя. Если необходимо снова подключиться, просто создайте новый `EventSource`.
@@ -211,10 +229,14 @@ eventSource.addEventListener('leave', event => {
 
 Объект `EventSource` автоматически устанавливает постоянное соединение и позволяет серверу отправлять через него сообщения.
 
+<<<<<<< HEAD
 Он предоставляет:
 - Автоматическое переподключение с настраиваемой `retry` задержкой.
 - Идентификаторы сообщений для восстановления соединения. Последний полученный идентификатор посылается в заголовке `Last-Event-ID` при пересоединении.
 - Текущее состояние, записанное в свойстве `readyState`.
+=======
+That makes `EventSource` a viable alternative to `WebSocket`, as the latter is more low-level and lacks such built-in features (though they can be implemented).
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 Это делает `EventSource` достойной альтернативой протоколу `WebSocket`, который сравнительно низкоуровневый и не имеет таких встроенных возможностей (хотя их и можно реализовать).
 
