@@ -91,7 +91,42 @@ let fruits = [
 "Висячая запятая" упрощает процесс добавления/удаления элементов, так как все строки становятся идентичными.
 ````
 
+<<<<<<< HEAD
 ## Получение последних элементов при помощи "at"
+=======
+## Get last elements with "at"
+
+[recent browser="new"]
+
+Let's say we want the last element of the array.
+
+Some programming languages allow the use of negative indexes for the same purpose, like `fruits[-1]`.
+
+However, in JavaScript it won't work. The result will be `undefined`, because the index in square brackets is treated literally.
+
+We can explicitly calculate the last element index and then access it: `fruits[fruits.length - 1]`.
+
+```js run
+let fruits = ["Apple", "Orange", "Plum"];
+
+alert( fruits[fruits.length-1] ); // Plum
+```
+
+A bit cumbersome, isn't it? We need to write the variable name twice.
+
+Luckily, there's a shorter syntax: `fruits.at(-1)`:
+
+```js run
+let fruits = ["Apple", "Orange", "Plum"];
+
+// same as fruits[fruits.length-1]
+alert( fruits.at(-1) ); // Plum
+```
+
+In other words, `arr.at(i)`:
+- is exactly the same as `arr[i]`, if `i >= 0`.
+- for negative values of `i`, it steps back from the end of the array.
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 [recent browser="new"]
 
@@ -151,9 +186,17 @@ alert( fruits.at(-1) ); // Plum
 
 Массивы в JavaScript могут работать и как очередь, и как стек. Мы можем добавлять/удалять элементы как в начало, так и в конец массива.
 
+<<<<<<< HEAD
 В компьютерных науках структура данных, делающая это возможным, называется [двусторонняя очередь](https://ru.wikipedia.org/wiki/Двухсторонняя_очередь).
 
 **Методы, работающие с концом массива:**
+=======
+Arrays in JavaScript can work both as a queue and as a stack. They allow you to add/remove elements, both to/from the beginning or the end.
+
+In computer science, the data structure that allows this, is called [deque](https://en.wikipedia.org/wiki/Double-ended_queue).
+
+**Methods that work with the end of the array:**
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 `pop`
 : Удаляет последний элемент из массива и возвращает его:
@@ -166,7 +209,11 @@ alert( fruits.at(-1) ); // Plum
     alert( fruits ); // Яблоко, Апельсин
     ```
 
+<<<<<<< HEAD
     И `fruits.pop()` и `fruits.at(-1)` возвращают последний элемент массива, но `fruits.pop()` также изменяет массив, удаляя его.
+=======
+    Both `fruits.pop()` and `fruits.at(-1)` return the last element of the array, but `fruits.pop()` also modifies the array by removing it.
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 `push`
 : Добавляет элемент в конец массива:
@@ -187,7 +234,11 @@ alert( fruits.at(-1) ); // Plum
 : Удаляет из массива первый элемент и возвращает его:
 
     ```js run
+<<<<<<< HEAD
     let fruits = ["Яблоко", "Апельсин", "Груша"];
+=======
+    let fruits = ["Apple", "Orange", "Pear"];
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
     alert( fruits.shift() ); // удаляем Яблоко и выводим его
 
@@ -198,7 +249,11 @@ alert( fruits.at(-1) ); // Plum
 : Добавляет элемент в начало массива:
 
     ```js run
+<<<<<<< HEAD
     let fruits = ["Апельсин", "Груша"];
+=======
+    let fruits = ["Orange", "Pear"];
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
     fruits.unshift('Яблоко');
 
@@ -223,7 +278,11 @@ alert( fruits );
 
 Массивы расширяют объекты, так как предусматривают специальные методы для работы с упорядоченными коллекциями данных, а также свойство `length`. Но в основе всё равно лежит объект.
 
+<<<<<<< HEAD
 Следует помнить, что в JavaScript существует 8 основных типов данных. Массив является объектом и, следовательно, ведёт себя как объект.
+=======
+Remember, there are only eight basic data types in JavaScript (see the [Data types](info:types) chapter for more info). Array is an object and thus behaves like an object.
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 Например, копируется по ссылке:
 
@@ -239,7 +298,11 @@ arr.push("Груша"); // массив меняется по ссылке
 alert( fruits ); // Банан, Груша - теперь два элемента
 ```
 
+<<<<<<< HEAD
 ...Но то, что действительно делает массивы особенными - это их внутреннее представление. Движок JavaScript старается хранить элементы массива в непрерывной области памяти, один за другим, так, как это показано на иллюстрациях к этой главе. Существуют и другие способы оптимизации, благодаря которым массивы работают очень быстро.
+=======
+...But what makes arrays really special is their internal representation. The engine tries to store its elements in the contiguous memory area, one after another, just as depicted on the illustrations in this chapter, and there are other optimizations as well, to make arrays work really fast.
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 Но все они утратят эффективность, если мы перестанем работать с массивом как с "упорядоченной коллекцией данных" и начнём использовать его как обычный объект.
 
@@ -277,7 +340,11 @@ fruits.age = 25; // создаём свойство с произвольным 
 fruits.shift(); // удаляем первый элемент с начала
 ```
 
+<<<<<<< HEAD
 Просто взять и удалить элемент с номером `0` недостаточно. Нужно также заново пронумеровать остальные элементы.
+=======
+It's not enough to take and remove the element with the index `0`. Other elements need to be renumbered as well.
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 Операция `shift` должна выполнить 3 действия:
 
@@ -394,11 +461,19 @@ alert( arr[3] ); // undefined: значения не восстановилис�
 let arr = *!*new Array*/!*("Яблоко", "Груша", "и тд");
 ```
 
+<<<<<<< HEAD
 Он редко применяется, так как квадратные скобки `[]` короче. Кроме того, у него есть хитрая особенность.
+=======
+It's rarely used, because square brackets `[]` are shorter. Also, there's a tricky feature with it.
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 Если `new Array` вызывается с одним аргументом, который представляет собой число, он создаёт массив *без элементов, но с заданной длиной*.
 
+<<<<<<< HEAD
 Давайте посмотрим, как можно оказать себе медвежью услугу:
+=======
+Let's see how one can shoot themselves in the foot:
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 ```js run
 let arr = new Array(2); // создастся ли массив [2]?
@@ -408,9 +483,13 @@ alert( arr[0] ); // undefined! нет элементов.
 alert( arr.length ); // length 2
 ```
 
+<<<<<<< HEAD
 Как мы видим, в коде, представленном выше, в `new Array(number)` все элементы равны `undefined`.
 
 Чтобы избежать появления таких неожиданных ситуаций, мы обычно используем квадратные скобки, если, конечно, не знаем точно, что по какой-то причине нужен именно `Array`.
+=======
+To avoid such surprises, we usually use square brackets, unless we really know what we're doing.
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 ## Многомерные массивы
 
@@ -423,7 +502,11 @@ let matrix = [
   [7, 8, 9]
 ];
 
+<<<<<<< HEAD
 alert( matrix[1][1] ); // 5, центральный элемент
+=======
+alert( matrix[0][1] ); // 2, the second value of the first inner array
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 ```
 
 ## toString
@@ -458,10 +541,62 @@ alert( "1" + 1 ); // "11"
 alert( "1,2" + 1 ); // "1,21"
 ```
 
+<<<<<<< HEAD
 ## Не сравнивайте массивы при помощи ==
+=======
+## Don't compare arrays with ==
+
+Arrays in JavaScript, unlike some other programming languages, shouldn't be compared with operator `==`.
+
+This operator has no special treatment for arrays, it works with them as with any objects.
+
+Let's recall the rules:
+
+- Two objects are equal `==` only if they're references to the same object.
+- If one of the arguments of `==` is an object, and the other one is a primitive, then the object gets converted to primitive, as explained in the chapter <info:object-toprimitive>.
+- ...With an exception of `null` and `undefined` that equal `==` each other and nothing else.
+
+The strict comparison `===` is even simpler, as it doesn't convert types.
+
+So, if we compare arrays with `==`, they are never the same, unless we compare two variables that reference exactly the same array.
+
+For example:
+```js run
+alert( [] == [] ); // false
+alert( [0] == [0] ); // false
+```
+
+These arrays are technically different objects. So they aren't equal. The `==` operator doesn't do item-by-item comparison.
+
+Comparison with primitives may give seemingly strange results as well:
+
+```js run
+alert( 0 == [] ); // true
+
+alert('0' == [] ); // false
+```
+
+Here, in both cases, we compare a primitive with an array object. So the array `[]` gets converted to primitive for the purpose of comparison and becomes an empty string `''`.
+
+Then the comparison process goes on with the primitives, as described in the chapter <info:type-conversions>:
+
+```js run
+// after [] was converted to ''
+alert( 0 == '' ); // true, as '' becomes converted to number 0
+
+alert('0' == '' ); // false, no type conversion, different strings
+```
+
+So, how to compare arrays?
+
+That's simple: don't use the `==` operator. Instead, compare them item-by-item in a loop or using iteration methods explained in the next chapter.
+
+## Summary
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 В JavaScript, в отличие от некоторых других языков программирования, массивы не следует сравнивать при помощи оператора `==`.
 
+<<<<<<< HEAD
 У этого оператора нет специального подхода к массивам, он работает с ними, как и с любыми другими объектами.
 
 Давайте ещё раз напомним правила:
@@ -471,19 +606,42 @@ alert( "1,2" + 1 ); // "1,21"
 - ...За исключением `null` и `undefined`, которые равны `==` друг другу и ничему больше.
 
 Оператор строгого равенства `===` ещё проще, так как он не преобразует типы.
+=======
+The declaration:
+
+```js
+// square brackets (usual)
+let arr = [item1, item2...];
+
+// new Array (exceptionally rare)
+let arr = new Array(item1, item2...);
+```
+
+The call to `new Array(number)` creates an array with the given length, but without elements.
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 Итак, если мы всё же сравниваем массивы с помощью `==`, то они никогда не будут одинаковыми, если только мы не сравним две переменные, которые ссылаются на один и тот же массив
 
+<<<<<<< HEAD
 Например:
 ```js run
 alert( [] == [] ); // false
 alert( [0] == [0] ); // false
 ```
+=======
+Getting the elements:
+
+- we can get element by its index, like `arr[0]`
+- also we can use `at(i)` method that allows negative indexes. For negative values of `i`, it steps back from the end of the array. If `i >= 0`, it works same as `arr[i]`.
+
+We can use an array as a deque with the following operations:
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 Технически эти массивы являются разными объектами. Так что они не равны. Оператор `==` не выполняет поэлементное сравнение.
 
 Сравнение с примитивами также может дать, казалось бы, странные результаты:
 
+<<<<<<< HEAD
 ```js run
 alert( 0 == [] ); // true
 
@@ -543,3 +701,10 @@ let arr = new Array(item1, item2...);
  - `for (let i in arr)` -- никогда не используйте для массивов!
 
 Мы вернёмся к массивам и изучим другие методы добавления, удаления, выделения элементов и сортировки массивов в главе: <info:array-methods>.
+=======
+To compare arrays, don't use the `==` operator (as well as `>`, `<` and others), as they have no special treatment for arrays. They handle them as any objects, and it's not what we usually want.
+
+Instead you can use `for..of` loop to compare arrays item-by-item.
+
+We will continue with arrays and study more methods to add, remove, extract elements and sort arrays in the next chapter <info:array-methods>.
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
