@@ -1,6 +1,10 @@
 # Опережающие и ретроспективные проверки
 
+<<<<<<< HEAD
 В некоторых случаях нам нужно найти соответствия шаблону, но только те, за которыми или перед которыми следует другой шаблон.
+=======
+Sometimes we need to find only those matches for a pattern that are followed or preceded by another pattern.
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 Для этого в регулярных выражениях есть специальный синтаксис: опережающая (lookahead) и ретроспективная (lookbehind) проверка.
 
@@ -26,16 +30,29 @@ alert( str.match(/\d+(?=€)/) ); // 30, число 1 проигнорирова
 
 Возможны и более сложные проверки, например `pattern:X(?=Y)(?=Z)` означает:
 
+<<<<<<< HEAD
 1. Найти `pattern:X`.
 2. Проверить, идёт ли `pattern:Y` сразу после `pattern:X` (если нет - не подходит).
 3. Проверить, идёт ли `pattern:Z` сразу после `pattern:X` (если нет - не подходит).
 4. Если обе проверки прошли - совпадение найдено.
 
 То есть этот шаблон означает, что мы ищем `pattern:X` при условии, что за ним идёт и `pattern:Y` и `pattern:Z`.
+=======
+1. Find `pattern:X`.
+2. Check if `pattern:Y` is immediately after `pattern:X` (skip if isn't).
+3. Check if `pattern:Z` is also immediately after `pattern:X` (skip if isn't).
+4. If both tests passed, then the `pattern:X` is a match, otherwise continue searching.
+
+In other words, such pattern means that we're looking for `pattern:X` followed by `pattern:Y` and `pattern:Z` at the same time.
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 Такое возможно только при условии, что шаблоны `pattern:Y` и `pattern:Z` не являются взаимно исключающими.
 
+<<<<<<< HEAD
 Например, `pattern:\d+(?=\s)(?=.*30)` ищет `pattern:\d+` при условии, что за ним идёт пробел, и где-то впереди есть `30`:
+=======
+For example, `pattern:\d+(?=\s)(?=.*30)` looks for `pattern:\d+` that is followed by a space `pattern:(?=\s)`, and there's `30` somewhere after it `pattern:(?=.*30)`:
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 ```js run
 let str = "1 индейка стоит 30€";
@@ -58,13 +75,39 @@ alert( str.match(/\d+(?=\s)(?=.*30)/) ); // 1
 ```js run
 let str = "2 индейки стоят 60€";
 
+<<<<<<< HEAD
 alert( str.match(/\d+(?!€)/) ); // 2 (в этот раз проигнорирована цена)
+=======
+alert( str.match(/\d+\b(?!€)/g) ); // 2 (the price is not matched)
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 ```
 
 ## Ретроспективная проверка
 
+<<<<<<< HEAD
 ```warn header="Браузерная совместимость с ретроспективной проверкой"
 Обратите внимание: Lookbehind не поддерживается в браузерах построенных не на движке V8, таких как Safari и Internet Explorer.
+=======
+```warn header="Lookbehind browser compatibility"
+Please Note: Lookbehind is not supported in non-V8 browsers, such as Safari, Internet Explorer.
+```
+
+Lookahead allows to add a condition for "what follows".
+
+Lookbehind is similar, but it looks behind. That is, it allows to match a pattern only if there's something before it.
+
+The syntax is:
+- Positive lookbehind: `pattern:(?<=Y)X`, matches `pattern:X`, but only if there's  `pattern:Y` before it.
+- Negative lookbehind: `pattern:(?<!Y)X`, matches `pattern:X`, but only if there's no `pattern:Y` before it.
+
+For example, let's change the price to US dollars. The dollar sign is usually before the number, so to look for `$30` we'll use `pattern:(?<=\$)\d+` -- an amount preceded by `subject:$`:
+
+```js run
+let str = "1 turkey costs $30";
+
+// the dollar sign is escaped \$
+alert( str.match(/(?<=\$)\d+/) ); // 30 (skipped the sole number)
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 ```
 
 Опережающие проверки позволяют задавать условия на то, что "идёт после".
@@ -80,8 +123,12 @@ alert( str.match(/\d+(?!€)/) ); // 2 (в этот раз проигнорир�
 ```js run
 let str = "1 индейка стоит $30";
 
+<<<<<<< HEAD
 // знак доллара экранируем \$, так как это специальный символ
 alert( str.match(/(?<=\$)\d+/) ); // 30, одинокое число игнорируется
+=======
+alert( str.match(/(?<!\$)\b\d+/g) ); // 2 (the price is not matched)
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 ```
 
 Если нам необходимо найти количество индеек -- число, перед которым не идёт `subject:$`, мы можем использовать негативную ретроспективную проверку `pattern:(?<!\$)\d+`:

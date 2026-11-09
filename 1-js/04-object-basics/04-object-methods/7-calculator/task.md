@@ -6,9 +6,15 @@ importance: 5
 
 Создайте объект `calculator` (калькулятор) с тремя методами:
 
+<<<<<<< HEAD
 - `read()` (читать) запрашивает два значения и сохраняет их как свойства объекта с именами `a` и `b`.
 - `sum()` (суммировать) возвращает сумму сохранённых значений.
 - `mul()` (умножить) перемножает сохранённые значения и возвращает результат.
+=======
+- `read()` prompts for two values and saves them as object properties with names `a` and `b` respectively.
+- `sum()` returns the sum of saved values.
+- `mul()` multiplies saved values and returns the result.
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 ```js
 let calculator = {
@@ -21,4 +27,3 @@ alert( calculator.mul() );
 ```
 
 [demo]
-
