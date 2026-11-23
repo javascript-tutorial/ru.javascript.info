@@ -6,8 +6,13 @@ JavaScript позволяет нам работать с примитивным�
 
 Примитив
 
+<<<<<<< HEAD
 - Это - значение «примитивного» типа.
 - Есть 7 примитивных типов: `string`, `number`, `boolean`, `symbol`, `null`, `undefined` и `bigint`.
+=======
+- Is a value of a primitive type.
+- There are 7 primitive types: `string`, `number`, `bigint`, `boolean`, `symbol`, `null` and `undefined`.
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 Объект
 
@@ -39,8 +44,13 @@ roma.sayHi(); // Привет, дружище!
 
 Вот парадокс, с которым столкнулся создатель JavaScript:
 
+<<<<<<< HEAD
 - Есть много всего, что хотелось бы сделать с примитивами, такими как строка или число. Было бы замечательно, если бы мы могли обращаться к ним при помощи методов.
 - Примитивы должны быть лёгкими и быстрыми насколько это возможно.
+=======
+- There are many things one would want to do with a primitive, like a string or a number. It would be great to access them using methods.
+- Primitives must be as fast and lightweight as possible.
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 Выбранное решение, хотя выглядит оно немного неуклюже:
 
@@ -48,7 +58,11 @@ roma.sayHi(); // Привет, дружище!
 2. Язык позволяет осуществлять доступ к методам и свойствам строк, чисел, булевых значений и символов.
 3. Чтобы это работало, при таком доступе создаётся специальный "объект-обёртка", который предоставляет нужную функциональность, а после удаляется.
 
+<<<<<<< HEAD
 Каждый примитив имеет свой собственный "объект-обёртку", которые называются: `String`, `Number`, `Boolean`, `Symbol` и `BigInt`. Таким образом, они имеют разный набор методов.
+=======
+The "object wrappers" are different for each primitive type and are called: `String`, `Number`, `Boolean`, `Symbol` and `BigInt`. Thus, they provide different sets of methods.
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 К примеру, существует метод [str.toUpperCase()](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/String/toUpperCase), который возвращает строку в верхнем регистре.
 
@@ -105,10 +119,17 @@ if (zero) {
 }
 ```
 
+<<<<<<< HEAD
 С другой стороны, использование функций `String/Number/Boolean` без оператора `new` - вполне разумно и полезно. Они превращают значение в соответствующий примитивный тип: в строку, в число, в булевый тип.
 
 К примеру, следующее вполне допустимо:
 
+=======
+On the other hand, using the same functions `String/Number/Boolean` without `new` is totally fine and useful thing. They convert a value to the corresponding type: to a string, a number, or a boolean (primitive).
+
+For example, this is entirely valid:
+
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 ```js
 let num = Number("123"); // превращает строку в число
 ```
